@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import diagramLayout from './onePropertyLayout';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   // DiagramElementCollection,
@@ -27,21 +27,21 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
   //     _angle0: DiagramObjectAngle;
   //     _angle1: DiagramObjectAngle;
   //     _angle2: DiagramObjectAngle;
-  //     _pad0: DiagramElementPrimative;
-  //     _pad1: DiagramElementPrimative;
-  //     _pad2: DiagramElementPrimative;
+  //     _pad0: DiagramElementPrimitive;
+  //     _pad1: DiagramElementPrimitive;
+  //     _pad2: DiagramElementPrimitive;
   //   } & DiagramObjectPolyLine;
   // } & DiagramElementCollection;
   _sideTri: {
-    _pad0: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
     _side12: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   _angleTri: {
-    _pad0: { move: { limitLine: Line } } & DiagramElementPrimative;
-    _pad1: { move: { limitLine: Line } } & DiagramElementPrimative;
+    _pad0: { move: { limitLine: Line } } & DiagramElementPrimitive;
+    _pad1: { move: { limitLine: Line } } & DiagramElementPrimitive;
     _angle2: DiagramObjectAngle;
   } & DiagramObjectPolyLine;
 

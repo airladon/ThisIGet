@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -18,9 +18,9 @@ const { minAngleDiff } = Fig.tools.g2;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _customTriangle: {
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -31,15 +31,15 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _totalAngle: {
     _triangle: {
-      _pad0: DiagramElementPrimative;
-      _pad1: DiagramElementPrimative;
-      _pad2: DiagramElementPrimative;
+      _pad0: DiagramElementPrimitive;
+      _pad1: DiagramElementPrimitive;
+      _pad2: DiagramElementPrimitive;
       _side01: DiagramObjectLine;
       _side12: DiagramObjectLine;
       _side20: DiagramObjectLine;
     } & DiagramObjectPolyLine;
     _fixedTriangle: {
-      _line: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
     } & DiagramObjectPolyLine;
     _angleA: DiagramObjectAngle;
     _angleB: DiagramObjectAngle;
@@ -51,9 +51,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   _triangleType: {
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _side01: DiagramObjectLine;
     _side12: DiagramObjectLine;
     _side20: DiagramObjectLine;
@@ -64,7 +64,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _definition: {
     element: HTMLElement;
-  } & DiagramElementPrimative;
+  } & DiagramElementPrimitive;
 
   constructor(
     diagram: CommonLessonDiagram,

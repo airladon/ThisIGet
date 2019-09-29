@@ -8,7 +8,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 // import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
 const {
-  Transform, DiagramElementPrimative, DiagramObjectPolyLine,
+  Transform, DiagramElementPrimitive, DiagramObjectPolyLine,
   DiagramObjectAngle, DiagramObjectLine,
   // Line,
 } = Fig;
@@ -20,15 +20,15 @@ const { removeRandElement, rand } = Fig.tools.math;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   triangle: {
-    _line: DiagramElementPrimative;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;

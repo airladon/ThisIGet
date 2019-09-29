@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -25,7 +25,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _bottomRightAngleInside: DiagramObjectAngle;
     _leftLine: DiagramObjectLine;
     _rightLine: DiagramObjectLine;
-    _point: DiagramElementPrimative;
+    _point: DiagramElementPrimitive;
     _rectangle: DiagramObjectPolyLine;
     _middleLine: DiagramObjectLine;
     _topMiddleAngle: DiagramObjectAngle;

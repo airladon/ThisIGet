@@ -7,7 +7,7 @@ import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -27,24 +27,24 @@ const {
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   _circumference: {
-    _label: DiagramElementPrimative;
-    _arrow: DiagramElementPrimative;
-    _line: DiagramElementPrimative;
+    _label: DiagramElementPrimitive;
+    _arrow: DiagramElementPrimitive;
+    _line: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _area: {
-    _label: DiagramElementPrimative;
-    _fill: DiagramElementPrimative;
+    _label: DiagramElementPrimitive;
+    _fill: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _radius: { label: EquationLabel } & DiagramObjectLine;
   _diameter: { label: EquationLabel } & DiagramObjectLine;
-  _circle: DiagramElementPrimative;
+  _circle: DiagramElementPrimitive;
 
   constructor(
     diagram: CommonLessonDiagram,

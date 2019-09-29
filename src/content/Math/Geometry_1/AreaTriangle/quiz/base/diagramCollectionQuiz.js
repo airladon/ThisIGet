@@ -9,7 +9,7 @@ import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
 const {
   Transform,
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   Point,
 } = Fig;
 
@@ -25,8 +25,8 @@ const { getPoint } = Fig.tools.g2;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   constructor(

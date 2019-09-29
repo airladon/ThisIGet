@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 // import diagramLayout from './layout';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   // DiagramElementCollection,
@@ -23,21 +23,21 @@ const {
 
 export default class CommonCollectionTri extends CommonDiagramCollection {
   _tri: {
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _side01: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
     _side12: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
     _side20: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
-    _angle0: { _label: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle1: { _label: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle2: { _label: DiagramElementPrimative } & DiagramObjectAngle;
+    _angle0: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle1: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle2: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
   } & DiagramObjectPolyLine;
 
   constructor(

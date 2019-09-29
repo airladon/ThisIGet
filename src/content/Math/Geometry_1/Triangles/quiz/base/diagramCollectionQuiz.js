@@ -8,7 +8,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
 const {
-  Transform, DiagramElementPrimative, DiagramObjectPolyLine,
+  Transform, DiagramElementPrimitive, DiagramObjectPolyLine,
   Line,
 } = Fig;
 
@@ -19,16 +19,16 @@ const { minAngleDiff } = Fig.tools.g2;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   triangle: {
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectPolyLine;
 
   fixedTriangle: {
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectPolyLine;
 
   constructor(

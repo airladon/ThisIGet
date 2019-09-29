@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 // import textureMap from '../../../../../common/images/textureMaps/circles.png';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramElementCollection,
   DiagramObjectLine,
   Transform, Equation,
@@ -13,45 +13,45 @@ const {
 } = Fig;
 
 type TypeCircumference = {
-  _line: DiagramElementPrimative,
-  _arrow: DiagramElementPrimative,
+  _line: DiagramElementPrimitive,
+  _arrow: DiagramElementPrimitive,
 } & DiagramElementCollection;
 
 type TypeDimensions = {
   _circumference: TypeCircumference,
   _diameter: DiagramObjectLine,
-  _c: DiagramElementPrimative,
-  _d: DiagramElementPrimative,
-  _darkCircle: DiagramElementPrimative,
+  _c: DiagramElementPrimitive,
+  _d: DiagramElementPrimitive,
+  _darkCircle: DiagramElementPrimitive,
   _eqn: {
-    _c: DiagramElementPrimative;
-    _d: DiagramElementPrimative;
-    _equals: DiagramElementPrimative;
-    _pi: DiagramElementPrimative;
+    _c: DiagramElementPrimitive;
+    _d: DiagramElementPrimitive;
+    _equals: DiagramElementPrimitive;
+    _pi: DiagramElementPrimitive;
   } & Equation;
 } & DiagramElementCollection;
 
 // const textureFile = `/static/dist/${textureMap}`;
 export default class Collection extends CommonDiagramCollection {
   _fig1: {
-    _circle: DiagramElementPrimative;
-    _wheel: DiagramElementPrimative;
+    _circle: DiagramElementPrimitive;
+    _wheel: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _properties: {
     _circumference: {
-      _line: DiagramElementPrimative;
-      _arrow: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
+      _arrow: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _diameter: DiagramObjectLine;
-    _d: DiagramElementPrimative;
-    _c: DiagramElementPrimative;
-    _darkCircle: DiagramElementPrimative;
+    _d: DiagramElementPrimitive;
+    _c: DiagramElementPrimitive;
+    _darkCircle: DiagramElementPrimitive;
     _eqn: {
-      _c: DiagramElementPrimative;
-      _d: DiagramElementPrimative;
-      _equals: DiagramElementPrimative;
-      _pi: DiagramElementPrimative;
+      _c: DiagramElementPrimitive;
+      _d: DiagramElementPrimitive;
+      _equals: DiagramElementPrimitive;
+      _pi: DiagramElementPrimitive;
     } & Equation;
   } & DiagramElementCollection;
 

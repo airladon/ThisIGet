@@ -11,7 +11,7 @@ import {
 } from '../../explanation/base/tools';
 
 const {
-  Transform, DiagramElementPrimative, DiagramObjectLine,
+  Transform, DiagramElementPrimitive, DiagramObjectLine,
   Point,
 } = Fig;
 const { removeRandElement } = Fig.tools.math;
@@ -24,8 +24,8 @@ type TypeSelectableLine = {
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   _line1: TypeSelectableLine;

@@ -9,7 +9,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform,
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectPolyLine,
   DiagramObjectAngle,
   DiagramObjectLine,
@@ -28,18 +28,18 @@ const {
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   triangle: {
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
     _angle0: { label: EquationLabel } & DiagramObjectAngle;
     _angle1: { label: EquationLabel } & DiagramObjectAngle;
     _angle2: { label: EquationLabel } & DiagramObjectAngle;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _side01: { label: EquationLabel } & DiagramObjectLine;
     _side12: { label: EquationLabel } & DiagramObjectLine;
     _side20: { label: EquationLabel } & DiagramObjectLine;

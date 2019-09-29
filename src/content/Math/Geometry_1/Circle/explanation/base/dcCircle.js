@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectLine,
   DiagramElementCollection,
   Equation,
@@ -16,36 +16,36 @@ const { spaceToSpaceTransform } = Fig.tools.g2;
 const { round } = Fig.tools.math;
 
 type TypeEquationElements = {
-  _diameter: DiagramElementPrimative;
-  _equals: DiagramElementPrimative;
-  __2: DiagramElementPrimative;
-  _radius: DiagramElementPrimative;
-  _pi: DiagramElementPrimative;
-  _circumference: DiagramElementPrimative;
-  _v: DiagramElementPrimative;
-  _equals: DiagramElementPrimative;
+  _diameter: DiagramElementPrimitive;
+  _equals: DiagramElementPrimitive;
+  __2: DiagramElementPrimitive;
+  _radius: DiagramElementPrimitive;
+  _pi: DiagramElementPrimitive;
+  _circumference: DiagramElementPrimitive;
+  _v: DiagramElementPrimitive;
+  _equals: DiagramElementPrimitive;
 } & Equation;
 
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   percentStraight: number;
   straightening: boolean;
   containToGrid: boolean;
-  _locationText: DiagramElementPrimative;
-  _circumferenceText: DiagramElementPrimative;
-  _diameterText: DiagramElementPrimative;
-  _radiusText: DiagramElementPrimative;
-  _grid: DiagramElementPrimative;
+  _locationText: DiagramElementPrimitive;
+  _circumferenceText: DiagramElementPrimitive;
+  _diameterText: DiagramElementPrimitive;
+  _radiusText: DiagramElementPrimitive;
+  _grid: DiagramElementPrimitive;
   _circle: {
-    _center: DiagramElementPrimative;
-    _line: DiagramElementPrimative;
-    _arc: DiagramElementPrimative;
+    _center: DiagramElementPrimitive;
+    _line: DiagramElementPrimitive;
+    _arc: DiagramElementPrimitive;
     _diameter: DiagramObjectLine;
     _radius: DiagramObjectLine;
-    _scale: DiagramElementPrimative;
-    _translate: DiagramElementPrimative;
+    _scale: DiagramElementPrimitive;
+    _translate: DiagramElementPrimitive;
     _circumference: {
-      _leftArc: DiagramElementPrimative;
-      _rightArc: DiagramElementPrimative;
+      _leftArc: DiagramElementPrimitive;
+      _rightArc: DiagramElementPrimitive;
       _leftLine: DiagramObjectLine;
       _rightLine: DiagramObjectLine;
     } & DiagramElementCollection;

@@ -6,13 +6,13 @@ import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
-const { Transform, DiagramElementPrimative } = Fig;
+const { Transform, DiagramElementPrimitive } = Fig;
 const { removeRandElement, rand } = Fig.tools.math;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   constructor(

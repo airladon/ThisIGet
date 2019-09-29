@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -17,10 +17,10 @@ const {
 //   _angle0: DiagramObjectAngle;
 //   _angle1: DiagramObjectAngle;
 //   _angle2: DiagramObjectAngle;
-//   _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
-//   _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
-//   _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
-//   _line: DiagramElementPrimative;
+//   _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+//   _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+//   _side20: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+//   _line: DiagramElementPrimitive;
 // } & DiagramObjectPolyLine;
 
 export default class QRCollection extends CommonDiagramCollection {
@@ -28,47 +28,47 @@ export default class QRCollection extends CommonDiagramCollection {
     _length: {
       _line: DiagramObjectLine;
       _measureLine: DiagramObjectLine;
-      _label: DiagramElementPrimative;
-      _grid: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
+      _grid: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   _unitShape: {
-    _circle: DiagramElementPrimative;
-    _grid: DiagramElementPrimative;
-    _genericGrid: DiagramElementPrimative;
-    _circleGrid: DiagramElementPrimative;
+    _circle: DiagramElementPrimitive;
+    _grid: DiagramElementPrimitive;
+    _genericGrid: DiagramElementPrimitive;
+    _circleGrid: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _shapes: {
-    _circleLabel: DiagramElementPrimative;
-    _squareLabel: DiagramElementPrimative;
-    _triangleLabel: DiagramElementPrimative;
-    _square: DiagramElementPrimative;
-    _circle: DiagramElementPrimative;
-    _triangle: DiagramElementPrimative;
-    _triangleHtmlLabel: DiagramElementPrimative;
-    _squareHtmlLabel: DiagramElementPrimative;
-    _circleHtmlLabel: DiagramElementPrimative;
+    _circleLabel: DiagramElementPrimitive;
+    _squareLabel: DiagramElementPrimitive;
+    _triangleLabel: DiagramElementPrimitive;
+    _square: DiagramElementPrimitive;
+    _circle: DiagramElementPrimitive;
+    _triangle: DiagramElementPrimitive;
+    _triangleHtmlLabel: DiagramElementPrimitive;
+    _squareHtmlLabel: DiagramElementPrimitive;
+    _circleHtmlLabel: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _rectangle: {
-    _row: DiagramElementPrimative;
+    _row: DiagramElementPrimitive;
     _line: DiagramObjectLine;
-    _grid: DiagramElementPrimative;
-    _labelB: DiagramElementPrimative;
-    _labelA: DiagramElementPrimative;
-    _labelHeight: DiagramElementPrimative;
-    _labelWidth: DiagramElementPrimative;
-    _label6: DiagramElementPrimative;
-    _label10: DiagramElementPrimative;
+    _grid: DiagramElementPrimitive;
+    _labelB: DiagramElementPrimitive;
+    _labelA: DiagramElementPrimitive;
+    _labelHeight: DiagramElementPrimitive;
+    _labelWidth: DiagramElementPrimitive;
+    _label6: DiagramElementPrimitive;
+    _label10: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _square: {
     _line: DiagramObjectLine;
-    _grid: DiagramElementPrimative;
-    _labelB1: DiagramElementPrimative;
-    _labelB2: DiagramElementPrimative;
+    _grid: DiagramElementPrimitive;
+    _labelB1: DiagramElementPrimitive;
+    _labelB2: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _areaSquare: Equation;

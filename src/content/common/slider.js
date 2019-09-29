@@ -2,13 +2,13 @@
 import Fig from 'figureone';
 
 const {
-  DiagramElementCollection, DiagramElementPrimative, Point, Transform,
+  DiagramElementCollection, DiagramElementPrimitive, Point, Transform,
 } = Fig;
 
 export type sliderType = {
-  _value: DiagramElementPrimative;
-  _negValue: DiagramElementPrimative;
-  _circle: DiagramElementPrimative;
+  _value: DiagramElementPrimitive;
+  _negValue: DiagramElementPrimitive;
+  _circle: DiagramElementPrimitive;
   travel: number;
   start: number;
   setValue: (number) => void;

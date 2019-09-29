@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -15,13 +15,13 @@ const {
 } = Fig;
 
 type fullTriangle = {
-        _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
-        _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
-        _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
+        _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+        _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+        _side20: { _label: DiagramElementPrimitive } & DiagramObjectLine;
         _angle0: DiagramObjectAngle;
         _angle1: DiagramObjectAngle;
         _angle2: DiagramObjectAngle;
-        _line: DiagramElementPrimative;
+        _line: DiagramElementPrimitive;
 } & DiagramObjectPolyLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -36,7 +36,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       _baseA: DiagramObjectLine;
       _base: DiagramObjectLine;
       _opposite: DiagramObjectLine;
-      _vertex: DiagramElementPrimative;
+      _vertex: DiagramElementPrimitive;
       _leftSide: DiagramObjectLine;
       _rightSide: DiagramObjectLine;
     } & DiagramElementCollection;
@@ -45,18 +45,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       _bottomRight: fullTriangle;
       _topLeft: fullTriangle;
       _topRight: fullTriangle;
-      _largeSquare: DiagramElementPrimative;
-      _smallSquare: DiagramElementPrimative;
-      _vertex1: DiagramElementPrimative;
-      _vertex2: DiagramElementPrimative;
-      _vertex3: DiagramElementPrimative;
-      _vertex4: DiagramElementPrimative;
-      _largeSquareArea: DiagramElementPrimative;
-      _smallSquareArea: DiagramElementPrimative;
-      _bottomLeftArea: DiagramElementPrimative;
-      _bottomRightArea: DiagramElementPrimative;
-      _topLeftArea: DiagramElementPrimative;
-      _topRightArea: DiagramElementPrimative;
+      _largeSquare: DiagramElementPrimitive;
+      _smallSquare: DiagramElementPrimitive;
+      _vertex1: DiagramElementPrimitive;
+      _vertex2: DiagramElementPrimitive;
+      _vertex3: DiagramElementPrimitive;
+      _vertex4: DiagramElementPrimitive;
+      _largeSquareArea: DiagramElementPrimitive;
+      _smallSquareArea: DiagramElementPrimitive;
+      _bottomLeftArea: DiagramElementPrimitive;
+      _bottomRightArea: DiagramElementPrimitive;
+      _topLeftArea: DiagramElementPrimitive;
+      _topRightArea: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 

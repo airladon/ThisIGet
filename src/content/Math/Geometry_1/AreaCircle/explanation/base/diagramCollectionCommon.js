@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -15,39 +15,39 @@ const {
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
-    _lightCircle: DiagramElementPrimative;
-    _circle: DiagramElementPrimative;
+    _lightCircle: DiagramElementPrimitive;
+    _circle: DiagramElementPrimitive;
     _poly: {
-      _fill: DiagramElementPrimative;
-      _triFill: DiagramElementPrimative;
+      _fill: DiagramElementPrimitive;
+      _triFill: DiagramElementPrimitive;
       _height: DiagramObjectLine;
       _radius: DiagramObjectLine;
       _base: DiagramObjectLine;
-      _border: DiagramElementPrimative;
-      _borderHighlight: DiagramElementPrimative;
-      _lines: DiagramElementPrimative;
+      _border: DiagramElementPrimitive;
+      _borderHighlight: DiagramElementPrimitive;
+      _lines: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _polyMore: {
-      _fill: DiagramElementPrimative;
-      _triFill: DiagramElementPrimative;
+      _fill: DiagramElementPrimitive;
+      _triFill: DiagramElementPrimitive;
       _height: DiagramObjectLine;
       _radius: DiagramObjectLine;
       _base: DiagramObjectLine;
-      _border: DiagramElementPrimative;
-      _borderHighlight: DiagramElementPrimative;
-      _lines: DiagramElementPrimative;
+      _border: DiagramElementPrimitive;
+      _borderHighlight: DiagramElementPrimitive;
+      _lines: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _polyMost: {
-      _fill: DiagramElementPrimative;
-      _triFill: DiagramElementPrimative;
+      _fill: DiagramElementPrimitive;
+      _triFill: DiagramElementPrimitive;
       _height: DiagramObjectLine;
       _radius: DiagramObjectLine;
       _base: DiagramObjectLine;
-      _border: DiagramElementPrimative;
-      _borderHighlight: DiagramElementPrimative;
-      _lines: DiagramElementPrimative;
+      _border: DiagramElementPrimitive;
+      _borderHighlight: DiagramElementPrimitive;
+      _lines: DiagramElementPrimitive;
     } & DiagramElementCollection;
-    _circleFill: DiagramElementPrimative;
+    _circleFill: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _eqn: Equation;

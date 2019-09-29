@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -17,10 +17,10 @@ type TypeFullPolyLine = {
   _angle0: DiagramObjectAngle;
   _angle1: DiagramObjectAngle;
   _angle2: DiagramObjectAngle;
-  _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _line: DiagramElementPrimative;
+  _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side20: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _line: DiagramElementPrimitive;
 } & DiagramObjectPolyLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -36,7 +36,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _tri: TypeFullPolyLine;
     _isosceles: TypeFullPolyLine;
     _lowerAngle: DiagramObjectAngle;
-    _lowerTriangle: DiagramElementPrimative;
+    _lowerTriangle: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(

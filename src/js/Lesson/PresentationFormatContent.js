@@ -9,7 +9,7 @@ import SimpleFormatContent from './SimpleFormatContent';
 
 const {
   Diagram, HTMLObject, Point,
-  DiagramElementPrimative, DiagramElementCollection,
+  DiagramElementPrimitive, DiagramElementCollection,
   DiagramElement, Rect, Equation, parsePoint,
   EqnNavigator,
 } = Fig;
@@ -37,7 +37,7 @@ function initializeItemSelector(
 }
 
 type TypeInteractiveElement = DiagramElementCollection
-                              | DiagramElementPrimative
+                              | DiagramElementPrimitive
                               | string
                               | HTMLElement;
 type TypeInteractiveElementLocation = 'center' | 'zero' | ''
@@ -98,15 +98,15 @@ class Section {
   blank: Array<string>;
   diagram: Diagram;
   skipWhenComingFromNext: boolean;
-  infoElements: Array<DiagramElementCollection | DiagramElementPrimative>;
-  showOnly: Array<DiagramElementPrimative | DiagramElementCollection>
+  infoElements: Array<DiagramElementCollection | DiagramElementPrimitive>;
+  showOnly: Array<DiagramElementPrimitive | DiagramElementCollection>
            | () => {};
 
-  hideOnly: Array<DiagramElementPrimative | DiagramElementCollection>
+  hideOnly: Array<DiagramElementPrimitive | DiagramElementCollection>
            | () => {};
 
-  show: Array<DiagramElementPrimative | DiagramElementCollection> | () => {};
-  hide: Array<DiagramElementPrimative | DiagramElementCollection> | () => {};
+  show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
+  hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
   initialPositions: Object | () => {};
   blankTransition: {
     toNext: boolean;
@@ -270,12 +270,12 @@ class Section {
           if (rect.left > 0 && rect.width > 0) {
             elementIsVisible = true;
           }
-        } else if (element instanceof DiagramElementPrimative
+        } else if (element instanceof DiagramElementPrimitive
                    && element.drawingObject instanceof HTMLObject) {
           if (element.isShown) {
             elementIsVisible = true;
           }
-        } else if ((element instanceof DiagramElementPrimative
+        } else if ((element instanceof DiagramElementPrimitive
           || element instanceof DiagramElementCollection)
           && element.isShown) {
           if (element.isMovable || element.isTouchable || element.isInteractive) {
@@ -288,7 +288,7 @@ class Section {
             || element.hasTouchableElements || element.isInteractive) {
             elementIsTouchable = true;
           }
-        } else if (element instanceof DiagramElementPrimative) {
+        } else if (element instanceof DiagramElementPrimitive) {
           if (element.isTouchable || element.isMovable || element.isInteractive) {
             elementIsTouchable = true;
           }
@@ -436,7 +436,7 @@ class Section {
       // this.interactiveElementList = this.interactiveElementsOnly;
       this.interactiveElementsOnly.forEach((element) => {
         if (element instanceof DiagramElementCollection
-          || element instanceof DiagramElementPrimative) {
+          || element instanceof DiagramElementPrimitive) {
           this.replaceOrAddInteractiveElement(element, '');
         } else if (typeof element === 'string') {
           const elem = document.getElementById(element);
@@ -503,7 +503,7 @@ class Section {
     if ('interactiveElements' in this) {
       this.interactiveElements.forEach((element) => {
         if (element instanceof DiagramElementCollection
-          || element instanceof DiagramElementPrimative) {
+          || element instanceof DiagramElementPrimitive) {
           this.replaceOrAddInteractiveElement(element, '');
         } else {
           this.replaceOrAddInteractiveElement(element.element, element.location);
@@ -810,7 +810,7 @@ class PresentationFormatContent extends SimpleFormatContent {
       animationEnd();
 
       let cssPosition = new Point(0, 0);
-      if (element instanceof DiagramElementPrimative
+      if (element instanceof DiagramElementPrimitive
         || element instanceof DiagramElementCollection) {
         let diagramPosition;
         if (location === 'center'

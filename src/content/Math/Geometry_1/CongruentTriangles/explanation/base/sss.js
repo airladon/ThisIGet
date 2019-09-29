@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   // DiagramElementCollection,
   DiagramObjectPolyLine,
@@ -22,8 +22,8 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   _left: { _label: DiagramElementCollection } & DiagramObjectLine;
   _base: DiagramObjectLine;
   _right: { _label: DiagramElementCollection } & DiagramObjectLine;;
-  _leftCircle: DiagramElementPrimative;
-  _rightCircle: DiagramElementPrimative;
+  _leftCircle: DiagramElementPrimitive;
+  _rightCircle: DiagramElementPrimitive;
   _leftBottom: { _label: DiagramElementCollection } & DiagramObjectLine;
   _rightBottom: { _label: DiagramElementCollection } & DiagramObjectLine;
   _constructionLine: { _label: DiagramElementCollection } & DiagramObjectLine;
@@ -36,17 +36,17 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   location: 'top' | 'bottom';
 
   _circ1: {
-    _scale: DiagramElementPrimative;
-    _line: DiagramElementPrimative;
+    _scale: DiagramElementPrimitive;
+    _line: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _circ2: {
-    _scale: DiagramElementPrimative;
-    _line: DiagramElementPrimative;
+    _scale: DiagramElementPrimitive;
+    _line: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
-  _pad1: DiagramElementPrimative;
-  _pad2: DiagramElementPrimative;
+  _pad1: DiagramElementPrimitive;
+  _pad2: DiagramElementPrimitive;
   _rad1: DiagramObjectLine;
   _rad2: DiagramObjectLine;
   _baseLine: DiagramObjectLine;

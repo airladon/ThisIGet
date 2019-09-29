@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection,
   Transform,
 } = Fig;
@@ -16,19 +16,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
     _angle: DiagramObjectAngle;
-    _arc: DiagramElementPrimative;
-    _marks12: DiagramElementPrimative;
-    _marks20: DiagramElementPrimative;
-    _marks50: DiagramElementPrimative;
-    _marks100: DiagramElementPrimative;
-    _marks12Long: DiagramElementPrimative;
+    _arc: DiagramElementPrimitive;
+    _marks12: DiagramElementPrimitive;
+    _marks20: DiagramElementPrimitive;
+    _marks50: DiagramElementPrimitive;
+    _marks100: DiagramElementPrimitive;
+    _marks12Long: DiagramElementPrimitive;
     _degrees: {
-      _marks36: DiagramElementPrimative;
-      _marks360: DiagramElementPrimative;
+      _marks36: DiagramElementPrimitive;
+      _marks360: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _angleText: {
-      _label: DiagramElementPrimative;
-      _value: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
+      _value: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 

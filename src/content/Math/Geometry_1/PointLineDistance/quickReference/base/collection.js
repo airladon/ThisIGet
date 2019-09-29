@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -15,15 +15,15 @@ const {
 export default class QRCollection extends CommonDiagramCollection {
   _fig: {
     _line: DiagramObjectLine;
-    _point: DiagramElementPrimative;
+    _point: DiagramElementPrimitive;
     _distance: {
       _line: DiagramObjectLine;
     } & DiagramElementCollection;
     _rightAngle: DiagramObjectAngle;
-    _perpendicular: { _label: DiagramElementPrimative } & DiagramObjectLine;
-    _end: DiagramElementPrimative;
+    _perpendicular: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+    _end: DiagramElementPrimitive;
     _distanceEnd: DiagramObjectLine;
-    _pointEnd: DiagramElementPrimative;
+    _pointEnd: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(

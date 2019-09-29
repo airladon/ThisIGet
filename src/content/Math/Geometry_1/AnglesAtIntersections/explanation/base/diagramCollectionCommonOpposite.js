@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  // DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectAngle, DiagramObjectLine,
   Transform,

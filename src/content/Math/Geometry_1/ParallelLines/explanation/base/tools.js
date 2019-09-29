@@ -5,12 +5,12 @@ const {
   Point, minAngleDiff, normAngle, Line, Rect,
 } = Fig.tools.g2;
 const {
-  DiagramElementPrimative, DiagramElementCollection,
+  DiagramElementPrimitive, DiagramElementCollection,
 } = Fig;
 
 export function makeAnglesClose(
-  element1: DiagramElementCollection | DiagramElementPrimative,
-  element2: DiagramElementCollection | DiagramElementPrimative,
+  element1: DiagramElementCollection | DiagramElementPrimitive,
+  element2: DiagramElementCollection | DiagramElementPrimitive,
 ) {
   const r1 = element1.transform.r();
   const r2 = element2.transform.r();
@@ -49,8 +49,8 @@ export function checkValuesForParallel(
 }
 
 export function checkElementsForParallel(
-  element1: DiagramElementPrimative | DiagramElementCollection,
-  element2: DiagramElementPrimative | DiagramElementCollection,
+  element1: DiagramElementPrimitive | DiagramElementCollection,
+  element2: DiagramElementPrimitive | DiagramElementCollection,
   makeRotationEqual: boolean = false,
   distanceThreshold: number,
   rotThreshold: number = Math.PI / 300,

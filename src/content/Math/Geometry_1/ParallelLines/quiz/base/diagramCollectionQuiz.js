@@ -9,13 +9,13 @@ import {
   randomizeParallelLine, makeAnglesClose, checkValuesForParallel, checkElementsForParallel,
 } from '../../explanation/base/tools';
 
-const { Transform, DiagramElementPrimative, DiagramObjectLine } = Fig;
+const { Transform, DiagramElementPrimitive, DiagramObjectLine } = Fig;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   _line1: DiagramObjectLine;

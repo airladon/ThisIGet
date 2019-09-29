@@ -163,7 +163,7 @@ var FigureOne = {
   //
   DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElement"],
   DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementCollection"],
-  DiagramElementPrimative: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementPrimative"],
+  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementPrimitive"],
   DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__["default"],
   WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__["default"],
   //
@@ -3496,7 +3496,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
 /* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 /* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
@@ -3527,7 +3527,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //  - GL Canvas
 //    - Diagram
 //      - Element Collection
-//        - Element Primative
+//        - Element Primitive
 //          - Drawing Object (e.g. shape, text) from primative vertices
 //
 // A shape is defined in Drawing Object space.
@@ -3665,6 +3665,7 @@ function () {
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
+    this.primitive = this.shapes;
     this.equationLow = this.getEquations(); // this.equationHigh = this.getEquations(true);
 
     this.equation = this.equationLow;
@@ -3740,7 +3741,7 @@ function () {
       // }
 
 
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
+      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
@@ -4286,7 +4287,8 @@ function () {
     key: "createDiagramElements",
     value: function createDiagramElements() {
       // $FlowFixMe
-      this.elements = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]();
+      // this.elements = new DiagramElementCollection();
+      this.elements = this.primitive.collection();
       this.elements.diagramLimits = this.limits;
     }
   }, {
@@ -4484,7 +4486,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
 /* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -4724,7 +4726,7 @@ function Arrow(webgl) {
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -4757,7 +4759,7 @@ function DashedLine(webgl, start, length, width, rotation, dashStyle, color, tra
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (DashedLine);
@@ -5262,7 +5264,7 @@ function (_Elements) {
       var leftSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + this.outsideSpace * scale, loc.y - glyphDescent);
       var glyph = this.glyph;
 
-      if (glyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"]) {
+      if (glyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"]) {
         glyph.show();
         glyph.transform.updateScale(bracketScale, bracketScale);
         glyph.transform.updateTranslation(leftSymbolLocation.x, leftSymbolLocation.y);
@@ -5278,7 +5280,7 @@ function (_Elements) {
       var rightSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + contentBounds.width + glyphBounds.width + (this.insideSpace * 2 + this.outsideSpace) * scale, leftSymbolLocation.y);
       var rightGlyph = this.rightGlyph;
 
-      if (rightGlyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"]) {
+      if (rightGlyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"]) {
         rightGlyph.show();
         rightGlyph.transform.updateScale(bracketScale, bracketScale);
         rightGlyph.transform.updateTranslation(rightSymbolLocation.x, rightSymbolLocation.y);
@@ -5359,7 +5361,7 @@ function (_Brackets) {
 
       var glyph = this.glyph;
 
-      if (glyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"]) {
+      if (glyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"]) {
         glyph.show();
         glyph.transform.updateScale(bracketScale, bracketScale);
         glyph.transform.updateTranslation(leftSymbolLocation.x, leftSymbolLocation.y);
@@ -5439,7 +5441,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // Equation is a class that takes a set of drawing objects (TextObjects,
-// DiagramElementPrimatives or DiagramElementCollections and HTML Objects
+// DiagramElementPrimitives or DiagramElementCollections and HTML Objects
 // and arranges their size in a )
 
 var BlankElement =
@@ -5496,7 +5498,7 @@ function () {
         this.scale = scale;
       }
 
-      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"]) {
+      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"]) {
         // Update translation and scale
         content.transform.updateTranslation(location.x, location.y);
         content.transform.updateScale(scale, scale);
@@ -5549,7 +5551,7 @@ function () {
     value: function setPositions() {
       var content = this.content;
 
-      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"]) {
+      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"]) {
         content.transform.updateTranslation(this.location.x, this.location.y);
         content.transform.updateScale(this.scale, this.scale);
         content.updateLastDrawTransform();
@@ -5710,7 +5712,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimatives or DiagramElementCollections and HTML Objects
+// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
 // // and arranges their size in a )
 
 var Fraction =
@@ -5885,11 +5887,11 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // import {
-//   DiagramElementPrimative, DiagramElementCollection,
+//   DiagramElementPrimitive, DiagramElementCollection,
 // } from '../../../Element';
 
  // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimatives or DiagramElementCollections and HTML Objects
+// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
 // // and arranges their size in a )
 
 var Padding =
@@ -6008,7 +6010,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimatives or DiagramElementCollections and HTML Objects
+// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
 // // and arranges their size in a )
 
 var Strike =
@@ -6636,7 +6638,7 @@ function (_DiagramElementCollec) {
               text: elem
             }));
           }
-        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"]) {
+        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"]) {
           _this2.add(key, elem);
         } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
           _this2.add(key, elem);
@@ -6661,13 +6663,13 @@ function (_DiagramElementCollec) {
           }
         }
       });
-      var fullLineHeightPrimative = makeTextElem({
+      var fullLineHeightPrimitive = makeTextElem({
         text: 'gh'
       });
       var form = this.createForm({
-        elem: fullLineHeightPrimative
+        elem: fullLineHeightPrimitive
       });
-      form.content = [this.eqn.functions.contentToElement(fullLineHeightPrimative)];
+      form.content = [this.eqn.functions.contentToElement(fullLineHeightPrimitive)];
       form.arrange(this.eqn.scale, 'left', 'baseline', new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       this.eqn.functions.fullLineHeight = form;
       this.setFirstTransform(this.transform);
@@ -6855,7 +6857,7 @@ function (_DiagramElementCollec) {
         return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       }
 
-      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || fixTo instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || fixTo instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
         return fixTo;
       }
 
@@ -7769,7 +7771,7 @@ function (_Elements) {
 
       var fixPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
 
-      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
         var t = fixTo.transform.t();
 
         if (t != null) {
@@ -7786,7 +7788,7 @@ function (_Elements) {
 
       var p = this.location._dup();
 
-      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
         var _t = fixTo.transform.t();
 
         var s = fixTo.transform.s();
@@ -8238,7 +8240,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import DiagramPrimatives from '../../DiagramPrimatives/DiagramPrimatives';
+ // import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
 
 
 
@@ -8392,7 +8394,7 @@ function () {
         return content._dup();
       }
 
-      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"]) {
+      if (content instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"] || content instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"]) {
         return new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Elements"]([new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Element"](content)]);
       }
 
@@ -9353,7 +9355,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EquationSymbols; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
 /* harmony import */ var _Symbols_Integral__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Symbols/Integral */ "./src/js/diagram/DiagramElements/Equation/Symbols/Integral.js");
 /* harmony import */ var _Symbols_Bracket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Symbols/Bracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bracket.js");
 /* harmony import */ var _Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Symbols/RoundedSquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/RoundedSquareBracket.js");
@@ -10055,7 +10057,7 @@ function Bracket(webgl, color, side, numLines, transformOrLocation, diagramLimit
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10088,7 +10090,7 @@ function Brace(webgl, color, side, numLines, transformOrLocation, diagramLimits)
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10132,7 +10134,7 @@ function Bracket(webgl, color, side, numLines, transformOrLocation, diagramLimit
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10176,7 +10178,7 @@ function Integral(webgl, color, numLines, transformOrLocation, diagramLimits) {
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10209,7 +10211,7 @@ function RoundedSquareBracket(webgl, color, side, numLines, transformOrLocation,
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10242,7 +10244,7 @@ function SquareBracket(webgl, color, side, numLines, transformOrLocation, diagra
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertices, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -10520,7 +10522,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexBracket);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexBracket).call(this, webgl));
-    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
+    _this.glPrimitive = _this.gl[0].TRIANGLE_STRIP;
     _this.numLines = numLines;
     _this.mainHeight = 1;
 
@@ -10636,7 +10638,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexIntegral);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexIntegral).call(this, webgl));
-    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP; // let mul = 0.5;
+    _this.glPrimitive = _this.gl[0].TRIANGLE_STRIP; // let mul = 0.5;
     // if (lineHeight === 1) {
     //   mul = 1;
     // }
@@ -10984,7 +10986,7 @@ function Fan(webgl, points, color, transformOrLocation, diagramLimits) {
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Fan);
@@ -11019,7 +11021,7 @@ function HorizontalLine(webgl, start, length, width, rotation, color, transformO
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (HorizontalLine);
@@ -11054,7 +11056,7 @@ function Lines(webgl, linePairs, numLinesThick, color, transformOrLocation, diag
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Lines);
@@ -11169,11 +11171,11 @@ function (_DiagramElementCollec) {
       this.addTicksOrGrid('majorTicks', this.webgl, majorTicks, majorTicksNum, majorTicks.step, cMajorTicksStart, xRatio, this.diagramLimits); // Axis Line
 
       var axis = new _VertexObjects_VAxis__WEBPACK_IMPORTED_MODULE_3__["default"](this.webgl, this.props);
-      this.add('line', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](axis, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"](), this.props.color, this.diagramLimits));
+      this.add('line', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](axis, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"](), this.props.color, this.diagramLimits));
       var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](this.props.titleFontFamily, 'normal', this.props.titleFontSize, this.props.titleFontWeight, 'center', 'middle', this.props.titleFontColor);
       var titleText = [new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0).transformBy(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).matrix()), this.props.title, font)];
       var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D[0], titleText);
-      this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
+      this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
 
       this.addTickLabels('major', this.drawContext2D[0], majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
       this.addTickLabels('minor', this.drawContext2D[0], minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
@@ -11194,7 +11196,7 @@ function (_DiagramElementCollec) {
       if (ticksOrGrid.mode !== 'off') {
         var ticks = new _VertexObjects_VTickMarks__WEBPACK_IMPORTED_MODULE_4__["default"](webgl, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"]( // clipStart - ticksOrGrid.width / 2 * xRatio,
         clipStart, this.props.start.y), this.props.rotation, num, this.toClip(step), ticksOrGrid.length, ticksOrGrid.width, ticksOrGrid.offset);
-        this.add(name, new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](ticks, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().scale(1, 1).rotate(0).translate(0, 0), ticksOrGrid.color, diagramLimits)); // if (name === 'majorTicks') {
+        this.add(name, new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](ticks, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().scale(1, 1).rotate(0).translate(0, 0), ticksOrGrid.color, diagramLimits)); // if (name === 'majorTicks') {
         //   console.log(ticks)
         // }
       }
@@ -11220,7 +11222,7 @@ function (_DiagramElementCollec) {
       }
 
       var axisLabels = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](drawContext2D, dText);
-      this.add("label_".concat(name), new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](axisLabels, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().scale(1, 1).rotate(0).translate(offset.x, offset.y), [0.5, 0.5, 0.5, 1], diagramLimits)); // const label = new TextObject(
+      this.add("label_".concat(name), new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](axisLabels, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().scale(1, 1).rotate(0).translate(offset.x, offset.y), [0.5, 0.5, 0.5, 1], diagramLimits)); // const label = new TextObject(
       //   drawContext2D,
       //   ticks.labels[i],
       //   new Point(
@@ -11233,7 +11235,7 @@ function (_DiagramElementCollec) {
       // label.fontSize = ticks.fontSize;
       // label.fontFamily = ticks.fontFamily;
       // label.fontWeight = ticks.fontWeight;
-      // this.add(`label_${name}_${i}`, new DiagramElementPrimative(
+      // this.add(`label_${name}_${i}`, new DiagramElementPrimitive(
       //   label,
       //   new Transform().scale(1, 1).rotate(0).translate(0, 0),
       //   [0.5, 0.5, 0.5, 1],
@@ -11653,7 +11655,7 @@ function PolyLine(webgl, points, close, lineWidth, color, borderToPoint, transfo
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 function PolyLineCorners(webgl, points, close, cornerLength, lineWidth, color, transformOrLocation, diagramLimits) {
@@ -11666,7 +11668,7 @@ function PolyLineCorners(webgl, points, close, cornerLength, lineWidth, color, t
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](vertexLineCorners, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLineCorners, transform, color, diagramLimits);
 }
 
 
@@ -11708,7 +11710,7 @@ function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSid
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, center, color, transformOrLocation, diagramLimits) {
@@ -11729,7 +11731,7 @@ function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, center
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"](vertexLineCorners, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLineCorners, transform, color, diagramLimits);
 }
 
 function PolygonLine(webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transformOrLocation, diagramLimits) {
@@ -11742,7 +11744,7 @@ function PolygonLine(webgl, numSides, radius, rotation, direction, numSidesToDra
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 
@@ -11785,7 +11787,7 @@ function RadialLines(webgl) {
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (RadialLines);
@@ -11820,7 +11822,7 @@ function RectangleFilled(webgl, alignH, alignV, width, height, cornerRadius, cor
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexRectangle, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexRectangle, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -11869,7 +11871,7 @@ function Text(webgl, diagramLimits, optionsIn) {
   //   transform = transformOrLocation._dup();
   // }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexText, options.transform, options.color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexText, options.transform, options.color, diagramLimits);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Text);
@@ -13783,7 +13785,7 @@ function () {
 
       if (form != null) {
         var key = Object.keys(form.elements)[0]; // This is ok to fix for flow because all the elements of the
-        // simple equation created by Equationlabel will be Primatives
+        // simple equation created by Equationlabel will be Primitives
         // $FlowFixMe
 
         var textObject = form.elements[key].drawingObject;
@@ -13803,11 +13805,11 @@ function () {
 
       if (form != null) {
         var key = Object.keys(form.elements)[0]; // This is ok to fix for flow because all the elements of the
-        // simple equation created by Equationlabel will be Primatives
+        // simple equation created by Equationlabel will be Primitives
         // $FlowFixMe
 
         var textObject = form.elements[key].drawingObject; // This is ok to fix for flow because all the elements of the
-        // simple equation created by Equationlabel will be Primatives
+        // simple equation created by Equationlabel will be Primitives
         // that are text objects
 
         if (textObject != null) {
@@ -14021,7 +14023,7 @@ function makeStraightLine(shapes, length, width, position, color, dashStyle, lar
 
   return straightLine;
 } // export type TypeLine = {
-//   _line: DiagramElementPrimative;
+//   _line: DiagramElementPrimitive;
 //   currentLength: number;
 //   setLength: (number) => void;
 //   setEndPoints: (Point, Point, number) => void;
@@ -14878,7 +14880,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
 /* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -15807,16 +15809,16 @@ function (_DiagramElementCollec) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js":
+/***/ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js":
 /*!***************************************************************!*\
-  !*** ./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js ***!
+  !*** ./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js ***!
   \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimatives; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimitives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
@@ -15869,12 +15871,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var DiagramPrimatives =
+var DiagramPrimitives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, // draw2DFigures: Object,
+  function DiagramPrimitives(webgl, draw2D, // draw2DFigures: Object,
   htmlCanvas, limits, spaceTransforms, animateNextFrame) {
-    _classCallCheck(this, DiagramPrimatives);
+    _classCallCheck(this, DiagramPrimitives);
 
     if (Array.isArray(webgl)) {
       this.webgl = webgl;
@@ -15895,7 +15897,7 @@ function () {
     this.spaceTransforms = spaceTransforms; // this.draw2DFigures = draw2DFigures;
   }
 
-  _createClass(DiagramPrimatives, [{
+  _createClass(DiagramPrimitives, [{
     key: "polyLineLegacy",
     value: function polyLineLegacy(points, close, lineWidth, color) {
       var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
@@ -16069,7 +16071,7 @@ function () {
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](to, o.transform, o.color, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -16144,7 +16146,7 @@ function () {
     //   }
     //   const dT = new DiagramText(new Point(0, 0), textInput, font);
     //   const to = new TextObject(this.draw2D, [dT]);
-    //   return new DiagramElementPrimative(
+    //   return new DiagramElementPrimitive(
     //     to,
     //     new Transform().scale(1, 1).translate(location.x, location.y),
     //     color,
@@ -16181,7 +16183,7 @@ function () {
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
       var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_21__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
@@ -16775,7 +16777,7 @@ function () {
     }
   }]);
 
-  return DiagramPrimatives;
+  return DiagramPrimitives;
 }();
 
 
@@ -17362,7 +17364,7 @@ function () {
   }]);
 
   return DiagramText;
-}(); // TextObject is the DrawingObject used in the DiagramElementPrimative.
+}(); // TextObject is the DrawingObject used in the DiagramElementPrimitive.
 // TextObject will draw an array of DiagramText objects.
 
 
@@ -18637,7 +18639,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexArrow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexArrow).call(this, webgl));
-    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
+    _this.glPrimitive = _this.gl[0].TRIANGLE_FAN;
     _this.height = height;
     var arrowHeight = height - legHeight;
     var points = [];
@@ -18751,7 +18753,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexDashedLine);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexDashedLine).call(this, webgl));
-    _this.glPrimative = _this.gl[0].TRIANGLES;
+    _this.glPrimitive = _this.gl[0].TRIANGLES;
     _this.dashCumLength = [];
     _this.maxLength = maxLength;
     var cx = 0;
@@ -18881,7 +18883,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertextFan);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertextFan).call(this, webgl));
-    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
+    _this.glPrimitive = webgl[0].gl.TRIANGLE_FAN;
     _this.points = [];
     points.forEach(function (p) {
       _this.points.push(p.x);
@@ -18952,7 +18954,7 @@ function (_VertexObject) {
     var cx = 0;
     var cy = 0 - width / 2.0;
     var points = [];
-    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
+    _this.glPrimitive = _this.gl[0].TRIANGLE_STRIP;
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy + width));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx + length, cy));
@@ -19034,7 +19036,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexLines);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexLines).call(this, webgl));
-    _this.glPrimative = _this.gl[0].LINES;
+    _this.glPrimitive = _this.gl[0].LINES;
     _this.points = [];
     linePairs.forEach(function (line) {
       var _line = _slicedToArray(line, 2),
@@ -19128,7 +19130,7 @@ function (_DrawingObject) {
   // primitive tyle (e.g. TRIANGLE_STRIP)
   // Vertex buffer
   // textureBuffer: WebGLBuffer;
-  // Primative vertices of shape
+  // Primitive vertices of shape
   // Number of primative vertices
   // Border vertices
   function VertexObject(webgl) {
@@ -19153,7 +19155,7 @@ function (_DrawingObject) {
       return w.gl;
     });
     _this.webgl = webglArray;
-    _this.glPrimative = webglArray[0].gl.TRIANGLES;
+    _this.glPrimitive = webglArray[0].gl.TRIANGLES;
     _this.points = [];
     _this.z = 0;
     _this.buffer = webglArray.map(function () {
@@ -19165,7 +19167,7 @@ function (_DrawingObject) {
     _this.programIndex = webglArray.map(function (w) {
       return w.getProgram(vertexShader, fragmentShader);
     });
-    _this.type = 'vertexPrimative';
+    _this.type = 'vertexPrimitive';
     return _this;
   }
 
@@ -19516,7 +19518,7 @@ function (_DrawingObject) {
         gl.uniform1i(locations.u_use_texture, 0);
       }
 
-      gl.drawArrays(this.glPrimative, offset, count);
+      gl.drawArrays(this.glPrimitive, offset, count);
 
       if (texture) {
         gl.disableVertexAttribArray(locations.a_texcoord);
@@ -19802,9 +19804,9 @@ function (_VertexObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
 
     if (triangles) {
-      _this.glPrimative = webgl[0].gl.TRIANGLES;
+      _this.glPrimitive = webgl[0].gl.TRIANGLES;
     } else {
-      _this.glPrimative = webgl[0].gl.TRIANGLE_STRIP;
+      _this.glPrimitive = webgl[0].gl.TRIANGLE_STRIP;
     } // Check potential errors in constructor input
 
 
@@ -19990,7 +19992,7 @@ function (_VertexObject) {
       _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
     }
 
-    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN; // Check potential errors in constructor input
+    _this.glPrimitive = webgl[0].gl.TRIANGLE_FAN; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = numSidesToDraw;
@@ -20138,7 +20140,7 @@ function (_VertexObject) {
 
     // setup webgl stuff
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygonLine).call(this, webgl));
-    _this.glPrimative = webgl[0].gl.LINES; // Check potential errors in constructor input
+    _this.glPrimitive = webgl[0].gl.LINES; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = Math.floor(numSidesToDraw);
@@ -20453,7 +20455,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexRectangleFilled);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexRectangleFilled).call(this, webgl));
-    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
+    _this.glPrimitive = _this.gl[0].TRIANGLE_FAN;
     var points = [];
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
 
@@ -20626,7 +20628,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexText);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'text'));
-    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
+    _this.glPrimitive = webgl[0].gl.TRIANGLE_FAN;
     var defaultTextOptions = {
       text: 'DEFAULT_TEXT',
       size: '20px',
@@ -20821,12 +20823,12 @@ function (_VertexObject) {
 /*!***********************************!*\
   !*** ./src/js/diagram/Element.js ***!
   \***********************************/
-/*! exports provided: DiagramElementPrimative, DiagramElementCollection, DiagramElement */
+/*! exports provided: DiagramElementPrimitive, DiagramElementCollection, DiagramElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElementPrimative", function() { return DiagramElementPrimative; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElementPrimitive", function() { return DiagramElementPrimitive; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElementCollection", function() { return DiagramElementCollection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElement", function() { return DiagramElement; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
@@ -20910,7 +20912,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // A diagram is composed of multiple diagram elements.
 //
 // A diagram element can either be a:
-//  - Primative: a basic element that has the webGL vertices, color
+//  - Primitive: a basic element that has the webGL vertices, color
 //  - Collection: a group of elements (either primatives or collections)
 //
 // A diagram element can be:
@@ -22290,12 +22292,12 @@ function () {
 // ***************************************************************
 
 
-var DiagramElementPrimative =
+var DiagramElementPrimitive =
 /*#__PURE__*/
 function (_DiagramElement) {
-  _inherits(DiagramElementPrimative, _DiagramElement);
+  _inherits(DiagramElementPrimitive, _DiagramElement);
 
-  function DiagramElementPrimative(drawingObject) {
+  function DiagramElementPrimitive(drawingObject) {
     var _this3;
 
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
@@ -22303,9 +22305,9 @@ function (_DiagramElement) {
     var diagramLimits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
     var parent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-    _classCallCheck(this, DiagramElementPrimative);
+    _classCallCheck(this, DiagramElementPrimitive);
 
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimitive).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
     _this3.color = color.slice();
     _this3.pointsToDraw = -1;
@@ -22316,7 +22318,7 @@ function (_DiagramElement) {
     return _this3;
   }
 
-  _createClass(DiagramElementPrimative, [{
+  _createClass(DiagramElementPrimitive, [{
     key: "setAngleToDraw",
     value: function setAngleToDraw() {
       var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
@@ -22367,7 +22369,7 @@ function (_DiagramElement) {
     value: function _dup() {
       var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       // const vertices = this.drawingObject._dup();
-      var primative = new DiagramElementPrimative(this.drawingObject._dup()); // const primative = new DiagramElementPrimative(
+      var primative = new DiagramElementPrimitive(this.drawingObject._dup()); // const primative = new DiagramElementPrimitive(
       //   vertices,
       //   transform,
       //   color,
@@ -22400,7 +22402,7 @@ function (_DiagramElement) {
       var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.resizeHtmlObject();
 
-      _get(_getPrototypeOf(DiagramElementPrimative.prototype), "resize", this).call(this, diagramHTMLElement); // If gl canvas is resized, webgl text will need to be updated.
+      _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "resize", this).call(this, diagramHTMLElement); // If gl canvas is resized, webgl text will need to be updated.
 
 
       if (this.drawingObject.type === 'vertexText') {
@@ -22414,7 +22416,7 @@ function (_DiagramElement) {
     value: function setColor(color) {
       this.color = color.slice();
 
-      if (this instanceof DiagramElementPrimative) {
+      if (this instanceof DiagramElementPrimitive) {
         if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
           this.drawingObject.setColor(this.color);
         }
@@ -22431,7 +22433,7 @@ function (_DiagramElement) {
       // this.color[3] = opacity;
       this.opacity = opacity;
 
-      if (this instanceof DiagramElementPrimative) {
+      if (this instanceof DiagramElementPrimitive) {
         if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
           this.drawingObject.setOpacity(opacity);
         }
@@ -22449,7 +22451,7 @@ function (_DiagramElement) {
   }, {
     key: "show",
     value: function show() {
-      _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
+      _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "show", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
         this.drawingObject.show = true; // This line is a challenge.
@@ -22470,7 +22472,7 @@ function (_DiagramElement) {
   }, {
     key: "hide",
     value: function hide() {
-      _get(_getPrototypeOf(DiagramElementPrimative.prototype), "hide", this).call(this);
+      _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "hide", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
         this.drawingObject.show = false;
@@ -22685,7 +22687,7 @@ function (_DiagramElement) {
     }
   }]);
 
-  return DiagramElementPrimative;
+  return DiagramElementPrimitive;
 }(DiagramElement); // ***************************************************************
 // Collection of Geometry Objects or Collections
 // ***************************************************************
@@ -23251,8 +23253,8 @@ function (_DiagramElement2) {
       return timeToAnimate;
     }
   }, {
-    key: "getAllPrimatives",
-    value: function getAllPrimatives() {
+    key: "getAllPrimitives",
+    value: function getAllPrimitives() {
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -23414,7 +23416,7 @@ function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
 
-        if (element instanceof DiagramElementPrimative) {
+        if (element instanceof DiagramElementPrimitive) {
           if (element.drawingObject.state === 'loading') {
             elems.push(element);
           }
@@ -23433,7 +23435,7 @@ function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
 
-        if (element instanceof DiagramElementPrimative) {
+        if (element instanceof DiagramElementPrimitive) {
           element.unrender();
         } else {
           element.unrenderAll();

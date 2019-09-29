@@ -8,7 +8,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform,
-  // DiagramElementPrimative,
+  // DiagramElementPrimitive,
   // DiagramObjectPolyLine,
   // DiagramObjectAngle,
   // DiagramObjectLine,

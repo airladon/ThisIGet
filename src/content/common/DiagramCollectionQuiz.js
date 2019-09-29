@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 
 const {
-  Diagram, Transform, Point, DiagramElementCollection, DiagramElementPrimative,
+  Diagram, Transform, Point, DiagramElementCollection, DiagramElementPrimitive,
 } = Fig;
 
 const { parsePoint } = Fig.tools.g2;
@@ -10,14 +10,14 @@ const { parsePoint } = Fig.tools.g2;
 const { joinObjects } = Fig.tools.misc;
 
 export type TypeMessages = {
-  _correct: DiagramElementPrimative;
-  _incorrect: DiagramElementPrimative;
+  _correct: DiagramElementPrimitive;
+  _incorrect: DiagramElementPrimitive;
 } & DiagramElementCollection;
 
 export type TypeButton = {
   enable: () => void;
   disable: () => void;
-} & DiagramElementPrimative;
+} & DiagramElementPrimitive;
 
 // $FlowFixMe
 const CommonQuizMixin = superclass => class extends superclass {

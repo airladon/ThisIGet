@@ -14,7 +14,6 @@ type Props = {
 
 export default class DiagramContainer extends React.Component
                                     <Props> {
-
   componentDidMount() {
     // const backgroundColor = this.props.backgroundColor || [1, 0, 0, 1];
     // const limits = this.props.limits || new Rect(-1, -1, 2, 2);

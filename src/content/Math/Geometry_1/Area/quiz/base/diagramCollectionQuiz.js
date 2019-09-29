@@ -9,7 +9,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform,
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   Point,
 } = Fig;
 
@@ -27,8 +27,8 @@ const {
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   constructor(

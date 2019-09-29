@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
@@ -20,7 +20,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectPolyLine;
 
   _correction: DiagramObjectPolyLine;
@@ -29,37 +29,37 @@ export default class CommonCollection extends CommonDiagramCollection {
     _side01: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _side12: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _side20: { _label: DiagramElementCollection; } & DiagramObjectLine;
-    _angle0: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle1: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle2: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
+    _angle0: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle1: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle2: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
     _angleEqual: DiagramObjectAngle;
-    _angleBase: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
+    _angleBase: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
     _sideEqual: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _sideSplit: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _sideBase: { _label: DiagramElementCollection; } & DiagramObjectLine;
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectPolyLine;
 
   _right: {
     _side01: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _side12: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _side20: { _label: DiagramElementCollection; } & DiagramObjectLine;
-    _angle0: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle1: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle2: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
+    _angle0: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle1: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle2: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
     _angleEqual: DiagramObjectAngle;
-    _angleBase: { _curve: DiagramElementPrimative } & DiagramObjectAngle;
+    _angleBase: { _curve: DiagramElementPrimitive } & DiagramObjectAngle;
     _sideEqual: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _sideSplit: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _sideBase: { _label: DiagramElementCollection; } & DiagramObjectLine;
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectPolyLine;
 
   _split: {
     _label: DiagramElementCollection;
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
   } & DiagramObjectLine;
 
   lastOpposite: boolean;

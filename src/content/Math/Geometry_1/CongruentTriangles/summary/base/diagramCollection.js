@@ -7,7 +7,7 @@ import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  Transform, DiagramElementPrimative, DiagramElementCollection,
+  Transform, DiagramElementPrimitive, DiagramElementCollection,
   DiagramObjectAngle, DiagramObjectLine, DiagramObjectPolyLine,
 } = Fig;
 
@@ -27,7 +27,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
-  _label: DiagramElementPrimative;
+  _label: DiagramElementPrimitive;
   label: HTMLElement;
 
   makeLabel() {

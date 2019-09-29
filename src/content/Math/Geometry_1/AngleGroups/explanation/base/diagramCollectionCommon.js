@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, Equation,
   Transform,
 } = Fig;
@@ -19,29 +19,29 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angleA: DiagramObjectAngle;
     _angleB: DiagramObjectAngle;
     _angleC: DiagramObjectAngle;
-    _vertex: DiagramElementPrimative;
+    _vertex: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _eqns: {
     _adjacent: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _complementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _supplementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _explementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
   } & DiagramElementCollection;
 

@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import CommonDiagramCollection from './DiagramCollection';
 
 const {
-  Transform, DiagramElementPrimative, Rect,
+  Transform, DiagramElementPrimitive, Rect,
   DiagramElementCollection,
 } = Fig;
 const { html } = Fig.tools;
@@ -18,7 +18,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   descriptionElement: HTMLElement;
   spaceForDiagramElement: HTMLElement;
   container: HTMLElement;
-  _box: DiagramElementPrimative;
+  _box: DiagramElementPrimitive;
   linkElement: HTMLElement;
   interactiveButtonMethod: Function | null;
 
@@ -85,7 +85,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   transformToQRWindow(
-    element: DiagramElementCollection | DiagramElementPrimative,
+    element: DiagramElementCollection | DiagramElementPrimitive,
     lensWindow: Rect,
   ) {
     const diagramContainer = document.getElementById('id_topic__qr_diagram_container');

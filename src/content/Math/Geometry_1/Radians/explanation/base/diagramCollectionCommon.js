@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, Equation,
   Transform,
 } = Fig;
@@ -16,40 +16,40 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
     _angle: DiagramObjectAngle;
-    _arc: DiagramElementPrimative;
-    _radians: DiagramElementPrimative;
+    _arc: DiagramElementPrimitive;
+    _radians: DiagramElementPrimitive;
     _degrees: {
-      _marks36: DiagramElementPrimative;
-      _marks360: DiagramElementPrimative;
+      _marks36: DiagramElementPrimitive;
+      _marks360: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _bendLine: {
       _line: DiagramObjectLine;
-      _arc: DiagramElementPrimative;
+      _arc: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _angleText: {
-      _label: DiagramElementPrimative;
-      _value: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
+      _value: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _radianLines: {
-      _line0: DiagramElementPrimative;
-      _line1: DiagramElementPrimative;
-      _line2: DiagramElementPrimative;
-      _line3: DiagramElementPrimative;
-      _line4: DiagramElementPrimative;
-      _line5: DiagramElementPrimative;
+      _line0: DiagramElementPrimitive;
+      _line1: DiagramElementPrimitive;
+      _line2: DiagramElementPrimitive;
+      _line3: DiagramElementPrimitive;
+      _line4: DiagramElementPrimitive;
+      _line5: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   _equation: {
-    _arc: DiagramElementPrimative;
-    __arc: DiagramElementPrimative;
-    _radius: DiagramElementPrimative;
-    __radius: DiagramElementPrimative;
-    _angle: DiagramElementPrimative;
-    __angle: DiagramElementPrimative;
-    _radiusLength1: DiagramElementPrimative;
-    _radiusLengths2: DiagramElementPrimative;
-    _radiusLengths3: DiagramElementPrimative;
+    _arc: DiagramElementPrimitive;
+    __arc: DiagramElementPrimitive;
+    _radius: DiagramElementPrimitive;
+    __radius: DiagramElementPrimitive;
+    _angle: DiagramElementPrimitive;
+    __angle: DiagramElementPrimitive;
+    _radiusLength1: DiagramElementPrimitive;
+    _radiusLengths2: DiagramElementPrimitive;
+    _radiusLengths3: DiagramElementPrimitive;
   } & Equation;
 
   _radDegEqn: Equation;

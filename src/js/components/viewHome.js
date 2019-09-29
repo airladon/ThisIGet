@@ -7,7 +7,7 @@ import About from './about';
 import DiagramContainer from './diagram';
 
 const {
-  DiagramElementCollection, Diagram, Rect, Transform
+  DiagramElementCollection, Diagram, Rect, Transform, TransformLimit,
 } = Fig;
 
 type Props = {
@@ -18,12 +18,38 @@ type Props = {
 function createDiagram(htmlId) {
   const diagram = new Diagram({
     htmlId,
-    backgroundColor: [1, 0, 0, 1],
+    backgroundColor: [1, 1, 1, 1],
     limits: new Rect(-3, -2, 6, 4),
     fontScale: 1,
   });
-  const collection = new DiagramElementCollection(new Transform(), diagram.limits);
+  // diagram.addElements([
+  //   {
+  //     name: 'ball',
+  //     type: 'polygon',
+  //     definition: {
+  //       radius: 0.5,
+  //       sides: 100,
+  //       color: [1, 0, 0, 1],
+  //       fill: true,
+  //     },
+  //     properties: {
+  //       move: {
+  //         boundary: 'diagram',
+  //         canBeMovedAfterLoosingTouch: true,
+  //         maxVelocity: new TransformLimit(10, 10, 10),
+  //       },
+  //     },
+  //     // initialize: [
+  //     //   { setMovable: [true] },
+  //     //   () => {},
+  //     //   { setTransformCallback: [] },
+  //     // ],
+  //   }]);
+  const collection = diagram.primitive.collection();
   diagram.elements = collection;
+  // diagram.addElements(collection, )
+  // const collection = new DiagramElementCollection(new Transform(), diagram.limits);
+  // diagram.elements = collection;
   diagram.addElements(collection, [
     {
       name: 'ball',
@@ -38,6 +64,7 @@ function createDiagram(htmlId) {
         move: {
           boundary: 'diagram',
           canBeMovedAfterLoosingTouch: true,
+          maxVelocity: new TransformLimit(10, 10, 10),
         },
       },
     },

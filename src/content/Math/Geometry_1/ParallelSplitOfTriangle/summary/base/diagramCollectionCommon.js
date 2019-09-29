@@ -4,7 +4,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -14,7 +14,7 @@ const {
 } = Fig;
 
 type TypeLabeledLine = {
-  _label: DiagramElementPrimative;
+  _label: DiagramElementPrimitive;
 } & DiagramObjectLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
