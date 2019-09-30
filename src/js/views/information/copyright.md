@@ -1,4 +1,4 @@
-# Copyright
+# Copyright Information
 
 The intent of www.thisiget.com is to make all academic content free to use, while protecting the remainder of the website with copyright to ensure users can be confident they are visiting www.thisiget.com and not a third party website.
 

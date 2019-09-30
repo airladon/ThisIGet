@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This privacy policy discloses the privacy practices for this website, www.thisiget.com. This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
+This privacy policy explains what information is collectioned and how that information is used by This I Get, LLC ("This I Get") when you visit the website www.thisiget.com.
  
 The topics in this policy are:
 * [Summary](#summary)
@@ -16,20 +16,20 @@ The topics in this policy are:
 
 ## Summary <a name="summary"></a>
 
-You can access all content on this website anonymously, sharing only the default information provided by your browser. This information includes browser type and version, IP address and sometimes the type of device the browser is on. It is used by the website to understand and optimize website use and performance, but not to identify you.
+You can access all content on this website anonymously, sharing only the default information provided by your browser. This information includes browser type and version, IP address and sometimes the type of device the browser is on. It is used by This I Get to understand and optimize website use and performance, but not to identify you.
 
 
 If you want to rate content, then an account needs to be created, and you need to be logged into the account. To create an account, you need to provide a username, email address and password. This information is used to manage your account, and ensures only you can access your content ratings. You can provide any valid username, email address and password, and thus remain anonymous.
 
-When you have an account, and are logged in, additional information including when you created the account, when you last logged in, and content rating information is stored. This information is used for account management, helping the website understand how many active users there are for performance optimization, allowing you to see your ratings of content in the future, and providing statistcal summaries of content to all users.
+When you have an account, and are logged in, additional information including when you created the account, when you last logged in, and content rating information is stored. This information is used for account management, helping This I Get understand how many active users there are, for performance optimization, allowing you to see your ratings of content in the future, and providing statistcal summaries of content to all users.
 
-Your information is never sold to third parties, and would only be shared to comply with the law.
+Your information is never sold to third parties, and would only be shared to comply with a legal requirement.
 
 ## What data is collected? <a name="whatdataiscollected"></a>
 
 ### Log Data
 
-Like many website operators, information that your browser sends whenever you visit the website is automatically collected. This Log Data may include information such as
+Like many websites, information that your browser sends whenever you visit the website is automatically collected. This Log Data may include information such as
 
 * your computer's Internet Protocol ("IP") address
 * browser type

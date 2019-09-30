@@ -15,6 +15,26 @@ type Props = {
   username: string;
 };
 
+
+// const diagram = new Diagram
+// const collection = new Collection(diagram, transform)
+// const collection = diagram.primitives.collection(transform)
+// const polygon = diagram.primitives.polygon(options)
+// collection.add(polygon)
+
+
+// const diagram = new Diagram
+// const collection = new Collection(transform)
+// const polygon = new Polygon(options)
+// collection.add(polygon)
+// diagram.add(collection)
+// diagram.initialize()
+//   - connects all webgl instances
+//   - sets all limits
+//   - connects all animation frames
+//   - sets all parents
+
+
 function createDiagram(htmlId) {
   const diagram = new Diagram({
     htmlId,

@@ -5,7 +5,7 @@
 ## Learning
 There are many ways to learn.
 
-People’s individual experiences, knowledge, language, context and personality mean different ways work better different people.
+People’s individual experiences, knowledge, language, context and personality mean different ways work better for different people.
 
 How the learning is to be applied also changes which way might be most effective. Sometimes practice is the most efficient or most appropriate way to learn, other times having a deep understanding is required.
 
