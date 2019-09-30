@@ -7,7 +7,7 @@ import About from './about';
 import DiagramContainer from './diagram';
 
 const {
-  DiagramElementCollection, Diagram, Rect, Transform, TransformLimit,
+  Diagram, Rect, TransformLimit,
 } = Fig;
 
 type Props = {

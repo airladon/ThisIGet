@@ -16,7 +16,7 @@ function sleep(ms) {
 //     thresholds: 10,      // 10 pixels allowed to be different
 //     element: '#topic__content',
 //     prefix: ''           // filename prefix
-//      
+//
 //   },
 //   {
 //    width: 300,
