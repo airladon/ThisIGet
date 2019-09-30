@@ -276,8 +276,15 @@ $fullwidth: 380px;
 }
 
 #about__diagram {
-  width: 30em;
-  height: 20em;
+  width: 380px;
   margin-left: auto;
   margin-right: auto;
+  padding-top: calc(380px * 0.6666);
+}
+
+@media screen and (max-width: 400px) {
+  #about__diagram {
+    width: calc(100% - 2em);
+    padding-top: calc(0.666666 * (100% - 2em));
+  }
 }

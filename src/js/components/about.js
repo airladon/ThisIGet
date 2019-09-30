@@ -111,6 +111,7 @@ export default class About extends React.Component
         </div>
       </div>
       <div className="about__spacer"></div>
+      { /*
       <div className="about_section">
         <div className="about__tiles">
           {title(
@@ -121,6 +122,7 @@ export default class About extends React.Component
         </div>
       </div>
       <div className="about__spacer"></div>
+      */ }
       <div className="about_section about__get_started">
         <div className="about__tiles">
           <div className="about__title">
