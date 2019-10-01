@@ -698,7 +698,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -706,7 +706,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "External angle calculations",
+          "title": "Various Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -714,13 +714,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
         "simple": {
           "type": "singlePage",
-          "title": "Full explanation in single page",
+          "title": "Descriptive",
           "description": "",
           "fullTopic": true
         }
@@ -748,7 +748,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         }
@@ -756,7 +756,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }

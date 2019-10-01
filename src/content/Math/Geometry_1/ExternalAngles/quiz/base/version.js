@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Find the Angle',
   description: '',
   htmlTitle: 'Quiz - find the external angle of a triangle',
   htmlDescription: 'Find the external angle (also called exterior angle) in a triangle quiz',

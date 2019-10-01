@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'External angle calculations',
+  title: 'Various Triangles',
   description: '',
   htmlTitle: 'External angle calculation examples',
   htmlDescription: 'Examples of geometries where calculating the external angle of a triangle is needed',

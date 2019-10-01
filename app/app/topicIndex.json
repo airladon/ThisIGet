@@ -1157,7 +1157,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Relationship",
           "description": "",
           "htmlTitle": "Self discover the relationship between the external and internal angles of a triangle",
           "htmlDescription": "Using knowledge of total angle in a triangle, and supplementary angles you can find the relationship between a triangle\\'s external angle and its two opposite internal angles",
@@ -1168,7 +1168,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "External angle calculations",
+          "title": "Various Triangles",
           "description": "",
           "htmlTitle": "External angle calculation examples",
           "htmlDescription": "Examples of geometries where calculating the external angle of a triangle is needed",
@@ -1179,7 +1179,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "External angles (also called exterior angles) in a triangle explanation through presentation",
           "htmlDescription": "Proof of external angles in a triangle equalling sum of opposite internal angles",
@@ -1188,7 +1188,7 @@
         },
         "simple": {
           "type": "singlePage",
-          "title": "Full explanation in single page",
+          "title": "Descriptive",
           "description": "",
           "htmlTitle": "External angles (also called exterior angles)  in a triangle as a single page explanation",
           "htmlDescription": "Proof of external angles in a triangle equalling sum of opposite internal angles",
@@ -1272,7 +1272,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - find the external angle of a triangle",
           "htmlDescription": "Find the external angle (also called exterior angle) in a triangle quiz",
@@ -1283,7 +1283,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of triangle external angle (or exterior angle)",
           "htmlDescription": "Interactive diagram showing and describing the external angle of a triangle",

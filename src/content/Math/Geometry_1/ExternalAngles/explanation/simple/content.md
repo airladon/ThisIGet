@@ -1,5 +1,3 @@
-## External Angles of a Triangle
-
 Consider a triangle with one of its sides extended beyond the corner.
 
 ![](./fig.png)
