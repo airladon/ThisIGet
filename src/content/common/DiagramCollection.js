@@ -4,7 +4,7 @@ import {
   makeSelectorText, SelectorList,
 } from './tools/selector';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from './CommonLessonDiagram';
+import CommonTopicDiagram from './CommonTopicDiagram';
 
 const { Point, Transform } = Fig.tools.g2;
 const {
@@ -27,7 +27,7 @@ export type TypeAddElementObject = {
 export default class CommonDiagramCollection extends DiagramElementCollection {
   layout: Object;
   colors: Object;
-  +diagram: CommonLessonDiagram;
+  +diagram: CommonTopicDiagram;
   moveToScenario: (
     DiagramElement,
     ?TypeScenario,
@@ -43,7 +43,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
   legacySetScenario: (DiagramElement, ?TypeScenario) => void;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object = { colors: {} },
     transform: Transform = new Transform(),
   ) {

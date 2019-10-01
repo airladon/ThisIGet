@@ -3,8 +3,8 @@ import * as React from 'react';
 import Fig from 'figureone';
 // import '../../css/style.scss';
 import TopicTile from './topicTile';
-import TopicDescription from '../Lesson/topicDescription';
-import makeTopicTree from '../Lesson/topicTree';
+import TopicDescription from '../TopicFormat/topicDescription';
+import makeTopicTree from '../TopicFormat/topicTree';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
@@ -114,7 +114,7 @@ export default class LearningPathNavigator extends React.Component
       x += width + hSpace;
     });
 
-    this.getLessonTilesBounds();
+    this.getTopicTilesBounds();
   }
 
   createLessonJsx(topic: TopicDescription) {
@@ -245,7 +245,7 @@ export default class LearningPathNavigator extends React.Component
     }
   }
 
-  getLessonTilesBounds() {
+  getTopicTilesBounds() {
     let xMax = 0;
     let yMax = 0;
     let yMin = 0;

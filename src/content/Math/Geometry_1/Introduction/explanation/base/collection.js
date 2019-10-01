@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import diagramLayout from './layout';
 // import textureMap from '../../../../../common/images/textureMaps/circles.png';
@@ -35,7 +35,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   propertiesPosition: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     transform: Transform = new Transform('Circle').rotate(0).translate(0, 0),
   ) {
     const layout = diagramLayout();

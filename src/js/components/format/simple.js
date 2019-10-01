@@ -1,10 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import SimpleFormat from '../../Lesson/SimpleFormat';
+import SimpleFormat from '../../TopicFormat/SimpleFormat';
 import StaticQR from '../staticQR';
 import PresentationQR from '../presentationQR';
-// import '../../css/simpleLesson.scss';
+// import '../../css/simpleFormat.scss';
 
 type Props = {
   version: SimpleFormat;

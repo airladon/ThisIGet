@@ -5,7 +5,7 @@ import * as React from 'react';
 import LearningPathNavigator from './learningPathNavigator';
 import TopicTitle from './topicTitle';
 import getTopicIndex from '../../content/topicIndex';
-import TopicDescription from '../Lesson/topicDescription';
+import TopicDescription from '../TopicFormat/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
 import { login } from '../tools/misc';
@@ -13,7 +13,7 @@ import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
-import { setVersionRating } from '../Lesson/rating';
+import { setVersionRating } from '../TopicFormat/rating';
 
 type Props = {
   version: Object;
@@ -288,7 +288,7 @@ export default class TopicComponent extends React.Component
         const fullTopicCount = Object.keys(approach)
           .filter(ver => approach[ver].fullTopic).length;
         // $FlowFixMe - onPath is there and boolean
-        const partialLessonCount = Object.keys(approach)
+        const partialTopicCount = Object.keys(approach)
           .filter(ver => !approach[ver].fullTopic).length;
         let selected = false;
         if (this.approachUID === approachUID) {
@@ -324,7 +324,7 @@ export default class TopicComponent extends React.Component
           listItems.push(approach[vUID]);
         });
         this.key += 1;
-        if (partialLessonCount > 0
+        if (partialTopicCount > 0
           && (approachUID === 'explanation' || approachUID === 'discover' || approachUID === 'summary')
         ) {
           listItems.splice(fullTopicCount, 0, {

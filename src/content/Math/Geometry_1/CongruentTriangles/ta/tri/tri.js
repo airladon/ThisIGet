@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 // import diagramLayout from './layout';
 
@@ -41,7 +41,7 @@ export default class CommonCollectionTri extends CommonDiagramCollection {
   } & DiagramObjectPolyLine;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

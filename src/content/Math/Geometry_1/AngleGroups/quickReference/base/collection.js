@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
@@ -45,7 +45,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

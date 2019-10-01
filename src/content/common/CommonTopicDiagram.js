@@ -1,19 +1,18 @@
 // @flow
 import Fig from 'figureone';
 import type { TypeDiagramOptions } from 'figureone';
-// import Lesson from '../../js/Lesson/Lesson';
 // eslint-disable-next-line import/no-cycle
 import CommonDiagramCollection from './DiagramCollection';
 
 const { Diagram, Rect } = Fig;
 const { joinObjects } = Fig.tools.misc;
 
-export type TypeCommonLessonDiagram = {
+export type TypeCommonTopicDiagram = {
   layout: {};
   version: Object;
 } & Diagram;
 
-export default class CommonLessonDiagram extends Diagram {
+export default class CommonTopicDiagram extends Diagram {
   layout: {
     limits?: Rect,
     colors?: {

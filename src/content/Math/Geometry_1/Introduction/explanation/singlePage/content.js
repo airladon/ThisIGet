@@ -2,13 +2,13 @@
 import Fig from 'figureone';
 import {
   SinglePageFormatContent, makeFig,
-} from '../../../../../../js/Lesson/SinglePageFormatContent';
+} from '../../../../../../js/TopicFormat/SinglePageFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import diagramLayout from './layout';
 import Collection from './collection';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import part1 from './part1.md';
 
 const {
@@ -33,7 +33,7 @@ class Content extends SinglePageFormatContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({
+    this.diagram = new CommonTopicDiagram({
       htmlId,
       vertexShader: 'withTexture',
       fragmentShader: 'withTexture',

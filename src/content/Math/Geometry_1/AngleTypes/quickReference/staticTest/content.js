@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import SimpleFormatContent from '../../../../../../js/Lesson/SimpleFormatContent';
+import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';

@@ -1,5 +1,5 @@
 import * as index from './topicIndex.json';
-import TopicDescription from '../js/Lesson/topicDescription';
+import TopicDescription from '../js/TopicFormat/topicDescription';
 
 export default function getTopicIndex() {
   const topicIndex = index.default;

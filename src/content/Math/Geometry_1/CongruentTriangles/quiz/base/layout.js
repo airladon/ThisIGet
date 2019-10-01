@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import commonLessonLayout from '../../explanation/base/layout';
+import commonLayout from '../../explanation/base/layout';
 
 // const { Point, Transform, Line } = Fig.tools.g2;
 
@@ -12,7 +12,7 @@ const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = commonLessonLayout();
+  const layout: Object = commonLayout();
   const { colors } = layout;
   const quizTri = {
     method: 'polyLine',

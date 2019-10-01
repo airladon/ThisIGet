@@ -9,7 +9,7 @@ type Props = {
   imgLink: ?string,
 };
 
-export default class LessonTitle extends React.Component
+export default class TopicTitle extends React.Component
                                     <Props> {
   render() {
     // const props = Object.assign({}, this.props);

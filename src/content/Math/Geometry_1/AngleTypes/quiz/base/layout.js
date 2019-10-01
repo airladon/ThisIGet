@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import commonLessonLayout from '../../explanation/base/layout';
+import commonLayout from '../../explanation/base/layout';
 
 const { Point } = Fig.tools.g2;
 
@@ -11,7 +11,7 @@ const { Point } = Fig.tools.g2;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = commonLessonLayout();
+  const layout: Object = commonLayout();
 
   layout.question = {
     name: 'question',

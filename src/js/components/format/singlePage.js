@@ -1,8 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SimpleFormat from '../../Lesson/SimpleFormat';
-// import '../../css/singlePageLesson.scss';
+import SimpleFormat from '../../TopicFormat/SimpleFormat';
 import StaticQR from '../staticQR';
 import PresentationQR from '../presentationQR';
 

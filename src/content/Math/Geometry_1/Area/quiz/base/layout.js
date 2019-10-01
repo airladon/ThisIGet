@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import commonLessonLayout from '../../explanation/base/layout';
+import commonLayout from '../../explanation/base/layout';
 
 const { Point, Rect } = Fig.tools.g2;
 
@@ -11,7 +11,7 @@ const { Point, Rect } = Fig.tools.g2;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = commonLessonLayout();
+  const layout: Object = commonLayout();
   const { colors } = layout;
 
   layout.bounds = new Rect(-2.5, -1.3, 5, 2.2);
