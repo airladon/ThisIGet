@@ -68,7 +68,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     height: 'auto',
     includeQRs: false,
     prePath: '',
-    threshold: 10,
+    threshold: 50,
     element: '#topic__content',
     prefix: '',
     endpoint: defEndpoint,
