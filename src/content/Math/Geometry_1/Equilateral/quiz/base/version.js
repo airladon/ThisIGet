@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Equilateral Quiz',
+  title: 'Using Equilateral Triangles',
   description: '',
   htmlTitle: 'Equilateral triangles quiz',
   htmlDescription: 'Solve problems with equilateral triangles',

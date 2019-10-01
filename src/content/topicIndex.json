@@ -629,7 +629,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove Properties",
           "description": "",
           "fullTopic": true
         }
@@ -637,7 +637,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -645,7 +645,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -673,7 +673,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Equilateral Quiz",
+          "title": "Using Equilateral Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -681,7 +681,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }

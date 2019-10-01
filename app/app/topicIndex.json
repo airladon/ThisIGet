@@ -1048,7 +1048,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove Properties",
           "description": "",
           "htmlTitle": "Self discover why an equilateral trianglehas equal angles",
           "htmlDescription": "Figure out why any equilateral triangle also have three equal angles",
@@ -1059,7 +1059,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using equilateral triangles",
           "htmlDescription": "Examples showing how how to use the properties of an equilateral triangle to solve different problems",
@@ -1070,7 +1070,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Equilateral triangle derivation from an isosceles triangle",
           "htmlDescription": "Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles",
@@ -1126,7 +1126,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Equilateral Quiz",
+          "title": "Using Equilateral Triangles",
           "description": "",
           "htmlTitle": "Equilateral triangles quiz",
           "htmlDescription": "Solve problems with equilateral triangles",
@@ -1137,7 +1137,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Equilateral triangle summary",
           "htmlDescription": "Interactive diagram showing properties of an equilateral triangle",

@@ -1,4 +1,4 @@
-## Equilateral Triangle
+### Definition
 
 A triangle that has all sides the **same length** is called an **equilateral** triangle.
 
@@ -7,7 +7,7 @@ A triangle that has all sides the **same length** is called an **equilateral** t
 The word equilateral comes from the Latin _aequilateralis_ where _aequi_ means _"equal"_ and _lateralis_ means _"side"_.
 
 
-## Angle, Side Relationship
+### Angle, Side Relationship
 
 When three sides of a triangle are equal, the triangle's angles have a special relationship. Can you figure out what it is?
 

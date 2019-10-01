@@ -1,7 +1,4 @@
-## Quiz
-
-* Round answers to **two decimal places**
-<!-- * Refresh the page to get new questions -->
+<html><div class="simple_topic__quiz_instructions">Round answers to two decimal places</div></html>
 
 ### Question 1:
 

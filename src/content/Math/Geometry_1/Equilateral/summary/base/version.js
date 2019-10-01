@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Equilateral triangle summary',
   htmlDescription: 'Interactive diagram showing properties of an equilateral triangle',
