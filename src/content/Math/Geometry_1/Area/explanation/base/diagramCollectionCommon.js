@@ -155,6 +155,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this.makeUnitCircleGrid();
     this.addGenericGrid();
+    this._eqn.isTouchable = false;
   }
 
   makeUnitCircleGrid() {

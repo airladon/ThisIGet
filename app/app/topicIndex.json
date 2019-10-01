@@ -342,7 +342,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of area",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Area examples",
           "htmlDescription": "Calculation examples of areas for different shapes",
@@ -353,7 +353,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to area, rectangle area and square area",
           "htmlDescription": "Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are",
@@ -416,7 +416,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Create an area",
+          "title": "Create an Area",
           "description": "",
           "htmlTitle": "Quiz: Create a rectangle or square with area",
           "htmlDescription": "Create a rectangle or square that has some defined area on this dynamic page",
@@ -2374,7 +2374,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links",
+          "title": "External",
           "description": "External links to sources of information for Similar Triangles",
           "htmlTitle": "Similar Triangles Links",
           "htmlDescription": "Explanations, proofs, examples and questions about Similar Triangles>",

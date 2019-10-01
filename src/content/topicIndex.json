@@ -215,7 +215,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of area",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -223,7 +223,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -251,7 +251,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Create an area",
+          "title": "Create an Area",
           "description": "",
           "fullTopic": true
         }
@@ -1453,7 +1453,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links",
+          "title": "External",
           "description": "External links to sources of information for Similar Triangles",
           "fullTopic": false
         }
