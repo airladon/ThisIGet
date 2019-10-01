@@ -1,13 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
+import thresholds from './thresholds';
 
 tester(
-  {
-    pages: {
-      1: { threshold: 0.006 },
-    },
-  },
+  { thresholds },
   'goto',
   'nextPrev',
 );

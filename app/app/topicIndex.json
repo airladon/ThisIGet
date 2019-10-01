@@ -160,7 +160,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle",
           "htmlDescription": "Dynamic diagram that lets you explore the different types of important angles",
@@ -183,7 +183,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Create the Angle",
           "description": "",
           "htmlTitle": "Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full",
           "htmlDescription": "",
