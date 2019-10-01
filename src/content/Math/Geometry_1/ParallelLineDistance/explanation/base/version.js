@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Introduction to the distance between parallel lines',
   htmlDescription: 'Investigate the property of distance between parallel lines',

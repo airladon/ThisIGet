@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of ',
+  title: 'Using Parallel Line Distance',
   description: '',
   htmlTitle: 'Parallel line distance examples',
   htmlDescription: 'Examples of problems where know the properties of parallel line distance is useful',

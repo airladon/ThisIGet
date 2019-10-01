@@ -1,5 +1,3 @@
-## Distance Between a Parallel Lines
-
 The [[distance]]((qr,'Math/Geometry_1/PointLineDistance/base/Main',#00756F)) between a point and a line is the shorter of:
 
 * the distance between the point and the line's end

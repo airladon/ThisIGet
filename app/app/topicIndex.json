@@ -1458,7 +1458,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "htmlTitle": "Self discover the properties of distance between parallel lines",
           "htmlDescription": "Figure out why the shortest distance between parallel lines is perpendicular and constant",
@@ -1469,7 +1469,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Using Parallel Line Distance",
           "description": "",
           "htmlTitle": "Parallel line distance examples",
           "htmlDescription": "Examples of problems where know the properties of parallel line distance is useful",
@@ -1480,7 +1480,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to the distance between parallel lines",
           "htmlDescription": "Investigate the property of distance between parallel lines",
@@ -1503,7 +1503,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of parallel line distance property",
           "htmlDescription": "Parallel line distance is the length of the perpendicular line between them",
