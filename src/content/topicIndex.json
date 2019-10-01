@@ -5,7 +5,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Introduction to Angles.",
           "fullTopic": true
         }
@@ -25,7 +25,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "Summary of Angles introduction",
           "fullTopic": true
         }

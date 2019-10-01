@@ -5,7 +5,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Introduction to Angles.",
           "htmlTitle": "Introduction to Angles",
           "htmlDescription": "Introduction to the concept of angle",
@@ -28,7 +28,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "Summary of Angles introduction",
           "htmlTitle": "Summary of Angles introduction",
           "htmlDescription": "Definition of an angle and where the name comes from",
