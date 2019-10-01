@@ -42,7 +42,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Example problems with complementary, supplementary and explementary angles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -50,7 +50,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Explanation of complementary, supplementary, and explementary angles.",
           "fullTopic": true
         }
@@ -58,7 +58,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links to Angle Groups",
+          "title": "External",
           "description": "External links to sources of information for Angle Groups>",
           "fullTopic": false
         }
@@ -86,7 +86,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Complementary, Supplementary and Explementary Angles.",
+          "title": "Interative",
           "description": "Summary of complementary, supplementary and explementary Angles.",
           "fullTopic": true
         }
