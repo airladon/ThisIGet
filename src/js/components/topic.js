@@ -415,9 +415,9 @@ export default class TopicComponent extends React.Component
   ratingLabel() {
     // const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
-      if (this.version.type === 'links') {
-        return 'Are these links helpful?';
-      }
+      // if (this.version.type === 'links') {
+      //   return 'Are these links helpful?';
+      // }
       // return `Your ${approachName} rating:`;
       return 'Your rating:';
     }

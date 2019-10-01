@@ -151,12 +151,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
           for (const link of qrLinks) {
             await link.click();
             await page.mouse.move(0, 0);
-            await sleep(1000);
-            clippingBox = await (await page.$('.topic__qr__container')).boundingBox();
-
             await page.evaluate(() => {
               window.scrollTo(0, 0);
             });
+            await sleep(1000);
+            clippingBox = await (await page.$('#id_topic__qr__static_container')).boundingBox();
+            if (clippingBox == null) {
+              clippingBox = await (await page.$('#id_topic__qr__pres_container')).boundingBox();
+            }
             // const linkBox = await link.boundingBox();
             // await page.evaluate((y) => {
             //   window.scrollTo(0, y);
