@@ -12,7 +12,7 @@ $$\color{r}a \color{black} = 360^\circ - 45^\circ - 210^\circ - 60^\circ$$
 $$\color{r}a \color{black} = \bbox[10px,border:1px solid gray]{45^\circ}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
