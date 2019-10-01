@@ -973,7 +973,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationships",
           "description": "",
           "fullTopic": true
         }
@@ -981,7 +981,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangles split with parallel lines",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -989,7 +989,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
@@ -1023,7 +1023,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
