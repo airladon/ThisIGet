@@ -1691,7 +1691,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationship",
           "description": "",
           "htmlTitle": "Self discover the angle of the distance between a point and line",
           "htmlDescription": "Figure out why the shortest distance between a point and a line is perpendicular to the line",
@@ -1702,7 +1702,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to distance between a point and line",
           "htmlDescription": "Properties of distance between point and a line",
@@ -1725,7 +1725,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of point line distance property",
           "htmlDescription": "",
@@ -1745,7 +1745,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Internal Angles",
           "description": "",
           "htmlTitle": "Self discover the total internal angle of a quadrangle",
           "htmlDescription": "Figure out the total internal angle of a quadrangle or quadrilateral yourself",
@@ -1756,7 +1756,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Quadrangle internal angle calculations",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Quadrangle or Quadrilateral interal angle calculation examples",
           "htmlDescription": "Examples of geometries where calculating the total internal angle of a quadrangle is needed",
@@ -1767,7 +1767,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to quadrangles and quadrilaterals",
           "htmlDescription": "Quadrangles, quadrilaterals and their properties",
@@ -1823,7 +1823,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle in the quadrangle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -1834,7 +1834,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Quadrangles (quadrilaterals) summary",
           "htmlDescription": "",

@@ -1040,7 +1040,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -1048,7 +1048,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1068,7 +1068,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1085,7 +1085,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Internal Angles",
           "description": "",
           "fullTopic": true
         }
@@ -1093,7 +1093,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Quadrangle internal angle calculations",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1101,7 +1101,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1129,7 +1129,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         }
@@ -1137,7 +1137,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
