@@ -806,7 +806,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -814,7 +814,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -822,7 +822,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -850,7 +850,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -858,7 +858,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }

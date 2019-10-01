@@ -1342,7 +1342,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover why an isosceles triangles can have two equal sides and angles",
           "htmlDescription": "Figure out why any triangle that has two equal sides also has two equal angles, and why any triangle with two equal angles has two equal sides",
@@ -1353,7 +1353,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using isosceles triangles",
           "htmlDescription": "Examples showing how how to use the properties of an isosceles triangle to solve different problems",
@@ -1364,7 +1364,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Isosceles triangles and proof",
           "htmlDescription": "Proof for if two sides are equal why two angles are equal and vise versa",
@@ -1427,7 +1427,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the missing side or angle of an isosceles triangle",
           "htmlDescription": "Given a set of sides and angles, find the missing one",
@@ -1438,7 +1438,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of Isosceles triangle and its properties",
           "htmlDescription": "Isosceles triangle, side and angle equality, split line properties",

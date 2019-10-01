@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Find the Property',
   description: '',
   htmlTitle: 'Quiz - Find the missing side or angle of an isosceles triangle',
   htmlDescription: 'Given a set of sides and angles, find the missing one',

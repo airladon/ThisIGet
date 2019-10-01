@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Isosceles triangles and proof',
   htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',

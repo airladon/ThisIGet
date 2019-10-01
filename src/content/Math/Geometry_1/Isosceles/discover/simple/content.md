@@ -1,4 +1,4 @@
-## Isosceles Triangle
+### Isosceles Triangle
 
 There are several types of triangle commonly found in many applications.
 
@@ -12,7 +12,7 @@ A triangle with **two sides of equal length** is called an **isosceles** triangl
 
 The word isosceles comes from the Greek word _isoskeles_ which is formed from _isos_ meaning _"equal"_ and _skelos_ meaning _"leg"_. In other words, an isosceles triangle is a triangle with two equal legs.
 
-## Angle, Side Relationship
+### Angle, Side Relationship
 
 When two sides of a triangle are equal, the triangle's angles have a special relationship. Can you figure out what it is?
 
@@ -77,7 +77,7 @@ $$c = \frac{180^\circ - a}{2}$$
 </hintLow><div></div>
 
 
-## Split line
+### Split line
 
 If a line is drawn from the angle between the equal sides, to the opposite side, and that line splits the angle in two equal pieces, how does it split the opposite side (from both a length and angle perspective)?
 

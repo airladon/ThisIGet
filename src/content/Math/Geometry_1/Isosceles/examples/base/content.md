@@ -1,9 +1,6 @@
-## Isosceles Triangle Calculation Examples
+### Example 1
 
-
-### Example 1:
-
-#### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
+What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
 ![](ex1.png)
 
@@ -16,9 +13,9 @@ $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{42.5^\circ}$$
 </hintLow>
 
 
-### Example 2:
+### Example 2
 
-#### What is the length of side $$\color{r}a$$?
+What is the length of side $$\color{r}a$$?
 
 ![](ex2.png)
 
@@ -29,9 +26,9 @@ $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{23}$$
 </hintLow>
 
 
-### Example 3:
+### Example 3
 
-#### A square is split with a line between opposite corners. What is angle $$\color{r}a$$ in degrees?
+A square is split with a line between opposite corners. What is angle $$\color{r}a$$ in degrees?
 
 ![](ex3.png)
 
@@ -44,9 +41,9 @@ $$\color{r}a \color{black} = \frac{180^\circ - 90^\circ}{2} = \bbox[10px,border:
 </hintLow>
 
 
-### Example 4:
+### Example 4
 
-#### Show that any triangle made from the diameter of a circle and a point on the circle has the same angle $$\color{r}a$$?
+Show that any triangle made from the diameter of a circle and a point on the circle has the same angle $$\color{r}a$$?
 
 ![](ex4.png)
 
@@ -74,9 +71,9 @@ $$\bbox[10px,border:1px solid gray]{90^\circ}$$
 
 </hintLow>
 
-### Example 5:
+### Example 5
 
-#### A $$\color{r}line$$ is drawn between two points of a circle (also called a chord). Show that a triangle formed from this line and any point on the circle on the _same side_ of the line will have the same angle.
+A $$\color{r}line$$ is drawn between two points of a circle (also called a chord). Show that a triangle formed from this line and any point on the circle on the _same side_ of the line will have the same angle.
 
 ![](ex5.png)
 
@@ -103,9 +100,9 @@ _Note:_ If the center of the circle is on the edge of, or outside the triangle, 
 
 </hintLow>
 
-### Example 6:
+### Example 6
 
-#### If a triangle is formed on the other side of the chord from Example 5, show that it too will have a constant angle opposite the chord, and show what the relationship is between this angle and the one from Example 5.
+If a triangle is formed on the other side of the chord from Example 5, show that it too will have a constant angle opposite the chord, and show what the relationship is between this angle and the one from Example 5.
 
 <hintLow>[Answer]
 You can follow the same procedure from **Example 5** to find the angle. First consider just a single triangle, and draw lines from its vertices to the circle center.

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Summary of Isosceles triangle and its properties',
   htmlDescription: 'Isosceles triangle, side and angle equality, split line properties',
