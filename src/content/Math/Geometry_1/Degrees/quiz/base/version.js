@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'General Questions about Degrees',
+  title: 'Angles and Circles',
   description: 'Answer general questions about measuring angle and degrees',
   htmlTitle: 'Quiz - Measuring angles and degrees',
   htmlDescription: 'Answer general questions about measuring angle and degrees',

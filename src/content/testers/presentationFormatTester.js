@@ -82,7 +82,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   let scenariosToUse = scenarios;
   const defaultOptions = {
-    thresholds: 10,
+    thresholds: 20,
     viewPort: {
       width: 600,
     },

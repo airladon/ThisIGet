@@ -917,7 +917,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Determine if Congruent",
           "description": "",
           "htmlTitle": "Quiz - Determine if two triangles are congruent",
           "htmlDescription": "Given three properties of two triangles, can you determine if they are congruent?",
@@ -968,7 +968,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Explanation on why we use degrees as a measure of angle",
           "htmlDescription": "How angle is measured, why use degrees and common angles in degrees",
@@ -1017,7 +1017,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "General Questions about Degrees",
+          "title": "Angles and Circles",
           "description": "Answer general questions about measuring angle and degrees",
           "htmlTitle": "Quiz - Measuring angles and degrees",
           "htmlDescription": "Answer general questions about measuring angle and degrees",
@@ -1028,7 +1028,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of using degrees to measure angle",
           "htmlDescription": "History of word, interactive diagram to see different angles in degrees",

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Explanation on why we use degrees as a measure of angle',
   htmlDescription: 'How angle is measured, why use degrees and common angles in degrees',

@@ -537,7 +537,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Determine if Congruent",
           "description": "",
           "fullTopic": true
         }
@@ -576,7 +576,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -604,7 +604,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "General Questions about Degrees",
+          "title": "Angles and Circles",
           "description": "Answer general questions about measuring angle and degrees",
           "fullTopic": true
         }
@@ -612,7 +612,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
