@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Area of a triangle',
   htmlDescription: 'Summary of triangle area',

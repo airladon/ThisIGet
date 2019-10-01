@@ -351,7 +351,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "From Rectangles and Congruent Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -359,7 +359,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -367,7 +367,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -395,7 +395,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Make triangle with target area",
+          "title": "Make an Area",
           "description": "",
           "fullTopic": true
         }
@@ -403,7 +403,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -420,7 +420,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Circle Radius, Diameter and Circumference",
+          "title": "Calculation of Properties",
           "description": "Examples calculations of diameter, radius and circumference",
           "fullTopic": true
         }
@@ -428,7 +428,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Presentation form - interactive.",
           "fullTopic": true
         }

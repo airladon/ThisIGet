@@ -1,5 +1,3 @@
-## Area of a Triangle
-
 As [[area]]((qr,'Math/Geometry_1/Area/base/Area',#00756F)) is measured in squares, and triangles and squares don't easily align, it can seem a challenge to calculate the area of a triangle.
 
 ![](problemstatement.png)

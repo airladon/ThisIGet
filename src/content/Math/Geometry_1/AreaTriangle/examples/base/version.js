@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of ',
+  title: 'Various Geometries',
   description: '',
   htmlTitle: 'Triangle area examples',
   htmlDescription: 'Calculation examples using area of a triangle',

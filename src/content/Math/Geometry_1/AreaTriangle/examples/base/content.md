@@ -1,9 +1,6 @@
-## Triangle Area Calculation Examples
-
-
 ### Example 1:
 
-#### What is the area of the triangle below?
+What is the area of the triangle below?
 
 ![](ex1.png)
 
@@ -13,8 +10,8 @@ Triangle area is half the product of triangle base and height.
 $$Area =  \textstyle{\frac{1}{2}} \times 3 \times 2 = \bbox[10px,border:1px solid gray]{3}$$
 </hintLow>
 
-
-#### What is the area of the triangle below?
+### Example 2:
+What is the area of the triangle below?
 
 ![](ex2.png)
 
@@ -24,8 +21,8 @@ When two sides of a triangle are perpendicular, then one side can be considered 
 $$Area = \textstyle{\frac{1}{2}} \times 10 \times 15 = \bbox[10px,border:1px solid gray]{75}$$
 </hintLow>
 
-
-#### What is the area of the triangle below?
+### Example 3:
+What is the area of the triangle below?
 
 ![](ex3.png)
 
@@ -35,8 +32,8 @@ In this case, the perpendicular height of the triangle is 15. Therefore:
 $$Area = \textstyle{\frac{1}{2}} \times  10 \times 15 = \bbox[10px,border:1px solid gray]{75}$$
 </hintLow>
 
-
-#### What is the area of the shaded blue triangle below?
+### Example 4:
+What is the area of the shaded blue triangle below?
 
 ![](ex4.png)
 
@@ -48,8 +45,8 @@ Therefore, the area of the blue shaded triangle is:
 $$Area = \bbox[10px,border:1px solid gray]{5}$$
 </hintLow>
 
-
-#### What is the area of the shaded blue shape?
+### Example 5:
+What is the area of the shaded blue shape?
 
 ![](ex5.png)
 
@@ -68,7 +65,7 @@ $$Area = \textstyle{\frac{1}{2}} \times 5 \times 2 \times 3 = \bbox[10px,border:
 </hintLow>
 
 
-<!-- #### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{a}$$ in degrees?
+<!-- What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{a}$$ in degrees?
  -->
 <!-- ![](ex1.png)
 

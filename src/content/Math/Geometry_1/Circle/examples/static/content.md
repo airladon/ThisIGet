@@ -1,11 +1,9 @@
-## Radius, Diameter and Circumference Example Calculations
-
 The circle's radius, diameter and circumference are related to each other by:
 ![](reference.png)
 
 ### Example 1:
 
-#### What is the _diameter_ of a circle when its radius is 1?
+What is the _diameter_ of a circle when its radius is 1?
 
 <!-- <div class="answer_indent"> -->
 $$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{1,113,0} \color{g}diameter \color{black}= 2 \times \color{b}radius \color{black}= 2 \times 1 = \bbox[10px,border:1px solid gray]{2}$$
@@ -13,7 +11,7 @@ $$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{
 
 ### Example 2:
 
-#### What is the _circumference_ of a circle when its radius is 5?
+What is the _circumference_ of a circle when its radius is 5?
 
 <!-- <div class="answer_indent"> -->
 First combine the equations for circumference, radius and diameter to find the relationship between circumference and radius:
@@ -31,7 +29,7 @@ $$\color{r}circumference \color{black}= 10 \times 3.14 = \bbox[10px,border:1px s
 
 ### Example 3:
 
-#### What is the _diameter_ of a circle when its circumference is 20?
+What is the _diameter_ of a circle when its circumference is 20?
 
 <!-- <div class="answer_indent"> -->
 First rearrange the relationship between diameter and circumference:

@@ -4,7 +4,7 @@
 var version = {
   uid: 'static',
   topic: 'examples',
-  title: 'Circle Radius, Diameter and Circumference',
+  title: 'Calculation of Properties',
   description: 'Examples calculations of diameter, radius and circumference',
   htmlTitle: 'Example calculations of radius, diameter and circumference',
   htmlDescription: 'Examples showing how to calculate radius, diameter and circumference of circles from known properties',
