@@ -1,7 +1,7 @@
 const thresholds = {
   pages: {
-    15: { next: 1700, prev: 1700 },
-    16: { next: 1700, prev: 1700 },
+    15: { next: 1900, prev: 1900 },
+    16: { next: 1900, prev: 1900 },
   },
 };
 

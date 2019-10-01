@@ -283,7 +283,7 @@ export default class TopicComponent extends React.Component
     });
     // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     approachUIDs.forEach((approachUID) => {
-      if (approaches[approachUID] != null && approachUID !== 'quickReference') {
+      if (approaches[approachUID] != null) {
         const approach = approaches[approachUID];
         // $FlowFixMe - onPath is there and boolean
         const fullTopicCount = Object.keys(approach)
@@ -318,10 +318,14 @@ export default class TopicComponent extends React.Component
         });
         const listItems = [];
         vUIDs.forEach((vUID) => {
-          listItems.push(approach[vUID]);
           if (approachUID === 'quickReference') {
-            listItems.slice(-1)[0].label = vUID;
+            // listItems.slice(-1)[0].label = vUID;
+            approach[vUID].label = vUID;
+            approach[vUID].link = `/dev${approach[vUID].link}`;
+            console.log(listItems.slice(-1)[0])
           }
+          listItems.push(approach[vUID]);
+          
         });
         this.key += 1;
         if (partialLessonCount > 0
@@ -347,6 +351,9 @@ export default class TopicComponent extends React.Component
         let nameLabel = approachUID.charAt(0).toUpperCase() + approachUID.slice(1);
         if (approachUID === 'ta') {
           nameLabel = 'TA';
+        }
+        if (approachUID === 'quickReference') {
+          nameLabel = 'dev';
         }
         if (listItems.length === 1) {
           let singleItemClass = 'dropdown_button_container';

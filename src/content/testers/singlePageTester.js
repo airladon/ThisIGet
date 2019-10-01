@@ -46,6 +46,19 @@ async function removeRatings(page) {
   });
 }
 
+async function removeTopicVariables(page) {
+  await page.evaluate(() => {
+    (document.querySelectorAll(
+      '.topic__variable',
+    ) || []).forEach(
+      (el) => {
+        // eslint-disable-next-line no-param-reassign
+        el.style.visibility = 'hidden';
+      },
+    );
+  });
+}
+
 // eslint-disable no-await-in-loop
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
@@ -127,6 +140,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         // }, Math.floor(lessonBox.y));
         let clippingBox = await (await page.$(options.element)).boundingBox();
         await removeRatings(page);
+        await removeTopicVariables(page);
         let image = await page.screenshot({ clip: clippingBox });
         expect(image).toMatchImageSnapshot({
           failureThreshold: options.threshold,

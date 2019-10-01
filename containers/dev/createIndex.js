@@ -56,9 +56,13 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
 
       Object.keys(contentTypes).forEach((contentTypeName) => {
         const topicVersions = contentTypes[contentTypeName];
-        if (contentTypeName !== 'quickReference') {
+        if (outObj[uid].approaches[contentTypeName] == null) {
           outObj[uid].approaches[contentTypeName] = {};
+        }
+        if (appObj[uid].approaches[contentTypeName] == null) {
           appObj[uid].approaches[contentTypeName] = {};
+        }
+        if (contentTypeName !== 'quickReference') {
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
@@ -123,16 +127,14 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
         if (contentTypeName === 'quickReference' && buildMode === 'development') {
           topicVersions.forEach((v) => {
             const [versionUid] = v;
-            outObj[uid].approaches[contentTypeName] = {};
-            appObj[uid].approaches[contentTypeName] = {};
             outObj[uid].approaches[contentTypeName][versionUid] = {
-              type: 'presentation',
+              type: appObj[uid].approaches[contentTypeName].type,
               title: `${versionUid}`,
               description: '',
               fullTopic: false,
             };
             appObj[uid].approaches[contentTypeName][versionUid] = {
-              type: 'presentation',
+              type: appObj[uid].approaches[contentTypeName].type,
               title: `${versionUid}`,
               description: '',
               fullTopic: false,
