@@ -773,13 +773,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive - Slides",
           "description": "Motivation to studying shapes.",
           "fullTopic": true
         },
         "singlePage": {
           "type": "singlePage",
-          "title": "Descriptive & Interactive",
+          "title": "Descriptive & Interactive - Single Page",
           "description": "Motivation to studying shapes.",
           "fullTopic": true
         }
