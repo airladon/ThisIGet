@@ -1,5 +1,3 @@
-## Area of a Circle
-
 The curves of a circle do not line up with the straight lines of a square, so finding the [[area]]((qr,'Math/Geometry_1/Area/base/Area',#00756F)) of a circle is not necessarily obvious.
 
 ![](problemstatement.png)

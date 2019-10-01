@@ -1,9 +1,6 @@
-## Title
-
-
 ### Example 1:
 
-#### What is the area of of the circle below?
+What is the area of of the circle below?
 
 ![](ex1.png)
 
@@ -15,7 +12,7 @@ $$Area = \pi \times 5^2 = \bbox[10px,border:1px solid gray]{78.5}$$
 
 ### Example 2:
 
-#### What is the diamter of the circle below?
+What is the diamter of the circle below?
 
 ![](ex2.png)
 
@@ -32,7 +29,7 @@ $$Area = 2 \times \sqrt{\frac{5}{\pi}} = \bbox[10px,border:1px solid gray]{2.5}$
 
 ### Example 3:
 
-#### What is the area of the 6 cirles enclosed in the rectangle below?
+What is the area of the 6 cirles enclosed in the rectangle below?
 
 ![](ex3.png)
 
@@ -49,7 +46,7 @@ $$Area = 6 \times \pi \times \left( \frac{5}{2}^2 \right) = \bbox[10px,border:1p
 
 ### Example 4:
 
-#### What is the area of the shaded shape?
+What is the area of the shaded shape?
 
 ![](ex4.png)
 
@@ -65,7 +62,7 @@ $$Area = \pi \times 5 ^ 2 - \pi \times 2.5^2 = \bbox[10px,border:1px solid gray]
 
 ### Example 5:
 
-##### How many square millimeters are in a square meter?
+#How many square millimeters are in a square meter?
 
 <hintLow>[Answer]
 

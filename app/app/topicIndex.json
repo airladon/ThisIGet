@@ -447,7 +447,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Area Through Pieces",
           "description": "",
           "htmlTitle": "Self discover what the area of a circle is",
           "htmlDescription": "Figure out why the area of a circle is what it is",
@@ -458,7 +458,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Circle Area",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Circle area examples",
           "htmlDescription": "Examples of calculations involving circle area",
@@ -469,7 +469,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Intuitive derivation of circle area",
           "htmlDescription": "Find the equation for circle area using triangles",
@@ -541,7 +541,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Calculating Properties",
           "description": "",
           "htmlTitle": "Quiz: Calculate the circle property",
           "htmlDescription": "Calculate circle property from either the radius, diameter, area or circumference",
@@ -552,7 +552,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of Circle Area",
           "htmlDescription": "Area of a circle equation",

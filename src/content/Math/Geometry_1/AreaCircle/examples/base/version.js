@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of Circle Area',
+  title: 'Various Geometries',
   description: '',
   htmlTitle: 'Circle area examples',
   htmlDescription: 'Examples of calculations involving circle area',

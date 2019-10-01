@@ -1,4 +1,3 @@
-## Area of a Circle
 
 Finding the area of a circle can seem challenging at first as area is measured in squares, and straight square edges don't easily fit into curved circles.
 

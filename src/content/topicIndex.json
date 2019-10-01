@@ -276,7 +276,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Area Through Pieces",
           "description": "",
           "fullTopic": true
         }
@@ -284,7 +284,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Circle Area",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -292,7 +292,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
@@ -326,7 +326,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Calculating Properties",
           "description": "",
           "fullTopic": true
         }
@@ -334,7 +334,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
