@@ -487,7 +487,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Congruence Tests",
           "description": "",
           "fullTopic": true
         }
@@ -495,7 +495,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of finding and using Congruent Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -503,13 +503,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Intuitive",
           "description": "",
           "fullTopic": true
         },
         "fromSAS": {
           "type": "singlePage",
-          "title": "Show SSS, ASA and AAS from SAS",
+          "title": "SSS, ASA and AAS from SAS",
           "description": "",
           "fullTopic": true
         }
@@ -545,7 +545,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }

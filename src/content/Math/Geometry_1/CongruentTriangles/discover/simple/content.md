@@ -1,4 +1,3 @@
-## Congruent Shapes and Triangles
 
 In mathematics, if **two shapes are the same size and shape**, then they are said to be **congruent**.
 
@@ -10,7 +9,7 @@ For two triangles to be **congruent**, the corresponding **side lengths** and **
 
 Flipped and rotated triangles still have the same corresponding sides and angles and therefore be congruent.
 
-## Congruence Tests
+### Congruence Tests
 
 The easy way to determine if two triangles are congruent is to measure all six sides and angles.
 
