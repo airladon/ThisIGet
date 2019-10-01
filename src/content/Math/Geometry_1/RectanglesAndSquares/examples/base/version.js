@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Rectangle calculation examples',
+  title: 'Various Geometries',
   description: '',
   htmlTitle: 'Examples of using rectangle properties',
   htmlDescription: 'Examples showing how to use the properties of a rectangle to examine geometries',

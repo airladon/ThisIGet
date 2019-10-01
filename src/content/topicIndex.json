@@ -1154,7 +1154,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Example problems using Radians",
+          "title": "Calculations with Radians",
           "description": "Use radians to calculate radius, angle and arc length",
           "fullTopic": true
         }
@@ -1162,7 +1162,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1190,13 +1190,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Change Circle to Match",
+          "title": "Change Arc to Match",
           "description": "",
           "fullTopic": true
         },
         "calc": {
           "type": "singlePage",
-          "title": "Calculate Properties with Radians",
+          "title": "Calculate Properties",
           "description": "Calculate properties of a circle from other properties using radians",
           "fullTopic": true
         }
@@ -1204,7 +1204,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1221,7 +1221,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1229,7 +1229,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Rectangle calculation examples",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1237,7 +1237,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1265,7 +1265,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }

@@ -1854,7 +1854,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Example problems using Radians",
+          "title": "Calculations with Radians",
           "description": "Use radians to calculate radius, angle and arc length",
           "htmlTitle": "Calculating radius, arc length and angle using radians",
           "htmlDescription": "Example problems showing how to use radians to calculate radius, arc length and angle when given two other circle properties",
@@ -1865,7 +1865,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to radians and why we use them",
           "htmlDescription": "Radians and their relationship with arc length and radius",
@@ -1928,7 +1928,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Change Circle to Match",
+          "title": "Change Arc to Match",
           "description": "",
           "htmlTitle": "Quiz: Find the arc or angle that matches the target",
           "htmlDescription": "Interactive quiz where you can change the diagram to find the target angle or arc length",
@@ -1937,7 +1937,7 @@
         },
         "calc": {
           "type": "singlePage",
-          "title": "Calculate Properties with Radians",
+          "title": "Calculate Properties",
           "description": "Calculate properties of a circle from other properties using radians",
           "htmlTitle": "Calculate circle properties using radians",
           "htmlDescription": "Calculate properties of a circle from other properties using radians",
@@ -1948,7 +1948,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of what radians are and their relationship to radius and arc length",
           "htmlDescription": "",
@@ -1968,7 +1968,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover why a rectangles opposite sides are equal and parallel",
           "htmlDescription": "Figure out why a rectangle has opposite sides that are equal and parallel",
@@ -1979,7 +1979,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Rectangle calculation examples",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using rectangle properties",
           "htmlDescription": "Examples showing how to use the properties of a rectangle to examine geometries",
@@ -1990,7 +1990,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to rectangles and squares and derivation of their properties",
           "htmlDescription": "Proof showing why a rectangles opposite sides are equal and parallel",
@@ -2053,7 +2053,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of rectangle and square properties",
           "htmlDescription": "",
