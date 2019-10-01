@@ -47,7 +47,7 @@ class Content extends PresentationFormatContent {
       title: 'Angles at Intersections',
       setContent: style({ centerV: true }, [
         '|Related angles| are angles that can be used to calculate each other.',
-        'This lesson will look at related angles in two common scenarios:',
+        'This topic will look at related angles in two common scenarios:',
         style({
           list: 'unordered',
           listStyleType: 'disc',

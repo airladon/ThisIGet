@@ -246,7 +246,6 @@ export default class TopicComponent extends React.Component
             approaches[approachUID] = {};
           }
           let active = false;
-          // console.log(currentExplanation, version, topic)
           if (this.versionName === versionName
             && this.approachUID === approachUID) {
             active = true;
@@ -319,13 +318,10 @@ export default class TopicComponent extends React.Component
         const listItems = [];
         vUIDs.forEach((vUID) => {
           if (approachUID === 'quickReference') {
-            // listItems.slice(-1)[0].label = vUID;
             approach[vUID].label = vUID;
             approach[vUID].link = `/dev${approach[vUID].link}`;
-            console.log(listItems.slice(-1)[0])
           }
           listItems.push(approach[vUID]);
-          
         });
         this.key += 1;
         if (partialLessonCount > 0

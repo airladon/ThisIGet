@@ -9,7 +9,7 @@ import withLoginManager from '../../components/view';
 
 function renderTopic(
   version: Object,
-  // lessonUID: string,
+  // topicUID: string,
   // topicName: string,
   // versionUID: string,
   //   uid: string,
@@ -34,10 +34,6 @@ function renderTopic(
     ReactDOM.render(
       <ViewTopicWithLoginState
         version={version}
-        // lessonUID={lessonUID}
-        // topicName={topicName}
-        // versionUID={versionUID}
-        // versionDetails={versionDetails}
       />,
       topicId,
     );

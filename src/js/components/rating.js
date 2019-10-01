@@ -19,7 +19,6 @@ export default class Rating extends React.Component
                                     <Props> {
   stars() {
     const stars = [];
-    // const link = `/rate/${this.props.lessonId}/${this.props.topic}/${this.props.versionId}`;
     for (let i = 0; i < this.props.rating; i += 1) {
       stars.push(<Star isFull={true}
         key={i}

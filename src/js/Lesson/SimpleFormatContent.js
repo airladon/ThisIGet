@@ -1,7 +1,6 @@
 // @flow
 import Fig from 'figureone';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-// import getTopicIndez from '../../content/common/lessonindex';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {
@@ -76,9 +75,9 @@ class SimpleFormatContent {
     qrs.forEach((qr) => {
       const splitQR = qr.replace(/^\//, '').replace(/\/$/, '').split('/');
       const versionUID = splitQR.slice(-1)[0];
-      const lessonUID = splitQR.slice(-2, -1)[0];
+      const topicUID = splitQR.slice(-2, -1)[0];
       const path = splitQR.slice(0, -2).join('/');
-      this.loadQR(qr, `content/${path}/${lessonUID}/quickReference/${versionUID}`);
+      this.loadQR(qr, `content/${path}/${topicUID}/quickReference/${versionUID}`);
     });
   }
 

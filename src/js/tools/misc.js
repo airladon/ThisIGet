@@ -171,8 +171,8 @@ function activator(
 }
 
 function attachQuickReference(
-  lessonPath: string,
-  lessonUID: string,
+  topicPath: string,
+  topicUID: string,
   versionUID: string,
   qrs: {
     [name: string]: Object,
@@ -181,15 +181,11 @@ function attachQuickReference(
   // if (window.quickReference == null) {
   //   window.quickReference = {};
   // }
-  // if (window.quickReference[lessonUID] == null) {
-  //   window.quickReference[lessonUID] = {};
-  // }
-  // window.quickReference[lessonUID][versionUID] = qrs;
   if (window.quickReference == null) {
     window.quickReference = {};
   }
   Object.keys(qrs).forEach((name) => {
-    window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
+    window.quickReference[`${topicPath}/${topicUID}/${versionUID}/${name}`] = qrs[name];
   });
 }
 

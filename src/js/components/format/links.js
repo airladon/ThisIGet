@@ -53,13 +53,4 @@ export default class LinksFormatComponent extends React.Component
       </div>
     </div>;
   }
-
-  // render() {
-  //   return <div id={this.lesson.content.htmlId}>
-  //     <div key={0} className="simple_topic__container">
-  //       <LinksTable links={version.links} />
-  //     </div>,
-  //     {this.lesson.content.sections[0]}
-  //   </div>;
-  // }
 }

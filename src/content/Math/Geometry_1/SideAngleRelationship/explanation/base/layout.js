@@ -241,7 +241,7 @@ export default function diagramLayout() {
         },
         'angles3': {
           content: ['if', 'B', 'less', 'A', 'then', 'b', '_less', 'a'],
-          description: 'From earlier in this lesson:',
+          description: 'From earlier in this topic:',
         },
         'angles4': {
           content: ['B', 'greater', 'A'],

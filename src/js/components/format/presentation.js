@@ -226,7 +226,7 @@ export default class PresentationFormatComponent extends React.Component
     // window.addEventListener('resize', this.centerContent.bind(this));
     // window.addEventListener('orientationchange', this.orientationChange.bind(this));
 
-    // uncomment this if the lesson should be centered on going to it
+    // uncomment this if the topic should be centered on going to it
     // this.orientationChange();
     // this.centerContentFlag = !this.centerContentFlag;
     // this.centerContent();

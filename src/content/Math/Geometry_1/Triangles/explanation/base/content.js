@@ -124,8 +124,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'In fact, a triangle\'s side lengths and angles |are all related|. If you know any four (and sometimes three), you can calculate the remainder!',
-        'In this lesson we will focus on the |relationship between angles|.',
-        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future lessons.',
+        'In this topic we will focus on the |relationship between angles|.',
+        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future topics.',
       ]),
     });
 
@@ -564,7 +564,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        '|Future lessons| in this learning path examine |equilateral_triangles|, |isosceles_triangles| and |right_angle_triangles| in more detail.',
+        '|Future topics| in this learning path examine |equilateral_triangles|, |isosceles_triangles| and |right_angle_triangles| in more detail.',
         'These triangles all have special |properties| and as such are used in many places to help |simplfy problems|.',
       ]),
       modifiers: {

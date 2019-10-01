@@ -126,18 +126,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
         if (height === 'auto') {
           await page.setViewport({ width, height: 1000 });
-          // const lessonContainerTemp = await page.$('#topic__content');
-          // const lessonBoxTemp = await lessonContainerTemp.boundingBox();
           await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
           await page.setViewport({ width, height });
         }
 
-        // const lessonContainer = await page.$('#topic__content');
-        // const lessonBox = await lessonContainer.boundingBox();
         // await page.evaluate((y) => {
         //   window.scrollTo(0, y);
-        // }, Math.floor(lessonBox.y));
+        // }, Math.floor(pageBox.y));
         let clippingBox = await (await page.$(options.element)).boundingBox();
         await removeRatings(page);
         await removeTopicVariables(page);

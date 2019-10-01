@@ -48,17 +48,17 @@ function hideInteractiveHighlightButton() {
 //    finishTransitionToAny
 //    setLeaveStateAndMoveToNextSection
 //    setLeaveState
-//    refresh -> lesson.refreshText called with setState callback
-//               callback is then called on lesson.component update complete
+//    refresh -> topic.refreshText called with setState callback
+//               callback is then called on topic.component update complete
 //
-//  When lesson.component is finished updating
+//  When topic.component is finished updating
 //    setState
 //       setEnterState
 //    transitionFromAny
 //    finishTransitionFromAny
-//    refresh -> lesson.refreshText called with componentUpdateComplete
+//    refresh -> topic.refreshText called with componentUpdateComplete
 //
-//  When lesson.component is finished updating
+//  When topic.component is finished updating
 //    componentUpdateComplete
 //      setOnclicks
 //      setSteadyState
