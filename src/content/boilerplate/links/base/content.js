@@ -1,4 +1,6 @@
 // @flow
+// import Fig from 'figureone';
+// import * as React from 'react';
 import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatContent';
 import linkTable from '../../../../../common/linkTable';
 // import imgLink from '../../tile.png';
