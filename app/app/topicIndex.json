@@ -1523,7 +1523,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Interactive introduction to parallel lines",
           "htmlDescription": "See what parallel lines are, and when lines are parallel",
@@ -1546,7 +1546,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Quiz - Move lines to be parallel and find parallel lines",
           "htmlDescription": "Interactive quiz to make lines parallel, and find parallel lines in a selection of lines",
@@ -1557,7 +1557,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Introduction to parallel lines summary",
           "htmlDescription": "",

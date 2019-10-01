@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Interactive introduction to parallel lines',
   htmlDescription: 'See what parallel lines are, and when lines are parallel',

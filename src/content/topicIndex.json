@@ -928,7 +928,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -948,7 +948,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -956,7 +956,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
