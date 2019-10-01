@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of Right Angle Triangle calculations',
+  title: 'Various Geometries',
   description: '',
   htmlTitle: 'Right Angle Triangle example calculations',
   htmlDescription: 'Examples showing how to use the properties of right angle triangles to solve various problems',

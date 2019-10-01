@@ -1,8 +1,6 @@
-## Right Angle Triangle Example Calculations
+### Example 1
 
-### Example 1:
-
-#### What is the length of side $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$?
+What is the length of side $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$?
 
 ![](ex1.png)
 
@@ -14,9 +12,9 @@ $$\color{r}a^2\color{black} = 3^2 + 4^2 = 25$$
 $$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{5}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
-#### What is the area of the triangle below?
+What is the area of the triangle below?
 
 ![](ex2.png)
 
@@ -34,9 +32,9 @@ $$Area = \textstyle{\frac{1}{2}}\times 7.93 \times 9 =  \bbox[10px,border:1px so
 </hintLow>
 
 
-### Example 3:
+### Example 3
 
-#### What is length of the diagonal $$\color{r}a$$ of the square?
+What is length of the diagonal $$\color{r}a$$ of the square?
 
 ![](ex3.png)
 
@@ -50,9 +48,9 @@ $$\color{r}a\color{black} = \sqrt{(1 + 1)} = \bbox[10px,border:1px solid gray]{1
 
 </hintLow>
 
-### Example 4:
+### Example 4
 
-#### What is the area of an equilateral triangle of side $$\color{r}a$$?
+What is the area of an equilateral triangle of side $$\color{r}a$$?
 
 ![](ex4.png)
 

@@ -4,7 +4,7 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Base',
+  title: 'Find Properties',
   description: '',
   htmlTitle: 'Self discover the properties of a right angle triangle',
   htmlDescription: 'Figure out why the hypotenuse is the longest side and find the pythagoean theorem',
