@@ -1,33 +1,34 @@
-## Side Angle Relationship Examples
+### Example 1
 
-
-### Example 1:
-
-#### Which angle is largest?
+Which angle is largest?
 
 ![](ex1.png)
 
+<hintLow>[Answer]
 The largest angle will be opposite the longest side. Therefore the largest angle is:
 
 $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{b}$$
+</hintLow>
 
-### Example 2:
+### Example 2
 
-#### Which side will be neither the longest or shortest?
+Which side will be neither the longest or shortest?
 
 ![](ex2.png)
 
+<hintLow>[Answer]
 The 59º angle is neither the largest or smallest angle, so therefore the side opposite will be neither the longest or shortest side.
 
 $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{a}$$
+</hintLow>
 
+### Example 3
 
-### Example 3:
-
-#### Which angle is largest?
+Which angle is largest?
 
 ![](ex3.png)
 
+<hintLow>[Answer]
 As side 5.1 is larger than side 5, then angle $$\color{r}b$$ will be larger than 60º.
 
 All angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) sum to 180º, so angles $$\color{r}b$$ and $$\color{r}a$$ must sum to 120º.
@@ -35,7 +36,7 @@ All angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#0075
 If $$\color{r}b$$ > 60º, then $$\color{r}a$$ must be less than 60º, and so the largest angle is
 
 $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{b}$$
-
+</hintLow>
 
 <!-- ![](ex1.png)
 
@@ -46,7 +47,7 @@ $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{10}$$
 
 ### Example 2:
 
-#### What is the length of side $$\color{r}a$$?
+What is the length of side $$\color{r}a$$?
 
 ![](ex2.png)
 
@@ -62,7 +63,7 @@ $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{2}$$
 
 ### Example 3:
 
-#### What is the size of angle $$\color{r}a$$ in degrees?
+What is the size of angle $$\color{r}a$$ in degrees?
 
 ![](ex3.png)
 

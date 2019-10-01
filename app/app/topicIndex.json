@@ -2074,7 +2074,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover the properties of a right angle triangle",
           "htmlDescription": "Figure out why the hypotenuse is the longest side and find the pythagoean theorem",
@@ -2085,7 +2085,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Right Angle Triangle calculations",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Right Angle Triangle example calculations",
           "htmlDescription": "Examples showing how to use the properties of right angle triangles to solve various problems",
@@ -2096,7 +2096,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Properties of right angle triangles, and the Pythagorean theorem.",
           "htmlTitle": "Right angle triangle introduction and pythagoean theorem proof",
           "htmlDescription": "Right angle triangle introduction, hypotenuse, area and pythagorean theorem derivation.",
@@ -2105,7 +2105,7 @@
         },
         "pythagorus_proof": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
+          "title": "Pythagorean Theorem",
           "description": "Derivation using area of four right angle triangles",
           "htmlTitle": "Pythagorean Theorem Derivation",
           "htmlDescription": "Derivation using area of four right angle triangles",
@@ -2189,7 +2189,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find the Unknown Angle",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle, side or area in a right angle triangle.",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2200,7 +2200,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Properties",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Right Angle Triangle Summary",
           "htmlDescription": "Right angle triangle definition including hypotenuse, area and pythagorean theorem.",
@@ -2220,7 +2220,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "htmlTitle": "Self discover why longer sides are opposite larger angles in a triangle",
           "htmlDescription": "Figure out why the length of a triangle\\'s side depends on the size of the oppostite angle",
@@ -2231,7 +2231,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangle side angle relationships",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Triangle side angle relationship examples",
           "htmlDescription": "Use the relationships between a triangles side and angle to solve different geometries",
@@ -2242,7 +2242,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to relationship between triangle side length and angle",
           "htmlDescription": "Proof of why larger angles are opposite longer sides in a triangle",
@@ -2305,7 +2305,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the largest or smallest side or angle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2316,7 +2316,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of relationship between side and angle in a triangle",
           "htmlDescription": "",
@@ -2422,7 +2422,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Interactive",
+          "title": "Properties and Types",
           "description": "",
           "htmlTitle": "Self discover what a triangle is, the types of triangle and the relationship between angles.",
           "htmlDescription": "Stand together with the great mathematicians and scientists by discovering the relationship between angles of a triangle yourself",

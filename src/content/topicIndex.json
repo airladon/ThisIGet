@@ -1283,7 +1283,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1291,7 +1291,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Right Angle Triangle calculations",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1299,13 +1299,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Properties of right angle triangles, and the Pythagorean theorem.",
           "fullTopic": true
         },
         "pythagorus_proof": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
+          "title": "Pythagorean Theorem",
           "description": "Derivation using area of four right angle triangles",
           "fullTopic": false
         }
@@ -1333,7 +1333,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find the Unknown Angle",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -1341,7 +1341,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Properties",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1358,7 +1358,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -1366,7 +1366,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangle side angle relationships",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1374,7 +1374,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1402,7 +1402,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -1410,7 +1410,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1487,7 +1487,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Interactive",
+          "title": "Properties and Types",
           "description": "",
           "fullTopic": true
         }

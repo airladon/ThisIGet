@@ -1,5 +1,3 @@
-## Side Angle Relationship of a Triangle
-
 If you draw many different triangles with angles that are both large and small, you might start to see a relationship between the opposite sides and angles. Can you see it?
 
 <hintLow>
