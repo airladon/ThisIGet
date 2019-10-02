@@ -53,7 +53,7 @@ async function removeTopicVariables(page) {
     ) || []).forEach(
       (el) => {
         // eslint-disable-next-line no-param-reassign
-        el.style.visibility = 'hidden';
+        el.style.display = 'none';
       },
     );
   });
@@ -65,6 +65,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
   const defaultOptions = {
+    viewHeight: 'auto',
     height: 'auto',
     includeQRs: false,
     prePath: '',
@@ -91,14 +92,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
     };
 
     allTests.push([
-      scenario.width, scenario.height, scenario.includeQRs, scenario.endpoint, scenarioOptions,
+      scenario.width, scenario.height, scenario.viewHeight, scenario.includeQRs, scenario.endpoint, scenarioOptions,
     ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      'width: %i height: %p, QRs: %p, endpoint: %s',
-      async (width, height, includeQRs, endpoint, options) => {
+      'width: %i height: %p, viewHeight: %p, QRs: %p, endpoint: %s',
+      async (width, height, viewHeight, includeQRs, endpoint, options) => {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
         await page.goto(fullpath, { waitUntil: 'networkidle0' });
@@ -124,19 +125,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const pageBox = await (await page.$('body'))
           .boundingBox();
 
-        if (height === 'auto') {
+        if (viewHeight === 'auto') {
           await page.setViewport({ width, height: 1000 });
           await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
-          await page.setViewport({ width, height });
+          await page.setViewport({ width, height: viewHeight });
         }
 
         // await page.evaluate((y) => {
         //   window.scrollTo(0, y);
         // }, Math.floor(pageBox.y));
-        let clippingBox = await (await page.$(options.element)).boundingBox();
         await removeRatings(page);
         await removeTopicVariables(page);
+
+        let clippingBox = await (await page.$(options.element)).boundingBox();
+        if (height !== 'auto') {
+          clippingBox.height = height;
+        }
+
         let image = await page.screenshot({ clip: clippingBox });
         expect(image).toMatchImageSnapshot({
           failureThreshold: options.threshold,
