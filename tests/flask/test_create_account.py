@@ -20,6 +20,8 @@ def create_account(
         username=username,
         email=email,
         password=password,
+        terms=True,
+        privacy=True,
         repeat_password=repeat_password), follow_redirects=follow_redirects)
 
 

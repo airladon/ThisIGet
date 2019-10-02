@@ -113,7 +113,6 @@ then
   if [ $APP_NAME ];
   then
     # Check heroku token exists
-    echo $HEROKU_API_KEY
     echo
     echo "${bold}${cyan}==== Checking ${reset}${cyan}HEROKU_API_KEY${bold} Exists locally =====${reset} "
     if [ -z $HEROKU_API_KEY ];
