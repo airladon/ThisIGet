@@ -8,6 +8,8 @@
 
 <!-- What property in a circle will have the largest value?
 
+$$\definecolor{g}{RGB}{29,177,0}\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{v}{RGB}{203,41,123}\defineColor{gr}{100,100,100}$$
+
 <quiz multichoice>
   - Radius
   - Diameter

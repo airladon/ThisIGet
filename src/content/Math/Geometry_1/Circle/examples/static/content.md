@@ -6,7 +6,7 @@ The circle's radius, diameter and circumference are related to each other by:
 What is the _diameter_ of a circle when its radius is 1?
 
 <hintLow>[Answer]
-$$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{1,113,0} \color{g}diameter \color{black}= 2 \times \color{b}radius \color{black}= 2 \times 1 = \bbox[10px,border:1px solid gray]{2}$$
+$$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0} \color{g}diameter \color{black}= 2 \times \color{b}radius \color{black}= 2 \times 1 = \bbox[10px,border:1px solid gray]{2}$$
 </hintLow>
 
 ### Example 2

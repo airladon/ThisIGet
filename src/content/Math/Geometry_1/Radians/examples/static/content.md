@@ -2,7 +2,7 @@ When angle is measured in Radians, the relationship between arc length, radius a
 
 ![](reference.png)
 
-$$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{1,113,0} \color{r}arc\ length \color{black}= \color{g}angle \color{black} \times \color{b}radius$$
+$$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0} \color{r}arc\ length \color{black}= \color{g}angle \color{black} \times \color{b}radius$$
 
 To convert angle between degrees and radians use:
 
