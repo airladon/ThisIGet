@@ -92,7 +92,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
     };
 
     allTests.push([
-      scenario.width, scenario.height, scenario.viewHeight, scenario.includeQRs, scenario.endpoint, scenarioOptions,
+      scenario.width, scenario.height, scenario.viewHeight,
+      scenario.includeQRs, scenario.endpoint, scenarioOptions,
     ]);
   });
 
