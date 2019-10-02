@@ -9,7 +9,7 @@ What is the the length of a?
 <quiz entry2>5</quiz>
 
 
-### Question 2:
+### Question 2
 
 What is the angle a in degrees?
 
