@@ -2444,7 +2444,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to triangles and their properties",
           "htmlDescription": "Proof that triangle total angle equals 180º",
@@ -2507,7 +2507,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Total Angle",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle in the triangle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2516,7 +2516,7 @@
         },
         "types": {
           "type": "presentation",
-          "title": "Triangle Types",
+          "title": "Create a Triangle",
           "description": "",
           "htmlTitle": "Quiz - Create a triangle of given type",
           "htmlDescription": "Create an acute triangle, right angle triangle, obtuse triangle, equilateral triangle, isosceles triangle or scalene triangle",

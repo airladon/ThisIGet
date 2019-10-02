@@ -1503,7 +1503,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1531,13 +1531,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Total Angle",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         },
         "types": {
           "type": "presentation",
-          "title": "Triangle Types",
+          "title": "Create a Triangle",
           "description": "",
           "fullTopic": true
         }
