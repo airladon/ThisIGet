@@ -7,5 +7,3 @@ tester(
   { thresholds },
   'goto',
 );
-
-tester({ element: 'body', prefix: 'full ', thresholds }, 1);

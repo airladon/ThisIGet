@@ -9,3 +9,4 @@ reports
 src/figureone
 .pytest_cache/
 env/
+temp/
