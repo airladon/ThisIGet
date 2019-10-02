@@ -7,11 +7,25 @@ from flask_mail import Mail
 from flask_talisman import Talisman
 from app.tools import getContent, getTopicIndex
 import os
+import logging
 
 app = Flask(__name__)
 app.config.from_object(Config)
 SELF = "'self'"
 
+# Setup logging
+if app.config['LOGGING'] == 'heroku':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
+else:
+    app.logger.setLevel(logging.INFO)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.INFO)
+app.logger.addHandler(stream_handler)
+
+# Setup Talisman
 if not os.environ.get('LOCAL_PRODUCTION') \
    or os.environ.get('LOCAL_PRODUCTION') != 'DISABLE_SECURITY':
     talisman = Talisman(

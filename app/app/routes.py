@@ -30,6 +30,7 @@ from app.tools import format_email
 
 # project/decorators.py
 from functools import wraps
+# import logging
 
 
 def make_response_with_files(*args, **kwargs):
@@ -103,7 +104,8 @@ def log_data(rquest):
         'Accept-Language': rquest.headers.get('Accept-Language'),
         'Referer': rquest.headers.get('Referer'),
     }
-    print(f"{rquest.remote_addr} - {log_data}")
+    app.logger.info(f"{rquest.remote_addr} - {log_data}")
+    # print()
 
 
 @app.route('/') # noqa

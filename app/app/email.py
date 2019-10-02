@@ -22,8 +22,8 @@ def can_send_email():
 
 def send_password_reset_email(user):
     if not can_send_email():
-        print('MAIL environment variable(s) not set')
-        print('No mail sent to user.email')
+        app.logger.error('MAIL environment variable(s) not set')
+        app.logger.error('No mail sent to user.email')
         return
     token = user.get_reset_password_token()
     email = user.get_email()
@@ -38,8 +38,8 @@ def send_password_reset_email(user):
 
 def send_confirm_account_email(user):
     if not can_send_email():
-        print('MAIL environment variable(s) not set')
-        print('No mail sent to user.email')
+        app.logger.error('MAIL environment variable(s) not set')
+        app.logger.error('No mail sent to user.email')
         return
     token = user.get_account_confirmation_token()
     email = user.get_email()
