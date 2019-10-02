@@ -593,10 +593,10 @@ export default function diagramLayout() {
     rb2: { symbol: 'bracket', side: 'right', numLines: 1 },
     lb3: { symbol: 'bracket', side: 'left', numLines: 1 },
     rb3: { symbol: 'bracket', side: 'right', numLines: 1 },
-    'x0': { symbol: 'xStrike', color: colors.description },
-    'x1': { symbol: 'xStrike', color: colors.description },
-    'x2': { symbol: 'xStrike', color: colors.description },
-    'x3': { symbol: 'xStrike', color: colors.description },
+    'x0': { symbol: 'xStrike', color: colors.grey },
+    'x1': { symbol: 'xStrike', color: colors.grey },
+    'x2': { symbol: 'xStrike', color: colors.grey },
+    'x3': { symbol: 'xStrike', color: colors.grey },
 
     arrow: { text: '     =>     ' },
     comma: { text: ',      ' },
@@ -629,7 +629,7 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       // navType: '1Button',
-      color: colors.diagram.text.base,
+      color: [1, 0, 0, 1], // colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
         alignH: 'center',
@@ -1185,7 +1185,7 @@ export default function diagramLayout() {
     name,
     method: 'addEquation',
     options: {
-      color: colors.diagram.text.base,
+      color: [1, 0, 0, 1], // colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
         alignH: 'center',

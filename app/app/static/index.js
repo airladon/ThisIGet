@@ -23148,13 +23148,18 @@ function (_DiagramElement2) {
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+      var nonNullColor = color;
+
+      if (nonNullColor == null) {
+        nonNullColor = [0, 0, 0, 1];
+      }
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.setColor(color);
+        element.setColor(nonNullColor);
       }
 
-      this.color = color.slice(); // this.color = [color[0], color[1], color[2], color[3]];
+      this.color = nonNullColor.slice(); // this.color = [color[0], color[1], color[2], color[3]];
     }
   }, {
     key: "setOpacity",
