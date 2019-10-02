@@ -34,6 +34,6 @@ We could do this same exersise for any point along the first line, so all distan
 
 Thus, the distance between parallel lines is the **length of a perpendicular line between them**, and is **constant** anywhere along the lines.
 
-A more interactive version of this can be found in this lesson's [Explanation](/content/Math/Geometry_1/ParallelLineDistance/explanation/base?page=1).
+A more interactive version of this can be found in this topic's [Explanation](/content/Math/Geometry_1/ParallelLineDistance/explanation/base?page=1).
 
 </hintLow>

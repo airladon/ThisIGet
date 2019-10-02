@@ -71,7 +71,7 @@ Moving these approximations into the original area equation gives
 
 $$ Area_{\ triangles} = \textstyle{\frac{1}{2}} r \times 2\pi r = \pi r^2$$
 
-A more complete description of this process can be seen in this lesson's presentation [Explanation](/content/Math/Geometry_1/AreaCircle/explanation/base) or single page [Explanation](/content/Math/Geometry_1/AreaCircle/explanation/static).
+A more complete description of this process can be seen in this topic's presentation [Explanation](/content/Math/Geometry_1/AreaCircle/explanation/base) or single page [Explanation](/content/Math/Geometry_1/AreaCircle/explanation/static).
 </hintLow>
 
 <!-- 

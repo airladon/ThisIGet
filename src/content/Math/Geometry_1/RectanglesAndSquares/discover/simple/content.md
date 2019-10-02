@@ -17,7 +17,7 @@ A rectangle's opposite sides are parallel and equal. Can you prove this?
 
 <hint>You can use the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) congruence test to show opposite sides are equal</hint>
 
-<hintLow>[Answer]This lesson's [Explanation](/content/Math/Geometry_1/RectanglesAndSquares/explanation/base) shows the proof that opposite sides are parallel and equal</hintLow>
+<hintLow>[Answer]This topic's [Explanation](/content/Math/Geometry_1/RectanglesAndSquares/explanation/base) shows the proof that opposite sides are parallel and equal</hintLow>
 
 
 ### Square

@@ -56,7 +56,7 @@ $$\frac{\color{r}A\color{b}D}{\color{r}AB} \color{black}= \frac{\color{r}A\color
 
 And so all sides of the smaller triangle have the same proportion to the larger triangle.
 
-This is described in more detail (with all equation steps) in this lesson's [Explanation](/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=1).
+This is described in more detail (with all equation steps) in this topic's [Explanation](/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=1).
 
 </hintLow>
 

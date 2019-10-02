@@ -146,7 +146,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 ![](angle-side-angle.png)
 </hintLow>
 
-<hint>The **SSS** case can either be intuited directly, or using a combination of **SAS** and the property of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later lesson in learning path) that says any triangle with two equal sides will have two equal angles opposite those sides. In fact, you can use **SAS** to show this property is true.</hint>
+<hint>The **SSS** case can either be intuited directly, or using a combination of **SAS** and the property of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later topic in learning path) that says any triangle with two equal sides will have two equal angles opposite those sides. In fact, you can use **SAS** to show this property is true.</hint>
 
 <hint>For **AAS**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) to get to the **ASA** case.
 </hint>
@@ -167,7 +167,7 @@ The **SSA** case is only sufficient if the side opposite to the known angle is l
 
 The **AAA** can produce many different sized triangles and is therefore insufficient.
 
-This lesson's [Explanation](/content/Math/Geometry_1/CongruentTriangles/explanation/base) explains how each case is possible or not.
+This topic's [Explanation](/content/Math/Geometry_1/CongruentTriangles/explanation/base) explains how each case is possible or not.
 
 </hintLow>
 

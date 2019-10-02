@@ -61,7 +61,7 @@ $$Area_{\ triangle} = \textstyle\frac{1}{2} \times h \times base $$
 
 So the area of a triangle is half the product of its base and height.
 
-Any side can be chosen as the base, and this lesson's [Explanation](/content/Math/Geometry_1/AreaTriangle/explanation/base?page=37) shows the example where triangle's top point does not sit directly above the base.
+Any side can be chosen as the base, and this topic's [Explanation](/content/Math/Geometry_1/AreaTriangle/explanation/base?page=37) shows the example where triangle's top point does not sit directly above the base.
 
 ![](example.png)
 

@@ -25,7 +25,7 @@ If one side is longer than another, can you prove which angle opposite the sides
 <hint>Use the [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangle and [[external]]((qr,'Math/Geometry_1/ExternalAngles/base/External',#00756F)) angle of a triangle relationships to find relationships between angles and see which ones are largest</hint>
 
 <hintLow>[Answer]
-  The answer can be seen in detail in this lesson's [Explanation](/content/Math/Geometry_1/SideAngleRelationship/explanation/base?page=3)
+  The answer can be seen in detail in this topic's [Explanation](/content/Math/Geometry_1/SideAngleRelationship/explanation/base?page=3)
 </hintLow>
 
 How about the converse, if one angle is longer than another, can you prove which side opposite the angles will be larger?
@@ -43,5 +43,5 @@ How about the converse, if one angle is longer than another, can you prove which
 <hint>If both B = A and B < A leads to results inconsistent with the given condition, then we can say the initial assumption is wrong</hint>
 
 <hintLow>[Answer]
-  The answer can be seen in detail in this lesson's [Explanation](/content/Math/Geometry_1/SideAngleRelationship/explanation/base?page=23)
+  The answer can be seen in detail in this topic's [Explanation](/content/Math/Geometry_1/SideAngleRelationship/explanation/base?page=23)
 </hintLow>

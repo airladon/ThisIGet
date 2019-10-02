@@ -15,7 +15,7 @@ The angle $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\defin
 
 $${\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
 
-See this lesson's [Explanation](/content/Math/Geometry_1/ExternalAngles/explanation/base) for the proof</hintLow>
+See this topic's [Explanation](/content/Math/Geometry_1/ExternalAngles/explanation/base) for the proof</hintLow>
 
 How many external angles does a triangle have?
 

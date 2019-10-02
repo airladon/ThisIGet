@@ -27,7 +27,7 @@ The equilateral triangle is a special form of an [[isosceles]]((qr,'Math/Geometr
 
 When you combine all pairs, you see all angles are equal.
 
-This can be seen in more detail in this lesson's [Explanation](/content/Math/Geometry_1/Equilateral/explanation/base?page=1)
+This can be seen in more detail in this topic's [Explanation](/content/Math/Geometry_1/Equilateral/explanation/base?page=1)
 
 </hintLow><div></div>
 
