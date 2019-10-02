@@ -4,7 +4,7 @@
 * Round answers to **two decimal places**
 <!-- * Refresh the page to get new questions -->
 
-### Question 1:
+### Question 1
 
 <!-- What property in a circle will have the largest value?
 
@@ -16,7 +16,7 @@
  -->
 
 
-### Question2:
+### Question 2
 
 <!-- 
 What is the radius of a circle that has a circumference of $|q1C|$?

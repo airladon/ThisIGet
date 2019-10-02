@@ -1,31 +1,31 @@
 * <html><div class="simple_topic__quiz_instructions">Round answers to two decimal places</div></html>
 * <html><div class="simple_topic__quiz_instructions"><a href="javascript:window.location.href=window.location.href">Refresh</a> page to get new question values</div></html>
 
-### Question 1:
+### Question 1
 
 What is the radius of a circle that has a circumference of $|q1C|$?
 
 <quiz entry2>$|q1R|$</quiz>
 
-### Question 2: 
+### Question 2
 
 What is the circumference of a circle that has a radius of $|q2R|$?
 
 <quiz entry2>$|q2C|$</quiz>
 
-### Question 3:
+### Question 3
 
 What is the diameter of a circle that has a circumference of $|q3C|$?
 
 <quiz entry2>$|q3D|$</quiz>
 
-### Question 4:
+### Question 4
 
 What is the circumference of a circle with diameter $|q4D|$?
 
 $|div q4m|$
 
-### Question 5:
+### Question 5
 
 What is the radius of a circle that has a diameter of $|q5D|$?
 
