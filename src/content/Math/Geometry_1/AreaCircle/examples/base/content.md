@@ -1,4 +1,4 @@
-### Example 1:
+### Example 1
 
 What is the area of of the circle below?
 
@@ -10,7 +10,7 @@ The area of a circle is the product of [[π]]((qr,'Math/Geometry_1/Circle/base/P
 $$Area = \pi \times 5^2 = \bbox[10px,border:1px solid gray]{78.5}$$ 
 </hintLow>
 
-### Example 2:
+### Example 2
 
 What is the diamter of the circle below?
 
@@ -27,7 +27,7 @@ $$Area = 2 \times \sqrt{\frac{5}{\pi}} = \bbox[10px,border:1px solid gray]{2.5}$
 </hintLow>
 
 
-### Example 3:
+### Example 3
 
 What is the area of the 6 cirles enclosed in the rectangle below?
 
@@ -44,7 +44,7 @@ $$Area = 6 \times \pi \times \left( \frac{5}{2}^2 \right) = \bbox[10px,border:1p
 </hintLow>
 
 
-### Example 4:
+### Example 4
 
 What is the area of the shaded shape?
 
@@ -60,7 +60,7 @@ $$Area = \pi \times 5 ^ 2 - \pi \times 2.5^2 = \bbox[10px,border:1px solid gray]
 
 </hintLow>
 
-### Example 5:
+### Example 5
 
 #How many square millimeters are in a square meter?
 

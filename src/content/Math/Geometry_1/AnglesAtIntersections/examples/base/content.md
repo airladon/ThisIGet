@@ -1,4 +1,4 @@
-### Example 1:
+### Example 1
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -10,7 +10,7 @@ In this example, the angles are **opposite** angles, and therefore equal. Theref
 $$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{110^\circ}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -22,7 +22,7 @@ In this example, the angles are **alternate** angles, and therefore equal. There
 $$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{70^\circ}$$
 </hintLow>
 
-### Example 3:
+### Example 3
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -34,7 +34,7 @@ In this example, the angles are **corresponding** angles, and therefore equal. T
 $$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{100^\circ}$$
 </hintLow>
 
-### Example 4:
+### Example 4
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -46,7 +46,7 @@ In this example, the angles are **interior** angles, and therefore add to 180º.
 $$\color{r}a\color{black} = 180^\circ - 130^\circ = \bbox[10px,border:1px solid gray]{50^\circ}$$
 </hintLow>
 
-### Example 5:
+### Example 5
 
 What is the size of angles $$\definecolor{r}{RGB}{238,34,12}\color{r}c$$ and $$\color{r}d$$ in degrees?
 
@@ -72,7 +72,7 @@ Angles $$\color{r}b$$ and $$\color{r}c$$ are **corresponding** angles and are th
 $$\color{r}c \color{black} = \color{r}b \color{black} = \bbox[10px,border:1px solid gray]{50^\circ}$$
 </hintLow>
 
-### Example 6:
+### Example 6
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}d$$ in degrees?
 

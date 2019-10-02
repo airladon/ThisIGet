@@ -1,6 +1,6 @@
-### Example 1:
+### Example 1
 
-#### What is size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
+What is size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
 ![](supplementary.png)
 
@@ -10,9 +10,9 @@ These angles are **supplementary** angles and add up to 180º. Therefore:
 $$\color{r}a \color{black}= 180^\circ - 50^\circ - 60^\circ = \bbox[10px,border:1px solid gray]{70^\circ}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
-#### What is size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
+What is size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
 ![](complementary.png)
 
@@ -22,9 +22,9 @@ These angles are **complementary** angles and add up to 90º. Therefore:
 $$\color{r}a \color{black}= 90^\circ - 30^\circ = \bbox[10px,border:1px solid gray]{60^\circ}$$
 </hintLow>
 
-### Example 3:
+### Example 3
 
-#### Find angles $$\color{r}a$$ and $$\color{r}b$$ in the below diagram:
+Find angles $$\color{r}a$$ and $$\color{r}b$$ in the below diagram:
 
 ![](combination.png)
 

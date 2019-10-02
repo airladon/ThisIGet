@@ -1,4 +1,4 @@
-### Example 1:
+### Example 1
 
 What is the area of this shape?
 
@@ -11,7 +11,7 @@ The area is the number of squares in the shape. Here we need to be careful as th
 $$\bbox[10px,border:1px solid gray]{25}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
 What is the area of this shape?
 
@@ -24,7 +24,7 @@ $$area=4 \times 8 = \bbox[10px,border:1px solid gray]{32}$$
 </hintLow>
 
 
-### Example 3:
+### Example 3
 
 What is the area of this shape?
 
@@ -36,7 +36,7 @@ The shape is a square, and so its area is the square of its side length.
 $$area=5 \times 5 = \bbox[10px,border:1px solid gray]{25}$$
 </hintLow>
 
-### Example 4:
+### Example 4
 
 What is the total area of these shapes?
 
@@ -48,7 +48,7 @@ The total shape consists of a rectangle of $$15 \times 8$$ and a square of $$10 
 $$area=120 + 100 = \bbox[10px,border:1px solid gray]{200}$$
 </hintLow>
 
-### Example 5:
+### Example 5
 
 What is the side length of this square?
 
@@ -60,7 +60,7 @@ The area of a square is the square of the side length, therefore, therefore the 
 $$side\ \ length=\sqrt{16} = \bbox[10px,border:1px solid gray]{4}$$
 </hintLow>
 
-### Example 6:
+### Example 6
 
 What is the area of one of the triangles?
 

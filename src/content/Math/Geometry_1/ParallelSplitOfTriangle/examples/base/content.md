@@ -1,4 +1,4 @@
-### Example:
+### Example
 
 What is the length of side $$\definecolor{r}{RGB}{238,34,12}{a}$$?
 

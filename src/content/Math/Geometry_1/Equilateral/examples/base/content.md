@@ -1,4 +1,4 @@
-### Example 1:
+### Example 1
 
 What is the length of side $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$?
 
@@ -10,7 +10,7 @@ All angles are equal, therefore this is an equilateral triangle. In an equilater
 $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{12}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -22,7 +22,7 @@ All sides are equal, therefore this is an equilateral triangle. In an equilatera
 $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{60^\circ}$$
 </hintLow>
 
-### Example 3:
+### Example 3
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
@@ -38,7 +38,7 @@ All the angles at $$\color{r}a$$ are [[explementary]]((qr,'Math/Geometry_1/Angle
 $$\color{r}a \color{black}= 360^\circ - 90^\circ - 90^\circ - 60^\circ = \bbox[10px,border:1px solid gray]{120^\circ}$$
 </hintLow>
 
-### Example 4:
+### Example 4
 
 What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
