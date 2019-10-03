@@ -4,7 +4,7 @@ import * as React from 'react';
 import PresentationFormat from '../../TopicFormat/PresentationFormat';
 import Button from '../button';
 import DropDownButton from '../dropDownButton';
-import { getCookie, createCookie } from '../../tools/misc';
+import { getCookie, createCookie, getCurrentPath } from '../../tools/misc';
 import PresentationQR from '../presentationQR';
 import StaticQR from '../staticQR';
 // import '../../css/presentationFormat.scss';
@@ -86,7 +86,7 @@ export default class PresentationFormatComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
-      createCookie('page', `${page + 1}`, 30, window.location.pathname.replace(/\/$/, ''));
+      createCookie('page', `${page + 1}`, 30, getCurrentPath());
     } else if (callback) {
       callback();
     }

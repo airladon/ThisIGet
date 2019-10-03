@@ -63,6 +63,14 @@ function loadRemoteCSS(
   }
 }
 
+function getCurrentPath() {
+  return window.location.pathname.replace(/\/$/, '');
+}
+
+function getTopicPath() {
+  return window.location.pathname.replace(/\/$/, '').replace(/^.*\/content\//, '');
+}
+
 function getCookie(key: string) {
   const { cookie } = document;
   if (cookie != null) {
@@ -106,7 +114,7 @@ function logInOut(isLoggedIn: boolean) {
   if (isLoggedIn === false) {
     logText = '/login';
   }
-  const next = `?next=${window.location.pathname.replace(/\/$/, '')}`;
+  const next = `?next=${getCurrentPath()}`;
   window.location = `${logText}${next}`;
 }
 function login() {
@@ -246,5 +254,6 @@ function shuffle(
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
   createCookie, activator, attachQuickReference, multichoice, shuffle,
+  getCurrentPath, getTopicPath,
 };
 

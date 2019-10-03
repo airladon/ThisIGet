@@ -3,7 +3,7 @@
 import * as React from 'react';
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Rating from '../rating';
-import { login } from '../../tools/misc';
+import { login, getTopicPath } from '../../tools/misc';
 import { getLinkRatings, setLinkRating } from '../../TopicFormat/rating';
 // import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
@@ -53,7 +53,7 @@ export default class LinksTable extends React.Component
 
   constructor(props: Props) {
     super(props);
-    const path = window.location.pathname.replace(/^.*\/content\//, '').split('/');
+    const path = getTopicPath().split('/');
     this.links = [];
     const initialRatings = [];
     props.links.forEach((link) => {

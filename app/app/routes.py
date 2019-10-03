@@ -10,7 +10,7 @@
 
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
-from flask import make_response, request
+from flask import make_response, request, abort
 from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
@@ -98,14 +98,21 @@ def get_full_path(root, file):
     return f'/{root}/{static_files[root][file]}'
 
 
+# @app.route('/errorTester')
+# def raiseError():
+#     raise Exception
+#     return
+
+
 def log_data(rquest):
     log_data = {
         'User-Agent': rquest.headers.get('User-Agent'),
         'Accept-Language': rquest.headers.get('Accept-Language'),
         'Referer': rquest.headers.get('Referer'),
+        'Endpoint': rquest.full_path,
+        'Route': ','.join([address for address in rquest.access_route]),
     }
     app.logger.info(f"{rquest.remote_addr} - {log_data}")
-    # print()
 
 
 @app.route('/') # noqa
@@ -116,7 +123,7 @@ def home():
     return res
 
 
-@app.route('/paths')
+@app.route('/paths', strict_slashes=False)
 def paths():
     res = make_response_with_files('learning_paths.html')
     res.set_cookie('page', '0')
@@ -155,44 +162,66 @@ def information_response(name):
     return res
 
 
-@app.route('/about')
+@app.route('/about', strict_slashes=False)
 def about():
     return information_response('about')
 
 
-@app.route('/copyright')
+@app.route('/copyright', strict_slashes=False)
 def copyright():
     return information_response('copyright')
 
 
-@app.route('/privacy')
+@app.route('/privacy', strict_slashes=False)
 def privacy():
     return information_response('privacy')
 
 
-@app.route('/terms')
+@app.route('/terms', strict_slashes=False)
 def terms():
     return information_response('terms')
 
 
-@app.route('/disclaimer')
+@app.route('/disclaimer', strict_slashes=False)
 def disclaimer():
     return information_response('disclaimer')
 
 
-@app.route('/contribute')
+@app.route('/contribute', strict_slashes=False)
 def contribute():
     return information_response('contribute')
 
 
-@app.route('/introduction')
+@app.route('/introduction', strict_slashes=False)
 def introduction():
     return information_response('introduction')
 
 
-@app.route('/contact')
+@app.route('/contact', strict_slashes=False)
 def contact():
     return information_response('contact')
+
+
+@app.errorhandler(404)
+def not_found_error(error):
+    app.logger.info(request.referrer)
+    if request.referrer and \
+       (request.referrer.startswith('https://thisiget') or  # noqa
+            request.referrer.startswith('https://www.thisiget') or  # noqa
+            request.referrer.startswith('http://localhost')):
+        app.logger.error(
+            f'Internal link broken.'
+            f'Referrer: {request.referrer} '
+            f'Url: {request.url}'
+        )
+        return render_template('404_internal.html'), 404
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
 
 
 # @app.route('/content/', defaults={'path': ''})
@@ -210,11 +239,13 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
-@app.route('/content/', defaults={'path': ''})  # noqa
+@app.route('/content/', defaults={'path': ''}, strict_slashes=False)  # noqa
 @app.route('/content/<path:path>')
 def get_content(path):
     log_data(request)
-    content_path = f'static/dist/content/{path}'.strip('/')
+    path = path.strip('/')
+    print(path)
+    content_path = f'static/dist/content/{path}'
     js = ''
     css = ''
     if (content_path in static_files):
@@ -222,8 +253,10 @@ def get_content(path):
              f'{path}/{static_files[content_path]["content.js"]}'
         css = f'/static/dist/content/{path}/' \
               f'{static_files[content_path]["content.css"]}'
-
-    *p, content_path, topic_name, version_uid = path.strip('/').split('/')
+    else:
+        abort(404)
+    print(js, css)
+    *p, content_path, topic_name, version_uid = path.split('/')
 
     end_point = f"{path}"
 
@@ -242,10 +275,10 @@ def get_content(path):
     res = make_response_with_files(
         'content.html', css=css, js=js, title=title, description=description)
     if topic_page:
-        res = make_response(redirect(request.path))
+        res = make_response(redirect(request.path.strip('/')))
         res.set_cookie(
             key='page', value=topic_page,
-            path=request.path, max_age=30 * 60)
+            path=request.path.strip('/'), max_age=30 * 60)
         return res
     return res
     # if current_user.is_authenticated:
@@ -255,7 +288,7 @@ def get_content(path):
     # return res
 
 
-@app.route('/qr/content/', defaults={'path': ''})
+@app.route('/qr/content/', defaults={'path': ''}, strict_slashes=False)
 @app.route('/qr/content/<path:path>')
 def get_qr_file_location(path):
     qr_path = f'static/dist/content/{path}'.strip('/')
@@ -264,6 +297,8 @@ def get_qr_file_location(path):
     if (qr_path in static_files):
         js = static_files[qr_path]["quickReference.js"]
         css = static_files[qr_path]["quickReference.css"]
+    else:
+        abort(404)
     return jsonify({
         'status': 'ok',
         'js': js,
@@ -271,7 +306,7 @@ def get_qr_file_location(path):
     })
 
 
-@app.route('/dev/content/', defaults={'path': ''})
+@app.route('/dev/content/', defaults={'path': ''}, strict_slashes=False)
 @app.route('/dev/content/<path:path>')
 def get_content_dev(path):
     content_path = f'static/dist/content/{path}'.strip('/')
@@ -501,7 +536,7 @@ def reset_password(token):
     return render_template('resetPassword.html', form=form, css=css, js=js)
 
 
-@app.route('/logout')
+@app.route('/logout', strict_slashes=False)
 def logout():
     logout_user()
     session.pop('username', None)

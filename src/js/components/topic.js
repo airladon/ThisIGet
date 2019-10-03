@@ -8,7 +8,7 @@ import getTopicIndex from '../../content/topicIndex';
 import TopicDescription from '../TopicFormat/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
-import { login } from '../tools/misc';
+import { login, getTopicPath, getCurrentPath } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
@@ -79,15 +79,14 @@ export default class TopicComponent extends React.Component
   constructor(props: Props) {
     super(props);
     this.version = props.version;
-    const path = window.location.pathname.replace(/\/$/, '').split('/');
+    const path = getTopicPath().split('/');
     /* eslint-disable prefer-destructuring */
     this.topicName = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
     this.versionName = path.slice(-1)[0];
     /* eslint-enable */
-    this.versionUID = window.location.pathname.replace(/^.*\/content\//, '');
-    const topicUID = window.location.pathname.replace(/^.*\/content\//, '')
-      .split('/').slice(0, -2).join('/');
+    this.versionUID = getTopicPath();
+    const topicUID = getTopicPath().split('/').slice(0, -2).join('/');
     this.topicDescription = getTopicDescription(topicUID);
     this.state = {
       userRating: 0,
@@ -213,7 +212,6 @@ export default class TopicComponent extends React.Component
 
   getApproaches() {
     const approaches = {};
-    // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
 
     const { topicDescription } = this;
     if (topicDescription != null) {
@@ -280,7 +278,6 @@ export default class TopicComponent extends React.Component
         approachUIDs.push(approachUID);
       }
     });
-    // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     approachUIDs.forEach((approachUID) => {
       if (approaches[approachUID] != null) {
         const approach = approaches[approachUID];
@@ -386,7 +383,6 @@ export default class TopicComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
-    // const topicName = window.location.href.split('/').slice(-2, -1)[0];
     return this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
   }
 
@@ -446,10 +442,9 @@ export default class TopicComponent extends React.Component
   }
 
   render() {
-    // console.log(`${window.location.pathname}/tile.svg`)
-    let path = window.location.pathname.replace(/\/$/, '').split('/').slice(0, -2);
+    let path = getCurrentPath().split('/').slice(0, -2);
     if (path[1] === 'dev') {
-      path = ['', ...window.location.pathname.replace(/\/$/, '').split('/').slice(2, -2)];
+      path = ['', ...getCurrentPath().replace(/\/$/, '').split('/').slice(2, -2)];
     }
     const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
@@ -457,9 +452,7 @@ export default class TopicComponent extends React.Component
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
 
         <TopicTitle
-          // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
-          // imgLink={`${window.location.pathname}/tile.svg`}
           key='1'
           label={this.version.content.title}
           />

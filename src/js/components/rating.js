@@ -40,23 +40,6 @@ export default class Rating extends React.Component
     return stars;
   }
 
-  // getRatingLabel() {
-  //   const topic = this.props.topic.charAt(0).toUpperCase() + this.props.topic.slice(1);
-  //   // let page = getCookie('page');
-  //   // if (page === '') {
-  //   //   page = '0';
-  //   // }
-
-  //   if (this.props.isLoggedIn) {
-  //     return `Is this ${topic} helpful?`;
-  //   }
-  //   // const link = `/login?next=${window.location.pathname}&page=${page}`;
-  //   // <a href={link}>Login</a> to rate {topic}:
-  //   return <div>
-  //     <span className="rating__login" onClick={login}>Login</span> to rate {topic}:
-  //   </div>;
-  // }
-
   render() {
     return <div className="rating__container">
       <div className="rating__label">
