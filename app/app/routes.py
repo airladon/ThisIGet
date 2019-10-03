@@ -275,7 +275,7 @@ def get_content(path):
     res = make_response_with_files(
         'content.html', css=css, js=js, title=title, description=description)
     if topic_page:
-        res = make_response(redirect(request.path))
+        # res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=topic_page,
             path=request.path, max_age=30 * 60)

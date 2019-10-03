@@ -87,6 +87,8 @@ export default class PresentationFormatComponent extends React.Component
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
       createCookie('page', `${page + 1}`, 30, getCurrentPath());
+      const versionName = window.location.pathname.replace(/.*\//, '');
+      window.history.replaceState({}, '', `${versionName}?page=${page + 1}`);
     } else if (callback) {
       callback();
     }

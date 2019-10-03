@@ -10,7 +10,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -52,7 +63,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "singlePage",
@@ -86,7 +108,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -136,7 +169,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -192,7 +236,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -256,7 +311,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -314,7 +380,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -364,7 +441,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "calcProperties": {
           "type": "singlePage",
@@ -434,7 +522,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -490,7 +589,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "singlePage",
@@ -548,7 +658,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "singlePage",
@@ -612,7 +733,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -652,7 +784,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {}
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      }
     },
     "dependencies": [],
     "enabled": true
@@ -692,7 +835,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -742,7 +896,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -768,7 +933,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -832,7 +1008,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -866,7 +1053,18 @@
           "fullTopic": true
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -916,7 +1114,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -966,7 +1175,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1030,7 +1250,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -1087,7 +1318,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1145,7 +1387,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1263,7 +1516,18 @@
           "fullTopic": false
         }
       },
-      "quickReference": {},
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "quiz": {
         "base": {
           "type": "presentation",
