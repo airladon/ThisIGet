@@ -9,7 +9,7 @@ $colors: (
   qrAngles_arrow:              color('red'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 

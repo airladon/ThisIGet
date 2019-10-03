@@ -4,7 +4,7 @@ $colors: (
   qrParallelLines_lines:              color('blue'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 

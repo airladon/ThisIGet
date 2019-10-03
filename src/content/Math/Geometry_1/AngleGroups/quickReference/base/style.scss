@@ -7,7 +7,7 @@ $colors: (
   qrAngleGroups_angleC:             color('yellow'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 

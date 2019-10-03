@@ -6,6 +6,6 @@ $colors: (
   qrParallelSplitOfTriangleGrey:              color('grey', 'base'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

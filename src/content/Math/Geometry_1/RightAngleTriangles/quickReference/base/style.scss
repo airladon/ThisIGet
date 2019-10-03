@@ -6,6 +6,6 @@ $colors: (
   qrRightAngleTriangle_angles:                      color('green'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

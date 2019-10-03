@@ -8,7 +8,7 @@ $colors: (
   qrExternalAngles_externalAngle:     color('red'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 

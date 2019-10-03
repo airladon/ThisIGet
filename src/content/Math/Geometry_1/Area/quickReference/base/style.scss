@@ -14,6 +14,6 @@ $colors: (
   qrArea_measure:           color('grey', 'base'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

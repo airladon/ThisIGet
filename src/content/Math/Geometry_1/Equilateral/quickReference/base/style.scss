@@ -6,6 +6,6 @@ $colors: (
   qrEquilateral_highlight:         color('green'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

@@ -12,6 +12,6 @@ $colors: (
   // arrow:              color('red'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

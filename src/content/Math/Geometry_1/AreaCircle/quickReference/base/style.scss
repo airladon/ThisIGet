@@ -5,6 +5,6 @@ $colors: (
   qrAreaCircle_radius:            color('diagram', 'construction7'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

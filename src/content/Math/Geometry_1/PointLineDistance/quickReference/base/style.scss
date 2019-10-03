@@ -7,6 +7,6 @@ $colors: (
   qrPointsLineDistance_distance2:            color('violet'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

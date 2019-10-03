@@ -9,7 +9,7 @@ $colors: (
   qrAnglesAtIntersections_intersectingLine:   color('blue', 'lighter'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 
