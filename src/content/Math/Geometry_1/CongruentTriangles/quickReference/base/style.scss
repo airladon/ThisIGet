@@ -9,6 +9,6 @@ $colors: (
   // disabled:          color('diagram', 'disabled', 'darker'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

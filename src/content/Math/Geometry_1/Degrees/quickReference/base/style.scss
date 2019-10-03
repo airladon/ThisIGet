@@ -7,6 +7,6 @@ $colors: (
   qrDegrees_marks:              color('grey', 'dark'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

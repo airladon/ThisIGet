@@ -6,6 +6,6 @@ $colors: (
   qrParallelLineDistance_angles:              color('yellow'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }

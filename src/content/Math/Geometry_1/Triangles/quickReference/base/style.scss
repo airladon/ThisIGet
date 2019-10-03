@@ -12,7 +12,7 @@ $colors: (
   qrTriangles_pads:               color('red', 'lighter'),
 );
 
-body {
+#topic__content {
   @include color_vars($colors);
 }
 

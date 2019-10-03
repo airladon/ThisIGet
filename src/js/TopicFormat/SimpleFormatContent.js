@@ -59,10 +59,12 @@ class SimpleFormatContent {
         if (data.status === 'ok') {
           const jsFile = `/static/dist/${path}/${data.js}`;
           const cssFile = `/static/dist/${path}/${data.css}`;
-          loadRemoteCSS(`${qr}CSS`, cssFile, () => {
-            loadRemote(`${qr}Script`, jsFile, () => {
-            });
-          });
+          // loadRemoteCSS(`${qr}CSS`, cssFile, () => {
+          //   loadRemote(`${qr}Script`, jsFile, () => {
+          //   });
+          // });
+          loadRemoteCSS(`${qr}CSS`, cssFile, () => {});
+          loadRemote(`${qr}Script`, jsFile, () => {});
         }
       })
       .catch(() => {});

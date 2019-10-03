@@ -50,8 +50,12 @@ function loadRemoteCSS(
     link.type = 'text/css';
     link.href = url;
     link.id = id; // e.g., googleMaps or stripe
-    if (document.body) {
-      document.body.appendChild(link);
+    // if (document.body) {
+    //   document.body.appendChild(link);
+    // }
+    const head = document.getElementsByTagName('head')[0];
+    if (head) {
+      head.append(link);
     }
     link.onload = () => {
       if (callback != null) {
