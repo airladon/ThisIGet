@@ -244,10 +244,10 @@ def is_logged_in():
 def get_content(path):
     log_data(request)
     path = path.strip('/')
-    print(path)
     content_path = f'static/dist/content/{path}'
     js = ''
     css = ''
+
     if (content_path in static_files):
         js = f'/static/dist/content/' \
              f'{path}/{static_files[content_path]["content.js"]}'
@@ -255,7 +255,7 @@ def get_content(path):
               f'{static_files[content_path]["content.css"]}'
     else:
         abort(404)
-    print(js, css)
+
     *p, content_path, topic_name, version_uid = path.split('/')
 
     end_point = f"{path}"
@@ -275,10 +275,10 @@ def get_content(path):
     res = make_response_with_files(
         'content.html', css=css, js=js, title=title, description=description)
     if topic_page:
-        res = make_response(redirect(request.path.strip('/')))
+        res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=topic_page,
-            path=request.path.strip('/'), max_age=30 * 60)
+            path=request.path, max_age=30 * 60)
         return res
     return res
     # if current_user.is_authenticated:
@@ -321,7 +321,7 @@ def get_content_dev(path):
 
     res = make_response_with_files('content.html', css=css, js=js)
     if topic_page:
-        res = make_response(redirect(request.path))
+        # res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=topic_page,
             path=request.path, max_age=30 * 60)
