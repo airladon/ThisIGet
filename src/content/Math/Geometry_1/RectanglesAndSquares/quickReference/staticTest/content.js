@@ -13,7 +13,7 @@ const versionToTest = 'base';
 // ////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////
 
-const path = window.location.pathname.split('/');
+const path = getCurrentPath().split('/');
 const [topicUID] = path.slice(-3, -2);
 const qrids = version.references;
 

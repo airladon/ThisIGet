@@ -288,7 +288,7 @@ def get_content(path):
     # return res
 
 
-@app.route('/qr/content/', defaults={'path': ''}, strict_slashes=False)
+@app.route('/qr/content/', defaults={'path': ''})
 @app.route('/qr/content/<path:path>')
 def get_qr_file_location(path):
     qr_path = f'static/dist/content/{path}'.strip('/')
@@ -306,7 +306,7 @@ def get_qr_file_location(path):
     })
 
 
-@app.route('/dev/content/', defaults={'path': ''}, strict_slashes=False)
+@app.route('/dev/content/', defaults={'path': ''})
 @app.route('/dev/content/<path:path>')
 def get_content_dev(path):
     content_path = f'static/dist/content/{path}'.strip('/')

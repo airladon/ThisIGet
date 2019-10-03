@@ -6,10 +6,11 @@ import version from './version';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
+import { getCurrentPath } from '../../../../../../js/tools/misc';
 
 const layout = diagramLayout();
 
-const path = window.location.pathname.split('/');
+const path = getCurrentPath().split('/');
 const [topicUID] = path.slice(-3, -2);
 const [versionUID] = path.slice(-1);
 
