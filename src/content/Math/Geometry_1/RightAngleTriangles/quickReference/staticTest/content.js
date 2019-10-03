@@ -5,6 +5,7 @@ import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatCo
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import version from '../base/version';
+import { getCurrentPath } from '../../../../../../js/tools/misc';
 
 // ////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////

@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
 import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatContent';
-import { getCurrentPath } from '../../../../../../js/tools/misc';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import version from '../base/version';
+import { getCurrentPath } from '../../../../../../js/tools/misc';
 
 // ////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////
