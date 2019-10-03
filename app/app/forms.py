@@ -6,8 +6,34 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 # from wtforms.validators import Length
 from app.models import Users
 from app.tools import hash_str_with_pepper, format_email
-
+from flask_login import current_user
 # import pdb
+
+
+def check_password(password):
+    if len(password.data) < 8:
+        raise ValidationError('Password must be at least 8 characters')
+
+
+def check_username(username):
+    if len(username.data) > 32:
+        raise ValidationError('Username max length is 32 characters')
+    if username.data == current_user.get_username():
+        return
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username.data.lower())).first()
+    # user = Users.query.filter_by(username=username.data).first()
+    if user is not None:
+        raise ValidationError('Username already exists.')
+
+
+def check_email(email):
+    if email.data == current_user.get_email():
+        return
+    user = Users.query.filter_by(
+        email_hash=hash_str_with_pepper(format_email(email.data))).first()
+    if user is not None:
+        raise ValidationError('Email address already in use.')
 
 
 class LoginForm(FlaskForm):
@@ -48,23 +74,26 @@ class CreateAccountForm(FlaskForm):
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):
-        if len(username.data) > 32:
-            raise ValidationError('Username max length is 32 characters')
-        user = Users.query.filter_by(
-            username_hash=hash_str_with_pepper(username.data.lower())).first()
-        # user = Users.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError('Username already exists.')
+        check_username(username)
+        # if len(username.data) > 32:
+        #     raise ValidationError('Username max length is 32 characters')
+        # user = Users.query.filter_by(
+        #     username_hash=hash_str_with_pepper(username.data.lower())).first()
+        # # user = Users.query.filter_by(username=username.data).first()
+        # if user is not None:
+        #     raise ValidationError('Username already exists.')
 
     def validate_email(self, email):
-        user = Users.query.filter_by(
-            email_hash=hash_str_with_pepper(format_email(email.data))).first()
-        if user is not None:
-            raise ValidationError('Email address already in use.')
+        check_email(email)
+        # user = Users.query.filter_by(
+        #     email_hash=hash_str_with_pepper(format_email(email.data))).first()
+        # if user is not None:
+        #     raise ValidationError('Email address already in use.')
 
     def validate_password(self, password):
-        if len(password.data) < 8:
-            raise ValidationError('Password must be at least 8 characters')
+        check_password(password)
+        # if len(password.data) < 8:
+        #     raise ValidationError('Password must be at least 8 characters')
 
 
 class ResetPasswordRequestForm(FlaskForm):
@@ -85,9 +114,28 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Reset Password')
 
     def validate_password(self, password):
-        if len(password.data) < 8:
-            raise ValidationError('Password must be at least 8 characters')
+        check_password(password)
+        # if len(password.data) < 8:
+        #     raise ValidationError('Password must be at least 8 characters')
 
 
 class ConfirmAccountMessageForm(FlaskForm):
     submit = SubmitField('Resend Confirmation Email')
+
+
+class AccountSettingsForm(FlaskForm):
+    username = StringField('Username:', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Update')
+    reset_password = SubmitField('Reset Password')
+    delete_account = SubmitField('Delete Account')
+    # delete = SubmitField('Delete Account')
+
+    def validate_username(self, username):
+        check_username(username)
+
+    # def validate_email(self, email):
+    #     check_email(email)
+
+    # def validate_password(self, password):
+    #     check_password(password)
