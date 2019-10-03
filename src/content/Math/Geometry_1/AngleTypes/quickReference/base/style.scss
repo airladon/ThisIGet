@@ -6,6 +6,20 @@ $colors: (
   qrAngleTypes_fill:              color('green', 'darkest'),
 );
 
-body {
+// body {
+//   @include color_vars($colors);
+// }
+
+#topic__content {
   @include color_vars($colors);
 }
+
+// #topic__content {
+//   --colors-qrAngleTypes_lines: blue;
+//   --colors-qrAngleTypes_lines: green;
+//   --colors-qrAngleTypes_lines: green;
+// }
+
+// // body h1 {
+// //   color: red;
+// // }

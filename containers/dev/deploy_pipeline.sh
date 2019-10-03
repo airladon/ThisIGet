@@ -60,9 +60,7 @@ check_status
 
 title "Browser Tests - General: thisiget-test"
 ./browser_test.sh test browser.*btest
-
-title "Browser Tests - Extended: thisiget-test"
-./browser_test.sh test browser.*btest
+check_status
 
 JEST_OPTIONS=`python browser_test_diff_master.py`
 echo Testing: $JEST_OPTIONS
