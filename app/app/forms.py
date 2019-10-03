@@ -34,14 +34,16 @@ class CreateAccountForm(FlaskForm):
         'Repeat Password: ',
         validators=[DataRequired(), EqualTo('password')]
     )
-    terms = BooleanField(
-        'I have read and agree to the <a href="/terms">Terms of Use</a>',  # noqa
-        validators=[DataRequired(
-            message="You must agree to create an account"), ])
-    privacy = BooleanField(
-        'I have read and agree to the <a href="/privacy">Privacy Policy</a>',
-        validators=[DataRequired(
-            message="You must agree to create an account"), ])
+
+    # # Uncomment for Privacy
+    # terms = BooleanField(
+    #     'I have read and agree to the <a href="/terms">Terms of Use</a>',  # noqa
+    #     validators=[DataRequired(
+    #         message="You must agree to create an account"), ])
+    # privacy = BooleanField(
+    #     'I have read and agree to the <a href="/privacy">Privacy Policy</a>',
+    #     validators=[DataRequired(
+    #         message="You must agree to create an account"), ])
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):

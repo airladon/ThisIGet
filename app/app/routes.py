@@ -166,30 +166,30 @@ def information_response(name):
 def about():
     return information_response('about')
 
+# Uncomment for Privacy
+# @app.route('/copyright', strict_slashes=False)
+# def copyright():
+#     return information_response('copyright')
 
-@app.route('/copyright', strict_slashes=False)
-def copyright():
-    return information_response('copyright')
+# Uncomment for Privacy
+# @app.route('/privacy', strict_slashes=False)
+# def privacy():
+#     return information_response('privacy')
 
-
-@app.route('/privacy', strict_slashes=False)
-def privacy():
-    return information_response('privacy')
-
-
-@app.route('/terms', strict_slashes=False)
-def terms():
-    return information_response('terms')
-
-
-@app.route('/disclaimer', strict_slashes=False)
-def disclaimer():
-    return information_response('disclaimer')
+# Uncomment for Privacy
+# @app.route('/terms', strict_slashes=False)
+# def terms():
+#     return information_response('terms')
 
 
-@app.route('/contribute', strict_slashes=False)
-def contribute():
-    return information_response('contribute')
+# @app.route('/disclaimer', strict_slashes=False)
+# def disclaimer():
+#     return information_response('disclaimer')
+
+
+# @app.route('/contribute', strict_slashes=False)
+# def contribute():
+#     return information_response('contribute')
 
 
 @app.route('/introduction', strict_slashes=False)
