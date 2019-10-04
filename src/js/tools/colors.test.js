@@ -128,6 +128,48 @@ describe('Color', () => {
       expect(round(c.hslSaturation, 2)).toBe(hslS1);
       expect(round(c.luminance, 2)).toBe(hslL1);
     });
+    test('Change Brightness', () => {
+      const c = new Color([26, 51, 77, 1]);
+      c.setBrightness(0.4);
+      expect(c.redGreenBlue).toEqual([34, 68, 102, 1]);
+      expect(c.brightness).toBe(0.4);
+    });
+    test('Change Saturation', () => {
+      const c = new Color([26, 51, 77, 1]);
+      c.setHsbSaturation(0.4);
+      expect(c.redGreenBlue).toEqual([46, 61, 77, 1]);
+      expect(round(c.brightness, 2)).toBe(0.3);
+      expect(round(c.hsbSaturation, 2)).toBe(0.4);
+    });
+    test('Change Hue', () => {
+      const c = new Color([26, 51, 77, 1]);
+      c.setHue(100);
+      expect(c.redGreenBlue).toEqual([43, 77, 26, 1]);
+      expect(round(c.brightness, 2)).toBe(0.3);
+      expect(round(c.hsbSaturation, 2)).toBe(0.66);
+      expect(round(c.hue, 0)).toBe(100);
+    });
+    test('New Saturation', () => {
+      const c1 = new Color([26, 51, 77, 1]);
+      const c2 = c1.newHsbSaturation(0.4);
+      expect(c2.redGreenBlue).toEqual([46, 61, 77, 1]);
+      expect(round(c2.brightness, 2)).toBe(0.3);
+      expect(round(c2.hsbSaturation, 2)).toBe(0.4);
+    });
+    test('New Hue', () => {
+      const c1 = new Color([26, 51, 77, 1]);
+      const c2 = c1.newHue(100);
+      expect(c2.redGreenBlue).toEqual([43, 77, 26, 1]);
+      expect(round(c2.brightness, 2)).toBe(0.3);
+      expect(round(c2.hsbSaturation, 2)).toBe(0.66);
+      expect(round(c2.hue, 0)).toBe(100);
+    });
+    test('New Brightness', () => {
+      const c1 = new Color([26, 51, 77, 1]);
+      const c2 = c1.newBrightness(0.4);
+      expect(c2.redGreenBlue).toEqual([34, 68, 102, 1]);
+      expect(c2.brightness).toBe(0.4);
+    });
   });
   // test('Instantiation', () => {
   //   const colors = new Colors(palette);

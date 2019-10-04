@@ -335,6 +335,10 @@ class Color {
     this.setHSB([hue, this.hsbSaturation, this.brightness]);
   }
 
+  setHsbSaturation(saturation: number) {
+    this.setHSB([this.hue, saturation, this.brightness]);
+  }
+
   newBrightness(brightness: number) {
     return new Color(HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]));
   }
