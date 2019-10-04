@@ -151,7 +151,7 @@ function HSBToRGB(hsb) {
   return [RGB1[0] + m, RGB1[1] + m, RGB1[2] + m];
 }
 
-function HSBToHSL(hsb) {
+function HSBToHSL(hsb: Array<number>) {
   const [hue, saturation, brightness, opacity] = hsb;
   const L = brightness - brightness * saturation / 2;
   let S = 0;
@@ -164,7 +164,7 @@ function HSBToHSL(hsb) {
   return [hue, S, L];
 }
 
-function HSLToHSB(hsl) {
+function HSLToHSB(hsl: Array<number>) {
   const [hue, saturation, luminance, opacity] = hsl;
   const V = luminance + saturation * Math.min(luminance, 1 - luminance);
   let S = 0;
