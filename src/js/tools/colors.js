@@ -1,105 +1,50 @@
 // @flow
 
-const palette = {
-  blue: '89A2E8',
-  red: 'FFA9A7',
-  green: 'ABFF9A',
-  yellow: 'E8DD8A',
-  cyan: '9AFFEA',
-  brown: 'DEC28B',
-  orange: 'E8B382',
-  violet: 'D882E8',
-  grey: '727F8C',
-  white: 'FFF',
-  offWhite: 'FAFAFA',
-  black: '000',
-  logo: '0070EB',
-  primaryDark: '0067D6',
-};
+// function modifyColor(c: Array<number>, modifier: number | string = 0) {
+//   let mod = 0;
+//   if (typeof modifier === 'string') {
+//     if (modifiers[modifier] != null) {
+//       mod = modifiers[modifier];
+//     }
+//   } else {
+//     mod = modifier;
+//   }
 
-const abstract = {
-  alpha: ['blue'],
-  bravo: ['red'],
-  charlie: ['green'],
-  delta: ['yellow'],
-  echo: ['cyan'],
-  foxtrot: ['orange'],
-};
+//   return [
+//     Math.max(Math.min(c[0] + mod, 1), 0),
+//     Math.max(Math.min(c[1] + mod, 1), 0),
+//     Math.max(Math.min(c[2] + mod, 1), 0),
+//     c[3],
+//   ];
+// }
 
-const hues = {
-  blue: ['blue'],
-  red: ['red'],
-  green: ['green'],
-  yellow: ['yellow'],
-  cyan: ['cyan'],
-  brown: ['brown'],
-  orange: ['orange'],
-  violet: ['violet'],
-  grey: ['grey'],
-  white: ['white'],
-  black: ['black'],
-};
-
-const site = {
-  primary: ['logo'],
-};
-
-const diagram = {
-  primary: ['blue'],
-  secondary: ['red'],
-  tertiary: ['green'],
-  construction: ['yellow', 'darker'],
-};
-
-const families = {
-  abstract, hues, site, diagram,
-};
-
-const modifiers = {
-  hover: 0.1,
-  dark: -0.1,
-  darker: -0.2,
-  darkest: -0.3,
-  light: 0.1,
-  lighter: 0.2,
-  lightest: 0.3,
-};
-
-function modifyColor(c: Array<number>, modifier: number | string = 0) {
-  let mod = 0;
-  if (typeof modifier === 'string') {
-    if (modifiers[modifier] != null) {
-      mod = modifiers[modifier];
-    }
-  } else {
-    mod = modifier;
-  }
-
-  return [
-    Math.max(Math.min(c[0] + mod, 1), 0),
-    Math.max(Math.min(c[1] + mod, 1), 0),
-    Math.max(Math.min(c[2] + mod, 1), 0),
-    c[3],
-  ];
-}
-
-function hexToArray(col: string): Array<number> {
-  let colHex: string = col.slice(1);
-  if (colHex.length < 6) {
-    colHex =
-      `${colHex[0]}${colHex[0]}${colHex[1]}${colHex[1]}${colHex[2]}${colHex[2]}`;
-  }
-  return [
-    parseInt(colHex.slice(0, 2), 16) / 255.0,
-    parseInt(colHex.slice(2, 4), 16) / 255.0,
-    parseInt(colHex.slice(4, 6), 16) / 255.0,
-    1,
-  ];
-}
+// function hexToArray(col: string): Array<number> {
+//   let colHex: string = col.slice(1);
+//   if (colHex.length < 6) {
+//     colHex =
+//       `${colHex[0]}${colHex[0]}${colHex[1]}${colHex[1]}${colHex[2]}${colHex[2]}`;
+//   }
+//   return [
+//     parseInt(colHex.slice(0, 2), 16) / 255.0,
+//     parseInt(colHex.slice(2, 4), 16) / 255.0,
+//     parseInt(colHex.slice(4, 6), 16) / 255.0,
+//     1,
+//   ];
+// }
 
 // From https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_HSL
 function HSLToRGB(hsl) {
-  const [hue, saturation, luminance, opacity] = hsl;
+  let [hue, saturation, luminance, opacity] = hsl;
+  if (hue < 0) { hue += 360; }
+  if (hue > 360) { hue -= 360; }
+  if (saturation < 0) { saturation = 0; }
+  if (saturation > 1) { saturation = 1; }
+  if (luminance < 0) { luminance = 0; }
+  if (luminance > 1) { luminance = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const C = (1 - Math.abs(2 * luminance - 1)) * saturation;
   const H = hue / 60;
   const X = C * (1 - Math.abs(H % 2 - 1));
@@ -126,7 +71,17 @@ function HSLToRGB(hsl) {
 
 // From https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_HSL
 function HSBToRGB(hsb) {
-  const [hue, saturation, brightness, opacity] = hsb;
+  let [hue, saturation, brightness, opacity] = hsb;
+  if (hue < 0) { hue += 360; }
+  if (hue > 360) { hue -= 360; }
+  if (saturation < 0) { saturation = 0; }
+  if (saturation > 1) { saturation = 1; }
+  if (brightness < 0) { brightness = 0; }
+  if (brightness > 1) { brightness = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const C = saturation * brightness;
   const H = hue / 60;
   const X = C * (1 - Math.abs(H % 2 - 1));
@@ -152,7 +107,17 @@ function HSBToRGB(hsb) {
 }
 
 function HSBToHSL(hsb: Array<number>) {
-  const [hue, saturation, brightness, opacity] = hsb;
+  let [hue, saturation, brightness, opacity] = hsb;
+  if (hue < 0) { hue += 360; }
+  if (hue > 360) { hue -= 360; }
+  if (saturation < 0) { saturation = 0; }
+  if (saturation > 1) { saturation = 1; }
+  if (brightness < 0) { brightness = 0; }
+  if (brightness > 1) { brightness = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const L = brightness - brightness * saturation / 2;
   let S = 0;
   if (L !== 0 || L !== 1) {
@@ -165,7 +130,17 @@ function HSBToHSL(hsb: Array<number>) {
 }
 
 function HSLToHSB(hsl: Array<number>) {
-  const [hue, saturation, luminance, opacity] = hsl;
+  let [hue, saturation, luminance, opacity] = hsl;
+  if (hue < 0) { hue += 360; }
+  if (hue > 360) { hue -= 360; }
+  if (saturation < 0) { saturation = 0; }
+  if (saturation > 1) { saturation = 1; }
+  if (luminance < 0) { luminance = 0; }
+  if (luminance > 1) { luminance = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const V = luminance + saturation * Math.min(luminance, 1 - luminance);
   let S = 0;
   if (V !== 0) {
@@ -178,7 +153,17 @@ function HSLToHSB(hsl: Array<number>) {
 }
 
 function RGBToHSL(rgb) {
-  const [r, g, b, opacity] = rgb;
+  let [r, g, b, opacity] = rgb;
+  if (r < 0) { r = 0; }
+  if (r > 1) { r = 1; }
+  if (b < 0) { b = 0; }
+  if (b > 1) { b = 1; }
+  if (g < 0) { g = 0; }
+  if (g > 1) { g = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let H = 0;
@@ -199,7 +184,17 @@ function RGBToHSL(rgb) {
 }
 
 function RGBToHSB(rgb) {
-  const [r, g, b, opacity] = rgb;
+  let [r, g, b, opacity] = rgb;
+  if (r < 0) { r = 0; }
+  if (r > 1) { r = 1; }
+  if (b < 0) { b = 0; }
+  if (b > 1) { b = 1; }
+  if (g < 0) { g = 0; }
+  if (g > 1) { g = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let H = 0;
@@ -240,8 +235,19 @@ function HEXToRGB(col: string) {
 }
 
 function RGBToHEX(rgb) {
-  const [red, green, blue, opacity] = rgb;
-  let hexRGB = `${Math.round((red * 255)).toString(16)}${Math.round((green * 255)).toString(16)}${Math.round((blue * 255)).toString(16)}`;
+  // const [red, green, blue, opacity] = rgb;
+  let [r, g, b, opacity] = rgb;
+  if (r < 0) { r = 0; }
+  if (r > 1) { r = 1; }
+  if (b < 0) { b = 0; }
+  if (b > 1) { b = 1; }
+  if (g < 0) { g = 0; }
+  if (g > 1) { g = 1; }
+  if (opacity != null) {
+    if (opacity < 0) { opacity = 0; }
+    if (opacity > 0) { opacity = 1; }
+  }
+  let hexRGB = `${Math.round((r * 255)).toString(16)}${Math.round((g * 255)).toString(16)}${Math.round((b * 255)).toString(16)}`;
   if (opacity != null) {
     hexRGB = `${hexRGB}${Math.round((opacity * 255)).toString(16)}`;
   }
@@ -335,6 +341,10 @@ class Color {
     this.setHSB([hue, this.hsbSaturation, this.brightness]);
   }
 
+  setLuminance(luminance: number) {
+    this.setHSL([this.hue, this.hslSaturation, luminance]);
+  }
+
   setHsbSaturation(saturation: number) {
     this.setHSB([this.hue, saturation, this.brightness]);
   }
@@ -350,8 +360,83 @@ class Color {
   newHue(hue: number) {
     return new Color(HSBToRGB([hue, this.hsbSaturation, this.brightness, this.opacity]));
   }
+
+  // This is the same as lighter in sass
+  lighten(delta: number) {
+    this.setLuminance(this.luminance + delta);
+  }
+
+  // This is the same as lighter in sass
+  darken(delta: number) {
+    this.setLuminance(this.luminance - delta);
+  }
 }
 
+
+const palette = {
+  blue: '89A2E8',
+  red: 'FFA9A7',
+  green: 'ABFF9A',
+  yellow: 'E8DD8A',
+  cyan: '9AFFEA',
+  brown: 'DEC28B',
+  orange: 'E8B382',
+  violet: 'D882E8',
+  grey: '727F8C',
+  white: 'FFF',
+  offWhite: 'FAFAFA',
+  black: '000',
+  logo: '0070EB',
+  primaryDark: '0067D6',
+};
+
+const abstract = {
+  alpha: ['blue'],
+  bravo: ['red'],
+  charlie: ['green'],
+  delta: ['yellow'],
+  echo: ['cyan'],
+  foxtrot: ['orange'],
+};
+
+const hues = {
+  blue: ['blue'],
+  red: ['red'],
+  green: ['green'],
+  yellow: ['yellow'],
+  cyan: ['cyan'],
+  brown: ['brown'],
+  orange: ['orange'],
+  violet: ['violet'],
+  grey: ['grey'],
+  white: ['white'],
+  black: ['black'],
+};
+
+const site = {
+  primary: ['logo'],
+};
+
+const diagram = {
+  primary: ['blue'],
+  secondary: ['red'],
+  tertiary: ['green'],
+  construction: ['yellow', 'darker'],
+};
+
+const families = {
+  abstract, hues, site, diagram,
+};
+
+const modifiers = {
+  hover: 0.1,
+  dark: -0.1,
+  darker: -0.2,
+  darkest: -0.3,
+  light: 0.1,
+  lighter: 0.2,
+  lightest: 0.3,
+};
 
 // function modify(col: [number, number, number, number], modifier: number) {
 //   return [

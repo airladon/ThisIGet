@@ -164,11 +164,26 @@ describe('Color', () => {
       expect(round(c2.hsbSaturation, 2)).toBe(0.66);
       expect(round(c2.hue, 0)).toBe(100);
     });
-    test('New Brightness', () => {
+    test.only('New Brightness', () => {
       const c1 = new Color([26, 51, 77, 1]);
       const c2 = c1.newBrightness(0.4);
       expect(c2.redGreenBlue).toEqual([34, 68, 102, 1]);
       expect(c2.brightness).toBe(0.4);
+
+      const d = new Color('3cb878');
+      const l = d.luminance;
+      d.lighten(0.30);
+      console.log(d.hex)
+      d.setHex('3cb878');
+      d.lighten(0.15);
+      console.log(d.hex)
+      d.setHex('3cb878');
+      d.darken(0.15);
+      console.log(d.hex)
+      d.setHex('3cb878');
+      d.darken(0.30);
+      console.log(d.hex)
+      d.setHex('3cb878');
     });
   });
   // test('Instantiation', () => {
