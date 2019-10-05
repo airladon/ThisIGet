@@ -20,16 +20,17 @@ const palette = {
   red: [0.5, 0, 0, 1],
   green: [0, 0.5, 0, 1],
   yellow: [0.8, 0.8, 0, 1],
-  cyan: [1, 1, 1, 1],
-  brown: [1, 1, 1, 1],
-  orange: [1, 1, 1, 1],
-  violet: [1, 1, 1, 1],
-  grey: [1, 1, 1, 1],
-  white: [1, 1, 1, 1],
-  offWhite: [1, 1, 1, 1],
-  black: [0, 0, 0, 1],
-  logo: [1, 1, 1, 1],
-  primaryDark: [1, 1, 1, 1],
+};
+
+const theme = {
+  blue: ['blue', 'base'],
+  darkBlue: ['blue', 'dark'],
+  diagram: {
+    red: ['red', 'base'],
+    element: {
+      green: ['green', 'base'],
+    },
+  },
 };
 
 describe('Color', () => {
@@ -164,26 +165,32 @@ describe('Color', () => {
       expect(round(c2.hsbSaturation, 2)).toBe(0.66);
       expect(round(c2.hue, 0)).toBe(100);
     });
-    test.only('New Brightness', () => {
+    test('New Brightness', () => {
       const c1 = new Color([26, 51, 77, 1]);
       const c2 = c1.newBrightness(0.4);
       expect(c2.redGreenBlue).toEqual([34, 68, 102, 1]);
       expect(c2.brightness).toBe(0.4);
-
+    });
+    test('Lighten', () => {
       const d = new Color('3cb878');
-      const l = d.luminance;
       d.lighten(0.30);
-      console.log(d.hex)
-      d.setHex('3cb878');
-      d.lighten(0.15);
-      console.log(d.hex)
-      d.setHex('3cb878');
-      d.darken(0.15);
-      console.log(d.hex)
-      d.setHex('3cb878');
+      expect(d.hex).toBe('aae3c6');
+    });
+    test('Darken', () => {
+      const d = new Color('3cb878');
       d.darken(0.30);
-      console.log(d.hex)
-      d.setHex('3cb878');
+      expect(d.hex).toBe('16452d');
+    });
+  });
+  describe.only('Colors', () => {
+    test('Instantiation', () => {
+      const colors = new Colors(palette, theme);
+      expect(colors).not.toBe(null);
+    });
+    test('Get first level', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('blue');
+      expect(color.rgb).toEqual(palette.blue);
     });
   });
   // test('Instantiation', () => {

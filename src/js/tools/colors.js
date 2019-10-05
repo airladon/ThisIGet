@@ -370,73 +370,196 @@ class Color {
   darken(delta: number) {
     this.setLuminance(this.luminance - delta);
   }
+
+  _dup() {
+    return new Color(this.rgb);
+  }
 }
 
 
-const palette = {
-  blue: '89A2E8',
-  red: 'FFA9A7',
-  green: 'ABFF9A',
-  yellow: 'E8DD8A',
-  cyan: '9AFFEA',
-  brown: 'DEC28B',
-  orange: 'E8B382',
-  violet: 'D882E8',
-  grey: '727F8C',
-  white: 'FFF',
-  offWhite: 'FAFAFA',
-  black: '000',
-  logo: '0070EB',
-  primaryDark: '0067D6',
+const palettes = {
+  standard: {
+    blue: '89A2E8',
+    red: 'FFA9A7',
+    green: 'ABFF9A',
+    yellow: 'E8DD8A',
+    cyan: '9AFFEA',
+    brown: 'DEC28B',
+    orange: 'E8B382',
+    violet: 'D882E8',
+    grey: '727F8C',
+    white: 'FFF',
+    offWhite: 'FAFAFA',
+    black: '000',
+    logo: '0070EB',
+    logoDark: '0067D6',
+  },
 };
 
-const abstract = {
-  alpha: ['blue'],
-  bravo: ['red'],
-  charlie: ['green'],
-  delta: ['yellow'],
-  echo: ['cyan'],
-  foxtrot: ['orange'],
+const themes = {
+  standard: {
+    blue: ['blue'],
+    red: ['red'],
+    green: ['green'],
+    yellow: ['yellow'],
+    cyan: ['cyan'],
+    brown: ['brown'],
+    orange: ['orange'],
+    violet: ['violet'],
+    grey: ['grey'],
+    white: ['white'],
+    black: ['black'],
+    diagram: {
+      background: ['black', 'base'],
+      primary: ['blue', 'base'],
+      warning: ['red', 'base'],
+      safe: ['green', 'base'],
+      passive: ['yellow', 'base'],
+      construction1: ['yellow', 'base'],
+      construction2: ['orange', 'base'],
+      construction3: ['grey', 'base'],
+      construction4: ['violet', 'base'],
+      construction5: ['brown', 'base'],
+      construction6: ['blue', 'base'],
+      construction7: ['cyan', 'base'],
+      construction8: ['green', 'base'],
+      construction9: ['red', 'base'],
+      disabled: ['black', 'light'],
+      disabledDark: ['grey', 'dark'],
+      disabledDarker: ['grey', 'darker'],
+      disabledDarkest: ['grey', 'darkest'],
+      push: ['red', 'base'],
+      action: ['cyan', 'base'],
+      text: {
+        base: ['yellow', 'lighter'],
+        warning: ['red', 'lighter'],
+        plot: ['blue', 'light'],
+        keyword: ['blue', 'light'],
+        keyword2: ['green', 'light'],
+        latin: ['cyan', 'light'],
+        oldFrench: ['violet', 'light'],
+        sanskrit: ['orange', 'light'],
+        arabic: ['violet', 'light'],
+        greek: ['green', 'light'],
+        english: ['blue', 'light'],
+        definition: ['grey', 'base'],
+        note: ['grey', 'light'],
+      },
+      quizCheck: ['violet', 'base'],
+      equation: {
+        border: ['black', 'dark'],
+      },
+      qr: {
+        background: ['black', 'darker'],
+        corners: ['grey', 'base'],
+        text: ['grey', 'light'],
+      },
+    },
+    presentation: {
+      background: ['white', 'base'],
+      button: ['white', 'darkest'],
+      disabled: ['white', 'lighter'],
+      hover: ['grey', 'lighter'],
+      hoverBackground: ['white', 'base'],
+      text: ['grey', 'base'],
+    },
+    lesson: {
+      background: ['grey', 'dark'],
+      text: {
+        title: ['blue', 'dark'],
+      },
+      title: {
+        background: ['offWhite', 'base'],
+      },
+      // text: ['grey', 'lighter'],
+      navigation: ['grey', 'base'],
+      button: ['grey', 'base'],
+      // button: {
+      //   highlight: ['grey', 'darker'],
+      // },
+    },
+    site: {
+      primary: ['logo', 'base'],
+      primaryDark: ['logoDark', 'base'],
+      warning: ['red', 'base'],
+      secondary: ['blue', 'light'],
+      text: ['grey', 'darker'],
+      background: ['offWhite', 'base'],
+      disabled: ['grey', 'base'],
+      safe: ['green', 'base'],
+      menus: ['grey', 'darker'],
+    },
+    navbar: {
+      // text: ['white', 'lighter'],
+      text: {
+        hover: ['white', 'base'],
+        input: ['grey', 'lighter'],
+      },
+      background: ['grey', 'darker'],
+    },
+  },
 };
+// const abstract = {
+//   alpha: ['blue'],
+//   bravo: ['red'],
+//   charlie: ['green'],
+//   delta: ['yellow'],
+//   echo: ['cyan'],
+//   foxtrot: ['orange'],
+// };
 
-const hues = {
-  blue: ['blue'],
-  red: ['red'],
-  green: ['green'],
-  yellow: ['yellow'],
-  cyan: ['cyan'],
-  brown: ['brown'],
-  orange: ['orange'],
-  violet: ['violet'],
-  grey: ['grey'],
-  white: ['white'],
-  black: ['black'],
-};
+// const hues = {
+//   blue: ['blue'],
+//   red: ['red'],
+//   green: ['green'],
+//   yellow: ['yellow'],
+//   cyan: ['cyan'],
+//   brown: ['brown'],
+//   orange: ['orange'],
+//   violet: ['violet'],
+//   grey: ['grey'],
+//   white: ['white'],
+//   black: ['black'],
+// };
 
-const site = {
-  primary: ['logo'],
-};
+// const site = {
+//   primary: ['logo'],
+// };
 
-const diagram = {
-  primary: ['blue'],
-  secondary: ['red'],
-  tertiary: ['green'],
-  construction: ['yellow', 'darker'],
-};
+// const diagram = {
+//   primary: ['blue'],
+//   secondary: ['red'],
+//   tertiary: ['green'],
+//   construction: ['yellow', 'darker'],
+// };
 
-const families = {
-  abstract, hues, site, diagram,
-};
+// const families = {
+//   abstract, hues, site, diagram,
+// };
 
-const modifiers = {
-  hover: 0.1,
+const shades = {
+  hover: -0.1,
   dark: -0.1,
   darker: -0.2,
-  darkest: -0.3,
+  darkest: -0.45,
   light: 0.1,
-  lighter: 0.2,
-  lightest: 0.3,
+  lighter: 0.20,
+  lightest: 0.45,
+  base: 0,
 };
+
+function getShade(shade: ?number | string) {
+  if (shade == null) {
+    return 0;
+  }
+  if (typeof shade === 'number') {
+    return shade;
+  }
+  if (shades[shade] != null) {
+    return shades[shade];
+  }
+  return 0;
+}
 
 // function modify(col: [number, number, number, number], modifier: number) {
 //   return [
@@ -447,6 +570,18 @@ const modifiers = {
 //   ];
 // }
 
+type TypeThemeLevel = {
+  [semanticName: string]: [string] | [string, string] | TypeThemeLevel;
+};
+
+type TypePaletteColor = {
+  [colorName: string]: Color;
+};
+
+type TypePaletteDefinition = {
+  [colorName: string]: string | Array<number>;
+};
+
 // Singleton class that contains projects global variables
 class Colors {
   static instance: Object;
@@ -454,69 +589,138 @@ class Colors {
     [colorName: string]: Color;
   };
 
+  theme: TypeThemeLevel;
+
   families: {
     [familyName: string]: {
       [colorName: string]: Array<number>;
     };
   };
 
-  constructor(paletteColors: Object = palette) {
+  constructor(
+    paletteColors: TypePaletteColor | TypePaletteDefinition | string = 'standard',
+    theme: string | TypeThemeLevel = 'standard',
+  ) {
     // If the instance alread exists, then don't create a new instance.
     // If it doesn't, then setup some default values.
     if (!Colors.instance) {
       Colors.instance = this;
+      this.setTheme(theme);
+      // this.theme = themes[theme];
+      // this.palette = paletteColors;
       this.setPalette(paletteColors);
     }
     return Colors.instance;
   }
 
-  setPalette(paletteColors: Object) {
-    this.palette = {};
-    Object.keys(paletteColors).forEach((col) => {
-      this.palette[col] = new Color(paletteColors[col]);
-    });
-
-    this.families = {};
-    Object.keys(families).forEach((familyName) => {
-      const family = families[familyName];
-      if (this.families[familyName] == null) {
-        this.families[familyName] = {};
-      }
-      Object.keys(family).forEach((member) => {
-        let [c, modifier] = families[familyName][member];
-        if (c == null) {
-          c = 'black';
-        }
-        if (modifier == null) {
-          modifier = 0;
-        }
-        this.families[familyName][member] = this.palette[c].modify(modifier);
-      });
-    });
-  }
-
-  get(
-    colorOrFamily: string,
-    colorModOrFamilyMember: string | number,
-    modOfFamilyMember: number = 0,
+  setPalette(
+    palette: TypePaletteColor | TypePaletteDefinition | string = 'standard',
   ) {
-    let c = [0, 0, 0, 1];
-    let mod = 0;
-    if (this.families.hues[colorOrFamily] != null) {
-      c = this.families.hues[colorOrFamily];
-      if (typeof colorModOrFamilyMember === 'number') {
-        mod = colorModOrFamilyMember;
-      } else {
-        mod = colorModOrFamilyMember;
+    this.palette = {};
+    let paletteColors = {};
+    if (typeof palette === 'string') {
+      if (palettes[palette]) {
+        paletteColors = palettes[palette];
       }
     } else {
-      if (typeof colorModOrFamilyMember === 'string') {
-        c = this.families[colorOrFamily][colorModOrFamilyMember];
-      }
-      mod = modOfFamilyMember;
+      paletteColors = palette;
     }
-    return modifyColor(c, mod);
+    Object.keys(paletteColors).forEach((colorName) => {
+      const col = paletteColors[colorName];
+      if (typeof col === 'string' || Array.isArray(col)) {
+        this.palette[colorName] = new Color(col);
+      } else {
+        this.palette[colorName] = col._dup();
+      }
+    });
   }
+
+  setTheme(theme: TypeThemeLevel | string) {
+    if (typeof theme === 'string') {
+      if (themes[theme] != null) {
+        this.theme = themes[theme];
+      }
+    } else {
+      this.theme = theme;
+    }
+  }
+
+  get(...names: Array<string | number>) {
+    let lastShade = 0;
+    let lastIndex = names.length - 1;
+    const last = names.slice(-1)[0];
+    if (typeof last === 'number' || shades[last] != null) {
+      lastShade = getShade(last);
+      lastIndex -= 2;
+    }
+    let definition = this.theme;
+    for (let i = 0; i <= lastIndex; i += 1) {
+      if (definition[names[i]] == null) {
+        return new Color();
+      }
+      definition = definition[names[i]];
+    }
+    console.log(definition)
+    if (!Array.isArray(definition) && typeof definition !== 'string') {
+      return new Color();
+    }
+    console.log('asdf')
+    const [colorName, shade] = definition;
+    if (this.palette[colorName] == null) {
+      return new Color();
+    }
+    const col = this.palette[colorName];
+    const totalShade = getShade(shade) + lastShade;
+    return new col._dup().lighten(totalShade);
+  }
+  // setPalette(paletteColors: Object) {
+  //   this.palette = {};
+  //   Object.keys(paletteColors).forEach((col) => {
+  //     this.palette[col] = new Color(paletteColors[col]);
+  //   });
+
+
+  //   this.families = {};
+  //   Object.keys(families).forEach((familyName) => {
+  //     const family = families[familyName];
+  //     if (this.families[familyName] == null) {
+  //       this.families[familyName] = {};
+  //     }
+  //     Object.keys(family).forEach((member) => {
+  //       let [c, modifier] = families[familyName][member];
+  //       if (c == null) {
+  //         c = 'black';
+  //       }
+  //       if (modifier == null) {
+  //         modifier = 0;
+  //       }
+  //       this.families[familyName][member] = this.palette[c].modify(modifier);
+  //     });
+  //   });
+  // }
+
+  // get(
+  //   colorOrFamily: string,
+  //   colorModOrFamilyMember: string | number,
+  //   modOfFamilyMember: number = 0,
+  // ) {
+  //   let c = [0, 0, 0, 1];
+  //   let mod = 0;
+  //   if (this.families.hues[colorOrFamily] != null) {
+  //     c = this.families.hues[colorOrFamily];
+  //     if (typeof colorModOrFamilyMember === 'number') {
+  //       mod = colorModOrFamilyMember;
+  //     } else {
+  //       mod = colorModOrFamilyMember;
+  //     }
+  //   } else {
+  //     if (typeof colorModOrFamilyMember === 'string') {
+  //       c = this.families[colorOrFamily][colorModOrFamilyMember];
+  //     }
+  //     mod = modOfFamilyMember;
+  //   }
+  //   return modifyColor(c, mod);
+  // }
 }
 
 // Do not automatically create and instance and return it otherwise can't
