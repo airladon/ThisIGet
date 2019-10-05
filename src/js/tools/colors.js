@@ -669,7 +669,7 @@ class Colors {
           level[nextLevelName] = {};
         }
         if (i === parents.length - 1) {
-          level[nextLevel] = color;
+          level[nextLevelName] = color;
         } else {
           level = level[nextLevelName];
         }
@@ -677,18 +677,12 @@ class Colors {
     };
     const processLevel = (level, parents) => {
       Object.keys(level).forEach((key) => {
-        let colorOrNextLevel = level[key];
-        console.log(key, colorOrNextLevel)
+        const colorOrNextLevel = level[key];
         if (Array.isArray(colorOrNextLevel) || typeof colorOrNextLevel === 'string') {
-          if (typeof colorOrNextLevel === 'string') {
-            colorOrNextLevel = [colorOrNextLevel, 'base'];
-          }
-          const [colorName, shade] = colorOrNextLevel;
-          const col = this.palette[colorName];
-          const newCol = col._dup().lighten(getShade(shade)).rgb;
-          addColor(parents, newCol);
+          const col = this.get(...[...parents, key]);
+          addColor([...parents, key], col.rgb);
         } else {
-          // processLevel(colorOrNextLevel, [...parents, key]);
+          processLevel(colorOrNextLevel, [...parents, key]);
         }
       });
     };
