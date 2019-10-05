@@ -265,6 +265,32 @@ function RGBToHEX(rgb: Array<number>) {
   return hexRGB;
 }
 
+type TypeInputColor = string | Array<number>;
+
+const shades = {
+  hover: -0.1,
+  dark: -0.1,
+  darker: -0.2,
+  darkest: -0.45,
+  light: 0.1,
+  lighter: 0.20,
+  lightest: 0.45,
+  base: 0,
+};
+
+function getShade(shade: ?number | string) {
+  if (shade == null) {
+    return 0;
+  }
+  if (typeof shade === 'number') {
+    return shade;
+  }
+  if (shades[shade] != null) {
+    return shades[shade];
+  }
+  return 0;
+}
+
 class Color {
   // value: Array<number>;
   red: number;                // [0, 255]
@@ -289,7 +315,7 @@ class Color {
   opacity: number;
 
   constructor(
-    c: string | Array<number> = [0, 0, 0, 1],
+    c: TypeInputColor = [0, 0, 0, 1],
   ) {
     this.opacity = 1;
     if (typeof c === 'string') {
@@ -373,14 +399,14 @@ class Color {
   }
 
   // This is the same as lighter in sass
-  lighten(delta: number) {
-    this.setLuminance(this.luminance + delta);
+  lighten(delta: number | string) {
+    this.setLuminance(this.luminance + getShade(delta));
     return this;
   }
 
   // This is the same as lighter in sass
-  darken(delta: number) {
-    this.setLuminance(this.luminance - delta);
+  darken(delta: number | string) {
+    this.setLuminance(this.luminance - getShade(delta));
     return this;
   }
 
@@ -513,30 +539,6 @@ const themes = {
   },
 };
 
-const shades = {
-  hover: -0.1,
-  dark: -0.1,
-  darker: -0.2,
-  darkest: -0.45,
-  light: 0.1,
-  lighter: 0.20,
-  lightest: 0.45,
-  base: 0,
-};
-
-function getShade(shade: ?number | string) {
-  if (shade == null) {
-    return 0;
-  }
-  if (typeof shade === 'number') {
-    return shade;
-  }
-  if (shades[shade] != null) {
-    return shades[shade];
-  }
-  return 0;
-}
-
 type TypeThemeLevel = {
   [semanticName: string]: [string] | [string, string] | TypeThemeLevel;
 };
@@ -651,6 +653,11 @@ class Colors {
 
     const totalShade = getShade(shade) + lastShade;
     return col._dup().lighten(totalShade);
+  }
+
+  static lighten(inputColor: TypeInputColor, shade: string | number) {
+    const col = new Color(inputColor);
+    return col.lighten(shade);
   }
 }
 

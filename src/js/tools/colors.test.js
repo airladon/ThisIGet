@@ -192,7 +192,7 @@ describe('Color', () => {
   //  HSL: 240, 100%, 25%
   //
   //  L: 15% = 00004d
-  //  L: 45% = 000036
+  //  L: 45% = 0000e6
   //  L: 5% = 000019
   //  L: 40% = 0000cc
   //
@@ -282,6 +282,14 @@ describe('Color', () => {
       const colors = new Colors(palette, theme);
       const color = colors.get('diagram/element/green', 0.1);
       expect(color.hex).toEqual('00e600');
+    });
+    test('static lighten', () => {
+      const c = Colors.lighten('000080', 'lighter').hex;
+      expect(c).toBe('0000e6');
+    });
+    test('static lighten numeric', () => {
+      const c = Colors.lighten('000080', 0.2).hex;
+      expect(c).toBe('0000e6');
     });
   });
   describe('RGB to Hex', () => {
