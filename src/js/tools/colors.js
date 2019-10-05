@@ -135,12 +135,14 @@ function RGBToHSL(rgb: Array<number>) {
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let H = 0;
-  if (r === max) {
-    H = (g - b) / (max - min);
-  } else if (g === max) {
-    H = 2.0 + (b - r) / (max - min);
-  } else {
-    H = 4.0 + (r - g) / (max - min);
+  if (max !== min) {
+    if (r === max) {
+      H = (g - b) / (max - min);
+    } else if (g === max) {
+      H = 2.0 + (b - r) / (max - min);
+    } else {
+      H = 4.0 + (r - g) / (max - min);
+    }
   }
   H *= 60;
   const L = (max + min) / 2;
@@ -166,12 +168,14 @@ function RGBToHSB(rgb: Array<number>) {
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
   let H = 0;
-  if (r === max) {
-    H = (g - b) / (max - min);
-  } else if (g === max) {
-    H = 2.0 + (b - r) / (max - min);
-  } else {
-    H = 4.0 + (r - g) / (max - min);
+  if (max !== min) {
+    if (r === max) {
+      H = (g - b) / (max - min);
+    } else if (g === max) {
+      H = 2.0 + (b - r) / (max - min);
+    } else {
+      H = 4.0 + (r - g) / (max - min);
+    }
   }
   H *= 60;
   const V = max;
@@ -282,8 +286,15 @@ class Color {
 
   opacity: number;
 
+  shadePresets: {
+    [shadeName: string]: Color;
+  };
+
   constructor(
     c: TypeInputColor = [0, 0, 0, 1],
+    shadePresets: {
+      [shadeName: string]: string | Color,
+    } = {},
   ) {
     this.opacity = 1;
     if (typeof c === 'string') {
@@ -293,6 +304,16 @@ class Color {
     } else {
       this.setRGB(c);
     }
+    this.shadePresets = {};
+    Object.keys(shadePresets).forEach((preset) => {
+      const shadePreset = shadePresets[preset];
+      if (typeof shadePreset === 'string') {
+        this.shadePresets[preset] = new Color(shadePreset);
+      } else {
+        this.shadePresets[preset] = shadePreset;
+      }
+    });
+    // console.log(this.shadePresets)
   }
 
   setRGB(rgb: Array<number>) {
@@ -355,31 +376,50 @@ class Color {
   }
 
   newBrightness(brightness: number) {
-    return new Color(HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]));
+    return new Color(HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]), this.shadePresets);
   }
 
   newHsbSaturation(hsbSaturation: number) {
-    return new Color(HSBToRGB([this.hue, hsbSaturation, this.brightness, this.opacity]));
+    return new Color(HSBToRGB([this.hue, hsbSaturation, this.brightness, this.opacity]), this.shadePresets);
   }
 
   newHue(hue: number) {
-    return new Color(HSBToRGB([hue, this.hsbSaturation, this.brightness, this.opacity]));
+    return new Color(HSBToRGB([hue, this.hsbSaturation, this.brightness, this.opacity]), this.shadePresets);
+  }
+
+  shade(delta: number | string) {
+    console.log(this.shadePresets)
+    if (typeof delta === 'string') {
+      if (this.shadePresets[delta] != null) {
+        this.setRGB(this.shadePresets[delta].rgb);
+      } else {
+        this.setLuminance(this.luminance + getShade(delta));
+      }
+    } else {
+      this.setLuminance(this.luminance + delta);
+    }
+    return this;
   }
 
   // This is the same as lighter in sass
   lighten(delta: number | string) {
-    this.setLuminance(this.luminance + getShade(delta));
+    this.shade(delta);
     return this;
   }
 
   // This is the same as lighter in sass
   darken(delta: number | string) {
-    this.setLuminance(this.luminance - getShade(delta));
+    if (typeof delta === 'number') {
+      this.shade(-delta);
+    } else {
+      this.shade(delta);
+    }
     return this;
   }
 
   _dup() {
-    return new Color(this.rgb);
+    console.log(new Color(this.rgb, this.shadePresets))
+    return new Color(this.rgb, this.shadePresets);
   }
 }
 
@@ -395,9 +435,25 @@ const palettes = {
     orange: 'E8B382',
     violet: 'D882E8',
     grey: '727F8C',
-    white: 'FFF',
+    white: {
+      base: 'FFF',
+      lightest: 'EEE',
+      lighter: 'DDD',
+      light: 'CCC',
+      dark: 'BBB',
+      darker: 'AAA',
+      darkest: '999',
+    },
     offWhite: 'FAFAFA',
-    black: '000',
+    black: {
+      base: '000',
+      lightest: '666',
+      lighter: '555',
+      light: '444',
+      dark: '333',
+      darker: '222',
+      darkest: '111',
+    },
     logo: '0070EB',
     logoDark: '0067D6',
   },
@@ -582,8 +638,10 @@ class Colors {
       const col = paletteColors[colorName];
       if (typeof col === 'string' || Array.isArray(col)) {
         this.palette[colorName] = new Color(col);
-      } else {
+      } else if (col instanceof Color) {
         this.palette[colorName] = col._dup();
+      } else if (col.base != null) {
+        this.palette[colorName] = new Color(col.base, col);
       }
     });
   }
@@ -636,6 +694,7 @@ class Colors {
     const col = this.palette[colorName];
 
     const totalShade = getShade(shade) + lastShade;
+    console.log(inputNames)
     return col._dup().lighten(totalShade);
   }
 

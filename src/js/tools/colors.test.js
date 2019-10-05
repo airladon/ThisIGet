@@ -26,6 +26,15 @@ const palette = {
   red: [0.5, 0, 0, 1],
   green: [0, 0.5, 0, 1],
   yellow: [0.8, 0.8, 0, 1],
+  black: {
+    base: '000',
+    lightest: '666',
+    lighter: '555',
+    light: '444',
+    dark: '333',
+    darker: '222',
+    darkest: '111',
+  },
 };
 
 const theme = {
@@ -302,6 +311,13 @@ describe('Color', () => {
       expect(round(c.diagram.red, 2)).toEqual(palette.red);
       expect(round(c.diagram.element.green, 2))
         .toEqual([0, round(parseInt(0xb3, 10) / 255, 2), 0, 1]);
+    });
+    test.only('Custom shades in palette', () => {
+      const c = new Colors(palette, theme);
+      const b1 = c.get('black');
+      expect(b1.hex).toBe('000000');
+      b1.shade('light');
+      expect(b1.hex).toBe('444444');
     });
   });
   describe('RGB to Hex', () => {
