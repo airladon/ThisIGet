@@ -512,43 +512,6 @@ const themes = {
     },
   },
 };
-// const abstract = {
-//   alpha: ['blue'],
-//   bravo: ['red'],
-//   charlie: ['green'],
-//   delta: ['yellow'],
-//   echo: ['cyan'],
-//   foxtrot: ['orange'],
-// };
-
-// const hues = {
-//   blue: ['blue'],
-//   red: ['red'],
-//   green: ['green'],
-//   yellow: ['yellow'],
-//   cyan: ['cyan'],
-//   brown: ['brown'],
-//   orange: ['orange'],
-//   violet: ['violet'],
-//   grey: ['grey'],
-//   white: ['white'],
-//   black: ['black'],
-// };
-
-// const site = {
-//   primary: ['logo'],
-// };
-
-// const diagram = {
-//   primary: ['blue'],
-//   secondary: ['red'],
-//   tertiary: ['green'],
-//   construction: ['yellow', 'darker'],
-// };
-
-// const families = {
-//   abstract, hues, site, diagram,
-// };
 
 const shades = {
   hover: -0.1,
@@ -573,15 +536,6 @@ function getShade(shade: ?number | string) {
   }
   return 0;
 }
-
-// function modify(col: [number, number, number, number], modifier: number) {
-//   return [
-//     Math.max(Math.min(1, col[0] + modifier), 0),
-//     Math.max(Math.min(1, col[1] + modifier), 0),
-//     Math.max(Math.min(1, col[2] + modifier), 0),
-//     col[3],
-//   ];
-// }
 
 type TypeThemeLevel = {
   [semanticName: string]: [string] | [string, string] | TypeThemeLevel;
@@ -658,7 +612,19 @@ class Colors {
     }
   }
 
-  get(...names: Array<string | number>) {
+  // get('diagram', 'text', 'base', 'light')
+  // get('diagram/text/base', 'light')
+  // get('diagram/text/base', 0.1)
+  get(...inputNames: Array<string | number>) {
+    // Go through names, and expand all slashes
+    let names = [];
+    inputNames.forEach((name) => {
+      if (typeof name === 'string') {
+        names = [...names, ...name.split('/')];
+      } else {
+        names = [...names, name];
+      }
+    });
     let lastShade = 0;
     let lastIndex = names.length - 1;
     const last = names.slice(-1)[0];
@@ -686,96 +652,7 @@ class Colors {
     const totalShade = getShade(shade) + lastShade;
     return col._dup().lighten(totalShade);
   }
-  // setPalette(paletteColors: Object) {
-  //   this.palette = {};
-  //   Object.keys(paletteColors).forEach((col) => {
-  //     this.palette[col] = new Color(paletteColors[col]);
-  //   });
-
-
-  //   this.families = {};
-  //   Object.keys(families).forEach((familyName) => {
-  //     const family = families[familyName];
-  //     if (this.families[familyName] == null) {
-  //       this.families[familyName] = {};
-  //     }
-  //     Object.keys(family).forEach((member) => {
-  //       let [c, modifier] = families[familyName][member];
-  //       if (c == null) {
-  //         c = 'black';
-  //       }
-  //       if (modifier == null) {
-  //         modifier = 0;
-  //       }
-  //       this.families[familyName][member] = this.palette[c].modify(modifier);
-  //     });
-  //   });
-  // }
-
-  // get(
-  //   colorOrFamily: string,
-  //   colorModOrFamilyMember: string | number,
-  //   modOfFamilyMember: number = 0,
-  // ) {
-  //   let c = [0, 0, 0, 1];
-  //   let mod = 0;
-  //   if (this.families.hues[colorOrFamily] != null) {
-  //     c = this.families.hues[colorOrFamily];
-  //     if (typeof colorModOrFamilyMember === 'number') {
-  //       mod = colorModOrFamilyMember;
-  //     } else {
-  //       mod = colorModOrFamilyMember;
-  //     }
-  //   } else {
-  //     if (typeof colorModOrFamilyMember === 'string') {
-  //       c = this.families[colorOrFamily][colorModOrFamilyMember];
-  //     }
-  //     mod = modOfFamilyMember;
-  //   }
-  //   return modifyColor(c, mod);
-  // }
 }
-
-// Do not automatically create and instance and return it otherwise can't
-// mock elements in jest
-// // const globalvars: Object = new GlobalVariables();
-// // Object.freeze(globalvars);
-
-// function getColor(
-//   familyName: 'site' | 'hues' | 'abstract',
-//   semanticName: string,
-//   modifier: number | string = 0,
-// ) {
-//   let hex = '000';
-//   let paletteColor = 'black';
-//   let mod = 0;
-//   let family = diagram;
-//   if (familyName === 'hues') {
-//     family = hues;
-//   } else if (familyName === 'site') {
-//     family = site;
-//   } else if (familyName === 'abstract') {
-//     family = abstract;
-//   }
-//   [paletteColor, mod] = family[semanticName];
-//   if (paletteColor == null) {
-//     paletteColor = 'black';
-//   }
-//   if (mod == null) {
-//     mod = 0;
-//   }
-//   const col = hexToArray(pallete[paletteColor] || '000');
-//   if (typeof modifiers === 'string') {
-//     mod += modifiers[modifier] || 0;
-//   } else {
-//     mod += modifier;
-//   }
-//   return modify(col, mod);
-// }
-
-// function color(hueName, modifier) {
-//   return getColor('hues', hueName, modifier);
-// }
 
 export {
   Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX,

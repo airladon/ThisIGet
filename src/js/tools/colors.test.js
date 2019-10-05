@@ -1,6 +1,9 @@
-import { Color, Colors, HSBToHSL, RGBToHEX } from './colors';
+import {
+  Color, Colors, HSBToHSL, RGBToHEX
+} from './colors';
 
 function roundNum(value, precision) {
+  // eslint-disable-next-line prefer-template
   return Number(Math.round(value + 'e' + precision) + 'e-' + precision);
 }
 
@@ -28,7 +31,7 @@ const theme = {
   diagram: {
     red: ['red', 'base'],
     element: {
-      green: ['green', 'base'],
+      green: ['green', 'light'],
     },
   },
 };
@@ -186,12 +189,25 @@ describe('Color', () => {
   //  0, 0, 0.5
   //  000080
   //  0, 0, 128
-  //  HSL: 240, 0, 25%
+  //  HSL: 240, 100%, 25%
   //
   //  L: 15% = 00004d
   //  L: 45% = 000036
   //  L: 5% = 000019
   //  L: 40% = 0000cc
+  //
+  // Red is:
+  //  0.5, 0, 0
+  //  800000
+  //  HSL: 0, 100%, 25%
+  //
+  //  L: 35% = b30000
+  //
+  // Light Green is:
+  //  00b300
+  //  HSL: 120, 100%, 35%
+  //
+  //  L: 45% = 00e600
   describe('Colors', () => {
     test('Instantiation', () => {
       const colors = new Colors(palette, theme);
@@ -217,10 +233,55 @@ describe('Color', () => {
       const color = colors.get('darkBlue', 'dark');
       expect(color.hex).toEqual('000019');
     });
-    test('Get first level with custom shade', () => {
+    test('Get first level with numerical shade', () => {
       const colors = new Colors(palette, theme);
       const color = colors.get('blue', 0.15);
       expect(color.hex).toEqual('0000cc');
+    });
+    test('Get second level', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'red');
+      expect(color.hex).toEqual('800000');
+    });
+    test('Get second level with shade mode', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'red', 'light');
+      expect(color.hex).toEqual('b30000');
+    });
+    test('Get second level with numerical shade mode', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'red', 0.10);
+      expect(color.hex).toEqual('b30000');
+    });
+    test('Get third level', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'element', 'green');
+      expect(color.hex).toEqual('00b300');
+    });
+    test('Get third level with shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'element', 'green', 'light');
+      expect(color.hex).toEqual('00e600');
+    });
+    test('Get third level with numerical shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'element', 'green', 0.1);
+      expect(color.hex).toEqual('00e600');
+    });
+    test('Get third level with slash form', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram/element/green');
+      expect(color.hex).toEqual('00b300');
+    });
+    test('Get third level with slash form and shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram/element/green', 'light');
+      expect(color.hex).toEqual('00e600');
+    });
+    test('Get third level with slash form and numerical shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram/element/green', 0.1);
+      expect(color.hex).toEqual('00e600');
     });
   });
   describe('RGB to Hex', () => {
