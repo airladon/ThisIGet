@@ -1,16 +1,16 @@
-@import '../../../geometry';
+// @import '../../../geometry';
 
-$colors: (
-  circle:               color('red'),
-  radius:               color('blue'),
-  diameter:             color('green'),
-  center:               color('yellow'),
-  grid:                 color('black', 'light'),
-  gridText:             color('black', 'lightest'),
-  circleFill:           color('black', 'dark'),
-  property:             color('red'),
-);
+// $colors: (
+//   circle:               color('red'),
+//   radius:               color('blue'),
+//   diameter:             color('green'),
+//   center:               color('yellow'),
+//   grid:                 color('black', 'light'),
+//   gridText:             color('black', 'lightest'),
+//   circleFill:           color('black', 'dark'),
+//   property:             color('red'),
+// );
 
-body {
-  @include color_vars($colors);
-}
+// body {
+//   @include color_vars($colors);
+// }

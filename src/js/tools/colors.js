@@ -1,39 +1,7 @@
 // @flow
 
-// function modifyColor(c: Array<number>, modifier: number | string = 0) {
-//   let mod = 0;
-//   if (typeof modifier === 'string') {
-//     if (modifiers[modifier] != null) {
-//       mod = modifiers[modifier];
-//     }
-//   } else {
-//     mod = modifier;
-//   }
-
-//   return [
-//     Math.max(Math.min(c[0] + mod, 1), 0),
-//     Math.max(Math.min(c[1] + mod, 1), 0),
-//     Math.max(Math.min(c[2] + mod, 1), 0),
-//     c[3],
-//   ];
-// }
-
-// function hexToArray(col: string): Array<number> {
-//   let colHex: string = col.slice(1);
-//   if (colHex.length < 6) {
-//     colHex =
-//       `${colHex[0]}${colHex[0]}${colHex[1]}${colHex[1]}${colHex[2]}${colHex[2]}`;
-//   }
-//   return [
-//     parseInt(colHex.slice(0, 2), 16) / 255.0,
-//     parseInt(colHex.slice(2, 4), 16) / 255.0,
-//     parseInt(colHex.slice(4, 6), 16) / 255.0,
-//     1,
-//   ];
-// }
-
 // From https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_HSL
-function HSLToRGB(hsl) {
+function HSLToRGB(hsl: Array<number>) {
   let [hue, saturation, luminance, opacity] = hsl;
   if (hue < 0) { hue += 360; }
   if (hue > 360) { hue -= 360; }
@@ -70,7 +38,7 @@ function HSLToRGB(hsl) {
 }
 
 // From https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_HSL
-function HSBToRGB(hsb) {
+function HSBToRGB(hsb: Array<number>) {
   let [hue, saturation, brightness, opacity] = hsb;
   if (hue < 0) { hue += 360; }
   if (hue > 360) { hue -= 360; }
@@ -152,7 +120,7 @@ function HSLToHSB(hsl: Array<number>) {
   return [hue, S, V];
 }
 
-function RGBToHSL(rgb) {
+function RGBToHSL(rgb: Array<number>) {
   let [r, g, b, opacity] = rgb;
   if (r < 0) { r = 0; }
   if (r > 1) { r = 1; }
@@ -183,7 +151,7 @@ function RGBToHSL(rgb) {
   return [H, S, L];
 }
 
-function RGBToHSB(rgb) {
+function RGBToHSB(rgb: Array<number>) {
   let [r, g, b, opacity] = rgb;
   if (r < 0) { r = 0; }
   if (r > 1) { r = 1; }
@@ -417,7 +385,7 @@ class Color {
 
 
 const palettes = {
-  standard: {
+  pastel: {
     blue: '89A2E8',
     red: 'FFA9A7',
     green: 'ABFF9A',
@@ -432,6 +400,22 @@ const palettes = {
     black: '000',
     logo: '0070EB',
     logoDark: '0067D6',
+  },
+  standard: {
+    blue: '1CA4FC',
+    red: 'EB261F',
+    yellow: 'FAE047',
+    green: '65D643',
+    cyan: '2FE6CF',
+    brown: 'D47A2B',
+    orange: 'FFA500',
+    violet: 'AE19D4',
+    grey: '929292',
+    white: 'FFF',
+    offWhite: 'FAFAFA',
+    black: '000',
+    primary: '0070EB',
+    primaryDark: '0067D6',
   },
 };
 
@@ -664,13 +648,13 @@ class Colors {
     const addColor = (parents, color) => {
       let level = this;
       for (let i = 0; i < parents.length; i += 1) {
-        const nextLevelName = parents[i];
-        if (level[nextLevelName] == null) {
+        const nextLevelName = parents[i];       // $FlowFixMe
+        if (level[nextLevelName] == null) {     // $FlowFixMe
           level[nextLevelName] = {};
         }
-        if (i === parents.length - 1) {
+        if (i === parents.length - 1) {         // $FlowFixMe
           level[nextLevelName] = color;
-        } else {
+        } else {                                // $FlowFixMe
           level = level[nextLevelName];
         }
       }
@@ -691,5 +675,6 @@ class Colors {
 }
 
 export {
-  Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX,
+  Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX, HEXToRGB,
+  HSBToRGB, HSLToRGB, RGBToHSL, RGBToHSB,
 };

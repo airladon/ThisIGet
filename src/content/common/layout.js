@@ -1,5 +1,6 @@
 // @flow
 import Fig from 'figureone';
+import { Colors } from '../../js/tools/colors';
 // import { Rect, Point } from '../../js/diagram/tools/g2';
 // import getCssColors from '../../js/tools/getCssColors';
 // import angleCircleLayout from '../../../common/AngleCircle/layout';
@@ -16,7 +17,8 @@ const { Rect, Point, DiagramFont } = Fig;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function baseLayout(cssColorNames: Array<string> = []) {
-  const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  // const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const colors = new Colors();
   if (colors.diagram == null) {
     colors.diagram = { text: { base: [1, 1, 1, 1] } };
   } else if (colors.diagram.text == null) {
