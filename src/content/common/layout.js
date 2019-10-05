@@ -19,18 +19,19 @@ const { Rect, Point, DiagramFont } = Fig;
 export default function baseLayout(cssColorNames: Array<string> = []) {
   // const colors = Fig.tools.color.getCSSColors(cssColorNames);
   const colors = new Colors();
-  if (colors.diagram == null) {
-    colors.diagram = { text: { base: [1, 1, 1, 1] } };
-  } else if (colors.diagram.text == null) {
-    colors.diagram.text = { base: [1, 1, 1, 1] };
-  } else if (colors.diagram.text.base == null) {
-    colors.diagram.text.base = [1, 1, 1, 1];
-  }
+  // if (colors.diagram == null) {
+  //   colors.diagram = { text: { base: [1, 1, 1, 1] } };
+  // } else if (colors.diagram.text == null) {
+  //   colors.diagram.text = { base: [1, 1, 1, 1] };
+  // } else if (colors.diagram.text.base == null) {
+  //   colors.diagram.text.base = [1, 1, 1, 1];
+  // }
+  // console.log(colors)
 
-  let textColor = [1, 1, 1, 1];
-  if (colors.diagram.text != null) {
-    textColor = colors.diagram.text.base;
-  }
+  // let textColor = [1, 1, 1, 1];
+  // if (colors.diagram.text != null) {
+  //   textColor = colors.diagram.text.base;
+  // }
 
   const layout = {
     limits: new Rect(-3, -2, 6, 4),
@@ -60,7 +61,7 @@ export default function baseLayout(cssColorNames: Array<string> = []) {
       '400',
       'center',
       'middle',
-      textColor,
+      colors.diagram.text.default.slice(),
     ),
 
     colors,

@@ -468,9 +468,25 @@ const palettes = {
     orange: 'FFA500',
     violet: 'AE19D4',
     grey: '929292',
-    white: 'FFF',
+    white: {
+      base: 'FFF',
+      lightest: 'EEE',
+      lighter: 'DDD',
+      light: 'CCC',
+      dark: 'BBB',
+      darker: 'AAA',
+      darkest: '999',
+    },
     offWhite: 'FAFAFA',
-    black: '000',
+    black: {
+      base: '000',
+      lightest: '666',
+      lighter: '555',
+      light: '444',
+      dark: '333',
+      darker: '222',
+      darkest: '111',
+    },
     primary: '0070EB',
     primaryDark: '0067D6',
   },
@@ -511,7 +527,7 @@ const themes = {
       push: ['red', 'base'],
       action: ['cyan', 'base'],
       text: {
-        base: ['yellow', 'lighter'],
+        default: ['yellow', 'lighter'],
         warning: ['red', 'lighter'],
         plot: ['blue', 'light'],
         keyword: ['blue', 'light'],
@@ -619,6 +635,7 @@ class Colors {
       // this.theme = themes[theme];
       // this.palette = paletteColors;
       this.setPalette(paletteColors);
+      this.fix();
     }
     return Colors.instance;
   }
@@ -675,7 +692,7 @@ class Colors {
     let lastIndex = names.length - 1;
     const last = names.slice(-1)[0];
     if (typeof last === 'number' || shades[last] != null) {
-      lastShade = getShade(last);
+      lastShade = last;
       lastIndex -= 1;
     }
 
@@ -694,10 +711,8 @@ class Colors {
     if (this.palette[colorName] == null) {
       return new Color();
     }
-    const col = this.palette[colorName];
-
-    const totalShade = getShade(shade) + lastShade;
-    return col._dup().lighten(totalShade);
+    const col = this.palette[colorName]._dup().shade(shade || 0);
+    return col.lighten(lastShade);
   }
 
   static lighten(inputColor: TypeInputColor, shade: string | number) {
