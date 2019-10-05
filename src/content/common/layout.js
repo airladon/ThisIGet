@@ -61,7 +61,7 @@ export default function baseLayout(cssColorNames: Array<string> = []) {
       '400',
       'center',
       'middle',
-      colors.diagram.text.default.slice(),
+      colors.diagram.text.base.slice(),
     ),
 
     colors,

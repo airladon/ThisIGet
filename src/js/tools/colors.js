@@ -527,7 +527,7 @@ const themes = {
       push: ['red', 'base'],
       action: ['cyan', 'base'],
       text: {
-        default: ['yellow', 'lighter'],
+        base: ['yellow', 'lighter'],
         warning: ['red', 'lighter'],
         plot: ['blue', 'light'],
         keyword: ['blue', 'light'],
@@ -674,45 +674,60 @@ class Colors {
     }
   }
 
+  getThemeElement(themePath: Array<string | number> | string) {
+    let pathArray = [];
+    if (typeof themePath === 'string') {
+      pathArray = [themePath];
+    } else {
+      pathArray = themePath;
+    }
+    let path = [];
+    pathArray.forEach((element) => {
+      if (typeof element === 'string') {
+        path = [...path, ...element.split('/')];
+      } else {
+        path = [...path, element];
+      }
+    });
+    let depth = 0;
+    const getValueFromTree = (remainingTree, treePath) => {
+      if (typeof treePath[0] === 'number') {
+        return null;
+      }
+      const value = remainingTree[treePath[0]];
+      if (value == null) {
+        return null;
+      }
+      depth += 1;
+      if (Array.isArray(value)) {
+        return value;
+      }
+      if (typeof value === 'string') {
+        return [value];
+      }
+      return getValueFromTree(value, treePath.slice(1));
+    };
+
+    const colorDefinition = getValueFromTree(this.theme, path) || ['black'];
+    let shade = 0;
+    if (depth < path.length) {
+      shade = path[depth];
+    }
+
+    return [colorDefinition, shade];
+  }
+
   // get('diagram', 'text', 'base', 'light')
   // get('diagram/text/base', 'light')
   // get('diagram/text/base', 0.1)
   get(...inputNames: Array<string | number>) {
-    // Go through names, and expand all slashes
-    let names = [];
-    inputNames.forEach((name) => {
-      if (typeof name === 'string') {
-        names = [...names, ...name.split('/')];
-      } else {
-        names = [...names, name];
-      }
-    });
-
-    let lastShade = 0;
-    let lastIndex = names.length - 1;
-    const last = names.slice(-1)[0];
-    if (typeof last === 'number' || shades[last] != null) {
-      lastShade = last;
-      lastIndex -= 1;
-    }
-
-    let definition = this.theme;
-    for (let i = 0; i <= lastIndex; i += 1) {
-      if (definition[names[i]] == null) {
-        return new Color();
-      }
-      definition = definition[names[i]];
-    }
-    if (!Array.isArray(definition) && typeof definition !== 'string') {
-      return new Color();
-    }
-
-    const [colorName, shade] = definition;
+    const [colorDefinition, finalShade] = this.getThemeElement(inputNames);
+    const [colorName, shade] = colorDefinition;
     if (this.palette[colorName] == null) {
       return new Color();
     }
     const col = this.palette[colorName]._dup().shade(shade || 0);
-    return col.lighten(lastShade);
+    return col.lighten(finalShade);
   }
 
   static lighten(inputColor: TypeInputColor, shade: string | number) {

@@ -33,13 +33,11 @@ export default function diagramLayout() {
   colors.radius = colors.get('blue').rgb;
   colors.diameter = colors.get('green').rgb;
   colors.center = colors.get('yellow').rgb;
-  // console.log(colors)
   colors.grid = colors.get('black', 'light').rgb.slice();
   colors.gridText = colors.get('black', 'lightest').rgb;
   colors.circleFill = colors.get('black', 'dark').rgb;
   colors.property = colors.get('red').rgb;
   layout.position = new Point(0, 0);
-  // console.log(colors.grid)
 
   // ///////////////////////////////////////////////////////////////
   // Shapes
@@ -437,7 +435,7 @@ export default function diagramLayout() {
     name,
     method: 'addEquation',
     options: {
-      color: colors.diagram.text.default,
+      color: colors.diagram.text.base,
       scale: 1.2,
       elements,
       defaultFormAlignment,
@@ -512,7 +510,7 @@ export default function diagramLayout() {
   //   name: 'eqnDiameterRadius',
   //   method: 'addEquation',
   //   options: {
-  //     color: colors.diagram.text.default,
+  //     color: colors.diagram.text.base,
   //     scale: 1.3,
   //     elements,
   //     defaultFormAlignment,
@@ -532,7 +530,7 @@ export default function diagramLayout() {
   //   name: 'cEquation',
   //   method: 'addEquation',
   //   options: {
-  //     color: colors.diagram.text.default,
+  //     color: colors.diagram.text.base,
   //     scale: 1.3,
   //     elements: {
   //       diameter: { text: 'diameter', color: colors.diameter },
@@ -562,7 +560,7 @@ export default function diagramLayout() {
     name: 'rEquation',
     method: 'addEquation',
     options: {
-      color: colors.diagram.text.default,
+      color: colors.diagram.text.base,
       scale: 1.3,
       elements: {
         diameter: { text: 'diameter', color: colors.diameter },
@@ -592,7 +590,7 @@ export default function diagramLayout() {
     name: 'allEquation',
     method: 'addNavigator',
     options: {
-      color: colors.diagram.text.default,
+      color: colors.diagram.text.base,
       scale: 1.3,
       elements: {
         diameter: { text: 'diameter', color: colors.diameter },

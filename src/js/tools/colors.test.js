@@ -46,6 +46,7 @@ const theme = {
     element: {
       green: ['green', 'light'],
     },
+    base: ['blue', 'dark'],
   },
 };
 
@@ -303,6 +304,11 @@ describe('Color', () => {
     test('static lighten numeric', () => {
       const c = Colors.lighten('000080', 0.2).hex;
       expect(c).toBe('0000e6');
+    });
+    test('Get level with same name as shade level', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('diagram', 'base');
+      expect(color.hex).toEqual('00004d');
     });
     test('fix', () => {
       const c = new Colors(palette, theme);
