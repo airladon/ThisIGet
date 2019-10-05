@@ -146,7 +146,10 @@ function RGBToHSL(rgb: Array<number>) {
   }
   H *= 60;
   const L = (max + min) / 2;
-  const S = (max - min) / (1 - Math.abs(max + min - 1));
+  let S = 0;
+  if (max !== 0 && min !== 1) {
+    S = (max - min) / (1 - Math.abs(max + min - 1));
+  }
   if (opacity != null) {
     return [H, S, L, opacity];
   }
@@ -179,7 +182,7 @@ function RGBToHSB(rgb: Array<number>) {
   }
   H *= 60;
   const V = max;
-  const S = (max - min) / max;
+  const S = max === 0 ? 0 : (max - min) / max;
   if (opacity != null) {
     return [H, S, V, opacity];
   }
@@ -388,7 +391,6 @@ class Color {
   }
 
   shade(delta: number | string) {
-    console.log(this.shadePresets)
     if (typeof delta === 'string') {
       if (this.shadePresets[delta] != null) {
         this.setRGB(this.shadePresets[delta].rgb);
@@ -418,7 +420,6 @@ class Color {
   }
 
   _dup() {
-    console.log(new Color(this.rgb, this.shadePresets))
     return new Color(this.rgb, this.shadePresets);
   }
 }
@@ -669,6 +670,7 @@ class Colors {
         names = [...names, name];
       }
     });
+
     let lastShade = 0;
     let lastIndex = names.length - 1;
     const last = names.slice(-1)[0];
@@ -676,6 +678,7 @@ class Colors {
       lastShade = getShade(last);
       lastIndex -= 1;
     }
+
     let definition = this.theme;
     for (let i = 0; i <= lastIndex; i += 1) {
       if (definition[names[i]] == null) {
@@ -694,7 +697,6 @@ class Colors {
     const col = this.palette[colorName];
 
     const totalShade = getShade(shade) + lastShade;
-    console.log(inputNames)
     return col._dup().lighten(totalShade);
   }
 

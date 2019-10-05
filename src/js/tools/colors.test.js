@@ -40,6 +40,7 @@ const palette = {
 const theme = {
   blue: ['blue', 'base'],
   darkBlue: ['blue', 'dark'],
+  black: ['black', 'base'],
   diagram: {
     red: ['red', 'base'],
     element: {
@@ -318,6 +319,10 @@ describe('Color', () => {
       expect(b1.hex).toBe('000000');
       b1.shade('light');
       expect(b1.hex).toBe('444444');
+      b1.shade('lighter');
+      expect(b1.hex).toBe('555555');
+      b1.shade('dark');
+      expect(b1.hex).toBe('333333');
     });
   });
   describe('RGB to Hex', () => {
