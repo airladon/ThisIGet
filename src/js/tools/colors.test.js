@@ -1,4 +1,4 @@
-import { Color, Colors, HSBToHSL } from './colors';
+import { Color, Colors, HSBToHSL, RGBToHEX } from './colors';
 
 function roundNum(value, precision) {
   return Number(Math.round(value + 'e' + precision) + 'e-' + precision);
@@ -182,7 +182,17 @@ describe('Color', () => {
       expect(d.hex).toBe('16452d');
     });
   });
-  describe.only('Colors', () => {
+  // Blue is:
+  //  0, 0, 0.5
+  //  000080
+  //  0, 0, 128
+  //  HSL: 240, 0, 25%
+  //
+  //  L: 15% = 00004d
+  //  L: 45% = 000036
+  //  L: 5% = 000019
+  //  L: 40% = 0000cc
+  describe('Colors', () => {
     test('Instantiation', () => {
       const colors = new Colors(palette, theme);
       expect(colors).not.toBe(null);
@@ -191,6 +201,36 @@ describe('Color', () => {
       const colors = new Colors(palette, theme);
       const color = colors.get('blue');
       expect(color.rgb).toEqual(palette.blue);
+    });
+    test('Get first level with dark shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('blue', 'dark');
+      expect(color.hex).toEqual('00004d');
+    });
+    test('Get first level with lighter shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('blue', 'lighter');
+      expect(color.hex).toEqual('0000e6');
+    });
+    test('Get first level with double shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('darkBlue', 'dark');
+      expect(color.hex).toEqual('000019');
+    });
+    test('Get first level with custom shade', () => {
+      const colors = new Colors(palette, theme);
+      const color = colors.get('blue', 0.15);
+      expect(color.hex).toEqual('0000cc');
+    });
+  });
+  describe('RGB to Hex', () => {
+    test('With zeros', () => {
+      const hex = RGBToHEX([0, 1, 0]);
+      expect(hex).toBe('00ff00');
+    });
+    test('With alpha', () => {
+      const hex = RGBToHEX([0, 1, 0, 0.5]);
+      expect(hex).toBe('00ff0080');
     });
   });
   // test('Instantiation', () => {

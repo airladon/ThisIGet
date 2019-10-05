@@ -43,7 +43,7 @@ function HSLToRGB(hsl) {
   if (luminance > 1) { luminance = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const C = (1 - Math.abs(2 * luminance - 1)) * saturation;
   const H = hue / 60;
@@ -80,7 +80,7 @@ function HSBToRGB(hsb) {
   if (brightness > 1) { brightness = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const C = saturation * brightness;
   const H = hue / 60;
@@ -116,7 +116,7 @@ function HSBToHSL(hsb: Array<number>) {
   if (brightness > 1) { brightness = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const L = brightness - brightness * saturation / 2;
   let S = 0;
@@ -139,7 +139,7 @@ function HSLToHSB(hsl: Array<number>) {
   if (luminance > 1) { luminance = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const V = luminance + saturation * Math.min(luminance, 1 - luminance);
   let S = 0;
@@ -162,7 +162,7 @@ function RGBToHSL(rgb) {
   if (g > 1) { g = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
@@ -193,7 +193,7 @@ function RGBToHSB(rgb) {
   if (g > 1) { g = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
@@ -234,7 +234,15 @@ function HEXToRGB(col: string) {
   return rgb;
 }
 
-function RGBToHEX(rgb) {
+function toHex(num: number, width: number = 2) {
+  let hex = num.toString(16);
+  for (let i = 0; i < width - hex.length; i += 1) {
+    hex = `0${hex}`;
+  }
+  return hex;
+}
+
+function RGBToHEX(rgb: Array<number>) {
   // const [red, green, blue, opacity] = rgb;
   let [r, g, b, opacity] = rgb;
   if (r < 0) { r = 0; }
@@ -245,11 +253,14 @@ function RGBToHEX(rgb) {
   if (g > 1) { g = 1; }
   if (opacity != null) {
     if (opacity < 0) { opacity = 0; }
-    if (opacity > 0) { opacity = 1; }
+    if (opacity > 1) { opacity = 1; }
   }
-  let hexRGB = `${Math.round((r * 255)).toString(16)}${Math.round((g * 255)).toString(16)}${Math.round((b * 255)).toString(16)}`;
+  const rHex = toHex(Math.round((r * 255)));
+  const gHex = toHex(Math.round((g * 255)));
+  const bHex = toHex(Math.round((b * 255)));
+  let hexRGB = `${rHex}${gHex}${bHex}`;
   if (opacity != null) {
-    hexRGB = `${hexRGB}${Math.round((opacity * 255)).toString(16)}`;
+    hexRGB = `${hexRGB}${toHex(Math.round((opacity * 255)))}`;
   }
   return hexRGB;
 }
@@ -364,11 +375,13 @@ class Color {
   // This is the same as lighter in sass
   lighten(delta: number) {
     this.setLuminance(this.luminance + delta);
+    return this;
   }
 
   // This is the same as lighter in sass
   darken(delta: number) {
     this.setLuminance(this.luminance - delta);
+    return this;
   }
 
   _dup() {
@@ -651,7 +664,7 @@ class Colors {
     const last = names.slice(-1)[0];
     if (typeof last === 'number' || shades[last] != null) {
       lastShade = getShade(last);
-      lastIndex -= 2;
+      lastIndex -= 1;
     }
     let definition = this.theme;
     for (let i = 0; i <= lastIndex; i += 1) {
@@ -660,18 +673,18 @@ class Colors {
       }
       definition = definition[names[i]];
     }
-    console.log(definition)
     if (!Array.isArray(definition) && typeof definition !== 'string') {
       return new Color();
     }
-    console.log('asdf')
+
     const [colorName, shade] = definition;
     if (this.palette[colorName] == null) {
       return new Color();
     }
     const col = this.palette[colorName];
+
     const totalShade = getShade(shade) + lastShade;
-    return new col._dup().lighten(totalShade);
+    return col._dup().lighten(totalShade);
   }
   // setPalette(paletteColors: Object) {
   //   this.palette = {};
@@ -764,4 +777,6 @@ class Colors {
 //   return getColor('hues', hueName, modifier);
 // }
 
-export { Color, Colors, HSBToHSL, HSLToHSB };
+export {
+  Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX,
+};
