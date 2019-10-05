@@ -1,8 +1,11 @@
 import {
-  Color, Colors, HSBToHSL, RGBToHEX
+  Color, Colors, HSBToHSL, RGBToHEX,
 } from './colors';
 
 function roundNum(value, precision) {
+  if (value < 10 ** (-precision - 2)) {
+    return 0;
+  }
   // eslint-disable-next-line prefer-template
   return Number(Math.round(value + 'e' + precision) + 'e-' + precision);
 }
@@ -291,10 +294,14 @@ describe('Color', () => {
       const c = Colors.lighten('000080', 0.2).hex;
       expect(c).toBe('0000e6');
     });
-    test.only('fix', () => {
+    test('fix', () => {
       const c = new Colors(palette, theme);
       c.fix();
       expect(c.blue).toEqual(palette.blue);
+      expect(round(c.darkBlue, 2)).toEqual([0, 0, round(parseInt(0x4d, 10) / 255, 2), 1]);
+      expect(round(c.diagram.red, 2)).toEqual(palette.red);
+      expect(round(c.diagram.element.green, 2))
+        .toEqual([0, round(parseInt(0xb3, 10) / 255, 2), 0, 1]);
     });
   });
   describe('RGB to Hex', () => {
