@@ -9,20 +9,28 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'qrAngles_lines',
-  'qrAngles_angles',
-  'qrAngles_moreSharp',
-  'qrAngles_lessSharp',
-  'qrAngles_center',
-  'qrAngles_arrow',
-];
+// const cssColorNames = [
+//   'qrAngles_lines',
+//   'qrAngles_angles',
+//   'qrAngles_moreSharp',
+//   'qrAngles_lessSharp',
+//   'qrAngles_center',
+//   'qrAngles_arrow',
+// ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  // const layout: Object = baseLayout(cssColorNames);
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const layout: Object = baseLayout();
   const { colors } = layout;
+
+  colors.qrAngles_lines = colors.get('blue').rgb;
+  colors.qrAngles_angles = colors.get('green').rgb;
+  colors.qrAngles_moreSharp = colors.get('red').rgb;
+  colors.qrAngles_lessSharp = colors.get('violet').rgb;
+  colors.qrAngles_center = colors.get('yellow').rgb;
+  colors.qrAngles_arrow = colors.get('red').rgb;
   layout.position = new Point(0, 0);
 
   // //////////////////////////////////////////////////

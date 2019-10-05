@@ -25,9 +25,9 @@ const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout();
   // const colors1 = Fig.tools.color.getCSSColors(cssColorNames);
   // layout.colors = colors;
+  const layout: Object = baseLayout();
   const { colors } = layout;
   colors.circle = colors.get('red').rgb;
   colors.radius = colors.get('blue').rgb;
