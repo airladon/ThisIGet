@@ -291,6 +291,11 @@ describe('Color', () => {
       const c = Colors.lighten('000080', 0.2).hex;
       expect(c).toBe('0000e6');
     });
+    test.only('fix', () => {
+      const c = new Colors(palette, theme);
+      c.fix();
+      expect(c.blue).toEqual(palette.blue);
+    });
   });
   describe('RGB to Hex', () => {
     test('With zeros', () => {
@@ -302,12 +307,4 @@ describe('Color', () => {
       expect(hex).toBe('00ff0080');
     });
   });
-  // test('Instantiation', () => {
-  //   const colors = new Colors(palette);
-  //   expect(colors.get('blue')).toEqual(palette.blue);
-  // });
-  // test('Darker', () => {
-  //   const colors = new Colors(palette);
-  //   expect(colors.get('blue', 'light')).toEqual([0.1, 0.1, 0.6, 1]);
-  // });
 });

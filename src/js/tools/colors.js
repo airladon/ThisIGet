@@ -560,11 +560,11 @@ class Colors {
 
   theme: TypeThemeLevel;
 
-  families: {
-    [familyName: string]: {
-      [colorName: string]: Array<number>;
-    };
-  };
+  // families: {
+  //   [familyName: string]: {
+  //     [colorName: string]: Array<number>;
+  //   };
+  // };
 
   constructor(
     paletteColors: TypePaletteColor | TypePaletteDefinition | string = 'standard',
@@ -658,6 +658,41 @@ class Colors {
   static lighten(inputColor: TypeInputColor, shade: string | number) {
     const col = new Color(inputColor);
     return col.lighten(shade);
+  }
+
+  fix() {
+    const addColor = (parents, color) => {
+      let level = this;
+      for (let i = 0; i < parents.length; i += 1) {
+        const nextLevelName = parents[i];
+        if (level[nextLevelName] == null) {
+          level[nextLevelName] = {};
+        }
+        if (i === parents.length - 1) {
+          level[nextLevel] = color;
+        } else {
+          level = level[nextLevelName];
+        }
+      }
+    };
+    const processLevel = (level, parents) => {
+      Object.keys(level).forEach((key) => {
+        let colorOrNextLevel = level[key];
+        console.log(key, colorOrNextLevel)
+        if (Array.isArray(colorOrNextLevel) || typeof colorOrNextLevel === 'string') {
+          if (typeof colorOrNextLevel === 'string') {
+            colorOrNextLevel = [colorOrNextLevel, 'base'];
+          }
+          const [colorName, shade] = colorOrNextLevel;
+          const col = this.palette[colorName];
+          const newCol = col._dup().lighten(getShade(shade)).rgb;
+          addColor(parents, newCol);
+        } else {
+          // processLevel(colorOrNextLevel, [...parents, key]);
+        }
+      });
+    };
+    processLevel(this.theme, []);
   }
 }
 
