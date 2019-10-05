@@ -8,21 +8,31 @@ const {
   Transform,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'qrCircle_circle',
-  'qrCircle_radius',
-  'qrCircle_diameter',
-  'qrCircle_center',
-  'qrCircle_grid',
-  'qrCircle_circleFill',
-  'qrCircle_property',
-];
+// const cssColorNames = [
+//   'qrCircle_circle',
+//   'qrCircle_radius',
+//   'qrCircle_diameter',
+//   'qrCircle_center',
+//   'qrCircle_grid',
+//   'qrCircle_circleFill',
+//   'qrCircle_property',
+// ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
+  // const layout: Object = baseLayout();
   const layout: Object = baseLayout();
-  const colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.colors = colors;
+  const { colors } = layout;
+  // const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  // layout.colors = colors;
+  colors.qrCircle_circle = colors.get('red').rgb;
+  colors.qrCircle_radius = colors.get('blue').rgb;
+  colors.qrCircle_diameter = colors.get('green').rgb;
+  colors.qrCircle_center = colors.get('yellow').rgb;
+  colors.qrCircle_grid = colors.get('grey', 'dark').rgb;
+  colors.qrCircle_circleFill = colors.get('black', 'dark').rgb;
+  colors.qrCircle_property = colors.get('red').rgb;
+
   layout.position = new Point(0, 0);
 
   let radius = 1;
