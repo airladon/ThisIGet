@@ -12,24 +12,20 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrTriangles_lines',
-  'qrTriangles_angle1',
-  'qrTriangles_angle2',
-  'qrTriangles_angle3',
-  'qrTriangles_angles',
-  'qrTriangles_disabled',
-  'qrTriangles_parallel',
-  'qrTriangles_pads',
-  'qrTriangles_sideLengths',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrTriangles_lines = colors.get('blue').rgb;
+  colors.qrTriangles_sideLengths = colors.get('yellow').rgb;
+  colors.qrTriangles_angles = colors.get('green').rgb;
+  colors.qrTriangles_angle1 = colors.get('green').rgb;
+  colors.qrTriangles_angle2 = colors.get('red').rgb;
+  colors.qrTriangles_angle3 = colors.get('yellow').rgb;
+  colors.qrTriangles_disabled = colors.get('grey', 'darker').rgb;
+  colors.qrTriangles_parallel = colors.get('red').rgb;
+  colors.qrTriangles_pads = colors.get('red', 'lighter').rgb;
   layout.width = 0.03;
   layout.defaultTri = [
     [2, -1.1],
