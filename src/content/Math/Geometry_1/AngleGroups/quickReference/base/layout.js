@@ -11,18 +11,16 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrAngleGroups_lines',
-  'qrAngleGroups_angleA',
-  'qrAngleGroups_angleB',
-  'qrAngleGroups_angleC',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrAngleGroups_lines = colors.get('blue').rgb;
+  colors.qrAngleGroups_angleA = colors.get('red').rgb;
+  colors.qrAngleGroups_angleB = colors.get('green').rgb;
+  colors.qrAngleGroups_angleC = colors.get('yellow').rgb;
+
   const radius = 1.3;
   const width = 0.03;
 

@@ -9,15 +9,6 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-// const cssColorNames = [
-//   'qrAngles_lines',
-//   'qrAngles_angles',
-//   'qrAngles_moreSharp',
-//   'qrAngles_lessSharp',
-//   'qrAngles_center',
-//   'qrAngles_arrow',
-// ];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   // const layout: Object = baseLayout(cssColorNames);
