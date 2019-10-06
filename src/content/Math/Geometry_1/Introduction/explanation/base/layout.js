@@ -12,15 +12,18 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'circle',
-  'dimension',
-];
+// const cssColorNames = [
+//   'circle',
+//   'dimension',
+// ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  // const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const { colors } = layout;
+  colors.circle = colors.get('red', 'dark').rgb;
+  colors.dimension = colors.get('blue', 'dark').rgb;
   layout.colors = colors;
   layout.position = new Point(0, 0);
 
