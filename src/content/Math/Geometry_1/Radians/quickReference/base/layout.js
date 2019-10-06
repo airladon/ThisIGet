@@ -9,20 +9,20 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'qrRadians_lines', 'qrRadians_angles',
-  'qrRadians_arc', 'qrRadians_marks', 'qrRadians_radianLines',
-  'qrRadians_degrees',
-];
-
 const { joinObjects } = Fig.tools.misc;
 const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrRadians_lines = colors.get('blue').rgb;
+  colors.qrRadians_angles = colors.get('green').rgb;
+  colors.qrRadians_arc = colors.get('red').rgb;
+  colors.qrRadians_marks = colors.get('grey', 'dark').rgb;
+  colors.qrRadians_radianLines = colors.get('yellow').rgb;
+  colors.qrRadians_degrees = colors.get('blue', 'lighter').rgb;
   layout.position = new Point(0, 0);
   const radius = 1.2;
   layout.radius = radius;
