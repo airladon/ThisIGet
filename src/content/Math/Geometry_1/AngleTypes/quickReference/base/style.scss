@@ -1,18 +1,18 @@
-@import '../../../../../../css/color';
+// @import '../../../../../../css/color';
 
-$colors: (
-  qrAngleTypes_lines:             color('blue'),
-  qrAngleTypes_angle:             color('green'),
-  qrAngleTypes_fill:              color('green', 'darkest'),
-);
+// $colors: (
+//   qrAngleTypes_lines:             color('blue'),
+//   qrAngleTypes_angle:             color('green'),
+//   qrAngleTypes_fill:              color('green', 'darkest'),
+// );
 
-// body {
+// // body {
+// //   @include color_vars($colors);
+// // }
+
+// #topic__content {
 //   @include color_vars($colors);
 // }
-
-#topic__content {
-  @include color_vars($colors);
-}
 
 // #topic__content {
 //   --colors-qrAngleTypes_lines: blue;
