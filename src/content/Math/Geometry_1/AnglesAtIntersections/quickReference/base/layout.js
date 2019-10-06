@@ -12,21 +12,17 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrAnglesAtIntersections_lines',
-  'qrAnglesAtIntersections_angle1',
-  'qrAnglesAtIntersections_angle2',
-  'qrAnglesAtIntersections_angle3',
-  'qrAnglesAtIntersections_angle4',
-  'qrAnglesAtIntersections_intersectingLine',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrAnglesAtIntersections_lines = colors.get('blue').rgb;
+  colors.qrAnglesAtIntersections_angle1 = colors.get('red').rgb;
+  colors.qrAnglesAtIntersections_angle2 = colors.get('green').rgb;
+  colors.qrAnglesAtIntersections_angle3 = colors.get('yellow').rgb;
+  colors.qrAnglesAtIntersections_angle4 = colors.get('cyan').rgb;
+  colors.qrAnglesAtIntersections_intersectingLine = colors.get('blue', 'lighter').rgb;
   layout.length = 2.5;
   layout.width = 0.03;
   layout.angleRadius = 0.4;

@@ -1,18 +1,3 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrAnglesAtIntersections_lines:              color('blue'),
-  qrAnglesAtIntersections_angle1:             color('red'),
-  qrAnglesAtIntersections_angle2:             color('green'),
-  qrAnglesAtIntersections_angle3:             color('yellow'),
-  qrAnglesAtIntersections_angle4:             color('cyan'),
-  qrAnglesAtIntersections_intersectingLine:   color('blue', 'lighter'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
-
 // .diagram__text {
 //   z-index: 0;
 // }
