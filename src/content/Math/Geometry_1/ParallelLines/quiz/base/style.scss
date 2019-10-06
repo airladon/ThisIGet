@@ -1,15 +1,3 @@
-@import '../../../geometry';
-
-$colors: (
-  lines:              color('grey', 'dark'),
-  selected:           color('red'),
-  movable:            color('blue'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 .diagram__text {
   z-index: 0;
 }
