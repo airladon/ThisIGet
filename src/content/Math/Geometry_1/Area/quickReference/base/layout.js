@@ -12,21 +12,17 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrArea_sides',
-  'qrArea_grid',
-  'qrArea_angles',
-  'qrArea_measure',
-  'qrArea_gridLight',
-  'qrArea_highlight',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrArea_sides = colors.get('blue').rgb;
+  colors.qrArea_angles = colors.get('red').rgb;
+  colors.qrArea_highlight = colors.get('red').rgb;
+  colors.qrArea_grid = colors.get('grey', 'darker').rgb;
+  colors.qrArea_gridLight = colors.get('grey', 'base').rgb;
+  colors.qrArea_measure = colors.get('grey', 'base').rgb;
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////

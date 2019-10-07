@@ -10,21 +10,17 @@ import baseLayout from '../../../../../common/layout';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'distance',
-  'angles',
-  'disabled',
-  'points',
-  'rectangle',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.lines = colors.get('blue').rgb;
+  colors.distance = colors.get('yellow').rgb;
+  colors.points = colors.get('yellow').rgb;
+  colors.angles = colors.get('yellow').rgb;
+  colors.disabled = colors.get('grey', 'darker').rgb;
+  colors.rectangle = colors.get('green').rgb;
   const leftX = -1;
   const rightX = 1;
   const bottomY = -1.2;

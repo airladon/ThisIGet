@@ -12,16 +12,12 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrAreaTriangle_sides',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrAreaTriangle_sides = colors.get('blue').rgb;
   const lineWidth = 0.02;
   const tri1 = [
     new Point(-1.5, -0.75),

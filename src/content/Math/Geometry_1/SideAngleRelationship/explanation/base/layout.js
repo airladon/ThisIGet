@@ -10,20 +10,18 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'equalSide',
-  'isosceles',
-  'fill',
-  'description',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.sides = colors.get('blue').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.isosceles = colors.get('red').rgb;
+  colors.equalSide = colors.get('blue', 'darker').rgb;
+  colors.fill = colors.get('blue', 'darkest').rgb;
+  colors.description = colors.get('grey', 'base').rgb;
+  colors.rgbToCssVar(colors.description, '--color-side-angle-relationship-description');
 
   const triPoints = [
     new Point(-2, -1),

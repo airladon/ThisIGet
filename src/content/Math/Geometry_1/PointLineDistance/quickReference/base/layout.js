@@ -11,19 +11,15 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrPointsLineDistance_lines',
-  'qrPointsLineDistance_points',
-  'qrPointsLineDistance_distance',
-  'qrPointsLineDistance_distance2',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrPointsLineDistance_lines = colors.get('blue').rgb;
+  colors.qrPointsLineDistance_points = colors.get('blue').rgb;
+  colors.qrPointsLineDistance_distance = colors.get('yellow').rgb;
+  colors.qrPointsLineDistance_distance2 = colors.get('violet').rgb;
   const p0 = new Point(0, 0.7);
   const p1 = new Point(-2, -0.7);
   const p2 = new Point(2, -0.7);

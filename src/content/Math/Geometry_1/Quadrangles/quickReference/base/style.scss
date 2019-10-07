@@ -1,9 +1,1 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrQuadrangles_sides:             color('blue'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
+//

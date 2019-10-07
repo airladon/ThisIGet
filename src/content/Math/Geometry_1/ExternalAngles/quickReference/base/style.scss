@@ -1,17 +1,3 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrExternalAngles_sides:             color('blue'),
-  qrExternalAngles_externalSide:      color('grey', 'base'),
-  qrExternalAngles_disabled:          color('grey', 'darker'),
-  qrExternalAngles_angles:            color('green'),
-  qrExternalAngles_externalAngle:     color('red'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
-
 // .diagram__text {
 //   z-index: 0;
 // }

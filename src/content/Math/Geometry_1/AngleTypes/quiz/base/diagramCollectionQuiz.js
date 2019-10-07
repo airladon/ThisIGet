@@ -35,6 +35,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.addElements(this, this.layout.addQuestion);
     this.hasTouchableElements = true;
     this._main._fig._line1.setTransformCallback = this.updateAngle.bind(this);
+    this._main._fig._line1.move.canBeMovedAfterLoosingTouch = true;
     this._main._fig._angle.autoRightAngle = false;
   }
 

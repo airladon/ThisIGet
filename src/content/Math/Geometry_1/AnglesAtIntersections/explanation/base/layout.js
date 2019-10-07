@@ -11,22 +11,18 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'angle1',
-  'angle2',
-  'angle3',
-  'angle4',
-  'disabled',
-  'intersectingLine',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.lines = colors.get('blue').rgb;
+  colors.angle1 = colors.get('red').rgb;
+  colors.angle2 = colors.get('green').rgb;
+  colors.angle3 = colors.get('yellow').rgb;
+  colors.angle4 = colors.get('cyan').rgb;
+  colors.disabled = colors.get('grey', 'darker').rgb;
+  colors.intersectingLine = colors.get('blue', 'lighter').rgb;
   layout.length = 2.5;
   layout.width = 0.03;
   layout.angleRadius = 0.4;

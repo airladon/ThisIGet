@@ -1,27 +1,10 @@
-@import '../../../geometry';
-
-$colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
-  lines:              color('blue'),
-  angles:             color('green'),
-  arc:                color('red'),
-  marks:              color('grey', 'dark'),
-  radianLines:        color('yellow'),
-  degrees:            color('blue', 'lighter'),
-  // arrow:              color('red'),
-);
-
-body {
-  @include color_vars($colors);
-}
 
 .diagram__text {
   z-index: 0;
 }
 
 .radian_equation {
-  color: map-get($colors, 'radianLines');
+  color: #FAE047;
   display: table !important;
 }
 
@@ -38,8 +21,8 @@ body {
   margin-top: 6%;
   // margin-left: 5%;
   margin-left: 7%;
-  background-color: color('black', 'darker');
-  color: color('grey', 'light');
+  // background-color: #222;
+  color: #8E98A3;
   border-spacing: 0;
   border-radius: 0.5em;
   // border-top-left-radius: 1em;
@@ -51,7 +34,7 @@ body {
 .topic__common_angles_table tr:first-child {
   width: 50%;
   text-align: center;
-  background-color: color('black', 'dark');
+  // background-color: #333;
   height: 2.5em;
   font-size: 0.7em;
   // border-top-left-radius: 1em;
@@ -103,7 +86,7 @@ body {
 #id_deg_equation,
 #id_rad_equation {
   // background-color: color('black', 'darker');
-  border: 1px solid color('diagram', 'equation-border');
+  border: 1px solid #333;
   width: 50%;
   height: 15%;
   margin-left: auto;

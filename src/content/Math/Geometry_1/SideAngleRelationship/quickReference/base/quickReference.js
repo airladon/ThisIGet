@@ -37,10 +37,22 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      Angles_opposite_longer_sides: click(coll.pulseLargestSideAngle, [coll], colors.angles),
-      angles_opposite_shorter_sides: click(coll.pulseSmallestSideAngle, [coll], colors.angles),
-      sides_opposite_larger_angles: click(coll.pulseLargestSideAngle, [coll], colors.sides),
-      sides_opposite_smaller_angles: click(coll.pulseSmallestSideAngle, [coll], colors.sides),
+      Angles_opposite_longer_sides: click(
+        coll.pulseLargestSideAngle,
+        [coll], colors.qrSideAngleRelationshipAngles,
+      ),
+      angles_opposite_shorter_sides: click(
+        coll.pulseSmallestSideAngle, [coll],
+        colors.qrSideAngleRelationshipAngles,
+      ),
+      sides_opposite_larger_angles: click(
+        coll.pulseLargestSideAngle, [coll],
+        colors.qrSideAngleRelationshipSides,
+      ),
+      sides_opposite_smaller_angles: click(
+        coll.pulseSmallestSideAngle, [coll],
+        colors.qrSideAngleRelationshipSides,
+      ),
     };
     this.setTitle('Triangle Angle Side Relationships');
     this.setDescription([

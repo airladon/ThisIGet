@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
+import { Colors } from '../tools/colors';
 
 const {
   Diagram,
@@ -21,8 +22,10 @@ class SimpleFormatContent {
   diagram: Object;
   setVariables: () => {[name: string]: string | number };
   variables: { [name: string]: string | number };
+  colors: Object;
 
   constructor(htmlId: string = 'topic__content') {
+    this.colors = new Colors();
     this.htmlId = htmlId;
     this.sections = [];
     this.iconLink = '/';

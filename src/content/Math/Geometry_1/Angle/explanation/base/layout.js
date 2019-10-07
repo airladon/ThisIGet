@@ -8,20 +8,28 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'lines',
-  'angles',
-  'moreSharp',
-  'lessSharp',
-  'center',
-  'arrow',
-];
+// const cssColorNames = [
+//   'lines',
+//   'angles',
+//   'moreSharp',
+//   'lessSharp',
+//   'center',
+//   'arrow',
+// ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  // const layout: Object = baseLayout(cssColorNames);
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const layout: Object = baseLayout();
   const { colors } = layout;
+
+  colors.lines = colors.get('blue').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.moreSharp = colors.get('red').rgb;
+  colors.lessSharp = colors.get('violet').rgb;
+  colors.center = colors.get('yellow').rgb;
+  colors.arrow = colors.get('red').rgb;
   layout.position = new Point(0, 0);
 
   const width = 0.02;

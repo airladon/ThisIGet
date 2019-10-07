@@ -11,17 +11,13 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrRectangles_sides',
-  'qrRectangles_angles',
-  // 'disabled',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrRectangles_sides = colors.get('blue').rgb;
+  colors.qrRectangles_angles = colors.get('red').rgb;
 
   const width = 0.02;
   const w = 3.5;

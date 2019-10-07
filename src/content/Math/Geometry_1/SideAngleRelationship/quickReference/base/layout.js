@@ -11,21 +11,13 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'equalSide',
-  'isosceles',
-  'fill',
-  'description',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrSideAngleRelationshipSides = colors.get('blue').rgb;
+  colors.qrSideAngleRelationshipAngles = colors.get('green').rgb;
   const triPoints = [
     new Point(-2, -1),
     new Point(-1.5, 0.6),
@@ -33,7 +25,7 @@ export default function diagramLayout() {
   ];
 
   const width = 0.04;
-  const angle = (text, radius = 0.3, color = colors.angles) => ({
+  const angle = (text, radius = 0.3, color = colors.qrSideAngleRelationshipAngles) => ({
     color,
     curve: {
       radius,
@@ -57,7 +49,7 @@ export default function diagramLayout() {
     name: 'tri',
     method: 'polyLine',
     options: {
-      color: colors.sides,
+      color: colors.qrSideAngleRelationshipSides,
       width,
       close: true,
       points: triPoints,

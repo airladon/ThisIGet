@@ -4,20 +4,16 @@ import baseLayout from '../../../../../common/layout';
 
 const { Rect, Point } = Fig.tools.g2;
 
-const cssColorNames = [
-  'lines',
-  'movable',
-  'selected',
-];
-
 const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.lines = colors.get('grey', 'dark').rgb;
+  colors.selected = colors.get('red').rgb;
+  colors.movable = colors.get('blue').rgb;
   layout.length = 1.5;
   layout.width = 0.03;
   layout.scale = {

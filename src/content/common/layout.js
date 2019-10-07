@@ -1,34 +1,24 @@
 // @flow
 import Fig from 'figureone';
-// import { Rect, Point } from '../../js/diagram/tools/g2';
-// import getCssColors from '../../js/tools/getCssColors';
-// import angleCircleLayout from '../../../common/AngleCircle/layout';
-// import { DiagramFont } from '../../js/diagram/DrawingObjects/TextObject/TextObject';
+import { Colors } from '../../js/tools/colors';
 
 const { Rect, Point, DiagramFont } = Fig;
-// const cssColorNames = [
-//   'latin',
-//   'line',
-//   'angleA',
-//   'angleB',
-//   'disabled',
-// ];
 
-/* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function baseLayout(cssColorNames: Array<string> = []) {
-  const colors = Fig.tools.color.getCSSColors(cssColorNames);
-  if (colors.diagram == null) {
-    colors.diagram = { text: { base: [1, 1, 1, 1] } };
-  } else if (colors.diagram.text == null) {
-    colors.diagram.text = { base: [1, 1, 1, 1] };
-  } else if (colors.diagram.text.base == null) {
-    colors.diagram.text.base = [1, 1, 1, 1];
-  }
+export default function baseLayout() {
+  const colors = new Colors();
+  // if (colors.diagram == null) {
+  //   colors.diagram = { text: { base: [1, 1, 1, 1] } };
+  // } else if (colors.diagram.text == null) {
+  //   colors.diagram.text = { base: [1, 1, 1, 1] };
+  // } else if (colors.diagram.text.base == null) {
+  //   colors.diagram.text.base = [1, 1, 1, 1];
+  // }
+  // console.log(colors)
 
-  let textColor = [1, 1, 1, 1];
-  if (colors.diagram.text != null) {
-    textColor = colors.diagram.text.base;
-  }
+  // let textColor = [1, 1, 1, 1];
+  // if (colors.diagram.text != null) {
+  //   textColor = colors.diagram.text.base;
+  // }
 
   const layout = {
     limits: new Rect(-3, -2, 6, 4),
@@ -39,7 +29,7 @@ export default function baseLayout(cssColorNames: Array<string> = []) {
       y: 1.7,
     },
     quiz: {
-      check: new Point( 2.4, -1.7),
+      check: new Point(2.4, -1.7),
       input: new Point(2.4, -1.3),
       newProblem: new Point(2.4, -1.7),
       // check: new Point(0, -1.7),
@@ -58,7 +48,7 @@ export default function baseLayout(cssColorNames: Array<string> = []) {
       '400',
       'center',
       'middle',
-      textColor,
+      colors.diagram.text.base.slice(),
     ),
 
     colors,

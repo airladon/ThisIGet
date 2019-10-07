@@ -1,18 +1,3 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrAngles_lines:              color('blue'),
-  qrAngles_angles:             color('green'),
-  qrAngles_moreSharp:          color('red'),
-  qrAngles_lessSharp:          color('violet'),
-  qrAngles_center:             color('yellow'),
-  qrAngles_arrow:              color('red'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
-
 .content_angles_bottom {
   margin-top: 35%;
 }

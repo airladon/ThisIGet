@@ -1,16 +1,3 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrAngleGroups_lines:              color('blue'),
-  qrAngleGroups_angleA:             color('red'),
-  qrAngleGroups_angleB:             color('green'),
-  qrAngleGroups_angleC:             color('yellow'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
-
 // .diagram__text {
 //   z-index: 0;
 // }

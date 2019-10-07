@@ -12,18 +12,14 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrRightAngleTriangle_sides',
-  'qrRightAngleTriangle_angles',
-  'qrRightAngleTriangle_rightAngle',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrRightAngleTriangle_sides = colors.get('blue').rgb;
+  colors.qrRightAngleTriangle_rightAngle = colors.get('red').rgb;
+  colors.qrRightAngleTriangle_angles = colors.get('green').rgb;
   // overly complicated as just a cut and past from explanation layout
   const leftSide = 3;
   const p0 = new Point(-1.7, -0.7);

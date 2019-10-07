@@ -10,19 +10,13 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'highlight',
-  'grey',
-  // 'darkGrey',
-];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.sides = colors.get('blue', 'base').rgb;
+  colors.highlight = colors.get('red').rgb;
   // const side = text => ({
   //   label: {
   //     text,

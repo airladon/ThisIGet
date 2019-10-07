@@ -87,6 +87,7 @@ check_status
 
 title "Browser Tests - General: thisiget-test"
 ./browser_test.sh beta browser.*btest
+check_status
 
 title "Browser Tests: thisiget-beta"
 ./browser_test.sh beta prod.btest.js
@@ -108,6 +109,8 @@ check_status
 
 title "Browser Tests: thisiget"
 ./browser_test.sh prod prod.btest.js
+check_status
+
 if [ $? != 0 ];
 then
     heroku rollback $CURRENT_VERSION

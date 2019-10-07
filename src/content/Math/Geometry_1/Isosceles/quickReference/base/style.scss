@@ -1,9 +1,9 @@
 @import '../../../../../../css/color';
 
 $colors: (
-  sides:             color('blue'),
-  angles:            color('red'),
-  disabled:          color('diagram', 'disabled', 'darker'),
+  qrIsoscelesSides:             color('blue'),
+  qrIsoscelesAngles:            color('red'),
+  qrIsoscelesDisabled:          color('diagram', 'disabled', 'darker'),
 );
 
 #topic__content {

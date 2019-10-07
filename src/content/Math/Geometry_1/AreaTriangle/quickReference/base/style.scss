@@ -1,9 +1,0 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrAreaTriangle_sides:             color('blue'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}

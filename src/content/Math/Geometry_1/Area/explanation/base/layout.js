@@ -11,26 +11,22 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'sidesDisabled',
-  'example1',
-  'example2',
-  'disabled',
-  'grid',
-  'angles',
-  'measure',
-  'gridLight',
-  'highlight',
-  'row',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.sides = colors.get('blue').rgb;
+  colors.sidesDisabled = colors.get('blue', 'darker').rgb;
+  colors.angles = colors.get('red').rgb;
+  colors.row = colors.get('red').rgb;
+  colors.highlight = colors.get('red').rgb;
+  colors.example1 = colors.get('red').rgb;
+  colors.example2 = colors.get('blue').rgb;
+  colors.disabled = colors.get('diagram', 'disabled').rgb;
+  colors.grid = colors.get('grey', 'darker').rgb;
+  colors.gridLight = colors.get('grey', 'base').rgb;
+  colors.measure = colors.get('grey', 'base').rgb;
   const exampleSquareLarge = {
     name: 'largeSquare',
     method: 'rectangle',

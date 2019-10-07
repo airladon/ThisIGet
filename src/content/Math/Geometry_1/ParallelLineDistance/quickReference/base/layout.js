@@ -11,18 +11,14 @@ import './style.scss';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrParallelLineDistance_lines',
-  'qrParallelLineDistance_distance',
-  'qrParallelLineDistance_angles',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrParallelLineDistance_lines = colors.get('blue').rgb;
+  colors.qrParallelLineDistance_distance = colors.get('yellow').rgb;
+  colors.qrParallelLineDistance_angles = colors.get('yellow').rgb;
   const bottomY = -1;
   const topY = 0.5;
 

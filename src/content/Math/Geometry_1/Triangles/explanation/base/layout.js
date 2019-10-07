@@ -11,23 +11,20 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'angle1',
-  'angle2',
-  'angle3',
-  'angles',
-  'disabled',
-  'parallel',
-  'pads',
-  'sideLengths',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.lines = colors.get('blue').rgb;
+  colors.sideLengths = colors.get('yellow').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.angle1 = colors.get('green').rgb;
+  colors.angle2 = colors.get('red').rgb;
+  colors.angle3 = colors.get('yellow').rgb;
+  colors.disabled = colors.get('grey', 'darker').rgb;
+  colors.parallel = colors.get('red').rgb;
+  colors.pads = colors.get('red', 'lighter').rgb;
   layout.width = 0.03;
   const exampleTri = {
     method: 'polyLine',

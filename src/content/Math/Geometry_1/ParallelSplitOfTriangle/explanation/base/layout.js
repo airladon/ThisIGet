@@ -10,19 +10,15 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'highlight',
-  'grey',
-  'darkGrey',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  // layout.colors = Fig.tools.color.getCSSColors();
   const { colors } = layout;
-
+  colors.sides = colors.get('blue', 'base').rgb;
+  colors.highlight = colors.get('red').rgb;
+  colors.grey = colors.get('grey', 'base').rgb;
+  colors.darkGrey = colors.get('grey', 'darker').rgb;
   const points = [
     new Point(-1.5, -1).add(0.3, 0),
     new Point(0, 1).add(0.3, 0),
@@ -629,7 +625,7 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       // navType: '1Button',
-      color: [1, 0, 0, 1], // colors.diagram.text.base,
+      color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
         alignH: 'center',
@@ -1185,7 +1181,7 @@ export default function diagramLayout() {
     name,
     method: 'addEquation',
     options: {
-      color: [1, 0, 0, 1], // colors.diagram.text.base,
+      color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
         alignH: 'center',

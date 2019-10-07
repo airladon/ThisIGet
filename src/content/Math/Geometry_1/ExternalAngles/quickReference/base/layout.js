@@ -11,20 +11,16 @@ import './style.scss';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrExternalAngles_sides',
-  'qrExternalAngles_angles',
-  'qrExternalAngles_externalAngle',
-  'qrExternalAngles_externalSide',
-  'qrExternalAngles_disabled',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrExternalAngles_sides = colors.get('blue').rgb;
+  colors.qrExternalAngles_externalSide = colors.get('grey', 'base').rgb;
+  colors.qrExternalAngles_disabled = colors.get('grey', 'darker').rgb;
+  colors.qrExternalAngles_angles = colors.get('green').rgb;
+  colors.qrExternalAngles_externalAngle = colors.get('red').rgb;
   const angle = text => ({
     color: colors.qrExternalAngles_angles,
     label: {

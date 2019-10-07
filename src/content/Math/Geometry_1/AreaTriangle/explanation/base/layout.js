@@ -11,24 +11,21 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'grid',
-  'area',
-  'disabled',
-  'construction1',
-  'construction2',
-  'fill',
-  'fill1',
-  'fill2',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.sides = colors.get('blue').rgb;
+  colors.angles = colors.get('red').rgb;
+  colors.area = colors.get('blue').rgb;
+  colors.grid = colors.get('grey', 'darker').rgb;
+  colors.disabled = colors.get('grey', 'darker').rgb;
+  colors.construction1 = colors.get('red', 'darker').rgb;
+  colors.construction2 = colors.get('green', 'darker').rgb;
+  colors.fill = colors.get('blue', 'darkest').rgb;
+  colors.fill1 = colors.get('red', 'darker').rgb;
+  colors.fill2 = colors.get('green', 'darkest').rgb;
 
   const introTriangle = {
     name: 'triangle',

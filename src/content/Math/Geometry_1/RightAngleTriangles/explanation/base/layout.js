@@ -11,23 +11,20 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'rightAngle',
-  'description',
-  'vertex',
-  'opposite',
-  'perpendicular',
-  'areaFill',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.areaFill = colors.get('blue', 'darkest').rgb;
+  colors.sides = colors.get('blue').rgb;
+  colors.rightAngle = colors.get('red').rgb;
+  colors.opposite = colors.get('red').rgb;
+  colors.perpendicular = colors.get('red').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.description = colors.get('grey', 'base').rgb;
+  colors.vertex = colors.get('yellow', 'dark').rgb;
+  colors.rgbToCssVar(colors.description, '--color-rightangletriangles-description');
   const leftSide = 3;
   const p0 = new Point(-1.7, -0.7);
   const p1 = p0
