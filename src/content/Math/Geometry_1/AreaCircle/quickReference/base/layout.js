@@ -12,17 +12,14 @@ import './style.scss';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrAreaCircle_sides',
-  'qrAreaCircle_radius',
-];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.qrAreaCircle_sides = colors.get('blue', 'base').rgb;
+  colors.qrAreaCircle_radius = colors.get('diagram', 'construction7').rgb;
   const radius = 1.25;
   layout.radius = radius;
   const circle = {

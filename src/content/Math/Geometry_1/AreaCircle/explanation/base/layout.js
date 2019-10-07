@@ -11,29 +11,28 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'grid',
-  'sides',
-  'areaTri',
-  'areaTriLabel',
-  'areaPoly',
-  'areaPolyLabel',
-  'areaCircle',
-  'areaCircleLabel',
-  'height',
-  'border',
-  'radius',
-  'circumference',
-  'disabled',
-  'disabledLabel',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.sides = colors.get('blue', 'base').rgb;
+  colors.areaTri = colors.get('diagram', 'construction6', 'darkest').rgb;
+  colors.areaTriLabel = colors.get('diagram', 'construction6').rgb;
+  colors.areaPoly = colors.get('diagram', 'construction6', 'darkest').rgb;
+  colors.areaPolyLabel = colors.get('diagram', 'construction6').rgb;
+  colors.areaCircle = colors.get('diagram', 'construction6', 'darkest').rgb;
+  colors.areaCircleLabel = colors.get('diagram', 'construction6').rgb;
+  //
+  colors.height = colors.get('diagram', 'construction7').rgb;
+  colors.border = colors.get('diagram', 'construction8').rgb;
+  colors.radius = colors.get('diagram', 'construction7').rgb;
+  colors.circumference = colors.get('diagram', 'disabledDark').rgb;
+  //
+  colors.disabled = colors.get('grey', 'darker').rgb;
+  colors.disabledLabel = colors.get('grey', 'base').rgb;
+  //
+  colors.grid = colors.get('grey', 'darker').rgb;
   const radius = 1.25;
   layout.radius = radius;
   const circle = {
