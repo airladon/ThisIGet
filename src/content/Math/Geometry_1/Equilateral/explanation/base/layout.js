@@ -10,17 +10,15 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'highlight',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.sides = colors.get('blue').rgb;
+  colors.angles = colors.get('red').rgb;
+  colors.highlight = colors.get('green').rgb;
+
   const points = [
     new Point(-1, -1).add(0, 1 - Math.tan(Math.PI / 6)),
     new Point(0, 0.732050).add(0, 1 - Math.tan(Math.PI / 6)),
