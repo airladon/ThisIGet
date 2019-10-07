@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 import './learningPaths.scss';
 import ViewLearningPaths from '../../components/viewLearningPaths';
 import withLoginManager from '../../components/view';
+import { loadColors } from '../../tools/colors';
+
+loadColors();
 
 const homePage = () => {
   const id: HTMLElement | null = document.getElementById('learning_paths');

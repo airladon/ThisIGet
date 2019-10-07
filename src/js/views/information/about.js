@@ -7,6 +7,9 @@ import content from './about.md';
 // import './privacy.scss';
 import ViewInformation from '../../components/viewInformation';
 import withLoginManager from '../../components/view';
+import { loadColors } from '../../tools/colors';
+
+loadColors();
 
 // page(content);
 

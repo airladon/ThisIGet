@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 // import './privacy.scss';
 import ViewInformation from '../../components/viewInformation';
 import withLoginManager from '../../components/view';
+import { loadColors } from '../../tools/colors';
+
+loadColors();
 
 const policyPage = (content: string) => {
   const id: HTMLElement | null = document.getElementById('information');

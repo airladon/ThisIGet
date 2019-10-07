@@ -601,6 +601,7 @@ const themes = {
       warning: ['red', 'base'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
+      h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
       disabled: ['grey', 'base'],
       safe: ['green', 'base'],
@@ -660,6 +661,9 @@ class Colors {
       const diagramTextBase = this.get('diagram', 'text', 'base');
       // console.log('loading colors')
       diagramTextBase.toCssVar('--color-diagram-text');
+      this.get('site', 'background').toCssVar('--color-site-background');
+      this.get('site', 'text').toCssVar('--color-site-text');
+      this.get('site', 'h1').toCssVar('--color-site-h1');
       // this.get('black', 'lightest').toCssVar('--color-black-dark');
       // this.get('black', 'light').toCssVar('--color-black-dark');
       // this.get('black', 'dark').toCssVar('--color-black-dark');
@@ -810,7 +814,11 @@ class Colors {
   }
 }
 
+function loadColors() {
+  return new Colors();
+}
+
 export {
   Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX, HEXToRGB,
-  HSBToRGB, HSLToRGB, RGBToHSL, RGBToHSB,
+  HSBToRGB, HSLToRGB, RGBToHSL, RGBToHSB, loadColors,
 };
