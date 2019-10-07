@@ -25,7 +25,7 @@ The triangle has two equal angles, and is therefore an isosceles triangle. As su
 $$\color{r}a \color{black}= \bbox[10px,border:1px solid gray]{23}$$
 </hintLow>
 
-
+<!-- 
 ### Example 3
 
 A square is split with a line between opposite corners. What is angle $$\color{r}a$$ in degrees?
@@ -39,9 +39,9 @@ We also know the square corner angle is 90º, and so therefore the angle $$\colo
 
 $$\color{r}a \color{black} = \frac{180^\circ - 90^\circ}{2} = \bbox[10px,border:1px solid gray]{45^\circ}$$
 </hintLow>
+ -->
 
-
-### Example 4
+### Example 3
 
 Show that any triangle made from the diameter of a circle and a point on the circle has the same angle $$\color{r}a$$?
 
@@ -71,7 +71,7 @@ $$\bbox[10px,border:1px solid gray]{90^\circ}$$
 
 </hintLow>
 
-### Example 5
+### Example 4
 
 A $$\color{r}line$$ is drawn between two points of a circle (also called a chord). Show that a triangle formed from this line and any point on the circle on the _same side_ of the line will have the same angle.
 
@@ -100,7 +100,7 @@ _Note:_ If the center of the circle is on the edge of, or outside the triangle, 
 
 </hintLow>
 
-### Example 6
+### Example 5
 
 If a triangle is formed on the other side of the chord from Example 5, show that it too will have a constant angle opposite the chord, and show what the relationship is between this angle and the one from Example 5.
 

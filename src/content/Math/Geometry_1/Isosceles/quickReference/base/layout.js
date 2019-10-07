@@ -11,15 +11,14 @@ import './style.scss';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides', 'angles', 'disabled',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrIsoscelesSides = colors.get('blue').rgb;
+  colors.qrIsoscelesAngles = colors.get('red').rgb;
+  colors.qrIsoscelesDisabled = colors.get('diagram', 'disabled', 'darker').rgb;
   layout.position = [0, -0.1];
   const width = 0.02;
   const points = [
@@ -35,7 +34,7 @@ export default function diagramLayout() {
       sides: 200,
     },
     autoRightAngle,
-    color: colors.angles,
+    color: colors.qrIsoscelesAngles,
     label: {
       text,
     },
@@ -73,7 +72,7 @@ export default function diagramLayout() {
       close: true,
       angle: [angle('a'), angle(on2('b')), angle('c', true)],
       side: [side('A'), side('L', 0.7, 'inside'), side(on2('B'))],
-      color: colors.sides,
+      color: colors.qrIsoscelesSides,
     },
     mods: {
       scenarios: {
@@ -93,7 +92,7 @@ export default function diagramLayout() {
       close: true,
       angle: [angle('a'), angle('c', true), angle(on2('b'))],
       side: [side(on2('B')), side('L', 0.3, 'inside'), side('A')],
-      color: colors.sides,
+      color: colors.qrIsoscelesSides,
     },
     mods: {
       scenarios: {
@@ -112,7 +111,7 @@ export default function diagramLayout() {
       close: true,
       angle: [angle('a'), angle('b'), angle('a')],
       side: [side('A'), side('A'), side('2B')],
-      color: colors.sides,
+      color: colors.qrIsoscelesSides,
     },
     mods: {
       scenarios: {
@@ -137,7 +136,7 @@ export default function diagramLayout() {
       },
       // angle: [angle('a'), angle(''), angle('a')],
       // side: [side('C'), side('C'), side('2B')],
-      color: colors.sides,
+      color: colors.qrIsoscelesSides,
     },
     mods: {
       scenarios: {
