@@ -21,6 +21,8 @@ export default function diagramLayout() {
   colors.angles = colors.get('green').rgb;
   colors.arc = colors.get('red').rgb;
   colors.marks = colors.get('grey', 'dark').rgb;
+  layout.colors.get('diagram', 'text', 'heading')
+    .toCssVar('--color-degrees-heading');
   layout.position = new Point(0, 0);
   const radius = 1.2;
   layout.radius = radius;

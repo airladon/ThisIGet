@@ -559,6 +559,8 @@ const themes = {
         english: ['blue', 'light'],
         definition: ['grey', 'base'],
         note: ['grey', 'light'],
+        //
+        heading: ['grey', 'base'],
       },
       quizCheck: ['violet', 'base'],
       equation: {
