@@ -1,10 +1,1 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrRectangles_sides:             color('blue'),
-  qrRectangles_angles:            color('red'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
+//
