@@ -379,7 +379,10 @@ class Color {
   }
 
   newBrightness(brightness: number) {
-    return new Color(HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]), this.shadePresets);
+    return new Color(
+      HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]),
+      this.shadePresets,
+    );
   }
 
   newHsbSaturation(hsbSaturation: number) {
@@ -421,6 +424,13 @@ class Color {
 
   _dup() {
     return new Color(this.rgb, this.shadePresets);
+  }
+
+  toCssVar(varName: string) {
+    const doc = document.documentElement;
+    if (doc != null) {
+      doc.style.setProperty(varName, `#${this.hex}`);
+    }
   }
 }
 
@@ -637,12 +647,22 @@ class Colors {
       this.setPalette(paletteColors);
       this.fix();
       const diagramTextBase = this.get('diagram', 'text', 'base');
-      const doc = document.documentElement;
-      if (doc != null) {
-        doc.style.setProperty('--color-diagram-text', `#${diagramTextBase.hex}`);
-      }
+      diagramTextBase.toCssVar('--color-diagram-text');
+      // const doc = document.documentElement;
+      // if (doc != null) {
+      //   doc.style.setProperty('--color-diagram-text', `#${diagramTextBase.hex}`);
+      // }
     }
     return Colors.instance;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  rgbToCssVar(rgb: Array<number>, name: string) {
+    const c = new Color(rgb);
+    const doc = document.documentElement;
+    if (doc != null) {
+      doc.style.setProperty(name, `#${c.hex}`);
+    }
   }
 
   setPalette(
