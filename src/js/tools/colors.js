@@ -647,6 +647,7 @@ class Colors {
       this.setPalette(paletteColors);
       this.fix();
       const diagramTextBase = this.get('diagram', 'text', 'base');
+      // console.log('loading colors')
       diagramTextBase.toCssVar('--color-diagram-text');
       // const doc = document.documentElement;
       // if (doc != null) {
