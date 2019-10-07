@@ -606,7 +606,11 @@ const themes = {
       fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
       safe: ['green', 'base'],
-      menus: ['grey', 'darker'],
+      menus: {
+        background: ['grey', 'darker'],
+        text: ['white', 'light'],
+        textHover: ['white', 'base'],
+      },
       button: {
         text: ['black', 'lighter'],
         border: ['white', 'darker'],
@@ -677,6 +681,8 @@ class Colors {
       this.get('site', 'text').toCssVar('--color-site-text');
       this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
+
+      // Buttons
       this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
       this.get('site', 'button', 'hoverBackground')
         .toCssVar('--color-site-button-hover-background');
@@ -687,18 +693,13 @@ class Colors {
         .toCssVar('--color-site-button-highlight-background');
       this.get('site', 'button', 'highlight', 'hoverBackground')
         .toCssVar('--color-site-button-highlight-hover-background');
-      // this.get('black', 'lightest').toCssVar('--color-black-dark');
-      // this.get('black', 'light').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // const doc = document.documentElement;
-      // if (doc != null) {
-      //   doc.style.setProperty('--color-diagram-text', `#${diagramTextBase.hex}`);
-      // }
+
+      // Menus
+      this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
+      this.get('site', 'menus', 'textHover')
+        .toCssVar('--color-site-menus-text-hover');
+      this.get('site', 'menus', 'background')
+        .toCssVar('--color-site-menus-background');
     }
     return Colors.instance;
   }
