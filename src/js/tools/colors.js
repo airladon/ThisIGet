@@ -606,6 +606,16 @@ const themes = {
       disabled: ['grey', 'base'],
       safe: ['green', 'base'],
       menus: ['grey', 'darker'],
+      button: {
+        text: ['black', 'lighter'],
+        border: ['white', 'darker'],
+        hoverBackground: ['white', 'light'],
+        highlight: {
+          text: ['white'],
+          background: ['logo', 'base'],
+          hoverBackground: ['logo', 'light'],
+        },
+      },
     },
     navbar: {
       // text: ['white', 'lighter'],
@@ -664,6 +674,16 @@ class Colors {
       this.get('site', 'background').toCssVar('--color-site-background');
       this.get('site', 'text').toCssVar('--color-site-text');
       this.get('site', 'h1').toCssVar('--color-site-h1');
+      this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
+      this.get('site', 'button', 'hoverBackground')
+        .toCssVar('--color-site-button-hover-background');
+      this.get('site', 'button', 'border').toCssVar('--color-site-button-border');
+      this.get('site', 'button', 'highlight', 'text')
+        .toCssVar('--color-site-button-highlight-text');
+      this.get('site', 'button', 'highlight', 'background')
+        .toCssVar('--color-site-button-highlight-background');
+      this.get('site', 'button', 'highlight', 'hoverBackground')
+        .toCssVar('--color-site-button-highlight-hover-background');
       // this.get('black', 'lightest').toCssVar('--color-black-dark');
       // this.get('black', 'light').toCssVar('--color-black-dark');
       // this.get('black', 'dark').toCssVar('--color-black-dark');
