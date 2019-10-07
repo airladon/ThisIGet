@@ -1,23 +1,10 @@
 // @flow
 import Fig from 'figureone';
 import { Colors } from '../../js/tools/colors';
-// import { Rect, Point } from '../../js/diagram/tools/g2';
-// import getCssColors from '../../js/tools/getCssColors';
-// import angleCircleLayout from '../../../common/AngleCircle/layout';
-// import { DiagramFont } from '../../js/diagram/DrawingObjects/TextObject/TextObject';
 
 const { Rect, Point, DiagramFont } = Fig;
-// const cssColorNames = [
-//   'latin',
-//   'line',
-//   'angleA',
-//   'angleB',
-//   'disabled',
-// ];
 
-/* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function baseLayout(cssColorNames: Array<string> = []) {
-  // const colors = Fig.tools.color.getCSSColors(cssColorNames);
+export default function baseLayout() {
   const colors = new Colors();
   // if (colors.diagram == null) {
   //   colors.diagram = { text: { base: [1, 1, 1, 1] } };
@@ -42,7 +29,7 @@ export default function baseLayout(cssColorNames: Array<string> = []) {
       y: 1.7,
     },
     quiz: {
-      check: new Point( 2.4, -1.7),
+      check: new Point(2.4, -1.7),
       input: new Point(2.4, -1.3),
       newProblem: new Point(2.4, -1.7),
       // check: new Point(0, -1.7),

@@ -381,16 +381,25 @@ class Color {
   newBrightness(brightness: number) {
     return new Color(
       HSBToRGB([this.hue, this.hsbSaturation, brightness, this.opacity]),
+      // $FlowFixMe
       this.shadePresets,
     );
   }
 
   newHsbSaturation(hsbSaturation: number) {
-    return new Color(HSBToRGB([this.hue, hsbSaturation, this.brightness, this.opacity]), this.shadePresets);
+    return new Color(
+      HSBToRGB([this.hue, hsbSaturation, this.brightness, this.opacity]),
+      // $FlowFixMe
+      this.shadePresets,
+    );
   }
 
   newHue(hue: number) {
-    return new Color(HSBToRGB([hue, this.hsbSaturation, this.brightness, this.opacity]), this.shadePresets);
+    return new Color(
+      HSBToRGB([hue, this.hsbSaturation, this.brightness, this.opacity]),
+      // $FlowFixMe
+      this.shadePresets,
+    );
   }
 
   shade(delta: number | string) {
@@ -649,6 +658,14 @@ class Colors {
       const diagramTextBase = this.get('diagram', 'text', 'base');
       // console.log('loading colors')
       diagramTextBase.toCssVar('--color-diagram-text');
+      // this.get('black', 'lightest').toCssVar('--color-black-dark');
+      // this.get('black', 'light').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
+      // this.get('black', 'dark').toCssVar('--color-black-dark');
       // const doc = document.documentElement;
       // if (doc != null) {
       //   doc.style.setProperty('--color-diagram-text', `#${diagramTextBase.hex}`);
