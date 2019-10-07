@@ -506,8 +506,8 @@ const palettes = {
       darker: '222',
       darkest: '111',
     },
-    primary: '0070EB',
-    primaryDark: '0067D6',
+    logo: '0070EB',
+    logoDark: '0067D6',
   },
 };
 
@@ -603,13 +603,14 @@ const themes = {
       text: ['grey', 'darker'],
       h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
+      fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
       safe: ['green', 'base'],
       menus: ['grey', 'darker'],
       button: {
         text: ['black', 'lighter'],
         border: ['white', 'darker'],
-        hoverBackground: ['white', 'light'],
+        hoverBackground: ['white', 'lighter'],
         highlight: {
           text: ['white'],
           background: ['logo', 'base'],
@@ -672,7 +673,9 @@ class Colors {
       // console.log('loading colors')
       diagramTextBase.toCssVar('--color-diagram-text');
       this.get('site', 'background').toCssVar('--color-site-background');
+      this.get('site', 'fill').toCssVar('--color-site-fill');
       this.get('site', 'text').toCssVar('--color-site-text');
+      this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
       this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
       this.get('site', 'button', 'hoverBackground')
