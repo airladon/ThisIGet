@@ -10,18 +10,13 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'qrParallelSplitOfTriangleSides',
-  'qrParallelSplitOfTriangleHighlight',
-  'qrParallelSplitOfTriangleGrey',
-  // 'darkGrey',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrParallelSplitOfTriangleSides = colors.get('blue', 'base').rgb;
+  colors.qrParallelSplitOfTriangleHighlight = colors.get('red').rgb;
+  colors.qrParallelSplitOfTriangleGrey = colors.get('grey', 'base').rgb;
 
   // const side = text => ({
   //   label: {
