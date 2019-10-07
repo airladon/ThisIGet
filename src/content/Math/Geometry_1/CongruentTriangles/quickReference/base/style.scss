@@ -1,14 +1,1 @@
-@import '../../../../../../css/color';
-
-
-$colors: (
-  qrCongruent_sides:             color('blue'),
-  qrCongruent_angles:            color('red'),
-  qrCongruent_pads:              color('yellow', 'darkest'),
-  // construction:      color('yellow', 'darkest'),
-  // disabled:          color('diagram', 'disabled', 'darker'),
-);
-
-#topic__content {
-  @include color_vars($colors);
-}
+//

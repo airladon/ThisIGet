@@ -28,11 +28,11 @@
 }
 
 .topic__congruent_angles_summary__label {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   width: calc(var(--topic__diagram-font-size) * 15);
 }
 
 .topic__congruent_angles_summary__label_warning {
-  color: color('diagram', 'warning');
+  color: #EB261F;
 }

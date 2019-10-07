@@ -1,17 +1,17 @@
-@import '../../../geometry';
+// @import '../../../geometry';
 
-$colors: (
-  sides:             color('blue'),
-  angles:            color('red'),
-  pads:              color('yellow', 'darkest'),
-  construction:      color('yellow', 'darkest'),
-  disabled:          color('diagram', 'disabled', 'darker'),
-  highlight:         color('green'),
-);
+// $colors: (
+//   sides:             color('blue'),
+//   angles:            color('red'),
+//   pads:              color('yellow', 'darkest'),
+//   construction:      color('yellow', 'darkest'),
+//   disabled:          color('diagram', 'disabled', 'darker'),
+//   highlight:         color('green'),
+// );
 
-body {
-  @include color_vars($colors);
-}
+// body {
+//   @include color_vars($colors);
+// }
 
 #id_diagram__text__low {
   z-index: 1;
