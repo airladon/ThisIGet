@@ -611,6 +611,7 @@ const themes = {
         background: ['grey', 'darker'],
         text: ['white', 'light'],
         textHover: ['white', 'base'],
+        border: ['grey', 'darkest'],
       },
       button: {
         text: ['black', 'lighter'],
@@ -708,6 +709,8 @@ class Colors {
         .toCssVar('--color-site-menus-text-hover');
       this.get('site', 'menus', 'background')
         .toCssVar('--color-site-menus-background');
+      this.get('site', 'menus', 'border')
+        .toCssVar('--color-site-menus-border');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
     }
