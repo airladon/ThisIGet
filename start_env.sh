@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Setup colors and text formatting
 red=`tput setaf 1`
 green=`tput setaf 2`
@@ -103,7 +105,7 @@ fi
 
 if [ "$1" = 'deploy_pipeline' ];
 then
-  HOST_PORT=5002
+  HOST_PORT=5004
   CONTAINER_PORT=5000
   CMD="/opt/app/deploy_pipeline.sh"
   DOCKERFILE="Dockerfile_dev"
