@@ -10,8 +10,15 @@ reset=`tput sgr0`
 DOCKERFILE='Dockerfile_prod'
 HOST_PORT=5000
 CMD=''
-PROJECT_PATH=`pwd`
 FAIL=0
+
+LOCAL_PROJECT_PATH=`pwd`
+if [ $HOST_PATH ];
+then
+  PROJECT_PATH=$HOST_PATH
+else
+  PROJECT_PATH=`pwd`
+fi
 
 stop_dev_server() {
   SERVER_RUNNING=`docker ps --format {{.Names}} \
@@ -42,7 +49,7 @@ check_status() {
   fi
 }
 
-if [ $1 != pupp ];
+if [ "$1" != pupp ];
 then
   echo
   echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
@@ -61,32 +68,32 @@ then
   DOCKERFILE=Dockerfile_$1
 fi
 
-if [ $1 = "prod" ];
+if [ "$1" = "prod" ];
 then
   HOST_PORT=5000
   CONTAINER_PORT=4000
   stop_dev_server
 fi
 
-if [ $1 = "stage" ];
+if [ "$1" = "stage" ];
 then
   HOST_PORT=5001
   CONTAINER_PORT=5000
 fi
 
-if [ $1 = "dev" ];
+if [ "$1" = "dev" ];
 then
   HOST_PORT=5002
   CONTAINER_PORT=5000
 fi
 
-if [ $1 = "pupp" ];
+if [ "$1" = "pupp" ];
 then
   # DOCKERFILE="Dockerfile_puppeteer"
   CONTAINER_PORT=5000
 fi
 
-if [ $1 = 'dev-server' ];
+if [ "$1" = 'dev-server' ];
 then
   HOST_PORT=5003
   CONTAINER_PORT=5000
@@ -94,7 +101,7 @@ then
   CMD=/opt/app/dev-server.sh
 fi
 
-if [ $1 = 'deploy_pipeline' ];
+if [ "$1" = 'deploy_pipeline' ];
 then
   HOST_PORT=5002
   CONTAINER_PORT=5000
@@ -103,32 +110,32 @@ then
 fi
 
 
-if [ $1 != "pupp" ];
+if [ "$1" != "pupp" ];
 then
   echo
   echo "${bold}${cyan}================= Building container ===================${reset}"
   cp containers/$DOCKERFILE Dockerfile
 
   GUNICORN_PORT=4000
-  docker build -t devenv-$1 .
+  docker build -t "devenv-$1" .
   rm Dockerfile
 fi
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
 echo
 echo "${bold}${cyan}================= Starting container ===================${reset}"
-if [ $1 = 'prod' ];
+if [ "$1" = 'prod' ];
 then
   docker run -it --rm \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
     --env-file=$PROJECT_PATH/containers/env.txt \
-    devenv-$1
-elif [ $1 = 'pupp' ];
+    "devenv-$1"
+elif [ "$1" = 'pupp' ];
 then
   docker run -it --rm \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
     -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
@@ -179,9 +186,9 @@ else
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    --env-file=$PROJECT_PATH/containers/env.txt \
+    --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
-    devenv-$1 $CMD
+    "devenv-$1" $CMD
 fi
