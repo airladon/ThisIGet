@@ -598,6 +598,7 @@ const themes = {
     site: {
       primary: ['logo', 'base'],
       primaryDark: ['logoDark', 'base'],
+      logoText: ['white', 'base'],
       warning: ['red', 'base'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
@@ -681,6 +682,9 @@ class Colors {
       this.get('site', 'text').toCssVar('--color-site-text');
       this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
+      this.get('site', 'primary').toCssVar('--color-site-primary');
+      this.get('site', 'warning').toCssVar('--color-site-warning');
+      this.get('site', 'logoText').toCssVar('--color-site-logo-text');
 
       // Buttons
       this.get('site', 'button', 'text').toCssVar('--color-site-button-text');

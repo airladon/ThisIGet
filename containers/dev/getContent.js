@@ -7,7 +7,7 @@ function entryPoints(buildMode) {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
     home: ['whatwg-fetch', './src/js/views/home/home.js'],
-    input: './src/js/views/input/input',
+    input: './src/js/views/input/input.js',
     learningPaths: './src/js/views/learningPaths/learningPaths.js',
     about: './src/js/views/information/about.js',
     contact: './src/js/views/information/contact.js',

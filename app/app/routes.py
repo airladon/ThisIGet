@@ -366,6 +366,8 @@ def login(username=''):
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = LoginForm()
     if username:
         # user = Users.query.filter_by(username=username).first()
@@ -399,7 +401,7 @@ def login(username=''):
             return redirect(url_for(
                 'confirm_account_message', username=user.get_username()))
     return render_template(
-        'login.html', form=form, css=css, js=js)
+        'login.html', form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
@@ -411,6 +413,8 @@ def create():
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users()
@@ -424,7 +428,8 @@ def create():
         # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
-    return render_template('createAccount.html', form=form, css=css, js=js)
+    return render_template(
+        'createAccount.html', form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/confirmAccountEmailSent/<username>', methods=['GET', 'POST'])
@@ -436,6 +441,8 @@ def confirm_account_message(username):
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username)).first()
@@ -454,7 +461,8 @@ def confirm_account_message(username):
         finish account registration.''', 'before')
 
     return render_template(
-        'confirmAccountMessage.html', form=form, js=js, css=css
+        'confirmAccountMessage.html',
+        form=form, js=js, css=css, tools_js=tools_js,
     )
 
 
@@ -497,6 +505,8 @@ def reset_password_request():
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
@@ -511,6 +521,7 @@ def reset_password_request():
         return redirect(url_for('reset_password_request'))
     return render_template(
         'resetPasswordRequest.html', form=form, css=css, js=js,
+        tools_js=tools_js,
     )
 
 
@@ -521,6 +532,8 @@ def reset_password(token):
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
@@ -533,7 +546,9 @@ def reset_password(token):
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')
         return redirect(url_for('login', username=user.get_username()))
-    return render_template('resetPassword.html', form=form, css=css, js=js)
+    return render_template(
+        'resetPassword.html', form=form, css=css, js=js,
+        tools_js=tools_js)
 
 
 @app.route('/logout', strict_slashes=False)

@@ -8,7 +8,7 @@ $width: 250px;
 
 .input_form__info {
   font-size: 0.8em;
-  color: grey;
+  color: var(----color-site-disabled);
   width: $width;
   margin-left: auto;
   margin-right: auto;
@@ -33,7 +33,7 @@ $width: 250px;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  background-color: color('site', 'primary');
+  background-color: var(--color-site-primary);
   -webkit-box-shadow: 0 5px 7px #333;
   -moz-box-shadow: 0 5px 7px #333;
   box-shadow: 0 5px 7px #333;
@@ -61,7 +61,7 @@ $width: 250px;
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  color: white;
+  color: var(--color-site-logo-text);
   height: 100%;
   width: 100%;
   font-size: 18px;
@@ -71,7 +71,7 @@ $width: 250px;
   margin-top: 20px;
   margin-bottom: 25px;
   font-size: 1.2em;
-  color: color('site', 'text');
+  color: var(--color-site-text);
 }
 
 // ///////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ $width: 250px;
   margin-bottom: 0;
   margin-bottom: 3px;
   font-size: 0.8em;
-  color: grey;
+  color: var(----color-site-disabled);
 }
 
 .input_form__check {
@@ -121,7 +121,7 @@ $width: 250px;
   position: absolute;
   text-align: center;
   font-size: 0.7em;
-  color: color('site', 'warning', 'light');
+  color: var(--color-site-warning);
   top: 56px;
   left: 0;
 }
@@ -142,23 +142,24 @@ $width: 250px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  background-color: color('site', 'safe');
-  color: white;
+  background-color: var(--color-site-background);
+  color: var(--color-site-button-text);
   font-size: 0.9em;
-  border: 0;
+  // border: 0;
   height: 2.3em;
-  width: $width;
+  width: 150px;
   border-radius: 5px;
+  border: 1px solid var(--color-site-button-border);
 }
 
 .input_form__submit_button:hover {
-  background-color: color('site', 'safe', 'light');
+  background-color: var(--color-site-button-hover-background);
 }
 
 .input_form__submit_ok_message_container {
   text-align: left;
   font-size: 0.9em;
-  color: color('site', 'text');
+  color: var(--color-site-text);
   bottom: -20px;
   width: $width;
   display: block;
@@ -176,7 +177,7 @@ $width: 250px;
   position: absolute;
   text-align: center;
   font-size: 0.7em;
-  color: color('site', 'warning', 'light');
+  color: var(--color-site-warning);
   top: 0;
   width: $width;
 }
@@ -209,6 +210,5 @@ $width: 250px;
 //   position: absolute;
 //   text-align: center;
 //   font-size: 0.7em;
-//   color: color('site', 'warning', 'light');
 //   top: -20px;
 // }
