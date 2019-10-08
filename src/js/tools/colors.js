@@ -622,6 +622,9 @@ const themes = {
           hoverBackground: ['logo', 'light'],
         },
       },
+      table: {
+        border: ['white', 'light'],
+      },
     },
     navbar: {
       // text: ['white', 'lighter'],
@@ -683,6 +686,7 @@ class Colors {
       this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
       this.get('site', 'primary').toCssVar('--color-site-primary');
+      this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
       this.get('site', 'warning').toCssVar('--color-site-warning');
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
 
@@ -704,6 +708,8 @@ class Colors {
         .toCssVar('--color-site-menus-text-hover');
       this.get('site', 'menus', 'background')
         .toCssVar('--color-site-menus-background');
+
+      this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
     }
     return Colors.instance;
   }
