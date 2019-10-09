@@ -71,7 +71,7 @@ check_status
 #     ./browser_test.sh test $JEST_OPTIONS
 #     check_status
 # fi
-./browser_test.sh test stage
+./browser_test.sh test stage.btest.js
 check_status
 
 ###########################################################################
