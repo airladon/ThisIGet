@@ -107,6 +107,10 @@ export default function tester(optionsOrScenario, ...scenarios) {
         }
       } else if (scenario === 'nextPrev') {
         allTests.push([1, [numPages, 1], optionsToUse]);
+      } else if (scenario === 'next') {
+        allTests.push([1, [numPages], optionsToUse]);
+      } else if (scenario === 'prev') {
+        allTests.push([numPages, [1], optionsToUse]);
       }
     } else {
       let fromPage = 1;
