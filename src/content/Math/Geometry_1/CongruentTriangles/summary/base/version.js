@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Summary of congruent triangles and SAS, SSA, ASA, AAS, SSS, AAA',
   htmlDescription: 'Facts only summary of congruent triangles and congruent triangle tests',

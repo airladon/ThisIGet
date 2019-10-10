@@ -1,15 +1,12 @@
-## Quiz
+<html><div class="simple_topic__quiz_instructions"><a href="javascript:window.location.href=window.location.href">Refresh</a> the page to get new question values</div></html>
 
-<!-- * Round answers to **two decimal places** -->
-* Refresh the page to get new questions
-
-### Question 1:
+### Question 1
 
 What would $|q1_angle_num|$ angles of $|q1_angles|$ be called?
 
 $|div q1_multichoice|$
 
-### Question 2:
+### Question 2
 
 ![](q2.png)
 
@@ -20,31 +17,31 @@ Are angles $|q2_angles|$?
 
 $|div q2_multichoice|$
 
-### Question 3:
+### Question 3
 
 Using the figure from Question 2, are angles $|q3_angles|$?
 
 $|div q3_multichoice|$
 
-### Question 4:
+### Question 4
 
 If angles A, B, and C are complementary, and angle A and B are $|q4_A|$º and $|q4_B|$º respectively, what is the value of C in degrees?
 
 <quiz entryInteger>$|q4_C|$</quiz>
 
-### Question 5:
+### Question 5
 
 If angles A, B, and C are supplementary, and angle A and B are $|q5_A|$º and $|q5_B|$º respectively, what is the value of C in degrees?
 
 <quiz entryInteger>$|q5_C|$</quiz>
 
-### Question 6:
+### Question 6
 
 If angles A, B, and C are explementary, and angle A and B are $|q6_A|$º and $|q6_B|$º respectively, what is the value of C in degrees?
 
 <quiz entryInteger>$|q6_C|$</quiz>
 
-### Question 7:
+### Question 7
 
 ![](supplementary.png)
 
@@ -52,7 +49,7 @@ If angles a and b are $|q7_A|$º and $|q7_B|$º respectively, what is the value 
 
 <quiz entryInteger>$|q7_C|$</quiz>
 
-### Question 8:
+### Question 8
 
 ![](complementary.png)
 
@@ -60,7 +57,7 @@ If angles a and b are $|q8_A|$º and $|q8_B|$º respectively, what is the value 
 
 <quiz entryInteger>$|q8_C|$</quiz>
 
-### Question 9:
+### Question 9
 
 ![](opposite.png)
 

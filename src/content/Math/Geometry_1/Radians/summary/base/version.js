@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Summary of what radians are and their relationship to radius and arc length',
   htmlDescription: '',

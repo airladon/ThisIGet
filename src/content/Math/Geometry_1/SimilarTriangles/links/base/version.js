@@ -5,7 +5,7 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
-  title: 'External Links',
+  title: 'External',
   description: 'External links to sources of information for Similar Triangles',
   htmlTitle: 'Similar Triangles Links',
   htmlDescription: 'Explanations, proofs, examples and questions about Similar Triangles>',

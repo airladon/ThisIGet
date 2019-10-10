@@ -91,12 +91,12 @@ export default class TopicButton extends React.Component <Props> {
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
-            {userRating || '-'}
+            {numHighRatings || '-'}
           </div>
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
-            {numHighRatings || '-'}
+            {userRating || '-'}
           </div>
         </td>
       </tr>
@@ -116,21 +116,21 @@ export default class TopicButton extends React.Component <Props> {
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_num_reviews">
-            Your
-          </div>
-          <div className="topic_button__rating_num_reviews">
-            Rating
-          </div>
-        </td>
-        <td className="topic_button__rating">
-          <div className="topic_button__rating_num_reviews">
-            {'Total'}
+            {'Num High'}
           </div>
           <div className="topic_button__rating_num_reviews">
             {
             //  '\u2605\u2605\u2605\u2605'
-            'Ratings ≥4'
+            'Ratings'
             }
+          </div>
+        </td>
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_num_reviews">
+            Your
+          </div>
+          <div className="topic_button__rating_num_reviews">
+            Rating
           </div>
         </td>
       </tr>

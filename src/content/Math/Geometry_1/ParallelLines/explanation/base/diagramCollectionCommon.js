@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import {
   makeAnglesClose, checkElementsForParallel,
 } from './tools';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramElementCollection,
   DiagramObjectLine,
@@ -20,26 +20,26 @@ export default class CommonCollection extends CommonDiagramCollection {
   _markings: {
     _l1: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _l2: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _l3: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
-      _mark2: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
+      _mark2: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _l4: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
-      _mark2: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
+      _mark2: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

@@ -1,41 +1,41 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import diagramLayout from './layout';
 // import textureMap from '../../../../../common/images/textureMaps/circles.png';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramElementCollection,
   DiagramObjectLine,
   Transform, Point, Equation,
 } = Fig;
 // const textureFile = `/static/dist/${textureMap}`;
 export default class CommonCollection extends CommonDiagramCollection {
-  _circle: DiagramElementPrimative;
-  _wheel: DiagramElementPrimative;
+  _circle: DiagramElementPrimitive;
+  _wheel: DiagramElementPrimitive;
   _properties: {
     _circumference: {
-      _line: DiagramElementPrimative;
-      _arrow: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
+      _arrow: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _diameter: DiagramObjectLine;
-    _d: DiagramElementPrimative;
-    _c: DiagramElementPrimative;
-    _darkCircle: DiagramElementPrimative;
+    _d: DiagramElementPrimitive;
+    _c: DiagramElementPrimitive;
+    _darkCircle: DiagramElementPrimitive;
     _eqn: {
-      _c: DiagramElementPrimative;
-      _d: DiagramElementPrimative;
-      _equals: DiagramElementPrimative;
-      _pi: DiagramElementPrimative;
+      _c: DiagramElementPrimitive;
+      _d: DiagramElementPrimitive;
+      _equals: DiagramElementPrimitive;
+      _pi: DiagramElementPrimitive;
     } & Equation;
   } & DiagramElementCollection;
 
   propertiesPosition: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     transform: Transform = new Transform('Circle').rotate(0).translate(0, 0),
   ) {
     const layout = diagramLayout();

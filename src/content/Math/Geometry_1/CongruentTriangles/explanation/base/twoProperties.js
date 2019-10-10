@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import diagramLayout from './twoPropertiesLayout';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   // DiagramElementCollection,
@@ -23,28 +23,28 @@ const { rand } = Fig.tools.math;
 
 export default class CommonCollectionTwoProp extends CommonDiagramCollection {
   _tri: {
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _side01: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
     _side12: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
     _side20: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
-    _angle0: { _label: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle1: { _label: DiagramElementPrimative } & DiagramObjectAngle;
-    _angle2: { _label: DiagramElementPrimative } & DiagramObjectAngle;
+    _angle0: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle1: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+    _angle2: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
   } & DiagramObjectPolyLine;
 
   lastAuto: 'sideside' | 'angleangle' | 'adjacentAngleSide' | 'oppositeAngleSide';
   lastValue: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object = diagramLayout(),
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

@@ -3,14 +3,14 @@ import Fig from 'figureone';
 import {
   PresentationFormatContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/PresentationFormatContent';
+} from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 
 const {
   click,
@@ -29,7 +29,7 @@ class Content extends PresentationFormatContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/AngleGroups/base',
@@ -124,8 +124,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'In fact, a triangle\'s side lengths and angles |are all related|. If you know any four (and sometimes three), you can calculate the remainder!',
-        'In this lesson we will focus on the |relationship between angles|.',
-        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future lessons.',
+        'In this topic we will focus on the |relationship between angles|.',
+        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future topics.',
       ]),
     });
 
@@ -564,7 +564,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        '|Future lessons| in this learning path examine |equilateral_triangles|, |isosceles_triangles| and |right_angle_triangles| in more detail.',
+        '|Future topics| in this learning path examine |equilateral_triangles|, |isosceles_triangles| and |right_angle_triangles| in more detail.',
         'These triangles all have special |properties| and as such are used in many places to help |simplfy problems|.',
       ]),
       modifiers: {

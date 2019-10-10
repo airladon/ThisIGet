@@ -5,7 +5,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Introduction to Angles.",
           "htmlTitle": "Introduction to Angles",
           "htmlDescription": "Introduction to the concept of angle",
@@ -14,8 +14,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -24,7 +28,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "Summary of Angles introduction",
           "htmlTitle": "Summary of Angles introduction",
           "htmlDescription": "Definition of an angle and where the name comes from",
@@ -44,7 +48,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Example problems with complementary, supplementary and explementary angles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Example problems with complementary angles, supplementary angles and explementary angles",
           "htmlDescription": "Identify and calculate complementary, supplementary and explementary angles",
@@ -55,7 +59,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Explanation of complementary, supplementary, and explementary angles.",
           "htmlTitle": "Complementary, supplementary and explementary angles explanation",
           "htmlDescription": "What are complementary angles, supplementary angles and explementary angles",
@@ -66,7 +70,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links to Angle Groups",
+          "title": "External",
           "description": "External links to sources of information for Angle Groups>",
           "htmlTitle": "Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links",
           "htmlDescription": "Explanations, proofs, examples and questions about adjacent angles",
@@ -111,8 +115,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -132,7 +140,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Complementary, Supplementary and Explementary Angles.",
+          "title": "Interative",
           "description": "Summary of complementary, supplementary and explementary Angles.",
           "htmlTitle": "Complementary, supplementary and explementary angles summary",
           "htmlDescription": "Summary of complementary angles, supplementary angles and explementary angles",
@@ -152,7 +160,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle",
           "htmlDescription": "Dynamic diagram that lets you explore the different types of important angles",
@@ -161,8 +169,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -171,7 +183,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Create the Angle",
           "description": "",
           "htmlTitle": "Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full",
           "htmlDescription": "",
@@ -191,7 +203,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Self discover the relationships between opposite angles, corresponding angles, alternate angles and interior angles",
           "htmlDescription": "Using parallel lines and supplementary angles, all these relationships can be proven",
@@ -202,7 +214,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of related angles",
+          "title": "Various Geometries",
           "description": "Examples of calculating opposite, corresponding, alternate and interior angles",
           "htmlTitle": "Opposite angles, corresponding angles, alternate angles and interior angles calculation examples",
           "htmlDescription": "Examples of finding angles in different geometries using the concepts of opposite, corresponding, alternate, interior and supplementary angles",
@@ -213,7 +225,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Opposite angles, corresponding angles, alternate angles and interior angles",
           "htmlDescription": "Introduction to opposite, corresponding, alternate and interior angles and their proofs",
@@ -276,8 +288,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -286,7 +302,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Simple geometries",
+          "title": "Simple Geometries",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -295,7 +311,7 @@
         },
         "complex": {
           "type": "singlePage",
-          "title": "More complex geometries",
+          "title": "Advanced Geometries",
           "description": "Find angles using opposite, corresponding, alternate, interior and supplementary angles",
           "htmlTitle": "Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles",
           "htmlDescription": "Find angles using opposite, corresponding, alternate, interior and supplementary angles",
@@ -306,7 +322,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of opposite, corresponding, adjacent and interior angles",
           "htmlDescription": "",
@@ -326,7 +342,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of area",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Area examples",
           "htmlDescription": "Calculation examples of areas for different shapes",
@@ -337,7 +353,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to area, rectangle area and square area",
           "htmlDescription": "Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are",
@@ -386,8 +402,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -396,7 +416,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Create an area",
+          "title": "Create an Area",
           "description": "",
           "htmlTitle": "Quiz: Create a rectangle or square with area",
           "htmlDescription": "Create a rectangle or square that has some defined area on this dynamic page",
@@ -407,7 +427,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of area, rectangle area and square area.",
           "htmlDescription": "Summary of area concept, and equations for rectangle area and square area",
@@ -427,7 +447,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Area Through Pieces",
           "description": "",
           "htmlTitle": "Self discover what the area of a circle is",
           "htmlDescription": "Figure out why the area of a circle is what it is",
@@ -438,7 +458,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Circle Area",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Circle area examples",
           "htmlDescription": "Examples of calculations involving circle area",
@@ -449,7 +469,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Intuitive derivation of circle area",
           "htmlDescription": "Find the equation for circle area using triangles",
@@ -507,8 +527,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -517,7 +541,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Calculating Properties",
           "description": "",
           "htmlTitle": "Quiz: Calculate the circle property",
           "htmlDescription": "Calculate circle property from either the radius, diameter, area or circumference",
@@ -528,7 +552,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of Circle Area",
           "htmlDescription": "Area of a circle equation",
@@ -548,7 +572,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "From Rectangles and Congruent Triangles",
           "description": "",
           "htmlTitle": "Self discover what the area of a triangle is",
           "htmlDescription": "Figure out why the area of a triangle depends just on its base and height",
@@ -559,7 +583,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Triangle area examples",
           "htmlDescription": "Calculation examples using area of a triangle",
@@ -570,7 +594,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Triangle Area derivation and proof",
           "htmlDescription": "Explanation on why area of a triangle is what it is",
@@ -612,8 +636,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -622,7 +650,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Make triangle with target area",
+          "title": "Make an Area",
           "description": "",
           "htmlTitle": "Quiz - Create a triangle with a given area",
           "htmlDescription": "Drag the corners of a triangle to change its height and base to get the target area",
@@ -633,7 +661,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Area of a triangle",
           "htmlDescription": "Summary of triangle area",
@@ -653,7 +681,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Circle Radius, Diameter and Circumference",
+          "title": "Calculation of Properties",
           "description": "Examples calculations of diameter, radius and circumference",
           "htmlTitle": "Example calculations of radius, diameter and circumference",
           "htmlDescription": "Examples showing how to calculate radius, diameter and circumference of circles from known properties",
@@ -664,7 +692,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Presentation form - interactive.",
           "htmlTitle": "Introduction to circles, their history and properties",
           "htmlDescription": "Introduction to circle, diameter, radius, circumference, center point. Relationships between radius, diameter and circumference.",
@@ -720,8 +748,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -770,7 +802,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Congruence Tests",
           "description": "",
           "htmlTitle": "Self discover congruent triangles and how you can test if two triangles are the same",
           "htmlDescription": "Given the definition of congruent, you can work out the tests to tell if two triangles are congruent",
@@ -781,7 +813,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of finding and using Congruent Triangles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples on how to find and use congruent triangles",
           "htmlDescription": "Examples showing how to identify congruent triangles, and then how to use the triangles to find unknown properties",
@@ -792,7 +824,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Intuitive",
           "description": "",
           "htmlTitle": "Congruent triangles and how to determine congruence",
           "htmlDescription": "Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests",
@@ -801,7 +833,7 @@
         },
         "fromSAS": {
           "type": "singlePage",
-          "title": "Show SSS, ASA and AAS from SAS",
+          "title": "SSS, ASA and AAS from SAS",
           "description": "",
           "htmlTitle": "Prove SSS, ASA and AAS from SAS",
           "htmlDescription": "Proofs for SSS, ASA and AAS triangle congruence from SAS",
@@ -871,8 +903,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -881,7 +917,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Determine if Congruent",
           "description": "",
           "htmlTitle": "Quiz - Determine if two triangles are congruent",
           "htmlDescription": "Given three properties of two triangles, can you determine if they are congruent?",
@@ -892,7 +928,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of congruent triangles and SAS, SSA, ASA, AAS, SSS, AAA",
           "htmlDescription": "Facts only summary of congruent triangles and congruent triangle tests",
@@ -932,7 +968,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Explanation on why we use degrees as a measure of angle",
           "htmlDescription": "How angle is measured, why use degrees and common angles in degrees",
@@ -967,8 +1003,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -977,7 +1017,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "General Questions about Degrees",
+          "title": "Angles and Circles",
           "description": "Answer general questions about measuring angle and degrees",
           "htmlTitle": "Quiz - Measuring angles and degrees",
           "htmlDescription": "Answer general questions about measuring angle and degrees",
@@ -988,7 +1028,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of using degrees to measure angle",
           "htmlDescription": "History of word, interactive diagram to see different angles in degrees",
@@ -1008,7 +1048,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove Properties",
           "description": "",
           "htmlTitle": "Self discover why an equilateral trianglehas equal angles",
           "htmlDescription": "Figure out why any equilateral triangle also have three equal angles",
@@ -1019,7 +1059,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using equilateral triangles",
           "htmlDescription": "Examples showing how how to use the properties of an equilateral triangle to solve different problems",
@@ -1030,7 +1070,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Equilateral triangle derivation from an isosceles triangle",
           "htmlDescription": "Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles",
@@ -1072,8 +1112,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1082,7 +1126,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Equilateral Quiz",
+          "title": "Using Equilateral Triangles",
           "description": "",
           "htmlTitle": "Equilateral triangles quiz",
           "htmlDescription": "Solve problems with equilateral triangles",
@@ -1093,7 +1137,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Equilateral triangle summary",
           "htmlDescription": "Interactive diagram showing properties of an equilateral triangle",
@@ -1113,7 +1157,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Relationship",
           "description": "",
           "htmlTitle": "Self discover the relationship between the external and internal angles of a triangle",
           "htmlDescription": "Using knowledge of total angle in a triangle, and supplementary angles you can find the relationship between a triangle\\'s external angle and its two opposite internal angles",
@@ -1124,7 +1168,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "External angle calculations",
+          "title": "Various Triangles",
           "description": "",
           "htmlTitle": "External angle calculation examples",
           "htmlDescription": "Examples of geometries where calculating the external angle of a triangle is needed",
@@ -1135,7 +1179,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "External angles (also called exterior angles) in a triangle explanation through presentation",
           "htmlDescription": "Proof of external angles in a triangle equalling sum of opposite internal angles",
@@ -1144,7 +1188,7 @@
         },
         "simple": {
           "type": "singlePage",
-          "title": "Full explanation in single page",
+          "title": "Descriptive",
           "description": "",
           "htmlTitle": "External angles (also called exterior angles)  in a triangle as a single page explanation",
           "htmlDescription": "Proof of external angles in a triangle equalling sum of opposite internal angles",
@@ -1214,8 +1258,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1224,7 +1272,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - find the external angle of a triangle",
           "htmlDescription": "Find the external angle (also called exterior angle) in a triangle quiz",
@@ -1235,7 +1283,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of triangle external angle (or exterior angle)",
           "htmlDescription": "Interactive diagram showing and describing the external angle of a triangle",
@@ -1255,7 +1303,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive - Slides",
           "description": "Motivation to studying shapes.",
           "htmlTitle": "Why Study Shapes?",
           "htmlDescription": "Introduction to shapes, naming, history and why we should study them",
@@ -1264,7 +1312,7 @@
         },
         "singlePage": {
           "type": "singlePage",
-          "title": "Descriptive - Single Page",
+          "title": "Descriptive & Interactive - Single Page",
           "description": "Motivation to studying shapes.",
           "htmlTitle": "Why Study Shapes?",
           "htmlDescription": "Introduction to shapes, naming, history and why we should study them",
@@ -1273,8 +1321,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1290,7 +1342,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover why an isosceles triangles can have two equal sides and angles",
           "htmlDescription": "Figure out why any triangle that has two equal sides also has two equal angles, and why any triangle with two equal angles has two equal sides",
@@ -1301,7 +1353,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using isosceles triangles",
           "htmlDescription": "Examples showing how how to use the properties of an isosceles triangle to solve different problems",
@@ -1312,7 +1364,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Isosceles triangles and proof",
           "htmlDescription": "Proof for if two sides are equal why two angles are equal and vise versa",
@@ -1361,8 +1413,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1371,7 +1427,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the missing side or angle of an isosceles triangle",
           "htmlDescription": "Given a set of sides and angles, find the missing one",
@@ -1382,7 +1438,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of Isosceles triangle and its properties",
           "htmlDescription": "Isosceles triangle, side and angle equality, split line properties",
@@ -1402,7 +1458,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "htmlTitle": "Self discover the properties of distance between parallel lines",
           "htmlDescription": "Figure out why the shortest distance between parallel lines is perpendicular and constant",
@@ -1413,7 +1469,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Using Parallel Line Distance",
           "description": "",
           "htmlTitle": "Parallel line distance examples",
           "htmlDescription": "Examples of problems where know the properties of parallel line distance is useful",
@@ -1424,7 +1480,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to the distance between parallel lines",
           "htmlDescription": "Investigate the property of distance between parallel lines",
@@ -1433,8 +1489,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1443,7 +1503,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of parallel line distance property",
           "htmlDescription": "Parallel line distance is the length of the perpendicular line between them",
@@ -1463,7 +1523,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Interactive introduction to parallel lines",
           "htmlDescription": "See what parallel lines are, and when lines are parallel",
@@ -1472,8 +1532,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1482,7 +1546,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Quiz - Move lines to be parallel and find parallel lines",
           "htmlDescription": "Interactive quiz to make lines parallel, and find parallel lines in a selection of lines",
@@ -1493,7 +1557,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Introduction to parallel lines summary",
           "htmlDescription": "",
@@ -1513,7 +1577,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationships",
           "description": "",
           "htmlTitle": "Self discover the properties of a triangle split with a parallel line",
           "htmlDescription": "Figure out why a triangle split with a parallel line will create a proportional triangle",
@@ -1524,7 +1588,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangles split with parallel lines",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Triangles split with parallel lines calculation examples",
           "htmlDescription": "Examples of triangle calculations where a triangle is split with a parallel line",
@@ -1535,7 +1599,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Splitting a triangle with a parallel line",
           "htmlDescription": "Proof that splitting a triangle with a parallel line results in a similar triangle",
@@ -1593,8 +1657,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1603,7 +1671,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Splitting a triangle with a parallel line",
           "htmlDescription": "Summary showing splitting a triangle with a parallel line results in a similar triangle",
@@ -1623,7 +1691,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationship",
           "description": "",
           "htmlTitle": "Self discover the angle of the distance between a point and line",
           "htmlDescription": "Figure out why the shortest distance between a point and a line is perpendicular to the line",
@@ -1634,7 +1702,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to distance between a point and line",
           "htmlDescription": "Properties of distance between point and a line",
@@ -1643,8 +1711,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1653,7 +1725,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of point line distance property",
           "htmlDescription": "",
@@ -1673,7 +1745,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Internal Angles",
           "description": "",
           "htmlTitle": "Self discover the total internal angle of a quadrangle",
           "htmlDescription": "Figure out the total internal angle of a quadrangle or quadrilateral yourself",
@@ -1684,7 +1756,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Quadrangle internal angle calculations",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Quadrangle or Quadrilateral interal angle calculation examples",
           "htmlDescription": "Examples of geometries where calculating the total internal angle of a quadrangle is needed",
@@ -1695,7 +1767,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to quadrangles and quadrilaterals",
           "htmlDescription": "Quadrangles, quadrilaterals and their properties",
@@ -1737,8 +1809,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1747,7 +1823,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle in the quadrangle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -1758,7 +1834,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Quadrangles (quadrilaterals) summary",
           "htmlDescription": "",
@@ -1778,7 +1854,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Example problems using Radians",
+          "title": "Calculations with Radians",
           "description": "Use radians to calculate radius, angle and arc length",
           "htmlTitle": "Calculating radius, arc length and angle using radians",
           "htmlDescription": "Example problems showing how to use radians to calculate radius, arc length and angle when given two other circle properties",
@@ -1789,7 +1865,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to radians and why we use them",
           "htmlDescription": "Radians and their relationship with arc length and radius",
@@ -1838,8 +1914,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1848,7 +1928,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Change Circle to Match",
+          "title": "Change Arc to Match",
           "description": "",
           "htmlTitle": "Quiz: Find the arc or angle that matches the target",
           "htmlDescription": "Interactive quiz where you can change the diagram to find the target angle or arc length",
@@ -1857,7 +1937,7 @@
         },
         "calc": {
           "type": "singlePage",
-          "title": "Calculate Properties with Radians",
+          "title": "Calculate Properties",
           "description": "Calculate properties of a circle from other properties using radians",
           "htmlTitle": "Calculate circle properties using radians",
           "htmlDescription": "Calculate properties of a circle from other properties using radians",
@@ -1868,7 +1948,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "htmlTitle": "Summary of what radians are and their relationship to radius and arc length",
           "htmlDescription": "",
@@ -1888,7 +1968,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover why a rectangles opposite sides are equal and parallel",
           "htmlDescription": "Figure out why a rectangle has opposite sides that are equal and parallel",
@@ -1899,7 +1979,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Rectangle calculation examples",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Examples of using rectangle properties",
           "htmlDescription": "Examples showing how to use the properties of a rectangle to examine geometries",
@@ -1910,7 +1990,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to rectangles and squares and derivation of their properties",
           "htmlDescription": "Proof showing why a rectangles opposite sides are equal and parallel",
@@ -1959,8 +2039,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1969,7 +2053,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of rectangle and square properties",
           "htmlDescription": "",
@@ -1990,7 +2074,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "htmlTitle": "Self discover the properties of a right angle triangle",
           "htmlDescription": "Figure out why the hypotenuse is the longest side and find the pythagoean theorem",
@@ -2001,7 +2085,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Right Angle Triangle calculations",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Right Angle Triangle example calculations",
           "htmlDescription": "Examples showing how to use the properties of right angle triangles to solve various problems",
@@ -2012,7 +2096,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Properties of right angle triangles, and the Pythagorean theorem.",
           "htmlTitle": "Right angle triangle introduction and pythagoean theorem proof",
           "htmlDescription": "Right angle triangle introduction, hypotenuse, area and pythagorean theorem derivation.",
@@ -2021,7 +2105,7 @@
         },
         "pythagorus_proof": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
+          "title": "Pythagorean Theorem",
           "description": "Derivation using area of four right angle triangles",
           "htmlTitle": "Pythagorean Theorem Derivation",
           "htmlDescription": "Derivation using area of four right angle triangles",
@@ -2091,8 +2175,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -2101,7 +2189,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find the Unknown Angle",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle, side or area in a right angle triangle.",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2112,7 +2200,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Properties",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Right Angle Triangle Summary",
           "htmlDescription": "Right angle triangle definition including hypotenuse, area and pythagorean theorem.",
@@ -2132,7 +2220,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "htmlTitle": "Self discover why longer sides are opposite larger angles in a triangle",
           "htmlDescription": "Figure out why the length of a triangle\\'s side depends on the size of the oppostite angle",
@@ -2143,7 +2231,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangle side angle relationships",
+          "title": "Various Geometries",
           "description": "",
           "htmlTitle": "Triangle side angle relationship examples",
           "htmlDescription": "Use the relationships between a triangles side and angle to solve different geometries",
@@ -2154,7 +2242,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to relationship between triangle side length and angle",
           "htmlDescription": "Proof of why larger angles are opposite longer sides in a triangle",
@@ -2203,8 +2291,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -2213,7 +2305,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "htmlTitle": "Quiz - Find the largest or smallest side or angle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2224,7 +2316,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "htmlTitle": "Summary of relationship between side and angle in a triangle",
           "htmlDescription": "",
@@ -2282,7 +2374,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links",
+          "title": "External",
           "description": "External links to sources of information for Similar Triangles",
           "htmlTitle": "Similar Triangles Links",
           "htmlDescription": "Explanations, proofs, examples and questions about Similar Triangles>",
@@ -2330,7 +2422,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Interactive",
+          "title": "Properties and Types",
           "description": "",
           "htmlTitle": "Self discover what a triangle is, the types of triangle and the relationship between angles.",
           "htmlDescription": "Stand together with the great mathematicians and scientists by discovering the relationship between angles of a triangle yourself",
@@ -2352,7 +2444,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "htmlTitle": "Introduction to triangles and their properties",
           "htmlDescription": "Proof that triangle total angle equals 180º",
@@ -2401,8 +2493,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -2411,7 +2507,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Total Angle",
+          "title": "Find the Angle",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown angle in the triangle",
           "htmlDescription": "Dynamic quiz where no two questions are the same",
@@ -2420,7 +2516,7 @@
         },
         "types": {
           "type": "presentation",
-          "title": "Triangle Types",
+          "title": "Create a Triangle",
           "description": "",
           "htmlTitle": "Quiz - Create a triangle of given type",
           "htmlDescription": "Create an acute triangle, right angle triangle, obtuse triangle, equilateral triangle, isosceles triangle or scalene triangle",

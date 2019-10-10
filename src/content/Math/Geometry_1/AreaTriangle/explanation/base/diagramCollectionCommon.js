@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramObjectPolyLine,
@@ -26,8 +26,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   _area1: {
-    _leftFill: DiagramElementPrimative;
-    _rightFill: DiagramElementPrimative;
+    _leftFill: DiagramElementPrimitive;
+    _rightFill: DiagramElementPrimitive;
     _tri: DiagramObjectPolyLine;
     _rect: DiagramObjectPolyLine;
     _base: DiagramObjectLine;
@@ -35,9 +35,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   _area2: {
-    _leftFill: DiagramElementPrimative;
-    _rightFill: DiagramElementPrimative;
-    _triFill: DiagramElementPrimative;
+    _leftFill: DiagramElementPrimitive;
+    _rightFill: DiagramElementPrimitive;
+    _triFill: DiagramElementPrimitive;
     _tri: DiagramObjectPolyLine;
     _rect: DiagramObjectPolyLine;
     _base: DiagramObjectLine;
@@ -45,21 +45,21 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   _intro: {
-    _grid: DiagramElementPrimative;
-    _triangle: DiagramElementPrimative;
+    _grid: DiagramElementPrimitive;
+    _triangle: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _implications: {
     _base: DiagramObjectLine;
     _height: DiagramObjectLine;
-    _grid: DiagramElementPrimative;
+    _grid: DiagramElementPrimitive;
     _tri: {
-      _line: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
     } & DiagramObjectPolyLine;
-    _text: DiagramElementPrimative;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _text: DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _height1: {
@@ -81,7 +81,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   area: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

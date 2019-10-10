@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   // DiagramObjectPolyLine,
@@ -24,19 +24,19 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   _adjacent: DiagramObjectLine;
   _unknown: DiagramObjectLine;
   _opposite: DiagramObjectLine;
-  _constructionLine: { _line: DiagramElementPrimative } & DiagramObjectLine;
+  _constructionLine: { _line: DiagramElementPrimitive } & DiagramObjectLine;
   _adjacentMovePad: {
     move: {
       limitLine: Line;
     };
-  } & DiagramElementPrimative;
+  } & DiagramElementPrimitive;
 
-  _constructionCircle: DiagramElementPrimative;
+  _constructionCircle: DiagramElementPrimitive;
 
   toggle: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

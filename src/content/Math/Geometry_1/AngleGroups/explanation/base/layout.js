@@ -10,18 +10,14 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'angleA',
-  'angleB',
-  'angleC',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
-  // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const layout: Object = baseLayout();
   const { colors } = layout;
+  colors.lines = colors.get('blue').rgb;
+  colors.angleA = colors.get('red').rgb;
+  colors.angleB = colors.get('green').rgb;
+  colors.angleC = colors.get('yellow').rgb;
   const radius = 1.3;
   const width = 0.03;
 

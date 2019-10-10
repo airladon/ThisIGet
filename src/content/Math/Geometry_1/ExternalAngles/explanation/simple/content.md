@@ -1,10 +1,8 @@
-## External Angles of a Triangle
-
 Consider a triangle with one of its sides extended beyond the corner.
 
 ![](./fig.png)
 
-An $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{100,100,100}\color{g}external\ angle$$ (also called $$\color{g}exterior\ angle$$) is the angle formed between the extended side and the adjacent side in the triangle.
+An $$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{100,100,100}\color{g}external\ angle$$ (also called $$\color{g}exterior\ angle$$) is the angle formed between the extended side and the adjacent side in the triangle.
 
 
 We know the sum of the angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00A89D)) add to 180º:

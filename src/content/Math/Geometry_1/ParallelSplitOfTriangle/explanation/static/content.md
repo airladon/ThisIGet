@@ -1,8 +1,6 @@
-## Triangle split with a Parallel Line
-
 ### Right Angle Triangle Split
 
-Start with a [[right angle triangle]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Definition',#00756F)) with sides $$\definecolor{b}{RGB}{0,103,214}\definecolor{r}{RGB}{238,34,12}\color{b}M$$, $$\color{b}N$$ and $$\color{b}B$$ (figure left). A line [[parallel]]((qr,'Math/Geometry_1/ParallelLines/base/Main',#00756F)) to $$\color{b}B$$ is used to split the triangle, and form a new triangle with sides $$\color{r}m$$, $$\color{r}n$$, $$\color{r}b$$ (figure middle). This new triangle is also a right angle triangle as $$\color{b}b$$ and $$\color{b}B$$ are parallel and the new triangle's right angle is a [[corresponding angle]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)) with the original’s right angle. We then create a third triangle and add the [[areas]]((qr,'Math/Geometry_1/AreaTriangle/base/Main',#00756F)) of the three triangles to get the original triangle’s area (figure right).
+Start with a [[right angle triangle]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Definition',#00756F)) with sides $$\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\color{b}M$$, $$\color{b}N$$ and $$\color{b}B$$ (figure left). A line [[parallel]]((qr,'Math/Geometry_1/ParallelLines/base/Main',#00756F)) to $$\color{b}B$$ is used to split the triangle, and form a new triangle with sides $$\color{r}m$$, $$\color{r}n$$, $$\color{r}b$$ (figure middle). This new triangle is also a right angle triangle as $$\color{b}b$$ and $$\color{b}B$$ are parallel and the new triangle's right angle is a [[corresponding angle]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)) with the original’s right angle. We then create a third triangle and add the [[areas]]((qr,'Math/Geometry_1/AreaTriangle/base/Main',#00756F)) of the three triangles to get the original triangle’s area (figure right).
 
 ![](Initial.png)
 

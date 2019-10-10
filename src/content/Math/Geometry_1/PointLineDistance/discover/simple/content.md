@@ -1,5 +1,3 @@
-## Distance Between a Point and Line
-
 The distance between a point and a line is defined as the minimum distance between the two.
 
 When the point is off the end of the line, then the minimum distance is between the point and the end of the line.
@@ -31,7 +29,7 @@ The triangle side that is perpendicular to the line will always be shorter than 
 
 Any line you draw from the point to the line that is not the perpendicular line will be the hypotenuse of a right angle triangle, and thus the perpendicular line must be the shortest.
 
-For a more descriptive discussion, this this lesson's [Explanation](/content/Math/Geometry_1/PointLineDistance/explanation/base?page=1).
+For a more descriptive discussion, this this topic's [Explanation](/content/Math/Geometry_1/PointLineDistance/explanation/base?page=1).
 
 </hintLow>
 

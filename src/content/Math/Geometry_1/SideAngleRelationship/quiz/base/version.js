@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Find the Property',
   description: '',
   htmlTitle: 'Quiz - Find the largest or smallest side or angle',
   htmlDescription: 'Dynamic quiz where no two questions are the same',

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
   htmlDescription: '',

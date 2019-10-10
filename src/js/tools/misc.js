@@ -50,8 +50,12 @@ function loadRemoteCSS(
     link.type = 'text/css';
     link.href = url;
     link.id = id; // e.g., googleMaps or stripe
-    if (document.body) {
-      document.body.appendChild(link);
+    // if (document.body) {
+    //   document.body.appendChild(link);
+    // }
+    const head = document.getElementsByTagName('head')[0];
+    if (head) {
+      head.append(link);
     }
     link.onload = () => {
       if (callback != null) {
@@ -61,6 +65,14 @@ function loadRemoteCSS(
   } else if (callback != null) {
     callback(id, url);
   }
+}
+
+function getCurrentPath() {
+  return window.location.pathname.replace(/\/$/, '');
+}
+
+function getTopicPath() {
+  return window.location.pathname.replace(/\/$/, '').replace(/^.*\/content\//, '');
 }
 
 function getCookie(key: string) {
@@ -106,7 +118,7 @@ function logInOut(isLoggedIn: boolean) {
   if (isLoggedIn === false) {
     logText = '/login';
   }
-  const next = `?next=${window.location.pathname.replace(/\/$/, '')}`;
+  const next = `?next=${getCurrentPath()}`;
   window.location = `${logText}${next}`;
 }
 function login() {
@@ -171,8 +183,8 @@ function activator(
 }
 
 function attachQuickReference(
-  lessonPath: string,
-  lessonUID: string,
+  topicPath: string,
+  topicUID: string,
   versionUID: string,
   qrs: {
     [name: string]: Object,
@@ -181,15 +193,11 @@ function attachQuickReference(
   // if (window.quickReference == null) {
   //   window.quickReference = {};
   // }
-  // if (window.quickReference[lessonUID] == null) {
-  //   window.quickReference[lessonUID] = {};
-  // }
-  // window.quickReference[lessonUID][versionUID] = qrs;
   if (window.quickReference == null) {
     window.quickReference = {};
   }
   Object.keys(qrs).forEach((name) => {
-    window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
+    window.quickReference[`${topicPath}/${topicUID}/${versionUID}/${name}`] = qrs[name];
   });
 }
 
@@ -250,5 +258,6 @@ function shuffle(
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
   createCookie, activator, attachQuickReference, multichoice, shuffle,
+  getCurrentPath, getTopicPath,
 };
 

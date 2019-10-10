@@ -5,15 +5,15 @@ import * as React from 'react';
 import LearningPathNavigator from './learningPathNavigator';
 import TopicTitle from './topicTitle';
 import getTopicIndex from '../../content/topicIndex';
-import TopicDescription from '../Lesson/topicDescription';
+import TopicDescription from '../TopicFormat/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
-import { login } from '../tools/misc';
+import { login, getTopicPath, getCurrentPath } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
-import { setVersionRating } from '../Lesson/rating';
+import { setVersionRating } from '../TopicFormat/rating';
 
 type Props = {
   version: Object;
@@ -39,6 +39,24 @@ function getTopicDescription(uid: string) {
   return topicIndex[uid];
 }
 
+function getVersionTitle(
+  topicUID: string,
+  approach: string,
+  versionName: string,
+) {
+  const topicIndex = getTopicIndex();
+  const version = topicIndex[topicUID].approaches[approach][versionName];
+  return { title: version.title, description: version.description };
+}
+
+function capitalize(text: string) {
+  if (text === 'ta') {
+    return 'TA';
+  }
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+
 export default class TopicComponent extends React.Component
                                     <Props, State> {
   version: Object;
@@ -55,19 +73,20 @@ export default class TopicComponent extends React.Component
   topicName: string;
   versionName: string;
   versionUID: string;
+  versionTitle: string;
+  versionDescription: string;
 
   constructor(props: Props) {
     super(props);
     this.version = props.version;
-    const path = window.location.pathname.replace(/\/$/, '').split('/');
+    const path = getTopicPath().split('/');
     /* eslint-disable prefer-destructuring */
     this.topicName = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
     this.versionName = path.slice(-1)[0];
     /* eslint-enable */
-    this.versionUID = window.location.pathname.replace(/^.*\/content\//, '');
-    const topicUID = window.location.pathname.replace(/^.*\/content\//, '')
-      .split('/').slice(0, -2).join('/');
+    this.versionUID = getTopicPath();
+    const topicUID = getTopicPath().split('/').slice(0, -2).join('/');
     this.topicDescription = getTopicDescription(topicUID);
     this.state = {
       userRating: 0,
@@ -79,6 +98,11 @@ export default class TopicComponent extends React.Component
     if (this.topicDescription != null) {
       this.topicDescription.getRatings(this.gotRatings.bind(this));
     }
+    const { title, description } = getVersionTitle(
+      topicUID, this.approachUID, this.versionName,
+    );
+    this.versionTitle = title;
+    this.versionDescription = description;
   }
 
   fillRatings() {
@@ -188,7 +212,6 @@ export default class TopicComponent extends React.Component
 
   getApproaches() {
     const approaches = {};
-    // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
 
     const { topicDescription } = this;
     if (topicDescription != null) {
@@ -221,7 +244,6 @@ export default class TopicComponent extends React.Component
             approaches[approachUID] = {};
           }
           let active = false;
-          // console.log(currentExplanation, version, topic)
           if (this.versionName === versionName
             && this.approachUID === approachUID) {
             active = true;
@@ -256,15 +278,14 @@ export default class TopicComponent extends React.Component
         approachUIDs.push(approachUID);
       }
     });
-    // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     approachUIDs.forEach((approachUID) => {
-      if (approaches[approachUID] != null && approachUID !== 'quickReference') {
+      if (approaches[approachUID] != null) {
         const approach = approaches[approachUID];
         // $FlowFixMe - onPath is there and boolean
         const fullTopicCount = Object.keys(approach)
           .filter(ver => approach[ver].fullTopic).length;
         // $FlowFixMe - onPath is there and boolean
-        const partialLessonCount = Object.keys(approach)
+        const partialTopicCount = Object.keys(approach)
           .filter(ver => !approach[ver].fullTopic).length;
         let selected = false;
         if (this.approachUID === approachUID) {
@@ -293,13 +314,14 @@ export default class TopicComponent extends React.Component
         });
         const listItems = [];
         vUIDs.forEach((vUID) => {
-          listItems.push(approach[vUID]);
           if (approachUID === 'quickReference') {
-            listItems.slice(-1)[0].label = vUID;
+            approach[vUID].label = vUID;
+            approach[vUID].link = `/dev${approach[vUID].link}`;
           }
+          listItems.push(approach[vUID]);
         });
         this.key += 1;
-        if (partialLessonCount > 0
+        if (partialTopicCount > 0
           && (approachUID === 'explanation' || approachUID === 'discover' || approachUID === 'summary')
         ) {
           listItems.splice(fullTopicCount, 0, {
@@ -322,6 +344,9 @@ export default class TopicComponent extends React.Component
         let nameLabel = approachUID.charAt(0).toUpperCase() + approachUID.slice(1);
         if (approachUID === 'ta') {
           nameLabel = 'TA';
+        }
+        if (approachUID === 'quickReference') {
+          nameLabel = 'dev';
         }
         if (listItems.length === 1) {
           let singleItemClass = 'dropdown_button_container';
@@ -358,7 +383,6 @@ export default class TopicComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
-    // const topicName = window.location.href.split('/').slice(-2, -1)[0];
     return this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
   }
 
@@ -385,31 +409,50 @@ export default class TopicComponent extends React.Component
   }
 
   ratingLabel() {
-    const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
+    // const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
-      if (this.version.type === 'links') {
-        return 'Are these links helpful?';
-      }
-      return `Is this ${approachName} helpful?`;
+      // if (this.version.type === 'links') {
+      //   return 'Are these links helpful?';
+      // }
+      // return `Your ${approachName} rating:`;
+      return 'Your rating:';
     }
+    // return <div>
+    //   <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
+    // </div>;
     return <div>
-      <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
+      <span className="rating__login" onClick={login}>Login</span> to rate:
+    </div>;
+  }
+
+  numHighRatings() {
+    let rating = '-';
+    if (this.state.ratings[this.approachUID][this.versionName] != null) {
+      rating = `${this.state.ratings[this.approachUID][this.versionName].numHighRatings}`;
+    }
+    // console.log(this.state.ratings[this.approachUID])
+    return <div className="topic__version_title__num_high">
+      <div className="topic__version_title__num_high__label">
+          Num high ratings:
+      </div>
+      <div className="topic__version_title__num_high__value">
+          {rating}
+      </div>
     </div>;
   }
 
   render() {
-    // console.log(`${window.location.pathname}/tile.svg`)
-    let path = window.location.pathname.replace(/\/$/, '').split('/').slice(0, -2);
+    let path = getCurrentPath().split('/').slice(0, -2);
     if (path[1] === 'dev') {
-      path = ['', ...window.location.pathname.replace(/\/$/, '').split('/').slice(2, -2)];
+      path = ['', ...getCurrentPath().replace(/\/$/, '').split('/').slice(2, -2)];
     }
-    const imgLink = `/static/dist${path.join('/')}/tile.svg`;
+    const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
+
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
+
         <TopicTitle
-          // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
-          // imgLink={`${window.location.pathname}/tile.svg`}
           key='1'
           label={this.version.content.title}
           />
@@ -418,6 +461,12 @@ export default class TopicComponent extends React.Component
             {this.addApproaches()}
           </div>
         </div>
+        <div className="topic__version_title__container">
+          <h2>
+          {`${capitalize(this.approachUID)} - ${this.versionTitle}`}
+          </h2>
+        </div>
+        {this.numHighRatings()}
         <Rating
           topic={this.approachUID}
           rating={this.state.userRating}

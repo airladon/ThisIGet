@@ -4,7 +4,7 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Base',
+  title: 'Prove Properties',
   description: '',
   htmlTitle: 'Self discover why an equilateral trianglehas equal angles',
   htmlDescription: 'Figure out why any equilateral triangle also have three equal angles',

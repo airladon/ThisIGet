@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection,
   Transform,
 } = Fig;
@@ -16,9 +16,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
-    _acute: DiagramElementPrimative;
-    _obtuse: DiagramElementPrimative;
-    _reflex: DiagramElementPrimative;
+    _acute: DiagramElementPrimitive;
+    _obtuse: DiagramElementPrimitive;
+    _reflex: DiagramElementPrimitive;
     _angle: DiagramObjectAngle;
   } & DiagramElementCollection;
 
@@ -28,7 +28,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   realTimeUpdates: boolean;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

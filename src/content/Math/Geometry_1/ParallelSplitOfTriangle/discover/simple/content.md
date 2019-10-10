@@ -1,5 +1,3 @@
-## Parallel Split of a Triangle
-
 ### Right Angle Triangle
 
 Take a right angle triangle $$\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{100,100,100}\definecolor{r}{RGB}{238,34,12}\color{r}ABC$$ and draw a line $$\definecolor{b}{RGB}{0,118,186}\color{b}DE$$ parallel to one of its sides such that it splits the triangle:
@@ -58,7 +56,7 @@ $$\frac{\color{r}A\color{b}D}{\color{r}AB} \color{black}= \frac{\color{r}A\color
 
 And so all sides of the smaller triangle have the same proportion to the larger triangle.
 
-This is described in more detail (with all equation steps) in this lesson's [Explanation](/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=1).
+This is described in more detail (with all equation steps) in this topic's [Explanation](/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=1).
 
 </hintLow>
 

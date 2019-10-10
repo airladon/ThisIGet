@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 
 import diagramLayout from '../../explanation/base/layout';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
@@ -13,7 +13,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
 
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = diagramLayout();

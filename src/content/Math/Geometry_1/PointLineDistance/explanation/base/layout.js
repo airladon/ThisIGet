@@ -10,19 +10,15 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'points',
-  'distance',
-  'distance2',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.lines = colors.get('blue').rgb;
+  colors.points = colors.get('blue').rgb;
+  colors.distance = colors.get('yellow').rgb;
+  colors.distance2 = colors.get('violet').rgb;
   const p0 = new Point(0, 0.7);
   const p1 = new Point(-2, -0.7);
   const p2 = new Point(2, -0.7);

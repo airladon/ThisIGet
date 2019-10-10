@@ -1,5 +1,3 @@
-## Right Angle Triangles
-
 ### Definition
 
 A triangle that has a right angle, is commonly called a **Right Angle Triangle** or **Right Triangle**.
@@ -75,9 +73,9 @@ $$c^2 = a^2 + b^2$$
 
 This is commonly known as the Pythagoean Theorem.
 
-To see all the steps on how to get this, see this lesson's [Explanation](/content/Math/Geometry_1/RightAngleTriangles/explanation/base?page=11).
+To see all the steps on how to get this, see this topic's [Explanation](/content/Math/Geometry_1/RightAngleTriangles/explanation/base?page=11).
 
-To see more proofs for this, see some of the external links in this lesson's [Links](/content/Math/Geometry_1/RightAngleTriangles/links/base) section.
+To see more proofs for this, see some of the external links in this topic's [Links](/content/Math/Geometry_1/RightAngleTriangles/links/base) section.
 
 </hintLow>
 

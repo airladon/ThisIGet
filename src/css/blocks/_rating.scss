@@ -3,8 +3,16 @@
   // color: color('grey', 'base');
   color: color('black', 'lighter');
   font-weight: 100;
-  padding-bottom: 12px;
+  padding-bottom: 1em;
   font-size: 0.9em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  // padding-top: 0.5em;
+  background: color('white', 'base');
+}
+
+.approach__links_table__your_rating .rating__container {
+  display: table;
 }
 
 .rating__label {

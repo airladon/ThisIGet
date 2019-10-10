@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
@@ -11,7 +11,7 @@ import {
 } from '../../explanation/base/tools';
 
 const {
-  Transform, DiagramElementPrimative, DiagramObjectLine,
+  Transform, DiagramElementPrimitive, DiagramObjectLine,
   Point,
 } = Fig;
 const { removeRandElement } = Fig.tools.math;
@@ -22,10 +22,10 @@ type TypeSelectableLine = {
 
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: CommonLessonDiagram;
+  diagram: CommonTopicDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   _line1: TypeSelectableLine;
@@ -36,7 +36,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   _line6: TypeSelectableLine;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

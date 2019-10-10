@@ -2,14 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { LessonContent } from '../../Lesson/LessonContent';
 import ViewTopic from '../../components/viewTopic';
 import withLoginManager from '../../components/view';
 // import '../../../css/style.scss';
 
 function renderTopic(
   version: Object,
-  // lessonUID: string,
+  // topicUID: string,
   // topicName: string,
   // versionUID: string,
   //   uid: string,
@@ -34,10 +33,6 @@ function renderTopic(
     ReactDOM.render(
       <ViewTopicWithLoginState
         version={version}
-        // lessonUID={lessonUID}
-        // topicName={topicName}
-        // versionUID={versionUID}
-        // versionDetails={versionDetails}
       />,
       topicId,
     );

@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectAngle,
   Transform,
@@ -16,27 +16,27 @@ export default class CommonCollection extends CommonDiagramCollection {
   _angle: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
-    _fill: DiagramElementPrimative;
-    _arrow: DiagramElementPrimative;
-    _anchor: DiagramElementPrimative;
+    _fill: DiagramElementPrimitive;
+    _arrow: DiagramElementPrimitive;
+    _anchor: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   _shapes: {
     _shape1: {
-      _line: DiagramElementPrimative;
-      _corners: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
+      _corners: DiagramElementPrimitive;
       // _moreSharpCorners: DiagramElementCollection;
       _lessSharpCorners: DiagramElementCollection;
     } & DiagramElementCollection;
     _shape2: {
-      _line: DiagramElementPrimative;
-      _corners: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
+      _corners: DiagramElementPrimitive;
       _moreSharpCorners: DiagramElementCollection;
       // _lessSharpCorners: DiagramElementCollection;
     } & DiagramElementCollection;
     _shape3: {
-      _line: DiagramElementPrimative;
-      _corners: DiagramElementPrimative;
+      _line: DiagramElementPrimitive;
+      _corners: DiagramElementPrimitive;
       _moreSharpCorners: DiagramElementCollection;
       _lessSharpCorners: DiagramElementCollection;
     } & DiagramElementCollection;
@@ -51,7 +51,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   angleIndex: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Angles').scale(1, 1).rotate(0).translate(0, 0),
   ) {

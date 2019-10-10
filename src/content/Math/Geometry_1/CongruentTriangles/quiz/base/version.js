@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Determine if Congruent',
   description: '',
   htmlTitle: 'Quiz - Determine if two triangles are congruent',
   htmlDescription: 'Given three properties of two triangles, can you determine if they are congruent?',

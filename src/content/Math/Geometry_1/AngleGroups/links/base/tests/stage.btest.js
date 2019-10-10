@@ -3,5 +3,6 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/singlePageTester';
 
 tester(
-  { width: 700, threshold: 0.001 },
+  { width: 300 },
+  { width: 700 },
 );

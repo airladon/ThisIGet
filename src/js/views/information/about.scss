@@ -1,0 +1,25 @@
+@import './information';
+
+.information__subtitle {
+  margin-bottom: 2em;
+}
+
+.about__credits_packages {
+  text-align: center;
+}
+
+.about__credits_package_list {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 15em;
+}
+
+.about__credits_category_title {
+  color: color('black');
+}
+
+@media screen and (max-width: 50em) {
+  .about__credits_package_list {
+    display: block;
+  }
+}

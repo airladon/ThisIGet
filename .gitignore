@@ -9,3 +9,5 @@ reports
 src/figureone
 .pytest_cache/
 env/
+temp/
+temp_docker_file

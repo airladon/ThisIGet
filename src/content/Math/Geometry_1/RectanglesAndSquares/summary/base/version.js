@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Summary of rectangle and square properties',
   htmlDescription: '',

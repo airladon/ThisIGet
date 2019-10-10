@@ -1,4 +1,4 @@
-# Copyright
+# Copyright Information
 
 The intent of www.thisiget.com is to make all academic content free to use, while protecting the remainder of the website with copyright to ensure users can be confident they are visiting www.thisiget.com and not a third party website.
 
@@ -33,5 +33,5 @@ A human-readable summary of (and not a substitute for) the license is:
 
 ## Other Site Content
 
-Unless otherwise specified, all text, images and content that is not "Academic Content" at www.thisiget.com is Copyright © 2019 **This I Get, LLC**.
+The name This I Get is trademarked and property of This I Get, LLC. Unless otherwise specified, all other text, images and content that is not "Academic Content" at www.thisiget.com is Copyright © 2019 **This I Get, LLC**.
 

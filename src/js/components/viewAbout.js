@@ -19,7 +19,6 @@ export default class ViewAbout extends React.Component<Props> {
     // delete props.active;
     return <div>
       <main>
-      <div className='vertical_blank_space'/>
       <div className='policy_text_container'>
         { /* <LoginTitle title=''/> */ }
         { /* <div className='vertical_blank_space'/> */ }

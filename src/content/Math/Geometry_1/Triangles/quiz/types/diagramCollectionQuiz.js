@@ -1,14 +1,14 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 // import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
 const {
-  Transform, DiagramElementPrimative, DiagramObjectPolyLine,
+  Transform, DiagramElementPrimitive, DiagramObjectPolyLine,
   DiagramObjectAngle, DiagramObjectLine,
   // Line,
 } = Fig;
@@ -18,17 +18,17 @@ const { removeRandElement, rand } = Fig.tools.math;
 // const { minAngleDiff } = Fig.tools.g2;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: CommonLessonDiagram;
+  diagram: CommonTopicDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   triangle: {
-    _line: DiagramElementPrimative;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -41,7 +41,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   transitioning: boolean;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

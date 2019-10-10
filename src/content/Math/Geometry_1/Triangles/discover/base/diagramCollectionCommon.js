@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   // DiagramElementCollection,
@@ -17,10 +17,10 @@ const { removeRandElement, round, rand } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   triangle: {
-    _line: DiagramElementPrimative;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -30,10 +30,10 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramObjectPolyLine;
 
   _triangle: {
-    _line: DiagramElementPrimative;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -42,7 +42,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _side20: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
-  _total: DiagramElementPrimative;
+  _total: DiagramElementPrimitive;
   _line: DiagramObjectLine;
 
   updateTri: boolean;
@@ -50,7 +50,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   updateTotal: boolean;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

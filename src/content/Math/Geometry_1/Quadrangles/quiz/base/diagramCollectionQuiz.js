@@ -1,14 +1,14 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform,
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
 } = Fig;
 
 const { randomPoint } = Fig.tools.g2;
@@ -19,14 +19,14 @@ const {
 } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: CommonLessonDiagram;
+  diagram: CommonTopicDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

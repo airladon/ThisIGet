@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Calculating Properties',
   description: '',
   htmlTitle: 'Quiz: Calculate the circle property',
   htmlDescription: 'Calculate circle property from either the radius, diameter, area or circumference',

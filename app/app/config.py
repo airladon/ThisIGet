@@ -10,6 +10,8 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PREFERRED_URL_SCHEME = 'https'
+    LOGGING = os.environ.get('LOGGING') or 'development'
+    ADMIN = os.environ.get('ADMIN') or ''
 
     # Mail
     MAIL_PORT = 465

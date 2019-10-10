@@ -24,8 +24,8 @@ $title-width: 350px;
 // }
 
 .topic__title_container {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 2em;
+  padding-bottom: 1.5em;
   padding-left: 1em;
   padding-right: 1em;
   width: 100%;
@@ -59,7 +59,7 @@ $title-width: 350px;
 }
 
 .topic__title_image {
-  float: left;
+  // float: left;
   height: $title-height;
   width: $title-height;
 }
@@ -70,23 +70,94 @@ $title-width: 350px;
   vertical-align: middle;
 }
 
+@media screen and (max-width: 400px) {
+  .topic__title_img_container {
+    display: inline-block;
+  }
+
+  .topic__title_text_container {
+    display: inline-block;
+  }
+}
+
+.topic__title_text {
+  // width: min-content;
+}
+
 .topic__title_text h1 {
   display: table-cell;
-  font-size: 26px;
-  font-weight: 200;
+  font-size: 30px;
+  font-weight: 300;
   padding-left: 10px;
-  color: color('black', 'lighter');
-  text-align: left;
+  // color: color('black', 'lighter');
+  // text-align: left;
 }
+
+.topic__title_bar h2 {
+  font-weight: 300;
+  font-size: 1.6em;
+  text-align: center;
+  margin-top: 0.4em;
+  margin-bottom: 0;
+}
+
+// @media screen and (max-width: 700px) {
+//   .topic__title_bar h2 {
+//     font-weight: 300;
+//     font-size: 1.2em;
+//     text-align: center;
+//     margin-top: 0.5em;
+//   }
+// }
+
+// .topic__title_text h1 {
+//   font-size: 30px;
+// }
+
+// @media screen and (max-width: 700px) {
+//   .topic__title_bar h1 {
+//     font-size: 26px;
+//   }
+
+//   .topic__title_bar h2 {
+//     font-size: 22px;
+//   }
+// }
 
 @media screen and (max-width: 400px) {
-  .topic__title_text h1 {
-    font-size: 20px;
+  .topic__title_bar h1 {
+    font-size: 24px;
+  }
+
+  .topic__title_bar h2 {
+    font-size: 22px;
   }
 }
 
-@media screen and (min-width: $tablet) {
-  .topic__title_text h1 {
-    font-size: 30px;
-  }
+.topic__version_title__container {
+  padding-left: 1em;
+  padding-right: 1em;
+  background-color: color('presentation', 'background');
+  border-top: 1px solid color('white', 'light');
+  padding-top: 0.2em;
+}
+
+.topic__version_title__num_high {
+  background-color: color('presentation', 'background');
+  font-size: 0.9em;
+  padding-top: 0.5em;
+  padding-bottom: 0.3em;
+}
+
+.topic__title_bar .rating__stars {
+  transform: translate(0, 0.1em);
+}
+
+.topic__version_title__num_high__label {
+  display: inline-block;
+}
+
+.topic__version_title__num_high__value {
+  display: inline-block;
+  padding-left: 1em;
 }

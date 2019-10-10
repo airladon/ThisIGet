@@ -1,19 +1,6 @@
-@import '../../../geometry';
-
-$colors: (
-  sides:             color('blue', 'base'),
-  highlight:         color('red'),
-  grey:              color('grey', 'base'),
-  darkGrey:          color('grey', 'darker'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 .figureone__eqn_nav__description {
   font-size: calc(var(--topic__diagram-font-size) * 0.55);
-  color: color('grey');
+  color: #929292;
   text-align: left;
   width: 30em;
 }

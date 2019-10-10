@@ -113,7 +113,6 @@ then
   if [ $APP_NAME ];
   then
     # Check heroku token exists
-    echo $HEROKU_API_KEY
     echo
     echo "${bold}${cyan}==== Checking ${reset}${cyan}HEROKU_API_KEY${bold} Exists locally =====${reset} "
     if [ -z $HEROKU_API_KEY ];
@@ -146,6 +145,8 @@ then
     EXPECTED_CONFIG_VARS[4]=AES_KEY
     EXPECTED_CONFIG_VARS[5]=PEPPER
     EXPECTED_CONFIG_VARS[6]=DATABASE_URL
+    EXPECTED_CONFIG_VARS[7]=ADMIN
+    EXPECTED_CONFIG_VARS[8]=LOGGING
 
     HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
 

@@ -38,10 +38,10 @@ export class QRMain extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      two_equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
-      two_equal_sides: click(coll.pulseEqualSides, [coll], colors.sides),
-      _two_equal_sides: highlight(colors.sides),
-      _two_equal_angles: highlight(colors.angles),
+      two_equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.qrIsoscelesAngles),
+      two_equal_sides: click(coll.pulseEqualSides, [coll], colors.qrIsoscelesSides),
+      _two_equal_sides: highlight(colors.qrIsoscelesSides),
+      _two_equal_angles: highlight(colors.qrIsoscelesAngles),
       opposite: click(coll.pulseOpposites, [coll], colors.diagram.action),
     };
     this.setTitle('Isosceles Triangle');
@@ -92,10 +92,10 @@ export class QRSplitLine extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
-      line: click(coll.pulseSplit, [coll, null], colors.sides),
-      equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.sides),
-      equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
+      right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.qrIsoscelesAngles),
+      line: click(coll.pulseSplit, [coll, null], colors.qrIsoscelesSides),
+      equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.qrIsoscelesSides),
+      equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.qrIsoscelesAngles),
     };
     this.setTitle('Split Isosceles Triangle');
     this.setDescription(style({ scale: 1 }, [

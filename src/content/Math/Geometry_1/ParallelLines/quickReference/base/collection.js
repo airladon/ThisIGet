@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   // DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -17,16 +17,16 @@ export default class QRCollection extends CommonDiagramCollection {
   _markings: {
     _l1: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _l2: {
       _line: DiagramObjectLine;
-      _mark: DiagramElementPrimative;
+      _mark: DiagramElementPrimitive;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

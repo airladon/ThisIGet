@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Summary of point line distance property',
   htmlDescription: '',

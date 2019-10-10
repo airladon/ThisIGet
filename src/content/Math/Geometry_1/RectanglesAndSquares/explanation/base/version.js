@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Introduction to rectangles and squares and derivation of their properties',
   htmlDescription: 'Proof showing why a rectangles opposite sides are equal and parallel',

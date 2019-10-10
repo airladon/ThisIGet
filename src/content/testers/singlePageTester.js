@@ -13,13 +13,16 @@ function sleep(ms) {
 // tester(
 //   {
 //     prePath: 'dev'
-//     thresholds: 0.0001,
+//     thresholds: 10,      // 10 pixels allowed to be different
+//     element: '#topic__content',
+//     prefix: ''           // filename prefix
+//
 //   },
 //   {
 //    width: 300,
 //    height: 600,
 //    includeQRs: true,
-//    threshold: 0.001,
+//    threshold: 10,
 //   },
 //   {
 //    width: 300,
@@ -30,44 +33,78 @@ function sleep(ms) {
 //   },
 // );
 
+async function removeRatings(page) {
+  await page.evaluate(() => {
+    (document.querySelectorAll(
+      '.rating__container, .approach__links_table__small_screen__value',
+    ) || []).forEach(
+      (el) => {
+        // eslint-disable-next-line no-param-reassign
+        el.style.visibility = 'hidden';
+      },
+    );
+  });
+}
+
+async function removeTopicVariables(page) {
+  await page.evaluate(() => {
+    (document.querySelectorAll(
+      '.topic__variable',
+    ) || []).forEach(
+      (el) => {
+        // eslint-disable-next-line no-param-reassign
+        el.style.display = 'none';
+      },
+    );
+  });
+}
+
+// eslint-disable no-await-in-loop
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const versionPath = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
   const defaultOptions = {
+    viewHeight: 'auto',
+    height: 'auto',
+    includeQRs: false,
     prePath: '',
-    threshold: 0.00001,
+    threshold: 50,
+    element: '#topic__content',
+    prefix: '',
+    endpoint: defEndpoint,
   };
   let optionsToUse = defaultOptions;
-  if ('prePath' in optionsOrScenario
-    || ('threshold' in optionsOrScenario && !('width' in optionsOrScenario))) {
+  if (!('width' in optionsOrScenario)) {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   } else {
     scenariosToUse = [optionsOrScenario, ...scenarios];
   }
-  const { prePath } = optionsToUse;
-
   const allTests = [];
   scenariosToUse.forEach((scenarioIn) => {
-    const defaultScenario = {
-      threshold: optionsToUse.threshold,
-      height: 'full',
-      includeQRs: false,
+    const scenario = joinObjects({}, optionsToUse, scenarioIn);
+    const scenarioOptions = {
+      element: scenario.element,
+      prefix: scenario.prefix,
+      endpoint: scenario.endpoint,
+      threshold: scenario.threshold,
+      prePath: scenario.prePath,
     };
-    const scenario = joinObjects({}, defaultScenario, scenarioIn);
+
     allTests.push([
-      scenario.width, scenario.height, scenario.includeQRs, scenario.threshold,
+      scenario.width, scenario.height, scenario.viewHeight,
+      scenario.includeQRs, scenario.endpoint, scenarioOptions,
     ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      'width: %i height: %p, QRs: %p, Threshold: %f',
-      async (width, height, includeQRs, threshold) => {
+      'width: %i height: %p, viewHeight: %p, QRs: %p, endpoint: %s',
+      async (width, height, viewHeight, includeQRs, endpoint, options) => {
         jest.setTimeout(120000);
-        const fullpath = `${sitePath}${prePath}/${versionPath}`;
-        await page.goto(fullpath);
-        await sleep(1000);
+        const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
+        await page.goto(fullpath, { waitUntil: 'networkidle0' });
+        // await sleep(1000);
 
         // Open all hints on a page
         let hints = await page.$$('.simple__hint_label');
@@ -84,66 +121,66 @@ export default function tester(optionsOrScenario, ...scenarios) {
           window.scrollTo(0, 0);
         });
 
-        if (height === 'full') {
+        // const contentBox = await (await page.$('#topic__content'))
+        //   .boundingBox();
+        const pageBox = await (await page.$('body'))
+          .boundingBox();
+
+        if (viewHeight === 'auto') {
           await page.setViewport({ width, height: 1000 });
-          const lessonContainerTemp = await page.$('#topic__content');
-          const lessonBoxTemp = await lessonContainerTemp.boundingBox();
-          await page.setViewport({ width, height: Math.floor(lessonBoxTemp.height) });
+          await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
-          await page.setViewport({ width, height });
+          await page.setViewport({ width, height: viewHeight });
         }
 
-        const lessonContainer = await page.$('#topic__content');
-        const lessonBox = await lessonContainer.boundingBox();
-        await page.evaluate((y) => {
-          window.scrollTo(0, y);
-        }, Math.floor(lessonBox.y));
+        // await page.evaluate((y) => {
+        //   window.scrollTo(0, y);
+        // }, Math.floor(pageBox.y));
+        await removeRatings(page);
+        await removeTopicVariables(page);
 
-        let image = await page.screenshot();
+        let clippingBox = await (await page.$(options.element)).boundingBox();
+        if (height !== 'auto') {
+          clippingBox.height = height;
+        }
+
+        let image = await page.screenshot({ clip: clippingBox });
         expect(image).toMatchImageSnapshot({
-          failureThreshold: threshold,             // 480 pixels
-          failureThresholdType: 'percent',
-          customSnapshotIdentifier: `${width}-${height}`,
+          failureThreshold: options.threshold,
+          customSnapshotIdentifier: `${options.prefix}${width}-${height}`,
         });
         if (includeQRs) {
           // Find all links on page that go to QR popups
-          // eslint-disable-next-line no-await-in-loop, no-loop-func
+          // eslint-disable-next-line no-loop-func
           const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
           // eslint-disable-next-line no-restricted-syntax
           for (const link of qrLinks) {
-            // eslint-disable-next-line no-await-in-loop
             await link.click();
-            // eslint-disable-next-line no-await-in-loop
             await page.mouse.move(0, 0);
-            // eslint-disable-next-line no-await-in-loop
-            await sleep(1000);
-            // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);
             });
-            // eslint-disable-next-line no-await-in-loop
-            const linkBox = await link.boundingBox();
-            // eslint-disable-next-line no-await-in-loop
-            await page.evaluate((y) => {
-              window.scrollTo(0, y);
-            }, linkBox.y);
-            // eslint-disable-next-line no-await-in-loop
-            image = await page.screenshot();
+            await sleep(1000);
+            clippingBox = await (await page.$('#id_topic__qr__static_container')).boundingBox();
+            if (clippingBox == null) {
+              clippingBox = await (await page.$('#id_topic__qr__pres_container')).boundingBox();
+            }
+            // const linkBox = await link.boundingBox();
+            // await page.evaluate((y) => {
+            //   window.scrollTo(0, y);
+            // }, linkBox.y);
+            image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,             // 480 pixels
-              failureThresholdType: 'percent',
-              customSnapshotIdentifier: `${width}-${height}-QR-${index}`,
+              failureThreshold: options.threshold,
+              customSnapshotIdentifier: `${options.prefix}${width}-${height}-QR-${index}`,
             });
             index += 1;
-            // eslint-disable-next-line no-await-in-loop
             const closeButtons = await page.$$('.topic__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
-              // eslint-disable-next-line no-await-in-loop
               const box = await closeButton.boundingBox();
               if (box != null && box.x > 0) {
-                // eslint-disable-next-line no-await-in-loop
                 await closeButton.click();
                 break;
               }

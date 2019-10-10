@@ -7,11 +7,57 @@ from flask_mail import Mail
 from flask_talisman import Talisman
 from app.tools import getContent, getTopicIndex
 import os
+import logging
+from logging.handlers import SMTPHandler
 
 app = Flask(__name__)
 app.config.from_object(Config)
 SELF = "'self'"
 
+
+# Setup logging
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+
+if app.config['LOGGING'] == 'heroku':
+    # gunicorn_logger = logging.getLogger('gunicorn.error')
+    # app.logger.handlers = gunicorn_logger.handlers
+    # app.logger.setLevel(gunicorn_logger.level)
+
+    # app.logger.setLevel(logging.INFO)
+    # stream_handler = logging.StreamHandler()
+    # stream_handler.setLevel(logging.INFO)
+    # stream_handler.setFormatter(logging.Formatter('%(levelname)s:%(message)s'))
+    # app.logger.addHandler(stream_handler)
+
+    if app.config['MAIL_SERVER']:
+        auth = None
+        if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
+            auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
+        secure = None
+        # if app.config['MAIL_USE_TLS']:
+        #     secure = ()
+        mail_handler = SMTPHandler(
+            mailhost=(app.config['MAIL_SERVER'], 25),
+            fromaddr=app.config['MAIL_SENDER'],
+            toaddrs=app.config['ADMIN'],
+            subject='This I Get Production ERROR',
+            credentials=auth, secure=())
+        mail_handler.setLevel(logging.ERROR)
+        app.logger.addHandler(mail_handler)
+        mail_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: '
+            '%(message)s [in %(pathname)s:%(lineno)d]'
+        ))
+
+# logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
+
+# else:
+#     app.logger.setLevel(logging.INFO)
+#     stream_handler = logging.StreamHandler()
+#     stream_handler.setLevel(logging.INFO)
+#     app.logger.addHandler(stream_handler)
+
+# Setup Talisman
 if not os.environ.get('LOCAL_PRODUCTION') \
    or os.environ.get('LOCAL_PRODUCTION') != 'DISABLE_SECURITY':
     talisman = Talisman(
@@ -35,11 +81,20 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 SELF,
                 'https://cdnjs.cloudflare.com',
                 "'unsafe-inline'",          # this needs to be removed later
+                'https://fonts.googleapis.com',
+                'https://fonts.gstatic.com',
             ],
             'style-src': [
                 SELF,
                 "'unsafe-inline'",
+                "https://fonts.googleapis.com"
             ],
+            'style-src-elem': [
+                SELF,
+                'https://fonts.googleapis.com',
+                "'unsafe-inline'",
+            ],
+            # 'font-src': '*',
         },)
 
 db = SQLAlchemy(app)

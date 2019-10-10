@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SimpleFormatContent from '../../../../../../js/Lesson/SimpleFormatContent';
+import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -67,9 +67,9 @@ class Content extends SimpleFormatContent {
 
       variables.q1_angles = anglesText;
       variables.q1_angle_num = numAngles;
-      const expText = angleType === 'explementary' ? '+ explementary' : '- Explementary';
-      const suppText = angleType === 'supplementary' ? '+ supplementary' : '- Supplementary';
-      const compText = angleType === 'complementary' ? '+ complementary' : '- Complementary';
+      const expText = angleType === 'explementary' ? '+ Explementary' : '- Explementary';
+      const suppText = angleType === 'supplementary' ? '+ Supplementary' : '- Supplementary';
+      const compText = angleType === 'complementary' ? '+ Complementary' : '- Complementary';
       const otherText = angleType === 'other' ? '+ None of the above' : '- None of the above';
       const answers = shuffle([
         expText, suppText, compText,

@@ -11,7 +11,8 @@
   // background-color: color('presentation', 'background');
   // border-radius: 0.6em;
   // border: solid 1px;
-  font-weight: 200;
+  font-weight: 300;
+  font-family: $fontfamily-heading;
 }
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
@@ -106,6 +107,7 @@
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+  font-weight: 300;
 }
 
 #id__topic__goto_button_label {

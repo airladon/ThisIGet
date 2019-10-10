@@ -1,15 +1,16 @@
 // @flow
-import { PresentationFormatContent } from '../../../../../../js/Lesson/PresentationFormatContent';
+import { PresentationFormatContent } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import diagramLayout from './layout';
 import details from '../../details';
 import version from './version';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
+import { getCurrentPath } from '../../../../../../js/tools/misc';
 
 const layout = diagramLayout();
 
-const path = window.location.pathname.split('/');
+const path = getCurrentPath().split('/');
 const [topicUID] = path.slice(-3, -2);
 const [versionUID] = path.slice(-1);
 
@@ -23,7 +24,7 @@ class Content extends PresentationFormatContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.loadQRs([
       `${details.path}/${topicUID}/${versionUID}`,
     ]);

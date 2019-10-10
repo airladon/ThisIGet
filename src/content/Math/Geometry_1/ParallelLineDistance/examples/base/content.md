@@ -1,9 +1,6 @@
-## Distance between Parallel Lines
+### Example 1
 
-
-### Example 1:
-
-#### What is distance between the parallel lines?
+What is distance between the parallel lines?
 
 ![](ex1.png)
 
@@ -16,9 +13,9 @@
 </hintLow>
 
 
-### Example 2:
+### Example 2
 
-#### What is the area of the red triangle?
+What is the area of the red triangle?
 
 ![](ex2.png)
 

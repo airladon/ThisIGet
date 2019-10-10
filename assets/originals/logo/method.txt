@@ -1,0 +1,24 @@
+Circles 1:
+Select larger circle
+Shift-Select smaller circle
+Shape->Subtract
+
+Circles 2:
+Select larger circle
+Shift-Select smaller circle
+Shape->Subtract
+
+Circles 3:
+Select larger circle
+Shift-Select smaller circle
+Shape->Subtract
+
+Shape->Unite circles 1, 2, 3 (Unite123)
+
+Copy paste in same location blue circle (CopyB)
+CopyB - Center to 250, 250
+CopyB - Color to eee
+
+
+Select CopyB, shift-select Unite123
+Shape->Intersect

@@ -4,13 +4,13 @@
   height: 50px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .navbar-icon-container {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   float: left;
   // margin-top: 2px;
 }
@@ -24,7 +24,7 @@
   display: inline-block;
   padding-top: 0.25rem;
   padding-left: 0;
-  margin-left: 1em;
+  margin-left: 2em;
   color: color('navbar', 'text');
   font-size: 14px;
   position: relative;
@@ -42,6 +42,7 @@
 
 .navbar-button {
   display: inline-block;
+  z-index: 1;
 }
 
 .navbar-input {
@@ -94,13 +95,28 @@
   margin-left: 1.5em;
 }
 
-.navbar-right {
-  float: right;
-  padding-right: 1em;
+.navbar-center {
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-// .navbar-login {
-// }
+.navbar-right {
+  float: right;
+  // padding-right: 0.5em;
+  padding-right: 0;
+}
+
+.navbar-container .dropdown_button_label_container {
+  padding-right: 0.3em;
+  padding-left: 0.3em;
+}
+
+.navbar-login {
+  transform: translate(0, -1px);
+}
 
 .navbar-search-container {
   float: right;
@@ -119,6 +135,16 @@
 
 .navbar_login:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .navbar_login__loggedin_label_username {
+    display: none;
+  }
+
+  // .navbar-right {
+  //   padding-right: 0;
+  // }
 }
 // .nav__home-icon {
 //   margin-right: 5px;

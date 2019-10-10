@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -17,10 +17,10 @@ type TypeFullPolyLine = {
   _angle0: DiagramObjectAngle;
   _angle1: DiagramObjectAngle;
   _angle2: DiagramObjectAngle;
-  _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
-  _line: DiagramElementPrimative;
+  _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side20: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _line: DiagramElementPrimitive;
 } & DiagramObjectPolyLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -36,11 +36,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     _tri: TypeFullPolyLine;
     _isosceles: TypeFullPolyLine;
     _lowerAngle: DiagramObjectAngle;
-    _lowerTriangle: DiagramElementPrimative;
+    _lowerTriangle: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

@@ -11,17 +11,14 @@ import baseLayout from '../../../../../common/layout';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'lines',
-  'angles',
-  'pads',
-  'parallel',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   const { colors } = layout;
+  colors.lines = colors.get('blue').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.pads = colors.get('red', 'darkest').rgb;
+  colors.parallel = colors.get('red').rgb;
   layout.width = 0.03;
 
   layout.defaultTri = [

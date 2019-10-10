@@ -1,15 +1,3 @@
-@import '../../../geometry';
-
-$colors: (
-  sides:             color('blue'),
-  angles:            color('red'),
-  disabled:          color('diagram', 'disabled', 'darker'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 .diagram__text {
   z-index: 0;
 }

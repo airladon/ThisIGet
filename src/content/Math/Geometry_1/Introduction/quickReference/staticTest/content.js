@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import SimpleFormatContent from '../../../../../../js/Lesson/SimpleFormatContent';
+import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import version from '../base/version';
+import { getCurrentPath } from '../../../../../../js/tools/misc';
 
 // ////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////
@@ -13,7 +14,7 @@ const versionToTest = 'base';
 // ////////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////////
 
-const path = window.location.pathname.split('/');
+const path = getCurrentPath().split('/');
 const [topicUID] = path.slice(-3, -2);
 const qrids = version.references;
 

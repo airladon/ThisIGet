@@ -1,4 +1,4 @@
-## Isosceles Triangle
+### Isosceles Triangle
 
 There are several types of triangle commonly found in many applications.
 
@@ -12,7 +12,7 @@ A triangle with **two sides of equal length** is called an **isosceles** triangl
 
 The word isosceles comes from the Greek word _isoskeles_ which is formed from _isos_ meaning _"equal"_ and _skelos_ meaning _"leg"_. In other words, an isosceles triangle is a triangle with two equal legs.
 
-## Angle, Side Relationship
+### Angle, Side Relationship
 
 When two sides of a triangle are equal, the triangle's angles have a special relationship. Can you figure out what it is?
 
@@ -37,7 +37,7 @@ If the triangles are congruent, then all their angles must be equal, and thus th
 
 **Therefore all isosceles triangles have two equal sides and two equal angles opposite the equal sides.**
 
-A more descriptive explanation of this can be found in this lesson's [Explanation](/content/Math/Geometry_1/Isosceles/explanation/base?page=4)
+A more descriptive explanation of this can be found in this topic's [Explanation](/content/Math/Geometry_1/Isosceles/explanation/base?page=4)
 
 </hintLow><div></div>
 
@@ -55,7 +55,7 @@ If the triangles are congruent, then all their sides must be equal, and thus the
 
 **Therefore all triangles that have two equal angles are isosceles triangles and have two equal sides.**
 
-A more descriptive explanation of this can be found in this lesson's [Explanation](/content/Math/Geometry_1/Isosceles/explanation/base?page=24)
+A more descriptive explanation of this can be found in this topic's [Explanation](/content/Math/Geometry_1/Isosceles/explanation/base?page=24)
 </hintLow>
 
 If you know a triangle is an isosceles triangle, and you know which sides are the same, how many angles do you need to know to calculate all three?
@@ -77,7 +77,7 @@ $$c = \frac{180^\circ - a}{2}$$
 </hintLow><div></div>
 
 
-## Split line
+### Split line
 
 If a line is drawn from the angle between the equal sides, to the opposite side, and that line splits the angle in two equal pieces, how does it split the opposite side (from both a length and angle perspective)?
 
@@ -113,7 +113,7 @@ A rectangle's opposite sides are parallel and equal. Can you prove this?
 
 <hint>You can use the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) congruence test to show opposite sides are equal</hint>
 
-<hintLow>[Answer]This lesson's [Explanation](/content/Math/Geometry_1/RectanglesAndSquares/explanation/base) shows the proof that opposite sides are parallel and equal</hintLow>
+<hintLow>[Answer]This topic's [Explanation](/content/Math/Geometry_1/RectanglesAndSquares/explanation/base) shows the proof that opposite sides are parallel and equal</hintLow>
 
 
 ## Square

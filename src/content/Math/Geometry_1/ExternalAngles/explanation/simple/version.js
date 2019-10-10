@@ -4,7 +4,7 @@
 var version = {
   uid: 'simple',
   topic: 'explanation',
-  title: 'Full explanation in single page',
+  title: 'Descriptive',
   description: '',
   htmlTitle: 'External angles (also called exterior angles)  in a triangle as a single page explanation',
   htmlDescription: 'Proof of external angles in a triangle equalling sum of opposite internal angles',

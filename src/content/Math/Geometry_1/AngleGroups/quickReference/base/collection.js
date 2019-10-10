@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, Equation,
   Transform,
 } = Fig;
@@ -23,29 +23,29 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _eqns: {
     _adjacent: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _complementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _supplementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
     _explementary: {
-      _a: DiagramElementPrimative;
-      _b: DiagramElementPrimative;
-      _c: DiagramElementPrimative;
+      _a: DiagramElementPrimitive;
+      _b: DiagramElementPrimitive;
+      _c: DiagramElementPrimitive;
     } & Equation;
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Create the Angle',
   description: '',
   htmlTitle: 'Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full',
   htmlDescription: '',

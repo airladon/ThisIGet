@@ -3,14 +3,14 @@ import Fig from 'figureone';
 import {
   PresentationFormatContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/PresentationFormatContent';
+} from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonCollection from './diagramCollectionCommon';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 
 const {
   click,
@@ -36,7 +36,7 @@ class Content extends PresentationFormatContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.loadQRs([
       'Math/Geometry_1/Circle/base',

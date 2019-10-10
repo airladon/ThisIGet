@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Splitting a triangle with a parallel line',
   htmlDescription: 'Summary showing splitting a triangle with a parallel line results in a similar triangle',

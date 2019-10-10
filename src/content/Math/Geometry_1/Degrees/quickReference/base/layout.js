@@ -7,15 +7,16 @@ const {
   Point,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'qrDegrees_lines', 'qrDegrees_angles', 'qrDegrees_arc', 'qrDegrees_marks',
-];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.qrDegrees_lines = colors.get('blue').rgb;
+  colors.qrDegrees_angles = colors.get('green').rgb;
+  colors.qrDegrees_arc = colors.get('red').rgb;
+  colors.qrDegrees_marks = colors.get('grey', 'dark').rgb;
   layout.position = new Point(0, 0);
   const radius = 1.2;
   layout.radius = radius;

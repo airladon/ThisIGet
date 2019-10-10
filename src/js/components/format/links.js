@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import SimpleFormat from '../../Lesson/SimpleFormat';
+import SimpleFormat from '../../TopicFormat/SimpleFormat';
 import LinksTable from './linksTable';
 
 type Props = {
@@ -48,16 +48,9 @@ export default class LinksFormatComponent extends React.Component
 
   render() {
     return <div id={this.version.content.htmlId} className="simple_topic__container">
-      {this.renderSections()}
+      <div className="simple_topic__inner_container">
+        {this.renderSections()}
+      </div>
     </div>;
   }
-
-  // render() {
-  //   return <div id={this.lesson.content.htmlId}>
-  //     <div key={0} className="simple_topic__container">
-  //       <LinksTable links={version.links} />
-  //     </div>,
-  //     {this.lesson.content.sections[0]}
-  //   </div>;
-  // }
 }

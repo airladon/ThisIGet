@@ -4,7 +4,7 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Base',
+  title: 'Area Through Pieces',
   description: '',
   htmlTitle: 'Self discover what the area of a circle is',
   htmlDescription: 'Figure out why the area of a circle is what it is',

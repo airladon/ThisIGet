@@ -86,6 +86,12 @@ export MAIL_USERNAME=enter_your_email_here
 export MAIL_PASSWORD=enter_your_password_here
 ```
 
+#### `LOGGING`
+Set to `heroku` if app is running on heroku and needs to stream logs to stdout through gunicorn
+
+#### `ADMIN`
+Email address for flask production error logs to be sent to
+
 #### `FLASK_APP`
 If you want to run flask or flask database migrations locally and not in a container, then you need the flask environment variable:
 

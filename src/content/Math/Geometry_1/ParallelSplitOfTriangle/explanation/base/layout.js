@@ -10,19 +10,15 @@ const {
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'highlight',
-  'grey',
-  'darkGrey',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  // layout.colors = Fig.tools.color.getCSSColors();
   const { colors } = layout;
-
+  colors.sides = colors.get('blue', 'base').rgb;
+  colors.highlight = colors.get('red').rgb;
+  colors.grey = colors.get('grey', 'base').rgb;
+  colors.darkGrey = colors.get('grey', 'darker').rgb;
   const points = [
     new Point(-1.5, -1).add(0.3, 0),
     new Point(0, 1).add(0.3, 0),
@@ -593,10 +589,10 @@ export default function diagramLayout() {
     rb2: { symbol: 'bracket', side: 'right', numLines: 1 },
     lb3: { symbol: 'bracket', side: 'left', numLines: 1 },
     rb3: { symbol: 'bracket', side: 'right', numLines: 1 },
-    'x0': { symbol: 'xStrike', color: colors.description },
-    'x1': { symbol: 'xStrike', color: colors.description },
-    'x2': { symbol: 'xStrike', color: colors.description },
-    'x3': { symbol: 'xStrike', color: colors.description },
+    'x0': { symbol: 'xStrike', color: colors.grey },
+    'x1': { symbol: 'xStrike', color: colors.grey },
+    'x2': { symbol: 'xStrike', color: colors.grey },
+    'x3': { symbol: 'xStrike', color: colors.grey },
 
     arrow: { text: '     =>     ' },
     comma: { text: ',      ' },

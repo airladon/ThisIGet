@@ -1,8 +1,6 @@
-## External Angles of a Triangle Calculations
+### Example 1
 
-### Example 1:
-
-#### Are these two triangles congruent?
+Are these two triangles congruent?
 
 ![](ex1.png)
 
@@ -12,9 +10,9 @@ Both triangles have the same corresponding angles and side lengths. Therefore, t
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
-### Example 2:
+### Example 2
 
-#### Are these two triangles congruent?
+Are these two triangles congruent?
 
 ![](ex2.png)
 
@@ -24,9 +22,9 @@ Both triangles have the same corresponding angle and side, however two propertie
 $$\bbox[10px,border:1px solid gray]{Not\ \ enough\ \ information}$$
 </hintLow>
 
-### Example 3:
+### Example 3
 
-#### Are these two triangles congruent?
+Are these two triangles congruent?
 
 ![](ex3.png)
 
@@ -36,9 +34,9 @@ Both triangles have the same corresponding **SAS** combination. Even though they
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
-### Example 4:
+### Example 4
 
-#### Are these two triangles congruent?
+Are these two triangles congruent?
 
 ![](ex4.png)
 
@@ -48,9 +46,9 @@ Both triangles have the same corresponding **ASA** combination. Therefore they a
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
-### Example 5:
+### Example 5
 
-#### Are these two triangles congruent?
+Are these two triangles congruent?
 
 ![](ex5.png)
 
@@ -68,9 +66,9 @@ We now have the same **ASA** property combination in both triangles and they are
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
-### Example 6:
+### Example 6
 
-#### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
+What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
 ![](ex6.png)
 
@@ -82,9 +80,9 @@ The left triangle's missing angle corresponds with angle $$\color{r}a$$, and can
 $$\color{r}a \color{black} = 180^\circ - 70^\circ - 60^\circ = \bbox[10px,border:1px solid gray]{50^\circ}$$
 </hintLow>
 
-### Example 7:
+### Example 7
 
-#### Are the two triangles congruent?
+Are the two triangles congruent?
 
 ![](ex7.png)
 
@@ -99,9 +97,9 @@ $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
 
-### Example 8:
+### Example 8
 
-#### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
+What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
 ![](ex8.png)
 

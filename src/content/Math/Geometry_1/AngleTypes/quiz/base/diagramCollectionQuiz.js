@@ -1,25 +1,25 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
-const { Transform, DiagramElementPrimative } = Fig;
+const { Transform, DiagramElementPrimitive } = Fig;
 
 const { rand, randElement } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: CommonLessonDiagram;
+  diagram: CommonTopicDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {
@@ -35,6 +35,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.addElements(this, this.layout.addQuestion);
     this.hasTouchableElements = true;
     this._main._fig._line1.setTransformCallback = this.updateAngle.bind(this);
+    this._main._fig._line1.move.canBeMovedAfterLoosingTouch = true;
     this._main._fig._angle.autoRightAngle = false;
   }
 

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Introduction to triangles and their properties',
   htmlDescription: 'Proof that triangle total angle equals 180º',

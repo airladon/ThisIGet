@@ -12,22 +12,31 @@ const {
 
 const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'circle',
-  'radius',
-  'diameter',
-  'center',
-  'grid',
-  'gridText',
-  'circleFill',
-  'property',
-];
+// const cssColorNames = [
+//   'circle',
+//   'radius',
+//   'diameter',
+//   'center',
+//   'grid',
+//   'gridText',
+//   'circleFill',
+//   'property',
+// ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
+  // const colors1 = Fig.tools.color.getCSSColors(cssColorNames);
+  // layout.colors = colors;
   const layout: Object = baseLayout();
-  const colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.colors = colors;
+  const { colors } = layout;
+  colors.circle = colors.get('red').rgb;
+  colors.radius = colors.get('blue').rgb;
+  colors.diameter = colors.get('green').rgb;
+  colors.center = colors.get('yellow').rgb;
+  colors.grid = colors.get('black', 'light').rgb.slice();
+  colors.gridText = colors.get('black', 'lightest').rgb;
+  colors.circleFill = colors.get('black', 'dark').rgb;
+  colors.property = colors.get('red').rgb;
   layout.position = new Point(0, 0);
 
   // ///////////////////////////////////////////////////////////////

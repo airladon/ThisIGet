@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Summary of using degrees to measure angle',
   htmlDescription: 'History of word, interactive diagram to see different angles in degrees',

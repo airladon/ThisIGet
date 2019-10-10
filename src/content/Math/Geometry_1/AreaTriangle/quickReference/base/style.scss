@@ -1,9 +1,0 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  qrAreaTriangle_sides:             color('blue'),
-);
-
-body {
-  @include color_vars($colors);
-}

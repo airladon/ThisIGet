@@ -4,7 +4,7 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Base',
+  title: 'Find the Relationships',
   description: '',
   htmlTitle: 'Self discover the properties of a triangle split with a parallel line',
   htmlDescription: 'Figure out why a triangle split with a parallel line will create a proportional triangle',

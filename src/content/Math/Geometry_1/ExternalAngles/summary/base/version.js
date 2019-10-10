@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Summary of triangle external angle (or exterior angle)',
   htmlDescription: 'Interactive diagram showing and describing the external angle of a triangle',

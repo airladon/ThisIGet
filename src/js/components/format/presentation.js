@@ -1,10 +1,10 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import PresentationFormat from '../../Lesson/PresentationFormat';
+import PresentationFormat from '../../TopicFormat/PresentationFormat';
 import Button from '../button';
 import DropDownButton from '../dropDownButton';
-import { getCookie, createCookie } from '../../tools/misc';
+import { getCookie, createCookie, getCurrentPath } from '../../tools/misc';
 import PresentationQR from '../presentationQR';
 import StaticQR from '../staticQR';
 // import '../../css/presentationFormat.scss';
@@ -86,7 +86,9 @@ export default class PresentationFormatComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
-      createCookie('page', `${page + 1}`, 30, window.location.pathname.replace(/\/$/, ''));
+      createCookie('page', `${page + 1}`, 30, getCurrentPath());
+      const versionName = window.location.pathname.replace(/.*\//, '');
+      window.history.replaceState({}, '', `${versionName}?page=${page + 1}`);
     } else if (callback) {
       callback();
     }
@@ -226,7 +228,7 @@ export default class PresentationFormatComponent extends React.Component
     // window.addEventListener('resize', this.centerContent.bind(this));
     // window.addEventListener('orientationchange', this.orientationChange.bind(this));
 
-    // uncomment this if the lesson should be centered on going to it
+    // uncomment this if the topic should be centered on going to it
     // this.orientationChange();
     // this.centerContentFlag = !this.centerContentFlag;
     // this.centerContent();

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'Simple',
   description: '',
   htmlTitle: 'Summary of parallel line distance property',
   htmlDescription: 'Parallel line distance is the length of the perpendicular line between them',

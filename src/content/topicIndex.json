@@ -5,14 +5,18 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Introduction to Angles.",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -21,7 +25,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "Summary of Angles introduction",
           "fullTopic": true
         }
@@ -38,7 +42,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Example problems with complementary, supplementary and explementary angles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -46,7 +50,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Explanation of complementary, supplementary, and explementary angles.",
           "fullTopic": true
         }
@@ -54,14 +58,18 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links to Angle Groups",
+          "title": "External",
           "description": "External links to sources of information for Angle Groups>",
           "fullTopic": false
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -78,7 +86,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Complementary, Supplementary and Explementary Angles.",
+          "title": "Interative",
           "description": "Summary of complementary, supplementary and explementary Angles.",
           "fullTopic": true
         }
@@ -95,14 +103,18 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -111,7 +123,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Create the Angle",
           "description": "",
           "fullTopic": true
         }
@@ -128,7 +140,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -136,7 +148,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of related angles",
+          "title": "Various Geometries",
           "description": "Examples of calculating opposite, corresponding, alternate and interior angles",
           "fullTopic": true
         }
@@ -144,7 +156,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -158,8 +170,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -168,13 +184,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Simple geometries",
+          "title": "Simple Geometries",
           "description": "",
           "fullTopic": true
         },
         "complex": {
           "type": "singlePage",
-          "title": "More complex geometries",
+          "title": "Advanced Geometries",
           "description": "Find angles using opposite, corresponding, alternate, interior and supplementary angles",
           "fullTopic": true
         }
@@ -182,7 +198,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -199,7 +215,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of area",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -207,7 +223,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -221,8 +237,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -231,7 +251,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Create an area",
+          "title": "Create an Area",
           "description": "",
           "fullTopic": true
         }
@@ -239,7 +259,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -256,7 +276,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Area Through Pieces",
           "description": "",
           "fullTopic": true
         }
@@ -264,7 +284,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Circle Area",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -272,7 +292,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
@@ -292,8 +312,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -302,7 +326,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Calculating Properties",
           "description": "",
           "fullTopic": true
         }
@@ -310,7 +334,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -327,7 +351,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "From Rectangles and Congruent Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -335,7 +359,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -343,7 +367,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -357,8 +381,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -367,7 +395,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Make triangle with target area",
+          "title": "Make an Area",
           "description": "",
           "fullTopic": true
         }
@@ -375,7 +403,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -392,7 +420,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Circle Radius, Diameter and Circumference",
+          "title": "Calculation of Properties",
           "description": "Examples calculations of diameter, radius and circumference",
           "fullTopic": true
         }
@@ -400,7 +428,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Presentation form - interactive.",
           "fullTopic": true
         }
@@ -414,8 +442,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -455,7 +487,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Congruence Tests",
           "description": "",
           "fullTopic": true
         }
@@ -463,7 +495,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of finding and using Congruent Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -471,13 +503,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Intuitive",
           "description": "",
           "fullTopic": true
         },
         "fromSAS": {
           "type": "singlePage",
-          "title": "Show SSS, ASA and AAS from SAS",
+          "title": "SSS, ASA and AAS from SAS",
           "description": "",
           "fullTopic": true
         }
@@ -491,8 +523,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -501,7 +537,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Determine if Congruent",
           "description": "",
           "fullTopic": true
         }
@@ -509,7 +545,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -540,7 +576,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -554,8 +590,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -564,7 +604,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "General Questions about Degrees",
+          "title": "Angles and Circles",
           "description": "Answer general questions about measuring angle and degrees",
           "fullTopic": true
         }
@@ -572,7 +612,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -589,7 +629,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove Properties",
           "description": "",
           "fullTopic": true
         }
@@ -597,7 +637,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -605,7 +645,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -619,8 +659,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -629,7 +673,7 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Equilateral Quiz",
+          "title": "Using Equilateral Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -637,7 +681,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -654,7 +698,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -662,7 +706,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "External angle calculations",
+          "title": "Various Triangles",
           "description": "",
           "fullTopic": true
         }
@@ -670,13 +714,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
         "simple": {
           "type": "singlePage",
-          "title": "Full explanation in single page",
+          "title": "Descriptive",
           "description": "",
           "fullTopic": true
         }
@@ -690,8 +734,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -700,7 +748,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         }
@@ -708,7 +756,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -725,20 +773,24 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive - Slides",
           "description": "Motivation to studying shapes.",
           "fullTopic": true
         },
         "singlePage": {
           "type": "singlePage",
-          "title": "Descriptive - Single Page",
+          "title": "Descriptive & Interactive - Single Page",
           "description": "Motivation to studying shapes.",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -754,7 +806,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -762,7 +814,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Isosceles Triangles",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -770,7 +822,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -784,8 +836,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -794,7 +850,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -802,7 +858,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -819,7 +875,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -827,7 +883,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Using Parallel Line Distance",
           "description": "",
           "fullTopic": true
         }
@@ -835,14 +891,18 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -851,7 +911,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -868,14 +928,18 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -884,7 +948,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -892,7 +956,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -909,7 +973,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationships",
           "description": "",
           "fullTopic": true
         }
@@ -917,7 +981,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangles split with parallel lines",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -925,7 +989,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
@@ -945,8 +1009,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -955,7 +1023,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -972,7 +1040,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find the Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -980,14 +1048,18 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -996,7 +1068,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1013,7 +1085,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Internal Angles",
           "description": "",
           "fullTopic": true
         }
@@ -1021,7 +1093,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Quadrangle internal angle calculations",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1029,7 +1101,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1043,8 +1115,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1053,7 +1129,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         }
@@ -1061,7 +1137,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1078,7 +1154,7 @@
       "examples": {
         "static": {
           "type": "singlePage",
-          "title": "Example problems using Radians",
+          "title": "Calculations with Radians",
           "description": "Use radians to calculate radius, angle and arc length",
           "fullTopic": true
         }
@@ -1086,7 +1162,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1100,8 +1176,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1110,13 +1190,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Change Circle to Match",
+          "title": "Change Arc to Match",
           "description": "",
           "fullTopic": true
         },
         "calc": {
           "type": "singlePage",
-          "title": "Calculate Properties with Radians",
+          "title": "Calculate Properties",
           "description": "Calculate properties of a circle from other properties using radians",
           "fullTopic": true
         }
@@ -1124,7 +1204,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1141,7 +1221,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1149,7 +1229,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Rectangle calculation examples",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1157,7 +1237,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1171,8 +1251,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1181,7 +1265,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1199,7 +1283,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1207,7 +1291,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of Right Angle Triangle calculations",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1215,13 +1299,13 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "Properties of right angle triangles, and the Pythagorean theorem.",
           "fullTopic": true
         },
         "pythagorus_proof": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
+          "title": "Pythagorean Theorem",
           "description": "Derivation using area of four right angle triangles",
           "fullTopic": false
         }
@@ -1235,8 +1319,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1245,7 +1333,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find the Unknown Angle",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -1253,7 +1341,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Properties",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1270,7 +1358,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Relationship",
           "description": "",
           "fullTopic": true
         }
@@ -1278,7 +1366,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of triangle side angle relationships",
+          "title": "Various Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1286,7 +1374,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1300,8 +1388,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1310,7 +1402,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find the Property",
           "description": "",
           "fullTopic": true
         }
@@ -1318,7 +1410,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Simple",
           "description": "",
           "fullTopic": true
         }
@@ -1361,7 +1453,7 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External Links",
+          "title": "External",
           "description": "External links to sources of information for Similar Triangles",
           "fullTopic": false
         }
@@ -1395,7 +1487,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Interactive",
+          "title": "Properties and Types",
           "description": "",
           "fullTopic": true
         }
@@ -1411,7 +1503,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -1425,8 +1517,12 @@
         }
       },
       "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
         "staticTest": {
-          "type": "presentation",
           "title": "staticTest",
           "description": "",
           "fullTopic": false
@@ -1435,13 +1531,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Total Angle",
+          "title": "Find the Angle",
           "description": "",
           "fullTopic": true
         },
         "types": {
           "type": "presentation",
-          "title": "Triangle Types",
+          "title": "Create a Triangle",
           "description": "",
           "fullTopic": true
         }

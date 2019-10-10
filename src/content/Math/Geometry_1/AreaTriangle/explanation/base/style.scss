@@ -1,22 +1,3 @@
-@import '../../../geometry';
-
-$colors: (
-  sides:             color('blue'),
-  angles:            color('red'),
-  area:              color('blue'),
-  grid:              color('grey', 'darker'),
-  disabled:          color('grey', 'darker'),
-  construction1:     color('red', 'darker'),
-  construction2:     color('green', 'darker'),
-  fill:              color('blue', 'darkest'),
-  fill1:             color('red', 'darker'),
-  fill2:             color('green', 'darkest'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 .diagram__text {
   z-index: 0;
 }

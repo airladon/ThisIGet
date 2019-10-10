@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
+# # Uncomment for Privacy
 # from wtforms import BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 # from wtforms.validators import Length
@@ -34,8 +35,10 @@ class CreateAccountForm(FlaskForm):
         'Repeat Password: ',
         validators=[DataRequired(), EqualTo('password')]
     )
+
+    # # Uncomment for Privacy
     # terms = BooleanField(
-    #     'I have read and agree to the <a href="/terms">Terms and Conditions</a>',  # noqa
+    #     'I have read and agree to the <a href="/terms">Terms of Use</a>',  # noqa
     #     validators=[DataRequired(
     #         message="You must agree to create an account"), ])
     # privacy = BooleanField(

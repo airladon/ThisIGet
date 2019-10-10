@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Introduction to radians and why we use them',
   htmlDescription: 'Radians and their relationship with arc length and radius',

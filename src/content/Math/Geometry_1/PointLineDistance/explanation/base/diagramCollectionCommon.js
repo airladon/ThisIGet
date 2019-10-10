@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -20,23 +20,23 @@ const { rand } = Fig.tools.math;
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _line: DiagramObjectLine;
-    _point: DiagramElementPrimative;
+    _point: DiagramElementPrimitive;
     _distance: {
       _line: DiagramObjectLine;
-      _pad: DiagramElementPrimative;
+      _pad: DiagramElementPrimitive;
     } & DiagramElementCollection;
     _rightAngle: DiagramObjectAngle;
-    _perpendicular: { _label: DiagramElementPrimative } & DiagramObjectLine;
-    _hypot: { _label: DiagramElementPrimative } & DiagramObjectLine;
+    _perpendicular: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+    _hypot: { _label: DiagramElementPrimitive } & DiagramObjectLine;
     _base: DiagramObjectLine;
-    _hypotPad: DiagramElementPrimative;
-    _end: DiagramElementPrimative;
+    _hypotPad: DiagramElementPrimitive;
+    _end: DiagramElementPrimitive;
     _distanceEnd: DiagramObjectLine;
-    _pointEnd: DiagramElementPrimative;
+    _pointEnd: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

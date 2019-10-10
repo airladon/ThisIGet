@@ -6,7 +6,7 @@ Two triangles that have the same angles can be different sizes.
 
 However, while the sizes may be different, the sizes are still related. Specifically, all pair of corresponding sides have the same ratio.
 
-This means, if the side of the larger triangle between angles $$\definecolor{b}{RGB}{0,103,214}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{RGB}{238,34,12}\color{b}a$$ and $$\color{b}b$$ is double the length of the corresponding side of the smaller triangle, then the other sides of the larger triangle will also be double the length of their corresponding sides on the smaller triangle.
+This means, if the side of the larger triangle between angles $$\definecolor{b}{RGB}{0,118,186}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{RGB}{238,34,12}\color{b}a$$ and $$\color{b}b$$ is double the length of the corresponding side of the smaller triangle, then the other sides of the larger triangle will also be double the length of their corresponding sides on the smaller triangle.
 
 ![](./ProportionalTriangles.png)
 

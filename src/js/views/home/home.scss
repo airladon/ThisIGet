@@ -1,1 +1,290 @@
 @import '../../../css/style';
+
+$fullwidth: 380px;
+
+.about__container {
+  width: 100%;
+}
+
+.about__spacer {
+  height: 0.5em;
+}
+
+.about__title {
+  padding: 2em;
+  font-family: $fontfamily-heading;
+  text-align: center;
+  width: 100%;
+  padding-top: 1em;
+  // padding-bottom: 1em;
+}
+
+.about__get_started_text,
+.about__arrow_text {
+  font-size: 1.5em;
+  color: color('black', 'darker');
+}
+
+.about__get_started_subtext,
+.about__arrow_subtext {
+  font-size: 1.1em;
+  padding-top: 1em;
+  // text-align: lef;
+}
+
+.about_section {
+  width: calc(100% - 1em);
+  background-color: color('white', 'lightest');
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about__tiles {
+  width: calc(760px + 3em);
+  padding: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about__title_text {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
+
+.about__tiles_text {
+  display: inline-block;
+  width: $fullwidth;
+  height: calc(320px + 1em);
+  padding: 1.7em;
+}
+
+.about__tiles_text_right {
+  float: right;
+}
+
+.about__tiles_text_container {
+  display: table-cell;
+  vertical-align: middle;
+  // width: 100%;
+  height: 100%;
+  width: 50%;
+  text-align: center;
+}
+
+.about__tiles_text_table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.about__tiles_text_title {
+  font-size: 1.5em;
+  text-align: left;
+  color: color('black', 'darker');
+}
+
+.about__tiles_text_text {
+  font-size: 1em;
+  padding-top: 1em;
+  text-align: left;
+}
+
+.about__tiles_tiles {
+  display: inline-block;
+  // height: 400px;
+  // width: 50%;
+  width: $fullwidth;
+  text-align: center;
+  // padding-top: 1.5em;
+  // padding-left: 1.5em;
+  // padding-right: 1.5em;
+}
+
+.about__tiles_group {
+  display: block;
+  height: calc(160px + 0.4em);
+}
+
+.about__tiles_tile_col {
+  display: inline-block;
+  padding: 0.2em;
+}
+
+.about__tiles_tile_container {
+  display: table-cell;
+  width: 160px;
+  height: 160px;
+  background-color: color('site', 'primary');
+  color: white;
+  text-align: center;
+  // padding-bottom: 10px;
+  vertical-align: middle;
+  border-radius: 0.8em;
+}
+
+.about__tiles_tile_img {
+  width: 65%;
+  height: 65%;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-position-y: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: center;
+  background-size: contain;
+}
+
+.about__logo {
+  width: $fullwidth;
+  height: calc(320px + 1em);
+  display: inline-block;
+}
+
+.about__logo_table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.about__logo_container {
+  height: 100%;
+  width: 100%;
+  display: table-cell;
+  font-size: 3em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.about__logo_section {
+  background-color: color('white', 'lightest');
+}
+
+.about__arrow {
+  display: block;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  // width: 40%;
+  margin-top: 2em;
+  width: 260px;
+}
+
+.about__get_started {
+  background: none;
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+
+@media screen and (max-width: $desktop) {
+  .about_section {
+    width: 100%;
+  }
+
+  .about__tiles_text_right {
+    float: none;
+  }
+
+  .about__tiles_tile_container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .about__tiles_tiles {
+    display: block;
+    width: 100%;
+  }
+
+  .about__tiles_text {
+    display: block;
+    width: calc(130px * 4 + 4em);
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about__tiles_group {
+    display: inline-block;
+    height: calc(130px + 0.4em);
+  }
+
+  .about__tiles_text_title {
+    text-align: center;
+  }
+
+  .about__tiles {
+    width: inherit;
+  }
+
+  .about__logo {
+    width: inherit;
+    display: block;
+    height: inherit;
+  }
+
+  .about__logo_section .about__tiles_text_text {
+    text-align: center;
+  }
+
+  .about__logo_section {
+    padding: 1.5em;
+    padding-top: 3em;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about__tiles_group {
+    display: block;
+  }
+
+  .about__tiles_tiles {
+    margin-bottom: 2em;
+  }
+
+  .about__tiles_text {
+    display: block;
+    width: calc(130px * 2 + 4em);
+  }
+
+  .about__tiles {
+    padding: 0.2em;
+  }
+
+  .about__logo {
+    width: 100%;
+    // height: calc(320px + 1em);
+    // display: inline-block;
+  }
+
+  .about__logo_section {
+    padding: 1em;
+    padding-top: 3em;
+  }
+
+  .about__get_started {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about__tiles_text {
+    display: block;
+    width: calc(110px * 2 + 4em);
+  }
+}
+
+#about__diagram {
+  width: 380px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: calc(380px * 0.6666);
+}
+
+@media screen and (max-width: 400px) {
+  #about__diagram {
+    width: calc(100% - 2em);
+    padding-top: calc(0.666666 * (100% - 2em));
+  }
+}

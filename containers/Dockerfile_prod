@@ -5,7 +5,7 @@
 
 
 
-FROM python:3.7.3-slim
+FROM python:3.7.4-slim
 
 WORKDIR /opt/app
 
@@ -32,4 +32,4 @@ RUN chmod 666 app/app/app.db
 USER myuser
 
 
-CMD gunicorn --bind 0.0.0.0:$PORT wsgi
+CMD gunicorn --bind 0.0.0.0:$PORT --workers=3 --log-level=info wsgi

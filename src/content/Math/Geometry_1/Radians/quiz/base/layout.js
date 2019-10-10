@@ -8,18 +8,23 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-const cssColorNames = [
-  'lines', 'angles', 'arc', 'marks', 'radianLines',
-];
+// const cssColorNames = [
+//   'lines', 'angles', 'arc', 'marks', 'radianLines',
+// ];
 
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
+  colors.lines = colors.get('blue').rgb;
+  colors.angles = colors.get('green').rgb;
+  colors.arc = colors.get('red').rgb;
+  colors.marks = colors.get('grey', 'dark').rgb;
+  colors.radianLines = colors.get('yellow').rgb;
   layout.position = new Point(0, 0);
   const radius = 1;
   layout.radius = radius;

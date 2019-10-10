@@ -9,7 +9,7 @@ type Props = {
   imgLink: ?string,
 };
 
-export default class LessonTitle extends React.Component
+export default class TopicTitle extends React.Component
                                     <Props> {
   render() {
     // const props = Object.assign({}, this.props);
@@ -49,7 +49,7 @@ export default class LessonTitle extends React.Component
       <div className='topic__title_centering_container'>
         <div className='topic__title_img_container'>
           <img src={imgLink} className="topic__title_image"
-            alt="Icon for lesson title"/>
+            alt="Icon for topic title"/>
         </div>
         <div className='topic__title_text_container'>
           <div className='topic__title_text'>

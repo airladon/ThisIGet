@@ -10,6 +10,7 @@ type Props = {
   isLoggedIn: boolean;
   username: string;
   content: string;
+  appendContent: ?React.Element<'div'>;
 };
 
 export default class ViewPolicy extends React.Component<Props> {
@@ -17,12 +18,13 @@ export default class ViewPolicy extends React.Component<Props> {
   render() {
     // const props = Object.assign({}, this.props);
     // delete props.active;
+    // console.log(this.props.appendContent)
     return <div>
       <main>
-      <div className='vertical_blank_space'/>
       <div className='information_text_container'>
         <div className="markdown" dangerouslySetInnerHTML={ { __html: this.props.content } }/>
       </div>
+      {this.props.appendContent || ''}
       <div className='vertical_blank_space'/>
       <div className='vertical_blank_space'/>
       </main>

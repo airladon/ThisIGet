@@ -1,15 +1,15 @@
-@import '../../../geometry';
+// @import '../../../geometry';
 
-$colors: (
-  lines:              color('blue'),
-  angles:             color('green'),
-  pads:               color('red', 'darkest'),
-  parallel:           color('red'),
-);
+// $colors: (
+//   lines:              color('blue'),
+//   angles:             color('green'),
+//   pads:               color('red', 'darkest'),
+//   parallel:           color('red'),
+// );
 
-body {
-  @include color_vars($colors);
-}
+// body {
+//   @include color_vars($colors);
+// }
 
 // .diagram__text {
 //   z-index: 0;

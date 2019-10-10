@@ -1,5 +1,3 @@
-## Distance Between a Parallel Lines
-
 The [[distance]]((qr,'Math/Geometry_1/PointLineDistance/base/Main',#00756F)) between a point and a line is the shorter of:
 
 * the distance between the point and the line's end
@@ -36,6 +34,6 @@ We could do this same exersise for any point along the first line, so all distan
 
 Thus, the distance between parallel lines is the **length of a perpendicular line between them**, and is **constant** anywhere along the lines.
 
-A more interactive version of this can be found in this lesson's [Explanation](/content/Math/Geometry_1/ParallelLineDistance/explanation/base?page=1).
+A more interactive version of this can be found in this topic's [Explanation](/content/Math/Geometry_1/ParallelLineDistance/explanation/base?page=1).
 
 </hintLow>

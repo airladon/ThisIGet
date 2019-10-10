@@ -1,22 +1,22 @@
-@import '../../../geometry';
+// @import '../../../geometry';
 
-$colors: (
-  sides:             color('blue'),
-  sidesDisabled:     color('blue', darker),
-  angles:            color('red'),
-  row:               color('red'),
-  highlight:         color('red'),
-  example1:          color('red'),
-  example2:          color('blue'),
-  disabled:          color('diagram', 'disabled'),
-  grid:              color('grey', 'darker'),
-  gridLight:         color('grey', 'base'),
-  measure:           color('grey', 'base'),
-);
+// $colors: (
+//   sides:             color('blue'),
+//   sidesDisabled:     color('blue', darker),
+//   angles:            color('red'),
+//   row:               color('red'),
+//   highlight:         color('red'),
+//   example1:          color('red'),
+//   example2:          color('blue'),
+//   disabled:          color('diagram', 'disabled'),
+//   grid:              color('grey', 'darker'),
+//   gridLight:         color('grey', 'base'),
+//   measure:           color('grey', 'base'),
+// );
 
-body {
-  @include color_vars($colors);
-}
+// body {
+//   @include color_vars($colors);
+// }
 
 .diagram__text {
   z-index: 1;
@@ -24,12 +24,12 @@ body {
 
 .area__label {
   font-size: calc(var(--topic__diagram-font-size) * 0.7);
-  color: map-get($colors, 'sides');
+  color: #1CA4FC;
 }
 
 .figureone__eqn_nav__description {
   // font-size: calc(var(--topic__diagram-font-size) * 0.55);
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
   // text-align: left;
   // width: 30em;
 }

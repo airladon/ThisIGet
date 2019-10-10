@@ -1,14 +1,14 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform,
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectPolyLine,
   DiagramObjectAngle,
   DiagramObjectLine,
@@ -23,27 +23,27 @@ const {
 } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: CommonLessonDiagram;
+  diagram: CommonTopicDiagram;
   _messages: {
-    _touching: DiagramElementPrimative;
-    _rotation: DiagramElementPrimative;
+    _touching: DiagramElementPrimitive;
+    _rotation: DiagramElementPrimitive;
   } & TypeMessages;
 
   triangle: {
-    _line: DiagramElementPrimative;
+    _line: DiagramElementPrimitive;
     _angle0: { label: EquationLabel } & DiagramObjectAngle;
     _angle1: { label: EquationLabel } & DiagramObjectAngle;
     _angle2: { label: EquationLabel } & DiagramObjectAngle;
-    _pad0: DiagramElementPrimative;
-    _pad1: DiagramElementPrimative;
-    _pad2: DiagramElementPrimative;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
+    _pad2: DiagramElementPrimitive;
     _side01: DiagramObjectLine;
     _side12: DiagramObjectLine;
     _side20: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

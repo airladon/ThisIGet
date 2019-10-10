@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: 'Introduction to Angles.',
   htmlTitle: 'Introduction to Angles',
   htmlDescription: 'Introduction to the concept of angle',

@@ -1,9 +1,6 @@
-## Quiz
+<html><div class="simple_topic__quiz_instructions">Round answers to two decimal places</div></html>
 
-* Round answers to **two decimal places**
-<!-- * Refresh the page to get new questions -->
-
-### Question 1:
+### Question 1
 
 What is the the length of a?
 
@@ -12,7 +9,7 @@ What is the the length of a?
 <quiz entry2>5</quiz>
 
 
-### Question 2:
+### Question 2
 
 What is the angle a in degrees?
 
@@ -21,7 +18,7 @@ What is the angle a in degrees?
 <quiz entry2>60</quiz>
 
 
-### Question 3:
+### Question 3
 
 What is the length a?
 
@@ -35,7 +32,7 @@ What is the length a?
 </quiz>
 
 
-### Question 4:
+### Question 4
 
 What is the angle a in degrees?
 
@@ -44,7 +41,7 @@ What is the angle a in degrees?
 <quiz entry2>60</quiz>
 
 
-### Question 5:
+### Question 5
 
 What is the angle a in degrees?
 

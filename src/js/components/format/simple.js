@@ -1,10 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import SimpleFormat from '../../Lesson/SimpleFormat';
+import SimpleFormat from '../../TopicFormat/SimpleFormat';
 import StaticQR from '../staticQR';
 import PresentationQR from '../presentationQR';
-// import '../../css/simpleLesson.scss';
+// import '../../css/simpleFormat.scss';
 
 type Props = {
   version: SimpleFormat;
@@ -14,44 +14,45 @@ type State = {
   qr: React.Element<'div'> | React.Element<typeof StaticQR>,
 };
 
-function align(elementId: string, containerId: string, linkId: string) {
-  const element = document.getElementById(elementId);
-  const container = document.getElementById(containerId);
+function align(qrId: string, topicId: string, linkId: string) {
+  const qr = document.getElementById(qrId);
+  const topic = document.getElementById(topicId);
   const link = document.getElementById(linkId);
-  if (element == null || container == null || link == null) {
+  if (qr == null || topic == null || link == null) {
     return;
   }
   // element.classList.remove('topic__hide');
-  const containerRect = container.getBoundingClientRect();
+  const topicRect = topic.getBoundingClientRect();
   const linkRect = link.getBoundingClientRect();
-  const windowWidth = window.innerWidth;
-  if (windowWidth < containerRect.width) {
-    element.style.left = '20px';
-    return;
-  }
-  const linkLeft = linkRect.left - containerRect.left;
-  element.style.left = '0';
-  const newRect = element.getBoundingClientRect();
+  // const windowWidth = window.innerWidth;
+  // if (windowWidth < topicRect.width) {
+  //   qr.style.left = '20px';
+  //   return;
+  // }
+  const linkLeft = linkRect.left - topicRect.left;
+  qr.style.left = '0';
+  const newRect = qr.getBoundingClientRect();
   const proposedLeft = linkLeft + linkRect.width / 2 - newRect.width / 2;
-  const overFlow = containerRect.width - (proposedLeft + newRect.width);
-  element.style.float = '';
+  const overFlow = topicRect.width - (proposedLeft + newRect.width);
+  // console.log(proposedLeft)
+  qr.style.float = '';
   if (proposedLeft <= 20) {
-    element.style.left = '20px';
+    qr.style.left = '20px';
   } else if (overFlow > 20) {
-    element.style.left = `${proposedLeft}px`;
+    qr.style.left = `${proposedLeft}px`;
   } else {
-    element.style.left = '';
-    element.style.right = '20px';
+    qr.style.left = '';
+    qr.style.right = '20px';
   }
   const windowHeight = window.innerheight;
-  if (windowHeight < containerRect.height) {
-    element.style.top = '10px';
+  if (windowHeight < topicRect.height) {
+    qr.style.top = '10px';
     return;
   }
-  const linkTop = linkRect.top - containerRect.top;
-  element.style.top = '0';
+  const linkTop = linkRect.top - topicRect.top;
+  qr.style.top = '0';
   const proposedTop = linkTop + linkRect.height;
-  element.style.top = `${proposedTop}px`;
+  qr.style.top = `${proposedTop}px`;
 }
 
 // Can also use html options like id="ID_TO_USE":
@@ -333,12 +334,14 @@ export default class SimpleFormatComponent extends React.Component
       className="simple_topic__container"
       // onClick={this.close.bind(this)}
     >
-      {this.version.content.sections}
-      <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
-        {this.state.qr}
-      </div>
-      <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
-        <PresentationQR id="id_topic__qr__content_pres__overlay"/>
+      <div className="simple_topic__inner_container">
+        {this.version.content.sections}
+        <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
+          {this.state.qr}
+        </div>
+        <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
+          <PresentationQR id="id_topic__qr__content_pres__overlay"/>
+        </div>
       </div>
     </div>;
   }

@@ -1,5 +1,3 @@
-## Area of a Triangle
-
 As [[area]]((qr,'Math/Geometry_1/Area/base/Area',#00756F)) is measured in squares, and triangles and squares don't easily align, it can seem a challenge to calculate the area of a triangle.
 
 ![](problemstatement.png)
@@ -63,7 +61,7 @@ $$Area_{\ triangle} = \textstyle\frac{1}{2} \times h \times base $$
 
 So the area of a triangle is half the product of its base and height.
 
-Any side can be chosen as the base, and this lesson's [Explanation](/content/Math/Geometry_1/AreaTriangle/explanation/base?page=37) shows the example where triangle's top point does not sit directly above the base.
+Any side can be chosen as the base, and this topic's [Explanation](/content/Math/Geometry_1/AreaTriangle/explanation/base?page=37) shows the example where triangle's top point does not sit directly above the base.
 
 ![](example.png)
 

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full explanation',
+  title: 'Descriptive & Interactive',
   description: '',
   htmlTitle: 'Introduction to quadrangles and quadrilaterals',
   htmlDescription: 'Quadrangles, quadrilaterals and their properties',

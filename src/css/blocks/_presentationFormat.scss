@@ -137,17 +137,18 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 .topic__widescreen_backdrop {
   font-size: var(--topic__diagram-font-size);
-  background-color: color('presentation', 'background');
+  // background-color: color('presentation', 'background');
+  background-color: color('white', 'base');
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
-  border-top: 1px solid color('white', 'light');
+  // border-top: 1px solid color('white', 'light');
   border-bottom: 1px solid color('white', 'light');
 }
 
 @media screen and (min-width: 1452px) and (max-aspect-ratio: $height_limited_landscape_aspect_ratio) {
   .topic__widescreen_backdrop {
-    max-width: 1450px;
-    border: 1px solid color('white', 'light');
+    // max-width: 1450px;
+    // border: 1px solid color('white', 'light');
     margin-left: auto;
     margin-right: auto;
   }
@@ -155,8 +156,8 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 @media screen and (min-width: 1452px) and (min-aspect-ratio: $height_limited_landscape_aspect_ratio) {
   .topic__widescreen_backdrop {
-    max-width: calc(var(--pres__container_width) + 50px);
-    border: 1px solid color('white', 'light');
+    // max-width: calc(var(--pres__container_width) + 50px);
+    // border: 1px solid color('white', 'light');
     margin-left: auto;
     margin-right: auto;
   }

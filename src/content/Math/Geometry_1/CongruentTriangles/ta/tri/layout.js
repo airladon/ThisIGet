@@ -10,21 +10,17 @@ import baseLayout from '../../../../../common/layout';
 
 // const { joinObjects } = Fig.tools.misc;
 
-const cssColorNames = [
-  'sides',
-  'angles',
-  'pads',
-  // 'disabled',
-  // 'construction',
-  'highlight',
-];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
-  const layout: Object = baseLayout(cssColorNames);
+  const layout: Object = baseLayout();
   // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  colors.sides = colors.get('blue').rgb;
+  colors.angles = colors.get('red').rgb;
+  colors.pads = colors.get('yellow', 'darkest').rgb;
+  colors.construction = colors.get('yellow', 'darkest').rgb;
+  colors.disabled = colors.get('diagram', 'disabled', 'darker').rgb;
+  colors.highlight = colors.get('green').rgb;
   layout.width = 0.02;
 
   layout.tri = {

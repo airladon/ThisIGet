@@ -3,8 +3,8 @@
 import * as React from 'react';
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Rating from '../rating';
-import { login } from '../../tools/misc';
-import { getLinkRatings, setLinkRating } from '../../Lesson/rating';
+import { login, getTopicPath } from '../../tools/misc';
+import { getLinkRatings, setLinkRating } from '../../TopicFormat/rating';
 // import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
 // import img from '../../tile.png';
@@ -53,7 +53,7 @@ export default class LinksTable extends React.Component
 
   constructor(props: Props) {
     super(props);
-    const path = window.location.pathname.replace(/^.*\/content\//, '').split('/');
+    const path = getTopicPath().split('/');
     this.links = [];
     const initialRatings = [];
     props.links.forEach((link) => {
@@ -167,6 +167,7 @@ export default class LinksTable extends React.Component
     let key = 0;
     const userRatingIndex = 3;
     const highRatingIndex = 1;
+    let tdClass = 'approach__links_table__td approach__links_table__first_row';
     this.links.forEach((link, index) => {
       let userRatingValue = this.state.ratings[index][userRatingIndex];
       if (typeof userRatingValue !== 'number') {
@@ -206,10 +207,10 @@ export default class LinksTable extends React.Component
 
       let description = null;
       if (this.hasDescription) {
-        description = <td className="approach__links_table__description">{link.description}</td>;
+        description = <td className={`approach__links_table__description ${tdClass}`}>{link.description}</td>;
       }
       links.push(<tr key={key} className="approach__links_table__large_screen">
-        <td className="approach__links_table__type">
+        <td className={`approach__links_table__type ${tdClass}`}>
           <a
             className={typeClass}
             href={link.url}
@@ -219,13 +220,13 @@ export default class LinksTable extends React.Component
           >
           </a>
         </td>
-        <td className="approach__links_table__title">{title}</td>
+        <td className={`approach__links_table__title ${tdClass}`}>{title}</td>
         {description}
-        <td className="approach__links_table__your_rating">{rating}</td>
-        <td className="approach__links_table__total_rating">{numHighRatings}</td>
+        <td className={`approach__links_table__total_rating ${tdClass}`}>{numHighRatings}</td>
+        <td className={`approach__links_table__your_rating ${tdClass}`}>{rating}</td>
       </tr>);
       key += 1;
-
+      tdClass = 'approach__links_table__td';
       // if (!this.props.isLoggedIn) {
       //   rating = <span className="rating__login" onClick={login}>{'Login'}</span>
       // }
@@ -259,7 +260,7 @@ export default class LinksTable extends React.Component
             <tr>
               <td className="approach__links_table__total_rating">
                 <div className="approach__links_table__small_screen__title">
-                    {'Total Ratings ≥4:'}
+                    {'Num High Ratings:'}
                 </div>
                 <div className="approach__links_table__small_screen__value">
                   {numHighRatings}
@@ -305,12 +306,12 @@ export default class LinksTable extends React.Component
     // const props = Object.assign({}, this.props);
     return <table className="approach__links_table">
       <tbody>
-        <tr className="approach__links_table__title_row approach__links_table__large_screen">
-        <td className="approach__links_table__type_title approach__links_table__type"></td>
-        <td className="approach__links_table__title_title approach__links_table__title">Link</td>
+        <tr className="approach__links_table__title_row approach__links_table__large_screen approach__links_table__header">
+        <td className="approach__links_table__type_title approach__links_table__type approach__links_table__header"></td>
+        <td className="approach__links_table__title_title approach__links_table__title approach__links_table__header">Link</td>
         {description}
-        <td className="approach__links_table__your_rating_title approach__links_table__your_rating">{this.yourRatingTitle()}</td>
-        <td className="approach__links_table__total_rating_title approach__links_table__total_rating">Total Ratings ≥4</td>
+        <td className="approach__links_table__total_rating_title approach__links_table__total_rating approach__links_table__header">Num High Ratings</td>
+        <td className="approach__links_table__your_rating_title approach__links_table__your_rating approach__links_table__header">{this.yourRatingTitle()}</td>
         </tr>
         {this.renderLinks()}
       </tbody>

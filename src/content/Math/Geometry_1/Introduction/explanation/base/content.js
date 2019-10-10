@@ -3,14 +3,14 @@ import Fig from 'figureone';
 import {
   PresentationFormatContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/PresentationFormatContent';
+} from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
 // import imgLink from '../../tile_ffffff.svg';
 import imgLinkGrey from '../../tile.svg';
 import details from '../../details';
 import DiagramCollection from './collection';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 
 const {
   click,
@@ -30,7 +30,7 @@ class Content extends PresentationFormatContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({
+    this.diagram = new CommonTopicDiagram({
       htmlId,
       vertexShader: 'withTexture',
       fragmentShader: 'withTexture',

@@ -1,7 +1,7 @@
 // @flow
-import commonLessonLayout from '../../explanation/base/layout';
+import commonLayout from '../../explanation/base/layout';
 
 export default function diagramLayout() {
-  const layout: Object = commonLessonLayout();
+  const layout: Object = commonLayout();
   return layout;
 }

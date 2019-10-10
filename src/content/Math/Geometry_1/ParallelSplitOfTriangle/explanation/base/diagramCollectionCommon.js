@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -22,9 +22,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _splitTri: DiagramObjectPolyLine;
     _labelM: DiagramObjectLine;
     _labelN: DiagramObjectLine;
-    _area1: DiagramElementPrimative;
-    _area2: DiagramElementPrimative;
-    _area3: DiagramElementPrimative;
+    _area1: DiagramElementPrimitive;
+    _area2: DiagramElementPrimitive;
+    _area3: DiagramElementPrimitive;
     _construction: DiagramObjectLine;
   } & DiagramElementCollection;
 
@@ -38,25 +38,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     _labelM: DiagramObjectLine;
     _labelN: DiagramObjectLine;
     _labelB: {
-      _label: DiagramElementPrimative;
+      _label: DiagramElementPrimitive;
     } & DiagramObjectLine;
-    _B1: DiagramElementPrimative;
-    _B2: DiagramElementPrimative;
-    _rH: DiagramElementPrimative;
+    _B1: DiagramElementPrimitive;
+    _B2: DiagramElementPrimitive;
+    _rH: DiagramElementPrimitive;
     _topLeftTri: {
       _side01: {
-        _label: DiagramElementPrimative;
+        _label: DiagramElementPrimitive;
       } & DiagramObjectLine;
       _side20: {
-        _label: DiagramElementPrimative;
+        _label: DiagramElementPrimitive;
       } & DiagramObjectLine;
     } & DiagramObjectPolyLine;
     _topRightTri: {
       _side12: {
-        _label: DiagramElementPrimative;
+        _label: DiagramElementPrimitive;
       } & DiagramObjectLine;
       _side20: {
-        _label: DiagramElementPrimative;
+        _label: DiagramElementPrimitive;
       } & DiagramObjectLine;
     } & DiagramObjectPolyLine;
   } & DiagramElementCollection;
@@ -90,7 +90,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   _7Eqn: Equation;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {

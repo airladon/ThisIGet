@@ -10,7 +10,7 @@
 
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
-from flask import make_response, request
+from flask import make_response, request, abort
 from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
@@ -30,6 +30,7 @@ from app.tools import format_email
 
 # project/decorators.py
 from functools import wraps
+# import logging
 
 
 def make_response_with_files(*args, **kwargs):
@@ -43,6 +44,8 @@ def make_response_with_files(*args, **kwargs):
     topic_index_js = ''
     about_js = ''
     about_css = ''
+    learning_paths_js = ''
+    learning_paths_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -59,6 +62,8 @@ def make_response_with_files(*args, **kwargs):
         topic_index_js = f"/{'static/dist'}/{dist['topicIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
+        learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
+        learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
     res = make_response(render_template(
         *args, **kwargs,
@@ -66,7 +71,8 @@ def make_response_with_files(*args, **kwargs):
         common_content_js=common_content_js, vendors_js=vendors_js,
         figure_one_js=figure_one_js, topic_index_js=topic_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
-        about_css=about_css,
+        about_css=about_css, learning_paths_js=learning_paths_js,
+        learning_paths_css=learning_paths_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
@@ -92,18 +98,34 @@ def get_full_path(root, file):
     return f'/{root}/{static_files[root][file]}'
 
 
+# @app.route('/errorTester')
+# def raiseError():
+#     raise Exception
+#     return
+
+
 def log_data(rquest):
     log_data = {
         'User-Agent': rquest.headers.get('User-Agent'),
         'Accept-Language': rquest.headers.get('Accept-Language'),
         'Referer': rquest.headers.get('Referer'),
+        'Endpoint': rquest.full_path,
+        'Route': ','.join([address for address in rquest.access_route]),
     }
-    print(f"{rquest.remote_addr} - {log_data}")
+    app.logger.info(f"{rquest.remote_addr} - {log_data}")
 
 
 @app.route('/') # noqa
 def home():
     res = make_response_with_files('home.html')
+    res.set_cookie('page', '0')
+    log_data(request)
+    return res
+
+
+@app.route('/paths', strict_slashes=False)
+def paths():
+    res = make_response_with_files('learning_paths.html')
     res.set_cookie('page', '0')
     log_data(request)
     return res
@@ -140,44 +162,66 @@ def information_response(name):
     return res
 
 
-@app.route('/about')
+@app.route('/about', strict_slashes=False)
 def about():
     return information_response('about')
 
+# Uncomment for Privacy
+# @app.route('/copyright', strict_slashes=False)
+# def copyright():
+#     return information_response('copyright')
 
-@app.route('/copyright')
-def copyright():
-    return information_response('copyright')
+# Uncomment for Privacy
+# @app.route('/privacy', strict_slashes=False)
+# def privacy():
+#     return information_response('privacy')
 
-
-@app.route('/privacy')
-def privacy():
-    return information_response('privacy')
-
-
-@app.route('/terms')
-def terms():
-    return information_response('terms')
-
-
-@app.route('/disclaimer')
-def disclaimer():
-    return information_response('disclaimer')
+# Uncomment for Privacy
+# @app.route('/terms', strict_slashes=False)
+# def terms():
+#     return information_response('terms')
 
 
-@app.route('/contribute')
-def contribute():
-    return information_response('contribute')
+# @app.route('/disclaimer', strict_slashes=False)
+# def disclaimer():
+#     return information_response('disclaimer')
 
 
-@app.route('/introduction')
+# @app.route('/contribute', strict_slashes=False)
+# def contribute():
+#     return information_response('contribute')
+
+
+@app.route('/introduction', strict_slashes=False)
 def introduction():
     return information_response('introduction')
 
 
-@app.route('/contact')
+@app.route('/contact', strict_slashes=False)
 def contact():
     return information_response('contact')
+
+
+@app.errorhandler(404)
+def not_found_error(error):
+    app.logger.info(request.referrer)
+    if request.referrer and \
+       (request.referrer.startswith('https://thisiget') or  # noqa
+            request.referrer.startswith('https://www.thisiget') or  # noqa
+            request.referrer.startswith('http://localhost')):
+        app.logger.error(
+            f'Internal link broken.'
+            f'Referrer: {request.referrer} '
+            f'Url: {request.url}'
+        )
+        return render_template('404_internal.html'), 404
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
 
 
 # @app.route('/content/', defaults={'path': ''})
@@ -195,20 +239,24 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
-@app.route('/content/', defaults={'path': ''})  # noqa
+@app.route('/content/', defaults={'path': ''}, strict_slashes=False)  # noqa
 @app.route('/content/<path:path>')
 def get_content(path):
     log_data(request)
-    content_path = f'static/dist/content/{path}'.strip('/')
+    path = path.strip('/')
+    content_path = f'static/dist/content/{path}'
     js = ''
     css = ''
+
     if (content_path in static_files):
         js = f'/static/dist/content/' \
              f'{path}/{static_files[content_path]["content.js"]}'
         css = f'/static/dist/content/{path}/' \
               f'{static_files[content_path]["content.css"]}'
+    else:
+        abort(404)
 
-    *p, content_path, topic_name, version_uid = path.strip('/').split('/')
+    *p, content_path, topic_name, version_uid = path.split('/')
 
     end_point = f"{path}"
 
@@ -227,7 +275,7 @@ def get_content(path):
     res = make_response_with_files(
         'content.html', css=css, js=js, title=title, description=description)
     if topic_page:
-        res = make_response(redirect(request.path))
+        # res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=topic_page,
             path=request.path, max_age=30 * 60)
@@ -249,6 +297,8 @@ def get_qr_file_location(path):
     if (qr_path in static_files):
         js = static_files[qr_path]["quickReference.js"]
         css = static_files[qr_path]["quickReference.css"]
+    else:
+        abort(404)
     return jsonify({
         'status': 'ok',
         'js': js,
@@ -271,7 +321,7 @@ def get_content_dev(path):
 
     res = make_response_with_files('content.html', css=css, js=js)
     if topic_page:
-        res = make_response(redirect(request.path))
+        # res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=topic_page,
             path=request.path, max_age=30 * 60)
@@ -486,7 +536,7 @@ def reset_password(token):
     return render_template('resetPassword.html', form=form, css=css, js=js)
 
 
-@app.route('/logout')
+@app.route('/logout', strict_slashes=False)
 def logout():
     logout_user()
     session.pop('username', None)

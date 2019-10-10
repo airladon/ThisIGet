@@ -57,7 +57,7 @@ export default class QuickReferencePopup extends React.Component
         // rel='noreferrer noopener'
         // target="_blank"
       >
-        Go to lesson to see why
+        Go to topic to see why
       </a>;
     }
 

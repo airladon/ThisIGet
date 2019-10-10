@@ -1,5 +1,3 @@
-## Congruent Triangles
-
 Triangles are said to be congruent if all their corresponding side lengths and angles are the same.
 
 ![](congruent.png)

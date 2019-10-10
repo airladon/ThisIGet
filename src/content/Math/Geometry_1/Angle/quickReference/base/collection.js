@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  DiagramElementPrimative, DiagramObjectLine,
+  DiagramElementPrimitive, DiagramObjectLine,
   DiagramElementCollection,
   Transform,
 } = Fig;
@@ -15,15 +15,15 @@ export default class CommonCollection extends CommonDiagramCollection {
   _angle: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
-    _fill: DiagramElementPrimative;
-    _arrow: DiagramElementPrimative;
-    _anchor: DiagramElementPrimative;
+    _fill: DiagramElementPrimitive;
+    _arrow: DiagramElementPrimitive;
+    _anchor: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   angleIndex: number;
 
   constructor(
-    diagram: CommonLessonDiagram,
+    diagram: CommonTopicDiagram,
     layout: Object,
     transform: Transform = new Transform('Angles').scale(1, 1).rotate(0).translate(0, 0),
   ) {

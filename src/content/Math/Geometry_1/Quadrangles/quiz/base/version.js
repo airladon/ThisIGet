@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Find the Angle',
   description: '',
   htmlTitle: 'Quiz - Find the unknown angle in the quadrangle',
   htmlDescription: 'Dynamic quiz where no two questions are the same',
