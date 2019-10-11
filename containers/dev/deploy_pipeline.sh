@@ -62,15 +62,17 @@ title "Browser Tests - General: thisiget-test"
 ./browser_test.sh test browser.*btest
 check_status
 
-JEST_OPTIONS=`python browser_test_diff_master.py`
-echo Testing: $JEST_OPTIONS
-if [ -z "$JEST_OPTIONS" ];
-then
-    echo No extended tests needed
-else
-    ./browser_test.sh test $JEST_OPTIONS
-    check_status
-fi
+# JEST_OPTIONS=`python browser_test_diff_master.py`
+# echo Testing: $JEST_OPTIONS
+# if [ -z "$JEST_OPTIONS" ];
+# then
+#     echo No extended tests needed
+# else
+#     ./browser_test.sh test $JEST_OPTIONS
+#     check_status
+# fi
+./browser_test.sh test stage.btest.js
+check_status
 
 ###########################################################################
 title "Deploy to thisiget-beta"
