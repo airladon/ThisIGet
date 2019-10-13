@@ -48,3 +48,4 @@ RUN chown -R myuser app
 USER myuser
 
 ENTRYPOINT ["bash"]
+
