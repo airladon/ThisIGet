@@ -43,7 +43,7 @@ docker_run_browser_test() {
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
         --entrypoint "npm" \
-        airladon/pynode:python3.7.4-node12.10.0-npm6.11.3-puppeteer1.20.0-chrome79.0.3921.0 \
+        thisiget-pupp \
         "run" "jest" "--" "--runInBand" $@
 }
 
@@ -56,7 +56,7 @@ docker_start_browser_test_container() {
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
-        airladon/pynode:python3.7.4-node12.10.0-npm6.11.3-puppeteer1.20.0-chrome79.0.3921.0 \
+        thisiget-pupp \
         bash
 }
 
@@ -66,6 +66,16 @@ title() {
 }
 chmod +777 -R src
 chmod +777 -R tests
+
+cp containers/Dockerfile_pupp .
+
+HOST_USER_ID=`id -u`
+
+sed "s/HOST_USER_ID/${HOST_USER_ID}/" < Dockerfile_pupp > Dockerfile 
+rm Dockerfile_pupp
+
+docker build -t thisiget-pupp .
+rm Dockerfile
 
 if [ "$1" = debug ];
 then
