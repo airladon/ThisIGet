@@ -121,7 +121,7 @@ then
   cp containers/$DOCKERFILE DockerfileTemp
   # set user id of new user in production container to the same user id of the 
   # user calling the container so permissions of files work out ok
-  DOCKER_GROUP_ID=`grep -e '^docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
+  DOCKER_GROUP_ID=`grep -e '^host-docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
   if [ -z "$DOCKER_GROUP_ID" ];
   then
     DOCKER_GROUP_ID=`ls -n /var/run/docker.sock | sed "s/[^ ]* *[^ ]* *\([^ ]*\).*/\1/"`
