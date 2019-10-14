@@ -39,6 +39,5 @@ RUN npm install
 ENV PATH="/home/pptruser/node_modules/.bin:${PATH}"
 
 
-
 # ENTRYPOINT ["dumb-init", "--"]
 CMD ["google-chrome-unstable"]
