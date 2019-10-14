@@ -32,7 +32,7 @@ USER pptruser
 
 WORKDIR /home/pptruser
 
-ADD pupp/package.json .
+ADD containers/pupp/package.json .
 RUN npm install
 
 # Update path so eslint can be run from anywhere
