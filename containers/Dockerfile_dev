@@ -40,7 +40,7 @@ RUN useradd -m -u HOST_USER_ID -o myuser
 RUN groupadd -g DOCKER_GROUP_ID -o host-docker
 RUN usermod -aG DOCKER_GROUP_ID,HOST_USER_GROUP_ID myuser
 RUN chown myuser /opt/app
-RUN chown -R myuser /opt/app
+# RUN chown -R myuser /opt/app
 # RUN chown -R myuser repo
 # RUN chown myuser app/app/app.db
 # RUN chmod 666 app/app/app.db
