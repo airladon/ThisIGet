@@ -64,8 +64,8 @@ title() {
     echo
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
-chmod +777 -R src
-chmod +777 -R tests
+# chmod +777 -R src
+# chmod +777 -R tests
 
 cp containers/Dockerfile_pupp .
 
