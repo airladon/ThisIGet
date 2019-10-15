@@ -38,5 +38,6 @@ RUN npm install
 # Update path so eslint can be run from anywhere
 ENV PATH="/home/pptruser/node_modules/.bin:${PATH}"
 
+
 # ENTRYPOINT ["dumb-init", "--"]
 CMD ["google-chrome-unstable"]
