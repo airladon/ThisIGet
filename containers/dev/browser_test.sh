@@ -43,14 +43,45 @@ docker_run_browser_test() {
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
         --entrypoint "npm" \
-        airladon/pynode:python3.7.4-node12.10.0-npm6.11.3-puppeteer1.20.0-chrome79.0.3921.0 \
+        thisiget-pupp \
         "run" "jest" "--" "--runInBand" $@
+}
+
+docker_start_browser_test_container() {
+    docker run -it --rm \
+        -v $HOST_PATH/tests/browser:/home/pptruser/tests/browser \
+        -v $HOST_PATH/src:/home/pptruser/src \
+        -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
+        -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
+        -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
+        -e TIG_ADDRESS=$1 \
+        --name devenv-browser-test \
+        thisiget-pupp \
+        bash
 }
 
 title() {
     echo
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
+# chmod +777 -R src
+# chmod +777 -R tests
+
+cp containers/Dockerfile_pupp .
+
+HOST_USER_ID=`id -u`
+
+sed "s/HOST_USER_ID/${HOST_USER_ID}/" < Dockerfile_pupp > Dockerfile 
+rm Dockerfile_pupp
+
+docker build -t thisiget-pupp .
+rm Dockerfile
+
+if [ "$1" = debug ];
+then
+    docker_start_browser_test_container
+    exit 0
+fi
 
 if [ $1 ];
 then
@@ -63,6 +94,7 @@ then
         *) TIG_ADDRESS=$1;;
     esac
 fi
+
 
 title "Running tests on $TIG_ADDRESS"
 docker_run_browser_test "$TIG_ADDRESS" "${@:2}"

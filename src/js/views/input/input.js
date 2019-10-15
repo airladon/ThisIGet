@@ -1,4 +1,4 @@
 import './input.scss';
-import { loadColors, Colors } from '../../tools/colors';
+import { loadColors } from '../../tools/colors';
 
 loadColors();

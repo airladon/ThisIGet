@@ -118,6 +118,20 @@ then
   echo "${bold}${cyan}================= Building container ===================${reset}"
   cp containers/$DOCKERFILE Dockerfile
 
+  cp containers/$DOCKERFILE DockerfileTemp
+  # set user id of new user in production container to the same user id of the 
+  # user calling the container so permissions of files work out ok
+  DOCKER_GROUP_ID=`grep -e '^host-docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
+  if [ -z "$DOCKER_GROUP_ID" ];
+  then
+    DOCKER_GROUP_ID=`ls -n /var/run/docker.sock | sed "s/[^ ]* *[^ ]* *\([^ ]*\).*/\1/"`
+  fi
+  HOST_USER_GROUP_ID=`id -g`
+  HOST_USER_ID=`id -u`
+
+  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile 
+  rm DockerfileTemp
+
   GUNICORN_PORT=4000
   docker build -t "devenv-$1" .
   rm Dockerfile

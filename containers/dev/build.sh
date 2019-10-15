@@ -208,7 +208,7 @@ fi
 if [ "$DEPLOY" = "deploy" ];
 then
   echo "${bold}${cyan}Login to Docker${reset}"
-  docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+  echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
   check_status "Docker Login"
 
   echo "${bold}${cyan}Building deployment image${reset}"

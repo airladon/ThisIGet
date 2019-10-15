@@ -363,6 +363,7 @@ def login(username=''):
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
@@ -410,6 +411,7 @@ def create():
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
@@ -438,6 +440,7 @@ def confirm_account_message(username):
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
@@ -502,6 +505,7 @@ def confirm_account(token):
 def reset_password_request():
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
@@ -529,6 +533,7 @@ def reset_password_request():
 def reset_password(token):
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"

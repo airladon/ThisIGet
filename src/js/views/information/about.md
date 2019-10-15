@@ -20,7 +20,7 @@ This site is not aimed at a particular audience or age group. It is simply refer
 
 [Introduction](/introduction) - Introduction to the the site and how to use it.
 
-[Privacy](/privacy) - The privacy policy of www.thisiget.com.
+<!-- [Privacy](/privacy) - The privacy policy of www.thisiget.com. -->
 
 <!-- [Terms of Use](/terms) - The terms to use this site or create an account www.thisiget.com.
 
