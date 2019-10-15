@@ -62,17 +62,17 @@ title "Browser Tests - General: thisiget-test"
 ./browser_test.sh test browser.*btest
 check_status
 
-# JEST_OPTIONS=`python browser_test_diff_master.py`
-# echo Testing: $JEST_OPTIONS
-# if [ -z "$JEST_OPTIONS" ];
-# then
-#     echo No extended tests needed
-# else
-#     ./browser_test.sh test $JEST_OPTIONS
-#     check_status
-# fi
-./browser_test.sh test stage.btest.js
-check_status
+JEST_OPTIONS=`python browser_test_diff_master.py`
+echo Testing: $JEST_OPTIONS
+if [ -z "$JEST_OPTIONS" ];
+then
+    echo No extended tests needed
+else
+    ./browser_test.sh test $JEST_OPTIONS
+    check_status
+fi
+# ./browser_test.sh test stage.btest.js
+# check_status
 
 ###########################################################################
 title "Deploy to thisiget-beta"
@@ -95,37 +95,37 @@ title "Browser Tests: thisiget-beta"
 ./browser_test.sh beta prod.btest.js
 check_status
 
-###########################################################################
-# CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
-# title "Deploy to thisiget - current: $CURRENT_VERSION"
-# ./build.sh deploy thisiget skip-tests skip-build
-# check_status
+##########################################################################
+CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
+title "Deploy to thisiget - current: $CURRENT_VERSION"
+./build.sh deploy thisiget skip-tests skip-build
+check_status
 
-# title "Delay for thisiget to restart"
-# sleep 5s
-# check_status
+title "Delay for thisiget to restart"
+sleep 5s
+check_status
 
-# title "Ratings Test: thisiget"
-# ./ratings_test.sh prod
-# check_status
+title "Ratings Test: thisiget"
+./ratings_test.sh prod
+check_status
 
-# title "Browser Tests: thisiget"
-# ./browser_test.sh prod prod.btest.js
-# check_status
+title "Browser Tests: thisiget"
+./browser_test.sh prod prod.btest.js
+check_status
 
-# if [ $? != 0 ];
-# then
-#     heroku rollback $CURRENT_VERSION
-#     NEW_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
-#     echo "${red}${bold}Production deployment failed${reset}"
-#     if [ "$NEW_VERSION" = "$CURRENT_VERSION" ];
-#     then
-#         echo "${red}${bold}Rolled back to $CURRENT_VERSION${reset}"
-#         echo
-#     else
-#         echo "${red}${bold}Rollback to $CURRENT_VERSION failed${reset}"
-#         echo
-#     fi
-#     exit 1
-# fi
+if [ $? != 0 ];
+then
+    heroku rollback $CURRENT_VERSION
+    NEW_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
+    echo "${red}${bold}Production deployment failed${reset}"
+    if [ "$NEW_VERSION" = "$CURRENT_VERSION" ];
+    then
+        echo "${red}${bold}Rolled back to $CURRENT_VERSION${reset}"
+        echo
+    else
+        echo "${red}${bold}Rollback to $CURRENT_VERSION failed${reset}"
+        echo
+    fi
+    exit 1
+fi
 
