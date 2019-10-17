@@ -7,8 +7,8 @@ import requests
 from lxml import etree
 from pathlib import Path
 
-content_path = Path(__file__).resolve().parent.parent/'src'/'content'
-local_sitemap = Path(__file__).resolve().parent.parent/'app'/'app'/'static'/'sitemap.xml'
+content_path = Path(__file__).resolve().parent.parent / 'src' / 'content'
+local_sitemap = Path(__file__).resolve().parent.parent / 'app' / 'app' / 'static' / 'sitemap.xml' # noqa
 
 # #############################################################################
 # Get current sitemap

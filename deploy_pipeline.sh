@@ -42,7 +42,7 @@ title "Creating hashes"
 python ./tools/create_site_hashes.py
 
 title "Creating site map"
-python ./create_site_map.py
+python ./tools/create_site_map.py
 check_status
 
 ###########################################################################

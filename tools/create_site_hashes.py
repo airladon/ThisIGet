@@ -3,7 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 
-static_path = Path(__file__).resolve().parent.parent/'app'/'app'/'static'
+static_path = Path(__file__).resolve().parent.parent / 'app' / 'app' / 'static'
+
 
 def md5(fname):
     hash_md5 = hashlib.md5()
@@ -25,5 +26,5 @@ for root, dirs, files in os.walk(static_path):
         md5_str = md5(full_file_path)
         file_list[full_file_path.replace(static_path.as_posix(), '')] = md5_str
 
-with open(static_path/'hashes.json', 'w') as outfile:
+with open(static_path / 'hashes.json', 'w') as outfile:
     json.dump(file_list, outfile)
