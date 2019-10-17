@@ -174,21 +174,17 @@ else
     -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
     -v $PROJECT_PATH/.git:/opt/app/.git \
     -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
-    -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
-    -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
-    -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
     -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \
-    -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
-    -v $PROJECT_PATH/containers/dev/jest.index.config.js:/opt/app/jest.index.config.js \
-    -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
-    -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \
     -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
+    -v $PROJECT_PATH/build.sh:/opt/app/build.sh \
+    -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
+    -v $PROJECT_PATH/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/.babelrc:/opt/app/.babelrc \
     -v $PROJECT_PATH/.eslintignore:/opt/app/.eslintignore \
     -v $PROJECT_PATH/.eslintrc.json:/opt/app/.eslintrc.json \
@@ -196,6 +192,9 @@ else
     -v $PROJECT_PATH/.flowconfig:/opt/app/.flowconfig \
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
+    -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
+    -v $PROJECT_PATH/jest.index.config.js:/opt/app/jest.index.config.js \
+    -v $PROJECT_PATH/pytest.ini:/opt/app/pytest.ini \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
@@ -204,6 +203,7 @@ else
     "devenv-$1" $CMD
 fi
 
+# -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
 # -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
 # -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
 # -v $PROJECT_PATH/containers/dev/quiz-loader.js:/opt/app/quiz-loader.js \

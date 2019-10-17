@@ -39,7 +39,7 @@ title "Run Lint Checks, Tests and Build App"
 check_status
 
 title "Creating hashes"
-python ./create_site_hashes.py
+python ./tools/create_site_hashes.py
 
 title "Creating site map"
 python ./create_site_map.py

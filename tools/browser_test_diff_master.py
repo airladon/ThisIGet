@@ -58,7 +58,7 @@ for path in diff:
 # Skip over commonlessons as the lessonindex will change it, and if
 # anything else was changed it will be caught in the git checks
 current = {}
-subprocess.run(['python', 'create_site_hashes.py'])
+subprocess.run(['python', 'tools/create_site_hashes.py'])
 with open('./app/app/static/hashes.json', 'r') as current_file:
     current = json.loads(current_file.read())
 

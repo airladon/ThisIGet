@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "webpack --env.mode=prod --config webpack/webpack.config.js",
-    "webpack": "webpack --config webpack/webpack.config.js",
+    "webpack": "webpack --env.mode=dev --config webpack/webpack.config.js",
     "watch": "webpack --watch --progress --config webpack/webpack.config.js",
     "flow": "flow",
     "jest": "jest",

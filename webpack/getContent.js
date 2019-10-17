@@ -1,6 +1,8 @@
+/* eslint-disable import/no-dynamic-require */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+
 const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
 function entryPoints(buildMode) {
