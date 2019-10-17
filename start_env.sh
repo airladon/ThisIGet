@@ -75,31 +75,35 @@ then
   HOST_PORT=5000
   CONTAINER_PORT=4000
   stop_dev_server
+  DOCKERFILE="prod/Dockerfile"
 fi
 
 if [ "$1" = "stage" ];
 then
   HOST_PORT=5001
   CONTAINER_PORT=5000
+  DOCKERFILE="stage/Dockerfile"
 fi
 
 if [ "$1" = "dev" ];
 then
   HOST_PORT=5002
   CONTAINER_PORT=5000
+  DOCKERFILE="dev/Dockerfile"
 fi
 
 if [ "$1" = "pupp" ];
 then
   # DOCKERFILE="Dockerfile_puppeteer"
   CONTAINER_PORT=5000
+  DOCKERFILE="pupp/Dockerfile"
 fi
 
 if [ "$1" = 'dev-server' ];
 then
   HOST_PORT=5003
   CONTAINER_PORT=5000
-  DOCKERFILE="Dockerfile_dev"
+  DOCKERFILE="dev/Dockerfile"
   CMD=/opt/app/dev-server.sh
 fi
 
@@ -108,7 +112,7 @@ then
   HOST_PORT=5004
   CONTAINER_PORT=5000
   CMD="/opt/app/deploy_pipeline.sh"
-  DOCKERFILE="Dockerfile_dev"
+  DOCKERFILE="dev/Dockerfile"
 fi
 
 

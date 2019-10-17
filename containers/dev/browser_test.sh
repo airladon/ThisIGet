@@ -60,14 +60,14 @@ docker_start_browser_test_container() {
         bash
 }
 
-title() {
+title() {  
     echo
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
 # chmod +777 -R src
 # chmod +777 -R tests
 
-cp containers/Dockerfile_pupp .
+cp containers/pupp/Dockerfile Dockerfile_pupp
 
 HOST_USER_ID=`id -u`
 
