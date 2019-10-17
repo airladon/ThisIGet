@@ -71,7 +71,8 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n  ],`;
       outStr = `${outStr}\n  enabled: ${details.enabled || 'false'},`;
-      outStr = `${outStr}\n  path: '${topicPath.split('/').slice(2, -1).join('/')}',`;
+      const shortTopicPath = path.relative(path.join(__dirname, '../src/content'), topicPath);
+      outStr = `${outStr}\n  path: '${shortTopicPath.split('/').slice(0, -1).join('/')}',`;
       outStr = `${outStr}\n  uid: '${topicPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
@@ -110,7 +111,8 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  topic: '${topic}',`;
       if (topic === 'quickReference') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
-        const quickReferenceFile = `./${versionPath}/quickReference.js`;
+        const quickReferenceFile = `${versionPath}/quickReference.js`;
+        console.log(quickReferenceFile)
         if (fs.existsSync(quickReferenceFile)) {
           const content = fs.readFileSync(quickReferenceFile, 'utf8');
           const split = content.split('\nattachQuickReference(').slice(-1)[0];
