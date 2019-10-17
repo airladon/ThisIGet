@@ -169,6 +169,7 @@ else
   docker run -it --rm \
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
+    -v $PROJECT_PATH/tools:/opt/app/tools \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
     -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
     -v $PROJECT_PATH/.git:/opt/app/.git \

@@ -112,7 +112,6 @@ function updateDetailsAndVersions() {
       if (topic === 'quickReference') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
         const quickReferenceFile = `${versionPath}/quickReference.js`;
-        console.log(quickReferenceFile)
         if (fs.existsSync(quickReferenceFile)) {
           const content = fs.readFileSync(quickReferenceFile, 'utf8');
           const split = content.split('\nattachQuickReference(').slice(-1)[0];

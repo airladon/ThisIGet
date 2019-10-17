@@ -74,6 +74,7 @@ module.exports = (env) => {
     path.join(__dirname, '../src/content'),
     path.join(__dirname, '../app/app'),
   );
+  
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
