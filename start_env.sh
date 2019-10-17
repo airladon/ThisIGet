@@ -171,11 +171,9 @@ else
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
     -v $PROJECT_PATH/tools:/opt/app/tools \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
-    -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
     -v $PROJECT_PATH/.git:/opt/app/.git \
     -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
     -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
-    -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
@@ -203,6 +201,8 @@ else
     "devenv-$1" $CMD
 fi
 
+# -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
+# -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \
 # -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
 # -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
 # -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
