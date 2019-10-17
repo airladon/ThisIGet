@@ -9,7 +9,7 @@ bold=`tput bold`
 reset=`tput sgr0`
 
 # Default values of variables
-DOCKERFILE='Dockerfile_prod'
+DOCKERFILE='prod/Dockerfile'
 HOST_PORT=5000
 CMD=''
 FAIL=0
@@ -67,7 +67,7 @@ fi
 
 if [ $1 ];
 then
-  DOCKERFILE=Dockerfile_$1
+  DOCKERFILE=$1/Dockerfile
 fi
 
 if [ "$1" = "prod" ];
@@ -94,7 +94,6 @@ fi
 
 if [ "$1" = "pupp" ];
 then
-  # DOCKERFILE="Dockerfile_puppeteer"
   CONTAINER_PORT=5000
   DOCKERFILE="pupp/Dockerfile"
 fi

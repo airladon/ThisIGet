@@ -212,7 +212,7 @@ then
   check_status "Docker Login"
 
   echo "${bold}${cyan}Building deployment image${reset}"
-  cp containers/Dockerfile_prod ./Dockerfile
+  cp containers/prod/Dockerfile ./Dockerfile
   docker build -t registry.heroku.com/$APP_NAME/web .
   check_status "Building deployment image"
 
