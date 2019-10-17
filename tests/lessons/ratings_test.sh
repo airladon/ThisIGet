@@ -47,8 +47,10 @@ then
     esac
 fi
 
+THIS_SCRIPT_PARENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 title "Running tests on $TIG_ADDRESS"
 # docker_run_browser_test "$TIG_ADDRESS" $2 $3 $4
-echo $TIG_ADDRESS > /opt/app/tests/lessons/tig_address
+echo $TIG_ADDRESS > $THIS_SCRIPT_PARENT_PATH/tig_address
 jest --config /opt/app/jest.index.config.js ratings.test.js
 

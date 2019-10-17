@@ -170,9 +170,7 @@ else
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
     -v $PROJECT_PATH/tools:/opt/app/tools \
-    -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
     -v $PROJECT_PATH/.git:/opt/app/.git \
-    -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
     -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
@@ -183,6 +181,7 @@ else
     -v $PROJECT_PATH/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/dev-server.sh:/opt/app/dev-server.sh \
+    -v $PROJECT_PATH/browser_test.sh:/opt/app/browser_test.sh \
     -v $PROJECT_PATH/.babelrc:/opt/app/.babelrc \
     -v $PROJECT_PATH/.eslintignore:/opt/app/.eslintignore \
     -v $PROJECT_PATH/.eslintrc.json:/opt/app/.eslintrc.json \
@@ -200,17 +199,3 @@ else
     -p $HOST_PORT:$CONTAINER_PORT \
     "devenv-$1" $CMD
 fi
-
-# -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
-# -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \
-# -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
-# -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
-# -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
-# -v $PROJECT_PATH/containers/dev/quiz-loader.js:/opt/app/quiz-loader.js \
-# -v $PROJECT_PATH/containers/dev/link-loader.js:/opt/app/link-loader.js \
-# -v $PROJECT_PATH/containers/dev/post-markdown-loader.js:/opt/app/post-markdown-loader.js \
-# -v $PROJECT_PATH/containers/dev/flaskReloaderPlugin.js:/opt/app/flaskReloaderPlugin.js \
-# -v $PROJECT_PATH/containers/dev/pathTools.js:/opt/app/pathTools.js \
-# -v $PROJECT_PATH/containers/dev/createIndex.js:/opt/app/createIndex.js \
-# -v $PROJECT_PATH/containers/dev/getContent.js:/opt/app/getContent.js \
-# -v $PROJECT_PATH/containers/dev/getContent.test.js:/opt/app/getContent.test.js \
