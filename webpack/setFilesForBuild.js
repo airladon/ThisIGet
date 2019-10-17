@@ -1,8 +1,8 @@
 const fs = require('fs');
-// const path = require('path');
+const path = require('path');
 
 function setBaseHTML(buildMode) {
-  const templates = '/opt/app/app/app/templates/';
+  const templates = path.join(__dirname, '../app/app/templates');
   const sourceFileName = `base-${buildMode}.html`;
   const destFileName = 'base.html';
   const sourceFile = `${templates}${sourceFileName}`;

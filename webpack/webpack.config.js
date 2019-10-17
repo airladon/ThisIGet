@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getContent.js');
 const createTopicIndex = require('./createIndex.js');
-const setFilesForBuild = require('../containers/dev/setFilesForBuild.js');
+const setFilesForBuild = require('./setFilesForBuild.js');
 const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
 
 const buildPath = path.join(__dirname, '..', 'app', 'app', 'static', 'dist');

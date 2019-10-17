@@ -171,8 +171,6 @@ else
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
     -v $PROJECT_PATH/tools:/opt/app/tools \
     -v $PROJECT_PATH/.git:/opt/app/.git \
-    -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
-    -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \

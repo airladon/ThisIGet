@@ -5,12 +5,15 @@ import os
 import re
 import requests
 from lxml import etree
+from pathlib import Path
 
+content_path = Path(__file__).resolve().parent.parent/'src'/'content'
+local_sitemap = Path(__file__).resolve().parent.parent/'app'/'app'/'static'/'sitemap.xml'
 
 # #############################################################################
 # Get current sitemap
-local_sitemap = os.path.join(
-    os.getcwd(), 'app', 'app', 'static', 'sitemap.xml')
+# local_sitemap = os.path.join(
+#     os.getcwd(), 'app', 'app', 'static', 'sitemap.xml')
 remote_sitemap = 'https://www.thisiget.com/sitemap.xml'
 
 existing_sitemap_content = ''
@@ -32,11 +35,10 @@ if existing_sitemap_content:
         children = sitemap.getchildren()
         existing_sitemap[children[0].text] = children[1].text
 
-
 # #############################################################################
 # Get all lesson versions
 versions = []
-for root, dirs, files in os.walk("./src/content"):
+for root, dirs, files in os.walk(content_path):
     for file in files:
         if ('quickReference' in root):
             continue
