@@ -1,7 +1,7 @@
 {
-  "name": "itiget",
+  "name": "pynode-puppeteer",
   "version": "0.1.0",
-  "description": "itiget webapp.",
+  "description": "Container for puppeteer testing with jest",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -12,30 +12,30 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airladon/itiget.git"
+    "url": "git+https://github.com/airladon/pynode.git"
   },
   "author": "airladon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/airladon/itiget/issues"
+    "url": "https://github.com/airladon/pynode/issues"
   },
-  "homepage": "https://github.com/airladon/itiget#readme",
+  "homepage": "https://github.com/airladon/pynode#readme",
   "dependencies": {
   },
   "devDependencies": {
-    "jest": "^24.1.0",
-    "jest-puppeteer": "^3.9.0",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
     "jest-image-snapshot": "^2.11.0",
-    "@babel/core": "^7.1.6",
-    "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/core": "^7.6.2",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.2",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "autoprefixer": "^9.3.1",
+    "autoprefixer": "^9.6.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0"
   }
 }

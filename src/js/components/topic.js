@@ -327,19 +327,19 @@ export default class TopicComponent extends React.Component
           listItems.splice(fullTopicCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
-                {'Portion of Topic'}
+                {'PORTION OF TOPIC'}
               </div>
             </div>,
             separator: true,
           });
-          listItems.splice(0, 0, {
-            label: <div className="topic_button__portion_separator">
-              <div className="topic_button__portion_separator_label">
-                {'Full Topic'}
-              </div>
-            </div>,
-            separator: true,
-          });
+          // listItems.splice(0, 0, {
+          //   label: <div className="topic_button__portion_separator">
+          //     <div className="topic_button__portion_separator_label">
+          //       {'FULL TOPIC'}
+          //     </div>
+          //   </div>,
+          //   separator: true,
+          // });
         }
         let nameLabel = approachUID.charAt(0).toUpperCase() + approachUID.slice(1);
         if (approachUID === 'ta') {

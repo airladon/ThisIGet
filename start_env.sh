@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Setup colors and text formatting
 red=`tput setaf 1`
 green=`tput setaf 2`
@@ -7,11 +9,18 @@ bold=`tput bold`
 reset=`tput sgr0`
 
 # Default values of variables
-DOCKERFILE='Dockerfile_prod'
+DOCKERFILE='prod/Dockerfile'
 HOST_PORT=5000
 CMD=''
-PROJECT_PATH=`pwd`
 FAIL=0
+
+LOCAL_PROJECT_PATH=`pwd`
+if [ $HOST_PATH ];
+then
+  PROJECT_PATH=$HOST_PATH
+else
+  PROJECT_PATH=`pwd`
+fi
 
 stop_dev_server() {
   SERVER_RUNNING=`docker ps --format {{.Names}} \
@@ -42,7 +51,7 @@ check_status() {
   fi
 }
 
-if [ $1 != pupp ];
+if [ "$1" != pupp ];
 then
   echo
   echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
@@ -58,77 +67,94 @@ fi
 
 if [ $1 ];
 then
-  DOCKERFILE=Dockerfile_$1
+  DOCKERFILE=$1/Dockerfile
 fi
 
-if [ $1 = "prod" ];
+if [ "$1" = "prod" ];
 then
   HOST_PORT=5000
   CONTAINER_PORT=4000
   stop_dev_server
+  DOCKERFILE="prod/Dockerfile"
 fi
 
-if [ $1 = "stage" ];
+if [ "$1" = "stage" ];
 then
   HOST_PORT=5001
   CONTAINER_PORT=5000
+  DOCKERFILE="stage/Dockerfile"
 fi
 
-if [ $1 = "dev" ];
+if [ "$1" = "dev" ];
 then
   HOST_PORT=5002
   CONTAINER_PORT=5000
+  DOCKERFILE="dev/Dockerfile"
 fi
 
-if [ $1 = "pupp" ];
+if [ "$1" = "pupp" ];
 then
-  # DOCKERFILE="Dockerfile_puppeteer"
   CONTAINER_PORT=5000
+  DOCKERFILE="pupp/Dockerfile"
 fi
 
-if [ $1 = 'dev-server' ];
+if [ "$1" = 'dev-server' ];
 then
   HOST_PORT=5003
   CONTAINER_PORT=5000
-  DOCKERFILE="Dockerfile_dev"
+  DOCKERFILE="dev/Dockerfile"
   CMD=/opt/app/dev-server.sh
 fi
 
-if [ $1 = 'deploy_pipeline' ];
+if [ "$1" = 'deploy_pipeline' ];
 then
-  HOST_PORT=5002
+  HOST_PORT=5004
   CONTAINER_PORT=5000
   CMD="/opt/app/deploy_pipeline.sh"
-  DOCKERFILE="Dockerfile_dev"
+  DOCKERFILE="dev/Dockerfile"
 fi
 
 
-if [ $1 != "pupp" ];
+if [ "$1" != "pupp" ];
 then
   echo
   echo "${bold}${cyan}================= Building container ===================${reset}"
   cp containers/$DOCKERFILE Dockerfile
 
+  cp containers/$DOCKERFILE DockerfileTemp
+  # set user id of new user in production container to the same user id of the 
+  # user calling the container so permissions of files work out ok
+  DOCKER_GROUP_ID=`grep -e '^host-docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
+  if [ -z "$DOCKER_GROUP_ID" ];
+  then
+    DOCKER_GROUP_ID=`ls -n /var/run/docker.sock | sed "s/[^ ]* *[^ ]* *\([^ ]*\).*/\1/"`
+  fi
+  HOST_USER_GROUP_ID=`id -g`
+  HOST_USER_ID=`id -u`
+
+  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile 
+  rm DockerfileTemp
+
   GUNICORN_PORT=4000
-  docker build -t devenv-$1 .
+  docker build -t "devenv-$1" .
   rm Dockerfile
 fi
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
 echo
 echo "${bold}${cyan}================= Starting container ===================${reset}"
-if [ $1 = 'prod' ];
+if [ "$1" = 'prod' ];
 then
   docker run -it --rm \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
     --env-file=$PROJECT_PATH/containers/env.txt \
-    devenv-$1
-elif [ $1 = 'pupp' ];
+    "devenv-$1"
+elif [ "$1" = 'pupp' ];
 then
   docker run -it --rm \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
     -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
@@ -179,9 +205,9 @@ else
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    --env-file=$PROJECT_PATH/containers/env.txt \
+    --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
-    --name devenv-$1 \
+    --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
-    devenv-$1 $CMD
+    "devenv-$1" $CMD
 fi

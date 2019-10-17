@@ -3,8 +3,8 @@ $fontfamily-heading: 'Lato', sans-serif;
 $fontfamily-body: 'Open Sans', sans-serif;
 
 body {
-  background-color: color('site', 'background');
-  color: color('site', 'text');
+  background-color: var(--color-site-background);
+  color: var(--color-site-text);
   font-family: $fontfamily-body;
 }
 
@@ -17,7 +17,7 @@ h5, {
 }
 
 h1 {
-  color: color('grey', 'darkest');
+  color: var(--color-site-h1);
 }
 // h2 {
 //   font-weight: 200;
