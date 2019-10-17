@@ -6,23 +6,23 @@ const pathTools = require(path.join(__dirname, 'pathTools.js'));
 function entryPoints(buildMode) {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
-    home: ['whatwg-fetch', './src/js/views/home/home.js'],
-    input: './src/js/views/input/input.js',
-    learningPaths: './src/js/views/learningPaths/learningPaths.js',
-    about: './src/js/views/information/about.js',
-    contact: './src/js/views/information/contact.js',
-    privacy: './src/js/views/information/privacy.js',
-    terms: './src/js/views/information/terms.js',
-    copyright: './src/js/views/information/copyright.js',
-    introduction: './src/js/views/information/introduction.js',
-    disclaimer: './src/js/views/information/disclaimer.js',
-    contribute: './src/js/views/information/contribute.js',
-    polyfill: './src/js/polyfills.js',
-    topicIndex: './src/content/topicIndex.js',
+    home: ['whatwg-fetch', path.join(__dirname, '../src/js/views/home/home.js')],
+    input: path.join(__dirname, '../src/js/views/input/input.js'),
+    learningPaths: path.join(__dirname, '../src/js/views/learningPaths/learningPaths.js'),
+    about: path.join(__dirname, '../src/js/views/information/about.js'),
+    contact: path.join(__dirname, '../src/js/views/information/contact.js'),
+    privacy: path.join(__dirname, '../src/js/views/information/privacy.js'),
+    terms: path.join(__dirname, '../src/js/views/information/terms.js'),
+    copyright: path.join(__dirname, '../src/js/views/information/copyright.js'),
+    introduction: path.join(__dirname, '../src/js/views/information/introduction.js'),
+    disclaimer: path.join(__dirname, '../src/js/views/information/disclaimer.js'),
+    contribute: path.join(__dirname, '../src/js/views/information/contribute.js'),
+    polyfill: path.join(__dirname, '../src/js/polyfills.js'),
+    topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
   };
 
   const topics = pathTools.getAllPaths(
-    './src/content',
+    path.join(__dirname, '../src/content'),
     ['entry.js', 'quickReference.js'],
     ['entry-dev.js'],
     buildMode,
@@ -48,9 +48,9 @@ function escape(text) {
 function updateDetailsAndVersions() {
   // eslint-disable-next-line no-console
   console.log('Updating details and versions...');
-  const topics = pathTools.getAllTopics('./src/content');
+  const topics = pathTools.getAllTopics(path.join(__dirname, '../src/content'));
   topics.forEach((topicPath) => {
-    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
+    const absoluteDetailsPath = `${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
@@ -86,10 +86,10 @@ function updateDetailsAndVersions() {
     }
   });
 
-  const versions = pathTools.getAllVersions('./src/content');
+  const versions = pathTools.getAllVersions(path.join(__dirname, '../src/content'));
   versions.forEach((versionPath) => {
     const versionPathAbsolute
-              = `${process.cwd()}/${versionPath}/version.js`;
+              = `${versionPath}/version.js`;
     const versionPathRelativeToCWD
       = path.relative(process.cwd(), versionPathAbsolute);
     const versionPathRelativeToThisFile
