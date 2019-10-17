@@ -1,5 +1,5 @@
 __pycache__
-Dockerfile
+./Dockerfile
 .webassets-cache/
 build_flask_gen/
 app/app/static/build
