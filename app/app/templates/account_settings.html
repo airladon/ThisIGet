@@ -7,6 +7,70 @@
     <div id="id_navbar"></div>
     <div id="account">
         <h1>Account Settings 1</h1>
+        <form action="" method="post" novalidate>
+            {{ username_form.hidden_tag() }}
+            <h2>Change Username:</h2>
+            <div class="input_form__field">
+                <div class="input_form__field_label">
+                    {{ username_form.username.label }}
+                </div>
+                {{ username_form.username(size=64, class_="input_form__field_entry", autocomplete="username") }}
+                {% for error in username_form.username.errors %}
+                    <span class="input_form__field_error_message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="input_form__submit_container">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_error_message">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {{ username_form.submit(class_="input_form__submit_button") }}
+                <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["after"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </form>
+        <form action="" method="post" novalidate>
+                {{ email_form.hidden_tag() }}
+                <h2>Change Email:</h2>
+                <div class="input_form__field">
+                    <div class="input_form__field_label">
+                        {{ email_form.email.label }}
+                    </div>
+                    {{ email_form.email(size=64, class_="input_form__field_entry", autocomplete="email") }}
+                    {% for error in email_form.email.errors %}
+                        <span class="input_form__field_error_message">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="input_form__submit_container">
+                    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span class="input_form__submit_error_message">{{ message }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    {{ email_form.submit(class_="input_form__submit_button") }}
+                    <div class="input_form__submit_ok_message_container">
+                        {% with messages = get_flashed_messages(category_filter=["after"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                            {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </form>
     </div>
     <div id="id_footer"></div>
 {% endblock %}

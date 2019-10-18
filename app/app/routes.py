@@ -14,7 +14,7 @@ from flask import make_response, request, abort
 from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
-from app.forms import AccountSettingsForm
+from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
@@ -425,22 +425,15 @@ def login(username=''):
 def account_settings():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
-    # js = ''
-    # css = ''
-    # if 'static/dist' in static_files:
-    #     js = f"/{'static/dist'}/{static_files['static/dist']['account.js']}"
-    #     css = f"/{'static/dist'}/{static_files['static/dist']['account.css']}"
-    form = AccountSettingsForm()
-    form.username.data = current_user.get_username()
-    form.email.data = current_user.get_email()
-    if form.validate_on_submit():
-        print('valid')
-    else:
-        print('not valid')
-    # return render_template('account_settings.html', form=form, css=css, js=js)
-    res = make_response_with_files('account_settings.html')
-    res.set_cookie('page', '0')
-    return res
+
+    username_form = AccountSettingsUsernameForm()
+    username_form.username.data = current_user.get_username()
+    email_form = AccountSettingsEmailForm()
+    email_form.email.data = current_user.get_email()
+
+    return make_response_with_files(
+        'account_settings.html', username_form=username_form,
+        email_form=email_form)
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])

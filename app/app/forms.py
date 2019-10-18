@@ -123,6 +123,19 @@ class ConfirmAccountMessageForm(FlaskForm):
     submit = SubmitField('Resend Confirmation Email')
 
 
+class AccountSettingsUsernameForm(FlaskForm):
+    username = StringField('Username:', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+    def validate_username(self, username):
+        check_username(username)
+
+
+class AccountSettingsEmailForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Update')
+
+
 class AccountSettingsForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
