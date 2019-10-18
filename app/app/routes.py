@@ -253,11 +253,11 @@ def get_content(path):
     if 'content.js' not in static_files[content_path]:
         abort(404)
     if 'content.css' not in static_files[content_path]:
-        abort(404)    
+        abort(404)
     js = f'/static/dist/content/' \
-            f'{path}/{static_files[content_path]["content.js"]}'
+        f'{path}/{static_files[content_path]["content.js"]}'
     css = f'/static/dist/content/{path}/' \
-            f'{static_files[content_path]["content.css"]}'
+        f'{static_files[content_path]["content.css"]}'
 
     *p, content_path, topic_name, version_uid = path.split('/')
 
@@ -302,7 +302,7 @@ def get_qr_file_location(path):
     if 'quickReference.js' not in static_files[qr_path]:
         abort(404)
     if 'quickReference.css' not in static_files[qr_path]:
-        abort(404)    
+        abort(404)
     js = static_files[qr_path]["quickReference.js"]
     css = static_files[qr_path]["quickReference.css"]
     return jsonify({
