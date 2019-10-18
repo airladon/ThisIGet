@@ -38,7 +38,7 @@ function entryPoints(buildMode) {
       points[`content/${p}/${name}`] = `${topic.path}/${topic.name}`;
     }
   });
-  console.log(points)
+
   return points;
 }
 
