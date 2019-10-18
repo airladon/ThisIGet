@@ -66,6 +66,7 @@ module.exports = (env) => {
       e = envConfig.dev;
     }
   }
+
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
