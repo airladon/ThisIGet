@@ -13,3 +13,4 @@ temp/
 temp_docker_file
 .vscode/
 thisiget.code-workspace
+.DS_Store

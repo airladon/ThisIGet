@@ -7,15 +7,14 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
   const outObj = {};
   const appObj = {};
   topics.forEach((topicPath) => {
-    const splitLessonPath = topicPath.split('/');
+    const uid = path.relative(path.join(__dirname, '../src/content'), topicPath);
+    // const splitLessonPath = topicPath.split('/');
     // const parentPath = splitLessonPath.slice(1, -1).join('/');
-    const uid = splitLessonPath.slice(-(splitLessonPath.length - 2)).join('/');
+    // const uid = splitLessonPath.slice(-(splitLessonPath.length - 2)).join('/');
     // const topicUid = splitLessonPath.slice(-1)[0];
-
-    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
+    const absoluteDetailsPath = `${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
-
     let title = '';
     let dependencies = [];
     let enabled = true;
@@ -43,26 +42,26 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
         approaches: {},
       };
       const versions = pathTools.getAllVersions(topicPath);
-      const contentTypes = {};
+      const approaches = {};
       versions.forEach((versionPath) => {
         const splitPath = versionPath.split('/');
-        const contentTypeName = splitPath.slice(-2, -1)[0];
+        const approachName = splitPath.slice(-2, -1)[0];
         const versionUid = splitPath.slice(-1)[0];
-        if (contentTypes[contentTypeName] == null) {
-          contentTypes[contentTypeName] = [];
+        if (approaches[approachName] == null) {
+          approaches[approachName] = [];
         }
-        contentTypes[contentTypeName].push([versionUid, versionPath]);
+        approaches[approachName].push([versionUid, versionPath]);
       });
 
-      Object.keys(contentTypes).forEach((contentTypeName) => {
-        const topicVersions = contentTypes[contentTypeName];
-        if (outObj[uid].approaches[contentTypeName] == null) {
-          outObj[uid].approaches[contentTypeName] = {};
+      Object.keys(approaches).forEach((approachName) => {
+        const topicVersions = approaches[approachName];
+        if (outObj[uid].approaches[approachName] == null) {
+          outObj[uid].approaches[approachName] = {};
         }
-        if (appObj[uid].approaches[contentTypeName] == null) {
-          appObj[uid].approaches[contentTypeName] = {};
+        if (appObj[uid].approaches[approachName] == null) {
+          appObj[uid].approaches[approachName] = {};
         }
-        if (contentTypeName !== 'quickReference') {
+        if (approachName !== 'quickReference') {
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
@@ -74,7 +73,7 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
             let links = '';
             // let references = [];
             const versionPathAbsolute
-              = `${process.cwd()}/${versionPath}/version.js`;
+              = `${versionPath}/version.js`;
             const versionPathRelativeToCWD
               = path.relative(process.cwd(), versionPathAbsolute);
             const versionPathRelativeToThisFile
@@ -107,13 +106,13 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
                 ({ links } = version);
               }
             }
-            outObj[uid].approaches[contentTypeName][versionUid] = {
+            outObj[uid].approaches[approachName][versionUid] = {
               type: `${type}`,
               title: `${versionTitle}`,
               description: `${versionDescription.replace(/'/, '\\\'')}`,
               fullTopic,
             };
-            appObj[uid].approaches[contentTypeName][versionUid] = {
+            appObj[uid].approaches[approachName][versionUid] = {
               type: `${type}`,
               title: `${versionTitle}`,
               description: `${versionDescription.replace(/'/, '\\\'')}`,
@@ -124,17 +123,17 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
             };
           });
         }
-        if (contentTypeName === 'quickReference' && buildMode === 'development') {
+        if (approachName === 'quickReference' && buildMode === 'development') {
           topicVersions.forEach((v) => {
             const [versionUid] = v;
-            outObj[uid].approaches[contentTypeName][versionUid] = {
-              type: appObj[uid].approaches[contentTypeName].type,
+            outObj[uid].approaches[approachName][versionUid] = {
+              type: appObj[uid].approaches[approachName].type,
               title: `${versionUid}`,
               description: '',
               fullTopic: false,
             };
-            appObj[uid].approaches[contentTypeName][versionUid] = {
-              type: appObj[uid].approaches[contentTypeName].type,
+            appObj[uid].approaches[approachName][versionUid] = {
+              type: appObj[uid].approaches[approachName].type,
               title: `${versionUid}`,
               description: '',
               fullTopic: false,
@@ -160,6 +159,7 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
   const appFileName = `${appPath}/topicIndex.json`;
   fs.writeFile(outFileName, JSON.stringify(outObj, null, 2), (err) => {
     if (err) {
+      console.log('write error')
       // eslint-disable-next-line no-console
       console.log(err);
     }

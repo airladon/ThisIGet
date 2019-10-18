@@ -1,15 +1,15 @@
 import os
 import subprocess
-import sys
+# import sys
 
 
 def set_app_env(app, show_changes=False):
-    app_names = {
-        'dev': 'thisiget-dev',
-        'beta': 'thisiget-beta',
-        'test': 'thisiget-test',
-        'prod': 'thisiget-prod',
-    }
+    # app_names = {
+    #     'dev': 'thisiget-dev',
+    #     'beta': 'thisiget-beta',
+    #     'test': 'thisiget-test',
+    #     'prod': 'thisiget-prod',
+    # }
 
     if app == 'local':
         keys = [

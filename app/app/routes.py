@@ -248,13 +248,16 @@ def get_content(path):
     js = ''
     css = ''
 
-    if (content_path in static_files):
-        js = f'/static/dist/content/' \
-             f'{path}/{static_files[content_path]["content.js"]}'
-        css = f'/static/dist/content/{path}/' \
-              f'{static_files[content_path]["content.css"]}'
-    else:
+    if content_path not in static_files:
         abort(404)
+    if 'content.js' not in static_files[content_path]:
+        abort(404)
+    if 'content.css' not in static_files[content_path]:
+        abort(404)
+    js = f'/static/dist/content/' \
+        f'{path}/{static_files[content_path]["content.js"]}'
+    css = f'/static/dist/content/{path}/' \
+        f'{static_files[content_path]["content.css"]}'
 
     *p, content_path, topic_name, version_uid = path.split('/')
 
@@ -294,11 +297,14 @@ def get_qr_file_location(path):
     qr_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
-    if (qr_path in static_files):
-        js = static_files[qr_path]["quickReference.js"]
-        css = static_files[qr_path]["quickReference.css"]
-    else:
+    if qr_path not in static_files:
         abort(404)
+    if 'quickReference.js' not in static_files[qr_path]:
+        abort(404)
+    if 'quickReference.css' not in static_files[qr_path]:
+        abort(404)
+    js = static_files[qr_path]["quickReference.js"]
+    css = static_files[qr_path]["quickReference.css"]
     return jsonify({
         'status': 'ok',
         'js': js,

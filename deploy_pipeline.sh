@@ -39,10 +39,10 @@ title "Run Lint Checks, Tests and Build App"
 check_status
 
 title "Creating hashes"
-python ./create_site_hashes.py
+python ./tools/create_site_hashes.py
 
 title "Creating site map"
-python ./create_site_map.py
+python ./tools/create_site_map.py
 check_status
 
 ###########################################################################
@@ -55,7 +55,7 @@ sleep 5s
 check_status
 
 title "Ratings Test - Ratings: thisiget-test"
-./ratings_test.sh test
+./tests/lessons/ratings_test.sh test
 check_status
 
 title "Browser Tests - General: thisiget-test"
@@ -84,7 +84,7 @@ sleep 5s
 check_status
 
 title "Ratings Test: thisiget-beta"
-./ratings_test.sh beta
+./tests/lessons/ratings_test.sh beta
 check_status
 
 title "Browser Tests - General: thisiget-test"
@@ -106,7 +106,7 @@ sleep 5s
 check_status
 
 title "Ratings Test: thisiget"
-./ratings_test.sh prod
+./tests/lessons/ratings_test.sh prod
 check_status
 
 title "Browser Tests: thisiget"
