@@ -25,8 +25,9 @@ type State = {
 };
 
 const withLoginManager = function loginManager(
-  WrappedComponent: React.ComponentType<WrappedComponentProps>,
+  WrappedComponent: ?React.ComponentType<WrappedComponentProps> = null,
   includeHome: boolean = true,
+  navbarOnly: boolean = false,
 ) {
   return class ViewBase extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -54,7 +55,6 @@ const withLoginManager = function loginManager(
     checkIsLoggedInFromCookie() {
       const { cookie } = document;
       if (cookie != null) {
-        // $FlowFixMe
         let username = cookie.match(/username=[^;]*/);
         // console.log(username)
         if (username != null) {
@@ -88,6 +88,25 @@ const withLoginManager = function loginManager(
     }
 
     render() {
+      if (navbarOnly) {
+        return (<div>
+          <Navbar
+              active='Single Page Lesson'
+              isLoggedIn={this.state.isLoggedIn}
+              username={this.state.username}
+              includeHome={includeHome}
+            />
+          <NavbarSpacer/>
+        </div>);
+      }
+      let wrappedComponentToUse = <div></div>
+      if (WrappedComponent != null) {
+        wrappedComponentToUse = <WrappedComponent
+            {...this.props}
+            username={this.state.username}
+            isLoggedIn={this.state.isLoggedIn}
+          />;
+      }
       return (
         <div>
           <Navbar
@@ -97,11 +116,7 @@ const withLoginManager = function loginManager(
               includeHome={includeHome}
             />
           <NavbarSpacer/>
-          <WrappedComponent
-            {...this.props}
-            username={this.state.username}
-            isLoggedIn={this.state.isLoggedIn}
-          />
+          {wrappedComponentToUse}
           <Footer
             includeHome={includeHome}
           />

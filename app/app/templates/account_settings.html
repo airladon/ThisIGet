@@ -1,5 +1,20 @@
-{% extends "inputBase.html" %}
+{% extends "base.html" %}
+{% block title %}This I Get - Account Settings{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href={{ account_css }}>
+{% endblock %}
+{% block content %}
+    <div id="id_navbar"></div>
+    <div id="account">
+        <h1>Account Settings 1</h1>
+    </div>
+    <div id="id_footer"></div>
+{% endblock %}
+{% block tail %}
+  <script type="text/javascript" src={{ account_js }}></script>
+{% endblock %}
 
+<!-- 
 {% block formTitle %}
     Account Settings
 {% endblock %}
@@ -27,10 +42,9 @@
         {% endfor %}
     </div>
     </div>
-{% endblock %}
-
+{% endblock %} -->
+<!-- 
 {% block afterSubmit %}
-    <!-- <div class="input_form__spacer"></div> -->
     <div class="input_form__submit_container">
         {{ form.reset_password(class_="input_form__submit_button") }}
     </div>
@@ -40,3 +54,4 @@
         {{ form.delete_account(class_="input_form__submit_button") }}
     </div>
 {% endblock %}
+ -->

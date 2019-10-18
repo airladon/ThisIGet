@@ -12,6 +12,7 @@ function entryPoints(buildMode) {
     input: path.join(__dirname, '../src/js/views/input/input.js'),
     learningPaths: path.join(__dirname, '../src/js/views/learningPaths/learningPaths.js'),
     about: path.join(__dirname, '../src/js/views/information/about.js'),
+    account: path.join(__dirname, '../src/js/views/account/account.js'),
     contact: path.join(__dirname, '../src/js/views/information/contact.js'),
     privacy: path.join(__dirname, '../src/js/views/information/privacy.js'),
     terms: path.join(__dirname, '../src/js/views/information/terms.js'),

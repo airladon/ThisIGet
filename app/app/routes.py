@@ -48,6 +48,8 @@ def make_response_with_files(*args, **kwargs):
     about_css = ''
     learning_paths_js = ''
     learning_paths_css = ''
+    account_js = ''
+    account_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -64,6 +66,8 @@ def make_response_with_files(*args, **kwargs):
         topic_index_js = f"/{'static/dist'}/{dist['topicIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
+        account_js = f"/{'static/dist'}/{dist['account.js']}"
+        account_css = f"/{'static/dist'}/{dist['account.css']}"
         learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
         learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
@@ -75,6 +79,7 @@ def make_response_with_files(*args, **kwargs):
         about_js=about_js, main_css=main_css, main_js=main_js,
         about_css=about_css, learning_paths_js=learning_paths_js,
         learning_paths_css=learning_paths_css,
+        account_js=account_js, account_css=account_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
@@ -420,11 +425,11 @@ def login(username=''):
 def account_settings():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
-    js = ''
-    css = ''
-    if 'static/dist' in static_files:
-        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+    # js = ''
+    # css = ''
+    # if 'static/dist' in static_files:
+    #     js = f"/{'static/dist'}/{static_files['static/dist']['account.js']}"
+    #     css = f"/{'static/dist'}/{static_files['static/dist']['account.css']}"
     form = AccountSettingsForm()
     form.username.data = current_user.get_username()
     form.email.data = current_user.get_email()
@@ -432,7 +437,10 @@ def account_settings():
         print('valid')
     else:
         print('not valid')
-    return render_template('account_settings.html', form=form, css=css, js=js)
+    # return render_template('account_settings.html', form=form, css=css, js=js)
+    res = make_response_with_files('account_settings.html')
+    res.set_cookie('page', '0')
+    return res
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
