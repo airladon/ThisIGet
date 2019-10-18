@@ -16,7 +16,7 @@ h1 {
   h2 {
     margin-top: 1.5em;
     font-weight: 400;
-    font-size: 1.2em;
+    font-size: 1.1em;
     text-align: left;
     color: black;
     width: 250px;
@@ -29,14 +29,37 @@ h1 {
       margin-bottom: 4em;
   }
 
-//   .first_form_container {
-//       margin-top: 0em;
-//   }
-
   .input_form__information {
     width: 250px;
     max-width: calc(100vw - 2em);
     margin-left: auto;
     margin-right: auto;
     font-size: 0.9em;
+  }
+
+  @media screen and (min-width: 700px) {
+    .input_form__submit_container {
+        position: relative;
+        display: inline-block;
+        margin-left: 2em;
+        transform: translate(0, -1px);
+    }
+
+    .input_form__field {
+        position: relative;
+        margin-left: calc(50% - (250px + 150px + 1em) / 2);
+        display: inline-block;
+    }
+
+    h2 {
+        width: calc(250px + 150px + 1em);
+    }
+
+    .input_form__information {
+        width: calc(250px + 150px + 1em);
+    }
+
+    .input_form__submit_ok_message_container {
+        top: 4em;
+    }
   }

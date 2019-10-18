@@ -110,7 +110,7 @@ class ConfirmAccountMessageForm(FlaskForm):
 
 class AccountSettingsUsernameForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])
-    submit_username = SubmitField('Update')
+    submit_username = SubmitField('Change')
 
     def validate_username(self, username):
         check_username(username)
@@ -118,7 +118,7 @@ class AccountSettingsUsernameForm(FlaskForm):
 
 class AccountSettingsEmailForm(FlaskForm):
     email = StringField('Email:', validators=[DataRequired(), Email()])
-    submit_email = SubmitField('Verify')
+    submit_email = SubmitField('Verify & Change')
 
     def validate_email(self, email):
         check_email(email)
@@ -133,7 +133,7 @@ class AccountSettingsPasswordForm(FlaskForm):
         'Repeat Password: ',
         validators=[DataRequired(), EqualTo('password')]
     )
-    submit_password = SubmitField('Set New Password')
+    submit_password = SubmitField('Change')
 
     def validate_password(self, password):
         check_password(password)
