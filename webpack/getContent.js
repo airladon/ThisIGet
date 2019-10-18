@@ -30,7 +30,7 @@ function entryPoints(buildMode) {
     buildMode,
   );
   topics.forEach((topic) => {
-    const p = topic.path.replace(/src\/content\//, '');
+    const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);
     if (name.slice(0, 5) === 'entry') {
       points[`content/${p}/content${name.slice(5)}`] = `${topic.path}/${topic.name}`;
@@ -38,6 +38,7 @@ function entryPoints(buildMode) {
       points[`content/${p}/${name}`] = `${topic.path}/${topic.name}`;
     }
   });
+  console.log(points)
   return points;
 }
 
