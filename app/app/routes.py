@@ -428,14 +428,9 @@ def account_settings():
 
     username_form = AccountSettingsUsernameForm()
     if username_form.validate_on_submit():
-        user = Users.query.filter_by(
-                id=current_user.id).first()
-        
-        user.set_username(username_form.username.data)
-        print(username_form.username.data)
+        current_user.set_username(username_form.username.data)
         username_form.username.data = current_user.get_username()
         db.session.commit()
-        print(user.get_username())
 
     username_form.username.data = current_user.get_username()
     email_form = AccountSettingsEmailForm()
