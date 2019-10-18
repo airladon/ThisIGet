@@ -1,5 +1,5 @@
 __pycache__
-Dockerfile
+./Dockerfile
 .webassets-cache/
 build_flask_gen/
 app/app/static/build
@@ -11,3 +11,6 @@ src/figureone
 env/
 temp/
 temp_docker_file
+.vscode/
+thisiget.code-workspace
+.DS_Store

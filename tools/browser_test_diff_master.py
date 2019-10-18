@@ -21,6 +21,8 @@ diff = subprocess.run(
     ['git', 'diff', '--name-only', master_sha, current_sha],
     stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split('\n')
 
+print(diff)
+
 paths = set()
 test_all = False
 max_depth = 7
@@ -28,6 +30,7 @@ max_depth = 7
 for path in diff:
     p = Path(path)
     parent = str(p.parent)
+    # print(parent, path)
     # These files are will not trigger browser tests
     if parent.startswith('tools') \
        or parent.startswith('containers') \
@@ -58,7 +61,7 @@ for path in diff:
 # Skip over commonlessons as the lessonindex will change it, and if
 # anything else was changed it will be caught in the git checks
 current = {}
-subprocess.run(['python', 'create_site_hashes.py'])
+subprocess.run(['python', 'tools/create_site_hashes.py'])
 with open('./app/app/static/hashes.json', 'r') as current_file:
     current = json.loads(current_file.read())
 

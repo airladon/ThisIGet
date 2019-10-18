@@ -1,6 +1,9 @@
 import os
 import hashlib
 import json
+from pathlib import Path
+
+static_path = Path(__file__).resolve().parent.parent / 'app' / 'app' / 'static'
 
 
 def md5(fname):
@@ -12,7 +15,7 @@ def md5(fname):
 
 
 file_list = {}
-for root, dirs, files in os.walk('./app/app/static'):
+for root, dirs, files in os.walk(static_path):
     for file in files:
         if os.path.isdir(file):
             continue
@@ -21,7 +24,7 @@ for root, dirs, files in os.walk('./app/app/static'):
         full_file_path = \
             os.path.join(root, file)
         md5_str = md5(full_file_path)
-        file_list[full_file_path.replace('./app/app/static', '')] = md5_str
+        file_list[full_file_path.replace(static_path.as_posix(), '')] = md5_str
 
-with open('./app/app/static/hashes.json', 'w') as outfile:
+with open(static_path / 'hashes.json', 'w') as outfile:
     json.dump(file_list, outfile)

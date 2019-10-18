@@ -249,13 +249,16 @@ def get_content(path):
     js = ''
     css = ''
 
-    if (content_path in static_files):
-        js = f'/static/dist/content/' \
-             f'{path}/{static_files[content_path]["content.js"]}'
-        css = f'/static/dist/content/{path}/' \
-              f'{static_files[content_path]["content.css"]}'
-    else:
+    if content_path not in static_files:
         abort(404)
+    if 'content.js' not in static_files[content_path]:
+        abort(404)
+    if 'content.css' not in static_files[content_path]:
+        abort(404)
+    js = f'/static/dist/content/' \
+        f'{path}/{static_files[content_path]["content.js"]}'
+    css = f'/static/dist/content/{path}/' \
+        f'{static_files[content_path]["content.css"]}'
 
     *p, content_path, topic_name, version_uid = path.split('/')
 
@@ -295,11 +298,14 @@ def get_qr_file_location(path):
     qr_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
-    if (qr_path in static_files):
-        js = static_files[qr_path]["quickReference.js"]
-        css = static_files[qr_path]["quickReference.css"]
-    else:
+    if qr_path not in static_files:
         abort(404)
+    if 'quickReference.js' not in static_files[qr_path]:
+        abort(404)
+    if 'quickReference.css' not in static_files[qr_path]:
+        abort(404)
+    js = static_files[qr_path]["quickReference.js"]
+    css = static_files[qr_path]["quickReference.css"]
     return jsonify({
         'status': 'ok',
         'js': js,
@@ -364,9 +370,12 @@ def login(username=''):
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = LoginForm()
     if username:
         # user = Users.query.filter_by(username=username).first()
@@ -400,7 +409,7 @@ def login(username=''):
             return redirect(url_for(
                 'confirm_account_message', username=user.get_username()))
     return render_template(
-        'login.html', form=form, css=css, js=js)
+        'login.html', form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/account', methods=['GET', 'POST'])
@@ -428,9 +437,12 @@ def create():
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users()
@@ -444,7 +456,8 @@ def create():
         # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
-    return render_template('createAccount.html', form=form, css=css, js=js)
+    return render_template(
+        'createAccount.html', form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/confirmAccountEmailSent/<username>', methods=['GET', 'POST'])
@@ -453,9 +466,12 @@ def confirm_account_message(username):
         return redirect(url_for('home'))
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username)).first()
@@ -474,7 +490,8 @@ def confirm_account_message(username):
         finish account registration.''', 'before')
 
     return render_template(
-        'confirmAccountMessage.html', form=form, js=js, css=css
+        'confirmAccountMessage.html',
+        form=form, js=js, css=css, tools_js=tools_js,
     )
 
 
@@ -514,9 +531,12 @@ def confirm_account(token):
 def reset_password_request():
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
@@ -531,6 +551,7 @@ def reset_password_request():
         return redirect(url_for('reset_password_request'))
     return render_template(
         'resetPasswordRequest.html', form=form, css=css, js=js,
+        tools_js=tools_js,
     )
 
 
@@ -538,9 +559,12 @@ def reset_password_request():
 def reset_password(token):
     js = ''
     css = ''
+    tools_js = ''
     if 'static/dist' in static_files:
         js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
+        tools_js = \
+            f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
@@ -553,7 +577,9 @@ def reset_password(token):
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')
         return redirect(url_for('login', username=user.get_username()))
-    return render_template('resetPassword.html', form=form, css=css, js=js)
+    return render_template(
+        'resetPassword.html', form=form, css=css, js=js,
+        tools_js=tools_js)
 
 
 @app.route('/logout', strict_slashes=False)

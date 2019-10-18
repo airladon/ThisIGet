@@ -6,27 +6,20 @@ $button_size: 0.4em;
   height: 100%;
   display: table;
   border-radius: $radius;
-  // background-color: color('lesson', 'title-background');
-  // background-color: color('white', 'lighter');
-  // border: 1px solid color('white', 'lighter');
-  // color: #929292;
-  color: color('black', 'lighter');
+  color: var(--color-site-button-text);
 }
 
 .dropdown_button_container:hover {
-  background-color: color('white', 'light');
+  background-color: var(--color-site-button-hover-background);
 }
 
 .dropdown_button_selected {
-  // background: color('site', 'safe', 'base');
-  background-color: color('site', 'primary');
-  // border: 0;
-  color: white;
+  background-color: var(--color-site-button-highlight-background);
+  color: var(--color-site-button-highlight-text);
 }
 
 .dropdown_button_selected:hover {
-  // background: color('site', 'safe', 'light');
-  background-color: color('site', 'primary', 'light');
+  background-color: var(--color-site-button-highlight-hover-background);
 }
 
 .dropdown_button_label_container {
@@ -56,7 +49,6 @@ $button_size: 0.4em;
   transform: translate(0, -0.2em);
   -webkit-transform: translate(0, -0.2em);
   pointer-events: none;
-  // color: #929292;
 }
 
 .dropdown_button_arrow_down {
@@ -104,9 +96,10 @@ $button_size: 0.4em;
 .dropdown_button_list {
   position: absolute;
   z-index: 10;
-  background-color: white;
+  background-color: var(--color-site-background);
   border-radius: $radius;
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
+  border: 1px solid var(--color-site-button-border);
   cursor: default;
   overflow: hidden;
 }
@@ -119,9 +112,8 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item {
-  // color: color('grey', 'base');
-  color: color('black', 'lighter');
-  background-color: white;
+  color: var(--color-site-button-text);
+  background-color: var(--color-site-background);
   white-space: nowrap;
   position: relative;
   display: block;
@@ -129,14 +121,13 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item:hover {
-  background-color: color('white', 'lightest');
+  background-color: var(--color-site-button-hover-background);
   cursor: pointer;
 }
 
 .dropdown_button_list_item_active {
-  color: color('white', 'base');
-  // background: color('site', 'safe', 'base');
-  background: color('site', 'primary');
+  background-color: var(--color-site-button-highlight-background);
+  color: var(--color-site-button-highlight-text);
 }
 
 // .dropdown_button_list_item_active .dropdown_button_list_item_link:focus {
@@ -144,33 +135,32 @@ $button_size: 0.4em;
 // }
 
 .dropdown_button_list_item_active:hover {
-  // background: color('site', 'safe', 'base');
-  background: color('site', 'primary');
+  background-color: var(--color-site-button-highlight-hover-background);
 }
 
 .dropdown_button_list_item_disabled {
-  color: color('black', 'lighter');
-  background-color: white;
+  color: var(--color-site-text);
+  background-color: var(--color-site-background);
 }
 
 .dropdown_button_list_item_disabled:hover {
-  color: color('black', 'lighter');
-  background-color: white;
+  color: var(--color-site-text);
+  background-color: var(--color-site-background);
   cursor: default;
 }
 
 .dropdown_button_list_item_separator {
-  color: color('black', 'lighter');
-  background-color: color('white', 'lightest');
+  color: var(--color-site-disabled);
+  background-color: var(--color-site-background);
   font-size: 0.75em;
   padding-top: 0.75em;
   padding-bottom: 5px;
-  border-bottom: 1px solid color('white', 'base');
-  border-top: 1px solid color('white', 'base');
+  border-bottom: 1px solid var(--color-site-background);
+  border-top: 1px solid var(--color-site-background);
 }
 
 .dropdown_button_list_item_separator:hover {
-  color: color('black', 'lighter');
-  background-color: color('white', 'lightest');
+  color: var(--color-site-text);
+  background-color: var(--color-site-background);
   cursor: default;
 }

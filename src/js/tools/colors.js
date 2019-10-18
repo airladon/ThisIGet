@@ -506,8 +506,8 @@ const palettes = {
       darker: '222',
       darkest: '111',
     },
-    primary: '0070EB',
-    primaryDark: '0067D6',
+    logo: '0070EB',
+    logoDark: '0067D6',
   },
 };
 
@@ -559,6 +559,8 @@ const themes = {
         english: ['blue', 'light'],
         definition: ['grey', 'base'],
         note: ['grey', 'light'],
+        //
+        heading: ['grey', 'base'],
       },
       quizCheck: ['violet', 'base'],
       equation: {
@@ -596,13 +598,34 @@ const themes = {
     site: {
       primary: ['logo', 'base'],
       primaryDark: ['logoDark', 'base'],
+      logoText: ['white', 'base'],
       warning: ['red', 'base'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
+      h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
+      fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
       safe: ['green', 'base'],
-      menus: ['grey', 'darker'],
+      menus: {
+        background: ['grey', 'darker'],
+        text: ['white', 'light'],
+        textHover: ['white', 'base'],
+        border: ['grey', 'darkest'],
+      },
+      button: {
+        text: ['black', 'lighter'],
+        border: ['white', 'darker'],
+        hoverBackground: ['white', 'lighter'],
+        highlight: {
+          text: ['white'],
+          background: ['logo', 'base'],
+          hoverBackground: ['logo', 'light'],
+        },
+      },
+      table: {
+        border: ['white', 'light'],
+      },
     },
     navbar: {
       // text: ['white', 'lighter'],
@@ -658,18 +681,38 @@ class Colors {
       const diagramTextBase = this.get('diagram', 'text', 'base');
       // console.log('loading colors')
       diagramTextBase.toCssVar('--color-diagram-text');
-      // this.get('black', 'lightest').toCssVar('--color-black-dark');
-      // this.get('black', 'light').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // this.get('black', 'dark').toCssVar('--color-black-dark');
-      // const doc = document.documentElement;
-      // if (doc != null) {
-      //   doc.style.setProperty('--color-diagram-text', `#${diagramTextBase.hex}`);
-      // }
+      this.get('site', 'background').toCssVar('--color-site-background');
+      this.get('site', 'fill').toCssVar('--color-site-fill');
+      this.get('site', 'text').toCssVar('--color-site-text');
+      this.get('site', 'disabled').toCssVar('--color-site-disabled');
+      this.get('site', 'h1').toCssVar('--color-site-h1');
+      this.get('site', 'primary').toCssVar('--color-site-primary');
+      this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
+      this.get('site', 'warning').toCssVar('--color-site-warning');
+      this.get('site', 'logoText').toCssVar('--color-site-logo-text');
+
+      // Buttons
+      this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
+      this.get('site', 'button', 'hoverBackground')
+        .toCssVar('--color-site-button-hover-background');
+      this.get('site', 'button', 'border').toCssVar('--color-site-button-border');
+      this.get('site', 'button', 'highlight', 'text')
+        .toCssVar('--color-site-button-highlight-text');
+      this.get('site', 'button', 'highlight', 'background')
+        .toCssVar('--color-site-button-highlight-background');
+      this.get('site', 'button', 'highlight', 'hoverBackground')
+        .toCssVar('--color-site-button-highlight-hover-background');
+
+      // Menus
+      this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
+      this.get('site', 'menus', 'textHover')
+        .toCssVar('--color-site-menus-text-hover');
+      this.get('site', 'menus', 'background')
+        .toCssVar('--color-site-menus-background');
+      this.get('site', 'menus', 'border')
+        .toCssVar('--color-site-menus-border');
+
+      this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
     }
     return Colors.instance;
   }
@@ -808,7 +851,11 @@ class Colors {
   }
 }
 
+function loadColors() {
+  return new Colors();
+}
+
 export {
   Color, Colors, HSBToHSL, HSLToHSB, RGBToHEX, HEXToRGB,
-  HSBToRGB, HSLToRGB, RGBToHSL, RGBToHSB,
+  HSBToRGB, HSLToRGB, RGBToHSL, RGBToHSB, loadColors,
 };

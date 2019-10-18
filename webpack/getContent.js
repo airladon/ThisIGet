@@ -1,41 +1,44 @@
+/* eslint-disable import/no-dynamic-require */
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+
 const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
 function entryPoints(buildMode) {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
-    home: ['whatwg-fetch', './src/js/views/home/home.js'],
-    input: './src/js/views/input/input',
-    learningPaths: './src/js/views/learningPaths/learningPaths.js',
-    about: './src/js/views/information/about.js',
-    contact: './src/js/views/information/contact.js',
-    privacy: './src/js/views/information/privacy.js',
-    terms: './src/js/views/information/terms.js',
-    copyright: './src/js/views/information/copyright.js',
-    introduction: './src/js/views/information/introduction.js',
-    disclaimer: './src/js/views/information/disclaimer.js',
-    contribute: './src/js/views/information/contribute.js',
-    polyfill: './src/js/polyfills.js',
-    topicIndex: './src/content/topicIndex.js',
+    home: ['whatwg-fetch', path.join(__dirname, '../src/js/views/home/home.js')],
+    input: path.join(__dirname, '../src/js/views/input/input.js'),
+    learningPaths: path.join(__dirname, '../src/js/views/learningPaths/learningPaths.js'),
+    about: path.join(__dirname, '../src/js/views/information/about.js'),
+    contact: path.join(__dirname, '../src/js/views/information/contact.js'),
+    privacy: path.join(__dirname, '../src/js/views/information/privacy.js'),
+    terms: path.join(__dirname, '../src/js/views/information/terms.js'),
+    copyright: path.join(__dirname, '../src/js/views/information/copyright.js'),
+    introduction: path.join(__dirname, '../src/js/views/information/introduction.js'),
+    disclaimer: path.join(__dirname, '../src/js/views/information/disclaimer.js'),
+    contribute: path.join(__dirname, '../src/js/views/information/contribute.js'),
+    polyfill: path.join(__dirname, '../src/js/polyfills.js'),
+    topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
   };
 
   const topics = pathTools.getAllPaths(
-    './src/content',
+    path.join(__dirname, '../src/content'),
     ['entry.js', 'quickReference.js'],
     ['entry-dev.js'],
     buildMode,
   );
   topics.forEach((topic) => {
-    const p = topic.path.replace(/src\/content\//, '');
+    const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);
     if (name.slice(0, 5) === 'entry') {
-      points[`content/${p}/content${name.slice(5)}`] = `./${topic.path}/${topic.name}`;
+      points[`content/${p}/content${name.slice(5)}`] = `${topic.path}/${topic.name}`;
     } else {
-      points[`content/${p}/${name}`] = `./${topic.path}/${topic.name}`;
+      points[`content/${p}/${name}`] = `${topic.path}/${topic.name}`;
     }
   });
+
   return points;
 }
 
@@ -48,9 +51,9 @@ function escape(text) {
 function updateDetailsAndVersions() {
   // eslint-disable-next-line no-console
   console.log('Updating details and versions...');
-  const topics = pathTools.getAllTopics('./src/content');
+  const topics = pathTools.getAllTopics(path.join(__dirname, '../src/content'));
   topics.forEach((topicPath) => {
-    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
+    const absoluteDetailsPath = `${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
@@ -71,7 +74,8 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n  ],`;
       outStr = `${outStr}\n  enabled: ${details.enabled || 'false'},`;
-      outStr = `${outStr}\n  path: '${topicPath.split('/').slice(2, -1).join('/')}',`;
+      const shortTopicPath = path.relative(path.join(__dirname, '../src/content'), topicPath);
+      outStr = `${outStr}\n  path: '${shortTopicPath.split('/').slice(0, -1).join('/')}',`;
       outStr = `${outStr}\n  uid: '${topicPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
@@ -86,10 +90,10 @@ function updateDetailsAndVersions() {
     }
   });
 
-  const versions = pathTools.getAllVersions('./src/content');
+  const versions = pathTools.getAllVersions(path.join(__dirname, '../src/content'));
   versions.forEach((versionPath) => {
     const versionPathAbsolute
-              = `${process.cwd()}/${versionPath}/version.js`;
+              = `${versionPath}/version.js`;
     const versionPathRelativeToCWD
       = path.relative(process.cwd(), versionPathAbsolute);
     const versionPathRelativeToThisFile
@@ -110,7 +114,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  topic: '${topic}',`;
       if (topic === 'quickReference') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
-        const quickReferenceFile = `./${versionPath}/quickReference.js`;
+        const quickReferenceFile = `${versionPath}/quickReference.js`;
         if (fs.existsSync(quickReferenceFile)) {
           const content = fs.readFileSync(quickReferenceFile, 'utf8');
           const split = content.split('\nattachQuickReference(').slice(-1)[0];

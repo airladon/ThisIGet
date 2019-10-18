@@ -6,12 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disab
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const entryPoints = require('./getContent.js');
-const createTopicIndex = require('./createIndex.js');
-const setFilesForBuild = require('./setFilesForBuild.js');
-const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
+const entryPoints = require('./webpack/getContent.js');
+const createTopicIndex = require('./webpack/createIndex.js');
+const setFilesForBuild = require('./webpack/setFilesForBuild.js');
+const FlaskReloaderPlugin = require('./webpack/flaskReloaderPlugin');
 
-const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
+const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
 
 const envConfig = {
   prod: {
@@ -66,10 +66,16 @@ module.exports = (env) => {
       e = envConfig.dev;
     }
   }
+
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
-  createTopicIndex(e.name, './src/content', './app/app');
+  createTopicIndex(
+    e.name,
+    path.join(__dirname, 'src/content'),
+    path.join(__dirname, 'app/app'),
+  );
+
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
@@ -202,17 +208,17 @@ module.exports = (env) => {
       extensions: ['.js'],
       modules: [
         'node_modules',
-        path.resolve(__dirname + '/src'),
+        path.join(__dirname, '/src'),
       ],
       alias: {
-        ['~']: path.resolve(__dirname + '/src'),
+        ['~']: path.join(__dirname, '/src'),
       },
 
     },
+    // Delete to here
     watchOptions: {
       ignored: /.*__image_snapshots__.*png/,
     },
-    // Delete to here
     externals,
     module: {
       rules: [
@@ -253,19 +259,19 @@ module.exports = (env) => {
             'html-loader',
             // 'markdown-loader',
             {
-              loader: path.resolve('/opt/app/math-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'math-loader.js'),
             },
             {
-              loader: path.resolve('/opt/app/post-markdown-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'post-markdown-loader.js'),
             },
             {
               loader: 'markdown-loader',
             },
             {
-              loader: path.resolve('/opt/app/link-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'link-loader.js'),
             },
             {
-              loader: path.resolve('/opt/app/quiz-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'quiz-loader.js'),
             },
           ],
         },

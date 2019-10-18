@@ -5,15 +5,13 @@
 }
 
 .topic__congruent_angles_summary__list {
-  // color: color('diagram', 'text-base');
   list-style: none;
   font-size: calc(var(--topic__diagram-font-size) * 0.75);
-  // margin-left: calc(var(--topic__text-margin) * 1.2);
 }
 
 .topic__congruent_angles_summary__sub_title {
   font-size: calc(var(--topic__diagram-font-size) * 0.7);
-  color: color('grey');
+  color: var(--color-congruenttrianglessummary-sub-title);
   margin-left: calc(var(--topic__diagram-font-size) * 1.5);
   margin-top: calc(var(--topic__diagram-font-size) * 1);
   margin-bottom: calc(var(--topic__diagram-font-size) * 0.5);
@@ -31,8 +29,4 @@
   color: var(--color-diagram-text);
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   width: calc(var(--topic__diagram-font-size) * 15);
-}
-
-.topic__congruent_angles_summary__label_warning {
-  color: #EB261F;
 }

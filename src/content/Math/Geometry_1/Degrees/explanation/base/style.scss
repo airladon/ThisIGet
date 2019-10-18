@@ -4,15 +4,11 @@
 
 .in_topic__fraction_table {
   text-align: center;
-  // color: color('diagram', 'text-base');
-  // font-size: calc(var(--topic__diagram-font-size) * 0.8);
   table-layout: fixed;
   width: calc(var(--topic__diagram-font-size) * 10);
   margin-left: calc(var(--topic__diagram-font-size) * 1);
-  // margin-top: calc(var(--topic__diagram-font-size) * 3);
   border-spacing: 0;
-  background-color: color('black', 'darker');
-  color: color('grey', 'light');
+  color: var(--color-diagram-text);
   border-radius: 0.5em;
   font-size: 0.7em;
   position: absolute;
@@ -23,18 +19,14 @@
 
 .in_topic__fraction_table tr:first-child {
   text-align: center;
-  background-color: color('black', 'dark');
+  color: var(--color-degrees-heading);
   height: 2.5em;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 .topic__fraction {
   font-size: 1.5em;
 }
-
-// .topic__common_angles_table td:first-child {
-//   font-size: 2em;
-// }
 
 .topic__common_angles_table td:nth-child(2) {
   font-size: 0.7em;

@@ -19,21 +19,18 @@
 }
 
 .topic_button .dropdown_button_list_item_separator {
-  background-color: #F5F5F5;
-  // color: color('white', 'dark');
-  color: color('black', 'lighter');
-  // padding: 0.2em 0.2em 0.2em 0.2em;
+  background-color: var(--color-site-fill);
+  color: var(--color-site-button-text);
+  border-bottom: 1px solid var(--color-site-button-border);
+  border-top: 1px solid var(--color-site-button-border);
   min-height: 1em;
 }
 
 .topic_button .dropdown_button_list_item:first-child {
-  // background-color: color('white', 'lightest');
-  color: color('black', 'lighter');
-  background-color: #F5F5F5;
-  // color: color('white', 'darkest');
-  // padding: 0.2em 0.2em 0.2em 0.2em;
+  color: var(--color-site-button-text);
+  background-color: var(--color-site-fill);
+  border-bottom: 1px solid var(--color-site-button-border);
   min-height: 1em;
-  // border-bottom: 1px white solid;
 }
 
 .topic_button__label {
@@ -84,7 +81,6 @@
 //   height: 100%;
 //   display: table;
 //   border-radius: $radius;
-//   background-color: color('lesson', 'title-background');
 //   border: 1px solid color('white', 'lighter');
 //   color: #929292;
 // }
@@ -102,12 +98,12 @@
   vertical-align: middle;
   display: table-cell;
   text-decoration: none;
-  color: color('black', 'lighter');
+  color: var(--color-site-button-text);
 }
 
 .topic_button__single_item_label:hover {
   text-decoration: none;
-  color: color('black', 'lighter');
+  color: var(--color-site-button-text);
 }
 
 .dropdown_button_selected .topic_button__single_item_label {
@@ -161,7 +157,9 @@
 .topic_button__portion_separator {
   height: 1em;
   display: table;
-  margin-left: 1.2em;
+  // margin-left: 1.2em;
+  width: 100%;
+  text-align: center;
 }
 
 .topic_button__portion_separator_label {

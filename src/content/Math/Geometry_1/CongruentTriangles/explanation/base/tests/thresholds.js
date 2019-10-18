@@ -15,6 +15,11 @@ const thresholds = {
     54: { goto: 50, next: 50, prev: 50 },
     55: { goto: 50, next: 50, prev: 50 },
     58: { goto: 50, next: 50, prev: 50 },
+    59: { goto: 50, next: 50, prev: 50 },
+    60: { goto: 50, next: 50, prev: 50 },
+    61: { goto: 50, next: 50, prev: 50 },
+    62: { goto: 50, next: 50, prev: 50 },
+    63: { goto: 50, next: 50, prev: 50 },
   },
 };
 
