@@ -208,15 +208,15 @@ def contact():
 def not_found_error(error):
     app.logger.info(request.referrer)
     if request.referrer and \
-       (request.referrer.startswith('https://thisiget') or  # noqa
-            request.referrer.startswith('https://www.thisiget') or  # noqa
-            request.referrer.startswith('http://localhost')):
-        route = ','.join([address for address in rquest.access_route])
+       (request.referrer.startswith('https://thisiget')
+            or request.referrer.startswith('https://www.thisiget')
+            or request.referrer.startswith('http://localhost')):
+        route = ','.join([address for address in request.access_route])
         app.logger.error(
-            f'Internal link broken. '
+            'Internal link broken. '
             f'Referrer: {request.referrer}, '
             f'Route: {route}, '
-            f'User Agent: {rquest.headers.get('User-Agent')}, '  # noqa
+            f'User Agent: {request.headers.get("User-Agent")}, '
             f'Url: {request.url}'
         )
         return render_template('404_internal.html'), 404
