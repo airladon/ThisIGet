@@ -15,8 +15,10 @@ from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
+from app.forms import AccountSettingsPasswordForm
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
+from app.email import send_change_email_email
 import datetime
 
 # from sqlalchemy import func
@@ -427,18 +429,39 @@ def account_settings():
         return redirect(url_for('home'))
 
     username_form = AccountSettingsUsernameForm()
-    if username_form.validate_on_submit():
-        current_user.set_username(username_form.username.data)
-        username_form.username.data = current_user.get_username()
-        db.session.commit()
-
-    username_form.username.data = current_user.get_username()
     email_form = AccountSettingsEmailForm()
-    email_form.email.data = current_user.get_email()
+    password_form = AccountSettingsPasswordForm()
+
+    if request.method == 'POST':
+        if 'submit_username' in request.form:
+            if username_form.validate_on_submit():
+                current_user.set_username(username_form.username.data)
+                username_form.username.data = current_user.get_username()
+                db.session.commit()
+                flash('Username updated', 'username_updated')
+        if 'submit_password' in request.form:
+            if password_form.validate_on_submit():
+                current_user.set_password(password_form.password.data)
+                db.session.commit()
+                flash('Password updated', 'password_updated')
+        if 'submit_email' in request.form:
+            if email_form.validate_on_submit():
+                if current_user.get_email() != email_form.email.data:
+                    send_change_email_email(
+                        current_user, email_form.email.data)
+                    flash('Confirmation email sent', 'email_updated')
+        else:
+            email_form.email.data = current_user.get_email()
+    else:
+        email_form.email.data = current_user.get_email()
+    username_form.username.data = current_user.get_username()
+    
+    # password_form.password.data = 'asdf'
+    # password_form.repeat_password.data = 'asdf'
 
     return make_response_with_files(
         'account_settings.html', username_form=username_form,
-        email_form=email_form)
+        email_form=email_form, password_form=password_form)
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
@@ -590,6 +613,47 @@ def reset_password(token):
     return render_template(
         'resetPassword.html', form=form, css=css, js=js,
         tools_js=tools_js)
+
+
+@app.route('/confirmEmailChange/<token>', methods=['GET'])
+def confirm_email_change(token):
+    result = Users.verify_change_email_token(token)
+
+    if result['status'] == 'ok':
+        user = result['user']
+        user.set_email(result['email'])
+        db.session.commit()
+        if current_user.is_authenticated and current_user == user:
+            return redirect(url_for('account_settings'))
+
+    confirm_email_change_js = ''
+    confirm_email_change_css = ''
+    if 'static/dist' in static_files:
+        confirm_email_change_js = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmEmailChange.js']}"
+        confirm_email_change_css = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmEmailChange.css']}"
+
+    return make_response_with_files(
+        'confirm_email_changed.html',
+        confirm_email_change_js=confirm_email_change_js,
+        confirm_email_change_css=confirm_email_change_css)
+
+    # user = Users.verify_reset_password_token(token)
+    # if not user:
+    #     return redirect(url_for('home'))
+    # form = ResetPasswordForm()
+    # if form.validate_on_submit():
+    #     user.set_password(form.password.data)
+    #     db.session.commit()
+    #     flash('Your password has been reset.', 'after')
+    #     flash('You can now login with your new password.', 'after')
+    #     return redirect(url_for('login', username=user.get_username()))
+    # return render_template(
+    #     'resetPassword.html', form=form, css=css, js=js,
+    #     tools_js=tools_js)
 
 
 @app.route('/logout', strict_slashes=False)

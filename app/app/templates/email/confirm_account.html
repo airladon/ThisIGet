@@ -1,4 +1,4 @@
-<p>Dear {{ user.username }},</p>
+<p>Dear {{ user.get_username() }},</p>
 <p>
     To verfiy your email and finish the registration of your new account click the following link:
     <a href="{{ url_for('confirm_account', token=token, _external=True) }}">
@@ -9,4 +9,4 @@
 <p>{{ url_for('confirm_account', token=token, _external=True) }}</p>
 <p>If you have not requested an account simply ignore this message..</p>
 <p>Sincerely,</p>
-<p>The ThisIGet Team</p>
+<p>The This I Get Team</p>

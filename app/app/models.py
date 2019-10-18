@@ -140,6 +140,43 @@ class Users(UserMixin, db.Model):
             return
         return Users.query.get(id)
 
+    def get_change_email_token(self, email_address, expires_in=1800):
+        return jwt.encode(
+            {
+                'change_email': self.id,
+                'exp': time() + expires_in,
+                'email': email_address,
+            },
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_change_email_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['change_email']
+            email = jwt.decode(token, app.config['SECRET_KEY'],
+                               algorithms=['HS256'])['email']
+        except jwt.ExpiredSignatureError:
+            id = jwt.decode(
+                token,
+                app.config['SECRET_KEY'],
+                algorithms=['HS256'],
+                options={'verify_exp': False}
+            )['change_email']
+            return {
+                'status': 'expired',
+                'user': Users.query.get(id),
+            }
+        except Exception:
+            return {
+                'status': 'fail'
+            }
+        return {
+            'status': 'ok',
+            'user': Users.query.get(id),
+            'email': email,
+        }
+
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
             {'account_confirmation': self.id, 'exp': time() + expires_in},

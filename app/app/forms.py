@@ -75,25 +75,12 @@ class CreateAccountForm(FlaskForm):
 
     def validate_username(self, username):
         check_username(username)
-        # if len(username.data) > 32:
-        #     raise ValidationError('Username max length is 32 characters')
-        # user = Users.query.filter_by(
-        #     username_hash=hash_str_with_pepper(username.data.lower())).first()
-        # # user = Users.query.filter_by(username=username.data).first()
-        # if user is not None:
-        #     raise ValidationError('Username already exists.')
 
     def validate_email(self, email):
         check_email(email)
-        # user = Users.query.filter_by(
-        #     email_hash=hash_str_with_pepper(format_email(email.data))).first()
-        # if user is not None:
-        #     raise ValidationError('Email address already in use.')
 
     def validate_password(self, password):
         check_password(password)
-        # if len(password.data) < 8:
-        #     raise ValidationError('Password must be at least 8 characters')
 
 
 class ResetPasswordRequestForm(FlaskForm):
@@ -115,8 +102,6 @@ class ResetPasswordForm(FlaskForm):
 
     def validate_password(self, password):
         check_password(password)
-        # if len(password.data) < 8:
-        #     raise ValidationError('Password must be at least 8 characters')
 
 
 class ConfirmAccountMessageForm(FlaskForm):
@@ -125,7 +110,7 @@ class ConfirmAccountMessageForm(FlaskForm):
 
 class AccountSettingsUsernameForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])
-    submit = SubmitField('Update')
+    submit_username = SubmitField('Update')
 
     def validate_username(self, username):
         check_username(username)
@@ -133,22 +118,22 @@ class AccountSettingsUsernameForm(FlaskForm):
 
 class AccountSettingsEmailForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Update')
+    submit_email = SubmitField('Update')
+
+    def validate_email(self, email):
+        check_email(email)
 
 
-class AccountSettingsForm(FlaskForm):
-    username = StringField('Username:', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Update')
-    reset_password = SubmitField('Reset Password')
-    delete_account = SubmitField('Delete Account')
-    # delete = SubmitField('Delete Account')
+class AccountSettingsPasswordForm(FlaskForm):
+    password = PasswordField(
+        'Password: ',
+        validators=[DataRequired()]
+    )
+    repeat_password = PasswordField(
+        'Repeat Password: ',
+        validators=[DataRequired(), EqualTo('password')]
+    )
+    submit_password = SubmitField('Set New Password')
 
-    def validate_username(self, username):
-        check_username(username)
-
-    # def validate_email(self, email):
-    #     check_email(email)
-
-    # def validate_password(self, password):
-    #     check_password(password)
+    def validate_password(self, password):
+        check_password(password)

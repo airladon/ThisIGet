@@ -11,6 +11,7 @@ function entryPoints(buildMode) {
     home: ['whatwg-fetch', path.join(__dirname, '../src/js/views/home/home.js')],
     input: path.join(__dirname, '../src/js/views/input/input.js'),
     learningPaths: path.join(__dirname, '../src/js/views/learningPaths/learningPaths.js'),
+    confirmEmailChange: path.join(__dirname, '../src/js/views/message/confirmEmailChange.js'),
     about: path.join(__dirname, '../src/js/views/information/about.js'),
     account: path.join(__dirname, '../src/js/views/account/account.js'),
     contact: path.join(__dirname, '../src/js/views/information/contact.js'),

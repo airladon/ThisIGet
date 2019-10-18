@@ -1,0 +1,11 @@
+<p>Dear {{ user.get_username() }},</p>
+<p>
+    To verfiy you wish to use this email address with your This I Get account, click the following link:
+    <a href="{{ url_for('confirm_email_change', token=token, _external=True) }}">
+        click here
+    </a>.
+</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('confirm_email_change', token=token, _external=True) }}</p>
+<p>Sincerely,</p>
+<p>The This I Get Team</p>
