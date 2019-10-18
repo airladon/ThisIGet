@@ -18,6 +18,7 @@ from app.forms import AccountSettingsForm
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
+
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
@@ -211,8 +212,10 @@ def not_found_error(error):
             request.referrer.startswith('https://www.thisiget') or  # noqa
             request.referrer.startswith('http://localhost')):
         app.logger.error(
-            f'Internal link broken.'
-            f'Referrer: {request.referrer} '
+            f'Internal link broken. '
+            f'Referrer: {request.referrer}, '
+            f'Route: {','.join([address for address in rquest.access_route])}, '
+            f'User Agent: {rquest.headers.get('User-Agent')}, '
             f'Url: {request.url}'
         )
         return render_template('404_internal.html'), 404
