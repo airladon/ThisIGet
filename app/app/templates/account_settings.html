@@ -6,10 +6,10 @@
 {% block content %}
     <div id="id_navbar"></div>
     <div id="account">
-        <h1>Account Settings 1</h1>
-        <form action="" method="post" novalidate>
+        <h1>Account Settings</h1>
+        <form class="form_container" action="" method="post" novalidate>
             {{ username_form.hidden_tag() }}
-            <h2>Change Username:</h2>
+            <h2>Change Username</h2>
             <div class="input_form__field">
                 <div class="input_form__field_label">
                     {{ username_form.username.label }}
@@ -19,15 +19,6 @@
                     <span class="input_form__field_error_message">{{ error }}</span>
                 {% endfor %}
             </div>
-            <div class="input_form__submit_ok_message_container">
-                {% with messages = get_flashed_messages(category_filter=["username_updated"]) %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <span class="input_form__submit_ok_message_text">{{ message }}</span>
-                    {% endfor %}
-                {% endif %}
-                {% endwith %}
-            </div>
             <div class="input_form__submit_container">
                 {% with messages = get_flashed_messages(category_filter=["error"]) %}
                     {% if messages %}
@@ -36,12 +27,28 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
+                <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["username_updated"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
                 {{ username_form.submit_username(class_="input_form__submit_button") }}
             </div>
         </form>
-        <form action="" method="post" novalidate>
+        <form class="form_container" action="" method="post" novalidate>
             {{ email_form.hidden_tag() }}
-            <h2>Change Email:</h2>
+            <h2>Change Email</h2>
+            <div class=input_form__information>
+                    <p>
+                        You will need to verify any email address before it is updated.
+                    </p>
+                    <p>When you submit your new email address, an email will be sent to the new address with a link that can be used for verification. After this link is visited, your new email address will be updated.
+                    </p>
+                </div>
             <div class="input_form__field">
                 <div class="input_form__field_label">
                     {{ email_form.email.label }}
@@ -71,9 +78,9 @@
                 </div>
             </div>
         </form>
-        <form action="" method="post" novalidate>
+        <form class="form_container" action="" method="post" novalidate>
             {{ password_form.hidden_tag() }}
-            <h2>Change Password Email:</h2>
+            <h2>Change Password</h2>
             <div class="input_form__field">
                 <div class="input_form__field_label">
                     {{ password_form.password.label }}

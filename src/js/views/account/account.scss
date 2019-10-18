@@ -3,3 +3,40 @@
 #account {
     min-height: calc(100vh - 51px - 20px - 4em);
 }
+
+h1 {
+    // margin-top: 2em;
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
+    // margin-bottom: 1em;
+    padding-top: 1em;
+  }
+  
+  h2 {
+    margin-top: 1.5em;
+    font-weight: 400;
+    font-size: 1.2em;
+    text-align: left;
+    color: black;
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form_container {
+      margin-bottom: 4em;
+  }
+
+//   .first_form_container {
+//       margin-top: 0em;
+//   }
+
+  .input_form__information {
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9em;
+  }

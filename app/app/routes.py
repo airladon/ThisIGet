@@ -428,23 +428,24 @@ def account_settings():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
 
-    username_form = AccountSettingsUsernameForm()
-    email_form = AccountSettingsEmailForm()
-    password_form = AccountSettingsPasswordForm()
+    username_form = AccountSettingsUsernameForm(prefix='username_form')
+    email_form = AccountSettingsEmailForm(prefix='email_form')
+    password_form = AccountSettingsPasswordForm(prefix='password_form')
 
     if request.method == 'POST':
-        if 'submit_username' in request.form:
+        if username_form.submit_username.data:
             if username_form.validate_on_submit():
-                current_user.set_username(username_form.username.data)
-                username_form.username.data = current_user.get_username()
-                db.session.commit()
-                flash('Username updated', 'username_updated')
-        if 'submit_password' in request.form:
+                if current_user.get_username() != username_form.username.data:
+                    current_user.set_username(username_form.username.data)
+                    username_form.username.data = current_user.get_username()
+                    db.session.commit()
+                    flash('Username updated', 'username_updated')
+        if password_form.submit_password.data:
             if password_form.validate_on_submit():
                 current_user.set_password(password_form.password.data)
                 db.session.commit()
                 flash('Password updated', 'password_updated')
-        if 'submit_email' in request.form:
+        if email_form.submit_email.data:
             if email_form.validate_on_submit():
                 if current_user.get_email() != email_form.email.data:
                     send_change_email_email(

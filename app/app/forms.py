@@ -117,8 +117,8 @@ class AccountSettingsUsernameForm(FlaskForm):
 
 
 class AccountSettingsEmailForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    submit_email = SubmitField('Update')
+    email = StringField('Email:', validators=[DataRequired(), Email()])
+    submit_email = SubmitField('Verify')
 
     def validate_email(self, email):
         check_email(email)

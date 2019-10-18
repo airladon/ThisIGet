@@ -10,6 +10,7 @@ $width: 250px;
   font-size: 0.8em;
   color: var(----color-site-disabled);
   width: $width;
+  max-width: calc(100vw - 2em);
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -83,6 +84,7 @@ $width: 250px;
   margin-right: auto;
   display: block;
   width: $width;
+  max-width: calc(100vw - 2em);
   text-align: left;
 }
 
@@ -115,6 +117,8 @@ $width: 250px;
   height: 2em;
   border: 1px solid lightgray;
   width: $width;
+  max-width: calc(100vw - 2em);
+  padding: 0.3em;
 }
 
 .input_form__field_error_message {
@@ -142,30 +146,39 @@ $width: 250px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  background-color: var(--color-site-background);
-  color: var(--color-site-button-text);
+  background-color: var(--color-site-color-button-background);
+  color: var(--color-site-color-button-text);
   font-size: 0.9em;
   // border: 0;
   height: 2.3em;
   width: 150px;
+  max-width: calc(100vw - 2em);
   border-radius: 5px;
-  border: 1px solid var(--color-site-button-border);
+  // border: 1px solid var(--color-site-button-border);
 }
 
 .input_form__submit_button:hover {
-  background-color: var(--color-site-button-hover-background);
+  background-color: var(--color-site-color-button-hover-background);
 }
 
 .input_form__submit_ok_message_container {
-  text-align: left;
-  font-size: 0.9em;
-  color: var(--color-site-text);
-  bottom: -20px;
-  width: $width;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
+  // text-align: left;
+  // font-size: 0.9em;
+  // color: var(--color-site-text);
+  // bottom: -20px;
+  // width: $width;
+  // display: block;
+  // margin-left: auto;
+  // margin-right: auto;
+  // margin-top: 20px;
+      /* text-align: left; */
+  font-size: 0.8em;
+  color: var(--color-site-safe);
+  width: 250px;
+  max-width: calc(100vw - 2em);
+  position: absolute;
+  left: calc(50% - 125px);
+  top: -0.3em;
 }
 
 .input_form__submit_ok_message_text {
@@ -180,6 +193,7 @@ $width: 250px;
   color: var(--color-site-warning);
   top: 0;
   width: $width;
+  max-width: calc(100vw - 2em);
 }
 
 // ///////////////////////////////////////////////////////
@@ -187,6 +201,7 @@ $width: 250px;
 #input_form__footer {
   text-align: center;
   width: $width;
+  max-width: calc(100vw - 2em);
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
