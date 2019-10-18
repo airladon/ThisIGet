@@ -198,6 +198,7 @@ else
     -v $PROJECT_PATH/requirements.txt:/opt/app/requirements.txt \
     -v $PROJECT_PATH/start_env.sh:/opt/app/start_env.sh \
     -v $PROJECT_PATH/updateFigureOne.sh:/opt/app/updateFigureOne.sh \
+    -v $PROJECT_PATH/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/.git:/opt/app/.git \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \

@@ -5,8 +5,8 @@ function setBaseHTML(buildMode) {
   const templates = path.join(__dirname, '../app/app/templates');
   const sourceFileName = `base-${buildMode}.html`;
   const destFileName = 'base.html';
-  const sourceFile = `${templates}${sourceFileName}`;
-  const destFile = `${templates}${destFileName}`;
+  const sourceFile = `${templates}/${sourceFileName}`;
+  const destFile = `${templates}/${destFileName}`;
   fs.copyFile(sourceFile, destFile, (err) => {
     if (err) throw err;
     console.log(`${sourceFileName} was copied to ${destFileName}`);

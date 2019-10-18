@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack --env.mode=prod --config webpack/webpack.config.js",
-    "webpack": "webpack --env.mode=dev --config webpack/webpack.config.js",
-    "watch": "webpack --watch --progress --config webpack/webpack.config.js",
+    "build": "webpack --env.mode=prod",
+    "webpack": "webpack --env.mode=prod",
+    "watch": "webpack --watch --progress",
     "flow": "flow",
     "jest": "jest",
     "lint": "eslint src",
