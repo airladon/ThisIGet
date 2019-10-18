@@ -258,19 +258,19 @@ module.exports = (env) => {
             'html-loader',
             // 'markdown-loader',
             {
-              loader: path.join(__dirname, 'math-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'math-loader.js'),
             },
             {
-              loader: path.join(__dirname, 'post-markdown-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'post-markdown-loader.js'),
             },
             {
               loader: 'markdown-loader',
             },
             {
-              loader: path.join(__dirname, 'link-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'link-loader.js'),
             },
             {
-              loader: path.join(__dirname, 'quiz-loader.js'),
+              loader: path.join(__dirname, 'webpack', 'quiz-loader.js'),
             },
           ],
         },
