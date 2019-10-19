@@ -485,6 +485,9 @@ def confirm_delete_account():
         if form.submit_save.data:
             return redirect(url_for('account_settings'))
         if form.submit_delete.data:
+            current_user.delete_account()
+            logout_user()
+            session.pop('username', None)
             return redirect(url_for('home'))
 
     confirm_delete_account_js = ''
@@ -501,6 +504,11 @@ def confirm_delete_account():
         'confirm_delete_account.html', form=form,
         confirm_delete_account_css=confirm_delete_account_css,
         confirm_delete_account_js=confirm_delete_account_js)
+
+
+@app.route('/accountDeleted', methods=['GET'])
+def account_deleted():
+    return make_response_with_files('confirm_account_deleted.html')
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])

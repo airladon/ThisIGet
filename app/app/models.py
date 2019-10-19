@@ -130,6 +130,14 @@ class Users(UserMixin, db.Model):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+    
+    def delete_account(self):
+        self.username = hash_str_with_pepper(
+            f'{self.get_username()} {str(datetime.now())}')
+        self.username_hash = 'deleted account'
+        self.email = ''
+        self.email_hash = ''
+        self.password = ''
 
     @staticmethod
     def verify_reset_password_token(token):
