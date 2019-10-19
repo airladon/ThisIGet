@@ -16,6 +16,7 @@ from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
 from app.forms import AccountSettingsPasswordForm, AccountSettingsDelete
+from app.forms import ConfirmDeleteAccount
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 from app.email import send_change_email_email
@@ -52,6 +53,8 @@ def make_response_with_files(*args, **kwargs):
     learning_paths_css = ''
     account_js = ''
     account_css = ''
+    generic_js = ''
+    generic_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -70,6 +73,8 @@ def make_response_with_files(*args, **kwargs):
         about_css = f"/{'static/dist'}/{dist['about.css']}"
         account_js = f"/{'static/dist'}/{dist['account.js']}"
         account_css = f"/{'static/dist'}/{dist['account.css']}"
+        generic_js = f"/{'static/dist'}/{dist['generic.js']}"
+        generic_css = f"/{'static/dist'}/{dist['generic.css']}"
         learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
         learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
@@ -82,6 +87,7 @@ def make_response_with_files(*args, **kwargs):
         about_css=about_css, learning_paths_js=learning_paths_js,
         learning_paths_css=learning_paths_css,
         account_js=account_js, account_css=account_css,
+        generic_js=generic_js, generic_css=generic_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
@@ -455,8 +461,8 @@ def account_settings():
         else:
             email_form.email.data = current_user.get_email()
         if delete_form.submit.data:
-            if delete_form.validate_on_submit:
-                print('deleting account')
+            if delete_form.validate_on_submit():
+                return redirect(url_for('confirm_delete_account'))
     else:
         email_form.email.data = current_user.get_email()
     username_form.username.data = current_user.get_username()
@@ -468,6 +474,33 @@ def account_settings():
         'account_settings.html', username_form=username_form,
         email_form=email_form, password_form=password_form,
         delete_form=delete_form)
+
+
+@app.route('/confirmDelete', methods=['GET', 'POST'])
+def confirm_delete_account():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = ConfirmDeleteAccount()
+    if request.method == 'POST' and form.validate_on_submit():
+        if form.submit_save.data:
+            return redirect(url_for('account_settings'))
+        if form.submit_delete.data:
+            return redirect(url_for('home'))
+
+    confirm_delete_account_js = ''
+    confirm_delete_account_css = ''
+    if 'static/dist' in static_files:
+        confirm_delete_account_js = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmDeleteAccount.js']}"
+        confirm_delete_account_css = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmDeleteAccount.css']}"
+
+    return make_response_with_files(
+        'confirm_delete_account.html', form=form,
+        confirm_delete_account_css=confirm_delete_account_css,
+        confirm_delete_account_js=confirm_delete_account_js)
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])

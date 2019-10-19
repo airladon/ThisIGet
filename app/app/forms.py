@@ -141,3 +141,8 @@ class AccountSettingsPasswordForm(FlaskForm):
 
 class AccountSettingsDelete(FlaskForm):
     submit = SubmitField('Delete')
+
+
+class ConfirmDeleteAccount(FlaskForm):
+    submit_save = SubmitField("I DO NOT want to delete my account!")
+    submit_delete = SubmitField('Delete account NOW')

@@ -1,0 +1,23 @@
+@import './message.scss';
+
+.input_form__information {
+    text-align: left;
+    margin-top: 2em;
+}
+
+.input_form__submit_button {
+    width: 300px;
+    height: 60px;
+}
+
+.input_form__submit_container {
+    margin-top: 2em;
+}
+
+.delete_button {
+    background-color: var(--color-site-warning);
+}
+
+.delete_button:hover {
+    background-color: #a00;
+}

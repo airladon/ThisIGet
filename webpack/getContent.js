@@ -14,6 +14,8 @@ function entryPoints(buildMode) {
     confirmEmailChange: path.join(__dirname, '../src/js/views/message/confirmEmailChange.js'),
     about: path.join(__dirname, '../src/js/views/information/about.js'),
     account: path.join(__dirname, '../src/js/views/account/account.js'),
+    generic: path.join(__dirname, '../src/js/views/message/generic.js'),
+    confirmDeleteAccount: path.join(__dirname, '../src/js/views/message/confirmDeleteAccount.js'),
     contact: path.join(__dirname, '../src/js/views/information/contact.js'),
     privacy: path.join(__dirname, '../src/js/views/information/privacy.js'),
     terms: path.join(__dirname, '../src/js/views/information/terms.js'),
