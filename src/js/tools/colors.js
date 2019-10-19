@@ -599,7 +599,7 @@ const themes = {
       primary: ['logo', 'base'],
       primaryDark: ['logoDark', 'base'],
       logoText: ['white', 'base'],
-      warning: ['red', 'base'],
+      warning: ['red', 'dark'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
       h1: ['grey', 'darkest'],
@@ -708,7 +708,7 @@ class Colors {
         .toCssVar('--color-site-button-highlight-background');
       this.get('site', 'button', 'highlight', 'hoverBackground')
         .toCssVar('--color-site-button-highlight-hover-background');
-      
+
       this.get('site', 'colorButton', 'text')
         .toCssVar('--color-site-color-button-text');
       this.get('site', 'colorButton', 'background')

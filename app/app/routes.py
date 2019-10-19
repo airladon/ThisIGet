@@ -15,7 +15,7 @@ from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
-from app.forms import AccountSettingsPasswordForm
+from app.forms import AccountSettingsPasswordForm, AccountSettingsDelete
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 from app.email import send_change_email_email
@@ -431,6 +431,7 @@ def account_settings():
     username_form = AccountSettingsUsernameForm(prefix='username_form')
     email_form = AccountSettingsEmailForm(prefix='email_form')
     password_form = AccountSettingsPasswordForm(prefix='password_form')
+    delete_form = AccountSettingsDelete(prefix='delete_form')
 
     if request.method == 'POST':
         if username_form.submit_username.data:
@@ -453,6 +454,9 @@ def account_settings():
                     flash('Confirmation email sent', 'email_updated')
         else:
             email_form.email.data = current_user.get_email()
+        if delete_form.submit.data:
+            if delete_form.validate_on_submit:
+                print('deleting account')
     else:
         email_form.email.data = current_user.get_email()
     username_form.username.data = current_user.get_username()
@@ -462,7 +466,8 @@ def account_settings():
 
     return make_response_with_files(
         'account_settings.html', username_form=username_form,
-        email_form=email_form, password_form=password_form)
+        email_form=email_form, password_form=password_form,
+        delete_form=delete_form)
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])

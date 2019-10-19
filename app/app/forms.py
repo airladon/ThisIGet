@@ -137,3 +137,7 @@ class AccountSettingsPasswordForm(FlaskForm):
 
     def validate_password(self, password):
         check_password(password)
+
+
+class AccountSettingsDelete(FlaskForm):
+    submit = SubmitField('Delete')

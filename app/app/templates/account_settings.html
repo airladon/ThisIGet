@@ -43,12 +43,12 @@
             {{ email_form.hidden_tag() }}
             <h2>Change Email</h2>
             <div class=input_form__information>
-                    <p>
-                        You will need to verify any email address before it is updated.
-                    </p>
-                    <p>When you submit your new email address, an email will be sent to the new address with a link that can be used for verification. After this link is visited, your new email address will be updated.
-                    </p>
-                </div>
+                <p>
+                    You will need to verify any email address before it is updated.
+                </p>
+                <p>When you submit your new email address, an email will be sent to the new address with a link that can be used for verification. After this link is visited, your new email address will be updated.
+                </p>
+            </div>
             <div class="input_form__field">
                 <div class="input_form__field_label">
                     {{ email_form.email.label }}
@@ -120,6 +120,18 @@
                     {% endif %}
                     {% endwith %}
                 </div>
+            </div>
+        </form>
+        <form class="form_container" action="" method="post" novalidate>
+                {{ delete_form.hidden_tag() }}
+            <h2>Delete Account</h2>
+            <div class=input_form__information>
+                <p>
+                    This will permanently delete your account and remove your username and email address from our systems.
+                </p>
+            </div>
+            <div class="input_form__submit_container delete_button_container">
+                {{ delete_form.submit(class_="input_form__submit_button delete_button") }}
             </div>
         </form>
     </div>
