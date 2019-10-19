@@ -51,7 +51,7 @@ export default class Navbar extends React.Component
             },
             {
               label: 'Account Settings',
-              link: 'account',
+              link: '/account',
               // active: true,
             },
             {

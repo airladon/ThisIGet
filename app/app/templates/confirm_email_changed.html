@@ -1,62 +1,10 @@
-{% extends "base.html" %}
-{% block title %}This I Get - Account Settings{% endblock %}
-{% block head %}
-  <link rel="stylesheet" type="text/css" href={{ confirm_email_change_css }}>
+{% extends "message_base.html" %}
+{% block title %}This I Get - Email Changed{% endblock %}
+{% block message %}
+    <p>
+        Your email has been updated in your account.
+    </p>
+    <p>
+        You can <a href="/login">sign in</a> to your account and go to account settings if you wish to check it.
+    </p>
 {% endblock %}
-{% block content %}
-    <div id="id_navbar"></div>
-    <div id="message">
-        <p>
-            Your email has been updated in your account.
-        </p>
-        <p>
-                You can <a href="/login">sign in</a> to your account and go to account settings if you wish to check it.
-        </p>
-    </div>
-    <div id="id_footer"></div>
-{% endblock %}
-{% block tail %}
-  <script type="text/javascript" src={{ confirm_email_change_js }}></script>
-{% endblock %}
-
-<!-- 
-{% block formTitle %}
-    Account Settings
-{% endblock %}
-
-{% block formfields %}
-    <div class="input_form__field">
-        <div class="input_form__field_label">
-            {{ form.username.label }}
-        </div>
-        {{ form.username(
-            size=32,
-            class_="input_form__field_entry",
-            autocomplete="username") }}
-        {% for error in form.username.errors %}
-            <span class="input_form__field_error_message">{{ error }}</span>
-        {% endfor %}
-    </div>
-    <div class="input_form__field">
-        <div class="input_form__field_label">
-            {{ form.email.label }}
-        </div>
-        {{ form.email(size=64, class_="input_form__field_entry") }}
-        {% for error in form.email.errors %}
-            <span class="input_form__field_error_message">{{ error }}</span>
-        {% endfor %}
-    </div>
-    </div>
-{% endblock %} -->
-<!-- 
-{% block afterSubmit %}
-    <div class="input_form__submit_container">
-        {{ form.reset_password(class_="input_form__submit_button") }}
-    </div>
-    <div class="input_form__spacer"></div>
-    <div class="input_form__spacer"></div>
-    <div class="input_form__submit_container">
-        {{ form.delete_account(class_="input_form__submit_button") }}
-    </div>
-{% endblock %}
- -->

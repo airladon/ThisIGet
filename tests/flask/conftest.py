@@ -34,7 +34,7 @@ def create_user(username, email=''):
     db.session.add(user)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def client(request):
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'app_test.db')

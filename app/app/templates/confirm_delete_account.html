@@ -1,36 +1,25 @@
-
-{% extends "base.html" %}
-{% block title %}This I Get - Account Settings{% endblock %}
-{% block head %}
-  <link rel="stylesheet" type="text/css" href={{ confirm_delete_account_css }}>
-{% endblock %}
-{% block content %}
-    <div id="id_navbar"></div>
-    <div id="message">
-        <form class="form_container" action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-            <h1>Delete Account Confirmation</h1>
-            <div class=input_form__information>
-                <p>
-                    You have chosen to permanently delete your account and remove your username and email address from our systems.
-                </p>
-                <p>
-                    There is no way to reverse this.
-                </p>
-                <p>
-                    Are you sure you want to delete your account?
-                </p>
-            </div>
-            <div class="input_form__submit_container">
-                {{ form.submit_save(class_="input_form__submit_button") }}
-            </div>
-            <div class="input_form__submit_container delete_button_container">
-                {{ form.submit_delete(class_="input_form__submit_button delete_button") }}
-            </div>
-        </form>
-    </div>
-    <div id="id_footer"></div>
-{% endblock %}
-{% block tail %}
-  <script type="text/javascript" src={{ confirm_delete_account_js }}></script>
+{% extends "message_base.html" %}
+{% block title %}This I Get - Delete Account{% endblock %}
+{% block message %}
+    <form class="form_container" action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+        <h1>Delete Account Confirmation</h1>
+        <div class=input_form__information>
+            <p>
+                You have chosen to permanently delete your account and remove your username and email address from our systems.
+            </p>
+            <p>
+                There is no way to reverse this.
+            </p>
+            <p>
+                Are you sure you want to delete your account?
+            </p>
+        </div>
+        <div class="input_form__submit_container">
+            {{ form.submit_save(class_="input_form__submit_button") }}
+        </div>
+        <div class="input_form__submit_container delete_button_container">
+            {{ form.submit_delete(class_="input_form__submit_button delete_button") }}
+        </div>
+    </form>
 {% endblock %}

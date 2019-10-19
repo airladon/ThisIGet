@@ -1,6 +1,6 @@
 // @flow
 
-import page from './message';
+import page from './messageBase';
 import './confirmDeleteAccount.scss';
 
 page();

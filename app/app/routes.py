@@ -53,8 +53,8 @@ def make_response_with_files(*args, **kwargs):
     learning_paths_css = ''
     account_js = ''
     account_css = ''
-    generic_js = ''
-    generic_css = ''
+    message_js = ''
+    message_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -73,8 +73,8 @@ def make_response_with_files(*args, **kwargs):
         about_css = f"/{'static/dist'}/{dist['about.css']}"
         account_js = f"/{'static/dist'}/{dist['account.js']}"
         account_css = f"/{'static/dist'}/{dist['account.css']}"
-        generic_js = f"/{'static/dist'}/{dist['generic.js']}"
-        generic_css = f"/{'static/dist'}/{dist['generic.css']}"
+        message_js = f"/{'static/dist'}/{dist['message.js']}"
+        message_css = f"/{'static/dist'}/{dist['message.css']}"
         learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
         learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
@@ -87,7 +87,7 @@ def make_response_with_files(*args, **kwargs):
         about_css=about_css, learning_paths_js=learning_paths_js,
         learning_paths_css=learning_paths_css,
         account_js=account_js, account_css=account_css,
-        generic_js=generic_js, generic_css=generic_css,
+        message_js=message_js, message_css=message_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
@@ -504,8 +504,8 @@ def confirm_delete_account():
 
     return make_response_with_files(
         'confirm_delete_account.html', form=form,
-        confirm_delete_account_css=confirm_delete_account_css,
-        confirm_delete_account_js=confirm_delete_account_js)
+        message_css=confirm_delete_account_css,
+        message_js=confirm_delete_account_js)
 
 
 @app.route('/accountDeleted', methods=['GET'])
@@ -667,6 +667,42 @@ def reset_password(token):
 @app.route('/confirmEmailChange/<token>', methods=['GET'])
 def confirm_email_change(token):
     result = Users.verify_change_email_token(token)
+    # if result['status'] == 'fail':
+    if result['status'] == 'expired':
+        message_html = f'''
+        <p>
+            You need to verify any email change within 30 minutes of the
+            request.
+        </p>
+        <p>
+            In this case, it took more than 30 minutes for the verification,
+            and so it failed.
+        </p>
+        <p>
+            If you wish to change your email address, please try again and be
+            sure to verify within 30 minutes.
+        </p>
+        '''
+        return make_response_with_files(
+            'message.html', message_html=message_html,
+        )
+
+    if result['status'] == 'fail':
+        message_html = f'''
+        <h1>
+            Account Email Change Failed
+        </h1>
+        <p>
+            The change to your account email address has failed as either the
+            verification token is invalid or corrupt.
+        </p>
+        <p>
+            If you wish to change your email, please try again in account
+            settings.
+        </p>'''
+        return make_response_with_files(
+            'message.html', message_html=message_html
+        )
 
     if result['status'] == 'ok':
         user = result['user']
@@ -687,8 +723,8 @@ def confirm_email_change(token):
 
     return make_response_with_files(
         'confirm_email_changed.html',
-        confirm_email_change_js=confirm_email_change_js,
-        confirm_email_change_css=confirm_email_change_css)
+        message_js=confirm_email_change_js,
+        message_css=confirm_email_change_css)
 
     # user = Users.verify_reset_password_token(token)
     # if not user:
