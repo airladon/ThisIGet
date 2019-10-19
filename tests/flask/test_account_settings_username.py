@@ -1,6 +1,5 @@
 import pytest  # noqa: F401
-import os
-from common import login, logout, create_account, remove_account
+from common import login, logout
 import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
