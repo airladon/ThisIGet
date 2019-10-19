@@ -18,8 +18,8 @@ def check_password(password):
 def check_username(username):
     if len(username.data) > 32:
         raise ValidationError('Username max length is 32 characters')
-    if username.data == current_user.get_username():
-        return
+    # if username.data == current_user.get_username():
+    #     return
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username.data.lower())).first()
     # user = Users.query.filter_by(username=username.data).first()
@@ -28,8 +28,8 @@ def check_username(username):
 
 
 def check_email(email):
-    if email.data == current_user.get_email():
-        return
+    # if email.data == current_user.get_email():
+    #     return
     user = Users.query.filter_by(
         email_hash=hash_str_with_pepper(format_email(email.data))).first()
     if user is not None:

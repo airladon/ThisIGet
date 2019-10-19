@@ -1,5 +1,6 @@
 import pytest  # noqa: F401
 import os
+from common import logout
 
 
 def login(
@@ -22,10 +23,6 @@ def login(
         username_or_email=username,
         password=password
     ), follow_redirects=follow_redirects)
-
-
-def logout(client):
-    return client.get('/logout')
 
 
 @pytest.fixture(autouse=True)

@@ -488,7 +488,7 @@ def confirm_delete_account():
             current_user.delete_account()
             logout_user()
             session.pop('username', None)
-            return redirect(url_for('home'))
+            return redirect(url_for('account_deleted'))
 
     confirm_delete_account_js = ''
     confirm_delete_account_css = ''
