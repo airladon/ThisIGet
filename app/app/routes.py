@@ -440,6 +440,8 @@ def account_settings():
     delete_form = AccountSettingsDelete(prefix='delete_form')
 
     if request.method == 'POST':
+        print(request)
+        print(request.form)
         if username_form.submit_username.data:
             if username_form.validate_on_submit():
                 if current_user.get_username() != username_form.username.data:
