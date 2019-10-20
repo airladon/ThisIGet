@@ -92,6 +92,13 @@ then
   DOCKERFILE="dev/Dockerfile"
 fi
 
+if [ "$1" = "dev-root" ];
+then
+  HOST_PORT=5002
+  CONTAINER_PORT=5000
+  DOCKERFILE="dev/Dockerfile"
+fi
+
 if [ "$1" = "pupp" ];
 then
   CONTAINER_PORT=5000
@@ -132,7 +139,14 @@ then
   HOST_USER_GROUP_ID=`id -g`
   HOST_USER_ID=`id -u`
 
-  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile 
+  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile
+
+  if [ "$1" = 'dev-root' ];
+  then
+    mv Dockerfile DockerfileTemp
+    sed "s/USER myuser//" < DockerfileTemp > Dockerfile
+  fi
+
   rm DockerfileTemp
 
   GUNICORN_PORT=4000
