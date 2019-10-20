@@ -11,12 +11,12 @@ import re
 import time
 
 
-def always_true_mock():
-    return True
-
-
 email_token = ''
 email_username = ''
+
+
+def always_true_mock():
+    return True
 
 
 def send_email_mock(subject, sender, recipients, text_body, html_body):

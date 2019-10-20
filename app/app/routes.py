@@ -452,8 +452,6 @@ def account_settings():
     delete_form = AccountSettingsDelete(prefix='delete_form')
 
     if request.method == 'POST':
-        print(request)
-        print(request.form)
         if username_form.submit_username.data:
             if username_form.validate_on_submit():
                 if current_user.get_username() != username_form.username.data:
@@ -494,7 +492,9 @@ def account_settings():
 def confirm_delete_account():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
-    form = ConfirmDeleteAccount()
+    form = ConfirmDeleteAccount(prefix='form')
+    # print(form.submit_save)
+    # print(form.submit_delete)
     if request.method == 'POST' and form.validate_on_submit():
         if form.submit_save.data:
             return redirect(url_for('account_settings'))
@@ -502,6 +502,7 @@ def confirm_delete_account():
             current_user.delete_account()
             logout_user()
             session.pop('username', None)
+            db.session.commit()
             return redirect(url_for('account_deleted'))
 
     confirm_delete_account_js = ''
