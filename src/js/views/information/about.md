@@ -30,7 +30,7 @@ This site is not aimed at a particular audience or age group. It is simply refer
 
 ## Credits
 
-This site was created with the help of many open source projects. Open source projects are core to many web technologies, and without them web the variety of high quality websites you see today would not exist. Many open source projects are developed by people in their spare time.
+This site was created with the help of many open source projects. Open source projects are core to many web technologies, and without them the variety of high quality websites you see today would not exist. Many open source projects are developed by people in their spare time.
 
 In developing this website, a Javscript library that helps make interactive diagrams (including equations) easy to create and animate was developed and open sourced. It is named [FigureOne](https://github.com/airladon/FigureOne).
 

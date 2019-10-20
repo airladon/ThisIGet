@@ -152,7 +152,7 @@ def test_link_ratings_cache(client):
     client.get(
         f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=2').get_json()
 
-    ratings = VersionRatingsCache.query.first()
+    ratings = LinkRatingsCache.query.first()
     assert ratings.num_ratings == 2
     assert ratings.ave_rating == 3
     assert ratings.high_ratings == 1
