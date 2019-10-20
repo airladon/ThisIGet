@@ -6,7 +6,6 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 # from wtforms.validators import Length
 from app.models import Users
 from app.tools import hash_str_with_pepper, format_email
-from flask_login import current_user
 # import pdb
 
 

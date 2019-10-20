@@ -84,6 +84,8 @@ from app.tools import hash_str_with_pepper, format_email
 # Size of email hash will be 60-29 = 31 as don't want to store the pepper
 
 # Username size will be limited to 32 characters
+def expiration():
+    return 1800
 
 
 class Users(UserMixin, db.Model):
@@ -130,7 +132,7 @@ class Users(UserMixin, db.Model):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
-    
+
     def delete_account(self):
         self.username = hash_str_with_pepper(
             f'{self.get_username()} {str(datetime.now())}')
@@ -148,11 +150,11 @@ class Users(UserMixin, db.Model):
             return
         return Users.query.get(id)
 
-    def get_change_email_token(self, email_address, expires_in=1800):
+    def get_change_email_token(self, email_address):
         return jwt.encode(
             {
                 'change_email': self.id,
-                'exp': time() + expires_in,
+                'exp': time() + expiration(),
                 'email': email_address,
             },
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
