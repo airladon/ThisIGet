@@ -31,7 +31,7 @@ from app.models import VersionRatingsCache
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-# import re
+import re
 
 # project/decorators.py
 from functools import wraps
@@ -78,17 +78,29 @@ def make_response_with_files(*args, **kwargs):
         learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
         learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
-    res = make_response(render_template(
-        *args, **kwargs,
-        tools_js=tools_js, polyfill_js=polyfill_js,
-        common_content_js=common_content_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, topic_index_js=topic_index_js,
-        about_js=about_js, main_css=main_css, main_js=main_js,
-        about_css=about_css, learning_paths_js=learning_paths_js,
-        learning_paths_css=learning_paths_css,
-        account_js=account_js, account_css=account_css,
-        message_js=message_js, message_css=message_css,
-    ))
+    if 'message_js' in kwargs and 'message_css' in kwargs:
+        res = make_response(render_template(
+            *args, **kwargs,
+            tools_js=tools_js, polyfill_js=polyfill_js,
+            common_content_js=common_content_js, vendors_js=vendors_js,
+            figure_one_js=figure_one_js, topic_index_js=topic_index_js,
+            about_js=about_js, main_css=main_css, main_js=main_js,
+            about_css=about_css, learning_paths_js=learning_paths_js,
+            learning_paths_css=learning_paths_css,
+            account_js=account_js, account_css=account_css,
+        ))
+    else:
+        res = make_response(render_template(
+            *args, **kwargs,
+            tools_js=tools_js, polyfill_js=polyfill_js,
+            common_content_js=common_content_js, vendors_js=vendors_js,
+            figure_one_js=figure_one_js, topic_index_js=topic_index_js,
+            about_js=about_js, main_css=main_css, main_js=main_js,
+            about_css=about_css, learning_paths_js=learning_paths_js,
+            learning_paths_css=learning_paths_css,
+            account_js=account_js, account_css=account_css,
+            message_js=message_js, message_css=message_css,
+        ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
     else:
@@ -675,8 +687,7 @@ def confirm_email_change(token):
             request.
         </p>
         <p>
-            In this case, it took more than 30 minutes for the verification,
-            and so it failed.
+            In this case, it took more than 30 minutes for the verification, and so it failed. # noqa
         </p>
         <p>
             If you wish to change your email address, please try again and be
@@ -684,7 +695,7 @@ def confirm_email_change(token):
         </p>
         '''
         return make_response_with_files(
-            'message.html', message_html=message_html,
+            'message.html', message_html=re.sub('\n', '', message_html),
         )
 
     if result['status'] == 'fail':
@@ -693,15 +704,14 @@ def confirm_email_change(token):
             Account Email Change Failed
         </h1>
         <p>
-            The change to your account email address has failed as either the
-            verification token is invalid or corrupt.
+            The change to your account email address has failed as either the verification token is invalid or corrupt.  # noqa
         </p>
         <p>
             If you wish to change your email, please try again in account
             settings.
         </p>'''
         return make_response_with_files(
-            'message.html', message_html=message_html
+            'message.html', message_html=re.sub('\n', '', message_html)
         )
 
     if result['status'] == 'ok':

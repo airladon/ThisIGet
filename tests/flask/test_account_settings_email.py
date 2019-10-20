@@ -106,3 +106,42 @@ def test_account_settings_email_signout(client, monkeypatch):
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper('test_user_01')).first()
     assert user.get_email() == 'noreply@thisiget.com'
+
+
+def test_account_settings_email_wrong_token(client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+
+    # Login and check initial email is correct
+    login(client)
+
+    # Change email post
+    res = client.post(
+        '/account',
+        data={
+            'email_form-email': "noreply@thisiget.com",
+            'email_form-submit_email': 'Verify & Change',
+        },
+        follow_redirects=True)
+
+    # Status should be shown as email sent
+    html = str(res.data)
+    assert '<span class="input_form__submit_ok_message_text">Confirmation email sent</span>' in html  # noqa
+
+    # email should not have changed yet
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_user_01')).first()
+    assert user.get_email() == 'test_user_01@thisiget.com'
+
+    # Confirm email change with token
+    res = client.get(
+        f'/confirmEmailChange/{email_token}wrong', follow_redirects=True)
+
+    # Should see token error page, and
+    # database should NOT be updated
+    html = str(res.data)
+    print(html)
+    assert 'The change to your account email address has failed as either the verification token is invalid or corrupt' in html  # noqa
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_user_01')).first()
+    assert user.get_email() == 'test_user_01@thisiget.com'
