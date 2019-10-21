@@ -11,6 +11,7 @@ expect.extend({ toMatchImageSnapshot });
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 // const testMode = process.env.TIG_MODE || 'test';
 const username = process.env.TIG_USERNAME || 'test_user_002';
+const username2 = process.env.TIG_USERNAME2 || 'test_user_002aofkspeD3fif';
 const password = process.env.TIG_PASSWORD || '12345678';
 
 
@@ -105,7 +106,7 @@ describe('Account Settings Flow', () => {
     });
   });
 
-  test.only('Change Email', async () => {
+  test('Change Email', async () => {
     jest.setTimeout(60000);
     expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
     expect(process.env.MAIL_RECEIVE_PASSWORD).not.toHaveLength(0);
@@ -125,7 +126,7 @@ describe('Account Settings Flow', () => {
     await snapshot('account-settings-email-flow-3');
 
     await logout();
-    await login(username, password);
+    await login('test_user_002a@thisiget.com', password);
     await gotoAccountSettings();
     await snapshot('account-settings-email-flow-4');
 
@@ -136,5 +137,47 @@ describe('Account Settings Flow', () => {
     token = await getToken('confirmEmailChange', latestEmailNumber);
     await page.goto(`${sitePath}/${token}`);
     await snapshot('account-settings-email-flow-6');
+  });
+
+  test('Change Username', async () => {
+    jest.setTimeout(60000);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-username-flow-1');
+
+    await setFormInput('username_form-username', username2);
+    await submit('username_form-submit_username');
+    await snapshot('account-settings-username-flow-2');
+
+    await logout();
+    await login(username2, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-username-flow-3');
+
+    await setFormInput('username_form-username', username);
+    await submit('username_form-submit_username');
+    await snapshot('account-settings-username-flow-4');
+  });
+
+  test.only('Change Password', async () => {
+    jest.setTimeout(60000);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-password-flow-1');
+
+    await setFormInput('password_form-password', 'asdfasdf');
+    await setFormInput('password_form-repeat_password', 'asdfasdf');
+    await submit('password_form-submit_password');
+    await snapshot('account-settings-password-flow-2');
+
+    await logout();
+    await login(username, 'asdfasdf');
+    await gotoAccountSettings();
+    await snapshot('account-settings-password-flow-3');
+
+    await setFormInput('password_form-password', password);
+    await setFormInput('password_form-repeat_password', password);
+    await submit('password_form-submit_password');
+    await snapshot('account-settings-password-flow-4');
   });
 });
