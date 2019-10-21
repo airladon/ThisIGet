@@ -1,5 +1,7 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+import { getEmail } from './email';
+import { login, gotoAccountSettings, snapshot } from './common';
 
 expect.extend({ toMatchImageSnapshot });
 
@@ -7,6 +9,32 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 // const testMode = process.env.TIG_MODE || 'test';
 const username = process.env.TIG_USERNAME || 'test_user_001';
 const password = process.env.TIG_PASSWORD || '12345678';
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/* eslint-disable no-await-in-loop */
+
+// async function login() {
+//   await page.goto(sitePath);
+//   await page.setViewport({ width: 500, height: 2000 });
+
+//   // Click on login
+//   await Promise.all([
+//     page.waitForNavigation(),
+//     page.click('#id_navbar_loginout'),
+//   ]);
+
+//   // Fill in login form and submit
+//   await page.type('#username_or_email', username);
+//   await page.type('#password', password);
+
+//   await Promise.all([
+//     page.waitForNavigation(),
+//     page.click('#submit'),
+//   ]);
+// }
 
 describe('Account Settings Flow', () => {
   test('Login Page', async () => {
@@ -75,5 +103,46 @@ describe('Account Settings Flow', () => {
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: 'account-settings-flow-4-delete-confirmation',
     });
+  });
+
+  test.only('Change Email', async () => {
+    jest.setTimeout(30000);
+    expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
+    expect(process.env.MAIL_RECEIVE_PASSWORD).not.toHaveLength(0);
+    expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-email-flow-1');
+
+    // Get latest message
+    const email = await getEmail();
+    const oldMsgNumber = email[0];
+
+    await page.evaluate(() => {
+      document.getElementById('email_form-email').value = '';
+    });
+    await page.type('#email_form-email', 'noreply@thisiget.com');
+
+    // Click on Change and Verify
+    await Promise.all([
+      page.waitForNavigation(),
+      page.click('#email_form-submit_email'),
+    ]);
+
+    await snapshot('account-settings-email-flow-2');
+
+    await sleep(2000);
+    let [msgNumber, body] = await getEmail();
+    let count = 0;
+    while (msgNumber === oldMsgNumber && count < 5) {
+      await sleep(2000);
+      [msgNumber, body] = await getEmail();
+      count += 1;
+    }
+
+    expect(msgNumber).not.toEqual(oldMsgNumber);
+    const [token] = body.match(/confirmEmailChange\/[^\r]*/);
+    await page.goto(`${sitePath}/${token}`);
+    await snapshot('account-settings-email-flow-3');
   });
 });
