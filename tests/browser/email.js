@@ -15,13 +15,20 @@ const getEmail = () => new Promise((resolve) => {
   });
 
   function openInbox(cb) {
-    imap.openBox('INBOX', true, cb);
+    imap.openBox('[Gmail]/All Mail', true, cb);
   }
+
+  // function getBoxes(cb) {
+  //   imap.getBoxes(cb);
+  // }
 
   let bodyContent = '';
   let messageNumber = 0;
 
   imap.once('ready', () => {
+    // getBoxes((err, boxes) => {
+    //   console.log(boxes)
+    // })
     openInbox((err, box) => {
       if (err) throw err;
       const f = imap.seq.fetch(`${box.messages.total}:*`, { bodies: ['HEADER.FIELDS (FROM)','TEXT'] });

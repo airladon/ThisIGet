@@ -42,7 +42,19 @@ async function snapshot(fileName) {
   });
 }
 
+async function logout() {
+  await Promise.all([
+    page.waitForSelector('#id_navbar_loginout_list'),
+    page.click('#id_navbar_loginout'),
+  ]);
+
+  const hints = await page.$$('.dropdown_button_list_item_link');
+  await Promise.all([
+    page.waitForNavigation(),
+    hints[1].click(),
+  ]);
+}
 
 module.exports = {
-  login, gotoAccountSettings, snapshot,
+  login, gotoAccountSettings, snapshot, logout,
 };
