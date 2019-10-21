@@ -1,8 +1,9 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { getEmail } from './email';
+// import { getEmail } from './email';
 import {
-  login, gotoAccountSettings, snapshot, logout,
+  login, gotoAccountSettings, snapshot, logout, getToken,
+  getLatestMessage, setFormInput, submit,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -12,9 +13,6 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 /* eslint-disable no-await-in-loop */
 
@@ -116,34 +114,13 @@ describe('Account Settings Flow', () => {
     await gotoAccountSettings();
     await snapshot('account-settings-email-flow-1');
 
-    // Get latest message
-    const email = await getEmail();
-    const oldMsgNumber = email[0];
-
-    await page.evaluate(() => {
-      document.getElementById('email_form-email').value = '';
-    });
-    await page.type('#email_form-email', 'test_user_002a@thisiget.com');
-
-    // Click on Change and Verify
-    await Promise.all([
-      page.waitForNavigation(),
-      page.click('#email_form-submit_email'),
-    ]);
-
+    let latestEmailNumber = await getLatestMessage();
+    await setFormInput('email_form-email', 'test_user_002a@thisiget.com');
+    await submit('email_form-submit_email');
     await snapshot('account-settings-email-flow-2');
 
-    await sleep(2000);
-    let [msgNumber, body] = await getEmail();
-    let count = 0;
-    while (msgNumber === oldMsgNumber && count < 5) {
-      await sleep(2000);
-      [msgNumber, body] = await getEmail();
-      count += 1;
-    }
-
-    expect(msgNumber).not.toEqual(oldMsgNumber);
-    let [token] = body.match(/confirmEmailChange\/[^\r]*/);
+    let token = await getToken('confirmEmailChange', latestEmailNumber);
+    latestEmailNumber = await getLatestMessage();
     await page.goto(`${sitePath}/${token}`);
     await snapshot('account-settings-email-flow-3');
 
@@ -152,29 +129,11 @@ describe('Account Settings Flow', () => {
     await gotoAccountSettings();
     await snapshot('account-settings-email-flow-4');
 
-    await page.evaluate(() => {
-      document.getElementById('email_form-email').value = '';
-    });
-    await page.type('#email_form-email', 'test_user_002@thisiget.com');
-
-    // Click on Change and Verify
-    await Promise.all([
-      page.waitForNavigation(),
-      page.click('#email_form-submit_email'),
-    ]);
-
+    await setFormInput('email_form-email', 'test_user_002@thisiget.com');
+    await submit('email_form-submit_email');
     await snapshot('account-settings-email-flow-5');
 
-    await sleep(2000);
-    [msgNumber, body] = await getEmail();
-    count = 0;
-    while (msgNumber === oldMsgNumber && count < 5) {
-      await sleep(2000);
-      [msgNumber, body] = await getEmail();
-      count += 1;
-    }
-    expect(msgNumber).not.toEqual(oldMsgNumber);
-    [token] = body.match(/confirmEmailChange\/[^\r]*/);
+    token = await getToken('confirmEmailChange', latestEmailNumber);
     await page.goto(`${sitePath}/${token}`);
     await snapshot('account-settings-email-flow-6');
   });
