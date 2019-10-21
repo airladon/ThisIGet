@@ -1,9 +1,9 @@
+/* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-// import { getEmail } from './email';
 import {
   login, gotoAccountSettings, snapshot, logout, getToken,
-  getLatestMessage, setFormInput, submit,
+  getLatestMessage, setFormInput, click, goHome,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -15,109 +15,49 @@ const username2 = process.env.TIG_USERNAME2 || 'test_user_002aofkspeD3fif';
 const password = process.env.TIG_PASSWORD || '12345678';
 
 
-/* eslint-disable no-await-in-loop */
-
-// async function login() {
-//   await page.goto(sitePath);
-//   await page.setViewport({ width: 500, height: 2000 });
-
-//   // Click on login
-//   await Promise.all([
-//     page.waitForNavigation(),
-//     page.click('#id_navbar_loginout'),
-//   ]);
-
-//   // Fill in login form and submit
-//   await page.type('#username_or_email', username);
-//   await page.type('#password', password);
-
-//   await Promise.all([
-//     page.waitForNavigation(),
-//     page.click('#submit'),
-//   ]);
-// }
-
 describe('Account Settings Flow', () => {
-  test('Login Page', async () => {
+  test('Delete Cancel', async () => {
     jest.setTimeout(10000);
-    // Home page, not logged in
-    await page.goto(sitePath);
-    await page.setViewport({ width: 500, height: 2000 });
-
-    // Click on login
-    let [response] = await Promise.all([
-      page.waitForNavigation(),
-      page.click('#id_navbar_loginout'),
-    ]);
-    expect(response.status()).toBe(200);
-
-    // Fill in login form and submit
-    await page.type('#username_or_email', username);
-    await page.type('#password', password);
-    let image = await page.screenshot();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: 'account-settings-flow-0-filled',
-    });
-    [response] = await Promise.all([
-      page.waitForNavigation(),
-      page.click('#submit'),
-    ]);
-    expect(response.status()).toBe(200);
-
-    // Should go back to home page logged in
-    // Cookies should show username that is logged in
-    image = await page.screenshot();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: 'account-settings-flow-1-logged-in',
-    });
-
-    // Click on Logout
-    await Promise.all([
-      page.waitForSelector('#id_navbar_loginout_list'),
-      page.click('#id_navbar_loginout'),
-    ]);
-    // expect(response.status()).toBe(200);
-    image = await page.screenshot();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: 'account-settings-flow-2-click-signedin',
-    });
-
-    const hints = await page.$$('.dropdown_button_list_item_link');
-    [response] = await Promise.all([
-      page.waitForNavigation(),
-      hints[0].click(),
-    ]);
-    expect(response.status()).toBe(200);
-    image = await page.screenshot();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: 'account-settings-flow-3-click-account-settings',
-    });
-
-    // Click on Delete
-    [response] = await Promise.all([
-      page.waitForNavigation(),
-      page.click('#delete_form-submit'),
-    ]);
-
-    expect(response.status()).toBe(200);
-    image = await page.screenshot();
-    expect(image).toMatchImageSnapshot({
-      customSnapshotIdentifier: 'account-settings-flow-4-delete-confirmation',
-    });
+    await goHome(500, 2000);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-delete-cancel-flow-1');
+    await click('delete_form-submit');
+    await snapshot('account-settings-delete-cancel-flow-2');
+    await click('form-submit_save');
+    await snapshot('account-settings-delete-cancel-flow-3');
+    await logout();
   });
+
+  // test('Delete', async () => {
+  //   jest.setTimeout(10000);
+  //   await goHome(500, 2000);
+  //   await login(username, password);
+  //   await gotoAccountSettings();
+  //   await snapshot('account-settings-delete-flow-1');
+
+  //   await click('delete_form-submit');
+  //   await snapshot('account-settings-delete-flow-2');
+
+  //   await click('form-submit_delete');
+  //   await snapshot('account-settings-delete-flow-3');
+
+  //   await createAccount(username, email, password);
+  // });
 
   test('Change Email', async () => {
     jest.setTimeout(60000);
     expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
     expect(process.env.MAIL_RECEIVE_PASSWORD).not.toHaveLength(0);
     expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
+    await goHome(500, 2000);
     await login(username, password);
     await gotoAccountSettings();
     await snapshot('account-settings-email-flow-1');
 
     let latestEmailNumber = await getLatestMessage();
     await setFormInput('email_form-email', 'test_user_002a@thisiget.com');
-    await submit('email_form-submit_email');
+    await click('email_form-submit_email');
     await snapshot('account-settings-email-flow-2');
 
     let token = await getToken('confirmEmailChange', latestEmailNumber);
@@ -131,22 +71,25 @@ describe('Account Settings Flow', () => {
     await snapshot('account-settings-email-flow-4');
 
     await setFormInput('email_form-email', 'test_user_002@thisiget.com');
-    await submit('email_form-submit_email');
+    await click('email_form-submit_email');
     await snapshot('account-settings-email-flow-5');
 
     token = await getToken('confirmEmailChange', latestEmailNumber);
     await page.goto(`${sitePath}/${token}`);
     await snapshot('account-settings-email-flow-6');
+    await logout();
   });
 
   test('Change Username', async () => {
-    jest.setTimeout(60000);
+    jest.setTimeout(10000);
+    await goHome(500, 2000);
     await login(username, password);
     await gotoAccountSettings();
     await snapshot('account-settings-username-flow-1');
 
     await setFormInput('username_form-username', username2);
-    await submit('username_form-submit_username');
+    await snapshot('account-settings-username-flow-1a');
+    await click('username_form-submit_username');
     await snapshot('account-settings-username-flow-2');
 
     await logout();
@@ -155,19 +98,21 @@ describe('Account Settings Flow', () => {
     await snapshot('account-settings-username-flow-3');
 
     await setFormInput('username_form-username', username);
-    await submit('username_form-submit_username');
+    await click('username_form-submit_username');
     await snapshot('account-settings-username-flow-4');
+    await logout();
   });
 
-  test.only('Change Password', async () => {
+  test('Change Password', async () => {
     jest.setTimeout(60000);
+    await goHome(500, 2000);
     await login(username, password);
     await gotoAccountSettings();
     await snapshot('account-settings-password-flow-1');
 
     await setFormInput('password_form-password', 'asdfasdf');
     await setFormInput('password_form-repeat_password', 'asdfasdf');
-    await submit('password_form-submit_password');
+    await click('password_form-submit_password');
     await snapshot('account-settings-password-flow-2');
 
     await logout();
@@ -177,7 +122,8 @@ describe('Account Settings Flow', () => {
 
     await setFormInput('password_form-password', password);
     await setFormInput('password_form-repeat_password', password);
-    await submit('password_form-submit_password');
+    await click('password_form-submit_password');
     await snapshot('account-settings-password-flow-4');
+    await logout();
   });
 });

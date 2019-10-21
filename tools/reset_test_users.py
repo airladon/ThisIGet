@@ -1,4 +1,5 @@
 import sys
+import datetime
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Users, VersionRatings # noqa
@@ -10,7 +11,15 @@ def resetUser(username, email, password):
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username.lower())).first()
     if user is None:
-        print(f'Resetting user {username} failed.')
+        user = Users()
+        user.set_username(username)
+        user.set_email(email)
+        user.set_password(password)
+        user.signed_up_on = datetime.datetime.now()
+        user.confirmed = True
+        user.confirmed_on = datetime.datetime.now()
+        db.session.add(user)
+        print(f'User {username} created.')
         return
     user.set_email(email)
     user.set_password(password)
@@ -22,5 +31,13 @@ for i in range(10):
     password = '12345678'
     print(f'Resetting {username}')
     resetUser(username, email, password)
+
+user = Users.query.filter_by(
+    username_hash=hash_str_with_pepper('test_user_002aofkspeD3fif'.lower())) \
+    .first()
+if user is not None:
+    db.session.delete(user)
+    print('Removed test_user_002aofkspeD3fif')
+
 
 db.session.commit()

@@ -500,7 +500,8 @@ def confirm_delete_account():
             return redirect(url_for('account_settings'))
         if form.submit_delete.data:
             if current_user.get_username() == 'test_user_002':
-                current_user.delete()
+                # current_user.delete()
+                db.session.delete(current_user)
             else:
                 current_user.delete_account()
             logout_user()
