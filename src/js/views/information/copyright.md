@@ -1,14 +1,18 @@
 # Copyright Information
 
-The intent of www.thisiget.com is to make all academic content free to use, while protecting the remainder of the website with copyright to ensure users can be confident they are visiting www.thisiget.com and not a third party website.
+This page summarizes this website's copyright policy for convenience. It does not replace the [Terms of Use](/terms) which details the policy.
 
-## Academic Content
+## Summary
 
-"Academic Content" is the content hosted on www.thisiget.com that is within a Topic, Learning Path, Form or Version. The definitions of these terms is in the [About](/about) section.
+This website www.thisiget.com provides reference, educational and training content (“Content”).
 
-All "Academic Content" hosted on www.thisiget.com is liscened under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+The intent of This I Get is to make all Content free to use with limited restrictions, while protecting the remainder of the Website with copyright and trademarks to ensure users can be confident they are visiting this Website and not a third-party website.
 
-A human-readable summary of (and not a substitute for) the license is:
+## Content
+
+The Content of this Website is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a> (“CC BY-SA 4.0”).
+
+A human-readable summary of (and not a substitute for) the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">license</a> is:
 
 >### You are free to:
 > 
@@ -31,7 +35,6 @@ A human-readable summary of (and not a substitute for) the license is:
 >No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
 >
 
-## Other Site Content
+## Other Site Material
 
-The name This I Get is trademarked and property of This I Get, LLC. Unless otherwise specified, all other text, images and content that is not "Academic Content" at www.thisiget.com is Copyright © 2019 **This I Get, LLC**.
-
+The remainder of the website that is not Content is Copyright © 2019 **This I Get, LLC**.

@@ -13,11 +13,11 @@ The information provided on the Website is not intended for distribution to or u
 
 The Website is intended for users who are at least 18 years of age. All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the Website. If you are a minor, you must have your parent or guardian read and agree to these Terms prior to you using the Website.
 
-## LICENSE
+## License
 
 We hereby grant to you a limited, non-exclusive, non-transferable and revocable license to access and use the Website and use our services solely for your personal use as permitted under this Agreement. We reserve the right, in our sole discretion, to deny access and/or use of the Website or services to anyone for any reason. You acknowledge and agree that we, in our sole discretion, at any time and with or without notice, may block or terminate your or any other party’s access to all or part of the Website or services, or change or discontinue any aspect or feature of the Website or services (including, without limitation, discontinuing any of the Website or services in their entirety); and that, without limitation of any other provisions of this Agreement, we reserve the right to take any actions at law or in equity that we deem appropriate in connection with the Website, services and this Agreement.
 
-## ACCOUNT
+## Account
 
 If you wish to rate Content, then you must create an account on the Website, and provide your personal information for the purpose of using the Website and our services. Your personal information will be governed by our [Privacy Policy](/privacy). If you are under the age of 18 and reside in the US, or if you are under the age of consent in your country of residence, then you may only create an account under the supervision of a parent or guardian. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable. You must ensure that you exit from your account at the end of each session. You agree to immediately notify us of any unauthorized use of your account information or any other breach of security. We strongly recommend that you change your password on a periodic basis and whenever you suspect that knowledge of the password has been compromised. It is your responsibility to protect the confidentiality of your account information. We assume no liability for any access to information that is accessed with your account information. You are solely responsible for protecting the privacy of your account and password, and you agree to accept all responsibility for activities that occur under your account or password.
 
@@ -33,7 +33,7 @@ By accessing the Website and creating an account, you represent and warrant that
 </ol>
 If you provide any information that is untrue, inaccurate, not current, or incomplete, we have the right to suspend or terminate your account and refuse any and all current or future use of the Website (or any portion thereof).
 
-## PROHIBITED ACTIVITIES
+## Prohibited Activities
 
 You may not access or use the Website for any purpose other than that for which we make the Website available. The Website may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us. 
 
@@ -64,7 +64,7 @@ As a user of the Website, you agree not to:
 <li>use the Website in a manner inconsistent with any applicable laws or regulations.</li>
 </ol>
 
-## INTELLECTUAL PROPERTY RIGHTS AND COPYRIGHT
+## Intellectual Property Rights and Copyright
 
 The intent of This I Get is to make all Content free to use with limited restrictions, while protecting the remainder of the Website with copyright and trademarks to ensure users can be confident they are visiting this Website and not a third-party website.
 
@@ -74,7 +74,7 @@ The remaining material that is not Content on the Website including text, images
 
 Provided that you are eligible to use the Website, you are granted a limited license to access and use the Website and to download or print a copy of any portion of the Website to which you have properly gained access solely for your personal, non-commercial use. For the Website Content, your rights are determined by CC BY-SA 4.0 license. We reserve all rights not expressly granted to you in and to the Website, the Content, the Material and the Marks.
 
-## PRIVACY
+## Privacy
 
 This I Get takes your privacy very seriously and collects as little information as is needed to maintain the Service. Please review the Privacy Policy in detail to understand This I Get’s data and privacy practices. By using the Website, you agree to be bound by our Privacy Policy, which is incorporated into these Terms. Please be advised the Website is hosted in the United States.
 
@@ -83,7 +83,7 @@ If you access the Website from the European Union, Asia, or any other region of 
 Further, we do not knowingly accept, request, or solicit information from children or knowingly market to children. Therefore, in accordance with the Children’s Online Privacy Protection Act (COPPA), if we receive actual knowledge that any minor individual has provided personal information to us without the requisite and verifiable parental consent, we will delete that information from the Website as quickly as is reasonably practical.
 
 
-## YOUR CONTRIBUTIONS
+## Your Contributions
 
 The Website may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Website, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material. The Website allows users to review the Content, create accounts to rate the Content, and view the aggregated statistics of the ratings. Users can also submit or update information by contacting This I Get directly, or contributing to the Website’s source code repository. The act of contributing content for the Website is referred to as the “Contribution” in these Terms.
 
@@ -118,7 +118,7 @@ You are solely responsible for your Contributions to the Website and you express
 
 We have the right, in our sole and absolute discretion, (1) to edit, redact, or otherwise change any Contributions; (2) to re-categorize any Contributions to place them in more appropriate locations on the Website; and (3) to pre-screen or delete any Contributions at any time and for any reason, without notice. We have no obligation to monitor your Contributions.
 
-## TERMINATION
+## Termination
 
 You are free to stop using the Website and our service at any time. If you wish to delete your account on the Website, you can do so in your account’s settings page. If you delete your account, the information related to your username, email address and password will be deleted. Your Content ratings data will be retained, but will no longer be tied to you.
 
@@ -128,7 +128,7 @@ If we terminate or suspend your account for any reason, you are prohibited from 
 
 If you stop using the service, or This I Get stops your use of the service, you agree that any Contributions you have made remain licensed under the CC BY-SA 4.0 license, and attributed in the commit history of the Website source repository.
 
-## MODIFICATIONS AND INTERRUPTIONS 
+## Modifications and Interruptions
 
 We reserve the right to change, modify, or remove the contents of the Website at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Website. We also reserve the right to modify or discontinue all or part of the Website without notice at any time.
 
@@ -138,7 +138,7 @@ We cannot guarantee the Website will be available at all times. We may experienc
 
 You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Website during any downtime or discontinuance of the Website. Nothing in these Terms will be construed to obligate us to maintain and support the Website or to supply any corrections, updates, or releases in connection therewith.
 
-## THIRD-PARTY LINKS AND RESOURCES
+## Third-Party Links and Resources
 
 This Website includes links to third-party websites and resources (“Third-Party Websites”) as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties (“Third-Party Content”). These links are not owned or operated by This I Get and This I Get does not endorse them, and is not responsible or liable for them. Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third Party Websites accessed through the Website or any Third-Party Content posted on, available through, or installed from the Website, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content. 
 
@@ -148,7 +148,7 @@ You should review the applicable terms and policies, including privacy and data 
 
 You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us harmless from any harm caused by your purchase of such products or services. Additionally, you shall hold us harmless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites.
 
-## SITE MANAGEMENT
+## Site Management
 
 We reserve the right, but not the obligation, to: 
 
@@ -174,11 +174,11 @@ You agree to defend, indemnify, and hold us harmless, including our subsidiaries
 
 Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it. 
 
-## JURISDICTION
+## Jurisdiction
 
 These Terms and your use of the Website are governed by and construed in accordance with the laws of the State of California applicable to agreements made and to be entirely performed within the State of California, without regard to its conflict of law principles. 
 
-## MISCELLANEOUS
+## Miscellaneous
 
 These Terms and any policies or operating rules posted by us on the Website or in respect to the Website constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Terms shall not operate as a waiver of such right or provision. 
 
@@ -188,11 +188,11 @@ If any provision or part of a provision of these Terms is determined to be unlaw
 
 You agree that these Terms will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Terms and the lack of signing by the parties hereto to execute these Terms.
 
-## CHANGES TO THIS TERMS OF USE
+## Changes to this Terms of Use
 
 This I Get keeps this Terms of Use under regular review and places any updates on this web page. Every time you visit this Website, you agree to the version of the Terms of Use that is posted here. This Terms of Use was Last Updated on October 18 2019. 
 
-## CONTACT INFORMATION
+## Contact Information
 
 In order to resolve a complaint regarding the Website or to receive further information regarding use of the Website, please contact feedback@thisiget.com.
 
