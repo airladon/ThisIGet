@@ -28,16 +28,19 @@ describe('Account Settings Flow', () => {
   //   await snapshot('account-settings-delete-cancel-flow-3');
   //   await logout();
   // });
-  // beforeEach(async () => {
-  //   await goHome(500, 2000);
-  //   await login(username, password);
-  //   await logout();
-  // });
+  beforeEach(async () => {
+    await goHome(500, 2000);
+    await logout();
+    await login(username, password);
+  });
+  afterEach(async () => {
+    await logout();
+  });
 
   test('Delete', async () => {
     jest.setTimeout(20000);
-    await goHome(500, 2000);
-    await login(username, password);
+    // await goHome(500, 2000);
+    // await login(username, password);
     await gotoAccountSettings();
     await snapshot('account-settings-delete-flow-1');
 
@@ -54,7 +57,7 @@ describe('Account Settings Flow', () => {
     await click('submit');
     await snapshot('account-settings-delete-flow-5');
 
-    await logout();
+    // await logout();
   });
 
   // test('Change Email', async () => {
@@ -94,8 +97,8 @@ describe('Account Settings Flow', () => {
 
   test('Change Username', async () => {
     jest.setTimeout(10000);
-    await goHome(500, 2000);
-    await login(username, password);
+    // await goHome(500, 2000);
+    // await login(username, password);
     await gotoAccountSettings();
     await snapshot('account-settings-username-flow-1');
     await setFormInput('username_form-username', username2);
@@ -110,7 +113,7 @@ describe('Account Settings Flow', () => {
     await setFormInput('username_form-username', username);
     await click('username_form-submit_username');
     await snapshot('account-settings-username-flow-4');
-    await logout();
+    // await logout();
     // await logout();
     // await logout();
   });
