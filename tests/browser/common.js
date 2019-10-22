@@ -49,7 +49,8 @@ async function setFormInput(id, text) {
 async function click(id) {
   await Promise.all([
     page.waitForNavigation(),
-    page.click(`#${id}`),
+    // page.click(`#${id}`),
+    page.$eval(`#${id}`, elem => elem.click()),
   ]);
 }
 

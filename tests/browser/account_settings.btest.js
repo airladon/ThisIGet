@@ -95,20 +95,35 @@ describe('Account Settings Flow', () => {
     await snapshot('account-settings-username-flow-1a');
 
     console.log(1)
-    await Promise.all([
-      page.waitForNavigation(),
-      page.click('#username_form-submit_username'),
-    ]);
+    // await Promise.all([
+    //   page.waitForNavigation(),
+    //   // page.click('#username_form-submit_username'),
+    //   page.$eval('#username_form-submit_username', elem => elem.click())
+    // ]);
+    await click('username_form-submit_username');
     console.log(2)
     await snapshot('account-settings-username-flow-2');
 
+  console.log(3)
     await logout();
+    console.log(4)
     await login(username2, password);
+    console.log(5)
     await gotoAccountSettings();
+    console.log(6)
     await snapshot('account-settings-username-flow-3');
 
+  console.log(7)
     await setFormInput('username_form-username', username);
+    // await click('username_form-submit_username');
+    console.log(8)
+    // await Promise.all([
+    //   page.waitForNavigation(),
+    //   // page.click('#username_form-submit_username'),
+    //   page.$eval('#username_form-submit_username', elem => elem.click())
+    // ]);
     await click('username_form-submit_username');
+    console.log(9)
     await snapshot('account-settings-username-flow-4');
     await logout();
   });
