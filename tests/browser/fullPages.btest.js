@@ -4,14 +4,14 @@ import presentationTester from '../../src/content/testers/presentationFormatTest
 singlePageTester({
   width: 700,
   element: 'body',
-  prefix: 'fullSinglePage-',
+  prefix: 'fullPage-SinglePage-',
   endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/examples/base',
 });
 
 presentationTester(
   {
     endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/discover/base',
-    prefix: 'fullPagePresentation-',
+    prefix: 'fullPage-Presentation-',
     element: 'body',
   },
   1,
@@ -20,7 +20,7 @@ presentationTester(
 singlePageTester({
   width: 700,
   element: 'main',
-  prefix: 'about-',
+  prefix: 'information-about-',
   endpoint: 'about',
 },
 // {
@@ -38,13 +38,13 @@ singlePageTester({
 {
   width: 700,
   element: 'main',
-  prefix: 'contact-',
+  prefix: 'information-contact-',
   endpoint: 'contact',
 },
 {
   width: 700,
   element: 'main',
-  prefix: 'introduction-',
+  prefix: 'information-introduction-',
   endpoint: 'introduction',
 },
 // {
@@ -56,6 +56,6 @@ singlePageTester({
 {
   width: 700,
   element: 'body',
-  prefix: 'home-',
+  prefix: 'fullPage-home-',
   endpoint: '',
 });
