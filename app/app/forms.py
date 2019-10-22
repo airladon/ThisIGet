@@ -104,7 +104,7 @@ class ResetPasswordForm(FlaskForm):
 
 
 class ConfirmAccountMessageForm(FlaskForm):
-    submit = SubmitField('Resend Confirmation Email')
+    submit = SubmitField('Resend Email')
 
 
 class AccountSettingsUsernameForm(FlaskForm):

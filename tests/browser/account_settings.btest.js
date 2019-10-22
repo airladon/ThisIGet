@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   login, gotoAccountSettings, snapshot, logout, getToken,
-  getLatestMessage, setFormInput, click, goHome,
+  getLatestMessage, setFormInput, click, goHome, createAccount,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -29,21 +29,25 @@ describe('Account Settings Flow', () => {
     await logout();
   });
 
-  // test('Delete', async () => {
-  //   jest.setTimeout(10000);
-  //   await goHome(500, 2000);
-  //   await login(username, password);
-  //   await gotoAccountSettings();
-  //   await snapshot('account-settings-delete-flow-1');
+  test.only('Delete', async () => {
+    jest.setTimeout(20000);
+    await goHome(500, 2000);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-delete-flow-1');
 
-  //   await click('delete_form-submit');
-  //   await snapshot('account-settings-delete-flow-2');
+    await click('delete_form-submit');
+    await snapshot('account-settings-delete-flow-2');
 
-  //   await click('form-submit_delete');
-  //   await snapshot('account-settings-delete-flow-3');
+    await click('form-submit_delete');
+    await snapshot('account-settings-delete-flow-3');
 
-  //   await createAccount(username, email, password);
-  // });
+    // Create a log in to make sure creation worked
+    await createAccount(username, `${username}@thisiget.com`, password);
+    await snapshot('account-settings-delete-flow-4');
+    await setFormInput('password', password)
+    await snapshot('account-settings-delete-flow-5');
+  });
 
   test('Change Email', async () => {
     jest.setTimeout(60000);

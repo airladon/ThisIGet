@@ -429,7 +429,8 @@ def login(username=''):
             user.last_login = datetime.datetime.now()
             db.session.commit()
             next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
+            if not next_page or url_parse(next_page).netloc != '' \
+                    or 'accountDeleted' in next_page:
                 next_page = url_for('home')
             next_page = next_page
             return redirect(next_page)
@@ -500,8 +501,9 @@ def confirm_delete_account():
             return redirect(url_for('account_settings'))
         if form.submit_delete.data:
             if current_user.get_username() == 'test_user_002':
-                # current_user.delete()
-                db.session.delete(current_user)
+                user = Users.query.filter_by(id=current_user.id).first()
+                if user is not None:
+                    db.session.delete(user)
             else:
                 current_user.delete_account()
             logout_user()
@@ -582,15 +584,16 @@ def confirm_account_message(username):
         # redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
-    flash('''You need to confirm your email address before your
-        account becomes active.''', 'before')
-    flash(f''''An email has been sent to {user.get_email()}.
-        Click the link inside it to confirm your email and
-        finish account registration.''', 'before')
+    # flash('''You need to confirm your email address before your
+    #     account becomes active.''', 'before')
+    # flash(f'''An email has been sent to {user.get_email()}.
+    #     Click the link inside it to confirm your email and
+    #     finish account registration.''', 'before')
 
     return render_template(
         'confirmAccountMessage.html',
         form=form, js=js, css=css, tools_js=tools_js,
+        email_address=user.get_email(),
     )
 
 

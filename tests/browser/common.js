@@ -59,11 +59,23 @@ async function getLatestMessage() {
 }
 
 
-async function login(username, password) {
+async function login(username, password, debug = '') {
+  if (debug) {
+    snapshot(`${debug}-0`);
+  }
   await click('id_navbar_loginout');
+  if (debug) {
+    snapshot(`${debug}-1`);
+  }
   await setFormInput('username_or_email', username);
   await setFormInput('password', password);
+  if (debug) {
+    snapshot(`${debug}-2`);
+  }
   await click('submit');
+  if (debug) {
+    snapshot(`${debug}-3`);
+  }
 }
 
 async function logout() {
@@ -93,7 +105,7 @@ async function gotoAccountSettings() {
 
 
 async function createAccount(username, email, password) {
-  await logout();
+  // await logout();
   await click('id_navbar_loginout');
   await click('login_form__create_account');
   await setFormInput('username', username);
@@ -102,7 +114,7 @@ async function createAccount(username, email, password) {
   await setFormInput('repeat_password', password);
   const currentMsgNumber = await getLatestMessage();
   await click('submit');
-  const token = getToken('confirmAccount', currentMsgNumber);
+  const token = await getToken('confirmAccount', currentMsgNumber);
   await page.goto(`${sitePath}/${token}`);
 }
 

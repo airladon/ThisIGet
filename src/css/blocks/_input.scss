@@ -16,6 +16,16 @@ $width: 250px;
   text-align: left;
 }
 
+.input_form__info_large {
+  font-size: 0.9em;
+  width: 300px;
+  max-width: calc(100vw - 2em);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
 .input_form p {
   margin-bottom: 1px;
   text-align: center;
@@ -162,23 +172,23 @@ $width: 250px;
 }
 
 .input_form__submit_ok_message_container {
-  // text-align: left;
-  // font-size: 0.9em;
-  // color: var(--color-site-text);
-  // bottom: -20px;
-  // width: $width;
-  // display: block;
-  // margin-left: auto;
-  // margin-right: auto;
-  // margin-top: 20px;
+  text-align: left;
+  font-size: 0.9em;
+  color: var(--color-site-text);
+  bottom: -20px;
+  width: $width;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
       /* text-align: left; */
-  font-size: 0.8em;
+  // font-size: 0.8em;
   color: var(--color-site-safe);
-  width: 250px;
+  // width: 250px;
   max-width: calc(100vw - 2em);
-  position: absolute;
-  left: calc(50% - 125px);
-  top: -0.3em;
+  // position: absolute;
+  // left: calc(50% - 125px);
+  // top: -0.3em;
 }
 
 .input_form__submit_ok_message_text {
@@ -192,8 +202,9 @@ $width: 250px;
   font-size: 0.7em;
   color: var(--color-site-warning);
   top: 0;
-  width: $width;
+  width: 100%;
   max-width: calc(100vw - 2em);
+  left: 1em;
 }
 
 // ///////////////////////////////////////////////////////

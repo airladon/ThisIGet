@@ -4,6 +4,16 @@
     min-height: calc(100vh - 51px - 20px - 4em);
 }
 
+.input_form__submit_ok_message_container {
+    font-size: 0.8em;
+    color: var(--color-site-safe);
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    position: absolute;
+    left: calc(50% - 125px);
+    top: -0.3em;
+  }
+
 h1 {
     // margin-top: 2em;
     font-weight: 300;
