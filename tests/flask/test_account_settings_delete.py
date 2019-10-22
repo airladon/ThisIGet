@@ -1,5 +1,5 @@
 import pytest  # noqa: F401
-from common import login, logout
+from common import login
 import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
@@ -71,7 +71,8 @@ def test_account_settings_delete_cancel(client):
     assert user.get_email() == 'test_user_01@thisiget.com'
 
     res = client.post(
-        '/confirmDelete', data={'form-submit_save': "DO NOT delete my account"},
+        '/confirmDelete',
+        data={'form-submit_save': "DO NOT delete my account"},
         follow_redirects=True)
 
     html = str(res.data)

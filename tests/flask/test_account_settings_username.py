@@ -85,4 +85,3 @@ def test_account_settings_username_existing_user(client):
     html = str(res.data)
     assert '<input autocomplete="username" class="input_form__field_entry" id="username_form-username" name="username_form-username" required size="32" type="text" value="test_User_01">' in html  # noqa
     assert '<span class="input_form__field_error_message">Username already exists.</span>' in html  # noqa
-

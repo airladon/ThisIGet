@@ -83,6 +83,7 @@ from app.tools import hash_str_with_pepper, format_email
 
 # Size of email hash will be 60-29 = 31 as don't want to store the pepper
 
+
 # Username size will be limited to 32 characters
 def expiration():
     return 1800

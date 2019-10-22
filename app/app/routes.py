@@ -442,7 +442,7 @@ def login(username=''):
         'login.html', form=form, css=css, js=js, tools_js=tools_js)
 
 
-@app.route('/account', methods=['GET', 'POST'])
+@app.route('/account', methods=['GET', 'POST'])  # noqa
 def account_settings():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -479,9 +479,6 @@ def account_settings():
     else:
         email_form.email.data = current_user.get_email()
     username_form.username.data = current_user.get_username()
-    
-    # password_form.password.data = 'asdf'
-    # password_form.repeat_password.data = 'asdf'
 
     return make_response_with_files(
         'account_settings.html', username_form=username_form,

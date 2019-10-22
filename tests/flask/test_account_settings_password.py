@@ -1,5 +1,5 @@
 import pytest  # noqa: F401
-from common import login, logout
+from common import login
 import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
@@ -51,7 +51,7 @@ def test_account_settings_password_different(client):
             'password_form-submit_password': 'Change',
         },
         follow_redirects=True)
-    
+
     html = str(res.data)
     # Confirm password fields are still blank
     assert '<input autocomplete="new-password" class="input_form__field_entry" id="password_form-password" name="password_form-password" required size="256" type="password" value="">' in html  # noqa
@@ -78,7 +78,7 @@ def test_account_settings_password_too_short(client):
             'password_form-submit_password': 'Change',
         },
         follow_redirects=True)
-    
+
     html = str(res.data)
     # Confirm password fields are still blank
     assert '<input autocomplete="new-password" class="input_form__field_entry" id="password_form-password" name="password_form-password" required size="256" type="password" value="">' in html  # noqa
