@@ -1,5 +1,6 @@
 # This I Get Privacy Policy
-#### Last updated October 18, 2019
+
+<html><div class=information__subtitle>Last updated October 18, 2019</div></html>
 
 This website www.thisiget.com (referred to as “Website” in this policy) provides reference, educational and training content (referred to as “Content” in this policy) and is owned by This I Get, LLC (referred to as “This I Get”, “we”, “our” or  “us” in this policy). This privacy policy explains how we, store, process and use your data when you visit this Website.
  

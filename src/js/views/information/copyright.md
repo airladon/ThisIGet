@@ -6,7 +6,7 @@ This page summarizes this website's copyright policy for convenience. It does no
 
 This website www.thisiget.com provides reference, educational and training content (“Content”).
 
-The intent of This I Get is to make all Content free to use with limited restrictions, while protecting the remainder of the Website with copyright and trademarks to ensure users can be confident they are visiting this Website and not a third-party website.
+The intent of This I Get is to make all Content free to use with limited restrictions, while protecting the remainder of the website with copyright and trademarks to ensure users can be confident they are visiting this website and not a third-party website.
 
 ## Content
 

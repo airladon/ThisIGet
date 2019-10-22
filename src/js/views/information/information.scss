@@ -53,7 +53,8 @@ h1 {
 }
 
 h2 {
-  margin-top: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 0.7em;
   font-weight: 300;
   font-size: 1.5em;
   text-align: center;
@@ -205,4 +206,5 @@ ol li {
   padding-right: 1em;
   // padding-bottom: 1em;
   color: color('site', 'text');
+  margin-bottom: 2em;
 }

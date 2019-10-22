@@ -1,5 +1,5 @@
 # This I Get - Terms Of Use
-#### Last updated October 18, 2019
+<html><div class=information__subtitle>Last updated October 18, 2019</div></html>
 
 Welcome to www.thisiget.com.  We hope you find the website useful!
 

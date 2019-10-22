@@ -2,7 +2,6 @@
 
 <html><div class=information__subtitle>Who created this site and why?</div></html>
 
-<!-- ## Hello and Thank You! -->
 Thank you for visiting this site, and I hope you get something positive out of it!
 
 My name is Rob and I initially created this site as an excuse to learn more about software and web technologies (I am an electrical engineer, and don’t have a deep skill set in either), while at the same time pursuing an interest in experimenting with interactive educational content.
