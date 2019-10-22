@@ -23,6 +23,12 @@ async function snapshot(fileName) {
   });
 }
 
+async function debugSnapshot(name, number) {
+  if (name) {
+    await snapshot(`${name}-${number}`);
+  }
+}
+
 async function getToken(prefix, oldMsgNumber) {
   await sleep(2000);
   let [msgNumber, body] = await getEmail();
@@ -61,22 +67,16 @@ async function getLatestMessage() {
 
 
 async function login(username, password, debug = '') {
-  if (debug) {
-    await snapshot(`${debug}-0`);
-  }
+  await debugSnapshot(debug, 0);
   await click('id_navbar_loginout');
-  if (debug) {
-    await snapshot(`${debug}-1`);
-  }
+  await debugSnapshot(debug, 1);
+
   await setFormInput('username_or_email', username);
   await setFormInput('password', password);
-  if (debug) {
-    await snapshot(`${debug}-2`);
-  }
+  await debugSnapshot(debug, 2);
+
   await click('submit');
-  if (debug) {
-    await snapshot(`${debug}-3`);
-  }
+  await debugSnapshot(debug, 3);
 }
 
 async function logout(debug = '') {
@@ -135,18 +135,48 @@ async function gotoAccountSettings(debug = '') {
 }
 
 
-async function createAccount(username, email, password) {
-  // await logout();
+async function createAccount(username, email, password, debug) {
+  await debugSnapshot(debug, 0);
+  await logout();
+  await debugSnapshot(debug, 1);
+
   await click('id_navbar_loginout');
+  await debugSnapshot(debug, 2);
+
   await click('login_form__create_account');
+  await debugSnapshot(debug, 3);
+
   await setFormInput('username', username);
   await setFormInput('email', email);
   await setFormInput('password', password);
   await setFormInput('repeat_password', password);
+  await debugSnapshot(debug, 4);
+
   const currentMsgNumber = await getLatestMessage();
   await click('submit');
+  await debugSnapshot(debug, 5);
+
   const token = await getToken('confirmAccount', currentMsgNumber);
   await page.goto(`${sitePath}/${token}`);
+  await debugSnapshot(debug, 6);
+}
+
+async function deleteAccount(username, password, debug) {
+  await debugSnapshot(debug, 0);
+  await logout();
+  await debugSnapshot(debug, 1);
+
+  await login(username, password);
+  await debugSnapshot(debug, 2);
+
+  await gotoAccountSettings();
+  await debugSnapshot(debug, 3);
+
+  await click('delete_form-submit');
+  await debugSnapshot(debug, 4);
+
+  await click('form-submit_delete');
+  await debugSnapshot(debug, 5);
 }
 
 module.exports = {
@@ -161,4 +191,5 @@ module.exports = {
   click,
   goHome,
   createAccount,
+  deleteAccount,
 };

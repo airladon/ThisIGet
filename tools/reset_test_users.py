@@ -23,6 +23,7 @@ def resetUser(username, email, password):
         return
     user.set_email(email)
     user.set_password(password)
+    user.confirmed = True
 
 
 for i in range(10):
