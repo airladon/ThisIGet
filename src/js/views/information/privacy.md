@@ -12,11 +12,12 @@ The topics in this policy are:
 * [How is data used?](#howused)
 * [How is data stored?](#howstored)
 * [Marketing](#marketing)
+* [Your rights in relation to the personal information we collect](#yourrights)
 * [Cookies](#cookies)
 * [Do not track](#donottrack)
 * [How long we retain your information](#howlong)
 * [Privacy policies of other websites](#otherwebsites)
-* [Changes to this Privacy Policy](#changes)
+* [Changes to this privacy policy](#changes)
 * [How to contact us](#contact)
 
 ## Why We Need to Collect and Process Data <a name="why"></a>
@@ -142,7 +143,7 @@ Should you notice any flaws or concerns in our security, please contact us at pr
 
 This I Get will not send you marketing emails.
 
-Your Rights in Relation to the Personal Information we Collect
+## Your Rights in Relation to the Personal Information we Collect <a name="yourrights">
 
 You have the right to access, correct, delete, restrict processing, and object to processing of your personal information. If you wish to (i) update, alter, delete or obtain a copy of your personal information that we hold; (ii) restrict or stop us from using any of the personal information which we hold on you, including by withdrawing any consent you have previously given to the processing of such information; or (iii) where any personal information has been processed on the basis of your consent or as necessary to perform a contract to which you are a party, request a copy of such personal information in a suitable format, you can request this by emailing us at the address set out at the end of this Privacy Policy. We endeavor to respond to such requests within a month or less, although we reserve the right to extend this period for complex requests.
 

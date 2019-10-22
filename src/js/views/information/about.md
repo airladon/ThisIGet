@@ -4,7 +4,7 @@
 
 Thank you for visiting this site, and I hope you get something positive out of it!
 
-My name is Rob and I initially created this site as an excuse to learn more about software and web technologies (I am an electrical engineer, and don’t have a deep skill set in either), while at the same time pursuing an interest in experimenting with interactive educational content.
+My name is Rob and I initially created this site as an excuse to learn more about software and web technologies, while at the same time pursuing an interest in experimenting with interactive educational content.
 
 During its development, I started to believe that making a concept available in a number of different versions might be useful. Often when learning something new, I have to read or watch the same concept from several different sources to make me comfortable with it. Therefore, making different versions of the same concept available to a user may be more convenient for them as well.
 

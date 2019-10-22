@@ -18,7 +18,7 @@ Single page content (such as [this](/content/Math/Geometry_1/RightAngleTriangles
 
 ### Interactive Presentation Content
 
-Interactive presentation style content (such as [this](/content/Math/Geometry_1/Triangles/explanation/base?page=2) for example) does require the Javascript programming language. Therefore, it is useful to have some programming experinceg, even if it's in a different language. 
+Interactive presentation style content (such as [this](/content/Math/Geometry_1/Triangles/explanation/base?page=2) for example) does require the Javascript programming language. Therefore, it is useful to have some programming experince, even if it's in a different language. 
 
 ### Creation Process
 
