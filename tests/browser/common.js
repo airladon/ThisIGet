@@ -110,28 +110,20 @@ async function logout(debug = '') {
 }
 
 
-async function gotoAccountSettings(debug = '') {
-  if (debug) {
-    await snapshot(`${debug}-0`);
-  }
+async function gotoAccountSettings(debug = '', index = 1) {
+  await debugSnapshot(debug, index + 0);
   await Promise.all([
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
   ]);
-  if (debug) {
-    await snapshot(`${debug}-1`);
-  }
+  await debugSnapshot(debug, index + 1);
+
   const hints = await page.$$('.dropdown_button_list_item_link');
-  if (debug) {
-    await snapshot(`${debug}-2`);
-  }
   await Promise.all([
     page.waitForNavigation(),
     hints[0].click(),
   ]);
-  if (debug) {
-    await snapshot(`${debug}-3`);
-  }
+  await debugSnapshot(debug, index + 2);
 }
 
 
