@@ -194,19 +194,19 @@ def about():
     return information_response('about')
 
 # Uncomment for Privacy
-# @app.route('/copyright', strict_slashes=False)
-# def copyright():
-#     return information_response('copyright')
+@app.route('/copyright', strict_slashes=False)
+def copyright():
+    return information_response('copyright')
 
 # Uncomment for Privacy
-# @app.route('/privacy', strict_slashes=False)
-# def privacy():
-#     return information_response('privacy')
+@app.route('/privacy', strict_slashes=False)
+def privacy():
+    return information_response('privacy')
 
 # Uncomment for Privacy
-# @app.route('/terms', strict_slashes=False)
-# def terms():
-#     return information_response('terms')
+@app.route('/terms', strict_slashes=False)
+def terms():
+    return information_response('terms')
 
 
 # @app.route('/disclaimer', strict_slashes=False)
@@ -555,7 +555,8 @@ def create():
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
     return render_template(
-        'createAccount.html', form=form, css=css, js=js, tools_js=tools_js)
+        'createAccountwithTerms.html',
+        form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/confirmAccountEmailSent/<username>', methods=['GET', 'POST'])

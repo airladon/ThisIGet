@@ -84,6 +84,14 @@ h3 {
   font-weight: 600;
 }
 
+h4 {
+  margin-top: 0;
+  // font-size: 1em;
+  // font-weith: 
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
 // h2:first-of-type {
 //   margin-top: 0.5em;
 // }
@@ -117,6 +125,37 @@ h3 {
 
 .information_text_container blockquote h3:first-of-type {
   margin-top: 0;
+}
+
+ol {
+  counter-reset: list;
+}
+
+ol > li {
+  list-style: none;
+  position: relative;
+}
+
+ol > li::before {
+  counter-increment: list;
+  content: counter(list, lower-alpha) ") ";
+  position: absolute;
+  left: -1.4em;
+}
+
+ol li {
+  margin-left: 0;
+  padding-left: 1em;
+}
+
+@media screen and (max-width: 400px) {
+  ol {
+    padding: 1.4em;
+  }
+
+  ol li {
+    padding-left: 0.2em;
+  }
 }
 
 .information_text_container blockquote li {

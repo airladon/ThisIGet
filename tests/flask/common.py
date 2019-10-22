@@ -19,8 +19,8 @@ def create_account(
         username=username,
         email=email,
         password=password,
-        # terms=True,               # Uncomment for privacy
-        # privacy=True,             # Uncomment for privacy
+        terms=True,               # Uncomment for privacy
+        privacy=True,             # Uncomment for privacy
         repeat_password=repeat_password), follow_redirects=follow_redirects)
 
 
