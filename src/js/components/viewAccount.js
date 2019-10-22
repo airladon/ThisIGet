@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import HomeBanner from './homeBanner';
 
 type Props = {
   isLoggedIn: boolean;

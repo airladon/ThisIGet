@@ -99,7 +99,7 @@ const withLoginManager = function loginManager(
           <NavbarSpacer/>
         </div>);
       }
-      let wrappedComponentToUse = <div></div>
+      let wrappedComponentToUse = <div></div>;
       if (WrappedComponent != null) {
         wrappedComponentToUse = <WrappedComponent
             {...this.props}
