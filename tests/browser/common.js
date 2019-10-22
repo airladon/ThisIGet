@@ -61,46 +61,70 @@ async function getLatestMessage() {
 
 async function login(username, password, debug = '') {
   if (debug) {
-    snapshot(`${debug}-0`);
+    await snapshot(`${debug}-0`);
   }
   await click('id_navbar_loginout');
   if (debug) {
-    snapshot(`${debug}-1`);
+    await snapshot(`${debug}-1`);
   }
   await setFormInput('username_or_email', username);
   await setFormInput('password', password);
   if (debug) {
-    snapshot(`${debug}-2`);
+    await snapshot(`${debug}-2`);
   }
   await click('submit');
   if (debug) {
-    snapshot(`${debug}-3`);
+    await snapshot(`${debug}-3`);
   }
 }
 
-async function logout() {
+async function logout(debug = '') {
+  if (debug) {
+    await snapshot(`${debug}-0`);
+  }
   await Promise.all([
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
   ]);
+  if (debug) {
+    await snapshot(`${debug}-1`);
+  }
   const hints = await page.$$('.dropdown_button_list_item_link');
+  if (debug) {
+    await snapshot(`${debug}-2`);
+  }
   await Promise.all([
     page.waitForNavigation(),
     hints[1].click(),
   ]);
+  if (debug) {
+    await snapshot(`${debug}-3`);
+  }
 }
 
 
-async function gotoAccountSettings() {
+async function gotoAccountSettings(debug = '') {
+  if (debug) {
+    await snapshot(`${debug}-0`);
+  }
   await Promise.all([
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
   ]);
+  if (debug) {
+    await snapshot(`${debug}-1`);
+  }
   const hints = await page.$$('.dropdown_button_list_item_link');
+  if (debug) {
+    await snapshot(`${debug}-2`);
+  }
   await Promise.all([
     page.waitForNavigation(),
     hints[0].click(),
   ]);
+  if (debug) {
+    await snapshot(`${debug}-3`);
+  }
 }
 
 

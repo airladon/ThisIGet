@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   login, gotoAccountSettings, snapshot, logout, getToken,
-  getLatestMessage, setFormInput, click, goHome, createAccount,
+  getLatestMessage, setFormInput, click, goHome, createAccount, sleep,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -29,7 +29,7 @@ describe('Account Settings Flow', () => {
     await logout();
   });
 
-  test.only('Delete', async () => {
+  test('Delete', async () => {
     jest.setTimeout(20000);
     await goHome(500, 2000);
     await login(username, password);
@@ -84,7 +84,7 @@ describe('Account Settings Flow', () => {
     await logout();
   });
 
-  test('Change Username', async () => {
+  test.only('Change Username', async () => {
     jest.setTimeout(10000);
     await goHome(500, 2000);
     await login(username, password);
@@ -93,7 +93,13 @@ describe('Account Settings Flow', () => {
 
     await setFormInput('username_form-username', username2);
     await snapshot('account-settings-username-flow-1a');
-    await click('username_form-submit_username');
+
+    console.log(1)
+    await Promise.all([
+      page.waitForNavigation(),
+      page.click('#username_form-submit_username'),
+    ]);
+    console.log(2)
     await snapshot('account-settings-username-flow-2');
 
     await logout();
@@ -130,4 +136,25 @@ describe('Account Settings Flow', () => {
     await snapshot('account-settings-password-flow-4');
     await logout();
   });
+
+  test('Error Messages', async () => {
+    jest.setTimeout(20000);
+    await goHome(500, 2000);
+    await login(username, password);
+    await gotoAccountSettings();
+    await snapshot('account-settings-errors-flow-1');
+
+    await setFormInput('username_form-username', 'test_user_001');
+    await click('username_form-submit_username');
+    await snapshot('account-settings-errors-flow-2');
+
+    await setFormInput('email_form-email', 'test_user_001@thisiget.com');
+    await click('email_form-submit_email');
+    await snapshot('account-settings-errors-flow-3');
+
+    await setFormInput('password_form-password', 'asdfasdf');
+    await setFormInput('password_form-repeat_password', 'asdfasdf1');
+    await click('password_form-submit_password');
+    await snapshot('account-settings-password-flow-4');
+  })
 });
