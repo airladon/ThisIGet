@@ -23,18 +23,18 @@ singlePageTester({
   prefix: 'information-about-',
   endpoint: 'about',
 },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'privacy-',
-//   endpoint: 'privacy',
-// },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'terms-',
-//   endpoint: 'terms',
-// },
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-privacy-',
+  endpoint: 'privacy',
+},
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-terms-',
+  endpoint: 'terms',
+},
 {
   width: 700,
   element: 'main',
@@ -47,12 +47,12 @@ singlePageTester({
   prefix: 'information-introduction-',
   endpoint: 'introduction',
 },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'copyright-',
-//   endpoint: 'copyright',
-// },
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-copyright-',
+  endpoint: 'copyright',
+},
 {
   width: 700,
   element: 'body',
