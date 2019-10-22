@@ -555,7 +555,7 @@ def create():
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
     return render_template(
-        'createAccountwithTerms.html',
+        'createAccount.html',
         form=form, css=css, js=js, tools_js=tools_js)
 
 
