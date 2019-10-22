@@ -18,6 +18,7 @@ describe('Account Settings Open', () => {
   test ('Open', async () => {
     jest.setTimeout(20000);
     await goHome(500, 1400);
+    await sleep(500);
     await snapshot('account-settings-open-1');
 
     await login(username, password);
