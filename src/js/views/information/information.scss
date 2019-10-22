@@ -52,32 +52,44 @@ h1 {
   padding-top: 1em;
 }
 
+// h2 {
+//   margin-top: 2em;
+//   margin-bottom: 0.7em;
+//   font-weight: 300;
+//   font-size: 1.5em;
+//   text-align: center;
+//   padding: 1em;
+//   background: color('white', 'lightest');
+//   width: calc(100% + 2.5em);
+//   transform: translate(-1.25em, 0);
+//   max-width: calc(1100px + 2.5em);
+// }
+
 h2 {
   margin-top: 2em;
-  margin-bottom: 0.7em;
+  margin-bottom: 0.5em;
   font-weight: 300;
-  font-size: 1.5em;
-  text-align: center;
-  padding: 1em;
-  background: color('white', 'lightest');
-  width: calc(100% + 2.5em);
-  transform: translate(-1.25em, 0);
+  padding-top: 0.3em;
+  padding-bottom: 0;
+  font-size: 1.8em;
+  border-bottom: 1px solid #aaa;
+  width: calc(100%);
   max-width: calc(1100px + 2.5em);
 }
 
-@media screen and (max-width: 1100px) {
-  h2 {
-    width: calc(100% + 3.4em);
-    transform: translate(-1.7em, 0);
-  }
-}
+// @media screen and (max-width: 1100px) {
+//   h2 {
+//     // width: calc(100% + 3.4em);
+//     // transform: translate(-1.7em, 0);
+//   }
+// }
 
-@media screen and (max-width: 700px) {
-  h2 {
-    width: calc(100% + 3em);
-    transform: translate(-1.5em, 0);
-  }
-}
+// @media screen and (max-width: 700px) {
+//   h2 {
+//     // width: calc(100% + 3em);
+//     // transform: translate(-1.5em, 0);
+//   }
+// }
 
 h3 {
   margin-top: 1.5em;

@@ -1,7 +1,7 @@
 // @flow
 
 import page from './information';
-import './information.scss';
+import './introduction.scss';
 import content from './introduction.md';
 
 page(content);
