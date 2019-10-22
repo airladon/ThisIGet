@@ -1,5 +1,5 @@
 # This I Get - Terms Of Use
-<html><div class=information__subtitle>Last updated October 18, 2019</div></html>
+<html><div class=information__subtitle>Last updated October 22, 2019</div></html>
 
 Welcome to www.thisiget.com.  We hope you find the website useful!
 
@@ -76,7 +76,7 @@ Provided that you are eligible to use the Website, you are granted a limited lic
 
 ## Privacy
 
-This I Get takes your privacy very seriously and collects as little information as is needed to maintain the Service. Please review the Privacy Policy in detail to understand This I Get’s data and privacy practices. By using the Website, you agree to be bound by our Privacy Policy, which is incorporated into these Terms. Please be advised the Website is hosted in the United States.
+This I Get takes your privacy very seriously and collects as little information as is needed to maintain the Service. Please review the [Privacy Policy](/privacy) in detail to understand This I Get’s data and privacy practices. By using the Website, you agree to be bound by our [Privacy Policy](/privacy), which is incorporated into these Terms. Please be advised the Website is hosted in the United States.
 
 If you access the Website from the European Union, Asia, or any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Website, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States. 
 
@@ -87,7 +87,7 @@ Further, we do not knowingly accept, request, or solicit information from childr
 
 The Website may invite you to chat, contribute to, or participate in blogs, message boards, online forums, and other functionality, and may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Website, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material. The Website allows users to review the Content, create accounts to rate the Content, and view the aggregated statistics of the ratings. Users can also submit or update information by contacting This I Get directly, or contributing to the Website’s source code repository. The act of contributing content for the Website is referred to as the “Contribution” in these Terms.
 
-Contributions may be viewable by other users of the Website and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary If you submit or modify Contributions you agree to the following terms:
+Contributions may be viewable by other users of the Website and through third-party websites. As such, any Contributions you transmit may be treated as non-confidential and non-proprietary. If you submit or modify Contributions you agree to the following terms:
 
 <ol type="a">
 <li>if authored by you, or if you have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, you agree to license the Contributions under the CC BY-SA 4.0 license indefinitely and no matter whether you continue to use the service or not;</li>
@@ -190,7 +190,7 @@ You agree that these Terms will not be construed against us by virtue of having 
 
 ## Changes to this Terms of Use
 
-This I Get keeps this Terms of Use under regular review and places any updates on this web page. Every time you visit this Website, you agree to the version of the Terms of Use that is posted here. This Terms of Use was Last Updated on October 18 2019. 
+This I Get keeps this Terms of Use under regular review and places any updates on this web page. Every time you visit this Website, you agree to the version of the Terms of Use that is posted here. This Terms of Use was Last Updated on October 22 2019. 
 
 ## Contact Information
 
