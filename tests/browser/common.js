@@ -83,6 +83,12 @@ async function logout(debug = '') {
   if (debug) {
     await snapshot(`${debug}-0`);
   }
+  // First check it we can log out
+  const button = await page.$('#id_navbar_loginout');
+  const className = await ((await button.getProperty('className')).jsonValue());
+  if (className !== 'dropdown_button_container') {
+    return;
+  }
   await Promise.all([
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
