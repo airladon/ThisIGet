@@ -174,14 +174,13 @@ $width: 250px;
 .input_form__submit_ok_message_container {
   text-align: left;
   font-size: 0.9em;
-  color: var(--color-site-text);
+  // color: var(--color-site-text);
   bottom: -20px;
   width: $width;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-      /* text-align: left; */
   // font-size: 0.8em;
   color: var(--color-site-safe);
   // width: 250px;
