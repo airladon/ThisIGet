@@ -137,5 +137,36 @@ describe('Account Settings Flow', () => {
     await setFormInput('password_form-repeat_password', 'asdfasdf1');
     await click('password_form-submit_password');
     await snapshot('account-settings-errors-flow-4');
-  })
+  });
+});
+
+describe('Account Settings Flow - Wide Screen', () => {
+  beforeEach(async () => {
+    await goHome(1000, 2000);
+    await logout();
+    await login(username, password);
+    await gotoAccountSettings();
+  });
+  afterEach(async () => {
+    await logout();
+  });
+  test('Change Password', async () => {
+    jest.setTimeout(10000);
+    await snapshot('account-settings-password-wide-1');
+
+    await setFormInput('password_form-password', 'asdfasdf');
+    await setFormInput('password_form-repeat_password', 'asdfasdf1');
+    await click('password_form-submit_password');
+    await snapshot('account-settings-password-wide-2');
+
+    await setFormInput('password_form-password', 'asdfasdf');
+    await setFormInput('password_form-repeat_password', 'asdfasdf');
+    await click('password_form-submit_password');
+    await snapshot('account-settings-password-wide-3');
+
+    await setFormInput('password_form-password', password);
+    await setFormInput('password_form-repeat_password', password);
+    await click('password_form-submit_password');
+    await snapshot('account-settings-password-wide-4');
+  });
 });
