@@ -629,6 +629,18 @@ const themes = {
           background: ['white', 'light'],
         },
       },
+      negative: {
+        base: {
+          text: ['white', 'lighter'],
+          border: ['black', 'lighter'],
+          background: ['black', 'lighter'],
+        },
+        hover: {
+          text: ['white', 'lighter'],
+          border: ['black', 'light'],
+          background: ['black', 'light'],
+        },
+      },
       select: {
         base: {
           text: ['white'],
@@ -652,6 +664,11 @@ const themes = {
           border: ['green', 'darker'],
           background: ['green', 'darker'],
         },
+      },
+      disabled: {
+        text: ['white', 'darker'],
+        background: ['white'],
+        border: ['white', 'lighter'],
       },
     },
     lp: {
@@ -725,17 +742,6 @@ const themes = {
         background: ['white', 'base'],
         text: ['white', 'darkest'],
       },
-      // background: {
-      //   base: ['white', 'base'],
-      //   hover: ['white', 'lightest'],
-      //   select: ['logo', 'base'],
-      //   selectHover: ['logo', 'light'],
-      // },
-      // text: {
-      //   base: ['black', 'lighter'],
-      //   disabled: ['black', 'lightest'],
-      //   select: ['white'],
-      // },
       separator: ['white', 'dark'],
       border: ['white', 'dark'],
     },
@@ -851,6 +857,15 @@ class Colors {
       this.setCssVar('button', 'highlight', 'hover', 'text');
       this.setCssVar('button', 'highlight', 'hover', 'background');
       this.setCssVar('button', 'highlight', 'hover', 'border');
+      this.setCssVar('button', 'disabled', 'text');
+      this.setCssVar('button', 'disabled', 'background');
+      this.setCssVar('button', 'disabled', 'border');
+      this.setCssVar('button', 'negative', 'base', 'text');
+      this.setCssVar('button', 'negative', 'base', 'background');
+      this.setCssVar('button', 'negative', 'base', 'border');
+      this.setCssVar('button', 'negative', 'hover', 'text');
+      this.setCssVar('button', 'negative', 'hover', 'background');
+      this.setCssVar('button', 'negative', 'hover', 'border');
 
       this.setCssVar('lp', 'container', 'background');
       this.setCssVar('lp', 'container', 'border');
