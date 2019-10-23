@@ -541,6 +541,7 @@ const themes = {
       construction9: ['red', 'base'],
       disabled: {
         base: ['black', 'light'],
+        lighter: ['black', 'lighter'],
         dark: ['grey', 'dark'],
         darker: ['grey', 'darker'],
         darkest: ['grey', 'darkest'],
@@ -602,7 +603,15 @@ const themes = {
       text: ['grey', 'darkest'],
       border: ['white', 'light'],
       shaddow: ['white', 'darkest'],
-      subheading: ['grey', 'darker'],
+      // subheading: ['grey', 'darker'],
+      title: {
+        text: ['grey', 'darkest'],
+        background: ['offWhite'],
+      },
+      subtitle: {
+        text: ['grey', 'darker'],
+        background: ['white'],
+      },
     },
     site: {
       primary: {
@@ -846,7 +855,10 @@ class Colors {
       this.setCssVar('topic', 'text');
       this.setCssVar('topic', 'border');
       this.setCssVar('topic', 'shaddow');
-      this.setCssVar('topic', 'subheading');
+      this.setCssVar('topic', 'title', 'text');
+      this.setCssVar('topic', 'title', 'background');
+      this.setCssVar('topic', 'subtitle', 'text');
+      this.setCssVar('topic', 'subtitle', 'background');
 
       this.get('diagram', 'background').toCssVar('--color-diagram-background');
       this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');
@@ -864,6 +876,9 @@ class Colors {
       this.setCssVar('diagram', 'text', 'oldFrench');
       this.setCssVar('diagram', 'text', 'greek');
       this.setCssVar('diagram', 'text', 'english');
+      this.setCssVar('diagram', 'text', 'definition');
+      this.setCssVar('diagram', 'text', 'note');
+      this.setCssVar('diagram', 'text', 'heading');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
