@@ -19,17 +19,17 @@
 }
 
 .topic_button .dropdown_button_list_item_separator {
-  background-color: var(--color-site-fill);
-  color: var(--color-site-button-text);
-  border-bottom: 1px solid var(--color-site-button-border);
-  border-top: 1px solid var(--color-site-button-border);
+  background-color: var(--color-menu-background);
+  color: var(--color-menu-text-disabled);
+  border-bottom: 1px solid var(--color-menu-separator);
+  border-top: 1px solid var(--color-menu-separator);
   min-height: 1em;
 }
 
 .topic_button .dropdown_button_list_item:first-child {
-  color: var(--color-site-button-text);
-  background-color: var(--color-site-fill);
-  border-bottom: 1px solid var(--color-site-button-border);
+  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-background);
+  border-bottom: 1px solid var(--color-menu-separator);
   min-height: 1em;
 }
 
