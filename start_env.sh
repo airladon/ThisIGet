@@ -136,10 +136,12 @@ then
   then
     DOCKER_GROUP_ID=`grep -e '^docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
   fi
+
   if [ -z "$DOCKER_GROUP_ID" ];
   then
     DOCKER_GROUP_ID=`ls -n /var/run/docker.sock | sed "s/[^ ]* *[^ ]* *\([^ ]*\).*/\1/"`
   fi
+  
   HOST_USER_GROUP_ID=`id -g`
   HOST_USER_ID=`id -u`
 
