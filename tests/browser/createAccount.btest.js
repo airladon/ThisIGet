@@ -22,9 +22,11 @@ describe('Create Account', () => {
     await logout();
   });
 
-  test('Create Account', async () => {
-    jest.setTimeout(30000);
+  test.only('Create Account', async () => {
+    jest.setTimeout(20000);
+    console.log('a')
     await deleteAccount(username, password);
+    console.log('b')
     await createAccount(username, `${username}@thisiget.com`, password, 'create-account');
     await setFormInput('password', password);
     await snapshot('create-account-7');
