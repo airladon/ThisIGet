@@ -1,6 +1,5 @@
 
 .navbar-container {
-  // background-color: color('navbar', 'background');
   background-color: var(--color-navbar-background);
   height: 50px;
   padding-top: 10px;
@@ -26,20 +25,17 @@
   padding-top: 0.25rem;
   padding-left: 0;
   margin-left: 2em;
-  // color: color('navbar', 'text');
   color: var(--color-navbar-text);
   font-size: 14px;
   position: relative;
 }
 
 .navbar-text a {
-  // color: color('navbar', 'text');
   color: var(--color-navbar-text);
   text-decoration: none;
 }
 
 .navbar-text a:hover {
-  // color: color('navbar', 'text', 'lightest');
   color: var(--color-navbar-text-hover);
   text-decoration: none;
 }
@@ -51,10 +47,7 @@
 
 // .navbar-input {
 //   display: inline-block;
-//   color: color('navbar', 'text-input');
 //   font-size: 14px;
-//   background-color: color('navbar', 'background');
-//   border: 1px solid color('navbar', 'background', 'dark');
 //   padding-left: 5px;
 //   margin-left: 0;
 //   padding-top: 3px;
@@ -63,7 +56,6 @@
 // }
 
 // .navbar-input::placeholder {
-//   color: color('navbar', 'background', 'base');
 //   padding-left: 0;
 //   margin-left: 0;
 //   opacity: 1; /* Firefox */
@@ -71,27 +63,23 @@
 // }
 
 // .navbar-input::-ms-input-placeholder { /* Microsoft Edge */
-//   color: color('navbar', 'background', 'base');
 //   padding-left: 0;
 //   margin-left: 0;
 //   font-weight: 200;
 // }
 
 // .navbar-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-//   color: color('navbar', 'background', 'base');
 //   padding-left: 0;
 //   margin-left: 0;
 //   font-weight: 200;
 // }
 
 // .navbar-input:focus {
-//   border: 1px solid color('navbar', 'background', 'light');
 //   // border: none;
 //   outline: none;
 // }
 
 .navbar-text:hover {
-  // color: color('navbar', 'text-hover');
   color: var(--color-navbar-text-hover);
 }
 
@@ -176,11 +164,6 @@
 // // Styles for switching between navbars with light or dark background.
 
 // // Dark links against a light background
-// $navbar-color:                 color('navbar', 'base');
-// $navbar-hover-color:           color('navbar', 'hover');
-// $navbar-active-color:          color('navbar', 'active');
-// $navbar-disabled-color:        color('navbar', 'disabled');
-// $navbar-toggler-border-color:  color('navbar', 'toggler-border');
 
 // // .navbar-default {
 // //   background-color: #F00;
@@ -188,7 +171,6 @@
 // // }
 
 // .navbar-color {
-//   background-color: color('navbar', 'background');
 
 //   .navbar-brand {
 //     color: $navbar-active-color;

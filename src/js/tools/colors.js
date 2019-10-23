@@ -539,10 +539,12 @@ const themes = {
       construction7: ['cyan', 'base'],
       construction8: ['green', 'base'],
       construction9: ['red', 'base'],
-      disabled: ['black', 'light'],
-      disabledDark: ['grey', 'dark'],
-      disabledDarker: ['grey', 'darker'],
-      disabledDarkest: ['grey', 'darkest'],
+      disabled: {
+        base: ['black', 'light'],
+        dark: ['grey', 'dark'],
+        darker: ['grey', 'darker'],
+        darkest: ['grey', 'darkest'],
+      },
       push: ['red', 'base'],
       action: ['cyan', 'base'],
       text: {
@@ -599,6 +601,7 @@ const themes = {
       background: ['white'],
       text: ['grey', 'darkest'],
       border: ['white', 'light'],
+      shaddow: ['white', 'darkest'],
     },
     site: {
       primary: ['logo', 'base'],
@@ -833,11 +836,16 @@ class Colors {
       this.setCssVar('topic', 'background');
       this.setCssVar('topic', 'text');
       this.setCssVar('topic', 'border');
+      this.setCssVar('topic', 'shaddow');
 
       this.get('diagram', 'background').toCssVar('--color-diagram-background');
       this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');
       this.get('diagram', 'equation', 'border')
         .toCssVar('--color-diagram-equation-border');
+      this.setCssVar('diagram', 'disabled', 'base');
+      this.setCssVar('diagram', 'disabled', 'dark');
+      this.setCssVar('diagram', 'disabled', 'darker');
+      this.setCssVar('diagram', 'disabled', 'darkest');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
