@@ -652,8 +652,8 @@ const themes = {
         },
         hover: {
           text: ['white'],
-          border: ['logo', 'light'],
-          background: ['logo', 'light'],
+          border: ['logo', 'base'],
+          background: ['logo', 'base'],
         },
       },
       highlight: {
