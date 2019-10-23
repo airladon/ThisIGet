@@ -632,6 +632,28 @@ const themes = {
         border: ['white', 'light'],
       },
     },
+    learningPath: {
+      container: {
+        background: ['white'],
+        border: ['white', 'lighter'],
+      },
+      tile: {
+        background: {
+          base: ['white', 'lighter'],
+          hover: ['white', 'light'],
+          select: ['logo', 'base'],
+          selectHover: ['logo', 'light'],
+          disabled: ['white'],
+        },
+        text: {
+          base: ['black', 'lighter'],
+          select: ['white'],
+        },
+        border: {
+          disabled: ['white', 'light'],
+        },
+      },
+    },
     navbar: {
       // text: ['white', 'lighter'],
       text: {
@@ -713,10 +735,12 @@ class Colors {
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
 
       // Buttons
-      this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
+      this.get('site', 'button', 'text')
+        .toCssVar('--color-site-button-text');
       this.get('site', 'button', 'hoverBackground')
         .toCssVar('--color-site-button-hover-background');
-      this.get('site', 'button', 'border').toCssVar('--color-site-button-border');
+      this.get('site', 'button', 'border')
+        .toCssVar('--color-site-button-border');
       this.get('site', 'button', 'highlight', 'text')
         .toCssVar('--color-site-button-highlight-text');
       this.get('site', 'button', 'highlight', 'background')
@@ -730,15 +754,6 @@ class Colors {
         .toCssVar('--color-site-color-button-background');
       this.get('site', 'colorButton', 'hoverBackground')
         .toCssVar('--color-site-color-button-hover-background');
-
-      // Menus
-      // this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
-      // this.get('site', 'menus', 'textHover')
-      //   .toCssVar('--color-site-menus-text-hover');
-      // this.get('site', 'menus', 'background')
-      //   .toCssVar('--color-site-menus-background');
-      // this.get('site', 'menus', 'border')
-      //   .toCssVar('--color-site-menus-border');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
@@ -754,6 +769,27 @@ class Colors {
       this.get('menu', 'background', 'select').toCssVar('--color-menu-background-select');
       this.get('menu', 'background', 'selectHover').toCssVar('--color-menu-background-select-hover');
       this.get('menu', 'separator').toCssVar('--color-menu-separator');
+
+      this.get('learningPath', 'container', 'border')
+        .toCssVar('--color-lp-container-border');
+      this.get('learningPath', 'container', 'background')
+        .toCssVar('--color-lp-container-background');
+      this.get('learningPath', 'tile', 'text', 'base')
+        .toCssVar('--color-lp-tile-text');
+      this.get('learningPath', 'tile', 'text', 'select')
+        .toCssVar('--color-lp-tile-text-select');
+      this.get('learningPath', 'tile', 'background', 'base')
+        .toCssVar('--color-lp-tile-background');
+      this.get('learningPath', 'tile', 'background', 'hover')
+        .toCssVar('--color-lp-tile-background-hover');
+      this.get('learningPath', 'tile', 'background', 'select')
+        .toCssVar('--color-lp-tile-background-select');
+      this.get('learningPath', 'tile', 'background', 'selectHover')
+        .toCssVar('--color-lp-tile-background-select-hover');
+      this.get('learningPath', 'tile', 'background', 'disabled')
+        .toCssVar('--color-lp-tile-background-disabled');
+      this.get('learningPath', 'tile', 'border', 'disabled')
+        .toCssVar('--color-lp-tile-border-disabled');
     }
     return Colors.instance;
   }
