@@ -1,14 +1,13 @@
 .rating__container {
   text-align: center;
-  // color: color('grey', 'base');
-  color: color('black', 'lighter');
+  color: var(--color-topic-subheading);
   font-weight: 100;
   padding-bottom: 1em;
   font-size: 0.9em;
   padding-left: 0.5em;
   padding-right: 0.5em;
   // padding-top: 0.5em;
-  background: color('white', 'base');
+  background: var(--color-topic-background);
 }
 
 .approach__links_table__your_rating .rating__container {
@@ -22,7 +21,6 @@
 
 .rating__stars {
   display: inline-block;
-  color: color('grey', 'lighter');
   position: relative;
 }
 
@@ -68,8 +66,7 @@
 }
 
 .rating__login {
-  // color: color('site', 'primary');
-  color: color('site', 'primaryDark');
+  color: var(--color-site-primary-dark);
 }
 
 .rating__login:hover {

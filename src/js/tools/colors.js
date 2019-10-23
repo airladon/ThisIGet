@@ -602,10 +602,13 @@ const themes = {
       text: ['grey', 'darkest'],
       border: ['white', 'light'],
       shaddow: ['white', 'darkest'],
+      subheading: ['grey', 'darker'],
     },
     site: {
-      primary: ['logo', 'base'],
-      primaryDark: ['logoDark', 'base'],
+      primary: {
+        base: ['logo', 'base'],
+        dark: ['logoDark', 'base'],
+      },
       logoText: ['white', 'base'],
       warning: ['red', 'dark'],
       secondary: ['blue', 'light'],
@@ -799,11 +802,13 @@ class Colors {
       this.get('site', 'text').toCssVar('--color-site-text');
       this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
-      this.get('site', 'primary').toCssVar('--color-site-primary');
-      this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
+      // this.get('site', 'primary').toCssVar('--color-site-primary');
+      // this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
       this.get('site', 'warning').toCssVar('--color-site-warning');
       this.get('site', 'safe').toCssVar('--color-site-safe');
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
+      this.setCssVar('site', 'primary', 'base');
+      this.setCssVar('site', 'primary', 'dark');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
@@ -837,6 +842,7 @@ class Colors {
       this.setCssVar('topic', 'text');
       this.setCssVar('topic', 'border');
       this.setCssVar('topic', 'shaddow');
+      this.setCssVar('topic', 'subheading');
 
       this.get('diagram', 'background').toCssVar('--color-diagram-background');
       this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');
