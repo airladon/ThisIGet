@@ -621,6 +621,9 @@ const themes = {
       table: {
         border: ['white', 'light'],
       },
+      input: {
+        border: ['black', 'lightest'],
+      },
     },
     button: {
       base: {
@@ -809,6 +812,7 @@ class Colors {
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
       this.setCssVar('site', 'primary', 'base');
       this.setCssVar('site', 'primary', 'dark');
+      this.setCssVar('site', 'input', 'border');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
