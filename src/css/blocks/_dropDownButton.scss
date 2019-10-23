@@ -6,20 +6,20 @@ $button_size: 0.4em;
   height: 100%;
   display: table;
   border-radius: $radius;
-  color: var(--color-site-button-text);
+  color: var(--color-button-text);
 }
 
 .dropdown_button_container:hover {
-  background-color: var(--color-site-button-hover-background);
+  background-color: var(--color-button-hover-background);
 }
 
 .dropdown_button_selected {
-  background-color: var(--color-site-button-highlight-background);
-  color: var(--color-site-button-highlight-text);
+  background-color: var(--color-button-select-background);
+  color: var(--color-button-select-text);
 }
 
 .dropdown_button_selected:hover {
-  background-color: var(--color-site-button-highlight-hover-background);
+  background-color: var(--color-button-select-hover-background);
 }
 
 .dropdown_button_label_container {

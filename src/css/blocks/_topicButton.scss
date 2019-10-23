@@ -98,16 +98,16 @@
   vertical-align: middle;
   display: table-cell;
   text-decoration: none;
-  color: var(--color-site-button-text);
+  color: var(--color-button-text);
 }
 
 .topic_button__single_item_label:hover {
   text-decoration: none;
-  color: var(--color-site-button-text);
+  color: var(--color-button-text);
 }
 
 .dropdown_button_selected .topic_button__single_item_label {
-  color: white;
+  color: var(--color-button-select-text);
 }
 
 .topic_button__type {

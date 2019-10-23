@@ -156,19 +156,20 @@ $width: 250px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  background-color: var(--color-site-color-button-background);
-  color: var(--color-site-color-button-text);
+  background-color: var(--color-button-highlight-background);
+  color: var(--color-button-highlight-text);
   font-size: 0.9em;
   // border: 0;
   height: 2.3em;
   width: 150px;
   max-width: calc(100vw - 2em);
   border-radius: 5px;
-  // border: 1px solid var(--color-site-button-border);
+  border: 1px solid var(--color-button-highlight-border);
 }
 
 .input_form__submit_button:hover {
-  background-color: var(--color-site-color-button-hover-background);
+  background-color: var(--color-button-highlight-hover-background);
+  border: 1px solid var(--color-button-highlight-hover-border);
 }
 
 .input_form__submit_ok_message_container {

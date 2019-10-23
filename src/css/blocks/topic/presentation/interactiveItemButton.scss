@@ -5,12 +5,12 @@
 }
 
 #id_topic__interactive_element_button {
-  color: color('presentation', 'text');
+  color: var(--color-button-text);
+  background-color: var(--color-button-background);
   width: var(--pres__button_height);
   height: var(--pres__button_height);
   position: absolute;
-  // border: 1px solid color('presentation', 'hover');
-  border: solid 1px color('white', 'darker');
+  border: solid 1px var(--color-button-border);
   border-radius: calc(var(--pres__button_height) / 2);
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -25,9 +25,9 @@
 }
 
 #id_topic__interactive_element_button:hover {
-  // background-color: color('presentation', 'hoverBackground');
-  background-color: color('white', 'lighter');
-  // border: 1px solid color('presentation', 'hover');
+  color: var(--color-button-hover-text);
+  background-color: var(--color-button-hover-background);
+  border: solid 1px var(--color-button-hover-border);
   cursor: pointer;
 }
 
