@@ -142,9 +142,7 @@ async function createAccount(username, email, password, debug) {
   await setFormInput('email', email);
   await setFormInput('password', password);
   await setFormInput('repeat_password', password);
-  console.log(1)
   await page.$eval('#terms', elem => elem.click());
-  console.log(2)
   await debugSnapshot(debug, 4);
 
   const currentMsgNumber = await getLatestMessage();

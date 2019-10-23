@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
-  snapshot, logout, getLatestMessage, getToken,
+  snapshot, logout, getLatestMessage, getToken, sleep,
   setFormInput, click, goHome, gotoAccountSettings,
 } from './common';
 
@@ -16,6 +16,7 @@ describe('Reset Password', () => {
   test('Reset Password', async () => {
     jest.setTimeout(30000);
     await goHome(500, 1200);
+    await sleep(500);
     await logout();
     await snapshot('reset-password-01');
 

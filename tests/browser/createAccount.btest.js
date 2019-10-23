@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   snapshot, logout,
-  setFormInput, click, goHome, deleteAccount, createAccount,
+  setFormInput, click, goHome, deleteAccount, createAccount, sleep,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -22,11 +22,10 @@ describe('Create Account', () => {
     await logout();
   });
 
-  test.only('Create Account', async () => {
+  test('Create Account', async () => {
     jest.setTimeout(20000);
-    console.log('a')
+    await sleep(500);
     await deleteAccount(username, password);
-    console.log('b')
     await createAccount(username, `${username}@thisiget.com`, password, 'create-account');
     await setFormInput('password', password);
     await snapshot('create-account-7');
