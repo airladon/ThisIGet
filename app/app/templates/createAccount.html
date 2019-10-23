@@ -65,17 +65,4 @@
             <span class="input_form__field_error_message input_form__field_error_message__check">{{ error }}</span>
         {% endfor %}
     </div>
-    <div class="input_form__field input_form__field__check">
-        <div class="input_form__check">
-            <div class="input_form__check_box">
-                {{ form.privacy() }}
-            </div>
-            <div class="input_form__field_label input_form__check_label">
-                {{ form.privacy.label }}
-            </div>
-        </div>
-        {% for error in form.privacy.errors %}
-            <span class="input_form__field_error_message input_form__field_error_message__check">{{ error }}</span>
-        {% endfor %}
-    </div>
 {% endblock %}
