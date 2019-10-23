@@ -99,7 +99,7 @@ $button_size: 0.4em;
   background-color: var(--color-menu-background);
   border-radius: $radius;
   // border: 1px solid #ccc;
-  border: 1px solid var(--color-menu-separator);
+  border: 1px solid var(--color-menu-border);
   cursor: default;
   overflow: hidden;
 }
@@ -121,13 +121,14 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item:hover {
-  background-color: var(--color-menu-background-hover);
+  background-color: var(--color-menu-hover-background);
+  color: var(--color-menu-hover-text);
   cursor: pointer;
 }
 
 .dropdown_button_list_item_active {
-  background-color: var(--color-menu-background-select);
-  color: var(--color-menu-text-select);
+  background-color: var(--color-menu-select-background);
+  color: var(--color-menu-select-text);
 }
 
 // .dropdown_button_list_item_active .dropdown_button_list_item_link:focus {
@@ -135,23 +136,24 @@ $button_size: 0.4em;
 // }
 
 .dropdown_button_list_item_active:hover {
-  background-color: var(--color-menu-background-select-hover);
+  background-color: var(--color-menu-select-hover-background);
+  color: var(--color-menu-select-hover-text);
 }
 
 .dropdown_button_list_item_disabled {
-  color: var(--color-menu-text-disabled);
-  background-color: var(--color-menu-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
 }
 
 .dropdown_button_list_item_disabled:hover {
-  color: var(--color-menu-text-disabled);
-  background-color: var(--color-menu-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   cursor: default;
 }
 
 .dropdown_button_list_item_separator {
-  color: var(--color-menu-text-disabled);
-  background-color: var(--color-menu-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   font-size: 0.75em;
   padding-top: 0.75em;
   padding-bottom: 5px;
@@ -160,7 +162,7 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item_separator:hover {
-  color: var(--color-menu-text-disabled);
-  background-color: var(--color-menu-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   cursor: default;
 }

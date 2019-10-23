@@ -701,18 +701,43 @@ const themes = {
       background: ['grey', 'darker'],
     },
     menu: {
-      background: {
-        base: ['white', 'base'],
-        hover: ['white', 'lightest'],
-        select: ['logo', 'base'],
-        selectHover: ['logo', 'light'],
+      base: {
+        base: {
+          background: ['white', 'base'],
+          text: ['black', 'lighter'],
+        },
+        hover: {
+          background: ['white', 'lightest'],
+          text: ['black', 'lighter'],
+        },
       },
-      text: {
-        base: ['black', 'lighter'],
-        disabled: ['black', 'lightest'],
-        select: ['white'],
+      select: {
+        base: {
+          background: ['logo', 'base'],
+          text: ['white'],
+        },
+        hover: {
+          background: ['logo', 'base'],
+          text: ['white'],
+        },
       },
+      disabled: {
+        background: ['white', 'base'],
+        text: ['white', 'darkest'],
+      },
+      // background: {
+      //   base: ['white', 'base'],
+      //   hover: ['white', 'lightest'],
+      //   select: ['logo', 'base'],
+      //   selectHover: ['logo', 'light'],
+      // },
+      // text: {
+      //   base: ['black', 'lighter'],
+      //   disabled: ['black', 'lightest'],
+      //   select: ['white'],
+      // },
       separator: ['white', 'dark'],
+      border: ['white', 'dark'],
     },
   },
 };
@@ -771,71 +796,34 @@ class Colors {
       this.get('site', 'safe').toCssVar('--color-site-safe');
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
 
-      // Buttons
-      // this.get('site', 'button', 'text')
-      //   .toCssVar('--color-site-button-text');
-      // this.get('site', 'button', 'hoverBackground')
-      //   .toCssVar('--color-site-button-hover-background');
-      // this.get('site', 'button', 'border')
-      //   .toCssVar('--color-site-button-border');
-      // this.get('site', 'button', 'background')
-      //   .toCssVar('--color-site-button-background');
-      // this.get('site', 'button', 'highlight', 'text')
-      //   .toCssVar('--color-site-button-highlight-text');
-      // this.get('site', 'button', 'highlight', 'background')
-      //   .toCssVar('--color-site-button-highlight-background');
-      // this.get('site', 'button', 'highlight', 'hoverBackground')
-      //   .toCssVar('--color-site-button-highlight-hover-background');
-
-      // this.get('site', 'colorButton', 'text')
-      //   .toCssVar('--color-site-color-button-text');
-      // this.get('site', 'colorButton', 'background')
-      //   .toCssVar('--color-site-color-button-background');
-      // this.get('site', 'colorButton', 'hoverBackground')
-      //   .toCssVar('--color-site-color-button-hover-background');
-
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
-      // this.get('navbar', 'background').toCssVar('--color-navbar-background');
-      // this.get('navbar', 'text', 'base').toCssVar('--color-navbar-text');
-      // this.get('navbar', 'text', 'hover').toCssVar('--color-navbar-text-hover');
       this.setCssVar('navbar', 'background');
       this.setCssVar('navbar', 'text', 'base');
       this.setCssVar('navbar', 'text', 'hover');
 
-      this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
-      this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
-      this.get('menu', 'text', 'select').toCssVar('--color-menu-text-select');
-      this.get('menu', 'background', 'base').toCssVar('--color-menu-background');
-      this.get('menu', 'background', 'hover').toCssVar('--color-menu-background-hover');
-      this.get('menu', 'background', 'select').toCssVar('--color-menu-background-select');
-      this.get('menu', 'background', 'selectHover').toCssVar('--color-menu-background-select-hover');
-      this.get('menu', 'separator').toCssVar('--color-menu-separator');
+      // this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
+      // this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
+      // this.get('menu', 'text', 'select').toCssVar('--color-menu-text-select');
+      // this.get('menu', 'background', 'base').toCssVar('--color-menu-background');
+      // this.get('menu', 'background', 'hover').toCssVar('--color-menu-background-hover');
+      // this.get('menu', 'background', 'select').toCssVar('--color-menu-background-select');
+      // this.get('menu', 'background', 'selectHover').toCssVar('--color-menu-background-select-hover');
+      // this.get('menu', 'separator').toCssVar('--color-menu-separator');
 
-      // this.get('learningPath', 'container', 'border')
-      //   .toCssVar('--color-lp-container-border');
-      // this.get('learningPath', 'container', 'background')
-      //   .toCssVar('--color-lp-container-background');
-      // this.get('learningPath', 'tile', 'text', 'base')
-      //   .toCssVar('--color-lp-tile-text');
-      // this.get('learningPath', 'tile', 'text', 'select')
-      //   .toCssVar('--color-lp-tile-text-select');
-      // this.get('learningPath', 'tile', 'background', 'base')
-      //   .toCssVar('--color-lp-tile-background');
-      // this.get('learningPath', 'tile', 'background', 'hover')
-      //   .toCssVar('--color-lp-tile-background-hover');
-      // this.get('learningPath', 'tile', 'background', 'select')
-      //   .toCssVar('--color-lp-tile-background-select');
-      // this.get('learningPath', 'tile', 'background', 'selectHover')
-      //   .toCssVar('--color-lp-tile-background-select-hover');
-      // this.get('learningPath', 'tile', 'background', 'disabled')
-      //   .toCssVar('--color-lp-tile-background-disabled');
-      // this.get('learningPath', 'tile', 'border', 'disabled')
-      //   .toCssVar('--color-lp-tile-border-disabled');
+      this.setCssVar('menu', 'base', 'base', 'text');
+      this.setCssVar('menu', 'base', 'base', 'background');
+      this.setCssVar('menu', 'base', 'hover', 'text');
+      this.setCssVar('menu', 'base', 'hover', 'background');
+      this.setCssVar('menu', 'select', 'base', 'text');
+      this.setCssVar('menu', 'select', 'base', 'background');
+      this.setCssVar('menu', 'select', 'hover', 'text');
+      this.setCssVar('menu', 'select', 'hover', 'background');
+      this.setCssVar('menu', 'disabled', 'text');
+      this.setCssVar('menu', 'disabled', 'background');
+      this.setCssVar('menu', 'separator');
+      this.setCssVar('menu', 'border');
 
-      // this.get('topic', 'background').toCssVar('--color-topic-background');
-      // this.get('topic', 'text').toCssVar('--color-topic-text');
-      // this.get('topic', 'border').toCssVar('--color-topic-border');
       this.setCssVar('topic', 'background');
       this.setCssVar('topic', 'text');
       this.setCssVar('topic', 'border');

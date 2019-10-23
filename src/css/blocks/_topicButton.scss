@@ -19,18 +19,20 @@
 }
 
 .topic_button .dropdown_button_list_item_separator {
-  background-color: var(--color-menu-background);
-  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-disabled-background);
+  color: var(--color-menu-disabled-text);
   border-bottom: 1px solid var(--color-menu-separator);
   border-top: 1px solid var(--color-menu-separator);
   min-height: 1em;
 }
 
 .topic_button .dropdown_button_list_item:first-child {
-  color: var(--color-menu-text-disabled);
-  background-color: var(--color-menu-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   border-bottom: 1px solid var(--color-menu-separator);
   min-height: 1em;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
 }
 
 .topic_button__label {
