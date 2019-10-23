@@ -71,13 +71,16 @@
   padding-left: var(--navigator__tile_padding_horizontal);
   padding-right: var(--navigator__tile_padding_horizontal);
   border-radius: var(--navigator__tile_border_radius);
+  border: 1px solid var(--color-lp-tile-border);
   color: var(--color-lp-tile-text);
   width: 100%;
   height: 100%;
 }
 
 .navigator__topic_tile_containter:hover {
-  background: var(--color-lp-tile-background-hover);
+  background: var(--color-lp-tile-hover-background);
+  border: 1px solid var(--color-lp-tile-hover-border);
+  color: var(--color-lp-tile-hover-text);
 }
 
 .navigator__topic_tile_containter_title {
@@ -88,7 +91,7 @@
   display: table;
   height: 100%;
   float: left;
-  width: calc(var(--navigator__tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) - var(--navigator__tile_img_width));
+  width: calc(var(--navigator__tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) - var(--navigator__tile_img_width) - 2px);
 }
 
 .navigator__topic_tile_title {
@@ -97,25 +100,30 @@
 }
 
 .navigator__topic_tile_disabled {
-  background-color: var(--color-lp-tile-background-disabled);
-  border: 1px solid var(--color-lp-tile-border-disabled);
-  color: var(--color-lp-tile-text-disabled);
+  background-color: var(--color-lp-tile-disabled-background);
+  border: 1px solid var(--color-lp-tile-disabled-border);
+  color: var(--color-lp-tile-disabled-text);
   padding-left: calc(var(--navigator__tile_padding_horizontal) - 2px);
   // font-size: calc(var(--navigator__tile_font_size) * 0.8);
 }
 
 .navigator__topic_tile_disabled:hover {
-  background-color: var(--color-lp-tile-background-disabled);
+  background-color: var(--color-lp-tile-disabled-background);
+  border: 1px solid var(--color-lp-tile-disabled-border);
+  color: var(--color-lp-tile-disabled-text);
 }
 
 .navigator__topic_tile_selected {
-  background-color: var(--color-lp-tile-background-select);
-  color: var(--color-lp-tile-text-select);
+  background-color: var(--color-lp-tile-select-background);
+  color: var(--color-lp-tile-select-text);
+  border: 1px solid var(--color-lp-tile-select-border);
   pointer-events: none;
 }
 
 .navigator__topic_tile_selected:hover {
-  background-color: var(--color-lp-tile-background-select-hover);
+  background-color: var(--color-lp-tile-select-hover-background);
+  color: var(--color-lp-tile-select-hover-text);
+  border: 1px solid var(--color-lp-tile-select-hover-border);
   pointer-events: none;
 }
 
