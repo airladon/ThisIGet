@@ -796,9 +796,12 @@ class Colors {
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
-      this.get('navbar', 'background').toCssVar('--color-navbar-background');
-      this.get('navbar', 'text', 'base').toCssVar('--color-navbar-text');
-      this.get('navbar', 'text', 'hover').toCssVar('--color-navbar-text-hover');
+      // this.get('navbar', 'background').toCssVar('--color-navbar-background');
+      // this.get('navbar', 'text', 'base').toCssVar('--color-navbar-text');
+      // this.get('navbar', 'text', 'hover').toCssVar('--color-navbar-text-hover');
+      this.setCssVar('navbar', 'background');
+      this.setCssVar('navbar', 'text', 'base');
+      this.setCssVar('navbar', 'text', 'hover');
 
       this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
       this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
@@ -830,9 +833,12 @@ class Colors {
       // this.get('learningPath', 'tile', 'border', 'disabled')
       //   .toCssVar('--color-lp-tile-border-disabled');
 
-      this.get('topic', 'background').toCssVar('--color-topic-background');
-      this.get('topic', 'text').toCssVar('--color-topic-text');
-      this.get('topic', 'border').toCssVar('--color-topic-border');
+      // this.get('topic', 'background').toCssVar('--color-topic-background');
+      // this.get('topic', 'text').toCssVar('--color-topic-text');
+      // this.get('topic', 'border').toCssVar('--color-topic-border');
+      this.setCssVar('topic', 'background');
+      this.setCssVar('topic', 'text');
+      this.setCssVar('topic', 'border');
 
       this.get('diagram', 'background').toCssVar('--color-diagram-background');
       this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');
@@ -858,6 +864,8 @@ class Colors {
       this.setCssVar('button', 'highlight', 'hover', 'background');
       this.setCssVar('button', 'highlight', 'hover', 'border');
 
+      this.setCssVar('lp', 'container', 'background');
+      this.setCssVar('lp', 'container', 'border');
       this.setCssVar('lp', 'tile', 'base', 'base', 'text');
       this.setCssVar('lp', 'tile', 'base', 'base', 'background');
       this.setCssVar('lp', 'tile', 'base', 'base', 'border');
