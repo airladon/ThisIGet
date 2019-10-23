@@ -1,7 +1,7 @@
 .footer__container {
   // height: 200px;
   width: 100%;
-  background-color: var(--color-site-menus-background);
+  background-color: var(--color-navbar-background);
   display: table;
   padding: 2em;
   text-align: center;
@@ -10,19 +10,19 @@
 .footer__terms_of_use {
   font-size: 0.8em;
   text-align: center;
-  color: var(--color-site-menus-text);
+  color: var(--color-navbar-text);
   margin-bottom: 1.5em;
   font-weight: 200;
 }
 
 .footer__terms_of_use__link {
-  color: var(--color-site-menus-text);
+  color: var(--color-navbar-text);
   // font-weight: 600;
   text-decoration-line: underline;
 }
 
 .footer__terms_of_use__link:hover {
-  color: var(--color-site-menus-text-hover);
+  color: var(--color-navbar-text-hover);
 }
 
 .footer__item {
@@ -32,15 +32,15 @@
 }
 
 .footer__item:hover {
-  color: var(--color-site-menus-text-hover);
+  color: var(--color-navbar-text-hover);
 }
 
 .footer__item__label {
-  color: var(--color-site-menus-text);
+  color: var(--color-navbar-text);
 }
 
 .footer__item__label:hover {
-  color: var(--color-site-menus-text-hover);
+  color: var(--color-navbar-text-hover);
   text-decoration-line: none;
 }
 

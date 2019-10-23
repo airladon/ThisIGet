@@ -607,12 +607,12 @@ const themes = {
       fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
       safe: ['green', 'dark'],
-      menus: {
-        background: ['grey', 'darker'],
-        text: ['white', 'light'],
-        textHover: ['white', 'base'],
-        border: ['grey', 'darkest'],
-      },
+      // menus: {
+      //   background: ['grey', 'darker'],
+      //   text: ['white', 'light'],
+      //   textHover: ['white', 'base'],
+      //   border: ['grey', 'darkest'],
+      // },
       button: {
         text: ['black', 'lighter'],
         border: ['white', 'darker'],
@@ -635,10 +635,22 @@ const themes = {
     navbar: {
       // text: ['white', 'lighter'],
       text: {
+        base: ['white', 'lighter'],
         hover: ['white', 'base'],
         input: ['grey', 'lighter'],
       },
       background: ['grey', 'darker'],
+    },
+    menu: {
+      background: {
+        base: ['white', 'base'],
+        hover: ['white', 'light'],
+      },
+      text: {
+        base: ['grey', 'darkest'],
+        disabled: ['black', 'lightest'],
+      },
+      separator: ['white', 'dark'],
     },
   },
 };
@@ -717,15 +729,25 @@ class Colors {
         .toCssVar('--color-site-color-button-hover-background');
 
       // Menus
-      this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
-      this.get('site', 'menus', 'textHover')
-        .toCssVar('--color-site-menus-text-hover');
-      this.get('site', 'menus', 'background')
-        .toCssVar('--color-site-menus-background');
-      this.get('site', 'menus', 'border')
-        .toCssVar('--color-site-menus-border');
+      // this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
+      // this.get('site', 'menus', 'textHover')
+      //   .toCssVar('--color-site-menus-text-hover');
+      // this.get('site', 'menus', 'background')
+      //   .toCssVar('--color-site-menus-background');
+      // this.get('site', 'menus', 'border')
+      //   .toCssVar('--color-site-menus-border');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
+
+      this.get('navbar', 'background').toCssVar('--color-navbar-background');
+      this.get('navbar', 'text', 'base').toCssVar('--color-navbar-text');
+      this.get('navbar', 'text', 'hover').toCssVar('--color-navbar-text-hover');
+
+      this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
+      this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
+      this.get('menu', 'background', 'base').toCssVar('--color-menu-background');
+      this.get('menu', 'background', 'hover').toCssVar('--color-menu-background-hover');
+      this.get('menu', 'separator').toCssVar('--color-menu-separator');
     }
     return Colors.instance;
   }
