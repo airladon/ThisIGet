@@ -11,7 +11,7 @@
 
 .single_page_topic__container .highlight_word {
   // color: #0067D6;
-  color: color('site', 'primaryDark');
+  color: var(--color-site-primary-dark);
   // font-style: italic;
 }
 
@@ -19,14 +19,10 @@
   // padding: 20px;
   // margin-left: 20px;
   // margin-right: 20px;
-  // background-color: color('white', 'lightest');
-  color: color('grey', 'darkest');
+  color: var(--color-topic-text);
   // color: white;
-  // background-color: color('lesson', 'title-background');
-  // background-color: color('white', 'lightest');
-  background-color: color('white', 'base');
-  // border-top: 1px solid color('white', 'light');
-  border-bottom: 1px solid color('white', 'light');
+  background-color: var(--color-topic-background);
+  border-bottom: 1px solid var(--color-topic-border);
   // position: relative;
   // max-width: 1100px;
   padding-left: 1em;
@@ -44,8 +40,6 @@
 
 @media screen and (min-width: 400px) {
   .single_page_topic__container {
-    // border-left: 1px solid color('white', 'light');
-    // border-right: 1px solid color('white', 'light');
     padding-left: 2em;
     padding-right: 2em;
   }
@@ -53,8 +47,6 @@
 
 @media screen and (min-width: 1100px) {
   .single_page_topic__container {
-    // border-left: 1px solid color('white', 'light');
-    // border-right: 1px solid color('white', 'light');
     margin-left: auto;
     margin-right: auto;
   }
@@ -111,13 +103,9 @@
   // touch-action: auto;
 }
 
-// .single_page_topic__container .highlight_word {
-//   color: color('diagram', 'text-keyword', 'dark');
-// }
 
 .single_page_topic__text_container {
   position: relative;
-  // background-color: color('white', 'lightest');
   // padding: 20px;
   // margin-left: 20px;
   // margin-right: 20px;
