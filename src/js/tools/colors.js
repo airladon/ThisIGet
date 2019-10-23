@@ -856,6 +856,14 @@ class Colors {
       this.setCssVar('diagram', 'disabled', 'dark');
       this.setCssVar('diagram', 'disabled', 'darker');
       this.setCssVar('diagram', 'disabled', 'darkest');
+      this.setCssVar('diagram', 'text', 'keyword');
+      this.setCssVar('diagram', 'text', 'keyword2');
+      this.setCssVar('diagram', 'text', 'sanskrit');
+      this.setCssVar('diagram', 'text', 'arabic');
+      this.setCssVar('diagram', 'text', 'latin');
+      this.setCssVar('diagram', 'text', 'oldFrench');
+      this.setCssVar('diagram', 'text', 'greek');
+      this.setCssVar('diagram', 'text', 'english');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
