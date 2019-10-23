@@ -616,7 +616,8 @@ const themes = {
       button: {
         text: ['black', 'lighter'],
         border: ['white', 'darker'],
-        hoverBackground: ['white', 'lighter'],
+        background: ['white', 'lighter'],
+        hoverBackground: ['white', 'light'],
         highlight: {
           text: ['white'],
           background: ['logo', 'base'],
@@ -741,6 +742,8 @@ class Colors {
         .toCssVar('--color-site-button-hover-background');
       this.get('site', 'button', 'border')
         .toCssVar('--color-site-button-border');
+      this.get('site', 'button', 'background')
+        .toCssVar('--color-site-button-background');
       this.get('site', 'button', 'highlight', 'text')
         .toCssVar('--color-site-button-highlight-text');
       this.get('site', 'button', 'highlight', 'background')
