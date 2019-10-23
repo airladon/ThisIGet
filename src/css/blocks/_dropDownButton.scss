@@ -96,10 +96,10 @@ $button_size: 0.4em;
 .dropdown_button_list {
   position: absolute;
   z-index: 10;
-  background-color: var(--color-site-background);
+  background-color: var(--color-menu-background);
   border-radius: $radius;
   // border: 1px solid #ccc;
-  border: 1px solid var(--color-site-button-border);
+  border: 1px solid var(--color-menu-separator);
   cursor: default;
   overflow: hidden;
 }
@@ -112,8 +112,8 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item {
-  color: var(--color-site-button-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text);
+  background-color: var(--color-menu-background);
   white-space: nowrap;
   position: relative;
   display: block;
@@ -121,13 +121,13 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item:hover {
-  background-color: var(--color-site-button-hover-background);
+  background-color: var(--color-menu-background-hover);
   cursor: pointer;
 }
 
 .dropdown_button_list_item_active {
-  background-color: var(--color-site-button-highlight-background);
-  color: var(--color-site-button-highlight-text);
+  background-color: var(--color-menu-background-select);
+  color: var(--color-menu-text-select);
 }
 
 // .dropdown_button_list_item_active .dropdown_button_list_item_link:focus {
@@ -135,32 +135,32 @@ $button_size: 0.4em;
 // }
 
 .dropdown_button_list_item_active:hover {
-  background-color: var(--color-site-button-highlight-hover-background);
+  background-color: var(--color-menu-background-select-hover);
 }
 
 .dropdown_button_list_item_disabled {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-background);
 }
 
 .dropdown_button_list_item_disabled:hover {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-background);
   cursor: default;
 }
 
 .dropdown_button_list_item_separator {
-  color: var(--color-site-disabled);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-background);
   font-size: 0.75em;
   padding-top: 0.75em;
   padding-bottom: 5px;
-  border-bottom: 1px solid var(--color-site-background);
-  border-top: 1px solid var(--color-site-background);
+  border-bottom: 1px solid var(--color-menu-separator);
+  border-top: 1px solid var(--color-menu-separator);
 }
 
 .dropdown_button_list_item_separator:hover {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text-disabled);
+  background-color: var(--color-menu-background);
   cursor: default;
 }

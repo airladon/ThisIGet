@@ -644,11 +644,14 @@ const themes = {
     menu: {
       background: {
         base: ['white', 'base'],
-        hover: ['white', 'light'],
+        hover: ['white', 'lightest'],
+        select: ['logo', 'base'],
+        selectHover: ['logo', 'light'],
       },
       text: {
-        base: ['grey', 'darkest'],
+        base: ['black', 'lighter'],
         disabled: ['black', 'lightest'],
+        select: ['white'],
       },
       separator: ['white', 'dark'],
     },
@@ -745,8 +748,11 @@ class Colors {
 
       this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
       this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
+      this.get('menu', 'text', 'select').toCssVar('--color-menu-text-select');
       this.get('menu', 'background', 'base').toCssVar('--color-menu-background');
       this.get('menu', 'background', 'hover').toCssVar('--color-menu-background-hover');
+      this.get('menu', 'background', 'select').toCssVar('--color-menu-background-select');
+      this.get('menu', 'background', 'selectHover').toCssVar('--color-menu-background-select-hover');
       this.get('menu', 'separator').toCssVar('--color-menu-separator');
     }
     return Colors.instance;
