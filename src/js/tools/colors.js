@@ -476,6 +476,8 @@ const palettes = {
     },
     logo: '0070EB',
     logoDark: '0067D6',
+    incorrect: '640000',
+    correct: '006400',
   },
   standard: {
     blue: '1CA4FC',
@@ -508,6 +510,8 @@ const palettes = {
     },
     logo: '0070EB',
     logoDark: '0067D6',
+    incorrect: '640000',
+    correct: '006400',
   },
 };
 
@@ -602,32 +606,67 @@ const themes = {
             border: ['black'],
             placeholder: ['black', 'lighter'],
           },
+          hover: {
+            background: ['white'],
+          },
           disabled: {
-            background: ['black', 'lighter'],
+            text: ['grey', 'darker'],
+            background: ['black'],
+            border: ['black', 'lighter'],
+          },
+        },
+        choice: {
+          base: {
+            base: {
+              text: ['white', 'dark'],
+              background: ['black'],
+              border: ['black'],
+            },
+            hover: {
+              text: ['white', 'dark'],
+              background: ['black', 'darker'],
+              border: ['black', 'darker'],
+            },
+          },
+          select: {
+            base: {
+              text: ['blue', 'base'],
+            },
+            hover: {
+              text: ['blue', 'base'],
+            },
+            disabled: {
+              text: ['blue', 'dark'],
+            },
+          },
+          disabled: {
+            text: ['black', 'dark'],
+            background: ['black'],
+            border: ['black'],
           },
         },
         correct: {
           base: {
             text: ['white'],
             border: ['white', 'darker'],
-            background: ['green', 'dark'],
+            background: ['correct', 'base'],
           },
           hover: {
             text: ['white'],
             border: ['white', 'darker'],
-            background: ['green', 'base'],
+            background: ['correct', 'light'],
           },
         },
         incorrect: {
           base: {
             text: ['white'],
             border: ['black', 'lightest'],
-            background: ['red', 'dark'],
+            background: ['incorrect', 'base'],
           },
           hover: {
             text: ['white'],
             border: ['black', 'lightest'],
-            background: ['red', 'base'],
+            background: ['incorrect', 'light'],
           },
         },
       },
@@ -967,7 +1006,10 @@ class Colors {
       this.setCssVar('diagram', 'quiz', 'input', 'base', 'background');
       this.setCssVar('diagram', 'quiz', 'input', 'base', 'border');
       this.setCssVar('diagram', 'quiz', 'input', 'base', 'placeholder');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'border');
       this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'input', 'hover', 'background');
       this.setCssVar('diagram', 'quiz', 'correct', 'base', 'text');
       this.setCssVar('diagram', 'quiz', 'correct', 'base', 'border');
       this.setCssVar('diagram', 'quiz', 'correct', 'base', 'background');
@@ -980,6 +1022,18 @@ class Colors {
       this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'text');
       this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'border');
       this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'border');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
