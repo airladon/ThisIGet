@@ -718,6 +718,8 @@ const themes = {
       warning: ['red', 'dark'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
+      title: ['grey', 'darkest'],
+      information: ['grey', 'darkest'],
       h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
       fill: ['offWhite', 'dark'],
@@ -928,6 +930,8 @@ class Colors {
       this.setCssVar('site', 'primary', 'base');
       this.setCssVar('site', 'primary', 'dark');
       this.setCssVar('site', 'input', 'border');
+      this.setCssVar('site', 'title');
+      this.setCssVar('site', 'information');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
 
