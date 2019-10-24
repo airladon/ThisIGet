@@ -50,8 +50,10 @@
   // border-radius: 0;
 }
 
-.topic__button-goto_container-disabled #id__topic__goto_button {
-  color: color('presentation', 'disabled');
+.topic__button-goto_container-disabled #id__topic__goto_button_label {
+  color: var(--color-button-disabled-text);
+  background-color: var(--color-button-disabled-background);
+  border: 1px solid var(--color-button-disabled-border);
 }
 
 .topic__button-goto_container .dropdown_button_label_container {

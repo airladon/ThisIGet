@@ -4,7 +4,7 @@
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
 }
 
-#id_topic__interactive_element_button {
+.topic__interactive_element_button {
   color: var(--color-button-text);
   background-color: var(--color-button-background);
   width: var(--pres__button_height);
@@ -24,7 +24,7 @@
   background-position: center;
 }
 
-#id_topic__interactive_element_button:hover {
+.topic__interactive_element_button:hover {
   color: var(--color-button-hover-text);
   background-color: var(--color-button-hover-background);
   border: solid 1px var(--color-button-hover-border);
@@ -62,5 +62,8 @@
   // border: 0;
   // height: 0;
   // width: 0;
-  opacity: 0.5;
+  // opacity: 0.5;
+  color: var(--color-button-disabled-text);
+  background-color: var(--color-button-disabled-background);
+  border: solid 1px var(--color-button-disabled-border);
 }
