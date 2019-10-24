@@ -37,12 +37,12 @@
   // 2.5em title + padding
   // 2.5em link + padding
   // 1em padding top/bottom
-  box-shadow: 0 0 20px var(--color-topic-shaddow);
+  box-shadow: 0 0 20px var(--color-qr-simple-shaddow);
   max-height: calc(400px + 6em);
   font-size: initial;
   z-index: 10;
   position: absolute;
-  background-color: var(--color-topic-background);
+  background-color: var(--color-qr-simple-background);
   padding: 0.5em;
   border-radius: 0.2em;
   margin-right: 1em;
@@ -83,7 +83,7 @@
   padding-right: 1em;
   padding-left: 0.4em;
   font-weight: 200;
-  color: color('black', 'lighter');
+  color: var(--color-qr-simple-title);
 }
 
 @media screen and (max-width: 600px) {
@@ -105,10 +105,10 @@
 
 .topic__qr__title_close {
   display: table-cell;
-  color: color('grey', 'dark');
+  color: var(--color-qr-simple-close-text);
   width: 2em;
-  // border: 1px solid color('white', 'light');
-  border: solid 1px color('white', 'darker');
+  border: solid 1px var(--color-qr-simple-close-border);
+  background-color: var(--color-qr-simple-close-background);
   height: 2em;
   text-align: center;
   vertical-align: middle;
@@ -117,7 +117,9 @@
 }
 
 .topic__qr__title_close:hover {
-  background-color: color('white', 'lightest');
+  color: var(--color-qr-simple-close-hover-text);
+  border: solid 1px var(--color-qr-simple-close-hover-border);
+  background-color: var(--color-qr-simple-close-hover-background);
   cursor: pointer;
 }
 
@@ -128,8 +130,8 @@
   overflow-y: scroll;
   max-height: 400px;
   max-width: 600px;
-  background-color: color('white', 'base');
-  border: 1px solid color('white', 'lighter');
+  background-color: var(--color-qr-simple-content-background);
+  border: 1px solid var(--color-qr-simple-content-border);
 }
 
 .topic__qr__content {
@@ -165,7 +167,7 @@
 
 .topic__qr__link_link {
   font-size: 0.8em;
-  color: color('black', 'lighter');
+  color: var(--color-qr-simple-link);
   text-decoration: underline;
 }
 
@@ -178,23 +180,26 @@
 // Presentation QR specific
 // ///////////////////////////////////////
 #topic__content_diagram .topic__qr__container {
-  background-color: color('black', 'dark');
+  background-color: var(--color-qr-presentation-background);
   padding: 0.5em;
-  border: 1px solid color('black', 'light');
-  box-shadow: 0 0 3em color('black', 'dark');
+  border: 1px solid var(--color-qr-presentation-border);
+  box-shadow: 0 0 3em var(--color-qr-presentation-shaddow);
 }
 
 #topic__content_diagram .topic__qr__title_text {
-  color: color('white', 'dark');
+  color: var(--color-qr-presentation-title);
 }
 
 #topic__content_diagram .topic__qr__title_close {
-  color: color('white', 'dark');
-  border: 1px solid color('white', 'dark');
+  color: var(--color-qr-presentation-close-text);
+  border: solid 1px var(--color-qr-presentation-close-border);
+  background-color: var(--color-qr-presentation-close-background);
 }
 
 #topic__content_diagram .topic__qr__title_close:hover {
-  background-color: color('black', 'light');
+  color: var(--color-qr-presentation-close-hover-text);
+  border: solid 1px var(--color-qr-presentation-close-hover-border);
+  background-color: var(--color-qr-presentation-close-hover-background);
 }
 
 #id_topic__qr__pres_container .topic__qr__content_container {
@@ -202,7 +207,7 @@
 }
 
 #topic__content_diagram .topic__qr__link_link {
-  color: color('white', 'dark');
+  color: var(--color-qr-presentation-link);
 }
 
 #id_topic__qr__content_pres__overlay {
@@ -219,7 +224,7 @@
 #id_qr_diagram {
   width: 100%;
   height: 100%;
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
 }
 
 .topic__qr_description_container {

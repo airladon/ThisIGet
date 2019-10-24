@@ -671,6 +671,50 @@ const themes = {
         },
       },
     },
+    qr: {
+      presentation: {
+        title: ['white', 'dark'],
+        background: ['black', 'dark'],
+        border: ['black', 'light'],
+        shaddow: ['black', 'dark'],
+        link: ['white', 'dark'],
+        close: {
+          base: {
+            text: ['white', 'dark'],
+            border: ['white', 'darker'],
+            background: ['black', 'dark'],
+          },
+          hover: {
+            text: ['white', 'dark'],
+            border: ['white', 'darker'],
+            background: ['black', 'light'],
+          },
+        },
+      },
+      simple: {
+        title: ['black', 'lighter'],
+        background: ['offWhite'],
+        border: ['black', 'light'],
+        shaddow: ['white', 'darkest'],
+        link: ['black', 'lighter'],
+        content: {
+          border: ['white', 'lighter'],
+          background: ['white'],
+        },
+        close: {
+          base: {
+            text: ['grey', 'dark'],
+            border: ['white', 'light'],
+            background: ['offWhite'],
+          },
+          hover: {
+            text: ['grey', 'dark'],
+            border: ['white', 'light'],
+            background: ['white', 'lightest'],
+          },
+        },
+      },
+    },
     presentation: {
       background: ['white', 'base'],
       button: ['white', 'darkest'],
@@ -969,6 +1013,31 @@ class Colors {
       this.setCssVar('topic', 'title', 'background');
       this.setCssVar('topic', 'subtitle', 'text');
       this.setCssVar('topic', 'subtitle', 'background');
+
+      this.setCssVar('qr', 'presentation', 'title');
+      this.setCssVar('qr', 'presentation', 'background');
+      this.setCssVar('qr', 'presentation', 'border');
+      this.setCssVar('qr', 'presentation', 'shaddow');
+      this.setCssVar('qr', 'presentation', 'link');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'text');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'border');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'background');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'text');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'border');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'background');
+      this.setCssVar('qr', 'simple', 'title');
+      this.setCssVar('qr', 'simple', 'background');
+      this.setCssVar('qr', 'simple', 'shaddow');
+      this.setCssVar('qr', 'simple', 'border');
+      this.setCssVar('qr', 'simple', 'link');
+      this.setCssVar('qr', 'simple', 'content', 'background');
+      this.setCssVar('qr', 'simple', 'content', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'text');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'background');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'text');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'background');
 
       this.setCssVar('section', 'background');
       this.setCssVar('section', 'text', 'title');
