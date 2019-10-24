@@ -9,6 +9,7 @@
   height: 0;
   border-top: calc(var(--pres__nav_button_height) / 2) solid transparent;
   border-bottom: calc(var(--pres__nav_button_height) / 2) solid transparent;
+  background-color: var(--color-topic-background);
 }
 
 .topic__np_button_fill {
