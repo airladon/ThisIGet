@@ -83,7 +83,10 @@ from app.tools import hash_str_with_pepper, format_email
 
 # Size of email hash will be 60-29 = 31 as don't want to store the pepper
 
+
 # Username size will be limited to 32 characters
+def expiration():
+    return 1800
 
 
 class Users(UserMixin, db.Model):
@@ -131,6 +134,14 @@ class Users(UserMixin, db.Model):
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
+    def delete_account(self):
+        self.username = hash_str_with_pepper(
+            f'{self.get_username()} {str(datetime.now())}')
+        self.username_hash = 'deleted account'
+        self.email = ''
+        self.email_hash = ''
+        self.password = ''
+
     @staticmethod
     def verify_reset_password_token(token):
         try:
@@ -139,6 +150,43 @@ class Users(UserMixin, db.Model):
         except Exception:
             return
         return Users.query.get(id)
+
+    def get_change_email_token(self, email_address):
+        return jwt.encode(
+            {
+                'change_email': self.id,
+                'exp': time() + expiration(),
+                'email': email_address,
+            },
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_change_email_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['change_email']
+            email = jwt.decode(token, app.config['SECRET_KEY'],
+                               algorithms=['HS256'])['email']
+        except jwt.ExpiredSignatureError:
+            id = jwt.decode(
+                token,
+                app.config['SECRET_KEY'],
+                algorithms=['HS256'],
+                options={'verify_exp': False}
+            )['change_email']
+            return {
+                'status': 'expired',
+                'user': Users.query.get(id),
+            }
+        except Exception:
+            return {
+                'status': 'fail'
+            }
+        return {
+            'status': 'ok',
+            'user': Users.query.get(id),
+            'email': email,
+        }
 
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(

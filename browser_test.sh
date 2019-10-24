@@ -41,6 +41,9 @@ docker_run_browser_test() {
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
         -e TIG_ADDRESS=$1 \
+        -e MAIL_RECEIVE_SERVER=$MAIL_RECEIVE_SERVER \
+        -e MAIL_RECEIVE_USERNAME=$MAIL_RECEIVE_USERNAME \
+        -e MAIL_RECEIVE_PASSWORD=$MAIL_RECEIVE_PASSWORD \
         --name devenv-browser-test \
         --entrypoint "npm" \
         thisiget-pupp \
@@ -55,6 +58,9 @@ docker_start_browser_test_container() {
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
         -e TIG_ADDRESS=$1 \
+        -e MAIL_RECEIVE_SERVER=$MAIL_RECEIVE_SERVER \
+        -e MAIL_RECEIVE_USERNAME=$MAIL_RECEIVE_USERNAME \
+        -e MAIL_RECEIVE_PASSWORD=$MAIL_RECEIVE_PASSWORD \
         --name devenv-browser-test \
         thisiget-pupp \
         bash

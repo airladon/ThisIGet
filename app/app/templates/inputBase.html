@@ -49,6 +49,8 @@
                     {% endwith %}
                   </div>
                 </div>
+                {% block afterSubmit %}
+                {% endblock %}
             </form>
             {% block afterForm %}
             {% endblock %}

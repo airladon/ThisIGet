@@ -1,0 +1,5 @@
+{% extends "message_base.html" %}
+{% block title %}{{ message_title }}{% endblock %}
+{% block message %}
+{{ message_html|safe }}
+{% endblock %}

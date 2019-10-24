@@ -14,9 +14,14 @@ from flask import make_response, request, abort
 from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
+from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
+from app.forms import AccountSettingsPasswordForm, AccountSettingsDelete
+from app.forms import ConfirmDeleteAccount
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
+from app.email import send_change_email_email
 import datetime
+
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
@@ -26,7 +31,7 @@ from app.models import VersionRatingsCache
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-# import re
+import re
 
 # project/decorators.py
 from functools import wraps
@@ -46,6 +51,10 @@ def make_response_with_files(*args, **kwargs):
     about_css = ''
     learning_paths_js = ''
     learning_paths_css = ''
+    account_js = ''
+    account_css = ''
+    message_js = ''
+    message_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -62,18 +71,36 @@ def make_response_with_files(*args, **kwargs):
         topic_index_js = f"/{'static/dist'}/{dist['topicIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
+        account_js = f"/{'static/dist'}/{dist['account.js']}"
+        account_css = f"/{'static/dist'}/{dist['account.css']}"
+        message_js = f"/{'static/dist'}/{dist['message.js']}"
+        message_css = f"/{'static/dist'}/{dist['message.css']}"
         learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
         learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
-    res = make_response(render_template(
-        *args, **kwargs,
-        tools_js=tools_js, polyfill_js=polyfill_js,
-        common_content_js=common_content_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, topic_index_js=topic_index_js,
-        about_js=about_js, main_css=main_css, main_js=main_js,
-        about_css=about_css, learning_paths_js=learning_paths_js,
-        learning_paths_css=learning_paths_css,
-    ))
+    if 'message_js' in kwargs and 'message_css' in kwargs:
+        res = make_response(render_template(
+            *args, **kwargs,
+            tools_js=tools_js, polyfill_js=polyfill_js,
+            common_content_js=common_content_js, vendors_js=vendors_js,
+            figure_one_js=figure_one_js, topic_index_js=topic_index_js,
+            about_js=about_js, main_css=main_css, main_js=main_js,
+            about_css=about_css, learning_paths_js=learning_paths_js,
+            learning_paths_css=learning_paths_css,
+            account_js=account_js, account_css=account_css,
+        ))
+    else:
+        res = make_response(render_template(
+            *args, **kwargs,
+            tools_js=tools_js, polyfill_js=polyfill_js,
+            common_content_js=common_content_js, vendors_js=vendors_js,
+            figure_one_js=figure_one_js, topic_index_js=topic_index_js,
+            about_js=about_js, main_css=main_css, main_js=main_js,
+            about_css=about_css, learning_paths_js=learning_paths_js,
+            learning_paths_css=learning_paths_css,
+            account_js=account_js, account_css=account_css,
+            message_js=message_js, message_css=message_css,
+        ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
     else:
@@ -167,19 +194,19 @@ def about():
     return information_response('about')
 
 # Uncomment for Privacy
-# @app.route('/copyright', strict_slashes=False)
-# def copyright():
-#     return information_response('copyright')
+@app.route('/copyright', strict_slashes=False)
+def copyright():
+    return information_response('copyright')
 
 # Uncomment for Privacy
-# @app.route('/privacy', strict_slashes=False)
-# def privacy():
-#     return information_response('privacy')
+@app.route('/privacy', strict_slashes=False)
+def privacy():
+    return information_response('privacy')
 
 # Uncomment for Privacy
-# @app.route('/terms', strict_slashes=False)
-# def terms():
-#     return information_response('terms')
+@app.route('/terms', strict_slashes=False)
+def terms():
+    return information_response('terms')
 
 
 # @app.route('/disclaimer', strict_slashes=False)
@@ -206,12 +233,15 @@ def contact():
 def not_found_error(error):
     app.logger.info(request.referrer)
     if request.referrer and \
-       (request.referrer.startswith('https://thisiget') or  # noqa
-            request.referrer.startswith('https://www.thisiget') or  # noqa
-            request.referrer.startswith('http://localhost')):
+       (request.referrer.startswith('https://thisiget')
+            or request.referrer.startswith('https://www.thisiget')
+            or request.referrer.startswith('http://localhost')):
+        route = ','.join([address for address in request.access_route])
         app.logger.error(
-            f'Internal link broken.'
-            f'Referrer: {request.referrer} '
+            'Internal link broken. '
+            f'Referrer: {request.referrer}, '
+            f'Route: {route}, '
+            f'User Agent: {request.headers.get("User-Agent")}, '
             f'Url: {request.url}'
         )
         return render_template('404_internal.html'), 404
@@ -399,7 +429,8 @@ def login(username=''):
             user.last_login = datetime.datetime.now()
             db.session.commit()
             next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
+            if not next_page or url_parse(next_page).netloc != '' \
+                    or 'accountDeleted' in next_page:
                 next_page = url_for('home')
             next_page = next_page
             return redirect(next_page)
@@ -409,6 +440,93 @@ def login(username=''):
                 'confirm_account_message', username=user.get_username()))
     return render_template(
         'login.html', form=form, css=css, js=js, tools_js=tools_js)
+
+
+@app.route('/account', methods=['GET', 'POST'])  # noqa
+def account_settings():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+
+    username_form = AccountSettingsUsernameForm(prefix='username_form')
+    email_form = AccountSettingsEmailForm(prefix='email_form')
+    password_form = AccountSettingsPasswordForm(prefix='password_form')
+    delete_form = AccountSettingsDelete(prefix='delete_form')
+
+    if request.method == 'POST':
+        if username_form.submit_username.data:
+            if username_form.validate_on_submit():
+                if current_user.get_username() != username_form.username.data:
+                    current_user.set_username(username_form.username.data)
+                    username_form.username.data = current_user.get_username()
+                    db.session.commit()
+                    flash('Username updated', 'username_updated')
+        if password_form.submit_password.data:
+            if password_form.validate_on_submit():
+                current_user.set_password(password_form.password.data)
+                db.session.commit()
+                flash('Password updated', 'password_updated')
+        if email_form.submit_email.data:
+            if email_form.validate_on_submit():
+                if current_user.get_email() != email_form.email.data:
+                    send_change_email_email(
+                        current_user, email_form.email.data)
+                    flash('Confirmation email sent', 'email_updated')
+        else:
+            email_form.email.data = current_user.get_email()
+        if delete_form.submit.data:
+            if delete_form.validate_on_submit():
+                return redirect(url_for('confirm_delete_account'))
+    else:
+        email_form.email.data = current_user.get_email()
+    username_form.username.data = current_user.get_username()
+
+    return make_response_with_files(
+        'account_settings.html', username_form=username_form,
+        email_form=email_form, password_form=password_form,
+        delete_form=delete_form)
+
+
+@app.route('/confirmDelete', methods=['GET', 'POST'])
+def confirm_delete_account():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = ConfirmDeleteAccount(prefix='form')
+    # print(form.submit_save)
+    # print(form.submit_delete)
+    if request.method == 'POST' and form.validate_on_submit():
+        if form.submit_save.data:
+            return redirect(url_for('account_settings'))
+        if form.submit_delete.data:
+            if current_user.get_username() == 'test_user_002':
+                user = Users.query.filter_by(id=current_user.id).first()
+                if user is not None:
+                    db.session.delete(user)
+            else:
+                current_user.delete_account()
+            logout_user()
+            session.pop('username', None)
+            db.session.commit()
+            return redirect(url_for('account_deleted'))
+
+    confirm_delete_account_js = ''
+    confirm_delete_account_css = ''
+    if 'static/dist' in static_files:
+        confirm_delete_account_js = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmDeleteAccount.js']}"
+        confirm_delete_account_css = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmDeleteAccount.css']}"
+
+    return make_response_with_files(
+        'confirm_delete_account.html', form=form,
+        message_css=confirm_delete_account_css,
+        message_js=confirm_delete_account_js)
+
+
+@app.route('/accountDeleted', methods=['GET'])
+def account_deleted():
+    return make_response_with_files('confirm_account_deleted.html')
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
@@ -437,7 +555,8 @@ def create():
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
     return render_template(
-        'createAccount.html', form=form, css=css, js=js, tools_js=tools_js)
+        'createAccount.html',
+        form=form, css=css, js=js, tools_js=tools_js)
 
 
 @app.route('/confirmAccountEmailSent/<username>', methods=['GET', 'POST'])
@@ -463,15 +582,16 @@ def confirm_account_message(username):
         # redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
-    flash('''You need to confirm your email address before your
-        account becomes active.''', 'before')
-    flash(f''''An email has been sent to {user.get_email()}.
-        Click the link inside it to confirm your email and
-        finish account registration.''', 'before')
+    # flash('''You need to confirm your email address before your
+    #     account becomes active.''', 'before')
+    # flash(f'''An email has been sent to {user.get_email()}.
+    #     Click the link inside it to confirm your email and
+    #     finish account registration.''', 'before')
 
     return render_template(
         'confirmAccountMessage.html',
         form=form, js=js, css=css, tools_js=tools_js,
+        email_address=user.get_email(),
     )
 
 
@@ -560,6 +680,81 @@ def reset_password(token):
     return render_template(
         'resetPassword.html', form=form, css=css, js=js,
         tools_js=tools_js)
+
+
+@app.route('/confirmEmailChange/<token>', methods=['GET'])
+def confirm_email_change(token):
+    result = Users.verify_change_email_token(token)
+    # if result['status'] == 'fail':
+    if result['status'] == 'expired':
+        message_html = f'''
+        <p>
+            You need to verify any email change within 30 minutes of the
+            request.
+        </p>
+        <p>
+            In this case, it took more than 30 minutes for the verification, and so it failed. # noqa
+        </p>
+        <p>
+            If you wish to change your email address, please try again and be
+            sure to verify within 30 minutes.
+        </p>
+        '''
+        return make_response_with_files(
+            'message.html', message_html=re.sub('\n', '', message_html),
+        )
+
+    if result['status'] == 'fail':
+        message_html = f'''
+        <h1>
+            Account Email Change Failed
+        </h1>
+        <p>
+            The change to your account email address has failed as either the verification token is invalid or corrupt.  # noqa
+        </p>
+        <p>
+            If you wish to change your email, please try again in account
+            settings.
+        </p>'''
+        return make_response_with_files(
+            'message.html', message_html=re.sub('\n', '', message_html)
+        )
+
+    if result['status'] == 'ok':
+        user = result['user']
+        user.set_email(result['email'])
+        db.session.commit()
+        if current_user.is_authenticated and current_user == user:
+            return redirect(url_for('account_settings'))
+
+    confirm_email_change_js = ''
+    confirm_email_change_css = ''
+    if 'static/dist' in static_files:
+        confirm_email_change_js = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmEmailChange.js']}"
+        confirm_email_change_css = \
+            f"/{'static/dist'}/" \
+            f"{static_files['static/dist']['confirmEmailChange.css']}"
+
+    return make_response_with_files(
+        'confirm_email_changed.html',
+        message_js=confirm_email_change_js,
+        message_css=confirm_email_change_css)
+
+    # user = Users.verify_reset_password_token(token)
+    # if not user:
+    #     return redirect(url_for('home'))
+    # form = ResetPasswordForm()
+    # if form.validate_on_submit():
+    #     user.set_password(form.password.data)
+    #     db.session.commit()
+    #     flash('Your password has been reset.', 'after')
+    #     flash('You can now login with your new password.', 'after')
+    #     return redirect(url_for('login', username=user.get_username()))
+    # return render_template(
+    #     'resetPassword.html', form=form, css=css, js=js,
+    #     tools_js=tools_js)
 
 
 @app.route('/logout', strict_slashes=False)

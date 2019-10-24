@@ -1,5 +1,6 @@
 import pytest  # noqa: F401
 import sys
+from common import login, logout
 # import pdb
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
@@ -14,20 +15,6 @@ version2a = f'{topic2}/explanation/base'
 version2b = f'{topic2}/summary/base'
 link_1_path = 'Math/Geometry_1/RightAngleTriangles/links/base'
 link_1_hash = '0d0bf3df02ca4f1cae21e8ee0fc2f2c5'
-
-
-def login(
-        client,
-        username='test_user_01',
-        password='12345678'):
-    return client.post('/login', data=dict(
-        username_or_email=username,
-        password=password
-    ))
-
-
-def logout(client):
-    return client.get('/logout')
 
 
 @pytest.fixture(autouse=True)
@@ -165,7 +152,7 @@ def test_link_ratings_cache(client):
     client.get(
         f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=2').get_json()
 
-    ratings = VersionRatingsCache.query.first()
+    ratings = LinkRatingsCache.query.first()
     assert ratings.num_ratings == 2
     assert ratings.ave_rating == 3
     assert ratings.high_ratings == 1

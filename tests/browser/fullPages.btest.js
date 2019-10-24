@@ -4,14 +4,14 @@ import presentationTester from '../../src/content/testers/presentationFormatTest
 singlePageTester({
   width: 700,
   element: 'body',
-  prefix: 'fullSinglePage-',
+  prefix: 'fullPage-SinglePage-',
   endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/examples/base',
 });
 
 presentationTester(
   {
     endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/discover/base',
-    prefix: 'fullPagePresentation-',
+    prefix: 'fullPage-Presentation-',
     element: 'body',
   },
   1,
@@ -20,42 +20,42 @@ presentationTester(
 singlePageTester({
   width: 700,
   element: 'main',
-  prefix: 'about-',
+  prefix: 'information-about-',
   endpoint: 'about',
 },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'privacy-',
-//   endpoint: 'privacy',
-// },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'terms-',
-//   endpoint: 'terms',
-// },
 {
   width: 700,
   element: 'main',
-  prefix: 'contact-',
+  prefix: 'information-privacy-',
+  endpoint: 'privacy',
+},
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-terms-',
+  endpoint: 'terms',
+},
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-contact-',
   endpoint: 'contact',
 },
 {
   width: 700,
   element: 'main',
-  prefix: 'introduction-',
+  prefix: 'information-introduction-',
   endpoint: 'introduction',
 },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'copyright-',
-//   endpoint: 'copyright',
-// },
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-copyright-',
+  endpoint: 'copyright',
+},
 {
   width: 700,
   element: 'body',
-  prefix: 'home-',
+  prefix: 'fullPage-home-',
   endpoint: '',
 });

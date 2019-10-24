@@ -92,6 +92,13 @@ then
   DOCKERFILE="dev/Dockerfile"
 fi
 
+if [ "$1" = "dev-root" ];
+then
+  HOST_PORT=5002
+  CONTAINER_PORT=5000
+  DOCKERFILE="dev/Dockerfile"
+fi
+
 if [ "$1" = "pupp" ];
 then
   CONTAINER_PORT=5000
@@ -127,12 +134,25 @@ then
   DOCKER_GROUP_ID=`grep -e '^host-docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
   if [ -z "$DOCKER_GROUP_ID" ];
   then
+    DOCKER_GROUP_ID=`grep -e '^docker:' /etc/group | sed 's/[^:]*:[^:]*:\([0-9]*\).*/\1/'`
+  fi
+
+  if [ -z "$DOCKER_GROUP_ID" ];
+  then
     DOCKER_GROUP_ID=`ls -n /var/run/docker.sock | sed "s/[^ ]* *[^ ]* *\([^ ]*\).*/\1/"`
   fi
+  
   HOST_USER_GROUP_ID=`id -g`
   HOST_USER_ID=`id -u`
 
-  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile 
+  sed "s/HOST_USER_ID/${HOST_USER_ID}/;s/HOST_USER_GROUP_ID/${HOST_USER_GROUP_ID}/;s/DOCKER_GROUP_ID/${DOCKER_GROUP_ID}/" < DockerfileTemp > Dockerfile
+
+  if [ "$1" = 'dev-root' ];
+  then
+    mv Dockerfile DockerfileTemp
+    sed "s/USER myuser//" < DockerfileTemp > Dockerfile
+  fi
+
   rm DockerfileTemp
 
   GUNICORN_PORT=4000

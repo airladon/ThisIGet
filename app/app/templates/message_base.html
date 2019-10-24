@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href={{ message_css }}>
+{% endblock %}
+{% block content %}
+    <div id="id_navbar"></div>
+    <div id="message">
+        {% block message %}{% endblock %}
+    </div>
+    <div id="id_footer"></div>
+{% endblock %}
+{% block tail %}
+  <script type="text/javascript" src={{ message_js }}></script>
+{% endblock %}

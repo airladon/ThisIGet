@@ -27,12 +27,12 @@ export default class Navbar extends React.Component
     if (this.props.isLoggedIn) {
       if (this.props.username !== '') {
         return <div>
-          Log Out
+          Signed In
         </div>;
       }
-      return 'Logout';
+      return 'Sign Out';
     }
-    return 'Login';
+    return 'Sign In';
   }
 
   getLoginButton() {
@@ -45,12 +45,17 @@ export default class Navbar extends React.Component
           xAlign='right'
           list={[
             {
-              label: `Logged in as ${this.props.username}`,
+              label: `Signed in as ${this.props.username}`,
               // active: false,
               separator: true,
             },
             {
-              label: 'Logout',
+              label: 'Account Settings',
+              link: '/account',
+              // active: true,
+            },
+            {
+              label: 'Sign out',
               link: this.loginout.bind(this),
               // active: true,
             },

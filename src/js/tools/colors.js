@@ -599,14 +599,14 @@ const themes = {
       primary: ['logo', 'base'],
       primaryDark: ['logoDark', 'base'],
       logoText: ['white', 'base'],
-      warning: ['red', 'base'],
+      warning: ['red', 'dark'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
       h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
       fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
-      safe: ['green', 'base'],
+      safe: ['green', 'dark'],
       menus: {
         background: ['grey', 'darker'],
         text: ['white', 'light'],
@@ -622,6 +622,11 @@ const themes = {
           background: ['logo', 'base'],
           hoverBackground: ['logo', 'light'],
         },
+      },
+      colorButton: {
+        text: ['white', 'base'],
+        background: ['green', 'dark'],
+        hoverBackground: ['green', 'darker'],
       },
       table: {
         border: ['white', 'light'],
@@ -689,6 +694,7 @@ class Colors {
       this.get('site', 'primary').toCssVar('--color-site-primary');
       this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
       this.get('site', 'warning').toCssVar('--color-site-warning');
+      this.get('site', 'safe').toCssVar('--color-site-safe');
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
 
       // Buttons
@@ -702,6 +708,13 @@ class Colors {
         .toCssVar('--color-site-button-highlight-background');
       this.get('site', 'button', 'highlight', 'hoverBackground')
         .toCssVar('--color-site-button-highlight-hover-background');
+
+      this.get('site', 'colorButton', 'text')
+        .toCssVar('--color-site-color-button-text');
+      this.get('site', 'colorButton', 'background')
+        .toCssVar('--color-site-color-button-background');
+      this.get('site', 'colorButton', 'hoverBackground')
+        .toCssVar('--color-site-color-button-hover-background');
 
       // Menus
       this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');

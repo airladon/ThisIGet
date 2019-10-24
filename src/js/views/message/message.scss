@@ -1,0 +1,20 @@
+@import '../../../css/style';
+
+#message {
+    margin-top: 5em;
+    margin-bottom: 5em;
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+    max-width: 20em;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 51px - 20px - 4em - 10em);
+}
+
+h1 {
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block title %}This I Get - Account Settings{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href={{ account_css }}>
+{% endblock %}
+{% block content %}
+    <div id="id_navbar"></div>
+    <div id="account">
+        <h1>Account Settings</h1>
+        <form class="form_container" action="" method="post" novalidate>
+            {{ username_form.hidden_tag() }}
+            <h2>Change Username</h2>
+            <div class="input_form__field">
+                <div class="input_form__field_label">
+                    {{ username_form.username.label }}
+                </div>
+                {{ username_form.username(size=32, class_="input_form__field_entry", autocomplete="username") }}
+                {% for error in username_form.username.errors %}
+                    <span class="input_form__field_error_message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="input_form__submit_container">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_error_message">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["username_updated"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {{ username_form.submit_username(class_="input_form__submit_button") }}
+            </div>
+        </form>
+        <form class="form_container" action="" method="post" novalidate>
+            {{ email_form.hidden_tag() }}
+            <h2>Change Email</h2>
+            <div class=input_form__information>
+                <p>
+                    You will need to verify any email address before it is updated.
+                </p>
+                <p>When you submit your new email address, an email will be sent to the new address with a link that can be used for verification. After this link is visited, your new email address will be updated.
+                </p>
+            </div>
+            <div class="input_form__field">
+                <div class="input_form__field_label">
+                    {{ email_form.email.label }}
+                </div>
+                {{ email_form.email(size=64, class_="input_form__field_entry", autocomplete="email") }}
+                {% for error in email_form.email.errors %}
+                    <span class="input_form__field_error_message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="input_form__submit_container">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_error_message">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {{ email_form.submit_email(class_="input_form__submit_button") }}
+                <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["email_updated"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </form>
+        <form class="form_container" action="" method="post" novalidate>
+            {{ password_form.hidden_tag() }}
+            <h2>Change Password</h2>
+            <div class="input_form__field">
+                <div class="input_form__field_label">
+                    {{ password_form.password.label }}
+                </div>
+                {{ password_form.password(size=256, class_="input_form__field_entry", autocomplete="new-password") }}
+                {% for error in password_form.password.errors %}
+                    <span class="input_form__field_error_message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="input_form__field">
+                <div class="input_form__field_label">
+                    {{ password_form.repeat_password.label }}
+                </div>
+                {{ password_form.repeat_password(
+                    size=256,
+                    class_="input_form__field_entry",
+                    autocomplete="new-password") }}
+                {% for error in password_form.repeat_password.errors %}
+                    <span class="input_form__field_error_message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="input_form__submit_container">
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_error_message">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {{ password_form.submit_password(class_="input_form__submit_button") }}
+                <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["password_updated"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </form>
+        <form class="form_container" action="" method="post" novalidate>
+                {{ delete_form.hidden_tag() }}
+            <h2>Delete Account</h2>
+            <div class=input_form__information>
+                <p>
+                    This will permanently delete your account and remove your username and email address from our systems.
+                </p>
+            </div>
+            <div class="input_form__submit_container delete_button_container">
+                {{ delete_form.submit(class_="input_form__submit_button delete_button") }}
+            </div>
+        </form>
+    </div>
+    <div id="id_footer"></div>
+{% endblock %}
+{% block tail %}
+  <script type="text/javascript" src={{ account_js }}></script>
+{% endblock %}
+
+<!-- 
+{% block formTitle %}
+    Account Settings
+{% endblock %}
+
+{% block formfields %}
+    <div class="input_form__field">
+        <div class="input_form__field_label">
+            {{ form.username.label }}
+        </div>
+        {{ form.username(
+            size=32,
+            class_="input_form__field_entry",
+            autocomplete="username") }}
+        {% for error in form.username.errors %}
+            <span class="input_form__field_error_message">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="input_form__field">
+        <div class="input_form__field_label">
+            {{ form.email.label }}
+        </div>
+        {{ form.email(size=64, class_="input_form__field_entry") }}
+        {% for error in form.email.errors %}
+            <span class="input_form__field_error_message">{{ error }}</span>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %} -->
+<!-- 
+{% block afterSubmit %}
+    <div class="input_form__submit_container">
+        {{ form.reset_password(class_="input_form__submit_button") }}
+    </div>
+    <div class="input_form__spacer"></div>
+    <div class="input_form__spacer"></div>
+    <div class="input_form__submit_container">
+        {{ form.delete_account(class_="input_form__submit_button") }}
+    </div>
+{% endblock %}
+ -->

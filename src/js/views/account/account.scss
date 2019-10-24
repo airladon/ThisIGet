@@ -1,0 +1,89 @@
+@import '../../../css/style';
+
+#account {
+    min-height: calc(100vh - 51px - 20px - 4em);
+}
+
+.input_form__submit_ok_message_container {
+    font-size: 0.8em;
+    color: var(--color-site-safe);
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    position: absolute;
+    left: calc(50% - 125px);
+    top: -2em;
+    text-align: center;
+  }
+
+h1 {
+    // margin-top: 2em;
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
+    // margin-bottom: 1em;
+    padding-top: 1em;
+}
+  
+h2 {
+    margin-top: 1.5em;
+    font-weight: 400;
+    font-size: 1.1em;
+    text-align: left;
+    color: black;
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_container {
+    margin-bottom: 4em;
+}
+
+.input_form__information {
+    width: 250px;
+    max-width: calc(100vw - 2em);
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9em;
+}
+
+.delete_button {
+    background-color: var(--color-site-warning);
+}
+
+.delete_button:hover {
+    background-color: #a00;
+}
+
+@media screen and (min-width: 700px) {
+    .input_form__submit_container {
+        position: relative;
+        display: inline-block;
+        margin-left: 2em;
+        transform: translate(0, -1px);
+    }
+
+    .input_form__field {
+        position: relative;
+        margin-left: calc(50% - (250px + 150px + 1em) / 2);
+        display: inline-block;
+    }
+
+    h2 {
+        width: calc(250px + 150px + 1em);
+    }
+
+    .input_form__information {
+        width: calc(250px + 150px + 1em);
+    }
+
+    .input_form__submit_ok_message_container {
+        top: 3em;
+    }
+
+    .delete_button_container {
+        display: block;
+        margin-left: calc(50% - 150px);
+    }
+}
