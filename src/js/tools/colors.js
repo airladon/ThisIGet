@@ -575,6 +575,62 @@ const themes = {
         corners: ['grey', 'base'],
         text: ['grey', 'light'],
       },
+      quiz: {
+        button: {
+          base: {
+            base: {
+              text: ['white', 'dark'],
+              background: ['black'],
+              border: ['black', 'light'],
+            },
+            hover: {
+              text: ['white', 'lightest'],
+              background: ['black', 'darker'],
+              border: ['black', 'light'],
+            },
+          },
+          disabled: {
+            text: ['black', 'dark'],
+            background: ['black'],
+            border: ['black', 'dark'],
+          },
+        },
+        input: {
+          base: {
+            text: ['grey', 'darker'],
+            background: ['white'],
+            border: ['black'],
+            placeholder: ['black', 'lighter'],
+          },
+          disabled: {
+            background: ['black', 'lighter'],
+          },
+        },
+        correct: {
+          base: {
+            text: ['white'],
+            border: ['white', 'darker'],
+            background: ['green', 'dark'],
+          },
+          hover: {
+            text: ['white'],
+            border: ['white', 'darker'],
+            background: ['green', 'base'],
+          },
+        },
+        incorrect: {
+          base: {
+            text: ['white'],
+            border: ['black', 'lightest'],
+            background: ['red', 'dark'],
+          },
+          hover: {
+            text: ['white'],
+            border: ['black', 'lightest'],
+            background: ['red', 'base'],
+          },
+        },
+      },
     },
     presentation: {
       background: ['white', 'base'],
@@ -897,6 +953,33 @@ class Colors {
       this.setCssVar('diagram', 'text', 'note');
       this.setCssVar('diagram', 'text', 'heading');
       this.setCssVar('diagram', 'text', 'hint');
+
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'border');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'placeholder');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'background');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
