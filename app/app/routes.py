@@ -269,6 +269,11 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
+@app.route('/Lessons/', defaults={'path': ''}, strict_slashes=False)  # noqa
+@app.route('/Lessons/<path:path>')
+def get_lesson(path):
+    return redirect(f'/content/{path}')
+
 @app.route('/content/', defaults={'path': ''}, strict_slashes=False)  # noqa
 @app.route('/content/<path:path>')
 def get_content(path):
