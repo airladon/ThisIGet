@@ -50,6 +50,26 @@
   // border-radius: 0;
 }
 
+#id__topic__goto_button_label {
+  color: var(--color-button-text);
+  background-color: var(--color-button-background);
+  border-radius: 0.3em;
+  border: solid 1px var(--color-button-border);
+}
+
+#id__topic__goto_button_label:hover {
+  color: var(--color-button-hover-text);
+  background-color: var(--color-button-hover-background);
+  border: solid 1px var(--color-button-hover-border);
+}
+
+#id__topic__goto_button_label .dropdown_button_arrow {
+  margin-left: 0;
+  position: absolute;
+  left: -10000%;
+  top: 40%;
+}
+
 .topic__button-goto_container-disabled #id__topic__goto_button_label {
   color: var(--color-button-disabled-text);
   background-color: var(--color-button-disabled-background);
@@ -100,24 +120,4 @@
   vertical-align: middle;
   text-align: center;
   font-weight: 300;
-}
-
-#id__topic__goto_button_label {
-  color: var(--color-button-text);
-  background-color: var(--color-button-background);
-  border-radius: 0.3em;
-  border: solid 1px var(--color-button-border);
-}
-
-#id__topic__goto_button_label:hover {
-  color: var(--color-button-hover-text);
-  background-color: var(--color-button-hover-background);
-  border: solid 1px var(--color-button-hover-border);
-}
-
-#id__topic__goto_button_label .dropdown_button_arrow {
-  margin-left: 0;
-  position: absolute;
-  left: -10000%;
-  top: 40%;
 }

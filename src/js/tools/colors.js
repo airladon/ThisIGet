@@ -983,15 +983,6 @@ class Colors {
       this.setCssVar('navbar', 'text', 'base');
       this.setCssVar('navbar', 'text', 'hover');
 
-      // this.get('menu', 'text', 'base').toCssVar('--color-menu-text');
-      // this.get('menu', 'text', 'disabled').toCssVar('--color-menu-text-disabled');
-      // this.get('menu', 'text', 'select').toCssVar('--color-menu-text-select');
-      // this.get('menu', 'background', 'base').toCssVar('--color-menu-background');
-      // this.get('menu', 'background', 'hover').toCssVar('--color-menu-background-hover');
-      // this.get('menu', 'background', 'select').toCssVar('--color-menu-background-select');
-      // this.get('menu', 'background', 'selectHover').toCssVar('--color-menu-background-select-hover');
-      // this.get('menu', 'separator').toCssVar('--color-menu-separator');
-
       this.setCssVar('menu', 'base', 'base', 'text');
       this.setCssVar('menu', 'base', 'base', 'background');
       this.setCssVar('menu', 'base', 'hover', 'text');
