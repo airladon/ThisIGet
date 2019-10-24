@@ -562,6 +562,7 @@ const themes = {
         english: ['blue', 'light'],
         definition: ['grey', 'base'],
         note: ['grey', 'light'],
+        hint: ['green'],
         //
         heading: ['grey', 'base'],
       },
@@ -879,6 +880,7 @@ class Colors {
       this.setCssVar('diagram', 'text', 'definition');
       this.setCssVar('diagram', 'text', 'note');
       this.setCssVar('diagram', 'text', 'heading');
+      this.setCssVar('diagram', 'text', 'hint');
 
       this.setCssVar('button', 'base', 'base', 'text');
       this.setCssVar('button', 'base', 'base', 'background');
