@@ -635,6 +635,16 @@ const themes = {
         border: ['black', 'lightest'],
       },
     },
+    section: {
+      background: ['white', 'lightest'],
+      text: {
+        base: ['grey', 'darker'],
+        title: ['black', 'darker'],
+      },
+    },
+    tile: {
+      background: ['logo', 'base'],
+    },
     button: {
       base: {
         base: {
@@ -860,6 +870,12 @@ class Colors {
       this.setCssVar('topic', 'title', 'background');
       this.setCssVar('topic', 'subtitle', 'text');
       this.setCssVar('topic', 'subtitle', 'background');
+
+      this.setCssVar('section', 'background');
+      this.setCssVar('section', 'text', 'title');
+      this.setCssVar('section', 'text');
+
+      this.setCssVar('tile', 'background');
 
       this.get('diagram', 'background').toCssVar('--color-diagram-background');
       this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');

@@ -19,11 +19,10 @@ $fullwidth: 380px;
   // padding-bottom: 1em;
 }
 
-.about__get_started_text,
-.about__arrow_text {
-  font-size: 1.5em;
-  color: color('black', 'darker');
-}
+// .about__get_started_text,
+// .about__arrow_text {
+//   font-size: 1.5em;
+// }
 
 .about__get_started_subtext,
 .about__arrow_subtext {
@@ -34,7 +33,7 @@ $fullwidth: 380px;
 
 .about_section {
   width: calc(100% - 1em);
-  background-color: color('white', 'lightest');
+  background-color: var(--color-section-background);
   margin-left: auto;
   margin-right: auto;
 }
@@ -82,7 +81,11 @@ $fullwidth: 380px;
 .about__tiles_text_title {
   font-size: 1.5em;
   text-align: left;
-  color: color('black', 'darker');
+  color: var(--color-section-text-title);
+}
+
+.about__tiles_text_title_center {
+  text-align: center;
 }
 
 .about__tiles_text_text {
@@ -116,7 +119,7 @@ $fullwidth: 380px;
   display: table-cell;
   width: 160px;
   height: 160px;
-  background-color: color('site', 'primary');
+  background-color: var(--color-tile-background);
   color: white;
   text-align: center;
   // padding-bottom: 10px;
@@ -158,7 +161,7 @@ $fullwidth: 380px;
 }
 
 .about__logo_section {
-  background-color: color('white', 'lightest');
+  background-color: var(--color-section-background);
 }
 
 .about__arrow {
