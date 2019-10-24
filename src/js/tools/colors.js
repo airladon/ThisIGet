@@ -981,6 +981,7 @@ class Colors {
       this.get('diagram', 'equation', 'border')
         .toCssVar('--color-diagram-equation-border');
       this.setCssVar('diagram', 'disabled', 'base');
+      this.setCssVar('diagram', 'disabled', 'lighter');
       this.setCssVar('diagram', 'disabled', 'dark');
       this.setCssVar('diagram', 'disabled', 'darker');
       this.setCssVar('diagram', 'disabled', 'darkest');

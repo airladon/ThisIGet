@@ -7,25 +7,22 @@
 }
 
 .diagram__selector_title_not_selected:hover {
-  color: color('diagram', 'disabled', 'base');
+  color: var(--color-diagram-disabled);
 }
 
 .diagram__selector_title_selected {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
 }
 
 .diagram__selector_title_selected:hover {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
 }
 
 // *********************** Horizontal ***********************
 .topic__horizontal_selector_table {
   margin-left: auto;
   margin-right: auto;
-  color: color('diagram', 'disabled');
   text-align: center;
-  // border-bottom: 1px solid color('diagram', 'disabled');
-  // border-top: 1px solid color('diagram', 'disabled');
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   font-weight: bold;
 }
@@ -49,12 +46,12 @@
 }
 
 .topic__horizontal_selector_table_subtext_selected {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
 }
 
 // *********************** Vertical ***********************
 .topic__vertical_selector_table {
-  color: color('diagram', 'disabled');
+  color: var(--color-diagram-disabled);
   text-align: left;
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   font-weight: bold;
