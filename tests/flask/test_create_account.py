@@ -1,5 +1,6 @@
 import pytest  # noqa: F401
 import sys
+# import pdb
 from common import create_account, remove_account
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
@@ -28,33 +29,41 @@ def test_create_new_user(client):
 
 # Should Fail
 @pytest.mark.parametrize(
-    "exists,username,email,password,repeat_password, error", [
+    "exists,username,email,password,repeat_password,terms,error", [
         # Password fails
-        (False, new_user, new_email, '12345678', '1234567',
+        (False, new_user, new_email, '12345678', '1234567', True,
             'Field must be equal to password.'),
-        (False, new_user, new_email, '1234567', '1234567',
+        (False, new_user, new_email, '1234567', '1234567', True,
             'Password must be at least 8 characters'),
         # Username fails
         (False, 'this_is_a_really_really_long_username', new_email,
-            '12345678', '12345678', 'Username max length is 32 characters'),
-        (True, new_user, new_email, '12345678', '12345678',
+            '12345678', '12345678', True,
+            'Username max length is 32 characters'),
+        (True, new_user, new_email, '12345678', '12345678', True,
             'Username already exist'),
         # Email fails
         (True, 'new_test_user_02', 'new_test_user_01@thisiget.com',
-            '12345678', '12345678', 'Email address already in use'),
+            '12345678', '12345678', True,
+            'Email address already in use'),
         (True, 'new_test_user_02', 'new_test_user_01@THISiget.com',
-            '12345678', '12345678', 'Email address already in use'),
+            '12345678', '12345678', True,
+            'Email address already in use'),
         (False, new_user, 'invalid_email',
-            '12345678', '12345678', 'Invalid email address'),
+            '12345678', '12345678', True,
+            'Invalid email address'),
+        (False, new_user, new_email,
+            '12345678', '12345678', False,
+            'You must agree to create an account'),
     ])
 def test_create_account_fail(
-        client, exists, username, email, password, repeat_password, error):
+        client, exists, username, email, password, repeat_password,
+        terms, error):
     remove_account(client)
     if exists:
         create_account(client)
     res = create_account(
         client=client, username=username, email=email,
-        password=password, repeat_password=repeat_password)
+        password=password, repeat_password=repeat_password, terms=terms)
     # pdb.set_trace()
     assert error in str(res.data)
 

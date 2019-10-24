@@ -14,14 +14,23 @@ def create_account(
         email='new_test_user_01@thisiget.com',
         password='12345678',
         repeat_password='12345678',
+        terms=True,
         follow_redirects=True):
-    return client.post('/createAccount', data=dict(
-        username=username,
-        email=email,
-        password=password,
-        terms=True,               # Uncomment for privacy
-        privacy=True,             # Uncomment for privacy
-        repeat_password=repeat_password), follow_redirects=follow_redirects)
+    if terms:
+        return client.post('/createAccount', data=dict(
+            username=username,
+            email=email,
+            password=password,
+            terms=True,
+            repeat_password=repeat_password),
+            follow_redirects=follow_redirects)
+    else:
+        return client.post('/createAccount', data=dict(
+            username=username,
+            email=email,
+            password=password,
+            repeat_password=repeat_password),
+            follow_redirects=follow_redirects)
 
 
 def remove_account(client, username=new_user):

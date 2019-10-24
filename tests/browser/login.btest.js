@@ -3,7 +3,7 @@ import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   login, snapshot, logout,
-  setFormInput, click, goHome,
+  setFormInput, click, goHome, sleep,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -26,6 +26,7 @@ describe('Account Settings Flow', () => {
 
   test('Log In', async () => {
     jest.setTimeout(10000);
+    await sleep(500);
     await login(username, password, 'login');
   });
 
