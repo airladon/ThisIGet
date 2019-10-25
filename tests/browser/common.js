@@ -172,6 +172,26 @@ async function deleteAccount(username, password, debug) {
   await debugSnapshot(debug, 5);
 }
 
+async function snap(snapshots, fileNamePrefix = '', startIndex = null) {
+  let index = 0;
+  if (startIndex == null) {
+    if (snapshots.length > 0) {
+      const lastPrefix =
+        snapshots.slice(-1)[0][0].replace(/-[0-9]*$/, '');
+      const lastIndex =
+        snapshots.slice(-1)[0][0].replace(/.*-([0-9]*)$/, '$1');
+      if (lastPrefix === fileNamePrefix) {
+        index = parseInt(lastIndex, 10) + 1;
+      }
+    }
+  } else {
+    index = startIndex;
+  }
+  const screenshot = await page.screenshot();
+  const fileName = `${fileNamePrefix}-${index.toString(10).padStart(2, '0')}`;
+  snapshots.push([fileName, screenshot]);
+}
+
 module.exports = {
   login,
   gotoAccountSettings,
@@ -185,4 +205,5 @@ module.exports = {
   goHome,
   createAccount,
   deleteAccount,
+  snap,
 };
