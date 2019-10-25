@@ -1,9 +1,22 @@
 /* eslint-disable no-await-in-loop */
 
 import { getEmail } from './email';
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 const path = require('path');
 const fs = require('fs');
+
+expect.extend({ toMatchImageSnapshot });
+
+
+function checkSnap(index, snapshots, replacements) {
+  const [fileName, screenshot] = snapshots[index];
+  replacements.push(snapshots[index]);
+  expect(screenshot).toMatchImageSnapshot({
+    customSnapshotIdentifier: fileName,
+  });
+  replacements.pop();
+}
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 
@@ -243,4 +256,5 @@ module.exports = {
   deleteAccount,
   snap,
   writeReplacements,
+  checkSnap,
 };
