@@ -1,12 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import joinObjects from './tools';
+import { joinObjects, writeImage } from './tools';
 import getThreshold from './threshold';
 import { cleanReplacementFolder } from '../../../tests/browser/common';
 
 const fs = require('fs');
-const path = require('path');
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -18,18 +17,6 @@ function sleep(ms) {
 function contentSectionCount(contentPath) {
   const content = fs.readFileSync(contentPath, 'utf8');
   return (content.match(/\n *this\.addSection/g) || []).length;
-}
-
-function writeImage(image, imagePath) {
-  const folder = path.dirname(imagePath);
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true });
-  }
-  fs.writeFile(imagePath, image, (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
 }
 
 // Open all hints on a page
@@ -50,15 +37,6 @@ async function closeHints(hints) {
     await hintText.click();
   }
 }
-
-// function runAssertion(assertion, onFailure) {
-//   try {
-//     assertion();
-//   } catch (exception) {
-//     onFailure();
-//     throw exception;
-//   }
-// }
 
 // tester(
 //   {

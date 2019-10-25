@@ -1,7 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 
-export default function joinObjects(...objects) {
+const path = require('path');
+const fs = require('fs');
+
+function joinObjects(...objects) {
   const assignObjectFromTo = (fromObject, toObject) => {
     Object.keys(fromObject).forEach((key) => {
       const value = fromObject[key];
@@ -45,3 +48,17 @@ export default function joinObjects(...objects) {
   }
   return out;
 }
+
+function writeImage(image, imagePath) {
+  const folder = path.dirname(imagePath);
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true });
+  }
+  fs.writeFile(imagePath, image, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
+
+export { writeImage, joinObjects };
