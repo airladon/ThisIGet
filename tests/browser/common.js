@@ -2,6 +2,9 @@
 
 import { getEmail } from './email';
 
+const path = require('path');
+const fs = require('fs');
+
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 
 function sleep(ms) {
@@ -192,6 +195,39 @@ async function snap(snapshots, fileNamePrefix = '', startIndex = null) {
   snapshots.push([fileName, screenshot]);
 }
 
+function cleanReplacementFolder(callingScriptPath) {
+  const deleteFolderRecursive = (folderPath) => {
+    if (fs.existsSync(folderPath)) {
+      fs.readdirSync(folderPath).forEach((file, index) => {
+        const curPath = path.join(folderPath, file);
+        if (fs.lstatSync(curPath).isDirectory()) { // recurse
+          deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(folderPath);
+    }
+  };
+  const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+  deleteFolderRecursive(folder);
+}
+
+function writeSS(callingScriptPath, fileName, screenshot) {
+  const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder);
+  }
+  fs.writeFileSync(path.join(folder, `${fileName}-snap.png`), screenshot, () => {});
+}
+
+function writeReplacements(callingScriptPath, replacements) {
+  cleanReplacementFolder(callingScriptPath);
+  replacements.forEach((snapshot) => {
+    writeSS(__dirname, ...snapshot);
+  });
+}
+
 module.exports = {
   login,
   gotoAccountSettings,
@@ -206,4 +242,5 @@ module.exports = {
   createAccount,
   deleteAccount,
   snap,
+  writeReplacements,
 };

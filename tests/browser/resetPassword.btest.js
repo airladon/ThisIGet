@@ -4,7 +4,11 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   logout, getLatestMessage, getToken, sleep,
   setFormInput, click, goHome, gotoAccountSettings, snap,
+  writeReplacements,
 } from './common';
+
+// const fs = require('fs');
+// const path = require('path');
 
 expect.extend({ toMatchImageSnapshot });
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
@@ -13,7 +17,7 @@ const password = process.env.TIG_PASSWORD || '12345678';
 
 const ss = [];
 const indexes = Array.from(Array(13).keys());
-
+const replacement = [];
 
 describe('Reset Password', () => {
   test('Get all snapshots', async () => {
@@ -71,9 +75,15 @@ describe('Reset Password', () => {
     'Screenshot %i',
     async (index) => {
       const [fileName, screenshot] = ss[index];
+      replacement.push(ss[index]);
       expect(screenshot).toMatchImageSnapshot({
         customSnapshotIdentifier: fileName,
       });
+      replacement.pop();
     },
   );
+
+  test('Write Replacements', () => {
+    writeReplacements(__dirname, replacement);
+  });
 });
