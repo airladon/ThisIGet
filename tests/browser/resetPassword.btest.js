@@ -64,100 +64,159 @@ const password = process.env.TIG_PASSWORD || '12345678';
 //   });
 // });
 
-let indexedScreenshots = [1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13];
+const indexedScreenshots = [];
+const indexes = Array.from(Array(13).keys());
 
-beforeAll(async () => {
-  jest.setTimeout(180000);
-  const screenshots = [];
-  await goHome(500, 1200);
-  await sleep(500);
-  await logout();
-  screenshots.push(await page.screenshot());
+async function snap(fileNamePrefix = '', startIndex = null) {
+  let index = 0;
+  if (startIndex == null) {
+    if (indexedScreenshots.length > 0) {
+      const lastPrefix =
+        indexedScreenshots.slice(-1)[0][0].replace(/-[0-9]*$/, '');
+      const lastIndex =
+        indexedScreenshots.slice(-1)[0][0].replace(/.*-([0-9]*)$/, '$1');
+      if (lastPrefix === fileNamePrefix) {
+        index = parseInt(lastIndex, 10) + 1;
+      }
+    }
+  } else {
+    index = startIndex;
+  }
+  const screenshot = await page.screenshot();
+  const fileName = `${fileNamePrefix}-${index.toString(10).padStart(2, '0')}`;
+  indexedScreenshots.push([fileName, screenshot]);
+}
 
-  await click('id_navbar_loginout');
-  screenshots.push(await page.screenshot());
+// beforeAll(async () => {
+//   jest.setTimeout(180000);
+//   // const screenshots = [];
+//   await goHome(500, 1200);
+//   await sleep(500);
+//   await logout();
+//   await snap('reset-password', 1);
 
-  await click('login_form__forgot_password');
-  screenshots.push(await page.screenshot());
+//   await click('id_navbar_loginout');
+//   await snap('reset-password');
 
-  await setFormInput('email', `${username}@thisiget.com`);
-  screenshots.push(await page.screenshot());
+//   await click('login_form__forgot_password');
+//   await snap('reset-password');
 
-  const currentMsgNumber = await getLatestMessage();
-  await click('submit');
-  screenshots.push(await page.screenshot());
+//   await setFormInput('email', `${username}@thisiget.com`);
+//   await snap('reset-password');
 
-  const token = await getToken('resetPassword', currentMsgNumber);
-  await page.goto(`${sitePath}/${token}`);
-  screenshots.push(await page.screenshot());
+//   const currentMsgNumber = await getLatestMessage();
+//   await click('submit');
+//   await snap('reset-password');
 
-  await setFormInput('password', 'asdfasdf');
-  await setFormInput('repeat_password', 'asdfasdf');
-  screenshots.push(await page.screenshot());
+//   const token = await getToken('resetPassword', currentMsgNumber);
+//   await page.goto(`${sitePath}/${token}`);
+//   await snap('reset-password');
 
-  await click('submit');
-  screenshots.push(await page.screenshot());
+//   await setFormInput('password', 'asdfasdf');
+//   await setFormInput('repeat_password', 'asdfasdf');
+//   await snap('reset-password');
 
-  await setFormInput('password', 'asdfasdf');
-  screenshots.push(await page.screenshot());
+//   await click('submit');
+//   await snap('reset-password');
 
-  await click('submit');
-  screenshots.push(await page.screenshot());
+//   await setFormInput('password', 'asdfasdf');
+//   await snap('reset-password');
 
-  await gotoAccountSettings();
-  screenshots.push(await page.screenshot());
+//   await click('submit');
+//   await snap('reset-password');
 
-  await setFormInput('password_form-password', password);
-  await setFormInput('password_form-repeat_password', password);
-  screenshots.push(await page.screenshot());
+//   await gotoAccountSettings();
+//   await snap('reset-password');
 
-  await click('password_form-submit_password');
-  screenshots.push(await page.screenshot());
+//   await setFormInput('password_form-password', password);
+//   await setFormInput('password_form-repeat_password', password);
+//   await snap('reset-password');
 
-  await logout();
+//   await click('password_form-submit_password');
+//   await snap('reset-password');
 
-  // indexedScreenshots = screenshots.map((s, index) => [index + 1, s]);
-  indexedScreenshots = screenshots;
-  console.log('done done')
-});
-
-
-// // async function getAllScreenShots() {
-// describe('Reset Password All', () => {
-//   // test('asdf', () => {
-//   //   console.log(indexedScreenshots.length)
-//   //   expect(false);
-//   // });
-//   // describe('Reset Password All', () => {
-//   test.each(indexedScreenshots)(
-//     'Screenshot',
-//     async (index, screenshot) => {
-//       console.log(index)
-//       const indexPadded = index.toString().padStart(2, '0');
-//       const fileName = `reset-password-${indexPadded}`;
-//       expect(screenshot).toMatchImageSnapshot({
-//         customSnapshotIdentifier: fileName,
-//       });
-//     },
-//   );
-//   // });
+//   await logout();
+//   expect(indexes).toHaveLength(indexedScreenshots.length);
 // });
 
-describe('All', () => {
-  for(let i = 0; i < indexedScreenshots.length; i += 1) {
-    test(`Screenshot ${i}`, async () => {
-      console.log(i, indexedScreenshots.length)
-      const index = i + 1;
-      const screenshot = indexedScreenshots[i];
-      console.log(screenshot);
-      const indexPadded = index.toString().padStart(2, '0');
-      const fileName = `reset-password-${indexPadded}`;
-      console.log(fileName)
+
+describe('Reset Password', () => {
+  test('Get all snapshots', async () => {
+    jest.setTimeout(180000);
+    await goHome(500, 1200);
+    await sleep(500);
+    await logout();
+    await snap('reset-password', 1);
+
+    await click('id_navbar_loginout');
+    await snap('reset-password');
+
+    await click('login_form__forgot_password');
+    await snap('reset-password');
+
+    await setFormInput('email', `${username}@thisiget.com`);
+    await snap('reset-password');
+
+    const currentMsgNumber = await getLatestMessage();
+    await click('submit');
+    await snap('reset-password');
+
+    const token = await getToken('resetPassword', currentMsgNumber);
+    await page.goto(`${sitePath}/${token}`);
+    await snap('reset-password');
+
+    await setFormInput('password', 'asdfasdf');
+    await setFormInput('repeat_password', 'asdfasdf');
+    await snap('reset-password');
+
+    await click('submit');
+    await snap('reset-password');
+
+    await setFormInput('password', 'asdfasdf');
+    await snap('reset-password');
+
+    await click('submit');
+    await snap('reset-password');
+
+    await gotoAccountSettings();
+    await snap('reset-password');
+
+    await setFormInput('password_form-password', password);
+    await setFormInput('password_form-repeat_password', password);
+    await snap('reset-password');
+
+    await click('password_form-submit_password');
+    await snap('reset-password');
+
+    await logout();
+    expect(indexes).toHaveLength(indexedScreenshots.length);
+  });
+  test.each(indexes)(
+    'Screenshot %i',
+    async (index) => {
+      const [fileName, screenshot] = indexedScreenshots[index];
       expect(screenshot).toMatchImageSnapshot({
         customSnapshotIdentifier: fileName,
       });
-    });
-  }
+    },
+  );
 });
+
+// describe('All', () => {
+//   for(let i = 0; i < indexedScreenshots.length; i += 1) {
+//     test(`Screenshot ${i}`, async () => {
+//       console.log(i, indexedScreenshots.length)
+//       const index = i + 1;
+//       const screenshot = indexedScreenshots[i];
+//       console.log(screenshot);
+//       const indexPadded = index.toString().padStart(2, '0');
+//       const fileName = `reset-password-${indexPadded}`;
+//       console.log(fileName)
+//       expect(screenshot).toMatchImageSnapshot({
+//         customSnapshotIdentifier: fileName,
+//       });
+//     });
+//   }
+// });
 
 // getAllScreenShots();
