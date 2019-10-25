@@ -64,8 +64,11 @@ const password = process.env.TIG_PASSWORD || '12345678';
 //   });
 // });
 
-async function getAllScreenShots() {
-  const screenshots = [];  
+let indexedScreenshots = [1, 2, 3, 4, 5, 6, 7, 8, 9,10, 11, 12, 13];
+
+beforeAll(async () => {
+  jest.setTimeout(180000);
+  const screenshots = [];
   await goHome(500, 1200);
   await sleep(500);
   await logout();
@@ -113,21 +116,48 @@ async function getAllScreenShots() {
 
   await logout();
 
-  const indexedScreenshots = screenshots.map((s, index) => [index, s]);
-
-  describe('Reset Password All', () => {
-    test.each(indexedScreenshots)(
-      'Screenshot %#',
-      async (index, screenshot) => {
-        const indexPadded = index.toString().paddStart(2, '0');
-        const fileName = `reset-password-${indexPadded}`;
-        expect(screenshot).toMatchImageSnapshot({
-          customSnapshotIdentifier: fileName,
-        });
-      },
-    );
-  });
-}
+  // indexedScreenshots = screenshots.map((s, index) => [index + 1, s]);
+  indexedScreenshots = screenshots;
+  console.log('done done')
+});
 
 
-getAllScreenShots();
+// // async function getAllScreenShots() {
+// describe('Reset Password All', () => {
+//   // test('asdf', () => {
+//   //   console.log(indexedScreenshots.length)
+//   //   expect(false);
+//   // });
+//   // describe('Reset Password All', () => {
+//   test.each(indexedScreenshots)(
+//     'Screenshot',
+//     async (index, screenshot) => {
+//       console.log(index)
+//       const indexPadded = index.toString().padStart(2, '0');
+//       const fileName = `reset-password-${indexPadded}`;
+//       expect(screenshot).toMatchImageSnapshot({
+//         customSnapshotIdentifier: fileName,
+//       });
+//     },
+//   );
+//   // });
+// });
+
+describe('All', () => {
+  for(let i = 0; i < indexedScreenshots.length; i += 1) {
+    test(`Screenshot ${i}`, async () => {
+      console.log(i, indexedScreenshots.length)
+      const index = i + 1;
+      const screenshot = indexedScreenshots[i];
+      console.log(screenshot);
+      const indexPadded = index.toString().padStart(2, '0');
+      const fileName = `reset-password-${indexPadded}`;
+      console.log(fileName)
+      expect(screenshot).toMatchImageSnapshot({
+        customSnapshotIdentifier: fileName,
+      });
+    });
+  }
+});
+
+// getAllScreenShots();
