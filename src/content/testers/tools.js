@@ -56,9 +56,29 @@ function writeImage(image, imagePath) {
   }
   fs.writeFile(imagePath, image, (err) => {
     if (err) {
+      // eslint-disable-next-line
       console.log(err);
     }
   });
 }
 
-export { writeImage, joinObjects };
+function cleanReplacementFolder(callingScriptPath) {
+  const deleteFolderRecursive = (folderPath) => {
+    if (fs.existsSync(folderPath)) {
+      fs.readdirSync(folderPath).forEach((file) => {
+        const curPath = path.join(folderPath, file);
+        if (fs.lstatSync(curPath).isDirectory()) { // recurse
+          deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(folderPath);
+    }
+  };
+  const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+  deleteFolderRecursive(folder);
+  return folder;
+}
+
+export { writeImage, joinObjects, cleanReplacementFolder };

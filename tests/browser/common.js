@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
-
-import { getEmail } from './email';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+import { getEmail } from './email';
 
 const path = require('path');
 const fs = require('fs');
@@ -279,6 +278,7 @@ function writeReplacements(callingScriptPath, replacements) {
 }
 
 module.exports = {
+  cleanReplacementFolder,
   login,
   gotoAccountSettings,
   snapshot,
@@ -294,5 +294,4 @@ module.exports = {
   snap,
   writeReplacements,
   checkSnap,
-  cleanReplacementFolder,
 };

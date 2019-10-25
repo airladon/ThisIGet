@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { joinObjects, writeImage } from './tools';
-import { cleanReplacementFolder } from '../../../tests/browser/common';
+import { joinObjects, writeImage, cleanReplacementFolder } from './tools';
+// import { cleanReplacementFolder } from '../../../tests/browser/common';
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -159,6 +159,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             customSnapshotIdentifier: fileName,
           });
         } catch (error) {
+          // eslint-disable-next-line
           console.log(error);
           writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
           errorFlag = true;
@@ -196,6 +197,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
                 customSnapshotIdentifier: fileName,
               });
             } catch (error) {
+              // eslint-disable-next-line
               console.log(error);
               writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
               errorFlag = true;
