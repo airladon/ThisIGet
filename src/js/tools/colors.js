@@ -681,12 +681,12 @@ const themes = {
         close: {
           base: {
             text: ['white', 'dark'],
-            border: ['white', 'darker'],
+            border: ['white', 'dark'],
             background: ['black', 'dark'],
           },
           hover: {
             text: ['white', 'dark'],
-            border: ['white', 'darker'],
+            border: ['white', 'dark'],
             background: ['black', 'light'],
           },
         },

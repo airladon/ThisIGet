@@ -4,5 +4,5 @@ import tester from '../../../../../../testers/presentationFormatTester';
 
 tester(
   'goto',
-  'nextPrev',
+  // 'nextPrev',
 );
