@@ -3,8 +3,10 @@ import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import joinObjects from './tools';
 import getThreshold from './threshold';
+import { cleanReplacementFolder } from '../../../tests/browser/common';
 
 const fs = require('fs');
+const path = require('path');
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -18,13 +20,17 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
-// function writeImage(image, path) {
-//   fs.writeFile(path, image, function(err) {
-//     if(err) {
-//       return console.log(err);
-//     }
-// });
-// }
+function writeImage(image, imagePath) {
+  const folder = path.dirname(imagePath);
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true });
+  }
+  fs.writeFile(imagePath, image, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+}
 
 // Open all hints on a page
 async function openHints() {
@@ -44,6 +50,15 @@ async function closeHints(hints) {
     await hintText.click();
   }
 }
+
+// function runAssertion(assertion, onFailure) {
+//   try {
+//     assertion();
+//   } catch (exception) {
+//     onFailure();
+//     throw exception;
+//   }
+// }
 
 // tester(
 //   {
@@ -80,7 +95,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
+  const replacementsPath = cleanReplacementFolder(fullPath);
   let scenariosToUse = scenarios;
+
   const defaultOptions = {
     thresholds: 20,
     viewPort: {
@@ -98,19 +115,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   }
   const { prePath } = optionsToUse;
+  // let totalTests = 0;
   scenariosToUse.forEach((scenario) => {
     if (typeof scenario === 'string') {
       const numPages = contentSectionCount(contentPath);
       if (scenario === 'goto') {
         for (let i = 1; i <= numPages; i += 1) {
           allTests.push([i, [i], optionsToUse]);
+          // totalTests += 1;
         }
       } else if (scenario === 'nextPrev') {
         allTests.push([1, [numPages, 1], optionsToUse]);
+        // totalTests += numPages * 2;
       } else if (scenario === 'next') {
         allTests.push([1, [numPages], optionsToUse]);
+        // totalTests += numPages;
       } else if (scenario === 'prev') {
         allTests.push([numPages, [1], optionsToUse]);
+        // totalTests += numPages;
       }
     } else {
       let fromPage = 1;
@@ -121,12 +143,23 @@ export default function tester(optionsOrScenario, ...scenarios) {
       } else {
         fromPage = scenario;
         toPages = [scenario];
+        // totalTests += 1;
       }
+      // let lastPage = fromPage;
+      // toPages.forEach((page) => {
+      //   totalTests += Math.abs(page - lastPage) + 1;
+      //   lastPage = page;
+      // });
       allTests.push([fromPage, toPages, optionsToUse]);
     }
   });
 
   const { endpoint } = optionsToUse;
+
+  // const snapshots = [];
+  // // const qrSnapshots = [];
+  // const indexes = Array.from(Array(totalTests).keys());
+  // const replacements = [];
 
 
   // Tests
@@ -135,6 +168,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
       'From: %i, to: %s',
       async (fromPage, toPages, options) => {
         jest.setTimeout(180000);
+        let errorFlag = false;
         const fullpath =
           `${sitePath}${prePath}/${endpoint}?page=${fromPage}`;
         try {
@@ -185,14 +219,22 @@ export default function tester(optionsOrScenario, ...scenarios) {
           let image = await page.screenshot({ clip: clippingBox });
           // writeImage(image, `${fullPath}/test_image2.png`);
           const gotoThreshold = getThreshold(currentPage, options.thresholds, 'goto');
-          expect(image).toMatchImageSnapshot({
-            failureThreshold: gotoThreshold,
-            customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
-          });
-
+          let fileName = `${options.prefix}page ${currentPage}`;
+          try {
+            expect(image).toMatchImageSnapshot({
+              failureThreshold: gotoThreshold,
+              customSnapshotIdentifier: fileName,
+            });
+          } catch (error) {
+            console.log(error);
+            writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+            errorFlag = true;
+          }
+          // await snap(`${options.prefix}page ${currentPage}`, snapshots, -1, gotoThreshold, { clip: clippingBox });
           // Find all links on page that go to QR popups
           const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
+
           for (const originalLink of qrLinks) {
             // Need to reget element incase a react redraw has happened
             const id = await (await originalLink.getProperty('id')).jsonValue();
@@ -201,11 +243,30 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await page.mouse.move(0, 0);
             await sleep(500);
 
+            fileName = `${options.prefix}page ${currentPage} - QR ${index}`;
             image = await page.screenshot({ clip: clippingBox });
-            expect(image).toMatchImageSnapshot({
-              failureThreshold: gotoThreshold,
-              customSnapshotIdentifier: `${options.prefix}page ${currentPage} - QR ${index}`,
-            });
+            // expect(image).toMatchImageSnapshot({
+            //   failureThreshold: gotoThreshold,
+            //   customSnapshotIdentifier: fileName,
+            // });
+            try {
+              expect(image).toMatchImageSnapshot({
+                failureThreshold: gotoThreshold,
+                customSnapshotIdentifier: fileName,
+              });
+            } catch (error) {
+              console.log(error);
+              writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+              errorFlag = true;
+            }
+            // await snap(
+            //   `${options.prefix}page ${currentPage} - QR ${index}`,
+            //   qrSnapshots, -1, gotoThreshold, { clip: clippingBox },
+            // );
+            // await snap(
+            //   `${options.prefix}page ${currentPage} - QR ${index}`,
+            //   null, -1, gotoThreshold, { clip: clippingBox },
+            // );
             index += 1;
 
             // Close the QR window
@@ -258,16 +319,55 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
             // Take screenshot
             image = await page.screenshot({ clip: clippingBox });
-            expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,
-              customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
-            });
+            // expect(image).toMatchImageSnapshot({
+            //   failureThreshold: threshold,
+            //   customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
+            // });
+            fileName = `${options.prefix}page ${currentPage}`;
+            try {
+              expect(image).toMatchImageSnapshot({
+                failureThreshold: threshold,
+                customSnapshotIdentifier: fileName,
+              });
+            } catch (error) {
+              console.log(error);
+              writeImage(image, `${replacementsPath}/${k}/${fileName}-snap.png`);
+              errorFlag = true;
+            }
+            // await snap(
+            //   `${options.prefix}page ${currentPage}`,
+            //   null, -1, threshold, { clip: clippingBox },
+            // );
 
             // Close all hints on a page
             await closeHints(hints);
           }
         }
+        if (errorFlag) {
+          expect(true).toBe(false);
+        }
       },
     );
+
+    // test.each(indexes)(
+    //   'Screenshot %i',
+    //   (index) => {
+    //     expect(snapshots).toHaveLength(indexes.length);
+    //     checkSnap(index, snapshots, replacements);
+    //   },
+    // );
+
+    // test('QR Snapshots', () => {
+    //   console.log(qrSnapshots.length)
+    //   qrSnapshots.forEach((ss, index) => {
+    //     console.log(ss)
+    //     checkSnap(index, qrSnapshots, replacements);
+    //   });
+    // });
+
+    // test('Write Replacements', () => {
+    //   console.log(replacements)
+    //   writeReplacements(__dirname, replacements);
+    // });
   });
 }

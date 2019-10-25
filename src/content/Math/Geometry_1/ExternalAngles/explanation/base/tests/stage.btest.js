@@ -3,6 +3,6 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 
 tester(
-  'next',
-  // 'nextPrev',
+  'goto',
+  'nextPrev',
 );

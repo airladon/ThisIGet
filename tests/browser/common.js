@@ -27,7 +27,10 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
  * @param {(number\|null)} [startIndex] - Snapshot number to use, null for auto
  *
  */
-async function snap(fileNamePrefix = '', snapshots = null, startIndex = null) {
+async function snap(
+  fileNamePrefix = '', snapshots = null, startIndex = null,
+  threshold = 0, screenshotOptions = {},
+) {
   let index = 0;
   // Calculate index
   if (startIndex == null && snapshots != null) {
@@ -44,14 +47,18 @@ async function snap(fileNamePrefix = '', snapshots = null, startIndex = null) {
   if (startIndex != null) {
     index = startIndex;
   }
-  const screenshot = await page.screenshot();
-  const fileName = `${fileNamePrefix}-${index.toString(10).padStart(2, '0')}`;
+  const screenshot = await page.screenshot(screenshotOptions);
+  let fileName = `${fileNamePrefix}-${index.toString(10).padStart(2, '0')}`;
+  if (startIndex === -1) {
+    fileName = fileNamePrefix;
+  }
   if (snapshots == null) {
     expect(screenshot).toMatchImageSnapshot({
       customSnapshotIdentifier: fileName,
+      failureThreshold: threshold,
     });
   } else {
-    snapshots.push([fileName, screenshot]);
+    snapshots.push([fileName, screenshot, threshold]);
   }
 }
 
@@ -64,10 +71,11 @@ async function debugSnapshot(
 }
 
 function checkSnap(index, snapshots, replacements) {
-  const [fileName, screenshot] = snapshots[index];
+  const [fileName, screenshot, threshold] = snapshots[index];
   replacements.push(snapshots[index]);
   expect(screenshot).toMatchImageSnapshot({
     customSnapshotIdentifier: fileName,
+    failureThreshold: threshold,
   });
   replacements.pop();
 }
@@ -252,6 +260,7 @@ function cleanReplacementFolder(callingScriptPath) {
   };
   const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
   deleteFolderRecursive(folder);
+  return folder;
 }
 
 function writeSS(callingScriptPath, fileName, screenshot) {
@@ -285,4 +294,5 @@ module.exports = {
   snap,
   writeReplacements,
   checkSnap,
+  cleanReplacementFolder,
 };
