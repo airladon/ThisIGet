@@ -20,47 +20,47 @@ describe('Reset Password', () => {
     await goHome(500, 1200);
     await sleep(500);
     await logout();
-    await snap(snapshots, 'reset-password', 1);
+    await snap('reset-password', snapshots, 1);
 
     await click('id_navbar_loginout');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await click('login_form__forgot_password');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await setFormInput('email', `${username}@thisiget.com`);
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     const currentMsgNumber = await getLatestMessage();
     await click('submit');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     const token = await getToken('resetPassword', currentMsgNumber);
     await page.goto(`${sitePath}/${token}`);
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await setFormInput('password', 'asdfasdf');
     await setFormInput('repeat_password', 'asdfasdf');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await click('submit');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await setFormInput('password', 'asdfasdf');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await click('submit');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await gotoAccountSettings();
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await setFormInput('password_form-password', password);
     await setFormInput('password_form-repeat_password', password);
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await click('password_form-submit_password');
-    await snap(snapshots, 'reset-password');
+    await snap('reset-password', snapshots);
 
     await logout();
     expect(indexes).toHaveLength(snapshots.length);
@@ -69,6 +69,7 @@ describe('Reset Password', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {
+      expect(snapshots).toHaveLength(indexes.length);
       checkSnap(index, snapshots, replacements);
     },
   );

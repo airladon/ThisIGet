@@ -8,6 +8,8 @@ const fs = require('fs');
 
 expect.extend({ toMatchImageSnapshot });
 
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
+
 /**
  * Takes a screen snapshot.
  * Either creates a file name and adds the screenshot and filname to a
@@ -70,8 +72,6 @@ function checkSnap(index, snapshots, replacements) {
   replacements.pop();
 }
 
-const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -128,23 +128,26 @@ async function getLatestMessage() {
 }
 
 
-async function login(username, password, debug = '') {
-  await debugSnapshot(debug, 0);
+async function login(
+  username, password,
+  fileNamePrefix = '', snapshots = null, startIndex = null,
+) {
+  await debugSnapshot(fileNamePrefix, snapshots, startIndex);
   await click('id_navbar_loginout');
-  await debugSnapshot(debug, 1);
+  await debugSnapshot(fileNamePrefix, snapshots);
 
   await setFormInput('username_or_email', username);
   await setFormInput('password', password);
-  await debugSnapshot(debug, 2);
+  await debugSnapshot(fileNamePrefix, snapshots);
 
   await click('submit');
-  await debugSnapshot(debug, 3);
+  await debugSnapshot(fileNamePrefix, snapshots);
 }
 
-async function logout(debug = '') {
-  if (debug) {
-    await snapshot(`${debug}-0`);
-  }
+async function logout(
+  fileNamePrefix = '', snapshots = null, startIndex = null,
+) {
+  await debugSnapshot(fileNamePrefix, snapshots, startIndex);
   // First check it we can log out
   const button = await page.$('#id_navbar_loginout');
   const className = await ((await button.getProperty('className')).jsonValue());
@@ -155,37 +158,33 @@ async function logout(debug = '') {
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
   ]);
-  if (debug) {
-    await snapshot(`${debug}-1`);
-  }
+  await debugSnapshot(fileNamePrefix, snapshots);
   const hints = await page.$$('.dropdown_button_list_item_link');
-  if (debug) {
-    await snapshot(`${debug}-2`);
-  }
+  await debugSnapshot(fileNamePrefix, snapshots);
   await Promise.all([
     page.waitForNavigation(),
     hints[1].click(),
   ]);
-  if (debug) {
-    await snapshot(`${debug}-3`);
-  }
+  await debugSnapshot(fileNamePrefix, snapshots);
 }
 
 
-async function gotoAccountSettings(debug = '', index = 1) {
-  await debugSnapshot(debug, index + 0);
+async function gotoAccountSettings(
+  fileNamePrefix = '', snapshots = null, startIndex = null,
+) {
+  await debugSnapshot(fileNamePrefix, snapshots, startIndex);
   await Promise.all([
     page.waitForSelector('#id_navbar_loginout_list'),
     page.click('#id_navbar_loginout'),
   ]);
-  await debugSnapshot(debug, index + 1);
+  await debugSnapshot(fileNamePrefix, snapshots);
 
   const hints = await page.$$('.dropdown_button_list_item_link');
   await Promise.all([
     page.waitForNavigation(),
     hints[0].click(),
   ]);
-  await debugSnapshot(debug, index + 2);
+  await debugSnapshot(fileNamePrefix, snapshots);
 }
 
 

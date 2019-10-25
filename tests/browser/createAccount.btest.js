@@ -61,13 +61,10 @@ describe('Create Account', () => {
     await snap('create-account-errors', snapshots);
   });
 
-  test('Snapshot Numbers Math', () => {
-    expect(snapshots).toHaveLength(indexes.length);
-  });
-
   test.each(indexes)(
     'Screenshot %i',
     (index) => {
+      expect(snapshots).toHaveLength(indexes.length);
       checkSnap(index, snapshots, replacements);
     },
   );

@@ -2,16 +2,18 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
-  login, snapshot, logout,
-  setFormInput, click, goHome, sleep,
+  login, snap, logout,
+  setFormInput, click, goHome, sleep, checkSnap, writeReplacements,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
 
-// const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
-// const testMode = process.env.TIG_MODE || 'test';
 const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
+
+const snapshots = [];
+const indexes = Array.from(Array(7).keys());
+const replacements = [];
 
 
 describe('Account Settings Flow', () => {
@@ -27,17 +29,29 @@ describe('Account Settings Flow', () => {
   test('Log In', async () => {
     jest.setTimeout(10000);
     await sleep(500);
-    await login(username, password, 'login');
+    await login(username, password, 'login', snapshots, 0);
   });
 
   test('Log In - Errors', async () => {
     jest.setTimeout(10000);
     await click('id_navbar_loginout');
-    await snapshot('login-errors-1');
+    await snap('login-errors', snapshots, 1);
     await setFormInput('username_or_email', username);
     await setFormInput('password', '3');
-    await snapshot('login-errors-2');
+    await snap('login-errors', snapshots);
     await click('submit');
-    await snapshot('login-errors-3');
+    await snap('login-errors', snapshots);
+  });
+
+  test.each(indexes)(
+    'Screenshot %i',
+    (index) => {
+      expect(snapshots).toHaveLength(indexes.length);
+      checkSnap(index, snapshots, replacements);
+    },
+  );
+
+  test('Write Replacements', () => {
+    writeReplacements(__dirname, replacements);
   });
 });
