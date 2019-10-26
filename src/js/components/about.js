@@ -87,7 +87,7 @@ export default class About extends React.Component
       <div className="about_section">
         <div className="about__tiles">
           <div className="about__title">
-            <div className="about__arrow_text">{'Different ways resonate with different people'}</div>
+            <div className="about__tiles_text_title about__tiles_text_title_center">{'Different ways resonate with different people'}</div>
             <div className="about__arrow_subtext">{'Your individual experiences, knowledge, language, context, personality and learning goals influence your preferred way to learn.'}</div>
             <div className="about__arrow_subtext">{"If one way of learning is not sufficient for everybody, then let's make them all available."}</div>
             <img className="about__arrow" src="/static/assets/about/arrow.png"></img>
@@ -126,7 +126,7 @@ export default class About extends React.Component
       <div className="about_section about__get_started">
         <div className="about__tiles">
           <div className="about__title">
-            <div className="about__get_started_text">{'Get Started'}</div>
+            <div className="about__tiles_text_title about__tiles_text_title_center">{'Get Started'}</div>
             <div className="about__get_started_subtext">{'Navigate the learning path below and select a topic to start.'}</div>
           </div>
         </div>

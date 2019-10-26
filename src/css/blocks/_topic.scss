@@ -75,11 +75,11 @@ $title_bar_space_low: 90px;
 }
 
 .topic__diagram {
-  background-color: color('diagram', 'background');
+  background-color: var(--color-diagram-background);
 }
 
 .highlight_word {
-  color: color('diagram', 'text-keyword');
+  color: var(--color-diagram-text-keyword);
   font-style: italic;
 }
 
@@ -106,39 +106,39 @@ $title_bar_space_low: 90px;
 }
 
 .topic__sanskrit {
-  color: color('diagram', 'text-sanskrit');
+  color: var(--color-diagram-text-sanskrit);
 }
 
 .topic__arabic {
-  color: color('diagram', 'text-arabic');
+  color: var(--color-diagram-text-arabic);
 }
 
 .topic__latin {
-  color: color('diagram', 'text-latin');
+  color: var(--color-diagram-text-latin);
 }
 
 .topic__old_french {
-  color: color('diagram', 'text-oldFrench');
+  color: var(--color-diagram-text-oldFrench);
 }
 
 .topic__greek {
-  color: color('diagram', 'text-greek');
+  color: var(--color-diagram-text-greek);
 }
 
 .topic__english {
-  color: color('diagram', 'text-english');
+  color: var(--color-diagram-text-english);
 }
 
 .greek,
 .latin {
   font-style: italic;
   font-family: Times New Roman, serif;
-  color: color('diagram', 'text-latin');
+  color: var(--color-diagram-text-latin);
 }
 
 .english {
   font-style: italic;
-  color: color('diagram', 'text-english');
+  color: var(--color-diagram-text-english);
 }
 
 // ***************************************************************
@@ -180,7 +180,7 @@ $title_bar_space_low: 90px;
 }
 
 .topic__title_tile_containter {
-  background: color('site', 'primary');
+  background: var(--color-site-primary);
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 30px;

@@ -476,6 +476,8 @@ const palettes = {
     },
     logo: '0070EB',
     logoDark: '0067D6',
+    incorrect: '640000',
+    correct: '006400',
   },
   standard: {
     blue: '1CA4FC',
@@ -508,6 +510,8 @@ const palettes = {
     },
     logo: '0070EB',
     logoDark: '0067D6',
+    incorrect: '640000',
+    correct: '006400',
   },
 };
 
@@ -539,10 +543,13 @@ const themes = {
       construction7: ['cyan', 'base'],
       construction8: ['green', 'base'],
       construction9: ['red', 'base'],
-      disabled: ['black', 'light'],
-      disabledDark: ['grey', 'dark'],
-      disabledDarker: ['grey', 'darker'],
-      disabledDarkest: ['grey', 'darkest'],
+      disabled: {
+        base: ['black', 'light'],
+        lighter: ['black', 'lighter'],
+        dark: ['grey', 'dark'],
+        darker: ['grey', 'darker'],
+        darkest: ['grey', 'darkest'],
+      },
       push: ['red', 'base'],
       action: ['cyan', 'base'],
       text: {
@@ -559,6 +566,7 @@ const themes = {
         english: ['blue', 'light'],
         definition: ['grey', 'base'],
         note: ['grey', 'light'],
+        hint: ['green'],
         //
         heading: ['grey', 'base'],
       },
@@ -571,14 +579,163 @@ const themes = {
         corners: ['grey', 'base'],
         text: ['grey', 'light'],
       },
+      quiz: {
+        button: {
+          base: {
+            base: {
+              text: ['white', 'dark'],
+              background: ['black'],
+              border: ['black', 'light'],
+            },
+            hover: {
+              text: ['white', 'lightest'],
+              background: ['black', 'darker'],
+              border: ['black', 'light'],
+            },
+          },
+          disabled: {
+            text: ['black', 'dark'],
+            background: ['black'],
+            border: ['black', 'dark'],
+          },
+        },
+        input: {
+          base: {
+            text: ['grey', 'darker'],
+            background: ['white'],
+            border: ['black'],
+            placeholder: ['black', 'lighter'],
+          },
+          hover: {
+            background: ['white'],
+          },
+          disabled: {
+            text: ['grey', 'darker'],
+            background: ['black'],
+            border: ['black', 'lighter'],
+          },
+        },
+        choice: {
+          base: {
+            base: {
+              text: ['white', 'dark'],
+              background: ['black'],
+              border: ['black'],
+            },
+            hover: {
+              text: ['white', 'dark'],
+              background: ['black', 'darker'],
+              border: ['black', 'darker'],
+            },
+          },
+          select: {
+            base: {
+              text: ['blue', 'base'],
+            },
+            hover: {
+              text: ['blue', 'base'],
+            },
+            disabled: {
+              text: ['blue', 'dark'],
+            },
+          },
+          disabled: {
+            text: ['black', 'dark'],
+            background: ['black'],
+            border: ['black'],
+          },
+        },
+        correct: {
+          base: {
+            text: ['white'],
+            border: ['white', 'darker'],
+            background: ['correct', 'base'],
+          },
+          hover: {
+            text: ['white'],
+            border: ['white', 'darker'],
+            background: ['correct', 'light'],
+          },
+        },
+        incorrect: {
+          base: {
+            text: ['white'],
+            border: ['black', 'lightest'],
+            background: ['incorrect', 'base'],
+          },
+          hover: {
+            text: ['white'],
+            border: ['black', 'lightest'],
+            background: ['incorrect', 'light'],
+          },
+        },
+      },
+    },
+    qr: {
+      presentation: {
+        title: ['white', 'dark'],
+        background: ['black', 'dark'],
+        border: ['black', 'light'],
+        shaddow: ['black', 'dark'],
+        link: ['white', 'dark'],
+        close: {
+          base: {
+            text: ['white', 'dark'],
+            border: ['white', 'dark'],
+            background: ['black', 'dark'],
+          },
+          hover: {
+            text: ['white', 'dark'],
+            border: ['white', 'dark'],
+            background: ['black', 'light'],
+          },
+        },
+      },
+      simple: {
+        title: ['black', 'lighter'],
+        background: ['offWhite'],
+        border: ['black', 'light'],
+        shaddow: ['white', 'darkest'],
+        link: ['black', 'lighter'],
+        content: {
+          border: ['white', 'lighter'],
+          background: ['white'],
+        },
+        close: {
+          base: {
+            text: ['grey', 'dark'],
+            border: ['white', 'light'],
+            background: ['offWhite'],
+          },
+          hover: {
+            text: ['grey', 'dark'],
+            border: ['white', 'light'],
+            background: ['white', 'lightest'],
+          },
+        },
+      },
     },
     presentation: {
       background: ['white', 'base'],
-      button: ['white', 'darkest'],
+      // button: ['white', 'darkest'],
       disabled: ['white', 'lighter'],
       hover: ['grey', 'lighter'],
       hoverBackground: ['white', 'base'],
       text: ['grey', 'base'],
+      button: {
+        base: {
+          base: {
+            text: ['black', 'darker'],
+            background: ['white'],
+            border: ['white', 'darkest'],
+          },
+          hover: {
+            text: ['black', 'darker'],
+            background: ['white', 'lightest'],
+            border: ['white', 'darkest'],
+          },
+        },
+      },
     },
     lesson: {
       background: ['grey', 'dark'],
@@ -595,50 +752,182 @@ const themes = {
       //   highlight: ['grey', 'darker'],
       // },
     },
+    topic: {
+      background: ['white'],
+      text: ['grey', 'darkest'],
+      border: ['white', 'light'],
+      shaddow: ['white', 'darkest'],
+      // subheading: ['grey', 'darker'],
+      title: {
+        text: ['grey', 'darkest'],
+        background: ['offWhite'],
+      },
+      subtitle: {
+        text: ['grey', 'darker'],
+        background: ['white'],
+      },
+    },
     site: {
-      primary: ['logo', 'base'],
-      primaryDark: ['logoDark', 'base'],
+      primary: {
+        base: ['logo', 'base'],
+        dark: ['logoDark', 'base'],
+      },
       logoText: ['white', 'base'],
       warning: ['red', 'dark'],
       secondary: ['blue', 'light'],
       text: ['grey', 'darker'],
+      title: ['grey', 'darkest'],
+      information: ['grey', 'darkest'],
       h1: ['grey', 'darkest'],
       background: ['offWhite', 'base'],
       fill: ['offWhite', 'dark'],
       disabled: ['grey', 'base'],
       safe: ['green', 'dark'],
-      menus: {
-        background: ['grey', 'darker'],
-        text: ['white', 'light'],
-        textHover: ['white', 'base'],
-        border: ['grey', 'darkest'],
-      },
-      button: {
-        text: ['black', 'lighter'],
-        border: ['white', 'darker'],
-        hoverBackground: ['white', 'lighter'],
-        highlight: {
-          text: ['white'],
-          background: ['logo', 'base'],
-          hoverBackground: ['logo', 'light'],
-        },
-      },
-      colorButton: {
-        text: ['white', 'base'],
-        background: ['green', 'dark'],
-        hoverBackground: ['green', 'darker'],
-      },
       table: {
         border: ['white', 'light'],
+      },
+      input: {
+        border: ['black', 'lightest'],
+      },
+    },
+    section: {
+      background: ['white', 'lightest'],
+      text: {
+        base: ['grey', 'darker'],
+        title: ['black', 'darker'],
+      },
+    },
+    tile: {
+      background: ['logo', 'base'],
+    },
+    button: {
+      base: {
+        base: {
+          text: ['black', 'lighter'],
+          border: ['white', 'lighter'],
+          background: ['white', 'lighter'],
+        },
+        hover: {
+          text: ['black', 'lighter'],
+          border: ['white', 'light'],
+          background: ['white', 'light'],
+        },
+      },
+      negative: {
+        base: {
+          text: ['white', 'lighter'],
+          border: ['black', 'lighter'],
+          background: ['black', 'lighter'],
+        },
+        hover: {
+          text: ['white', 'lighter'],
+          border: ['black', 'light'],
+          background: ['black', 'light'],
+        },
+      },
+      select: {
+        base: {
+          text: ['white'],
+          border: ['logo', 'base'],
+          background: ['logo', 'base'],
+        },
+        hover: {
+          text: ['white'],
+          border: ['logo', 'base'],
+          background: ['logo', 'base'],
+        },
+      },
+      highlight: {
+        base: {
+          text: ['white'],
+          border: ['green', 'dark'],
+          background: ['green', 'dark'],
+        },
+        hover: {
+          text: ['white'],
+          border: ['green', 'darker'],
+          background: ['green', 'darker'],
+        },
+      },
+      disabled: {
+        text: ['white', 'darker'],
+        background: ['white'],
+        border: ['white', 'lighter'],
+      },
+    },
+    lp: {
+      container: {
+        background: ['white'],
+        border: ['white', 'lighter'],
+      },
+      tile: {
+        base: {
+          base: {
+            text: ['black', 'lighter'],
+            background: ['white', 'lighter'],
+            border: ['white', 'lighter'],
+          },
+          hover: {
+            text: ['black', 'lighter'],
+            background: ['white', 'light'],
+            border: ['white', 'light'],
+          },
+        },
+        select: {
+          base: {
+            text: ['white'],
+            background: ['logo', 'base'],
+            border: ['logo', 'base'],
+          },
+          hover: {
+            text: ['white'],
+            background: ['red', 'light'],
+            border: ['logo', 'light'],
+          },
+        },
+        disabled: {
+          text: ['white', 'darker'],
+          background: ['white'],
+          border: ['white', 'lighter'],
+        },
       },
     },
     navbar: {
       // text: ['white', 'lighter'],
       text: {
+        base: ['white', 'lighter'],
         hover: ['white', 'base'],
         input: ['grey', 'lighter'],
       },
       background: ['grey', 'darker'],
+    },
+    menu: {
+      base: {
+        base: {
+          background: ['white', 'base'],
+          text: ['black', 'lighter'],
+        },
+        hover: {
+          background: ['white', 'lightest'],
+          text: ['black', 'lighter'],
+        },
+      },
+      select: {
+        base: {
+          background: ['logo', 'base'],
+          text: ['white'],
+        },
+        hover: {
+          background: ['logo', 'base'],
+          text: ['white'],
+        },
+      },
+      disabled: {
+        background: ['white', 'base'],
+        text: ['white', 'darkest'],
+      },
+      separator: ['white', 'dark'],
+      border: ['white', 'dark'],
     },
   },
 };
@@ -691,43 +980,200 @@ class Colors {
       this.get('site', 'text').toCssVar('--color-site-text');
       this.get('site', 'disabled').toCssVar('--color-site-disabled');
       this.get('site', 'h1').toCssVar('--color-site-h1');
-      this.get('site', 'primary').toCssVar('--color-site-primary');
-      this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
+      // this.get('site', 'primary').toCssVar('--color-site-primary');
+      // this.get('site', 'primaryDark').toCssVar('--color-site-primary-dark');
       this.get('site', 'warning').toCssVar('--color-site-warning');
       this.get('site', 'safe').toCssVar('--color-site-safe');
       this.get('site', 'logoText').toCssVar('--color-site-logo-text');
-
-      // Buttons
-      this.get('site', 'button', 'text').toCssVar('--color-site-button-text');
-      this.get('site', 'button', 'hoverBackground')
-        .toCssVar('--color-site-button-hover-background');
-      this.get('site', 'button', 'border').toCssVar('--color-site-button-border');
-      this.get('site', 'button', 'highlight', 'text')
-        .toCssVar('--color-site-button-highlight-text');
-      this.get('site', 'button', 'highlight', 'background')
-        .toCssVar('--color-site-button-highlight-background');
-      this.get('site', 'button', 'highlight', 'hoverBackground')
-        .toCssVar('--color-site-button-highlight-hover-background');
-
-      this.get('site', 'colorButton', 'text')
-        .toCssVar('--color-site-color-button-text');
-      this.get('site', 'colorButton', 'background')
-        .toCssVar('--color-site-color-button-background');
-      this.get('site', 'colorButton', 'hoverBackground')
-        .toCssVar('--color-site-color-button-hover-background');
-
-      // Menus
-      this.get('site', 'menus', 'text').toCssVar('--color-site-menus-text');
-      this.get('site', 'menus', 'textHover')
-        .toCssVar('--color-site-menus-text-hover');
-      this.get('site', 'menus', 'background')
-        .toCssVar('--color-site-menus-background');
-      this.get('site', 'menus', 'border')
-        .toCssVar('--color-site-menus-border');
+      this.setCssVar('site', 'primary', 'base');
+      this.setCssVar('site', 'primary', 'dark');
+      this.setCssVar('site', 'input', 'border');
+      this.setCssVar('site', 'title');
+      this.setCssVar('site', 'information');
 
       this.get('site', 'table', 'border').toCssVar('--color-site-table-border');
+
+      this.setCssVar('navbar', 'background');
+      this.setCssVar('navbar', 'text', 'base');
+      this.setCssVar('navbar', 'text', 'hover');
+
+      this.setCssVar('menu', 'base', 'base', 'text');
+      this.setCssVar('menu', 'base', 'base', 'background');
+      this.setCssVar('menu', 'base', 'hover', 'text');
+      this.setCssVar('menu', 'base', 'hover', 'background');
+      this.setCssVar('menu', 'select', 'base', 'text');
+      this.setCssVar('menu', 'select', 'base', 'background');
+      this.setCssVar('menu', 'select', 'hover', 'text');
+      this.setCssVar('menu', 'select', 'hover', 'background');
+      this.setCssVar('menu', 'disabled', 'text');
+      this.setCssVar('menu', 'disabled', 'background');
+      this.setCssVar('menu', 'separator');
+      this.setCssVar('menu', 'border');
+
+      this.setCssVar('topic', 'background');
+      this.setCssVar('topic', 'text');
+      this.setCssVar('topic', 'border');
+      this.setCssVar('topic', 'shaddow');
+      this.setCssVar('topic', 'title', 'text');
+      this.setCssVar('topic', 'title', 'background');
+      this.setCssVar('topic', 'subtitle', 'text');
+      this.setCssVar('topic', 'subtitle', 'background');
+
+      this.setCssVar('qr', 'presentation', 'title');
+      this.setCssVar('qr', 'presentation', 'background');
+      this.setCssVar('qr', 'presentation', 'border');
+      this.setCssVar('qr', 'presentation', 'shaddow');
+      this.setCssVar('qr', 'presentation', 'link');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'text');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'border');
+      this.setCssVar('qr', 'presentation', 'close', 'base', 'background');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'text');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'border');
+      this.setCssVar('qr', 'presentation', 'close', 'hover', 'background');
+      this.setCssVar('qr', 'simple', 'title');
+      this.setCssVar('qr', 'simple', 'background');
+      this.setCssVar('qr', 'simple', 'shaddow');
+      this.setCssVar('qr', 'simple', 'border');
+      this.setCssVar('qr', 'simple', 'link');
+      this.setCssVar('qr', 'simple', 'content', 'background');
+      this.setCssVar('qr', 'simple', 'content', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'text');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'base', 'background');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'text');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'border');
+      this.setCssVar('qr', 'simple', 'close', 'hover', 'background');
+
+      this.setCssVar('section', 'background');
+      this.setCssVar('section', 'text', 'title');
+      this.setCssVar('section', 'text');
+
+      this.setCssVar('tile', 'background');
+
+      this.get('diagram', 'background').toCssVar('--color-diagram-background');
+      this.get('diagram', 'text', 'base').toCssVar('--color-diagram-text');
+      this.get('diagram', 'equation', 'border')
+        .toCssVar('--color-diagram-equation-border');
+      this.setCssVar('diagram', 'disabled', 'base');
+      this.setCssVar('diagram', 'disabled', 'lighter');
+      this.setCssVar('diagram', 'disabled', 'dark');
+      this.setCssVar('diagram', 'disabled', 'darker');
+      this.setCssVar('diagram', 'disabled', 'darkest');
+      this.setCssVar('diagram', 'text', 'keyword');
+      this.setCssVar('diagram', 'text', 'keyword2');
+      this.setCssVar('diagram', 'text', 'sanskrit');
+      this.setCssVar('diagram', 'text', 'arabic');
+      this.setCssVar('diagram', 'text', 'latin');
+      this.setCssVar('diagram', 'text', 'oldFrench');
+      this.setCssVar('diagram', 'text', 'greek');
+      this.setCssVar('diagram', 'text', 'english');
+      this.setCssVar('diagram', 'text', 'definition');
+      this.setCssVar('diagram', 'text', 'note');
+      this.setCssVar('diagram', 'text', 'heading');
+      this.setCssVar('diagram', 'text', 'hint');
+
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'base', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'button', 'disabled', 'border');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'input', 'base', 'placeholder');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'border');
+      this.setCssVar('diagram', 'quiz', 'input', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'input', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'correct', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'correct', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'incorrect', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'base', 'border');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'base', 'hover', 'border');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'base', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'hover', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'select', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'text');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'background');
+      this.setCssVar('diagram', 'quiz', 'choice', 'disabled', 'border');
+
+      this.setCssVar('button', 'base', 'base', 'text');
+      this.setCssVar('button', 'base', 'base', 'background');
+      this.setCssVar('button', 'base', 'base', 'border');
+      this.setCssVar('button', 'base', 'hover', 'text');
+      this.setCssVar('button', 'base', 'hover', 'background');
+      this.setCssVar('button', 'base', 'hover', 'border');
+      this.setCssVar('button', 'select', 'base', 'text');
+      this.setCssVar('button', 'select', 'base', 'background');
+      this.setCssVar('button', 'select', 'base', 'border');
+      this.setCssVar('button', 'select', 'hover', 'text');
+      this.setCssVar('button', 'select', 'hover', 'background');
+      this.setCssVar('button', 'select', 'hover', 'border');
+      this.setCssVar('button', 'highlight', 'base', 'text');
+      this.setCssVar('button', 'highlight', 'base', 'background');
+      this.setCssVar('button', 'highlight', 'base', 'border');
+      this.setCssVar('button', 'highlight', 'hover', 'text');
+      this.setCssVar('button', 'highlight', 'hover', 'background');
+      this.setCssVar('button', 'highlight', 'hover', 'border');
+      this.setCssVar('button', 'disabled', 'text');
+      this.setCssVar('button', 'disabled', 'background');
+      this.setCssVar('button', 'disabled', 'border');
+      this.setCssVar('button', 'negative', 'base', 'text');
+      this.setCssVar('button', 'negative', 'base', 'background');
+      this.setCssVar('button', 'negative', 'base', 'border');
+      this.setCssVar('button', 'negative', 'hover', 'text');
+      this.setCssVar('button', 'negative', 'hover', 'background');
+      this.setCssVar('button', 'negative', 'hover', 'border');
+
+      this.setCssVar('presentation', 'button', 'base', 'base', 'text');
+      this.setCssVar('presentation', 'button', 'base', 'base', 'background');
+      this.setCssVar('presentation', 'button', 'base', 'base', 'border');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'text');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'background');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'border');
+
+      this.setCssVar('lp', 'container', 'background');
+      this.setCssVar('lp', 'container', 'border');
+      this.setCssVar('lp', 'tile', 'base', 'base', 'text');
+      this.setCssVar('lp', 'tile', 'base', 'base', 'background');
+      this.setCssVar('lp', 'tile', 'base', 'base', 'border');
+      this.setCssVar('lp', 'tile', 'base', 'hover', 'text');
+      this.setCssVar('lp', 'tile', 'base', 'hover', 'background');
+      this.setCssVar('lp', 'tile', 'base', 'hover', 'border');
+      this.setCssVar('lp', 'tile', 'select', 'base', 'text');
+      this.setCssVar('lp', 'tile', 'select', 'base', 'background');
+      this.setCssVar('lp', 'tile', 'select', 'base', 'border');
+      this.setCssVar('lp', 'tile', 'select', 'hover', 'text');
+      this.setCssVar('lp', 'tile', 'select', 'hover', 'background');
+      this.setCssVar('lp', 'tile', 'select', 'hover', 'border');
+      this.setCssVar('lp', 'tile', 'disabled', 'text');
+      this.setCssVar('lp', 'tile', 'disabled', 'background');
+      this.setCssVar('lp', 'tile', 'disabled', 'border');
     }
     return Colors.instance;
+  }
+
+  setCssVar(...args: Array<string>) {
+    const name = `--color-${args.join('-')}`;
+    const nameWithoutBase = name.replace(/-base/g, '');
+    this.get(...args).toCssVar(nameWithoutBase);
   }
 
   // eslint-disable-next-line class-methods-use-this

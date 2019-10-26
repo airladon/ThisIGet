@@ -5,5 +5,5 @@ import thresholds from './thresholds';
 
 tester(
   { thresholds },
-  'next',
+  'goto',
 );

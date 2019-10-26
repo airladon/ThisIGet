@@ -4,13 +4,20 @@
   border-style: none;
   border: 0;
   padding: 0;
-  background-color: color('presentation', 'background');
-  // background-color: color('presentation', 'background');
   top: calc(100% - var(--pres__nav_button_height));
   width: 0;
   height: 0;
   border-top: calc(var(--pres__nav_button_height) / 2) solid transparent;
   border-bottom: calc(var(--pres__nav_button_height) / 2) solid transparent;
+  background-color: var(--color-topic-background);
+}
+
+.topic__np_button_fill {
+  border-top: calc(var(--pres__nav_button_height) / 2 - 2px) solid transparent;
+  border-bottom: calc(var(--pres__nav_button_height) / 2 - 2px) solid transparent;
+  position: absolute;
+  left: calc(-1 * var(--pres__nav_button_width) + 1px);
+  top: calc(-1 * var(--pres__nav_button_height) / 2 + 2px);
 }
 
 #topic__button-previous {
@@ -54,43 +61,71 @@
 }
 
 .topic__button-next-enabled {
-  // border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
-  border-left: var(--pres__nav_button_width) solid color('black', 'lightest');
+  border-left: var(--pres__nav_button_width) solid var(--color-button-negative-border);
 }
 
 .topic__button-next-enabled:hover {
-  // border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
-  border-left: var(--pres__nav_button_width) solid color('black', 'light');
+  border-left: var(--pres__nav_button_width) solid var(--color-button-negative-hover-border);
+}
+
+.topic__button-next-enabled .topic__np_button_fill {
+  border-left: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-negative-background);
+}
+
+.topic__button-next-disabled .topic__np_button_fill {
+  border-left: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-disabled-background);
 }
 
 .topic__button-next-disabled {
-  // border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
-  border-left: var(--pres__nav_button_width) solid color('white', 'lighter');
+  border-left: var(--pres__nav_button_width) solid var(--color-button-disabled-border);
   pointer-events: none;
-}
-
-.topic__button-next-disabled:hover {
-  // border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
-  border-left: var(--pres__nav_button_width) solid color('white', 'lighter');
 }
 
 .topic__button-prev-enabled {
-  // border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
-  border-right: var(--pres__nav_button_width) solid color('black', 'lightest');
-}
-
-.topic__button-prev-enabled:hover {
-  // border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
-  border-right: var(--pres__nav_button_width) solid color('black', 'light');
+  border-right: var(--pres__nav_button_width) solid var(--color-button-negative-border);
 }
 
 .topic__button-prev-disabled {
-  // border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
-  border-right: var(--pres__nav_button_width) solid color('white', 'lighter');
+  border-right: var(--pres__nav_button_width) solid var(--color-button-disabled-border);
   pointer-events: none;
 }
 
+.topic__button-prev-enabled .topic__np_button_fill {
+  border-right: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-negative-background);
+}
+
+.topic__button-prev-disabled .topic__np_button_fill {
+  border-right: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-disabled-background);
+}
+
+.topic__button-next-enabled .topic__np_button_fill:hover {
+  border-left: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-negative-hover-background);
+}
+
+.topic__button-next-disabled:hover {
+  border-left: var(--pres__nav_button_width) solid var(--color-button-disabled-border);
+}
+
+.topic__button-next-disabled .topic__np_button_fill:hover {
+  border-left: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-disabled-background);
+}
+
+.topic__button-prev-enabled:hover {
+  border-right: var(--pres__nav_button_width) solid var(--color-button-negative-hover-border);
+}
+
 .topic__button-prev-disabled:hover {
-  // border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
-  border-right: var(--pres__nav_button_width) solid color('white', 'lighter');
+  border-right: var(--pres__nav_button_width) solid var(--color-button-disabled-border);
+}
+
+.topic__button-prev-enabled .topic__np_button_fill:hover {
+  border-right: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-negative-hover-background);
+}
+
+.topic__button-prev-disabled .topic__np_button_fill:hover {
+  border-right: calc(var(--pres__nav_button_width) - 2px) solid var(--color-button-disabled-background);
+}
+
+#topic__button-previous .topic__np_button_fill {
+  left: 1px;
 }

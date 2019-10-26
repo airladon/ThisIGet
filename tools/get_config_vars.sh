@@ -42,3 +42,13 @@ heroku config --app=$1 | \
   sed 's/^/export /' | \
   sed 's/$/"/'
 echo
+
+heroku config --app=$1 | \
+  sed '1d' | \
+  sed 's/ //g' | \
+  sed 's/:.*//' | \
+  sed '/^FLASK_APP/d' | \
+  sed '/^OLD/d' | \
+  sed 's/^/unset /'
+  # sed 's/$/"/'
+echo

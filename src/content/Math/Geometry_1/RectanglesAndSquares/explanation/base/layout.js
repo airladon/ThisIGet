@@ -17,7 +17,7 @@ export default function diagramLayout() {
   const { colors } = layout;
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
-  colors.disabled = colors.get('diagram', 'disabled').rgb;
+  colors.disabled = colors.get('diagram', 'disabled', 'base').rgb;
 
   const width = 0.02;
   const w = 3.5;

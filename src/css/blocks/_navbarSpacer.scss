@@ -3,7 +3,7 @@
   height: 0;
   width: 100%;
   position: relative;
-  background-color: color('lesson', 'title-background');
+  background-color: var(--color-site-background);
 }
 
 @media screen and (min-width: $large-desktop) {

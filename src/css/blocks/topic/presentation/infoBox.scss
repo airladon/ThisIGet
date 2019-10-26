@@ -1,13 +1,11 @@
 .topic__info_button {
-  // background-color: color('presentation', 'background');
-  background-color: #0000;
+  // background-color: #0000;
   position: absolute;
   left: calc(70% - var(--pres__button_height) / 2);
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
   width: calc(var(--pres__button_height) * 1);
   height: calc(var(--pres__button_height) * 1);
   // padding: calc(var(--pres__button_height) * 0.6 * 0.05);
-  // border-color: color('diagram', 'background', 'darker');
 }
 
 // .topic__info_button button:hover {
@@ -15,7 +13,6 @@
 //   border-radius: calc(var(--pres__button_height) / 2);
 //   width: calc(var(--pres__button_height) * 1);
 //   height: calc(var(--pres__button_height) * 1);
-//   color: color('presentation', 'hover');
 // }
 
 .topic__info_button_label_container {
@@ -23,9 +20,10 @@
   height: 100%;
   position: relative;
   display: table;
-  color: color('presentation', 'text');
+  color: var(--color-presentation-button-text);
+  background-color: var(--color-presentation-button-background);
   font-size: calc(var(--pres__unit) * 0.8);
-  border: 1px solid color('presentation', 'hover');
+  border: 1px solid var(--color-presentation-button-border);
   border-radius: calc(var(--pres__button_height) / 2);
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -50,24 +48,11 @@
 }
 
 .topic__info_button_label_container:hover {
-  color: color('presentation', 'hover');
-  // border: 1px solid color('presentation', 'hover', 'lighter');
+  color: var(--color-presentation-button-hover-text);
+  background-color: var(--color-presentation-button-hover-background);
+  border: 1px solid var(--color-presentation-button-hover-border);
   cursor: pointer;
-  // background-color: color('diagram', 'background', 'darker');
 }
-// .topic__info_button_show {
-//   // background-color: color('diagram', 'background', 'darker');
-// }
-
-// .topic__info_button_show:hover {
-//   // background-color: color('diagram', 'background', 'dark');
-// }
-
-// @media screen and (min-width: $small-tablet) {
-//   .topic__info_button {
-//     border: calc(var(--topic__goto_button-font-size) * 0.2) solid color('diagram', 'background', 'darker');
-//   }
-// }
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
   .topic__info_button {
@@ -85,7 +70,7 @@
   left: 50%;
   transform: translate(-50%, -100%);
   background-color: rgba(255, 255, 255, 0.95);
-  color: color('diagram', 'disabled', 'darker');
+  color: var(--color-diagram-disabled-darker);
   border-radius: calc(var(--topic__diagram-font-size) * 0.4);
   width: max-content;
   max-width: calc(var(--pres__content_width) * 0.8);
@@ -109,12 +94,12 @@
 }
 
 .topic__info_box__close:hover {
-  color: color('diagram', 'disabled', 'darker');
+  color: var(--color-diagram-disabled-darker);
   font-weight: light;
 }
 
 .topic__info_box__title {
-  color: color('diagram', 'disabled', 'base');
+  color: var(--color-diagram-disabled);
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   text-align: center;
   padding-top: calc(var(--topic__diagram-font-size) * 0.5);

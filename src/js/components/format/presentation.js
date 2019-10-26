@@ -289,12 +289,12 @@ export default class PresentationFormatComponent extends React.Component
   // eslint-disable-next-line class-methods-use-this
   addPrevButton() {
     return <Button label="" id="topic__button-previous" className=" topic__np_button topic__button-prev-enabled"
-    aria-label="Previous slide"/>;
+    aria-label="Previous slide"><div className="topic__np_button_fill"></div></Button>;
   }
 
   // eslint-disable-next-line class-methods-use-this
   addNextButton() {
-    return <Button label="" id="topic__button-next" className=" topic__np_button topic__button-next-enabled" aria-label="Next slide"/>;
+    return <Button label="" id="topic__button-next" className=" topic__np_button topic__button-next-enabled" aria-label="Next slide"><div className="topic__np_button_fill"></div></Button>;
   }
 
   // eslint-disable-next-line class-methods-use-this

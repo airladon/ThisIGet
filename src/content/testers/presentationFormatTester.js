@@ -1,8 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import joinObjects from './tools';
+import { joinObjects, writeImage, cleanReplacementFolder } from './tools';
 import getThreshold from './threshold';
+// import { cleanReplacementFolder } from '../../../tests/browser/common';
 
 const fs = require('fs');
 
@@ -17,14 +18,6 @@ function contentSectionCount(contentPath) {
   const content = fs.readFileSync(contentPath, 'utf8');
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
-
-// function writeImage(image, path) {
-//   fs.writeFile(path, image, function(err) {
-//     if(err) {
-//       return console.log(err);
-//     }
-// });
-// }
 
 // Open all hints on a page
 async function openHints() {
@@ -73,14 +66,14 @@ async function closeHints(hints) {
 //   [3, 3],                      // Test page 3 only
 //   [1, 10, 5, 3]                // Go from page 1 to 10, to 5, to 3
 // );
-
-
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
+  const replacementsPath = cleanReplacementFolder(fullPath);
   let scenariosToUse = scenarios;
+
   const defaultOptions = {
     thresholds: 20,
     viewPort: {
@@ -128,13 +121,13 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
   const { endpoint } = optionsToUse;
 
-
   // Tests
   describe(`${endpoint}`, () => {
     test.each(allTests)(
       'From: %i, to: %s',
       async (fromPage, toPages, options) => {
         jest.setTimeout(180000);
+        let errorFlag = false;
         const fullpath =
           `${sitePath}${prePath}/${endpoint}?page=${fromPage}`;
         try {
@@ -185,14 +178,23 @@ export default function tester(optionsOrScenario, ...scenarios) {
           let image = await page.screenshot({ clip: clippingBox });
           // writeImage(image, `${fullPath}/test_image2.png`);
           const gotoThreshold = getThreshold(currentPage, options.thresholds, 'goto');
-          expect(image).toMatchImageSnapshot({
-            failureThreshold: gotoThreshold,
-            customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
-          });
+          let fileName = `${options.prefix}page ${currentPage}`;
+          try {
+            expect(image).toMatchImageSnapshot({
+              failureThreshold: gotoThreshold,
+              customSnapshotIdentifier: fileName,
+            });
+          } catch (error) {
+            // eslint-disable-next-line
+            console.log(error);
+            writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+            errorFlag = true;
+          }
 
           // Find all links on page that go to QR popups
           const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
+
           for (const originalLink of qrLinks) {
             // Need to reget element incase a react redraw has happened
             const id = await (await originalLink.getProperty('id')).jsonValue();
@@ -201,11 +203,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await page.mouse.move(0, 0);
             await sleep(500);
 
+            fileName = `${options.prefix}page ${currentPage} - QR ${index}`;
             image = await page.screenshot({ clip: clippingBox });
-            expect(image).toMatchImageSnapshot({
-              failureThreshold: gotoThreshold,
-              customSnapshotIdentifier: `${options.prefix}page ${currentPage} - QR ${index}`,
-            });
+            try {
+              expect(image).toMatchImageSnapshot({
+                failureThreshold: gotoThreshold,
+                customSnapshotIdentifier: fileName,
+              });
+            } catch (error) {
+              // eslint-disable-next-line
+              console.log(error);
+              writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+              errorFlag = true;
+            }
             index += 1;
 
             // Close the QR window
@@ -258,14 +268,25 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
             // Take screenshot
             image = await page.screenshot({ clip: clippingBox });
-            expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,
-              customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
-            });
+            fileName = `${options.prefix}page ${currentPage}`;
+            try {
+              expect(image).toMatchImageSnapshot({
+                failureThreshold: threshold,
+                customSnapshotIdentifier: fileName,
+              });
+            } catch (error) {
+              // eslint-disable-next-line
+              console.log(error);
+              writeImage(image, `${replacementsPath}/${k}/${fileName}-snap.png`);
+              errorFlag = true;
+            }
 
             // Close all hints on a page
             await closeHints(hints);
           }
+        }
+        if (errorFlag) {
+          expect(true).toBe(false);
         }
       },
     );

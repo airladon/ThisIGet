@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import joinObjects from './tools';
+import { joinObjects, writeImage, cleanReplacementFolder } from './tools';
+// import { cleanReplacementFolder } from '../../../tests/browser/common';
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -64,6 +65,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
+  const replacementsPath = cleanReplacementFolder(fullPath);
   const defaultOptions = {
     viewHeight: 'auto',
     height: 'auto',
@@ -101,6 +103,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     test.each(allTests)(
       'width: %i height: %p, viewHeight: %p, QRs: %p, endpoint: %s',
       async (width, height, viewHeight, includeQRs, endpoint, options) => {
+        let errorFlag = false;
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
         await page.goto(fullpath, { waitUntil: 'networkidle0' });
@@ -145,10 +148,22 @@ export default function tester(optionsOrScenario, ...scenarios) {
         }
 
         let image = await page.screenshot({ clip: clippingBox });
-        expect(image).toMatchImageSnapshot({
-          failureThreshold: options.threshold,
-          customSnapshotIdentifier: `${options.prefix}${width}-${height}`,
-        });
+        let fileName = `${options.prefix}${width}-${height}`;
+        // expect(image).toMatchImageSnapshot({
+        //   failureThreshold: options.threshold,
+        //   customSnapshotIdentifier: fileName,
+        // });
+        try {
+          expect(image).toMatchImageSnapshot({
+            failureThreshold: options.threshold,
+            customSnapshotIdentifier: fileName,
+          });
+        } catch (error) {
+          // eslint-disable-next-line
+          console.log(error);
+          writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+          errorFlag = true;
+        }
         if (includeQRs) {
           // Find all links on page that go to QR popups
           // eslint-disable-next-line no-loop-func
@@ -171,10 +186,22 @@ export default function tester(optionsOrScenario, ...scenarios) {
             //   window.scrollTo(0, y);
             // }, linkBox.y);
             image = await page.screenshot({ clip: clippingBox });
-            expect(image).toMatchImageSnapshot({
-              failureThreshold: options.threshold,
-              customSnapshotIdentifier: `${options.prefix}${width}-${height}-QR-${index}`,
-            });
+            fileName = `${options.prefix}${width}-${height}-QR-${index}`;
+            // expect(image).toMatchImageSnapshot({
+            //   failureThreshold: options.threshold,
+            //   customSnapshotIdentifier: fileName,
+            // });
+            try {
+              expect(image).toMatchImageSnapshot({
+                failureThreshold: options.threshold,
+                customSnapshotIdentifier: fileName,
+              });
+            } catch (error) {
+              // eslint-disable-next-line
+              console.log(error);
+              writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
+              errorFlag = true;
+            }
             index += 1;
             const closeButtons = await page.$$('.topic__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
@@ -186,6 +213,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
               }
             }
           }
+        }
+        if (errorFlag) {
+          expect(true).toBe(false);
         }
       },
     );

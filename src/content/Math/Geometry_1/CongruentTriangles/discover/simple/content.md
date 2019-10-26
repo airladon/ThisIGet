@@ -7,7 +7,7 @@ For two triangles to be **congruent**, the corresponding **side lengths** and **
 
 ![](congruent.png)
 
-Flipped and rotated triangles still have the same corresponding sides and angles and therefore be congruent.
+Flipped and rotated triangles still have the same corresponding sides and angles and are therefore congruent.
 
 ### Congruence Tests
 

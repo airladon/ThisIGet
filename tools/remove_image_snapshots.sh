@@ -1,1 +1,1 @@
-find -E ./src/content -regex '.*__image_snapshots__.*png' -delete
+find -E ./src/content ./tests -regex '.*__image_snapshots__.*png' -delete

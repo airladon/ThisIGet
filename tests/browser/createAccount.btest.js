@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
-  snapshot, logout,
+  logout, snap, checkSnap, writeReplacements,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,
 } from './common';
 
@@ -10,6 +10,10 @@ expect.extend({ toMatchImageSnapshot });
 
 const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
+
+const snapshots = [];
+const indexes = Array.from(Array(12).keys());
+const replacements = [];
 
 
 describe('Create Account', () => {
@@ -26,11 +30,15 @@ describe('Create Account', () => {
     jest.setTimeout(20000);
     await sleep(500);
     await deleteAccount(username, password);
-    await createAccount(username, `${username}@thisiget.com`, password, 'create-account');
+    await createAccount(
+      username, `${username}@thisiget.com`, password,
+      'create-account', snapshots, 0,
+    );
     await setFormInput('password', password);
-    await snapshot('create-account-7');
+    await snap('create-account', snapshots);
+
     await click('submit');
-    await snapshot('create-account-8');
+    await snap('create-account', snapshots);
   });
 
   test('Create Account - Errors', async () => {
@@ -41,15 +49,27 @@ describe('Create Account', () => {
 
     await setFormInput('username', username);
     await click('submit');
-    await snapshot('create-account-errors-1');
+    await snap('create-account-errors', snapshots, 1);
 
     await setFormInput('email', `${username}@thisiget.com`);
     await click('submit');
-    await snapshot('create-account-errors-2');
+    await snap('create-account-errors', snapshots);
 
     await setFormInput('password', 'asdfasdf');
     await setFormInput('repeat_password', 'asdfasdf1');
     await click('submit');
-    await snapshot('create-account-errors-3');
+    await snap('create-account-errors', snapshots);
+  });
+
+  test.each(indexes)(
+    'Screenshot %i',
+    (index) => {
+      expect(snapshots).toHaveLength(indexes.length);
+      checkSnap(index, snapshots, replacements);
+    },
+  );
+
+  test('Write Replacements', () => {
+    writeReplacements(__dirname, replacements);
   });
 });

@@ -8,11 +8,11 @@ $fontSize: 14px;
 .navbar_login .dropdown_button_container {
   width: auto;
   // width: 200px;
-  background-color: color('navbar', 'background');
-  border: 1px solid color('navbar', 'background');
+  background-color: var(--color-navbar-background);
+  border: 1px solid var(--color-navbar-background);
   border-radius: $radius;
   font-size: $fontSize;
-  color: color('navbar', 'text');
+  color: var(--color-navbar-text);
 }
 
 .navbar_login .dropdown_button_label_container {
@@ -20,19 +20,13 @@ $fontSize: 14px;
 }
 
 .navbar_login .dropdown_button_container:hover {
-  // border: 1px solid color('white', 'light');
-  background-color: darken(color('navbar', 'background'), 3);
+  color: var(--color-navbar-text-hover);
 }
 
 .navbar_login .dropdown_button_list {
   border-radius: $radius;
   font-weight: 100;
   font-size: $fontSize;
-}
-
-.navbar_login__loggedin_label_username {
-  // font-weight: 400;
-  color: lighten(color('navbar', 'text'), 20);
 }
 
 #id_navbar_loginout {
@@ -45,8 +39,9 @@ $fontSize: 14px;
 
 .navbar_login .dropdown_button_list_item_disabled {
   font-size: 0.8em;
-  border-bottom: 1px solid color('white', 'lighter');
-  color: color('white', 'darkest');
+  // border-bottom: 1px solid color('white', 'lighter');
+  border-bottom: 1px solid var(--color-menu-separator);
+  color: var(--color-menu-disabled-text);
   padding-top: 0.6em;
   padding-bottom: 0.6em;
 }

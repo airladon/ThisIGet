@@ -11,7 +11,7 @@
 }
 
 .about__credits_category_title {
-  color: color('black');
+  color: var(--color-site-title);
 }
 
 @media screen and (max-width: 50em) {

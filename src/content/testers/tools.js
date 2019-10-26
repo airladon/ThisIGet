@@ -1,7 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 
-export default function joinObjects(...objects) {
+const path = require('path');
+const fs = require('fs');
+
+function joinObjects(...objects) {
   const assignObjectFromTo = (fromObject, toObject) => {
     Object.keys(fromObject).forEach((key) => {
       const value = fromObject[key];
@@ -45,3 +48,37 @@ export default function joinObjects(...objects) {
   }
   return out;
 }
+
+function writeImage(image, imagePath) {
+  const folder = path.dirname(imagePath);
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true });
+  }
+  fs.writeFile(imagePath, image, (err) => {
+    if (err) {
+      // eslint-disable-next-line
+      console.log(err);
+    }
+  });
+}
+
+function cleanReplacementFolder(callingScriptPath) {
+  const deleteFolderRecursive = (folderPath) => {
+    if (fs.existsSync(folderPath)) {
+      fs.readdirSync(folderPath).forEach((file) => {
+        const curPath = path.join(folderPath, file);
+        if (fs.lstatSync(curPath).isDirectory()) { // recurse
+          deleteFolderRecursive(curPath);
+        } else { // delete file
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(folderPath);
+    }
+  };
+  const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+  deleteFolderRecursive(folder);
+  return folder;
+}
+
+export { writeImage, joinObjects, cleanReplacementFolder };

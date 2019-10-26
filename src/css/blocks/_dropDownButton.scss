@@ -6,20 +6,20 @@ $button_size: 0.4em;
   height: 100%;
   display: table;
   border-radius: $radius;
-  color: var(--color-site-button-text);
+  color: var(--color-button-text);
 }
 
 .dropdown_button_container:hover {
-  background-color: var(--color-site-button-hover-background);
+  background-color: var(--color-button-hover-background);
 }
 
 .dropdown_button_selected {
-  background-color: var(--color-site-button-highlight-background);
-  color: var(--color-site-button-highlight-text);
+  background-color: var(--color-button-select-background);
+  color: var(--color-button-select-text);
 }
 
 .dropdown_button_selected:hover {
-  background-color: var(--color-site-button-highlight-hover-background);
+  background-color: var(--color-button-select-hover-background);
 }
 
 .dropdown_button_label_container {
@@ -96,10 +96,10 @@ $button_size: 0.4em;
 .dropdown_button_list {
   position: absolute;
   z-index: 10;
-  background-color: var(--color-site-background);
+  background-color: var(--color-menu-background);
   border-radius: $radius;
   // border: 1px solid #ccc;
-  border: 1px solid var(--color-site-button-border);
+  border: 1px solid var(--color-menu-border);
   cursor: default;
   overflow: hidden;
 }
@@ -112,8 +112,8 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item {
-  color: var(--color-site-button-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-text);
+  background-color: var(--color-menu-background);
   white-space: nowrap;
   position: relative;
   display: block;
@@ -121,13 +121,14 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item:hover {
-  background-color: var(--color-site-button-hover-background);
+  background-color: var(--color-menu-hover-background);
+  color: var(--color-menu-hover-text);
   cursor: pointer;
 }
 
 .dropdown_button_list_item_active {
-  background-color: var(--color-site-button-highlight-background);
-  color: var(--color-site-button-highlight-text);
+  background-color: var(--color-menu-select-background);
+  color: var(--color-menu-select-text);
 }
 
 // .dropdown_button_list_item_active .dropdown_button_list_item_link:focus {
@@ -135,32 +136,33 @@ $button_size: 0.4em;
 // }
 
 .dropdown_button_list_item_active:hover {
-  background-color: var(--color-site-button-highlight-hover-background);
+  background-color: var(--color-menu-select-hover-background);
+  color: var(--color-menu-select-hover-text);
 }
 
 .dropdown_button_list_item_disabled {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
 }
 
 .dropdown_button_list_item_disabled:hover {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   cursor: default;
 }
 
 .dropdown_button_list_item_separator {
-  color: var(--color-site-disabled);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   font-size: 0.75em;
   padding-top: 0.75em;
   padding-bottom: 5px;
-  border-bottom: 1px solid var(--color-site-background);
-  border-top: 1px solid var(--color-site-background);
+  border-bottom: 1px solid var(--color-menu-separator);
+  border-top: 1px solid var(--color-menu-separator);
 }
 
 .dropdown_button_list_item_separator:hover {
-  color: var(--color-site-text);
-  background-color: var(--color-site-background);
+  color: var(--color-menu-disabled-text);
+  background-color: var(--color-menu-disabled-background);
   cursor: default;
 }

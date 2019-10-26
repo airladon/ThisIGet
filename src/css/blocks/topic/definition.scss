@@ -1,5 +1,5 @@
 .diagram__definition_container {
-  color: color('diagram', 'text-definition');
+  color: var(--color-diagram-text-definition);
   position: absolute;
   top: 90%;
   left: 7%;
@@ -22,17 +22,16 @@
 }
 
 .diagram__definition_word {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
   padding-right: calc(var(--topic__diagram-font-size) * 0.15);
 }
 
 .diagram__definition_root {
-  // color: color('diagram', 'text-latin');
   font-family: times new roman, serif;
   font-style: italic;
   padding-left: calc(var(--topic__diagram-font-size) * 0.15);
 }
 
 .diagram__definition_meaning {
-  color: color('diagram', 'text-base');
+  color: var(--color-diagram-text);
 }
