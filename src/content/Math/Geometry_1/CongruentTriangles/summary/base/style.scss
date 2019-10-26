@@ -11,6 +11,7 @@
 
 .topic__congruent_angles_summary__sub_title {
   font-size: calc(var(--topic__diagram-font-size) * 0.7);
+  color: #929292;
   color: var(--color-congruenttrianglessummary-sub-title);
   margin-left: calc(var(--topic__diagram-font-size) * 1.5);
   margin-top: calc(var(--topic__diagram-font-size) * 1);
@@ -26,6 +27,7 @@
 }
 
 .topic__congruent_angles_summary__label {
+  color: #fdf1aa;
   color: var(--color-diagram-text);
   font-size: calc(var(--topic__diagram-font-size) * 0.6);
   width: calc(var(--topic__diagram-font-size) * 15);

@@ -13,16 +13,9 @@ const {
 
 const { joinObjects, duplicateFromTo } = Fig.tools.misc;
 
-// const cssColorNames = [
-//   'circle',
-//   'dimensions',
-//   'dimensionsDark',
-// ];
-
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = baseLayout();
-  // const colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
   colors.circle = colors.get('red', 'dark').rgb;
   colors.dimensions = colors.get('blue', 'dark').rgb;

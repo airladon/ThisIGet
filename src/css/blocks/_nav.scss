@@ -1,5 +1,6 @@
 
 .navbar-container {
+  background-color: #5f5f5f;
   background-color: var(--color-navbar-background);
   height: 50px;
   padding-top: 10px;
@@ -25,17 +26,20 @@
   padding-top: 0.25rem;
   padding-left: 0;
   margin-left: 2em;
+  color: #ddd;
   color: var(--color-navbar-text);
   font-size: 14px;
   position: relative;
 }
 
 .navbar-text a {
+  color: #ddd;
   color: var(--color-navbar-text);
   text-decoration: none;
 }
 
 .navbar-text a:hover {
+  color: #fff;
   color: var(--color-navbar-text-hover);
   text-decoration: none;
 }
@@ -80,6 +84,7 @@
 // }
 
 .navbar-text:hover {
+  color: #fff;
   color: var(--color-navbar-text-hover);
 }
 

@@ -37,11 +37,13 @@
   // 2.5em title + padding
   // 2.5em link + padding
   // 1em padding top/bottom
+  box-shadow: 0 0 20px #999;
   box-shadow: 0 0 20px var(--color-qr-simple-shaddow);
   max-height: calc(400px + 6em);
   font-size: initial;
   z-index: 10;
   position: absolute;
+  background-color: #fafafa;
   background-color: var(--color-qr-simple-background);
   padding: 0.5em;
   border-radius: 0.2em;
@@ -83,6 +85,7 @@
   padding-right: 1em;
   padding-left: 0.4em;
   font-weight: 200;
+  color: #555;
   color: var(--color-qr-simple-title);
 }
 
@@ -105,9 +108,12 @@
 
 .topic__qr__title_close {
   display: table-cell;
+  color: #797979;
   color: var(--color-qr-simple-close-text);
   width: 2em;
+  border: solid 1px #ccc;
   border: solid 1px var(--color-qr-simple-close-border);
+  background-color: #fafafa;
   background-color: var(--color-qr-simple-close-background);
   height: 2em;
   text-align: center;
@@ -117,8 +123,11 @@
 }
 
 .topic__qr__title_close:hover {
+  color: #797979;
   color: var(--color-qr-simple-close-hover-text);
+  border: solid 1px #ccc;
   border: solid 1px var(--color-qr-simple-close-hover-border);
+  background-color: #eee;
   background-color: var(--color-qr-simple-close-hover-background);
   cursor: pointer;
 }
@@ -130,7 +139,9 @@
   overflow-y: scroll;
   max-height: 400px;
   max-width: 600px;
+  background-color: #fff;
   background-color: var(--color-qr-simple-content-background);
+  border: 1px solid #ddd;
   border: 1px solid var(--color-qr-simple-content-border);
 }
 
@@ -167,6 +178,7 @@
 
 .topic__qr__link_link {
   font-size: 0.8em;
+  color: #555;
   color: var(--color-qr-simple-link);
   text-decoration: underline;
 }
@@ -180,25 +192,35 @@
 // Presentation QR specific
 // ///////////////////////////////////////
 #topic__content_diagram .topic__qr__container {
+  background-color: #333;
   background-color: var(--color-qr-presentation-background);
   padding: 0.5em;
+  border: 1px solid #444;
   border: 1px solid var(--color-qr-presentation-border);
+  box-shadow: 0 0 3em #333;
   box-shadow: 0 0 3em var(--color-qr-presentation-shaddow);
 }
 
 #topic__content_diagram .topic__qr__title_text {
+  color: #bbb;
   color: var(--color-qr-presentation-title);
 }
 
 #topic__content_diagram .topic__qr__title_close {
+  color: #bbb;
   color: var(--color-qr-presentation-close-text);
+  border: solid 1px #bbb;
   border: solid 1px var(--color-qr-presentation-close-border);
+  background-color: #333;
   background-color: var(--color-qr-presentation-close-background);
 }
 
 #topic__content_diagram .topic__qr__title_close:hover {
+  color: #bbb;
   color: var(--color-qr-presentation-close-hover-text);
+  border: solid 1px #bbb;
   border: solid 1px var(--color-qr-presentation-close-hover-border);
+  background-color: #444;
   background-color: var(--color-qr-presentation-close-hover-background);
 }
 
@@ -207,6 +229,7 @@
 }
 
 #topic__content_diagram .topic__qr__link_link {
+  color: #bbb;
   color: var(--color-qr-presentation-link);
 }
 
@@ -224,6 +247,7 @@
 #id_qr_diagram {
   width: 100%;
   height: 100%;
+  color: #fdf1aa;
   color: var(--color-diagram-text);
 }
 

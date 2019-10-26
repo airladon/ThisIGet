@@ -183,16 +183,16 @@ export default class TopicComponent extends React.Component
       </div>;
   }
 
-  titleAsTile() {
-    return <div id="id_topic__title_tile" className="topic__title_tile">
-      <img src={'/static/'} className="navigator__topic_tile_image" />
-      <div className="topic__title_tile_containter topic__title_tile_shadow">
-        <div className="topic__title_tile_title">
-          {this.version.content.title}
-        </div>
-      </div>
-    </div>;
-  }
+  // titleAsTile() {
+  //   return <div id="id_topic__title_tile" className="topic__title_tile">
+  //     <img src={'/static/'} className="navigator__topic_tile_image" />
+  //     <div className="topic__title_tile_containter topic__title_tile_shadow">
+  //       <div className="topic__title_tile_title">
+  //         {this.version.content.title}
+  //       </div>
+  //     </div>
+  //   </div>;
+  // }
 
   calcTitleHeight() {
     const { topicDescription } = this;

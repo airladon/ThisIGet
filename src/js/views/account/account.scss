@@ -6,6 +6,7 @@
 
 .input_form__submit_ok_message_container {
   font-size: 0.8em;
+  color: #4bbd29;
   color: var(--color-site-safe);
   width: 250px;
   max-width: calc(100vw - 2em);
@@ -49,7 +50,9 @@ h2 {
 }
 
 .delete_button {
+  background-color: #c51812;
   background-color: var(--color-site-warning);
+  border: 1px solid #c51812;
   border: 1px solid var(--color-site-warning);
 }
 

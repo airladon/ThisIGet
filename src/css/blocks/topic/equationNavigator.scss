@@ -8,10 +8,12 @@
 .figureone__eqn_nav__not_touchable {
   pointer-events: none;
   cursor: none;
+  color: #1f1f1f;
   color: var(--color-diagram-disabled-darkest);
 }
 
 .figureone__eqn_nav__not_touchable:hover {
+  color: #1f1f1f;
   color: var(--color-diagram-disabled-darkest);
 }
 
@@ -21,6 +23,7 @@
 
 .figureone__eqn_nav__table {
   font-size: calc(var(--topic__diagram-font-size) * 1);
+  color: #444;
   color: var(--color-diagram-disabled);
 
   --figureone__eqn_nav__font_size: 1em;
@@ -102,6 +105,7 @@
 .figureone__eqn_nav__3line__prevRow__button:hover,
 .figureone__eqn_nav__3line__currentRow__button:hover,
 .figureone__eqn_nav__3line__nextRow__button:hover {
+  color: #555;
   color: var(--color-diagram-disabled-lighter);
 }
 
@@ -140,6 +144,7 @@
 
 .figureone__eqn_nav__1line__next__button:hover,
 .figureone__eqn_nav__1line__prev__button:hover {
+  color: #555;
   color: var(--color-diagram-disabled-lighter);
 }
 
@@ -180,6 +185,7 @@
 .figureone__eqn_nav__2lines__nextRow:hover,
 .figureone__eqn_nav__2lines__next__button:hover,
 .figureone__eqn_nav__2lines__prev__button:hover {
+  color: #555;
   color: var(--color-diagram-disabled-lighter);
 }
 
