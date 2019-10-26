@@ -5,6 +5,7 @@
   // margin-right: calc(var(--pres__text_margin) * 1);
   // width: calc(100% - 4 * var(--pres__text_margin));
   font-size: 0.7em;
+  color: #fdf1aa;
   color: var(--color-diagram-text);
   margin-left: var(--pres__text_margin);
   margin-right: var(--pres__text_margin);
@@ -13,11 +14,13 @@
 .presentation__hint_label,
 .presentation__note__label {
   display: inline-block;
+  color: #ababab;
   color: var(--color-diagram-text-note);
   margin-right: 0.6em;
 }
 
 .presentation__hint_label {
+  color: #65d643;
   color: var(--color-diagram-text-hint);
 }
 

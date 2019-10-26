@@ -79,6 +79,7 @@ $title_bar_space_low: 90px;
 }
 
 .highlight_word {
+  color: #4eb8fd;
   color: var(--color-diagram-text-keyword);
   font-style: italic;
 }
@@ -106,26 +107,32 @@ $title_bar_space_low: 90px;
 }
 
 .topic__sanskrit {
+  color: #ffb733;
   color: var(--color-diagram-text-sanskrit);
 }
 
 .topic__arabic {
+  color: #c438e8;
   color: var(--color-diagram-text-arabic);
 }
 
 .topic__latin {
+  color: #5debda;
   color: var(--color-diagram-text-latin);
 }
 
 .topic__old_french {
+  color: #c438e8;
   color: var(--color-diagram-text-oldFrench);
 }
 
 .topic__greek {
+  color: #87df6d;
   color: var(--color-diagram-text-greek);
 }
 
 .topic__english {
+  color: #4eb8fd;
   color: var(--color-diagram-text-english);
 }
 
@@ -133,11 +140,13 @@ $title_bar_space_low: 90px;
 .latin {
   font-style: italic;
   font-family: Times New Roman, serif;
+  color: #5debda;
   color: var(--color-diagram-text-latin);
 }
 
 .english {
   font-style: italic;
+  color: #4eb8fd;
   color: var(--color-diagram-text-english);
 }
 
