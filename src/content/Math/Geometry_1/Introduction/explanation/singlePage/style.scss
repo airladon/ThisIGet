@@ -1,15 +1,3 @@
-@import '../../../geometry';
-
-$colors: (
-  circle:               color('red', 'dark'),
-  dimensions:            color('blue', 'dark'),
-  dimensionsDark:        color('blue', 'darker'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 // #id_figure1 {
 //   width: 300px;
 //   // width: 100%;

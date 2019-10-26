@@ -39,7 +39,6 @@ $fontSize: 14px;
 
 .navbar_login .dropdown_button_list_item_disabled {
   font-size: 0.8em;
-  // border-bottom: 1px solid color('white', 'lighter');
   border-bottom: 1px solid var(--color-menu-separator);
   color: var(--color-menu-disabled-text);
   padding-top: 0.6em;
