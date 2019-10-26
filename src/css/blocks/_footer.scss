@@ -1,6 +1,7 @@
 .footer__container {
   // height: 200px;
   width: 100%;
+  background-color: #5f5f5f;
   background-color: var(--color-navbar-background);
   display: table;
   padding: 2em;
@@ -10,18 +11,21 @@
 .footer__terms_of_use {
   font-size: 0.8em;
   text-align: center;
+  color: #ddd;
   color: var(--color-navbar-text);
   margin-bottom: 1.5em;
   font-weight: 200;
 }
 
 .footer__terms_of_use__link {
+  color: #ddd;
   color: var(--color-navbar-text);
   // font-weight: 600;
   text-decoration-line: underline;
 }
 
 .footer__terms_of_use__link:hover {
+  color: #fff;
   color: var(--color-navbar-text-hover);
 }
 
@@ -32,14 +36,17 @@
 }
 
 .footer__item:hover {
+  color: #fff;
   color: var(--color-navbar-text-hover);
 }
 
 .footer__item__label {
+  color: #ddd;
   color: var(--color-navbar-text);
 }
 
 .footer__item__label:hover {
+  color: #fff;
   color: var(--color-navbar-text-hover);
   text-decoration-line: none;
 }

@@ -7,6 +7,7 @@
 }
 
 .diagram__selector_title_not_selected:hover {
+  color: #444;
   color: var(--color-diagram-disabled);
 }
 
@@ -54,6 +55,7 @@
 
 // *********************** Vertical ***********************
 .topic__vertical_selector_table {
+  color: #444;
   color: var(--color-diagram-disabled);
   text-align: left;
   font-size: calc(var(--topic__diagram-font-size) * 0.6);

@@ -8,7 +8,12 @@ lines = color_file.readlines();
 for line in lines:
     c = re.search(r'(--color.*): #(.*);', line)
     if c:
-        colors[c.group(1)] = c.group(2)
+        hex_color = c.group(2)
+        if hex_color[0] == hex_color[1] \
+            and hex_color[2] == hex_color[3] \
+            and hex_color[4] == hex_color[5]:
+            hex_color = f'{hex_color[0]}{hex_color[2]}{hex_color[4]}'
+        colors[c.group(1)] = hex_color
 color_file.close()
 
 files = []
@@ -25,6 +30,7 @@ for f in files:
     file.close()
     new_lines = []
     previous_line = ''
+    updated = False
     for line in lines:
         color_search = re.search(r'(.*)var\((--color-[^\)]*)\)(.*)', line)
         if color_search:
@@ -33,15 +39,20 @@ for f in files:
                 print(f'{color} not defined')
                 continue
             new_line = f'{color_search.group(1)}#{colors[color]}' \
-                       f'{color_search.group(3)}'
+                       f'{color_search.group(3)}\n'
 
-            compare_previous = re.sub(r'#[0-9abcdefABCDEF]*', '', previous_line)
-            compare_new_line = re.sub(r'#[0-9abcdefABCDEF]*', '', new_line)
-            if compare_previous_line != compare_new_line:
-                new_lines.append(new_line)
-            else:
-                new_lines[-1] = new_line
-            new_lines.append(line)
-        previous_line = line;
-
+            compare_prev = re.sub(r'#[0-9abcdefABCDEF]*', '', previous_line)
+            compare_new = re.sub(r'#[0-9abcdefABCDEF]*', '', new_line)
+            if new_line != previous_line:
+                updated = True
+                if compare_prev != compare_new:
+                    new_lines.append(new_line)
+                else:
+                    new_lines[-1] = new_line
+        new_lines.append(line)
+        previous_line = line
+    if updated:
+        file = open(f, 'w')
+        file.writelines(new_lines)
+        file.close()
 

@@ -5,11 +5,14 @@
 }
 
 .topic__interactive_element_button {
+  color: #222;
   color: var(--color-presentation-button-text);
+  background-color: #fff;
   background-color: var(--color-presentation-button-background);
   width: var(--pres__button_height);
   height: var(--pres__button_height);
   position: absolute;
+  border: solid 1px #999;
   border: solid 1px var(--color-presentation-button-border);
   border-radius: calc(var(--pres__button_height) / 2);
   -webkit-user-select: none; /* Safari */
@@ -25,8 +28,11 @@
 }
 
 .topic__interactive_element_button:hover {
+  color: #222;
   color: var(--color-presentation-button-hover-text);
+  background-color: #eee;
   background-color: var(--color-presentation-button-hover-background);
+  border: solid 1px #999;
   border: solid 1px var(--color-presentation-button-hover-border);
   cursor: pointer;
 }
@@ -63,7 +69,10 @@
   // height: 0;
   // width: 0;
   // opacity: 0.5;
+  color: #aaa;
   color: var(--color-button-disabled-text);
+  background-color: #fff;
   background-color: var(--color-button-disabled-background);
+  border: solid 1px #ddd;
   border: solid 1px var(--color-button-disabled-border);
 }

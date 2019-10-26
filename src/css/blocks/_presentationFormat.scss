@@ -137,9 +137,11 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 .topic__widescreen_backdrop {
   font-size: var(--topic__diagram-font-size);
+  background-color: #fff;
   background-color: var(--color-topic-background);
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
+  border-bottom: 1px solid #ccc;
   border-bottom: 1px solid var(--color-topic-border);
 }
 
@@ -169,6 +171,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 .topic__diagram {
   width: var(--pres__content_width);
   height: var(--pres__content_height);
+  background-color: #000;
   background-color: var(--color-diagram-background);
   // border-radius: calc(var(--pres__unit) * 0.8);
 }
@@ -227,6 +230,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   padding-right: calc(var(--topic__diagram-font-size) * 0.8);
   font-size: calc(var(--topic__diagram-font-size) * 1);
   color: #fdf1aa;
+  color: #fdf1aa
   color: var(--color-diagram-text)
 }
 
@@ -236,6 +240,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 .topic__diagram_text p {
   color: #fdf1aa;
+  color: #fdf1aa
   color: var(--color-diagram-text)
   margin-left: calc(var(--pres__text_margin) * 1);
   margin-right: calc(var(--pres__text_margin) * 1);
@@ -291,6 +296,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 .topic__equation_border {
+  border: 1px solid #333;
   border: 1px solid var(--color-diagram-equation-border);
 }
 

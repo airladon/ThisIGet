@@ -75,6 +75,7 @@ $title_bar_space_low: 90px;
 }
 
 .topic__diagram {
+  background-color: #000;
   background-color: var(--color-diagram-background);
 }
 
@@ -189,6 +190,7 @@ $title_bar_space_low: 90px;
 }
 
 .topic__title_tile_containter {
+  background: #0070eb;
   background: var(--color-site-primary);
   padding-top: 10px;
   padding-bottom: 10px;

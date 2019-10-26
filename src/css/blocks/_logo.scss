@@ -4,6 +4,7 @@
   width: 5.5em;
   height: 5.5em;
   border-radius: 50%;
+  background-color: #0070eb;
   background-color: var(--color-site-primary);
   background-image: $main-logo;
   background-size: cover;
@@ -21,6 +22,7 @@
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+  color: #fff;
   color: var(--color-site-logo-text);
   font-size: 1em;
   height: 100%;

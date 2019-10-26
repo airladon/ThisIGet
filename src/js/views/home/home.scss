@@ -33,6 +33,7 @@ $fullwidth: 380px;
 
 .about_section {
   width: calc(100% - 1em);
+  background-color: #eee;
   background-color: var(--color-section-background);
   margin-left: auto;
   margin-right: auto;
@@ -81,6 +82,7 @@ $fullwidth: 380px;
 .about__tiles_text_title {
   font-size: 1.5em;
   text-align: left;
+  color: #222;
   color: var(--color-section-text-title);
 }
 
@@ -119,6 +121,7 @@ $fullwidth: 380px;
   display: table-cell;
   width: 160px;
   height: 160px;
+  background-color: #0070eb;
   background-color: var(--color-tile-background);
   color: white;
   text-align: center;
@@ -161,6 +164,7 @@ $fullwidth: 380px;
 }
 
 .about__logo_section {
+  background-color: #eee;
   background-color: var(--color-section-background);
 }
 
