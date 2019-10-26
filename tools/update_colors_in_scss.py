@@ -11,15 +11,15 @@ import os
 
 # Get colors
 colors = {}
-color_file = open('./tools/colors_to_update.txt');
-lines = color_file.readlines();
+color_file = open('./tools/colors_to_update.txt')
+lines = color_file.readlines()
 for line in lines:
     c = re.search(r'(--color.*): #(.*);', line)
     if c:
         hex_color = c.group(2)
-        if hex_color[0] == hex_color[1] \
-            and hex_color[2] == hex_color[3] \
-            and hex_color[4] == hex_color[5]:
+        if (hex_color[0] == hex_color[1]
+           and hex_color[2] == hex_color[3]
+           and hex_color[4] == hex_color[5]):
             hex_color = f'{hex_color[0]}{hex_color[2]}{hex_color[4]}'
         colors[c.group(1)] = hex_color
 color_file.close()
@@ -65,4 +65,3 @@ for f in files:
         file = open(f, 'w')
         file.writelines(new_lines)
         file.close()
-
