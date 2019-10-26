@@ -1,3 +1,11 @@
+# This script will parse all scss and find css variables that are colors
+# It will then insert the same line before that line with a hard coded color
+# so if the browser doesn't support css variables, it still gets color
+#
+# First open webpage and copy all color variables to colors_to_update.txt
+# Then run this script:
+#    python tools/update_colors_in_scss.py
+
 import re
 import os
 
