@@ -163,6 +163,11 @@ def sitemap():
     return app.send_static_file('sitemap.xml')
 
 
+@app.route('/robots.txt')
+def robots():
+    return app.send_static_file('robots.txt')
+
+
 @app.route('/hashes')
 def hashes():
     return app.send_static_file('hashes.json')

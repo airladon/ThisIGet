@@ -81,4 +81,10 @@ function cleanReplacementFolder(callingScriptPath) {
   return folder;
 }
 
-export { writeImage, joinObjects, cleanReplacementFolder };
+function getReplacementsFolder(callingScriptPath) {
+  return `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+}
+
+export {
+  writeImage, joinObjects, cleanReplacementFolder, getReplacementsFolder,
+};
