@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { joinObjects, writeImage, cleanReplacementFolder } from './tools';
-// import { cleanReplacementFolder } from '../../../tests/browser/common';
+import { joinObjects, writeImage, getReplacementsFolder } from './tools';
+// import { getReplacementsFolder } from '../../../tests/browser/common';
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -65,7 +65,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
-  const replacementsPath = cleanReplacementFolder(fullPath);
+  const replacementsPath = getReplacementsFolder(fullPath);
   const defaultOptions = {
     viewHeight: 'auto',
     height: 'auto',

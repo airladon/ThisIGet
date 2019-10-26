@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { joinObjects, writeImage, cleanReplacementFolder } from './tools';
+import { joinObjects, writeImage, getReplacementsFolder } from './tools';
 import getThreshold from './threshold';
-// import { cleanReplacementFolder } from '../../../tests/browser/common';
+// import { getReplacementsFolder } from '../../../tests/browser/common';
 
 const fs = require('fs');
 
@@ -71,7 +71,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
-  const replacementsPath = cleanReplacementFolder(fullPath);
+  // const replacementsPath = cleanReplacementFolder(fullPath);
+  const replacementsPath = getReplacementsFolder(fullPath);
   let scenariosToUse = scenarios;
 
   const defaultOptions = {

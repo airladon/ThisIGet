@@ -262,6 +262,10 @@ function cleanReplacementFolder(callingScriptPath) {
   return folder;
 }
 
+function getReplacementsFolder(callingScriptPath) {
+  return `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+}
+
 function writeSS(callingScriptPath, fileName, screenshot) {
   const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
   if (!fs.existsSync(folder)) {
@@ -271,7 +275,7 @@ function writeSS(callingScriptPath, fileName, screenshot) {
 }
 
 function writeReplacements(callingScriptPath, replacements) {
-  cleanReplacementFolder(callingScriptPath);
+  // cleanReplacementFolder(callingScriptPath);
   replacements.forEach((ss) => {
     writeSS(__dirname, ...ss);
   });
@@ -279,6 +283,7 @@ function writeReplacements(callingScriptPath, replacements) {
 
 module.exports = {
   cleanReplacementFolder,
+  getReplacementsFolder,
   login,
   gotoAccountSettings,
   snapshot,
