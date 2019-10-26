@@ -35,13 +35,15 @@ for f in files:
         color_search = re.search(r'(.*)var\((--color-[^\)]*)\)(.*)', line)
         if color_search:
             color = color_search.group(2)
+            compare_prev = re.sub(r'#[0-9abcdefABCDEF]*', '', previous_line)
             if color not in colors:
-                print(f'{color} not defined')
+                compare_line = re.sub(r'var\(--color[^\)]*\)', '', line)
+                if compare_line != compare_prev:
+                    print(f'{color} not defined')
                 continue
             new_line = f'{color_search.group(1)}#{colors[color]}' \
                        f'{color_search.group(3)}\n'
 
-            compare_prev = re.sub(r'#[0-9abcdefABCDEF]*', '', previous_line)
             compare_new = re.sub(r'#[0-9abcdefABCDEF]*', '', new_line)
             if new_line != previous_line:
                 updated = True

@@ -230,8 +230,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   padding-right: calc(var(--topic__diagram-font-size) * 0.8);
   font-size: calc(var(--topic__diagram-font-size) * 1);
   color: #fdf1aa;
-  color: #fdf1aa
-  color: var(--color-diagram-text)
+  color: var(--color-diagram-text);
 }
 
 .topic__diagram_text_small {
@@ -240,8 +239,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 .topic__diagram_text p {
   color: #fdf1aa;
-  color: #fdf1aa
-  color: var(--color-diagram-text)
+  color: var(--color-diagram-text);
   margin-left: calc(var(--pres__text_margin) * 1);
   margin-right: calc(var(--pres__text_margin) * 1);
   margin-top: var(--pres__text_p_space);
