@@ -717,11 +717,25 @@ const themes = {
     },
     presentation: {
       background: ['white', 'base'],
-      button: ['white', 'darkest'],
+      // button: ['white', 'darkest'],
       disabled: ['white', 'lighter'],
       hover: ['grey', 'lighter'],
       hoverBackground: ['white', 'base'],
       text: ['grey', 'base'],
+      button: {
+        base: {
+          base: {
+            text: ['black', 'darker'],
+            background: ['white'],
+            border: ['white', 'darkest'],
+          },
+          hover: {
+            text: ['black', 'darker'],
+            background: ['white', 'lightest'],
+            border: ['white', 'darkest'],
+          },
+        },
+      },
     },
     lesson: {
       background: ['grey', 'dark'],
@@ -1127,6 +1141,13 @@ class Colors {
       this.setCssVar('button', 'negative', 'hover', 'text');
       this.setCssVar('button', 'negative', 'hover', 'background');
       this.setCssVar('button', 'negative', 'hover', 'border');
+
+      this.setCssVar('presentation', 'button', 'base', 'base', 'text');
+      this.setCssVar('presentation', 'button', 'base', 'base', 'background');
+      this.setCssVar('presentation', 'button', 'base', 'base', 'border');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'text');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'background');
+      this.setCssVar('presentation', 'button', 'base', 'hover', 'border');
 
       this.setCssVar('lp', 'container', 'background');
       this.setCssVar('lp', 'container', 'border');

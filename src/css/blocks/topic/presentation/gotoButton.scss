@@ -51,16 +51,16 @@
 }
 
 #id__topic__goto_button_label {
-  color: var(--color-button-text);
-  background-color: var(--color-button-background);
+  color: var(--color-presentation-button-text);
+  background-color: var(--color-presentation-button-background);
   border-radius: 0.3em;
-  border: solid 1px var(--color-button-border);
+  border: solid 1px var(--color-presentation-button-border);
 }
 
 #id__topic__goto_button_label:hover {
-  color: var(--color-button-hover-text);
-  background-color: var(--color-button-hover-background);
-  border: solid 1px var(--color-button-hover-border);
+  color: var(--color-presentation-button-hover-text);
+  background-color: var(--color-presentation-button-hover-background);
+  border: solid 1px var(--color-presentation-button-hover-border);
 }
 
 #id__topic__goto_button_label .dropdown_button_arrow {

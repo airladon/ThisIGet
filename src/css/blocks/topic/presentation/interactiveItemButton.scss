@@ -5,12 +5,12 @@
 }
 
 .topic__interactive_element_button {
-  color: var(--color-button-text);
-  background-color: var(--color-button-background);
+  color: var(--color-presentation-button-text);
+  background-color: var(--color-presentation-button-background);
   width: var(--pres__button_height);
   height: var(--pres__button_height);
   position: absolute;
-  border: solid 1px var(--color-button-border);
+  border: solid 1px var(--color-presentation-button-border);
   border-radius: calc(var(--pres__button_height) / 2);
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -25,9 +25,9 @@
 }
 
 .topic__interactive_element_button:hover {
-  color: var(--color-button-hover-text);
-  background-color: var(--color-button-hover-background);
-  border: solid 1px var(--color-button-hover-border);
+  color: var(--color-presentation-button-hover-text);
+  background-color: var(--color-presentation-button-hover-background);
+  border: solid 1px var(--color-presentation-button-hover-border);
   cursor: pointer;
 }
 
