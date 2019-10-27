@@ -32,15 +32,20 @@ class Content extends SimpleFormatContent {
       const variables = {};
       variables.q1C = round(rand(1, 20), 1);
       variables.q1R = round(variables.q1C / 2 / Math.PI, 2);
+      variables.q1A = variables.q1R;
 
       variables.q2R = round(rand(0.1, 20), 1);
       variables.q2C = round(variables.q2R * Math.PI * 2, 2);
+      variables.q2A = variables.q2C;
 
       variables.q3C = round(rand(1, 20), 1);
       variables.q3D = round(variables.q3C / Math.PI, 2);
+      variables.q3A = variables.q3D;
 
       variables.q5D = round(rand(1, 20), 1);
-      variables.q5R = round(variables.q4D / 2, 2);
+      variables.q5R = round(variables.q5D / 2, 2);
+      // variables.q5A = round(variables.q5R, 2);
+      variables.q5A = variables.q5R.toString();
 
       variables.q4D = round(rand(1, 20), 1);
       const answers = shuffle(
