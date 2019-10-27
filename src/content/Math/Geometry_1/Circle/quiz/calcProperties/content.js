@@ -40,7 +40,7 @@ class Content extends SimpleFormatContent {
       variables.q3D = round(variables.q3C / Math.PI, 2);
 
       variables.q5D = round(rand(1, 20), 1);
-      variables.q5R = round(variables.q4D / 2, 2);
+      variables.q5R = round(variables.q5D / 2, 2);
 
       variables.q4D = round(rand(1, 20), 1);
       const answers = shuffle(
