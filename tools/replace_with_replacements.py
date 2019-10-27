@@ -24,6 +24,7 @@ for r, d, f in chain.from_iterable(
         if r.endswith('__replacements__') and file.endswith('png'):
             files.append(pathlib.Path(r) / file)
 
+errors = []
 for f in files:
     name = re.sub('-snap', '', f.stem)
     diff_file = f.parent / f'{name}-diff.png'
@@ -32,10 +33,9 @@ for f in files:
         copyfile(f, to_replace_file)
         os.remove(f)
         os.remove(diff_file)
+        print(f'f')
     else:
-        print(f'Error replacing {f}')
-    # print(f) 
-    # file_name = re.sub('^./', '', f)
-    # file_name = re.sub('/', '--', file_name)
-    # copyfile(f, f'{copy_path}/{file_name}')
-    # print(f)
+        errors.append(f)
+
+for error in errors:
+    print(f'Error replacing {error}')
