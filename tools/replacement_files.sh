@@ -9,7 +9,7 @@ then
     find -E ./src/content ./tests -regex '.*__replacements__.*png'
 fi
 
-if [ "$1" = 'cp' ];
+if [ "$1" = 'replace' ];
 then
     python tools/replace_with_replacements.py
 fi
