@@ -7,9 +7,9 @@ What is the radius of a circle that has a circumference of $|q1C|$?
 
 <quiz entry2>$|q1R|$</quiz>
 
-<hintLow>[Answer]
+<!-- <hintLow>[Answer]
 $|q1A|$
-</hintLow>
+</hintLow> -->
 
 ### Question 2
 
@@ -17,9 +17,9 @@ What is the circumference of a circle that has a radius of $|q2R|$?
 
 <quiz entry2>$|q2C|$</quiz>
 
-<hintLow>[Answer]
+<!-- <hintLow>[Answer]
 $|q2A|$
-</hintLow>
+</hintLow> -->
 
 ### Question 3
 
@@ -27,9 +27,9 @@ What is the diameter of a circle that has a circumference of $|q3C|$?
 
 <quiz entry2>$|q3D|$</quiz>
 
-<hintLow>[Answer]
+<!-- <hintLow>[Answer]
 $|q3A|$
-</hintLow>
+</hintLow> -->
 
 ### Question 4
 
@@ -43,9 +43,9 @@ What is the radius of a circle that has a diameter of $|q5D|$?
 
 <quiz entry2>$|q5R|$</quiz>
 
-<hintLow>[Answer]
+<!-- <hintLow>[Answer]
 $|q5A|$
-</hintLow>
+</hintLow> -->
 
 <!-- ### Question 5:
 
