@@ -28,15 +28,15 @@ errors = []
 for f in files:
     name = re.sub('-snap', '', f.stem)
     diff_file = f.parent.parent / '__diff_output__' / f'{name}-diff.png'
-    to_replace_file = f.parent.parent / f'{name}.png'
-    print(to_replace_file)
-#     if diff_file.exists() and to_replace_file.exists():
-#         copyfile(f, to_replace_file)
-#         os.remove(f)
-#         os.remove(diff_file)
-#         print(f'f')
-#     else:
-#         errors.append(f)
+    to_replace_file = f.parent.parent / f'{name}-snap.png'
+    # print(diff_file.exists(), diff_file)
+    if diff_file.exists() and to_replace_file.exists():
+        copyfile(f, to_replace_file)
+        os.remove(f)
+        os.remove(diff_file)
+        print(f'f')
+    else:
+        errors.append(f)
 
-# for error in errors:
-#     print(f'Error replacing {error}')
+for error in errors:
+    print(f'Error replacing {error}')
