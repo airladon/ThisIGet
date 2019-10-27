@@ -704,12 +704,12 @@ const themes = {
         close: {
           base: {
             text: ['grey', 'dark'],
-            border: ['white', 'light'],
+            border: ['white', 'darker'],
             background: ['offWhite'],
           },
           hover: {
             text: ['grey', 'dark'],
-            border: ['white', 'light'],
+            border: ['white', 'darker'],
             background: ['white', 'lightest'],
           },
         },

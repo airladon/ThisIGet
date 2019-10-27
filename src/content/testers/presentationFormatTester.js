@@ -38,6 +38,13 @@ async function closeHints(hints) {
   }
 }
 
+async function stopHintButton() {
+  await page.evaluate(() => {
+    const button = document.querySelector('#id_topic__interactive_element_button');
+    button.style.animation = 'none';
+  });
+}
+
 // tester(
 //   {
 //     prePath: '/dev'
@@ -148,6 +155,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
           width: options.viewPort.width,
           height: Math.floor(pageHeight),
         });
+
+        await stopHintButton();
 
         await page.evaluate(() => {
           window.scrollTo(0, 0);

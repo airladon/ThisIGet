@@ -25,6 +25,17 @@
   background-size: 75% 75%;
   background-repeat: no-repeat;
   background-position: center;
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 .topic__interactive_element_button:hover {
