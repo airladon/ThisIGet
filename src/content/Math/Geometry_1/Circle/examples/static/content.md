@@ -38,5 +38,5 @@ $$\color{g}diameter \color{black}= \frac{\color{r}circumference}{\color{black}\p
 
 Substitute in the value for circumference and $$\pi$$:
 
-$$\color{g}diameter \color{black}= \frac{20}{3.14} = \bbox[10px,border:1px solid gray]{3.37}$$
+$$\color{g}diameter \color{black}= \frac{20}{3.14} = \bbox[10px,border:1px solid gray]{6.37}$$
 </hintLow>
