@@ -34,7 +34,7 @@ for f in files:
         copyfile(f, to_replace_file)
         os.remove(f)
         os.remove(diff_file)
-        print(f'f')
+        print(f'{f}')
     else:
         errors.append(f)
 
