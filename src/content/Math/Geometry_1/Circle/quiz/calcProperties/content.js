@@ -44,7 +44,6 @@ class Content extends SimpleFormatContent {
 
       variables.q5D = round(rand(1, 20), 1);
       variables.q5R = round(variables.q5D / 2, 2);
-      // variables.q5A = round(variables.q5R, 2);
       variables.q5A = variables.q5R.toString();
 
       variables.q4D = round(rand(1, 20), 1);
