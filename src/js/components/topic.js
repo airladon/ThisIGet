@@ -448,10 +448,12 @@ export default class TopicComponent extends React.Component
     }
     const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
-    const twitterText = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20')
+    const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20')
 
-    const twitterLink = `http://twitter.com/share?text=${twitterText}&url=${window.location}`
-    const twitterOnClick = () => {
+    const twitterLink = `http://twitter.com/share?text=${shareTitle}&url=${window.location}`;
+    const facebookLink = `http://www.facebook.com/sharer/sharer.php?u=${window.location}`;
+
+    const shareOnClick = (link) => {
       const viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
       const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
       const idealWidth = 700;
@@ -459,10 +461,15 @@ export default class TopicComponent extends React.Component
       const width = Math.min(idealWidth, viewPortWidth);
       const height = Math.min(idealHeight, viewPortHeight);
       window.open(
-        twitterLink, 'newwindow', `width=${width},height=${height}`,
+        link, 'newwindow', `width=${width},height=${height}`,
       );
-    }
+    };
 
+    const twitterOnClick = () => shareOnClick(twitterLink);
+    const facebookOnClick = () => shareOnClick(facebookLink);
+    const emailOnClick = () => {
+      window.location.href='mailto:';
+    }
 
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
@@ -492,14 +499,26 @@ export default class TopicComponent extends React.Component
         />
       </div>
       {this.renderTopic()}
-      { /* <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a>
-      */ }
-      <a
-        href={twitterLink}
-        rel="noopener noreferrer"
-        target="_blank"
-        onClick={twitterOnClick}
-      >Tweet</a>
+      <div className="share_bar">
+        <div className="share_icon_container">
+          <img
+            className="share_icon share_icon_tw"
+            onClick={twitterOnClick}
+            alt="Share on Twitter"/>
+        </div>
+        <div className="share_icon_container">
+          <img
+            className="share_icon share_icon_fb"
+            onClick={facebookOnClick}
+            alt="Share on Facebook"/>
+        </div>
+        <div className="share_icon_container">
+        <img
+          className="share_icon share_icon_mail"
+          onClick={emailOnClick}
+          alt="Share with email"/>
+        </div>
+      </div>
       <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
