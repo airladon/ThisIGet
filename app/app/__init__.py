@@ -68,15 +68,21 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 SELF,
                 # "'unsafe-inline'",
                 "data:",
+                # 'https://syndication.twitter.com/',
             ],
             'script-src': [
                 SELF,
                 'https://unpkg.com/',
                 'https://cdnjs.cloudflare.com',
                 'https://cdn.polyfill.io/v2/',
+                # 'https://platform.twitter.com/',
                 "'unsafe-inline'",          # this needs to be removed later
                 "'unsafe-eval'",    # this needs to be removed as well
             ],
+            # 'frame-src': [
+            #     SELF,
+            #     'https://platform.twitter.com/',
+            # ],
             'font-src': [
                 SELF,
                 'https://cdnjs.cloudflare.com',
