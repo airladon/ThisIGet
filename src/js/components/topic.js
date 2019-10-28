@@ -14,6 +14,7 @@ import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
+import ShareBar from './share';
 
 type Props = {
   version: Object;
@@ -448,28 +449,28 @@ export default class TopicComponent extends React.Component
     }
     const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
-    const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20')
+    const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20');
 
-    const twitterLink = `http://twitter.com/share?text=${shareTitle}&url=${window.location}`;
-    const facebookLink = `http://www.facebook.com/sharer/sharer.php?u=${window.location}`;
+    // const twitterLink = `http://twitter.com/share?text=${shareTitle}&url=${window.location}`;
+    // const facebookLink = `http://www.facebook.com/sharer/sharer.php?u=${window.location}`;
 
-    const shareOnClick = (link) => {
-      const viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-      const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      const idealWidth = 700;
-      const idealHeight = 400;
-      const width = Math.min(idealWidth, viewPortWidth);
-      const height = Math.min(idealHeight, viewPortHeight);
-      window.open(
-        link, 'newwindow', `width=${width},height=${height}`,
-      );
-    };
+    // const shareOnClick = (link) => {
+    //   const viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    //   const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //   const idealWidth = 700;
+    //   const idealHeight = 400;
+    //   const width = Math.min(idealWidth, viewPortWidth);
+    //   const height = Math.min(idealHeight, viewPortHeight);
+    //   window.open(
+    //     link, 'newwindow', `width=${width},height=${height}`,
+    //   );
+    // };
 
-    const twitterOnClick = () => shareOnClick(twitterLink);
-    const facebookOnClick = () => shareOnClick(facebookLink);
-    const emailOnClick = () => {
-      window.location.href='mailto:';
-    }
+    // const twitterOnClick = () => shareOnClick(twitterLink);
+    // const facebookOnClick = () => shareOnClick(facebookLink);
+    // const emailOnClick = () => {
+    //   window.location.href='mailto:';
+    // }
 
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
@@ -499,6 +500,8 @@ export default class TopicComponent extends React.Component
         />
       </div>
       {this.renderTopic()}
+      <ShareBar link={window.location} title={shareTitle}/>
+      { /*
       <div className="share_bar">
         <div className="share_icon_container">
           <img
@@ -519,6 +522,7 @@ export default class TopicComponent extends React.Component
           alt="Share with email"/>
         </div>
       </div>
+      */ }
       <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
