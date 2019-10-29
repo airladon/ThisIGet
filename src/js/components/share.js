@@ -5,7 +5,6 @@ import * as React from 'react';
 type Props={
   link: string;
   title: string;
-  shareTitle: string;
 };
 
 const shareOnClick = (link) => {

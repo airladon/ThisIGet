@@ -282,10 +282,8 @@ export default class TopicComponent extends React.Component
     approachUIDs.forEach((approachUID) => {
       if (approaches[approachUID] != null) {
         const approach = approaches[approachUID];
-        // $FlowFixMe - onPath is there and boolean
         const fullTopicCount = Object.keys(approach)
           .filter(ver => approach[ver].fullTopic).length;
-        // $FlowFixMe - onPath is there and boolean
         const partialTopicCount = Object.keys(approach)
           .filter(ver => !approach[ver].fullTopic).length;
         let selected = false;
@@ -450,27 +448,6 @@ export default class TopicComponent extends React.Component
     const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
     const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20');
-
-    // const twitterLink = `http://twitter.com/share?text=${shareTitle}&url=${window.location}`;
-    // const facebookLink = `http://www.facebook.com/sharer/sharer.php?u=${window.location}`;
-
-    // const shareOnClick = (link) => {
-    //   const viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    //   const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    //   const idealWidth = 700;
-    //   const idealHeight = 400;
-    //   const width = Math.min(idealWidth, viewPortWidth);
-    //   const height = Math.min(idealHeight, viewPortHeight);
-    //   window.open(
-    //     link, 'newwindow', `width=${width},height=${height}`,
-    //   );
-    // };
-
-    // const twitterOnClick = () => shareOnClick(twitterLink);
-    // const facebookOnClick = () => shareOnClick(facebookLink);
-    // const emailOnClick = () => {
-    //   window.location.href='mailto:';
-    // }
 
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
