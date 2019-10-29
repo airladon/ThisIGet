@@ -109,7 +109,7 @@ class Content extends SinglePageFormatContent {
         'id_figure2',
         diag._fig2,
         'fit',
-        new Rect(-2, -1.3, 3.2, 2.8),
+        new Rect(-2.4, -1.3, 3.6, 2.8),
         'Diagram showing a circle, its properties of diameter and circumference and the relationship between the properties',
         400,
       ),
