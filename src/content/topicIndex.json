@@ -1462,7 +1462,7 @@
     "dependencies": [
       "ParallelSplitOfTriangle"
     ],
-    "enabled": false
+    "enabled": true
   },
   "Math/Geometry_1/ToDo/CalculatingPi": {
     "title": "Calculating Pi",

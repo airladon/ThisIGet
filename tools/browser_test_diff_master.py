@@ -21,7 +21,7 @@ diff = subprocess.run(
     ['git', 'diff', '--name-only', master_sha, current_sha],
     stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split('\n')
 
-print(diff)
+# print(diff)
 
 paths = set()
 test_all = False
@@ -85,6 +85,7 @@ for file_name in current.keys():
         continue
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/content'):
+            print(file_name)
             test_all = True
             # print(file_name, file_name not in existing)
             # print(f'All: {file_name}')
