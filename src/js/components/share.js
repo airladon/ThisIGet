@@ -5,10 +5,13 @@ import * as React from 'react';
 type Props={
   link: string;
   title: string;
+  shareTitle: string;
 };
 
 const shareOnClick = (link) => {
+  // $FlowFixMe
   const viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  // $FlowFixMe
   const viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   const idealWidth = 700;
   const idealHeight = 400;
@@ -21,13 +24,13 @@ const shareOnClick = (link) => {
 
 export default class ShareBar extends React.Component<Props> {
   render() {
-    const twitterLink = `http://twitter.com/share?text=${this.props.title}&url=${this.props.link}`;
+    const twitterLink = `http://twitter.com/share?text=${this.props.title}%0A&url=${this.props.link}`;
     const facebookLink = `http://www.facebook.com/sharer/sharer.php?u=${this.props.link}`;
 
     const twitterOnClick = () => shareOnClick(twitterLink);
     const facebookOnClick = () => shareOnClick(facebookLink);
     const emailOnClick = () => {
-      window.location.href=`mailto:?subject=${this.props.title}!&body=${this.props.link}`;
+      window.location.href = `mailto:?subject=${this.props.title}!&body=${this.props.link}`;
     };
     return <div className="share_bar">
       <div className="share_bar_container">

@@ -500,29 +500,10 @@ export default class TopicComponent extends React.Component
         />
       </div>
       {this.renderTopic()}
-      <ShareBar link={window.location} title={shareTitle}/>
-      { /*
-      <div className="share_bar">
-        <div className="share_icon_container">
-          <img
-            className="share_icon share_icon_tw"
-            onClick={twitterOnClick}
-            alt="Share on Twitter"/>
-        </div>
-        <div className="share_icon_container">
-          <img
-            className="share_icon share_icon_fb"
-            onClick={facebookOnClick}
-            alt="Share on Facebook"/>
-        </div>
-        <div className="share_icon_container">
-        <img
-          className="share_icon share_icon_mail"
-          onClick={emailOnClick}
-          alt="Share with email"/>
-        </div>
-      </div>
-      */ }
+      <ShareBar
+        link={window.location}
+        title={shareTitle}
+      />
       <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
