@@ -2334,6 +2334,15 @@
     "title": "Similar Triangles",
     "approaches": {
       "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
         "equilangularIsSimilarProof": {
           "type": "singlePage",
           "title": "Equilangular Triangles are Similar - Proof 2",

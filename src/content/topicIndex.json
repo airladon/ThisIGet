@@ -1425,6 +1425,12 @@
     "title": "Similar Triangles",
     "approaches": {
       "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "fullTopic": true
+        },
         "equilangularIsSimilarProof": {
           "type": "singlePage",
           "title": "Equilangular Triangles are Similar - Proof 2",
