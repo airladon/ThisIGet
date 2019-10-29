@@ -1071,6 +1071,7 @@ class Colors {
       this.setCssVar('diagram', 'text', 'note');
       this.setCssVar('diagram', 'text', 'heading');
       this.setCssVar('diagram', 'text', 'hint');
+      this.setCssVar('diagram', 'action');
 
       this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'text');
       this.setCssVar('diagram', 'quiz', 'button', 'base', 'base', 'background');

@@ -43,20 +43,15 @@ class Content extends PresentationFormatContent {
     const coll = diag._collection;
     const fig = coll._fig;
     const examples = coll._examples;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Introduction',
-      setContent: style({ centerV: true }, [
-        'Shapes that have the |same shape|, but are a |different size|, are commonly called |similar shapes|.',
-        'Similar shapes can be enlarged, or reduced to be congruent (the same size).',
-      ]),
-    });
-    this.addSection({
       setContent: [
         'Shapes that have the |same shape|, but are a |different size|, are commonly called |similar_shapes|.',
       ],
       modifiers: {
-        similar_shapes: click(coll.pulseSimilar, [coll], colors.sides),
+        similar_shapes: click(coll.pulseSimilar, [coll], colors.diagram.action),
       },
       show: [examples],
       setEnterState: () => {
@@ -74,8 +69,8 @@ class Content extends PresentationFormatContent {
         'Similar shapes can be |enlarged|, or |reduced| to become the same size (|congruent|).',
       ],
       modifiers: {
-        enlarged: click(coll.growExamples, [coll, null], colors.sides),
-        reduced: click(coll.reduceExamples, [coll, null], colors.sides),
+        enlarged: click(coll.growExamples, [coll, null], colors.diagram.action),
+        reduced: click(coll.reduceExamples, [coll, null], colors.diagram.action),
       },
       show: [examples],
       setEnterState: () => {
@@ -88,6 +83,147 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    this.addSection({
+      setContent: [
+        'When a shape\'s size is |changed|, all its sides are changed by the |same proportion|.',
+      ],
+      modifiers: {
+        changed: click(coll.goToOtherBound, [coll, null], colors.diagram.action),
+      },
+      show: [fig._triScaler],
+      setEnterState: () => {
+        fig._triScaler.setScenario('base');
+        coll.scaleTri();
+      },
+    });
+
+    let common = {
+      show: [fig._tri1, fig._trir],
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('right');
+      },
+      setSteadyState: () => {
+        fig._tri1.hideAngles();
+        fig._trir.hideAngles();
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+      },
+    };
+    this.addSection(common, {
+      setContent: [
+        'Thus |similar triangles| are triangles whose corresponding sides have the |same proportion| or |ratio|.',
+      ],
+    });
+
+    let commonContent = {
+      setContent: [
+        'Now, if we measure the |angles| of these two triangles, we will see they are the |same|.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        same: click(this.next, [this], colors.angles),
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('right');
+        coll.setAngles('initial');
+      },
+      show: [fig._tri1, fig._trir],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        same: click(coll.pulseAngles, [coll], colors.angles),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseAllAngles(done);
+      },
+    });
+
+    commonContent = {
+      setContent: [
+        'Is this the case for |any| pair of similar triangles? To find out, let\'s |rename| the angles to be more general.',
+      ],
+    };
+    this.addSection(common, commonContent);
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('right');
+        coll.setAngles('general');
+      },
+      show: [fig._tri1, fig._trir],
+    };
+    this.addSection(common, commonContent);
+
+    commonContent = {
+      setContent: [
+        'Now, let\'s create a third triangle using the base of the smaller triangle.',
+      ],
+    };
+    this.addSection(common, commonContent);
+
+    this.addSection(commonContent, {
+      setEnterState: () => {
+        if (this.comingFrom === 'prev') {
+          fig._tri1.setScenario('left');
+          fig._trir.setScenario('right');
+        } else {
+          fig._tri1.setScenario('left');
+          fig._trir.setScenario('topRight');
+        }
+        fig._tri2.setScenario('bottomRight');
+        fig._tri2.setFirstTransform(fig.lastDrawTransform);
+      },
+      transitionFromPrev: (done) => {
+        fig._trir.animations.new()
+          .scenario({ target: 'topRight', duration: 1 })
+          // .trigger({
+          //   callback: () => {
+          //     fig._trir._side20._label.pulseScaleNow(1, 1.5);
+          //   },
+          //   duration: 1,
+          // })
+          .trigger(coll.moveNewBase.bind(coll, done))
+          .start();
+        // fig.animations.new()
+        //   .inSerial([
+        //     fig._trir.anim.scenario({ target: 'topRight', duration: 1 }),
+        //   ])
+        //   // .trigger(() => {
+        //   //   fig._newBase.showAll();
+        //   //   fig._newBase.setScenario('topRight');
+        //   //   console.log('asdf')
+        //   // })
+        //   // .inSerial([
+        //   //   fig._newBase.anim.scenario({ target: 'bottomRight', duration: 0.8 }),
+        //   // ])
+        //   .trigger(coll.moveNewBase(done))
+        //   // .whenFinished(done)
+        //   .start();
+        // // fig._trir.animations.new()
+        // //   .scenario({ target: 'topRight', duration: 0.5 })
+        // //   .whenFinished(done)
+        // //   .start();
+        // // fig._newBase.setScenario('topRight');
+        // // fig._newBase.animations.new()
+        // //   .scenario({ target: 'bottomRight', duration: 0.8 })
+        // //   .whenFinished(done)
+        // //   .start();
+      },
+      show: [fig._tri1, fig._trir],
+      setSteadyState: () => {
+        fig._trir.setScenario('topRight');
+        fig._tri2.showAll();
+      },
+    });
   }
 }
 
