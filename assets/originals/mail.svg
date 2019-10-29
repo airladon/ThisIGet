@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <rect x="98.176" y="137.109" width="303.311" height="227.483" style="stroke-linejoin: round; fill: none; stroke: rgb(102, 102, 102); stroke-width: 35px;"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 145.165 199.853"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(102, 102, 102); stroke-width: 35px;" d="M 99.162 137.885 L 224.226 239.663 C 224.14 239.711 234.483 249.146 249.888 249.146"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 476.484 241.357"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(51, 51, 51); stroke-width: 9px;" d="M 355.127 199.82" transform="matrix(-1, 0, 0, -1, 710.254028, 399.640015)"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(51, 51, 51); stroke-width: 9px;" d="M 23.808 241.324" transform="matrix(-1, 0, 0, -1, 47.616001, 482.64801)"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(102, 102, 102); stroke-width: 35px;" d="M 249.757 249.128 L 374.821 147.35 C 374.735 147.302 385.077 137.868 400.482 137.868" transform="matrix(-1, 0, 0, -1, 650.238998, 386.996002)"/>
+</svg>

@@ -14,6 +14,7 @@ import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
+import ShareBar from './share';
 
 type Props = {
   version: Object;
@@ -281,10 +282,8 @@ export default class TopicComponent extends React.Component
     approachUIDs.forEach((approachUID) => {
       if (approaches[approachUID] != null) {
         const approach = approaches[approachUID];
-        // $FlowFixMe - onPath is there and boolean
         const fullTopicCount = Object.keys(approach)
           .filter(ver => approach[ver].fullTopic).length;
-        // $FlowFixMe - onPath is there and boolean
         const partialTopicCount = Object.keys(approach)
           .filter(ver => !approach[ver].fullTopic).length;
         let selected = false;
@@ -448,6 +447,8 @@ export default class TopicComponent extends React.Component
     }
     const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
+    const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20');
+
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
 
@@ -476,6 +477,10 @@ export default class TopicComponent extends React.Component
         />
       </div>
       {this.renderTopic()}
+      <ShareBar
+        link={window.location}
+        title={shareTitle}
+      />
       <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
