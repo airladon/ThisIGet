@@ -28,6 +28,7 @@ type TypeDimensions = {
     _d: DiagramElementPrimitive;
     _equals: DiagramElementPrimitive;
     _pi: DiagramElementPrimitive;
+    _times: DiagramElementPrimitive;
   } & Equation;
 } & DiagramElementCollection;
 
@@ -52,6 +53,7 @@ export default class Collection extends CommonDiagramCollection {
       _d: DiagramElementPrimitive;
       _equals: DiagramElementPrimitive;
       _pi: DiagramElementPrimitive;
+      _times: DiagramElementPrimitive;
     } & Equation;
   } & DiagramElementCollection;
 
@@ -186,6 +188,7 @@ export default class Collection extends CommonDiagramCollection {
       .inParallel([
         eqn._equals.anim.dissolveIn(1),
         eqn._pi.anim.dissolveIn(1),
+        eqn._times.anim.dissolveIn(1),
       ])
       .start();
     this.diagram.animateNextFrame();

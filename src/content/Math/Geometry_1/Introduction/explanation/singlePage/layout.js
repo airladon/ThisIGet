@@ -184,17 +184,18 @@ export default function diagramLayout() {
       },
       elements: {
         c: 'c',
-        'pi': 'π',
+        'pi': '3.14',
         'd': 'd',
+        'times': ' \u00D7 ',
         'equals': ' = ',
       },
       forms: {
-        'base': ['c', 'equals', 'pi', 'space', 'd'],
+        'base': ['c', 'equals', 'pi', 'times', 'space', 'd'],
       },
     },
     mods: {
       scenarios: {
-        left: { position: new Point(-radius * 1.8, 0) },
+        left: { position: new Point(-radius * 2, 0) },
         bottom: { position: new Point(0, -radius * 1.5) },
       },
     },

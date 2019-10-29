@@ -179,12 +179,13 @@ export default function diagramLayout() {
       },
       elements: {
         c: 'c',
-        'pi': 'π',
+        'pi': '3.14',
+        'times': ' \u00D7 ',
         'd': 'd',
         'equals': ' = ',
       },
       forms: {
-        'base': ['c', 'equals', 'pi', 'space', 'd'],
+        'base': ['c', 'equals', 'pi', 'times','space', 'd'],
       },
     },
     mods: {
