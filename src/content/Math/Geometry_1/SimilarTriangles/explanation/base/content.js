@@ -34,7 +34,7 @@ class Content extends PresentationFormatContent {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      // 'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/Triangles/base',
     ]);
   }
 
@@ -208,6 +208,26 @@ class Content extends PresentationFormatContent {
         fig._tri2.showAll();
       },
     });
+
+    commonContent = {
+      setContent: [
+        'As all angles in a triangle |add| to 180º, then if you know two angles you can always calculate the third.',
+      ],
+      modifiers: {
+        add: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      },
+    };
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        fig._tri2.setScenario('bottomRight');
+        coll.setAngles('general');
+        coll.setTri2('initial');
+      },
+      show: [fig._tri1, fig._trir, fig._tri2],
+    };
+    this.addSection(common, commonContent);
   }
 }
 

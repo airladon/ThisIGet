@@ -49,11 +49,14 @@ export default class QRTriangle extends PopupBoxCollection {
     const collection = this._collection;
     collection.show();
     const total = collection._totalAngle;
+    const eqn = collection._eqn;
     collection.updateTotalAngles();
     total._fixedTriangle._line.show();
     total._angleC.showAll();
     total._angleB.showAll();
     total._angleA.showAll();
+    eqn.showForm('0');
+    eqn.setScenario('default');
     this.transformToQRWindow(collection, new Rect(-2, -0.9, 4, 2.4));
     this.diagram.animateNextFrame();
   }
