@@ -88,7 +88,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        'When a shape\'s size is |changed|, all its sides are changed by the |same proportion|.',
+        'When a shape\'s size is |changed|, all its sides are changed by the |same proportion|, or |scaling factor|.',
       ],
       modifiers: {
         changed: click(coll.goToOtherBound, [coll, null], colors.diagram.action),
@@ -100,6 +100,8 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         fig._triScaler.hideAngles();
+        // fig._triScaler._side01._
+        console.log(fig._triScaler._side01._label._base.drawingObject)
       },
     });
 
@@ -118,7 +120,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       setContent: [
-        'Thus |similar triangles| are triangles whose |corresponding_sides| have the |same proportion| or |ratio|.',
+        'Thus |similar triangles| are triangles whose |corresponding_sides| have the |same proportion|.',
       ],
       modifiers: {
         corresponding_sides: click(coll.pulseTriRSide, [coll], colors.sides),
@@ -393,7 +395,9 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     this.addSection({
       setContent: style({ centerV: true }, [
-        'So |any| two triangles are similar if they have |equal corresponding angles| (if they are |equiangular|).',
+        'The word |equiangular| is often used to describe |equal corresponding angles|.',
+        'So |any| two triangles are similar if they have |equal corresponding angles| (|equiangular|).',
+        
         'By extension, this means |all equiangular triangles are similar|.',
       ]),
     });
@@ -403,7 +407,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Similar Triangles',
       setContent: style({ centerV: true }, [
-        'Does this mean that |all similar triangles are equiangular|?.',
+        'Does this mean that |all similar triangles are equiangular|?',
       ]),
     });
 
@@ -417,10 +421,10 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        'To find out, let\'s start with two |similar triangles| with |different_corresponding_angles|.',
+        'To find out, let\'s start with two |similar triangles| with |unknown_corresponding_angles|.',
       ],
       modifiers: {
-        different_corresponding_angles: click(coll.pulseAngles, [coll], colors.angles),
+        unknown_corresponding_angles: click(coll.pulseAngles, [coll], colors.angles),
       },
     };
     // this.addSection(commonContent);
@@ -438,7 +442,7 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'Now, using the |base_angles| of the larger triangle, and the |base| of the smaller triangle, let\'s |create| a third triangle.',
+        'Using the |base_angles| of the larger triangle, and the |base| of the smaller triangle, let\'s |create| a third triangle.',
       ],
     };
     this.addSection(common, commonContent, {

@@ -21,7 +21,7 @@ Therefore $$\triangle ABC$$ and $$\triangle ADE$$ are **similar**.
 *Triangles with the same corresponding angles will have corresponding sides of equal proportion, and will therefore be similar.*
 
 
-### Proportional Triangles are Similar - Proof
+### Similar Triangles are Equiangular - Proof
 
 Start with two triangles whose **corresponding sides have equal proportion**.
 

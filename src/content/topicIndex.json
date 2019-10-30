@@ -1427,8 +1427,8 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
-          "description": "",
+          "title": "Descriptive & Interactive",
+          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
           "fullTopic": true
         },
         "equilangularIsSimilarProof": {
@@ -1445,14 +1445,14 @@
         },
         "static": {
           "type": "singlePage",
-          "title": "Descriptive",
-          "description": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "title": "Descriptive (Static)",
+          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
           "fullTopic": true
         },
         "staticBrief": {
           "type": "singlePage",
-          "title": "In Brief",
-          "description": "Succinct proofs showing why equiangular triangles, and proportional triangles are similar",
+          "title": "Brief",
+          "description": "Succinct proofs showing similar triangles are equiangular, and equiangular triangles are similar",
           "fullTopic": true
         }
       },

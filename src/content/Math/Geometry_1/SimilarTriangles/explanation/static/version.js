@@ -4,10 +4,10 @@
 var version = {
   uid: 'static',
   topic: 'explanation',
-  title: 'Descriptive',
-  description: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
-  htmlTitle: 'Similar Triangles Proof',
-  htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+  title: 'Descriptive (Static)',
+  description: 'Proofs showing similar triangles are equiangular, and equiangular triangles are similar',
+  htmlTitle: 'Introduction to similar triangles and their proofs',
+  htmlDescription: 'Definition of similar triangles and proof equiangular triangles are similar, and similar triangles are equiangular',
   fullTopic: true,
   type: 'singlePage',
 };
