@@ -176,6 +176,8 @@ export default function diagramLayout() {
         right: { scale: 1, position: [1, 0] },
         topRight: { scale: 1, position: [1, 0.5] },
         bottomRight: { scale: 1, position: [1, -1] },
+        bottomRightSummary: { scale: 1, position: [1, -0.6] },
+        bottomLeft: { scale: 1, position: [-1, -0.6] },
         on: { scale: 0.98, position: [-0.995, 0.325] },
       },
       touchInBoundingRect: true,

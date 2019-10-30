@@ -1610,8 +1610,8 @@
           "type": "singlePage",
           "title": "Full Proof",
           "description": "Proof showing the resulting triangle has proportional sides",
-          "htmlTitle": "Similar Triangles Proof",
-          "htmlDescription": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "htmlTitle": "Parallel Split of a Triangle Proof",
+          "htmlDescription": "Proof showing a triangle split with a line parallel to one of its sides will produce a proportional triangle",
           "fullTopic": true,
           "links": ""
         }
@@ -1637,7 +1637,7 @@
               "hash": "11d70ead6e3138cd4b774ecfe9422867",
               "publisher": "NCERT X Mathematics",
               "type": "generic",
-              "description": "Proofs for why proportional triangles are similar, and why equiangular triangles are similar"
+              "description": "Proofs for why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar"
             },
             {
               "url": "http://www.malinc.se/math/geometry/similartrianglesen.php",
@@ -2337,45 +2337,45 @@
         "base": {
           "type": "presentation",
           "title": "Descriptive & Interactive",
-          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "htmlTitle": "Interactive introduction to similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles and proof equiangular triangles are similar, and similar triangles are equiangular",
+          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
           "fullTopic": true,
           "links": ""
         },
-        "equilangularIsSimilarProof": {
+        "equalAnglesAreSimilarProof": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2",
-          "description": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
-          "htmlTitle": "Equilangular Triangles are Similar Proof",
-          "htmlDescription": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
+          "title": "Equal Corresponding Angle Triangles are Similar - Proof 2",
+          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
+          "htmlTitle": "Similar Triangles Proof",
+          "htmlDescription": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""
         },
-        "equilangularProofBrief": {
+        "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
           "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
-          "description": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
-          "htmlTitle": "Triangles with equal angles are similar proof",
-          "htmlDescription": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
+          "description": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
+          "htmlTitle": "Similar Triangles Proof",
+          "htmlDescription": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""
         },
         "static": {
           "type": "singlePage",
           "title": "Descriptive (Static)",
-          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "htmlTitle": "Introduction to similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles and proof equiangular triangles are similar, and similar triangles are equiangular",
+          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
           "fullTopic": true,
           "links": ""
         },
         "staticBrief": {
           "type": "singlePage",
           "title": "Brief",
-          "description": "Succinct proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Succinct proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "htmlTitle": "Similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles and proof equiangular triangles are similar, and similar triangles are equiangular",
+          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
           "fullTopic": true,
           "links": ""
         }
@@ -2394,9 +2394,20 @@
               "hash": "11d70ead6e3138cd4b774ecfe9422867",
               "publisher": "NCERT X Mathematics",
               "type": "generic",
-              "description": "Proofs for why proporitional triangles are similar, and why equiangular triangles are similar"
+              "description": "Proofs for why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar"
             }
           ]
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
         }
       }
     },

@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'equilangularIsSimilarProof',
+  uid: 'equalAnglesAreSimilarProof',
   topic: 'explanation',
   title: 'Equal Corresponding Angle Triangles are Similar - Proof 2',
   description: 'Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar',

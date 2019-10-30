@@ -1428,31 +1428,31 @@
         "base": {
           "type": "presentation",
           "title": "Descriptive & Interactive",
-          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "fullTopic": true
         },
-        "equilangularIsSimilarProof": {
+        "equalAnglesAreSimilarProof": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2",
-          "description": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
+          "title": "Equal Corresponding Angle Triangles are Similar - Proof 2",
+          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false
         },
-        "equilangularProofBrief": {
+        "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
           "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
-          "description": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
+          "description": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false
         },
         "static": {
           "type": "singlePage",
           "title": "Descriptive (Static)",
-          "description": "Proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "fullTopic": true
         },
         "staticBrief": {
           "type": "singlePage",
           "title": "Brief",
-          "description": "Succinct proofs showing similar triangles are equiangular, and equiangular triangles are similar",
+          "description": "Succinct proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "fullTopic": true
         }
       },
@@ -1462,6 +1462,14 @@
           "title": "External",
           "description": "External links to sources of information for Similar Triangles",
           "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "fullTopic": true
         }
       }
     },
