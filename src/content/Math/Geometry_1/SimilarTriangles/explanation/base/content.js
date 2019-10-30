@@ -100,7 +100,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         fig._triScaler.hideAngles();
-      }
+      },
     });
 
     let common = {
@@ -205,7 +205,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        move: click(coll.triAtoTri1, [coll, null], colors.diagram.action)
+        move: click(coll.triAtoTri1, [coll, null], colors.diagram.action),
       },
       transitionFromPrev: (done) => {
         coll.triAtoTri1(done);
@@ -592,7 +592,7 @@ class Content extends PresentationFormatContent {
         coll.setTri2('all');
       },
       show: [fig._tri1, fig._trir, fig._tri2],
-    }
+    };
     this.addSection(common, commonContent, {
       modifiers: {
         base: click(coll.pulseTri2Base, [coll], colors.sides),

@@ -104,7 +104,7 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       scale: 1.4,
       forms: {
-        '0': ['a', 'plus1', 'b', 'plus2', 'c', 'equals', '_180']
+        '0': ['a', 'plus1', 'b', 'plus2', 'c', 'equals', '_180'],
       },
     },
     mods: {

@@ -8,6 +8,7 @@ const {
   DiagramObjectAngle,
   DiagramElementCollection,
   DiagramObjectPolyLine,
+  Equation,
   Transform,
 } = Fig;
 
@@ -21,6 +22,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angleB: DiagramObjectAngle;
     _angleC: DiagramObjectAngle;
   } & DiagramElementCollection;
+
+  _eqn: Equation;
 
   constructor(
     diagram: CommonTopicDiagram,

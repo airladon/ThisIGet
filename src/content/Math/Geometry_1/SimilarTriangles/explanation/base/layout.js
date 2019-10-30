@@ -4,7 +4,7 @@ import baseLayout from '../../../../../common/layout';
 
 const {
   Point,
-  Transform,
+  // Transform,
   // Line,
 } = Fig.tools.g2;
 
@@ -288,7 +288,7 @@ export default function diagramLayout() {
     ],
     options: {
       position: p,
-    }
+    },
   });
 
   const fig = {
@@ -359,11 +359,11 @@ export default function diagramLayout() {
           'Bp', 'equals2', 'r2', 'B', '      ',
           'Cp', 'equals3', 'r3', 'C', '      ',
         ],
-        'generalRatios': [
-          { frac: ['Ap', 'A', 'v1'] }, 'equals1',
-          { frac: ['Bp', 'B', 'v2'] }, 'equals2',
-          { frac: ['Cp', 'C', 'v3'] },
-        ],
+        // 'generalRatios': [
+        //   { frac: ['Ap', 'A', 'v1'] }, 'equals1',
+        //   { frac: ['Bp', 'B', 'v2'] }, 'equals2',
+        //   { frac: ['Cp', 'C', 'v3'] },
+        // ],
       },
     },
     mods: {

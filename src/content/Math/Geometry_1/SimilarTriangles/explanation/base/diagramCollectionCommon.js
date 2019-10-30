@@ -4,20 +4,53 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  // DiagramElementPrimitive,
-  // DiagramObjectAngle,
-  // DiagramObjectLine,
-  // DiagramElementCollection,
-  // DiagramObjectPolyLine,
-  // Equation,
+  DiagramElementPrimitive,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
+  DiagramObjectPolyLine,
+  Equation,
   Transform,
+  EquationLabel,
 } = Fig;
+
+type TypeAngle = {
+  label: {
+    offset: number;
+  } & EquationLabel;
+  _label: DiagramElementPrimitive;
+  _curve: DiagramElementPrimitive;
+} & DiagramObjectAngle;
+
+type TypeSide = {
+  label: {
+    offset: number;
+  } & EquationLabel;
+  _label: DiagramElementPrimitive;
+} & DiagramObjectLine;
+
+type TypeTri = {
+  _angle0: TypeAngle;
+  _angle1: TypeAngle;
+  _angle2: TypeAngle;
+  _side01: TypeSide;
+  _side12: TypeSide;
+  _side20: TypeSide;
+  _line: DiagramObjectLine;
+} & DiagramObjectPolyLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
-    _tri1: DiagramObjectPolyLine;
-    _tri2: DiagramObjectPolyLine;
-    _triScaler: DiagramObjectPolyLine;
+    _tri1: TypeTri;
+    _tri2: TypeTri;
+    _tria: TypeTri;
+    _trir: TypeTri;
+    _triScaler: TypeTri;
+    _angleA: TypeAngle;
+    _angleB: TypeAngle;
+    _newBase: DiagramObjectLine;
+    _arrow1: DiagramElementCollection;
+    _arrow2: DiagramElementCollection;
   } & DiagramElementCollection;
 
   _examples: {
@@ -28,6 +61,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _quad1: DiagramObjectPolyLine;
     _quad2: DiagramObjectPolyLine;
   } & DiagramElementCollection;
+
+  _eqn: Equation;
 
   similarCounter: number;
   angleCounter: number;
