@@ -173,7 +173,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         create: this.bindNext(colors.diagram.action),
         base: click(coll.pulseNewBase, [coll], colors.sides),
-        angles: click(coll.pulseNewAngles, [coll], colors.sides),
+        angles: click(coll.pulseNewAngles, [coll], colors.angles),
       },
     });
 
@@ -206,15 +206,18 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         fig._trir.setScenario('topRight');
         fig._tri2.showAll();
+        coll.setTri2('initial');
       },
     });
 
     commonContent = {
       setContent: [
-        'As all angles in a triangle |add| to 180º, then if you know two angles you can always calculate the third.',
+        'As all angles in a triangle |add| to 180º, then if you know |two_angles| you can always calculate the |third|.',
       ],
       modifiers: {
         add: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+        two_angles: click(coll.pulseNewAnglesOnly, [coll], colors.angles),
+        third: click(coll.pulseUnknownAngle, [coll], colors.angles),
       },
     };
     common = {
@@ -228,6 +231,48 @@ class Content extends PresentationFormatContent {
       show: [fig._tri1, fig._trir, fig._tri2],
     };
     this.addSection(common, commonContent);
+
+    commonContent = {
+      setContent: [
+        'From the |first_triangle|, we know if there are two angles |a| and |b|, then the third must be |c|.',
+      ],
+      modifiers: {
+        add: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+        first_triangle: click(coll.pulseTri1, [coll], colors.sides),
+        a: click(coll.pulseA, [coll], colors.angles),
+        b: click(coll.pulseB, [coll], colors.angles),
+        c: click(coll.pulseC, [coll], colors.angles),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    commonContent = {
+      setContent: [
+        'Thus the |third_triangle\'s| unknown angle is |c|.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        'third_triangle\'s': click(coll.pulseTri2, [coll], colors.sides),
+        c: this.bindNext(colors.angles),
+      },
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        'third_triangle\'s': click(coll.pulseTri2, [coll], colors.sides),
+        c: click(coll.pulseNewC, [coll], colors.angles),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseNewC(done);
+      },
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        fig._tri2.setScenario('bottomRight');
+        coll.setAngles('general');
+        coll.setTri2('abc');
+      },
+    });
   }
 }
 

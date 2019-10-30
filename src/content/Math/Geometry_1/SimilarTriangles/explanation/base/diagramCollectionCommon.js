@@ -235,6 +235,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri2._side01.setLabel('');
       tri2._side12.setLabel('');
       tri2._side20.setLabel('rB');
+    } else if (toType === 'abc') {
+      tri2._angle0.setLabel('a');
+      tri2._angle1.setLabel('c');
+      tri2._angle2.setLabel('b');
+      tri2._side01.setLabel('');
+      tri2._side12.setLabel('');
+      tri2._side20.setLabel('rB');
     }
   }
 
@@ -317,6 +324,47 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._tri1._angle2.pulseScaleNow(1, 1.3);
     this._fig._tri2._angle0.pulseScaleNow(1, 1.3);
     this._fig._tri2._angle2.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNewAnglesOnly() {
+    this._fig._tri2._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri2._angle2.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseUnknownAngle() {
+    this._fig._tri2._angle1.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseA() {
+    this._fig._tri1._angle0.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseB() {
+    this._fig._tri1._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseC() {
+    this._fig._tri1._angle1.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNewC(done: ?() => void = null) {
+    this._fig._tri2._angle1.pulseScaleNow(1, 1.5, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri1() {
+    this._fig._tri1.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri2() {
+    this._fig._tri2.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();
   }
 }
