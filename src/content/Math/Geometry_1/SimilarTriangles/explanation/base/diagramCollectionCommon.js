@@ -255,9 +255,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri._angle0.setLabel('a');
       tri._angle1.setLabel('c');
       tri._angle2.setLabel('b');
-      tri._side01.setLabel('rA');
-      tri._side12.setLabel('rC');
-      tri._side20.setLabel('rB');
+      tri._side01.setLabel('sA');
+      tri._side12.setLabel('sC');
+      tri._side20.setLabel('sB');
       tri._side01._label.setColor(this.layout.colors.sides2);
       tri._side12._label.setColor(this.layout.colors.sides2);
       tri._side20._label.setColor(this.layout.colors.sides2);
@@ -360,21 +360,21 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri2._angle2.setLabel('b');
       tri2._side01.setLabel('');
       tri2._side12.setLabel('');
-      tri2._side20.setLabel('rB');
+      tri2._side20.setLabel('sB');
     } else if (toType === 'abc') {
       tri2._angle0.setLabel('a');
       tri2._angle1.setLabel('c');
       tri2._angle2.setLabel('b');
       tri2._side01.setLabel('');
       tri2._side12.setLabel('');
-      tri2._side20.setLabel('rB');
+      tri2._side20.setLabel('sB');
     } else if (toType === 'all') {
       tri2._angle0.setLabel('a');
       tri2._angle1.setLabel('c');
       tri2._angle2.setLabel('b');
-      tri2._side01.setLabel('rA');
-      tri2._side12.setLabel('rC');
-      tri2._side20.setLabel('rB');
+      tri2._side01.setLabel('sA');
+      tri2._side12.setLabel('sC');
+      tri2._side20.setLabel('sB');
     }
   }
 

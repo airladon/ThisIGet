@@ -373,7 +373,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: style({ top: 0 }, [
-        'And so we see the two triangles are actually |similar triangles| as their |corresponding_sides| all have the same scaling factor |r| and therefore have the |same proportion|.',
+        'And so we see the two triangles are actually |similar triangles| as their |corresponding_sides| all have the same scaling factor |s| and therefore have the |same proportion|.',
       ]),
       modifiers: {
         corresponding_sides: click(coll.pulseTriASide, [coll], colors.sides),
@@ -579,7 +579,7 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'As we know the |base| is scaled by |r|, then the |other_sides| must also be scaled by |r|.',
+        'As we know the |base| is scaled by |s|, then the |other_sides| must also be scaled by |s|.',
       ],
     };
     this.addSection(common, commonContent, {
