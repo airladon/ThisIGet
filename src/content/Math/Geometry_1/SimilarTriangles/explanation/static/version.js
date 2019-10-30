@@ -5,9 +5,9 @@ var version = {
   uid: 'static',
   topic: 'explanation',
   title: 'Descriptive (Static)',
-  description: 'Proofs showing similar triangles are equiangular, and equiangular triangles are similar',
+  description: 'Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar',
   htmlTitle: 'Introduction to similar triangles and their proofs',
-  htmlDescription: 'Definition of similar triangles and proof equiangular triangles are similar, and similar triangles are equiangular',
+  htmlDescription: 'Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles',
   fullTopic: true,
   type: 'singlePage',
 };

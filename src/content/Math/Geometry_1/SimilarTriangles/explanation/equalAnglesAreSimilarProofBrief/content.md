@@ -1,4 +1,4 @@
-### Equiangular Triangles are Similar - Proof
+### Triangles with Equal Corresponding Angles are Similar - Proof
 
 Consider two triangles with **equal angles** overlaid on each other (left). We then label the points, and add in some construction lines (right).
 

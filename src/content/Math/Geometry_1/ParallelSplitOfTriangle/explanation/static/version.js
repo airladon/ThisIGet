@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Full Proof',
   description: 'Proof showing the resulting triangle has proportional sides',
-  htmlTitle: 'Similar Triangles Proof',
-  htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+  htmlTitle: 'Parallel Split of a Triangle Proof',
+  htmlDescription: 'Proof showing a triangle split with a line parallel to one of its sides will produce a proportional triangle',
   fullTopic: true,
   type: 'singlePage',
 };

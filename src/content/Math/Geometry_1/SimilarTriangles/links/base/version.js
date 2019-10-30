@@ -15,7 +15,7 @@ var version = {
       hash: '11d70ead6e3138cd4b774ecfe9422867',
       publisher: 'NCERT X Mathematics',
       type: 'generic',
-      description: 'Proofs for why proporitional triangles are similar, and why equiangular triangles are similar',
+      description: 'Proofs for why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar',
     },
   ],
 };

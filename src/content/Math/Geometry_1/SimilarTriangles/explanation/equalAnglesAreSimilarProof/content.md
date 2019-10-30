@@ -1,8 +1,8 @@
-## Equiangular Triangles are Similar - Proof
+## Triangles with Equal Corresponding Angles are Similar - Proof
 
 Two triangles that have the same angles can be different sizes.
 
-![](./EquiangularTriangles.png)
+![](./SimilarTriangles.png)
 
 However, while the sizes may be different, the sizes are still related. Specifically, all pair of corresponding sides have the same ratio.
 
@@ -64,4 +64,4 @@ In other words, the ratio of the small triangle side $$\color{b}n$$ to its corre
 
 Now, we arbitrarily selected the top angle as the angle to align the small and large triangles. Had we selected the bottom left, then we could do the same exercise and find the ratio of the corresponding left sides and corresponding bottom sides of the triangles is also the same.
 
-Thus the ratio of all corresponding side pairs are the same, and so we can see **if triangles share the same angles, then their corresponding sides have the same proportion, and they are therefore similar triangles**.
+Thus the ratio of all corresponding side pairs are the same, and so we can see **if triangles share the same corresponding angles, then their corresponding sides have the same proportion, and they are therefore similar triangles**.

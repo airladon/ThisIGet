@@ -4,11 +4,11 @@
 
 **Similar** triangles have the same corresponding angles and their corresponding sides are the same proportion.
 
-### Equiangular Triangles are Similar - Proof
+### Triangles with Equal Corresponding Angles are Similar - Proof
 
 Two triangles that have the same angles can be different sizes.
 
-![](./EquiangularTriangles.png)
+![](./SimilarTriangles.png)
 
 However, while the sizes may be different, the sizes are still related. Specifically, all pairs of corresponding sides have the same ratio.
 
@@ -26,7 +26,7 @@ When a triangle is [[split]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/T
 **Therefore if triangles share the same angles, then their corresponding sides have the same proportion, and they are similar triangles**.
 
 
-### Proportional Triangles are Similar - Proof
+### Similar Triangles have Equal Corresponding Angles - Proof
 
 Now what happens if we know two triangles have corresponding sides that are proportional. Are their corresponding angles equal, and therefore are they similar?
 

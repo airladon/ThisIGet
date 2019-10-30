@@ -5,7 +5,7 @@
 **Similar** triangles have the same corresponding angles and their corresponding sides are the same proportion.
 
 
-### Equiangular Triangles are Similar - Proof
+### Triangles with Equal Corresponding Angles are Similar - Proof
 
 Consider two triangles with **equal angles** overlaid on each other.
 
@@ -21,7 +21,7 @@ Therefore $$\triangle ABC$$ and $$\triangle ADE$$ are **similar**.
 *Triangles with the same corresponding angles will have corresponding sides of equal proportion, and will therefore be similar.*
 
 
-### Similar Triangles are Equiangular - Proof
+### Similar Triangles have Equal Corresponding Angles - Proof
 
 Start with two triangles whose **corresponding sides have equal proportion**.
 

@@ -167,7 +167,7 @@ class Content extends PresentationFormatContent {
       setContent: [
         'Does this mean that |any| two triangles with |equal corresponding angles| will be |similar|?',
       ],
-      title: 'Equiangular Triangles',
+      title: 'Equal Angles',
     };
     this.addSection(common, commonContent);
 
@@ -395,10 +395,9 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     this.addSection({
       setContent: style({ centerV: true }, [
-        'The word |equiangular| is often used to describe |equal corresponding angles|.',
-        'So |any| two triangles are similar if they have |equal corresponding angles| (|equiangular|).',
+        'So |any| two triangles are similar if they have |equal corresponding angles|.',
         
-        'By extension, this means |all equiangular triangles are similar|.',
+        'By extension, this means |all triangles with equal corresponding angles are similar|.',
       ]),
     });
 
@@ -407,7 +406,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Similar Triangles',
       setContent: style({ centerV: true }, [
-        'Does this mean that |all similar triangles are equiangular|?',
+        'Does this mean that |all similar triangles have equal corresponding angles|?',
       ]),
     });
 
@@ -558,7 +557,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       setContent: [
-        'The |first_triangle| and |third_triangle| have equal angles. We saw earlier that |equiangular triangles are always similar|.',
+        'The |first_triangle| and |third_triangle| have equal corresponding angles. We saw earlier that |triangles with equal corresponding angles are always similar|.',
       ],
       modifiers: {
         first_triangle: click(coll.pulseTri1, [coll], colors.sides),
@@ -689,7 +688,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Summary',
       setContent: style({ centerV: true }, [
-        'So we have seen |all equiangular triangles are similar|, and conversely all |similar triangles are equiangular|.',
+        'So we have seen |all triangles with equal corresponding angles are similar|, and conversely all |similar triangles have equal corresponding angles|.',
       ]),
     });
   }
