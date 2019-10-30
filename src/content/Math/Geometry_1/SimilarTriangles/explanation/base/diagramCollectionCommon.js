@@ -49,6 +49,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._triScaler.move.minTransform.updateScale(0.5, 0.5);
     this.similarCounter = 0;
     this.angleCounter = 0;
+    this.sideCounter = 0;
   }
 
   scaleTri() {
@@ -306,6 +307,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       // tri1._angle0.setLabel('a');
       // tri1._angle1.setLabel('c');
       // tri1._angle2.setLabel('b');
+      this.setTri1('general');
       trir._angle0.setLabel('a');
       trir._angle1.setLabel('c');
       trir._angle2.setLabel('b');
@@ -359,6 +361,17 @@ export default class CommonCollection extends CommonDiagramCollection {
       .position({ target: targetPosition, duration: 1 })
       .whenFinished(done)
       .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri2Base() {
+    this._fig._tri2._side20._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri2Other() {
+    this._fig._tri2._side12._label.pulseScaleNow(1, 2);
+    this._fig._tri2._side01._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
@@ -573,10 +586,25 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseTriASide() {
     const tria = this._fig._tria;
-    const side = [tria._side01, tria._side12, tria._side20];
+    const tri1 = this._fig._tri1;
+    const sidea = [tria._side01, tria._side12, tria._side20];
+    const side1 = [tri1._side01, tri1._side12, tri1._side20];
     const index = this.sideCounter;
     this.sideCounter = (this.sideCounter + 1) % 3;
-    side[index]._lable.pulseScaleNow(1, 2);
+    sidea[index]._label.pulseScaleNow(1, 2);
+    side1[index]._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTriRSide() {
+    const trir = this._fig._trir;
+    const tri1 = this._fig._tri1;
+    const sider = [trir._side01, trir._side12, trir._side20];
+    const side1 = [tri1._side01, tri1._side12, tri1._side20];
+    const index = this.sideCounter;
+    this.sideCounter = (this.sideCounter + 1) % 3;
+    sider[index]._label.pulseScaleNow(1, 2);
+    side1[index]._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 }

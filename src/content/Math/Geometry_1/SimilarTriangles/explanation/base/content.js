@@ -98,6 +98,9 @@ class Content extends PresentationFormatContent {
         fig._triScaler.setScenario('base');
         coll.scaleTri();
       },
+      setSteadyState: () => {
+        fig._triScaler.hideAngles();
+      }
     });
 
     let common = {
@@ -109,14 +112,17 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         fig._tri1.hideAngles();
         fig._trir.hideAngles();
-        eqn.showForm('ratios');
-        eqn.setScenario('bottom');
+        // eqn.showForm('ratios');
+        // eqn.setScenario('bottom');
       },
     };
     this.addSection(common, {
       setContent: [
-        'Thus |similar triangles| are triangles whose corresponding sides have the |same proportion| or |ratio|.',
+        'Thus |similar triangles| are triangles whose |corresponding_sides| have the |same proportion| or |ratio|.',
       ],
+      modifiers: {
+        corresponding_sides: click(coll.pulseTriRSide, [coll], colors.sides),
+      },
     });
 
     // ************************************************************************
@@ -167,10 +173,10 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        'To find out, let\'s start with two triangles with the |same_angles|, but of |different_sizes|.',
+        'To find out, let\'s start with two triangles with the |same_angles|, but of |different_side_lengths|.',
       ],
       modifiers: {
-        different_sizes: click(coll.pulseTri1ASides, [coll], colors.sides),
+        different_side_lengths: click(coll.pulseTri1ASides, [coll], colors.sides),
         same_angles: click(coll.pulseTri1AAngles, [coll], colors.angles),
       },
     };
@@ -211,17 +217,17 @@ class Content extends PresentationFormatContent {
 
     // ************************************************************************
     // ************************************************************************
-    commonContent = {
-      setContent: [
-        'Now let\'s focus on just a portion of the diagram',
-      ],
-    };
+    // commonContent = {
+    //   setContent: [
+    //     'Now let\'s focus on just a portion of the diagram',
+    //   ],
+    // };
 
-    this.addSection(common, commonContent, {
-      setSteadyState: () => {
-        fig._tria.setScenario('on');
-      },
-    });
+    // this.addSection(common, commonContent, {
+    //   setSteadyState: () => {
+    //     fig._tria.setScenario('on');
+    //   },
+    // });
 
     common = {
       setEnterState: () => {
@@ -232,7 +238,7 @@ class Content extends PresentationFormatContent {
       },
       show: [fig._tri1, fig._tria],
     };
-    this.addSection(common, commonContent);
+    // this.addSection(common, commonContent);
 
     // ************************************************************************
     // ************************************************************************
@@ -365,10 +371,11 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: style({ top: 0 }, [
-        'And so we see the two triangles are actually similar triangles as their |corresponding_sides| all have the same scaling factor |r| and therefore have the same proportion.',
+        'And so we see the two triangles are actually |similar triangles| as their |corresponding_sides| all have the same scaling factor |r| and therefore have the |same proportion|.',
       ]),
       modifiers: {
         corresponding_sides: click(coll.pulseTriASide, [coll], colors.sides),
+        r: highlight(colors.sides2),
       },
     };
     common = {
@@ -381,6 +388,25 @@ class Content extends PresentationFormatContent {
       show: [fig._tri1, fig._tria],
     };
     this.addSection(common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'So |any| two triangles are similar if they have |equal corresponding angles| (if they are |equiangular|).',
+        'By extension, this means |all equiangular triangles are similar|.',
+      ]),
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Similar Triangles',
+      setContent: style({ centerV: true }, [
+        'Does this mean that |all similar triangles are equiangular|?.',
+      ]),
+    });
+
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
@@ -391,10 +417,13 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        'Is this the case for |any| pair of similar triangles? To find out, let\'s |rename| the angles to be more general.',
+        'To find out, let\'s start with two |similar triangles| with |different_corresponding_angles|.',
       ],
+      modifiers: {
+        different_corresponding_angles: click(coll.pulseAngles, [coll], colors.angles),
+      },
     };
-    this.addSection(common, commonContent);
+    // this.addSection(commonContent);
 
     common = {
       setEnterState: () => {
@@ -409,14 +438,14 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'Now, let\'s |create| a third triangle using the |base| of the smaller triangle, |angles| on the base of the larger.',
+        'Now, using the |base_angles| of the larger triangle, and the |base| of the smaller triangle, let\'s |create| a third triangle.',
       ],
     };
     this.addSection(common, commonContent, {
       modifiers: {
         create: this.bindNext(colors.diagram.action),
         base: click(coll.pulseNewBase, [coll], colors.sides),
-        angles: click(coll.pulseNewAngles, [coll], colors.angles),
+        base_angles: click(coll.pulseNewAngles, [coll], colors.angles),
       },
     });
 
@@ -533,7 +562,7 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'Therefore the |first_triangle| and |third_triangle| are similar, and the sides are proportionally scaled by |r|.',
+        'Therefore the |first_triangle| and |third_triangle| are similar, and the sides are proportionally scaled by the |same factor|.',
       ],
       modifiers: {
         first_triangle: click(coll.pulseTri1, [coll], colors.sides),
@@ -542,7 +571,33 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, commonContent);
 
+    commonContent = {
+      setContent: [
+        'As we know the |base| is scaled by |r|, then the |other_sides| must also be scaled by |r|.',
+      ],
+    };
     this.addSection(common, commonContent, {
+      modifiers: {
+        base: click(coll.pulseTri2Base, [coll], colors.sides),
+        other_sides: this.bindNext(colors.sides),
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        fig._tri2.setScenario('bottomRight');
+        coll.setAngles('general');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir, fig._tri2],
+    }
+    this.addSection(common, commonContent, {
+      modifiers: {
+        base: click(coll.pulseTri2Base, [coll], colors.sides),
+        other_sides: click(coll.pulseNewSides, [coll, null], colors.sides),
+      },
       transitionFromPrev: (done) => {
         coll.setTri2('all');
         coll.pulseNewSides(done);
@@ -596,7 +651,7 @@ class Content extends PresentationFormatContent {
         SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
         second_triangle: click(coll.pulseTrir, [coll], colors.sides),
         third_triangle: click(coll.pulseTri2, [coll], colors.sides),
-        same_angles: click(coll.pulseTri2rAngles, [coll], colors.angles),
+        same_angles: click(coll.pulseTri2rAngles, [coll, null], colors.angles),
       },
       transitionFromPrev: (done) => {
         coll.pulseTri2rAngles(done);
@@ -620,7 +675,16 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         fig._trir.setScenario('right');
-      },      
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Summary',
+      setContent: style({ centerV: true }, [
+        'So we have seen |all equiangular triangles are similar|, and conversely all |similar triangles are equiangular|.',
+      ]),
     });
   }
 }
