@@ -185,11 +185,11 @@ export default function diagramLayout() {
     options: {
       p1: pointsSmall[2],
       p2: pointsSmall[0],
-      label: {
-        text: 'rB',
-        offset: 0.05,
-        location: 'outside',
-      },
+      // label: {
+      //   text: 'rB',
+      //   offset: 0.05,
+      //   location: 'outside',
+      // },
       width: 0.02,
       color: colors.sides,
     },
@@ -198,6 +198,66 @@ export default function diagramLayout() {
         topRight: { position: [1, 0] },
         bottomRight: { position: [1, -1.5] },
       },
+    },
+  };
+
+  const angleA = {
+    name: 'angleA',
+    method: 'angle',
+    options: {
+      rotation: 0,
+      angle: Math.atan2(
+        pointsSmall[1].y - pointsSmall[0].y,
+        pointsSmall[1].x - pointsSmall[0].x,
+      ),
+      sides: {
+        length: 0.3,
+        width: 0.02,
+        color: colors.sides,
+      },
+      // label: {
+      //   text: 'a',
+      //   offset: 0.01,
+      //   scale: 0.6,
+      //   // location: 'outside',
+      // },
+      curve: {
+        radius: 0.2,
+        width: 0.01,
+        color: colors.angles,
+      },
+      color: colors.angles,
+    },
+  };
+
+  const angleB = {
+    name: 'angleB',
+    method: 'angle',
+    options: {
+      rotation: Math.atan2(
+        pointsSmall[1].y - pointsSmall[2].y,
+        pointsSmall[1].x - pointsSmall[2].x,
+      ),
+      angle: Math.PI - Math.atan2(
+        pointsSmall[1].y - pointsSmall[2].y,
+        pointsSmall[1].x - pointsSmall[2].x,
+      ),
+      sides: {
+        length: 0.3,
+        width: 0.02,
+        color: colors.sides,
+      },
+      // label: {
+      //   text: 'b',
+      //   offset: 0.01,
+      //   scale: 0.6,
+      // },
+      curve: {
+        radius: 0.2,
+        width: 0.01,
+        color: colors.angles,
+      },
+      color: colors.angles,
     },
   };
 
@@ -210,6 +270,8 @@ export default function diagramLayout() {
       tri('tri2', pointsSmall, 'rA', 'rB', 'rC'),
       tri('trir', pointsSmall, 'rA', 'rB', 'rC'),
       newBase,
+      angleA,
+      angleB,
     ],
     mods: {
       scenarios: {

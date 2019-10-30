@@ -158,6 +158,7 @@ class Content extends PresentationFormatContent {
         fig._tri1.setScenario('left');
         fig._trir.setScenario('right');
         coll.setAngles('general');
+        coll.setTri2('initial');
       },
       show: [fig._tri1, fig._trir],
     };
@@ -165,12 +166,23 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'Now, let\'s create a third triangle using the base of the smaller triangle.',
+        'Now, let\'s |create| a third triangle using the |base| of the smaller triangle, |angles| on the base of the larger.',
       ],
     };
-    this.addSection(common, commonContent);
+    this.addSection(common, commonContent, {
+      modifiers: {
+        create: this.bindNext(colors.diagram.action),
+        base: click(coll.pulseNewBase, [coll], colors.sides),
+        angles: click(coll.pulseNewAngles, [coll], colors.sides),
+      },
+    });
 
     this.addSection(commonContent, {
+      modifiers: {
+        create: click(coll.createTriangle, [coll, null], colors.diagram.action),
+        base: click(coll.pulseNewBase, [coll], colors.sides),
+        angles: click(coll.pulseNewAngles, [coll], colors.angles),
+      },
       setEnterState: () => {
         if (this.comingFrom === 'prev') {
           fig._tri1.setScenario('left');
@@ -181,42 +193,14 @@ class Content extends PresentationFormatContent {
         }
         fig._tri2.setScenario('bottomRight');
         fig._tri2.setFirstTransform(fig.lastDrawTransform);
+        coll.setAngles('general');
+        coll.setTri2('initial');
       },
       transitionFromPrev: (done) => {
         fig._trir.animations.new()
           .scenario({ target: 'topRight', duration: 1 })
-          // .trigger({
-          //   callback: () => {
-          //     fig._trir._side20._label.pulseScaleNow(1, 1.5);
-          //   },
-          //   duration: 1,
-          // })
-          .trigger(coll.moveNewBase.bind(coll, done))
+          .trigger(coll.createTriangle.bind(coll, done))
           .start();
-        // fig.animations.new()
-        //   .inSerial([
-        //     fig._trir.anim.scenario({ target: 'topRight', duration: 1 }),
-        //   ])
-        //   // .trigger(() => {
-        //   //   fig._newBase.showAll();
-        //   //   fig._newBase.setScenario('topRight');
-        //   //   console.log('asdf')
-        //   // })
-        //   // .inSerial([
-        //   //   fig._newBase.anim.scenario({ target: 'bottomRight', duration: 0.8 }),
-        //   // ])
-        //   .trigger(coll.moveNewBase(done))
-        //   // .whenFinished(done)
-        //   .start();
-        // // fig._trir.animations.new()
-        // //   .scenario({ target: 'topRight', duration: 0.5 })
-        // //   .whenFinished(done)
-        // //   .start();
-        // // fig._newBase.setScenario('topRight');
-        // // fig._newBase.animations.new()
-        // //   .scenario({ target: 'bottomRight', duration: 0.8 })
-        // //   .whenFinished(done)
-        // //   .start();
       },
       show: [fig._tri1, fig._trir],
       setSteadyState: () => {

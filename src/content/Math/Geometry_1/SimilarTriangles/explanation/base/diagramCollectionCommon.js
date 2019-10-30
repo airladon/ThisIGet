@@ -203,6 +203,12 @@ export default class CommonCollection extends CommonDiagramCollection {
   setAngles(toType: string = 'general') {
     const tri1 = this._fig._tri1;
     const trir = this._fig._trir;
+    // const tri2 = this._fig._tri2;
+    // tri2._angle0.setLabel('a');
+    // tri2._angle1.setLabel('c');
+    // tri2._angle2.setLabel('b');
+    // this._fig._angleA.label.setText('a');
+    // this._fig._angleB.label.setText('b');
     if (toType === 'general') {
       tri1._angle0.setLabel('a');
       tri1._angle1.setLabel('c');
@@ -220,6 +226,18 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
   }
 
+  setTri2(toType: string = 'initial') {
+    const tri2 = this._fig._tri2;
+    if (toType === 'initial') {
+      tri2._angle0.setLabel('a');
+      tri2._angle1.setLabel('');
+      tri2._angle2.setLabel('b');
+      tri2._side01.setLabel('');
+      tri2._side12.setLabel('');
+      tri2._side20.setLabel('rB');
+    }
+  }
+
   moveNewBase(done: ?() => void = null) {
     const trir = this._fig._trir;
     const newBase = this._fig._newBase;
@@ -230,7 +248,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     newBase.animations.new()
       .trigger({
         callback: () => {
-          newBase._label.pulseScaleNow(1, 1.5);
+          // newBase._label.pulseScaleNow(1, 1.5);
           trir._side20._label.pulseScaleNow(1, 1.5);
         },
         duration: 1,
@@ -238,6 +256,67 @@ export default class CommonCollection extends CommonDiagramCollection {
       .position({ target: targetPosition, duration: 1 })
       .whenFinished(done)
       .start();
+    this.diagram.animateNextFrame();
+  }
+
+  moveNewAngles(done: ?() => void = null) {
+    const tri1 = this._fig._tri1;
+    const angleA = this._fig._angleA;
+    const angleB = this._fig._angleB;
+    const targetPositionA = this._fig._tri2._angle0.getDiagramPosition();
+    const targetPositionB = this._fig._tri2._angle2.getDiagramPosition();
+    angleA.showAll();
+    angleA.setDiagramPositionToElement(tri1._angle0);
+    angleA.stop();
+    angleB.showAll();
+    angleB.setDiagramPositionToElement(tri1._angle2);
+    angleA.animations.new()
+      .trigger({
+        callback: () => {
+          angleA._curve.pulseScaleNow(1, 1.3);
+          tri1._angle0.pulseScaleNow(1, 1.3);
+          angleB._curve.pulseScaleNow(1, 1.3);
+          tri1._angle2.pulseScaleNow(1, 1.3);
+        },
+        duration: 1,
+      })
+      .inParallel([
+        angleA.anim.position({ target: targetPositionA, duration: 1 }),
+        angleB.anim.position({ target: targetPositionB, duration: 1 }),
+      ])
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  createTriangle(done: ?() => void = null) {
+    this._fig.stop();
+    this._fig._tri2.hideAll();
+    this._fig._angleA.hideAll();
+    this._fig._angleB.hideAll();
+    this._fig._newBase.hideAll();
+    this._fig.animations.new()
+      .trigger({ callback: this.moveNewBase.bind(this), duration: 2 })
+      .trigger({ callback: this.moveNewAngles.bind(this), duration: 2 })
+      .inSerial([
+        this._fig._tri2.anim.dissolveIn(1),
+      ])
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNewBase() {
+    this._fig._trir._side20._label.pulseScaleNow(1, 1.5);
+    this._fig._tri2._side20._label.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNewAngles() {
+    this._fig._tri1._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri1._angle2.pulseScaleNow(1, 1.3);
+    this._fig._tri2._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri2._angle2.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 }
