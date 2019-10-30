@@ -31,6 +31,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   similarCounter: number;
   angleCounter: number;
+  sideCounter: number;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -48,7 +49,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._triScaler.move.minTransform.updateScale(0.5, 0.5);
     this.similarCounter = 0;
     this.angleCounter = 0;
-    console.log(this)
   }
 
   scaleTri() {
@@ -213,8 +213,8 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri._side12.setColor(this.layout.colors.sides2);
       tri._side20.setColor(this.layout.colors.sides2);
       tri._line.setColor(this.layout.colors.sides2);
-      tri._angle1.setColor(this.layout.colors.angles);
-      tri._angle2.setColor(this.layout.colors.angles);
+      // tri._angle1.setColor(this.layout.colors.angles);
+      // tri._angle2.setColor(this.layout.colors.angles);
     } else if (toType === 'solved') {
       tri._angle0.setLabel('a');
       tri._angle1.setLabel('c');
@@ -222,12 +222,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri._side01.setLabel('rA');
       tri._side12.setLabel('rC');
       tri._side20.setLabel('rB');
-      tri._side01._label.setColor(this.layout.colors.sides);
-      tri._side12._label.setColor(this.layout.colors.sides);
-      tri._side20._label.setColor(this.layout.colors.sides);
-      tri._line.setColor(this.layout.colors.sides);
-      tri._angle1.setColor(this.layout.colors.angles);
-      tri._angle2.setColor(this.layout.colors.angles);
+      tri._side01._label.setColor(this.layout.colors.sides2);
+      tri._side12._label.setColor(this.layout.colors.sides2);
+      tri._side20._label.setColor(this.layout.colors.sides2);
+      tri._line.setColor(this.layout.colors.sides2);
+      // tri._angle1.setColor(this.layout.colors.angles);
+      // tri._angle2.setColor(this.layout.colors.angles);
     } else if (toType === 'inWorking') {
       tri._angle0.setLabel('a');
       tri._angle1.setLabel('');
@@ -238,11 +238,11 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri._side01.setColor(this.layout.colors.sides2);
       tri._side12.setColor(this.layout.colors.sides2);
       tri._side20.setColor(this.layout.colors.sides2);
-      tri._side01._label.setColor(this.layout.colors.darkGrey);
-      tri._side12._label.setColor(this.layout.colors.darkGrey);
+      // tri._side01._label.setColor(this.layout.colors.darkGrey);
+      // tri._side12._label.setColor(this.layout.colors.darkGrey);
       tri._line.setColor(this.layout.colors.sides2);
-      tri._angle1.setColor(this.layout.colors.darkGrey);
-      tri._angle2.setColor(this.layout.colors.darkGrey);
+      // tri._angle1.setColor(this.layout.colors.darkGrey);
+      // tri._angle2.setColor(this.layout.colors.darkGrey);
     }
   }
 
@@ -252,23 +252,23 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri._angle0.setLabel('a');
       tri._angle1.setLabel('c');
       tri._angle2.setLabel('b');
-      tri._angle1.setColor(this.layout.colors.angles);
-      tri._angle2.setColor(this.layout.colors.angles);
-      tri._side12._label.setColor(this.layout.colors.sides);
+      // tri._angle1.setColor(this.layout.colors.angles);
+      // tri._angle2.setColor(this.layout.colors.angles);
+      // tri._side12._label.setColor(this.layout.colors.sides);
     } else if (toType === 'initial') {
       tri._angle0.setLabelToRealAngle();
       tri._angle1.setLabelToRealAngle();
       tri._angle2.setLabelToRealAngle();
-      tri._angle1.setColor(this.layout.colors.angles);
-      tri._angle2.setColor(this.layout.colors.angles);
-      tri._side12._label.setColor(this.layout.colors.sides);
+      // tri._angle1.setColor(this.layout.colors.angles);
+      // tri._angle2.setColor(this.layout.colors.angles);
+      // tri._side12._label.setColor(this.layout.colors.sides);
     } else if (toType === 'inWorking') {
       tri._angle0.setLabel('a');
       tri._angle1.setLabel('c');
       tri._angle2.setLabel('b');
-      tri._angle1.setColor(this.layout.colors.darkGrey);
-      tri._angle2.setColor(this.layout.colors.darkGrey);
-      tri._side12._label.setColor(this.layout.colors.darkGrey);
+      // tri._angle1.setColor(this.layout.colors.darkGrey);
+      // tri._angle2.setColor(this.layout.colors.darkGrey);
+      // tri._side12._label.setColor(this.layout.colors.darkGrey);
     }
   }
 
@@ -563,6 +563,20 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseArrows(done: ?() => void = null) {
     this._fig._arrow1.pulseScaleNow(1, 2);
     this._fig._arrow2.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEqn(done: ?() => void = null) {
+    this._eqn.pulseScaleNow(1, 1.2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTriASide() {
+    const tria = this._fig._tria;
+    const side = [tria._side01, tria._side12, tria._side20];
+    const index = this.sideCounter;
+    this.sideCounter = (this.sideCounter + 1) % 3;
+    side[index]._lable.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 }

@@ -308,11 +308,79 @@ class Content extends PresentationFormatContent {
       },
     };
     this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+        coll.pulseEqn(done);
+      },
       setSteadyState: () => {
         eqn.showForm('ratios');
         eqn.setScenario('bottom');
-      }
+      },
     });
+    this.addSection(common, commonContent, {
+      show: [fig._tri1, fig._tria],
+      transitionFromPrev: (done) => {
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+        coll.setTri1('general');
+        coll.setTriA('initial');
+        fig._tria.animations.new()
+          .scenario({ target: 'right', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig._tria.setScenario('right');
+        coll.setTri1('general');
+        coll.setTriA('initial');
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._tria.setScenario('right');
+        coll.setTri1('general');
+        coll.setTriA('solved');
+      },
+      show: [fig._tri1, fig._tria],
+    };
+    this.addSection(common, commonContent, {
+      show: [fig._tri1, fig._tria],
+      transitionFromPrev: (done) => {
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+        coll.pulseTriASides(done);
+      },
+      setSteadyState: () => {
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'And so we see the two triangles are actually similar triangles as their |corresponding_sides| all have the same scaling factor |r| and therefore have the same proportion.',
+      ]),
+      modifiers: {
+        corresponding_sides: click(coll.pulseTriASide, [coll], colors.sides),
+      },
+    };
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._tria.setScenario('right');
+        coll.setTri1('general');
+        coll.setTriA('solved');
+      },
+      show: [fig._tri1, fig._tria],
+    };
+    this.addSection(common, commonContent);
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
