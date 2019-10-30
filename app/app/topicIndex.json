@@ -2333,6 +2333,17 @@
   "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
     "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "htmlTitle": "Self discover why ...",
+          "htmlDescription": "Figure out why ...",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
@@ -2402,10 +2413,10 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
-          "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "title": "Similar Triangles",
+          "description": "Properties of Similar Triangles",
+          "htmlTitle": "Similar Triangles Definition",
+          "htmlDescription": "Definition of similar triangles",
           "fullTopic": true,
           "links": ""
         }

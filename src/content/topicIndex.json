@@ -1424,6 +1424,14 @@
   "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
     "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
@@ -1467,8 +1475,8 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
-          "description": "",
+          "title": "Similar Triangles",
+          "description": "Properties of Similar Triangles",
           "fullTopic": true
         }
       }
