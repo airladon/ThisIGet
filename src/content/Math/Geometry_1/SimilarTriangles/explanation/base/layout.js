@@ -17,6 +17,7 @@ export default function diagramLayout() {
   const { colors } = layout;
   colors.sides = colors.get('blue', 'base').rgb;
   colors.angles = colors.get('red', 'base').rgb;
+  colors.angles2 = colors.get('green', 'base').rgb;
   colors.highlight = colors.get('red').rgb;
   colors.grey = colors.get('grey', 'base').rgb;
   colors.darkGrey = colors.get('grey', 'darker').rgb;

@@ -35,6 +35,7 @@ class Content extends PresentationFormatContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/CongruentTriangles/base',
     ]);
   }
 
@@ -257,6 +258,17 @@ class Content extends PresentationFormatContent {
         c: this.bindNext(colors.angles),
       },
     });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        fig._tri2.setScenario('bottomRight');
+        coll.setAngles('general');
+        coll.setTri2('abc');
+      },
+      show: [fig._tri1, fig._trir, fig._tri2],
+    };
     this.addSection(common, commonContent, {
       modifiers: {
         'third_triangle\'s': click(coll.pulseTri2, [coll], colors.sides),
@@ -265,13 +277,108 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done) => {
         coll.pulseNewC(done);
       },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'The |first_triangle| and |third_triangle| have equal angles. We saw earlier that |equiangular triangles are always similar|.',
+      ],
+      modifiers: {
+        first_triangle: click(coll.pulseTri1, [coll], colors.sides),
+        third_triangle: click(coll.pulseTri2, [coll], colors.sides),
+      },
+    });
+
+    commonContent = {
+      setContent: [
+        'Therefore the |first_triangle| and |third_triangle| are similar, and the sides are proportionally scaled by |r|.',
+      ],
+      modifiers: {
+        first_triangle: click(coll.pulseTri1, [coll], colors.sides),
+        third_triangle: click(coll.pulseTri2, [coll], colors.sides),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTri2('all');
+        coll.pulseNewSides(done);
+      },
       setEnterState: () => {
         fig._tri1.setScenario('left');
         fig._trir.setScenario('topRight');
         fig._tri2.setScenario('bottomRight');
         coll.setAngles('general');
-        coll.setTri2('abc');
+        coll.setTri2('all');
       },
+    });
+
+    commonContent = {
+      setContent: [
+        'Now we can see the |second_triangle| and |third_triangle| have the same side lengths.',
+      ],
+      modifiers: {
+        second_triangle: click(coll.pulseTrir, [coll], colors.sides),
+        third_triangle: click(coll.pulseTri2, [coll], colors.sides),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    commonContent = {
+      setContent: [
+        'From |SSS| triangle congruence, any two triangles with the same side lengths are |congruent|, and thus both triangles have the |same_angles|.',
+      ],
+      modifiers: {
+        SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
+        second_triangle: click(coll.pulseTrir, [coll], colors.sides),
+        third_triangle: click(coll.pulseTri2, [coll], colors.sides),
+        same_angles: this.bindNext(colors.angles),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        fig._tri2.setScenario('bottomRight');
+        coll.setAngles('solved');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir, fig._tri2],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
+        second_triangle: click(coll.pulseTrir, [coll], colors.sides),
+        third_triangle: click(coll.pulseTri2, [coll], colors.sides),
+        same_angles: click(coll.pulseTri2rAngles, [coll], colors.angles),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseTri2rAngles(done);
+      },
+    });
+
+    this.addSection({
+      setContent: 'And so we have shown that |any two similar triangles| will also have the |same corresponding angles|.',
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._trir.setScenario('topRight');
+        coll.setAngles('solved');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir],
+      transitionFromPrev: (done) => {
+        fig._trir.animations.new()
+          .scenario({ target: 'right', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig._trir.setScenario('right');
+      },      
     });
   }
 }

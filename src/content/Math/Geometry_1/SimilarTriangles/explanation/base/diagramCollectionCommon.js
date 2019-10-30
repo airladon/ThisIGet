@@ -216,6 +216,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       trir._angle0.setLabel('a\'');
       trir._angle1.setLabel('c\'');
       trir._angle2.setLabel('b\'');
+      trir._angle0.setColor(this.layout.colors.angles2);
+      trir._angle1.setColor(this.layout.colors.angles2);
+      trir._angle2.setColor(this.layout.colors.angles2);
     } else if (toType === 'initial') {
       tri1._angle0.setLabelToRealAngle();
       tri1._angle1.setLabelToRealAngle();
@@ -223,6 +226,19 @@ export default class CommonCollection extends CommonDiagramCollection {
       trir._angle1.setLabelToRealAngle();
       trir._angle2.setLabelToRealAngle();
       tri1._angle2.setLabelToRealAngle();
+      trir._angle0.setColor(this.layout.colors.angles);
+      trir._angle1.setColor(this.layout.colors.angles);
+      trir._angle2.setColor(this.layout.colors.angles);
+    } else if (toType === 'solved') {
+      tri1._angle0.setLabel('a');
+      tri1._angle1.setLabel('c');
+      tri1._angle2.setLabel('b');
+      trir._angle0.setLabel('a');
+      trir._angle1.setLabel('c');
+      trir._angle2.setLabel('b');
+      trir._angle0.setColor(this.layout.colors.angles);
+      trir._angle1.setColor(this.layout.colors.angles);
+      trir._angle2.setColor(this.layout.colors.angles);
     }
   }
 
@@ -241,6 +257,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       tri2._angle2.setLabel('b');
       tri2._side01.setLabel('');
       tri2._side12.setLabel('');
+      tri2._side20.setLabel('rB');
+    } else if (toType === 'all') {
+      tri2._angle0.setLabel('a');
+      tri2._angle1.setLabel('c');
+      tri2._angle2.setLabel('b');
+      tri2._side01.setLabel('rA');
+      tri2._side12.setLabel('rC');
       tri2._side20.setLabel('rB');
     }
   }
@@ -365,6 +388,27 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseTri2() {
     this._fig._tri2.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTrir() {
+    this._fig._trir.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNewSides(done: ?() => void = null) {
+    this._fig._tri2._side01._label.pulseScaleNow(1, 1.5, 0, done);
+    this._fig._tri2._side12._label.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri2rAngles(done: ?() => void = null) {
+    this._fig._tri2._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri2._angle1.pulseScaleNow(1, 1.3);
+    this._fig._tri2._angle2.pulseScaleNow(1, 1.3);
+    this._fig._trir._angle0.pulseScaleNow(1, 1.3);
+    this._fig._trir._angle1.pulseScaleNow(1, 1.3);
+    this._fig._trir._angle2.pulseScaleNow(1, 1.3, 0, done);
     this.diagram.animateNextFrame();
   }
 }
