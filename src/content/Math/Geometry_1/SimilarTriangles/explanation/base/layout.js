@@ -16,6 +16,7 @@ export default function diagramLayout() {
   const layout: Object = baseLayout();
   const { colors } = layout;
   colors.sides = colors.get('blue', 'base').rgb;
+  colors.sides2 = colors.get('green', 'base').rgb;
   colors.angles = colors.get('red', 'base').rgb;
   colors.angles2 = colors.get('green', 'base').rgb;
   colors.highlight = colors.get('red').rgb;
@@ -175,6 +176,7 @@ export default function diagramLayout() {
         right: { scale: 1, position: [1, 0] },
         topRight: { scale: 1, position: [1, 0.5] },
         bottomRight: { scale: 1, position: [1, -1] },
+        on: { scale: 0.98, position: [-0.995, 0.325] },
       },
       touchInBoundingRect: true,
     },
@@ -262,6 +264,33 @@ export default function diagramLayout() {
     },
   };
 
+  const w = 0.06;
+  const arrow = (name, p, color = colors.sides) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      {
+        name: '1',
+        method: 'line',
+        options: {
+          // p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color,
+          p1: [-w, -w], p2: [0, 0], width: 0.01, color,
+        },
+      },
+      {
+        name: '2',
+        method: 'line',
+        options: {
+          // p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color,
+          p1: [-w, w], p2: [0, 0], width: 0.01, color,
+        },
+      },
+    ],
+    options: {
+      position: p,
+    }
+  });
+
   const fig = {
     name: 'fig',
     method: 'collection',
@@ -270,9 +299,12 @@ export default function diagramLayout() {
       tri('tri1', points, 'A', 'B', 'C'),
       tri('tri2', pointsSmall, 'rA', 'rB', 'rC'),
       tri('trir', pointsSmall, 'rA', 'rB', 'rC'),
+      tri('tria', pointsSmall, 'A\'', 'B\'', 'C\''),
       newBase,
       angleA,
       angleB,
+      arrow('arrow1', [-0.9, -0.145], colors.sides2),
+      arrow('arrow2', [-0.9, -0.8]),
     ],
     mods: {
       scenarios: {
@@ -289,12 +321,12 @@ export default function diagramLayout() {
     _A: { text: 'A', color: colors.sides },
     _B: { text: 'B', color: colors.sides },
     _C: { text: 'C', color: colors.sides },
+    Ap: { text: 'A\'', color: colors.sides2 },
+    Bp: { text: 'B\'', color: colors.sides2 },
+    Cp: { text: 'C\'', color: colors.sides2 },
     r1: { text: 'r', color: colors.sides },
     r2: { text: 'r', color: colors.sides },
     r3: { text: 'r', color: colors.sides },
-    Ap: { text: 'A\'', color: colors.sides },
-    Bp: { text: 'B\'', color: colors.sides },
-    Cp: { text: 'C\'', color: colors.sides },
     equals1: '  =  ',
     equals2: '  =  ',
     equals3: '  =  ',
@@ -317,10 +349,15 @@ export default function diagramLayout() {
       },
       color: colors.diagram.text.base,
       forms: {
+        // 'ratios': [
+        //   { frac: [['r1', '_A'], 'A', 'v1'] }, 'equals1',
+        //   { frac: [['r2', '_B'], 'B', 'v2'] }, 'equals2',
+        //   { frac: [['r3', '_C'], 'C', 'v3'] },
+        // ],
         'ratios': [
-          { frac: [['r1', '_A'], 'A', 'v1'] }, 'equals1',
-          { frac: [['r2', '_B'], 'B', 'v2'] }, 'equals2',
-          { frac: [['r3', '_C'], 'C', 'v3'] },
+          'Ap', 'equals1', 'r1', 'A', '      ',
+          'Bp', 'equals2', 'r2', 'B', '      ',
+          'Cp', 'equals3', 'r3', 'C', '      ',
         ],
         'generalRatios': [
           { frac: ['Ap', 'A', 'v1'] }, 'equals1',
@@ -332,6 +369,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         bottom: { position: [0, -1.5], scale: 1 },
+        right: { position: [1.1, 0] },
       },
     },
   };

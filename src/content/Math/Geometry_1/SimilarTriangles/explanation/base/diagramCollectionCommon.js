@@ -200,8 +200,80 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  setTriA(toType: string = 'initial') {
+    const tri = this._fig._tria;
+    if (toType === 'initial') {
+      tri._angle0.setLabel('a');
+      tri._angle1.setLabel('c');
+      tri._angle2.setLabel('b');
+      tri._side01.setLabel('A\'');
+      tri._side12.setLabel('C\'');
+      tri._side20.setLabel('B\'');
+      tri._side01.setColor(this.layout.colors.sides2);
+      tri._side12.setColor(this.layout.colors.sides2);
+      tri._side20.setColor(this.layout.colors.sides2);
+      tri._line.setColor(this.layout.colors.sides2);
+      tri._angle1.setColor(this.layout.colors.angles);
+      tri._angle2.setColor(this.layout.colors.angles);
+    } else if (toType === 'solved') {
+      tri._angle0.setLabel('a');
+      tri._angle1.setLabel('c');
+      tri._angle2.setLabel('b');
+      tri._side01.setLabel('rA');
+      tri._side12.setLabel('rC');
+      tri._side20.setLabel('rB');
+      tri._side01._label.setColor(this.layout.colors.sides);
+      tri._side12._label.setColor(this.layout.colors.sides);
+      tri._side20._label.setColor(this.layout.colors.sides);
+      tri._line.setColor(this.layout.colors.sides);
+      tri._angle1.setColor(this.layout.colors.angles);
+      tri._angle2.setColor(this.layout.colors.angles);
+    } else if (toType === 'inWorking') {
+      tri._angle0.setLabel('a');
+      tri._angle1.setLabel('');
+      tri._angle2.setLabel('b');
+      tri._side01.setLabel('A\'');
+      tri._side12.setLabel('C\'');
+      tri._side20.setLabel('B\'');
+      tri._side01.setColor(this.layout.colors.sides2);
+      tri._side12.setColor(this.layout.colors.sides2);
+      tri._side20.setColor(this.layout.colors.sides2);
+      tri._side01._label.setColor(this.layout.colors.darkGrey);
+      tri._side12._label.setColor(this.layout.colors.darkGrey);
+      tri._line.setColor(this.layout.colors.sides2);
+      tri._angle1.setColor(this.layout.colors.darkGrey);
+      tri._angle2.setColor(this.layout.colors.darkGrey);
+    }
+  }
+
+  setTri1(toType: string = 'initial') {
+    const tri = this._fig._tri1;
+    if (toType === 'general') {
+      tri._angle0.setLabel('a');
+      tri._angle1.setLabel('c');
+      tri._angle2.setLabel('b');
+      tri._angle1.setColor(this.layout.colors.angles);
+      tri._angle2.setColor(this.layout.colors.angles);
+      tri._side12._label.setColor(this.layout.colors.sides);
+    } else if (toType === 'initial') {
+      tri._angle0.setLabelToRealAngle();
+      tri._angle1.setLabelToRealAngle();
+      tri._angle2.setLabelToRealAngle();
+      tri._angle1.setColor(this.layout.colors.angles);
+      tri._angle2.setColor(this.layout.colors.angles);
+      tri._side12._label.setColor(this.layout.colors.sides);
+    } else if (toType === 'inWorking') {
+      tri._angle0.setLabel('a');
+      tri._angle1.setLabel('c');
+      tri._angle2.setLabel('b');
+      tri._angle1.setColor(this.layout.colors.darkGrey);
+      tri._angle2.setColor(this.layout.colors.darkGrey);
+      tri._side12._label.setColor(this.layout.colors.darkGrey);
+    }
+  }
+
   setAngles(toType: string = 'general') {
-    const tri1 = this._fig._tri1;
+    // const tri1 = this._fig._tri1;
     const trir = this._fig._trir;
     // const tri2 = this._fig._tri2;
     // tri2._angle0.setLabel('a');
@@ -209,10 +281,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     // tri2._angle2.setLabel('b');
     // this._fig._angleA.label.setText('a');
     // this._fig._angleB.label.setText('b');
+    this.setTri1(toType);
     if (toType === 'general') {
-      tri1._angle0.setLabel('a');
-      tri1._angle1.setLabel('c');
-      tri1._angle2.setLabel('b');
+      // tri1._angle0.setLabel('a');
+      // tri1._angle1.setLabel('c');
+      // tri1._angle2.setLabel('b');
       trir._angle0.setLabel('a\'');
       trir._angle1.setLabel('c\'');
       trir._angle2.setLabel('b\'');
@@ -220,19 +293,19 @@ export default class CommonCollection extends CommonDiagramCollection {
       trir._angle1.setColor(this.layout.colors.angles2);
       trir._angle2.setColor(this.layout.colors.angles2);
     } else if (toType === 'initial') {
-      tri1._angle0.setLabelToRealAngle();
-      tri1._angle1.setLabelToRealAngle();
+      // tri1._angle0.setLabelToRealAngle();
+      // tri1._angle1.setLabelToRealAngle();
       trir._angle0.setLabelToRealAngle();
       trir._angle1.setLabelToRealAngle();
       trir._angle2.setLabelToRealAngle();
-      tri1._angle2.setLabelToRealAngle();
+      // tri1._angle2.setLabelToRealAngle();
       trir._angle0.setColor(this.layout.colors.angles);
       trir._angle1.setColor(this.layout.colors.angles);
       trir._angle2.setColor(this.layout.colors.angles);
     } else if (toType === 'solved') {
-      tri1._angle0.setLabel('a');
-      tri1._angle1.setLabel('c');
-      tri1._angle2.setLabel('b');
+      // tri1._angle0.setLabel('a');
+      // tri1._angle1.setLabel('c');
+      // tri1._angle2.setLabel('b');
       trir._angle0.setLabel('a');
       trir._angle1.setLabel('c');
       trir._angle2.setLabel('b');
@@ -409,6 +482,87 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._trir._angle0.pulseScaleNow(1, 1.3);
     this._fig._trir._angle1.pulseScaleNow(1, 1.3);
     this._fig._trir._angle2.pulseScaleNow(1, 1.3, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri1Angles() {
+    this._fig._tri1._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri1._angle1.pulseScaleNow(1, 1.3);
+    this._fig._tri1._angle2.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTriAAngles() {
+    this._fig._tria._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tria._angle1.pulseScaleNow(1, 1.3);
+    this._fig._tria._angle2.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri1Sides() {
+    this._fig._tri1._side01._label.pulseScaleNow(1, 1.9);
+    this._fig._tri1._side12._label.pulseScaleNow(1, 1.9);
+    this._fig._tri1._side20._label.pulseScaleNow(1, 1.9);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTriASides() {
+    this._fig._tria._side01._label.pulseScaleNow(1, 1.9);
+    this._fig._tria._side12._label.pulseScaleNow(1, 1.9);
+    this._fig._tria._side20._label.pulseScaleNow(1, 1.9);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri1ASides() {
+    this.pulseTri1Sides();
+    this.pulseTriASides();
+  }
+
+  pulseTri1AAngles() {
+    this.pulseTri1Angles();
+    this.pulseTriAAngles();
+  }
+
+  triAtoTri1(done: ?() => void = null) {
+    const tria = this._fig._tria;
+    tria.stop();
+    tria.setScenario('right');
+    tria.animations.new()
+      .scenario({ target: 'on', duration: 1 })
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAnglesA1a() {
+    this._fig._tria._angle0.pulseScaleNow(1, 1.3);
+    this._fig._tri1._angle0.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSideA() {
+    this._fig._tri1._side01._label.pulseScaleNow(1, 1.9);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSideB() {
+    this._fig._tri1._side20._label.pulseScaleNow(1, 1.9);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSideBa() {
+    this._fig._tria._side20._label.pulseScaleNow(1, 1.9);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseParallelLines() {
+    this.pulseSideBa();
+    this.pulseSideB();
+  }
+
+  pulseArrows(done: ?() => void = null) {
+    this._fig._arrow1.pulseScaleNow(1, 2);
+    this._fig._arrow2.pulseScaleNow(1, 2, 0, done);
     this.diagram.animateNextFrame();
   }
 }

@@ -36,6 +36,8 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/AnglesAtIntersections/base',
+      'Math/Geometry_1/ParallelSplitOfTriangle/base',
     ]);
   }
 
@@ -117,6 +119,10 @@ class Content extends PresentationFormatContent {
       ],
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     let commonContent = {
       setContent: [
         'Now, if we measure the |angles| of these two triangles, we will see they are the |same|.',
@@ -147,6 +153,174 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'Does this mean that |any| two triangles with |equal corresponding angles| will be |similar|?',
+      ],
+      title: 'Equiangular Triangles',
+    };
+    this.addSection(common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'To find out, let\'s start with two triangles with the |same_angles|, but of |different_sizes|.',
+      ],
+      modifiers: {
+        different_sizes: click(coll.pulseTri1ASides, [coll], colors.sides),
+        same_angles: click(coll.pulseTri1AAngles, [coll], colors.angles),
+      },
+    };
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._tria.setScenario('right');
+        coll.setTri1('general');
+        coll.setTriA('initial');
+      },
+      show: [fig._tri1, fig._tria],
+    };
+    this.addSection(common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'As the angles are the same, we can |move| the smaller triangle on the larger one such that one angle lines up.',
+      ],
+      modifiers: {
+        move: this.bindNext(colors.diagram.action),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        move: click(coll.triAtoTri1, [coll, null], colors.diagram.action)
+      },
+      transitionFromPrev: (done) => {
+        coll.triAtoTri1(done);
+      },
+      setSteadyState: () => {
+        fig._tria.setScenario('on');
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'Now let\'s focus on just a portion of the diagram',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      setSteadyState: () => {
+        fig._tria.setScenario('on');
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._tria.setScenario('on');
+        coll.setTri1('inWorking');
+        coll.setTriA('inWorking');
+      },
+      show: [fig._tri1, fig._tria],
+    };
+    this.addSection(common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection(common, commonContent, {
+      setContent: [
+        'We can see that line |A_| intersects lines |B| and |B\'|, making two |corresponding_angles| of equal size |a|.',
+      ],
+      modifiers: {
+        corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        a: click(coll.pulseAnglesA1a, [coll], colors.angles),
+        A_: click(coll.pulseSideA, [coll], colors.sides),
+        B: click(coll.pulseSideB, [coll], colors.sides),
+        'B\'': click(coll.pulseSideBa, [coll], colors.sides2),
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'We know that when |corresponding_angles| are equal, the |intersected_lines| must be |parallel|.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        parallel: this.bindNext(colors.sides),
+        intersected_lines: click(coll.pulseParallelLines, [coll], colors.sides),
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        fig._tri1.setScenario('left');
+        fig._tria.setScenario('on');
+        coll.setTri1('inWorking');
+        coll.setTriA('inWorking');
+      },
+      show: [fig._tri1, fig._tria, fig._arrow1, fig._arrow2],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        parallel: click(coll.pulseArrows, [coll], colors.sides),
+        intersected_lines: click(coll.pulseParallelLines, [coll, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseArrows(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'We also know that |any triangle split with a parallel line|, will form a smaller triangle whose sides are all in |proportion| to the larger triangle.',
+      ],
+      modifiers: {
+        proportion: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+      },
+    };
+    this.addSection(common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'We also know that |any triangle split with a parallel line|, will form a smaller triangle whose sides are all in |proportion| to the larger triangle.',
+      ],
+      modifiers: {
+        proportion: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('ratios');
+        eqn.setScenario('bottom');
+      }
+    });
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: [
         'Is this the case for |any| pair of similar triangles? To find out, let\'s |rename| the angles to be more general.',
