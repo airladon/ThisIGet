@@ -139,8 +139,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     const large = [ex._circ2, ex._tri2, ex._quad2];
     const index = this.similarCounter;
     this.similarCounter = (this.similarCounter + 1) % 3;
-    small[index].pulseScaleNow(1, 1.2);
-    large[index].pulseScaleNow(1, 1.2);
+    small[index].pulseScaleNow(1, 1.3);
+    large[index].pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 
@@ -389,7 +389,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       .trigger({
         callback: () => {
           // newBase._label.pulseScaleNow(1, 1.5);
-          trir._side20._label.pulseScaleNow(1, 1.5);
+          trir._side20._label.pulseScaleNow(1, 2);
         },
         duration: 1,
       })
@@ -458,8 +458,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseNewBase() {
-    this._fig._trir._side20._label.pulseScaleNow(1, 1.5);
-    this._fig._tri2._side20._label.pulseScaleNow(1, 1.5);
+    this._fig._trir._side20._label.pulseScaleNow(1, 2);
+    this._fig._tri2._side20._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
@@ -518,8 +518,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseNewSides(done: ?() => void = null) {
-    this._fig._tri2._side01._label.pulseScaleNow(1, 1.5, 0, done);
-    this._fig._tri2._side12._label.pulseScaleNow(1, 1.5);
+    this._fig._tri2._side01._label.pulseScaleNow(1, 2, 0, done);
+    this._fig._tri2._side12._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
@@ -548,16 +548,16 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseTri1Sides() {
-    this._fig._tri1._side01._label.pulseScaleNow(1, 1.9);
-    this._fig._tri1._side12._label.pulseScaleNow(1, 1.9);
-    this._fig._tri1._side20._label.pulseScaleNow(1, 1.9);
+    this._fig._tri1._side01._label.pulseScaleNow(1, 2);
+    this._fig._tri1._side12._label.pulseScaleNow(1, 2);
+    this._fig._tri1._side20._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
-  pulseTriASides() {
-    this._fig._tria._side01._label.pulseScaleNow(1, 1.9);
-    this._fig._tria._side12._label.pulseScaleNow(1, 1.9);
-    this._fig._tria._side20._label.pulseScaleNow(1, 1.9);
+  pulseTriASides(done: ?() => void = null) {
+    this._fig._tria._side01._label.pulseScaleNow(1, 2);
+    this._fig._tria._side12._label.pulseScaleNow(1, 2);
+    this._fig._tria._side20._label.pulseScaleNow(1, 2, 0, done);
     this.diagram.animateNextFrame();
   }
 
@@ -589,17 +589,17 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseSideA() {
-    this._fig._tri1._side01._label.pulseScaleNow(1, 1.9);
+    this._fig._tri1._side01._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
   pulseSideB() {
-    this._fig._tri1._side20._label.pulseScaleNow(1, 1.9);
+    this._fig._tri1._side20._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
   pulseSideBa() {
-    this._fig._tria._side20._label.pulseScaleNow(1, 1.9);
+    this._fig._tria._side20._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 

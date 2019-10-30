@@ -453,7 +453,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         create: click(coll.createTriangle, [coll, null], colors.diagram.action),
         base: click(coll.pulseNewBase, [coll], colors.sides),
-        angles: click(coll.pulseNewAngles, [coll], colors.angles),
+        base_angles: click(coll.pulseNewAngles, [coll], colors.angles),
       },
       setEnterState: () => {
         if (this.comingFrom === 'prev') {
@@ -479,6 +479,8 @@ class Content extends PresentationFormatContent {
         fig._trir.setScenario('topRight');
         fig._tri2.showAll();
         coll.setTri2('initial');
+        fig._angleA.hideAll();
+        fig._angleB.hideAll();
       },
     });
 
