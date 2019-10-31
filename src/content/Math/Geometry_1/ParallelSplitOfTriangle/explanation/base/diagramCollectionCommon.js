@@ -243,15 +243,18 @@ export default class CommonCollection extends CommonDiagramCollection {
 
 
   setupFig4EqnLinks() {
-    const e1 = this._fig4._eqn1;
-    const e2 = this._fig4._eqn2;
-    const makeClick = (equation, name) => {
+    const e1 = this._fig4._eqn1.eqn;
+    const e2 = this._fig4._eqn2.eqn;
+    const e3 = this._fig4._eqn3.eqn;
+    const e4 = this._fig4._eqn4.eqn;
+    const makeClick = (equation, name, figElement = name) => {
       const element = equation[`_${name}`];
       if (element != null) {
-        element.onClick = this.pulseE.bind(this, name, null, null);
+        element.onClick = this.pulseE.bind(this, figElement, null, null);
         element.makeTouchable();
       }
     };
+
     makeClick(e1, 'AB');
     makeClick(e1, 'AD');
     makeClick(e1, 'AC');
@@ -261,6 +264,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     makeClick(e2, 'AD');
     makeClick(e2, 'AC');
     makeClick(e2, 'AF');
+
+    makeClick(e3, 'AC');
+    makeClick(e3, 'AE');
+    makeClick(e3, 'AC1', 'AC');
+    makeClick(e3, 'AF');
+
+    makeClick(e4, 'AE');
+    makeClick(e4, 'AF');
   }
 
   pulseE(name: string | Array<string>, done: ?() => void = null, scale: ?number = null) {
@@ -312,8 +323,8 @@ export default class CommonCollection extends CommonDiagramCollection {
         doneToUse = null;
       }
     });
-    if (done != null) {
-      done();
+    if (doneToUse != null) {
+      doneToUse();
     }
     this.diagram.animateNextFrame();
   }

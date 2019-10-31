@@ -19,6 +19,8 @@ export default function diagramLayout() {
   colors.highlight = colors.get('red').rgb;
   colors.grey = colors.get('grey', 'base').rgb;
   colors.darkGrey = colors.get('grey', 'darker').rgb;
+  colors.description = colors.get('grey', 'base').rgb;
+  colors.rgbToCssVar(colors.description, '--color-parallelsplit-description');
   const points = [
     new Point(-1.5, -1).add(0.3, 0),
     new Point(0, 1).add(0.3, 0),
@@ -1238,9 +1240,9 @@ export default function diagramLayout() {
   //   },
   // };
 
-  const fig4Eqn = name => ({
+  const fig4Eqn = (name, y) => ({
     name,
-    method: 'addEquation',
+    method: 'addEqn',
     options: {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
@@ -1261,17 +1263,46 @@ export default function diagramLayout() {
         equals1: '  =  ',
       },
       forms: {
-        '0': [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AE', 'AC', 'v2'] }],
-        '1': [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AF', 'AC', 'v2'] }],
-        '2': [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
-        '3': [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+        '0': {
+          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AE', 'AC', 'v2'] }],
+          description: 'Given',
+        },
+        '1': {
+          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AF', 'AC', 'v2'] }],
+          description: 'DF is parallel with BC',
+        },
+        '2': {
+          content: [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+          description: 'Right side of first two equations equal each other',
+        },
+        '3': {
+          content: ['AE', 'equals1', 'AF'],
+          description: 'Multiply both sides by AC',
+        },
       },
     },
     mods: {
       scenarios: {
-        topLeft: { position: [-1.5, 0.7] },
-        left: { position: [-1.5, 0.2] },
-        bottomLeft: { position: [-1.5, -0.3] },
+        default: { position: [2.5, y], scale: 0.9 },
+        // left: { position: [-1.5, y] },
+        // bottomLeft: { position: [-1.5, y] },
+      },
+    },
+  });
+
+  const fig4Nav = (name, y) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      equation: fig4Eqn(`${name}Eqn`, y),
+      interactive: false,
+      alignV: 'middle',
+      alignH: 'left',
+    },
+    mods: {
+      scenarios: {
+        default: { position: [2, y + 0.35] },
       },
     },
   });
@@ -1322,15 +1353,22 @@ export default function diagramLayout() {
       line('AD', anyTriPoints[1], anyTriSplit[0]),
       line('AB', anyTriPoints[0], anyTriPoints[1]),
       line('AE', anyTriPoints[1], anyTriSplit[1].add(-0.06, 0.15)),
+      line('AF', anyTriPoints[1], anyTriSplit[1]),
       line('AC', anyTriPoints[1], anyTriPoints[2]),
       line('BC', anyTriPoints[0], anyTriPoints[2]),
       triangle('tri', anyTriPoints[0], anyTriPoints[1], anyTriPoints[2], colors.sides),
-      fig4Eqn('eqn1'),
-      fig4Eqn('eqn2'),
-      fig4Eqn('eqn3'),
+      fig4Nav('eqn1', 1.2),
+      fig4Nav('eqn2', 0.4),
+      fig4Nav('eqn3', -0.4),
+      fig4Nav('eqn4', -1.2),
     ],
     options: {
       position: [0, -0.2],
+    },
+    mods: {
+      scenarios: {
+        default: { position: [-1.5, -0.5] },
+      },
     },
   };
 
