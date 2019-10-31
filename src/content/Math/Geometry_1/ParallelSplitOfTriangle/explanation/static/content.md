@@ -91,3 +91,37 @@ If we introduce a third parallel line, then all lines between the parallel lines
 As each triangle has the same height, then any parallel split line will split all the hypotenuses by the same proportion.
 
 **Therefore, when lines between parallel lines are split by a third parallel line, they are all split with the same ratio.**
+
+### Line Formed by Two Sides Split in Proportion
+
+When a triangle is split by a parallel line, the split triangle’s sides all have the same proportion, or ratio, to the original triangle’s sides.
+
+Is the converse true? If we draw a line between two sides of a triangle split in the same ratio, is that line parallel?
+
+First, take a triangle and split two of it’s sides in the same ratio:
+
+![](split_sides.png)
+
+Here the sides $$\color{b}AB$$ and $$\color{b}AC$$ are split by $$\color{b}D$$ and $$\color{b}E$$ respectively such that:
+
+$$\frac{\color{b}AD}{\color{b}AB}\color{black} = \frac{\color{b}AE}{\color{b}AC} \ \ \ \ \ \ \ \ \color{grey}(1)$$
+
+Now let’s assume that DE is NOT parallel with $$\color{b}AC$$. Therefore, draw a line from $$\color{b}D$$ that is parallel with $$\color{b}AC$$. This line is $$\color{b}DF$$.
+
+![](parallel_line.png)
+
+Now, as $$\color{b}D\color{r}F$$ is parallel to $$\color{b}BC$$, we know from above that the line must split $$\color{b}AB$$ and $$\color{b}AC$$ in proportion:
+
+$$\frac{\color{b}AD}{\color{b}AB}\color{black} = \frac{\color{r}AF}{\color{b}AC} \ \ \ \ \ \ \ \ \color{grey}(2)$$
+
+Equations $$\color{grey}(1)$$ and $$\color{grey}(2)$$ have the same left side term, and therefore equal each other:
+
+$$\frac{\color{b}AE}{\color{b}AC}\color{black} = \frac{\color{r}AF}{\color{b}AC}$$
+
+Which simplifies to:
+
+$$\color{b}AE\color{black} = \color{r}AF$$
+
+Therefore $$\color{b}E$$ and $$\color{r}F$$ must be the same point. As $$\color{b}D\color{r}F$$ is parallel with $$\color{b}AC$$, then so $$\color{b}DE$$ must also be parallel.
+
+**Therefore, if we draw a line between two sides of a triangle split by the same proportion or ratio, that line will be parallel to the third side.**
