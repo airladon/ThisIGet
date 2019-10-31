@@ -403,7 +403,7 @@ export default function diagramLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
 
-  const line = (name, p1, p2, color = colors.sides) => ({
+  const line = (name, p1, p2, color = colors.sides, dashStyle: ?Object = null) => ({
     name,
     method: 'line',
     options: {
@@ -411,6 +411,7 @@ export default function diagramLayout() {
       p2,
       width: 0.02,
       color,
+      dashStyle,
     },
   });
 
@@ -1218,6 +1219,121 @@ export default function diagramLayout() {
     },
   });
 
+
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // const pTri = {
+  //   name: 'tri',
+  //   method: 'polyLine',
+  //   options: {
+  //     points: anyTriPoints,
+  //     color: colors.sides,
+  //     close: true,
+  //     width: 0.02,
+  //   },
+  // };
+
+  const fig4Eqn = name => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        fixTo: 'equals',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      scale: 0.8,
+      elements: {
+        AB: { text: 'AB', color: colors.sides },
+        AD: { text: 'AD', color: colors.sides },
+        AE: { text: 'AE', color: colors.sides },
+        AF: { text: 'AF', color: colors.sides },
+        AC: { text: 'AC', color: colors.sides },
+        AC1: { text: 'AC', color: colors.sides },
+        v1: { symbol: 'vinculum' },
+        v2: { symbol: 'vinculum' },
+        equals1: '  =  ',
+      },
+      forms: {
+        '0': [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AE', 'AC', 'v2'] }],
+        '1': [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AF', 'AC', 'v2'] }],
+        '2': [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+        '3': [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+      },
+    },
+    mods: {
+      scenarios: {
+        topLeft: { position: [-1.5, 0.7] },
+        left: { position: [-1.5, 0.2] },
+        bottomLeft: { position: [-1.5, -0.3] },
+      },
+    },
+  });
+
+  const text = (name, text, position) => ({
+    name,
+    method: 'text',
+    options: {
+      position,
+      text,
+      color: colors.sides,
+    },
+  });
+
+  const dot = (name, position) => ({
+    name,
+    method: 'polygon',
+    options: {
+      position,
+      sides: 30,
+      color: colors.sides,
+      fill: true,
+      radius: 0.05,
+    },
+  });
+
+  const fig4 = {
+    name: 'fig4',
+    method: 'collection',
+    addElements: [
+      line(
+        'DE', anyTriSplit[0], anyTriSplit[1].add(-0.06, 0.15),
+        colors.sides, { style: [0.05, 0.02] },
+      ),
+      line(
+        'DF', anyTriSplit[0], anyTriSplit[1],
+        colors.sides, { style: [0.05, 0.02] },
+      ),
+      text('B', 'B', anyTriPoints[0].add(-0.15, -0.1)),
+      text('A', 'A', anyTriPoints[1].add(0, 0.15)),
+      text('C', 'C', anyTriPoints[2].add(0.15, -0.1)),
+      text('D', 'D', anyTriSplit[0].add(-0.2, 0)),
+      text('E', 'E', anyTriSplit[1].add(-0.06 + 0.15, 0.15 + 0.05)),
+      text('F', 'F', anyTriSplit[1].add(0.15, -0.05)),
+      dot('pointD', anyTriSplit[0]),
+      dot('pointE', anyTriSplit[1].add(-0.06, 0.15)),
+      dot('pointF', anyTriSplit[1]),
+      line('AD', anyTriPoints[1], anyTriSplit[0]),
+      line('AB', anyTriPoints[0], anyTriPoints[1]),
+      line('AE', anyTriPoints[1], anyTriSplit[1].add(-0.06, 0.15)),
+      line('AC', anyTriPoints[1], anyTriPoints[2]),
+      line('BC', anyTriPoints[0], anyTriPoints[2]),
+      triangle('tri', anyTriPoints[0], anyTriPoints[1], anyTriPoints[2], colors.sides),
+      fig4Eqn('eqn1'),
+      fig4Eqn('eqn2'),
+      fig4Eqn('eqn3'),
+    ],
+    options: {
+      position: [0, -0.2],
+    },
+  };
+
   layout.addElements = [
     fig,
     nav('0', 0.8, false, '0'),
@@ -1231,6 +1347,7 @@ export default function diagramLayout() {
     fig2,
     eqnFig2('fig2Eqn'),
     fig3,
+    fig4,
   ];
   return layout;
 }

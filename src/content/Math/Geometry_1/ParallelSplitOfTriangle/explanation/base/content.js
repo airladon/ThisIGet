@@ -48,6 +48,7 @@ class Content extends PresentationFormatContent {
     const fig = coll._fig;
     const fig2 = coll._fig2;
     const fig3 = coll._fig3;
+    const fig4 = coll._fig4;
 
     this.addSection({
       title: 'Right Angle Triangle Split',
@@ -756,6 +757,12 @@ class Content extends PresentationFormatContent {
       ]),
     });
 
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
     this.addSection({
       title: 'Lines between Parallel Lines',
       setContent: centerV([
@@ -896,6 +903,268 @@ class Content extends PresentationFormatContent {
       setContent: centerV([
         'So, |all lines between parallel lines will be split with the same proportion| if a third parallel line is introduced between the initial parallel lines.',
       ]),
+    });
+
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    // ********************************************************************
+    this.addSection({
+      title: 'Two Sides Split in Proportion',
+      setContent: centerV([
+        'We know if a triangle is split by a parallel line, it will form a split triangle whose sides all have the |same proportion|, or ratio, to the original triangle’s sides.',
+        '|Is the converse true?| If we draw a line between two sides of a triangle split in the same ratio, is that line parallel?',
+      ]),
+    });
+
+    let commonContent = {
+      setContent: [
+        'To see, let\'s take a triangle and |split| two of it’s sides in the |same_ratio|.',
+      ],
+    } 
+    this.addSection(commonContent, {
+      modifiers: {
+        split: this.bindNext(colors.sides),
+        same_ratio: this.bindNext(colors.sides),
+      },
+      show: [fig4._tri, fig4._A, fig4._B, fig4._C],
+    });
+
+    this.addSection(commonContent, {
+      modifiers: {
+        split: click(coll.pulseE, [coll, ['pointE', 'pointD'], null, 2], colors.sides),
+        same_ratio: click(coll.pulseE, [coll, ['eqn1'], null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseE(['pointE', 'pointD'], done, 2);
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+      ],
+      setSteadyState: () => {
+        fig4._E.show();
+        fig4._D.show();
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+      },
+    });
+
+    // ********************************************************************
+    // ********************************************************************
+    common = {
+      setSteadyState: () => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+      },
+    };
+    commonContent = {
+      setContent: [
+        'Now, let\'s assume the line |DE| is not parallel with |BC|.',
+      ],
+    }; 
+    this.addSection(common, commonContent, {
+      modifiers: {
+        DE: this.bindNext(colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        DE: click(coll.pulseE, [coll, ['DE'], null], colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE,
+      ],
+      transitionFromPrev: (done) => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        coll.pulseE(['DE'], done, 4);
+      },
+    });
+
+    // ********************************************************************
+    // ********************************************************************
+    commonContent = {
+      setContent: [
+        'So we can draw a line from D that is |parallel| with |BC|.',
+      ],
+    }; 
+    this.addSection(common, commonContent, {
+      modifiers: {
+        parallel: this.bindNext(colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        parallel: click(coll.pulseE, [coll, ['DF'], null], colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE, fig4._DF, fig4._pointF,
+      ],
+      transitionFromPrev: (done) => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        coll.pulseE(['pointF'], null, 2);
+        fig4._DF.grow(0.1, 1, true, done);
+      },
+      setSteadyState: () => {
+        fig4._F.showAll();
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+      },
+    });
+
+    // ********************************************************************
+    // ********************************************************************
+    commonContent = {
+      setContent: [
+        'As |DF| is parallel to |BC| it must split the triangle in |equal_proportion|.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal_proportion: this.bindNext(colors.sides),
+        DF: click(coll.pulseE, [coll, ['DF'], null], colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE, fig4._DF, fig4._pointF,
+        fig4._F,
+      ],
+    });
+
+    common = {
+      setSteadyState: () => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        fig4._eqn2.showForm('1');
+        fig4._eqn2.setScenario('left');
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal_proportion: click(coll.pulseE, [coll, ['eqn2'], null], colors.sides),
+        DF: click(coll.pulseE, [coll, ['DF'], null], colors.sides),
+        BC: click(coll.pulseE, [coll, ['BC'], null], colors.sides),
+      },
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE, fig4._DF, fig4._pointF,
+        fig4._F,
+      ],
+      transitionFromPrev: (done) => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        fig4._eqn2.showForm('1');
+        fig4._eqn2.setScenario('left');
+        coll.pulseE('eqn2', done);
+      },
+    });
+
+    // ********************************************************************
+    // ********************************************************************
+    commonContent = {
+      setContent: [
+        'The two equations have an equal |left_side|. Therefore the |right_sides| are |equal| to each other.',
+      ],
+    };
+    common = {
+      show: [
+        fig4._tri, fig4._A, fig4._B, fig4._C,
+        fig4._D, fig4._E,
+        fig4._pointD, fig4._pointE,
+        fig4._AB, fig4._AD, fig4._AC, fig4._AE, fig4._BC,
+        fig4._DE, fig4._DF, fig4._pointF,
+        fig4._F,
+      ],
+      setSteadyState: () => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        fig4._eqn2.showForm('1');
+        fig4._eqn2.setScenario('left');
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        left_side: click(coll.pulseE, [coll, [
+          'eqn1._AD', 'eqn1._AB', // 'eqn1._v1',
+          'eqn2._AD', 'eqn2._AB', // 'eqn2._v1',
+        ], null], colors.sides),
+        right_sides: click(coll.pulseE, [coll, [
+          'eqn1._AE', 'eqn1._AC', // 'eqn1._v1',
+          'eqn2._AF', 'eqn2._AC', // 'eqn2._v1',
+        ], null], colors.sides),
+        equal: this.bindNext(colors.sides),
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        left_side: click(coll.pulseE, [coll, [
+          'eqn1._AD', 'eqn1._AB', // 'eqn1._v1',
+          'eqn2._AD', 'eqn2._AB', // 'eqn2._v1',
+        ], null], colors.sides),
+        right_sides: click(coll.pulseE, [coll, [
+          'eqn1._AE', 'eqn1._AC', // 'eqn1._v1',
+          'eqn2._AF', 'eqn2._AC', // 'eqn2._v1',
+        ], null], colors.sides),
+        equal: click(coll.pulseE, [coll, ['eqn3'], null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        fig4._eqn2.showForm('1');
+        fig4._eqn2.setScenario('left');
+        fig4._eqn3.showForm('2');
+        fig4._eqn3.setScenario('bottomLeft');
+        coll.pulseE('eqn3._AC', done);
+      },
+      setSteadyState: () => {
+        fig4._eqn1.showForm('0');
+        fig4._eqn1.setScenario('topLeft');
+        fig4._eqn2.showForm('1');
+        fig4._eqn2.setScenario('left');
+        fig4._eqn3.showForm('2');
+        fig4._eqn3.setScenario('bottomLeft');
+      },
     });
   }
 }

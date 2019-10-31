@@ -2336,10 +2336,10 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Find Properties",
           "description": "",
-          "htmlTitle": "Self discover why ...",
-          "htmlDescription": "Figure out why ...",
+          "htmlTitle": "Self discover the properties of similar triangles",
+          "htmlDescription": "Figure out why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar",
           "fullTopic": true,
           "links": ""
         }
