@@ -77,6 +77,55 @@ export class QRTriangle extends PopupBoxCollection {
   }
 }
 
+export class QRProportionalSplit extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
+
+    const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_sides: click(
+        coll.pulseTwoSides, [coll], colors.qrParallelSplitOfTriangleSides,
+      ),
+      parallel: click(
+        coll.pulseParallel, [coll], colors.qrParallelSplitOfTriangleHighlight,
+      ),
+      line: click(
+        coll.pulseSplit, [coll], colors.qrParallelSplitOfTriangleHighlight,
+      ),
+      same_proportion: click(
+        coll.pulseEqn, [coll], colors.qrParallelSplitOfTriangleSides,
+      ),
+      remaining_side: click(
+        coll.pulseBottom, [coll], colors.qrParallelSplitOfTriangleSides,
+      ),
+    };
+    this.setTitle('Proportional Split of a Triangle');
+    this.setDescription([
+      'A |line| between |two_sides| of a triangle split by the |same_proportion| or ratio will be |parallel| to the |remaining_side|.',
+    ], modifiers);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
+  }
+
+  show() {
+    super.show();
+    const coll = this._collection;
+    coll.hideAll();
+    // console.log(coll)
+    coll._fig.showAll();
+    coll._eqn.showForm('1');
+    coll._eqn.setScenario('default');
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
+    this.transformToQRWindow(coll, new Rect(-1.15, -1.2, 3.75, 2.8));
+    this.diagram.animateNextFrame();
+  }
+}
+
 export class QRLines extends PopupBoxCollection {
   _collection: CommonCollection;
 
@@ -132,6 +181,7 @@ export class QRLines extends PopupBoxCollection {
 
 attachQuickReference(details.path, topicUID, versionUID, {
   TrianglePres: QRTriangle,
+  ProportionalSplit: QRProportionalSplit,
   LinesPres: QRLines,
   Triangle: <StaticQR
       title="Triangle Split by Parallel Line"

@@ -1240,6 +1240,17 @@ export default function diagramLayout() {
   //   },
   // };
 
+  const f4Points = [
+    new Point(-0.8, -0.8),
+    new Point(0.7, 1),
+    new Point(1.3, -0.8),
+  ];
+
+  const f4Split = [
+    new Point(-0.38, -0.3),
+    new Point(1.14, -0.3),
+  ];
+
   const fig4Eqn = (name, y) => ({
     name,
     method: 'addEqn',
@@ -1334,29 +1345,29 @@ export default function diagramLayout() {
     method: 'collection',
     addElements: [
       line(
-        'DE', anyTriSplit[0], anyTriSplit[1].add(-0.06, 0.15),
+        'DE', f4Split[0], f4Split[1].add(-0.06, 0.15),
         colors.sides, { style: [0.05, 0.02] },
       ),
       line(
-        'DF', anyTriSplit[0], anyTriSplit[1],
+        'DF', f4Split[0], f4Split[1],
         colors.sides, { style: [0.05, 0.02] },
       ),
-      text('B', 'B', anyTriPoints[0].add(-0.15, -0.1)),
-      text('A', 'A', anyTriPoints[1].add(0, 0.15)),
-      text('C', 'C', anyTriPoints[2].add(0.15, -0.1)),
-      text('D', 'D', anyTriSplit[0].add(-0.2, 0)),
-      text('E', 'E', anyTriSplit[1].add(-0.06 + 0.15, 0.15 + 0.05)),
-      text('F', 'F', anyTriSplit[1].add(0.15, -0.05)),
-      dot('pointD', anyTriSplit[0]),
-      dot('pointE', anyTriSplit[1].add(-0.06, 0.15)),
-      dot('pointF', anyTriSplit[1]),
-      line('AD', anyTriPoints[1], anyTriSplit[0]),
-      line('AB', anyTriPoints[0], anyTriPoints[1]),
-      line('AE', anyTriPoints[1], anyTriSplit[1].add(-0.06, 0.15)),
-      line('AF', anyTriPoints[1], anyTriSplit[1]),
-      line('AC', anyTriPoints[1], anyTriPoints[2]),
-      line('BC', anyTriPoints[0], anyTriPoints[2]),
-      triangle('tri', anyTriPoints[0], anyTriPoints[1], anyTriPoints[2], colors.sides),
+      text('B', 'B', f4Points[0].add(-0.15, -0.1)),
+      text('A', 'A', f4Points[1].add(0, 0.15)),
+      text('C', 'C', f4Points[2].add(0.15, -0.1)),
+      text('D', 'D', f4Split[0].add(-0.2, 0)),
+      text('E', 'E', f4Split[1].add(-0.06 + 0.15, 0.15 + 0.05)),
+      text('F', 'F', f4Split[1].add(0.15, -0.05)),
+      dot('pointD', f4Split[0]),
+      dot('pointE', f4Split[1].add(-0.06, 0.15)),
+      dot('pointF', f4Split[1]),
+      line('AD', f4Points[1], f4Split[0]),
+      line('AB', f4Points[0], f4Points[1]),
+      line('AE', f4Points[1], f4Split[1].add(-0.06, 0.15)),
+      line('AF', f4Points[1], f4Split[1]),
+      line('AC', f4Points[1], f4Points[2]),
+      line('BC', f4Points[0], f4Points[2]),
+      triangle('tri', f4Points[0], f4Points[1], f4Points[2], colors.sides),
       fig4Nav('eqn1', 1.2),
       fig4Nav('eqn2', 0.4),
       fig4Nav('eqn3', -0.4),
