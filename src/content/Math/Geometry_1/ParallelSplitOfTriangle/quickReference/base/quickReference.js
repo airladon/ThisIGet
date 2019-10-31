@@ -9,6 +9,7 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 import triangle from './triangle.md';
+import proportional from './proportional.md';
 import lines from './lines.md';
 import './style.scss';
 
@@ -181,12 +182,17 @@ export class QRLines extends PopupBoxCollection {
 
 attachQuickReference(details.path, topicUID, versionUID, {
   TrianglePres: QRTriangle,
-  ProportionalSplit: QRProportionalSplit,
+  ProportionalSplitPres: QRProportionalSplit,
   LinesPres: QRLines,
   Triangle: <StaticQR
       title="Triangle Split by Parallel Line"
       content={triangle}
-      link={`${details.path}/${details.uid}/summary/base?page=3`}
+      link={`${details.path}/${details.uid}/summary/base?page=1`}
+  />,
+  ProportionalSplit: <StaticQR
+      title="Proportional Split of a Triangle"
+      content={proportional}
+      link={`${details.path}/${details.uid}/summary/base?page=2`}
   />,
   Lines: <StaticQR
       title="Lines Split by Parallel Lines"
