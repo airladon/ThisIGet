@@ -30,6 +30,33 @@ export default function diagramLayout() {
     new Point(0.18, -0.48).add(0.3, 0),
   ];
 
+  const w = 0.06;
+  const arrow = (name, p, color = colors.sides) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      {
+        name: '1',
+        method: 'line',
+        options: {
+          // p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color,
+          p1: [-w, -w], p2: [0, 0], width: 0.01, color,
+        },
+      },
+      {
+        name: '2',
+        method: 'line',
+        options: {
+          // p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color,
+          p1: [-w, w], p2: [0, 0], width: 0.01, color,
+        },
+      },
+    ],
+    options: {
+      position: p,
+    },
+  });
+
   const side = text => ({
     label: {
       text,
@@ -38,7 +65,7 @@ export default function diagramLayout() {
     },
   });
 
-  const angle = text => ({
+  const angle = (text, s = 1) => ({
     label: {
       text,
       offset: 0.01,
@@ -46,7 +73,7 @@ export default function diagramLayout() {
       // location: 'outside',
     },
     curve: {
-      radius: 0.2,
+      radius: 0.3 * s,
       width: 0.01,
       color: colors.angles,
     },
@@ -54,7 +81,7 @@ export default function diagramLayout() {
     sides: 100,
   });
 
-  const tri = (name, p, sideA, sideB, color, defaultP, onP) => ({
+  const tri = (name, p, sideA, sideB, sideC, color, defaultP, onP, s) => ({
     name,
     method: 'polyLine',
     options: {
@@ -65,18 +92,18 @@ export default function diagramLayout() {
       side: [
         side(sideA),
         side(sideB),
-        side(''),
+        side(sideC),
       ],
       angle: [
         angle(''),
-        angle(''),
+        angle('', s),
         angle(''),
       ],
     },
     mods: {
       scenarios: {
         default: { scale: 1, position: defaultP },
-        on: { scale: 1, position: onP },
+        on: { scale: s, position: onP },
       },
       touchInBoundingRect: true,
     },
@@ -84,8 +111,10 @@ export default function diagramLayout() {
 
 
   layout.addElements = [
-    tri('tri1', points, 'A', 'B', colors.sides, [-1, 0], [0, 0]),
-    tri('tri2', pointsSmall, 'A', 'B', colors.small, [1, 0], [0, 0]),
+    tri('tri2', points, 'rA', 'rB', 'rC', colors.sides, [1, 0], [0, 0], 1),
+    tri('tri1', pointsSmall, 'A', 'B', 'C', colors.small, [-1, 0], [0.013, 0.315], 0.92),
+    arrow('arrow2', [0.1, -0.8], colors.sides),
+    arrow('arrow1', [0.1, -0.48 + 0.315 + 0.04], colors.small),
   ];
 
   return layout;

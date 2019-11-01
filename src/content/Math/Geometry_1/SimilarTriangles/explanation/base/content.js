@@ -853,11 +853,25 @@ class Content extends PresentationFormatContent {
 
     // ************************************************************************
     // ************************************************************************
+    // const pulse = (elementsIn: DiagramElement | Array<DiagramElement>, done: ?() => void = null, scale: ?number | Array<number> = null) => {
+    //   let elements;
+    //   if (Array.isArray(elementsIn)) {
+    //     elements = elementsIn;
+    //   } else {
+    //     elements = [elementsIn];
+    //   }
+    //   elements.forEach((element) => {
+    //     if (element ==)
+    //   });
+    // }
+
     common = {
       show: [sas],
       hide: [
         sas._tri1._angle0, sas._tri1._angle2,
         sas._tri2._angle0, sas._tri2._angle2,
+        sas._tri1._side20, sas._tri2._side20,
+        sas._arrow1, sas._arrow2,
       ],
       setSteadyState: () => {
         sas._tri1.setScenario('default');
@@ -866,37 +880,135 @@ class Content extends PresentationFormatContent {
     }
     this.addSection(common, {
       setContent: style({}, [
-        'Next, let\'s consider the SAS case, where we know two triangles have the same angle adjacent to corresponding sides that are equal in proportion.',
+        'Next, let\'s consider the |SAS| case, where we know two triangles have the same |angle| adjacent to |corresponding_sides| that are equal in proportion.',
       ]),
+      modifiers: {
+        angle: click(sas.pulseAngles, [sas, null], colors.angles),
+        corresponding_sides: click(sas.pulseSides, [sas], colors.sides),
+      },
     });
 
     // ************************************************************************
     // ************************************************************************
     commonContent = {
       setContent: [
-        'We start by aligning the triangles such that the equal angles are on top of each other.',
+        'We start by |moving the triangles| such that the |known angles| are on |aligned|.',
       ],
     };
     this.addSection(common, commonContent, {
-      show: ['sas'],
+      modifiers: {
+        aligned: this.bindNext(colors.angles),
+      },
+      show: [sas],
+      hide: [
+        sas._tri1._angle0, sas._tri1._angle2,
+        sas._tri2._angle0, sas._tri2._angle2,
+        sas._tri1._side20, sas._tri2._side20,
+        sas._arrow1, sas._arrow2,
+      ],
       setSteadyState: () => {
         sas._tri1.setScenario('default');
         sas._tri2.setScenario('default');
       },
     });
-    this.addSection(commonContent, {
-      show: ['sas'],
+
+    common = {
+      show: [sas],
+      hide: [
+        sas._tri1._angle0, sas._tri1._angle2, sas._tri1._angle1,
+        sas._tri2._angle0, sas._tri2._angle2,
+        sas._tri1._side20, sas._tri2._side20,
+        sas._arrow1, sas._arrow2,
+      ],
+      setSteadyState: () => {
+        sas._tri1.setScenario('on');
+        sas._tri2.setScenario('on');
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        aligned: click(sas.pulseAngles, [sas, null], colors.angles),
+      },
       transitionFromPrev: (done) => {
+        sas._tri1._angle1.showAll();
         sas.animations.new()
           .scenarios({ target: 'on', duration: 1 })
           .whenFinished(done)
           .start();
       },
       setSteadyState: () => {
+        sas._tri1._angle1.hide();
         sas._tri1.setScenario('on');
         sas._tri2.setScenario('on');
       },
     });
+
+    commonContent = {
+      setContent: [
+        'This is equivalent to a triangle with |two_sides_split| in the same proportion, which means the |two base sides| must be |parallel|.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        two_sides_split: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/ProportionalSplitPres'),
+        parallel: this.bindNext(colors.sides),
+      },
+    });
+
+    common = {
+      show: [sas],
+      hide: [
+        sas._tri1._angle0, sas._tri1._angle2, sas._tri1._angle1,
+        sas._tri2._angle0, sas._tri2._angle2,
+        sas._tri1._side20, sas._tri2._side20,
+      ],
+      setSteadyState: () => {
+        sas._tri1.setScenario('on');
+        sas._tri2.setScenario('on');
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        two_sides_split: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/ProportionalSplitPres'),
+        parallel: click(sas.pulseParallel, [sas, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        sas.pulseParallel(done);
+      },
+    });
+
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'We now have a |triangle_split_with_a_parallel_line|, which means all corresponding sides of both triangles must have |equal proportion|. In other words, they are |similar|.',
+      ]),
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        triangle_split_with_a_parallel_line: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+        similar: this.bindNext(colors.sides),
+      },
+    });
+    this.addSection(common, commonContent, {
+      hide: [
+        sas._tri1._angle0, sas._tri1._angle2, sas._tri1._angle1,
+        sas._tri2._angle0, sas._tri2._angle2,
+      ],
+      modifiers: {
+        triangle_split_with_a_parallel_line: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+        similar: click(sas.pulseSimilar, [sas, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        sas.sideCounter = 2;
+        sas.pulseSimilar(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    
   }
 }
 
