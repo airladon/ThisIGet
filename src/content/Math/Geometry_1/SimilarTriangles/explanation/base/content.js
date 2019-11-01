@@ -52,6 +52,7 @@ class Content extends PresentationFormatContent {
     const eqn = coll._eqn;
     const twoProp = diag._twoProp;
     const sas = diag._sas;
+    const ssa = diag._ssa;
 
     this.addSection({
       title: 'Introduction',
@@ -1008,7 +1009,32 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Finally, let\'s consider the |SSA| case.',
+        'We have already seen from |SSA_triangle_congruency| that knowing an angle, opposite side, and adjacent side creates |two triangles| if the |opposite side is shorter than the adjacent side|.',
+        'On the other hand, if the |opposite side| is |equal to or longer| than the |ajacent side|, only |one triangle| can be constructed.',
+        'Hence SSA can be used to check for triangle congruency as long as the opposite side is the same length as, or longer than, the adjacent side.',
+      ]),
+      modifiers: {
+        SSA_triangle_congruency: this.qr('Math/Geometry_1/CongruentTriangles/base/Ssa'),
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Therefore, as a shorter opposite side than adjacent side results in more than one possible triangle, we cannot use this case for a similarity test.',
+        'So, let\'s explore the case for when the opposite side is longer than the adjacent side.',
+      ]),
+    });
+
+    this.addSection({
+      show: [ssa],
+      setSteadyState: () => {
+        ssa.setScenarios('default');
+        // ssa._b.setScenarios('initial');
+      }
+    });
   }
 }
 
