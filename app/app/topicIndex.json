@@ -2356,7 +2356,7 @@
         },
         "equalAnglesAreSimilarProof": {
           "type": "singlePage",
-          "title": "Equal Corresponding Angle Triangles are Similar - Proof 2",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
           "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "htmlTitle": "Similar Triangles Proof",
           "htmlDescription": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
@@ -2365,7 +2365,7 @@
         },
         "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2 (Brief)",
           "description": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "htmlTitle": "Similar Triangles Proof",
           "htmlDescription": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
@@ -2374,7 +2374,7 @@
         },
         "static": {
           "type": "singlePage",
-          "title": "Descriptive (Static)",
+          "title": "Descriptive",
           "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
           "htmlTitle": "Introduction to similar triangles and their proofs",
           "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",

@@ -10,8 +10,8 @@ var version = {
     'ProportionalSplitPres',
     'LinesPres',
     'Triangle',
-    'Lines',
     'ProportionalSplit',
+    'Lines',
   ],
 };
 

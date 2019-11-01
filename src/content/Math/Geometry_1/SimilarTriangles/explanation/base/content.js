@@ -5,6 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
+import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -18,6 +19,8 @@ const {
   // clickW,
   highlight,
   // centerV,
+  // note,
+  highlightWord,
 } = Fig.tools.html;
 
 const layout = diagramLayout();
@@ -47,6 +50,8 @@ class Content extends PresentationFormatContent {
     const fig = coll._fig;
     const examples = coll._examples;
     const eqn = coll._eqn;
+    const twoProp = diag._twoProp;
+    const sas = diag._sas;
 
     this.addSection({
       title: 'Introduction',
@@ -690,6 +695,207 @@ class Content extends PresentationFormatContent {
       setContent: style({ centerV: true }, [
         'So we have seen |all triangles with equal corresponding angles are similar|, and conversely all |similar triangles have equal corresponding angles|.',
       ]),
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'As similar triangles have proportional sides, and equal corresponding angles, you can often |infer unknown side lengths or angles| if know two triangles are |similar|.',
+        '|How many properties| do you need to know to confirm two triangles are |similar|?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Another way to ask this is, what are the properties you need to confirm two triangles will have the same corresponding angles?',
+        'As all similar triangles have the same corresponding angles, if you  show a set of properties can create a triangle with only one set of angles, then you know they will be sufficient to determine similarity.',
+      ]),
+    });
+
+    this.addSection({
+      title: 'One Property',
+      setContent: [
+        'How many triangles can be created if you fix just a single angle or side? You can try with the triangle below.'
+        ,
+        note({ label: 'Note:' }, 'Move the |vertices| of the triangle to change the triangle'),
+      ],
+      show: [twoProp._tri],
+    });
+
+    this.addSection({
+      setContent: [
+        'If we fix a single |angle| or |side|, many different triangles with |different angles| can be made.',
+      ],
+      modifiers: {
+        side: click(twoProp.side, [twoProp], colors.sides),
+        angle: click(twoProp.angle, [twoProp], colors.angles),
+      },
+      show: [twoProp._tri],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Two Properties',
+      setContent: style({ centerV: true }, [
+        'Therefore |one property is insufficient| to determine congruency.',
+        'How about |two properties|?',
+        'The two property |combinations| are:',
+        style({ list: 'unordered' }, [
+          'Adjacent Side-Angle',
+          'Opposite Side-Angle',
+          'Side-Side',
+          'Angle-Angle',
+        ]),
+      ]),
+    });
+
+    this.addSection({
+      setContent: 'Try making the |different combinations| and see if multiple triangles can be made for each.',
+      show: [twoProp._tri],
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'You might see that |Side_Side|, |Adjacent_Side_Angle| and |Opposite_Side_Angle| can all form |many| triangles. These combinations are therefore insufficient.'),
+      modifiers: {
+        Side_Side: click(twoProp.sideSide, [twoProp], { text: 'Side-Side', color: colors.diagram.action }),
+        Angle_Angle: click(twoProp.angleAngle, [twoProp], { text: 'Angle-Angle', color: colors.diagram.action }),
+        Adjacent_Side_Angle: click(twoProp.adjacentAngleSide, [twoProp], { text: 'Adjacent Side-Angle', color: colors.diagram.action }),
+        Opposite_Side_Angle: click(twoProp.oppositeAngleSide, [twoProp], { text: 'Opposite Side-Angle', color: colors.diagram.action }),
+      },
+      show: [twoProp._tri],
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'In comparison, the |Angle-Angle| combination |is sufficient| to determine similarity.',
+        'This is because all angles in a triangle |add_to_180|.',
+        'Therefore, if you |know any two angles|, you can |calculate all three|.',
+        'You can then |directly compare all three corresponding angles|, and if they are equal, know that the triangles are similar.',
+      ]),
+      modifiers: {
+        add_to_180: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres', { text: 'add to 180º' }),
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Three Properties',
+      setContent: style({ top: 10 }, [
+        'Next lets consider combinations of three properties.',
+        'The three property |combinations| are:',
+        `<ul style="position:absolute; top:40%">
+          <li>Angle Angle Angle - |AAA|</li>
+          <li>Side Side Side - |SSS|</li>
+          <li>Angle Angle Side - |AAS|</li>
+          <li>Angle Side Angle - |ASA|</li>
+          <li>Side Angle Side - |SAS|</li>
+          <li>Side Side Angle - |SSA|</li>
+        </ul>`,
+      ]),
+    });
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Similar triangles have all corresponding sides as the same proportion.',
+        'All similar triangles have the same corresponding angles.',
+        'Therefore, |SSS| and |AAA| are |sufficient to determine similarity|.',
+      ]),
+    });
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'In addition, we have just seen that knowing just |two angles| is sufficient to determine similarity.',
+        'Therefore both |AAS| and |ASA| can determine similarity (though the side knowledge is unnecessary).',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ }, [
+        'Therefore we have so far:',
+        `<ul style="position:absolute; top:30%; left: 30%">
+          <li style="list-style: none">Angle Angle Angle - |AAA|  |check|</li>
+          <li style="list-style: none">Side Side Side - |SSS|  |check|</li>
+          <li style="list-style: none">Angle Angle Side - |AAS|  |check|</li>
+          <li style="list-style: none">Angle Side Angle - |ASA|  |check|</li>
+          <li style="list-style: none">Side Angle Side - |SAS|</li>
+          <li style="list-style: none">Side Side Angle - |SSA|</li>
+        </ul>`,
+      ]),
+      modifiers: {
+        check: highlightWord('\u2713', colors.diagram.safe),
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    common = {
+      show: [sas],
+      hide: [
+        sas._tri1._angle0, sas._tri1._angle2,
+        sas._tri2._angle0, sas._tri2._angle2,
+      ],
+      setSteadyState: () => {
+        sas._tri1.setScenario('default');
+        sas._tri2.setScenario('default');
+      },
+    }
+    this.addSection(common, {
+      setContent: style({}, [
+        'Next, let\'s consider the SAS case, where we know two triangles have the same angle adjacent to corresponding sides that are equal in proportion.',
+      ]),
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'We start by aligning the triangles such that the equal angles are on top of each other.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      show: ['sas'],
+      setSteadyState: () => {
+        sas._tri1.setScenario('default');
+        sas._tri2.setScenario('default');
+      },
+    });
+    this.addSection(commonContent, {
+      show: ['sas'],
+      transitionFromPrev: (done) => {
+        sas.animations.new()
+          .scenarios({ target: 'on', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sas._tri1.setScenario('on');
+        sas._tri2.setScenario('on');
+      },
     });
   }
 }

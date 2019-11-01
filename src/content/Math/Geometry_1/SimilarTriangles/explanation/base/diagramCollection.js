@@ -4,6 +4,8 @@ import Fig from 'figureone';
 import diagramLayout from './layout';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonCollection from './diagramCollectionCommon';
+import CommonCollectionTwoProp from './twoProperties';
+import CommonCollectionSAS from './sas';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const { Transform } = Fig;
@@ -19,6 +21,8 @@ export default class DiagramCollection extends CommonDiagramCollection {
     super(diagram, layout, transform);
 
     this.add('collection', new CommonCollection(diagram, this.layout));
+    this.add('twoProp', new CommonCollectionTwoProp(diagram));
+    this.add('sas', new CommonCollectionSAS(diagram));
     this.hasTouchableElements = true;
   }
 }

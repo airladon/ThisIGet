@@ -37,7 +37,7 @@ export default function diagramLayout() {
   });
 
   const w = 0.05;
-  const arrow = (name, p, color = colors.sides) => ({
+  const arrow = (name, p, color = colors.qrParallelSplitOfTriangleSides) => ({
     name,
     method: 'collection',
     addElements: [
