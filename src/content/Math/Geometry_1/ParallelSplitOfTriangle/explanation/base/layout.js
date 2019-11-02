@@ -1318,12 +1318,12 @@ export default function diagramLayout() {
     },
   });
 
-  const text = (name, text, position) => ({
+  const text = (name, txt, position) => ({
     name,
     method: 'text',
     options: {
       position,
-      text,
+      text: txt,
       color: colors.sides,
     },
   });

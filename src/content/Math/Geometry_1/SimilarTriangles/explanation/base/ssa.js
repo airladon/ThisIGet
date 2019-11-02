@@ -80,7 +80,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     const showDimension = () => {
       this._rADim.showAll();
       this._rADim._label.pulseScaleNow(1, 2, 0, done);
-    }
+    };
     this._rALine.grow(0, 0.8, true, showDimension);
     this.diagram.animateNextFrame();
   }

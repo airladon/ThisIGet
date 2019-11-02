@@ -107,8 +107,6 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         fig._triScaler.hideAngles();
-        // fig._triScaler._side01._
-        console.log(fig._triScaler._side01._label._base.drawingObject)
       },
     });
 
@@ -403,7 +401,6 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'So |any| two triangles are similar if they have |equal corresponding angles|.',
-        
         'By extension, this means |all triangles with equal corresponding angles are similar|.',
       ]),
     });
@@ -726,8 +723,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'One Property',
       setContent: [
-        'How many triangles can be created if you fix just a single angle or side? You can try with the triangle below.'
-        ,
+        'How many triangles can be created if you fix just a single angle or side? You can try with the triangle below.',
         note({ label: 'Note:' }, 'Move the |vertices| of the triangle to change the triangle'),
       ],
       show: [twoProp._tri],
@@ -855,17 +851,6 @@ class Content extends PresentationFormatContent {
 
     // ************************************************************************
     // ************************************************************************
-    // const pulse = (elementsIn: DiagramElement | Array<DiagramElement>, done: ?() => void = null, scale: ?number | Array<number> = null) => {
-    //   let elements;
-    //   if (Array.isArray(elementsIn)) {
-    //     elements = elementsIn;
-    //   } else {
-    //     elements = [elementsIn];
-    //   }
-    //   elements.forEach((element) => {
-    //     if (element ==)
-    //   });
-    // }
 
     common = {
       show: [sas],
@@ -879,7 +864,7 @@ class Content extends PresentationFormatContent {
         sas._tri1.setScenario('default');
         sas._tri2.setScenario('default');
       },
-    }
+    };
     this.addSection(common, {
       setContent: style({}, [
         'Next, let\'s consider the |SAS| case, where we know two triangles have the same |angle| adjacent to |corresponding_sides| that are equal in proportion.',
@@ -1223,7 +1208,7 @@ class Content extends PresentationFormatContent {
       setContent: style({ centerV: true }, [
         'And so we have seen that |SSA| can be used to determine if two triangles are similar if the side opposite the known angle is longer than the side adjacent.',
         'By the same process, we can also show |SSA| can be used as a similarity test if the |two known sides are equal|.',
-        'We can also show the equal case using |isosceles| triangles, as if you know just |one angle| in an isosceles triangle, you can |calculate the rest|.'
+        'We can also show the equal case using |isosceles| triangles, as if you know just |one angle| in an isosceles triangle, you can |calculate the rest|.',
       ]),
       modifiers: {
         isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),

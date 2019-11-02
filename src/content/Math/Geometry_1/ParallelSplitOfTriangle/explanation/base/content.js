@@ -923,7 +923,7 @@ class Content extends PresentationFormatContent {
       setContent: [
         'To see, let\'s take a triangle and |split| two of it’s sides in the |same_ratio|.',
       ],
-    } 
+    };
     this.addSection(commonContent, {
       modifiers: {
         split: this.bindNext(colors.sides),
@@ -966,7 +966,7 @@ class Content extends PresentationFormatContent {
       setContent: [
         'Now, let\'s assume the line |DE| is not parallel with |BC|.',
       ],
-    }; 
+    };
     this.addSection(common, commonContent, {
       modifiers: {
         DE: this.bindNext(colors.sides),

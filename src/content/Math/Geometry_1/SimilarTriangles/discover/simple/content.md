@@ -1,4 +1,4 @@
-## Similar Triangles
+### Similar Triangles
 
 **Similar** shapes are those that have the same shape but are a different size.
 
@@ -14,7 +14,7 @@ Do you notice any common characteristics of the angles of each similar triangle 
     All triangles seem to have equal corresponding angles.
 </hintLow>
 
-## Are Triangles with Equal Corresponding Angles Similar?
+### Are Triangles with Equal Corresponding Angles Similar?
 
 Can you show that all triangles with equal corresponding angles are similar triangles?
 
@@ -47,7 +47,7 @@ This is the definition of a similar triangle, so we have shown that all triangle
 ![](parallel_split_answer.png)
 </hintLow>
 
-## Do Similar Triangles have Equal Corresponding Angles?
+### Do Similar Triangles have Equal Corresponding Angles?
 
 Can you show that all similar triangles have equal corresponding angles?
 
