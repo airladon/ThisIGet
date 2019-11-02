@@ -1492,6 +1492,14 @@
           "fullTopic": false
         }
       },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",

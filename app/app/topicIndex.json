@@ -2433,6 +2433,17 @@
           "fullTopic": false
         }
       },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
