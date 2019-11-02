@@ -9,7 +9,10 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 import StaticQR from '../../../../../../js/components/staticQR';
-// import external from './external.md';
+import similar from './similar.md';
+import sas from './sas.md';
+import aa from './aa.md';
+import ssa from './ssa.md';
 
 const topicUID = details.uid;
 const versionUID = version.uid;
@@ -17,7 +20,7 @@ const versionUID = version.uid;
 const { Transform, Rect } = Fig;
 const {
   click,
-  highlight,
+  // highlight,
 } = Fig.tools.html;
 
 export class QRSimilar extends PopupBoxCollection {
@@ -39,7 +42,7 @@ export class QRSimilar extends PopupBoxCollection {
     };
     this.setDescription([
       '|Similar triangles| have |corresponding_sides| that are proportional (have the same |scaling| factor, shown as |s| in the diagram).',
-      'All |similar triangles| have equal |corresponding_angles|, and all triangles with |corresponding_angles_| angles are |similar|.',
+      'All |similar triangles| have equal |corresponding_angles|, and all triangles with equal |corresponding_angles_| angles are |similar|.',
     ], modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
@@ -155,13 +158,28 @@ export class QRSSA extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, topicUID, versionUID, {
-  Similar: QRSimilar,
-  Ssa: QRSSA,
-  Sas: QRSAS,
-  Aa: QRAA,
-  // Main: <StaticQR
-  //   title=""
-  //   content={external}
-  //   link={`${details.path}/${details.uid}/explanation/base?page=1`}
-  // />,
+  SimilarPres: QRSimilar,
+  SsaPres: QRSSA,
+  SasPres: QRSAS,
+  AaPres: QRAA,
+  Similar: <StaticQR
+    title=""
+    content={similar}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
+  Sas: <StaticQR
+    title=""
+    content={sas}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
+  Aa: <StaticQR
+    title=""
+    content={aa}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
+  Ssa: <StaticQR
+    title=""
+    content={ssa}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
 });

@@ -43,7 +43,7 @@ class Content extends PresentationFormatContent {
       title: 'Similar Triangles',
       setContent: style({ top: 0 }, [
         '|Similar triangles| have |corresponding_sides| that are proportional (have the same |scaling| factor, shown as |s| in the diagram).',
-        'All |similar triangles| have equal |corresponding_angles|, and all triangles with |corresponding_angles_| angles are |similar|.',
+        'All |similar triangles| have equal |corresponding_angles|, and all triangles with equal |corresponding_angles_| angles are |similar|.',
       ]),
       modifiers: {
         corresponding_angles: click(coll.pulseAngles, [coll, null], colors.angles),
