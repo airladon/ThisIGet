@@ -79,6 +79,31 @@ export default class CommonCollection extends CommonDiagramCollection {
     _height3: DiagramObjectLine;
   } & DiagramElementCollection;
 
+  _fig4: {
+    _A: DiagramElementPrimitive;
+    _B: DiagramElementPrimitive;
+    _C: DiagramElementPrimitive;
+    _D: DiagramElementPrimitive;
+    _E: DiagramElementPrimitive;
+    _F: DiagramElementPrimitive;
+    _DE: DiagramObjectLine;
+    _DF: DiagramObjectLine;
+    _AB: DiagramObjectLine;
+    _AD: DiagramObjectLine;
+    _AE: DiagramObjectLine;
+    _AF: DiagramObjectLine;
+    _AC: DiagramObjectLine;
+    _VC: DiagramObjectLine;
+    _eqn1: Equation;
+    _eqn2: Equation;
+    _eqn3: Equation;
+    _eqn4: Equation;
+    _pointD: DiagramElementPrimitive;
+    _pointE: DiagramElementPrimitive;
+    _pointF: DiagramElementPrimitive;
+    _tri: DiagramObjectPolyLine;
+  }
+
 
   _0Eqn: Equation;
   _1Eqn: Equation;

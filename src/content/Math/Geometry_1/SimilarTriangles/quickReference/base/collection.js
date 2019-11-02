@@ -4,17 +4,27 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  // DiagramElementPrimitive,
-  // DiagramObjectAngle,
-  // DiagramObjectLine,
+  DiagramElementPrimitive,
+  DiagramObjectAngle,
+  DiagramObjectLine,
   // DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramObjectPolyLine,
   // Equation,
   Transform,
 } = Fig;
 
+type TypeTriangle = {
+  _line: DiagramElementPrimitive;
+  _angle0: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+  _angle1: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+  _angle2: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
+  _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _side20: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+} & DiagramObjectPolyLine
 export default class CommonCollection extends CommonDiagramCollection {
-
+  _tri1: TypeTriangle;
+  _tri2: TypeTriangle;
   sideCounter: number;
   sasCounter: number;
   aaCounter: number;
@@ -85,7 +95,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleSas(pulse = true) {
+  toggleSas(pulse: boolean = true) {
     const t1 = this._tri1;
     const t2 = this._tri2;
     const combos = [
@@ -108,7 +118,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleSsa(pulse = true) {
+  toggleSsa(pulse: boolean = true) {
     const t1 = this._tri1;
     const t2 = this._tri2;
     const combos = [
@@ -160,7 +170,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleAa(pulse = true) {
+  toggleAa(pulse: boolean = true) {
     const t1 = this._tri1;
     const t2 = this._tri2;
     const combos = [

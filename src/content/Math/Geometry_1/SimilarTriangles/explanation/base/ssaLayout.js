@@ -93,7 +93,7 @@ export default function diagramLayout() {
     },
   });
 
-  const tri = (name, p, sideA, sideB, defaultP, onP) => ({
+  const tri = (name, p, sideA, sideB, defaultP) => ({
     name,
     method: 'collection',
     addElements: [

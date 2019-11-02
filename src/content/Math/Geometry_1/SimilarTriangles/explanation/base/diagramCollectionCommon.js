@@ -649,7 +649,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleSas(pulse = true) {
+  toggleSas(pulse: boolean = true) {
     const t1 = this._fig._tri1;
     const t2 = this._fig._trir;
     const combos = [
@@ -672,7 +672,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleSsa(pulse = true) {
+  toggleSsa(pulse: boolean = true) {
     const t1 = this._fig._tri1;
     const t2 = this._fig._trir;
     const combos = [
@@ -698,7 +698,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleAa(pulse = true) {
+  toggleAa(pulse: boolean = true) {
     const t1 = this._fig._tri1;
     const t2 = this._fig._trir;
     const combos = [

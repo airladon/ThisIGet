@@ -21,27 +21,30 @@ const {
 
 // const { getPoint } = Fig.tools.g2;
 
+type TypeTri = {
+  _ss: {
+    _side01: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+    _side12: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  } & DiagramObjectPolyLine;
+  _b: DiagramObjectAngle;
+  _C: DiagramObjectLine;
+} & DiagramObjectPolyLine;
+
+
 export default class CommonCollectionSSA extends CommonDiagramCollection {
-//   _tri1: {
-//     _side01: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _side12: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _side20: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _angle0: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//     _angle1: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//     _angle2: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//   } & DiagramObjectPolyLine;
+  _tri1: TypeTri;
+  _tri2: TypeTri;
+  _b: DiagramObjectAngle;
+  _rALine: DiagramObjectLine;
+  _rBLine: DiagramObjectLine;
+  _rCLine: DiagramObjectLine;
+  _rADim: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _rBDim: { _label: DiagramElementPrimitive } & DiagramObjectLine;
+  _arrow1: CommonDiagramCollection;
+  _arrow2: CommonDiagramCollection;
+  _cLabel: DiagramElementPrimitive;
+  _rcLabel: DiagramElementPrimitive;
 
-//   _tri2: {
-//     _side01: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _side12: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _side20: { _label: DiagramElementPrimitive; } & DiagramObjectLine;
-//     _angle0: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//     _angle1: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//     _angle2: { _label: DiagramElementPrimitive } & DiagramObjectAngle;
-//   } & DiagramObjectPolyLine;
-
-//   _arrow1: CommonDiagramCollection;
-//   _arrow2: CommonDiagramCollection;
   sideCounter: number;
 
   constructor(
@@ -60,11 +63,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._tri2._b.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
-//   pulseAngles(done: ?() => void = null) {
-//     this._tri1._angle1.pulseScaleNow(1, 1.5, 0, done);
-//     this._tri2._angle1.pulseScaleNow(1, 1.5);
-//     this.diagram.animateNextFrame();
-//   }
 
   pulseSides() {
     const tri1 = this._tri1._ss;
