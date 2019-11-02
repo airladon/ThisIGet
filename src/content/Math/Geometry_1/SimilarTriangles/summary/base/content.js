@@ -57,6 +57,65 @@ class Content extends PresentationFormatContent {
       },
       show: [fig._tri1, fig._trir],
     });
+
+    this.addSection({
+      setContent: style({}, [
+        '|AA| - if |two angles| in two triangles are |equal|, then the triangles are |similar|.',
+      ]),
+      modifiers: {
+        // SAS: click(coll.toggleSas, [coll, null], colors.diagram.action),
+        AA: click(coll.toggleAa, [coll, true], colors.diagram.action),
+      },
+      setEnterState: () => {
+        fig._tri1.setScenario('bottomLeft');
+        fig._trir.setScenario('bottomRightSummary');
+        coll.setAngles('solved');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir],
+      setSteadyState: () => {
+        coll.toggleAa(false);
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        '|SAS| - if two triangles have |two proportional corresponding sides|, and the |angle between| those sides is |equal|, then the triangles are |similar|.',
+      ]),
+      modifiers: {
+        SAS: click(coll.toggleSas, [coll, true], colors.diagram.action),
+        // AA: click(coll.toggleAa, [coll, null], colors.diagram.action),
+      },
+      setEnterState: () => {
+        fig._tri1.setScenario('bottomLeft');
+        fig._trir.setScenario('bottomRightSummary');
+        coll.setAngles('solved');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir],
+      setSteadyState: () => {
+        coll.toggleSas(false);
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        '|SSA| - if triangles share an equal angle, and have two corresponding sides that are proportional, then they are |only similar| if the |side opposite the angle is greater than or equal to the adjacent side|.',
+      ]),
+      modifiers: {
+        SSA: click(coll.toggleSsa, [coll, true], colors.diagram.action),
+      },
+      setEnterState: () => {
+        fig._tri1.setScenario('bottomLeft');
+        fig._trir.setScenario('bottomRightSummary');
+        coll.setAngles('solved');
+        coll.setTri2('all');
+      },
+      show: [fig._tri1, fig._trir],
+      setSteadyState: () => {
+        coll.toggleSsa(false);
+      },
+    });
   }
 }
 

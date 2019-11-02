@@ -67,6 +67,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   similarCounter: number;
   angleCounter: number;
   sideCounter: number;
+  sasCounter: number;
+  aaCounter: number;
+  ssaCounter: number;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -85,6 +88,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.similarCounter = 0;
     this.angleCounter = 0;
     this.sideCounter = 0;
+    this.sasCounter = 0;
+    this.aaCounter = 0;
+    this.ssaCounter = 0;
   }
 
   scaleTri() {
@@ -640,6 +646,78 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.sideCounter = (this.sideCounter + 1) % 3;
     sider[index]._label.pulseScaleNow(1, 2);
     side1[index]._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  toggleSas(pulse = true) {
+    const t1 = this._fig._tri1;
+    const t2 = this._fig._trir;
+    const combos = [
+      [t1._angle1, t2._angle1, t1._side01, t1._side12, t2._side01, t2._side12],
+      [t1._angle2, t2._angle2, t1._side12, t1._side20, t2._side12, t2._side20],
+      [t1._angle0, t2._angle0, t1._side20, t1._side01, t2._side20, t2._side01],
+    ];
+    const index = this.sasCounter;
+    this.sasCounter = (this.sasCounter + 1) % 3;
+    t1.hideAll();
+    t2.hideAll();
+    t1._line.show();
+    t2._line.show();
+    combos[index].forEach((element) => {
+      element.showAll();
+      if (pulse) {
+        element._label.pulseScaleNow(1, 2);
+      }
+    });
+    this.diagram.animateNextFrame();
+  }
+
+  toggleSsa(pulse = true) {
+    const t1 = this._fig._tri1;
+    const t2 = this._fig._trir;
+    const combos = [
+      [t1._angle0, t2._angle0, t1._side01, t1._side12, t2._side01, t2._side12],
+      [t1._angle2, t2._angle2, t1._side01, t1._side12, t2._side01, t2._side12],
+      [t1._angle1, t2._angle1, t1._side01, t1._side20, t2._side01, t2._side20],
+      [t1._angle2, t2._angle2, t1._side01, t1._side20, t2._side01, t2._side20],
+      [t1._angle0, t2._angle0, t1._side12, t1._side20, t2._side12, t2._side20],
+      [t1._angle1, t2._angle1, t1._side12, t1._side20, t2._side12, t2._side20],
+    ];
+    const index = this.ssaCounter;
+    this.ssaCounter = (this.ssaCounter + 1) % 6;
+    t1.hideAll();
+    t2.hideAll();
+    t1._line.show();
+    t2._line.show();
+    combos[index].forEach((element) => {
+      element.showAll();
+      if (pulse) {
+        element._label.pulseScaleNow(1, 2);
+      }
+    });
+    this.diagram.animateNextFrame();
+  }
+
+  toggleAa(pulse = true) {
+    const t1 = this._fig._tri1;
+    const t2 = this._fig._trir;
+    const combos = [
+      [t1._angle1, t2._angle1, t1._angle2, t2._angle2],
+      [t1._angle2, t2._angle2, t1._angle0, t2._angle0],
+      [t1._angle0, t2._angle0, t1._angle1, t2._angle1],
+    ];
+    const index = this.aaCounter;
+    this.aaCounter = (this.aaCounter + 1) % 3;
+    t1.hideAll();
+    t2.hideAll();
+    t1._line.show();
+    t2._line.show();
+    combos[index].forEach((element) => {
+      element.showAll();
+      if (pulse) {
+        element._label.pulseScaleNow(1, 2);
+      }
+    });
     this.diagram.animateNextFrame();
   }
 }
