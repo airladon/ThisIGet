@@ -37,9 +37,10 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
-    const fig = coll._fig;
+    // const fig = coll._fig;
 
     this.addSection({
+      title: 'Similar Triangles',
       setContent: style({ top: 0 }, [
         '|Similar triangles| have |corresponding_sides| that are proportional (have the same |scaling| factor, shown as |s| in the diagram).',
         'All |similar triangles| have equal |corresponding_angles|, and all triangles with |corresponding_angles_| angles are |similar|.',
@@ -50,68 +51,63 @@ class Content extends PresentationFormatContent {
         corresponding_sides: click(coll.pulseTriRSide, [coll, null], colors.sides),
       },
       setEnterState: () => {
-        fig._tri1.setScenario('bottomLeft');
-        fig._trir.setScenario('bottomRightSummary');
-        coll.setAngles('solved');
-        coll.setTri2('all');
+        coll.setScenarios('default');
       },
-      show: [fig._tri1, fig._trir],
+      show: [coll._tri1, coll._tri2],
     });
 
     this.addSection({
+      title: 'AA',
       setContent: style({}, [
-        '|AA| - if |two angles| in two triangles are |equal|, then the triangles are |similar|.',
+        'If any triangles have |two_corresponding_angles| that are |equal|, then the triangles are |similar|. This is often called the |AA| similarity test.',
       ]),
       modifiers: {
-        // SAS: click(coll.toggleSas, [coll, null], colors.diagram.action),
-        AA: click(coll.toggleAa, [coll, true], colors.diagram.action),
+        two_corresponding_angles: click(coll.toggleAa, [coll, true], colors.angles),
       },
       setEnterState: () => {
-        fig._tri1.setScenario('bottomLeft');
-        fig._trir.setScenario('bottomRightSummary');
-        coll.setAngles('solved');
-        coll.setTri2('all');
+        coll.setScenarios('default');
       },
-      show: [fig._tri1, fig._trir],
+      show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
         coll.toggleAa(false);
       },
     });
 
     this.addSection({
+      title: 'SAS',
       setContent: style({}, [
-        '|SAS| - if two triangles have |two proportional corresponding sides|, and the |angle between| those sides is |equal|, then the triangles are |similar|.',
+        'If |any_triangles| have |two_corresponding_sides| that are proportional and share an |equal_angle| between those sides, then the triangles are |similar|. This is often called the |SAS| similarity test.',
       ]),
       modifiers: {
-        SAS: click(coll.toggleSas, [coll, true], colors.diagram.action),
-        // AA: click(coll.toggleAa, [coll, null], colors.diagram.action),
+        any_triangles: click(coll.toggleSas, [coll, true], colors.diagram.action),
+        two_corresponding_sides: click(coll.pulseAllSides, [coll], colors.sides),
+        equal_angle: click(coll.pulseAllAngles, [coll], colors.angles),
       },
       setEnterState: () => {
-        fig._tri1.setScenario('bottomLeft');
-        fig._trir.setScenario('bottomRightSummary');
-        coll.setAngles('solved');
-        coll.setTri2('all');
+        coll.setScenarios('default');
       },
-      show: [fig._tri1, fig._trir],
+      show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
         coll.toggleSas(false);
       },
     });
 
     this.addSection({
+      title: 'SSA',
       setContent: style({}, [
-        '|SSA| - if triangles share an equal angle, and have two corresponding sides that are proportional, then they are |only similar| if the |side opposite the angle is greater than or equal to the adjacent side|.',
+        'If |any_triangles| have |two_corresponding_sides| that are proportional and share a corresponding |equal_angle| adjacent to just one of the sides, then the triangles are |only similar| if the side |opposite| the angle is |greater than or equal to| the |adjacent| side. This is often called the |SSA| similarity test.',
       ]),
       modifiers: {
-        SSA: click(coll.toggleSsa, [coll, true], colors.diagram.action),
+        any_triangles: click(coll.toggleSsa, [coll, true], colors.diagram.action),
+        two_corresponding_sides: click(coll.pulseAllSides, [coll], colors.sides),
+        equal_angle: click(coll.pulseAllAngles, [coll], colors.angles),
+        adjacent: click(coll.pulseAdjacent, [coll], colors.sides),
+        opposite: click(coll.pulseOpposite, [coll], colors.sides),
       },
       setEnterState: () => {
-        fig._tri1.setScenario('bottomLeft');
-        fig._trir.setScenario('bottomRightSummary');
-        coll.setAngles('solved');
-        coll.setTri2('all');
+        coll.setScenarios('default');
       },
-      show: [fig._tri1, fig._trir],
+      show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
         coll.toggleSsa(false);
       },

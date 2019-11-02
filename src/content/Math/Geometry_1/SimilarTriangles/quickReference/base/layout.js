@@ -51,7 +51,7 @@ export default function diagramLayout() {
       radius,
       width: 0.01,
       color: colors.qrSimilarTrianglesAngles,
-      curve: 50,
+      sides: 50,
     },
     color: colors.qrSimilarTrianglesAngles,
   });
