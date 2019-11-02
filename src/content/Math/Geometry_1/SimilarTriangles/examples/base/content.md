@@ -79,6 +79,56 @@ $$\bbox[10px,border:1px solid gray]{\color{b}h \color{black} = 4\times5 = 20}$$
 
 </hintLow>
 
+
+### Example 6
+
+What is the length of side $$\color{b}a$$?
+
+![](ex6.png)
+
+<hintLow>[Answer]
+The middle angles where the two triangles meet is an [[opposite angle]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), which means both angles are equal.
+
+We also know that the two known sides of each triangle have equal proportion. The larger triangles sides are 2.5 times larger than the smaller triangle.
+
+Therefore, we can use the SAS similarity test to confirm both triangles are similar.
+
+As both triangles are similar, and we know the proportionality factor is 2.5, then the unknown side must be:
+
+$$\bbox[10px,border:1px solid gray]{\color{b}h \color{black} = \frac{13}{2.5} = 5.2}$$
+
+</hintLow>
+
+
+### Example 7
+
+What is the distance $$\color{b}d$$ between the parallel lines?
+
+![](ex7.png)
+
+<hintLow>[Answer]
+
+First note that the [[distance between the parallel lines]]((qr,'Math/Geometry_1/ParallelLineDistance/base/Main',#00756F)) is the length of the line perpendicular to the lines.
+
+Next we can draw in some lines to highlight the two triangles in the diagram.
+
+![](ex7a.png)
+
+Now, both triangles are similar as they both share two equal angles (the AA similarity test):
+
+* the right angle
+* the [[opposite angle]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)) where there two vertices touch
+
+The proportionality factor, or scaling factor between the two triangles is
+
+$$\frac{20}{12}=1.67$$
+
+Therefore, the distance between the parallel lines is:
+
+$$\bbox[10px,border:1px solid gray]{\color{b}h \color{black} = 10 * 1.67 = 16.7}$$
+
+</hintLow>
+
 <!-- What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\bbox[10px,border:1px solid gray]{a}$$ in degrees? -->
 <!-- 
 ![](ex1.png)
