@@ -163,22 +163,22 @@ attachQuickReference(details.path, topicUID, versionUID, {
   SasPres: QRSAS,
   AaPres: QRAA,
   Similar: <StaticQR
-    title=""
+    title="Similar Triangles"
     content={similar}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
   Sas: <StaticQR
-    title=""
+    title="SAS Similarity"
     content={sas}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
   Aa: <StaticQR
-    title=""
+    title="AA Similarity"
     content={aa}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
   Ssa: <StaticQR
-    title=""
+    title="SSA Similarity"
     content={ssa}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
