@@ -110,6 +110,13 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseProportional(done: ?() => void = null) {
+    this._cLabel.pulseScaleNow(1, 2, 0, done);
+    this._rcLabel.pulseScaleNow(1, 2, 0, done);
+    this._rBDim._label.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
 //   pulseSimilar(done: ?() => void = null) {
 //     const tri1 = this._tri1;
 //     const tri2 = this._tri2;

@@ -41,6 +41,7 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/CongruentTriangles/base',
       'Math/Geometry_1/AnglesAtIntersections/base',
       'Math/Geometry_1/ParallelSplitOfTriangle/base',
+      'Math/Geometry_1/Isosceles/base',
     ]);
   }
 
@@ -1162,6 +1163,85 @@ class Content extends PresentationFormatContent {
       ],
       transitionFromPrev: (done) => {
         ssa.pulseParallel(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'We now have a situation where the larger |triangle_is_split_by_a_parallel_line|. Therefore, the smaller triangle is |proportional| to the larger, and therefore |similar|.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        triangle_is_split_by_a_parallel_line: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+        proportional: this.bindNext(colors.sides),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        triangle_is_split_by_a_parallel_line: this.qr('Math/Geometry_1/ParallelSplitOfTriangle/base/TrianglePres'),
+        proportional: click(ssa.pulseProportional, [ssa, null], colors.sides),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine, ssa._arrow1, ssa._arrow2,
+        ssa._cLabel, ssa._rcLabel, ssa._rBDim,
+      ],
+      transitionFromPrev: (done) => {
+        ssa.pulseProportional(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'From |SSA|, the two large triangles are |congruent|, and therefore both are similar to the smaller triangle.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        SSA: this.qr('Math/Geometry_1/CongruentTriangles/base/Ssa'),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine,
+        ssa._cLabel, ssa._rcLabel, ssa._rBDim,
+      ],
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'And so we have seen that |SSA| can be used to determine if two triangles are similar if the side opposite the known angle is longer than the side adjacent.',
+        'By the same process, we can also show |SSA| can be used as a similarity test if the |two known sides are equal|.',
+        'We can also show the equal case using |isosceles| triangles, as if you know just |one angle| in an isosceles triangle, you can |calculate the rest|.'
+      ]),
+      modifiers: {
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
+      },
+    });
+
+
+    this.addSection({
+      title: 'Summary',
+      setContent: style({ centerV: true }, [
+        'So we have seen that |similar triangles| have corresponding sides that have the |same proportion|.',
+        '|All similar triangles| have |corresponding angles| that are |equal|.',
+        '|All triangles| with |equal corresponding angles| are |similar|.',
+        'We can test if two triangles are similar using |AA| and |SAS|.',
+        'We can use |SSA| only when the |opposite side is longer than or equal to the adjacent side|.',
+      ]),
+      modifiers: {
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
       },
     });
   }

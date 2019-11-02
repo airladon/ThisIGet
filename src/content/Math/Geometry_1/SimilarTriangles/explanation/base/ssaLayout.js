@@ -156,6 +156,11 @@ export default function diagramLayout() {
       },
       width: 0.01,
       color: colors.sides,
+      // label: {
+      //   text: label,
+      //   offset: 0.05,
+      //   location: 'inside',
+      // },
     },
     mods: {
       scenarios: {
@@ -205,6 +210,21 @@ export default function diagramLayout() {
     },
   });
 
+  const txt = (name, text, defaultPos) => ({
+    name,
+    method: 'text',
+    options: {
+      text,
+      color: colors.sides,
+      size: 0.2 * 0.8,
+    },
+    mods: {
+      scenarios: {
+        default: { position: defaultPos },
+      },
+    },
+  });
+
   layout.addElements = [
     tri('tri1', points1, 'A', 'B', pos1),
     tri('tri2', points2, 'rA', 'rB', pos2),
@@ -213,9 +233,11 @@ export default function diagramLayout() {
     rCLine,
     rALine,
     dimension('rADim', 'rA', points2[0], points2[1], pos1),
-    dimension('rBDim', 'rA', points2[1], points2[2], pos1),
+    dimension('rBDim', 'rB', points2[1], points2[2], pos1),
     arrow('arrow1', lineC.pointAtPercent(0.5).add(pos1), a),
     arrow('arrow2', lineRC.pointAtPercent(0.43).add(pos1), a),
+    txt('cLabel', 'C', lineC.pointAtPercent(0.5).add(pos1).add(0.05, 0.2)),
+    txt('rcLabel', 'rC', lineRC.pointAtPercent(0.5).add(pos1).add(0, 0.2)),
   ];
 
   return layout;
