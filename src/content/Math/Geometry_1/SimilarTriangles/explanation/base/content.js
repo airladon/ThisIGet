@@ -1028,12 +1028,104 @@ class Content extends PresentationFormatContent {
       ]),
     });
 
-    this.addSection({
-      show: [ssa],
-      setSteadyState: () => {
+    common = {
+      setEnterState: () => {
         ssa.setScenarios('default');
-        // ssa._b.setScenarios('initial');
-      }
+      },
+      hide: [ssa._tri1._b._side1, ssa._tri1._b._side2, ssa._tri2._b._side1, ssa._tri2._b._side2],
+    };
+    this.addSection(common, {
+      setContent: [
+        'We start with two triangles that share the |same_angle|, and have adjacent and opposite sides that are in |proportion_to_each_other|.',
+      ],
+      modifiers: {
+        same_angle: click(ssa.pulseAngle, [ssa], colors.angles),
+        proportion_to_each_other: click(ssa.pulseSides, [ssa], colors.sides),
+      },
+      show: [ssa._tri1, ssa._tri2],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        '|Extend| side |A| of the smaller triangle by to be the same as the larger.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Extend: this.bindNext(colors.diagram.action),
+      },
+      show: [ssa._tri1, ssa._tri2],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Extend: click(ssa.growRA, [ssa, 0, 0.8, true, null], colors.diagram.action),
+      },
+      show: [ssa._tri1, ssa._tri2, ssa._rALine],
+      transitionFromPrev: (done) => {
+        ssa.growRA(done);
+      },
+      setSteadyState: () => {
+        ssa._rADim.showAll();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        '|Copy| angle |b| to the end of the new line.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Copy: this.bindNext(colors.diagram.action),
+        b: highlight(colors.angles),
+      },
+      show: [ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Copy: click(ssa.pulseAngleB, [ssa, null], colors.diagram.action),
+        b: highlight(colors.angles),
+      },
+      show: [ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b],
+      transitionFromPrev: (done) => {
+        ssa.pulseAngleB(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        '|Extend| |B| and from angle |b| to form a larger triangle.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Extend: this.bindNext(colors.diagram.action),
+      },
+      show: [ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        Extend: click(ssa.growLargeTriangle, [ssa, null], colors.diagram.action),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine,
+      ],
+      transitionFromPrev: (done) => {
+        ssa.growLargeTriangle(done);
+      },
     });
   }
 }

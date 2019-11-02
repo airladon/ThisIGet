@@ -42,7 +42,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
 
 //   _arrow1: CommonDiagramCollection;
 //   _arrow2: CommonDiagramCollection;
-//   sideCounter: number;
+  sideCounter: number;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -52,27 +52,51 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
-    // this.sideCounter = 0;
+    this.sideCounter = 0;
   }
 
+  pulseAngle() {
+    this._tri1._b.pulseScaleNow(1, 1.5);
+    this._tri2._b.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
 //   pulseAngles(done: ?() => void = null) {
 //     this._tri1._angle1.pulseScaleNow(1, 1.5, 0, done);
 //     this._tri2._angle1.pulseScaleNow(1, 1.5);
 //     this.diagram.animateNextFrame();
 //   }
 
-//   pulseSides() {
-//     const tri1 = this._tri1;
-//     const tri2 = this._tri2;
-//     const side1 = [tri1._side01, tri1._side12];
-//     const side2 = [tri2._side01, tri2._side12];
-//     const index = this.sideCounter;
-//     this.sideCounter = (this.sideCounter + 1) % 2;
-//     side1[index]._label.pulseScaleNow(1, 2);
-//     side2[index]._label.pulseScaleNow(1, 2);
-//     this.diagram.animateNextFrame();
-//   }
+  pulseSides() {
+    const tri1 = this._tri1._ss;
+    const tri2 = this._tri2._ss;
+    const side1 = [tri1._side01, tri1._side12];
+    const side2 = [tri2._side01, tri2._side12];
+    const index = this.sideCounter;
+    this.sideCounter = (this.sideCounter + 1) % 2;
+    side1[index]._label.pulseScaleNow(1, 2);
+    side2[index]._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
 
+  growRA(done: ?() => void = null) {
+    const showDimension = () => {
+      this._rADim.showAll();
+      this._rADim._label.pulseScaleNow(1, 2, 0, done);
+    }
+    this._rALine.grow(0, 0.8, true, showDimension);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngleB(done: ?() => void = null) {
+    this._b.pulseScaleNow(1, 1.4, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  growLargeTriangle(done: ?() => void = null) {
+    this._rCLine.grow(0, 1.5, true, done);
+    this._rBLine.grow(0, 1.5, true, done);
+    this.diagram.animateNextFrame();
+  }
 //   pulseParallel(done: ?() => void = null) {
 //     this._arrow1.pulseScaleNow(1, 2.5, 0, done);
 //     this._arrow2.pulseScaleNow(1, 2.5);

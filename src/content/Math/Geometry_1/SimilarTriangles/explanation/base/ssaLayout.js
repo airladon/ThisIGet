@@ -164,9 +164,9 @@ export default function diagramLayout() {
     },
   });
 
-  const rBLine = dashedLine('rbLine', points1[2], points2[2], pos1.add(points1[2]));
+  const rBLine = dashedLine('rBLine', points1[2], points2[2], pos1.add(points1[2]));
 
-  const rCLine = dashedLine('rcLine', points2[0], points2[2], pos1.add(points2[0]));
+  const rCLine = dashedLine('rCLine', points2[0], points2[2], pos1.add(points2[0]));
 
   const rALine = {
     name: 'rALine',
@@ -203,11 +203,6 @@ export default function diagramLayout() {
       p2: p2.add(defaultPos),
       offset: -0.3,
     },
-    // mods: {
-    //   scenarios: {
-    //     default: { position: defaultPos },
-    //   },
-    // },
   });
 
   layout.addElements = [
