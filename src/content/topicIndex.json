@@ -1432,6 +1432,14 @@
           "fullTopic": true
         }
       },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Similar Triangles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
