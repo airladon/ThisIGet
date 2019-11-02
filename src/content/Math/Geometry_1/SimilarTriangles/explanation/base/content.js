@@ -1104,13 +1104,14 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        '|Extend| |B| and from angle |b| to form a larger triangle.',
+        '|Extend| side |B| and a line from angle |b_| to form a larger triangle.',
       ],
     };
 
     this.addSection(common, commonContent, {
       modifiers: {
         Extend: this.bindNext(colors.diagram.action),
+        b_: highlight(colors.angles),
       },
       show: [ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b],
     });
@@ -1118,6 +1119,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         Extend: click(ssa.growLargeTriangle, [ssa, null], colors.diagram.action),
+        b_: highlight(colors.angles),
       },
       show: [
         ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
@@ -1125,6 +1127,41 @@ class Content extends PresentationFormatContent {
       ],
       transitionFromPrev: (done) => {
         ssa.growLargeTriangle(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        'The |b| angles are |equal_corresponding_angles|, therefore the two lines that rise from them must be |parallel|.',
+      ],
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        b: click(ssa.pulseBAngles, [ssa], colors.angles),
+        equal_corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        parallel: this.bindNext(colors.sides),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        b: click(ssa.pulseBAngles, [ssa], colors.angles),
+        equal_corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        parallel: click(ssa.pulseParallel, [ssa, null], colors.sides),
+      },
+      show: [
+        ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
+        ssa._rCLine, ssa._rBLine, ssa._arrow1, ssa._arrow2,
+      ],
+      transitionFromPrev: (done) => {
+        ssa.pulseParallel(done);
       },
     });
   }

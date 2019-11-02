@@ -93,15 +93,22 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   }
 
   growLargeTriangle(done: ?() => void = null) {
-    this._rCLine.grow(0, 1.5, true, done);
-    this._rBLine.grow(0, 1.5, true, done);
+    this._rCLine.grow(0.05, 1.5, true, done);
+    this._rBLine.grow(0.05, 1.5, true, done);
     this.diagram.animateNextFrame();
   }
-//   pulseParallel(done: ?() => void = null) {
-//     this._arrow1.pulseScaleNow(1, 2.5, 0, done);
-//     this._arrow2.pulseScaleNow(1, 2.5);
-//     this.diagram.animateNextFrame();
-//   }
+
+  pulseParallel(done: ?() => void = null) {
+    this._arrow1.pulseScaleNow(1, 2.5, 0, done);
+    this._arrow2.pulseScaleNow(1, 2.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseBAngles() {
+    this._tri1._b.pulseScaleNow(1, 1.4);
+    this._b.pulseScaleNow(1, 1.4);
+    this.diagram.animateNextFrame();
+  }
 
 //   pulseSimilar(done: ?() => void = null) {
 //     const tri1 = this._tri1;
