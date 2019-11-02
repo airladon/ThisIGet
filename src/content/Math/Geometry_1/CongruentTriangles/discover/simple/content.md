@@ -124,7 +124,7 @@ The six combinations are:
 * side-side-angle (SSA)
 * side-angle-side (SAS)
 * angle-angle-side (AAS)
-* angle-side-angle (AAA)
+* angle-side-angle (ASA)
 
 Note that **angle-side-side** is the same as **side-side-angle** as in both an angle is adjacent to only one side. Similarly **angle-angle-side** is the same as **side-angle-angle**.
 
