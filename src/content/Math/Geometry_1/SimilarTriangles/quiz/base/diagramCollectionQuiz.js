@@ -41,6 +41,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addQuestion();
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
+    this.addMultipleChoice('similar_tri_1', ['Yes', 'No']);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
   }
@@ -120,8 +121,59 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this._question.drawingObject.setText(`Enter the unknown ${'something'}:`);
     // this.answer = ;
     super.afterTransitionToNewProblem();
-    // this.showAnglesAndSides();
+    this.showAnglesAndSides();
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  showAnglesAndSides() {
+    if (this._tri1._angle0.angle > Math.PI) {
+      this._tri1.reverse = !this._tri1.reverse;
+      this._tri1.updatePoints(this._tri1.points);
+    }
+    if (this._tri2._angle0.angle > Math.PI) {
+      this._tri2.reverse = !this._tri2.reverse;
+      this._tri2.updatePoints(this._tri2.points);
+    }
+
+    const scenarios = [
+      //
+      [true, 'AAA', ['0', '1', '2'], ['0', '1', '2']],
+      //
+      [true, 'AA', ['0', '1'], ['0', '1']],    // same
+      [true, 'AA', ['0', '2'], ['0', '1']],    // different
+      //
+      [false, 'SS', ['01', '12'], ['01', '12']], // same
+      [false, 'SS', ['01', '12'], ['01', '20']], // different
+      //
+      [true, 'SAS', ['01', '1', '12'], ['01', '1', '12']],
+    ];
+    const scenario = randElement(scenarios);
+    const [possible, name, tri1Show, tri2Show] = scenario;
+    const showProperties = (tri, props) => {
+      props.forEach((prop) => {
+        if (prop.length === 1) {
+          tri[`_angle${prop}`].showAll();
+        } else {
+          tri[`_side${prop}`].showAll();
+        }
+      });
+    };
+
+    this._tri1.hideAll();
+    this._tri1._line.show();
+    // this._tri1._pad0.show();
+    // this._tri1._pad1.show();
+    // this._tri1._pad2.show();
+    this._tri2.hideAll();
+    this._tri2._line.show();
+    // this._tri2._pad0.show();
+    // this._tri2._pad1.show();
+    // this._tri2._pad2.show();
+    console.log(name)
+    showProperties(this._tri1, tri1Show);
+    showProperties(this._tri2, tri2Show);
+  }
+
 
   findAnswer() {
     // if (parseFloat(this._input.getValue()) === this.answer) {
