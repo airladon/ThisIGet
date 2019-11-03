@@ -16,6 +16,7 @@ export default function diagramLayout() {
   const { colors } = layout;
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
+  const width = 0.015;
   const quizTri = {
     method: 'polyLine',
     options: {
@@ -25,7 +26,7 @@ export default function diagramLayout() {
         [1.5, 0],
       ],
       color: colors.sides,
-      width: layout.width,
+      width,
       close: true,
       pad: {
         color: [0, 0, 0, 0.001],
@@ -34,16 +35,25 @@ export default function diagramLayout() {
         sides: 4,
         radius: 0.1,
       },
+      makeValid: {
+        shape: 'triangle',
+        hide: {
+          minAngle: 10 * Math.PI / 180,
+          maxAngle: 170 * Math.PI / 180,
+          minSide: 0.8,
+        },
+      },
       angle: {
         color: colors.angles,
         curve: {
-          radius: 0.3,
-          width: layout.width,
+          radius: 0.2,
+          width,
         },
         autoRightAngle: false,
         label: {
           text: null,
           precision: 0,
+          scale: 0.7,
         },
       },
       side: {

@@ -20,7 +20,8 @@ const {
   // removeRandElement,
   randElement,
   randElements,
-  // round,
+  round,
+  randInt,
   rand,
 } = Fig.tools.math;
 
@@ -35,7 +36,20 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       diagram,
       layout,
       'q1',
-      {},
+      {
+        checkDimensions: {
+          answer: 'Incorrect',
+          details: 'Make sure to check the dimensions are the same',
+        },
+        notSelected: {
+          answer: 'Incorrect',
+          details: 'Make sure to select "Yes" or "No" above the "Check" button',
+        },
+        ssa: {
+          answer: 'Incorrect',
+          details: 'Side-Side-Angle does not guarantee congruence if the angle\'s opposite side is longer than the adjacent side.',
+        },
+      },
       transform,
     );
     this.addQuestion();
@@ -89,13 +103,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._tri2._pad0.scenarios.quiz = { position: points2[0] };
     this._tri2._pad1.scenarios.quiz = { position: points2[1] };
     this._tri2._pad2.scenarios.quiz = { position: points2[2] };
-    const trick = rand(0, 1);
-    if (trick < 0.3) {
-      this._tri2._pad0.scenarios.quiz = { position: points2[0].add(0.1, 0) };
-      this.hint = 'checkDimensions';
-    } else {
-      this.hint = 'incorrect';
-    }
+    // const trick = rand(0, 1);
+    // if (trick < 0.3) {
+    //   this._tri2._pad0.scenarios.quiz = { position: points2[0].add(0.1, 0) };
+    //   this.hint = 'checkDimensions';
+    // } else {
+    //   this.hint = 'incorrect';
+    // }
   }
 
   setupNewProblem() {
@@ -126,21 +140,31 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   // eslint-disable-next-line class-methods-use-this
   showAnglesAndSides() {
+    const tri1 = this._tri1;
+    const tri2 = this._tri2;
+    let tri1Angles = [tri1._angle0, tri1._angle1, tri1._angle2];
+    let tri2Angles = [tri2._angle0, tri2._angle1, tri2._angle2];
+    let tri1Sides = [tri1._side01, tri1._side12, tri1._side20];
+    let tri2Sides = [tri2._side01, tri2._side12, tri2._side20];
     if (this._tri1._angle0.angle > Math.PI) {
       this._tri1.reverse = !this._tri1.reverse;
       this._tri1.updatePoints(this._tri1.points);
+      // tri1Angles = [tri1._angle0, tri1._angle2, tri1._angle1];
+      // tri1Sides = [tri1._side20, tri1._side12, tri1._side01];
     }
     if (this._tri2._angle0.angle > Math.PI) {
       this._tri2.reverse = !this._tri2.reverse;
       this._tri2.updatePoints(this._tri2.points);
+      // tri2Angles = [tri2._angle0, tri2._angle2, tri2._angle1];
+      // tri2Sides = [tri2._side20, tri2._side12, tri2._side01];
     }
-
+    let answer = 'possible';
     const scenarios = [
       //
-      [true, 'AAA', ['0', '1', '2'], ['0', '1', '2']],
-      //
-      [true, 'AA', ['0', '1'], ['0', '1']],    // same
-      [true, 'AA', ['0', '2'], ['0', '1']],    // different
+      // [true, 'AAA', ['0', '1', '2'], ['0', '1', '2']],
+      // //
+      // [true, 'AA', ['0', '1'], ['0', '1']],    // same
+      // [true, 'AA', ['0', '2'], ['0', '1']],    // different
       //
       [false, 'SS', ['01', '12'], ['01', '12']], // same
       [false, 'SS', ['01', '12'], ['01', '20']], // different
@@ -154,34 +178,76 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         if (prop.length === 1) {
           tri[`_angle${prop}`].showAll();
         } else {
-          tri[`_side${prop}`].showAll();
+          const side = tri[`_side${prop}`];
+          side.showAll();
         }
       });
     };
-
+    if (possible === false) {
+      answer = 'not possible';
+    }
     this._tri1.hideAll();
     this._tri1._line.show();
-    // this._tri1._pad0.show();
-    // this._tri1._pad1.show();
-    // this._tri1._pad2.show();
     this._tri2.hideAll();
     this._tri2._line.show();
-    // this._tri2._pad0.show();
-    // this._tri2._pad1.show();
-    // this._tri2._pad2.show();
-    console.log(name)
     showProperties(this._tri1, tri1Show);
     showProperties(this._tri2, tri2Show);
+
+    // Normalize the dimensions of the triangld
+    if (possible === true && answer === 'possible') {
+      // Copy all the angles over
+      tri1Angles.forEach((tri1Angle, index) => {
+        tri2Angles[index].label.setText(tri1Angle.label.getText());
+      });
+
+      const scalingFactor = randElement([10, 100]);
+      const proportion = randInt(1, 10);
+
+      tri2Sides.forEach((tri2Side, index) => {
+        let side = parseFloat(tri2Side.label.getText());
+        console.log(side)
+        side *= scalingFactor;
+        side = round(side, 0);
+        const side1 = side * proportion;
+        console.log(side, side1)
+        tri1Sides[index].label.setText(`${side1.toFixed(0)}`);
+        tri2Side.label.setText(`${side.toFixed(0)}`);
+        console.log(tri2Side.label.getText())
+      });
+      // Copy all the sides over
+      // for (let sideIndex = 0; sideIndex < 3; sideIndex += 1)
+    }
+
+
+    if (this.hint === 'checkDimensions') {
+      answer = 'not possible';
+    }
+    this.answer = answer;
+    // this._check.show();
+    // this._choice.show();
+    this.diagram.animateNextFrame();
   }
 
+  showAnswer() {
+    super.showAnswer();
+    if (this.answer === 'possible') {
+      this.selectMultipleChoice('congruent_tri_1', 0);
+    } else {
+      this.selectMultipleChoice('congruent_tri_1', 1);
+    }
+    // this._answerBox.disable();
+    this.diagram.animateNextFrame();
+  }
 
   findAnswer() {
-    // if (parseFloat(this._input.getValue()) === this.answer) {
-    //   return 'correct';
-    // }
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    return 'incorrect';
+    const selection = this.getMultipleChoiceSelection('similar_tri_1');
+    if (selection === -1) {
+      return 'notSelected';
+    }
+    if ((selection === 0 && this.answer === 'possible')
+      || (selection === 1 && this.answer === 'not possible')) {
+      return 'correct';
+    }
+    return this.hint;
   }
 }
