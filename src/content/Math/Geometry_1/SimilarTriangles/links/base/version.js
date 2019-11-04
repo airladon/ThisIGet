@@ -19,18 +19,21 @@ var version = {
     },
     {
       url: 'https://en.wikipedia.org/wiki/Similarity_(geometry)',
+      hash: '600b5eac1f9913bc90fe230f791ec900',
       publisher: 'Wikipedia',
       type: 'generic',
       description: 'Similarity in geometry',
     },
     {
       url: 'https://www.mathopenref.com/similartriangles.html',
+      hash: '12405c1c60a1b75bd641810a3fd80a8e',
       publisher: 'Math Open Reference',
       type: 'generic',
       description: 'Introduction to similar triangles and their tests, including interactive applet',
     },
     {
       url: 'https://mathbitsnotebook.com/Geometry/Similarity/SMNumber.html',
+      hash: '862522bd09be1224489a9fe7c14c68be',
       publisher: 'Math Bits Notebook',
       type: 'generic',
       description: 'Example problems using similar triangles',
@@ -39,5 +42,3 @@ var version = {
 };
 
 module.exports = version;
-
-

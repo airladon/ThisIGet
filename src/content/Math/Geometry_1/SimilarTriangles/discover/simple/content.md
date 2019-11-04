@@ -40,7 +40,7 @@ The angles formed from side $$\color{b}A$$ intersecting sides $$\color{b}B$$ and
 <hint>Use knowledge of what happens when a [[parallel line splits a triangle]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)).</hint>
 
 <hintLow>
-When a parallel line splits a triangle, the triangle formed is proportional to the original. Therefore each of the smaller sides is scaled by the same factor.
+When a [[parallel line splits a triangle]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)), the triangle formed is proportional to the original. Therefore each of the smaller sides is scaled by the same factor.
 
 This is the definition of a similar triangle, so we have shown that all triangles with equal corresponding sides are similar.
 
@@ -72,9 +72,11 @@ As the angles in a triangle always [[add to 180º]]((qr,'Math/Geometry_1/Triangl
 </hintLow>
 
 <hintLow>
-Both triangles share the same angles, therefore they must be similar. Can you fill in the side lengths of the new triangle?
+Both triangles share the same angles, therefore they must be similar. You can therefore fill in the side lengths of the new triangle.
 
 ![](unknown_sides.png)
+
+If you can show the new triangle and the small triangle are congruent, then their corresponding angles will be equal.
 </hintLow>
 
 <hint>Use knowledge of [[SSS triangle congruence]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sss',#00756F)).</hint>
@@ -84,7 +86,7 @@ The two triangles on the right share the same side lengths, and therefore from [
 
 As they are congruent, they also share the same corresponding angles.
 
-And now we see the original too similar triangles also share the same angles.
+And now we see the original two similar triangles also share the same corresponding angles.
 
 ![](final_sides.png)
 </hintLow>
@@ -96,9 +98,9 @@ Two ways to determine if two triangles are similar is to either:
 * Measure all sides and confirm corresponding sides have the same proportion
 * Measure all angles and confirm corresponding angles are equal
 
-Both ways do not require you to know all sides AND angles of both triangles. Therefore, if you can determine two triangles are similar with just a set of properties, and one of the triangles has unknown properties that correspond to known properties of the other triangle, then you can directly calculate the unknown properties.
+Both ways do not require you to know all sides AND angles of both triangles. Thus if you know two triangles are similar, unknown properties of one triangle may be inferred from corresponding known properties of the other.
 
-Therefore, it is useful to know what combinations of properties you need to determine if two triangles are similar.
+It is useful to know what combinations of properties can determine if two triangles are similar.
 
 
 ### One Property
@@ -110,7 +112,7 @@ If you just know a single side or angle, is that enough to know whether two tria
 Another way to ask this is: if you fix one side (or angle), how many different triangles can you make?
 
 
-If the answer is just one, then you know if two triangles have one side (or angle) that is the same length then they will be similar.
+If the answer is just one, then you know if two triangles have one side (or angle) that is the same measure then they will be similar.
 
 If on the other hand you can make triangles with different angles, then you know you won't be able to use this property to determine if two triangles are similar.
 
@@ -131,7 +133,7 @@ The diagram below shows two triangles with different angles being created from f
 
 What about if you know two properties? Firstly, what are the different combinations of properties? One combination is two sides, what are the others?
 
-<hintLow>
+<hintLow>[Answer]
 
 The unique combinations of two properties are:
 * adjacent side angle
@@ -145,31 +147,31 @@ Are any of these combinations suffient to determine if two triangles are congrue
 
 <hint>This interactive triangle might be helpful to experiment with [here](/content/Math/Geometry_1/CongruentTriangles/ta/tri). You can move its vertices and see how the side lengths and angles change.</hint>
 
-<hint>The diagram from the answer in **One Property** can be used for the "Side, Adjacent Angle" case.</hint>
+<hint>The diagram from the answer in **One Property** can be used for the "Adjacent side angle" case.</hint>
 
 <hintLow>[Answer - Adjacent side angle]
-We can use the same diagram from the "One Property" answer to see that a single side and adjacent angle can create more than one triangle, and is therefore insufficient for a similarity test.
+We can use the same diagram from the "One Property" answer to see that an adjacent side and angle can create more than one triangle, and is therefore insufficient for a similarity test.
 
 ![](one_property.png)
 
 </hintLow>
 
 <hintLow>[Answer - Opposite side angle]
-Below is a diagram showing two triangles that can be formed using the same side and opposite angle. So this is also cannot be used as a similarity test.
+Below is a diagram showing two triangles that can be formed using the same side and opposite angle. So this cannot be used as a similarity test.
 
 ![](one_side_opp_angle.png)
 
 </hintLow>
 
 <hintLow>[Answer - Two sides]
-Below is a diagram showing two triangles that can be formed using the same two adjacent sides. So this is also cannot be used as a similarity test.
+Below is a diagram showing two triangles that can be formed using the same two adjacent sides. So this cannot be used as a similarity test.
 
 ![](two_sides.png)
 
 </hintLow>
 
 <hintLow>[Answer - Two angles]
-We know that the sum of a triangles angles always equals 180º. Therefore anytime you know two angles, you can always calculate the third, meaning that knowing two angles is as good as knowing three angles.
+We know that the sum of a triangle's angles [[always equals 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)). Therefore anytime you know two angles, you can always calculate the third, meaning that knowing two angles is as good as knowing three angles.
 
 Therefore, knowing two angles in two triangles is sufficient information to know if they are similar or not.
 
@@ -236,5 +238,5 @@ The SAS case can be considered with the aid of a diagram. Start by aligning the 
 <hintLow>[Answer - SSA]
 SSA can be used to test for similarity only if the known side opposite the known angle is longer than or equal to the known side adjacent to the angle.
 
-The various explanations of this topic have both a [descriptive](/content/Math/Geometry_1/SimilarTriangles/explanation/static) reasoning for this, as well as more [succinct](/content/Math/Geometry_1/SimilarTriangles/explanation/staticBrief) reasoning.
+This topic's explanations of this topic have both a [descriptive](/content/Math/Geometry_1/SimilarTriangles/explanation/static) reasoning for this, as well as more [succinct](/content/Math/Geometry_1/SimilarTriangles/explanation/staticBrief) reasoning.
 </hintLow>
