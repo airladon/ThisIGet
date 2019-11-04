@@ -345,6 +345,12 @@ class Color {
     this.hexA = RGBToHEX(this.rgb);
   }
 
+  setOpacity(opacity: ?number) {
+    if (opacity != null) {
+      this.setRGB([this.r, this.g, this.b, opacity]);
+    }
+  }
+
   setHSB(hsb: Array<number>) {
     this.setRGB(HSBToRGB(hsb));
   }
@@ -438,7 +444,11 @@ class Color {
   toCssVar(varName: string) {
     const doc = document.documentElement;
     if (doc != null) {
-      doc.style.setProperty(varName, `#${this.hex}`);
+      if (this.opacity !== 1) {
+        doc.style.setProperty(varName, `#${this.hexA}`);
+      } else {
+        doc.style.setProperty(varName, `#${this.hex}`);
+      }
     }
   }
 }
@@ -619,13 +629,13 @@ const themes = {
           base: {
             base: {
               text: ['white', 'dark'],
-              background: ['black'],
-              border: ['black'],
+              background: ['black', 'base', 0],
+              border: ['black', 'base', 0],
             },
             hover: {
               text: ['white', 'dark'],
-              background: ['black', 'darker'],
-              border: ['black', 'darker'],
+              background: ['black', 'dark', 0.5],
+              border: ['black', 'dark', 0.5],
             },
           },
           select: {
@@ -1268,11 +1278,14 @@ class Colors {
   // get('diagram/text/base', 0.1)
   get(...inputNames: Array<string | number>) {
     const [colorDefinition, finalShade] = this.getThemeElement(inputNames);
-    const [colorName, shade] = colorDefinition;
+    const [colorName, shade, opacity] = colorDefinition;
     if (this.palette[colorName] == null) {
       return new Color();
     }
     const col = this.palette[colorName]._dup().shade(shade || 0);
+    if (typeof opacity === 'number') {
+      col.setOpacity(opacity);
+    }
     return col.lighten(finalShade);
   }
 
