@@ -3,7 +3,7 @@ import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
+// import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
@@ -26,7 +26,6 @@ const {
 } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-
   constructor(
     diagram: CommonTopicDiagram,
     layout: Object,
@@ -44,10 +43,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         notSelected: {
           answer: 'Incorrect',
           details: 'Make sure to select "Yes" or "No" above the "Check" button',
-        },
-        ssa: {
-          answer: 'Incorrect',
-          details: 'Side-Side-Angle does not guarantee congruence if the angle\'s opposite side is longer than the adjacent side.',
         },
         custom: {
           answer: 'Incorrect',
@@ -89,7 +84,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   calcRandomTriangles() {
     const points = this.randomTriangle();
-    const rotation1 = 0; //rand(0, Math.PI * 2);
+    const rotation1 = 0; // rand(0, Math.PI * 2);
     const rotation2 = rand(0, Math.PI * 2);
     const position1 = new Point(-1.2, -0.3);
     const position2 = new Point(1.2, -0.3);
@@ -169,6 +164,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       // tri2Sides = [tri2._side20, tri2._side12, tri2._side01];
     }
     let answer = 'possible';
+    // eslint-disable-next-line max-len
     const scenarios: Array<[string, string, Array<string>, Array<string>, string, Array<[string, number]>]> = [
       [
         'yes', 'AAA', ['0', '1', '2'], ['0', '1', '2'],
@@ -202,7 +198,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         'You should calculate all three angles',
         [],
       ],    // different
-      
+
       ['no', 'SS', ['01', '12'], ['01', '12'], 'Two sides is not enough information to determine similarity', []], // same
       ['no', 'SA', ['0', '12'], ['0', '12'], 'A single side and angle is not enough information to determine similarity', []], // different
       ['no', 'SA', ['0', '01'], ['0', '01'], 'A single side and angle is not enough information to determine similarity', []], // different

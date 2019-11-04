@@ -1207,7 +1207,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'And so we have seen that |SSA| can be used to determine if two triangles are similar if the side opposite the known angle is longer than the side adjacent.',
-        'By the same process, we can also show |SSA| can be used as a similarity test if the |two known sides are equal|.',
+        'By the same process, we can show |SSA| can be used as a similarity test if the |two known sides are equal|.',
         'We can also show the equal case using |isosceles| triangles, as if you know just |one angle| in an isosceles triangle, you can |calculate the rest|.',
       ]),
       modifiers: {
