@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Similar Triangles',
+  title: 'Definition and Similarity Tests',
   description: 'Properties of Similar Triangles',
-  htmlTitle: 'Similar Triangles Definition',
-  htmlDescription: 'Definition of similar triangles',
+  htmlTitle: 'Similar triangles definition',
+  htmlDescription: 'Definition of similar triangles, and how to test for similarity',
   fullTopic: true,
   type: 'presentation',
 };

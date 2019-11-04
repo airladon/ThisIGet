@@ -1427,7 +1427,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Find Properties",
+          "title": "Properties and Tests for Similarity",
           "description": "",
           "fullTopic": true
         }
@@ -1495,7 +1495,7 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Are They Similar?",
           "description": "",
           "fullTopic": true
         }
@@ -1503,7 +1503,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Similar Triangles",
+          "title": "Definition and Similarity Tests",
           "description": "Properties of Similar Triangles",
           "fullTopic": true
         }

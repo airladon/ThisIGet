@@ -5,9 +5,9 @@ var version = {
   uid: 'staticBrief',
   topic: 'explanation',
   title: 'Brief',
-  description: 'Succinct proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar',
-  htmlTitle: 'Similar triangles and their proofs',
-  htmlDescription: 'Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles',
+  description: '',
+  htmlTitle: 'Introduction to similar triangles, with succinct proofs',
+  htmlDescription: 'Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar',
   fullTopic: true,
   type: 'singlePage',
 };

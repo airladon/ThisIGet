@@ -4,10 +4,10 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Find Properties',
+  title: 'Properties and Tests for Similarity',
   description: '',
-  htmlTitle: 'Self discover the properties of similar triangles',
-  htmlDescription: 'Figure out why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar',
+  htmlTitle: 'Discover the properties of similar triangles',
+  htmlDescription: 'Figure out why similar triangles have equal corresponding angles, why triangles with equal corresponding angles are similar, and how to test for similarity',
   fullTopic: true,
   type: 'singlePage',
 };
