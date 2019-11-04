@@ -111,7 +111,7 @@ export default function diagramLayout() {
 
 
   layout.addElements = [
-    tri('tri2', points, 'rA', 'rB', 'rC', colors.sides, [1, 0], [0, 0], 1),
+    tri('tri2', points, 'sA', 'sB', 'sC', colors.sides, [1, 0], [0, 0], 1),
     tri('tri1', pointsSmall, 'A', 'B', 'C', colors.small, [-1, 0], [0.013, 0.315], 0.92),
     arrow('arrow2', [0.1, -0.8], colors.sides),
     arrow('arrow1', [0.1, -0.48 + 0.315 + 0.04], colors.small),

@@ -715,15 +715,15 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'Another way to ask this is, what are the properties you need to confirm two triangles will have the same corresponding angles?',
-        'As all similar triangles have the same corresponding angles, if you  show a set of properties can create a triangle with only one set of angles, then you know they will be sufficient to determine similarity.',
+        'Another way to ask this is, |what are the properties you need to know to confirm two triangles have the same corresponding angles?|',
+        'As all similar triangles have the same corresponding angles, if you  show a set of properties can create a triangle with only |one set of angles|, then you know they will be sufficient to determine |similarity|.',
       ]),
     });
 
     this.addSection({
       title: 'One Property',
       setContent: [
-        'How many triangles can be created if you fix just a single angle or side? You can try with the triangle below.',
+        'How many triangles can be created if you fix just a |single angle| or |side|? You can try with the triangle below.',
         note({ label: 'Note:' }, 'Move the |vertices| of the triangle to change the triangle'),
       ],
       show: [twoProp._tri],
@@ -1009,8 +1009,8 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'Therefore, as a shorter opposite side than adjacent side results in more than one possible triangle, we cannot use this case for a similarity test.',
-        'So, let\'s explore the case for when the opposite side is longer than the adjacent side.',
+        'As a |shorter opposite side than adjacent side| results in more than one possible triangle, we |cannot| use this case for a similarity test.',
+        'So, let\'s explore the case for when the opposite side is |longer| than the adjacent side.',
       ]),
     });
 
@@ -1035,7 +1035,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        '|Extend| side |A| of the smaller triangle by to be the same as the larger.',
+        '|Extend| side |A| of the smaller triangle to be the same as the larger.',
       ],
     };
 

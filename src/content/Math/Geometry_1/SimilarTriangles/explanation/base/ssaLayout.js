@@ -227,17 +227,17 @@ export default function diagramLayout() {
 
   layout.addElements = [
     tri('tri1', points1, 'A', 'B', pos1),
-    tri('tri2', points2, 'rA', 'rB', pos2),
+    tri('tri2', points2, 'sA', 'sB', pos2),
     bAngle,
     rBLine,
     rCLine,
     rALine,
-    dimension('rADim', 'rA', points2[0], points2[1], pos1),
-    dimension('rBDim', 'rB', points2[1], points2[2], pos1),
+    dimension('rADim', 'sA', points2[0], points2[1], pos1),
+    dimension('rBDim', 'sB', points2[1], points2[2], pos1),
     arrow('arrow1', lineC.pointAtPercent(0.5).add(pos1), a),
     arrow('arrow2', lineRC.pointAtPercent(0.43).add(pos1), a),
     txt('cLabel', 'C', lineC.pointAtPercent(0.5).add(pos1).add(0.05, 0.2)),
-    txt('rcLabel', 'rC', lineRC.pointAtPercent(0.5).add(pos1).add(0, 0.2)),
+    txt('rcLabel', 'sC', lineRC.pointAtPercent(0.5).add(pos1).add(0, 0.2)),
   ];
 
   return layout;
