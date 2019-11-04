@@ -38,7 +38,7 @@ In this case, one triangle is flipped compared to the other, but the correspondi
 
 ### Example 4
 
-What is the measure of angle $$\definecolor{r}\definecolor{b}{RGB}{0,118,186}{RGB}{238,34,12}a$$ in degrees?
+What is the measure of angle $$\definecolor{r}{RGB}{238,34,12}\definecolor{b}{RGB}{0,118,186}\color{r}a$$ in degrees?
 
 ![](ex4.png)
 
@@ -51,7 +51,7 @@ The two triangles are similar as the smaller triangle's sides are all half the l
 
 Therefore, as both triangles have the same corresponding angles, the unknown angle $$\color{r}a$$ must be:
 
-$$\bbox[10px,border:1px solid gray]{\color{r}a \color{black} = 63º}$$
+$$\bbox[10px,border:1px solid gray]{\color{r}a \color{black} = 63^\circ}$$
 
 </hintLow>
 
@@ -62,9 +62,9 @@ What is the height $$\color{b}h$$?
 ![](ex5.png)
 
 <hintLow>[Answer]
-Here we recognize that the two right angles are equal [[corresponding angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)), and therefore the lines representing the heights of each triangle ($$\color{b}5$$ and $$\color{b}h$$ are parallel to each other.
+Here we recognize that the two right angles are equal [[corresponding angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)), and therefore the lines representing the heights of each triangle ($$\color{b}5$$ and $$\color{b}h$$) are parallel to each other.
 
-[[Triangles split with a parallel line]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)) form an equal proportion, and therefore similar, smaller triangle.
+[[Triangles split with a parallel line]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)) form an equally proportioned, and therefore similar, smaller triangle.
 
 To find the proportion, or scaling factor of the two similar triangles we can use the base of both triangles:
 
@@ -89,7 +89,7 @@ What is the length of side $$\color{b}a$$?
 <hintLow>[Answer]
 The middle angles where the two triangles meet is an [[opposite angle]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), which means both angles are equal.
 
-We also know that the two known sides of each triangle have equal proportion. The larger triangles sides are 2.5 times larger than the smaller triangle.
+We also know that the two corresponding known sides of each triangle have equal proportion. The larger triangles sides are 2.5 times larger than the smaller triangle.
 
 Therefore, we can use the SAS similarity test to confirm both triangles are similar.
 
