@@ -49,21 +49,26 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
           answer: 'Incorrect',
           details: 'Side-Side-Angle does not guarantee congruence if the angle\'s opposite side is longer than the adjacent side.',
         },
+        custom: {
+          answer: 'Incorrect',
+          details: 'Please try again',
+        },
       },
       transform,
     );
     this.addQuestion();
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
-    this.addMultipleChoice('similar_tri_1', ['Yes', 'No']);
+    this.addMultipleChoice('similar_tri_1', ['Yes', 'No', 'Maybe']);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
+    console.log(this)
   }
 
   // eslint-disable-next-line class-methods-use-this
   randomTriangle(
-    maxQuadrantBounds: Point = new Point(0.9, 0.9),
-    minQuadrantBounds: Point = new Point(0.4, 0.4),
+    maxQuadrantBounds: Point = new Point(1, 1),
+    minQuadrantBounds: Point = new Point(0.5, 0.5),
   ): Array<Point> {
     const possibleQuads = [0, 1, 2, 3];
     const quadrants = randElements(3, possibleQuads);
@@ -85,12 +90,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   calcRandomTriangles() {
     const points = this.randomTriangle();
-    const rotation1 = rand(0, Math.PI * 2);
+    const rotation1 = 0; //rand(0, Math.PI * 2);
     const rotation2 = rand(0, Math.PI * 2);
     const position1 = new Point(-1.2, -0.3);
     const position2 = new Point(1.2, -0.3);
     const scale1 = randElement([-1, 1]);
-    const scale2 = rand(0.3, 0.8);
+    const scale2 = rand(0.6, 0.8);
     const transform1 = new Transform().scale(scale1, 1)
       .rotate(rotation1).translate(position1);
     const transform2 = new Transform().scale(scale2, scale2)
@@ -126,6 +131,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._tri2._pad0.show();
     this._tri2._pad1.show();
     this._tri2._pad2.show();
+    this._tri1.makeValid.shape = '';
+    this._tri2.makeValid.shape = '';
     this.transitionToNewProblem({ target: 'quiz', duration: 1 });
     // this._question.drawingObject.setText('');
   }
@@ -135,6 +142,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this._question.drawingObject.setText(`Enter the unknown ${'something'}:`);
     // this.answer = ;
     super.afterTransitionToNewProblem();
+    this._tri1.makeValid.shape = 'triangle';
+    this._tri2.makeValid.shape = 'triangle';
+    this._tri1.updatePoints(this._tri1.points);
+    this._tri2.updatePoints(this._tri2.points);
     this.showAnglesAndSides();
   }
 
@@ -142,10 +153,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   showAnglesAndSides() {
     const tri1 = this._tri1;
     const tri2 = this._tri2;
-    let tri1Angles = [tri1._angle0, tri1._angle1, tri1._angle2];
-    let tri2Angles = [tri2._angle0, tri2._angle1, tri2._angle2];
-    let tri1Sides = [tri1._side01, tri1._side12, tri1._side20];
-    let tri2Sides = [tri2._side01, tri2._side12, tri2._side20];
+    const tri1Angles = [tri1._angle0, tri1._angle1, tri1._angle2];
+    const tri2Angles = [tri2._angle0, tri2._angle1, tri2._angle2];
+    const tri1Sides = [tri1._side01, tri1._side12, tri1._side20];
+    const tri2Sides = [tri2._side01, tri2._side12, tri2._side20];
     if (this._tri1._angle0.angle > Math.PI) {
       this._tri1.reverse = !this._tri1.reverse;
       this._tri1.updatePoints(this._tri1.points);
@@ -159,20 +170,49 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       // tri2Sides = [tri2._side20, tri2._side12, tri2._side01];
     }
     let answer = 'possible';
-    const scenarios = [
+    const scenarios: Array<[string, string, Array<string>, Array<string>, string, Array<[string, number]>]> = [
+      [
+        'yes', 'AAA', ['0', '1', '2'], ['0', '1', '2'],
+        'Triangles with the same corresponding angles are similar',
+        [['0', -5], ['1', 5]],
+      ],
+      [
+        'yes', 'SSS', ['01', '12', '20'], ['01', '12', '20'],
+        'Triangles with  corresponding sides in proportion are similar',
+        [['01', rand(0.1, 0.5)]],
+      ],
       //
-      // [true, 'AAA', ['0', '1', '2'], ['0', '1', '2']],
-      // //
-      // [true, 'AA', ['0', '1'], ['0', '1']],    // same
-      // [true, 'AA', ['0', '2'], ['0', '1']],    // different
+      [
+        'yes', 'AA', ['0', '1'], ['0', '1'],
+        'Triangles with two equal angles are similar',
+        [['0', randInt(1, 8)]],
+      ],    // same
+      [
+        'yes', 'AA', ['0', '2'], ['0', '1'],
+        'You should calculate all three angles',
+        [['1', randInt(1, 8)]],
+      ],    // different
+      
+      ['maybe', 'SS', ['01', '12'], ['01', '12'], 'Two sides is not enough information to determine similarity', []], // same
+      ['maybe', 'SA', ['0', '12'], ['0', '12'], 'A single side and angle is not enough information to determine similarity', []], // different
       //
-      [false, 'SS', ['01', '12'], ['01', '12']], // same
-      [false, 'SS', ['01', '12'], ['01', '20']], // different
-      //
-      [true, 'SAS', ['01', '1', '12'], ['01', '1', '12']],
+      [
+        'yes', 'SAS', ['01', '1', '12'], ['01', '1', '12'],
+        'SAS is sufficient to determine similarity.',
+        [['01', rand(0.1, 0.5)]],
+      ],
+      [
+        'yes', 'SAA', ['01', '1', '2'], ['01', '1', '2'],
+        'Triangles with two equal angles are similar', [],
+      ],
+      ['yes', 'SAA', ['01', '1', '2'], ['01', '1', '0'], 'You should calculate all three angles', []],
+      ['yes', 'SSA', ['01', '12', '2'], ['01', '12', '2'], 'This is a case of SSA where the opposite side is greater than or equal to the adjacent side', []],
     ];
     const scenario = randElement(scenarios);
-    const [possible, name, tri1Show, tri2Show] = scenario;
+    const [possible, name, tri1Show, tri2Show, defaultHint, trick] = scenario;
+    let hint = defaultHint;
+
+    this.hint = 'custom';
     const showProperties = (tri, props) => {
       props.forEach((prop) => {
         if (prop.length === 1) {
@@ -183,9 +223,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         }
       });
     };
-    if (possible === false) {
-      answer = 'not possible';
-    }
+    answer = possible;
     this._tri1.hideAll();
     this._tri1._line.show();
     this._tri2.hideAll();
@@ -194,34 +232,58 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     showProperties(this._tri2, tri2Show);
 
     // Normalize the dimensions of the triangld
-    if (possible === true && answer === 'possible') {
-      // Copy all the angles over
-      tri1Angles.forEach((tri1Angle, index) => {
-        tri2Angles[index].label.setText(tri1Angle.label.getText());
-      });
+    // Copy all angles from one triangle to next
+    tri1Angles.forEach((tri1Angle, index) => {
+      tri2Angles[index].label.setText(tri1Angle.label.getText());
+    });
 
-      const scalingFactor = randElement([10, 100]);
-      const proportion = randInt(1, 10);
+    // Copy and scale side lengths of small triangle to large
+    const scalingFactor = randElement([10, 100]);
+    const proportion = randInt(2, 10);
+    tri2Sides.forEach((tri2Side, index) => {
+      let side = parseFloat(tri2Side.label.getText());
+      side *= scalingFactor;
+      side = round(side, 0);
+      const side1 = side * proportion;
+      tri1Sides[index].label.setText(`${side1.toFixed(0)}`);
+      tri2Side.label.setText(`${side.toFixed(0)}`);
+    });
 
-      tri2Sides.forEach((tri2Side, index) => {
-        let side = parseFloat(tri2Side.label.getText());
-        console.log(side)
-        side *= scalingFactor;
-        side = round(side, 0);
-        const side1 = side * proportion;
-        console.log(side, side1)
-        tri1Sides[index].label.setText(`${side1.toFixed(0)}`);
-        tri2Side.label.setText(`${side.toFixed(0)}`);
-        console.log(tri2Side.label.getText())
-      });
-      // Copy all the sides over
-      // for (let sideIndex = 0; sideIndex < 3; sideIndex += 1)
+    // Deal with the SSA case
+    if (name === 'SSA') {
+      const opposite = parseFloat(tri1Sides[0].label.getText());
+      const adjacent = parseFloat(tri1Sides[1].label.getText());
+      if (adjacent > opposite) {
+        hint = 'This is a case of SSA when the adjacent side is longer than the opposite side';
+        answer = 'maybe';
+      }
     }
 
-
-    if (this.hint === 'checkDimensions') {
-      answer = 'not possible';
+    const willTrick = rand(0, 1);
+    if (willTrick < 0.3 && trick != null) {
+      trick.forEach((prop: [string, number]) => {
+        let element;
+        let delta = prop[1];
+        if (prop[0].length === 1) {
+          element = this._tri2[`_angle${prop[0]}`];
+          const value = parseFloat(element.label.getText());
+          element.label.setText(`${(value + delta).toFixed(0)}º`);
+        } else {
+          element = this._tri2[`_side${prop[0]}`];
+          delta *= scalingFactor;
+          const value = parseFloat(element.label.getText());
+          element.label.setText((value + delta).toFixed(0));
+        }
+      });
+      hint = 'checkDimensions';
+      answer = 'no';
     }
+
+    const hintElement = document.querySelector('#id__quiz_answer_box__custom_q1 .approach__quiz__answer_details_text');
+    if (hintElement != null) {
+      hintElement.innerHTML = hint;
+    }
+
     this.answer = answer;
     // this._check.show();
     // this._choice.show();
@@ -230,10 +292,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   showAnswer() {
     super.showAnswer();
-    if (this.answer === 'possible') {
-      this.selectMultipleChoice('congruent_tri_1', 0);
+    if (this.answer === 'yes') {
+      this.selectMultipleChoice('similar_tri_1', 0);
+    } else if (this.answer === 'no') {
+      this.selectMultipleChoice('similar_tri_1', 1);
     } else {
-      this.selectMultipleChoice('congruent_tri_1', 1);
+      this.selectMultipleChoice('similar_tri_1', 2);
     }
     // this._answerBox.disable();
     this.diagram.animateNextFrame();
@@ -244,10 +308,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (selection === -1) {
       return 'notSelected';
     }
-    if ((selection === 0 && this.answer === 'possible')
-      || (selection === 1 && this.answer === 'not possible')) {
+    if ((selection === 0 && this.answer === 'yes')
+      || (selection === 1 && this.answer === 'no'
+      || (selection === 2 && this.answer === 'maybe'))) {
       return 'correct';
     }
+
     return this.hint;
   }
 }

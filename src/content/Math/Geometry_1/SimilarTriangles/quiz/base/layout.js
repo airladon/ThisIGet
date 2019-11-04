@@ -2,11 +2,11 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 
-// const {
-//   // Point,
+const {
+  Point,
 //   // Transform,
 //   // Line,
-// } = Fig;
+} = Fig;
 
 const { joinObjects } = Fig.tools.misc;
 
@@ -14,6 +14,19 @@ const { joinObjects } = Fig.tools.misc;
 export default function diagramLayout() {
   const layout: Object = baseLayout();
   const { colors } = layout;
+  // quiz: {
+  //     check: new Point(2.4, -1.7),
+  //     input: new Point(2.4, -1.3),
+  //     newProblem: new Point(2.4, -1.7),
+  //     // check: new Point(0, -1.7),
+  //     position: new Point(0, 0),
+  //     answer: new Point(0, -1.7),
+  //     nextSteps: new Point(0, -1.9),
+  //     // newProblem: new Point(0, -1.7),
+  //     showAnotherAnswer: new Point(1.1, -1.7),
+  //     choice: new Point(2.02, -1.1),
+  //   },
+  layout.quiz.choice = new Point(1.95, -0.85);
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
   const width = 0.015;

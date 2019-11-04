@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationFormatContent,
   // interactiveItem,
@@ -11,11 +11,12 @@ import details from '../../details';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
+const {
+  style,
 //   click,
 //   centerV,
 //   highlight,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = diagramLayout();
 // const { colors } = layout;
@@ -39,7 +40,10 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       // setContent: ['Find the unknown angle:'],
-      setContent: ['Can you determine if the triangles are similar based on the properties shown?'],
+      setContent: [
+        'Are these triangles similar?',
+        style({ size: 0.6, top: 0 }, 'Answer |Maybe| if there is not enough information.'),
+      ],
       show: [quiz._tri1, quiz._tri2],
       setSteadyState: () => {
         quiz.newProblem();
