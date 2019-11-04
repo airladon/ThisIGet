@@ -41,8 +41,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       // setContent: ['Find the unknown angle:'],
       setContent: [
-        'Are these triangles similar?',
-        style({ size: 0.6, top: 0 }, 'Answer |Maybe| if there is not enough information.'),
+        'Can you say these triangles are similar?',
+        style({ size: 0.6, top: 0 }, 'If there is not enough information, or the triangles cannot be similar, then answer |No|.'),
       ],
       show: [quiz._tri1, quiz._tri2],
       setSteadyState: () => {

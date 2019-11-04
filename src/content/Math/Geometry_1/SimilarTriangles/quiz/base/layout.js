@@ -26,7 +26,7 @@ export default function diagramLayout() {
   //     showAnotherAnswer: new Point(1.1, -1.7),
   //     choice: new Point(2.02, -1.1),
   //   },
-  layout.quiz.choice = new Point(1.95, -0.85);
+  // layout.quiz.choice = new Point(1.95, -0.85);
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
   const width = 0.015;
