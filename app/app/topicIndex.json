@@ -2338,8 +2338,8 @@
           "type": "singlePage",
           "title": "Properties and Tests for Similarity",
           "description": "",
-          "htmlTitle": "Self discover the properties of similar triangles",
-          "htmlDescription": "Figure out why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar",
+          "htmlTitle": "Discover the properties of similar triangles",
+          "htmlDescription": "Figure out why similar triangles have equal corresponding angles, why triangles with equal corresponding angles are similar, and how to test for similarity",
           "fullTopic": true,
           "links": ""
         }
@@ -2359,9 +2359,9 @@
         "base": {
           "type": "presentation",
           "title": "Descriptive & Interactive",
-          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
-          "htmlTitle": "Interactive introduction to similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
+          "description": "",
+          "htmlTitle": "Interactive introduction to similar triangles",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
           "fullTopic": true,
           "links": ""
         },
@@ -2377,8 +2377,8 @@
         "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
           "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2 (Brief)",
-          "description": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
-          "htmlTitle": "Similar Triangles Proof",
+          "description": "",
+          "htmlTitle": "Triangles with Equal Corresponding Angles are Similar - Succinct Proof",
           "htmlDescription": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""
@@ -2386,18 +2386,18 @@
         "static": {
           "type": "singlePage",
           "title": "Descriptive",
-          "description": "Proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
-          "htmlTitle": "Introduction to similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
+          "description": "",
+          "htmlTitle": "Introduction to similar triangles",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
           "fullTopic": true,
           "links": ""
         },
         "staticBrief": {
           "type": "singlePage",
           "title": "Brief",
-          "description": "Succinct proofs showing similar triangles have equal corresponding angles, and triangles with equal corresponding angles are similar",
-          "htmlTitle": "Similar triangles and their proofs",
-          "htmlDescription": "Definition of similar triangles, and proofs showing triangles with equal corresponding angles are similar, and similar triangles have equal corresponding angles",
+          "description": "",
+          "htmlTitle": "Introduction to similar triangles, with succinct proofs",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
           "fullTopic": true,
           "links": ""
         }
@@ -2449,8 +2449,8 @@
           "type": "presentation",
           "title": "Definition and Similarity Tests",
           "description": "Properties of Similar Triangles",
-          "htmlTitle": "Similar Triangles Definition",
-          "htmlDescription": "Definition of similar triangles",
+          "htmlTitle": "Similar triangles definition",
+          "htmlDescription": "Definition of similar triangles, and how to test for similarity",
           "fullTopic": true,
           "links": ""
         }
