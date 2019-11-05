@@ -66,6 +66,7 @@ class Content extends PresentationFormatContent {
       },
       setEnterState: () => {
         coll.setScenarios('default');
+        coll.aaCounter = 0;
       },
       show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
@@ -85,6 +86,7 @@ class Content extends PresentationFormatContent {
       },
       setEnterState: () => {
         coll.setScenarios('default');
+        coll.sasCounter = 0;
       },
       show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
@@ -106,6 +108,7 @@ class Content extends PresentationFormatContent {
       },
       setEnterState: () => {
         coll.setScenarios('default');
+        coll.ssaCounter = 0;
       },
       show: [coll._tri1, coll._tri2],
       setSteadyState: () => {
