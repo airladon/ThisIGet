@@ -79,6 +79,31 @@ export default class CommonCollection extends CommonDiagramCollection {
     _height3: DiagramObjectLine;
   } & DiagramElementCollection;
 
+  _fig4: {
+    _A: DiagramElementPrimitive;
+    _B: DiagramElementPrimitive;
+    _C: DiagramElementPrimitive;
+    _D: DiagramElementPrimitive;
+    _E: DiagramElementPrimitive;
+    _F: DiagramElementPrimitive;
+    _DE: DiagramObjectLine;
+    _DF: DiagramObjectLine;
+    _AB: DiagramObjectLine;
+    _AD: DiagramObjectLine;
+    _AE: DiagramObjectLine;
+    _AF: DiagramObjectLine;
+    _AC: DiagramObjectLine;
+    _VC: DiagramObjectLine;
+    _eqn1: Equation;
+    _eqn2: Equation;
+    _eqn3: Equation;
+    _eqn4: Equation;
+    _pointD: DiagramElementPrimitive;
+    _pointE: DiagramElementPrimitive;
+    _pointF: DiagramElementPrimitive;
+    _tri: DiagramObjectPolyLine;
+  }
+
 
   _0Eqn: Equation;
   _1Eqn: Equation;
@@ -103,6 +128,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._3Eqn.eqn.formRestart = { pulse: { element: this._2Eqn, duration: 1, scale: 1.1 } };
     this._6Eqn.eqn.formRestart = { pulse: { element: this._5Eqn, duration: 1, scale: 1.1 } };
     this._7Eqn.eqn.formRestart = { pulse: { element: this._6Eqn, duration: 1, scale: 1.1 } };
+    this.setupFig4EqnLinks();
   }
 
   // pulseSplit(done: ?() => void = null) {
@@ -237,6 +263,94 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig3._height1.pulseWidth();
     this._fig3._height2.pulseWidth();
     this._fig3._height3.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+
+  setupFig4EqnLinks() {
+    const e1 = this._fig4._eqn1.eqn;
+    const e2 = this._fig4._eqn2.eqn;
+    const e3 = this._fig4._eqn3.eqn;
+    const e4 = this._fig4._eqn4.eqn;
+    const makeClick = (equation, name, figElement = name) => {
+      const element = equation[`_${name}`];
+      if (element != null) {
+        element.onClick = this.pulseE.bind(this, figElement, null, null);
+        element.makeTouchable();
+      }
+    };
+
+    makeClick(e1, 'AB');
+    makeClick(e1, 'AD');
+    makeClick(e1, 'AC');
+    makeClick(e1, 'AE');
+
+    makeClick(e2, 'AB');
+    makeClick(e2, 'AD');
+    makeClick(e2, 'AC');
+    makeClick(e2, 'AF');
+
+    makeClick(e3, 'AC');
+    makeClick(e3, 'AE');
+    makeClick(e3, 'AC1', 'AC');
+    makeClick(e3, 'AF');
+
+    makeClick(e4, 'AE');
+    makeClick(e4, 'AF');
+  }
+
+  pulseE(name: string | Array<string>, done: ?() => void = null, scale: ?number = null) {
+    let names;
+    if (typeof name === 'string') {
+      names = [name];
+    } else {
+      names = name;
+    }
+    let doneToUse = done;
+    const getElement = (elementPath, parent) => {
+      const ep = elementPath.split('.');
+      const newParent = parent[ep[0]];
+      if (newParent == null) {
+        return null;
+      }
+      if (ep.length > 1) {
+        return getElement(ep.slice(1).join('.'), newParent);
+      }
+      return newParent;
+    };
+    names.forEach((n) => {
+      const realName = `_${n}`;
+      // const element = this._fig4[realName];
+      const element = getElement(realName, this._fig4);
+      if (element == null) {
+        return;
+      }
+      if (realName.length === 3) {
+        let scaleToUse = 4;
+        if (scale != null && typeof scale === 'number') {
+          scaleToUse = scale;
+        }
+        element.pulseWidth({ line: scaleToUse, done: doneToUse });
+        doneToUse = null;
+      } else if (realName.length === 1) {
+        let scaleToUse = 2;
+        if (scale != null && typeof scale === 'number') {
+          scaleToUse = scale;
+        }
+        element.pulseScaleNow(1, scaleToUse, 0, doneToUse);
+        doneToUse = null;
+      } else {
+        let scaleToUse = 1.4;
+        if (scale != null && typeof scale === 'number') {
+          scaleToUse = scale;
+        }
+        element.pulseScaleNow(1, scaleToUse, 0, doneToUse);
+        doneToUse = null;
+      }
+    });
+    if (doneToUse != null) {
+      doneToUse();
+    }
     this.diagram.animateNextFrame();
   }
 }

@@ -20,6 +20,7 @@ class Content extends SimpleFormatContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/CongruentTriangles/base',
       'Math/Geometry_1/ParallelSplitOfTriangle/base',
+      'Math/Geometry_1/Isosceles/base',
     ]);
   }
 

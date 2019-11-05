@@ -25,6 +25,16 @@ export default function diagramLayout() {
   //     location: 'outside',
   //   },
   // });
+  const line = (name, p1, p2, color = colors.qrParallelSplitOfTriangleSides) => ({
+    name,
+    method: 'line',
+    options: {
+      p1,
+      p2,
+      width: 0.02,
+      color,
+    },
+  });
 
   const w = 0.05;
   const arrow = (name, p, color = colors.qrParallelSplitOfTriangleSides) => ({
@@ -35,17 +45,22 @@ export default function diagramLayout() {
         name: '1',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] - w], p2: p, width: 0.02, color,
+          // p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color,
+          p1: [-w, -w], p2: [0, 0], width: 0.01, color,
         },
       },
       {
         name: '2',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] + w], p2: p, width: 0.02, color,
+          // p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color,
+          p1: [-w, w], p2: [0, 0], width: 0.01, color,
         },
       },
     ],
+    options: {
+      position: p,
+    },
   });
 
   const label = (text, p1, p2, offset = 0.4, color = colors.qrParallelSplitOfTriangleSides) => ({
@@ -163,6 +178,9 @@ export default function diagramLayout() {
       label('m', splitPoints[0], points[1], 0.15, colors.qrParallelSplitOfTriangleHighlight),
       label('n', points[1], splitPoints[1], 0.15, colors.qrParallelSplitOfTriangleHighlight),
       label1('b', splitPoints[1], splitPoints[0], 0.15, colors.qrParallelSplitOfTriangleHighlight),
+      line('bottomLine', points[2], points[0]),
+      line('leftLine', points[0], points[1]),
+      line('rightLine', points[2], points[1]),
     ],
     mods: {
       scenarios: {
@@ -178,17 +196,6 @@ export default function diagramLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
-
-  const line = (name, p1, p2, color = colors.qrParallelSplitOfTriangleSides) => ({
-    name,
-    method: 'line',
-    options: {
-      p1,
-      p2,
-      width: 0.02,
-      color,
-    },
-  });
 
   const parallelSplitLine = {
     name: 'split',
@@ -263,6 +270,11 @@ export default function diagramLayout() {
         '0': [
           { frac: ['b', 'B', 'v0'] },
           '   ', 'equals0', '   ',
+          { frac: ['n', 'N', 'v1'] },
+          '   ', 'equals1', '   ',
+          { frac: ['m', 'M', 'v2'] },
+        ],
+        '1': [
           { frac: ['n', 'N', 'v1'] },
           '   ', 'equals1', '   ',
           { frac: ['m', 'M', 'v2'] },

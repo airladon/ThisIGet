@@ -1424,29 +1424,51 @@
   "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
     "approaches": {
-      "explanation": {
-        "equilangularIsSimilarProof": {
+      "discover": {
+        "simple": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2",
-          "description": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
+          "title": "Properties and Tests for Similarity",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Similar Triangles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        },
+        "equalAnglesAreSimilarProof": {
+          "type": "singlePage",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
+          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false
         },
-        "equilangularProofBrief": {
+        "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
-          "description": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2 (Brief)",
+          "description": "",
           "fullTopic": false
         },
         "static": {
           "type": "singlePage",
           "title": "Descriptive",
-          "description": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "description": "",
           "fullTopic": true
         },
         "staticBrief": {
           "type": "singlePage",
-          "title": "In Brief",
-          "description": "Succinct proofs showing why equiangular triangles, and proportional triangles are similar",
+          "title": "Brief",
+          "description": "",
           "fullTopic": true
         }
       },
@@ -1457,12 +1479,40 @@
           "description": "External links to sources of information for Similar Triangles",
           "fullTopic": false
         }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Are They Similar?",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition and Similarity Tests",
+          "description": "Properties of Similar Triangles",
+          "fullTopic": true
+        }
       }
     },
     "dependencies": [
       "ParallelSplitOfTriangle"
     ],
-    "enabled": false
+    "enabled": true
   },
   "Math/Geometry_1/ToDo/CalculatingPi": {
     "title": "Calculating Pi",

@@ -88,10 +88,37 @@ export default function diagramLayout() {
     ],
   };
 
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      elements: {
+        a: { color: colors.qrTriangles_angle1 },
+        b: { color: colors.qrTriangles_angle2 },
+        c: { color: colors.qrTriangles_angle3 },
+        plus1: { text: ' + ' },
+        plus2: { text: ' + ' },
+        equals: { text: ' = ' },
+        _180: { text: '180º' },
+      },
+      color: colors.diagram.text.base,
+      scale: 1.4,
+      forms: {
+        '0': ['a', 'plus1', 'b', 'plus2', 'c', 'equals', '_180'],
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0.5, 0.5] },
+      },
+    },
+  };
+
   layout.addElements = [
     // triangleExamples,
     // layout.customTriangle,
     layout.totalAngle,
+    eqn,
   ];
   return layout;
 }

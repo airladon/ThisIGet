@@ -19,6 +19,8 @@ export default function diagramLayout() {
   colors.highlight = colors.get('red').rgb;
   colors.grey = colors.get('grey', 'base').rgb;
   colors.darkGrey = colors.get('grey', 'darker').rgb;
+  colors.description = colors.get('grey', 'base').rgb;
+  colors.rgbToCssVar(colors.description, '--color-parallelsplit-description');
   const points = [
     new Point(-1.5, -1).add(0.3, 0),
     new Point(0, 1).add(0.3, 0),
@@ -403,7 +405,7 @@ export default function diagramLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
 
-  const line = (name, p1, p2, color = colors.sides) => ({
+  const line = (name, p1, p2, color = colors.sides, dashStyle: ?Object = null) => ({
     name,
     method: 'line',
     options: {
@@ -411,6 +413,7 @@ export default function diagramLayout() {
       p2,
       width: 0.02,
       color,
+      dashStyle,
     },
   });
 
@@ -1218,6 +1221,168 @@ export default function diagramLayout() {
     },
   });
 
+
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // const pTri = {
+  //   name: 'tri',
+  //   method: 'polyLine',
+  //   options: {
+  //     points: anyTriPoints,
+  //     color: colors.sides,
+  //     close: true,
+  //     width: 0.02,
+  //   },
+  // };
+
+  const f4Points = [
+    new Point(-0.8, -0.8),
+    new Point(0.7, 1),
+    new Point(1.3, -0.8),
+  ];
+
+  const f4Split = [
+    new Point(-0.38, -0.3),
+    new Point(1.14, -0.3),
+  ];
+
+  const fig4Eqn = (name, y) => ({
+    name,
+    method: 'addEqn',
+    options: {
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        fixTo: 'equals',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      scale: 0.8,
+      elements: {
+        AB: { text: 'AB', color: colors.sides },
+        AD: { text: 'AD', color: colors.sides },
+        AE: { text: 'AE', color: colors.sides },
+        AF: { text: 'AF', color: colors.sides },
+        AC: { text: 'AC', color: colors.sides },
+        AC1: { text: 'AC', color: colors.sides },
+        v1: { symbol: 'vinculum' },
+        v2: { symbol: 'vinculum' },
+        equals1: '  =  ',
+      },
+      forms: {
+        '0': {
+          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AE', 'AC', 'v2'] }],
+          description: 'Given',
+        },
+        '1': {
+          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AF', 'AC', 'v2'] }],
+          description: 'DF is parallel with BC',
+        },
+        '2': {
+          content: [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+          description: 'Right side of first two equations equal each other',
+        },
+        '3': {
+          content: ['AE', 'equals1', 'AF'],
+          description: 'Multiply both sides by AC',
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [2.5, y], scale: 0.9 },
+        // left: { position: [-1.5, y] },
+        // bottomLeft: { position: [-1.5, y] },
+      },
+    },
+  });
+
+  const fig4Nav = (name, y) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      equation: fig4Eqn(`${name}Eqn`, y),
+      interactive: false,
+      alignV: 'middle',
+      alignH: 'left',
+    },
+    mods: {
+      scenarios: {
+        default: { position: [2, y + 0.35] },
+      },
+    },
+  });
+
+  const text = (name, txt, position) => ({
+    name,
+    method: 'text',
+    options: {
+      position,
+      text: txt,
+      color: colors.sides,
+    },
+  });
+
+  const dot = (name, position) => ({
+    name,
+    method: 'polygon',
+    options: {
+      position,
+      sides: 30,
+      color: colors.sides,
+      fill: true,
+      radius: 0.05,
+    },
+  });
+
+  const fig4 = {
+    name: 'fig4',
+    method: 'collection',
+    addElements: [
+      line(
+        'DE', f4Split[0], f4Split[1].add(-0.06, 0.15),
+        colors.sides, { style: [0.05, 0.02] },
+      ),
+      line(
+        'DF', f4Split[0], f4Split[1],
+        colors.sides, { style: [0.05, 0.02] },
+      ),
+      text('B', 'B', f4Points[0].add(-0.15, -0.1)),
+      text('A', 'A', f4Points[1].add(0, 0.15)),
+      text('C', 'C', f4Points[2].add(0.15, -0.1)),
+      text('D', 'D', f4Split[0].add(-0.2, 0)),
+      text('E', 'E', f4Split[1].add(-0.06 + 0.15, 0.15 + 0.05)),
+      text('F', 'F', f4Split[1].add(0.15, -0.05)),
+      dot('pointD', f4Split[0]),
+      dot('pointE', f4Split[1].add(-0.06, 0.15)),
+      dot('pointF', f4Split[1]),
+      line('AD', f4Points[1], f4Split[0]),
+      line('AB', f4Points[0], f4Points[1]),
+      line('AE', f4Points[1], f4Split[1].add(-0.06, 0.15)),
+      line('AF', f4Points[1], f4Split[1]),
+      line('AC', f4Points[1], f4Points[2]),
+      line('BC', f4Points[0], f4Points[2]),
+      triangle('tri', f4Points[0], f4Points[1], f4Points[2], colors.sides),
+      fig4Nav('eqn1', 1.2),
+      fig4Nav('eqn2', 0.4),
+      fig4Nav('eqn3', -0.4),
+      fig4Nav('eqn4', -1.2),
+    ],
+    options: {
+      position: [0, -0.2],
+    },
+    mods: {
+      scenarios: {
+        default: { position: [-1.5, -0.5] },
+      },
+    },
+  };
+
   layout.addElements = [
     fig,
     nav('0', 0.8, false, '0'),
@@ -1231,6 +1396,7 @@ export default function diagramLayout() {
     fig2,
     eqnFig2('fig2Eqn'),
     fig3,
+    fig4,
   ];
   return layout;
 }

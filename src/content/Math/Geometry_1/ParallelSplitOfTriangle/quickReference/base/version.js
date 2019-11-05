@@ -7,8 +7,10 @@ var version = {
   type: 'singlePage',
   references: [
     'TrianglePres',
+    'ProportionalSplitPres',
     'LinesPres',
     'Triangle',
+    'ProportionalSplit',
     'Lines',
   ],
 };

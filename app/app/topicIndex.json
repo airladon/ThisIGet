@@ -1610,8 +1610,8 @@
           "type": "singlePage",
           "title": "Full Proof",
           "description": "Proof showing the resulting triangle has proportional sides",
-          "htmlTitle": "Similar Triangles Proof",
-          "htmlDescription": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "htmlTitle": "Parallel Split of a Triangle Proof",
+          "htmlDescription": "Proof showing a triangle split with a line parallel to one of its sides will produce a proportional triangle",
           "fullTopic": true,
           "links": ""
         }
@@ -1637,7 +1637,7 @@
               "hash": "11d70ead6e3138cd4b774ecfe9422867",
               "publisher": "NCERT X Mathematics",
               "type": "generic",
-              "description": "Proofs for why proportional triangles are similar, and why equiangular triangles are similar"
+              "description": "Proofs for why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar"
             },
             {
               "url": "http://www.malinc.se/math/geometry/similartrianglesen.php",
@@ -2333,40 +2333,71 @@
   "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
     "approaches": {
-      "explanation": {
-        "equilangularIsSimilarProof": {
+      "discover": {
+        "simple": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2",
-          "description": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
-          "htmlTitle": "Equilangular Triangles are Similar Proof",
-          "htmlDescription": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
+          "title": "Properties and Tests for Similarity",
+          "description": "",
+          "htmlTitle": "Discover the properties of similar triangles",
+          "htmlDescription": "Figure out why similar triangles have equal corresponding angles, why triangles with equal corresponding angles are similar, and how to test for similarity",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Similar Triangles",
+          "description": "",
+          "htmlTitle": "Similar triangle examples",
+          "htmlDescription": "Examples showing how to find similar triangles, and where they can be used",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "Interactive introduction to similar triangles",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
+          "fullTopic": true,
+          "links": ""
+        },
+        "equalAnglesAreSimilarProof": {
+          "type": "singlePage",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
+          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
+          "htmlTitle": "Similar Triangles Proof",
+          "htmlDescription": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""
         },
-        "equilangularProofBrief": {
+        "equalAnglesAreSimilarProofBrief": {
           "type": "singlePage",
-          "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
-          "description": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
-          "htmlTitle": "Triangles with equal angles are similar proof",
-          "htmlDescription": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
+          "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2 (Brief)",
+          "description": "",
+          "htmlTitle": "Triangles with Equal Corresponding Angles are Similar - Succinct Proof",
+          "htmlDescription": "Succinct proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""
         },
         "static": {
           "type": "singlePage",
           "title": "Descriptive",
-          "description": "Proofs showing why equiangular triangles, and proportional triangles are similar",
-          "htmlTitle": "Similar Triangles Proof",
-          "htmlDescription": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "description": "",
+          "htmlTitle": "Introduction to similar triangles",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
           "fullTopic": true,
           "links": ""
         },
         "staticBrief": {
           "type": "singlePage",
-          "title": "In Brief",
-          "description": "Succinct proofs showing why equiangular triangles, and proportional triangles are similar",
-          "htmlTitle": "Similar Triangles Proof",
-          "htmlDescription": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "Introduction to similar triangles, with succinct proofs",
+          "htmlDescription": "Definition of similar triangles, proof showing triangles with equal corresponding angles are similar, proof showing similar triangles have equal corresponding angles, and how to test triangles are similar",
           "fullTopic": true,
           "links": ""
         }
@@ -2385,16 +2416,71 @@
               "hash": "11d70ead6e3138cd4b774ecfe9422867",
               "publisher": "NCERT X Mathematics",
               "type": "generic",
-              "description": "Proofs for why proporitional triangles are similar, and why equiangular triangles are similar"
+              "description": "Proofs for why similar triangles have equal corresponding angles, and why triangles with equal corresponding angles are similar"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Similarity_(geometry)",
+              "hash": "600b5eac1f9913bc90fe230f791ec900",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "Similarity in geometry"
+            },
+            {
+              "url": "https://www.mathopenref.com/similartriangles.html",
+              "hash": "12405c1c60a1b75bd641810a3fd80a8e",
+              "publisher": "Math Open Reference",
+              "type": "generic",
+              "description": "Introduction to similar triangles and their tests, including interactive applet"
+            },
+            {
+              "url": "https://mathbitsnotebook.com/Geometry/Similarity/SMNumber.html",
+              "hash": "862522bd09be1224489a9fe7c14c68be",
+              "publisher": "Math Bits Notebook",
+              "type": "generic",
+              "description": "Example problems using similar triangles"
             }
           ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Are They Similar?",
+          "description": "",
+          "htmlTitle": "Quiz - Find if the triangles are similar",
+          "htmlDescription": "Practice identifying if two triangles are similar or not",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition and Similarity Tests",
+          "description": "Properties of Similar Triangles",
+          "htmlTitle": "Similar triangles definition",
+          "htmlDescription": "Definition of similar triangles, and how to test for similarity",
+          "fullTopic": true,
+          "links": ""
         }
       }
     },
     "dependencies": [
       "ParallelSplitOfTriangle"
     ],
-    "enabled": false
+    "enabled": true
   },
   "Math/Geometry_1/ToDo/CalculatingPi": {
     "title": "Calculating Pi",

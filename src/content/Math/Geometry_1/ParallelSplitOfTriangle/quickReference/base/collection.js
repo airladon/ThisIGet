@@ -28,6 +28,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     _labelm: TypeLabeledLine;
     _labeln: TypeLabeledLine;
     _labelb: TypeLabeledLine;
+    _bottomLine: DiagramObjectLine;
+    _leftLine: DiagramObjectLine;
+    _rightLine: DiagramObjectLine;
+    _bottomArrow: {
+      _1: DiagramObjectLine;
+    } & DiagramElementCollection;
+    _topArrow: {
+      _1: DiagramObjectLine;
+    } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   _eqn: Equation;
@@ -59,6 +68,23 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseSplit() {
     this._fig._split.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseParallel() {
+    this._fig._bottomArrow.pulseScaleNow(1, 2);
+    this._fig._topArrow.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseBottom() {
+    this._fig._bottomLine.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTwoSides() {
+    this._fig._leftLine.pulseWidth({ line: 6 });
+    this._fig._rightLine.pulseWidth({ line: 6 });
     this.diagram.animateNextFrame();
   }
 
