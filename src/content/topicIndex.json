@@ -1034,6 +1034,23 @@
     ],
     "enabled": true
   },
+  "Math/Geometry_1/Parallelogram": {
+    "title": "Parallelogram",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AreaTriangle"
+    ],
+    "enabled": true
+  },
   "Math/Geometry_1/PointLineDistance": {
     "title": "Point to Line Distance",
     "approaches": {
@@ -1450,7 +1467,7 @@
         "equalAnglesAreSimilarProof": {
           "type": "singlePage",
           "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
-          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
+          "description": "",
           "fullTopic": false
         },
         "equalAnglesAreSimilarProofBrief": {

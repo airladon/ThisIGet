@@ -7,6 +7,8 @@ var topicDetails = {
     'AreaTriangle',
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
+  uid: 'Parallelogram',
 };
 
 module.exports = topicDetails;

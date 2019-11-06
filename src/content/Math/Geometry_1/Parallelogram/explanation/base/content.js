@@ -41,9 +41,10 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
-    const fig = coll._fig;
+    // const fig = coll._fig;
 
     this.addSection({
+      show: [coll],
     });
   }
 }
