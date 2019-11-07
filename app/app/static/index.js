@@ -14307,17 +14307,17 @@ function (_DiagramElementCollec) {
 
       if (line != null) {
         line.stopPulsing();
-        var oldTransformMethod = line.pulse.transformMethod;
-        var oldPulseCallback = line.pulse.callback;
+        var oldTransformMethod = line.pulseSettings.transformMethod;
+        var oldPulseCallback = line.pulseSettings.callback;
 
         var finishPulsing = function finishPulsing() {
-          line.pulse.transformMethod = oldTransformMethod;
-          line.pulse.callback = oldPulseCallback;
+          line.pulseSettings.transformMethod = oldTransformMethod;
+          line.pulseSettings.callback = oldPulseCallback;
         };
 
-        line.pulse.callback = finishPulsing;
+        line.pulseSettings.callback = finishPulsing;
 
-        line.pulse.transformMethod = function (s) {
+        line.pulseSettings.transformMethod = function (s) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
@@ -16858,14 +16858,10 @@ function () {
       var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, options.width / 2)];
       var collection = this.collection(options.transform);
       var start = -((options.num - 1) / 2) * options.step;
-      console.log(options.num, start);
 
       var _loop2 = function _loop2(i) {
         var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(options.angle).translate(start + i * options.step, 0).rotate(options.rotation);
-        var points = single.map( // p => (p._dup.new Point(p.x + start + i * options.step, p.y))
-        //   .rotate(options.angle)
-        //   .rotate(options.rotation),
-        function (p) {
+        var points = single.map(function (p) {
           return p._dup().transformBy(t.matrix());
         });
         collection.add("".concat(i), _this2.fan({
@@ -16878,7 +16874,6 @@ function () {
         _loop2(i);
       }
 
-      console.log(collection);
       return collection;
     }
   }]);
@@ -21068,8 +21063,11 @@ function () {
   // For the future when collections use color
   // this is in vertex space
   // Current animation/movement state of element
-  // Pulse animation state
+  // pulse: Object;                  // Pulse animation state
   // Rename to animate in future
+  // pulse: (mixed) => void;
+  // pulse: (?Array<string | DiagramElement> | mixed) => void;
+  // +pulse: (Array<string | DiagramElement>) => void;
   // This will scale and position this element such that the center of the
   // diagram limits will will look like it is centered on a html element
   // when this figurone element is drawn.
@@ -21118,6 +21116,8 @@ function () {
     this.isInteractive = undefined;
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
+    this.dimColor = [0.5, 0.5, 0.5, 1];
+    this.defaultColor = this.color.slice();
     this.opacity = 1;
 
     this.setTransformCallback = function () {};
@@ -21130,7 +21130,14 @@ function () {
     };
     this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false; // Rename to animate in future
+    this.noRotationFromParent = false;
+
+    this.pulseDefault = function () {
+      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _this.pulseScaleNow(1, 2, 0, callback);
+    }; // Rename to animate in future
+
 
     this.anim = {
       rotation: function rotation() {
@@ -21325,7 +21332,7 @@ function () {
       limitLine: null
     };
     this.scenarios = {};
-    this.pulse = {
+    this.pulseSettings = {
       time: 1,
       frequency: 0.5,
       A: 1,
@@ -21613,7 +21620,27 @@ function () {
   }, {
     key: "setColor",
     value: function setColor(color) {
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       this.color = color != null ? color.slice() : [0, 0, 0, 0];
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      }
+    }
+  }, {
+    key: "dim",
+    value: function dim() {
+      this.setColor(this.dimColor, false);
+    }
+  }, {
+    key: "setDimColor",
+    value: function setDimColor(color) {
+      this.dimColor = color != null ? color.slice() : [0, 0, 0, 0];
+    }
+  }, {
+    key: "undim",
+    value: function undim() {
+      this.setColor(this.defaultColor, true);
     }
   }, {
     key: "setOpacity",
@@ -21876,19 +21903,19 @@ function () {
         // draw). If the pulse time is 0, that means pulsing will loop
         // indefinitely.
 
-        if (deltaTime > this.pulse.time && this.pulse.time !== 0) {
+        if (deltaTime > this.pulseSettings.time && this.pulseSettings.time !== 0) {
           // this.state.isPulsing = false;
           this.stopPulsing(true);
-          deltaTime = this.pulse.time;
+          deltaTime = this.pulseSettings.time;
         } // Go through each pulse matrix planned, and transform the input matrix
         // with the pulse.
 
 
-        for (var i = 0; i < this.pulse.num; i += 1) {
+        for (var i = 0; i < this.pulseSettings.num; i += 1) {
           // Get the current pulse magnitude
-          var pulseMag = this.pulse.style(deltaTime, this.pulse.frequency, this.pulse.A instanceof Array ? this.pulse.A[i] : this.pulse.A, this.pulse.B instanceof Array ? this.pulse.B[i] : this.pulse.B, this.pulse.C instanceof Array ? this.pulse.C[i] : this.pulse.C); // Use the pulse magnitude to get the current pulse transform
+          var pulseMag = this.pulseSettings.style(deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
-          var pTransform = this.pulse.transformMethod(pulseMag); // if(this.name === '_radius') {
+          var pTransform = this.pulseSettings.transformMethod(pulseMag); // if(this.name === '_radius') {
           // }
           // Transform the current transformMatrix by the pulse transform matrix
           // const pMatrix = m2.mul(m2.copy(transform), pTransform.matrix());
@@ -21908,25 +21935,25 @@ function () {
     value: function pulseScaleNow(time, scale) {
       var frequency = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      this.pulse.time = time;
+      this.pulseSettings.time = time;
 
       if (frequency === 0 && time === 0) {
-        this.pulse.frequency = 1;
+        this.pulseSettings.frequency = 1;
       }
 
       if (frequency !== 0) {
-        this.pulse.frequency = frequency;
+        this.pulseSettings.frequency = frequency;
       }
 
       if (time !== 0 && frequency === 0) {
-        this.pulse.frequency = 1 / (time * 2);
+        this.pulseSettings.frequency = 1 / (time * 2);
       }
 
-      this.pulse.A = 1;
-      this.pulse.B = scale - 1;
-      this.pulse.C = 0;
-      this.pulse.num = 1;
-      this.pulse.callback = callback;
+      this.pulseSettings.A = 1;
+      this.pulseSettings.B = scale - 1;
+      this.pulseSettings.C = 0;
+      this.pulseSettings.num = 1;
+      this.pulseSettings.callback = callback;
       this.pulseNow();
     }
   }, {
@@ -21935,29 +21962,32 @@ function () {
       var num = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var bArray = [scale];
-      this.pulse.num = num;
+      this.pulseSettings.num = num;
 
-      if (this.pulse.num > 1) {
+      if (this.pulseSettings.num > 1) {
         var b = Math.abs(1 - scale);
         var bMax = b;
         var bMin = -b;
         var range = bMax - bMin;
-        var bStep = range / (this.pulse.num - 1);
+        var bStep = range / (this.pulseSettings.num - 1);
         bArray = [];
 
-        for (var i = 0; i < this.pulse.num; i += 1) {
+        for (var i = 0; i < this.pulseSettings.num; i += 1) {
           bArray.push(bMax - i * bStep);
         }
       }
 
-      this.pulse.time = time;
-      this.pulse.frequency = 1 / (time * 2);
-      this.pulse.A = 1;
-      this.pulse.B = bArray;
-      this.pulse.C = 0;
-      this.pulse.callback = callback;
+      this.pulseSettings.time = time;
+      this.pulseSettings.frequency = 1 / (time * 2);
+      this.pulseSettings.A = 1;
+      this.pulseSettings.B = bArray;
+      this.pulseSettings.C = 0;
+      this.pulseSettings.callback = callback;
       this.pulseNow();
-    }
+    } // pulse(done: ?(mixed) => void = null) {
+    //   this.pulseDefault(done);
+    // }
+
   }, {
     key: "pulseNow",
     value: function pulseNow() {
@@ -21970,9 +22000,9 @@ function () {
     value: function stopPulsing(result) {
       this.state.isPulsing = false;
 
-      if (this.pulse.callback) {
-        var callback = this.pulse.callback;
-        this.pulse.callback = null;
+      if (this.pulseSettings.callback) {
+        var callback = this.pulseSettings.callback;
+        this.pulseSettings.callback = null;
         callback(result);
       }
     }
@@ -22416,6 +22446,8 @@ function (_DiagramElement) {
     _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimitive).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
     _this3.color = color != null ? color.slice() : [0, 0, 0, 0];
+    _this3.defaultColor = _this3.color.slice();
+    _this3.dimColor = [0.5, 0.5, 0.5, 1];
     _this3.pointsToDraw = -1;
     _this3.angleToDraw = -1;
     _this3.lengthToDraw = -1;
@@ -22425,6 +22457,12 @@ function (_DiagramElement) {
   }
 
   _createClass(DiagramElementPrimitive, [{
+    key: "pulse",
+    value: function pulse() {
+      var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.pulseDefault(done);
+    }
+  }, {
     key: "setAngleToDraw",
     value: function setAngleToDraw() {
       var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
@@ -22520,7 +22558,12 @@ function (_DiagramElement) {
   }, {
     key: "setColor",
     value: function setColor(color) {
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       this.color = color != null ? color.slice() : [0, 0, 0, 0];
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      }
 
       if (this instanceof DiagramElementPrimitive) {
         if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
@@ -22804,7 +22847,6 @@ var DiagramElementCollection =
 function (_DiagramElement2) {
   _inherits(DiagramElementCollection, _DiagramElement2);
 
-  // biasTransform: Array<number>;
   function DiagramElementCollection() {
     var _this5;
 
@@ -22947,6 +22989,64 @@ function (_DiagramElement2) {
           this.renderedOnNextDraw = false;
         }
       }
+    } // $FlowFixMe
+
+  }, {
+    key: "pulse",
+    value: function pulse(elementsToPulse) {
+      var _this6 = this;
+
+      var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (elementsToPulse == null || typeof elementsToPulse === 'function') {
+        this.pulseDefault(done);
+        return;
+      }
+
+      var doneToUse = done;
+      elementsToPulse.forEach(function (elementToPulse) {
+        var element;
+
+        if (typeof elementToPulse === 'string') {
+          element = _this6.getElement(elementToPulse);
+        } else {
+          element = elementToPulse;
+        }
+
+        if (element != null) {
+          element.pulseDefault(doneToUse);
+          doneToUse = null;
+        }
+      });
+
+      if (doneToUse != null) {
+        doneToUse();
+      }
+    }
+  }, {
+    key: "getElement",
+    value: function getElement(elementPath) {
+      var getElement = function getElement(inputElementPath, parent) {
+        var ep = inputElementPath.split('.');
+        var newParent = parent.elements[ep[0]];
+
+        if (newParent == null) {
+          // $FlowFixMe
+          newParent = parent[ep[0]];
+        }
+
+        if (newParent == null) {
+          return null;
+        }
+
+        if (ep.length > 1) {
+          return getElement(ep.slice(1).join('.'), newParent);
+        }
+
+        return newParent;
+      };
+
+      return getElement(elementPath, this);
     }
   }, {
     key: "show",
@@ -23254,14 +23354,43 @@ function (_DiagramElement2) {
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var nonNullColor = color != null ? color : [0, 0, 0, 0];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.setColor(nonNullColor);
+        element.setColor(nonNullColor, setDefault);
       }
 
-      this.color = nonNullColor.slice(); // this.color = [color[0], color[1], color[2], color[3]];
+      this.color = nonNullColor.slice();
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      } // this.color = [color[0], color[1], color[2], color[3]];
+
+    }
+  }, {
+    key: "setDimColor",
+    value: function setDimColor() {
+      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+      var nonNullColor = color != null ? color : [0, 0, 0, 0];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setDimColor(nonNullColor);
+      }
+
+      this.dimColor = nonNullColor.slice();
+    }
+  }, {
+    key: "undim",
+    value: function undim() {
+      this.color = this.defaultColor.slice();
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.undim();
+      }
     }
   }, {
     key: "setOpacity",
@@ -23300,11 +23429,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this6.elements[a];
-        var elemB = _this6.elements[b];
+        var elemA = _this7.elements[a];
+        var elemB = _this7.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA

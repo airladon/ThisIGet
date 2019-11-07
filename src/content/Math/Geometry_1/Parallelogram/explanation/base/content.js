@@ -42,11 +42,34 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     // const fig = coll._fig;
+    const dimmer = () => {
+      coll._pgram.pulseDefault(null);
+      coll._pgram.setDimColor([1, 0, 0, 0.5]);
+      coll._pgram.dim();
+      this.diagram.animateNextFrame();
+    };
+
+    const undimmer = () => {
+      coll._pgram.undim();
+      this.diagram.animateNextFrame();
+    };
+    
+    const clicker = () => {
+      coll._pgram.pulse(['_a1', '_a2', 'b1.curve']);
+      this.diagram.animateNextFrame();
+    }
 
     this.addSection({
+      setContent: 'this is a |dim| and |undim|, and |test|',
+      modifiers: {
+        dim: click(dimmer, [this], colors.sides),
+        undim: click(undimmer, [this], colors.sides),
+        // test: click(clicker, [this], colors.sides),
+        test: this.bindPulse(coll._pgram, ['a1', 'a2.curve'], colors.angles),
+      },
       show: [coll],
       setSteadyState: () => {
-        console.log(coll._pgram)
+        console.log(coll)
       }
     });
   }

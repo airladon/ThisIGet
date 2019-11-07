@@ -927,6 +927,26 @@ class PresentationFormatContent extends SimpleFormatContent {
     return click(this.next, [this], color);
   }
 
+  bindPulse(
+    parent: DiagramElement,
+    childrenOrColor: Array<DiagramElement | string | number> = this.diagram.layout.colors.action,
+    color: Array<number> = this.diagram.layout.colors.action,
+  ) {
+    let colorToUse = color;
+    if (typeof childrenOrColor[0] === 'number') {
+      colorToUse = childrenOrColor;
+    }
+    const pulser = () => {
+      if (typeof childrenOrColor[0] === 'number') {
+        parent.pulse();
+      } else {
+        parent.pulse(childrenOrColor);
+      }
+      this.diagram.animateNextFrame();
+    };
+    return click(pulser, [this], colorToUse);
+  }
+
   // bindShowQR(
   //   uid: string,
   //   qrid: string,
