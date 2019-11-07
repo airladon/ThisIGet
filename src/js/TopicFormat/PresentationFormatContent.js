@@ -927,17 +927,67 @@ class PresentationFormatContent extends SimpleFormatContent {
     return click(this.next, [this], color);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  getColor(
+    parent: DiagramElement,
+    childrenOrColor: ?(Array<number> | Array<DiagramElement | string>),
+    color: ?Array<number>,
+  ): Array<number> {
+    if (color != null) {
+      return color.slice();
+    }
+    let colorToUse = parent.color.slice();
+    if (childrenOrColor != null) {
+      if (typeof childrenOrColor[0] === 'number') {
+        colorToUse = childrenOrColor;
+      } else if (parent.type === 'collection' && childrenOrColor.length > 0) {
+        const firstElement = parent.getElement(childrenOrColor[0]);
+        colorToUse = firstElement.color.slice();
+      }
+    }
+    return colorToUse.slice();
+  }
+
+  /**
+  * Pulse element or specified children of element with the element's or
+  * children element's default pulse.
+  *
+  * @param {string} parent - A DiagramElement
+  * @param {?(Array<DiagramElement | string> | () => void)} childrenOrDone
+  * [childrenOrDone=null] - The children of the parent to be pulsed, or if the
+  * parent is to be pulsed, then the the callback done
+  * @param {?() => void} done [done=null] - Callback to be executed when
+  * pulsing is finished. Done is only executed when the first element being
+  * pulsed is finished.
+  *
+  * @example
+  *     pulse(parent)
+  *     pulse(parent, () => {})
+  *     pulse(parent, ['child1', 'child2'])
+  *     pulse(parent, ['child1', 'child2'], () => {})
+  */
+  pulse(
+    parent: DiagramElement,
+    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+    done: ?() => void = null,
+  ) {
+    if (typeof childrenOrDone === 'function') {
+      parent.pulse(childrenOrDone);
+    } else {
+      parent.pulse(childrenOrDone, done);
+    }
+    this.diagram.animateNextFrame();
+  }
+
   bindPulse(
     parent: DiagramElement,
-    childrenOrColor: Array<DiagramElement | string | number> = this.diagram.layout.colors.action,
-    color: Array<number> = this.diagram.layout.colors.action,
+    // $FlowFixMe
+    childrenOrColor: ?(Array<number> | Array<DiagramElement | string>) = null,
+    color: ?Array<number> = null,
   ) {
-    let colorToUse = color;
-    if (typeof childrenOrColor[0] === 'number') {
-      colorToUse = childrenOrColor;
-    }
+    const colorToUse = this.getColor(parent, childrenOrColor, color);
     const pulser = () => {
-      if (typeof childrenOrColor[0] === 'number') {
+      if (childrenOrColor == null || typeof childrenOrColor[0] === 'number') {
         parent.pulse();
       } else {
         parent.pulse(childrenOrColor);
@@ -945,6 +995,67 @@ class PresentationFormatContent extends SimpleFormatContent {
       this.diagram.animateNextFrame();
     };
     return click(pulser, [this], colorToUse);
+  }
+
+  highlight(
+    parent: DiagramElementCollection,
+    children: ?Array<DiagramElement | string> = null,
+  ) {
+    parent.highlight(children);
+    this.diagram.animateNextFrame();
+  }
+
+  bindHighlight(
+    parent: DiagramElementCollection,
+    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+    color: ?Array<number> = null,
+  ) {
+    const colorToUse = this.getColor(parent, childrenOrColor, color);
+    const highlighter = () => {
+      if (childrenOrColor == null) {
+        parent.highlight();
+      } else if (typeof childrenOrColor[0] === 'number') {
+        parent.highlight();
+      } else {
+        parent.highlight(childrenOrColor);
+      }
+      this.diagram.animateNextFrame();
+    };
+    return click(highlighter, [this], colorToUse);
+  }
+
+  highlightAndPulse(
+    parent: DiagramElementCollection,
+    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+    done: ?() => void = null,
+  ) {
+    if (typeof childrenOrDone === 'function') {
+      parent.highlight();
+      parent.pulse(childrenOrDone);
+    } else {
+      parent.highlight(childrenOrDone);
+      parent.pulse(childrenOrDone, done);
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  bindHighlightAndPulse(
+    parent: DiagramElement,
+    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+    color: ?Array<number> = null,
+  ) {
+    const colorToUse = this.getColor(parent, childrenOrColor, color);
+    const pulseHighlighter = () => {
+      if (typeof childrenOrColor[0] === 'number') {
+        parent.highlight();
+        parent.pulse();
+      } else {
+        parent.highlight(childrenOrColor);
+        parent.pulse(childrenOrColor);
+      }
+      this.diagram.animateNextFrame();
+    };
+    return click(pulseHighlighter, [this], colorToUse)
   }
 
   // bindShowQR(
@@ -1031,7 +1142,7 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   addSection(...sectionObjects: Array<Object>) {
     const s = new Section(this.diagram);
-    const section = Object.assign({}, ...sectionObjects);
+    const section = joinObjects({}, ...sectionObjects);
     Object.keys(section).forEach((key) => {
       // $FlowFixMe
       s[key] = section[key];

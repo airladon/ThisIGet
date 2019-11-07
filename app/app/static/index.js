@@ -12321,6 +12321,10 @@ function (_DiagramElementCollec) {
       _this2.addSide(2, _sideOptions2.length, _sideOptions2.width, _sideOptions2.color);
     }
 
+    _this2.pulseDefault = function (done) {
+      _this2.pulseScaleNow(1, 1.5, 0, done);
+    };
+
     _this2.update();
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
@@ -14283,6 +14287,15 @@ function (_DiagramElementCollec) {
 
       _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationBounds);
     }
+
+    _this2.pulseDefault = function (done) {
+      _this2.pulseWidth({
+        line: 6,
+        label: 2,
+        arrow: 4,
+        done: done
+      });
+    };
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
       _this2.setProperties(optionsToUse.mods);
@@ -16538,6 +16551,7 @@ function () {
     value: function collection() {
       var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('collection').scale(1, 1).rotate(0).translate(0, 0);
+      var color = [1, 0, 0, 1];
 
       if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
         transform.updateTranslation(transformOrPointOrOptions);
@@ -16557,9 +16571,14 @@ function () {
         if (optionsToUse.position != null) {
           transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
         }
+
+        if (optionsToUse.color != null) {
+          color = optionsToUse.color;
+        }
       }
 
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
+      element.setColor(color);
       return element;
     }
   }, {
@@ -20945,14 +20964,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -20967,9 +20978,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -21130,14 +21151,15 @@ function () {
     };
     this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false;
+    this.noRotationFromParent = false; // this.pulseDefault = (callback: ?() => void = null) => {
+    //   this.pulseScaleNow(1, 2, 0, callback);
+    // };
 
-    this.pulseDefault = function () {
-      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      _this.pulseScaleNow(1, 2, 0, callback);
+    this.pulseDefault = {
+      frequency: 0,
+      scale: 2,
+      time: 1
     }; // Rename to animate in future
-
 
     this.anim = {
       rotation: function rotation() {
@@ -21506,6 +21528,59 @@ function () {
   }, {
     key: "setFirstTransform",
     value: function setFirstTransform(parentTransform) {}
+  }, {
+    key: "exec",
+    value: function exec(execFunctionAndArgs) {
+      // if (elementsToExec == null || typeof elementsToExec === 'function') {
+      var execFunc;
+      var args;
+
+      if (Array.isArray(execFunctionAndArgs)) {
+        var _execFunctionAndArgs = _toArray(execFunctionAndArgs);
+
+        execFunc = _execFunctionAndArgs[0];
+        args = _execFunctionAndArgs.slice(1);
+      } else {
+        execFunc = execFunctionAndArgs;
+      } // $FlowFixMe
+
+
+      if (this[execFunc] != null && typeof this[execFunc] === 'function') {
+        if (args === undefined) {
+          // $FlowFixMe
+          this[execFunc]();
+        } else {
+          // $FlowFixMe
+          this[execFunc].apply(this, _toConsumableArray(args));
+        }
+      }
+    }
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (typeof this.pulseDefault === 'function') {
+        this.pulseDefault(done);
+      } else {
+        var _this$pulseDefault = this.pulseDefault,
+            frequency = _this$pulseDefault.frequency,
+            time = _this$pulseDefault.time,
+            scale = _this$pulseDefault.scale;
+        this.pulseScaleNow(time, scale, frequency, done);
+      }
+    }
+  }, {
+    key: "getElement",
+    value: function getElement() {
+      return this;
+    } // eslint-disable-next-line no-unused-vars, class-methods-use-this
+
+  }, {
+    key: "highlight",
+    value: function highlight() {
+      this.undim();
+    }
   }, {
     key: "setPosition",
     value: function setPosition(pointOrX) {
@@ -22451,18 +22526,13 @@ function (_DiagramElement) {
     _this3.pointsToDraw = -1;
     _this3.angleToDraw = -1;
     _this3.lengthToDraw = -1;
-    _this3.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
+    _this3.cannotTouchHole = false;
+    _this3.type = 'primitive'; // this.setMoveBoundaryToDiagram();
 
     return _this3;
   }
 
   _createClass(DiagramElementPrimitive, [{
-    key: "pulse",
-    value: function pulse() {
-      var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.pulseDefault(done);
-    }
-  }, {
     key: "setAngleToDraw",
     value: function setAngleToDraw() {
       var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
@@ -22861,6 +22931,7 @@ function (_DiagramElement2) {
     _this5.drawOrder = [];
     _this5.touchInBoundingRect = false;
     _this5.eqns = {};
+    _this5.type = 'collection';
     return _this5;
   }
 
@@ -22989,32 +23060,64 @@ function (_DiagramElement2) {
           this.renderedOnNextDraw = false;
         }
       }
-    } // $FlowFixMe
+    }
+  }, {
+    key: "exec",
+    value: function exec(execFunctionAndArgs) {
+      var _this6 = this;
 
+      var elementsToExec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (elementsToExec == null) {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "exec", this).call(this, execFunctionAndArgs);
+
+        return;
+      }
+
+      if (Array.isArray(elementsToExec) && elementsToExec.length === 0) {
+        return;
+      }
+
+      elementsToExec.forEach(function (elementToExec) {
+        var element;
+
+        if (typeof elementToExec === 'string') {
+          element = _this6.getElement(elementToExec);
+        } else {
+          element = elementToExec;
+        }
+
+        if (element != null) {
+          element.exec(execFunctionAndArgs);
+        }
+      });
+    }
   }, {
     key: "pulse",
-    value: function pulse(elementsToPulse) {
-      var _this6 = this;
+    value: function pulse(elementsOrDone) {
+      var _this7 = this;
 
       var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      if (elementsToPulse == null || typeof elementsToPulse === 'function') {
-        this.pulseDefault(done);
+      if (elementsOrDone == null || typeof elementsOrDone === 'function') {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, elementsOrDone);
+
         return;
       }
 
       var doneToUse = done;
-      elementsToPulse.forEach(function (elementToPulse) {
+      elementsOrDone.forEach(function (elementToPulse) {
         var element;
 
         if (typeof elementToPulse === 'string') {
-          element = _this6.getElement(elementToPulse);
+          element = _this7.getElement(elementToPulse);
         } else {
           element = elementToPulse;
         }
 
         if (element != null) {
-          element.pulseDefault(doneToUse);
+          // element.pulseDefault(doneToUse);
+          element.pulse(doneToUse);
           doneToUse = null;
         }
       });
@@ -23025,7 +23128,16 @@ function (_DiagramElement2) {
     }
   }, {
     key: "getElement",
-    value: function getElement(elementPath) {
+    value: function getElement() {
+      var elementPath = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementPath == null) {
+        return this;
+      } // if (elementPath instanceof DiagramElement) {
+      //   return elementPath;
+      // }
+
+
       var getElement = function getElement(inputElementPath, parent) {
         var ep = inputElementPath.split('.');
         var newParent = parent.elements[ep[0]];
@@ -23393,6 +23505,40 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "dim",
+    value: function dim(elementsToDim) {
+      if (elementsToDim == null || Array.isArray(elementsToDim) && elementsToDim.length === 0) {
+        // super.dim();
+        this.color = this.dimColor.slice();
+
+        for (var i = 0; i < this.drawOrder.length; i += 1) {
+          var element = this.elements[this.drawOrder[i]];
+          element.dim();
+        }
+
+        return;
+      }
+
+      this.exec('dim', elementsToDim);
+    }
+  }, {
+    key: "highlight",
+    value: function highlight() {
+      var elementsToHighlight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToHighlight == null) {
+        this.undim();
+        return;
+      }
+
+      if (Array.isArray(elementsToHighlight) && elementsToHighlight.length === 0) {
+        return;
+      }
+
+      this.dim();
+      this.exec('undim', elementsToHighlight);
+    }
+  }, {
     key: "setOpacity",
     value: function setOpacity(opacity) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -23429,11 +23575,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this7.elements[a];
-        var elemB = _this7.elements[b];
+        var elemA = _this8.elements[a];
+        var elemB = _this8.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA

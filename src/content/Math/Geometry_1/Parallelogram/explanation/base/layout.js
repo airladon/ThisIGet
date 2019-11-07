@@ -136,6 +136,17 @@ export default function diagramLayout() {
       angle('d1', points[3], points[1], points[0], 'd', 4, 0.5, colors.angles2),
       angle('d2', points[1], points[3], points[2], 'd', 4, 0.5, colors.angles2),
     ],
+    options: {
+      color: colors.sides,
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, 0], scale: 1 },
+      },
+      pulseDefault: {
+        scale: 1.1,
+      },
+    },
   };
   layout.addElements = [
     parallelogram,
