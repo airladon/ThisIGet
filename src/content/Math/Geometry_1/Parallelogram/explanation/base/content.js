@@ -45,6 +45,9 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       show: [coll],
+      setSteadyState: () => {
+        console.log(coll._pgram)
+      }
     });
   }
 }

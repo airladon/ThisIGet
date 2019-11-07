@@ -5,7 +5,7 @@ import baseLayout from '../../../../../common/layout';
 const {
   Point,
   // Transform,
-  // Line,
+  Line,
 } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
@@ -27,10 +27,18 @@ export default function diagramLayout() {
     new Point(-1.3, 1),
   ];
 
-  const angleA = Math.atan2(points[2] - points[1], points[2] - points[1]);
-  const angleB = Math.PI - angleA;
+  const angleA = Math.atan2(points[2].y - points[1].y, points[2].x - points[1].x);
+  // const angleB = Math.PI - angleA;
+  const lineLeft = new Line(points[0], points[3]);
+  const lineRight = new Line(points[1], points[2]);
+  const lineTop = new Line(points[2], points[3]);
+  const lineBottom = new Line(points[0], points[1]);
 
-  const angle = (name, p1, p2, p3, text, num = 1, radius = 0.3, color = colors.angles) => ({
+  const lineD1 = new Line(points[0], points[2]);
+  const lineD2 = new Line(points[1], points[3]);
+  const center = lineD1.midPoint();
+
+  const angle = (name, p1, p2, p3, text, num = 1, radius = 0.3, color = colors.angles, textRadius = radius * 0.9) => ({
     name,
     method: 'angle',
     options: {
@@ -42,12 +50,54 @@ export default function diagramLayout() {
         sides: 100,
         width: 0.01,
         num,
-        step: 0.05,
+        step: 0.03,
       },
       color,
       label: {
         text,
-        radius: radius + 0.05 * (num - 1),
+        radius: textRadius,
+      },
+    },
+  });
+
+  const pMarks = (name, position, num, rotation) => ({
+    name,
+    method: 'parallelMarks',
+    options: {
+      color: colors.sides,
+      width: 0.01,
+      step: 0.04,
+      length: 0.1,
+      num,
+      rotation,
+      position,
+    },
+  });
+
+  const lMarks = (name, position, num, rotation) => ({
+    name,
+    method: 'marks',
+    options: {
+      color: colors.sides,
+      width: 0.01,
+      step: 0.04,
+      length: 0.12,
+      num,
+      rotation,
+      position,
+    },
+  });
+
+  const dashed = (name, p1, p2) => ({
+    name,
+    method: 'line',
+    options: {
+      color: colors.sides,
+      width: 0.01,
+      p1,
+      p2,
+      dashStyle: {
+        style: [0.05, 0.02],
       },
     },
   });
@@ -69,8 +119,22 @@ export default function diagramLayout() {
       },
       angle('a1', points[1], points[0], points[3], 'a'),
       angle('a2', points[3], points[2], points[1], 'a'),
-      angle('b1', points[2], points[1], points[0], '180º-a', 2),
-      angle('b2', points[0], points[3], points[2], '180º-a', 2),
+      angle('b1', points[2], points[1], points[0], '180º-a', 2, 0.3, colors.angles, 0.35),
+      angle('b2', points[0], points[3], points[2], '180º-a', 2, 0.3, colors.angles, 0.35),
+      pMarks('pMarkLeft', lineLeft.midPoint(), 2, angleA),
+      pMarks('pMarkRight', lineRight.midPoint(), 2, angleA),
+      pMarks('pMarkTop', lineTop.midPoint(), 1, 0),
+      pMarks('pMarkBottom', lineBottom.midPoint(), 1, 0),
+      lMarks('lMarkUp1', lineD1.pointAtPercent(0.25), 1, lineD1.angle()),
+      lMarks('lMarkUp2', lineD1.pointAtPercent(0.75), 1, lineD1.angle()),
+      lMarks('lMark21', lineD2.pointAtPercent(0.25), 2, lineD2.angle()),
+      lMarks('lMark22', lineD2.pointAtPercent(0.75), 2, lineD2.angle()),
+      dashed('diag1', lineD1.p1, lineD1.p2),
+      dashed('diag2', lineD2.p1, lineD2.p2),
+      angle('c1', points[1], points[0], points[2], 'c', 3, 0.5, colors.angles2),
+      angle('c2', points[3], points[2], points[0], 'c', 3, 0.5, colors.angles2),
+      angle('d1', points[3], points[1], points[0], 'd', 4, 0.5, colors.angles2),
+      angle('d2', points[1], points[3], points[2], 'd', 4, 0.5, colors.angles2),
     ],
   };
   layout.addElements = [

@@ -4541,6 +4541,8 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       rectangle: shapes.rectangle.bind(shapes),
       grid: shapes.grid.bind(shapes),
       dashedLine: shapes.dashedLine.bind(shapes),
+      parallelMarks: shapes.parallelMarks.bind(shapes),
+      marks: shapes.marks.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -16775,6 +16777,110 @@ function () {
       xy.add('x', xAxis);
       return xy;
     }
+  }, {
+    key: "parallelMarks",
+    value: function parallelMarks() {
+      var _this = this;
+
+      var defaultOptions = {
+        width: 0.01,
+        num: 1,
+        length: 0.1,
+        angle: Math.PI / 4,
+        step: 0.04,
+        rotation: 0,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var x = options.length * Math.cos(options.angle);
+      var y = options.length * Math.sin(options.angle);
+      var wx = Math.abs(options.width * Math.cos(options.angle + Math.PI / 2));
+      var wy = options.width * Math.sin(options.angle + Math.PI / 2);
+      var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 - y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, -y + wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-Math.abs(options.width / Math.cos(options.angle + Math.PI / 2)), 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, y - wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 + y)];
+      var collection = this.collection(options.transform);
+      var start = -((options.num - 1) / 2) * options.step;
+
+      var _loop = function _loop(i) {
+        var points = single.map(function (p) {
+          return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](p.x + start + i * options.step, p.y).rotate(options.rotation);
+        });
+        collection.add("".concat(i), _this.fan({
+          points: points,
+          color: options.color
+        }));
+      };
+
+      for (var i = 0; i < options.num; i += 1) {
+        _loop(i);
+      }
+
+      return collection;
+    }
+  }, {
+    key: "marks",
+    value: function marks() {
+      var _this2 = this;
+
+      var defaultOptions = {
+        width: 0.01,
+        num: 1,
+        length: 0.2,
+        angle: Math.PI / 2,
+        step: 0.04,
+        rotation: 0,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, options.width / 2)];
+      var collection = this.collection(options.transform);
+      var start = -((options.num - 1) / 2) * options.step;
+      console.log(options.num, start);
+
+      var _loop2 = function _loop2(i) {
+        var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(options.angle).translate(start + i * options.step, 0).rotate(options.rotation);
+        var points = single.map( // p => (p._dup.new Point(p.x + start + i * options.step, p.y))
+        //   .rotate(options.angle)
+        //   .rotate(options.rotation),
+        function (p) {
+          return p._dup().transformBy(t.matrix());
+        });
+        collection.add("".concat(i), _this2.fan({
+          points: points,
+          color: options.color
+        }));
+      };
+
+      for (var i = 0; i < options.num; i += 1) {
+        _loop2(i);
+      }
+
+      console.log(collection);
+      return collection;
+    }
   }]);
 
   return DiagramPrimitives;
@@ -21507,7 +21613,7 @@ function () {
   }, {
     key: "setColor",
     value: function setColor(color) {
-      this.color = color.slice();
+      this.color = color != null ? color.slice() : [0, 0, 0, 0];
     }
   }, {
     key: "setOpacity",
@@ -22309,7 +22415,7 @@ function (_DiagramElement) {
 
     _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimitive).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
-    _this3.color = color.slice();
+    _this3.color = color != null ? color.slice() : [0, 0, 0, 0];
     _this3.pointsToDraw = -1;
     _this3.angleToDraw = -1;
     _this3.lengthToDraw = -1;
@@ -22414,7 +22520,7 @@ function (_DiagramElement) {
   }, {
     key: "setColor",
     value: function setColor(color) {
-      this.color = color.slice();
+      this.color = color != null ? color.slice() : [0, 0, 0, 0];
 
       if (this instanceof DiagramElementPrimitive) {
         if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
@@ -23148,11 +23254,7 @@ function (_DiagramElement2) {
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
-      var nonNullColor = color;
-
-      if (nonNullColor == null) {
-        nonNullColor = [0, 0, 0, 1];
-      }
+      var nonNullColor = color != null ? color : [0, 0, 0, 0];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
