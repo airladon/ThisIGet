@@ -102,6 +102,23 @@ export default function diagramLayout() {
     },
   });
 
+  const label = (name, p1, p2, text) => ({
+    name,
+    method: 'line',
+    options: {
+      // showLine: false,
+      width: 0.02,
+      p1,
+      p2,
+      color: colors.sides,
+      label: {
+        text,
+        location: 'outside',
+        offset: 0.1,
+      },
+    },
+  });
+
   const w = 0.02;
   const parallelogram = {
     name: 'pgram',
@@ -131,17 +148,21 @@ export default function diagramLayout() {
       lMarks('lMark22', lineD2.pointAtPercent(0.75), 2, lineD2.angle()),
       dashed('diag1', lineD1.p1, lineD1.p2),
       dashed('diag2', lineD2.p1, lineD2.p2),
-      angle('c1', points[1], points[0], points[2], 'c', 3, 0.5, colors.angles2),
-      angle('c2', points[3], points[2], points[0], 'c', 3, 0.5, colors.angles2),
-      angle('d1', points[3], points[1], points[0], 'd', 4, 0.5, colors.angles2),
-      angle('d2', points[1], points[3], points[2], 'd', 4, 0.5, colors.angles2),
+      angle('c1', points[1], points[0], points[2], 'c', 1, 0.5, colors.angles2),
+      angle('c2', points[3], points[2], points[0], 'c', 1, 0.5, colors.angles2),
+      angle('d1', points[3], points[1], points[0], 'd', 2, 0.5, colors.angles2),
+      angle('d2', points[1], points[3], points[2], 'd', 2, 0.5, colors.angles2),
+      label('labelA1', points[1], points[0], 'A'),
+      label('labelA2', points[3], points[2], 'A'),
+      label('labelB1', points[2], points[1], 'B'),
+      label('labelB2', points[0], points[3], 'B'),
     ],
     options: {
       color: colors.sides,
     },
     mods: {
       scenarios: {
-        default: { position: [0, 0], scale: 1 },
+        default: { position: [0, -0.4], scale: 1 },
       },
       pulseDefault: {
         scale: 1.1,

@@ -36,6 +36,7 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Quadrangles/base',
       'Math/Geometry_1/ParallelLines/base',
+      'Math/Geometry_1/CongruentTriangles/base',
       'Math/Geometry_1/AnglesAtIntersections/base',
     ]);
   }
@@ -96,9 +97,8 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         pgram.undim();
         pgram.setScenario('default');
-        console.log(pgram);
       },
-    }
+    };
     this.addSection(common, {
       title: 'Definition',
       setContent: [
@@ -252,6 +252,256 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'For simplicity moving forward, let\'s |remove| the angle labels.',
+      modifiers: {
+        remove: this.bindNext(colors.angles),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+      ],
+    });
+
+    common = {
+      setEnterState: () => {
+        pgram.undim();
+        pgram.setScenario('default');
+        console.log(pgram)
+      },
+      hide: [
+        pgram._a1._label, pgram._a2._label,
+        pgram._b1._label, pgram._b2._label,
+      ],
+    }
+    this.addSection(common, commonContent, {
+      modifiers: {
+        remove: click(coll.dissolveOutAngleLabels, [coll, null], colors.angles)
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+      ],
+      transitionFromPrev: (done) => {
+        coll.dissolveOutAngleLabels(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Draw a |diagonal_line| between two opposite corners to split the parallelogram into |two triangles|.',
+      modifiers: {
+        diagonal_line: this.bindNext(colors.sides),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'Side Lengths',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+      ],
+      hide: [
+        pgram._a1._label, pgram._a2._label,
+        pgram._b1._label, pgram._b2._label,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null], colors.sides),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+      ],
+      transitionFromPrev: (done) => {
+        pgram._diag1.grow(0.05, 1, true, done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Using |alternate_angles| between parallel lines, we can highlight two more |equal_angles|.',
+      modifiers: {
+        alternate_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
+        equal_angles: this.bindNext(colors.angles2),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'Side Lengths',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal_angles: this.bindPulse(pgram, ['c1', 'c2']),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['c1', 'c2'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'We can remove some marks on the diagram that we don\'t need for now.',
+      modifiers: {
+        alternate_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
+        equal_angles: this.bindNext(colors.angles2),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'Side Lengths',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal_angles: this.bindPulse(pgram, ['c1', 'c2']),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['c1', 'c2'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'The two triangles |share| the same corresponding two angles and side, therefore by |AAS| they must be |congruent|.',
+      modifiers: {
+        AAS: this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
+        share: click(coll.toggleSas, [coll, null], colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+      ],
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      }
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'As the triangles are |congruent|, then their corresponding sides must be the |same_length|.',
+      modifiers: {
+        same_length: this.bindNext(colors.sides),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'Side Lengths',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        same_length: click(coll.toggleEqualSides, [coll, null], colors.sides),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['labelA1', 'labelA2', 'labelB1', 'labelB2'], done);
+      },
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection(common, commonContent, {
+      setContent: 'And so we see the parallelogram\'s |opposite_sides| are |equal|.',
+      modifiers: {
+        opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['labelA1', 'labelA2', 'labelB1', 'labelB2'], done);
+      },
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
   }
 }
 

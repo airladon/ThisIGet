@@ -25,6 +25,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     _c2: TypeLabelledAngle;
     _d1: TypeLabelledAngle;
     _d2: TypeLabelledAngle;
+    _labelA1: TypeLabelledLine;
+    _labelA2: TypeLabelledLine;
+    _labelB1: TypeLabelledLine;
+    _labelB2: TypeLabelledLine;
     _pMarkLeft: DiagramElementPrimitive;
     _pMarkTop: DiagramElementPrimitive;
     _pMarkRight: DiagramElementPrimitive;
@@ -77,6 +81,52 @@ export default class CommonCollection extends CommonDiagramCollection {
     ];
     const pair = anglePairs[this.toggleIndex];
     this._pgram.pulse([pair[0], pair[1]], done);
+    this.toggleIndex = (this.toggleIndex + 1) % 2;
+    this.diagram.animateNextFrame();
+  }
+
+  dissolveOutAngleLabels(done: ?() => void = null) {
+    const pgram = this._pgram;
+    pgram.stop();
+    // pgram._a1.setOpacity(1);
+    pgram._a1.showAll();
+    // pgram._a2.setOpacity(1);
+    pgram._a2.showAll();
+    // pgram._b1.setOpacity(1);
+    pgram._b1.showAll();
+    // pgram._b2.setOpacity(1);
+    pgram._b2.showAll();
+    pgram.animations.new()
+      .inParallel([
+        pgram._a1._label.anim.dissolveOut(1),
+        pgram._a2._label.anim.dissolveOut(1),
+        pgram._b1._label.anim.dissolveOut(1),
+        pgram._b2._label.anim.dissolveOut(1),
+      ])
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleSas(done: ?() => void = null) {
+    const pgram = this._pgram;
+    const combos = [
+      [pgram._c1, pgram._b1, pgram._diag1],
+      [pgram._c2, pgram._b2, pgram._diag1],
+    ];
+    pgram.highlight(['c1', 'c2', 'b1', 'b2', 'diag1']);
+    pgram.pulse(combos[this.toggleIndex], done);
+    this.toggleIndex = (this.toggleIndex + 1) % 2;
+    this.diagram.animateNextFrame();
+  }
+
+  toggleEqualSides(done: ?() => void = null) {
+    const pgram = this._pgram;
+    const sides = [
+      ['labelA1', 'labelA2'],
+      ['labelB1', 'labelB2'],
+    ];
+    pgram.pulse(sides[this.toggleIndex], done);
     this.toggleIndex = (this.toggleIndex + 1) % 2;
     this.diagram.animateNextFrame();
   }
