@@ -1060,6 +1060,58 @@ class PresentationFormatContent extends SimpleFormatContent {
     return click(pulseHighlighter, [this], colorToUse);
   }
 
+  accent(
+    parent: DiagramElement,
+    children: ?(Array<DiagramElement | string> | DiagramElement | string) = null,
+    styleIn: 'pulse' | 'show' | 'highlight' |
+             Array<'highlight' | 'pulse' | 'show'> = 'pulse',
+    done: ?() => void = null,
+  ) {
+    let style;
+    if (typeof styleIn === 'string') {
+      style = [styleIn];
+    } else {
+      style = styleIn;
+    }
+    if (children == null) {
+      if (style.includes('show')) {
+        parent.showAll();
+      }
+      if (style.includes('highlight')) {
+        parent.highlight();
+      }
+      if (style.includes('pulse')) {
+        parent.pulse(done);
+      }
+    } else {
+      if (style.includes('show')) {
+        parent.exec(['showAll'], children);
+      }
+      if (style.includes('highlight')) {
+        parent.highlight(children);
+      }
+      if (style.includes('pulse')) {
+        parent.pulse(children, done);
+      }
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  bindAccent(
+    parent: DiagramElement,
+    children: ?Array<DiagramElement | string> = null,
+    styleIn: 'pulse' | 'show' | 'highlight' |
+             Array<'highlight' | 'pulse' | 'show'> = 'pulse',
+    color: ?Array<number> = null,
+  ) {
+    const colorToUse = this.getColor(parent, children, color);
+    const accenter = () => {
+      this.accent(parent, children, styleIn, null);
+      this.diagram.animateNextFrame();
+    };
+    return click(accenter, [this], colorToUse);
+  }
+
   // If any child is not shown, then show all children - otherwise hide all
   toggle(
     parent: DiagramElement,

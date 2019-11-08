@@ -165,10 +165,10 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        angle: this.bindPulse(pgram._a1, null, null),
+        angle: this.bindAccent(pgram._a1),
       },
       transitionFromPrev: (done) => {
-        this.pulse(pgram._a1, done);
+        this.accent(pgram._a1, null, 'pulse', done);
       },
       show: [
         pgram._line,
