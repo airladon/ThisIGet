@@ -1046,6 +1046,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   ) {
     const colorToUse = this.getColor(parent, childrenOrColor, color);
     const pulseHighlighter = () => {
+      // $FlowFixMe
       if (typeof childrenOrColor[0] === 'number') {
         parent.highlight();
         parent.pulse();
@@ -1055,9 +1056,55 @@ class PresentationFormatContent extends SimpleFormatContent {
       }
       this.diagram.animateNextFrame();
     };
-    return click(pulseHighlighter, [this], colorToUse)
+    return click(pulseHighlighter, [this], colorToUse);
   }
 
+  // If any child is not shown, then show all children - otherwise hide all
+  toggle(
+    parent: DiagramElement,
+    children: ?Array<DiagramElement | string> = null,
+  ) {
+    if (children == null) {
+      if (parent.isShown) {
+        parent.hide();
+      } else {
+        parent.showAll();
+      }
+    } else {
+      let shown = true;
+      children.forEach((child) => {
+        const el = parent.getElement(child);
+        if (el != null && el.isShown === false) {
+          shown = false;
+        }
+      });
+      // const firstChild = parent.getElement(children[0]);
+      if (shown) {
+        parent.exec(['hide'], children);
+      } else {
+        parent.exec(['showAll'], children);
+      }
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  bindToggle(
+    parent: DiagramElement,
+    // $FlowFixMe
+    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+    color: ?Array<number> = null,
+  ) {
+    const colorToUse = this.getColor(parent, childrenOrColor, color);
+    const toggler = () => {
+      if (typeof childrenOrColor[0] === 'number') {
+        this.toggle(parent);
+      } else {
+        this.toggle(parent, childrenOrColor);
+      }
+      this.diagram.animateNextFrame();
+    };
+    return click(toggler, [this], colorToUse);
+  }
   // bindShowQR(
   //   uid: string,
   //   qrid: string,

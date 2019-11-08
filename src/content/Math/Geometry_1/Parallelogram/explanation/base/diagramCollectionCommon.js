@@ -1,13 +1,14 @@
 // @flow
 import Fig from 'figureone';
+import type { TypeLabelledAngle, TypeLabelledLine } from 'figureone';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
-import { TypeLabelledAngle, TypeLabelledLine } from 'figureone';
+
 
 const {
   DiagramElementPrimitive,
-  // DiagramObjectAngle,
-  // DiagramObjectLine,
+  DiagramObjectAngle,
+  DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
   // Equation,
@@ -20,8 +21,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line: DiagramObjectPolyLine;
     _a1: TypeLabelledAngle;
     _a2: TypeLabelledAngle;
-    _b1: TypeLabelledAngle;
-    _b2: TypeLabelledAngle;
+    _b1: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
+    _b2: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _c1: TypeLabelledAngle;
     _c2: TypeLabelledAngle;
     _d1: TypeLabelledAngle;
@@ -40,6 +41,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     _lMark22: DiagramElementPrimitive;
     _diag1: TypeLabelledLine;
     _diag2: TypeLabelledLine;
+    _v1: DiagramObjectLine;
+    _v2: DiagramObjectLine;
+    _right1: DiagramObjectAngle;
+    _right2: DiagramObjectAngle;
+    _rect: DiagramElementPrimitive;
+    _tri1: DiagramElementPrimitive;
+    _tri2: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(
@@ -128,6 +136,26 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  toggleRectangle() {
+    if (this._pgram._rect.isShown) {
+      this._pgram._rect.hide();
+    } else {
+      this._pgram._rect.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  toggleAreaAas(done: ?() => void = null) {
+    const pgram = this._pgram;
+    const combos = [
+      ['labelB2', 'a1', 'right1'],
+      ['labelB1', 'a2', 'right2'],
+    ];
+    pgram.pulse(combos[this.toggleIndex], done);
+    this.toggleIndex = (this.toggleIndex + 1) % 2;
+    this.diagram.animateNextFrame();
+  }
+
   toggleEqualHalves(done: ?() => void = null) {
     const pgram = this._pgram;
     const marks = [
@@ -172,6 +200,47 @@ export default class CommonCollection extends CommonDiagramCollection {
         pgram._pMarkRight.anim.dissolveOut(1),
         pgram._pMarkBottom.anim.dissolveOut(1),
       ])
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  split(done: ?() => void = null) {
+    const pgram = this._pgram;
+    pgram.stop();
+    pgram._v1.hide();
+    pgram._v2.hide();
+    pgram._right1.hide();
+    pgram._right2.hide();
+    pgram.animations.new()
+      .trigger({
+        callback: () => {
+          pgram._v1.showAll();
+          pgram._v1.grow(0.05, 1, true, null);
+        },
+        duration: 1,
+      })
+      .trigger({
+        callback: () => {
+          pgram._right1.showAll();
+          pgram._right1.pulse();
+        },
+        duration: 1,
+      })
+      .trigger({
+        callback: () => {
+          pgram._v2.showAll();
+          pgram._v2.grow(0.05, 1, true, null);
+        },
+        duration: 1,
+      })
+      .trigger({
+        callback: () => {
+          pgram._right2.showAll();
+          pgram._right2.pulse();
+        },
+        duration: 1,
+      })
       .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();

@@ -6,6 +6,7 @@ import {
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
+import { note } from '../../../../../common/tools/note';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -38,6 +39,8 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/ParallelLines/base',
       'Math/Geometry_1/CongruentTriangles/base',
       'Math/Geometry_1/AnglesAtIntersections/base',
+      'Math/Geometry_1/Area/base',
+      'Math/Geometry_1/AreaTriangle/base',
     ]);
   }
 
@@ -45,6 +48,8 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const pgram = coll._pgram;
+    const eqn = coll._eqn;
+    const nav = coll._nav;
     
     // // const fig = coll._fig;
     // const dimmer = () => {
@@ -283,7 +288,6 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         pgram.undim();
         pgram.setScenario('default');
-        console.log(pgram)
       },
       hide: [
         pgram._a1._label, pgram._a2._label,
@@ -732,8 +736,355 @@ class Content extends PresentationFormatContent {
         pgram._line,
 
       ],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Next, let\'s find the parallelogram\'s |area|.',
+    };
+    this.addSection(common, commonContent, {
+      title: 'Area',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+      ],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Start by |splitting| the parallelogram into |two right angle triangles| and a |rectangle|.',
+      modifiers: {
+        splitting: this.bindNext(colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        splitting: click(coll.split, [coll, null], colors.sides),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+      ],
+      transitionFromPrev: (done) => {
+        coll.split(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'By |AAS|, the two triangles are |equal|, and so their side lengths are |equal_|.',
+      modifiers: {
+        AAS: this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
+        equal: click(coll.toggleAreaAas, [coll, null], colors.diagram.action),
+        equal_: this.bindNext(colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+      ],
       setSteadyState: () => {
         coll.toggleIndex = 0;
+      },
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        // splitting: click(coll.split, [coll, null], colors.sides),
+        equal_: this.bindPulse(pgram, ['s1.label', 's2.label']),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['s1.label', 's2.label'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'The distance between the parallel lines is |height| of the parallelogram.',
+      modifiers: {
+        height: this.bindNext(colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        // splitting: click(coll.split, [coll, null], colors.sides),
+        height: this.bindPulse(pgram, ['h.label']),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2, pgram._h,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['h.label'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'The |total_area| is the sum of the |rectangle|, and |two_triangles|.',
+        note({ top: 93, color: colors.diagram.text.note }, 'Reference formulas: |rectangle_area|, |triangle_area|.')
+      ]),
+      modifiers: {
+        rectangle: this.bindToggle(pgram, ['rect'], colors.sides),
+        two_triangles: this.bindToggle(pgram, ['tri1', 'tri2'], colors.sides),
+        total_area: this.bindToggle(pgram, ['tri1', 'tri2', 'rect'], colors.sides),
+        rectangle_area: this.qr('Math/Geometry_1/Area/base/RectanglePres'),
+        triangle_area: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2, pgram._h,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2, pgram._h,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.animations.new()
+          .scenario({ target: 'low', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        pgram.setScenario('low');
+        eqn.showForm('0');
+        eqn.setScenarios('default');
+        // nav.updateButtons();
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        pgram.undim();
+        pgram.setScenario('low');
+        eqn.setScenario('default');
+        nav.setScenario('default');
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._s1, pgram._s2, pgram._h,
+      ],
+      hide: [
+        pgram._a1._label, pgram._a2._label,
+        pgram._b1._label, pgram._b2._label,
+      ],
+    }
+    this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Which |simplifies| to:',
+    };
+    this.addSection(common, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('2');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      // show: [
+      //   pgram._line,
+      //   pgram._pMarkLeft, pgram._pMarkRight,
+      //   pgram._pMarkTop, pgram._pMarkBottom,
+      //   pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+      //   pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+      //   pgram._labelA1, pgram._labelA2,
+      //   pgram._labelB1, pgram._labelB2,
+      //   pgram._s1, pgram._s2, pgram._h,
+      //   eqn, nav,
+      // ],
+      setSteadyState: () => {
+        nav.showAll();
+        eqn.showForm('7');
+        nav.updateButtons();
+      },
+    });
+
+    // this.addSection(common, commonContent, {
+    //   show: [
+    //     pgram._line,
+    //     pgram._pMarkLeft, pgram._pMarkRight,
+    //     pgram._pMarkTop, pgram._pMarkBottom,
+    //     pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+    //     pgram._v1, pgram._v2, pgram._right1, pgram._right2,
+    //     pgram._labelA1, pgram._labelA2,
+    //     pgram._labelB1, pgram._labelB2,
+    //     pgram._s1, pgram._s2, pgram._h,
+    //     eqn, nav,
+    //   ],
+    //   setSteadyState: () => {
+
+    //     pgram.setScenario('low');
+    //     eqn.showForm('6');
+    //     eqn.setScenarios('default');
+    //     // nav.updateButtons();
+    //   },
+    // });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'So the area of a parallelogram is the |length| of one set of |parallel lines| multiplied by the |distance between| them.'),
+    };
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        eqn.showForm('7');
+        eqn.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('7');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._labelA1, pgram._labelA2,
+        pgram._h,
+        eqn,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('7');
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'In summary, a |parallelogram| has'),
+        style({
+          list: 'unordered', listStyleTyle: 'disc', size: 0.95, top: 2,
+        }, [
+          '|Opposite_sides| that are |parallel| and |equal|',
+          '|Opposite_angles| that are |equal|',
+          '|Diagonals| that split each other in |half|',
+          '|Area| = |A| \u00D7 |H|',
+        ]),
+      ],
+      modifiers: {
+        Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
+        Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
+        half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        A: this.bindPulse(pgram, ['labelA1']),
+        H: this.bindPulse(pgram, ['h']),
+        Diagonals: this.bindPulse(pgram, ['diag1', 'diag2']),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'summary',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._diag1, pgram._diag2,
+        pgram._lMarkUp1, pgram._lMarkUp2,
+        pgram._lMark21, pgram._lMark22,
+        pgram._h,
+      ],
+      setSteadyState: () => {
+        pgram.setScenario('bottom');
       },
     });
   }
