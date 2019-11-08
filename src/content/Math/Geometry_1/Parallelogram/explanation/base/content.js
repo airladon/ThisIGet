@@ -134,6 +134,15 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     let commonContent = {
       setContent: 'Let\'s start by labeling an |angle|.',
       modifiers: { angle: this.bindNext(colors.angles) },
@@ -299,6 +308,15 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: 'Draw a |diagonal_line| between two opposite corners to split the parallelogram into |two triangles|.',
       modifiers: {
@@ -347,7 +365,6 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonContent, {
-      title: 'Side Lengths',
       show: [
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
@@ -385,7 +402,6 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonContent, {
-      title: 'Side Lengths',
       show: [
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
@@ -447,7 +463,6 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonContent, {
-      title: 'Side Lengths',
       show: [
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
@@ -498,6 +513,225 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done) => {
         pgram.pulse(['labelA1', 'labelA2', 'labelB1', 'labelB2'], done);
       },
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Next, we will draw the |second_diagonal| of the parallelogram.',
+      modifiers: {
+        second_diagonal: this.bindNext(colors.sides),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      title: 'Diagonal Intersection',
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        second_diagonal: click(pgram._diag2.grow, [pgram._diag2, 0.05, 1, true, null], colors.sides),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram._diag2.grow(0.05, 1, true, done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Using |alternate_angles| between parallel lines, we again can highlight two more |equal_angles|.',
+      modifiers: {
+        alternate_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
+        equal_angles: this.bindNext(colors.angles2),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal_angles: this.bindPulse(pgram, ['d1', 'd2']),
+      },
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._d1, pgram._d2,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['d1', 'd2'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Let\'s |simplify| the diagram to compare just the top and bottom triangles.',
+      modifiers: {
+        simplify: this.bindNext(colors.angles2),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._d1, pgram._d2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        simplify: click(coll.dissolveOutToTriangles, [coll, null], colors.diagram.action),
+      },
+      show: [
+        // pgram._line,
+        // pgram._pMarkLeft, pgram._pMarkRight,
+        // pgram._pMarkTop, pgram._pMarkBottom,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2,
+        // pgram._labelB1, pgram._labelB2,
+        pgram._d1, pgram._d2,
+      ],
+      transitionFromPrev: (done) => {
+        coll.dissolveOutToTriangles(done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Using |ASA| we can see the two triangles are congruent, and as a result their corresponding sides will be |equal|.',
+      modifiers: {
+        ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Asa'),
+        equal: this.bindNext(colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._d1, pgram._d2,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        equal: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+      },
+      show: [
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._d1, pgram._d2,
+        pgram._lMarkUp1, pgram._lMarkUp2,
+        pgram._lMark21, pgram._lMark22,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.pulse(['lMarkUp1', 'lMarkUp2', 'lMark21', 'lMark22'], done);
+      },
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'Each |diagonal| line is |split_in_half| by the other.',
+      modifiers: {
+        split_in_half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._diag1, pgram._diag2,
+        pgram._c1, pgram._c2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._d1, pgram._d2,
+        pgram._lMarkUp1, pgram._lMarkUp2,
+        pgram._lMark21, pgram._lMark22,
+      ],
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'So the |diagonals| of a parallelogram will |always| intersect at their |center|.',
+      modifiers: {
+        diagonals: this.bindPulse(pgram, ['diag1', 'diag2']),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._diag1, pgram._diag2,
+        pgram._lMarkUp1, pgram._lMarkUp2,
+        pgram._lMark21, pgram._lMark22,
+        pgram._line,
+
+      ],
       setSteadyState: () => {
         coll.toggleIndex = 0;
       },

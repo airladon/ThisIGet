@@ -6,8 +6,8 @@ import { TypeLabelledAngle, TypeLabelledLine } from 'figureone';
 
 const {
   DiagramElementPrimitive,
-  DiagramObjectAngle,
-  DiagramObjectLine,
+  // DiagramObjectAngle,
+  // DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
   // Equation,
@@ -17,6 +17,7 @@ const {
 export default class CommonCollection extends CommonDiagramCollection {
   toggleIndex: number;
   _pgram: {
+    _line: DiagramObjectPolyLine;
     _a1: TypeLabelledAngle;
     _a2: TypeLabelledAngle;
     _b1: TypeLabelledAngle;
@@ -88,13 +89,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   dissolveOutAngleLabels(done: ?() => void = null) {
     const pgram = this._pgram;
     pgram.stop();
-    // pgram._a1.setOpacity(1);
     pgram._a1.showAll();
-    // pgram._a2.setOpacity(1);
     pgram._a2.showAll();
-    // pgram._b1.setOpacity(1);
     pgram._b1.showAll();
-    // pgram._b2.setOpacity(1);
     pgram._b2.showAll();
     pgram.animations.new()
       .inParallel([
@@ -128,6 +125,55 @@ export default class CommonCollection extends CommonDiagramCollection {
     ];
     pgram.pulse(sides[this.toggleIndex], done);
     this.toggleIndex = (this.toggleIndex + 1) % 2;
+    this.diagram.animateNextFrame();
+  }
+
+  toggleEqualHalves(done: ?() => void = null) {
+    const pgram = this._pgram;
+    const marks = [
+      ['lMarkUp1', 'lMarkUp2'],
+      ['lMark21', 'lMark22'],
+    ];
+    pgram.pulse(marks[this.toggleIndex], done);
+    this.toggleIndex = (this.toggleIndex + 1) % 2;
+    this.diagram.animateNextFrame();
+  }
+
+  dissolveOutToTriangles(done: ?() => void = null) {
+    const pgram = this._pgram;
+    pgram.stop();
+    pgram._line.showAll();
+    pgram._labelB1.showAll();
+    pgram._labelB2.showAll();
+    pgram._a1._curve.showAll();
+    pgram._a2._curve.showAll();
+    pgram._b1._curve.showAll();
+    pgram._b2._curve.showAll();
+    pgram._b1._curve1.showAll();
+    pgram._b2._curve1.showAll();
+    pgram._pMarkLeft.showAll();
+    pgram._pMarkRight.showAll();
+    pgram._pMarkTop.showAll();
+    pgram._pMarkBottom.showAll();
+
+    pgram.animations.new()
+      .inParallel([
+        pgram._a1._curve.anim.dissolveOut(1),
+        pgram._a2._curve.anim.dissolveOut(1),
+        pgram._b1._curve.anim.dissolveOut(1),
+        pgram._b2._curve.anim.dissolveOut(1),
+        pgram._b1._curve1.anim.dissolveOut(1),
+        pgram._b2._curve1.anim.dissolveOut(1),
+        pgram._labelB1.anim.dissolveOut(1),
+        pgram._labelB2.anim.dissolveOut(1),
+        pgram._line.anim.dissolveOut(1),
+        pgram._pMarkLeft.anim.dissolveOut(1),
+        pgram._pMarkTop.anim.dissolveOut(1),
+        pgram._pMarkRight.anim.dissolveOut(1),
+        pgram._pMarkBottom.anim.dissolveOut(1),
+      ])
+      .whenFinished(done)
+      .start();
     this.diagram.animateNextFrame();
   }
 }

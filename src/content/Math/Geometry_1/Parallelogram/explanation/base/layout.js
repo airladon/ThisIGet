@@ -86,6 +86,11 @@ export default function diagramLayout() {
       rotation,
       position,
     },
+    mods: {
+      pulseDefault: {
+        scale: 3,
+      },
+    },
   });
 
   const dashed = (name, p1, p2) => ({
@@ -147,11 +152,11 @@ export default function diagramLayout() {
       lMarks('lMark21', lineD2.pointAtPercent(0.25), 2, lineD2.angle()),
       lMarks('lMark22', lineD2.pointAtPercent(0.75), 2, lineD2.angle()),
       dashed('diag1', lineD1.p1, lineD1.p2),
-      dashed('diag2', lineD2.p1, lineD2.p2),
+      dashed('diag2', lineD2.p2, lineD2.p1),
       angle('c1', points[1], points[0], points[2], 'c', 1, 0.5, colors.angles2),
       angle('c2', points[3], points[2], points[0], 'c', 1, 0.5, colors.angles2),
-      angle('d1', points[3], points[1], points[0], 'd', 2, 0.5, colors.angles2),
-      angle('d2', points[1], points[3], points[2], 'd', 2, 0.5, colors.angles2),
+      angle('d1', points[3], points[1], points[0], 'd', 1, 0.5, colors.angles2),
+      angle('d2', points[1], points[3], points[2], 'd', 1, 0.5, colors.angles2),
       label('labelA1', points[1], points[0], 'A'),
       label('labelA2', points[3], points[2], 'A'),
       label('labelB1', points[2], points[1], 'B'),
