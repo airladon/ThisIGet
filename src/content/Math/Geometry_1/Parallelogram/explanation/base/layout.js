@@ -198,6 +198,8 @@ export default function diagramLayout() {
       angle('a2', points[3], points[2], points[1], 'a'),
       angle('b1', points[2], points[1], points[0], '180º-a', 2, 0.3, colors.angles, 0.35),
       angle('b2', points[0], points[3], points[2], '180º-a', 2, 0.3, colors.angles, 0.35),
+      angle('b11', points[2], points[1], points[0], 'b', 2, 0.3, colors.angles, 0.35),
+      angle('b21', points[0], points[3], points[2], 'b', 2, 0.3, colors.angles, 0.35),
       pMarks('pMarkLeft', lineLeft.midPoint(), 2, angleA),
       pMarks('pMarkRight', lineRight.midPoint(), 2, angleA),
       pMarks('pMarkTop', lineTop.midPoint(), 1, 0),
@@ -392,10 +394,85 @@ export default function diagramLayout() {
     },
   };
 
+  const eqn2 = {
+    name: 'eqn2',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        equals: '  =  ',
+        a: { color: colors.angles },
+        b: { color: colors.angles },
+        _21: '2',
+        _22: '2',
+        plus: '  +  ',
+        _360: '360º',
+        _180: '180º',
+        _divide2: '÷2',
+        _divide21: '÷2',
+        _divide22: '÷2',
+        // v: { symbol: 'vinculum' },
+        b1: {
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+        },
+        // b2: {
+        //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+        // },
+        // lb: { symbol: 'bracket', side: 'left' },
+        // rb: { symbol: 'bracket', side: 'right' },
+        strike1: { symbol: 'xStrike', color: colors.working },
+        strike2: { symbol: 'xStrike', color: colors.working },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': ['_360', 'equals', '_21', 'a', 'plus', '_22', 'b'],
+        '1': [
+          { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
+          'equals',
+          { annotate: [['_21', 'a', 'plus', '_22', 'b'], ['_divide21', 'center', 'bottom', 'center', 2], 'false'] },
+        ],
+        '2': [
+          {
+            annotate: [
+              { topComment: ['_360', '_180', 'b1', 0.1, 0.05, 0.6, false] },
+              ['_divide2', 'center', 'bottom', 'center', 2],
+              'false',
+            ],
+          },
+          'equals',
+          { 
+            annotate: [[
+              { strike: ['_21', 'strike1'] },
+              'a', 'plus',
+              { strike: ['_22', 'strike2'] },
+              'b',
+            ], ['_divide21', 'center', 'bottom', 'center', 2], 'false']
+          },
+        ],
+        // '3': [
+        //   { bottomComment: ['_360', ['_divide2', '_180'], 'b1', 0.1, 0.05, 0.6, false] },
+        //   'equals', { strike: ['_21', 'strike1'] }, 'a',
+        //   'plus', { strike: ['_22', 'strike2'] }, 'b'],
+        '3': ['_180', 'equals', 'a', 'plus', 'b'],
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, 0.9] },
+      },
+    },
+  };
+
   layout.addElements = [
     parallelogram,
     eqn,
     nav,
+    eqn2,
   ];
   return layout;
 }

@@ -636,6 +636,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   animationEnd: string;
   next: () => void;
   prev: () => void;
+  toggleIndex: [number, number, number, number, number];
   // questions
 
   constructor(htmlId: string = 'topic__content') {
@@ -646,7 +647,7 @@ class PresentationFormatContent extends SimpleFormatContent {
     // this.iconLink = '/';
     // this.iconLinkGrey = '/';
     // this.setTitle();
-
+    this.toggleIndex = [0, 0, 0, 0, 0];
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {
       window.quickReference = {};
@@ -1104,6 +1105,80 @@ class PresentationFormatContent extends SimpleFormatContent {
       this.diagram.animateNextFrame();
     };
     return click(toggler, [this], colorToUse);
+  }
+
+  toggleGroups(
+    parent: DiagramElement,
+    // $FlowFixMe
+    groupsIn: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
+    toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
+    styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
+             Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
+    done: ?() => void = null,
+  ) {
+    let style;
+    if (typeof styleIn === 'string') {
+      style = [styleIn];
+    } else {
+      style = styleIn;
+    }
+
+    let groups;
+    if (typeof groupsIn[0] === 'string') {
+      groups = groupsIn.map(g => [g]);
+    } else {
+      groups = groupsIn;
+    }
+    const index = this.toggleIndex[toggleIndex];
+    const numGroups = groups.length;
+    const group = groups[index];
+    if (style.includes('show')) {
+      groups.forEach((g, i) => {
+        if (i !== index) {
+          parent.exec(['hide'], g);
+        }
+      });
+      parent.exec(['showAll'], group);
+    }
+    if (style.includes('highlightInParent')) {
+      parent.highlight([...group]);
+    }
+    if (style.includes('highlight')) {
+      groups.forEach((g, i) => {
+        if (i !== index) {
+          parent.exec(['dim'], g);
+        }
+      });
+      parent.exec(['undim'], group);
+    }
+    if (style.includes('pulse')) {
+      parent.pulse([...group], done);
+    }
+    this.toggleIndex[toggleIndex] = (index + 1) % numGroups;
+    this.diagram.animateNextFrame();
+  }
+
+  bindToggleGroups(
+    parent: DiagramElement,
+    // $FlowFixMe
+    groups: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
+    color: Array<number> = [1, 0, 0, 1],
+    styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
+             Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
+    toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
+  ) {
+    const groupPulser = () => {
+      this.toggleGroups(parent, groups, toggleIndex, styleIn, null);
+    };
+    return click(groupPulser, [this], color);
+  }
+
+  resetToggle(index: ?(0 | 1 | 2 | 3 | 4) = null) {
+    if (index == null) {
+      this.toggleIndex = [0, 0, 0, 0, 0];
+    } else {
+      this.toggleIndex[index] = 0;
+    }
   }
   // bindShowQR(
   //   uid: string,

@@ -50,6 +50,7 @@ class Content extends PresentationFormatContent {
     const pgram = coll._pgram;
     const eqn = coll._eqn;
     const nav = coll._nav;
+    const eqn2 = coll._eqn2;
     
     // // const fig = coll._fig;
     // const dimmer = () => {
@@ -269,6 +270,71 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    this.addSection(common, {
+      setContent: 'Conversely, is |any| quadrangle with |equal_opposite_angles| a |parallelogram|? |test|',
+      modifiers: {
+        equal_opposite_angles: this.bindToggleGroups(
+          pgram, [['a1', 'a2'], ['b11', 'b21']], colors.angles, ['pulse', 'highlightInParent'],
+        ),
+        test: this.bindToggleGroups(
+          pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles, ['pulse', 'highlightInParent'],
+        ),
+      },
+      show: [
+        pgram._line,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
+      ],
+      setSteadyState: () => {
+        coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'We know all quadrangles angles |add_to_360º|, therefore we have:',
+      modifiers: {
+        add_to_360º: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.animations.new()
+          .scenario({ target: 'low', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        pgram.setScenario('low');
+        eqn2.setScenario('default');
+        eqn2.showForm('0');
+      },
+    });
+
+    const temp = {
+      show: [
+        pgram._line,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
+      ],
+      setEnterState: () => {
+        pgram.setScenario('low');
+        eqn2.setScenario('default');
+      },
+    };
+
+    this.addSectionEqnStep({ eqn: eqn2, from: '0', to: '1' }, common, commonContent, temp);
+    this.addSectionEqnStep({ eqn: eqn2, from: '1', to: '2' }, common, commonContent, temp);
+    this.addSectionEqnStep({ eqn: eqn2, from: '2', to: '3' }, common, commonContent, temp);
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: 'For simplicity moving forward, let\'s |remove| the angle labels.',
       modifiers: {
@@ -362,43 +428,6 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: 'Using |alternate_angles| between parallel lines, we can highlight two more |equal_angles|.',
-      modifiers: {
-        alternate_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
-        equal_angles: this.bindNext(colors.angles2),
-      },
-    };
-
-    this.addSection(common, commonContent, {
-      show: [
-        pgram._line,
-        pgram._pMarkLeft, pgram._pMarkRight,
-        pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
-        pgram._diag1,
-      ],
-    });
-    this.addSection(common, commonContent, {
-      modifiers: {
-        equal_angles: this.bindPulse(pgram, ['c1', 'c2']),
-      },
-      show: [
-        pgram._line,
-        pgram._pMarkLeft, pgram._pMarkRight,
-        pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
-        pgram._diag1,
-        pgram._c1, pgram._c2,
-      ],
-      transitionFromPrev: (done) => {
-        pgram.pulse(['c1', 'c2'], done);
-      },
-    });
-
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    commonContent = {
-      setContent: 'We can remove some marks on the diagram that we don\'t need for now.',
       modifiers: {
         alternate_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
         equal_angles: this.bindNext(colors.angles2),
@@ -842,7 +871,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     commonContent = {
-      setContent: 'The distance between the parallel lines is |height| of the parallelogram.',
+      setContent: 'The distance between the parallel lines is the |height| of the parallelogram.',
       modifiers: {
         height: this.bindNext(colors.sides),
       },
