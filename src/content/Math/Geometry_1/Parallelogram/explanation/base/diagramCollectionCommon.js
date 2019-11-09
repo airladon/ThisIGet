@@ -175,8 +175,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     pgram._line.showAll();
     pgram._labelB1.showAll();
     pgram._labelB2.showAll();
-    pgram._a1._curve.showAll();
-    pgram._a2._curve.showAll();
+    pgram._d1.showAll();
+    pgram._d2.showAll();
     pgram._b1._curve.showAll();
     pgram._b2._curve.showAll();
     pgram._b1._curve1.showAll();
@@ -188,8 +188,8 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     pgram.animations.new()
       .inParallel([
-        pgram._a1._curve.anim.dissolveOut(1),
-        pgram._a2._curve.anim.dissolveOut(1),
+        pgram._d1.anim.dissolveOut(1),
+        pgram._d2.anim.dissolveOut(1),
         pgram._b1._curve.anim.dissolveOut(1),
         pgram._b2._curve.anim.dissolveOut(1),
         pgram._b1._curve1.anim.dissolveOut(1),

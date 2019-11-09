@@ -52,53 +52,6 @@ class Content extends PresentationFormatContent {
     const nav = coll._nav;
     const eqn2 = coll._eqn2;
     
-    // // const fig = coll._fig;
-    // const dimmer = () => {
-    //   // coll._pgram.pulseDefault(null);
-    //   // coll._pgram.setDimColor([1, 0, 0, 0.5]);
-    //   // coll._pgram.dim();
-    //   coll._pgram.exec('dim', ['a1', 'a2', 'b2']);
-    //   this.diagram.animateNextFrame();
-    // };
-
-    // const dim2 = () => {
-    //   coll._pgram.undim();
-    //   coll._pgram.exec(['setDimColor', [0, 1, 0, 1]], ['a1.curve', 'a2', 'b1']);
-    //   coll._pgram.dim();
-    //   this.diagram.animateNextFrame();
-    // };
-
-    // const highlight1 = () => {
-    //   coll._pgram.highlight([coll._pgram._a1, 'b1', 'a2.curve']);
-    //   this.diagram.animateNextFrame();
-    // }
-
-    // const undimmer = () => {
-    //   coll.undim();
-    //   this.diagram.animateNextFrame();
-    // }
-    
-    // // const clicker = () => {
-    // //   coll._pgram.pulse(['_a1', coll._param._a2, 'b1.curve']);
-    // //   this.diagram.animateNextFrame();
-    // // }
-
-    // this.addSection({
-    //   setContent: 'this is a |dim| and |dim2|, |undim|, and |test|, |highlight|, |h2|',
-    //   modifiers: {
-    //     dim: click(dimmer, [this], colors.sides),
-    //     dim2: click(dim2, [this], colors.sides),
-    //     undim: click(undimmer, [this], colors.sides),
-    //     highlight: click(highlight1, [this], colors.sides),
-    //     h2: this.bindHighlightAndPulse(coll._pgram, ['diag2', 'a1', 'a2']),
-    //     // test: click(clicker, [this], colors.sides),
-    //     test: this.bindPulse(coll._pgram, ['a1', 'a2.curve', 'diag1', 'lMark21', 'pMarkTop']),
-    //   },
-    //   show: [coll],
-    //   setSteadyState: () => {
-    //     console.log(coll)
-    //   }
-    // });
     let common = {
       setEnterState: () => {
         pgram.undim();
@@ -108,13 +61,18 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Definition',
       setContent: [
-        'A |parallelogram| is a |quadrangle| whose opposite sides are |parallel|.',
-        `${new Definition('Parallelogram', 'Latin', ['parallelogrammum', ''], 'Greek', ['parallelogrammon', 'bounded by parallel lines']).html(colors.sides)}`,
+        'A |parallelogram| is a |quadrangle| whose |opposite_sides| are |parallel|.',
+        `${new Definition('Parallelogram', 'Latin', ['parallelogrammum', ''], 'Greek', ['parallelogrammon', 'bounded by parallel lines']).html({ classes: 'diagram__definition_high', color: colors.sides })}`,
       ],
       modifiers: {
         parallelogram: this.bindAccent(pgram),
         parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         quadrangle: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
+        opposite_sides: this.bindToggleGroups(
+          pgram,
+          [['pMarkLeft', 'pMarkRight'], ['pMarkTop', 'pMarkBottom']],
+          colors.sides,
+        ),
       },
       show: [
         pgram._line,
@@ -566,7 +524,7 @@ class Content extends PresentationFormatContent {
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
       ],
       transitionFromPrev: (done) => {
-        pgram.pulse(['labelA1', 'labelA2', 'labelB1', 'labelB2'], done);
+        pgram.pulse(['labelA1.label', 'labelA2.label', 'labelB1.label', 'labelB2.label'], done);
       },
       setSteadyState: () => {
         coll.toggleIndex = 0;
@@ -590,9 +548,9 @@ class Content extends PresentationFormatContent {
         pgram._c1, pgram._c2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
       ],
-      transitionFromPrev: (done) => {
-        pgram.pulse(['labelA1', 'labelA2', 'labelB1', 'labelB2'], done);
-      },
+      // transitionFromPrev: (done) => {
+      //   pgram.pulse(['labelA1.label', 'labelA2.label', 'labelB1.label', 'labelB2.label'], done);
+      // },
       setSteadyState: () => {
         coll.toggleIndex = 0;
       },
@@ -694,7 +652,11 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({ top: 0 }, 'Thus, the quadrangle\'s |opposite_angles| are equal, and as we saw previously, this must be a |parallelogram|.'),
       modifiers: {
-        opposite_angles: this.bindNext(colors.angles),
+        opposite_angles: this.bindToggleGroups(
+          pgram,
+          [['c1', 'd1', 'c2', 'd2'], ['b1', 'b2']],
+          colors.angles,
+        ),
         parallelogram: this.bindNext(colors.sides),
       },
     };
@@ -710,11 +672,6 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        opposite_angles: this.bindToggleGroups(
-          pgram,
-          [['a1', 'a2'], ['b1', 'b2']],
-          colors.angles,
-        ),
         parallelogram: this.bindAccent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom']),
       },
       show: [
@@ -723,12 +680,12 @@ class Content extends PresentationFormatContent {
         pgram._diag1,
         pgram._c1, pgram._c2, pgram._b1, pgram._b2,
         pgram._d1, pgram._d2,
-        pgram._a1, pgram._a2,
+        // pgram._a1, pgram._a2,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['a1', 'a2', 'pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
+        this.accent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
       },
     });
 
@@ -757,9 +714,11 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._d1, pgram._d2,
         pgram._diag1,
-        pgram._c1, pgram._c2,
+        // pgram._c1, pgram._c2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
       ],
     });
@@ -771,9 +730,11 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._d1, pgram._d2,
         pgram._diag1, pgram._diag2,
-        pgram._c1, pgram._c2,
+        // pgram._c1, pgram._c2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
       ],
       transitionFromPrev: (done) => {
@@ -797,9 +758,11 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
         pgram._diag1, pgram._diag2,
-        pgram._c1, pgram._c2,
+        // pgram._c1, pgram._c2,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._d1, pgram._d2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
       ],
     });
@@ -811,9 +774,11 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
         pgram._diag1, pgram._diag2,
-        pgram._c1, pgram._c2,
+        // pgram._c1, pgram._c2,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._d1, pgram._d2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
         pgram._e1, pgram._e2,
       ],
@@ -837,9 +802,11 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
         pgram._diag1, pgram._diag2,
-        pgram._c1, pgram._c2,
+        // pgram._c1, pgram._c2,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._d1, pgram._d2,
         pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
         pgram._e1, pgram._e2,
       ],
@@ -939,7 +906,7 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        // pgram._a1, pgram._b1, pgram._a2, pgram._b2,
         pgram._diag1, pgram._diag2,
         pgram._lMarkUp1, pgram._lMarkUp2,
         pgram._lMark21, pgram._lMark22,
