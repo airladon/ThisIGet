@@ -32,7 +32,6 @@ class Content extends PresentationFormatContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    console.log(this.diagram.elements)
   }
 
   addSections() {
@@ -80,18 +79,18 @@ class Content extends PresentationFormatContent {
         })}`,
       ],
       modifiers: {
-        Opposite_angles: this.bindToggleGroups(
+        Opposite_angles: pgram.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
         ),
-        Opposite_sides: this.bindToggleGroups(
+        Opposite_sides: pgram.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
-        half: this.bindToggleGroups(
+        half: pgram.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
-        A: this.bindAccent(pgram, ['labelA1']),
-        H: this.bindAccent(pgram, ['h']),
-        Diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        A: pgram.bindAccent(pgram, ['labelA1']),
+        H: pgram.bindAccent(pgram, ['h']),
+        Diagonals: pgram.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });
 
@@ -110,16 +109,16 @@ class Content extends PresentationFormatContent {
         ]),
       ],
       modifiers: {
-        equal_opposite_angles: this.bindToggleGroups(
+        equal_opposite_angles: pgram.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
         ),
-        equal_opposite_sides: this.bindToggleGroups(
+        equal_opposite_sides: pgram.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
-        half: this.bindToggleGroups(
+        half: pgram.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
-        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        diagonals: pgram.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });
   }

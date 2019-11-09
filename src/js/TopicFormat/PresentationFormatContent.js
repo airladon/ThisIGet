@@ -937,544 +937,498 @@ class PresentationFormatContent extends SimpleFormatContent {
     return click(this.next, [this], color);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getColor(
-    parent: DiagramElement,
-    childrenOrColor: ?(Array<number> | Array<DiagramElement | string>),
-    color: ?Array<number>,
-  ): Array<number> {
-    if (color != null) {
-      return color.slice();
-    }
-    let colorToUse = parent.color.slice();
-    if (childrenOrColor != null) {
-      if (typeof childrenOrColor[0] === 'number') {
-        colorToUse = childrenOrColor;
-      } else if (parent.type === 'collection' && childrenOrColor.length > 0) {
-        const firstElement = parent.getElement(childrenOrColor[0]);
-        colorToUse = firstElement.color.slice();
-      }
-    }
-    return colorToUse.slice();
-  }
-
-  /**
-  * Pulse element or specified children of element with the element's or
-  * children element's default pulse.
-  *
-  * @param {string} parent - A DiagramElement
-  * @param {?(Array<DiagramElement | string> | () => void)} childrenOrDone
-  * [childrenOrDone=null] - The children of the parent to be pulsed, or if the
-  * parent is to be pulsed, then the the callback done
-  * @param {?() => void} done [done=null] - Callback to be executed when
-  * pulsing is finished. Done is only executed when the first element being
-  * pulsed is finished.
-  *
-  * @example
-  *     pulse(parent)
-  *     pulse(parent, () => {})
-  *     pulse(parent, ['child1', 'child2'])
-  *     pulse(parent, ['child1', 'child2'], () => {})
-  */
-  // pulse(
+  // // eslint-disable-next-line class-methods-use-this
+  // getColor(
   //   parent: DiagramElement,
+  //   childrenOrColor: ?(Array<number> | Array<DiagramElement | string>),
+  //   color: ?Array<number>,
+  // ): Array<number> {
+  //   if (color != null) {
+  //     return color.slice();
+  //   }
+  //   let colorToUse = parent.color.slice();
+  //   if (childrenOrColor != null) {
+  //     if (typeof childrenOrColor[0] === 'number') {
+  //       colorToUse = childrenOrColor;
+  //     } else if (parent.type === 'collection' && childrenOrColor.length > 0) {
+  //       const firstElement = parent.getElement(childrenOrColor[0]);
+  //       colorToUse = firstElement.color.slice();
+  //     }
+  //   }
+  //   return colorToUse.slice();
+  // }
+
+  // /**
+  // * Pulse element or specified children of element with the element's or
+  // * children element's default pulse.
+  // *
+  // * @param {string} parent - A DiagramElement
+  // * @param {?(Array<DiagramElement | string> | () => void)} childrenOrDone
+  // * [childrenOrDone=null] - The children of the parent to be pulsed, or if the
+  // * parent is to be pulsed, then the the callback done
+  // * @param {?() => void} done [done=null] - Callback to be executed when
+  // * pulsing is finished. Done is only executed when the first element being
+  // * pulsed is finished.
+  // *
+  // * @example
+  // *     pulse(parent)
+  // *     pulse(parent, () => {})
+  // *     pulse(parent, ['child1', 'child2'])
+  // *     pulse(parent, ['child1', 'child2'], () => {})
+  // */
+  // // pulse(
+  // //   parent: DiagramElement,
+  // //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  // //   done: ?() => void = null,
+  // // ) {
+  // //   if (typeof childrenOrDone === 'function') {
+  // //     parent.pulse(childrenOrDone);
+  // //   } else {
+  // //     parent.pulse(childrenOrDone, done);
+  // //   }
+  // //   this.diagram.animateNextFrame();
+  // // }
+
+  // // bindPulse(
+  // //   parent: DiagramElement,
+  // //   // $FlowFixMe
+  // //   childrenOrColor: ?(Array<number> | Array<DiagramElement | string>) = null,
+  // //   color: ?Array<number> = null,
+  // // ) {
+  // //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  // //   const pulser = () => {
+  // //     if (childrenOrColor == null || typeof childrenOrColor[0] === 'number') {
+  // //       parent.pulse();
+  // //     } else {
+  // //       parent.pulse(childrenOrColor);
+  // //     }
+  // //     this.diagram.animateNextFrame();
+  // //   };
+  // //   return click(pulser, [this], colorToUse);
+  // // }
+
+  // // highlight(
+  // //   parent: DiagramElementCollection,
+  // //   children: ?Array<DiagramElement | string> = null,
+  // // ) {
+  // //   parent.highlight(children);
+  // //   this.diagram.animateNextFrame();
+  // // }
+
+  // // bindHighlight(
+  // //   parent: DiagramElementCollection,
+  // //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  // //   color: ?Array<number> = null,
+  // // ) {
+  // //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  // //   const highlighter = () => {
+  // //     if (childrenOrColor == null) {
+  // //       parent.highlight();
+  // //     } else if (typeof childrenOrColor[0] === 'number') {
+  // //       parent.highlight();
+  // //     } else {
+  // //       parent.highlight(childrenOrColor);
+  // //     }
+  // //     this.diagram.animateNextFrame();
+  // //   };
+  // //   return click(highlighter, [this], colorToUse);
+  // // }
+
+  // // highlightAndPulse(
+  // //   parent: DiagramElementCollection,
+  // //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  // //   done: ?() => void = null,
+  // // ) {
+  // //   if (typeof childrenOrDone === 'function') {
+  // //     parent.highlight();
+  // //     parent.pulse(childrenOrDone);
+  // //   } else {
+  // //     parent.highlight(childrenOrDone);
+  // //     parent.pulse(childrenOrDone, done);
+  // //   }
+  // //   this.diagram.animateNextFrame();
+  // // }
+
+  // // bindHighlightAndPulse(
+  // //   parent: DiagramElement,
+  // //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  // //   color: ?Array<number> = null,
+  // // ) {
+  // //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  // //   const pulseHighlighter = () => {
+  // //     // $FlowFixMe
+  // //     if (typeof childrenOrColor[0] === 'number') {
+  // //       parent.highlight();
+  // //       parent.pulse();
+  // //     } else {
+  // //       parent.highlight(childrenOrColor);
+  // //       parent.pulse(childrenOrColor);
+  // //     }
+  // //     this.diagram.animateNextFrame();
+  // //   };
+  // //   return click(pulseHighlighter, [this], colorToUse);
+  // // }
+
+  // // return an array of elements
+  // // If children is none, then elements is returned in array form
+  // // If children is defined, then each element in elements will be searched
+  // // for the children and all returned
+  // // eslint-disable-next-line class-methods-use-this
+  // getElements(
+  //   elementsIn: DiagramElement | Array<DiagramElement>,
+  //   childrenIn: ?Array<DiagramElement | string>,
+  // ): Array<DiagramElement> {
+  //   let elements;
+  //   if (Array.isArray(elementsIn)) {
+  //     elements = elementsIn;
+  //   } else {
+  //     elements = [elementsIn];
+  //   }
+  //   if (childrenIn == null) {
+  //     return elements;
+  //   }
+  //   const children = [];
+  //   elements.forEach((element) => {
+  //     childrenIn.forEach((child) => {
+  //       if (typeof child === 'string') {
+  //         const c = element.getElement(child);
+  //         if (c != null) {
+  //           children.push(c);
+  //         }
+  //       } else {
+  //         children.push(child);
+  //       }
+  //     });
+  //   });
+  //   return children;
+  // }
+
+  // // eslint-disable-next-line class-methods-use-this
+  // getElementsFromOptions(
+  //   options: TypeAccentOptions | DiagramElement | Array<DiagramElement>,
+  // ): Array<DiagramElement> {
+  //   if (options instanceof DiagramElement) {
+  //     return [options];
+  //   }
+  //   if (Array.isArray(options)) {
+  //     return options;
+  //   }
+  //   const { element, children } = options;
+  //   if (element == null) {
+  //     return [];
+  //   }
+  //   if (children == null) {
+  //     if (Array.isArray(element)) {
+  //       return element;
+  //     }
+  //     return [element];
+  //   }
+
+  //   return this.getElements(element, children);
+  // }
+
+  // // eslint-disable-next-line class-methods-use-this
+  // mergeAccentOptions(
+  //   elementOrOptions: DiagramElement | Array<DiagramElement>
+  //                     | TypeAccentOptions,
+  //   childrenOrDoneOrColor: ?(Array<DiagramElement | string> | () => void | Array<number>) = null,
+  //   done: ?() => void = null,
+  // ): {
+  //   element: ?Array<DiagramElement>,
+  //   children: ?Array<DiagramElement | string>,
+  //   style: TypeAccent,
+  //   done: ?() => void,
+  // } {
+  //   const defaultOptions: TypeAccentOptions = {
+  //     element: null,
+  //     children: null,
+  //     style: 'pulse',
+  //     done: null,
+  //   };
+  //   let options;
+  //   if (typeof childrenOrDoneOrColor === 'function') {
+  //     defaultOptions.done = childrenOrDoneOrColor;
+  //   } else if (childrenOrDoneOrColor != null
+  //     && typeof childrenOrDoneOrColor[0] !== 'number') {
+  //     defaultOptions.children = childrenOrDoneOrColor;
+  //   }
+  //   if (done != null) {
+  //     defaultOptions.done = done;
+  //   }
+
+  //   if (Array.isArray(elementOrOptions)) {
+  //     defaultOptions.element = elementOrOptions;
+  //     options = defaultOptions;
+  //   } else if (elementOrOptions instanceof DiagramElement) {
+  //     defaultOptions.element = [elementOrOptions];
+  //     options = defaultOptions;
+  //   } else {
+  //     options = joinObjects({}, defaultOptions, elementOrOptions);
+  //   }
+
+  //   if (options.element instanceof DiagramElement) {
+  //     options.element = [options.element];
+  //   }
+
+  //   const styleIn = options.style;
+  //   let style;
+  //   if (typeof styleIn === 'string') {
+  //     style = [styleIn];
+  //   } else if (styleIn == null) {
+  //     style = ['pulse'];
+  //   } else {
+  //     style = styleIn;
+  //   }
+  //   options.style = style;
+  //   return options;
+  // }
+
+  // /*
+  //   accent(element, done)
+  //   accent(elements, done)
+  //   accent(parent, children, done)
+  //   accent({
+  //     element: DiagramElement | Array<DiagramElement>,
+  //     children: ?Array<DiagramElement | string>,
+  //     style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
+  //     done: ?() => void,
+  //   })
+  // }
+  // */
+  // accent(
+  //   elementOrOptions: DiagramElement | Array<DiagramElement>
+  //                     | TypeAccentOptions,
   //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
   //   done: ?() => void = null,
   // ) {
-  //   if (typeof childrenOrDone === 'function') {
-  //     parent.pulse(childrenOrDone);
-  //   } else {
-  //     parent.pulse(childrenOrDone, done);
+  //   const options = this.mergeAccentOptions(elementOrOptions, childrenOrDone, done);
+
+  //   let parents = options.element;
+  //   const { children, style } = options;
+  //   let doneToUse = options.done;
+
+  //   const allElements = this.getElementsFromOptions(options);
+  //   if (allElements.length === 0 || parents == null) {
+  //     if (doneToUse != null) {
+  //       doneToUse();
+  //     }
+  //     return;
+  //   }
+
+  //   if (!Array.isArray(parents)) {
+  //     parents = [parents];
+  //   }
+
+  //   parents.forEach((element) => {
+  //     if (children == null) {
+  //       if (style.includes('show')) {
+  //         element.showAll();
+  //       }
+  //       if (style.includes('highlight')) {
+  //         element.highlight();
+  //       }
+  //       if (style.includes('pulse')) {
+  //         element.pulse(doneToUse);
+  //         doneToUse = null;
+  //       }
+  //     } else {
+  //       if (style.includes('show')) {
+  //         element.exec(['showAll'], children);
+  //       }
+  //       if (style.includes('highlight')) {
+  //         element.highlight(children);
+  //       }
+  //       if (style.includes('pulse')) {
+  //         element.pulse(children, doneToUse);
+  //         doneToUse = null;
+  //       }
+  //     }
+  //   });
+  //   if (doneToUse != null) {
+  //     doneToUse();
   //   }
   //   this.diagram.animateNextFrame();
   // }
 
-  // bindPulse(
+  // /*
+  //   bindAccent(element, color)
+  //   bindAccent(elements, color)
+  //   bindAccent(parent, children, color)
+  //   bindAccent({
+  //     element: DiagramElement | Array<DiagramElement>,
+  //     children: ?Array<DiagramElement | string>,
+  //     style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
+  //     done: ?() => void,
+  //   }, color)
+  // }
+  // */
+  // bindAccent(
+  //   elementOrOptions: DiagramElement | Array<DiagramElement>
+  //                     | TypeAccentOptions,
+  //   // $FlowFixMe
+  //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  //   color: ?Array<number> = null,
+  // ) {
+  //   let colorToUse = [1, 1, 1, 1];
+  //   const options = this.mergeAccentOptions(elementOrOptions, childrenOrColor, null);
+
+  //   const allElements = this.getElementsFromOptions(options);
+  //   if (allElements.length > 0) {
+  //     colorToUse = allElements[0].color.slice();
+  //   }
+
+  //   if (Array.isArray(childrenOrColor)
+  //     && childrenOrColor.length > 0
+  //     && typeof childrenOrColor[0] === 'number'
+  //   ) {
+  //     colorToUse = childrenOrColor.slice();
+  //   }
+  //   if (color != null) {
+  //     colorToUse = color.slice();
+  //   }
+  //   const accenter = () => {
+  //     this.accent(options);
+  //     this.diagram.animateNextFrame();
+  //   };
+  //   return click(accenter, [this], colorToUse);
+  // }
+
+  // // If any child is not shown, then show all children - otherwise hide all
+  // toggle(
+  //   parent: DiagramElement,
+  //   children: ?Array<DiagramElement | string> = null,
+  //   othersToHide: ?Array<DiagramElement | string> = null,
+  // ) {
+  //   if (children == null) {
+  //     if (parent.isShown) {
+  //       parent.hide();
+  //     } else {
+  //       parent.showAll();
+  //     }
+  //     this.diagram.animateNextFrame();
+  //     return;
+  //   }
+  //   const childElements = this.getElements(parent, children);
+  //   const allChildrenShown = childElements.reduce(
+  //     (allShown, elem) => elem.isShown && allShown,
+  //     true,
+  //   );
+  //   let anyOthersShown = false;
+  //   if (othersToHide != null && othersToHide.length > 0) {
+  //     const otherElements = this.getElements(parent, othersToHide);
+  //     anyOthersShown = otherElements.reduce((anyShown, elem) => elem.isShown || anyShown, false);
+  //   }
+
+  //   if (allChildrenShown && !anyOthersShown) {
+  //     parent.exec(['hide'], children);
+  //   } else {
+  //     parent.exec(['showAll'], children);
+  //   }
+  //   if (anyOthersShown) {
+  //     parent.exec('hide', othersToHide);
+  //   }
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // bindToggle(
   //   parent: DiagramElement,
   //   // $FlowFixMe
-  //   childrenOrColor: ?(Array<number> | Array<DiagramElement | string>) = null,
-  //   color: ?Array<number> = null,
-  // ) {
-  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
-  //   const pulser = () => {
-  //     if (childrenOrColor == null || typeof childrenOrColor[0] === 'number') {
-  //       parent.pulse();
-  //     } else {
-  //       parent.pulse(childrenOrColor);
-  //     }
-  //     this.diagram.animateNextFrame();
-  //   };
-  //   return click(pulser, [this], colorToUse);
-  // }
-
-  // highlight(
-  //   parent: DiagramElementCollection,
-  //   children: ?Array<DiagramElement | string> = null,
-  // ) {
-  //   parent.highlight(children);
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // bindHighlight(
-  //   parent: DiagramElementCollection,
   //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  //   // $FlowFixMe
+  //   othersToHideOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
   //   color: ?Array<number> = null,
   // ) {
-  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
-  //   const highlighter = () => {
-  //     if (childrenOrColor == null) {
-  //       parent.highlight();
-  //     } else if (typeof childrenOrColor[0] === 'number') {
-  //       parent.highlight();
+  //   let colorToUse = this.getColor(parent, childrenOrColor, color);
+  //   if (Array.isArray(othersToHideOrColor) && typeof othersToHideOrColor[0] === 'number') {
+  //     colorToUse = othersToHideOrColor;
+  //   }
+
+  //   const toggler = () => {
+  //     if (typeof childrenOrColor[0] === 'number') {
+  //       this.toggle(parent);
+  //     } else if (typeof othersToHideOrColor[0] === 'number') {
+  //       this.toggle(parent, childrenOrColor);
   //     } else {
-  //       parent.highlight(childrenOrColor);
+  //       this.toggle(parent, childrenOrColor, othersToHideOrColor);
   //     }
   //     this.diagram.animateNextFrame();
   //   };
-  //   return click(highlighter, [this], colorToUse);
+  //   return click(toggler, [this], colorToUse);
   // }
 
-  // highlightAndPulse(
-  //   parent: DiagramElementCollection,
-  //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  // toggleGroups(
+  //   parent: DiagramElement,
+  //   // $FlowFixMe
+  //   groupsIn: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
+  //   toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
+  //   styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
+  //            Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
   //   done: ?() => void = null,
   // ) {
-  //   if (typeof childrenOrDone === 'function') {
-  //     parent.highlight();
-  //     parent.pulse(childrenOrDone);
+  //   let style;
+  //   if (typeof styleIn === 'string') {
+  //     style = [styleIn];
   //   } else {
-  //     parent.highlight(childrenOrDone);
-  //     parent.pulse(childrenOrDone, done);
+  //     style = styleIn;
   //   }
+
+  //   let groups;
+  //   if (typeof groupsIn[0] === 'string') {
+  //     groups = groupsIn.map(g => [g]);
+  //   } else {
+  //     groups = groupsIn;
+  //   }
+  //   const index = this.toggleIndex[toggleIndex];
+  //   const numGroups = groups.length;
+  //   const group = groups[index];
+
+  //   if (style.includes('show')) {
+  //     groups.forEach((g, i) => {
+  //       if (i !== index) {
+  //         parent.exec(['hide'], g);
+  //       }
+  //     });
+  //     parent.exec(['showAll'], group);
+  //   }
+  //   if (style.includes('highlightInParent')) {
+  //     parent.highlight([...group]);
+  //   }
+  //   if (style.includes('highlight')) {
+  //     groups.forEach((g, i) => {
+  //       if (i !== index) {
+  //         parent.exec(['dim'], g);
+  //       }
+  //     });
+  //     parent.exec(['undim'], group);
+  //   }
+  //   if (style.includes('pulse')) {
+  //     parent.pulse([...group], done);
+  //   }
+  //   this.toggleIndex[toggleIndex] = (index + 1) % numGroups;
   //   this.diagram.animateNextFrame();
   // }
 
-  // bindHighlightAndPulse(
+  // bindToggleGroups(
   //   parent: DiagramElement,
-  //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-  //   color: ?Array<number> = null,
+  //   // $FlowFixMe
+  //   groups: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
+  //   color: Array<number> = [1, 0, 0, 1],
+  //   styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
+  //            Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
+  //   toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
   // ) {
-  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
-  //   const pulseHighlighter = () => {
-  //     // $FlowFixMe
-  //     if (typeof childrenOrColor[0] === 'number') {
-  //       parent.highlight();
-  //       parent.pulse();
-  //     } else {
-  //       parent.highlight(childrenOrColor);
-  //       parent.pulse(childrenOrColor);
-  //     }
-  //     this.diagram.animateNextFrame();
+  //   const groupPulser = () => {
+  //     this.toggleGroups(parent, groups, toggleIndex, styleIn, null);
   //   };
-  //   return click(pulseHighlighter, [this], colorToUse);
+  //   return click(groupPulser, [this], color);
   // }
 
-  // return an array of elements
-  // If children is none, then elements is returned in array form
-  // If children is defined, then each element in elements will be searched
-  // for the children and all returned
-  // eslint-disable-next-line class-methods-use-this
-  getElements(
-    elementsIn: DiagramElement | Array<DiagramElement>,
-    childrenIn: ?Array<DiagramElement | string>,
-  ): Array<DiagramElement> {
-    let elements;
-    if (Array.isArray(elementsIn)) {
-      elements = elementsIn;
-    } else {
-      elements = [elementsIn];
-    }
-    if (childrenIn == null) {
-      return elements;
-    }
-    const children = [];
-    elements.forEach((element) => {
-      childrenIn.forEach((child) => {
-        if (typeof child === 'string') {
-          const c = element.getElement(child);
-          if (c != null) {
-            children.push(c);
-          }
-        } else {
-          children.push(child);
-        }
-      });
-    });
-    return children;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  getElementsFromOptions(
-    options: TypeAccentOptions | DiagramElement | Array<DiagramElement>,
-  ): Array<DiagramElement> {
-    if (options instanceof DiagramElement) {
-      return [options];
-    }
-    if (Array.isArray(options)) {
-      return options;
-    }
-    const { element, children } = options;
-    if (element == null) {
-      return [];
-    }
-    if (children == null) {
-      if (Array.isArray(element)) {
-        return element;
-      }
-      return [element];
-    }
-
-    return this.getElements(element, children);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  mergeAccentOptions(
-    elementOrOptions: DiagramElement | Array<DiagramElement>
-                      | TypeAccentOptions,
-    childrenOrDoneOrColor: ?(Array<DiagramElement | string> | () => void | Array<number>) = null,
-    done: ?() => void = null,
-  ): {
-    element: ?Array<DiagramElement>,
-    children: ?Array<DiagramElement | string>,
-    style: TypeAccent,
-    done: ?() => void,
-  } {
-    const defaultOptions: TypeAccentOptions = {
-      element: null,
-      children: null,
-      style: 'pulse',
-      done: null,
-    };
-    let options;
-    if (typeof childrenOrDoneOrColor === 'function') {
-      defaultOptions.done = childrenOrDoneOrColor;
-    } else if (childrenOrDoneOrColor != null
-      && typeof childrenOrDoneOrColor[0] !== 'number') {
-      defaultOptions.children = childrenOrDoneOrColor;
-    }
-    if (done != null) {
-      defaultOptions.done = done;
-    }
-
-    if (Array.isArray(elementOrOptions)) {
-      defaultOptions.element = elementOrOptions;
-      options = defaultOptions;
-    } else if (elementOrOptions instanceof DiagramElement) {
-      defaultOptions.element = [elementOrOptions];
-      options = defaultOptions;
-    } else {
-      options = joinObjects({}, defaultOptions, elementOrOptions);
-    }
-
-    if (options.element instanceof DiagramElement) {
-      options.element = [options.element];
-    }
-
-    const styleIn = options.style;
-    let style;
-    if (typeof styleIn === 'string') {
-      style = [styleIn];
-    } else if (styleIn == null) {
-      style = ['pulse'];
-    } else {
-      style = styleIn;
-    }
-    options.style = style;
-    return options;
-  }
-
-  /*
-    accent(element, done)
-    accent(elements, done)
-    accent(parent, children, done)
-    accent({
-      element: DiagramElement | Array<DiagramElement>,
-      children: ?Array<DiagramElement | string>,
-      style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
-      done: ?() => void,
-    })
-  }
-  */
-  accent(
-    elementOrOptions: DiagramElement | Array<DiagramElement>
-                      | TypeAccentOptions,
-    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
-    done: ?() => void = null,
-  ) {
-    const options = this.mergeAccentOptions(elementOrOptions, childrenOrDone, done);
-
-    let parents = options.element;
-    const { children, style } = options;
-    let doneToUse = options.done;
-
-    const allElements = this.getElementsFromOptions(options);
-    if (allElements.length === 0 || parents == null) {
-      if (doneToUse != null) {
-        doneToUse();
-      }
-      return;
-    }
-
-    if (!Array.isArray(parents)) {
-      parents = [parents];
-    }
-
-    parents.forEach((element) => {
-      if (children == null) {
-        if (style.includes('show')) {
-          element.showAll();
-        }
-        if (style.includes('highlight')) {
-          element.highlight();
-        }
-        if (style.includes('pulse')) {
-          element.pulse(doneToUse);
-          doneToUse = null;
-        }
-      } else {
-        if (style.includes('show')) {
-          element.exec(['showAll'], children);
-        }
-        if (style.includes('highlight')) {
-          element.highlight(children);
-        }
-        if (style.includes('pulse')) {
-          element.pulse(children, doneToUse);
-          doneToUse = null;
-        }
-      }
-    });
-    if (doneToUse != null) {
-      doneToUse();
-    }
-    this.diagram.animateNextFrame();
-  }
-
-  /*
-    bindAccent(element, color)
-    bindAccent(elements, color)
-    bindAccent(parent, children, color)
-    bindAccent({
-      element: DiagramElement | Array<DiagramElement>,
-      children: ?Array<DiagramElement | string>,
-      style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
-      done: ?() => void,
-    }, color)
-  }
-  */
-  bindAccent(
-    elementOrOptions: DiagramElement | Array<DiagramElement>
-                      | TypeAccentOptions,
-    // $FlowFixMe
-    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-    color: ?Array<number> = null,
-  ) {
-    let colorToUse = [1, 1, 1, 1];
-    const options = this.mergeAccentOptions(elementOrOptions, childrenOrColor, null);
-
-    const allElements = this.getElementsFromOptions(options);
-    if (allElements.length > 0) {
-      colorToUse = allElements[0].color.slice();
-    }
-
-    if (Array.isArray(childrenOrColor)
-      && childrenOrColor.length > 0
-      && typeof childrenOrColor[0] === 'number'
-    ) {
-      colorToUse = childrenOrColor.slice();
-    }
-    if (color != null) {
-      colorToUse = color.slice();
-    }
-    const accenter = () => {
-      this.accent(options);
-      this.diagram.animateNextFrame();
-    };
-    return click(accenter, [this], colorToUse);
-  }
-
-  // If any child is not shown, then show all children - otherwise hide all
-  toggle(
-    parent: DiagramElement,
-    children: ?Array<DiagramElement | string> = null,
-    othersToHide: ?Array<DiagramElement | string> = null,
-  ) {
-    if (children == null) {
-      if (parent.isShown) {
-        parent.hide();
-      } else {
-        parent.showAll();
-      }
-      this.diagram.animateNextFrame();
-      return;
-    }
-    const childElements = this.getElements(parent, children);
-    const allChildrenShown = childElements.reduce(
-      (allShown, elem) => elem.isShown && allShown,
-      true,
-    );
-    let anyOthersShown = false;
-    if (othersToHide != null && othersToHide.length > 0) {
-      const otherElements = this.getElements(parent, othersToHide);
-      anyOthersShown = otherElements.reduce((anyShown, elem) => elem.isShown || anyShown, false);
-    }
-
-    if (allChildrenShown && !anyOthersShown) {
-      parent.exec(['hide'], children);
-    } else {
-      parent.exec(['showAll'], children);
-    }
-    if (anyOthersShown) {
-      parent.exec('hide', othersToHide);
-    }
-    this.diagram.animateNextFrame();
-  }
-
-  bindToggle(
-    parent: DiagramElement,
-    // $FlowFixMe
-    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-    // $FlowFixMe
-    othersToHideOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-    color: ?Array<number> = null,
-  ) {
-    let colorToUse = this.getColor(parent, childrenOrColor, color);
-    if (Array.isArray(othersToHideOrColor) && typeof othersToHideOrColor[0] === 'number') {
-      colorToUse = othersToHideOrColor;
-    }
-
-    const toggler = () => {
-      if (typeof childrenOrColor[0] === 'number') {
-        this.toggle(parent);
-      } else if (typeof othersToHideOrColor[0] === 'number') {
-        this.toggle(parent, childrenOrColor);
-      } else {
-        this.toggle(parent, childrenOrColor, othersToHideOrColor);
-      }
-      this.diagram.animateNextFrame();
-    };
-    return click(toggler, [this], colorToUse);
-  }
-
-  toggleGroups(
-    parent: DiagramElement,
-    // $FlowFixMe
-    groupsIn: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
-    toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
-    styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
-             Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
-    done: ?() => void = null,
-  ) {
-    let style;
-    if (typeof styleIn === 'string') {
-      style = [styleIn];
-    } else {
-      style = styleIn;
-    }
-
-    let groups;
-    if (typeof groupsIn[0] === 'string') {
-      groups = groupsIn.map(g => [g]);
-    } else {
-      groups = groupsIn;
-    }
-    const index = this.toggleIndex[toggleIndex];
-    const numGroups = groups.length;
-    const group = groups[index];
-    // if (style.includes('toggle')) {
-    //   let othersShowing = false;
-    //   let anyGroupHidden = false;
-    //   groups.forEach((g, i) => {
-    //     const elements = this.getElements(parent, g);
-    //     if (i !== 0) {
-    //       const anyShown = elements.reduce((shown, e) => shown || e.isShown, false);
-    //       othersShowing = othersShowing || anyShown;
-    //       parent.exec(['hide'], g);
-    //     }
-    //     if (i === 0) {
-    //       const anyHidden = elements.reduce((shown, e) => shown && e.isShown, false);
-    //       anyGroupHidden = anyHidden;
-    //       parent.exec(['showAll'], g);
-    //     }
-    //   });
-    //   if (!othersShowing && !anyGroupHidden) {
-    //     parent.exec(['hide'], group);
-    //   }
-    //   this.diagram.animateNextFrame();
-    //   return;
-    // }
-    if (style.includes('show')) {
-      groups.forEach((g, i) => {
-        if (i !== index) {
-          parent.exec(['hide'], g);
-        }
-      });
-      parent.exec(['showAll'], group);
-    }
-    if (style.includes('highlightInParent')) {
-      parent.highlight([...group]);
-    }
-    if (style.includes('highlight')) {
-      groups.forEach((g, i) => {
-        if (i !== index) {
-          parent.exec(['dim'], g);
-        }
-      });
-      parent.exec(['undim'], group);
-    }
-    if (style.includes('pulse')) {
-      parent.pulse([...group], done);
-    }
-    this.toggleIndex[toggleIndex] = (index + 1) % numGroups;
-    this.diagram.animateNextFrame();
-  }
-
-  bindToggleGroups(
-    parent: DiagramElement,
-    // $FlowFixMe
-    groups: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
-    color: Array<number> = [1, 0, 0, 1],
-    styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
-             Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
-    toggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
-  ) {
-    const groupPulser = () => {
-      this.toggleGroups(parent, groups, toggleIndex, styleIn, null);
-    };
-    return click(groupPulser, [this], color);
-  }
-
-  resetToggle(index: ?(0 | 1 | 2 | 3 | 4) = null) {
-    if (index == null) {
-      this.toggleIndex = [0, 0, 0, 0, 0];
-    } else {
-      this.toggleIndex[index] = 0;
-    }
-  }
-  // bindShowQR(
-  //   uid: string,
-  //   qrid: string,
-  //   colorOrOptions: Array<number> | {
-  //     color?: ?Array<number>,
-  //     interactive?: boolean,
-  //     id?: string,
-  //     classes?: string,
-  //     text?: ?string,
-  //   } = {},
-  //   // color: Array<number> = this.diagram.layout.colors.diagram.action,
-  // ) {
-  //   const defaultOptions = {
-  //     color: this.diagram.layout.colors.diagram.action,
-  //     classes: '',
-  //   };
-  //   let options = defaultOptions;
-  //   if (Array.isArray(colorOrOptions)) {
-  //     options.color = colorOrOptions;
+  // resetToggle(index: ?(0 | 1 | 2 | 3 | 4) = null) {
+  //   if (index == null) {
+  //     this.toggleIndex = [0, 0, 0, 0, 0];
   //   } else {
-  //     options = joinObjects({}, defaultOptions, colorOrOptions);
-  //     options.classes = `topic__qr_action_word ${options.classes}`;
+  //     this.toggleIndex[index] = 0;
   //   }
-  //   return click(this.showQR, [this, uid, qrid], options);
   // }
 
   qr(

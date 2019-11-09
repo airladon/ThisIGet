@@ -31,12 +31,15 @@ export default class QRMainPres extends PopupBoxCollection {
     super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
+    const pgram = coll._pgram;
     const { colors } = this.layout;
-    const modifiers = {};
+    const modifiers = {
+      parallelogram: this.bindAccent(pgram),
+    };
     this.setTitle('Parallelogram');
     this.setDescription([
       'A |parallelogram| is a four sided shape with |parallel opposite sides|. It\'s properties are |opposite sides are equal|, |opposite angles are equal|, |diagonals intersect at their midpoints|. Conversely, if a four sided shape has any of these properties, it is a parallelogram. A parallelogram\'s area is: |Area| = |A| \u00D7 |H|.',
-    ]);
+    ], modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 

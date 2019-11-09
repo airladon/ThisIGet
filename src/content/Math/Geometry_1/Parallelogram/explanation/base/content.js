@@ -65,10 +65,10 @@ class Content extends PresentationFormatContent {
         `${new Definition('Parallelogram', 'Latin', ['parallelogrammum', ''], 'Greek', ['parallelogrammon', 'bounded by parallel lines']).html({ classes: 'diagram__definition_high', color: colors.sides })}`,
       ],
       modifiers: {
-        parallelogram: this.bindAccent(pgram),
+        parallelogram: coll.bindAccent(pgram),
         parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         quadrangle: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
-        opposite_sides: this.bindToggleGroups(
+        opposite_sides: coll.bindToggleGroups(
           pgram,
           [['pMarkLeft', 'pMarkRight'], ['pMarkTop', 'pMarkBottom']],
           colors.sides,
@@ -123,11 +123,11 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        angle: this.bindAccent(pgram._a1),
+        angle: coll.bindAccent(pgram._a1),
       },
       transitionFromPrev: (done) => {
-        // this.accent(pgram._a1, null, 'pulse', done);
-        this.accent(pgram._a1, done);
+        // coll.accent(pgram._a1, null, 'pulse', done);
+        coll.accent(pgram._a1, done);
       },
       show: [
         pgram._line,
@@ -158,7 +158,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        angle: this.bindAccent(pgram, ['b1', 'a1']),
+        angle: coll.bindAccent(pgram, ['b1', 'a1']),
       },
       show: [
         pgram._line,
@@ -167,7 +167,7 @@ class Content extends PresentationFormatContent {
         pgram._a1, pgram._b1,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['b1', 'a1'], done);
+        coll.accent(pgram, ['b1', 'a1'], done);
       },
     });
 
@@ -232,10 +232,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       setContent: 'Conversely, is |any| quadrangle with |equal_opposite_angles| a |parallelogram|?',
       modifiers: {
-        equal_opposite_angles: this.bindToggleGroups(
+        equal_opposite_angles: coll.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b11', 'b21']], colors.angles,
         ),
-        test: this.bindToggleGroups(
+        test: coll.bindToggleGroups(
           pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles,
         ),
       },
@@ -298,7 +298,7 @@ class Content extends PresentationFormatContent {
       setContent: 'So each |interior_angle_pair| |adds_to_180º|, and therefore must be between |parallel lines|.',
       modifiers: {
         adds_to_180º: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Interior'),
-        interior_angle_pair: this.bindToggleGroups(
+        interior_angle_pair: coll.bindToggleGroups(
           pgram,
           [['a1', 'b11'], ['b11', 'a2'], ['a2', 'b21'], ['b21', 'a1']],
         ),
@@ -311,10 +311,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, temp, commonContent, {
       setContent: 'Therefore, |any| quadrangle with |equal_opposite_angles| is a |parallelogram|.',
       modifiers: {
-        equal_opposite_angles: this.bindToggleGroups(
+        equal_opposite_angles: coll.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b11', 'b21']],
         ),
-        parallelogram: this.bindAccent(
+        parallelogram: coll.bindAccent(
           pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'],
         ),
       },
@@ -450,7 +450,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        equal_angles: this.bindAccent(pgram, ['c1', 'c2']),
+        equal_angles: coll.bindAccent(pgram, ['c1', 'c2']),
       },
       show: [
         pgram._line,
@@ -562,7 +562,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       setContent: 'Conversely, is |any| quadrangle with |equal_opposite_sides| a |parallelogram|?',
       modifiers: {
-        equal_opposite_sides: this.bindToggleGroups(
+        equal_opposite_sides: coll.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
       },
@@ -593,7 +593,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null], colors.sides),
-        two_triangles: this.bindToggleGroups(
+        two_triangles: coll.bindToggleGroups(
           pgram,
           [['labelA1', 'labelB1', 'diag1'], ['labelA2', 'labelB2', 'diag1']],
           colors.sides,
@@ -628,7 +628,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        corresponding_angles: this.bindToggleGroups(
+        corresponding_angles: coll.bindToggleGroups(
           pgram,
           [['c1', 'c2'], ['d1', 'd2'], ['b1', 'b2']],
           colors.angles,
@@ -642,7 +642,7 @@ class Content extends PresentationFormatContent {
         pgram._d1, pgram._d2,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['d1', 'd2', 'c1', 'c2', 'b1', 'b2'], done);
+        coll.accent(pgram, ['d1', 'd2', 'c1', 'c2', 'b1', 'b2'], done);
       },
     });
 
@@ -652,7 +652,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({ top: 0 }, 'Thus, the quadrangle\'s |opposite_angles| are equal, and as we saw previously, this must be a |parallelogram|.'),
       modifiers: {
-        opposite_angles: this.bindToggleGroups(
+        opposite_angles: coll.bindToggleGroups(
           pgram,
           [['c1', 'd1', 'c2', 'd2'], ['b1', 'b2']],
           colors.angles,
@@ -672,7 +672,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        parallelogram: this.bindAccent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom']),
+        parallelogram: coll.bindAccent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom']),
       },
       show: [
         pgram._line,
@@ -685,7 +685,7 @@ class Content extends PresentationFormatContent {
         pgram._pMarkTop, pgram._pMarkBottom,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
+        coll.accent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
       },
     });
 
@@ -768,7 +768,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        equal_angles: this.bindAccent(pgram, ['e1', 'e2']),
+        equal_angles: coll.bindAccent(pgram, ['e1', 'e2']),
       },
       show: [
         pgram._line,
@@ -898,7 +898,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'So the |diagonals| of a parallelogram will |always| intersect at their |center|.',
       modifiers: {
-        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
     this.addSection(common, commonContent, {
@@ -919,8 +919,8 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'Conversely, is |any| quadrangle with |diagonals| that split each other in |half| a |parallelogram|?',
       modifiers: {
-        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
-        half: this.bindAccent(pgram, ['lMarkUp1', 'lMarkUp2', 'lMark21', 'lMark22']),
+        diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
+        half: coll.bindAccent(pgram, ['lMarkUp1', 'lMarkUp2', 'lMark21', 'lMark22']),
       },
     };
 
@@ -955,7 +955,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        equal: this.bindToggleGroups(
+        equal: coll.bindToggleGroups(
           pgram,
           [['g1', 'g2'], ['j1', 'j2']],
           colors.angles2,
@@ -969,7 +969,7 @@ class Content extends PresentationFormatContent {
         pgram._g1, pgram._g2, pgram._j1, pgram._j2,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['g1', 'g2', 'j1', 'j2'], done);
+        coll.accent(pgram, ['g1', 'g2', 'j1', 'j2'], done);
       },
     });
 
@@ -980,7 +980,7 @@ class Content extends PresentationFormatContent {
       setContent: 'Therefore by |ASA| the |opposite_triangles| will be |congruent|.',
       modifiers: {
         ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
-        opposite_triangles: this.bindToggleGroups(
+        opposite_triangles: coll.bindToggleGroups(
           pgram,
           [['triLeft', 'triRight'], ['triTop', 'triBottom']],
           colors.sides,
@@ -1002,7 +1002,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        congruent: this.bindToggleGroups(
+        congruent: coll.bindToggleGroups(
           pgram,
           [['g1', 'g2', 'f1', 'f2', 'd1', 'd2'], ['j1', 'j2', 'c1', 'c2', 'e1', 'e2']],
           colors.angles2,
@@ -1019,7 +1019,7 @@ class Content extends PresentationFormatContent {
         pgram._f1, pgram._f2, pgram._e1, pgram._e2,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['c1', 'c2', 'd1', 'd2', 'e1', 'e2', 'f1', 'f2'], done);
+        coll.accent(pgram, ['c1', 'c2', 'd1', 'd2', 'e1', 'e2', 'f1', 'f2'], done);
       },
     });
 
@@ -1029,7 +1029,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'The quadrangle\'s |opposite_angles| are equal, and it is therefore a |parallelagram|.',
       modifiers: {
-        opposite_angles: this.bindToggleGroups(
+        opposite_angles: coll.bindToggleGroups(
           pgram,
           [['f1', 'f2', 'e1', 'e2'], ['c1', 'c2', 'd1', 'd2']],
           colors.angles2,
@@ -1053,7 +1053,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        parallelagram: this.bindAccent(
+        parallelagram: coll.bindAccent(
           pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'],
         ),
       },
@@ -1069,7 +1069,7 @@ class Content extends PresentationFormatContent {
         pgram._pMarkTop, pgram._pMarkBottom,
       ],
       transitionFromPrev: (done) => {
-        this.accent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
+        coll.accent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
       },
     });
 
@@ -1079,8 +1079,8 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'So |any| quadrangle with |diagonals| that split each other in |half| will be a |parallelogram|.',
       modifiers: {
-        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
-        half: this.bindAccent(pgram, ['lMarkUp1', 'lMarkUp2', 'lMark21', 'lMark22']),
+        diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
+        half: coll.bindAccent(pgram, ['lMarkUp1', 'lMarkUp2', 'lMark21', 'lMark22']),
       },
     };
 
@@ -1188,7 +1188,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         // splitting: click(coll.split, [coll, null], colors.sides),
-        equal_: this.bindAccent(pgram, ['s1.label', 's2.label']),
+        equal_: coll.bindAccent(pgram, ['s1.label', 's2.label']),
       },
       show: [
         pgram._line,
@@ -1229,7 +1229,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         // splitting: click(coll.split, [coll, null], colors.sides),
-        height: this.bindAccent(pgram, ['h.label']),
+        height: coll.bindAccent(pgram, ['h.label']),
       },
       show: [
         pgram._line,
@@ -1255,9 +1255,9 @@ class Content extends PresentationFormatContent {
         note({ top: 93, color: colors.diagram.text.note }, 'Reference formulas: |rectangle_area|, |triangle_area|.')
       ]),
       modifiers: {
-        rectangle: this.bindToggle(pgram, ['rect'], ['tri1', 'tri2'], colors.sides),
-        two_triangles: this.bindToggle(pgram, ['tri1', 'tri2'], ['rect'],colors.sides),
-        total_area: this.bindToggle(pgram, ['tri1', 'tri2', 'rect'], colors.sides),
+        rectangle: coll.bindToggle(pgram, ['rect'], ['tri1', 'tri2'], colors.sides),
+        two_triangles: coll.bindToggle(pgram, ['tri1', 'tri2'], ['rect'],colors.sides),
+        total_area: coll.bindToggle(pgram, ['tri1', 'tri2', 'rect'], colors.sides),
         rectangle_area: this.qr('Math/Geometry_1/Area/base/RectanglePres'),
         triangle_area: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),
       },
@@ -1439,9 +1439,9 @@ class Content extends PresentationFormatContent {
         Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
         Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
         half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
-        A: this.bindAccent(pgram, ['labelA1']),
-        H: this.bindAccent(pgram, ['h']),
-        Diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        A: coll.bindAccent(pgram, ['labelA1']),
+        H: coll.bindAccent(pgram, ['h']),
+        Diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
 
@@ -1482,7 +1482,7 @@ class Content extends PresentationFormatContent {
         equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
         equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
         half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
-        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
 
