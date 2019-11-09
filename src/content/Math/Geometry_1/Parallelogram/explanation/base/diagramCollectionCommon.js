@@ -23,6 +23,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _a2: TypeLabelledAngle;
     _b1: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _b2: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
+    _b21: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
+    _b21: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _c1: TypeLabelledAngle;
     _c2: TypeLabelledAngle;
     _d1: TypeLabelledAngle;
@@ -99,14 +101,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     pgram.stop();
     pgram._a1.showAll();
     pgram._a2.showAll();
-    pgram._b1.showAll();
-    pgram._b2.showAll();
+    pgram._b11.showAll();
+    pgram._b21.showAll();
     pgram.animations.new()
       .inParallel([
         pgram._a1._label.anim.dissolveOut(1),
         pgram._a2._label.anim.dissolveOut(1),
-        pgram._b1._label.anim.dissolveOut(1),
-        pgram._b2._label.anim.dissolveOut(1),
+        pgram._b11._label.anim.dissolveOut(1),
+        pgram._b21._label.anim.dissolveOut(1),
       ])
       .whenFinished(done)
       .start();

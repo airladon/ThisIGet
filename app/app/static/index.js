@@ -6488,9 +6488,11 @@ function (_DiagramElementCollec) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNew).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
     _this.shapes = shapes;
-    _this.color = optionsToUse.color; // this.isTouchDevice = isTouchDevice;
+
+    _this.setColor(optionsToUse.color); // this.isTouchDevice = isTouchDevice;
     // this.animateNextFrame = animateNextFrame;
     // Set default values
+
 
     _this.eqn = {
       forms: {},
@@ -16829,6 +16831,7 @@ function () {
       var wy = options.width * Math.sin(options.angle + Math.PI / 2);
       var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 - y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, -y + wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-Math.abs(options.width / Math.cos(options.angle + Math.PI / 2)), 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, y - wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 + y)];
       var collection = this.collection(options.transform);
+      collection.setColor(options.color);
       var start = -((options.num - 1) / 2) * options.step;
 
       var _loop = function _loop(i) {
@@ -16876,6 +16879,7 @@ function () {
 
       var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, options.width / 2)];
       var collection = this.collection(options.transform);
+      collection.setColor(options.color);
       var start = -((options.num - 1) / 2) * options.step;
 
       var _loop2 = function _loop2(i) {

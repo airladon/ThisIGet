@@ -137,7 +137,7 @@ class Content extends PresentationFormatContent {
       }, [
         '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
         'When the two lines are |parallel|, the interior angles always add to |180º|.',
-        'Similarly, if interior angles are |add to 180º|, then the two lines are always |parallel_|.',
+        'Similarly, if interior angles |add to 180º|, then the two lines are always |parallel_|.',
       ]),
       modifiers: {
         Interior_angles: click(three.toggleInterior, [three], colors.angle1),

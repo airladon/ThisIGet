@@ -255,7 +255,7 @@ export class QRInterior extends PopupBoxCollection {
     this.setDescription([
       '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
       'When the two lines are |parallel|, the |interior_angles_always_add_to_180º|.',
-      'If interior angles are |add to 180º|, then the |two_lines_are_always_parallel|.',
+      'If interior angles |add to 180º|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }

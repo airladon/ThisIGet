@@ -272,13 +272,13 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     this.addSection(common, {
-      setContent: 'Conversely, is |any| quadrangle with |equal_opposite_angles| a |parallelogram|? |test|',
+      setContent: 'Conversely, is |any| quadrangle with |equal_opposite_angles| a |parallelogram|?',
       modifiers: {
         equal_opposite_angles: this.bindToggleGroups(
-          pgram, [['a1', 'a2'], ['b11', 'b21']], colors.angles, ['pulse', 'highlightInParent'],
+          pgram, [['a1', 'a2'], ['b11', 'b21']], colors.angles,
         ),
         test: this.bindToggleGroups(
-          pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles, ['pulse', 'highlightInParent'],
+          pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles,
         ),
       },
       show: [
@@ -336,6 +336,51 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    this.addSection(common, temp, commonContent, {
+      setContent: 'So each |interior_angle_pair| |adds_to_180º|, and therefore must be between |parallel lines|.',
+      modifiers: {
+        adds_to_180º: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Interior'),
+        interior_angle_pair: this.bindToggleGroups(
+          pgram,
+          [['a1', 'b11'], ['b11', 'a2'], ['a2', 'b21'], ['b21', 'a1']],
+        ),
+      },
+      setSteadyState: () => {
+        eqn2.showForm('3');
+      },
+    });
+
+    this.addSection(common, temp, commonContent, {
+      setContent: 'Therefore, |any| quadrangle with |equal_opposite_angles| is a |parallelogram|.',
+      modifiers: {
+        equal_opposite_angles: this.bindToggleGroups(
+          pgram, [['a1', 'a2'], ['b11', 'b21']],
+        ),
+        parallelogram: this.bindAccent(
+          pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'],
+        ),
+      },
+      setEnterState: () => {
+        pgram.setScenario('default');
+      },
+      show: [
+        pgram._line,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._pMarkLeft, pgram._pMarkRight,
+      ],
+      transitionFromPrev: (done) => {
+        pgram.setScenario('low');
+        pgram.animations.new()
+          .scenario({ target: 'default', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: 'For simplicity moving forward, let\'s |remove| the angle labels.',
       modifiers: {
@@ -347,7 +392,7 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
       ],
     });
 
@@ -358,6 +403,7 @@ class Content extends PresentationFormatContent {
       },
       hide: [
         pgram._a1._label, pgram._a2._label,
+        pgram._b11._label, pgram._b21._label,
         pgram._b1._label, pgram._b2._label,
       ],
     }
@@ -369,7 +415,7 @@ class Content extends PresentationFormatContent {
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,
         pgram._pMarkTop, pgram._pMarkBottom,
-        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._a1, pgram._b11, pgram._a2, pgram._b21,
       ],
       transitionFromPrev: (done) => {
         coll.dissolveOutAngleLabels(done);
@@ -549,6 +595,140 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         coll.toggleIndex = 0;
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection(common, {
+      setContent: 'Conversely, is |any| quadrangle with |equal_opposite_sides| a |parallelogram|?',
+      modifiers: {
+        equal_opposite_sides: this.bindToggleGroups(
+          pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
+        ),
+      },
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'We can test this by drawing the same |diagonal_line| and realizing the |two_triangles| created are |congruent| by |SSS|.',
+      modifiers: {
+        diagonal_line: this.bindNext(colors.sides),
+        two_triangles: this.bindNext(colors.sides),
+        SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null], colors.sides),
+        two_triangles: this.bindToggleGroups(
+          pgram,
+          [['labelA1', 'labelB1', 'diag1'], ['labelA2', 'labelB2', 'diag1']],
+          colors.sides,
+        ),
+      },
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._diag1,
+      ],
+      transitionFromPrev: (done) => {
+        pgram._diag1.grow(0.05, 1, true, done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'Therefore, the two triangle\'s |corresponding_angles| are equal.'),
+      modifiers: {
+        corresponding_angles: this.bindNext(colors.angles),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._diag1,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        corresponding_angles: this.bindToggleGroups(
+          pgram,
+          [['c1', 'c2'], ['g1', 'g2'], ['b1', 'b2']],
+          colors.angles,
+        ),
+      },
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._diag1,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._g1, pgram._g2,
+      ],
+      transitionFromPrev: (done) => {
+        this.accent(pgram, ['g1', 'g2', 'c1', 'c2', 'b1', 'b2'], done);
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'Thus, the quadrangle\'s |opposite_angles| are equal, and as we saw previously, this must be a |parallelogram|.'),
+      modifiers: {
+        opposite_angles: this.bindNext(colors.angles),
+        parallelogram: this.bindNext(colors.sides),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._diag1,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._g1, pgram._g2,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        opposite_angles: this.bindToggleGroups(
+          pgram,
+          [['a1', 'a2'], ['b1', 'b2']],
+          colors.angles,
+        ),
+        parallelogram: this.bindAccent(pgram, ['pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom']),
+      },
+      show: [
+        pgram._line,
+        pgram._labelA1, pgram._labelA2, pgram._labelB1, pgram._labelB2,
+        pgram._diag1,
+        pgram._c1, pgram._c2, pgram._b1, pgram._b2,
+        pgram._g1, pgram._g2,
+        pgram._a1, pgram._a2,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+      ],
+      transitionFromPrev: (done) => {
+        this.accent(pgram, ['a1', 'a2', 'pMarkLeft', 'pMarkRight', 'pMarkTop', 'pMarkBottom'], done);
       },
     });
 

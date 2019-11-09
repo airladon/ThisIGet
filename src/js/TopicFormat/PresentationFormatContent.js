@@ -1276,6 +1276,7 @@ class PresentationFormatContent extends SimpleFormatContent {
     if (allElements.length > 0) {
       colorToUse = allElements[0].color.slice();
     }
+
     if (Array.isArray(childrenOrColor)
       && childrenOrColor.length > 0
       && typeof childrenOrColor[0] === 'number'
