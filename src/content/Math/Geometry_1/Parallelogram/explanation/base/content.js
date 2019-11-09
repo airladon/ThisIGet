@@ -1446,7 +1446,7 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonContent, {
-      title: 'summary',
+      title: 'Summary',
       show: [
         pgram._line,
         pgram._pMarkLeft, pgram._pMarkRight,

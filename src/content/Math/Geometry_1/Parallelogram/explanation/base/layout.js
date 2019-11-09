@@ -259,6 +259,7 @@ export default function diagramLayout() {
         default: { position: [0, -0.1], scale: 0.9 },
         low: { position: [0, -0.4], scale: 0.9 },
         bottom: { position: [0, -0.6], scale: 0.9 },
+        summary: { position: [0, -0.5], scale: 0.9 },
       },
       pulseDefault: {
         scale: 1.1,

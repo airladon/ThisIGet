@@ -1698,6 +1698,17 @@
           "fullTopic": true,
           "links": ""
         }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
       }
     },
     "dependencies": [
