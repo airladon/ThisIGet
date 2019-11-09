@@ -38,7 +38,7 @@ export default function diagramLayout() {
 
   const lineD1 = new Line(points[0], points[2]);
   const lineD2 = new Line(points[1], points[3]);
-  // const center = lineD1.midPoint();
+  const center = lineD1.midPoint();
   const height = points[2].y - points[1].y;
   const right1 = new Point(points[3].x, points[0].y);
   const right2 = new Point(points[1].x, points[2].y);
@@ -152,38 +152,55 @@ export default function diagramLayout() {
     },
   });
 
+  const fill = (name, points, color) => ({
+    name,
+    method: 'fan',
+    options: {
+      fill: true,
+      points,
+      color,
+    },
+  });
+
   const w = 0.02;
   const parallelogram = {
     name: 'pgram',
     method: 'collection',
     addElements: [
-      {
-        name: 'rect',
-        method: 'fan',
-        options: {
-          fill: true,
-          points: [right1, points[1], right2, points[3]],
-          color: colors.fill,
-        },
-      },
-      {
-        name: 'tri1',
-        method: 'fan',
-        options: {
-          fill: true,
-          points: [points[1], right2, points[2]],
-          color: colors.fill,
-        },
-      },
-      {
-        name: 'tri2',
-        method: 'fan',
-        options: {
-          fill: true,
-          points: [points[0], right1, points[3]],
-          color: colors.fill,
-        },
-      },
+      // {
+      //   name: 'rect',
+      //   method: 'fan',
+      //   options: {
+      //     fill: true,
+      //     points: [right1, points[1], right2, points[3]],
+      //     color: colors.fill,
+      //   },
+      // },
+      fill('rect', [right1, points[1], right2, points[3]], colors.fill),
+      fill('tri1', [points[1], right2, points[2]], colors.fill),
+      fill('tri2', [points[0], right1, points[3]], colors.fill),
+      fill('triLeft', [points[3], center, points[0]], colors.fill),
+      fill('triRight', [points[1], center, points[2]], colors.fill),
+      fill('triTop', [points[2], center, points[3]], colors.fill),
+      fill('triBottom', [points[0], center, points[1]], colors.fill),
+      // {
+      //   name: 'tri1',
+      //   method: 'fan',
+      //   options: {
+      //     fill: true,
+      //     points: [points[1], right2, points[2]],
+      //     color: colors.fill,
+      //   },
+      // },
+      // {
+      //   name: 'tri2',
+      //   method: 'fan',
+      //   options: {
+      //     fill: true,
+      //     points: [points[0], right1, points[3]],
+      //     color: colors.fill,
+      //   },
+      // },
       {
         name: 'line',
         method: 'polyLine',
@@ -212,12 +229,16 @@ export default function diagramLayout() {
       dashed('diag2', lineD2.p2, lineD2.p1),
       angle('c1', points[1], points[0], points[2], 'c', 1, 0.5, colors.angles2),
       angle('c2', points[3], points[2], points[0], 'c', 1, 0.5, colors.angles2),
-      // angle('f1', points[1], points[0], points[2], '', 1, 0.5, colors.angles),
-      // angle('f2', points[3], points[2], points[0], '', 1, 0.5, colors.angles),
-      angle('g1', points[2], points[0], points[3], 'd', 1, 0.5, colors.angles2),
-      angle('g2', points[0], points[2], points[1], 'd', 1, 0.5, colors.angles2),
-      angle('d1', points[3], points[1], points[0], 'e', 1, 0.5, colors.angles2),
-      angle('d2', points[1], points[3], points[2], 'e', 1, 0.5, colors.angles2),
+      angle('g1', points[3], center, points[0], 'g', 1, 0.3, colors.angles2),
+      angle('g2', points[1], center, points[2], 'g', 1, 0.3, colors.angles2),
+      angle('j1', points[0], center, points[1], 'j', 1, 0.25, colors.angles2),
+      angle('j2', points[2], center, points[3], 'j', 1, 0.25, colors.angles2),
+      angle('d1', points[2], points[0], points[3], 'd', 1, 0.5, colors.angles2),
+      angle('d2', points[0], points[2], points[1], 'd', 1, 0.5, colors.angles2),
+      angle('e1', points[3], points[1], points[0], 'e', 1, 0.5, colors.angles2),
+      angle('e2', points[1], points[3], points[2], 'e', 1, 0.5, colors.angles2),
+      angle('f1', points[2], points[1], points[3], 'f', 1, 0.5, colors.angles2),
+      angle('f2', points[0], points[3], points[1], 'f', 1, 0.5, colors.angles2),
       label('labelA1', points[1], points[0], 'A'),
       label('labelA2', points[3], points[2], 'A'),
       label('labelB1', points[2], points[1], 'B'),
