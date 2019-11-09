@@ -32,12 +32,13 @@ class Content extends PresentationFormatContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    console.log(this.diagram.elements)
   }
 
   addSections() {
     const diag = this.diagram.elements;
-    const coll = diag._collection;
-    const pgram = coll._pgram;
+    // const coll = diag._collection;
+    const pgram = diag._pgram;
 
     const common = {
       show: [
@@ -79,9 +80,15 @@ class Content extends PresentationFormatContent {
         })}`,
       ],
       modifiers: {
-        Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
-        Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
-        half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        Opposite_angles: this.bindToggleGroups(
+          pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
+        ),
+        Opposite_sides: this.bindToggleGroups(
+          pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
+        ),
+        half: this.bindToggleGroups(
+          pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
+        ),
         A: this.bindAccent(pgram, ['labelA1']),
         H: this.bindAccent(pgram, ['h']),
         Diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
@@ -103,9 +110,18 @@ class Content extends PresentationFormatContent {
         ]),
       ],
       modifiers: {
-        equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
-        equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
-        half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        equal_opposite_angles: this.bindToggleGroups(
+          pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
+        ),
+        equal_opposite_sides: this.bindToggleGroups(
+          pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
+        ),
+        half: this.bindToggleGroups(
+          pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
+        ),
+        // equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
+        // equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
+        // half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
         diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });
