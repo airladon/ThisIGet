@@ -48,9 +48,9 @@ export default function diagramLayout() {
       curve: {
         radius,
         sides: 100,
-        width: 0.01,
+        width: 0.02,
         num,
-        step: 0.03,
+        step: 0.04,
       },
       autoRightAngle: true,
       color,
@@ -66,9 +66,9 @@ export default function diagramLayout() {
     method: 'parallelMarks',
     options: {
       color: colors.sides,
-      width: 0.01,
-      step: 0.04,
-      length: 0.1,
+      width: 0.02,
+      step: 0.05,
+      length: 0.15,
       num,
       rotation,
       position,
@@ -80,9 +80,9 @@ export default function diagramLayout() {
     method: 'marks',
     options: {
       color: colors.diagonal,
-      width: 0.01,
-      step: 0.04,
-      length: 0.12,
+      width: 0.02,
+      step: 0.05,
+      length: 0.15,
       num,
       rotation,
       position,
@@ -99,7 +99,7 @@ export default function diagramLayout() {
     method: 'line',
     options: {
       color: colors.diagonal,
-      width: 0.01,
+      width: 0.02,
       p1,
       p2,
       dashStyle: {
@@ -113,17 +113,18 @@ export default function diagramLayout() {
     method: 'line',
     options: {
       color: colors.dim,
-      width: 0.01,
+      width: 0.02,
       p1,
       p2,
       arrows: {
-        width: 0.05,
-        height: 0.05,
+        width: 0.08,
+        height: 0.08,
       },
       label: {
         text,
         location: 'outside',
         offset: 0.05,
+        scale: 1.2,
       },
       dashStyle: {
         style: [0.05, 0.02],
@@ -144,12 +145,13 @@ export default function diagramLayout() {
       label: {
         text,
         location: 'outside',
-        offset: 0.1,
+        offset: 0.15,
+        scale: 1.2,
       },
     },
   });
 
-  const w = 0.02;
+  const w = 0.03;
   const parallelogram = {
     name: 'pgram',
     method: 'collection',
@@ -164,10 +166,10 @@ export default function diagramLayout() {
           color: colors.sides,
         },
       },
-      angle('a1', points[1], points[0], points[3], 'a'),
-      angle('a2', points[3], points[2], points[1], 'a'),
-      angle('b1', points[2], points[1], points[0], '180º-a', 2, 0.3, colors.angles, 0.35),
-      angle('b2', points[0], points[3], points[2], '180º-a', 2, 0.3, colors.angles, 0.35),
+      angle('a1', points[1], points[0], points[3], ''),
+      angle('a2', points[3], points[2], points[1], ''),
+      angle('b1', points[2], points[1], points[0], '', 2, 0.3, colors.angles, 0.35),
+      angle('b2', points[0], points[3], points[2], '', 2, 0.3, colors.angles, 0.35),
       pMarks('pMarkLeft', lineLeft.midPoint(), 2, angleA),
       pMarks('pMarkRight', lineRight.midPoint(), 2, angleA),
       pMarks('pMarkTop', lineTop.midPoint(), 1, 0),
@@ -189,7 +191,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [0, -0.5], scale: 0.8 },
+        default: { position: [0, -0.1], scale: 0.8 },
       },
       pulseDefault: {
         scale: 1.1,

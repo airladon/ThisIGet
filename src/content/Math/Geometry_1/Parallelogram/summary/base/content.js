@@ -58,7 +58,7 @@ class Content extends PresentationFormatContent {
         pgram._b1._label, pgram._b2._label,
       ],
       setSteadyState: () => {
-        pgram.setScenario('summary');
+        pgram.setScenario('default');
       },
     };
 
@@ -119,9 +119,6 @@ class Content extends PresentationFormatContent {
         half: this.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
-        // equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
-        // equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
-        // half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
         diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });

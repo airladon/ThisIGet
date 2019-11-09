@@ -1699,6 +1699,18 @@
           "links": ""
         }
       },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",
