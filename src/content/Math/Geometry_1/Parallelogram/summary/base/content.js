@@ -36,7 +36,6 @@ class Content extends PresentationFormatContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    // const coll = diag._collection;
     const pgram = diag._pgram;
 
     const common = {
@@ -79,18 +78,18 @@ class Content extends PresentationFormatContent {
         })}`,
       ],
       modifiers: {
-        Opposite_angles: pgram.bindToggleGroups(
+        Opposite_angles: diag.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
         ),
-        Opposite_sides: pgram.bindToggleGroups(
+        Opposite_sides: diag.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
-        half: pgram.bindToggleGroups(
+        half: diag.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
-        A: pgram.bindAccent(pgram, ['labelA1']),
-        H: pgram.bindAccent(pgram, ['h']),
-        Diagonals: pgram.bindAccent(pgram, ['diag1', 'diag2']),
+        A: diag.bindAccent(pgram, ['labelA1']),
+        H: diag.bindAccent(pgram, ['h']),
+        Diagonals: diag.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });
 
@@ -109,16 +108,16 @@ class Content extends PresentationFormatContent {
         ]),
       ],
       modifiers: {
-        equal_opposite_angles: pgram.bindToggleGroups(
+        equal_opposite_angles: diag.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
         ),
-        equal_opposite_sides: pgram.bindToggleGroups(
+        equal_opposite_sides: diag.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
-        half: pgram.bindToggleGroups(
+        half: diag.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
-        diagonals: pgram.bindAccent(pgram, ['diag1', 'diag2']),
+        diagonals: diag.bindAccent(pgram, ['diag1', 'diag2']),
       },
     });
   }

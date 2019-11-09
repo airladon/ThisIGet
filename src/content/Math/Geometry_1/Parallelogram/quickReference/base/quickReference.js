@@ -9,7 +9,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 import StaticQR from '../../../../../../js/components/staticQR';
-// import external from './external.md';
+import pgramMd from './pgram.md';
+import './style.scss';
 
 const topicUID = details.uid;
 const versionUID = version.uid;
@@ -34,11 +35,22 @@ export default class QRMainPres extends PopupBoxCollection {
     const pgram = coll._pgram;
     const { colors } = this.layout;
     const modifiers = {
-      parallelogram: this.bindAccent(pgram),
+      parallel_opposite_sides: coll.bindToggleGroups(
+        pgram, [['pMarkLeft', 'pMarkRight'], ['pMarkTop', 'pMarkBottom']], colors.sides,
+      ),
+      opposite_sides_are_equal: coll.bindToggleGroups(
+        pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
+      ),
+      opposite_angles_are_equal: coll.bindToggleGroups(
+        pgram, [['a1', 'a2'], ['b1', 'b2']], colors.angles,
+      ),
+      A: coll.bindAccent(pgram, ['labelA1']),
+      H: coll.bindAccent(pgram, ['h']),
+      diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
     };
     this.setTitle('Parallelogram');
     this.setDescription([
-      'A |parallelogram| is a four sided shape with |parallel opposite sides|. It\'s properties are |opposite sides are equal|, |opposite angles are equal|, |diagonals intersect at their midpoints|. Conversely, if a four sided shape has any of these properties, it is a parallelogram. A parallelogram\'s area is: |Area| = |A| \u00D7 |H|.',
+      'A |parallelogram| is a four sided shape with |parallel_opposite_sides|. It\'s properties are |opposite_sides_are_equal|, |opposite_angles_are_equal|, |diagonals| |intersect at their midpoints|. Conversely, if a four sided shape has any of these properties, it is a parallelogram. A parallelogram\'s area is: |Area| = |A| \u00D7 |H|.',
     ], modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
@@ -56,9 +68,9 @@ export default class QRMainPres extends PopupBoxCollection {
 
 attachQuickReference(details.path, topicUID, versionUID, {
   MainPres: QRMainPres,
-  // Main: <StaticQR
-  //   title=""
-  //   content={external}
-  //   link={`${details.path}/${details.uid}/explanation/base?page=1`}
-  // />,
+  Main: <StaticQR
+    title=""
+    content={pgramMd}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
 });

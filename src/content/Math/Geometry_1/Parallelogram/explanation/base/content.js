@@ -17,7 +17,7 @@ const {
   style,
   click,
   // clickW,
-  highlight,
+  // highlight,
   // centerV,
 } = Fig.tools.html;
 
@@ -51,7 +51,7 @@ class Content extends PresentationFormatContent {
     const eqn = coll._eqn;
     const nav = coll._nav;
     const eqn2 = coll._eqn2;
-    
+
     let common = {
       setEnterState: () => {
         pgram.undim();
@@ -364,10 +364,10 @@ class Content extends PresentationFormatContent {
         pgram._b11._label, pgram._b21._label,
         pgram._b1._label, pgram._b2._label,
       ],
-    }
+    };
     this.addSection(common, commonContent, {
       modifiers: {
-        remove: click(coll.dissolveOutAngleLabels, [coll, null], colors.angles)
+        remove: click(coll.dissolveOutAngleLabels, [coll, null], colors.angles),
       },
       show: [
         pgram._line,
@@ -487,7 +487,7 @@ class Content extends PresentationFormatContent {
       ],
       setSteadyState: () => {
         coll.toggleIndex = 0;
-      }
+      },
     });
 
     // ************************************************************************
@@ -724,7 +724,9 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        second_diagonal: click(pgram._diag2.grow, [pgram._diag2, 0.05, 1, true, null], colors.sides),
+        second_diagonal: click(
+          pgram._diag2.grow, [pgram._diag2, 0.05, 1, true, null], colors.sides,
+        ),
       },
       show: [
         pgram._line,
@@ -1252,11 +1254,11 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({ top: 0 }, [
         'The |total_area| is the sum of the |rectangle|, and |two_triangles|.',
-        note({ top: 93, color: colors.diagram.text.note }, 'Reference formulas: |rectangle_area|, |triangle_area|.')
+        note({ top: 93, color: colors.diagram.text.note }, 'Reference formulas: |rectangle_area|, |triangle_area|.'),
       ]),
       modifiers: {
         rectangle: coll.bindToggle(pgram, ['rect'], ['tri1', 'tri2'], colors.sides),
-        two_triangles: coll.bindToggle(pgram, ['tri1', 'tri2'], ['rect'],colors.sides),
+        two_triangles: coll.bindToggle(pgram, ['tri1', 'tri2'], ['rect'], colors.sides),
         total_area: coll.bindToggle(pgram, ['tri1', 'tri2', 'rect'], colors.sides),
         rectangle_area: this.qr('Math/Geometry_1/Area/base/RectanglePres'),
         triangle_area: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),
@@ -1320,7 +1322,7 @@ class Content extends PresentationFormatContent {
         pgram._a1._label, pgram._a2._label,
         pgram._b1._label, pgram._b2._label,
       ],
-    }
+    };
     this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
 
