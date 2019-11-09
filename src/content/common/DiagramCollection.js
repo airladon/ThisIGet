@@ -159,7 +159,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
   layout: Object;
   colors: Object;
   +diagram: CommonTopicDiagram;
-  currentToggleIndex: [number, number, number, number, number];
+  currentToggleIndex: { [toggleIndexName: string]: number };
   moveToScenario: (
     DiagramElement,
     ?TypeScenario,
@@ -183,7 +183,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     this.diagram = diagram;
     this.layout = layout;
     this.colors = layout.colors;
-    this.currentToggleIndex = [0, 0, 0, 0, 0];
+    this.currentToggleIndex = { '0': 0 };
   }
 
   makeUnitsSelector() {
@@ -402,7 +402,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     parent: DiagramElement,
     // $FlowFixMe
     groupsIn: Array<Array<DiagramElement | string>> | Array<DiagramElement | string>,
-    currentToggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
+    currentToggleIndex: string | number = 0,
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
     done: ?() => void = null,
@@ -420,7 +420,8 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     } else {
       groups = groupsIn;
     }
-    const index = this.currentToggleIndex[currentToggleIndex];
+    const indexToUse = `${currentToggleIndex}`;
+    const index = this.currentToggleIndex[indexToUse];
     const numGroups = groups.length;
     const group = groups[index];
     if (style.includes('show')) {
@@ -445,7 +446,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     if (style.includes('pulse')) {
       parent.pulse([...group], done);
     }
-    this.currentToggleIndex[currentToggleIndex] = (index + 1) % numGroups;
+    this.currentToggleIndex[indexToUse] = (index + 1) % numGroups;
     this.diagram.animateNextFrame();
   }
 
@@ -456,7 +457,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     color: Array<number> = [1, 0, 0, 1],
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
-    currentToggleIndex: 0 | 1 | 2 | 3 | 4 = 0,
+    currentToggleIndex: number | string = 0,
   ) {
     const groupPulser = () => {
       this.toggleGroups(parent, groups, currentToggleIndex, styleIn, null);
@@ -464,11 +465,13 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return click(groupPulser, [this], color);
   }
 
-  resetToggle(index: ?(0 | 1 | 2 | 3 | 4) = null) {
-    if (index == null) {
-      this.currentToggleIndex = [0, 0, 0, 0, 0];
+  resetToggle(indexIn: ?(number | string) = null) {
+    if (indexIn == null) {
+      Object.keys(this.currentToggleIndex).forEach((index) => {
+        this.currentToggleIndex[index] = 0;
+      });
     } else {
-      this.currentToggleIndex[index] = 0;
+      this.currentToggleIndex[`${indexIn}`] = 0;
     }
   }
 }
