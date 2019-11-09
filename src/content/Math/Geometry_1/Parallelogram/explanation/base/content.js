@@ -1255,8 +1255,8 @@ class Content extends PresentationFormatContent {
         note({ top: 93, color: colors.diagram.text.note }, 'Reference formulas: |rectangle_area|, |triangle_area|.')
       ]),
       modifiers: {
-        rectangle: this.bindToggle(pgram, ['rect'], colors.sides),
-        two_triangles: this.bindToggle(pgram, ['tri1', 'tri2'], colors.sides),
+        rectangle: this.bindToggle(pgram, ['rect'], ['tri1', 'tri2'], colors.sides),
+        two_triangles: this.bindToggle(pgram, ['tri1', 'tri2'], ['rect'],colors.sides),
         total_area: this.bindToggle(pgram, ['tri1', 'tri2', 'rect'], colors.sides),
         rectangle_area: this.qr('Math/Geometry_1/Area/base/RectanglePres'),
         triangle_area: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),

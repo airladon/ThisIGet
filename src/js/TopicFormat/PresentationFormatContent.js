@@ -1297,6 +1297,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   toggle(
     parent: DiagramElement,
     children: ?Array<DiagramElement | string> = null,
+    othersToHide: ?Array<DiagramElement | string> = null,
   ) {
     if (children == null) {
       if (parent.isShown) {
@@ -1304,20 +1305,27 @@ class PresentationFormatContent extends SimpleFormatContent {
       } else {
         parent.showAll();
       }
+      this.diagram.animateNextFrame();
+      return;
+    }
+    const childElements = this.getElements(parent, children);
+    const allChildrenShown = childElements.reduce(
+      (allShown, elem) => elem.isShown && allShown,
+      true,
+    );
+    let anyOthersShown = false;
+    if (othersToHide != null && othersToHide.length > 0) {
+      const otherElements = this.getElements(parent, othersToHide);
+      anyOthersShown = otherElements.reduce((anyShown, elem) => elem.isShown || anyShown, false);
+    }
+
+    if (allChildrenShown && !anyOthersShown) {
+      parent.exec(['hide'], children);
     } else {
-      let shown = true;
-      children.forEach((child) => {
-        const el = parent.getElement(child);
-        if (el != null && el.isShown === false) {
-          shown = false;
-        }
-      });
-      // const firstChild = parent.getElement(children[0]);
-      if (shown) {
-        parent.exec(['hide'], children);
-      } else {
-        parent.exec(['showAll'], children);
-      }
+      parent.exec(['showAll'], children);
+    }
+    if (anyOthersShown) {
+      parent.exec('hide', othersToHide);
     }
     this.diagram.animateNextFrame();
   }
@@ -1326,14 +1334,22 @@ class PresentationFormatContent extends SimpleFormatContent {
     parent: DiagramElement,
     // $FlowFixMe
     childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+    // $FlowFixMe
+    othersToHideOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
     color: ?Array<number> = null,
   ) {
-    const colorToUse = this.getColor(parent, childrenOrColor, color);
+    let colorToUse = this.getColor(parent, childrenOrColor, color);
+    if (Array.isArray(othersToHideOrColor) && typeof othersToHideOrColor[0] === 'number') {
+      colorToUse = othersToHideOrColor;
+    }
+
     const toggler = () => {
       if (typeof childrenOrColor[0] === 'number') {
         this.toggle(parent);
-      } else {
+      } else if (typeof othersToHideOrColor[0] === 'number') {
         this.toggle(parent, childrenOrColor);
+      } else {
+        this.toggle(parent, childrenOrColor, othersToHideOrColor);
       }
       this.diagram.animateNextFrame();
     };
@@ -1365,6 +1381,28 @@ class PresentationFormatContent extends SimpleFormatContent {
     const index = this.toggleIndex[toggleIndex];
     const numGroups = groups.length;
     const group = groups[index];
+    // if (style.includes('toggle')) {
+    //   let othersShowing = false;
+    //   let anyGroupHidden = false;
+    //   groups.forEach((g, i) => {
+    //     const elements = this.getElements(parent, g);
+    //     if (i !== 0) {
+    //       const anyShown = elements.reduce((shown, e) => shown || e.isShown, false);
+    //       othersShowing = othersShowing || anyShown;
+    //       parent.exec(['hide'], g);
+    //     }
+    //     if (i === 0) {
+    //       const anyHidden = elements.reduce((shown, e) => shown && e.isShown, false);
+    //       anyGroupHidden = anyHidden;
+    //       parent.exec(['showAll'], g);
+    //     }
+    //   });
+    //   if (!othersShowing && !anyGroupHidden) {
+    //     parent.exec(['hide'], group);
+    //   }
+    //   this.diagram.animateNextFrame();
+    //   return;
+    // }
     if (style.includes('show')) {
       groups.forEach((g, i) => {
         if (i !== index) {
