@@ -64,6 +64,15 @@ function interactiveItem(
   };
 }
 
+type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
+
+type TypeAccentOptions = {
+  element?: ?DiagramElement | Array<DiagramElement>,
+  children?: ?Array<DiagramElement | string>,
+  style?: TypeAccent,
+  done?: ?() => void,
+}
+
 function infoList(listItems: Array<string>) {
   const out = ['<ul>'];
   listItems.forEach((item) => {
@@ -967,146 +976,317 @@ class PresentationFormatContent extends SimpleFormatContent {
   *     pulse(parent, ['child1', 'child2'])
   *     pulse(parent, ['child1', 'child2'], () => {})
   */
-  pulse(
-    parent: DiagramElement,
-    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
-    done: ?() => void = null,
-  ) {
-    if (typeof childrenOrDone === 'function') {
-      parent.pulse(childrenOrDone);
+  // pulse(
+  //   parent: DiagramElement,
+  //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  //   done: ?() => void = null,
+  // ) {
+  //   if (typeof childrenOrDone === 'function') {
+  //     parent.pulse(childrenOrDone);
+  //   } else {
+  //     parent.pulse(childrenOrDone, done);
+  //   }
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // bindPulse(
+  //   parent: DiagramElement,
+  //   // $FlowFixMe
+  //   childrenOrColor: ?(Array<number> | Array<DiagramElement | string>) = null,
+  //   color: ?Array<number> = null,
+  // ) {
+  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  //   const pulser = () => {
+  //     if (childrenOrColor == null || typeof childrenOrColor[0] === 'number') {
+  //       parent.pulse();
+  //     } else {
+  //       parent.pulse(childrenOrColor);
+  //     }
+  //     this.diagram.animateNextFrame();
+  //   };
+  //   return click(pulser, [this], colorToUse);
+  // }
+
+  // highlight(
+  //   parent: DiagramElementCollection,
+  //   children: ?Array<DiagramElement | string> = null,
+  // ) {
+  //   parent.highlight(children);
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // bindHighlight(
+  //   parent: DiagramElementCollection,
+  //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  //   color: ?Array<number> = null,
+  // ) {
+  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  //   const highlighter = () => {
+  //     if (childrenOrColor == null) {
+  //       parent.highlight();
+  //     } else if (typeof childrenOrColor[0] === 'number') {
+  //       parent.highlight();
+  //     } else {
+  //       parent.highlight(childrenOrColor);
+  //     }
+  //     this.diagram.animateNextFrame();
+  //   };
+  //   return click(highlighter, [this], colorToUse);
+  // }
+
+  // highlightAndPulse(
+  //   parent: DiagramElementCollection,
+  //   childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  //   done: ?() => void = null,
+  // ) {
+  //   if (typeof childrenOrDone === 'function') {
+  //     parent.highlight();
+  //     parent.pulse(childrenOrDone);
+  //   } else {
+  //     parent.highlight(childrenOrDone);
+  //     parent.pulse(childrenOrDone, done);
+  //   }
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // bindHighlightAndPulse(
+  //   parent: DiagramElement,
+  //   childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
+  //   color: ?Array<number> = null,
+  // ) {
+  //   const colorToUse = this.getColor(parent, childrenOrColor, color);
+  //   const pulseHighlighter = () => {
+  //     // $FlowFixMe
+  //     if (typeof childrenOrColor[0] === 'number') {
+  //       parent.highlight();
+  //       parent.pulse();
+  //     } else {
+  //       parent.highlight(childrenOrColor);
+  //       parent.pulse(childrenOrColor);
+  //     }
+  //     this.diagram.animateNextFrame();
+  //   };
+  //   return click(pulseHighlighter, [this], colorToUse);
+  // }
+
+  // return an array of elements
+  // If children is none, then elements is returned in array form
+  // If children is defined, then each element in elements will be searched
+  // for the children and all returned
+  // eslint-disable-next-line class-methods-use-this
+  getElements(
+    elementsIn: DiagramElement | Array<DiagramElement>,
+    childrenIn: ?Array<DiagramElement | string>,
+  ): Array<DiagramElement> {
+    let elements;
+    if (Array.isArray(elementsIn)) {
+      elements = elementsIn;
     } else {
-      parent.pulse(childrenOrDone, done);
+      elements = [elementsIn];
     }
-    this.diagram.animateNextFrame();
+    if (childrenIn == null) {
+      return elements;
+    }
+    const children = [];
+    elements.forEach((element) => {
+      childrenIn.forEach((child) => {
+        if (typeof child === 'string') {
+          const c = element.getElement(child);
+          if (c != null) {
+            children.push(c);
+          }
+        } else {
+          children.push(child);
+        }
+      });
+    });
+    return children;
   }
 
-  bindPulse(
-    parent: DiagramElement,
-    // $FlowFixMe
-    childrenOrColor: ?(Array<number> | Array<DiagramElement | string>) = null,
-    color: ?Array<number> = null,
-  ) {
-    const colorToUse = this.getColor(parent, childrenOrColor, color);
-    const pulser = () => {
-      if (childrenOrColor == null || typeof childrenOrColor[0] === 'number') {
-        parent.pulse();
-      } else {
-        parent.pulse(childrenOrColor);
+  // eslint-disable-next-line class-methods-use-this
+  getElementsFromOptions(
+    options: TypeAccentOptions | DiagramElement | Array<DiagramElement>,
+  ): Array<DiagramElement> {
+    if (options instanceof DiagramElement) {
+      return [options];
+    }
+    if (Array.isArray(options)) {
+      return options;
+    }
+    const { element, children } = options;
+    if (element == null) {
+      return [];
+    }
+    if (children == null) {
+      if (Array.isArray(element)) {
+        return element;
       }
-      this.diagram.animateNextFrame();
-    };
-    return click(pulser, [this], colorToUse);
+      return [element];
+    }
+
+    return this.getElements(element, children);
   }
 
-  highlight(
-    parent: DiagramElementCollection,
-    children: ?Array<DiagramElement | string> = null,
-  ) {
-    parent.highlight(children);
-    this.diagram.animateNextFrame();
-  }
-
-  bindHighlight(
-    parent: DiagramElementCollection,
-    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-    color: ?Array<number> = null,
-  ) {
-    const colorToUse = this.getColor(parent, childrenOrColor, color);
-    const highlighter = () => {
-      if (childrenOrColor == null) {
-        parent.highlight();
-      } else if (typeof childrenOrColor[0] === 'number') {
-        parent.highlight();
-      } else {
-        parent.highlight(childrenOrColor);
-      }
-      this.diagram.animateNextFrame();
-    };
-    return click(highlighter, [this], colorToUse);
-  }
-
-  highlightAndPulse(
-    parent: DiagramElementCollection,
-    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+  // eslint-disable-next-line class-methods-use-this
+  mergeAccentOptions(
+    elementOrOptions: DiagramElement | Array<DiagramElement>
+                      | TypeAccentOptions,
+    childrenOrDoneOrColor: ?(Array<DiagramElement | string> | () => void | Array<number>) = null,
     done: ?() => void = null,
-  ) {
-    if (typeof childrenOrDone === 'function') {
-      parent.highlight();
-      parent.pulse(childrenOrDone);
+  ): {
+    element: ?Array<DiagramElement>,
+    children: ?Array<DiagramElement | string>,
+    style: TypeAccent,
+    done: ?() => void,
+  } {
+    const defaultOptions: TypeAccentOptions = {
+      element: null,
+      children: null,
+      style: 'pulse',
+      done: null,
+    };
+    let options;
+    if (typeof childrenOrDoneOrColor === 'function') {
+      defaultOptions.done = childrenOrDoneOrColor;
+    } else if (childrenOrDoneOrColor != null
+      && typeof childrenOrDoneOrColor[0] !== 'number') {
+      defaultOptions.children = childrenOrDoneOrColor;
+    }
+    if (done != null) {
+      defaultOptions.done = done;
+    }
+
+    if (Array.isArray(elementOrOptions)) {
+      defaultOptions.element = elementOrOptions;
+      options = defaultOptions;
+    } else if (elementOrOptions instanceof DiagramElement) {
+      defaultOptions.element = [elementOrOptions];
+      options = defaultOptions;
     } else {
-      parent.highlight(childrenOrDone);
-      parent.pulse(childrenOrDone, done);
+      options = joinObjects({}, defaultOptions, elementOrOptions);
     }
-    this.diagram.animateNextFrame();
-  }
 
-  bindHighlightAndPulse(
-    parent: DiagramElement,
-    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
-    color: ?Array<number> = null,
-  ) {
-    const colorToUse = this.getColor(parent, childrenOrColor, color);
-    const pulseHighlighter = () => {
-      // $FlowFixMe
-      if (typeof childrenOrColor[0] === 'number') {
-        parent.highlight();
-        parent.pulse();
-      } else {
-        parent.highlight(childrenOrColor);
-        parent.pulse(childrenOrColor);
-      }
-      this.diagram.animateNextFrame();
-    };
-    return click(pulseHighlighter, [this], colorToUse);
-  }
+    if (options.element instanceof DiagramElement) {
+      options.element = [options.element];
+    }
 
-  accent(
-    parent: DiagramElement,
-    children: ?(Array<DiagramElement | string> | DiagramElement | string) = null,
-    styleIn: 'pulse' | 'show' | 'highlight' |
-             Array<'highlight' | 'pulse' | 'show'> = 'pulse',
-    done: ?() => void = null,
-  ) {
+    const styleIn = options.style;
     let style;
     if (typeof styleIn === 'string') {
       style = [styleIn];
+    } else if (styleIn == null) {
+      style = ['pulse'];
     } else {
       style = styleIn;
     }
-    if (children == null) {
-      if (style.includes('show')) {
-        parent.showAll();
+    options.style = style;
+    return options;
+  }
+
+  /*
+    accent(element, done)
+    accent(elements, done)
+    accent(parent, children, done)
+    accent({
+      element: DiagramElement | Array<DiagramElement>,
+      children: ?Array<DiagramElement | string>,
+      style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
+      done: ?() => void,
+    })
+  }
+  */
+  accent(
+    elementOrOptions: DiagramElement | Array<DiagramElement>
+                      | TypeAccentOptions,
+    childrenOrDone: ?(Array<DiagramElement | string> | () => void) = null,
+    done: ?() => void = null,
+  ) {
+    const options = this.mergeAccentOptions(elementOrOptions, childrenOrDone, done);
+
+    let parents = options.element;
+    const { children, style } = options;
+    let doneToUse = options.done;
+
+    const allElements = this.getElementsFromOptions(options);
+    if (allElements.length === 0 || parents == null) {
+      if (doneToUse != null) {
+        doneToUse();
       }
-      if (style.includes('highlight')) {
-        parent.highlight();
+      return;
+    }
+
+    if (!Array.isArray(parents)) {
+      parents = [parents];
+    }
+
+    parents.forEach((element) => {
+      if (children == null) {
+        if (style.includes('show')) {
+          element.showAll();
+        }
+        if (style.includes('highlight')) {
+          element.highlight();
+        }
+        if (style.includes('pulse')) {
+          element.pulse(doneToUse);
+          doneToUse = null;
+        }
+      } else {
+        if (style.includes('show')) {
+          element.exec(['showAll'], children);
+        }
+        if (style.includes('highlight')) {
+          element.highlight(children);
+        }
+        if (style.includes('pulse')) {
+          element.pulse(children, doneToUse);
+          doneToUse = null;
+        }
       }
-      if (style.includes('pulse')) {
-        parent.pulse(done);
-      }
-    } else {
-      if (style.includes('show')) {
-        parent.exec(['showAll'], children);
-      }
-      if (style.includes('highlight')) {
-        parent.highlight(children);
-      }
-      if (style.includes('pulse')) {
-        parent.pulse(children, done);
-      }
+    });
+    if (doneToUse != null) {
+      doneToUse();
     }
     this.diagram.animateNextFrame();
   }
 
+  /*
+    bindAccent(element, color)
+    bindAccent(elements, color)
+    bindAccent(parent, children, color)
+    bindAccent({
+      element: DiagramElement | Array<DiagramElement>,
+      children: ?Array<DiagramElement | string>,
+      style: ?'pulse' | 'highlight' | 'show' | ['pulse', 'highlight', 'show'],
+      done: ?() => void,
+    }, color)
+  }
+  */
   bindAccent(
-    parent: DiagramElement,
-    children: ?Array<DiagramElement | string> = null,
-    styleIn: 'pulse' | 'show' | 'highlight' |
-             Array<'highlight' | 'pulse' | 'show'> = 'pulse',
+    elementOrOptions: DiagramElement | Array<DiagramElement>
+                      | TypeAccentOptions,
+    // $FlowFixMe
+    childrenOrColor: ?(Array<DiagramElement | string> | Array<number>) = null,
     color: ?Array<number> = null,
   ) {
-    const colorToUse = this.getColor(parent, children, color);
+    let colorToUse = [1, 1, 1, 1];
+    const options = this.mergeAccentOptions(elementOrOptions, childrenOrColor, null);
+
+    const allElements = this.getElementsFromOptions(options);
+    if (allElements.length > 0) {
+      colorToUse = allElements[0].color.slice();
+    }
+    if (Array.isArray(childrenOrColor)
+      && childrenOrColor.length > 0
+      && typeof childrenOrColor[0] === 'number'
+    ) {
+      colorToUse = childrenOrColor.slice();
+    }
+    if (color != null) {
+      colorToUse = color.slice();
+    }
     const accenter = () => {
-      this.accent(parent, children, styleIn, null);
+      this.accent(options);
       this.diagram.animateNextFrame();
     };
     return click(accenter, [this], colorToUse);

@@ -112,7 +112,7 @@ class Content extends PresentationFormatContent {
         `${new Definition('Parallelogram', 'Latin', ['parallelogrammum', ''], 'Greek', ['parallelogrammon', 'bounded by parallel lines']).html(colors.sides)}`,
       ],
       modifiers: {
-        parallelogram: this.bindPulse(pgram, null, null),
+        parallelogram: this.bindAccent(pgram),
         parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         quadrangle: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
       },
@@ -128,7 +128,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        '|Parallelograms| are |common| shapes, and it is therefore useful to know their |properties| to make solving problems that invovle them |easier|.',
+        '|Parallelograms| are |common| shapes, and it is therefore useful to know their |properties| to make solving problems that involve them |easier|.',
       ]),
       show: [
         pgram._line,
@@ -168,7 +168,8 @@ class Content extends PresentationFormatContent {
         angle: this.bindAccent(pgram._a1),
       },
       transitionFromPrev: (done) => {
-        this.accent(pgram._a1, null, 'pulse', done);
+        // this.accent(pgram._a1, null, 'pulse', done);
+        this.accent(pgram._a1, done);
       },
       show: [
         pgram._line,
@@ -199,7 +200,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        angle: this.bindPulse(pgram, ['b1', 'a1'], null),
+        angle: this.bindAccent(pgram, ['b1', 'a1']),
       },
       show: [
         pgram._line,
@@ -208,7 +209,7 @@ class Content extends PresentationFormatContent {
         pgram._a1, pgram._b1,
       ],
       transitionFromPrev: (done) => {
-        this.pulse(pgram, ['b1', 'a1'], done);
+        this.accent(pgram, ['b1', 'a1'], done);
       },
     });
 
@@ -445,7 +446,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        equal_angles: this.bindPulse(pgram, ['c1', 'c2']),
+        equal_angles: this.bindAccent(pgram, ['c1', 'c2']),
       },
       show: [
         pgram._line,
@@ -624,7 +625,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        equal_angles: this.bindPulse(pgram, ['d1', 'd2']),
+        equal_angles: this.bindAccent(pgram, ['d1', 'd2']),
       },
       show: [
         pgram._line,
@@ -750,7 +751,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'So the |diagonals| of a parallelogram will |always| intersect at their |center|.',
       modifiers: {
-        diagonals: this.bindPulse(pgram, ['diag1', 'diag2']),
+        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
     this.addSection(common, commonContent, {
@@ -850,7 +851,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         // splitting: click(coll.split, [coll, null], colors.sides),
-        equal_: this.bindPulse(pgram, ['s1.label', 's2.label']),
+        equal_: this.bindAccent(pgram, ['s1.label', 's2.label']),
       },
       show: [
         pgram._line,
@@ -891,7 +892,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         // splitting: click(coll.split, [coll, null], colors.sides),
-        height: this.bindPulse(pgram, ['h.label']),
+        height: this.bindAccent(pgram, ['h.label']),
       },
       show: [
         pgram._line,
@@ -1092,9 +1093,9 @@ class Content extends PresentationFormatContent {
         Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
         Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
         half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
-        A: this.bindPulse(pgram, ['labelA1']),
-        H: this.bindPulse(pgram, ['h']),
-        Diagonals: this.bindPulse(pgram, ['diag1', 'diag2']),
+        A: this.bindAccent(pgram, ['labelA1']),
+        H: this.bindAccent(pgram, ['h']),
+        Diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
 
