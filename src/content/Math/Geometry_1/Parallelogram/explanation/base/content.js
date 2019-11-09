@@ -1447,6 +1447,15 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: [
         style({ top: 0 }, 'In summary, a |parallelogram| has'),
@@ -1488,26 +1497,45 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: [
-        style({ top: 0 }, 'Conversely, we have also seen'),
+        style({ top: 0 }, '|Conversely|, we have also seen'),
         style({
           list: 'unordered', listStyleTyle: 'disc', size: 0.95, top: 2,
         }, [
-          'Any quadrangle with equal opposite angles is a parallelogram',
-          'Any quadrangle with equal opposite sides is a parallelogram',
-          'Any quadrangle whose diagonals split each other in half is a parallelogram',
+          'Any quadrangle with |equal_opposite_angles| is a |parallelogram|',
+          'Any quadrangle with |equal_opposite_sides| is a |parallelogram|',
+          'Any quadrangle whose |diagonals| split each other in |half| is a |parallelogram|',
         ]),
       ],
       modifiers: {
-        Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
-        Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
+        equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
+        equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
         half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
-        A: this.bindAccent(pgram, ['labelA1']),
-        H: this.bindAccent(pgram, ['h']),
-        Diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
+        diagonals: this.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };
+
+    this.addSection(common, commonContent, {
+      show: [
+        pgram._line,
+        pgram._pMarkLeft, pgram._pMarkRight,
+        pgram._pMarkTop, pgram._pMarkBottom,
+        pgram._a1, pgram._b1, pgram._a2, pgram._b2,
+        pgram._labelA1, pgram._labelA2,
+        pgram._labelB1, pgram._labelB2,
+        pgram._diag1, pgram._diag2,
+        pgram._lMarkUp1, pgram._lMarkUp2,
+        pgram._lMark21, pgram._lMark22,
+        pgram._h,
+      ],
+      setSteadyState: () => {
+        pgram.setScenario('bottom');
+      },
+    });
   }
 }
 
