@@ -1688,6 +1688,17 @@
   "Math/Geometry_1/Parallelogram": {
     "title": "Parallelogram",
     "approaches": {
+      "discover": {
+        "base": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "Derivation using area of four right angle triangles",
+          "htmlTitle": "Pythagorean Theorem Derivation",
+          "htmlDescription": "Derivation using area of four right angle triangles",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
