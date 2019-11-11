@@ -1071,6 +1071,14 @@
           "fullTopic": false
         }
       },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Are They Similar?",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "summary": {
         "base": {
           "type": "presentation",

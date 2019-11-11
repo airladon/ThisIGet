@@ -12860,6 +12860,15 @@ function (_DiagramElementCollec) {
       this.updateLabel();
     }
   }, {
+    key: "getLabel",
+    value: function getLabel() {
+      if (this.label != null) {
+        return this.label.getText();
+      }
+
+      return '';
+    }
+  }, {
     key: "setLabelToRealAngle",
     value: function setLabelToRealAngle() {
       var label = this.label;
@@ -14566,6 +14575,15 @@ function (_DiagramElementCollec) {
       }
 
       this.updateLabel();
+    }
+  }, {
+    key: "getLabel",
+    value: function getLabel() {
+      if (this.label != null) {
+        return this.label.getText();
+      }
+
+      return '';
     }
   }, {
     key: "setLabelToRealLength",
