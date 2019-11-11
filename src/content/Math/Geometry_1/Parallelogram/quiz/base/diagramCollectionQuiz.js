@@ -107,6 +107,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   setupNewProblem() {
     this.fillSelection([['-', false], ['-', false], ['-', false]]);
+    this._choice.hide();
     this.calcRandomPgram();
     this._pgram.hideAll();
     this._pgram.show();
@@ -306,7 +307,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
     this.answer = answer;
     // this._check.show();
-    // this._choice.show();
+    this._choice.show();
     this.diagram.animateNextFrame();
   }
 
@@ -321,7 +322,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       );
       if (choiceElement != null) {
         const option = removeRandElement(options);
-        answer = choiceIndex;
+        if (option[1]) {
+          answer = choiceIndex;
+        }
         choiceElement.innerHTML = option[0];
       }
     }
@@ -339,18 +342,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         firstChoiceText.parentElement.parentElement.style.visibility = 'visible';
       }
     }
-    // const firstChoiceCircle = document.getElementById(
-    //   'id_approach__quiz_multiple_choice_box_circle__pgram_0',
-    // );
-    // if (firstChoiceText != null && firstChoiceCircle != null) {
-    //   if (numOptions === 2) {
-    //     firstChoiceText.style.visibility = 'hidden';
-    //     firstChoiceCircle.style.visibility = 'hidden';
-    //   } else {
-    //     firstChoiceText.style.visibility = 'visible';
-    //     firstChoiceCircle.style.visibility = 'visible';
-    //   }
-    // }
     return answer;
   }
 
