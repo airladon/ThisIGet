@@ -63,13 +63,13 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Properties',
       setContent: [
-        style({ top: 0 }, 'A |parallelogram| has'),
+        style({ top: 0 }, 'A |parallelogram| is a four sided shape that has'),
         style({
           list: 'unordered', listStyleTyle: 'disc', size: 0.95, top: 1,
         }, [
           '|Opposite_sides| that are |parallel| and |equal|',
           '|Opposite_angles| that are |equal|',
-          '|Diagonals| that split each other in |half|',
+          '|Diagonals| that intersect at their |mid-points|',
           '|Area| = |A| \u00D7 |H|',
         ]),
         `${new Definition('Parallelogram', 'Latin', ['parallelogrammum', ''], 'Greek', ['parallelogrammon', 'bounded by parallel lines']).html({
@@ -84,7 +84,7 @@ class Content extends PresentationFormatContent {
         Opposite_sides: diag.bindToggleGroups(
           pgram, [['labelA1', 'labelA2'], ['labelB1', 'labelB2']], colors.sides,
         ),
-        half: diag.bindToggleGroups(
+        'mid-points': diag.bindToggleGroups(
           pgram, [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']], colors.sides,
         ),
         A: diag.bindAccent(pgram, ['labelA1']),

@@ -1043,6 +1043,12 @@
           "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "Derivation using area of four right angle triangles",
+          "fullTopic": true
         }
       },
       "quickReference": {
