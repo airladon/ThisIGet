@@ -3,8 +3,10 @@
 A **parallelogram** is a shape with four sides [[quadrangle or quadrilateral]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F))  that has **parallel opposite sides**.
 
 ![](pgram.png)
-<!-- 
-The properties of the parallelogram and their converse implications are detailed below:
+
+One this page, you will discover some of the properties of a parallelogram. You will also investigate the converse relationships of these properties to determine if they can be used to identify a parallelogram.
+
+It is useful to progress through these in order as the earlier ones are sometimes needed for the later ones.
 
 * [Opposite Angles](#angles)
 * [Opposite Angles - Converse](#angles-converse)
@@ -12,7 +14,7 @@ The properties of the parallelogram and their converse implications are detailed
 * [Opposite Sides - Converse](#sides-converse)
 * [Opposite Diagonal Intersection](#diagonals)
 * [Opposite Diagonal Intersection - Converse](#diagonals-converse)
-* [Area](#area) -->
+* [Area](#area)
 
 ### Angles <a name="angles"></a>
 
