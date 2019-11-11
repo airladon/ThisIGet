@@ -17,7 +17,7 @@ const {
 } = Fig;
 
 const {
-  // removeRandElement,
+  removeRandElement,
   randElement,
   randElements,
   round,
@@ -26,6 +26,8 @@ const {
 } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
+  scalingFactor: number;
+
   constructor(
     diagram: CommonTopicDiagram,
     layout: Object,
@@ -40,9 +42,21 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
           answer: 'Incorrect',
           details: 'Make sure to check the dimensions are the same',
         },
+        oppositeAngles: {
+          answer: 'Incorrect',
+          details: 'Opposite angles are not equal',
+        },
+        oppositeSides: {
+          answer: 'Incorrect',
+          details: 'Opposite sides are not equal',
+        },
+        diag: {
+          answer: 'Incorrect',
+          details: 'Both diagonals do not intersect at their midpoints',
+        },
         notSelected: {
           answer: 'Incorrect',
-          details: 'Make sure to select "Yes" or "No" above the "Check" button',
+          details: 'Make sure to select an answer above the "Check" button',
         },
         custom: {
           answer: 'Incorrect',
@@ -54,17 +68,17 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addQuestion();
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
-    this.addMultipleChoice('similar_tri_1', ['Yes', 'No']);
+    this.addMultipleChoice('pgram', ['-', '-', '-', 'No']);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
-    console.log(this)
+    this.scalingFactor = 1;
   }
 
   // eslint-disable-next-line class-methods-use-this
   randomParallelogram(
   ): Array<Point> {
 
-    const length = rand(1, 3);
+    const length = rand(1, 2.2);
     const height = rand(0.8, 1.5);
     const offset = rand(0, 1);
 
@@ -74,8 +88,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const p4 = new Point(+length / 2 - offset / 2, -height / 2);
 
     return [p1, p2, p3, p4];
-    // const rotation = rand(0, Math.PI * 1.999);
-    // return points.map(p => p.rotateBy(rotation));
   }
 
   calcRandomPgram() {
@@ -94,8 +106,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
+    this.fillSelection([['-', false], ['-', false], ['-', false]]);
     this.calcRandomPgram();
-    
     this._pgram.hideAll();
     this._pgram.show();
     this._pgram._line.show();
@@ -107,14 +119,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   afterTransitionToNewProblem() {
-    // super.afterTransitionToNewProblem();
-    // this._question.drawingObject.setText(`Enter the unknown ${'something'}:`);
-    // this.answer = ;
     super.afterTransitionToNewProblem();
-    // this._tri1.makeValid.shape = 'triangle';
-    // this._tri2.makeValid.shape = 'triangle';
-    // this._pgram.updatePoints(this._tri1.points);
-    // this._tri2.updatePoints(this._tri2.points);
     this.showAnglesAndSides();
   }
 
@@ -122,22 +127,27 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const pgram = this._pgram;
     const angle0 = parseFloat(pgram._angle0.getLabel());
     const angle1 = (360 - angle0 * 2) / 2;
+    pgram._angle0.setLabel(`${angle0}º`);
     pgram._angle1.setLabel(`${angle1}º`);
     pgram._angle3.setLabel(`${angle1}º`);
     pgram._angle2.setLabel(`${angle0}º`);
 
-    const side01 = parseFloat(pgram._side01.getLabel());
-    pgram._side23.setLabel(`${side01}`);
+    this.scalingFactor = randInt(10, 100);
 
-    const side12 = parseFloat(pgram._side12.getLabel());
-    pgram._side30.setLabel(`${side12}`);
+    const side01 = pgram._side01.getLength();
+    pgram._side01.setLabel(`${round(side01 * this.scalingFactor, 0)}`);
+    pgram._side23.setLabel(`${round(side01 * this.scalingFactor, 0)}`);
+
+    const side12 = pgram._side12.getLength();
+    pgram._side12.setLabel(`${round(side12 * this.scalingFactor, 0)}`);
+    pgram._side30.setLabel(`${round(side12 * this.scalingFactor, 0)}`);
   }
 
   // eslint-disable-next-line class-methods-use-this
   showAnglesAndSides() {
     const pgram = this._pgram;
-    const angles = [pgram._angle0, pgram._angle1, pgram._angle2, pgram._angle3];
-    const sides = [pgram._side01, pgram._side12, pgram._side23, pgram._side30];
+    // const angles = [pgram._angle0, pgram._angle1, pgram._angle2, pgram._angle3];
+    // const sides = [pgram._side01, pgram._side12, pgram._side23, pgram._side30];
     pgram.showAll();
     this.hint = 'checkDimensions';
     if (pgram._angle0.angle > Math.PI) {
@@ -152,76 +162,115 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // make consistent
     this.makeConsistent();
 
-    let answer = 'possible';
+    let answer = 0;
     // // eslint-disable-next-line max-len
-    const scenarios: Array<[string, string, Array<string>, string, Array<[string, number]>]> = [
+    const scenarios: Array<[boolean, string, Array<string>, string, string, Array<[string, number]>]> = [
+      // [
+      //   true, 'AAA_SS', ['0', '1', '2', '01', '12'], '23',
+      //   'Quadrangles with equal opposite angles are parallelograms',
+      //   [['0', -3], ['2', 3]],
+      // ],
+      // [
+      //   true, 'AAA_SS', ['0', '1', '2', '01', '12'], '23',
+      //   'Quadrangles with equal opposite angles are parallelograms',
+      //   [['1', -3], ['3', 3]],
+      // ],
+      // [
+      //   true, 'SSSS_A', ['01', '12', '23', '30', '0'], '1',
+      //   'Quadrangles with equal opposite sides are parallelograms',
+      //   [['01', -0.1], ['23', 0.1]],
+      // ],
+      // [
+      //   true, 'SSSS_AA', ['01', '12', '23', '30', '0', '3'], '1',
+      //   'Quadrangles with equal opposite sides are parallelograms',
+      //   [['01', -0.1], ['23', 0.1]],
+      // ],
       [
-        'yes', 'angles', ['0', '1', '2', '3'],
+        true, 'AAAA_SS', ['0', '1', '2', '3', '01', '12'], '23',
         'Quadrangles with equal opposite angles are parallelograms',
         [['0', -3], ['2', 3]],
       ],
-      [
-        'yes', 'sides', ['01', '12', '23', '30'],
-        'Quadrangles with equal opposite sides are parallelograms',
-        [['01', -2], ['23', 2]],
-      ],
       // [
-      //   'yes', 'AAS', ['01', '12', '23', '30'],
-      //   'Quadrangles with equal opposite sides are parallelograms',
-      //   [],
-      // ],
-      // Doubled for proability of seeing it
-      // [
-      //   'yes', 'diagonals', ['01', '12', '20'], ['01', '12', '20'],
-      //   'Triangles with  corresponding sides in proportion are similar',
-      //   [['max', rand(0.1, 0.5)]],
+      //   false, 'A_SS', ['0', '01', '12'], '23',
+      //   'Not enough information to determine if a parallelogram',
+      //   [['0', -3], ['2', 3]],
       // ],
       // [
-      //   'yes', 'SSS', ['01', '12', '20'], ['01', '12', '20'],
-      //   'Triangles with  corresponding sides in proportion are similar',
-      //   [['max', rand(0.1, 0.5)]],
-      // ],
-      // //
-      // [
-      //   'yes', 'AA', ['0', '1'], ['0', '1'],
-      //   'Triangles with two equal angles are similar',
-      //   [],
-      // ],    // same
-      // [
-      //   'yes', 'AA', ['0', '2'], ['0', '1'],
-      //   'You should calculate all three angles',
-      //   [],
-      // ],    // different
-
-      // ['no', 'SS', ['01', '12'], ['01', '12'], 'Two sides is not enough information to determine similarity', []], // same
-      // ['no', 'SA', ['0', '12'], ['0', '12'], 'A single side and angle is not enough information to determine similarity', []], // different
-      // ['no', 'SA', ['0', '01'], ['0', '01'], 'A single side and angle is not enough information to determine similarity', []], // different
-      // //
-      // [
-      //   'yes', 'SAS', ['01', '1', '12'], ['01', '1', '12'],
-      //   'SAS is sufficient to determine similarity.',
-      //   [['max', rand(0.1, 0.5)]],
+      //   false, 'AA_SS', ['0', '2', '01', '12'], '23',
+      //   'Not enough information to determine if a parallelogram',
+      //   [['0', -3], ['2', 3]],
       // ],
       // [
-      //   'yes', 'SAS', ['01', '1', '12'], ['01', '1', '12'],
-      //   'SAS is sufficient to determine similarity.',
-      //   [['max', rand(0.1, 0.5)]],
+      //   false, 'SSS_A', ['01', '12', '23', '0'], '2',
+      //   'Not enough information to determine if a parallelogram',
+      //   [['0', -3], ['2', 3]],
       // ],
-      // //
-      // [
-      //   'yes', 'SAA', ['01', '1', '2'], ['01', '1', '2'],
-      //   'Triangles with two equal angles are similar', [],
-      // ],
-      // ['yes', 'SAA', ['01', '1', '2'], ['01', '1', '0'], 'You should calculate all three angles', []],
-      // //
-      // ['yes', 'SSA', ['01', '12', '2'], ['01', '12', '2'], 'This is a case of SSA where the opposite side is greater than or equal to the adjacent side', []],
-      // ['yes', 'SSA', ['01', '12', '2'], ['01', '12', '2'], 'This is a case of SSA where the opposite side is greater than or equal to the adjacent side', []],
     ];
     const scenario = randElement(scenarios);
-    const [possible, name, pgramShow, defaultHint, trick] = scenario;
+    const [possible, name, pgramShow, unknown, defaultHint, trick] = scenario;
     let hint = defaultHint;
+    if (!possible) {
+      answer = 3;
+    }
 
     this.hint = 'custom';
+    const willTrick = rand(0.4, 1);
+    if (answer !== 3 && willTrick < 0.3 && trick.length > 0) {
+      trick.forEach((prop: [string, number]) => {
+        let element;
+        let delta = prop[1];
+        if (prop[0].length === 1) {
+          element = pgram[`_angle${prop[0]}`];
+          const value = parseFloat(element.getLabel());
+          element.setLabel(`${(value + delta).toFixed(0)}º`);
+          this.hint = 'oppositeAngles';
+        } else {
+          element = pgram[`_side${prop[0]}`];
+          delta *= this.scalingFactor;
+          const value = parseFloat(element.getLabel());
+          element.setLabel((round(value + delta, 0)).toFixed(0));
+          this.hint = 'oppositeSides';
+        }
+      });
+      hint = null;
+      answer = 3;
+    }
+
+    // calculate the multiple choice answers
+    let options = [];
+    if (unknown.length === 2) {
+      const side01 = pgram._side01.getLabel();
+      const side12 = pgram._side12.getLabel();
+      options = [
+        [side01, true],
+        [side12, false],
+      ];
+      if (parseFloat(side01) === parseFloat(side12)) {
+        options[1][0] = `${side01 * 2}`;
+      }
+    }
+    if (unknown.length === 1) {
+      const angle0 = pgram._angle0.getLabel();
+      const angle1 = pgram._angle1.getLabel();
+      options = [
+        [angle0, false],
+        [angle1, true],
+        [randElement([
+          `${parseFloat(angle0) * 2}º`,
+          `${parseFloat(angle1) * 2}º`,
+        ]), false],
+      ];
+      if (parseFloat(angle0) === parseFloat(angle1)) {
+        options[0][0] = '45º';
+      }
+    }
+
+    const answerPosition = this.fillSelection(options);
+    if (answer !== 3) {
+      answer = answerPosition;
+    }
+
+    // Show elements
     const showProperties = (shape, props) => {
       props.forEach((prop) => {
         if (prop.length === 1) {
@@ -232,112 +281,97 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         }
       });
     };
-    answer = possible;
+
     this._pgram.hideAll();
     this._pgram._line.show();
     showProperties(pgram, pgramShow);
 
-    // Normalize the dimensions of the triangld
-    // Copy all angles from one triangle to next
-    // tri1Angles.forEach((tri1Angle, index) => {
-    //   tri2Angles[index].label.setText(tri1Angle.label.getText());
-    // });
+    // show unknown
+    let unknownElement;
+    if (unknown.length === 1) {
+      unknownElement = pgram[`_angle${unknown}`];
+    } else {
+      unknownElement = pgram[`_side${unknown}`];
+    }
+    if (unknownElement != null) {
+      unknownElement.showAll();
+      unknownElement.setLabel('?');
+    }
+    if (hint != null) {
+      const hintElement = document.querySelector('#id__quiz_answer_box__custom_q1 .approach__quiz__answer_details_text');
+      if (hintElement != null) {
+        hintElement.innerHTML = hint;
+      }
+    }
 
-    // Copy and scale side lengths of small triangle to large
-    const scalingFactor = randElement([10, 100]);
-    const proportion = randInt(2, 10);
-    sides.forEach((pgramSide, index) => {
-      let side = parseFloat(pgramSide.getLabel());
-      side *= scalingFactor;
-      side = round(side, 0);
-      const side1 = side * proportion;
-      sides[index].label.setText(`${side1.toFixed(0)}`);
-      // pgramSide.label.setText(`${side.toFixed(0)}`);
-    });
-
-    // // Deal with the SSA case
-    // if (name === 'SSA') {
-    //   const opposite = parseFloat(tri1Sides[0].label.getText());
-    //   const adjacent = parseFloat(tri1Sides[1].label.getText());
-    //   if (adjacent > opposite) {
-    //     hint = 'This is a case of SSA when the adjacent side is longer than the opposite side';
-    //     answer = 'no';
-    //   }
-    // }
-
-    // const willTrick = rand(0, 1);
-    // if (willTrick < 0.3 && trick.length > 0) {
-    //   trick.forEach((prop: [string, number]) => {
-    //     let element;
-    //     let delta = prop[1];
-    //     if (prop[0].length === 1) {
-    //       element = this._tri2[`_angle${prop[0]}`];
-    //       const value = parseFloat(element.label.getText());
-    //       element.label.setText(`${(value + delta).toFixed(0)}º`);
-    //     } else if (prop[0] === 'max') {
-    //       const len01 = parseFloat(this._tri2._side01.label.getText());
-    //       const len12 = parseFloat(this._tri2._side12.label.getText());
-    //       const len20 = parseFloat(this._tri2._side20.label.getText());
-    //       let sides = [
-    //         [len01, this._tri2._side01],
-    //         [len12, this._tri2._side12],
-    //         [len20, this._tri2._side20],
-    //       ];
-    //       sides = sides.filter(s => s[1].isShown);
-    //       const maxIndex = sides.reduce((acc, value, index) => {
-    //         if (sides[index][0] > sides[acc][0]) {
-    //           return index;
-    //         }
-    //         return acc;
-    //       }, 0);
-
-    //       delta *= scalingFactor;
-    //       const [maxLen, maxSide] = sides[maxIndex];
-    //       maxSide.label.setText((maxLen + delta).toFixed(0));
-    //     } else {
-    //       element = this._tri2[`_side${prop[0]}`];
-    //       delta *= scalingFactor;
-    //       const value = parseFloat(element.label.getText());
-    //       element.label.setText((value + delta).toFixed(0));
-    //     }
-    //   });
-    //   hint = null;
-    //   this.hint = 'checkDimensions';
-    //   answer = 'no';
-    // }
-
-
-    // if (hint != null) {
-    //   const hintElement = document.querySelector('#id__quiz_answer_box__custom_q1 .approach__quiz__answer_details_text');
-    //   if (hintElement != null) {
-    //     hintElement.innerHTML = hint;
-    //   }
-    // }
-
-    // this.answer = answer;
+    this.answer = answer;
     // this._check.show();
     // this._choice.show();
     this.diagram.animateNextFrame();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  fillSelection(options) {
+    const numOptions = options.length;
+    let answer;
+    for (let i = 0; i < numOptions; i += 1) {
+      const choiceIndex = 2 - i;
+      const choiceElement = document.getElementById(
+        `id_approach__quiz_multiple_choice_box_answer__pgram_${choiceIndex}`,
+      );
+      if (choiceElement != null) {
+        const option = removeRandElement(options);
+        answer = choiceIndex;
+        choiceElement.innerHTML = option[0];
+      }
+    }
+
+    const firstChoiceText = document.getElementById(
+      'id_approach__quiz_multiple_choice_box_answer__pgram_0',
+    );
+    if (firstChoiceText != null
+      && firstChoiceText.parentElement != null
+      && firstChoiceText.parentElement.parentElement != null
+    ) {
+      if (numOptions === 2) {
+        firstChoiceText.parentElement.parentElement.style.visibility = 'hidden';
+      } else {
+        firstChoiceText.parentElement.parentElement.style.visibility = 'visible';
+      }
+    }
+    // const firstChoiceCircle = document.getElementById(
+    //   'id_approach__quiz_multiple_choice_box_circle__pgram_0',
+    // );
+    // if (firstChoiceText != null && firstChoiceCircle != null) {
+    //   if (numOptions === 2) {
+    //     firstChoiceText.style.visibility = 'hidden';
+    //     firstChoiceCircle.style.visibility = 'hidden';
+    //   } else {
+    //     firstChoiceText.style.visibility = 'visible';
+    //     firstChoiceCircle.style.visibility = 'visible';
+    //   }
+    // }
+    return answer;
+  }
+
   showAnswer() {
     super.showAnswer();
-    if (this.answer === 'yes') {
-      this.selectMultipleChoice('similar_tri_1', 0);
-    } else {
-      this.selectMultipleChoice('similar_tri_1', 1);
-    }
+    this.selectMultipleChoice('pgram', this.answer);
+    // if (this.answer === 0) {
+    //   this.selectMultipleChoice('similar_tri_1', 0);
+    // } else {
+    //   this.selectMultipleChoice('similar_tri_1', 1);
+    // }
     // this._answerBox.disable();
     this.diagram.animateNextFrame();
   }
 
   findAnswer() {
-    const selection = this.getMultipleChoiceSelection('similar_tri_1');
+    const selection = this.getMultipleChoiceSelection('pgram');
     if (selection === -1) {
       return 'notSelected';
     }
-    if ((selection === 0 && this.answer === 'yes')
-      || (selection === 1 && this.answer === 'no')) {
+    if (selection === this.answer) {
       return 'correct';
     }
 

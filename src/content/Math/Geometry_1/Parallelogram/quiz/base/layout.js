@@ -2,11 +2,11 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 
-// const {
-//   Point,
+const {
+  Point,
 //   // Transform,
 //   // Line,
-// } = Fig;
+} = Fig;
 
 const { joinObjects } = Fig.tools.misc;
 
@@ -26,7 +26,8 @@ export default function diagramLayout() {
   //     showAnotherAnswer: new Point(1.1, -1.7),
   //     choice: new Point(2.02, -1.1),
   //   },
-  // layout.quiz.choice = new Point(1.95, -0.85);
+  layout.quiz.choice = new Point(2.02, -0.6);
+  // layout.quiz.check = new Point(2.1, -1.7)
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
   const width = 0.015;
@@ -45,19 +46,10 @@ export default function diagramLayout() {
       close: true,
       pad: {
         color: [0, 0, 0, 0.001],
-        // color: colors.angles,
         isMovable: true,
         sides: 4,
         radius: 0.1,
       },
-      // makeValid: {
-      //   shape: 'triangle',
-      //   hide: {
-      //     minAngle: 10 * Math.PI / 180,
-      //     maxAngle: 170 * Math.PI / 180,
-      //     minSide: 0.8,
-      //   },
-      // },
       angle: {
         color: colors.angles,
         curve: {

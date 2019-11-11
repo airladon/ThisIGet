@@ -41,7 +41,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       // setContent: ['Find the unknown angle:'],
       setContent: [
-        'Can you say this is a parallogram?',
+        style({ top: 0 }, 'Can you find the unknown property?'),
         style({ size: 0.6, top: 0 }, 'If there is not enough information, or the shape cannot be a parallelgram, then answer |No|.'),
         style({ size: 0.6, top: 0 }, 'Focus on the properties - do not worry about if the shape "looks" like a parallelogram.'),
       ],
