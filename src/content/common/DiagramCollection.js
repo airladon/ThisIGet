@@ -27,6 +27,15 @@ export type TypeAddElementObject = {
   addElements?: Array<TypeAddElementObject>
 };
 
+type TypeAccentOptions = {
+  element?: ?DiagramElement | Array<DiagramElement>,
+  children?: ?Array<DiagramElement | string>,
+  style?: TypeAccent,
+  done?: ?() => void,
+}
+
+type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
+
 function getColor(
   parent: DiagramElement,
   // $FlowFixMe
@@ -42,7 +51,9 @@ function getColor(
       colorToUse = childrenOrColor;
     } else if (parent.type === 'collection' && childrenOrColor.length > 0) {
       const firstElement = parent.getElement(childrenOrColor[0]);
-      colorToUse = firstElement.color.slice();
+      if (firstElement != null) {
+        colorToUse = firstElement.color.slice();
+      }
     }
   }
   return colorToUse.slice();
@@ -67,6 +78,7 @@ function mergeAccentOptions(
   };
   let options;
   if (typeof childrenOrDoneOrColor === 'function') {
+    // $FlowFixMe
     defaultOptions.done = childrenOrDoneOrColor;
   } else if (childrenOrDoneOrColor != null
     && typeof childrenOrDoneOrColor[0] !== 'number') {
@@ -100,6 +112,7 @@ function mergeAccentOptions(
     style = styleIn;
   }
   options.style = style;
+  // $FlowFixMe
   return options;
 }
 
@@ -116,9 +129,13 @@ function getElements(
   if (childrenIn == null) {
     return elements;
   }
+  let childrenInToUse = childrenIn;
+  if (!Array.isArray(childrenIn)) {
+    childrenInToUse = [childrenIn];
+  }
   const children = [];
   elements.forEach((element) => {
-    childrenIn.forEach((child) => {
+    childrenInToUse.forEach((child) => {
       if (typeof child === 'string') {
         const c = element.getElement(child);
         if (c != null) {
@@ -250,6 +267,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     const { children, style } = options;
     let doneToUse = options.done;
 
+    // $FlowFixMe
     const allElements = getElementsFromOptions(options);
     if (allElements.length === 0 || parents == null) {
       if (doneToUse != null) {
@@ -315,6 +333,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     let colorToUse = [1, 1, 1, 1];
     const options = mergeAccentOptions(elementOrOptions, childrenOrColor, null);
 
+    // $FlowFixMe
     const allElements = getElementsFromOptions(options);
     if (allElements.length > 0) {
       colorToUse = allElements[0].color.slice();
@@ -330,6 +349,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       colorToUse = color.slice();
     }
     const accenter = () => {
+      // $FlowFixMe
       this.accent(options);
       this.diagram.animateNextFrame();
     };

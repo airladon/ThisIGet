@@ -12350,12 +12350,12 @@ function (_DiagramElementCollec) {
 
           doneToUse = null;
         }
-      } else if (pulseSettings.curve != null && _this2._curve != null) {
+      } else if (_this2._curve != null && pulseSettings.curve != null) {
         var defaultCurveThickOptions = {
           width: 2,
           num: 5
         };
-        var curveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultCurveThickOptions, pulseSettings.curve);
+        var curveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultCurveThickOptions, pulseSettings.curve); // $FlowFixMe
 
         _this2._curve.pulseThickNow(1, curveOptions.width, curveOptions.num, doneToUse);
 
@@ -16068,6 +16068,10 @@ function () {
 
       var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16107,6 +16111,10 @@ function () {
 
       var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16137,6 +16145,10 @@ function () {
       var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       }), options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -16199,6 +16211,10 @@ function () {
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16231,6 +16247,10 @@ function () {
       }
 
       var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -16360,6 +16380,10 @@ function () {
         element.setColor(options.color);
       }
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       return element;
     }
   }, {
@@ -16419,7 +16443,13 @@ function () {
         }
       }
 
-      return this.lines(linePairs, numLinesThick, color, transform);
+      var element = this.lines(linePairs, numLinesThick, color, transform);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "polygon",
@@ -16485,6 +16515,10 @@ function () {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16527,7 +16561,13 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     } // dashedLine(
     //   start: Point,
     //   length: number,
@@ -16575,7 +16615,13 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "radialLines",
@@ -16599,7 +16645,13 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "repeatPatternVertex",
@@ -16655,6 +16707,10 @@ function () {
         copy.drawingObject.changeVertices(newPoints);
       }
 
+      if (options.pulse != null) {
+        copy.pulseDefault.scale = options.pulse;
+      }
+
       return copy;
     }
   }, {
@@ -16663,6 +16719,7 @@ function () {
       var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('collection').scale(1, 1).rotate(0).translate(0, 0);
       var color = [1, 0, 0, 1];
+      var pulse = null;
 
       if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
         transform.updateTranslation(transformOrPointOrOptions);
@@ -16686,10 +16743,19 @@ function () {
         if (optionsToUse.color != null) {
           color = optionsToUse.color;
         }
+
+        if (optionsToUse.pulse != null) {
+          pulse = optionsToUse.pulse;
+        }
       }
 
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
       element.setColor(color);
+
+      if (pulse != null) {
+        element.pulseDefault.scale = pulse;
+      }
+
       return element;
     }
   }, {
@@ -16905,6 +16971,11 @@ function () {
 
       xy.add('y', yAxis);
       xy.add('x', xAxis);
+
+      if (options.pulse != null) {
+        xy.pulseDefault.scale = options.pulse;
+      }
+
       return xy;
     }
   }, {
@@ -16994,6 +17065,11 @@ function () {
       var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, options.width / 2)];
       var collection = this.collection(options.transform);
       collection.setColor(options.color);
+
+      if (options.pulse != null) {
+        collection.pulseDefault.scale = options.pulse;
+      }
+
       var start = -((options.num - 1) / 2) * options.step;
 
       var _loop2 = function _loop2(i) {
