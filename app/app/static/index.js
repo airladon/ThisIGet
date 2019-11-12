@@ -4541,6 +4541,8 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       rectangle: shapes.rectangle.bind(shapes),
       grid: shapes.grid.bind(shapes),
       dashedLine: shapes.dashedLine.bind(shapes),
+      parallelMarks: shapes.parallelMarks.bind(shapes),
+      marks: shapes.marks.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -6486,9 +6488,11 @@ function (_DiagramElementCollec) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNew).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
     _this.shapes = shapes;
-    _this.color = optionsToUse.color; // this.isTouchDevice = isTouchDevice;
+
+    _this.setColor(optionsToUse.color); // this.isTouchDevice = isTouchDevice;
     // this.animateNextFrame = animateNextFrame;
     // Set default values
+
 
     _this.eqn = {
       forms: {},
@@ -12202,6 +12206,13 @@ function (_DiagramElementCollec) {
       p2: null,
       // rotation will be overridden
       p3: null,
+      pulse: {
+        curve: 1,
+        label: 1,
+        arrow: 1,
+        side: 1,
+        collection: 1.8
+      },
       mods: {}
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
@@ -12318,6 +12329,77 @@ function (_DiagramElementCollec) {
 
       _this2.addSide(2, _sideOptions2.length, _sideOptions2.width, _sideOptions2.color);
     }
+
+    _this2.pulseDefaultSettings = {
+      curve: optionsToUse.pulse.curve || 1,
+      label: optionsToUse.pulse.label || 1,
+      arrow: optionsToUse.pulse.arrow || 1,
+      side: optionsToUse.pulse.side || 1,
+      collection: optionsToUse.pulse.collection || 1
+    }; // this.pulseDefault = (done) => {
+    //   this.pulseScaleNow(1, 1.7, 0, done);
+    // };
+
+    _this2.pulseDefault = function (done) {
+      var doneToUse = done;
+      var pulseSettings = _this2.pulseDefaultSettings;
+
+      if (typeof pulseSettings.curve === 'number') {
+        if (pulseSettings.curve !== 1 && _this2._curve != null) {
+          _this2._curve.pulseScaleNow(1, pulseSettings.curve, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      } else if (_this2._curve != null && pulseSettings.curve != null) {
+        var defaultCurveThickOptions = {
+          width: 2,
+          num: 5
+        };
+        var curveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultCurveThickOptions, pulseSettings.curve); // $FlowFixMe
+
+        _this2._curve.pulseThickNow(1, curveOptions.width, curveOptions.num, doneToUse);
+
+        doneToUse = null;
+      }
+
+      if (pulseSettings.label !== 1 && _this2._label != null) {
+        _this2._label.pulseScaleNow(1, pulseSettings.label, 0, doneToUse);
+
+        doneToUse = null;
+      }
+
+      if (pulseSettings.arrow !== 1) {
+        if (_this2._arrow1 != null) {
+          _this2._arrow1.pulseScaleNow(1, pulseSettings.arrow, 0, doneToUse);
+
+          doneToUse = null;
+        }
+
+        if (_this2._arrow2 != null) {
+          _this2._arrow2.pulseScaleNow(1, pulseSettings.arrow, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      }
+
+      if (pulseSettings.side !== 1) {
+        if (_this2._side1 != null) {
+          _this2._side1.pulseScaleNow(1, pulseSettings.side, 0, doneToUse);
+
+          doneToUse = null;
+        }
+
+        if (_this2._side2 != null) {
+          _this2._side2.pulseScaleNow(1, pulseSettings.side, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      }
+
+      if (pulseSettings.collection !== 1) {
+        _this2.pulseScaleNow(1, pulseSettings.collection, 0, doneToUse);
+      }
+    };
 
     _this2.update();
 
@@ -12850,6 +12932,15 @@ function (_DiagramElementCollec) {
       }
 
       this.updateLabel();
+    }
+  }, {
+    key: "getLabel",
+    value: function getLabel() {
+      if (this.label != null) {
+        return this.label.getText();
+      }
+
+      return '';
     }
   }, {
     key: "setLabelToRealAngle",
@@ -14117,7 +14208,13 @@ function (_DiagramElementCollec) {
       largerTouchBorder: true,
       offset: 0,
       dashStyle: null,
-      mods: {}
+      mods: {},
+      pulse: {
+        line: 6,
+        label: 2,
+        arrow: 3,
+        collection: 1
+      }
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var dashStyle = optionsToUse.dashStyle;
@@ -14282,6 +14379,26 @@ function (_DiagramElementCollec) {
       _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationBounds);
     }
 
+    _this2.pulseDefaultSettings = {
+      line: optionsToUse.pulse.line || 1,
+      label: optionsToUse.pulse.label || 1,
+      arrow: optionsToUse.pulse.arrow || 1,
+      collection: optionsToUse.pulse.collection || 1
+    };
+
+    _this2.pulseDefault = function (done) {
+      _this2.pulseWidth({
+        line: _this2.pulseDefaultSettings.line,
+        label: _this2.pulseDefaultSettings.label,
+        arrow: _this2.pulseDefaultSettings.arrow,
+        done: done
+      });
+
+      if (_this2.pulseDefaultSettings.collection !== 1) {
+        _this2.pulseScaleNow(1, _this2.pulseDefaultSettings.collection);
+      }
+    };
+
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
       _this2.setProperties(optionsToUse.mods);
     }
@@ -14305,17 +14422,17 @@ function (_DiagramElementCollec) {
 
       if (line != null) {
         line.stopPulsing();
-        var oldTransformMethod = line.pulse.transformMethod;
-        var oldPulseCallback = line.pulse.callback;
+        var oldTransformMethod = line.pulseSettings.transformMethod;
+        var oldPulseCallback = line.pulseSettings.callback;
 
         var finishPulsing = function finishPulsing() {
-          line.pulse.transformMethod = oldTransformMethod;
-          line.pulse.callback = oldPulseCallback;
+          line.pulseSettings.transformMethod = oldTransformMethod;
+          line.pulseSettings.callback = oldPulseCallback;
         };
 
-        line.pulse.callback = finishPulsing;
+        line.pulseSettings.callback = finishPulsing;
 
-        line.pulse.transformMethod = function (s) {
+        line.pulseSettings.transformMethod = function (s) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
@@ -14549,6 +14666,15 @@ function (_DiagramElementCollec) {
       }
 
       this.updateLabel();
+    }
+  }, {
+    key: "getLabel",
+    value: function getLabel() {
+      if (this.label != null) {
+        return this.label.getText();
+      }
+
+      return '';
     }
   }, {
     key: "setLabelToRealLength",
@@ -15942,6 +16068,10 @@ function () {
 
       var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -15981,6 +16111,10 @@ function () {
 
       var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16011,6 +16145,10 @@ function () {
       var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       }), options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -16073,6 +16211,10 @@ function () {
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16105,6 +16247,10 @@ function () {
       }
 
       var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -16234,6 +16380,10 @@ function () {
         element.setColor(options.color);
       }
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       return element;
     }
   }, {
@@ -16293,7 +16443,13 @@ function () {
         }
       }
 
-      return this.lines(linePairs, numLinesThick, color, transform);
+      var element = this.lines(linePairs, numLinesThick, color, transform);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "polygon",
@@ -16359,6 +16515,10 @@ function () {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
       }
@@ -16401,7 +16561,13 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     } // dashedLine(
     //   start: Point,
     //   length: number,
@@ -16449,7 +16615,13 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "radialLines",
@@ -16473,7 +16645,13 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
     }
   }, {
     key: "repeatPatternVertex",
@@ -16529,6 +16707,10 @@ function () {
         copy.drawingObject.changeVertices(newPoints);
       }
 
+      if (options.pulse != null) {
+        copy.pulseDefault.scale = options.pulse;
+      }
+
       return copy;
     }
   }, {
@@ -16536,6 +16718,8 @@ function () {
     value: function collection() {
       var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('collection').scale(1, 1).rotate(0).translate(0, 0);
+      var color = [1, 0, 0, 1];
+      var pulse = null;
 
       if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
         transform.updateTranslation(transformOrPointOrOptions);
@@ -16555,9 +16739,23 @@ function () {
         if (optionsToUse.position != null) {
           transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
         }
+
+        if (optionsToUse.color != null) {
+          color = optionsToUse.color;
+        }
+
+        if (optionsToUse.pulse != null) {
+          pulse = optionsToUse.pulse;
+        }
       }
 
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
+      element.setColor(color);
+
+      if (pulse != null) {
+        element.pulseDefault.scale = pulse;
+      }
+
       return element;
     }
   }, {
@@ -16773,7 +16971,123 @@ function () {
 
       xy.add('y', yAxis);
       xy.add('x', xAxis);
+
+      if (options.pulse != null) {
+        xy.pulseDefault.scale = options.pulse;
+      }
+
       return xy;
+    }
+  }, {
+    key: "parallelMarks",
+    value: function parallelMarks() {
+      var _this = this;
+
+      var defaultOptions = {
+        width: 0.01,
+        num: 1,
+        length: 0.1,
+        angle: Math.PI / 4,
+        step: 0.04,
+        rotation: 0,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var x = options.length * Math.cos(options.angle);
+      var y = options.length * Math.sin(options.angle);
+      var wx = Math.abs(options.width * Math.cos(options.angle + Math.PI / 2));
+      var wy = options.width * Math.sin(options.angle + Math.PI / 2);
+      var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 - y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, -y + wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-Math.abs(options.width / Math.cos(options.angle + Math.PI / 2)), 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, y - wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 + y)];
+      var collection = this.collection(options.transform);
+      collection.setColor(options.color);
+
+      if (options.pulse != null) {
+        collection.pulseDefault.scale = options.pulse;
+      }
+
+      var start = -((options.num - 1) / 2) * options.step;
+
+      var _loop = function _loop(i) {
+        var points = single.map(function (p) {
+          return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](p.x + start + i * options.step, p.y).rotate(options.rotation);
+        });
+        collection.add("".concat(i), _this.fan({
+          points: points,
+          color: options.color
+        }));
+      };
+
+      for (var i = 0; i < options.num; i += 1) {
+        _loop(i);
+      }
+
+      return collection;
+    }
+  }, {
+    key: "marks",
+    value: function marks() {
+      var _this2 = this;
+
+      var defaultOptions = {
+        width: 0.01,
+        num: 1,
+        length: 0.2,
+        angle: Math.PI / 2,
+        step: 0.04,
+        rotation: 0,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, -options.width / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-options.length / 2, options.width / 2)];
+      var collection = this.collection(options.transform);
+      collection.setColor(options.color);
+
+      if (options.pulse != null) {
+        collection.pulseDefault.scale = options.pulse;
+      }
+
+      var start = -((options.num - 1) / 2) * options.step;
+
+      var _loop2 = function _loop2(i) {
+        var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(options.angle).translate(start + i * options.step, 0).rotate(options.rotation);
+        var points = single.map(function (p) {
+          return p._dup().transformBy(t.matrix());
+        });
+        collection.add("".concat(i), _this2.fan({
+          points: points,
+          color: options.color
+        }));
+      };
+
+      for (var i = 0; i < options.num; i += 1) {
+        _loop2(i);
+      }
+
+      return collection;
     }
   }]);
 
@@ -20844,14 +21158,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -20866,9 +21172,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -20962,8 +21278,11 @@ function () {
   // For the future when collections use color
   // this is in vertex space
   // Current animation/movement state of element
-  // Pulse animation state
+  // pulse: Object;                  // Pulse animation state
   // Rename to animate in future
+  // pulse: (mixed) => void;
+  // pulse: (?Array<string | DiagramElement> | mixed) => void;
+  // +pulse: (Array<string | DiagramElement>) => void;
   // This will scale and position this element such that the center of the
   // diagram limits will will look like it is centered on a html element
   // when this figurone element is drawn.
@@ -21012,6 +21331,8 @@ function () {
     this.isInteractive = undefined;
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
+    this.dimColor = [0.5, 0.5, 0.5, 1];
+    this.defaultColor = this.color.slice();
     this.opacity = 1;
 
     this.setTransformCallback = function () {};
@@ -21024,7 +21345,15 @@ function () {
     };
     this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false; // Rename to animate in future
+    this.noRotationFromParent = false; // this.pulseDefault = (callback: ?() => void = null) => {
+    //   this.pulseScaleNow(1, 2, 0, callback);
+    // };
+
+    this.pulseDefault = {
+      frequency: 0,
+      scale: 2,
+      time: 1
+    }; // Rename to animate in future
 
     this.anim = {
       rotation: function rotation() {
@@ -21219,7 +21548,7 @@ function () {
       limitLine: null
     };
     this.scenarios = {};
-    this.pulse = {
+    this.pulseSettings = {
       time: 1,
       frequency: 0.5,
       A: 1,
@@ -21394,6 +21723,59 @@ function () {
     key: "setFirstTransform",
     value: function setFirstTransform(parentTransform) {}
   }, {
+    key: "exec",
+    value: function exec(execFunctionAndArgs) {
+      // if (elementsToExec == null || typeof elementsToExec === 'function') {
+      var execFunc;
+      var args;
+
+      if (Array.isArray(execFunctionAndArgs)) {
+        var _execFunctionAndArgs = _toArray(execFunctionAndArgs);
+
+        execFunc = _execFunctionAndArgs[0];
+        args = _execFunctionAndArgs.slice(1);
+      } else {
+        execFunc = execFunctionAndArgs;
+      } // $FlowFixMe
+
+
+      if (this[execFunc] != null && typeof this[execFunc] === 'function') {
+        if (args === undefined) {
+          // $FlowFixMe
+          this[execFunc]();
+        } else {
+          // $FlowFixMe
+          this[execFunc].apply(this, _toConsumableArray(args));
+        }
+      }
+    }
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (typeof this.pulseDefault === 'function') {
+        this.pulseDefault(done);
+      } else {
+        var _this$pulseDefault = this.pulseDefault,
+            frequency = _this$pulseDefault.frequency,
+            time = _this$pulseDefault.time,
+            scale = _this$pulseDefault.scale;
+        this.pulseScaleNow(time, scale, frequency, done);
+      }
+    }
+  }, {
+    key: "getElement",
+    value: function getElement() {
+      return this;
+    } // eslint-disable-next-line no-unused-vars, class-methods-use-this
+
+  }, {
+    key: "highlight",
+    value: function highlight() {
+      this.undim();
+    }
+  }, {
     key: "setPosition",
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -21507,7 +21889,27 @@ function () {
   }, {
     key: "setColor",
     value: function setColor(color) {
-      this.color = color.slice();
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      this.color = color != null ? color.slice() : [0, 0, 0, 0];
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      }
+    }
+  }, {
+    key: "dim",
+    value: function dim() {
+      this.setColor(this.dimColor, false);
+    }
+  }, {
+    key: "setDimColor",
+    value: function setDimColor(color) {
+      this.dimColor = color != null ? color.slice() : [0, 0, 0, 0];
+    }
+  }, {
+    key: "undim",
+    value: function undim() {
+      this.setColor(this.defaultColor, true);
     }
   }, {
     key: "setOpacity",
@@ -21770,19 +22172,19 @@ function () {
         // draw). If the pulse time is 0, that means pulsing will loop
         // indefinitely.
 
-        if (deltaTime > this.pulse.time && this.pulse.time !== 0) {
+        if (deltaTime > this.pulseSettings.time && this.pulseSettings.time !== 0) {
           // this.state.isPulsing = false;
           this.stopPulsing(true);
-          deltaTime = this.pulse.time;
+          deltaTime = this.pulseSettings.time;
         } // Go through each pulse matrix planned, and transform the input matrix
         // with the pulse.
 
 
-        for (var i = 0; i < this.pulse.num; i += 1) {
+        for (var i = 0; i < this.pulseSettings.num; i += 1) {
           // Get the current pulse magnitude
-          var pulseMag = this.pulse.style(deltaTime, this.pulse.frequency, this.pulse.A instanceof Array ? this.pulse.A[i] : this.pulse.A, this.pulse.B instanceof Array ? this.pulse.B[i] : this.pulse.B, this.pulse.C instanceof Array ? this.pulse.C[i] : this.pulse.C); // Use the pulse magnitude to get the current pulse transform
+          var pulseMag = this.pulseSettings.style(deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
-          var pTransform = this.pulse.transformMethod(pulseMag); // if(this.name === '_radius') {
+          var pTransform = this.pulseSettings.transformMethod(pulseMag); // if(this.name === '_radius') {
           // }
           // Transform the current transformMatrix by the pulse transform matrix
           // const pMatrix = m2.mul(m2.copy(transform), pTransform.matrix());
@@ -21802,25 +22204,25 @@ function () {
     value: function pulseScaleNow(time, scale) {
       var frequency = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      this.pulse.time = time;
+      this.pulseSettings.time = time;
 
       if (frequency === 0 && time === 0) {
-        this.pulse.frequency = 1;
+        this.pulseSettings.frequency = 1;
       }
 
       if (frequency !== 0) {
-        this.pulse.frequency = frequency;
+        this.pulseSettings.frequency = frequency;
       }
 
       if (time !== 0 && frequency === 0) {
-        this.pulse.frequency = 1 / (time * 2);
+        this.pulseSettings.frequency = 1 / (time * 2);
       }
 
-      this.pulse.A = 1;
-      this.pulse.B = scale - 1;
-      this.pulse.C = 0;
-      this.pulse.num = 1;
-      this.pulse.callback = callback;
+      this.pulseSettings.A = 1;
+      this.pulseSettings.B = scale - 1;
+      this.pulseSettings.C = 0;
+      this.pulseSettings.num = 1;
+      this.pulseSettings.callback = callback;
       this.pulseNow();
     }
   }, {
@@ -21829,29 +22231,32 @@ function () {
       var num = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var bArray = [scale];
-      this.pulse.num = num;
+      this.pulseSettings.num = num;
 
-      if (this.pulse.num > 1) {
+      if (this.pulseSettings.num > 1) {
         var b = Math.abs(1 - scale);
         var bMax = b;
         var bMin = -b;
         var range = bMax - bMin;
-        var bStep = range / (this.pulse.num - 1);
+        var bStep = range / (this.pulseSettings.num - 1);
         bArray = [];
 
-        for (var i = 0; i < this.pulse.num; i += 1) {
+        for (var i = 0; i < this.pulseSettings.num; i += 1) {
           bArray.push(bMax - i * bStep);
         }
       }
 
-      this.pulse.time = time;
-      this.pulse.frequency = 1 / (time * 2);
-      this.pulse.A = 1;
-      this.pulse.B = bArray;
-      this.pulse.C = 0;
-      this.pulse.callback = callback;
+      this.pulseSettings.time = time;
+      this.pulseSettings.frequency = 1 / (time * 2);
+      this.pulseSettings.A = 1;
+      this.pulseSettings.B = bArray;
+      this.pulseSettings.C = 0;
+      this.pulseSettings.callback = callback;
       this.pulseNow();
-    }
+    } // pulse(done: ?(mixed) => void = null) {
+    //   this.pulseDefault(done);
+    // }
+
   }, {
     key: "pulseNow",
     value: function pulseNow() {
@@ -21864,9 +22269,9 @@ function () {
     value: function stopPulsing(result) {
       this.state.isPulsing = false;
 
-      if (this.pulse.callback) {
-        var callback = this.pulse.callback;
-        this.pulse.callback = null;
+      if (this.pulseSettings.callback) {
+        var callback = this.pulseSettings.callback;
+        this.pulseSettings.callback = null;
         callback(result);
       }
     }
@@ -22309,11 +22714,14 @@ function (_DiagramElement) {
 
     _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimitive).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
-    _this3.color = color.slice();
+    _this3.color = color != null ? color.slice() : [0, 0, 0, 0];
+    _this3.defaultColor = _this3.color.slice();
+    _this3.dimColor = [0.5, 0.5, 0.5, 1];
     _this3.pointsToDraw = -1;
     _this3.angleToDraw = -1;
     _this3.lengthToDraw = -1;
-    _this3.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
+    _this3.cannotTouchHole = false;
+    _this3.type = 'primitive'; // this.setMoveBoundaryToDiagram();
 
     return _this3;
   }
@@ -22414,7 +22822,12 @@ function (_DiagramElement) {
   }, {
     key: "setColor",
     value: function setColor(color) {
-      this.color = color.slice();
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      this.color = color != null ? color.slice() : [0, 0, 0, 0];
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      }
 
       if (this instanceof DiagramElementPrimitive) {
         if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
@@ -22698,7 +23111,6 @@ var DiagramElementCollection =
 function (_DiagramElement2) {
   _inherits(DiagramElementCollection, _DiagramElement2);
 
-  // biasTransform: Array<number>;
   function DiagramElementCollection() {
     var _this5;
 
@@ -22713,6 +23125,7 @@ function (_DiagramElement2) {
     _this5.drawOrder = [];
     _this5.touchInBoundingRect = false;
     _this5.eqns = {};
+    _this5.type = 'collection';
     return _this5;
   }
 
@@ -22841,6 +23254,105 @@ function (_DiagramElement2) {
           this.renderedOnNextDraw = false;
         }
       }
+    }
+  }, {
+    key: "exec",
+    value: function exec(execFunctionAndArgs) {
+      var _this6 = this;
+
+      var elementsToExec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (elementsToExec == null) {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "exec", this).call(this, execFunctionAndArgs);
+
+        return;
+      }
+
+      if (Array.isArray(elementsToExec) && elementsToExec.length === 0) {
+        return;
+      }
+
+      elementsToExec.forEach(function (elementToExec) {
+        var element;
+
+        if (typeof elementToExec === 'string') {
+          element = _this6.getElement(elementToExec);
+        } else {
+          element = elementToExec;
+        }
+
+        if (element != null) {
+          element.exec(execFunctionAndArgs);
+        }
+      });
+    }
+  }, {
+    key: "pulse",
+    value: function pulse(elementsOrDone) {
+      var _this7 = this;
+
+      var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (elementsOrDone == null || typeof elementsOrDone === 'function') {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, elementsOrDone);
+
+        return;
+      }
+
+      var doneToUse = done;
+      elementsOrDone.forEach(function (elementToPulse) {
+        var element;
+
+        if (typeof elementToPulse === 'string') {
+          element = _this7.getElement(elementToPulse);
+        } else {
+          element = elementToPulse;
+        }
+
+        if (element != null) {
+          // element.pulseDefault(doneToUse);
+          element.pulse(doneToUse);
+          doneToUse = null;
+        }
+      });
+
+      if (doneToUse != null) {
+        doneToUse();
+      }
+    }
+  }, {
+    key: "getElement",
+    value: function getElement() {
+      var elementPath = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementPath == null) {
+        return this;
+      } // if (elementPath instanceof DiagramElement) {
+      //   return elementPath;
+      // }
+
+
+      var getElement = function getElement(inputElementPath, parent) {
+        var ep = inputElementPath.split('.');
+        var newParent = parent.elements[ep[0]];
+
+        if (newParent == null) {
+          // $FlowFixMe
+          newParent = parent[ep[0]];
+        }
+
+        if (newParent == null) {
+          return null;
+        }
+
+        if (ep.length > 1) {
+          return getElement(ep.slice(1).join('.'), newParent);
+        }
+
+        return newParent;
+      };
+
+      return getElement(elementPath, this);
     }
   }, {
     key: "show",
@@ -23148,18 +23660,77 @@ function (_DiagramElement2) {
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
-      var nonNullColor = color;
-
-      if (nonNullColor == null) {
-        nonNullColor = [0, 0, 0, 1];
-      }
+      var setDefault = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var nonNullColor = color != null ? color : [0, 0, 0, 0];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.setColor(nonNullColor);
+        element.setColor(nonNullColor, setDefault);
       }
 
-      this.color = nonNullColor.slice(); // this.color = [color[0], color[1], color[2], color[3]];
+      this.color = nonNullColor.slice();
+
+      if (setDefault) {
+        this.defaultColor = this.color.slice();
+      } // this.color = [color[0], color[1], color[2], color[3]];
+
+    }
+  }, {
+    key: "setDimColor",
+    value: function setDimColor() {
+      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+      var nonNullColor = color != null ? color : [0, 0, 0, 0];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setDimColor(nonNullColor);
+      }
+
+      this.dimColor = nonNullColor.slice();
+    }
+  }, {
+    key: "undim",
+    value: function undim() {
+      this.color = this.defaultColor.slice();
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.undim();
+      }
+    }
+  }, {
+    key: "dim",
+    value: function dim(elementsToDim) {
+      if (elementsToDim == null || Array.isArray(elementsToDim) && elementsToDim.length === 0) {
+        // super.dim();
+        this.color = this.dimColor.slice();
+
+        for (var i = 0; i < this.drawOrder.length; i += 1) {
+          var element = this.elements[this.drawOrder[i]];
+          element.dim();
+        }
+
+        return;
+      }
+
+      this.exec('dim', elementsToDim);
+    }
+  }, {
+    key: "highlight",
+    value: function highlight() {
+      var elementsToHighlight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToHighlight == null) {
+        this.undim();
+        return;
+      }
+
+      if (Array.isArray(elementsToHighlight) && elementsToHighlight.length === 0) {
+        return;
+      }
+
+      this.dim();
+      this.exec('undim', elementsToHighlight);
     }
   }, {
     key: "setOpacity",
@@ -23198,11 +23769,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this6 = this;
+      var _this8 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this6.elements[a];
-        var elemB = _this6.elements[b];
+        var elemA = _this8.elements[a];
+        var elemB = _this8.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA

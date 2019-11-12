@@ -1685,6 +1685,133 @@
     ],
     "enabled": true
   },
+  "Math/Geometry_1/Parallelogram": {
+    "title": "Parallelogram",
+    "approaches": {
+      "discover": {
+        "base": {
+          "type": "singlePage",
+          "title": "Properties",
+          "description": "",
+          "htmlTitle": "Self discover the properties of a parallelogram",
+          "htmlDescription": "Find the relationships and expressions of angles, sides, diagonals and area of a parallelogram",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "htmlTitle": "Examples of parallelogram calculations",
+          "htmlDescription": "Using the properties of parallelograms to find unknown information",
+          "fullTopic": true,
+          "links": ""
+        },
+        "identify": {
+          "type": "singlePage",
+          "title": "Identifying Parallelograms",
+          "description": "",
+          "htmlTitle": "Identify parallelograms from only some properties",
+          "htmlDescription": "Use a small combination of properties to determine if a shape is a parallelogram",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "Derivation using area of four right angle triangles",
+          "htmlTitle": "Pythagorean Theorem Derivation",
+          "htmlDescription": "Derivation using area of four right angle triangles",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "General",
+          "description": "External links to sources of information for a parallelogram>",
+          "htmlTitle": "Parallelogram Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about parallelograms",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Parallelogram",
+              "hash": "2791efc7facea360e11a9abfd8da4a23",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "Detailed description and properties"
+            },
+            {
+              "url": "https://www.mathwarehouse.com/geometry/quadrilaterals/parallelograms/",
+              "hash": "b69b26181b1a441e3914aafcffa18987",
+              "publisher": "Math Warehouse",
+              "type": "generic",
+              "description": "Description and proofs of properties"
+            },
+            {
+              "url": "https://mathbitsnotebook.com/Geometry/Quadrilaterals/QDParallelograms.html",
+              "hash": "1ed154dd5834137dd42ed1c446712928",
+              "publisher": "MathBitsNotebook",
+              "type": "generic",
+              "description": "Description and proofs"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Unknown Property",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using parallelograms",
+          "htmlDescription": "Practice identifying if a quadrangle is a parallelogram, and if it is identify the unknown property",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition and Properties",
+          "description": "",
+          "htmlTitle": "Definition and properties of a parallelogram",
+          "htmlDescription": "Includes converse relationships and how to determine if a shape is a parallelogram",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      "RightAngleTriangles"
+    ],
+    "enabled": true
+  },
   "Math/Geometry_1/PointLineDistance": {
     "title": "Point to Line Distance",
     "approaches": {
@@ -2368,8 +2495,8 @@
         "equalAnglesAreSimilarProof": {
           "type": "singlePage",
           "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
-          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
-          "htmlTitle": "Similar Triangles Proof",
+          "description": "",
+          "htmlTitle": "Triangles with Equal Corresponding Angles are Similar - Proof",
           "htmlDescription": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
           "fullTopic": false,
           "links": ""

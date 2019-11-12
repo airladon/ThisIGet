@@ -286,6 +286,7 @@ class PresentationFormat extends SimpleFormat {
     const { diagram } = this;
     const section = this.content.sections[this.currentSectionIndex];
     if (diagram) {
+      // this.content.resetToggle();
       section.setEnterState(this.state);
       section.currentInteractiveItem = -1;
       // if (this.overlayDiagram) {

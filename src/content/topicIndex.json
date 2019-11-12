@@ -1034,6 +1034,87 @@
     ],
     "enabled": true
   },
+  "Math/Geometry_1/Parallelogram": {
+    "title": "Parallelogram",
+    "approaches": {
+      "discover": {
+        "base": {
+          "type": "singlePage",
+          "title": "Properties",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "identify": {
+          "type": "singlePage",
+          "title": "Identifying Parallelograms",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "Derivation using area of four right angle triangles",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "General",
+          "description": "External links to sources of information for a parallelogram>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Unknown Property",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition and Properties",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "RightAngleTriangles"
+    ],
+    "enabled": true
+  },
   "Math/Geometry_1/PointLineDistance": {
     "title": "Point to Line Distance",
     "approaches": {
@@ -1450,7 +1531,7 @@
         "equalAnglesAreSimilarProof": {
           "type": "singlePage",
           "title": "Triangles with Equal Corresponding Angles are Similar - Proof 2",
-          "description": "Proof showing why triangles with equal corresponding angles are proportional triangles and therefore similar",
+          "description": "",
           "fullTopic": false
         },
         "equalAnglesAreSimilarProofBrief": {

@@ -33,7 +33,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
 
   _constructionCircle: DiagramElementPrimitive;
 
-  toggle: number;
+  toggleIndex: number;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -53,7 +53,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
     this._opposite.makeTouchable();
     this._opposite.setTransformCallback = this.tryToShowTriangle.bind(this);
-    this.toggle = 0;
+    this.toggleIndex = 0;
   }
 
   setInitialPosition() {
@@ -270,18 +270,18 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   }
 
   adjacentTwo(done: ?() => void = null) {
-    if (this.toggle > 0) {
+    if (this.toggleIndex > 0) {
       this.animations.new()
         .trigger({ callback: this.toggleInterceptAngles.bind(this) })
         .start();
       this.toggleInterceptAngles();
-      this.toggle -= 1;
+      this.toggleIndex -= 1;
       if (done != null) {
         done();
       }
       return;
     }
-    this.toggle = 1;
+    this.toggleIndex = 1;
     const adjacentLength = rand(
       this.layout.ssaRadius + 0.3,
       Math.abs(this._adjacentMovePad.move.limitLine.p1.x),

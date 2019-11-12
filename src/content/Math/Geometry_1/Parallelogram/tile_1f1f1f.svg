@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <polygon style="stroke-width: 18px; stroke: rgb(31, 31, 31) ; fill: none;" points="30.157 390.262 120.38 109.018 470.764 109.018 380.363 390.228"/>
+  <path d="M 281.723 66.835 L 324.803 109.916 M 281.715 152.116 L 324.796 109.036" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;"/>
+  <path d="M 194.244 347.374 L 237.325 390.454 M 194.237 432.655 L 237.318 389.575" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;"/>
+  <path d="M 382.932 303.522 L 426.013 260.441" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;" transform="matrix(0.292372, -0.956305, 0.956305, 0.292372, 49.245332, 587.985268)"/>
+  <path d="M 382.94 218.241 L 426.02 261.321" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;" transform="matrix(0.292372, -0.956305, 0.956305, 0.292372, 49.245332, 587.985268)"/>
+  <path d="M 464.356 272.046 L 435.752 218.253 M 382.803 247.106 L 436.596 218.502" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;"/>
+  <path d="M 34.597 300.894 L 77.677 257.813" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;" transform="matrix(0.292372, -0.956305, 0.956305, 0.292372, -194.733008, 253.0104)"/>
+  <path d="M 34.604 215.612 L 77.685 258.693" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;" transform="matrix(0.292372, -0.956305, 0.956305, 0.292372, -194.733008, 253.0104)"/>
+  <path d="M 115.02 269.418 L 86.418 215.624 M 33.467 244.478 L 87.261 215.875" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 16px;"/>
+</svg>

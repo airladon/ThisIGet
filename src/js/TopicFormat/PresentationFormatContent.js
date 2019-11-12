@@ -64,6 +64,15 @@ function interactiveItem(
   };
 }
 
+// type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
+
+// type TypeAccentOptions = {
+//   element?: ?DiagramElement | Array<DiagramElement>,
+//   children?: ?Array<DiagramElement | string>,
+//   style?: TypeAccent,
+//   done?: ?() => void,
+// }
+
 function infoList(listItems: Array<string>) {
   const out = ['<ul>'];
   listItems.forEach((item) => {
@@ -646,7 +655,6 @@ class PresentationFormatContent extends SimpleFormatContent {
     // this.iconLink = '/';
     // this.iconLinkGrey = '/';
     // this.setTitle();
-
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {
       window.quickReference = {};
@@ -927,32 +935,6 @@ class PresentationFormatContent extends SimpleFormatContent {
     return click(this.next, [this], color);
   }
 
-  // bindShowQR(
-  //   uid: string,
-  //   qrid: string,
-  //   colorOrOptions: Array<number> | {
-  //     color?: ?Array<number>,
-  //     interactive?: boolean,
-  //     id?: string,
-  //     classes?: string,
-  //     text?: ?string,
-  //   } = {},
-  //   // color: Array<number> = this.diagram.layout.colors.diagram.action,
-  // ) {
-  //   const defaultOptions = {
-  //     color: this.diagram.layout.colors.diagram.action,
-  //     classes: '',
-  //   };
-  //   let options = defaultOptions;
-  //   if (Array.isArray(colorOrOptions)) {
-  //     options.color = colorOrOptions;
-  //   } else {
-  //     options = joinObjects({}, defaultOptions, colorOrOptions);
-  //     options.classes = `topic__qr_action_word ${options.classes}`;
-  //   }
-  //   return click(this.showQR, [this, uid, qrid], options);
-  // }
-
   qr(
     linkIn: string,
     colorOrOptions: Array<number> | {
@@ -1011,7 +993,7 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   addSection(...sectionObjects: Array<Object>) {
     const s = new Section(this.diagram);
-    const section = Object.assign({}, ...sectionObjects);
+    const section = joinObjects({}, ...sectionObjects);
     Object.keys(section).forEach((key) => {
       // $FlowFixMe
       s[key] = section[key];
