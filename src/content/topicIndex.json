@@ -1045,6 +1045,14 @@
           "fullTopic": true
         }
       },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",

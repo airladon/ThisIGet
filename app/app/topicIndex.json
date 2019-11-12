@@ -1699,6 +1699,17 @@
           "links": ""
         }
       },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "htmlTitle": "... examples",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
