@@ -23,7 +23,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _a2: TypeLabelledAngle;
     _b1: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _b2: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
-    _b21: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
+    _b11: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _b21: { _curve1: DiagramElementPrimitive } & TypeLabelledAngle;
     _c1: TypeLabelledAngle;
     _c2: TypeLabelledAngle;

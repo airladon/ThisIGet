@@ -29,6 +29,7 @@ export type TypeAddElementObject = {
 
 function getColor(
   parent: DiagramElement,
+  // $FlowFixMe
   childrenOrColor: ?(Array<number> | Array<DiagramElement | string>),
   color: ?Array<number>,
 ): Array<number> {

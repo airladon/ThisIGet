@@ -210,27 +210,27 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       [
         true, 'SSSS_AA', ['01', '12', '23', '30', '0', '3'], '1',
         'Quadrangles with equal opposite sides are parallelograms',
-        [['01', -0.1], ['23', 0.1]],
+        [],
       ],
       [
         true, 'AAAA_SS', ['0', '1', '2', '3', '01', '12'], '23',
         'Quadrangles with equal opposite angles are parallelograms',
-        [['0', -3], ['2', 3]],
+        [],
       ],
       [
         false, 'A_SS', ['0', '01', '12'], '23',
         'Not enough information to determine if a parallelogram',
-        [['0', -3], ['2', 3]],
+        [],
       ],
       [
         false, 'AA_SS', ['0', '2', '01', '12'], '23',
         'Not enough information to determine if a parallelogram',
-        [['0', -3], ['2', 3]],
+        [],
       ],
       [
         false, 'SSS_A', ['01', '12', '23', '0'], '2',
         'Not enough information to determine if a parallelogram',
-        [['0', -3], ['2', 3]],
+        [],
       ],
       [
         true, 'PPPP_SS', ['p01', 'p12', 'p23', 'p30', '01', '12'], '23',
@@ -263,11 +263,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         [],
       ],
       [
-        false, 'D_AA', ['d02', 'd31', 'l31_1', 'l31_2', '1', '2'], '3',
-        'It is not clear if one diagonal intersects at its midpoint',
-        [],
-      ],
-      [
         true, 'DD_SS', ['d02', 'd31', 'l02_1', 'l02_2', 'l31_1', 'l31_2', '01', '12'], '23',
         'Quadrangles with diagonals that intersect at their midpoints are parallelograms',
         [],
@@ -284,6 +279,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       ],
     ];
     const scenario = randElement(scenarios);
+    // eslint-disable-next-line no-unused-vars
     const [possible, name, pgramShow, unknown, defaultHint, trick] = scenario;
     let hint = defaultHint;
     if (!possible) {
@@ -291,7 +287,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
 
     this.hint = 'custom';
-    const willTrick = rand(0, 0.2);
+    const willTrick = rand(0, 1);
     if (answer !== 3 && willTrick < 0.3 && trick.length > 0) {
       trick.forEach((prop: [string, number]) => {
         let element;
@@ -339,6 +335,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       ];
       if (parseFloat(angle0) === parseFloat(angle1)) {
         options[0][0] = '45º';
+      }
+      if (options[0][0] === options[2][0]
+        || options[1][0] === options[2][0]
+      ) {
+        options[2][0] = `${parseFloat(angle1) - 2}º`;
       }
     }
 
@@ -401,7 +402,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   // eslint-disable-next-line class-methods-use-this
-  fillSelection(options) {
+  fillSelection(options: Array<[string, boolean]>) {
     const numOptions = options.length;
     let answer;
     for (let i = 0; i < numOptions; i += 1) {
@@ -414,6 +415,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         if (option[1]) {
           answer = choiceIndex;
         }
+        // eslint-disable-next-line prefer-destructuring
         choiceElement.innerHTML = option[0];
       }
     }
@@ -426,8 +428,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       && firstChoiceText.parentElement.parentElement != null
     ) {
       if (numOptions === 2) {
+        // $FlowFixMe
         firstChoiceText.parentElement.parentElement.style.visibility = 'hidden';
       } else {
+        // $FlowFixMe
         firstChoiceText.parentElement.parentElement.style.visibility = 'visible';
       }
     }
