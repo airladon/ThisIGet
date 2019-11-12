@@ -2,11 +2,11 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'base',
+  uid: 'complex',
   topic: 'examples',
-  title: 'Simple Geometries',
+  title: 'Complex Geometries',
   description: '',
-  htmlTitle: 'Examples of parallelogram calculations',
+  htmlTitle: 'Examples of parallelogram calculations with complex geometries',
   htmlDescription: 'Using the properties of parallelograms to find unknown information',
   fullTopic: true,
   type: 'singlePage',

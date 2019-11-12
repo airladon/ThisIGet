@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'discover',
-  title: 'Brief',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Parallelogram\'s Properties',
+  description: '',
+  htmlTitle: 'Self discover the properties of a parallelgram',
+  htmlDescription: 'Find the relationships and expressions of angles, sides, diagonals and area of a parallelogram',
   fullTopic: true,
   type: 'singlePage',
 };

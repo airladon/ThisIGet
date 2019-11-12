@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Definition and Properties',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Definition and properties of a parallelgoram',
+  htmlDescription: 'Includes converse relationships and how to determine if a shape is a parallelogram',
   fullTopic: true,
   type: 'presentation',
 };

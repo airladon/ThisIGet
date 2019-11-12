@@ -1040,15 +1040,21 @@
       "discover": {
         "base": {
           "type": "singlePage",
-          "title": "Brief",
-          "description": "Derivation using area of four right angle triangles",
+          "title": "Parallelogram's Properties",
+          "description": "",
           "fullTopic": true
         }
       },
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Simple Geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "complex": {
+          "type": "singlePage",
+          "title": "Complex Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1090,7 +1096,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition and Properties",
           "description": "",
           "fullTopic": true
         }

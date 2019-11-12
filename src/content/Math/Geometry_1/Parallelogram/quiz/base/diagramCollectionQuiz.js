@@ -268,7 +268,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         [],
       ],
       [
-        true, 'DD_S', ['d02', 'd31', 'l02_1', 'l02_2', 'l31_1', 'l31_2', '01'], '23',
+        true, 'DD_SS', ['d02', 'd31', 'l02_1', 'l02_2', 'l31_1', 'l31_2', '01', '12'], '23',
         'Quadrangles with diagonals that intersect at their midpoints are parallelograms',
         [],
       ],
