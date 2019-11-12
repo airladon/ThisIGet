@@ -177,11 +177,11 @@ Consider a quadrangle with diagnols that intersect at their midpoints. At the in
 
 By [[SAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00756F)) the top and bottom triangles are congruent. Therefore the top side and bottom side have equal length.
 
-Similarly the left and right triangles are congruent, and the left and right side have equal length.
+Similarly the left and right triangles are congruent, and the left and right sides have equal length.
 
 Thus we have a quadrangle with opposite sides of equal length, which is a parallelogram.
 
-**Any quadrangle with diagonals that intersect at the midpoints will be a paralleogram.**
+**Any quadrangle with diagonals that intersect at their midpoints will be a paralleogram.**
 
 </hintLow>
 
@@ -200,7 +200,7 @@ Consider a parallelogram that has been split into a rectangle and two right angl
 
 ![](pgram_area1.png)
 
-By [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00756F)), the right angle triangles are congruent.
+By [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)), the right angle triangles are congruent.
 
 Therefore, their side length $$\color{b}S$$ along the parallelogram side $$\color{b}A$$ is the same.
 

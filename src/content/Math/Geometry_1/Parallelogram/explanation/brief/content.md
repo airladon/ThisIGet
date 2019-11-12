@@ -1,6 +1,6 @@
 ### Definition
 
-A **parallelogram** is a shape with four sides [[quadrangle or quadrilateral]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F))  that has **parallel opposite sides**.
+A **parallelogram** is a shape with four sides ([[quadrangle or quadrilateral]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F))) that has **parallel opposite sides**.
 
 ![](pgram.png)
 
@@ -10,8 +10,8 @@ The properties of the parallelogram and their converse implications are detailed
 * [Opposite Angles - Converse](#angles-converse)
 * [Opposite Sides](#sides)
 * [Opposite Sides - Converse](#sides-converse)
-* [Opposite Diagonal Intersection](#diagonals)
-* [Opposite Diagonal Intersection - Converse](#diagonals-converse)
+* [Diagonal Intersection](#diagonals)
+* [Diagonal Intersection - Converse](#diagonals-converse)
 * [Area](#area)
 
 ### Opposite Angles <a name="angles"></a>
@@ -41,7 +41,7 @@ Consider a quadrangle with equal opposite angles:
 
 ![](pgram_angles2.png)
 
-A quadrangle's angles always [[add to 360º]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F))
+A quadrangle's angles always [[add to 360º]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F)).
 
 $$360^\circ = 2\color{r}a \color{black}+ 2\color{r}b$$
 
@@ -77,7 +77,7 @@ By [[SSS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sss',#00756F)) the two t
 
 Therefore corresponding triangle angles are equal.
 
-Therefore quadrangle opposite angles are equal, and the shape must be a parallelogram.
+Therefore the quadrangle's opposite angles are equal, and the shape must be a parallelogram.
 
 **Any quadrangle with equal opposite sides is a parallelogram.**
 
@@ -87,7 +87,7 @@ Consider a parallelogram with marked diagonals forming four internal triangles, 
 
 ![](pgram_diag1.png)
 
-We showed angles $$\color{g}c$$ are equal in [Sides](#sides).
+We showed angles $$\color{g}c$$ are equal in [Opposite Sides](#sides).
 
 Angles $$\color{r}e$$ are equal as they are [[opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)).
 
@@ -110,11 +110,11 @@ Consider a quadrangle with diagnols that intersect at their midpoints. At the in
 
 By [[SAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00756F)) the top and bottom triangles are congruent. Therefore the top side and bottom side have equal length.
 
-Similarly the left and right triangles are congruent, and the left and right side have equal length.
+Similarly the left and right triangles are congruent, and the left and right sides have equal length.
 
 Thus we have a quadrangle with opposite sides of equal length, which is a parallelogram.
 
-**Any quadrangle with diagonals that intersect at the midpoints will be paralleograms.**
+**Any quadrangle with diagonals that intersect at their midpoints will be paralleograms.**
 
 ### Area <a name="area"></a>
 
@@ -122,7 +122,7 @@ Consider a parallelogram that has been split into a rectangle and two right angl
 
 ![](pgram_area1.png)
 
-By [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00756F)), the right angle triangles are congruent.
+By [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)), the right angle triangles are congruent.
 
 Therefore, their side length $$\color{b}S$$ along the parallelogram side $$\color{b}A$$ is the same.
 
@@ -131,7 +131,7 @@ The area of the parallelogram is the sum:
 
 $$\color{b}Area \color{black}= \color{b}Area_{rectangle} \color{black}+ 2\color{b}Area_{triangle}$$
 
-$$\color{b}Area \color{black}= (\color{b}A \color{black}- \color{b}S\color{black})\color{b}H \color{black}+ 2\color{b}SH$$
+$$\color{b}Area \color{black}= (\color{b}A \color{black}- \color{b}S\color{black})\color{b}H \color{black}+ 2\times \frac{1}{2}\color{b}SH$$
 
 $$\color{b}Area \color{black}= \color{b}AH$$
 
