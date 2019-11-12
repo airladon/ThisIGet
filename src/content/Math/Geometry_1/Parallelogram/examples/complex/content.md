@@ -56,6 +56,27 @@ We now see both pairs of opposite angles are equal, therefore this shape is a pa
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 </hintLow>
 
+### Example 4
+Is this shape a parallelogram?
+
+![](ex4_1.png)
+
+<hintLow>[Answer]
+First, let's draw in the diagonals and some angles:
+
+![](ex4_2.png)
+
+From [[opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)) we know the two $$\color{r}b$$ angles are equal.
+
+From [[alternate angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Alternate',#00756F)) we know the two $$\color{g}a$$ angles are equal.
+
+From [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) we know the top and bottom triangle are congruent.
+
+Therefore, the diagonals must intersect at their midpoints, and the shape is a parallelogram.
+
+$$\bbox[10px,border:1px solid gray]{Yes}$$
+</hintLow>
+
 
 <!-- 
 ![](ex1.png)
