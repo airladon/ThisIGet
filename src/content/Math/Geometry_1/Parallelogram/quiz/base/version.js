@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Are They Similar?',
+  title: 'Unknown Property',
   description: '',
-  htmlTitle: 'Quiz - Find if the triangles are similar',
-  htmlDescription: 'Practice identifying if two triangles are similar or not',
+  htmlTitle: 'Quiz - Find the unknown property using parallelograms',
+  htmlDescription: 'Practice identifying if a quadrangle is a parallelgoram, and if it is identify the unknown property',
   fullTopic: true,
   type: 'presentation',
 };
