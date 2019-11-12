@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Parallelogram',
   dependencies: [
-    'AreaTriangle',
+    'RightAngleTriangles',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

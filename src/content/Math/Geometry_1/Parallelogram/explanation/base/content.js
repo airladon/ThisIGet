@@ -141,7 +141,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     commonContent = {
-      setContent: '|Interior_angles| between intersected parallel lines can then be used to calculate the bottom right |angle|.',
+      setContent: '|Interior_angles| between intersected parallel lines can be used to calculate the bottom right |angle|.',
       modifiers: {
         Interior_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Interior'),
         angle: this.bindNext(colors.angles),
@@ -252,7 +252,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     commonContent = {
-      setContent: 'We know all quadrangles angles |add_to_360º|, therefore we have:',
+      setContent: 'We know all a quadrangle\'s angles |add_to_360º|, therefore we have:',
       modifiers: {
         add_to_360º: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
       },
@@ -979,9 +979,9 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     commonContent = {
-      setContent: 'Therefore by |ASA| the |opposite_triangles| will be |congruent|.',
+      setContent: 'Therefore by |SAS| the |opposite_triangles| will be |congruent|.',
       modifiers: {
-        ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
+        SAS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
         opposite_triangles: coll.bindToggleGroups(
           pgram,
           [['triLeft', 'triRight'], ['triTop', 'triBottom']],
@@ -1499,7 +1499,7 @@ class Content extends PresentationFormatContent {
         pgram._diag1, pgram._diag2,
         pgram._lMarkUp1, pgram._lMarkUp2,
         pgram._lMark21, pgram._lMark22,
-        pgram._h,
+        // pgram._h,
       ],
       setSteadyState: () => {
         pgram.setScenario('bottom');

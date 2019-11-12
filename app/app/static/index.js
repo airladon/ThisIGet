@@ -12206,6 +12206,13 @@ function (_DiagramElementCollec) {
       p2: null,
       // rotation will be overridden
       p3: null,
+      pulse: {
+        curve: 1,
+        label: 1,
+        arrow: 1,
+        side: 1,
+        collection: 1.8
+      },
       mods: {}
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
@@ -12323,8 +12330,75 @@ function (_DiagramElementCollec) {
       _this2.addSide(2, _sideOptions2.length, _sideOptions2.width, _sideOptions2.color);
     }
 
+    _this2.pulseDefaultSettings = {
+      curve: optionsToUse.pulse.curve || 1,
+      label: optionsToUse.pulse.label || 1,
+      arrow: optionsToUse.pulse.arrow || 1,
+      side: optionsToUse.pulse.side || 1,
+      collection: optionsToUse.pulse.collection || 1
+    }; // this.pulseDefault = (done) => {
+    //   this.pulseScaleNow(1, 1.7, 0, done);
+    // };
+
     _this2.pulseDefault = function (done) {
-      _this2.pulseScaleNow(1, 1.5, 0, done);
+      var doneToUse = done;
+      var pulseSettings = _this2.pulseDefaultSettings;
+
+      if (typeof pulseSettings.curve === 'number') {
+        if (pulseSettings.curve !== 1 && _this2._curve != null) {
+          _this2._curve.pulseScaleNow(1, pulseSettings.curve, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      } else if (pulseSettings.curve != null && _this2._curve != null) {
+        var defaultCurveThickOptions = {
+          width: 2,
+          num: 5
+        };
+        var curveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultCurveThickOptions, pulseSettings.curve);
+
+        _this2._curve.pulseThickNow(1, curveOptions.width, curveOptions.num, doneToUse);
+
+        doneToUse = null;
+      }
+
+      if (pulseSettings.label !== 1 && _this2._label != null) {
+        _this2._label.pulseScaleNow(1, pulseSettings.label, 0, doneToUse);
+
+        doneToUse = null;
+      }
+
+      if (pulseSettings.arrow !== 1) {
+        if (_this2._arrow1 != null) {
+          _this2._arrow1.pulseScaleNow(1, pulseSettings.arrow, 0, doneToUse);
+
+          doneToUse = null;
+        }
+
+        if (_this2._arrow2 != null) {
+          _this2._arrow2.pulseScaleNow(1, pulseSettings.arrow, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      }
+
+      if (pulseSettings.side !== 1) {
+        if (_this2._side1 != null) {
+          _this2._side1.pulseScaleNow(1, pulseSettings.side, 0, doneToUse);
+
+          doneToUse = null;
+        }
+
+        if (_this2._side2 != null) {
+          _this2._side2.pulseScaleNow(1, pulseSettings.side, 0, doneToUse);
+
+          doneToUse = null;
+        }
+      }
+
+      if (pulseSettings.collection !== 1) {
+        _this2.pulseScaleNow(1, pulseSettings.collection, 0, doneToUse);
+      }
     };
 
     _this2.update();
@@ -14134,7 +14208,13 @@ function (_DiagramElementCollec) {
       largerTouchBorder: true,
       offset: 0,
       dashStyle: null,
-      mods: {}
+      mods: {},
+      pulse: {
+        line: 6,
+        label: 2,
+        arrow: 3,
+        collection: 1
+      }
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var dashStyle = optionsToUse.dashStyle;
@@ -14299,13 +14379,24 @@ function (_DiagramElementCollec) {
       _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationBounds);
     }
 
+    _this2.pulseDefaultSettings = {
+      line: optionsToUse.pulse.line || 1,
+      label: optionsToUse.pulse.label || 1,
+      arrow: optionsToUse.pulse.arrow || 1,
+      collection: optionsToUse.pulse.collection || 1
+    };
+
     _this2.pulseDefault = function (done) {
       _this2.pulseWidth({
-        line: 6,
-        label: 2,
-        arrow: 4,
+        line: _this2.pulseDefaultSettings.line,
+        label: _this2.pulseDefaultSettings.label,
+        arrow: _this2.pulseDefaultSettings.arrow,
         done: done
       });
+
+      if (_this2.pulseDefaultSettings.collection !== 1) {
+        _this2.pulseScaleNow(1, _this2.pulseDefaultSettings.collection);
+      }
     };
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
@@ -16850,6 +16941,11 @@ function () {
       var single = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 - y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, -y + wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-Math.abs(options.width / Math.cos(options.angle + Math.PI / 2)), 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-x - wx, y - wy), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0 - x, 0 + y)];
       var collection = this.collection(options.transform);
       collection.setColor(options.color);
+
+      if (options.pulse != null) {
+        collection.pulseDefault.scale = options.pulse;
+      }
+
       var start = -((options.num - 1) / 2) * options.step;
 
       var _loop = function _loop(i) {

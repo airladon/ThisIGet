@@ -48,9 +48,9 @@ export default function diagramLayout() {
       curve: {
         radius,
         sides: 100,
-        width: 0.01,
+        width: 0.02,
         num,
-        step: 0.03,
+        step: 0.04,
       },
       autoRightAngle: true,
       color,
@@ -66,9 +66,9 @@ export default function diagramLayout() {
     method: 'parallelMarks',
     options: {
       color: colors.sides,
-      width: 0.01,
-      step: 0.04,
-      length: 0.1,
+      width: 0.02,
+      step: 0.05,
+      length: 0.15,
       num,
       rotation,
       position,
@@ -80,9 +80,9 @@ export default function diagramLayout() {
     method: 'marks',
     options: {
       color: colors.diagonal,
-      width: 0.01,
-      step: 0.04,
-      length: 0.12,
+      width: 0.02,
+      step: 0.05,
+      length: 0.2,
       num,
       rotation,
       position,
@@ -104,6 +104,9 @@ export default function diagramLayout() {
       p2,
       dashStyle: {
         style: [0.05, 0.02],
+      },
+      pulse: {
+        line: 10,
       },
     },
   });
@@ -149,7 +152,7 @@ export default function diagramLayout() {
     },
   });
 
-  const w = 0.02;
+  const w = 0.03;
   const parallelogram = {
     name: 'pgram',
     method: 'collection',

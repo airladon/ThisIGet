@@ -1808,7 +1808,7 @@
       }
     },
     "dependencies": [
-      "AreaTriangle"
+      "RightAngleTriangles"
     ],
     "enabled": true
   },
