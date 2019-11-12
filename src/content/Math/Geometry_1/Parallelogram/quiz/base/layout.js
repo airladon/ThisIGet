@@ -8,7 +8,7 @@ const {
 //   // Line,
 } = Fig;
 
-const { joinObjects } = Fig.tools.misc;
+// const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {

@@ -166,12 +166,12 @@ export default function diagramLayout() {
     },
   });
 
-  const fill = (name, points, color) => ({
+  const fill = (name, pointsIn, color) => ({
     name,
     method: 'fan',
     options: {
       fill: true,
-      points,
+      points: pointsIn,
       color,
     },
   });
@@ -485,13 +485,13 @@ export default function diagramLayout() {
             ],
           },
           'equals',
-          { 
+          {
             annotate: [[
               { strike: ['_21', 'strike1'] },
               'a', 'plus',
               { strike: ['_22', 'strike2'] },
               'b',
-            ], ['_divide21', 'center', 'bottom', 'center', 2], 'false']
+            ], ['_divide21', 'center', 'bottom', 'center', 2], 'false'],
           },
         ],
         // '3': [

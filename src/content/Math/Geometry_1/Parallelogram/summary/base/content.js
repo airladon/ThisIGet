@@ -13,7 +13,7 @@ import Definition from '../../../../../common/tools/definition';
 
 const {
   style,
-  click,
+  // click,
 //   clickW,
 //   highlight,
 //   centerV,

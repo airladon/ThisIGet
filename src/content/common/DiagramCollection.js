@@ -27,14 +27,14 @@ export type TypeAddElementObject = {
   addElements?: Array<TypeAddElementObject>
 };
 
+type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
+
 type TypeAccentOptions = {
   element?: ?DiagramElement | Array<DiagramElement>,
   children?: ?Array<DiagramElement | string>,
   style?: TypeAccent,
   done?: ?() => void,
 }
-
-type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
 
 function getColor(
   parent: DiagramElement,

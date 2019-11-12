@@ -20,7 +20,7 @@ const {
 const {
   removeRandElement,
   randElement,
-  randElements,
+  // randElements,
   round,
   randInt,
   rand,
@@ -78,7 +78,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   // eslint-disable-next-line class-methods-use-this
   randomParallelogram(
   ): Array<Point> {
-
     const length = rand(1, 2.2);
     const height = rand(1.2, 1.6);
     const offset = rand(0, 1);
@@ -190,7 +189,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.updateDiagonalsAndMarks();
 
     let answer = 0;
-    // // eslint-disable-next-line max-len
+    // eslint-disable-next-line max-len
     const scenarios: Array<[boolean, string, Array<string>, string, string, Array<[string, number]>]> = [
       [
         true, 'AAA_SS', ['0', '1', '2', '01', '12'], '23',

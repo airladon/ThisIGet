@@ -16,11 +16,11 @@ const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
-const {
-  click,
-  style,
-//   highlight,
-} = Fig.tools.html;
+// const {
+//   click,
+//   style,
+// //   highlight,
+// } = Fig.tools.html;
 
 export default class QRMainPres extends PopupBoxCollection {
   _collection: CommonCollection;

@@ -64,14 +64,14 @@ function interactiveItem(
   };
 }
 
-type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
+// type TypeAccent = 'pulse' | 'show' | 'highlight' | Array<'highlight' | 'pulse' | 'show'>;
 
-type TypeAccentOptions = {
-  element?: ?DiagramElement | Array<DiagramElement>,
-  children?: ?Array<DiagramElement | string>,
-  style?: TypeAccent,
-  done?: ?() => void,
-}
+// type TypeAccentOptions = {
+//   element?: ?DiagramElement | Array<DiagramElement>,
+//   children?: ?Array<DiagramElement | string>,
+//   style?: TypeAccent,
+//   done?: ?() => void,
+// }
 
 function infoList(listItems: Array<string>) {
   const out = ['<ul>'];
