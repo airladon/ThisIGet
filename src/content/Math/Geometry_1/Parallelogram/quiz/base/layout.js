@@ -30,6 +30,55 @@ export default function diagramLayout() {
   // layout.quiz.check = new Point(2.1, -1.7)
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
+  colors.diagonal = colors.get('grey').rgb;
+
+  const pMarks = (name, num) => ({
+    name,
+    method: 'parallelMarks',
+    options: {
+      color: colors.sides,
+      width: 0.01,
+      step: 0.04,
+      length: 0.1,
+      num,
+      rotation: 0,
+      position: [0, 0],
+    },
+  });
+
+  const lMarks = (name, num) => ({
+    name,
+    method: 'marks',
+    options: {
+      color: colors.diagonal,
+      width: 0.01,
+      step: 0.04,
+      length: 0.12,
+      num,
+      rotation: 0,
+      position: [0, 0],
+    },
+    mods: {
+      pulseDefault: {
+        scale: 3,
+      },
+    },
+  });
+
+  const dashed = name => ({
+    name,
+    method: 'line',
+    options: {
+      color: colors.diagonal,
+      width: 0.004,
+      p1: [0, 0],
+      p2: [5, 0],
+      dashStyle: {
+        style: [0.03, 0.02],
+      },
+    },
+  });
+
   const width = 0.015;
   const pgram = {
     name: 'pgram',
@@ -73,6 +122,16 @@ export default function diagramLayout() {
   };
 
   layout.addElementsQuiz = [
+    dashed('d02'),
+    dashed('d31'),
+    lMarks('l02_1', 1),
+    lMarks('l02_2', 1),
+    lMarks('l31_1', 2),
+    lMarks('l31_2', 2),
+    pMarks('p01', 1),
+    pMarks('p12', 2),
+    pMarks('p23', 1),
+    pMarks('p30', 2),
     pgram,
   ];
 
