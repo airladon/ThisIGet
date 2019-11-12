@@ -26,7 +26,7 @@ Is this shape a parallelogram?
 ![](ex2_1.png)
 
 <hintLow>[Answer]
-Start by drawing a diagonal and recongnizing we can potentially use [[SSA]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) to determine if the two triangles are congruent.
+Start by drawing a diagonal and recongnizing we can potentially use [[SSA]]((qr,'Math/Geometry_1/CongruentTriangles/base/Ssa',#00756F)) to determine if the two triangles are congruent.
 
 ![](ex2_2.png)
 

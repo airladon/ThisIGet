@@ -97,6 +97,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     this.addSection(common, {
+      title: 'Converse',
       setContent: [
         style({ top: 0 }, 'Conversely:'),
         style({
@@ -106,6 +107,11 @@ class Content extends PresentationFormatContent {
           'Any quadrangle with |equal_opposite_sides| is a |parallelogram|',
           'Any quadrangle whose |diagonals| split each other in |half| is a |parallelogram|',
         ]),
+      ],
+      hide: [
+        pgram._a1._label, pgram._a2._label,
+        pgram._b1._label, pgram._b2._label,
+        pgram._h,
       ],
       modifiers: {
         equal_opposite_angles: diag.bindToggleGroups(

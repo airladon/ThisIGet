@@ -1709,12 +1709,12 @@
           "fullTopic": true,
           "links": ""
         },
-        "complex": {
+        "identify": {
           "type": "singlePage",
-          "title": "Complex Geometries",
+          "title": "Identifying Parallelograms",
           "description": "",
-          "htmlTitle": "Examples of parallelogram calculations with complex geometries",
-          "htmlDescription": "Using the properties of parallelograms to find unknown information",
+          "htmlTitle": "Identify parallelograms from only some properties",
+          "htmlDescription": "Use a small combination of properties to determine if a shape is a parallelogram",
           "fullTopic": true,
           "links": ""
         }
