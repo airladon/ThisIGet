@@ -945,7 +945,10 @@ def get_link_ratings(path):
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     ratings = []
     for link in link_list[path]:
-        rating = get_link_rating(path, link['hash'], current_user)
+        if 'hash' in link:
+            rating = get_link_rating(path, link['hash'], current_user)
+        else:
+            rating = [0, 0, 0, 0]
         ratings.append(rating)
     return jsonify({'status': 'ok', 'ratings': ratings})
 

@@ -42,7 +42,7 @@ class Content extends PresentationFormatContent {
       // setContent: ['Find the unknown angle:'],
       setContent: [
         style({ top: 0 }, 'Can you find the unknown property?'),
-        style({ size: 0.6, top: 0 }, 'If there is not enough information, or the shape cannot be a parallelgram, then answer |No|.'),
+        style({ size: 0.6, top: 0 }, 'If there is not enough information, or the shape cannot be a parallelogram, then answer |No|.'),
       ],
       show: [quiz._pgram],
       setSteadyState: () => {

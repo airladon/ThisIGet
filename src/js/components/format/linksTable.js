@@ -169,7 +169,10 @@ export default class LinksTable extends React.Component
     const highRatingIndex = 1;
     let tdClass = 'approach__links_table__td approach__links_table__first_row';
     this.links.forEach((link, index) => {
-      let userRatingValue = this.state.ratings[index][userRatingIndex];
+      let userRatingValue = 0;
+      if (this.state.ratings[index] && this.state.ratings[index][userRatingIndex]) {
+        userRatingValue = this.state.ratings[index][userRatingIndex];
+      }
       if (typeof userRatingValue !== 'number') {
         userRatingValue = 0;
       }
@@ -184,7 +187,7 @@ export default class LinksTable extends React.Component
       let numHighRatings = <div className="approach__links_table__disabled">
         {'-'}
       </div>;
-      if (this.state.ratings[index][highRatingIndex]) {
+      if (this.state.ratings[index] && this.state.ratings[index][highRatingIndex]) {
         numHighRatings = this.state.ratings[index][highRatingIndex];
       }
       const title = <a

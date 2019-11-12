@@ -7,7 +7,7 @@ var version = {
   title: 'Unknown Property',
   description: '',
   htmlTitle: 'Quiz - Find the unknown property using parallelograms',
-  htmlDescription: 'Practice identifying if a quadrangle is a parallelgoram, and if it is identify the unknown property',
+  htmlDescription: 'Practice identifying if a quadrangle is a parallelogram, and if it is identify the unknown property',
   fullTopic: true,
   type: 'presentation',
 };

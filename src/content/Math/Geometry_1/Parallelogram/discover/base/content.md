@@ -18,7 +18,7 @@ It is useful to progress through these in order as the earlier ones are sometime
 
 ### Angles <a name="angles"></a>
 
-Can you find a relationship between the angles of a parallelgram?
+Can you find a relationship between the angles of a parallelogram?
 
 <hint>You can use [[interior angles between parallel lines]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Interior',#00756F)).</hint>
 
@@ -72,7 +72,7 @@ When [[interior angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Interio
 
 ### Opposite Sides <a name="sides"></a>
 
-Can you find a relationship between the side lengths of a parallelgram?
+Can you find a relationship between the side lengths of a parallelogram?
 
 <hint>Draw a diagonal between two opposite corners of the parallogram</hint>
 

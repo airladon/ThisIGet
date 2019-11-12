@@ -1073,6 +1073,14 @@
           "fullTopic": true
         }
       },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "General",
+          "description": "External links to sources of information for a parallelogram>",
+          "fullTopic": false
+        }
+      },
       "quickReference": {
         "base": {
           "title": "base",
