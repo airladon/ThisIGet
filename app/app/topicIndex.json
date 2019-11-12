@@ -1691,7 +1691,7 @@
       "discover": {
         "base": {
           "type": "singlePage",
-          "title": "Parallelogram's Properties",
+          "title": "Properties",
           "description": "",
           "htmlTitle": "Self discover the properties of a parallelogram",
           "htmlDescription": "Find the relationships and expressions of angles, sides, diagonals and area of a parallelogram",
@@ -1790,7 +1790,7 @@
           "title": "Unknown Property",
           "description": "",
           "htmlTitle": "Quiz - Find the unknown property using parallelograms",
-          "htmlDescription": "Practice identifying if a quadrangle is a parallelogoram, and if it is identify the unknown property",
+          "htmlDescription": "Practice identifying if a quadrangle is a parallelogram, and if it is identify the unknown property",
           "fullTopic": true,
           "links": ""
         }
@@ -1800,7 +1800,7 @@
           "type": "presentation",
           "title": "Definition and Properties",
           "description": "",
-          "htmlTitle": "Definition and properties of a parallelogoram",
+          "htmlTitle": "Definition and properties of a parallelogram",
           "htmlDescription": "Includes converse relationships and how to determine if a shape is a parallelogram",
           "fullTopic": true,
           "links": ""

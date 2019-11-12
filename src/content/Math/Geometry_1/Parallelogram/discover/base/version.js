@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'discover',
-  title: 'Parallelogram\'s Properties',
+  title: 'Properties',
   description: '',
   htmlTitle: 'Self discover the properties of a parallelogram',
   htmlDescription: 'Find the relationships and expressions of angles, sides, diagonals and area of a parallelogram',
