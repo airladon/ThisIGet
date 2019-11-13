@@ -1166,7 +1166,7 @@ class Content extends PresentationFormatContent {
       },
       show: [
         ssa._tri1, ssa._tri2, ssa._rALine, ssa._rADim, ssa._b,
-        ssa._rCLine, ssa._rBLine,
+        ssa._rCLine, ssa._rBLine, ssa._arrow1, ssa._arrow2,
       ],
     });
 
