@@ -1866,6 +1866,117 @@
     ],
     "enabled": true
   },
+  "Math/Geometry_1/Polygon": {
+    "title": "Polygons",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "htmlTitle": "Self discover why ...",
+          "htmlDescription": "Figure out why ...",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "htmlTitle": "... examples",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Derivation of Pythagorean Theorem",
+          "description": "Derivation using area of four right angle triangles",
+          "htmlTitle": "Pythagorean Theorem Derivation",
+          "htmlDescription": "Derivation using area of four right angle triangles",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for <TOPIC>",
+          "htmlTitle": "<TOPIC> Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about <TOPIC>",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Polygon",
+              "hash": "ad32fbfff17ed6a028cc353902c09c90",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on polygons"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Regular_polygon",
+              "hash": "2a56c1a857eb3f6dfa0cf43fa678850f",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on regular polygons"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      "Equilateral"
+    ],
+    "enabled": true
+  },
   "Math/Geometry_1/Quadrangles": {
     "title": "Quadrangles",
     "approaches": {

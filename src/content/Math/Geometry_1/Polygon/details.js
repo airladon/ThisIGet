@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var topicDetails = {
-  title: 'Regular Polygons',
+  title: 'Polygons',
   dependencies: [
     'Equilateral',
   ],
