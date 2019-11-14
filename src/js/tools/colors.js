@@ -349,6 +349,7 @@ class Color {
     if (opacity != null) {
       this.setRGB([this.r, this.g, this.b, opacity]);
     }
+    return this;
   }
 
   setHSB(hsb: Array<number>) {

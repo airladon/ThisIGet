@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   // DiagramElementPrimitive,
-  // DiagramObjectAngle,
+  DiagramObjectAngle,
   // DiagramObjectLine,
   // DiagramElementCollection,
   // DiagramObjectPolyLine,
@@ -24,5 +24,67 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     // this.hasTouchableElements = true;
+  }
+
+  growSides(sideNum: number, done: ?() => void = null) {
+    const tot = this._tot;
+    const fromPoly = tot[`_n${sideNum - 1}`];
+    const toPoly = tot[`_n${sideNum}`];
+    const side1 = tot[`_s${sideNum}1`];
+    const side2 = tot[`_s${sideNum}2`];
+    const point = tot[`_p${sideNum}`];
+    const line = tot[`_l${sideNum}`];
+    // tot.hideAll();
+    toPoly.hideAll();
+    line.hideAll();
+    fromPoly.showAll();
+    side1.showAll();
+    side2.showAll();
+    point.showAll();
+    const growDone = () => {
+      fromPoly.hideAll();
+      toPoly.showAll();
+      line.showAll();
+      this.diagram.animateNextFrame();
+      if (done != null) {
+        done();
+      }
+    };
+    side1.grow(0, 1, true, growDone);
+    side2.grow(0, 1, true);
+    this.diagram.animateNextFrame();
+  }
+
+  shrinkAngle(
+    angle: DiagramObjectAngle,
+    fromAngle: number,
+    toAngle: number,
+    pulse: boolean = true,
+  ) {
+    console.log(pulse)
+    angle.stop();
+    angle.setAngle({ angle: fromAngle });
+    const delta = toAngle - fromAngle;
+    if (pulse) {
+      angle.animations.new()
+        .pulse(1)
+        .custom({
+          callback: (p) => {
+            angle.setAngle({ angle: fromAngle + p * delta });
+          },
+          duration: 1,
+        })
+        .start();
+    } else {
+      angle.animations.new()
+        .custom({
+          callback: (p) => {
+            angle.setAngle({ angle: fromAngle + p * delta });
+          },
+          duration: 1,
+        })
+        .start();
+    }
+    this.diagram.animateNextFrame();
   }
 }
