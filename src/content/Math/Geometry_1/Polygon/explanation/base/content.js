@@ -278,30 +278,44 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: [
+      setContent: style({ top: 0 }, [
         'The total internal angle has been |reduced_by_a|, |reduced_by_b| and |increased| by the |explementary_angle_of_c|.',
         note({ top: 93, color: colors.diagram.text.note }, 'Reference: |explementary| angle'),
-      ],
-    };
-    this.addSection(common, commonContent, {
+      ]),
       modifiers: {
-        reduced_by_a: click(coll.shrinkAngle, [coll, tot._af, 1.06, 0.55, true], colors.angles),
-        reduced_by_b: click(coll.shrinkAngle, [coll, tot._bf, 1.9, 1.35, true], colors.angles),
+        reduced_by_a: click(coll.shrinkAngle, [coll, tot._af, 1.06, 0.55, true, []], colors.angles),
+        reduced_by_b: click(coll.shrinkAngle, [coll, tot._bf, 1.9, 1.35, true, []], colors.angles),
         explementary_angle_of_c: click(
-          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false], colors.angles,
+          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, []], colors.angles,
         ),
         explementary: this.qr('Math/Geometry_1/AngleGroups/base/Explementary'),
       },
+    };
+    this.addSection(common, commonContent, {
       show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
     });
 
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
     this.addSection(common, commonContent, {
       modifiers: {
-        angles: coll.bindAccent(tot, ['a', 'b', 'c']),
+        reduced_by_a: click(coll.shrinkAngle, [coll, tot._af, 1.06, 0.55, true, ['m1', 'a1']], colors.angles),
+        reduced_by_b: click(coll.shrinkAngle, [coll, tot._bf, 1.9, 1.35, true, ['m2', 'b1']], colors.angles),
+        explementary_angle_of_c: click(
+          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, ['_360', 'm3', 'c1']], colors.angles,
+        ),
       },
-      show: [tot._n6, tot._l6, tot._a, tot._b, tot._c, tot._af, tot._bf],
+      show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
       transitionFromPrev: (done) => {
-        coll.accent(tot, ['a', 'b', 'c'], done);
+        tot.animations.new()
+          .scenario({ target: 'low', duration: 0.8 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._eqnTot.showForm('0');
+        tot.setScenario('low');
       },
     });
   }

@@ -206,11 +206,97 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [0, -0.6] },
-        low: { position: [0, -1] },
+        low: { position: [0, -0.8] },
       },
     },
   });
 
+  const newTot = { sub: ['New', 'tot1'] };
+  const oldTot = { sub: ['Old', 'tot2'] };
+
+  const eqnTot = {
+    name: 'eqnTot',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        equals: '  =  ',
+        // New: { color: colors.angles },
+        // Old: { color: colors.angles },
+        New: 'New',
+        Old: 'Old',
+        tot1: { text: 'Total Angle' },
+        tot2: { text: 'Total Angle' },
+        a1: { text: 'a', color: colors.angles },
+        a2: { text: 'a', color: colors.angles },
+        b1: { text: 'b', color: colors.angles },
+        b2: { text: 'b', color: colors.angles },
+        c1: { text: 'c', color: colors.angles },
+        c2: { text: 'c', color: colors.angles },
+        _360: '360º',
+        _180: '180º',
+        p1: ' + ',
+        p2: ' + ',
+        p3: ' + ',
+        m1: ' - ',
+        m2: ' - ',
+        m3: ' - ',
+        lb: {
+          symbol: 'brace', side: 'left', numLines: 1, color: colors.working,
+        },
+        rb: {
+          symbol: 'brace', side: 'right', numLines: 1, color: colors.working,
+        },
+        brace: {
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+        },
+        // strike1: { symbol: 'xStrike', color: colors.working },
+        // strike2: { symbol: 'xStrike', color: colors.working },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': [newTot, 'equals', oldTot, 'm1', 'a1', 'm2', 'b1', 'p1', '_360', 'm3', 'c1'],
+        // '1': [
+        //   { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
+        //   'equals',
+        //   { annotate: [['_21', 'a', 'plus', '_22', 'b'], ['_divide21', 'center', 'bottom', 'center', 2], 'false'] },
+        // ],
+        // '2': [
+        //   {
+        //     annotate: [
+        //       { topComment: ['_360', '_180', 'b1', 0.1, 0.05, 0.6, false] },
+        //       ['_divide2', 'center', 'bottom', 'center', 2],
+        //       'false',
+        //     ],
+        //   },
+        //   'equals',
+        //   {
+        //     annotate: [[
+        //       { strike: ['_21', 'strike1'] },
+        //       'a', 'plus',
+        //       { strike: ['_22', 'strike2'] },
+        //       'b',
+        //     ], ['_divide21', 'center', 'bottom', 'center', 2], 'false'],
+        //   },
+        // ],
+        // // '3': [
+        // //   { bottomComment: ['_360', ['_divide2', '_180'], 'b1', 0.1, 0.05, 0.6, false] },
+        // //   'equals', { strike: ['_21', 'strike1'] }, 'a',
+        // //   'plus', { strike: ['_22', 'strike2'] }, 'b'],
+        // '3': ['_180', 'equals', 'a', 'plus', 'b'],
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [-0.7, 0.9] },
+      },
+    },
+  };
   // const polyBuilder = (points, tris) => {
   //   // const sides = [];
   //   const triangles = [];
@@ -264,6 +350,7 @@ export default function diagramLayout() {
     poly('poly2', pointsP2, [-0.2, -0.2], 0.9),
     // poly('tot', pointsTot6, [0, -0.4]),
     tot,
+    eqnTot,
 
     // polyBuilder(pointsP, [
     //   [0, 2],

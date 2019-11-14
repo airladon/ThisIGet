@@ -60,8 +60,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     fromAngle: number,
     toAngle: number,
     pulse: boolean = true,
+    eqnElementsToPulse: ?Array<DiagramElement> = null,
   ) {
-    console.log(pulse)
     angle.stop();
     angle.setAngle({ angle: fromAngle });
     const delta = toAngle - fromAngle;
@@ -84,6 +84,13 @@ export default class CommonCollection extends CommonDiagramCollection {
           duration: 1,
         })
         .start();
+    }
+    if (eqnElementsToPulse != null) {
+      this.accent({
+        element: this._eqnTot,
+        children: eqnElementsToPulse,
+        style: 'highlight',
+      });
     }
     this.diagram.animateNextFrame();
   }
