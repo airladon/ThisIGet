@@ -356,6 +356,53 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return click(accenter, [this], colorToUse);
   }
 
+  accentEqn(
+    eqn: Equation,
+    children: Array<DiagramElement | string>,
+    boxIn: string | DiagramElement,
+    space: number = 0.1,
+    done: ?() => void = null,
+  ) {
+    const box = eqn.getElement(boxIn);
+    if (box == null) {
+      if (done != null) {
+        done();
+      }
+      return;
+    }
+    box.custom.setSize(eqn, children, space);
+    box.showAll();
+    this.accent(box, done);
+  }
+
+  bindAccentEqn(
+    eqn: Equation,
+    children: Array<DiagramElement | string>,
+    boxIn: string | DiagramElement,
+    spaceOrColor: number | Array<number> = 0.05,
+    colorIn: ?Array<number> = null,
+  ) {
+    const allElements = eqn.getElements(children);
+    let color = [1, 1, 1, 1];
+    let space = 0;
+    if (allElements.length > 0) {
+      color = allElements[0].color.slice()
+    }
+    if (Array.isArray(spaceOrColor)) {
+      color = spaceOrColor;
+    } else {
+      space = spaceOrColor;
+    }
+    if (colorIn != null) {
+      color = colorIn;
+    }
+    const accenter = () => {
+      this.accentEqn(eqn, children, boxIn, space);
+      this.diagram.animateNextFrame();
+    };
+    return click(accenter, [this], color);
+  }
+
   // If any child is not shown, then show all children - otherwise hide all
   toggle(
     parent: DiagramElement,

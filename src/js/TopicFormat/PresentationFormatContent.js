@@ -827,7 +827,7 @@ class PresentationFormatContent extends SimpleFormatContent {
           diagramPosition = element.getCenterDiagramPosition();
         } else if (location === 'zero'
         || (location === '' && element.interactiveLocation === 'zero')) {
-          diagramPosition = element.getDiagramPosition();
+          diagramPosition = element.getPosition('diagram');
         } else if (location === 'topLeft'
           || (location === '' && element.interactiveLocation === 'topLeft')
         ) {

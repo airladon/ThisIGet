@@ -4,16 +4,24 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
-  // DiagramElementPrimitive,
+  DiagramElementPrimitive,
   DiagramObjectAngle,
   // DiagramObjectLine,
   // DiagramElementCollection,
   // DiagramObjectPolyLine,
-  // Equation,
+  Equation,
   Transform,
+  // Point,
 } = Fig;
 
+// const {
+//   getBoundingRect
+// } = Fig.tools.g2;
+
 export default class CommonCollection extends CommonDiagramCollection {
+  _eqnTot: {
+    _box: CommonDiagramPrimitive;
+  } & Equation;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -86,11 +94,33 @@ export default class CommonCollection extends CommonDiagramCollection {
         .start();
     }
     if (eqnElementsToPulse != null) {
-      this.accent({
-        element: this._eqnTot,
-        children: eqnElementsToPulse,
-        style: 'highlight',
-      });
+      this._eqnTot._box.show();
+      this.accentEqn(this._eqnTot, eqnElementsToPulse, 'box', 0.05);
+      // this._eqnTot._box.custom.setSize(this._eqnTot, eqnElementsToPulse, 0.1);
+      // this.accent(this._eqnTot._box);
+      // this._highlighter.show();
+      // const bound = this._eqnTot.getDiagramBoundingRect(eqnElementsToPulse);
+      // // const points = []
+      // // eqnElementsToPulse.forEach((element) => {
+      // //   const e = this._eqnTot.getElement(element);
+      // //   const bound = e.getDiagramBoundingRect();
+      // //   console.log(bound)
+      // //   points.push(new Point(bound.left, bound.bottom));
+      // //   points.push(new Point(bound.right, bound.top));
+      // // });
+      // // const bound = getBoundingRect(points);
+      // // console.log(bound)
+      // this._highlighter.setScale(bound.width, bound.height);
+      // this._highlighter.setPosition(
+      //    bound.left + bound.width / 2,
+      //   bound.bottom + bound.height / 2,
+      // );
+      // this.accent(this._highlighter);
+      // this.accent({
+      //   element: this._eqnTot,
+      //   children: eqnElementsToPulse,
+      //   style: 'highlight',
+      // });
     }
     this.diagram.animateNextFrame();
   }

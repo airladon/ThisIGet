@@ -251,6 +251,10 @@ export default function diagramLayout() {
         brace: {
           symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
+        box: {
+          symbol: 'box', color: colors.angles, width: 0.01,
+          staticSize: [1, 0.2],
+        },
         // strike1: { symbol: 'xStrike', color: colors.working },
         // strike2: { symbol: 'xStrike', color: colors.working },
       },
@@ -260,7 +264,9 @@ export default function diagramLayout() {
         alignV: 'baseline',
       },
       forms: {
-        '0': [newTot, 'equals', oldTot, 'm1', 'a1', 'm2', 'b1', 'p1', '_360', 'm3', 'c1'],
+        '0': [newTot, 'equals', oldTot, 'm1', 'a1', 'm2', 'b1', 'p1','_360', 'm3', 'c1'],
+        '1': { sup: ['a1', { box: ['b1', 'box', true, 0.05] }] },
+        '2': { box: ['b1', 'box', true, 0.05] },
         // '1': [
         //   { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
         //   'equals',
@@ -338,7 +344,19 @@ export default function diagramLayout() {
   //   };
   // };
 
+  const highlighter = {
+    name: 'highlighter',
+    method: 'rectangle',
+    options: {
+      length: 1,
+      width: 1,
+      fill: true,
+      color: colors.angleFill,
+    },
+  };
+
   layout.addElements = [
+    highlighter,
     poly('tri', regularPolyPoints(3, 1), [-1, 0]),
     poly('quad', regularPolyPoints(4, 1), [1, 0]),
     poly('pent', regularPolyPoints(5, 1)),

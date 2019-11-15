@@ -4113,7 +4113,7 @@ function () {
   }, {
     key: "rotateElement",
     value: function rotateElement(element, previousClientPoint, currentClientPoint) {
-      var centerDiagramSpace = element.getDiagramPosition();
+      var centerDiagramSpace = element.getPosition('diagram');
 
       if (centerDiagramSpace == null) {
         centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
@@ -4188,11 +4188,10 @@ function () {
       //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
       // const currentDiagramPoint =
       //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      // const center = element.getDiagramPosition();
       // const previousMag = previousDiagramPoint.sub(center).distance();
       // const currentMag = currentDiagramPoint.sub(center).distance();
 
-      var center = element.getDiagramPosition().transformBy(this.spaceTransforms.diagramToPixel.matrix());
+      var center = element.getPosition('diagram').transformBy(this.spaceTransforms.diagramToPixel.matrix());
       var previousMag = previousPixelPoint.sub(center).distance();
       var currentMag = currentPixelPoint.sub(center).distance();
       var currentScale = element.transform.s();
@@ -5071,6 +5070,189 @@ var Bounds = function Bounds() {
 
 /***/ }),
 
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Box.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+ // // Equation is a class that takes a set of drawing objects (TextObjects,
+// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
+// // and arranges their size in a )
+
+var Box =
+/*#__PURE__*/
+function (_Elements) {
+  _inherits(Box, _Elements);
+
+  // boxScale: Point;
+  // boxRotation: number;
+  function Box(mainContent, box) {
+    var _this;
+
+    var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    _classCallCheck(this, Box);
+
+    if (box) {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent, new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](box)]));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent]));
+    }
+
+    _this.box = box;
+    _this.scaleModifier = 1;
+    _this.lineWidth = 0.01;
+    _this.mainContent = mainContent;
+
+    if (boxInSize == null) {
+      _this.boxInSize = false;
+    } else {
+      _this.boxInSize = boxInSize;
+    }
+
+    _this.space = space == null ? 0 : space;
+    _this.boxWidth = 1;
+    _this.boxHeight = 1;
+    _this.boxPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    return _possibleConstructorReturn(_this);
+  }
+
+  _createClass(Box, [{
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var box = null;
+
+      if (this.box != null && namedCollection) {
+        box = namedCollection[this.box.name];
+      } else {
+        box = this.box;
+      }
+
+      var boxCopy = new Box(this.mainContent._dup(namedCollection), box, this.boxInSize, this.space);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, boxCopy, ['box', 'mainContent']);
+      return boxCopy;
+    }
+  }, {
+    key: "calcSize",
+    value: function calcSize(location, incomingScale) {
+      var scale = incomingScale * this.scaleModifier;
+      this.location = location._dup();
+      this.mainContent.calcSize(location, scale);
+      var lineWidth = 0;
+
+      if (this.box && this.box.lineWidth != null && typeof this.box.lineWidth === 'number') {
+        lineWidth = this.box.lineWidth;
+      }
+
+      var boxWidth = this.mainContent.width + this.space * 2;
+      var boxHeight = this.mainContent.height + this.space * 2;
+      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space, location.y - this.mainContent.descent - this.space);
+
+      if (this.boxInSize) {
+        this.width = boxWidth + lineWidth;
+        this.height = boxHeight + lineWidth;
+        this.ascent = this.mainContent.ascent + this.space + lineWidth / 2;
+        this.descent = this.mainContent.descent + this.space + lineWidth / 2;
+        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space, 0));
+        bottomLeft.x += this.space;
+      } else {
+        this.width = this.mainContent.width;
+        this.ascent = this.mainContent.ascent + this.space;
+        this.descent = this.mainContent.descent + this.space;
+      }
+
+      this.height = this.descent + this.ascent;
+      var box = this.box;
+
+      if (box) {
+        this.boxPosition = bottomLeft._dup();
+        this.boxWidth = boxWidth;
+        this.boxHeight = boxHeight;
+        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight));
+        box.showAll();
+      }
+    }
+  }, {
+    key: "getAllElements",
+    value: function getAllElements() {
+      var elements = [];
+
+      if (this.mainContent) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      }
+
+      if (this.box) {
+        elements = [].concat(_toConsumableArray(elements), [this.box]);
+      }
+
+      return elements;
+    }
+  }, {
+    key: "setPositions",
+    value: function setPositions() {
+      this.mainContent.setPositions();
+      var box = this.box;
+
+      if (box) {
+        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight)); // box.showAll();
+      }
+    }
+  }, {
+    key: "offsetLocation",
+    value: function offsetLocation() {
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      this.location = this.location.add(offset);
+      this.mainContent.offsetLocation(offset);
+      this.boxPosition = this.boxPosition.add(offset);
+    }
+  }]);
+
+  return Box;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+
+
+
+/***/ }),
+
 /***/ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js":
 /*!**********************************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js ***!
@@ -5504,9 +5686,14 @@ function () {
         // Update translation and scale
         content.transform.updateTranslation(location.x, location.y);
         content.transform.updateScale(scale, scale);
-        content.updateLastDrawTransform(); // Get the boundaries of element
+        content.updateLastDrawTransform();
+
+        if (content.internalSetTransformCallback != null) {
+          content.internalSetTransformCallback(content.transform);
+        } // Get the boundaries of element
         // const t = content.lastDrawTransform._dup();
         // content.lastDrawTransform = content.transform._dup();
+
 
         var r = content.getRelativeVertexSpaceBoundingRect(); // content.lastDrawTransform = t;
 
@@ -5515,7 +5702,7 @@ function () {
         this.ascent = r.top * scale;
         this.descent = -r.bottom * scale;
         this.height = r.height * scale;
-        this.width = r.width * scale; // console.log(this.height)
+        this.width = r.width * scale;
       }
     }
   }, {
@@ -6687,7 +6874,7 @@ function (_DiagramElementCollec) {
       this.eqn.descriptionPosition = descriptionPosition;
 
       if (this.eqn.descriptionElement) {
-        this.eqn.descriptionElement.setPosition(this.getDiagramPosition().add(descriptionPosition));
+        this.eqn.descriptionElement.setPosition(this.getPosition('diagram').add(descriptionPosition));
       }
     }
   }, {
@@ -6697,7 +6884,7 @@ function (_DiagramElementCollec) {
 
       _get(_getPrototypeOf(EquationNew.prototype), "setPosition", this).call(this, pointOrX, y);
 
-      var position = this.getDiagramPosition(); // console.log(this.eqn, this.eqn.descriptionElement)
+      var position = this.getPosition('diagram'); // console.log(this.eqn, this.eqn.descriptionElement)
 
       if (this.eqn.descriptionElement != null) {
         this.eqn.descriptionElement.setPosition(position.add(this.eqn.descriptionPosition));
@@ -7798,7 +7985,7 @@ function (_Elements) {
         var s = fixTo.transform.s();
 
         if (_t != null && s != null) {
-          var rect = fixTo.getVertexSpaceBoundingRect();
+          var rect = fixTo.getBoundingRect('vertex');
           w = rect.width * s.x;
           h = rect.height * s.y;
           a = rect.top * s.y - _t.y;
@@ -8217,6 +8404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
 /* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
 /* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
+/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8245,6 +8433,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
+
 
 
 
@@ -8421,6 +8610,11 @@ function () {
 
       if (name === 'strike') {
         return this.strike(params);
+      } // $FlowFixMe
+
+
+      if (name === 'box') {
+        return this.box(params);
       } // $FlowFixMe
 
 
@@ -8707,6 +8901,44 @@ function () {
       strikeInSize);
     }
   }, {
+    key: "box",
+    value: function box(optionsOrContent) // options: TypeStrikeObject | TypeStrikeArray) {
+    {
+      var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var spaceIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var content;
+      var symbol;
+      var inSize;
+      var space;
+
+      if (!(sym == null && boxInSize == null && spaceIn == null)) {
+        content = optionsOrContent;
+        symbol = sym;
+        inSize = boxInSize;
+        space = spaceIn;
+      } else if (Array.isArray(optionsOrContent)) {
+        // $FlowFixMe
+        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 4);
+
+        content = _optionsOrContent5[0];
+        symbol = _optionsOrContent5[1];
+        inSize = _optionsOrContent5[2];
+        space = _optionsOrContent5[3];
+      } else {
+        content = optionsOrContent.content;
+        symbol = optionsOrContent.symbol;
+        inSize = optionsOrContent.inSize;
+        space = optionsOrContent.space;
+      }
+
+      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_10__["default"]( // $FlowFixMe
+      this.contentToElement(content), // $FlowFixMe
+      getDiagramElement(this.elements, symbol), // $FlowFixMe
+      inSize, // $FlowFixMe
+      space);
+    }
+  }, {
     key: "annotate",
     value: function annotate(optionsOrContent) {
       var _this2 = this;
@@ -8723,11 +8955,11 @@ function () {
         withAnnotations = withAnnotationsArray;
         includeAnnotationInSize = includeAnnotationInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 3);
 
-        content = _optionsOrContent5[0];
-        withAnnotations = _optionsOrContent5[1];
-        includeAnnotationInSize = _optionsOrContent5[2];
+        content = _optionsOrContent6[0];
+        withAnnotations = _optionsOrContent6[1];
+        includeAnnotationInSize = _optionsOrContent6[2];
       } else {
         content = optionsOrContent.content;
         withAnnotations = optionsOrContent.withAnnotations;
@@ -8882,14 +9114,14 @@ function () {
         right = rightPad;
         bottom = bottomPad;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 5);
 
         // $FlowFixMe
-        content = _optionsOrContent6[0];
-        top = _optionsOrContent6[1];
-        right = _optionsOrContent6[2];
-        bottom = _optionsOrContent6[3];
-        left = _optionsOrContent6[4];
+        content = _optionsOrContent7[0];
+        top = _optionsOrContent7[1];
+        right = _optionsOrContent7[2];
+        bottom = _optionsOrContent7[3];
+        left = _optionsOrContent7[4];
       } else {
         content = optionsOrContent.content;
         top = optionsOrContent.top;
@@ -8931,17 +9163,17 @@ function () {
         useMinLineHeight = useMinLineHeightForLine;
         heightScale = bracketHeightScale;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 7);
 
         // $FlowFixMe
-        content = _optionsOrContent7[0];
-        left = _optionsOrContent7[1];
-        right = _optionsOrContent7[2];
-        insideSpace = _optionsOrContent7[3];
-        outsideSpace = _optionsOrContent7[4];
+        content = _optionsOrContent8[0];
+        left = _optionsOrContent8[1];
+        right = _optionsOrContent8[2];
+        insideSpace = _optionsOrContent8[3];
+        outsideSpace = _optionsOrContent8[4];
         // $FlowFixMe
-        useMinLineHeight = _optionsOrContent7[5];
-        heightScale = _optionsOrContent7[6];
+        useMinLineHeight = _optionsOrContent8[5];
+        heightScale = _optionsOrContent8[6];
       } else {
         content = optionsOrContent.content;
         left = optionsOrContent.left;
@@ -9013,11 +9245,11 @@ function () {
         symbol = sym;
         space = insideSpace;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 3);
 
-        content = _optionsOrContent8[0];
-        symbol = _optionsOrContent8[1];
-        space = _optionsOrContent8[2];
+        content = _optionsOrContent9[0];
+        symbol = _optionsOrContent9[1];
+        space = _optionsOrContent9[2];
       } else {
         content = optionsOrContent.content;
         symbol = optionsOrContent.symbol;
@@ -9090,15 +9322,15 @@ function () {
         includeInSize = includeInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 7);
 
-        content = _optionsOrContent9[0];
-        comment = _optionsOrContent9[1];
-        symbol = _optionsOrContent9[2];
-        contentSpace = _optionsOrContent9[3];
-        commentSpace = _optionsOrContent9[4];
-        scale = _optionsOrContent9[5];
-        includeInSize = _optionsOrContent9[6];
+        content = _optionsOrContent10[0];
+        comment = _optionsOrContent10[1];
+        symbol = _optionsOrContent10[2];
+        contentSpace = _optionsOrContent10[3];
+        commentSpace = _optionsOrContent10[4];
+        scale = _optionsOrContent10[5];
+        includeInSize = _optionsOrContent10[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9239,13 +9471,13 @@ function () {
         scale = comScale;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent11 = _slicedToArray(optionsOrContent, 5);
 
-        content = _optionsOrContent10[0];
-        comment = _optionsOrContent10[1];
-        symbol = _optionsOrContent10[2];
-        space = _optionsOrContent10[3];
-        scale = _optionsOrContent10[4];
+        content = _optionsOrContent11[0];
+        comment = _optionsOrContent11[1];
+        symbol = _optionsOrContent11[2];
+        space = _optionsOrContent11[3];
+        scale = _optionsOrContent11[4];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9364,8 +9596,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Symbols_Bracket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Symbols/Bracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bracket.js");
 /* harmony import */ var _Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Symbols/RoundedSquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/RoundedSquareBracket.js");
 /* harmony import */ var _Symbols_Bar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
-/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
-/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
+/* harmony import */ var _Symbols_Box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Box */ "./src/js/diagram/DiagramElements/Equation/Symbols/Box.js");
+/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
+/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -9374,8 +9607,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import { DiagramElementCollection } from '../../Element';
 
  // import SuperSub from './Elements/SuperSub';
+
 
 
 
@@ -9432,6 +9667,10 @@ function () {
         return this.roundedSquareBracket(options);
       }
 
+      if (name === 'box') {
+        return this.box(options);
+      }
+
       return null;
     }
   }, {
@@ -9445,6 +9684,18 @@ function () {
       }
 
       return this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('vinculum').scale(1, 1).translate(0, 0));
+    }
+  }, {
+    key: "box",
+    value: function box(optionsIn) {
+      var defaultOptions = {
+        color: this.defaultColor,
+        fill: false,
+        width: 0.01,
+        staticSize: null
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return Object(_Symbols_Box__WEBPACK_IMPORTED_MODULE_7__["default"])(this.shapes, options.color, options.fill, options.width, options.staticSize);
     }
   }, {
     key: "strike",
@@ -9519,7 +9770,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "brace",
@@ -9530,7 +9781,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_7__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "roundedSquareBracket",
@@ -10062,6 +10313,146 @@ function Bracket(webgl, color, side, numLines, transformOrLocation, diagramLimit
   }
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Box.js":
+/*!****************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Box.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// import VertexBar from './VertexBar';
+
+
+ // import WebGLInstance from '../../../webgl/webgl';
+
+function getRectAndSpace(rectOrParent) {
+  var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var rectToUse;
+  var spaceToUse = 0;
+
+  if (rectOrParent instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"]) {
+    rectToUse = rectOrParent;
+
+    if (typeof childrenOrSpace === 'number') {
+      spaceToUse = childrenOrSpace;
+    }
+  } else if (typeof childrenOrSpace === 'number') {
+    spaceToUse = childrenOrSpace;
+    rectToUse = rectOrParent.getBoundingRect('local');
+  } else {
+    rectToUse = rectOrParent.getBoundingRect('local', childrenOrSpace);
+
+    if (typeof space === 'number') {
+      spaceToUse = space;
+    }
+  }
+
+  return [rectToUse, spaceToUse];
+}
+
+function Box(shapes, color, fill, width, staticSize) // transformOrLocation: Transform | Point,
+// diagramLimits: Rect,
+{
+  var box;
+
+  if (fill) {
+    box = shapes.rectangle({
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+  } else if (staticSize != null) {
+    var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["parsePoint"])(staticSize);
+    var x = size.x,
+        y = size.y;
+
+    var poly = function poly(p1, p2, w) {
+      return shapes.polyLine({
+        points: [p1, p2],
+        color: color,
+        width: w,
+        close: false
+      });
+    };
+
+    box = shapes.collection({
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+    var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)];
+    box.add('left', poly(points[0], points[1], width / x));
+    box.add('top', poly(points[1].add(-width / x / 2, 0), points[2].add(width / x / 2, 0), width / y));
+    box.add('right', poly(points[2], points[3], width / x));
+    box.add('bottom', poly(points[3].add(width / x / 2, 0), points[0].add(-width / x / 2, 0), width / y)); // console.log(width / x, width / y);
+    // box.add('left', poly(points[0], points[1], 0.1));
+    // box.add('top', poly(points[1], points[2], 0.1));
+    // box.add('right', poly(points[2], points[3], 0.1));
+    // box.add('bottom', poly(points[3], points[0], 0.1));
+    // box.add('poly', shapes.polygon({
+    //   radius: 1,
+    //   color,
+    //   fill: true,
+    // }));
+  } else {
+    box = shapes.polyLine({
+      points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)],
+      color: color,
+      width: width,
+      close: true,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+    box.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1);
+
+    box.internalSetTransformCallback = function () {
+      var s = box.getScale();
+
+      if (box.custom.scale.isNotEqualTo(s, 8)) {
+        box.drawingObject.change([new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, -s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, -s.y / 2)]);
+        box.custom.scale = s;
+      }
+    };
+
+    box.getTransform = function () {
+      var t = box.transform._dup();
+
+      t.updateScale(1, 1);
+      return t;
+    };
+  } // eslint-disable-next-line max-len
+
+
+  box.custom.setSize = function (rectOrParent) {
+    var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    var _getRectAndSpace = getRectAndSpace(rectOrParent, childrenOrSpace, space),
+        _getRectAndSpace2 = _slicedToArray(_getRectAndSpace, 2),
+        rectToUse = _getRectAndSpace2[0],
+        spaceToUse = _getRectAndSpace2[1];
+
+    box.setScale(rectToUse.width + spaceToUse * 2, rectToUse.height + spaceToUse * 2);
+    box.setPosition(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
+  };
+
+  return box;
 }
 
 /***/ }),
@@ -17962,7 +18353,17 @@ function (_DrawingObject) {
   }, {
     key: "measureText",
     value: function measureText(ctx, text) {
-      var aWidth = ctx.measureText('a').width; // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+      // const aWidth = ctx.measureText('a').width;
+      var fontHeight = ctx.font.match(/[^ ]*px/);
+      var aWidth;
+
+      if (fontHeight != null) {
+        aWidth = parseFloat(fontHeight[0]) / 2;
+      } else {
+        aWidth = ctx.measureText('a').width;
+      } // const aWidth = parseFloat(ctx.font.match(/[^ ]*px/)[0]) / 2;
+      // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+
 
       var ascent = aWidth * 1.4;
       var descent = aWidth * 0.08; // Uncomment below and change above consts to lets if more resolution on
@@ -21337,12 +21738,15 @@ function () {
 
     this.setTransformCallback = function () {};
 
+    this.internalSetTransformCallback = function () {};
+
     this.lastDrawTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
       parentCount: 0,
       elementCount: 0
     };
+    this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
     this.noRotationFromParent = false; // this.pulseDefault = (callback: ?() => void = null) => {
@@ -21768,6 +22172,11 @@ function () {
     key: "getElement",
     value: function getElement() {
       return this;
+    }
+  }, {
+    key: "getElements",
+    value: function getElements() {
+      return [this];
     } // eslint-disable-next-line no-unused-vars, class-methods-use-this
 
   }, {
@@ -21823,6 +22232,10 @@ function () {
     key: "setTransform",
     value: function setTransform(transform) {
       this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
+
+      if (this.internalSetTransformCallback) {
+        this.internalSetTransformCallback(this.transform);
+      }
 
       if (this.setTransformCallback) {
         this.setTransformCallback(this.transform);
@@ -22044,7 +22457,8 @@ function () {
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
-      this.transform.order.forEach(function (t, index) {
+      var transform = this.getTransform();
+      transform.order.forEach(function (t, index) {
         _this2.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
@@ -22314,19 +22728,119 @@ function () {
       if (diagramHTMLElement && this.tieToHTML.updateOnResize) {
         this.updateHTMLElementTie(diagramHTMLElement);
       }
+    } // ***************************************************************
+    // Boundaries
+    // ***************************************************************
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getVertexSpaceBoundaries",
+    value: function getVertexSpaceBoundaries() {
+      return [[]];
     } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getGLBoundaries",
+    value: function getGLBoundaries() {
+      return [[]];
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getLocalBoundaries",
+    value: function getLocalBoundaries() {
+      return [[]];
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getDiagramBoundaries",
+    value: function getDiagramBoundaries() {
+      return [[]];
+    }
+  }, {
+    key: "getBoundaries",
+    value: function getBoundaries() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      if (space === 'local') {
+        return this.getLocalBoundaries();
+      }
+
+      if (space === 'diagram') {
+        return this.getDiagramBoundaries();
+      }
+
+      if (space === 'vertex') {
+        return this.getVertexSpaceBoundaries();
+      }
+
+      if (space === 'gl') {
+        return this.getGLBoundaries();
+      }
+
+      return [[]];
+    } // ***************************************************************
+    // Bounding Rect
+    // ***************************************************************
+    // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "getGLBoundingRect",
     value: function getGLBoundingRect() {
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
-    }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getLocalBoundingRect",
+    value: function getLocalBoundingRect() {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getVertexSpaceBoundingRect",
+    value: function getVertexSpaceBoundingRect() {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // eslint-disable-next-line class-methods-use-this
+
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
       var gl = this.getGLBoundingRect();
       var glToDiagramScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.diagramLimits.width / 2, this.diagramLimits.height / 2);
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](gl.left * glToDiagramScale.x, gl.bottom * glToDiagramScale.y, gl.width * glToDiagramScale.x, gl.height * glToDiagramScale.y);
+    }
+  }, {
+    key: "getBoundingRect",
+    value: function getBoundingRect() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      if (space === 'local') {
+        return this.getLocalBoundingRect();
+      }
+
+      if (space === 'diagram') {
+        return this.getDiagramBoundingRect();
+      }
+
+      if (space === 'vertex') {
+        return this.getVertexSpaceBoundingRect();
+      }
+
+      if (space === 'gl') {
+        return this.getGLBoundingRect();
+      }
+
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // ***************************************************************
+    // Size
+    // ***************************************************************
+
+  }, {
+    key: "getRelativeBoundingRect",
+    value: function getRelativeBoundingRect() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var rect = this.getBoundingRect(space);
+      var position = this.getPosition(space);
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](rect.left - position.x, rect.bottom - position.y, rect.width, rect.height);
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -22346,18 +22860,6 @@ function () {
     value: function getCenterDiagramPosition() {
       var rect = this.getDiagramBoundingRect();
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.left + rect.width / 2, rect.bottom + rect.height / 2);
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      var t = this.transform.t();
-      var position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-
-      if (t != null) {
-        position = t._dup();
-      }
-
-      return position;
     }
   }, {
     key: "getScale",
@@ -22417,11 +22919,54 @@ function () {
       return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
-    key: "getDiagramPosition",
-    value: function getDiagramPosition() {
-      // Note, this should be 0,0 as the current transform's translation will
-      // be included in getVertexSpaceDiagramPosition
-      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+    key: "getLocalPosition",
+    value: function getLocalPosition() {
+      var t = this.transform.t();
+      var position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (t != null) {
+        position = t._dup();
+      }
+
+      return position;
+    } // // deprecated
+    // getDiagramPosition() {
+    //   // Note, this should be 0,0 as the current transform's translation will
+    //   // be included in getVertexSpaceDiagramPosition
+    //   return this.getVertexSpaceDiagramPosition(new Point(0, 0));
+    // }
+    // // eslint-disable-next-line class-methods-use-this
+    // getGLPosition() {
+    //   return new Point(0, 0);
+    // }
+
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      // vertex space position doesn't mean much as it will always be 0, 0
+      if (space === 'vertex') {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      }
+
+      if (space === 'local') {
+        return this.getLocalPosition();
+      }
+
+      if (space === 'diagram') {
+        // Note, this should be 0,0 as the current transform's translation will
+        // be included in getVertexSpaceDiagramPosition
+        return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+      }
+
+      if (space === 'gl') {
+        // Note, this should be 0,0 as the current transform's translation will
+        // be included in getVertexSpaceDiagramPosition
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0).transformBy(this.lastDrawTransform.matrix());
+      }
+
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     }
   }, {
     key: "getPixelToVertexSpaceScale",
@@ -22488,7 +23033,7 @@ function () {
   }, {
     key: "setDiagramPositionToElement",
     value: function setDiagramPositionToElement(element) {
-      var p = element.getDiagramPosition();
+      var p = element.getPosition('diagram');
       this.setDiagramPosition(p._dup());
     }
   }, {
@@ -22689,6 +23234,11 @@ function () {
     //   }
     // }
 
+  }, {
+    key: "getTransform",
+    value: function getTransform() {
+      return this.transform;
+    }
   }]);
 
   return DiagramElement;
@@ -22951,7 +23501,7 @@ function (_DiagramElement) {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
         };
-        var newTransform = parentTransform.transform(this.transform);
+        var newTransform = parentTransform.transform(this.getTransform());
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
         this.lastDrawTransform = pulseTransforms[0];
@@ -23041,19 +23591,19 @@ function (_DiagramElement) {
     // }
 
   }, {
-    key: "getGLBoundaries",
-    value: function getGLBoundaries() {
-      return this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
-    }
-  }, {
     key: "getVertexSpaceBoundaries",
     value: function getVertexSpaceBoundaries() {
       return this.drawingObject.border;
     }
   }, {
-    key: "getGLBoundingRect",
-    value: function getGLBoundingRect() {
-      return this.drawingObject.getGLBoundingRect(this.lastDrawTransform.matrix());
+    key: "getLocalBoundaries",
+    value: function getLocalBoundaries() {
+      return this.drawingObject.getGLBoundaries(this.transform.matrix());
+    }
+  }, {
+    key: "getGLBoundaries",
+    value: function getGLBoundaries() {
+      return this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
     }
   }, {
     key: "getVertexSpaceBoundingRect",
@@ -23061,14 +23611,29 @@ function (_DiagramElement) {
       return this.drawingObject.getVertexSpaceBoundingRect();
     }
   }, {
-    key: "getRelativeGLBoundingRect",
-    value: function getRelativeGLBoundingRect() {
-      return this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
+    key: "getLocalBoundingRect",
+    value: function getLocalBoundingRect() {
+      return this.drawingObject.getGLBoundingRect(this.transform.matrix());
+    }
+  }, {
+    key: "getGLBoundingRect",
+    value: function getGLBoundingRect() {
+      return this.drawingObject.getGLBoundingRect(this.lastDrawTransform.matrix());
     }
   }, {
     key: "getRelativeVertexSpaceBoundingRect",
     value: function getRelativeVertexSpaceBoundingRect() {
       return this.drawingObject.getRelativeVertexSpaceBoundingRect();
+    }
+  }, {
+    key: "getRelativeGLBoundingRect",
+    value: function getRelativeGLBoundingRect() {
+      return this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
+    }
+  }, {
+    key: "getRelativeLocalBoundingRect",
+    value: function getRelativeLocalBoundingRect() {
+      return this.drawingObject.getRelativeGLBoundingRect(this.transform.matrix());
     }
   }, {
     key: "increaseBorderSize",
@@ -23233,7 +23798,7 @@ function (_DiagramElement2) {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
         };
-        var newTransform = parentTransform.transform(this.transform);
+        var newTransform = parentTransform.transform(this.getTransform());
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
         this.lastDrawTransform = pulseTransforms[0]; // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
@@ -23327,6 +23892,10 @@ function (_DiagramElement2) {
 
       if (elementPath == null) {
         return this;
+      }
+
+      if (typeof elementPath !== 'string') {
+        return elementPath;
       } // if (elementPath instanceof DiagramElement) {
       //   return elementPath;
       // }
@@ -23353,6 +23922,21 @@ function (_DiagramElement2) {
       };
 
       return getElement(elementPath, this);
+    }
+  }, {
+    key: "getElements",
+    value: function getElements(children) {
+      var _this8 = this;
+
+      var elements = [];
+      children.forEach(function (child) {
+        var element = _this8.getElement(child);
+
+        if (element != null) {
+          elements.push(element);
+        }
+      });
+      return elements;
     }
   }, {
     key: "show",
@@ -23515,6 +24099,49 @@ function (_DiagramElement2) {
       this.setMoveBoundaryToDiagram();
     }
   }, {
+    key: "getAllBoundaries",
+    value: function getAllBoundaries() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var boundaries = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.isShown) {
+          var elementBoundaries = element.getBoundaries(space);
+          boundaries = boundaries.concat(elementBoundaries);
+        }
+      }
+
+      return boundaries;
+    }
+  }, {
+    key: "getBoundaries",
+    value: function getBoundaries() {
+      var _this9 = this;
+
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var boundaries = [];
+
+      if (children == null) {
+        return this.getAllBoundaries();
+      }
+
+      children.forEach(function (child) {
+        var e = _this9.getElement(child);
+
+        if (e == null) {
+          return;
+        }
+
+        var elementBoundaries = e.getBoundaries(space);
+        boundaries = boundaries.concat(elementBoundaries);
+      });
+      return boundaries;
+    } // deprecated
+
+  }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
       var boundaries = [];
@@ -23529,7 +24156,8 @@ function (_DiagramElement2) {
       }
 
       return boundaries;
-    }
+    } // deprecated
+
   }, {
     key: "getVertexSpaceBoundaries",
     value: function getVertexSpaceBoundaries() {
@@ -23545,6 +24173,44 @@ function (_DiagramElement2) {
       }
 
       return boundaries;
+    } // getBoundaries() {
+    //   let boundaries = [];
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     if (element.isShown) {
+    //       const elementBoundaries = element.getBoundaries();
+    //       boundaries = boundaries.concat(elementBoundaries);
+    //     }
+    //   }
+    //   return boundaries;
+    // }
+
+  }, {
+    key: "getBoundingRect",
+    value: function getBoundingRect() {
+      var _this10 = this;
+
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (children == null) {
+        var boundaries = this.getBoundaries(space);
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      }
+
+      var points = [];
+      children.forEach(function (child) {
+        var e = _this10.getElement(child);
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
     }
   }, {
     key: "getGLBoundingRect",
@@ -23555,8 +24221,29 @@ function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var boundaries = this.getVertexSpaceBoundaries();
-      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      var _this11 = this;
+
+      var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToBound == null) {
+        // return super.getDiagramBoundingRect();
+        var boundaries = this.getVertexSpaceBoundaries();
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      }
+
+      var points = [];
+      elementsToBound.forEach(function (element) {
+        var e = _this11.getElement(element);
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
     }
   }, {
     key: "getRelativeGLBoundingRect",
@@ -23564,7 +24251,8 @@ function (_DiagramElement2) {
       var boundingRect = this.getGLBoundingRect();
       var location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0).transformBy(this.lastDrawTransform.matrix());
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundingRect.left - location.x, boundingRect.bottom - location.y, boundingRect.width, boundingRect.height);
-    }
+    } // deprecated
+
   }, {
     key: "getRelativeVertexSpaceBoundingRect",
     value: function getRelativeVertexSpaceBoundingRect() {
@@ -23733,6 +24421,37 @@ function (_DiagramElement2) {
       this.exec('undim', elementsToHighlight);
     }
   }, {
+    key: "getDiagramBoundingRect",
+    value: function getDiagramBoundingRect() {
+      var _this12 = this;
+
+      var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToBound == null) {
+        return _get(_getPrototypeOf(DiagramElementCollection.prototype), "getDiagramBoundingRect", this).call(this);
+      }
+
+      var points = [];
+      elementsToBound.forEach(function (element) {
+        var e;
+
+        if (typeof element === 'string') {
+          e = _this12.getElement(element);
+        } else {
+          e = element;
+        }
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getDiagramBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
+    }
+  }, {
     key: "setOpacity",
     value: function setOpacity(opacity) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -23763,17 +24482,21 @@ function (_DiagramElement2) {
 
         if (element.name in elementTransforms) {
           element.transform = elementTransforms[element.name];
+
+          if (element.internalSetTransformCallback) {
+            element.internalSetTransformCallback(element.transform);
+          }
         }
       }
     }
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this8 = this;
+      var _this13 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this8.elements[a];
-        var elemB = _this8.elements[b];
+        var elemA = _this13.elements[a];
+        var elemB = _this13.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -23818,6 +24541,10 @@ function (_DiagramElement2) {
             }
           } else {
             element.transform = elementTransforms[element.name]._dup();
+
+            if (element.internalSetTransformCallback) {
+              element.internalSetTransformCallback(element.transform);
+            }
           }
         }
       }

@@ -279,7 +279,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     commonContent = {
       setContent: style({ top: 0 }, [
-        'The total internal angle has been |reduced_by_a|, |reduced_by_b| and |increased| by the |explementary_angle_of_c|.',
+        'The total |internal| angle has been |reduced_by_a|, |reduced_by_b| and |increased| by the |explementary_angle_of_c|.',
         note({ top: 93, color: colors.diagram.text.note }, 'Reference: |explementary| angle'),
       ]),
       modifiers: {
@@ -288,6 +288,8 @@ class Content extends PresentationFormatContent {
         explementary_angle_of_c: click(
           coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, []], colors.angles,
         ),
+        // internal: coll.bindAccentEqn(coll._eqnTot, ['Old'], 'box', 0.05),
+        internal: coll.bindAccent(coll._eqnTot),
         explementary: this.qr('Math/Geometry_1/AngleGroups/base/Explementary'),
       },
     };
@@ -298,13 +300,23 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     // ************************************************************
+    const temp = () => {
+      coll._eqnTot.showForm('1')
+      // console.log(coll._eqnTot._box._left.isShown)
+      console.log(coll._eqnTot._box.isShown)
+      coll._eqnTot.goToForm({ name: '2', animate: 'move', delay: 2 });
+      // console.log(coll._eqnTot._box._left.isShown, coll._eqnTot._box.isShown)
+      console.log(coll._eqnTot._box.isShown)
+      this.diagram.animateNextFrame();
+    }
     this.addSection(common, commonContent, {
       modifiers: {
         reduced_by_a: click(coll.shrinkAngle, [coll, tot._af, 1.06, 0.55, true, ['m1', 'a1']], colors.angles),
         reduced_by_b: click(coll.shrinkAngle, [coll, tot._bf, 1.9, 1.35, true, ['m2', 'b1']], colors.angles),
         explementary_angle_of_c: click(
-          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, ['_360', 'm3', 'c1']], colors.angles,
+          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, ['Old', 'tot2', '_360', 'm3', 'c1']], colors.angles,
         ),
+        internal: click(temp, [this], colors.angles),
       },
       show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
       transitionFromPrev: (done) => {
@@ -316,6 +328,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll._eqnTot.showForm('0');
         tot.setScenario('low');
+        console.log(coll._eqnTot)
       },
     });
   }
