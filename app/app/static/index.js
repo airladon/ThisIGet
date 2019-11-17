@@ -5149,7 +5149,8 @@ function (_Elements) {
       _this.boxInSize = boxInSize;
     }
 
-    _this.space = space == null ? 0 : space;
+    _this.space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(space || 0); // space == null ? 0 : space;
+
     _this.boxWidth = 1;
     _this.boxHeight = 1;
     _this.boxPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
@@ -5183,21 +5184,21 @@ function (_Elements) {
         lineWidth = this.box.lineWidth;
       }
 
-      var boxWidth = this.mainContent.width + this.space * 2;
-      var boxHeight = this.mainContent.height + this.space * 2;
-      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space, location.y - this.mainContent.descent - this.space);
+      var boxWidth = this.mainContent.width + this.space.x * 2;
+      var boxHeight = this.mainContent.height + this.space.y * 2;
+      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space.x, location.y - this.mainContent.descent - this.space.y);
 
       if (this.boxInSize) {
         this.width = boxWidth + lineWidth;
         this.height = boxHeight + lineWidth;
-        this.ascent = this.mainContent.ascent + this.space + lineWidth / 2;
-        this.descent = this.mainContent.descent + this.space + lineWidth / 2;
-        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space, 0));
-        bottomLeft.x += this.space;
+        this.ascent = this.mainContent.ascent + this.space.y + lineWidth / 2;
+        this.descent = this.mainContent.descent + this.space.y + lineWidth / 2;
+        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space.x, 0));
+        bottomLeft.x += this.space.x;
       } else {
         this.width = this.mainContent.width;
-        this.ascent = this.mainContent.ascent + this.space;
-        this.descent = this.mainContent.descent + this.space;
+        this.ascent = this.mainContent.ascent + this.space.y;
+        this.descent = this.mainContent.descent + this.space.y;
       }
 
       this.height = this.descent + this.ascent;
@@ -6150,6 +6151,304 @@ function (_Elements) {
 
   return Padding;
 }(_Element__WEBPACK_IMPORTED_MODULE_2__["Elements"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Root.js":
+/*!******************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Root.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Root; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+ // import { roundNum } from '../../../../tools/math';
+
+
+
+
+
+var space = function space(l, b, r, t) {
+  return {
+    left: l,
+    bottom: b,
+    right: r,
+    top: t
+  };
+};
+
+var Root =
+/*#__PURE__*/
+function (_Elements) {
+  _inherits(Root, _Elements);
+
+  // glyphStartWidth: number;
+  // glyphStartHeight: number;
+  // glyphLineWidth: number;
+  // glyphContentWidth: number;
+  // glyphScale: number;
+  function Root(content, radicalGlyph, root) {
+    var _this;
+
+    var contentSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    var rootSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+    var rootScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+
+    _classCallCheck(this, Root);
+
+    var glyph = radicalGlyph !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](radicalGlyph) : null;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Root).call(this, [glyph, root, content]));
+    _this.root = root;
+    _this.mainContent = content;
+    _this.radicalGlyph = radicalGlyph;
+    _this.contentSpace = space(0.01, 0.01, 0.01, 0.01);
+
+    if (typeof contentSpace === 'number') {
+      _this.contentSpace = space(contentSpace, contentSpace, contentSpace, contentSpace);
+    } else if (Array.isArray(contentSpace) && contentSpace.length === 2) {
+      _this.contentSpace = space(contentSpace[0], contentSpace[1], contentSpace[0], contentSpace[1]);
+    } else if (contentSpace instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+      _this.contentSpace = space(contentSpace.x, contentSpace.y, contentSpace.x, contentSpace.y);
+    } else if (contentSpace != null) {
+      _this.contentSpace = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(space(0.01, 0.01, 0.01, 0.01), // $FlowFixMe
+      contentSpace);
+    } // this.contentSpace = getPoint(contentSpace || 0.05);
+
+
+    _this.rootSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(rootSpace || 0.05); // this.glyphStartHeight = glyphStartHeight || 0.1;
+    // this.glyphStartWidth = glyphStartWidth || 0.1;
+
+    _this.glyphLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    _this.rootScale = rootScale || 0.5;
+    _this.glyphWidth = 1;
+    _this.glyphHeight = 1; // this.glyphLineWidth = glyphLineWidth || 0.01;
+
+    return _this;
+  }
+
+  _createClass(Root, [{
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var root = this.root == null ? null : this.root._dup(namedCollection);
+      var content = this.mainContent == null ? null : this.mainContent._dup(namedCollection);
+      var glyph = null;
+
+      if (this.radicalGlyph != null && namedCollection) {
+        glyph = namedCollection[this.radicalGlyph.name];
+      } else {
+        glyph = this.radicalGlyph;
+      }
+
+      var rootCopy = new Root(content, glyph, root);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, rootCopy, ['root', 'mainContent', 'radicalGlyph']);
+      return rootCopy;
+    }
+  }, {
+    key: "getAllElements",
+    value: function getAllElements() {
+      var elements = [];
+
+      if (this.root) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.root.getAllElements()));
+      }
+
+      if (this.mainContent) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      }
+
+      if (this.radicalGlyph) {
+        elements = [].concat(_toConsumableArray(elements), [this.radicalGlyph]);
+      }
+
+      return elements;
+    }
+  }, {
+    key: "setPositions",
+    value: function setPositions() {
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph) {
+        // radicalGlyph.setPosition(this.glyphLocation);
+        // radicalGlyph.setScale(this.glyphWidth, this.glyphHeight);
+        var t = radicalGlyph.getTransform()._dup();
+
+        t.updateTranslation(this.glyphLocation.x, this.glyphLocation.y);
+        t.updateScale(this.glyphWidth, this.glyphHeight);
+        radicalGlyph.setTransform(t);
+      }
+
+      if (this.root) {
+        this.root.setPositions();
+      }
+
+      if (this.mainContent) {
+        this.mainContent.setPositions();
+      }
+    }
+  }, {
+    key: "offsetLocation",
+    value: function offsetLocation() {
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      this.location = this.location.add(offset);
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph != null) {
+        this.glyphLocation = this.glyphLocation.add(offset);
+      }
+
+      if (this.mainContent) {
+        this.mainContent.offsetLocation(offset);
+      }
+
+      if (this.root) {
+        this.root.offsetLocation(offset);
+      }
+    }
+  }, {
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var rootBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var glyphBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var mainContent = this.mainContent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.width = mainContent.width;
+        contentBounds.height = mainContent.ascent + mainContent.descent;
+        contentBounds.ascent = mainContent.ascent;
+        contentBounds.descent = mainContent.descent;
+      }
+
+      var mainContentLocation = loc._dup();
+
+      var root = this.root;
+
+      if (root instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        root.calcSize(loc._dup(), scale * this.rootScale);
+        rootBounds.width = root.width;
+        rootBounds.height = root.ascent + root.descent;
+        rootBounds.ascent = root.ascent;
+        rootBounds.descent = root.descent;
+      }
+
+      var rootLocation = loc._dup();
+
+      this.glyphLocation = loc._dup();
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph) {
+        var _radicalGlyph$custom = radicalGlyph.custom,
+            startHeight = _radicalGlyph$custom.startHeight,
+            startWidth = _radicalGlyph$custom.startWidth,
+            proportionalToHeight = _radicalGlyph$custom.proportionalToHeight,
+            maxStartWidth = _radicalGlyph$custom.maxStartWidth,
+            maxStartHeight = _radicalGlyph$custom.maxStartHeight;
+        glyphBounds.descent = contentBounds.descent + this.contentSpace.bottom;
+        glyphBounds.ascent = contentBounds.ascent + this.contentSpace.top;
+        glyphBounds.height = glyphBounds.ascent + glyphBounds.descent;
+        var glyphStartHeight = startHeight;
+        var glyphStartWidth = startWidth;
+
+        if (proportionalToHeight) {
+          glyphStartHeight = startHeight * glyphBounds.height;
+          glyphStartWidth = startWidth * glyphBounds.height;
+        }
+
+        if (maxStartHeight != null && glyphStartHeight > maxStartHeight) {
+          glyphStartHeight = maxStartHeight;
+        }
+
+        if (maxStartWidth != null && glyphStartWidth > maxStartWidth) {
+          glyphStartWidth = maxStartWidth;
+        }
+
+        glyphBounds.width = glyphStartWidth + this.contentSpace.left + contentBounds.width + this.contentSpace.right;
+        var startTop = glyphBounds.height - glyphStartHeight;
+
+        if (startTop < rootBounds.height / 2 + this.rootSpace.y) {
+          rootLocation.y = loc.y - glyphBounds.descent + glyphStartHeight + this.rootSpace.y + rootBounds.height / 2 - (rootBounds.height / 2 - rootBounds.descent);
+        } else {
+          rootLocation.y = loc.y + glyphBounds.ascent - (rootBounds.height / 2 - rootBounds.descent);
+        }
+
+        if (rootBounds.width + this.rootSpace.x > glyphStartWidth) {
+          this.glyphLocation.x = loc.x + rootBounds.width + this.rootSpace.x - glyphStartWidth;
+        }
+
+        mainContentLocation.x = this.glyphLocation.x + glyphStartWidth + this.contentSpace.left;
+        this.width = this.glyphLocation.x + glyphBounds.width - loc.x;
+        this.ascent = Math.max(glyphBounds.ascent, rootBounds.ascent + rootLocation.y);
+        this.descent = glyphBounds.descent;
+      } else {
+        mainContentLocation.x = rootLocation.x + rootLocation.width;
+        this.width = rootBounds.width + this.contentSpace.left + contentBounds.width;
+        this.ascent = Math.max(rootBounds.ascent, contentBounds.ascent);
+        this.descent = Math.max(rootBounds.descent, contentBounds.descent);
+      }
+
+      this.height = this.ascent + this.descent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(mainContentLocation, scale);
+      }
+
+      if (root instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        root.calcSize(rootLocation, scale * this.rootScale);
+      }
+
+      this.glyphWidth = glyphBounds.width;
+      this.glyphHeight = glyphBounds.height;
+      this.glyphLocation.y = this.glyphLocation.y - glyphBounds.descent;
+
+      if (radicalGlyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElement"]) {
+        radicalGlyph.custom.setSize(this.glyphLocation, glyphBounds.width, glyphBounds.height);
+      }
+    }
+  }]);
+
+  return Root;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
 
 
 
@@ -8398,13 +8697,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _Elements_Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Elements/Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
 /* harmony import */ var _Elements_Fraction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Elements/Fraction */ "./src/js/diagram/DiagramElements/Equation/Elements/Fraction.js");
-/* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
-/* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
-/* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
-/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
-/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
-/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
+/* harmony import */ var _Elements_Root__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Elements/Root */ "./src/js/diagram/DiagramElements/Equation/Elements/Root.js");
+/* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
+/* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
+/* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
+/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
+/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
+/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8429,6 +8729,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 // import { joinObjects } from '../../../tools/tools';
+
 
 
 
@@ -8618,6 +8919,11 @@ function () {
       } // $FlowFixMe
 
 
+      if (name === 'root') {
+        return this.root(params);
+      } // $FlowFixMe
+
+
       if (name === 'brac') {
         return this.brac(params);
       } // $FlowFixMe
@@ -8732,6 +9038,57 @@ function () {
       return f;
     }
   }, {
+    key: "root",
+    value: function root(optionsOrNum) {
+      var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var rootIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var contentSpaceIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var rootSpaceIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var rootScaleIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var content;
+      var root;
+      var symbol;
+      var contentSpace;
+      var rootSpace;
+      var rootScale;
+
+      if (!(sym == null && root == null)) {
+        content = optionsOrNum;
+        root = rootIn;
+        symbol = sym;
+        contentSpace = contentSpaceIn;
+        rootSpace = rootSpaceIn;
+        rootScale = rootScaleIn;
+      } else if (Array.isArray(optionsOrNum)) {
+        var _optionsOrNum2 = _slicedToArray(optionsOrNum, 6);
+
+        // $FlowFixMe
+        content = _optionsOrNum2[0];
+        symbol = _optionsOrNum2[1];
+        root = _optionsOrNum2[2];
+        // $FlowFixMe
+        contentSpace = _optionsOrNum2[3];
+        rootSpace = _optionsOrNum2[4];
+        rootScale = _optionsOrNum2[5];
+      } else {
+        content = optionsOrNum.content;
+        symbol = optionsOrNum.symbol;
+        root = optionsOrNum.root;
+        contentSpace = optionsOrNum.contentSpace;
+        rootSpace = optionsOrNum.rootSpace;
+        rootScale = optionsOrNum.rootScale;
+      }
+
+      var f = new _Elements_Root__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+      this.contentToElement(content), // $FlowFixMe
+      getDiagramElement(this.elements, symbol), // $FlowFixMe
+      this.contentToElement(root), // $FlowFixMe
+      contentSpace, // $FlowFixMe
+      rootSpace, // $FlowFixMe
+      rootScale);
+      return f;
+    }
+  }, {
     key: "supSub",
     value: function supSub(optionsOrContent) {
       var sup = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -8776,7 +9133,7 @@ function () {
       subscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       superscriptBias = superscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       superscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       this.contentToElement(superscript), // $FlowFixMe
       this.contentToElement(subscript), // $FlowFixMe
@@ -8818,7 +9175,7 @@ function () {
 
       superscriptBias = superscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       superscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       this.contentToElement(superscript), // $FlowFixMe
       null, // $FlowFixMe
@@ -8860,7 +9217,7 @@ function () {
 
       subscriptBias = subscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       subscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       null, // $FlowFixMe
       this.contentToElement(subscript), // $FlowFixMe
@@ -8895,7 +9252,7 @@ function () {
         strikeInSize = optionsOrContent.strikeInSize;
       }
 
-      return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+      return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       strikeInSize);
@@ -8932,7 +9289,7 @@ function () {
         space = optionsOrContent.space;
       }
 
-      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_10__["default"]( // $FlowFixMe
+      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_11__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       inSize, // $FlowFixMe
@@ -8971,14 +9328,14 @@ function () {
       if (Array.isArray(withAnnotations)) {
         annotations = withAnnotations.map(function (annotation) {
           // annotation is an already instantiated AnnotationInformation
-          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             return annotation;
           }
 
           var parsedContent = _this2.parseContent(annotation); // case that annotation is a method object
 
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             return parsedContent;
           } // $FlowFixMe
           // Case of single annotation in array form
@@ -8987,7 +9344,7 @@ function () {
           if (Array.isArray(annotation)) {
             var annotationFromArray = _this2.annotation(annotation);
 
-            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
               return annotationFromArray;
             }
           }
@@ -9002,12 +9359,12 @@ function () {
         // AnnotationInformation instantiation
 
       } else if (withAnnotations != null) {
-        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
           annotations = [withAnnotations];
         } else {
           var parsedContent = this.parseContent(withAnnotations); // Method Object
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             annotations = [parsedContent]; // Array form only
           } else {
             // $FlowFixMe
@@ -9022,7 +9379,7 @@ function () {
         includeAnnotationInSizeToUse = includeAnnotationInSize;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["Annotation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["Annotation"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       annotations, // $FlowFixMe
       includeAnnotationInSizeToUse);
@@ -9086,7 +9443,7 @@ function () {
         scaleToUse = scale;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]( // $FlowFixMe
       this.contentToElement(annotation), // $FlowFixMe
       relativeToContentH, // $FlowFixMe
       relativeToContentV, // $FlowFixMe
@@ -9130,7 +9487,7 @@ function () {
         left = optionsOrContent.left;
       }
 
-      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
+      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       top, // $FlowFixMe
       right, // $FlowFixMe
@@ -9222,7 +9579,7 @@ function () {
         heightScaleToUse = heightScale;
       }
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Brackets"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Brackets"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       leftBracket, // $FlowFixMe
       rightBracket, // $FlowFixMe
@@ -9274,7 +9631,7 @@ function () {
           symbol = _this$processBar2[1],
           spaceToUse = _this$processBar2[2];
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       spaceToUse, 0.03, 'top');
@@ -9289,7 +9646,7 @@ function () {
           symbol = _this$processBar4[1],
           spaceToUse = _this$processBar4[2];
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       spaceToUse, 0.03, 'bottom');
@@ -9384,7 +9741,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
@@ -9425,7 +9782,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
@@ -9515,7 +9872,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         false, // $FlowFixMe
@@ -9551,7 +9908,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         false, // $FlowFixMe
@@ -9597,8 +9954,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Symbols/RoundedSquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/RoundedSquareBracket.js");
 /* harmony import */ var _Symbols_Bar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
 /* harmony import */ var _Symbols_Box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Box */ "./src/js/diagram/DiagramElements/Equation/Symbols/Box.js");
-/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
-/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
+/* harmony import */ var _Symbols_Radical__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/Radical */ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js");
+/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
+/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -9610,6 +9968,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import { DiagramElementCollection } from '../../Element';
 
  // import SuperSub from './Elements/SuperSub';
+
 
 
 
@@ -9671,6 +10030,10 @@ function () {
         return this.box(options);
       }
 
+      if (name === 'radical') {
+        return this.radical(options);
+      }
+
       return null;
     }
   }, {
@@ -9696,6 +10059,30 @@ function () {
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       return Object(_Symbols_Box__WEBPACK_IMPORTED_MODULE_7__["default"])(this.shapes, options.color, options.fill, options.width, options.staticSize);
+    }
+  }, {
+    key: "radical",
+    value: function radical(optionsIn) {
+      var defaultOptions = {
+        color: this.defaultColor,
+        lineWidth: 0.01,
+        staticSize: null,
+        startHeight: 0.5,
+        startWidth: 0.7,
+        maxStartWidth: 0.15,
+        maxStartHeight: 0.15,
+        proportionalToHeight: true
+      };
+
+      if (optionsIn.proportionalToHeight != null && optionsIn.proportionalToHeight === false) {
+        defaultOptions.startHeight = 0.15;
+        defaultOptions.startWidth = 0.15;
+        defaultOptions.maxStartHeight = null;
+        defaultOptions.maxStartWidth = null;
+      }
+
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return Object(_Symbols_Radical__WEBPACK_IMPORTED_MODULE_8__["default"])(this.shapes, options.color, options.lineWidth, options.startWidth, options.startHeight, options.proportionalToHeight, options.maxStartWidth, options.maxStartHeight, options.staticSize);
     }
   }, {
     key: "strike",
@@ -9770,7 +10157,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_10__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "brace",
@@ -9781,7 +10168,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "roundedSquareBracket",
@@ -10338,52 +10725,105 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-// import VertexBar from './VertexBar';
 
 
- // import WebGLInstance from '../../../webgl/webgl';
+
 
 function getRectAndSpace(rectOrParent) {
   var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var rectToUse;
-  var spaceToUse = 0;
+  var childrenToUse = null;
+  var spaceToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+
+  if (Array.isArray(childrenOrSpace)) {
+    if (childrenOrSpace.length > 1) {
+      if (typeof childrenOrSpace[0] === 'string' || childrenOrSpace[0] instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+        childrenToUse = childrenOrSpace;
+      } else {
+        // $FlowFixMe
+        spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
+      }
+    }
+  }
+
+  if (space != null) {
+    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(space);
+  }
 
   if (rectOrParent instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"]) {
     rectToUse = rectOrParent;
-
-    if (typeof childrenOrSpace === 'number') {
-      spaceToUse = childrenOrSpace;
-    }
-  } else if (typeof childrenOrSpace === 'number') {
-    spaceToUse = childrenOrSpace;
-    rectToUse = rectOrParent.getBoundingRect('local');
   } else {
-    rectToUse = rectOrParent.getBoundingRect('local', childrenOrSpace);
+    // $FlowFixMe
+    rectToUse = rectOrParent.getBoundingRect('local', childrenToUse);
+  } // if (rectOrParent instanceof Rect) {
+  //   rectToUse = rectOrParent;
+  //   if (typeof childrenOrSpace === 'number'
+  //     || childrenOrSpace instanceof Point
+  //     || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
+  //     spaceToUse = getPoint(childrenOrSpace);
+  //   }
+  // } else if (typeof childrenOrSpace === 'number'
+  //   || childrenOrSpace instanceof Point
+  //   || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
+  //   spaceToUse = getPoint(childrenOrSpace);
+  //   rectToUse = rectOrParent.getBoundingRect('local');
+  // } else {
+  //   rectToUse = rectOrParent.getBoundingRect('local', childrenOrSpace);
+  //   if (typeof space === 'number'
+  //     || childrenOrSpace instanceof Point
+  //     || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
+  //     spaceToUse = getPoint(space);
+  //   }
+  // }
 
-    if (typeof space === 'number') {
-      spaceToUse = space;
-    }
-  }
 
   return [rectToUse, spaceToUse];
 }
 
-function Box(shapes, color, fill, width, staticSize) // transformOrLocation: Transform | Point,
-// diagramLimits: Rect,
-{
-  var box;
+function updateStaticLinePoints(box, width, sizeIn) {
+  var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(sizeIn);
+  var x = size.x,
+      y = size.y;
+  var xWidth = width / y / 2;
+  var yWidth = width / x / 2;
+  var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, -0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, -0.5 + xWidth)];
+
+  var getPoints = function getPoints(indexes) {
+    return indexes.map(function (index) {
+      return points[index]._dup();
+    });
+  };
+
+  var left = box._left;
+  var right = box._right;
+  var top = box._top;
+  var bottom = box._bottom;
+
+  if (left == null || right == null || top == null || bottom == null) {
+    return;
+  } // $FlowFixMe
+
+
+  left.drawingObject.changeVertices(getPoints([0, 1, 2, 1, 3, 2])); // $FlowFixMe
+
+  top.drawingObject.changeVertices(getPoints([2, 3, 4, 3, 5, 4])); // $FlowFixMe
+
+  right.drawingObject.changeVertices(getPoints([4, 5, 6, 5, 7, 6])); // $FlowFixMe
+
+  bottom.drawingObject.changeVertices(getPoints([6, 7, 0, 7, 1, 0]));
+}
+
+function Box(shapes, color, fill, width, staticSize) {
+  var box; // Defined once, just scaled
 
   if (fill) {
     box = shapes.rectangle({
       color: color,
       transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
     });
+    box.custom.boxType = 'fill'; // Defined every time a setSize event is called
   } else if (staticSize != null) {
-    var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["parsePoint"])(staticSize);
-    var x = size.x,
-        y = size.y;
-
     var poly = function poly(p1, p2, w) {
       return shapes.polyLine({
         points: [p1, p2],
@@ -10398,19 +10838,12 @@ function Box(shapes, color, fill, width, staticSize) // transformOrLocation: Tra
       transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
     });
     var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)];
-    box.add('left', poly(points[0], points[1], width / x));
-    box.add('top', poly(points[1].add(-width / x / 2, 0), points[2].add(width / x / 2, 0), width / y));
-    box.add('right', poly(points[2], points[3], width / x));
-    box.add('bottom', poly(points[3].add(width / x / 2, 0), points[0].add(-width / x / 2, 0), width / y)); // console.log(width / x, width / y);
-    // box.add('left', poly(points[0], points[1], 0.1));
-    // box.add('top', poly(points[1], points[2], 0.1));
-    // box.add('right', poly(points[2], points[3], 0.1));
-    // box.add('bottom', poly(points[3], points[0], 0.1));
-    // box.add('poly', shapes.polygon({
-    //   radius: 1,
-    //   color,
-    //   fill: true,
-    // }));
+    box.add('left', poly(points[0], points[1], 0.1));
+    box.add('top', poly(points[0], points[1], 0.1));
+    box.add('right', poly(points[0], points[1], 0.1));
+    box.add('bottom', poly(points[0], points[1], 0.1));
+    updateStaticLinePoints(box, width, staticSize);
+    box.custom.boxType = 'line'; // defined everytime a setTransform event is called
   } else {
     box = shapes.polyLine({
       points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)],
@@ -10436,6 +10869,8 @@ function Box(shapes, color, fill, width, staticSize) // transformOrLocation: Tra
       t.updateScale(1, 1);
       return t;
     };
+
+    box.custom.boxType = 'dynamic';
   } // eslint-disable-next-line max-len
 
 
@@ -10448,8 +10883,15 @@ function Box(shapes, color, fill, width, staticSize) // transformOrLocation: Tra
         rectToUse = _getRectAndSpace2[0],
         spaceToUse = _getRectAndSpace2[1];
 
-    box.setScale(rectToUse.width + spaceToUse * 2, rectToUse.height + spaceToUse * 2);
-    box.setPosition(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
+    if (box.custom.boxType === 'line') {
+      updateStaticLinePoints(box, width, new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](rectToUse.width, rectToUse.height));
+    }
+
+    var t = box.transform._dup();
+
+    t.updateScale(rectToUse.width + spaceToUse.x * 2, rectToUse.height + spaceToUse.y * 2);
+    t.updateTranslation(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
+    box.setTransform(t);
   };
 
   return box;
@@ -10574,6 +11016,153 @@ function Integral(webgl, color, numLines, transformOrLocation, diagramLimits) {
   }
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js":
+/*!********************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Radical; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _DrawingObjects_VertexObject_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../DrawingObjects/VertexObject/PolyLineTriangles3 */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+
+
+
+
+
+function updateStaticLinePoints(box, startWidthIn, startHeightIn, width, height, lineWidth, proportionalToHeight, maxStartWidth, maxStartHeight) {
+  var startHeight = startHeightIn;
+  var startWidth = startWidthIn;
+
+  if (proportionalToHeight) {
+    startHeight = startHeightIn * height;
+    startWidth = startWidthIn * height;
+  }
+
+  if (maxStartWidth != null) {
+    if (maxStartWidth < startWidth) {
+      startWidth = maxStartWidth;
+    }
+  }
+
+  if (maxStartHeight != null) {
+    if (maxStartHeight < startHeight) {
+      startHeight = maxStartHeight;
+    }
+  }
+
+  var coords = [new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, startHeight * 0.9), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth / 5, startHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth / 5 * 3, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](width, height)]; // if (proportionalToHeight) {
+  //   coords[0] = new Point(0, startHeight * 0.9 * height);
+  //   coords[1] = new Point(startWidth / 3, startHeight * height);
+  // }
+  // console.log(coords)
+
+  var lineTriangles = Object(_DrawingObjects_VertexObject_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_2__["default"])(coords, false, lineWidth, 'never'); // console.log(lineTriangles.points)
+
+  var points = [];
+
+  for (var i = 0; i < lineTriangles.points.length; i += 2) {
+    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](lineTriangles.points[i], lineTriangles.points[i + 1]));
+  } // console.log(points)
+
+
+  var left = box._left;
+  var down = box._down;
+  var up = box._up;
+  var top = box._top;
+
+  if (top == null || left == null || down == null || up == null) {
+    return;
+  }
+
+  var getPoints = function getPoints(indexes) {
+    return indexes.map(function (index) {
+      return points[index]._dup();
+    });
+  }; // $FlowFixMe
+
+
+  left.drawingObject.changeVertices(getPoints([0, 1, 2, 3, 4, 5])); // $FlowFixMe
+
+  down.drawingObject.changeVertices(getPoints([6, 7, 8, 9, 10, 11])); // $FlowFixMe
+
+  up.drawingObject.changeVertices(getPoints([12, 13, 14, 15, 16, 17])); // $FlowFixMe
+
+  top.drawingObject.changeVertices(getPoints([18, 19, 20, 21, 22, 23]));
+}
+
+var poly = function poly(color) {
+  return {
+    points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 1)],
+    color: color,
+    width: 0.01,
+    close: false
+  };
+};
+
+function Radical(shapes, color, lineWidth, startWidth, startHeight, proportionalToHeight, maxStartWidth, maxStartHeight, staticSize) {
+  var radical = shapes.collection({
+    color: color,
+    transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]('radical').scale(1, 1).translate(0, 0)
+  });
+  radical.add('left', shapes.polyLine(poly(color)));
+  radical.add('down', shapes.polyLine(poly(color)));
+  radical.add('up', shapes.polyLine(poly(color)));
+  radical.add('top', shapes.polyLine(poly(color)));
+  updateStaticLinePoints(radical, 0.2, 0.2, 1, 1, 0.01, true, null, null);
+  radical.custom.startWidth = startWidth;
+  radical.custom.startHeight = startHeight;
+  radical.custom.lineWidth = lineWidth;
+  radical.custom.proportionalToHeight = proportionalToHeight;
+  radical.custom.maxStartWidth = maxStartWidth;
+  radical.custom.maxStartHeight = maxStartHeight; // Defined every time a setSize event is called
+
+  if (staticSize != null) {
+    radical.custom.type = 'static';
+    var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_3__["getPoint"])(staticSize); // this is messed up and I wouldn't use it, but you can
+
+    updateStaticLinePoints(radical, radical.custom.startWidth, radical.custom.startHeight, size.x, size.y, radical.custom.lineWidth, radical.custom.proportionalToHeight, radical.custom.maxStartWidth, radical.custom.maxStartHeight); // defined everytime a setTransform event is called
+  } else {
+    radical.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](1, 1);
+
+    radical.internalSetTransformCallback = function () {
+      var s = radical.getScale();
+
+      if (radical.custom.scale.isNotEqualTo(s, 8)) {
+        updateStaticLinePoints(radical, radical.custom.startWidth, radical.custom.startHeight, s.x, s.y, radical.custom.lineWidth, radical.custom.proportionalToHeight, radical.custom.maxStartWidth, radical.custom.maxStartHeight);
+        radical.custom.scale = s;
+      }
+    };
+
+    radical.getTransform = function () {
+      var t = radical.transform._dup();
+
+      t.updateScale(1, 1);
+      return t;
+    };
+
+    radical.custom.type = 'dynamic';
+  } // eslint-disable-next-line max-len
+
+
+  radical.custom.setSize = function (location, widthIn, heightIn) {
+    var t = radical.transform._dup();
+
+    t.updateScale(widthIn, heightIn);
+    t.updateTranslation(location.x, location.y);
+    radical.setTransform(t);
+  };
+
+  return radical;
 }
 
 /***/ }),
@@ -23598,7 +24187,7 @@ function (_DiagramElement) {
   }, {
     key: "getLocalBoundaries",
     value: function getLocalBoundaries() {
-      return this.drawingObject.getGLBoundaries(this.transform.matrix());
+      return this.drawingObject.getGLBoundaries(this.getTransform().matrix());
     }
   }, {
     key: "getGLBoundaries",
@@ -23613,7 +24202,7 @@ function (_DiagramElement) {
   }, {
     key: "getLocalBoundingRect",
     value: function getLocalBoundingRect() {
-      return this.drawingObject.getGLBoundingRect(this.transform.matrix());
+      return this.drawingObject.getGLBoundingRect(this.getTransform().matrix());
     }
   }, {
     key: "getGLBoundingRect",
@@ -23633,7 +24222,7 @@ function (_DiagramElement) {
   }, {
     key: "getRelativeLocalBoundingRect",
     value: function getRelativeLocalBoundingRect() {
-      return this.drawingObject.getRelativeGLBoundingRect(this.transform.matrix());
+      return this.drawingObject.getRelativeGLBoundingRect(this.getTransform().matrix());
     }
   }, {
     key: "increaseBorderSize",
@@ -24088,7 +24677,7 @@ function (_DiagramElement2) {
     value: function setFirstTransform() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       // const finalParentTransform = this.processParentTransform(parentTransform);
-      var firstTransform = parentTransform.transform(this.transform);
+      var firstTransform = parentTransform.transform(this.getTransform());
       this.lastDrawTransform = firstTransform;
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {

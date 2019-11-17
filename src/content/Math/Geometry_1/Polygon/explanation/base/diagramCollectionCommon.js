@@ -73,8 +73,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     angle.stop();
     angle.setAngle({ angle: fromAngle });
     const delta = toAngle - fromAngle;
+    let trigger = () => {};
+    let triggerDuration = 0;
+    this._tot._af.hide();
+    this._tot._bf.hide();
+    this._tot._cf.hide();
+    this._eqnTot._box.hide();
+    angle.showAll();
+    angle.setOpacity(0.01);
+    if (eqnElementsToPulse != null && eqnElementsToPulse.length > 0) {
+      trigger = () => {
+        this._eqnTot._box.show();
+        this.accentEqn(this._eqnTot, eqnElementsToPulse, 'box', [0.02, 0.05]);
+      };
+      triggerDuration = 1;
+    };
     if (pulse) {
       angle.animations.new()
+        .trigger({ callback: trigger, duration: triggerDuration })
+        .trigger({ callback: () => { angle.setOpacity(1); }, duration: 0 })
         .pulse(1)
         .custom({
           callback: (p) => {
@@ -85,6 +102,8 @@ export default class CommonCollection extends CommonDiagramCollection {
         .start();
     } else {
       angle.animations.new()
+        .trigger({ callback: trigger, duration: triggerDuration })
+        .trigger({ callback: () => { angle.setOpacity(1); }, duration: 0 })
         .custom({
           callback: (p) => {
             angle.setAngle({ angle: fromAngle + p * delta });
@@ -93,35 +112,35 @@ export default class CommonCollection extends CommonDiagramCollection {
         })
         .start();
     }
-    if (eqnElementsToPulse != null) {
-      this._eqnTot._box.show();
-      this.accentEqn(this._eqnTot, eqnElementsToPulse, 'box', 0.05);
-      // this._eqnTot._box.custom.setSize(this._eqnTot, eqnElementsToPulse, 0.1);
-      // this.accent(this._eqnTot._box);
-      // this._highlighter.show();
-      // const bound = this._eqnTot.getDiagramBoundingRect(eqnElementsToPulse);
-      // // const points = []
-      // // eqnElementsToPulse.forEach((element) => {
-      // //   const e = this._eqnTot.getElement(element);
-      // //   const bound = e.getDiagramBoundingRect();
-      // //   console.log(bound)
-      // //   points.push(new Point(bound.left, bound.bottom));
-      // //   points.push(new Point(bound.right, bound.top));
-      // // });
-      // // const bound = getBoundingRect(points);
-      // // console.log(bound)
-      // this._highlighter.setScale(bound.width, bound.height);
-      // this._highlighter.setPosition(
-      //    bound.left + bound.width / 2,
-      //   bound.bottom + bound.height / 2,
-      // );
-      // this.accent(this._highlighter);
-      // this.accent({
-      //   element: this._eqnTot,
-      //   children: eqnElementsToPulse,
-      //   style: 'highlight',
-      // });
-    }
+    // if (eqnElementsToPulse != null) {
+    //   this._eqnTot._box.show();
+    //   this.accentEqn(this._eqnTot, eqnElementsToPulse, 'box', [0.02, 0.05]);
+    //   // this._eqnTot._box.custom.setSize(this._eqnTot, eqnElementsToPulse, 0.1);
+    //   // this.accent(this._eqnTot._box);
+    //   // this._highlighter.show();
+    //   // const bound = this._eqnTot.getDiagramBoundingRect(eqnElementsToPulse);
+    //   // // const points = []
+    //   // // eqnElementsToPulse.forEach((element) => {
+    //   // //   const e = this._eqnTot.getElement(element);
+    //   // //   const bound = e.getDiagramBoundingRect();
+    //   // //   console.log(bound)
+    //   // //   points.push(new Point(bound.left, bound.bottom));
+    //   // //   points.push(new Point(bound.right, bound.top));
+    //   // // });
+    //   // // const bound = getBoundingRect(points);
+    //   // // console.log(bound)
+    //   // this._highlighter.setScale(bound.width, bound.height);
+    //   // this._highlighter.setPosition(
+    //   //    bound.left + bound.width / 2,
+    //   //   bound.bottom + bound.height / 2,
+    //   // );
+    //   // this.accent(this._highlighter);
+    //   // this.accent({
+    //   //   element: this._eqnTot,
+    //   //   children: eqnElementsToPulse,
+    //   //   style: 'highlight',
+    //   // });
+    // }
     this.diagram.animateNextFrame();
   }
 }

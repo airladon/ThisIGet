@@ -360,7 +360,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     eqn: Equation,
     children: Array<DiagramElement | string>,
     boxIn: string | DiagramElement,
-    space: number = 0.1,
+    space: Point | [number, number] | number = 0.1,
     done: ?() => void = null,
   ) {
     const box = eqn.getElement(boxIn);
@@ -379,16 +379,16 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     eqn: Equation,
     children: Array<DiagramElement | string>,
     boxIn: string | DiagramElement,
-    spaceOrColor: number | Array<number> = 0.05,
+    spaceOrColor: Point | [number, number] | number | Array<number> = 0.05,
     colorIn: ?Array<number> = null,
   ) {
     const allElements = eqn.getElements(children);
     let color = [1, 1, 1, 1];
     let space = 0;
     if (allElements.length > 0) {
-      color = allElements[0].color.slice()
+      color = allElements[0].color.slice();
     }
-    if (Array.isArray(spaceOrColor)) {
+    if (Array.isArray(spaceOrColor) && spaceOrColor.length > 2) {
       color = spaceOrColor;
     } else {
       space = spaceOrColor;
@@ -396,10 +396,10 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     if (colorIn != null) {
       color = colorIn;
     }
-    const accenter = () => {
+    const accenter = () => {    // $FlowFixMe
       this.accentEqn(eqn, children, boxIn, space);
       this.diagram.animateNextFrame();
-    };
+    };  // $FlowFixMe
     return click(accenter, [this], color);
   }
 

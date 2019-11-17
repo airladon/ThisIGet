@@ -20,6 +20,7 @@ export default function diagramLayout() {
   colors.angleFill = colors.get('red', 'darker').setOpacity(0.6).rgb;
   colors.tri = colors.get('green').rgb;
   colors.construction = colors.get('grey', 'dark').rgb;
+  colors.working = colors.get('grey').rgb;
   const width = 0.03;
 
   const regularPolyPoints = (num, r) => {
@@ -236,25 +237,47 @@ export default function diagramLayout() {
         c2: { text: 'c', color: colors.angles },
         _360: '360º',
         _180: '180º',
-        p1: ' + ',
+        _1802: '180º',
+        n: 'n',
+        _2: '2',
+        p1: '+',
         p2: ' + ',
         p3: ' + ',
-        m1: ' - ',
-        m2: ' - ',
-        m3: ' - ',
+        m1: '-',
+        m2: '-',
+        m3: '-',
+        m4: '-',
         lb: {
-          symbol: 'brace', side: 'left', numLines: 1, color: colors.working,
+          symbol: 'bracket', side: 'left', numLines: 1,
         },
         rb: {
-          symbol: 'brace', side: 'right', numLines: 1, color: colors.working,
+          symbol: 'bracket', side: 'right', numLines: 1,
         },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
         box: {
-          symbol: 'box', color: colors.angles, width: 0.01,
-          staticSize: [1, 0.2],
+          symbol: 'box', color: colors.angles, width: 0.008,
+          // staticSize: [1, 0.2],
         },
+        box2: {
+          symbol: 'box', color: colors.angles, width: 0.01,
+          // staticSize: [1, 0.2],
+        },
+        times: ' \u00D7 ',
+        root: {
+          symbol: 'radical',
+          color: colors.sides,
+          startHeight: 0.5,
+          startWidth: 0.7,
+          maxStartHeight: 0.15,
+          maxStartWidth: 0.15,
+          lineWidth: 0.01,
+          proportionalToHeight: true,
+          // staticSize: [3, 1],
+        },
+        v: { symbol: 'vinculum' },
+        v1: { symbol: 'vinculum' },
         // strike1: { symbol: 'xStrike', color: colors.working },
         // strike2: { symbol: 'xStrike', color: colors.working },
       },
@@ -264,9 +287,75 @@ export default function diagramLayout() {
         alignV: 'baseline',
       },
       forms: {
-        '0': [newTot, 'equals', oldTot, 'm1', 'a1', 'm2', 'b1', 'p1','_360', 'm3', 'c1'],
-        '1': { sup: ['a1', { box: ['b1', 'box', true, 0.05] }] },
-        '2': { box: ['b1', 'box', true, 0.05] },
+        '0': [newTot, 'equals', oldTot, '   ', 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'p1', '   ', '_360', '   ', 'm3', '   ', 'c1'],
+        '1': {
+          content: [
+            newTot, 'equals', oldTot, '   ', 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'm3', '   ', 'c1', '   ', 'p1', '   ', '_360',
+          ],
+          translation: {
+            m3: ['curved', 'up', 1],
+            c1: ['curved', 'up', 1],
+          },
+        },
+        '2': [
+          newTot, 'equals', oldTot, '   ',
+          {
+            topComment: {
+              content: [
+                'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'm3', '   ', 'c1'],
+              comment: ['m4', ' ', '_180'],
+              symbol: 'brace',
+            },
+          },
+          '   ', 'p1', '   ', '_360',
+        ],
+        '3': [
+          newTot, 'equals', oldTot, '   ',
+          'm4', ' ', '_180',
+          '   ', 'p1', '   ', '_360',
+        ],
+        '4': [
+          newTot, 'equals', oldTot, '   ',
+          {
+            topComment: {
+              content: ['m4', ' ', '_180', '   ', 'p1', '   ', '_360'],
+              comment: ['p2', '_1802'],
+              symbol: 'brace',
+            },
+          },
+        ],
+        '5': [
+          newTot, 'equals', oldTot, '   ',
+          'p2', '_1802',
+        ],
+        '6': {
+          box: {
+            content: ['tot1', 'equals', {
+              brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+            }, 'times', '_180'],
+            symbol: 'box2',
+            space: 0.2,
+          },
+        },
+        // '1': { sup: ['a1', { box: ['b1', 'box', true, 0.05] }] },
+        // '2': { box: ['b1', 'box', true, 0.05] },
+        // '3': ['c1', ' ', { box: [{
+        //   root: {
+        //     content: ['a1', ' ', { frac: ['b1', 'b2', 'v1'] }],
+        //     symbol: 'root',
+        //     root: { frac: ['c2', 'a2', 'v'] },
+        //     rootScale: 0.9,
+        //     // rootSpace: [0, 0.3],
+        //     contentSpace: { left: 0.01, bottom: 0, top: 0.02, right: 0.1 },
+        //   } }, 'box'] }
+        // ],
+        // '4': { sup: ['b1', {
+        //   root: {
+        //     content: 'a1',
+        //     symbol: 'root',
+        //     contentSpace: 0.01,
+        //   },
+        // }, 0.7] },
         // '1': [
         //   { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
         //   'equals',
@@ -300,6 +389,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [-0.7, 0.9] },
+        bottom: { position: [-0.2, -0.9] },
       },
     },
   };

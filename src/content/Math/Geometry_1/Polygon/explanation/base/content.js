@@ -17,7 +17,7 @@ const {
   style,
   click,
   // clickW,
-  // highlight,
+  highlight,
   // centerV,
 } = Fig.tools.html;
 
@@ -57,7 +57,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Definition',
       setContent: [
-        'A |polygon| is the general term that describes a shape made up of |straight sides|.',
+        '|Polygon| is the |general term| that describes a shape made up of |straight sides|.',
         `${new Definition('Polygon', 'Latin', ['polygonum', ''], 'Greek', ['polygonos', 'many-angled']).html({
           // classes: 'diagram__definition_high',
           color: colors.sides,
@@ -95,12 +95,15 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Total Angle',
       setContent: style({ centerV: true }, [
-        'We have previously found the |total angle| of a |triangle| and |quadrangle|.',
+        'We have previously found that the |total angle| of |any three sided polygon| (or triangle) is |_180º|.',
+        'We have also seen the |total angle| of |any four sided polygon| (or quadrangle) is |_360º|.',
+        // 'We have previously found the |total angle| of a |triangle| is 180º and total angle of a |quadrangle| is 360º.',
+        // 'In other words, |any 3 sided polygon| has a total angle of |180º|, and |any four sided polygon| has a total angle of 360º.',
         'Is it possible to find the |total angle| of |any| polygon?',
       ]),
       modifiers: {
-        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-        quadrangle: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
+        _180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+        _360º: this.qr('Math/Geometry_1/Quadrangles/base/Main'),
       },
     });
 
@@ -135,7 +138,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: 'Replace one side with |two_sides|, which is effectively |adding one side|.',
+      setContent: 'Replacing one side with |two_sides|, is effectively |adding one side|.',
     };
     this.addSection(common, commonContent, {
       modifiers: { two_sides: this.bindNext(colors.sides) },
@@ -236,7 +239,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: 'Similar before, we can replace one side with |two_sides|.',
+      setContent: 'As before we can replace one side with |two_sides|.',
     };
     this.addSection(common, commonContent, {
       modifiers: { two_sides: this.bindNext(colors.sides) },
@@ -279,7 +282,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     commonContent = {
       setContent: style({ top: 0 }, [
-        'The total |internal| angle has been |reduced_by_a|, |reduced_by_b| and |increased| by the |explementary_angle_of_c|.',
+        'The |total angle| of the old shape has been |reduced_by_a|, |reduced_by_b| and |increased| by the |explementary_angle_of_c|.',
         note({ top: 93, color: colors.diagram.text.note }, 'Reference: |explementary| angle'),
       ]),
       modifiers: {
@@ -289,7 +292,7 @@ class Content extends PresentationFormatContent {
           coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, []], colors.angles,
         ),
         // internal: coll.bindAccentEqn(coll._eqnTot, ['Old'], 'box', 0.05),
-        internal: coll.bindAccent(coll._eqnTot),
+        // internal: coll.bindAccent(coll._eqnTot),
         explementary: this.qr('Math/Geometry_1/AngleGroups/base/Explementary'),
       },
     };
@@ -297,26 +300,13 @@ class Content extends PresentationFormatContent {
       show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
     });
 
-    // ************************************************************
-    // ************************************************************
-    // ************************************************************
-    const temp = () => {
-      coll._eqnTot.showForm('1')
-      // console.log(coll._eqnTot._box._left.isShown)
-      console.log(coll._eqnTot._box.isShown)
-      coll._eqnTot.goToForm({ name: '2', animate: 'move', delay: 2 });
-      // console.log(coll._eqnTot._box._left.isShown, coll._eqnTot._box.isShown)
-      console.log(coll._eqnTot._box.isShown)
-      this.diagram.animateNextFrame();
-    }
     this.addSection(common, commonContent, {
       modifiers: {
         reduced_by_a: click(coll.shrinkAngle, [coll, tot._af, 1.06, 0.55, true, ['m1', 'a1']], colors.angles),
         reduced_by_b: click(coll.shrinkAngle, [coll, tot._bf, 1.9, 1.35, true, ['m2', 'b1']], colors.angles),
         explementary_angle_of_c: click(
-          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, ['Old', 'tot2', '_360', 'm3', 'c1']], colors.angles,
+          coll.shrinkAngle, [coll, tot._cf, 0.005, 4.2, false, ['p1', '_360', 'c1']], colors.angles,
         ),
-        internal: click(temp, [this], colors.angles),
       },
       show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
       transitionFromPrev: (done) => {
@@ -328,7 +318,88 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll._eqnTot.showForm('0');
         tot.setScenario('low');
-        console.log(coll._eqnTot)
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'Which can be rearranged to:',
+      ]),
+    };
+    this.addSection(common, commonContent, {
+      show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
+      setSteadyState: () => {
+        coll._eqnTot.showForm('0');
+        tot.setScenario('low');
+      },
+    });
+
+    const commonShow = {
+      show: [tot._n6, tot._l6, tot._a, tot._b, tot._c],
+      setEnterState: () => {
+        coll.setScenarios('default');
+        tot.setScenarios('low');
+      },
+    };
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '0', to: '1', duration: 1,
+    }, common, commonContent, commonShow);
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'Here |a|, |b| and |c| are the angles of a triangle and thus their sum is |180º|.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angles),
+        b: highlight(colors.angles),
+        c: highlight(colors.angles),
+      },
+    };
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '1', to: '1', duration: 1,
+    }, common, commonContent, commonShow);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '1', to: '2',
+    }, common, commonContent, commonShow);
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '2', to: '3',
+    }, common, commonContent, commonShow);
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '3', to: '4',
+    }, common, commonContent, commonShow);
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '4', to: '5',
+    }, common, commonContent, commonShow);
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, [
+        'And so we see adding a point |inside| the shape also |increases the total angle by 180º|.',
+      ]),
+    };
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '5', to: '5',
+    }, common, commonContent, commonShow);
+
+    this.addSection({
+      setContent: style({ top: 15 }, [
+        'We started with a |triangle|, that has a |total angle of 180º|, and |3 sides|.',
+        '|Every side added| increases the total angle by |180º|.',
+        
+        'Thus the |total angle| of an |n-sided polygon| is:',
+      ]),
+      setSteadyState: () => {
+        coll._eqnTot.showForm('6');
+        coll._eqnTot.setScenario('bottom');
       },
     });
   }
