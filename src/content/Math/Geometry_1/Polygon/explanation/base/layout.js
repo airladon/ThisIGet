@@ -387,12 +387,18 @@ export default function diagramLayout() {
         '8': [
           'angle', 'equals', {
             frac: {
-              numerator: { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+              numerator: [
+                { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                'times', '_180',
+              ],
               denominator: 'n2',
               symbol: 'v',
             },
-          }, 'times', '_180',
+          },
         ],
+        // '9': [
+        //   'angle', 'equals', '_180', 'm1', { frac: ['_360', 'n', 'v'] },
+        // ],
       },
     },
     mods: {

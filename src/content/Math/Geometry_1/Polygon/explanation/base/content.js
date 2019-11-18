@@ -296,7 +296,7 @@ class Content extends PresentationFormatContent {
         ),
         // internal: coll.bindAccentEqn(coll._eqnTot, ['Old'], 'box', 0.05),
         // internal: coll.bindAccent(coll._eqnTot),
-        explementary: this.qr('Math/Geometry_1/AngleGroups/base/Explementary'),
+        explementary: this.qr('Math/Geometry_1/AngleGroups/base/ExplementaryPres'),
       },
     };
     this.addSection(common, commonContent, {
