@@ -393,7 +393,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: style({ top: 15 }, [
         'We started with a |triangle|, that has a |total angle of 180º|, and |3 sides|.',
-        '|Every side added| increases the total angle by |180º|.',
+        '|Every additional side| increases the total angle by |180º|.',
         
         'Thus the |total angle| of an |n-sided polygon| is:',
       ]),
@@ -401,6 +401,63 @@ class Content extends PresentationFormatContent {
         coll._eqnTot.showForm('6');
         coll._eqnTot.setScenario('bottom');
       },
+    });
+    
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'A |regular polygon| is a special type of polygon whose |sides| and |angles| are all |equal|.',
+      ],
+      modifiers: {
+        equal: coll.bindToggleGroups(
+          coll,
+          [
+            [
+              '_tri._angle0', '_tri._angle1', '_tri._angle2',
+              '_tri._side01', '_tri._side12', '_tri._side20'],
+            [
+              '_quad._angle0', '_quad._angle1', '_quad._angle2', '_quad._angle3',
+              '_quad._side01', '_quad._side12', '_quad._side23', '_quad._side30',
+            ],
+            [
+              '_pent._angle0', '_pent._angle1', '_pent._angle2', '_pent._angle3', '_pent._angle4',
+              '_pent._side01', '_pent._side12', '_pent._side23', '_pent._side34', '_pent._side40',
+            ],
+          ],
+          colors.diagram.action,
+          ['show', 'pulse'],
+        ),
+      },
+      angles: highlight(colors.angles),
+    };
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+    };
+    this.addSection(common, commonContent, {
+      title: 'Regular Polygons',
+      show: [coll._tri._line, coll._quad._line, coll._pent._line],
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'A |regular polygon| can be created by |splitting a circle| into |equal pieces|.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      show: [coll._split],
     });
   }
 }

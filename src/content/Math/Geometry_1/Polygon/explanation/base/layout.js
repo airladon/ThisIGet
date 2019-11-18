@@ -8,7 +8,7 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-// const { joinObjects } = Fig.tools.misc;
+const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -23,11 +23,11 @@ export default function diagramLayout() {
   colors.working = colors.get('grey').rgb;
   const width = 0.03;
 
-  const regularPolyPoints = (num, r) => {
+  const regularPolyPoints = (num, r, angleOffset = 0) => {
     const polyPoints = [];
     for (let i = 0; i < num; i += 1) {
-      const angle = Math.PI * 2 / num * i + Math.PI / 2 - Math.PI * 2 / num;
-      polyPoints.push([r * Math.cos(angle), r * Math.sin(angle)]);
+      const angle = Math.PI * 2 / num * i + Math.PI / 2 - Math.PI * 2 / num + Math.PI + angleOffset;
+      polyPoints.push([r * Math.cos(-angle), r * Math.sin(-angle)]);
     }
     return polyPoints;
   };
@@ -55,10 +55,11 @@ export default function diagramLayout() {
     [1, -0.5],
   ];
 
-  const poly = (name, points, pos = [0, 0], scale = 1) => {
+  const poly = (name, points, pos = [0, 0], scale = 1, sideLabel = null, angleLabel = undefined) => {
     const t = new Transform().scale(scale, scale);
     const pointsToUse = points.map(p => (new Point(p[0], p[1])).transformBy(t.matrix()));
-    return {
+
+    let outObj = {
       name,
       method: 'polyLine',
       options: {
@@ -75,6 +76,43 @@ export default function diagramLayout() {
         pulseDefault: { scale: 1.4 },
       },
     };
+
+    if (sideLabel != null) {
+      outObj = joinObjects({}, outObj, {
+        options: {
+          side: {
+            label: {
+              text: sideLabel,
+              offset: 0.05,
+              location: 'outside',
+              scale: 0.8,
+            },
+          },
+        },
+      });
+    }
+
+    if (angleLabel !== undefined) {
+      outObj = joinObjects({}, outObj, {
+        options: {
+          angle: {
+            label: {
+              text: angleLabel,
+              scale: 0.7,
+            },
+            curve: {
+              sides: 50,
+              width: 0.01,
+              radius: 0.2,
+            },
+            // direction: -1,
+            // rotation: Math.PI / 3,
+            color: colors.angles,
+          },
+        },
+      });
+    }
+    return outObj;
   };
 
   // const pointsB3 = regularPolyPoints(3, 1.2);
@@ -337,53 +375,6 @@ export default function diagramLayout() {
             space: 0.2,
           },
         },
-        // '1': { sup: ['a1', { box: ['b1', 'box', true, 0.05] }] },
-        // '2': { box: ['b1', 'box', true, 0.05] },
-        // '3': ['c1', ' ', { box: [{
-        //   root: {
-        //     content: ['a1', ' ', { frac: ['b1', 'b2', 'v1'] }],
-        //     symbol: 'root',
-        //     root: { frac: ['c2', 'a2', 'v'] },
-        //     rootScale: 0.9,
-        //     // rootSpace: [0, 0.3],
-        //     contentSpace: { left: 0.01, bottom: 0, top: 0.02, right: 0.1 },
-        //   } }, 'box'] }
-        // ],
-        // '4': { sup: ['b1', {
-        //   root: {
-        //     content: 'a1',
-        //     symbol: 'root',
-        //     contentSpace: 0.01,
-        //   },
-        // }, 0.7] },
-        // '1': [
-        //   { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
-        //   'equals',
-        //   { annotate: [['_21', 'a', 'plus', '_22', 'b'], ['_divide21', 'center', 'bottom', 'center', 2], 'false'] },
-        // ],
-        // '2': [
-        //   {
-        //     annotate: [
-        //       { topComment: ['_360', '_180', 'b1', 0.1, 0.05, 0.6, false] },
-        //       ['_divide2', 'center', 'bottom', 'center', 2],
-        //       'false',
-        //     ],
-        //   },
-        //   'equals',
-        //   {
-        //     annotate: [[
-        //       { strike: ['_21', 'strike1'] },
-        //       'a', 'plus',
-        //       { strike: ['_22', 'strike2'] },
-        //       'b',
-        //     ], ['_divide21', 'center', 'bottom', 'center', 2], 'false'],
-        //   },
-        // ],
-        // // '3': [
-        // //   { bottomComment: ['_360', ['_divide2', '_180'], 'b1', 0.1, 0.05, 0.6, false] },
-        // //   'equals', { strike: ['_21', 'strike1'] }, 'a',
-        // //   'plus', { strike: ['_22', 'strike2'] }, 'b'],
-        // '3': ['_180', 'equals', 'a', 'plus', 'b'],
       },
     },
     mods: {
@@ -393,79 +384,69 @@ export default function diagramLayout() {
       },
     },
   };
-  // const polyBuilder = (points, tris) => {
-  //   // const sides = [];
-  //   const triangles = [];
-  //   // for (let i = 1; i < points.length + 1; i += 1) {
-  //   //   const side = {
-  //   //     name: `side${i - 1}`,
-  //   //     method: 'line',
-  //   //     options: {
-  //   //       p1: points[i - 1],
-  //   //       p2: points[i % (points.length)],
-  //   //       color: colors.sides,
-  //   //       width: 0.03,
-  //   //     },
-  //   //   };
-  //   //   sides.push(side);
-  //   // }
-  //   // sides.push(poly('line', points));
-  //   tris.forEach((triPair, index) => {
-  //     const tri = {
-  //       name: `tri${index}`,
-  //       method: 'line',
-  //       options: {
-  //         p1: points[triPair[0]],
-  //         p2: points[triPair[1]],
-  //         dashStyle: { style: [0.05, 0.03] },
-  //         width: 0.02,
-  //         color: colors.tri,
-  //       },
-  //     };
-  //     triangles.push(tri);
-  //   });
-  //   return {
-  //     name: 'polyB',
-  //     method: 'collection',
-  //     options: {
-  //       color: colors.sides,
-  //     },
-  //     addElements: triangles,
-  //   };
-  // };
 
-  const highlighter = {
-    name: 'highlighter',
-    method: 'rectangle',
+  // const highlighter = {
+  //   name: 'highlighter',
+  //   method: 'rectangle',
+  //   options: {
+  //     length: 1,
+  //     width: 1,
+  //     fill: true,
+  //     color: colors.angleFill,
+  //   },
+  // };
+  const sPoints = regularPolyPoints(6, 1.2);
+  const sLine = (name, p2) => ({
+    name,
+    method: 'line',
     options: {
-      length: 1,
-      width: 1,
-      fill: true,
-      color: colors.angleFill,
+      width: 0.01,
+      color: colors.tri,
+      p1: [0, 0],
+      p2,
+      dashStyle: {
+        style: [0.05, 0.03],
+      },
     },
+  });
+  const split = {
+    name: 'split',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'circle',
+        method: 'polygon',
+        options: {
+          sides: 100,
+          color: colors.tri,
+          radius: 1.2,
+          width: 0.01,
+        },
+      },
+      sLine('s0', sPoints[0]),
+      sLine('s1', sPoints[1]),
+      sLine('s2', sPoints[2]),
+      sLine('s3', sPoints[3]),
+      sLine('s4', sPoints[4]),
+      sLine('s5', sPoints[5]),
+    ],
   };
+  console.log(sPoints)
 
   layout.addElements = [
-    highlighter,
-    poly('tri', regularPolyPoints(3, 1), [-1, 0]),
-    poly('quad', regularPolyPoints(4, 1), [1, 0]),
-    poly('pent', regularPolyPoints(5, 1)),
+    // highlighter,
+    poly('tri', regularPolyPoints(3, 1), [-2, -0.5], 0.9, 'A', null),
+    poly('quad', regularPolyPoints(4, 1, Math.PI / 4), [0, -0.3], 0.9, 'B', ''),
+    poly('pent', regularPolyPoints(5, 1), [2, -0.3], 0.9, 'C', null),
     poly('hex', regularPolyPoints(6, 1)),
     poly('hep', regularPolyPoints(7, 1)),
     poly('oct', regularPolyPoints(8, 1)),
     poly('poly0', pointsP, [1.7, -0.2], 0.9),
     poly('poly1', pointsP1, [-2, -0.2], 0.9),
     poly('poly2', pointsP2, [-0.2, -0.2], 0.9),
-    // poly('tot', pointsTot6, [0, -0.4]),
     tot,
     eqnTot,
-
-    // polyBuilder(pointsP, [
-    //   [0, 2],
-    //   [2, 6],
-    //   [2, 5],
-    //   [3, 5],
-    // ]),
+    split,
   ];
   return layout;
 }
