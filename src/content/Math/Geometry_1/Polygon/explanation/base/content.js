@@ -711,6 +711,78 @@ class Content extends PresentationFormatContent {
         coll.accent(split, colors.sides, done);
       },
     });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'We have seen the |total_angle| for a |n-sided polygon| is:'),
+      ],
+      modifiers: {
+        total_angle: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        split._line,
+        split._i0, split._i1, split._i2,
+        split._i3, split._i4,
+      ],
+      setSteadyState: () => {
+        coll._eqnTot.showForm('7');
+        coll._eqnTot.setScenario('high');
+        coll._split.setScenario('low');
+      },
+      transitionFromPrev: (done) => {
+        coll._split.animations.new()
+          .scenario({ target: 'low', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'As each angle is the |same|, we can divide by the number of angles |n|, to get the size of each |angle|:'),
+      ],
+      modifiers: {
+        total_angle: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
+        angle: this.bindNext(colors.angles),
+      },
+    };
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        coll._eqnTot.setScenario('high');
+        coll._split.setScenario('low');
+      },
+      show: [
+        split._line,
+        split._i0, split._i1, split._i2,
+        split._i3, split._i4,
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '7', to: '7', duration: 1,
+    }, common, commonContent);
+
+    const commonMods = {
+      modifiers: {
+        total_angle: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
+        angle: click(() => {
+          coll.toggleGroups(split, ['i0', 'i1', 'i2', 'i3', 'i4']);
+          coll.accent(coll._eqnTot._angle);
+        }, [this], colors.angles),
+      },
+    };
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '7', to: '8', duration: 1,
+    }, common, commonContent, commonMods);
   }
 }
 

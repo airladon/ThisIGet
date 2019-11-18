@@ -251,8 +251,8 @@ export default function diagramLayout() {
     },
   });
 
-  const newTot = { sub: ['New', 'tot1'] };
-  const oldTot = { sub: ['Old', 'tot2'] };
+  const newTot = { sub: ['tot1', 'New'] };
+  const oldTot = { sub: ['tot2', 'Old'] };
 
   const eqnTot = {
     name: 'eqnTot',
@@ -266,8 +266,9 @@ export default function diagramLayout() {
         // Old: { color: colors.angles },
         New: 'New',
         Old: 'Old',
-        tot1: { text: 'Total Angle' },
-        tot2: { text: 'Total Angle' },
+        tot1: { text: 'total angle', color: colors.angles },
+        tot2: { text: 'total angle', color: colors.angles },
+        angle: { text: 'angle', color: colors.angles },
         a1: { text: 'a', color: colors.angles },
         a2: { text: 'a', color: colors.angles },
         b1: { text: 'b', color: colors.angles },
@@ -277,7 +278,8 @@ export default function diagramLayout() {
         _360: '360º',
         _180: '180º',
         _1802: '180º',
-        n: 'n',
+        n: { text: 'n', color: colors.sides },
+        n2: { text: 'n', color: colors.sides },
         _2: '2',
         p1: '+',
         p2: ' + ',
@@ -303,6 +305,7 @@ export default function diagramLayout() {
           symbol: 'box', color: colors.angles, width: 0.01,
           // staticSize: [1, 0.2],
         },
+        v: { symbol: 'vinculum' },
         times: ' \u00D7 ',
         root: {
           symbol: 'radical',
@@ -376,12 +379,27 @@ export default function diagramLayout() {
             space: 0.2,
           },
         },
+        '7': [
+          'tot1', 'equals', {
+            brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+          }, 'times', '_180',
+        ],
+        '8': [
+          'angle', 'equals', {
+            frac: {
+              numerator: { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+              denominator: 'n2',
+              symbol: 'v',
+            },
+          }, 'times', '_180',
+        ],
       },
     },
     mods: {
       scenarios: {
         default: { position: [-0.7, 0.9] },
         bottom: { position: [-0.2, -0.9] },
+        high: { position: [-0.2, 1] },
       },
     },
   };
@@ -526,6 +544,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [0, -0.3] },
+        low: { position: [0, -0.6] },
       },
     },
   };
