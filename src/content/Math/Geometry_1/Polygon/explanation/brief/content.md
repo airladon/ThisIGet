@@ -1,6 +1,6 @@
 ### Definition
 
-*Polygon* is the general term that describes a shape made up of *straight sides*.
+*Polygon* is the general term that describes a shape made up of *straight sides*. A polygon has the same number of sides and angles.
 
 ![](examples.png)
 
@@ -14,19 +14,19 @@ You can make a triangle into a 4 sided shape by splitting one side into two.
 
 ![](quad.png)
 
-Now, the total angle is two triangles worth, or 360º.
+Now, the total angle is the same as two triangles, or 360º.
 
-Everytime you split a side into two, another triangle's worth of total angle is added.
+Everytime you split a side into two, another triangle's total angle is added.
 
 ![](pent.png)
 
-Splitting a side into two can either add to a shape (as above), or subtract from the shape.
+Splitting a side into two can either add to a shape (as above), or subtract from the shape (as below).
 
 ![](inside.png)
 
 When subtracting from the shape, the total angle also increases by 180º.
 
-Considering the above diagram, the total angle decresases by $$\definecolor{r}{RGB}{238,34,12}\definecolor{b}{RGB}{0,118,186}\color{r}a$$ and $$\color{r}b$$, and increases by [[explementary]]((qr,'Math/Geometry_1/AngleGroups/base/Explementary',#00756F)) angle of $$\color{r}c$$:
+Considering the above diagram, the total angle decreases by $$\definecolor{r}{RGB}{238,34,12}\definecolor{b}{RGB}{0,118,186}\color{r}a$$ and $$\color{r}b$$, and increases by the [[explementary]]((qr,'Math/Geometry_1/AngleGroups/base/Explementary',#00756F)) angle of $$\color{r}c$$:
 
 $$total\ angle_{new} = total\ angle_{old} - \color{r}a \color{black}- \color{r}b \color{black}+360^\circ - \color{r}c$$
 
@@ -54,7 +54,7 @@ We know:
 
 * Each piece is equal
 * Therefore each angle at the circle center is equal
-* the triangle sides from the center are the radius
+* The triangle sides that meet at the center are the radius
 
 ![](tri.png)
 
@@ -67,9 +67,7 @@ From above, we know the total angle of a regular polygon is:
 
 $$total\ angle = \left(\color{b}n\color{black}-2\right) \times 180^\circ$$
 
-![](poly_angle.png)
-
-As each angle of a regular polygon is equal, then each angle must be:
+As each angle of a regular polygon is equal, then we can divide this by the number of angles to get the size of each angle:
 
 $$angle = \frac{\left(\color{b}n\color{black}-2\right) \times 180^\circ}{\color{b}n}$$
 
