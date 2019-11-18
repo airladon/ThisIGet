@@ -71,11 +71,11 @@ $$total\ angle = \left(\color{b}n\color{black}-2\right) \times 180^\circ$$
 
 As each angle of a regular polygon is equal, then each angle must be:
 
-$$\bbox[10px,border:1px solid gray]{angle = \frac{\left(\color{b}n\color{black}-2\right) \times 180^\circ}{\color{b}n}}$$
+$$angle = \frac{\left(\color{b}n\color{black}-2\right) \times 180^\circ}{\color{b}n}$$
 
 This can be rearranged to
 
-$$angle = 180^\circ - \frac{360^\circ}{\color{b}n}$$
+$$\bbox[10px,border:1px solid gray]{angle = 180^\circ - \frac{360^\circ}{\color{b}n}}$$
 
 This tells us that as $$\color{b}n$$ gets larger, then so the angle must get closer and closer to 180º, but will always be less than 180º.
 

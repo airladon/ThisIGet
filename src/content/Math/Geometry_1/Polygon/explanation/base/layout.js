@@ -262,6 +262,7 @@ export default function diagramLayout() {
       scale: 0.9,
       elements: {
         equals: '  =  ',
+        equals1: '  =  ',
         // New: { color: colors.angles },
         // Old: { color: colors.angles },
         New: 'New',
@@ -276,10 +277,14 @@ export default function diagramLayout() {
         c1: { text: 'c', color: colors.angles },
         c2: { text: 'c', color: colors.angles },
         _360: '360º',
+        _3602: '360º',
         _180: '180º',
         _1802: '180º',
         n: { text: 'n', color: colors.sides },
         n2: { text: 'n', color: colors.sides },
+        n3: { text: 'n', color: colors.sides },
+        n4: { text: 'n', color: colors.sides },
+        n5: { text: 'n', color: colors.sides },
         _2: '2',
         p1: '+',
         p2: ' + ',
@@ -306,6 +311,8 @@ export default function diagramLayout() {
           // staticSize: [1, 0.2],
         },
         v: { symbol: 'vinculum' },
+        v1: { symbol: 'vinculum' },
+        v2: { symbol: 'vinculum' },
         times: ' \u00D7 ',
         root: {
           symbol: 'radical',
@@ -318,10 +325,8 @@ export default function diagramLayout() {
           proportionalToHeight: true,
           // staticSize: [3, 1],
         },
-        v: { symbol: 'vinculum' },
-        v1: { symbol: 'vinculum' },
-        // strike1: { symbol: 'xStrike', color: colors.working },
-        // strike2: { symbol: 'xStrike', color: colors.working },
+        s1: { symbol: 'xStrike', color: colors.working },
+        s2: { symbol: 'xStrike', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -396,9 +401,87 @@ export default function diagramLayout() {
             },
           },
         ],
-        // '9': [
-        //   'angle', 'equals', '_180', 'm1', { frac: ['_360', 'n', 'v'] },
-        // ],
+        '9': [
+          'angle', 'equals', {
+            frac: {
+              numerator: {
+                topComment: {
+                  content: [
+                    { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                    'times', '_180',
+                  ],
+                  comment: ['n3', '_1802', '  ', 'm2', '  ', 'n4', '_3602'],
+                  symbol: 'brace',
+                },
+              },
+              denominator: 'n2',
+              symbol: 'v',
+            },
+          },
+        ],
+        '10': [
+          'angle', 'equals', {
+            frac: {
+              numerator: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],
+              denominator: 'n2',
+              symbol: 'v',
+            },
+          },
+        ],
+        '11': [
+          'angle', 'equals', {
+            frac: {
+              numerator: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],
+              denominator: 'n2',
+              symbol: 'v',
+            },
+          }, 'equals1', {
+            frac: {
+              numerator: ['n', '_180'],
+              denominator: 'n4',
+              symbol: 'v1',
+            },
+          }, '  ', 'm1', '  ', {
+            frac: {
+              numerator: ['_360'],
+              denominator: 'n5',
+              symbol: 'v2',
+            },
+          },
+        ],
+        '12': [
+          'angle', 'equals', {
+            frac: {
+              numerator: ['n', '_180'],
+              denominator: 'n4',
+              symbol: 'v1',
+            },
+          }, '  ', 'm1', '  ', {
+            frac: {
+              numerator: ['_360'],
+              denominator: 'n5',
+              symbol: 'v2',
+            },
+          },
+        ],
+        '13': [
+          'angle', 'equals', {
+            frac: {
+              numerator: [{ strike: ['n', 's1'] }, '_180'],
+              denominator: { strike: ['n4', 's2'] },
+              symbol: 'v1',
+            },
+          }, '  ', 'm1', '  ', {
+            frac: {
+              numerator: ['_360'],
+              denominator: 'n5',
+              symbol: 'v2',
+            },
+          },
+        ],
+        '14': [
+          'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'n5', 'v2'] },
+        ],
       },
     },
     mods: {

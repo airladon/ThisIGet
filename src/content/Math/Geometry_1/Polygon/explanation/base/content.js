@@ -724,6 +724,7 @@ class Content extends PresentationFormatContent {
       },
     };
     this.addSection(common, commonContent, {
+      title: 'Regular Polygon Angle',
       show: [
         split._line,
         split._i0, split._i1, split._i2,
@@ -747,7 +748,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     commonContent = {
       setContent: [
-        style({ top: 0 }, 'As each angle is the |same|, we can divide by the number of angles |n|, to get the size of each |angle|:'),
+        style({ top: 0 }, 'As each angle is the |same|, we can divide by the number of angles |n|, to get the size of each |angle|.'),
       ],
       modifiers: {
         total_angle: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
@@ -783,6 +784,68 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqn: coll._eqnTot, from: '7', to: '8', duration: 1,
     }, common, commonContent, commonMods);
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'Now lets |rearrange| the equation.'),
+      ],
+    };
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        coll._eqnTot.setScenario('high');
+        coll._split.setScenario('low');
+      },
+      show: [
+        split._line,
+        split._i0, split._i1, split._i2,
+        split._i3, split._i4,
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '8', to: '8', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '8', to: '9', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '9', to: '10', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '10', to: '11', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '11', to: '12', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '12', to: '13', duration: 1,
+    }, common, commonContent);
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '13', to: '14', duration: 1,
+    }, common, commonContent);
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'This tells us that as the number of sides |increases|, the angle will |get closer to 180º|.'),
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqn: coll._eqnTot, from: '14', to: '14', duration: 1,
+    }, common, commonContent);
   }
 }
 
