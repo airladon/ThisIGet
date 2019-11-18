@@ -26332,8 +26332,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoint", function() { return getPoint; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -26343,6 +26341,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -26749,6 +26749,54 @@ function () {
   return Point;
 }();
 
+// point can be defined as:
+//    - Point instance
+//    - [1, 1]
+//    - { x: 1, y: 1 }
+function parsePoint(p, onFail) {
+  if (p instanceof Point) {
+    return p;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (Array.isArray(p)) {
+    if (p.length === 2) {
+      return new Point(p[0], p[1]);
+    }
+
+    return onFailToUse;
+  }
+
+  if (typeof p === 'number') {
+    return new Point(p, p);
+  }
+
+  if (_typeof(p) === 'object') {
+    var keys = Object.keys(p);
+
+    if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
+      return new Point(p.x, p.y);
+    }
+  }
+
+  return onFailToUse;
+}
+
+function getPoint(p) {
+  var parsedPoint = parsePoint(p);
+
+  if (parsedPoint == null) {
+    parsedPoint = new Point(0, 0);
+  }
+
+  return parsedPoint;
+}
+
 function linearPath(start, delta, percent) {
   return start.add(delta.x * percent, delta.y * percent);
 }
@@ -26939,10 +26987,10 @@ function () {
 
     _classCallCheck(this, Line);
 
-    this.p1 = p1._dup();
+    this.p1 = getPoint(p1);
 
-    if (p2OrMag instanceof Point) {
-      this.p2 = p2OrMag._dup();
+    if (p2OrMag instanceof Point || Array.isArray(p2OrMag)) {
+      this.p2 = getPoint(p2OrMag);
       this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
     } else {
       this.p2 = this.p1.add(p2OrMag * Math.cos(angle), p2OrMag * Math.sin(angle));
@@ -28453,54 +28501,6 @@ function getMoveTime(startTransform, stopTransform) // 100%/s
     }
   });
   return maxTime;
-}
-
-// point can be defined as:
-//    - Point instance
-//    - [1, 1]
-//    - { x: 1, y: 1 }
-function parsePoint(p, onFail) {
-  if (p instanceof Point) {
-    return p;
-  }
-
-  var onFailToUse = onFail;
-
-  if (onFailToUse == null) {
-    onFailToUse = null;
-  }
-
-  if (Array.isArray(p)) {
-    if (p.length === 2) {
-      return new Point(p[0], p[1]);
-    }
-
-    return onFailToUse;
-  }
-
-  if (typeof p === 'number') {
-    return new Point(p, p);
-  }
-
-  if (_typeof(p) === 'object') {
-    var keys = Object.keys(p);
-
-    if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
-      return new Point(p.x, p.y);
-    }
-  }
-
-  return onFailToUse;
-}
-
-function getPoint(p) {
-  var parsedPoint = parsePoint(p);
-
-  if (parsedPoint == null) {
-    parsedPoint = new Point(0, 0);
-  }
-
-  return parsedPoint;
 }
 
 

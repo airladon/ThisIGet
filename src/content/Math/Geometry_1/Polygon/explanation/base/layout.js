@@ -5,7 +5,7 @@ import baseLayout from '../../../../../common/layout';
 const {
   Point,
   Transform,
-  // Line,
+  Line,
 } = Fig.tools.g2;
 
 const { joinObjects } = Fig.tools.misc;
@@ -407,8 +407,62 @@ export default function diagramLayout() {
       dashStyle: {
         style: [0.05, 0.03],
       },
+      label: {
+        text: 'r',
+        offset: 0.01,
+      },
     },
   });
+  const sAng = (name, p1index, p3index) => ({
+    name,
+    method: 'angle',
+    options: {
+      p1: sPoints[p1index],
+      p2: [0, 0],
+      p3: sPoints[p3index],
+      curve: {
+        sides: 50,
+        radius: 0.2,
+        width: 0.01,
+      },
+      label: {
+        text: null,
+      },
+      color: colors.angles,
+    },
+  });
+  const iAng = (name, p1index, p2index, p3index) => ({
+    name,
+    method: 'angle',
+    options: {
+      p1: sPoints[p1index],
+      p2: sPoints[p2index],
+      p3: sPoints[p3index],
+      curve: {
+        sides: 50,
+        radius: 0.2,
+        width: 0.01,
+        num: 2,
+        step: 0.02,
+      },
+      color: colors.angles,
+    },
+  });
+  const mark = (name, p1Index, p2Index) => {
+    const l = new Line(sPoints[p1Index], sPoints[p2Index]);
+    return {
+      name,
+      method: 'marks',
+      options: {
+        num: 1,
+        width: 0.02,
+        length: 0.2,
+        rotation: l.angle(),
+        position: l.midPoint(),
+        color: colors.sides,
+      },
+    };
+  }
   const split = {
     name: 'split',
     method: 'collection',
@@ -423,15 +477,38 @@ export default function diagramLayout() {
           width: 0.01,
         },
       },
+      sAng('a0', 1, 0),
+      sAng('a1', 2, 1),
+      sAng('a2', 3, 2),
+      sAng('a3', 4, 3),
+      sAng('a4', 5, 4),
+      sAng('a5', 0, 5),
+      iAng('i0', 0, 1, 2),
+      iAng('i1', 1, 2, 3),
+      iAng('i2', 2, 3, 4),
+      iAng('i3', 3, 4, 5),
+      iAng('i4', 4, 5, 0),
+      iAng('i5', 5, 0, 1),
       sLine('s0', sPoints[0]),
       sLine('s1', sPoints[1]),
       sLine('s2', sPoints[2]),
       sLine('s3', sPoints[3]),
       sLine('s4', sPoints[4]),
       sLine('s5', sPoints[5]),
+      mark('m0', 0, 1),
+      mark('m1', 1, 2),
+      mark('m2', 2, 3),
+      mark('m3', 3, 4),
+      mark('m4', 4, 5),
+      mark('m5', 5, 0),
+      poly('line', sPoints),
     ],
+    mods: {
+      scenarios: {
+        default: { position: [0, -0.3] },
+      },
+    },
   };
-  console.log(sPoints)
 
   layout.addElements = [
     // highlighter,
