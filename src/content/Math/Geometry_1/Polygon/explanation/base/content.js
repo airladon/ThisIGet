@@ -38,6 +38,8 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/Quadrangles/base',
       'Math/Geometry_1/AngleGroups/base',
+      'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/Isosceles/base',
     ]);
   }
 
@@ -468,19 +470,245 @@ class Content extends PresentationFormatContent {
       show: [
         split._circle,
         split._s0._line, split._s1._line, split._s2._line,
-        split._s3._line, split._s4._line, split._s5._line,
-        split._a0, split._a1, split._a2, split._a3,
-        split._a4, split._a5,
+        split._s3._line, split._s4._line, // split._s5._line,
+        // split._a0, split._a1, split._a2, split._a3,
+        // split._a4, // split._a5,
       ],
       modifiers: {
         equal_pieces: coll.bindAccent(
           split,
-          ['a0', 'a1', 'a2', 'a3', 'a4', 'a5'],
+          ['s0', 's1', 's2', 's3', 's4'],
           colors.split,
         ),
       },
       transitionFromPrev: (done) => {
-        coll.accent(split, ['a0', 'a1', 'a2', 'a3', 'a4', 'a5'], done);
+        coll.accent(split, ['s0', 's1', 's2', 's3', 's4'], done);
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'Each piece has the same |angle|, and |side_lengths| (which are the |radius| of the circle).',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0._line, split._s1._line, split._s2._line,
+        split._s3._line, split._s4._line,
+        // split._a0, split._a1, split._a2, split._a3,
+        // split._a4,
+        // split._r0, split._r1, split._r2,
+        // split._r3, split._r4,
+      ],
+      modifiers: {
+        angle: this.bindNext(colors.angles, 'angles'),
+        side_lengths: this.bindNext(colors.split, 'sides'),
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0._line, split._s1._line, split._s2._line,
+        split._s3._line, split._s4._line, // split._s5._line,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4, // split._a5,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+      ],
+      modifiers: {
+        angle: coll.bindAccent(
+          split,
+          ['a0', 'a1', 'a2', 'a3', 'a4'],
+        ),
+        side_lengths: coll.bindAccent(
+          split,
+          ['r0', 'r1', 'r2', 'r3', 'r4'],
+          colors.split,
+        ),
+      },
+      transitionFromPrev: (done) => {
+        if (this.message === 'angles') {
+          coll.accent(split, ['a0', 'a1', 'a2', 'a3', 'a4'], done);
+        } else if (this.message === 'sides') {
+          coll.accent(split, ['r0', 'r1', 'r2', 'r3', 'r4'], done);
+        } else {
+          coll.accent(split, [
+            'r0', 'r1', 'r2', 'r3', 'r4', 'a0', 'a1', 'a2', 'a3', 'a4',
+          ], done);
+        }
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'Joining the splits creates a |polygon|.',
+      ],
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0._line, split._s1._line, split._s2._line,
+        split._s3._line, split._s4._line, // split._s5._line,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4, // split._a5,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+      ],
+      modifiers: {
+        polygon: this.bindNext(colors.sides),
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0._line, split._s1._line, split._s2._line,
+        split._s3._line, split._s4._line, // split._s5._line,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4, // split._a5,
+        split._line,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+      ],
+      modifiers: {
+        polygon: coll.bindAccent(split._line),
+      },
+      transitionFromPrev: (done) => {
+        coll.accent(split._line, done);
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'By |SAS|, each triangle is congruent. Each triangle is also an |isosceles| triangle as two sides have the same length.',
+        note({ top: 93, color: colors.diagram.text.note }, 'Reference: |SAS_congruence|, |Isosceles_Triangle|'),
+      ],
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0, split._s1, split._s2,
+        split._s3, split._s4,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4,
+        split._line,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+      ],
+      modifiers: {
+        SAS: coll.bindToggleGroups(split, [
+          ['r0', 'r1', 'a0'],
+          ['r1', 'r2', 'a1'],
+          ['r2', 'r3', 'a2'],
+          ['r3', 'r4', 'a3'],
+          ['r4', 'r0', 'a4'],
+        ], colors.diagram.action, ['pulse', 'highlight']),
+        isosceles: coll.bindToggleGroups(split, [
+          ['r0', 'r1'],
+          ['r1', 'r2'],
+          ['r2', 'r3'],
+          ['r3', 'r4'],
+          ['r4', 'r0'],
+        ], colors.diagram.action, ['pulse', 'highlight'], 0, [
+          'a0', 'a1', 'a2', 'a3', 'a4',
+        ]),
+        SAS_congruence: this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
+        Isosceles_Triangle: this.qr('Math/Geometry_1/Isosceles/base/Main'),
+      },
+      setLeaveState: () => {
+        coll.undim();
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: [
+        'Therefore, all |sides| and internal |angles| are the |same|, and we have created a |regular_polygon|.',
+      ],
+      modifiers: {
+        regular_polygon: this.bindNext(colors.sides),
+        sides: this.bindNext(colors.sides, 'sides'),
+        angles: this.bindNext(colors.angles, 'angles'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0, split._s1, split._s2,
+        split._s3, split._s4,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4,
+        split._line,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0, split._s1, split._s2,
+        split._s3, split._s4,
+        split._r0, split._r1, split._r2,
+        split._r3, split._r4,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4,
+        split._line,
+        split._m0, split._m1, split._m2,
+        split._m3, split._m4,
+        split._i0, split._i1, split._i2,
+        split._i3, split._i4,
+      ],
+      modifiers: {
+        sides: coll.bindAccent(split, ['m0', 'm1', 'm2', 'm3', 'm4']),
+        angles: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
+      },
+      transitionFromPrev: (done) => {
+        if (this.message === 'sides') {
+          coll.accent(split, ['m0', 'm1', 'm2', 'm3', 'm4'], done);
+        } else if (this.message === 'angles') {
+          coll.accent(split, ['i0', 'i1', 'i2', 'i3', 'i4'], done);
+        } else {
+          coll.accent(split, [
+            'm0', 'm1', 'm2', 'm3', 'm4',
+            'i0', 'i1', 'i2', 'i3', 'i4',
+          ], done);
+        }
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        split._line,
+        split._m0, split._m1, split._m2,
+        split._m3, split._m4,
+        split._i0, split._i1, split._i2,
+        split._i3, split._i4,
+      ],
+      modifiers: {
+        regular_polygon: coll.bindAccent(split, colors.sides),
+        sides: coll.bindAccent(split, ['m0', 'm1', 'm2', 'm3', 'm4']),
+        angles: coll.bindAccent(split, ['i0', 'i1', 'i2', 'i3', 'i4']),
+      },
+      transitionFromPrev: (done) => {
+        coll.accent(split, colors.sides, done);
       },
     });
   }

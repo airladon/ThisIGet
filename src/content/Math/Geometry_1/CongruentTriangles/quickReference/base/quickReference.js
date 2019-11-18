@@ -137,7 +137,7 @@ export class QRSas extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       two_sides_of_the_same_length: highlight(colors.qrCongruent_sides),
-      three_angles: highlight(colors.qrCongruent_angles),
+      angle_between: highlight(colors.qrCongruent_angles),
     };
     this.setTitle('SAS Congruence');
     this.setDescription([

@@ -474,6 +474,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
     done: ?() => void = null,
+    toHide: Array<DiagramElement | string> | DiagramElement | string = [],
   ) {
     let style;
     if (typeof styleIn === 'string') {
@@ -499,9 +500,15 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
         }
       });
       parent.exec(['showAll'], group);
+      if (toHide) {
+        parent.exec(['hide'], toHide);
+      }
     }
     if (style.includes('highlightInParent')) {
       parent.highlight([...group]);
+      if (toHide) {
+        parent.exec(['dim'], toHide);
+      }
     }
     if (style.includes('highlight')) {
       groups.forEach((g, i) => {
@@ -510,6 +517,9 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
         }
       });
       parent.exec(['undim'], group);
+      if (toHide) {
+        parent.exec(['dim'], toHide);
+      }
     }
     if (style.includes('pulse')) {
       parent.pulse([...group], done);
@@ -526,9 +536,10 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
     currentToggleIndex: number | string = 0,
+    toHide: Array<DiagramElement | string> | DiagramElement | string = [],
   ) {
     const groupPulser = () => {
-      this.toggleGroups(parent, groups, currentToggleIndex, styleIn, null);
+      this.toggleGroups(parent, groups, currentToggleIndex, styleIn, null, toHide);
     };
     return click(groupPulser, [this], color);
   }

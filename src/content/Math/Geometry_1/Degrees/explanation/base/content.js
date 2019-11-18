@@ -119,7 +119,7 @@ class Content extends PresentationFormatContent {
       setContent: [
         'For example, it could be |_12| equal portions like a clock.',
       ],
-      modifiers: { _12: click(this.next, [this], colors.marks) },
+      modifiers: { _12: click(this.next, [this, null], colors.marks) },
       show: [
         circle._line1, circle._line2, circle._angle,
       ],

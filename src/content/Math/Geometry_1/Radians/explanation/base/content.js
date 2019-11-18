@@ -145,7 +145,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         arc_length: click(diag.pulseArc, [diag], colors.arc),
         radius_length: click(diag.pulseRadius, [diag], colors.lines),
-        equal: click(this.next, [this], colors.radianLines),
+        equal: click(this.next, [this, null], colors.radianLines),
       },
       setSteadyState: () => {
         circle.setScenario('center');
@@ -194,7 +194,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       modifiers: {
         radian: click(diag.goToOneRadian, [diag], colors.angles),
-        portions: click(this.next, [this], colors.radianLines),
+        portions: click(this.next, [this, null], colors.radianLines),
       },
       show: [
         circle._line1, circle._line2, circle._angle,

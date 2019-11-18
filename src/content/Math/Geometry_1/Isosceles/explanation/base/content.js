@@ -88,8 +88,8 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        line: click(this.next, [this], colors.sides),
-        equal_angles: click(this.next, [this], colors.angles),
+        line: click(this.next, [this, null], colors.sides),
+        equal_angles: click(this.next, [this, null], colors.angles),
       },
       show: [
         tri._line, tri._side01, tri._side12,
@@ -97,8 +97,8 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, {
       modifiers: {
-        line: click(this.next, [this], colors.sides),
-        equal_angles: click(this.next, [this], colors.angles),
+        line: click(this.next, [this, null], colors.sides),
+        equal_angles: click(this.next, [this, null], colors.angles),
       },
       show: [
         tri._line, tri._side01, tri._side12, tri._angle1,
@@ -138,7 +138,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        L: click(this.next, [this], colors.sides),
+        L: click(this.next, [this, null], colors.sides),
       },
     });
     this.addSection(common, {
@@ -162,7 +162,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        separately: click(this.next, [this], colors.sides),
+        separately: click(this.next, [this, null], colors.sides),
       },
       show: [
         tri._line, tri._side01, tri._side12,
@@ -212,7 +212,7 @@ class Content extends PresentationFormatContent {
       },
     };
     this.addSection(common, {
-      modifiers: { same: click(this.next, [this], colors.diagram.action) },
+      modifiers: { same: click(this.next, [this, null], colors.diagram.action) },
       show: [
         left._line, left._angleTop, left._sideEqual, left._sideSplit,
         right._line, right._angleTop, right._sideEqual, right._sideSplit,
@@ -238,7 +238,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        recombine: click(this.next, [this], colors.diagram.action),
+        recombine: click(this.next, [this, null], colors.diagram.action),
       },
       setSteadyState: () => {
         coll.setScenarios('separate');
@@ -264,7 +264,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        two_angles: click(this.next, [this], colors.angles),
+        two_angles: click(this.next, [this, null], colors.angles),
       },
       show: [left, right, correction],
       setSteadyState: () => {
@@ -292,7 +292,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Split Line',
       modifiers: {
-        line: click(this.next, [this], colors.sides),
+        line: click(this.next, [this, null], colors.sides),
       },
       show: [left, right, correction],
       setSteadyState: () => {
@@ -404,8 +404,8 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        line: click(this.next, [this], colors.sides),
-        equal_angles: click(this.next, [this], colors.angles),
+        line: click(this.next, [this, null], colors.sides),
+        equal_angles: click(this.next, [this, null], colors.angles),
       },
       show: [
         tri._line, tri._angle0, tri._angle2,
@@ -413,8 +413,8 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, {
       modifiers: {
-        line: click(this.next, [this], colors.sides),
-        equal_angles: click(this.next, [this], colors.angles),
+        line: click(this.next, [this, null], colors.sides),
+        equal_angles: click(this.next, [this, null], colors.angles),
       },
       show: [
         tri._line, tri._angle0, tri._angle2, tri._angle1,
@@ -450,14 +450,14 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        L: click(this.next, [this], colors.sides),
-        separately: click(this.next, [this], colors.sides),
+        L: click(this.next, [this, null], colors.sides),
+        separately: click(this.next, [this, null], colors.sides),
       },
     });
     this.addSection(common, {
       modifiers: {
         L: click(coll.pulseL, [coll, null], colors.sides),
-        separately: click(this.next, [this], colors.sides),
+        separately: click(this.next, [this, null], colors.sides),
       },
       transitionFromPrev: (done) => {
         coll._split._label.showAll();
@@ -471,7 +471,7 @@ class Content extends PresentationFormatContent {
 
     // this.addSection(common, {
     //   modifiers: {
-    //     separately: click(this.next, [this], colors.sides),
+    //     separately: click(this.next, [this, null], colors.sides),
     //   },
     //   show: [
     //     tri._line, tri._side01, tri._side12,
@@ -521,7 +521,7 @@ class Content extends PresentationFormatContent {
       },
     };
     this.addSection(common, {
-      modifiers: { same: click(this.next, [this], colors.diagram.action) },
+      modifiers: { same: click(this.next, [this, null], colors.diagram.action) },
       show: [
         left._line, left._angleTop, left._angleEqual, left._sideSplit,
         right._line, right._angleTop, right._angleEqual, right._sideSplit,
@@ -549,7 +549,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        recombine: click(this.next, [this], colors.diagram.action),
+        recombine: click(this.next, [this, null], colors.diagram.action),
       },
       setSteadyState: () => {
         coll.setScenarios('separate');
@@ -575,8 +575,8 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        equal_angles: click(this.next, [this], colors.angles),
-        equal_sides: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this, null], colors.angles),
+        equal_sides: click(this.next, [this, null], colors.sides),
       },
       show: [left, right, correction],
       setSteadyState: () => {

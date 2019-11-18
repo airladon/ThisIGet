@@ -217,7 +217,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: 'Equal Sides',
       modifiers: {
-        draw: click(this.next, [this], colors.sides),
+        draw: click(this.next, [this, null], colors.sides),
       },
     });
     this.addSection(common, {

@@ -396,7 +396,7 @@ export default function diagramLayout() {
   //     color: colors.angleFill,
   //   },
   // };
-  const sPoints = regularPolyPoints(6, 1.2);
+  const sPoints = regularPolyPoints(5, 1.2);
   const sLine = (name, p2) => ({
     name,
     method: 'line',
@@ -408,10 +408,10 @@ export default function diagramLayout() {
       dashStyle: {
         style: [0.05, 0.03],
       },
-      label: {
-        text: 'r',
-        offset: 0.01,
-      },
+      // label: {
+      //   text: 'r',
+      //   offset: 0.01,
+      // },
     },
   });
   const sAng = (name, p1index, p3index) => ({
@@ -449,21 +449,28 @@ export default function diagramLayout() {
       color: colors.angles,
     },
   });
-  const mark = (name, p1Index, p2Index) => {
-    const l = new Line(sPoints[p1Index], sPoints[p2Index]);
+  const mark = (name, p1Index, p2Index = null, num = 1, color = colors.sides, length = 0.2) => {
+    let p2;
+    if (p2Index == null) {
+      p2 = new Point(0, 0);
+    } else {
+      p2 = sPoints[p2Index];
+    }
+    const l = new Line(sPoints[p1Index], p2);
     return {
       name,
       method: 'marks',
       options: {
-        num: 1,
+        num,
         width: 0.02,
-        length: 0.2,
+        length,
         rotation: l.angle(),
         position: l.midPoint(),
-        color: colors.sides,
+        color,
       },
     };
-  }
+  };
+  // const dmark = (name, p1Index, p2Index)
   const split = {
     name: 'split',
     method: 'collection',
@@ -482,28 +489,40 @@ export default function diagramLayout() {
       sAng('a1', 2, 1),
       sAng('a2', 3, 2),
       sAng('a3', 4, 3),
-      sAng('a4', 5, 4),
-      sAng('a5', 0, 5),
+      sAng('a4', 0, 4),
+      // sAng('a4', 5, 4),
+      // sAng('a5', 0, 5),
       iAng('i0', 0, 1, 2),
       iAng('i1', 1, 2, 3),
       iAng('i2', 2, 3, 4),
-      iAng('i3', 3, 4, 5),
-      iAng('i4', 4, 5, 0),
-      iAng('i5', 5, 0, 1),
+      iAng('i3', 3, 4, 0),
+      iAng('i4', 4, 0, 1),
+      // iAng('i4', 4, 5, 0),
+      // iAng('i5', 5, 0, 1),
       sLine('s0', sPoints[0]),
       sLine('s1', sPoints[1]),
       sLine('s2', sPoints[2]),
       sLine('s3', sPoints[3]),
       sLine('s4', sPoints[4]),
-      sLine('s5', sPoints[5]),
+      // sLine('s5', sPoints[5]),
       mark('m0', 0, 1),
       mark('m1', 1, 2),
       mark('m2', 2, 3),
       mark('m3', 3, 4),
-      mark('m4', 4, 5),
-      mark('m5', 5, 0),
+      mark('m4', 4, 0),
+      //
+      mark('r0', 0, null, 2, colors.split, 0.15),
+      mark('r1', 1, null, 2, colors.split, 0.15),
+      mark('r2', 2, null, 2, colors.split, 0.15),
+      mark('r3', 3, null, 2, colors.split, 0.15),
+      mark('r4', 4, null, 2, colors.split, 0.15),
+      // mark('m4', 4, 5),
+      // mark('m5', 5, 0),
       poly('line', sPoints),
     ],
+    options: {
+      pulse: 1.2,
+    },
     mods: {
       scenarios: {
         default: { position: [0, -0.3] },
