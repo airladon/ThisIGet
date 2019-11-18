@@ -45,6 +45,7 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const tot = coll._tot;
+    const split = coll._split;
 
     // ************************************************************
     // ************************************************************
@@ -453,11 +454,34 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     commonContent = {
       setContent: [
-        'A |regular polygon| can be created by |splitting a circle| into |equal pieces|.',
+        'A |regular polygon| can be created by |splitting a circle| into |equal_pieces|.',
       ],
     };
     this.addSection(common, commonContent, {
-      show: [coll._split],
+      show: [split._circle],
+      modifiers: {
+        equal_pieces: this.bindNext(colors.split),
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        split._circle,
+        split._s0._line, split._s1._line, split._s2._line,
+        split._s3._line, split._s4._line, split._s5._line,
+        split._a0, split._a1, split._a2, split._a3,
+        split._a4, split._a5,
+      ],
+      modifiers: {
+        equal_pieces: coll.bindAccent(
+          split,
+          ['a0', 'a1', 'a2', 'a3', 'a4', 'a5'],
+          colors.split,
+        ),
+      },
+      transitionFromPrev: (done) => {
+        coll.accent(split, ['a0', 'a1', 'a2', 'a3', 'a4', 'a5'], done);
+      },
     });
   }
 }

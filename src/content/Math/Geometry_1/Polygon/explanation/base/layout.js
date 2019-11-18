@@ -21,6 +21,7 @@ export default function diagramLayout() {
   colors.tri = colors.get('green').rgb;
   colors.construction = colors.get('grey', 'dark').rgb;
   colors.working = colors.get('grey').rgb;
+  colors.split = colors.get('green', 'dark').rgb;
   const width = 0.03;
 
   const regularPolyPoints = (num, r, angleOffset = 0) => {
@@ -401,7 +402,7 @@ export default function diagramLayout() {
     method: 'line',
     options: {
       width: 0.01,
-      color: colors.tri,
+      color: colors.split,
       p1: [0, 0],
       p2,
       dashStyle: {
@@ -472,7 +473,7 @@ export default function diagramLayout() {
         method: 'polygon',
         options: {
           sides: 100,
-          color: colors.tri,
+          color: colors.split,
           radius: 1.2,
           width: 0.01,
         },
