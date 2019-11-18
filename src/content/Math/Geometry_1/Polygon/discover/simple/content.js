@@ -14,9 +14,9 @@ class Content extends SimpleFormatContent {
     //  this.iconLink = imgLink;
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
-      // 'Math/Geometry_1/Isosceles/base',
-      // 'Math/Geometry_1/ExternalAngles/base',
-      // 'Math/Geometry_1/CongruentTriangles/base/',
+      'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/AngleGroups/base',
+      'Math/Geometry_1/CongruentTriangles/base',
     ]);
   }
 
