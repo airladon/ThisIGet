@@ -3,9 +3,9 @@
 
 ### Question 1
 
-What is the sum of the internal angles in degrees of a $|q1q|$ sided shape?
+$|q1q|$
 
-<quiz entry>$|q1a|$</quiz>
+<quiz entry0>$|q1a|$</quiz>
 
 <hintLow>[Answer]
 $|q1a|$
@@ -13,9 +13,9 @@ $|q1a|$
 
 ### Question 2
 
-What is the number of sides of a shape with an internal angle sum of $|q2q|$º?
+$|q2q|$
 
-<quiz entry>$|q2a|$</quiz>
+<quiz entry0>$|q2a|$</quiz>
 
 <hintLow>[Answer]
 $|q2a|$
@@ -23,9 +23,9 @@ $|q2a|$
 
 ### Question 3
 
-What is the measure of each angle of a $|q3q|$ sided regular polygon?
+$|q3q|$
 
-<quiz entry>$|q3a|$</quiz>
+<quiz entry0>$|q3a|$</quiz>
 
 <hintLow>[Answer]
 $|q3a|$
@@ -33,9 +33,9 @@ $|q3a|$
 
 ### Question 4
 
-A regular polygon's corner has an internal angle of $|q4q|$. What number of sides does the polygon have?
+$|q4q|$
 
-<quiz entry>$|q4a|$</quiz>
+<quiz entry0>$|q4a|$</quiz>
 
 <hintLow>[Answer]
 $|q4a|$
