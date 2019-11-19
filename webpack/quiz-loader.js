@@ -152,7 +152,7 @@ function convertID(str) {
   }
   const id = contents.split(' ').slice(-1)[0];
 
-  let out = `<${tag} id="id_topic__variable_${id}" class="topic__variable">${id}</${tag}>`;
+  let out = `<${tag} class="topic__variable_${id} topic__variable">${id}</${tag}>`;
   if (str.charAt(0) === ' ') {
     out = ` ${out}`;
   }

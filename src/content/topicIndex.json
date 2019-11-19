@@ -1215,9 +1215,9 @@
       },
       "quiz": {
         "base": {
-          "type": "presentation",
-          "title": "Base",
-          "description": "",
+          "type": "singlePage",
+          "title": "Calculate Properties",
+          "description": "Calculate properties of a circle from other properties",
           "fullTopic": true
         }
       },

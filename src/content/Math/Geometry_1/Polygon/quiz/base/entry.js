@@ -1,11 +1,10 @@
 // // @flow
 
 import renderTopic from '../../../../../../js/views/topic/topic';
-import PresentationFormat from '../../../../../../js/TopicFormat/PresentationFormat';
+import SimpleFormat from '../../../../../../js/TopicFormat/SimpleFormat';
 import Content from './content';
-import '../../../../../../css/presentationFormat.scss';
+import '../../../../../../css/simpleFormat.scss';
 import './style.scss';
 
-
-const version = new PresentationFormat(new Content());
+const version = new SimpleFormat(new Content());
 renderTopic(version);
