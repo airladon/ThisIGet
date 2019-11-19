@@ -5180,25 +5180,26 @@ function (_Elements) {
       this.mainContent.calcSize(location, scale);
       var lineWidth = 0;
 
-      if (this.box && this.box.lineWidth != null && typeof this.box.lineWidth === 'number') {
-        lineWidth = this.box.lineWidth;
+      if (this.box && this.box.custom.lineWidth != null && typeof this.box.custom.lineWidth === 'number') {
+        lineWidth = this.box.custom.lineWidth;
       }
 
       var boxWidth = this.mainContent.width + this.space.x * 2;
-      var boxHeight = this.mainContent.height + this.space.y * 2;
+      var boxHeight = this.mainContent.height + this.space.y * 2; // Position of center of box line in bottom left corner
+
       var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space.x, location.y - this.mainContent.descent - this.space.y);
 
       if (this.boxInSize) {
-        this.width = boxWidth + lineWidth;
-        this.height = boxHeight + lineWidth;
-        this.ascent = this.mainContent.ascent + this.space.y + lineWidth / 2;
-        this.descent = this.mainContent.descent + this.space.y + lineWidth / 2;
-        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space.x, 0));
-        bottomLeft.x += this.space.x;
+        this.width = boxWidth + lineWidth * 2;
+        this.height = boxHeight + lineWidth * 2;
+        this.ascent = this.mainContent.ascent + this.space.y + lineWidth;
+        this.descent = this.mainContent.descent + this.space.y + lineWidth;
+        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space.x + lineWidth, 0));
+        bottomLeft.x += this.space.x + lineWidth;
       } else {
         this.width = this.mainContent.width;
-        this.ascent = this.mainContent.ascent + this.space.y;
-        this.descent = this.mainContent.descent + this.space.y;
+        this.ascent = this.mainContent.ascent;
+        this.descent = this.mainContent.descent;
       }
 
       this.height = this.descent + this.ascent;
@@ -10747,6 +10748,10 @@ function getRectAndSpace(rectOrParent) {
     }
   }
 
+  if (typeof childrenOrSpace === 'number') {
+    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
+  }
+
   if (space != null) {
     spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(space);
   }
@@ -10756,27 +10761,7 @@ function getRectAndSpace(rectOrParent) {
   } else {
     // $FlowFixMe
     rectToUse = rectOrParent.getBoundingRect('local', childrenToUse);
-  } // if (rectOrParent instanceof Rect) {
-  //   rectToUse = rectOrParent;
-  //   if (typeof childrenOrSpace === 'number'
-  //     || childrenOrSpace instanceof Point
-  //     || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
-  //     spaceToUse = getPoint(childrenOrSpace);
-  //   }
-  // } else if (typeof childrenOrSpace === 'number'
-  //   || childrenOrSpace instanceof Point
-  //   || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
-  //   spaceToUse = getPoint(childrenOrSpace);
-  //   rectToUse = rectOrParent.getBoundingRect('local');
-  // } else {
-  //   rectToUse = rectOrParent.getBoundingRect('local', childrenOrSpace);
-  //   if (typeof space === 'number'
-  //     || childrenOrSpace instanceof Point
-  //     || (Array.isArray(childrenOrSpace) && childrenOrSpace.length > 0 && typeof childrenOrSpace[0] === 'number')) {
-  //     spaceToUse = getPoint(space);
-  //   }
-  // }
-
+  }
 
   return [rectToUse, spaceToUse];
 }
@@ -10843,7 +10828,8 @@ function Box(shapes, color, fill, width, staticSize) {
     box.add('right', poly(points[0], points[1], 0.1));
     box.add('bottom', poly(points[0], points[1], 0.1));
     updateStaticLinePoints(box, width, staticSize);
-    box.custom.boxType = 'line'; // defined everytime a setTransform event is called
+    box.custom.boxType = 'line';
+    box.custom.lineWidth = width; // defined everytime a setTransform event is called
   } else {
     box = shapes.polyLine({
       points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)],
@@ -10853,6 +10839,7 @@ function Box(shapes, color, fill, width, staticSize) {
       transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
     });
     box.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1);
+    box.custom.lineWidth = width;
 
     box.internalSetTransformCallback = function () {
       var s = box.getScale();
@@ -10889,7 +10876,7 @@ function Box(shapes, color, fill, width, staticSize) {
 
     var t = box.transform._dup();
 
-    t.updateScale(rectToUse.width + spaceToUse.x * 2, rectToUse.height + spaceToUse.y * 2);
+    t.updateScale(rectToUse.width + spaceToUse.x * 2 + width, rectToUse.height + spaceToUse.y * 2 + width);
     t.updateTranslation(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
     box.setTransform(t);
   };

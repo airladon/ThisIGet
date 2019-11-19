@@ -7,8 +7,8 @@ const {
   DiagramElementPrimitive,
   DiagramObjectAngle,
   // DiagramObjectLine,
-  // DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramElementCollection,
+  DiagramObjectPolyLine,
   Equation,
   Transform,
   // Point,
@@ -20,8 +20,71 @@ const {
 
 export default class CommonCollection extends CommonDiagramCollection {
   _eqnTot: {
-    _box: CommonDiagramPrimitive;
+    _box: DiagramElementPrimitive;
   } & Equation;
+
+  _tot: {
+    _af: DiagramObjectAngle;
+    _bf: DiagramObjectAngle;
+    _cf: DiagramObjectAngle;
+    _p4: DiagramElementPrimitive;
+    _p5: DiagramElementPrimitive;
+    _p6: DiagramElementPrimitive;
+    _l4: DiagramObjectLine;
+    _l5: DiagramObjectLine;
+    _l6: DiagramObjectLine;
+    _s41: DiagramObjectLine;
+    _s42: DiagramObjectLine;
+    _s51: DiagramObjectLine;
+    _s51: DiagramObjectLine;
+    _s61: DiagramObjectLine;
+    _s61: DiagramObjectLine;
+    _a: DiagramObjectAngle;
+    _b: DiagramObjectAngle;
+    _c: DiagramObjectAngle;
+    _e: DiagramObjectAngle;
+    _n3: DiagramObjectPolyLine;
+    _n4: DiagramObjectPolyLine;
+    _n5: DiagramObjectPolyLine;
+    _n6: DiagramObjectPolyLine;
+  } & DiagramElementCollection;
+
+  _split: {
+    _a0: DiagramObjectAngle;
+    _a1: DiagramObjectAngle;
+    _a2: DiagramObjectAngle;
+    _a3: DiagramObjectAngle;
+    _a4: DiagramObjectAngle;
+    _i0: DiagramObjectAngle;
+    _i1: DiagramObjectAngle;
+    _i2: DiagramObjectAngle;
+    _i3: DiagramObjectAngle;
+    _i4: DiagramObjectAngle;
+    _s0: DiagramObjectLine;
+    _s1: DiagramObjectLine;
+    _s2: DiagramObjectLine;
+    _s3: DiagramObjectLine;
+    _s4: DiagramObjectLine;
+    _m0: DiagramElementPrimitive;
+    _m1: DiagramElementPrimitive;
+    _m2: DiagramElementPrimitive;
+    _m3: DiagramElementPrimitive;
+    _m4: DiagramElementPrimitive;
+    _r0: DiagramElementPrimitive;
+    _r1: DiagramElementPrimitive;
+    _r2: DiagramElementPrimitive;
+    _r3: DiagramElementPrimitive;
+    _r4: DiagramElementPrimitive;
+    _line: DiagramObjectPolyLine;
+  } & DiagramElementCollection;
+
+  _poly0: DiagramObjectPolyLine;
+  _poly1: DiagramObjectPolyLine;
+  _poly2: DiagramObjectPolyLine;
+
+  _tri: DiagramObjectPolyLine;
+  _quad: DiagramObjectPolyLine;
+  _pent: DiagramObjectPolyLine;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -31,7 +94,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
-    // this.hasTouchableElements = true;
   }
 
   growSides(sideNum: number, done: ?() => void = null) {
@@ -42,7 +104,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     const side2 = tot[`_s${sideNum}2`];
     const point = tot[`_p${sideNum}`];
     const line = tot[`_l${sideNum}`];
-    // tot.hideAll();
     toPoly.hideAll();
     line.hideAll();
     fromPoly.showAll();
@@ -112,35 +173,6 @@ export default class CommonCollection extends CommonDiagramCollection {
         })
         .start();
     }
-    // if (eqnElementsToPulse != null) {
-    //   this._eqnTot._box.show();
-    //   this.accentEqn(this._eqnTot, eqnElementsToPulse, 'box', [0.02, 0.05]);
-    //   // this._eqnTot._box.custom.setSize(this._eqnTot, eqnElementsToPulse, 0.1);
-    //   // this.accent(this._eqnTot._box);
-    //   // this._highlighter.show();
-    //   // const bound = this._eqnTot.getDiagramBoundingRect(eqnElementsToPulse);
-    //   // // const points = []
-    //   // // eqnElementsToPulse.forEach((element) => {
-    //   // //   const e = this._eqnTot.getElement(element);
-    //   // //   const bound = e.getDiagramBoundingRect();
-    //   // //   console.log(bound)
-    //   // //   points.push(new Point(bound.left, bound.bottom));
-    //   // //   points.push(new Point(bound.right, bound.top));
-    //   // // });
-    //   // // const bound = getBoundingRect(points);
-    //   // // console.log(bound)
-    //   // this._highlighter.setScale(bound.width, bound.height);
-    //   // this._highlighter.setPosition(
-    //   //    bound.left + bound.width / 2,
-    //   //   bound.bottom + bound.height / 2,
-    //   // );
-    //   // this.accent(this._highlighter);
-    //   // this.accent({
-    //   //   element: this._eqnTot,
-    //   //   children: eqnElementsToPulse,
-    //   //   style: 'highlight',
-    //   // });
-    // }
     this.diagram.animateNextFrame();
   }
 }

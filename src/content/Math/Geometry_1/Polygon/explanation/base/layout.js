@@ -305,6 +305,7 @@ export default function diagramLayout() {
         },
         box: {
           symbol: 'box', color: colors.angles, width: 0.008,
+          // symbol: 'box', color: colors.angles, width: 0.08,
           // staticSize: [1, 0.2],
         },
         box2: {
@@ -482,6 +483,14 @@ export default function diagramLayout() {
         ],
         '14': [
           'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'n5', 'v2'] },
+          // {
+          //   box: {
+          //     content: '_1802',
+          //     symbol: 'box',
+          //     // space: -0.01,
+          //     // inSize: true,
+          //   },
+          // }, '_3602',
         ],
       },
     },
@@ -644,9 +653,9 @@ export default function diagramLayout() {
     poly('tri', regularPolyPoints(3, 1), [-2, -0.5], 0.9, 'A', null),
     poly('quad', regularPolyPoints(4, 1, Math.PI / 4), [0, -0.3], 0.9, 'B', ''),
     poly('pent', regularPolyPoints(5, 1), [2, -0.3], 0.9, 'C', null),
-    poly('hex', regularPolyPoints(6, 1)),
-    poly('hep', regularPolyPoints(7, 1)),
-    poly('oct', regularPolyPoints(8, 1)),
+    // poly('hex', regularPolyPoints(6, 1)),
+    // poly('hep', regularPolyPoints(7, 1)),
+    // poly('oct', regularPolyPoints(8, 1)),
     poly('poly0', pointsP, [1.7, -0.2], 0.9),
     poly('poly1', pointsP1, [-2, -0.2], 0.9),
     poly('poly2', pointsP2, [-0.2, -0.2], 0.9),
