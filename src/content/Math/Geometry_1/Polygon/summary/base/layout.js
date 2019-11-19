@@ -158,7 +158,7 @@ export default function diagramLayout() {
     return 'Decagon';
   };
 
-  const regularPoly = (name, sides, angleOffset = 0) => {
+  const regularPoly = (name, sides, angleOffset = 0, yOffset = 0) => {
     const points = regularPolyPoints(sides, 0.8, angleOffset);
     const collection = {
       name,
@@ -173,6 +173,11 @@ export default function diagramLayout() {
             color: colors.sides,
             points,
           },
+          mods: {
+            scenarios: {
+              default: { position: [0, yOffset] },
+            }
+          }
         },
         txt('sidesLabel', 'Sides:', [1.2, 0.5]),
         txt('sides', `${sides}`, [2.5, 0.5], colors.sides),
@@ -196,8 +201,8 @@ export default function diagramLayout() {
     poly('poly0', pointsP, [1.7, -0.5], 0.9),
     poly('poly1', pointsP1, [-2, -0.5], 0.9),
     poly('poly2', pointsP2, [-0.2, -0.5], 0.9),
-    regularPoly('p3', 3),
-    regularPoly('p4', 4),
+    regularPoly('p3', 3, 0, -0.3),
+    regularPoly('p4', 4, Math.PI / 4),
     regularPoly('p5', 5),
     regularPoly('p6', 6),
     regularPoly('p7', 7),

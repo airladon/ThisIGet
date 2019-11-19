@@ -8,7 +8,7 @@ import CommonTopicDiagram from './CommonTopicDiagram';
 
 const { Point, Transform } = Fig.tools.g2;
 const {
-  DiagramElementCollection, DiagramElement,
+  DiagramElementCollection, DiagramElement, Equation,
 } = Fig;
 
 const { joinObjects } = Fig.tools.misc;
@@ -358,7 +358,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
 
   accentEqn(
     eqn: Equation,
-    children: Array<DiagramElement | string>,
+    children: Array<DiagramElement | string> | DiagramElement,
     boxIn: string | DiagramElement,
     space: Point | [number, number] | number = 0.1,
     done: ?() => void = null,
@@ -370,7 +370,13 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       }
       return;
     }
-    box.custom.setSize(eqn, children, space);
+    let childrenToUse;
+    if (Array.isArray(children)) {
+      childrenToUse = children;
+    } else {
+      childrenToUse = [children];
+    }
+    box.custom.setSize(eqn, childrenToUse, space);
     box.showAll();
     this.accent(box, done);
   }

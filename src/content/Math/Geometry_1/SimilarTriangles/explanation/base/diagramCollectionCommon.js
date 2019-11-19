@@ -387,7 +387,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   moveNewBase(done: ?() => void = null) {
     const trir = this._fig._trir;
     const newBase = this._fig._newBase;
-    const targetPosition = this._fig._tri2._side20.position('diagram');
+    const targetPosition = this._fig._tri2._side20.getPosition('diagram');
     newBase.showAll();
     newBase.setDiagramPositionToElement(trir._side20);
     newBase.stop();
