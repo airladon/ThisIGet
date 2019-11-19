@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Calculate Properties',
-  description: 'Calculate properties of a circle from other properties',
-  htmlTitle: 'Calculate circle properties',
-  htmlDescription: 'Calculate properties of a circle from other properties',
+  title: 'Angles and Sides',
+  description: '',
+  htmlTitle: 'Quiz: Angles and sides of polygons',
+  htmlDescription: 'Calculate angles and sides of polygons and regular polygons',
   fullTopic: true,
   type: 'singlePage',
 };

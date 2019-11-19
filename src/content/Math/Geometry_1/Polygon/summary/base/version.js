@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Definition and Properties',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Polygons and Regular Polygons Summary',
+  htmlDescription: 'Definition and properties of polygons and regular polygons',
   fullTopic: true,
   type: 'presentation',
 };

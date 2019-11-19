@@ -4,10 +4,10 @@
 var version = {
   uid: 'brief',
   topic: 'explanation',
-  title: 'Derivation of Pythagorean Theorem',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Brief',
+  description: '',
+  htmlTitle: 'Polygons and Regular Polygons in brief',
+  htmlDescription: 'Brief explanation of definition and properties of polygons and regular polygons',
   fullTopic: true,
   type: 'singlePage',
 };

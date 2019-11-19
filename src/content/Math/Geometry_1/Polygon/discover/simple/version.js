@@ -4,10 +4,10 @@
 var version = {
   uid: 'simple',
   topic: 'discover',
-  title: 'Base',
+  title: 'Properties',
   description: '',
-  htmlTitle: 'Self discover why ...',
-  htmlDescription: 'Figure out why ...',
+  htmlTitle: 'Discover side and angle relationships of polygons',
+  htmlDescription: 'Develop relationships between sides and angles of polygons and regular polygons',
   fullTopic: true,
   type: 'singlePage',
 };

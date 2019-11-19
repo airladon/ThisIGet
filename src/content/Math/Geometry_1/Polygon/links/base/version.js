@@ -5,10 +5,10 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
-  title: 'External',
-  description: 'External links to sources of information for <TOPIC>',
-  htmlTitle: '<TOPIC> Links',
-  htmlDescription: 'Explanations, proofs, examples and questions about <TOPIC>',
+  title: 'General',
+  description: 'General links to sources of information for polygons',
+  htmlTitle: 'Polygon Links',
+  htmlDescription: 'Explanations, proofs, examples and questions about polygons',
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Polygon',

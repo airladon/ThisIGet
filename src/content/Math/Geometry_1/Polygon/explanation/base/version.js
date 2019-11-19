@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Descriptive & Interactive',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Polygons and Regular Polygons',
+  htmlDescription: 'Descriptive and interactive explanation of definition and properties of polygons and regular polygons',
   fullTopic: true,
   type: 'presentation',
 };
