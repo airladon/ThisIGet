@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 
-import diagramLayout from '../../explanation/base/layout';
+import diagramLayout from './layout';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './diagramCollectionCommon';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const { Transform } = Fig;

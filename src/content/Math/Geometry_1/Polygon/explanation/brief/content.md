@@ -76,14 +76,3 @@ This can be rearranged to
 $$\bbox[10px,border:1px solid gray]{angle = 180^\circ - \frac{360^\circ}{\color{b}n}}$$
 
 This tells us that as $$\color{b}n$$ gets larger, then so the angle must get closer and closer to 180º, but will always be less than 180º.
-
-
-
-<!-- 
-$$\definecolor{g}{RGB}{29,177,0}\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{v}{RGB}{203,41,123}\defineColor{gr}{100,100,100}$$
-
-### Example Image
-![](./test-image.png)
-
-### Example QR
-[[here]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) -->

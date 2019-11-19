@@ -56,6 +56,7 @@ export default function diagramLayout() {
     [1, -0.5],
   ];
 
+  // eslint-disable-next-line max-len
   const poly = (name, points, pos = [0, 0], scale = 1, sideLabel = null, angleLabel = undefined) => {
     const t = new Transform().scale(scale, scale);
     const pointsToUse = points.map(p => (new Point(p[0], p[1])).transformBy(t.matrix()));
