@@ -16,7 +16,7 @@ class Content extends SimpleFormatContent {
     this.loadQRs([
       // 'Math/Geometry_1/Triangles/base',
       // 'Math/Geometry_1/AnglesAtIntersections/base/',
-      // 'Math/Geometry_1/AngleGroups/base/',
+      'Math/Geometry_1/AngleGroups/base/',
     ]);
   }
 
