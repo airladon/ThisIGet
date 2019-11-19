@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of ',
+  title: 'Polygons and Regular Polygons',
   description: '',
-  htmlTitle: '... examples',
-  htmlDescription: '',
+  htmlTitle: 'Calculating angles and sides of polygons',
+  htmlDescription: 'Calculating sides from angles and angles from sides of polygons and regular polygons',
   fullTopic: true,
   type: 'singlePage',
 };

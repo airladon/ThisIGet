@@ -72,7 +72,7 @@ class Content extends SimpleFormatContent {
         const q4Sides = removeRandElement(possibleRegularSides);
         const q4Angle = 180 - 360 / q4Sides;
         variables[`q${qnum}a`] = q4Sides.toFixed(0);
-        variables[`q${qnum}q`] = `A regular polygon's corner has an internal angle of ${q4Angle.toFixed(0)}. What number of sides does the polygon have?`;
+        variables[`q${qnum}q`] = `A regular polygon's corner has an internal angle of ${q4Angle.toFixed(0)}º. What number of sides does the polygon have?`;
       }
 
       const questions = [1, 2, 3, 4];
@@ -80,43 +80,6 @@ class Content extends SimpleFormatContent {
       q2(removeRandElement(questions));
       q3(removeRandElement(questions));
       q4(removeRandElement(questions));
-
-      // //; q1
-      // const q1Sides = removeRandElement(possibleSides);
-      // const q1Angle = (q1Sides - 2) * 180;
-      // variables.q1q = q1Sides.toFixed(0);
-      // variables.q1a = q1Angle.toFixed(0);
-
-
-      // // q2
-      // const q2Sides = removeRandElement(possibleSides);
-      // const q2Angle = (q2Sides - 2) * 180;
-      // variables.q2a = q2Sides.toFixed(0);
-      // variables.q2q = q2Angle.toFixed(0);
-
-      // // q3
-      // const q3Sides = removeRandElement(possibleRegularSides);
-      // const q3Angle = 180 - 360 / q3Sides;
-      // variables.q3q = q3Sides.toFixed(0);
-      // variables.q3a = q3Angle.toFixed(0);
-
-      // // q4
-      // const q4Sides = removeRandElement(possibleRegularSides);
-      // const q4Angle = 180 - 360 / q4Sides;
-      // variables.q4a = q4Sides.toFixed(0);
-      // variables.q4q = q4Angle.toFixed(0);
-      // variables.q4D = round(rand(1, 20), 1);
-      // const answers = shuffle(
-      //   `+ ${round(variables.q4D * Math.PI, 2)}`,
-      //   [
-      //     `- ${round(variables.q4D * 2, 2)}`,
-      //     `- ${round(variables.q4D / 2, 2)}`,
-      //     `- ${round(variables.q4D * Math.PI - rand(0.5, 1), 2)}`,
-      //     `- ${round(variables.q4D * Math.PI + rand(0.5, 2), 2)}`,
-      //   ],
-      //   4,
-      // );
-      // variables.q4m = multichoice(answers, 'q4');
 
       return variables;
     };

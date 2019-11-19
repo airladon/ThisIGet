@@ -411,7 +411,7 @@ export default function diagramLayout() {
                     { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
                     'times', '_180',
                   ],
-                  comment: ['n3', '_1802', '  ', 'm2', '  ', 'n4', '_3602'],
+                  comment: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],
                   symbol: 'brace',
                 },
               },

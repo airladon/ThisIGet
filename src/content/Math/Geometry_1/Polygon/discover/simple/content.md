@@ -17,7 +17,7 @@ Can you find the relationship of a polygon with any number of sides and its corr
 <hintLow>
 Here is an example of making a triangle into a quadrangle. By changing one side into two, you effectively add an additional side to the shape.
 
-The shape is now made up of 2 triangles. What is the internal angle?
+The shape is now made up of 2 triangles. What is the total angle?
 
 ![](quad.png)
 
@@ -84,7 +84,7 @@ We know:
 
 * Each piece is equal
 * Therefore each angle at the circle center is equal
-* The triangle sides that meet at the center are the radius
+* The triangle sides that meet at the center are the radius $$r$$
 
 ![](tri.png)
 

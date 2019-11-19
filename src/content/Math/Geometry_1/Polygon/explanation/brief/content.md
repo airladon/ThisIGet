@@ -54,7 +54,7 @@ We know:
 
 * Each piece is equal
 * Therefore each angle at the circle center is equal
-* The triangle sides that meet at the center are the radius
+* The triangle sides that meet at the center are the radius $$r$$
 
 ![](tri.png)
 

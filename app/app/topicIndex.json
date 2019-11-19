@@ -1872,10 +1872,10 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Properties",
           "description": "",
-          "htmlTitle": "Self discover why ...",
-          "htmlDescription": "Figure out why ...",
+          "htmlTitle": "Discover side and angle relationships of polygons",
+          "htmlDescription": "Develop relationships between sides and angles of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         }
@@ -1883,10 +1883,10 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Polygons and Regular Polygons",
           "description": "",
-          "htmlTitle": "... examples",
-          "htmlDescription": "",
+          "htmlTitle": "Calculating angles and sides of polygons",
+          "htmlDescription": "Calculating sides from angles and angles from sides of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         }
@@ -1896,17 +1896,17 @@
           "type": "presentation",
           "title": "Descriptive & Interactive",
           "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "htmlTitle": "Polygons and Regular Polygons",
+          "htmlDescription": "Descriptive and interactive explanation of definition and properties of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         },
         "brief": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
-          "description": "Derivation using area of four right angle triangles",
-          "htmlTitle": "Pythagorean Theorem Derivation",
-          "htmlDescription": "Derivation using area of four right angle triangles",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "Polygons and Regular Polygons in brief",
+          "htmlDescription": "Brief explanation of definition and properties of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         }
@@ -1914,10 +1914,10 @@
       "links": {
         "base": {
           "type": "generic",
-          "title": "External",
-          "description": "External links to sources of information for <TOPIC>",
-          "htmlTitle": "<TOPIC> Links",
-          "htmlDescription": "Explanations, proofs, examples and questions about <TOPIC>",
+          "title": "General",
+          "description": "General links to sources of information for polygons",
+          "htmlTitle": "Polygon Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about polygons",
           "fullTopic": false,
           "links": [
             {
@@ -1973,10 +1973,10 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
-          "htmlTitle": "Calculate circle properties",
-          "htmlDescription": "Calculate properties of a circle from other properties",
+          "title": "Angles and Sides",
+          "description": "",
+          "htmlTitle": "Quiz: Angles and sides of polygons",
+          "htmlDescription": "Calculate angles and sides of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         }
@@ -1984,10 +1984,10 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition and Properties",
           "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "htmlTitle": "Polygons and Regular Polygons Summary",
+          "htmlDescription": "Definition and properties of polygons and regular polygons",
           "fullTopic": true,
           "links": ""
         }

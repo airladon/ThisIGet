@@ -1166,7 +1166,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1174,7 +1174,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Polygons and Regular Polygons",
           "description": "",
           "fullTopic": true
         }
@@ -1188,16 +1188,16 @@
         },
         "brief": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
-          "description": "Derivation using area of four right angle triangles",
+          "title": "Brief",
+          "description": "",
           "fullTopic": true
         }
       },
       "links": {
         "base": {
           "type": "generic",
-          "title": "External",
-          "description": "External links to sources of information for <TOPIC>",
+          "title": "General",
+          "description": "General links to sources of information for polygons",
           "fullTopic": false
         }
       },
@@ -1216,15 +1216,15 @@
       "quiz": {
         "base": {
           "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
+          "title": "Angles and Sides",
+          "description": "",
           "fullTopic": true
         }
       },
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition and Properties",
           "description": "",
           "fullTopic": true
         }

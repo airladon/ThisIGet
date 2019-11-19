@@ -89,12 +89,12 @@ attachQuickReference(details.path, topicUID, versionUID, {
   PolygonPres: QRPolygon,
   RegularPolygonPres: QRRegularPolygon,
   Polygon: <StaticQR
-    title=""
+    title="Polygon"
     content={polygon}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
   RegularPolygon: <StaticQR
-    title=""
+    title="Regular Polygon"
     content={regular}
     link={`${details.path}/${details.uid}/explanation/base?page=1`}
   />,
