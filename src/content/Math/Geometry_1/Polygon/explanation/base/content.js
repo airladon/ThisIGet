@@ -56,7 +56,7 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         coll.setScenarios('default');
       },
-    }
+    };
     this.addSection(common, {
       title: 'Definition',
       setContent: [
@@ -100,8 +100,6 @@ class Content extends PresentationFormatContent {
       setContent: style({ centerV: true }, [
         'We have previously found that the |total angle| of |any three sided polygon| (or triangle) is |_180º|.',
         'We have also seen the |total angle| of |any four sided polygon| (or quadrangle) is |_360º|.',
-        // 'We have previously found the |total angle| of a |triangle| is 180º and total angle of a |quadrangle| is 360º.',
-        // 'In other words, |any 3 sided polygon| has a total angle of |180º|, and |any four sided polygon| has a total angle of 360º.',
         'Is it possible to find the |total angle| of |any| polygon?',
       ]),
       modifiers: {
@@ -397,7 +395,6 @@ class Content extends PresentationFormatContent {
       setContent: style({ top: 15 }, [
         'We started with a |triangle|, that has a |total angle of 180º|, and |3 sides|.',
         '|Every additional side| increases the total angle by |180º|.',
-        
         'Thus the |total angle| of an |n-sided polygon| is:',
       ]),
       setSteadyState: () => {
@@ -405,7 +402,7 @@ class Content extends PresentationFormatContent {
         coll._eqnTot.setScenario('bottom');
       },
     });
-    
+
     // ************************************************************
     // ************************************************************
     // ************************************************************

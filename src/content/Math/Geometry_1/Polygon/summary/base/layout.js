@@ -176,8 +176,8 @@ export default function diagramLayout() {
           mods: {
             scenarios: {
               default: { position: [0, yOffset] },
-            }
-          }
+            },
+          },
         },
         txt('sidesLabel', 'Sides:', [1.2, 0.5]),
         txt('sides', `${sides}`, [2.5, 0.5], colors.sides),

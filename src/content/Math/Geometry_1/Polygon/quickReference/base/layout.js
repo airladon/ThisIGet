@@ -10,7 +10,7 @@ const {
 } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
-const { round } = Fig.tools.math;
+// const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
@@ -135,30 +135,30 @@ export default function diagramLayout() {
   //   },
   // });
 
-  const getName = (n) => {
-    if (n === 3) {
-      return 'Triangle';
-    }
-    if (n === 4) {
-      return 'Quadrangle';
-    }
-    if (n === 5) {
-      return 'Pentagon';
-    }
-    if (n === 6) {
-      return 'Hexagon';
-    }
-    if (n === 7) {
-      return 'Heptagon';
-    }
-    if (n === 8) {
-      return 'Octagon';
-    }
-    if (n === 9) {
-      return 'Nonagon';
-    }
-    return 'Decagon';
-  };
+  // const getName = (n) => {
+  //   if (n === 3) {
+  //     return 'Triangle';
+  //   }
+  //   if (n === 4) {
+  //     return 'Quadrangle';
+  //   }
+  //   if (n === 5) {
+  //     return 'Pentagon';
+  //   }
+  //   if (n === 6) {
+  //     return 'Hexagon';
+  //   }
+  //   if (n === 7) {
+  //     return 'Heptagon';
+  //   }
+  //   if (n === 8) {
+  //     return 'Octagon';
+  //   }
+  //   if (n === 9) {
+  //     return 'Nonagon';
+  //   }
+  //   return 'Decagon';
+  // };
 
   const regularPoly = (name, sides, position = [0, 0], angleOffset = 0) => {
     const points = regularPolyPoints(sides, 0.8, angleOffset);

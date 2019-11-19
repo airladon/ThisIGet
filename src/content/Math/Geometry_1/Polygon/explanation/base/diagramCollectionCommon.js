@@ -149,7 +149,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         this.accentEqn(this._eqnTot, eqnElementsToPulse || [], 'box', [0.02, 0.05]);
       };
       triggerDuration = 1;
-    };
+    }
     if (pulse) {
       angle.animations.new()
         .trigger({ callback: trigger, duration: triggerDuration })

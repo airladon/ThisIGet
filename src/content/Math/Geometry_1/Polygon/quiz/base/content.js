@@ -5,7 +5,6 @@ import SimpleFormatContent from '../../../../../../js/TopicFormat/SimpleFormatCo
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-// $FlowFixMe
 import content from './content.md';
 // import {
 //   multichoice,
@@ -13,11 +12,11 @@ import content from './content.md';
 // } from '../../../../../../js/tools/misc';
 
 const {
-  round,
-  rand,
-  randElement,
+  // round,
+  // rand,
+  // randElement,
   removeRandElement,
-  randInt,
+  // randInt,
 } = Fig.tools.math;
 
 class Content extends SimpleFormatContent {
@@ -73,7 +72,7 @@ class Content extends SimpleFormatContent {
         const q4Angle = 180 - 360 / q4Sides;
         variables[`q${qnum}a`] = q4Sides.toFixed(0);
         variables[`q${qnum}q`] = `A regular polygon's corner has an internal angle of ${q4Angle.toFixed(0)}º. What number of sides does the polygon have?`;
-      }
+      };
 
       const questions = [1, 2, 3, 4];
       q1(removeRandElement(questions));
