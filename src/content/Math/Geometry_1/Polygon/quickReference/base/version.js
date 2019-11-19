@@ -6,8 +6,10 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
-    'MainPres',
-    '// Main',
+    'PolygonPres',
+    'RegularPolygonPres',
+    'Polygon',
+    'RegularPolygon',
   ],
 };
 
