@@ -1944,7 +1944,96 @@
         }
       }
     },
-    "dependencies": [],
+    "dependencies": [
+      "introduction"
+    ],
     "enabled": false
+  },
+  "Math/Trigonometry_1/introduction": {
+    "title": "Why Study Trigonometry",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "fullTopic": true
+        },
+        "markdown": {
+          "type": "singlePage",
+          "title": "Derivation of Pythagorean Theorem",
+          "description": "Derivation using area of four right angle triangles",
+          "fullTopic": true
+        },
+        "simple": {
+          "type": "singlePage",
+          "title": "Descriptive",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for <TOPIC>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        },
+        "markdown": {
+          "type": "singlePage",
+          "title": "Calculate Properties",
+          "description": "Calculate properties of a circle from other properties",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      ""
+    ],
+    "enabled": true
   }
 }
