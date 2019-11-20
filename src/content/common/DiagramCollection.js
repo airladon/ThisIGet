@@ -8,7 +8,7 @@ import CommonTopicDiagram from './CommonTopicDiagram';
 
 const { Point, Transform } = Fig.tools.g2;
 const {
-  DiagramElementCollection, DiagramElement,
+  DiagramElementCollection, DiagramElement, Equation,
 } = Fig;
 
 const { joinObjects } = Fig.tools.misc;
@@ -356,6 +356,59 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return click(accenter, [this], colorToUse);
   }
 
+  accentEqn(
+    eqn: Equation,
+    children: Array<DiagramElement | string> | DiagramElement,
+    boxIn: string | DiagramElement,
+    space: Point | [number, number] | number = 0.1,
+    done: ?() => void = null,
+  ) {
+    const box = eqn.getElement(boxIn);
+    if (box == null) {
+      if (done != null) {
+        done();
+      }
+      return;
+    }
+    let childrenToUse;
+    if (Array.isArray(children)) {
+      childrenToUse = children;
+    } else {
+      childrenToUse = [children];
+    }
+    box.custom.setSize(eqn, childrenToUse, space);
+    box.showAll();
+    this.accent(box, done);
+  }
+
+  bindAccentEqn(
+    eqn: Equation,
+    children: Array<DiagramElement | string>,
+    boxIn: string | DiagramElement,
+    spaceOrColor: Point | [number, number] | number | Array<number> = 0.05,
+    colorIn: ?Array<number> = null,
+  ) {
+    const allElements = eqn.getElements(children);
+    let color = [1, 1, 1, 1];
+    let space = 0;
+    if (allElements.length > 0) {
+      color = allElements[0].color.slice();
+    }
+    if (Array.isArray(spaceOrColor) && spaceOrColor.length > 2) {
+      color = spaceOrColor;
+    } else {
+      space = spaceOrColor;
+    }
+    if (colorIn != null) {
+      color = colorIn;
+    }
+    const accenter = () => {    // $FlowFixMe
+      this.accentEqn(eqn, children, boxIn, space);
+      this.diagram.animateNextFrame();
+    };  // $FlowFixMe
+    return click(accenter, [this], color);
+  }
+
   // If any child is not shown, then show all children - otherwise hide all
   toggle(
     parent: DiagramElement,
@@ -427,6 +480,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
     done: ?() => void = null,
+    toHide: Array<DiagramElement | string> | DiagramElement | string = [],
   ) {
     let style;
     if (typeof styleIn === 'string') {
@@ -452,9 +506,15 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
         }
       });
       parent.exec(['showAll'], group);
+      if (toHide) {
+        parent.exec(['hide'], toHide);
+      }
     }
     if (style.includes('highlightInParent')) {
       parent.highlight([...group]);
+      if (toHide) {
+        parent.exec(['dim'], toHide);
+      }
     }
     if (style.includes('highlight')) {
       groups.forEach((g, i) => {
@@ -463,6 +523,9 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
         }
       });
       parent.exec(['undim'], group);
+      if (toHide) {
+        parent.exec(['dim'], toHide);
+      }
     }
     if (style.includes('pulse')) {
       parent.pulse([...group], done);
@@ -479,9 +542,10 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     styleIn: 'pulse' | 'highlightInParent' | 'show' | 'highlight' |
              Array<'highlight' | 'pulse' | 'show' | 'highlightInParent'> = 'pulse',
     currentToggleIndex: number | string = 0,
+    toHide: Array<DiagramElement | string> | DiagramElement | string = [],
   ) {
     const groupPulser = () => {
-      this.toggleGroups(parent, groups, currentToggleIndex, styleIn, null);
+      this.toggleGroups(parent, groups, currentToggleIndex, styleIn, null, toHide);
     };
     return click(groupPulser, [this], color);
   }

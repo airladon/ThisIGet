@@ -387,7 +387,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   moveNewBase(done: ?() => void = null) {
     const trir = this._fig._trir;
     const newBase = this._fig._newBase;
-    const targetPosition = this._fig._tri2._side20.getDiagramPosition();
+    const targetPosition = this._fig._tri2._side20.getPosition('diagram');
     newBase.showAll();
     newBase.setDiagramPositionToElement(trir._side20);
     newBase.stop();
@@ -420,8 +420,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     const tri1 = this._fig._tri1;
     const angleA = this._fig._angleA;
     const angleB = this._fig._angleB;
-    const targetPositionA = this._fig._tri2._angle0.getDiagramPosition();
-    const targetPositionB = this._fig._tri2._angle2.getDiagramPosition();
+    const targetPositionA = this._fig._tri2._angle0.getPosition('diagram');
+    const targetPositionB = this._fig._tri2._angle2.getPosition('diagram');
     angleA.showAll();
     angleA.setDiagramPositionToElement(tri1._angle0);
     angleA.stop();

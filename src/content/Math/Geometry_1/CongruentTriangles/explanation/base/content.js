@@ -358,7 +358,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        circles: click(this.next, [this], colors.diagram.action),
+        circles: click(this.next, [this, null], colors.diagram.action),
       },
       show: [sss._left._line, sss._base._line, sss._right._line],
       setSteadyState: () => {
@@ -909,8 +909,8 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        flip: click(this.next, [this], colors.sides),
-        original: click(this.next, [this], colors.diagram.action),
+        flip: click(this.next, [this, null], colors.sides),
+        original: click(this.next, [this, null], colors.diagram.action),
       },
       setSteadyState: () => {
         sas._config1.setScenario('center');
@@ -1020,8 +1020,8 @@ class Content extends PresentationFormatContent {
         'To help visualize, we can |extend| the unknown side and |rotate| the opposite side while tracing its end.',
       ],
       modifiers: {
-        extend: click(this.next, [this], colors.sides),
-        rotate: click(this.next, [this], colors.sides),
+        extend: click(this.next, [this, null], colors.sides),
+        rotate: click(this.next, [this, null], colors.sides),
       },
     });
 
@@ -1237,7 +1237,7 @@ class Content extends PresentationFormatContent {
         'As the two angles are fixed, the only way to make a triangle is to |extend| the remaining sides till they meet.',
       ],
       modifiers: {
-        extend: click(this.next, [this], colors.sides),
+        extend: click(this.next, [this, null], colors.sides),
       },
       setEnterState: () => {
         asa.initialTri();
@@ -1371,7 +1371,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       modifiers: {
         triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres', colors.sides),
-        calculate: click(this.next, [this], colors.angles),
+        calculate: click(this.next, [this, null], colors.angles),
       },
       show: [aas._angle1, aas._angle3, aas._side],
     });

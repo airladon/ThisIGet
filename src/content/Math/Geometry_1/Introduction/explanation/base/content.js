@@ -100,7 +100,7 @@ class Content extends PresentationFormatContent {
       'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
     ];
     this.addSection(common, {
-      modifiers: { shape: click(this.next, [this], colors.circle) },
+      modifiers: { shape: click(this.next, [this, null], colors.circle) },
       setEnterState: () => { circ._wheel.setScenario('left'); },
       show: [circ._wheel],
     });
@@ -121,7 +121,7 @@ class Content extends PresentationFormatContent {
       title: 'Properties',
       modifiers: {
         shape: click(circ.pulseCircle, [circ], colors.circle),
-        Properties: click(this.next, [this], colors.dimension),
+        Properties: click(this.next, [this, null], colors.dimension),
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
@@ -150,7 +150,7 @@ class Content extends PresentationFormatContent {
     ];
     this.addSection(common, {
       modifiers: {
-        Relationships: click(this.next, [this], colors.dimension),
+        Relationships: click(this.next, [this, null], colors.dimension),
         properties: click(circ.pulseProperties, [circ], colors.dimension),
       },
       setEnterState: () => {
@@ -187,7 +187,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         relationships: click(circ.pulseEquation, [circ], colors.dimension),
         properties: click(circ.pulseProperties, [circ], colors.dimension),
-        all: click(this.next, [this], colors.diagram.action),
+        all: click(this.next, [this, null], colors.diagram.action),
       },
       setEnterState: () => {
         circ._circle.setScenario('right');

@@ -144,7 +144,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        same: click(this.next, [this], colors.angles),
+        same: click(this.next, [this, null], colors.angles),
       },
     });
 

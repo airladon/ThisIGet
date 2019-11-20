@@ -240,12 +240,16 @@ export default class SimpleFormatComponent extends React.Component
 
   showVariables() {
     Object.keys(this.version.content.variables).forEach((variableName) => {
-      const element =
-        document.getElementById(`id_topic__variable_${variableName}`);
-      if (element == null) {
+      // const element =
+      //   document.getElementById(`id_topic__variable_${variableName}`);
+      const elements = document.querySelectorAll(`.topic__variable_${variableName}`);
+      if (elements == null) {
         return;
       }
-      element.innerHTML = `${this.version.content.variables[variableName]}`;
+      elements.forEach((element) => {
+        // eslint-disable-next-line no-param-reassign
+        element.innerHTML = `${this.version.content.variables[variableName]}`;
+      });
     });
   }
 

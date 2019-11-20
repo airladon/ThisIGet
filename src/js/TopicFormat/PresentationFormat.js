@@ -110,7 +110,10 @@ class PresentationFormat extends SimpleFormat {
     return htmlText;
   }
 
-  nextSection() {
+  nextSection(message: ?string = null) {
+    if (typeof message === 'string') {
+      this.content.message = message;
+    }
     const { diagram } = this;
     window.presentationFormatTransitionStatus = 'notSteady';
     if (this.currentSectionIndex < this.content.sections.length - 1 && diagram) {
@@ -140,7 +143,10 @@ class PresentationFormat extends SimpleFormat {
     this.renderDiagrams();
   }
 
-  prevSection() {
+  prevSection(message: ?string = null) {
+    if (typeof message === 'string') {
+      this.content.message = message;
+    }
     const { diagram } = this;
     window.presentationFormatTransitionStatus = 'notSteady';
     if (this.currentSectionIndex > 0 && diagram) {
@@ -404,6 +410,7 @@ class PresentationFormat extends SimpleFormat {
     const section = this.content.sections[this.currentSectionIndex];
     // section.setOnClicks();
     section.setSteadyState(this.state);
+    this.content.message = null;
     this.firstPageShown = false;
     this.inTransition = false;
     const { diagram } = this;

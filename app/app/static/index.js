@@ -4113,7 +4113,7 @@ function () {
   }, {
     key: "rotateElement",
     value: function rotateElement(element, previousClientPoint, currentClientPoint) {
-      var centerDiagramSpace = element.getDiagramPosition();
+      var centerDiagramSpace = element.getPosition('diagram');
 
       if (centerDiagramSpace == null) {
         centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
@@ -4188,11 +4188,10 @@ function () {
       //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
       // const currentDiagramPoint =
       //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      // const center = element.getDiagramPosition();
       // const previousMag = previousDiagramPoint.sub(center).distance();
       // const currentMag = currentDiagramPoint.sub(center).distance();
 
-      var center = element.getDiagramPosition().transformBy(this.spaceTransforms.diagramToPixel.matrix());
+      var center = element.getPosition('diagram').transformBy(this.spaceTransforms.diagramToPixel.matrix());
       var previousMag = previousPixelPoint.sub(center).distance();
       var currentMag = currentPixelPoint.sub(center).distance();
       var currentScale = element.transform.s();
@@ -5071,6 +5070,191 @@ var Bounds = function Bounds() {
 
 /***/ }),
 
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Box.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+ // // Equation is a class that takes a set of drawing objects (TextObjects,
+// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
+// // and arranges their size in a )
+
+var Box =
+/*#__PURE__*/
+function (_Elements) {
+  _inherits(Box, _Elements);
+
+  // boxScale: Point;
+  // boxRotation: number;
+  function Box(mainContent, box) {
+    var _this;
+
+    var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+    _classCallCheck(this, Box);
+
+    if (box) {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent, new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](box)]));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent]));
+    }
+
+    _this.box = box;
+    _this.scaleModifier = 1;
+    _this.lineWidth = 0.01;
+    _this.mainContent = mainContent;
+
+    if (boxInSize == null) {
+      _this.boxInSize = false;
+    } else {
+      _this.boxInSize = boxInSize;
+    }
+
+    _this.space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(space || 0); // space == null ? 0 : space;
+
+    _this.boxWidth = 1;
+    _this.boxHeight = 1;
+    _this.boxPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    return _possibleConstructorReturn(_this);
+  }
+
+  _createClass(Box, [{
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var box = null;
+
+      if (this.box != null && namedCollection) {
+        box = namedCollection[this.box.name];
+      } else {
+        box = this.box;
+      }
+
+      var boxCopy = new Box(this.mainContent._dup(namedCollection), box, this.boxInSize, this.space);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, boxCopy, ['box', 'mainContent']);
+      return boxCopy;
+    }
+  }, {
+    key: "calcSize",
+    value: function calcSize(location, incomingScale) {
+      var scale = incomingScale * this.scaleModifier;
+      this.location = location._dup();
+      this.mainContent.calcSize(location, scale);
+      var lineWidth = 0;
+
+      if (this.box && this.box.custom.lineWidth != null && typeof this.box.custom.lineWidth === 'number') {
+        lineWidth = this.box.custom.lineWidth;
+      }
+
+      var boxWidth = this.mainContent.width + this.space.x * 2;
+      var boxHeight = this.mainContent.height + this.space.y * 2; // Position of center of box line in bottom left corner
+
+      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space.x, location.y - this.mainContent.descent - this.space.y);
+
+      if (this.boxInSize) {
+        this.width = boxWidth + lineWidth * 2;
+        this.height = boxHeight + lineWidth * 2;
+        this.ascent = this.mainContent.ascent + this.space.y + lineWidth;
+        this.descent = this.mainContent.descent + this.space.y + lineWidth;
+        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space.x + lineWidth, 0));
+        bottomLeft.x += this.space.x + lineWidth;
+      } else {
+        this.width = this.mainContent.width;
+        this.ascent = this.mainContent.ascent;
+        this.descent = this.mainContent.descent;
+      }
+
+      this.height = this.descent + this.ascent;
+      var box = this.box;
+
+      if (box) {
+        this.boxPosition = bottomLeft._dup();
+        this.boxWidth = boxWidth;
+        this.boxHeight = boxHeight;
+        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight));
+        box.showAll();
+      }
+    }
+  }, {
+    key: "getAllElements",
+    value: function getAllElements() {
+      var elements = [];
+
+      if (this.mainContent) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      }
+
+      if (this.box) {
+        elements = [].concat(_toConsumableArray(elements), [this.box]);
+      }
+
+      return elements;
+    }
+  }, {
+    key: "setPositions",
+    value: function setPositions() {
+      this.mainContent.setPositions();
+      var box = this.box;
+
+      if (box) {
+        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight)); // box.showAll();
+      }
+    }
+  }, {
+    key: "offsetLocation",
+    value: function offsetLocation() {
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      this.location = this.location.add(offset);
+      this.mainContent.offsetLocation(offset);
+      this.boxPosition = this.boxPosition.add(offset);
+    }
+  }]);
+
+  return Box;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+
+
+
+/***/ }),
+
 /***/ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js":
 /*!**********************************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js ***!
@@ -5504,9 +5688,14 @@ function () {
         // Update translation and scale
         content.transform.updateTranslation(location.x, location.y);
         content.transform.updateScale(scale, scale);
-        content.updateLastDrawTransform(); // Get the boundaries of element
+        content.updateLastDrawTransform();
+
+        if (content.internalSetTransformCallback != null) {
+          content.internalSetTransformCallback(content.transform);
+        } // Get the boundaries of element
         // const t = content.lastDrawTransform._dup();
         // content.lastDrawTransform = content.transform._dup();
+
 
         var r = content.getRelativeVertexSpaceBoundingRect(); // content.lastDrawTransform = t;
 
@@ -5515,7 +5704,7 @@ function () {
         this.ascent = r.top * scale;
         this.descent = -r.bottom * scale;
         this.height = r.height * scale;
-        this.width = r.width * scale; // console.log(this.height)
+        this.width = r.width * scale;
       }
     }
   }, {
@@ -5963,6 +6152,304 @@ function (_Elements) {
 
   return Padding;
 }(_Element__WEBPACK_IMPORTED_MODULE_2__["Elements"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Root.js":
+/*!******************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Root.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Root; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+ // import { roundNum } from '../../../../tools/math';
+
+
+
+
+
+var space = function space(l, b, r, t) {
+  return {
+    left: l,
+    bottom: b,
+    right: r,
+    top: t
+  };
+};
+
+var Root =
+/*#__PURE__*/
+function (_Elements) {
+  _inherits(Root, _Elements);
+
+  // glyphStartWidth: number;
+  // glyphStartHeight: number;
+  // glyphLineWidth: number;
+  // glyphContentWidth: number;
+  // glyphScale: number;
+  function Root(content, radicalGlyph, root) {
+    var _this;
+
+    var contentSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    var rootSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+    var rootScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+
+    _classCallCheck(this, Root);
+
+    var glyph = radicalGlyph !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](radicalGlyph) : null;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Root).call(this, [glyph, root, content]));
+    _this.root = root;
+    _this.mainContent = content;
+    _this.radicalGlyph = radicalGlyph;
+    _this.contentSpace = space(0.01, 0.01, 0.01, 0.01);
+
+    if (typeof contentSpace === 'number') {
+      _this.contentSpace = space(contentSpace, contentSpace, contentSpace, contentSpace);
+    } else if (Array.isArray(contentSpace) && contentSpace.length === 2) {
+      _this.contentSpace = space(contentSpace[0], contentSpace[1], contentSpace[0], contentSpace[1]);
+    } else if (contentSpace instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+      _this.contentSpace = space(contentSpace.x, contentSpace.y, contentSpace.x, contentSpace.y);
+    } else if (contentSpace != null) {
+      _this.contentSpace = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(space(0.01, 0.01, 0.01, 0.01), // $FlowFixMe
+      contentSpace);
+    } // this.contentSpace = getPoint(contentSpace || 0.05);
+
+
+    _this.rootSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(rootSpace || 0.05); // this.glyphStartHeight = glyphStartHeight || 0.1;
+    // this.glyphStartWidth = glyphStartWidth || 0.1;
+
+    _this.glyphLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    _this.rootScale = rootScale || 0.5;
+    _this.glyphWidth = 1;
+    _this.glyphHeight = 1; // this.glyphLineWidth = glyphLineWidth || 0.01;
+
+    return _this;
+  }
+
+  _createClass(Root, [{
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var root = this.root == null ? null : this.root._dup(namedCollection);
+      var content = this.mainContent == null ? null : this.mainContent._dup(namedCollection);
+      var glyph = null;
+
+      if (this.radicalGlyph != null && namedCollection) {
+        glyph = namedCollection[this.radicalGlyph.name];
+      } else {
+        glyph = this.radicalGlyph;
+      }
+
+      var rootCopy = new Root(content, glyph, root);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, rootCopy, ['root', 'mainContent', 'radicalGlyph']);
+      return rootCopy;
+    }
+  }, {
+    key: "getAllElements",
+    value: function getAllElements() {
+      var elements = [];
+
+      if (this.root) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.root.getAllElements()));
+      }
+
+      if (this.mainContent) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      }
+
+      if (this.radicalGlyph) {
+        elements = [].concat(_toConsumableArray(elements), [this.radicalGlyph]);
+      }
+
+      return elements;
+    }
+  }, {
+    key: "setPositions",
+    value: function setPositions() {
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph) {
+        // radicalGlyph.setPosition(this.glyphLocation);
+        // radicalGlyph.setScale(this.glyphWidth, this.glyphHeight);
+        var t = radicalGlyph.getTransform()._dup();
+
+        t.updateTranslation(this.glyphLocation.x, this.glyphLocation.y);
+        t.updateScale(this.glyphWidth, this.glyphHeight);
+        radicalGlyph.setTransform(t);
+      }
+
+      if (this.root) {
+        this.root.setPositions();
+      }
+
+      if (this.mainContent) {
+        this.mainContent.setPositions();
+      }
+    }
+  }, {
+    key: "offsetLocation",
+    value: function offsetLocation() {
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      this.location = this.location.add(offset);
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph != null) {
+        this.glyphLocation = this.glyphLocation.add(offset);
+      }
+
+      if (this.mainContent) {
+        this.mainContent.offsetLocation(offset);
+      }
+
+      if (this.root) {
+        this.root.offsetLocation(offset);
+      }
+    }
+  }, {
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var rootBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var glyphBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var mainContent = this.mainContent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.width = mainContent.width;
+        contentBounds.height = mainContent.ascent + mainContent.descent;
+        contentBounds.ascent = mainContent.ascent;
+        contentBounds.descent = mainContent.descent;
+      }
+
+      var mainContentLocation = loc._dup();
+
+      var root = this.root;
+
+      if (root instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        root.calcSize(loc._dup(), scale * this.rootScale);
+        rootBounds.width = root.width;
+        rootBounds.height = root.ascent + root.descent;
+        rootBounds.ascent = root.ascent;
+        rootBounds.descent = root.descent;
+      }
+
+      var rootLocation = loc._dup();
+
+      this.glyphLocation = loc._dup();
+      var radicalGlyph = this.radicalGlyph;
+
+      if (radicalGlyph) {
+        var _radicalGlyph$custom = radicalGlyph.custom,
+            startHeight = _radicalGlyph$custom.startHeight,
+            startWidth = _radicalGlyph$custom.startWidth,
+            proportionalToHeight = _radicalGlyph$custom.proportionalToHeight,
+            maxStartWidth = _radicalGlyph$custom.maxStartWidth,
+            maxStartHeight = _radicalGlyph$custom.maxStartHeight;
+        glyphBounds.descent = contentBounds.descent + this.contentSpace.bottom;
+        glyphBounds.ascent = contentBounds.ascent + this.contentSpace.top;
+        glyphBounds.height = glyphBounds.ascent + glyphBounds.descent;
+        var glyphStartHeight = startHeight;
+        var glyphStartWidth = startWidth;
+
+        if (proportionalToHeight) {
+          glyphStartHeight = startHeight * glyphBounds.height;
+          glyphStartWidth = startWidth * glyphBounds.height;
+        }
+
+        if (maxStartHeight != null && glyphStartHeight > maxStartHeight) {
+          glyphStartHeight = maxStartHeight;
+        }
+
+        if (maxStartWidth != null && glyphStartWidth > maxStartWidth) {
+          glyphStartWidth = maxStartWidth;
+        }
+
+        glyphBounds.width = glyphStartWidth + this.contentSpace.left + contentBounds.width + this.contentSpace.right;
+        var startTop = glyphBounds.height - glyphStartHeight;
+
+        if (startTop < rootBounds.height / 2 + this.rootSpace.y) {
+          rootLocation.y = loc.y - glyphBounds.descent + glyphStartHeight + this.rootSpace.y + rootBounds.height / 2 - (rootBounds.height / 2 - rootBounds.descent);
+        } else {
+          rootLocation.y = loc.y + glyphBounds.ascent - (rootBounds.height / 2 - rootBounds.descent);
+        }
+
+        if (rootBounds.width + this.rootSpace.x > glyphStartWidth) {
+          this.glyphLocation.x = loc.x + rootBounds.width + this.rootSpace.x - glyphStartWidth;
+        }
+
+        mainContentLocation.x = this.glyphLocation.x + glyphStartWidth + this.contentSpace.left;
+        this.width = this.glyphLocation.x + glyphBounds.width - loc.x;
+        this.ascent = Math.max(glyphBounds.ascent, rootBounds.ascent + rootLocation.y);
+        this.descent = glyphBounds.descent;
+      } else {
+        mainContentLocation.x = rootLocation.x + rootLocation.width;
+        this.width = rootBounds.width + this.contentSpace.left + contentBounds.width;
+        this.ascent = Math.max(rootBounds.ascent, contentBounds.ascent);
+        this.descent = Math.max(rootBounds.descent, contentBounds.descent);
+      }
+
+      this.height = this.ascent + this.descent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(mainContentLocation, scale);
+      }
+
+      if (root instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        root.calcSize(rootLocation, scale * this.rootScale);
+      }
+
+      this.glyphWidth = glyphBounds.width;
+      this.glyphHeight = glyphBounds.height;
+      this.glyphLocation.y = this.glyphLocation.y - glyphBounds.descent;
+
+      if (radicalGlyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElement"]) {
+        radicalGlyph.custom.setSize(this.glyphLocation, glyphBounds.width, glyphBounds.height);
+      }
+    }
+  }]);
+
+  return Root;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
 
 
 
@@ -6687,7 +7174,7 @@ function (_DiagramElementCollec) {
       this.eqn.descriptionPosition = descriptionPosition;
 
       if (this.eqn.descriptionElement) {
-        this.eqn.descriptionElement.setPosition(this.getDiagramPosition().add(descriptionPosition));
+        this.eqn.descriptionElement.setPosition(this.getPosition('diagram').add(descriptionPosition));
       }
     }
   }, {
@@ -6697,7 +7184,7 @@ function (_DiagramElementCollec) {
 
       _get(_getPrototypeOf(EquationNew.prototype), "setPosition", this).call(this, pointOrX, y);
 
-      var position = this.getDiagramPosition(); // console.log(this.eqn, this.eqn.descriptionElement)
+      var position = this.getPosition('diagram'); // console.log(this.eqn, this.eqn.descriptionElement)
 
       if (this.eqn.descriptionElement != null) {
         this.eqn.descriptionElement.setPosition(position.add(this.eqn.descriptionPosition));
@@ -7798,7 +8285,7 @@ function (_Elements) {
         var s = fixTo.transform.s();
 
         if (_t != null && s != null) {
-          var rect = fixTo.getVertexSpaceBoundingRect();
+          var rect = fixTo.getBoundingRect('vertex');
           w = rect.width * s.x;
           h = rect.height * s.y;
           a = rect.top * s.y - _t.y;
@@ -8211,12 +8698,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _Elements_Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Elements/Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
 /* harmony import */ var _Elements_Fraction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Elements/Fraction */ "./src/js/diagram/DiagramElements/Equation/Elements/Fraction.js");
-/* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
-/* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
-/* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
-/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
-/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
+/* harmony import */ var _Elements_Root__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Elements/Root */ "./src/js/diagram/DiagramElements/Equation/Elements/Root.js");
+/* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
+/* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
+/* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
+/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
+/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
+/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8244,7 +8733,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
  // import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
+
 
 
 
@@ -8424,6 +8915,16 @@ function () {
       } // $FlowFixMe
 
 
+      if (name === 'box') {
+        return this.box(params);
+      } // $FlowFixMe
+
+
+      if (name === 'root') {
+        return this.root(params);
+      } // $FlowFixMe
+
+
       if (name === 'brac') {
         return this.brac(params);
       } // $FlowFixMe
@@ -8538,6 +9039,57 @@ function () {
       return f;
     }
   }, {
+    key: "root",
+    value: function root(optionsOrNum) {
+      var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var rootIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var contentSpaceIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var rootSpaceIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var rootScaleIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var content;
+      var root;
+      var symbol;
+      var contentSpace;
+      var rootSpace;
+      var rootScale;
+
+      if (!(sym == null && root == null)) {
+        content = optionsOrNum;
+        root = rootIn;
+        symbol = sym;
+        contentSpace = contentSpaceIn;
+        rootSpace = rootSpaceIn;
+        rootScale = rootScaleIn;
+      } else if (Array.isArray(optionsOrNum)) {
+        var _optionsOrNum2 = _slicedToArray(optionsOrNum, 6);
+
+        // $FlowFixMe
+        content = _optionsOrNum2[0];
+        symbol = _optionsOrNum2[1];
+        root = _optionsOrNum2[2];
+        // $FlowFixMe
+        contentSpace = _optionsOrNum2[3];
+        rootSpace = _optionsOrNum2[4];
+        rootScale = _optionsOrNum2[5];
+      } else {
+        content = optionsOrNum.content;
+        symbol = optionsOrNum.symbol;
+        root = optionsOrNum.root;
+        contentSpace = optionsOrNum.contentSpace;
+        rootSpace = optionsOrNum.rootSpace;
+        rootScale = optionsOrNum.rootScale;
+      }
+
+      var f = new _Elements_Root__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+      this.contentToElement(content), // $FlowFixMe
+      getDiagramElement(this.elements, symbol), // $FlowFixMe
+      this.contentToElement(root), // $FlowFixMe
+      contentSpace, // $FlowFixMe
+      rootSpace, // $FlowFixMe
+      rootScale);
+      return f;
+    }
+  }, {
     key: "supSub",
     value: function supSub(optionsOrContent) {
       var sup = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -8582,7 +9134,7 @@ function () {
       subscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       superscriptBias = superscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       superscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       this.contentToElement(superscript), // $FlowFixMe
       this.contentToElement(subscript), // $FlowFixMe
@@ -8624,7 +9176,7 @@ function () {
 
       superscriptBias = superscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       superscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       this.contentToElement(superscript), // $FlowFixMe
       null, // $FlowFixMe
@@ -8666,7 +9218,7 @@ function () {
 
       subscriptBias = subscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       subscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
+      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       null, // $FlowFixMe
       this.contentToElement(subscript), // $FlowFixMe
@@ -8701,10 +9253,48 @@ function () {
         strikeInSize = optionsOrContent.strikeInSize;
       }
 
-      return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+      return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       strikeInSize);
+    }
+  }, {
+    key: "box",
+    value: function box(optionsOrContent) // options: TypeStrikeObject | TypeStrikeArray) {
+    {
+      var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var spaceIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var content;
+      var symbol;
+      var inSize;
+      var space;
+
+      if (!(sym == null && boxInSize == null && spaceIn == null)) {
+        content = optionsOrContent;
+        symbol = sym;
+        inSize = boxInSize;
+        space = spaceIn;
+      } else if (Array.isArray(optionsOrContent)) {
+        // $FlowFixMe
+        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 4);
+
+        content = _optionsOrContent5[0];
+        symbol = _optionsOrContent5[1];
+        inSize = _optionsOrContent5[2];
+        space = _optionsOrContent5[3];
+      } else {
+        content = optionsOrContent.content;
+        symbol = optionsOrContent.symbol;
+        inSize = optionsOrContent.inSize;
+        space = optionsOrContent.space;
+      }
+
+      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_11__["default"]( // $FlowFixMe
+      this.contentToElement(content), // $FlowFixMe
+      getDiagramElement(this.elements, symbol), // $FlowFixMe
+      inSize, // $FlowFixMe
+      space);
     }
   }, {
     key: "annotate",
@@ -8723,11 +9313,11 @@ function () {
         withAnnotations = withAnnotationsArray;
         includeAnnotationInSize = includeAnnotationInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 3);
 
-        content = _optionsOrContent5[0];
-        withAnnotations = _optionsOrContent5[1];
-        includeAnnotationInSize = _optionsOrContent5[2];
+        content = _optionsOrContent6[0];
+        withAnnotations = _optionsOrContent6[1];
+        includeAnnotationInSize = _optionsOrContent6[2];
       } else {
         content = optionsOrContent.content;
         withAnnotations = optionsOrContent.withAnnotations;
@@ -8739,14 +9329,14 @@ function () {
       if (Array.isArray(withAnnotations)) {
         annotations = withAnnotations.map(function (annotation) {
           // annotation is an already instantiated AnnotationInformation
-          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             return annotation;
           }
 
           var parsedContent = _this2.parseContent(annotation); // case that annotation is a method object
 
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             return parsedContent;
           } // $FlowFixMe
           // Case of single annotation in array form
@@ -8755,7 +9345,7 @@ function () {
           if (Array.isArray(annotation)) {
             var annotationFromArray = _this2.annotation(annotation);
 
-            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
               return annotationFromArray;
             }
           }
@@ -8770,12 +9360,12 @@ function () {
         // AnnotationInformation instantiation
 
       } else if (withAnnotations != null) {
-        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
           annotations = [withAnnotations];
         } else {
           var parsedContent = this.parseContent(withAnnotations); // Method Object
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             annotations = [parsedContent]; // Array form only
           } else {
             // $FlowFixMe
@@ -8790,7 +9380,7 @@ function () {
         includeAnnotationInSizeToUse = includeAnnotationInSize;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["Annotation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["Annotation"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       annotations, // $FlowFixMe
       includeAnnotationInSizeToUse);
@@ -8854,7 +9444,7 @@ function () {
         scaleToUse = scale;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_8__["AnnotationInformation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]( // $FlowFixMe
       this.contentToElement(annotation), // $FlowFixMe
       relativeToContentH, // $FlowFixMe
       relativeToContentV, // $FlowFixMe
@@ -8882,14 +9472,14 @@ function () {
         right = rightPad;
         bottom = bottomPad;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 5);
 
         // $FlowFixMe
-        content = _optionsOrContent6[0];
-        top = _optionsOrContent6[1];
-        right = _optionsOrContent6[2];
-        bottom = _optionsOrContent6[3];
-        left = _optionsOrContent6[4];
+        content = _optionsOrContent7[0];
+        top = _optionsOrContent7[1];
+        right = _optionsOrContent7[2];
+        bottom = _optionsOrContent7[3];
+        left = _optionsOrContent7[4];
       } else {
         content = optionsOrContent.content;
         top = optionsOrContent.top;
@@ -8898,7 +9488,7 @@ function () {
         left = optionsOrContent.left;
       }
 
-      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
+      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       top, // $FlowFixMe
       right, // $FlowFixMe
@@ -8931,17 +9521,17 @@ function () {
         useMinLineHeight = useMinLineHeightForLine;
         heightScale = bracketHeightScale;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 7);
 
         // $FlowFixMe
-        content = _optionsOrContent7[0];
-        left = _optionsOrContent7[1];
-        right = _optionsOrContent7[2];
-        insideSpace = _optionsOrContent7[3];
-        outsideSpace = _optionsOrContent7[4];
+        content = _optionsOrContent8[0];
+        left = _optionsOrContent8[1];
+        right = _optionsOrContent8[2];
+        insideSpace = _optionsOrContent8[3];
+        outsideSpace = _optionsOrContent8[4];
         // $FlowFixMe
-        useMinLineHeight = _optionsOrContent7[5];
-        heightScale = _optionsOrContent7[6];
+        useMinLineHeight = _optionsOrContent8[5];
+        heightScale = _optionsOrContent8[6];
       } else {
         content = optionsOrContent.content;
         left = optionsOrContent.left;
@@ -8990,7 +9580,7 @@ function () {
         heightScaleToUse = heightScale;
       }
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Brackets"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Brackets"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       leftBracket, // $FlowFixMe
       rightBracket, // $FlowFixMe
@@ -9013,11 +9603,11 @@ function () {
         symbol = sym;
         space = insideSpace;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 3);
 
-        content = _optionsOrContent8[0];
-        symbol = _optionsOrContent8[1];
-        space = _optionsOrContent8[2];
+        content = _optionsOrContent9[0];
+        symbol = _optionsOrContent9[1];
+        space = _optionsOrContent9[2];
       } else {
         content = optionsOrContent.content;
         symbol = optionsOrContent.symbol;
@@ -9042,7 +9632,7 @@ function () {
           symbol = _this$processBar2[1],
           spaceToUse = _this$processBar2[2];
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       spaceToUse, 0.03, 'top');
@@ -9057,7 +9647,7 @@ function () {
           symbol = _this$processBar4[1],
           spaceToUse = _this$processBar4[2];
 
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       spaceToUse, 0.03, 'bottom');
@@ -9090,15 +9680,15 @@ function () {
         includeInSize = includeInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 7);
 
-        content = _optionsOrContent9[0];
-        comment = _optionsOrContent9[1];
-        symbol = _optionsOrContent9[2];
-        contentSpace = _optionsOrContent9[3];
-        commentSpace = _optionsOrContent9[4];
-        scale = _optionsOrContent9[5];
-        includeInSize = _optionsOrContent9[6];
+        content = _optionsOrContent10[0];
+        comment = _optionsOrContent10[1];
+        symbol = _optionsOrContent10[2];
+        contentSpace = _optionsOrContent10[3];
+        commentSpace = _optionsOrContent10[4];
+        scale = _optionsOrContent10[5];
+        includeInSize = _optionsOrContent10[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9152,7 +9742,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
@@ -9193,7 +9783,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_6__["Bar"]( // $FlowFixMe
+        contentToUse = new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
@@ -9239,13 +9829,13 @@ function () {
         scale = comScale;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent11 = _slicedToArray(optionsOrContent, 5);
 
-        content = _optionsOrContent10[0];
-        comment = _optionsOrContent10[1];
-        symbol = _optionsOrContent10[2];
-        space = _optionsOrContent10[3];
-        scale = _optionsOrContent10[4];
+        content = _optionsOrContent11[0];
+        comment = _optionsOrContent11[1];
+        symbol = _optionsOrContent11[2];
+        space = _optionsOrContent11[3];
+        scale = _optionsOrContent11[4];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9283,7 +9873,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         false, // $FlowFixMe
@@ -9319,7 +9909,7 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
+        contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         false, // $FlowFixMe
@@ -9364,8 +9954,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Symbols_Bracket__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Symbols/Bracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bracket.js");
 /* harmony import */ var _Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Symbols/RoundedSquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/RoundedSquareBracket.js");
 /* harmony import */ var _Symbols_Bar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
-/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
-/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
+/* harmony import */ var _Symbols_Box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Box */ "./src/js/diagram/DiagramElements/Equation/Symbols/Box.js");
+/* harmony import */ var _Symbols_Radical__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/Radical */ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js");
+/* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
+/* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -9374,8 +9966,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import { DiagramElementCollection } from '../../Element';
 
  // import SuperSub from './Elements/SuperSub';
+
+
 
 
 
@@ -9432,6 +10027,14 @@ function () {
         return this.roundedSquareBracket(options);
       }
 
+      if (name === 'box') {
+        return this.box(options);
+      }
+
+      if (name === 'radical') {
+        return this.radical(options);
+      }
+
       return null;
     }
   }, {
@@ -9445,6 +10048,42 @@ function () {
       }
 
       return this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('vinculum').scale(1, 1).translate(0, 0));
+    }
+  }, {
+    key: "box",
+    value: function box(optionsIn) {
+      var defaultOptions = {
+        color: this.defaultColor,
+        fill: false,
+        width: 0.01,
+        staticSize: null
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return Object(_Symbols_Box__WEBPACK_IMPORTED_MODULE_7__["default"])(this.shapes, options.color, options.fill, options.width, options.staticSize);
+    }
+  }, {
+    key: "radical",
+    value: function radical(optionsIn) {
+      var defaultOptions = {
+        color: this.defaultColor,
+        lineWidth: 0.01,
+        staticSize: null,
+        startHeight: 0.5,
+        startWidth: 0.7,
+        maxStartWidth: 0.15,
+        maxStartHeight: 0.15,
+        proportionalToHeight: true
+      };
+
+      if (optionsIn.proportionalToHeight != null && optionsIn.proportionalToHeight === false) {
+        defaultOptions.startHeight = 0.15;
+        defaultOptions.startWidth = 0.15;
+        defaultOptions.maxStartHeight = null;
+        defaultOptions.maxStartWidth = null;
+      }
+
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return Object(_Symbols_Radical__WEBPACK_IMPORTED_MODULE_8__["default"])(this.shapes, options.color, options.lineWidth, options.startWidth, options.startHeight, options.proportionalToHeight, options.maxStartWidth, options.maxStartHeight, options.staticSize);
     }
   }, {
     key: "strike",
@@ -9519,7 +10158,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_10__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "brace",
@@ -9530,7 +10169,7 @@ function () {
         color: this.defaultColor
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_7__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+      return new _Symbols_Brace__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
     }
   }, {
     key: "roundedSquareBracket",
@@ -10066,6 +10705,187 @@ function Bracket(webgl, color, side, numLines, transformOrLocation, diagramLimit
 
 /***/ }),
 
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Box.js":
+/*!****************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Box.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+function getRectAndSpace(rectOrParent) {
+  var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var rectToUse;
+  var childrenToUse = null;
+  var spaceToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+
+  if (Array.isArray(childrenOrSpace)) {
+    if (childrenOrSpace.length > 1) {
+      if (typeof childrenOrSpace[0] === 'string' || childrenOrSpace[0] instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+        childrenToUse = childrenOrSpace;
+      } else {
+        // $FlowFixMe
+        spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
+      }
+    }
+  }
+
+  if (typeof childrenOrSpace === 'number') {
+    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
+  }
+
+  if (space != null) {
+    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(space);
+  }
+
+  if (rectOrParent instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"]) {
+    rectToUse = rectOrParent;
+  } else {
+    // $FlowFixMe
+    rectToUse = rectOrParent.getBoundingRect('local', childrenToUse);
+  }
+
+  return [rectToUse, spaceToUse];
+}
+
+function updateStaticLinePoints(box, width, sizeIn) {
+  var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(sizeIn);
+  var x = size.x,
+      y = size.y;
+  var xWidth = width / y / 2;
+  var yWidth = width / x / 2;
+  var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, -0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, -0.5 + xWidth)];
+
+  var getPoints = function getPoints(indexes) {
+    return indexes.map(function (index) {
+      return points[index]._dup();
+    });
+  };
+
+  var left = box._left;
+  var right = box._right;
+  var top = box._top;
+  var bottom = box._bottom;
+
+  if (left == null || right == null || top == null || bottom == null) {
+    return;
+  } // $FlowFixMe
+
+
+  left.drawingObject.changeVertices(getPoints([0, 1, 2, 1, 3, 2])); // $FlowFixMe
+
+  top.drawingObject.changeVertices(getPoints([2, 3, 4, 3, 5, 4])); // $FlowFixMe
+
+  right.drawingObject.changeVertices(getPoints([4, 5, 6, 5, 7, 6])); // $FlowFixMe
+
+  bottom.drawingObject.changeVertices(getPoints([6, 7, 0, 7, 1, 0]));
+}
+
+function Box(shapes, color, fill, width, staticSize) {
+  var box; // Defined once, just scaled
+
+  if (fill) {
+    box = shapes.rectangle({
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+    box.custom.boxType = 'fill'; // Defined every time a setSize event is called
+  } else if (staticSize != null) {
+    var poly = function poly(p1, p2, w) {
+      return shapes.polyLine({
+        points: [p1, p2],
+        color: color,
+        width: w,
+        close: false
+      });
+    };
+
+    box = shapes.collection({
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+    var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)];
+    box.add('left', poly(points[0], points[1], 0.1));
+    box.add('top', poly(points[0], points[1], 0.1));
+    box.add('right', poly(points[0], points[1], 0.1));
+    box.add('bottom', poly(points[0], points[1], 0.1));
+    updateStaticLinePoints(box, width, staticSize);
+    box.custom.boxType = 'line';
+    box.custom.lineWidth = width; // defined everytime a setTransform event is called
+  } else {
+    box = shapes.polyLine({
+      points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)],
+      color: color,
+      width: width,
+      close: true,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
+    });
+    box.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1);
+    box.custom.lineWidth = width;
+
+    box.internalSetTransformCallback = function () {
+      var s = box.getScale();
+
+      if (box.custom.scale.isNotEqualTo(s, 8)) {
+        box.drawingObject.change([new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, -s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, -s.y / 2)]);
+        box.custom.scale = s;
+      }
+    };
+
+    box.getTransform = function () {
+      var t = box.transform._dup();
+
+      t.updateScale(1, 1);
+      return t;
+    };
+
+    box.custom.boxType = 'dynamic';
+  } // eslint-disable-next-line max-len
+
+
+  box.custom.setSize = function (rectOrParent) {
+    var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    var _getRectAndSpace = getRectAndSpace(rectOrParent, childrenOrSpace, space),
+        _getRectAndSpace2 = _slicedToArray(_getRectAndSpace, 2),
+        rectToUse = _getRectAndSpace2[0],
+        spaceToUse = _getRectAndSpace2[1];
+
+    if (box.custom.boxType === 'line') {
+      updateStaticLinePoints(box, width, new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](rectToUse.width, rectToUse.height));
+    }
+
+    var t = box.transform._dup();
+
+    t.updateScale(rectToUse.width + spaceToUse.x * 2 + width, rectToUse.height + spaceToUse.y * 2 + width);
+    t.updateTranslation(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
+    box.setTransform(t);
+  };
+
+  return box;
+}
+
+/***/ }),
+
 /***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js":
 /*!******************************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js ***!
@@ -10183,6 +11003,153 @@ function Integral(webgl, color, numLines, transformOrLocation, diagramLimits) {
   }
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js":
+/*!********************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Radical; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _DrawingObjects_VertexObject_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../DrawingObjects/VertexObject/PolyLineTriangles3 */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+
+
+
+
+
+function updateStaticLinePoints(box, startWidthIn, startHeightIn, width, height, lineWidth, proportionalToHeight, maxStartWidth, maxStartHeight) {
+  var startHeight = startHeightIn;
+  var startWidth = startWidthIn;
+
+  if (proportionalToHeight) {
+    startHeight = startHeightIn * height;
+    startWidth = startWidthIn * height;
+  }
+
+  if (maxStartWidth != null) {
+    if (maxStartWidth < startWidth) {
+      startWidth = maxStartWidth;
+    }
+  }
+
+  if (maxStartHeight != null) {
+    if (maxStartHeight < startHeight) {
+      startHeight = maxStartHeight;
+    }
+  }
+
+  var coords = [new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, startHeight * 0.9), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth / 5, startHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth / 5 * 3, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](startWidth, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](width, height)]; // if (proportionalToHeight) {
+  //   coords[0] = new Point(0, startHeight * 0.9 * height);
+  //   coords[1] = new Point(startWidth / 3, startHeight * height);
+  // }
+  // console.log(coords)
+
+  var lineTriangles = Object(_DrawingObjects_VertexObject_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_2__["default"])(coords, false, lineWidth, 'never'); // console.log(lineTriangles.points)
+
+  var points = [];
+
+  for (var i = 0; i < lineTriangles.points.length; i += 2) {
+    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](lineTriangles.points[i], lineTriangles.points[i + 1]));
+  } // console.log(points)
+
+
+  var left = box._left;
+  var down = box._down;
+  var up = box._up;
+  var top = box._top;
+
+  if (top == null || left == null || down == null || up == null) {
+    return;
+  }
+
+  var getPoints = function getPoints(indexes) {
+    return indexes.map(function (index) {
+      return points[index]._dup();
+    });
+  }; // $FlowFixMe
+
+
+  left.drawingObject.changeVertices(getPoints([0, 1, 2, 3, 4, 5])); // $FlowFixMe
+
+  down.drawingObject.changeVertices(getPoints([6, 7, 8, 9, 10, 11])); // $FlowFixMe
+
+  up.drawingObject.changeVertices(getPoints([12, 13, 14, 15, 16, 17])); // $FlowFixMe
+
+  top.drawingObject.changeVertices(getPoints([18, 19, 20, 21, 22, 23]));
+}
+
+var poly = function poly(color) {
+  return {
+    points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](0, 1)],
+    color: color,
+    width: 0.01,
+    close: false
+  };
+};
+
+function Radical(shapes, color, lineWidth, startWidth, startHeight, proportionalToHeight, maxStartWidth, maxStartHeight, staticSize) {
+  var radical = shapes.collection({
+    color: color,
+    transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]('radical').scale(1, 1).translate(0, 0)
+  });
+  radical.add('left', shapes.polyLine(poly(color)));
+  radical.add('down', shapes.polyLine(poly(color)));
+  radical.add('up', shapes.polyLine(poly(color)));
+  radical.add('top', shapes.polyLine(poly(color)));
+  updateStaticLinePoints(radical, 0.2, 0.2, 1, 1, 0.01, true, null, null);
+  radical.custom.startWidth = startWidth;
+  radical.custom.startHeight = startHeight;
+  radical.custom.lineWidth = lineWidth;
+  radical.custom.proportionalToHeight = proportionalToHeight;
+  radical.custom.maxStartWidth = maxStartWidth;
+  radical.custom.maxStartHeight = maxStartHeight; // Defined every time a setSize event is called
+
+  if (staticSize != null) {
+    radical.custom.type = 'static';
+    var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_3__["getPoint"])(staticSize); // this is messed up and I wouldn't use it, but you can
+
+    updateStaticLinePoints(radical, radical.custom.startWidth, radical.custom.startHeight, size.x, size.y, radical.custom.lineWidth, radical.custom.proportionalToHeight, radical.custom.maxStartWidth, radical.custom.maxStartHeight); // defined everytime a setTransform event is called
+  } else {
+    radical.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"](1, 1);
+
+    radical.internalSetTransformCallback = function () {
+      var s = radical.getScale();
+
+      if (radical.custom.scale.isNotEqualTo(s, 8)) {
+        updateStaticLinePoints(radical, radical.custom.startWidth, radical.custom.startHeight, s.x, s.y, radical.custom.lineWidth, radical.custom.proportionalToHeight, radical.custom.maxStartWidth, radical.custom.maxStartHeight);
+        radical.custom.scale = s;
+      }
+    };
+
+    radical.getTransform = function () {
+      var t = radical.transform._dup();
+
+      t.updateScale(1, 1);
+      return t;
+    };
+
+    radical.custom.type = 'dynamic';
+  } // eslint-disable-next-line max-len
+
+
+  radical.custom.setSize = function (location, widthIn, heightIn) {
+    var t = radical.transform._dup();
+
+    t.updateScale(widthIn, heightIn);
+    t.updateTranslation(location.x, location.y);
+    radical.setTransform(t);
+  };
+
+  return radical;
 }
 
 /***/ }),
@@ -17962,7 +18929,17 @@ function (_DrawingObject) {
   }, {
     key: "measureText",
     value: function measureText(ctx, text) {
-      var aWidth = ctx.measureText('a').width; // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+      // const aWidth = ctx.measureText('a').width;
+      var fontHeight = ctx.font.match(/[^ ]*px/);
+      var aWidth;
+
+      if (fontHeight != null) {
+        aWidth = parseFloat(fontHeight[0]) / 2;
+      } else {
+        aWidth = ctx.measureText('a').width;
+      } // const aWidth = parseFloat(ctx.font.match(/[^ ]*px/)[0]) / 2;
+      // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+
 
       var ascent = aWidth * 1.4;
       var descent = aWidth * 0.08; // Uncomment below and change above consts to lets if more resolution on
@@ -21337,12 +22314,15 @@ function () {
 
     this.setTransformCallback = function () {};
 
+    this.internalSetTransformCallback = function () {};
+
     this.lastDrawTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
       parentCount: 0,
       elementCount: 0
     };
+    this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
     this.noRotationFromParent = false; // this.pulseDefault = (callback: ?() => void = null) => {
@@ -21768,6 +22748,11 @@ function () {
     key: "getElement",
     value: function getElement() {
       return this;
+    }
+  }, {
+    key: "getElements",
+    value: function getElements() {
+      return [this];
     } // eslint-disable-next-line no-unused-vars, class-methods-use-this
 
   }, {
@@ -21823,6 +22808,10 @@ function () {
     key: "setTransform",
     value: function setTransform(transform) {
       this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
+
+      if (this.internalSetTransformCallback) {
+        this.internalSetTransformCallback(this.transform);
+      }
 
       if (this.setTransformCallback) {
         this.setTransformCallback(this.transform);
@@ -22044,7 +23033,8 @@ function () {
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
-      this.transform.order.forEach(function (t, index) {
+      var transform = this.getTransform();
+      transform.order.forEach(function (t, index) {
         _this2.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
@@ -22314,19 +23304,119 @@ function () {
       if (diagramHTMLElement && this.tieToHTML.updateOnResize) {
         this.updateHTMLElementTie(diagramHTMLElement);
       }
+    } // ***************************************************************
+    // Boundaries
+    // ***************************************************************
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getVertexSpaceBoundaries",
+    value: function getVertexSpaceBoundaries() {
+      return [[]];
     } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getGLBoundaries",
+    value: function getGLBoundaries() {
+      return [[]];
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getLocalBoundaries",
+    value: function getLocalBoundaries() {
+      return [[]];
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getDiagramBoundaries",
+    value: function getDiagramBoundaries() {
+      return [[]];
+    }
+  }, {
+    key: "getBoundaries",
+    value: function getBoundaries() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      if (space === 'local') {
+        return this.getLocalBoundaries();
+      }
+
+      if (space === 'diagram') {
+        return this.getDiagramBoundaries();
+      }
+
+      if (space === 'vertex') {
+        return this.getVertexSpaceBoundaries();
+      }
+
+      if (space === 'gl') {
+        return this.getGLBoundaries();
+      }
+
+      return [[]];
+    } // ***************************************************************
+    // Bounding Rect
+    // ***************************************************************
+    // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "getGLBoundingRect",
     value: function getGLBoundingRect() {
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
-    }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getLocalBoundingRect",
+    value: function getLocalBoundingRect() {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getVertexSpaceBoundingRect",
+    value: function getVertexSpaceBoundingRect() {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // eslint-disable-next-line class-methods-use-this
+
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
       var gl = this.getGLBoundingRect();
       var glToDiagramScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.diagramLimits.width / 2, this.diagramLimits.height / 2);
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](gl.left * glToDiagramScale.x, gl.bottom * glToDiagramScale.y, gl.width * glToDiagramScale.x, gl.height * glToDiagramScale.y);
+    }
+  }, {
+    key: "getBoundingRect",
+    value: function getBoundingRect() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      if (space === 'local') {
+        return this.getLocalBoundingRect();
+      }
+
+      if (space === 'diagram') {
+        return this.getDiagramBoundingRect();
+      }
+
+      if (space === 'vertex') {
+        return this.getVertexSpaceBoundingRect();
+      }
+
+      if (space === 'gl') {
+        return this.getGLBoundingRect();
+      }
+
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    } // ***************************************************************
+    // Size
+    // ***************************************************************
+
+  }, {
+    key: "getRelativeBoundingRect",
+    value: function getRelativeBoundingRect() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var rect = this.getBoundingRect(space);
+      var position = this.getPosition(space);
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](rect.left - position.x, rect.bottom - position.y, rect.width, rect.height);
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -22346,18 +23436,6 @@ function () {
     value: function getCenterDiagramPosition() {
       var rect = this.getDiagramBoundingRect();
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.left + rect.width / 2, rect.bottom + rect.height / 2);
-    }
-  }, {
-    key: "getPosition",
-    value: function getPosition() {
-      var t = this.transform.t();
-      var position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-
-      if (t != null) {
-        position = t._dup();
-      }
-
-      return position;
     }
   }, {
     key: "getScale",
@@ -22417,11 +23495,54 @@ function () {
       return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
-    key: "getDiagramPosition",
-    value: function getDiagramPosition() {
-      // Note, this should be 0,0 as the current transform's translation will
-      // be included in getVertexSpaceDiagramPosition
-      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+    key: "getLocalPosition",
+    value: function getLocalPosition() {
+      var t = this.transform.t();
+      var position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (t != null) {
+        position = t._dup();
+      }
+
+      return position;
+    } // // deprecated
+    // getDiagramPosition() {
+    //   // Note, this should be 0,0 as the current transform's translation will
+    //   // be included in getVertexSpaceDiagramPosition
+    //   return this.getVertexSpaceDiagramPosition(new Point(0, 0));
+    // }
+    // // eslint-disable-next-line class-methods-use-this
+    // getGLPosition() {
+    //   return new Point(0, 0);
+    // }
+
+  }, {
+    key: "getPosition",
+    value: function getPosition() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+
+      // vertex space position doesn't mean much as it will always be 0, 0
+      if (space === 'vertex') {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      }
+
+      if (space === 'local') {
+        return this.getLocalPosition();
+      }
+
+      if (space === 'diagram') {
+        // Note, this should be 0,0 as the current transform's translation will
+        // be included in getVertexSpaceDiagramPosition
+        return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+      }
+
+      if (space === 'gl') {
+        // Note, this should be 0,0 as the current transform's translation will
+        // be included in getVertexSpaceDiagramPosition
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0).transformBy(this.lastDrawTransform.matrix());
+      }
+
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     }
   }, {
     key: "getPixelToVertexSpaceScale",
@@ -22488,7 +23609,7 @@ function () {
   }, {
     key: "setDiagramPositionToElement",
     value: function setDiagramPositionToElement(element) {
-      var p = element.getDiagramPosition();
+      var p = element.getPosition('diagram');
       this.setDiagramPosition(p._dup());
     }
   }, {
@@ -22689,6 +23810,11 @@ function () {
     //   }
     // }
 
+  }, {
+    key: "getTransform",
+    value: function getTransform() {
+      return this.transform;
+    }
   }]);
 
   return DiagramElement;
@@ -22951,7 +24077,7 @@ function (_DiagramElement) {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
         };
-        var newTransform = parentTransform.transform(this.transform);
+        var newTransform = parentTransform.transform(this.getTransform());
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
         this.lastDrawTransform = pulseTransforms[0];
@@ -23041,19 +24167,19 @@ function (_DiagramElement) {
     // }
 
   }, {
-    key: "getGLBoundaries",
-    value: function getGLBoundaries() {
-      return this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
-    }
-  }, {
     key: "getVertexSpaceBoundaries",
     value: function getVertexSpaceBoundaries() {
       return this.drawingObject.border;
     }
   }, {
-    key: "getGLBoundingRect",
-    value: function getGLBoundingRect() {
-      return this.drawingObject.getGLBoundingRect(this.lastDrawTransform.matrix());
+    key: "getLocalBoundaries",
+    value: function getLocalBoundaries() {
+      return this.drawingObject.getGLBoundaries(this.getTransform().matrix());
+    }
+  }, {
+    key: "getGLBoundaries",
+    value: function getGLBoundaries() {
+      return this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
     }
   }, {
     key: "getVertexSpaceBoundingRect",
@@ -23061,14 +24187,29 @@ function (_DiagramElement) {
       return this.drawingObject.getVertexSpaceBoundingRect();
     }
   }, {
-    key: "getRelativeGLBoundingRect",
-    value: function getRelativeGLBoundingRect() {
-      return this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
+    key: "getLocalBoundingRect",
+    value: function getLocalBoundingRect() {
+      return this.drawingObject.getGLBoundingRect(this.getTransform().matrix());
+    }
+  }, {
+    key: "getGLBoundingRect",
+    value: function getGLBoundingRect() {
+      return this.drawingObject.getGLBoundingRect(this.lastDrawTransform.matrix());
     }
   }, {
     key: "getRelativeVertexSpaceBoundingRect",
     value: function getRelativeVertexSpaceBoundingRect() {
       return this.drawingObject.getRelativeVertexSpaceBoundingRect();
+    }
+  }, {
+    key: "getRelativeGLBoundingRect",
+    value: function getRelativeGLBoundingRect() {
+      return this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
+    }
+  }, {
+    key: "getRelativeLocalBoundingRect",
+    value: function getRelativeLocalBoundingRect() {
+      return this.drawingObject.getRelativeGLBoundingRect(this.getTransform().matrix());
     }
   }, {
     key: "increaseBorderSize",
@@ -23233,7 +24374,7 @@ function (_DiagramElement2) {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
         };
-        var newTransform = parentTransform.transform(this.transform);
+        var newTransform = parentTransform.transform(this.getTransform());
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
         this.lastDrawTransform = pulseTransforms[0]; // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
@@ -23327,6 +24468,10 @@ function (_DiagramElement2) {
 
       if (elementPath == null) {
         return this;
+      }
+
+      if (typeof elementPath !== 'string') {
+        return elementPath;
       } // if (elementPath instanceof DiagramElement) {
       //   return elementPath;
       // }
@@ -23353,6 +24498,21 @@ function (_DiagramElement2) {
       };
 
       return getElement(elementPath, this);
+    }
+  }, {
+    key: "getElements",
+    value: function getElements(children) {
+      var _this8 = this;
+
+      var elements = [];
+      children.forEach(function (child) {
+        var element = _this8.getElement(child);
+
+        if (element != null) {
+          elements.push(element);
+        }
+      });
+      return elements;
     }
   }, {
     key: "show",
@@ -23504,7 +24664,7 @@ function (_DiagramElement2) {
     value: function setFirstTransform() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       // const finalParentTransform = this.processParentTransform(parentTransform);
-      var firstTransform = parentTransform.transform(this.transform);
+      var firstTransform = parentTransform.transform(this.getTransform());
       this.lastDrawTransform = firstTransform;
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -23514,6 +24674,49 @@ function (_DiagramElement2) {
 
       this.setMoveBoundaryToDiagram();
     }
+  }, {
+    key: "getAllBoundaries",
+    value: function getAllBoundaries() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var boundaries = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.isShown) {
+          var elementBoundaries = element.getBoundaries(space);
+          boundaries = boundaries.concat(elementBoundaries);
+        }
+      }
+
+      return boundaries;
+    }
+  }, {
+    key: "getBoundaries",
+    value: function getBoundaries() {
+      var _this9 = this;
+
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var boundaries = [];
+
+      if (children == null) {
+        return this.getAllBoundaries();
+      }
+
+      children.forEach(function (child) {
+        var e = _this9.getElement(child);
+
+        if (e == null) {
+          return;
+        }
+
+        var elementBoundaries = e.getBoundaries(space);
+        boundaries = boundaries.concat(elementBoundaries);
+      });
+      return boundaries;
+    } // deprecated
+
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
@@ -23529,7 +24732,8 @@ function (_DiagramElement2) {
       }
 
       return boundaries;
-    }
+    } // deprecated
+
   }, {
     key: "getVertexSpaceBoundaries",
     value: function getVertexSpaceBoundaries() {
@@ -23545,6 +24749,44 @@ function (_DiagramElement2) {
       }
 
       return boundaries;
+    } // getBoundaries() {
+    //   let boundaries = [];
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     if (element.isShown) {
+    //       const elementBoundaries = element.getBoundaries();
+    //       boundaries = boundaries.concat(elementBoundaries);
+    //     }
+    //   }
+    //   return boundaries;
+    // }
+
+  }, {
+    key: "getBoundingRect",
+    value: function getBoundingRect() {
+      var _this10 = this;
+
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (children == null) {
+        var boundaries = this.getBoundaries(space);
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      }
+
+      var points = [];
+      children.forEach(function (child) {
+        var e = _this10.getElement(child);
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
     }
   }, {
     key: "getGLBoundingRect",
@@ -23555,8 +24797,29 @@ function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var boundaries = this.getVertexSpaceBoundaries();
-      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      var _this11 = this;
+
+      var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToBound == null) {
+        // return super.getDiagramBoundingRect();
+        var boundaries = this.getVertexSpaceBoundaries();
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(boundaries);
+      }
+
+      var points = [];
+      elementsToBound.forEach(function (element) {
+        var e = _this11.getElement(element);
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
     }
   }, {
     key: "getRelativeGLBoundingRect",
@@ -23564,7 +24827,8 @@ function (_DiagramElement2) {
       var boundingRect = this.getGLBoundingRect();
       var location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0).transformBy(this.lastDrawTransform.matrix());
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundingRect.left - location.x, boundingRect.bottom - location.y, boundingRect.width, boundingRect.height);
-    }
+    } // deprecated
+
   }, {
     key: "getRelativeVertexSpaceBoundingRect",
     value: function getRelativeVertexSpaceBoundingRect() {
@@ -23733,6 +24997,37 @@ function (_DiagramElement2) {
       this.exec('undim', elementsToHighlight);
     }
   }, {
+    key: "getDiagramBoundingRect",
+    value: function getDiagramBoundingRect() {
+      var _this12 = this;
+
+      var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (elementsToBound == null) {
+        return _get(_getPrototypeOf(DiagramElementCollection.prototype), "getDiagramBoundingRect", this).call(this);
+      }
+
+      var points = [];
+      elementsToBound.forEach(function (element) {
+        var e;
+
+        if (typeof element === 'string') {
+          e = _this12.getElement(element);
+        } else {
+          e = element;
+        }
+
+        if (e == null) {
+          return;
+        }
+
+        var bound = e.getDiagramBoundingRect();
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.left, bound.bottom));
+        points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bound.right, bound.top));
+      });
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(points);
+    }
+  }, {
     key: "setOpacity",
     value: function setOpacity(opacity) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -23763,17 +25058,21 @@ function (_DiagramElement2) {
 
         if (element.name in elementTransforms) {
           element.transform = elementTransforms[element.name];
+
+          if (element.internalSetTransformCallback) {
+            element.internalSetTransformCallback(element.transform);
+          }
         }
       }
     }
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this8 = this;
+      var _this13 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this8.elements[a];
-        var elemB = _this8.elements[b];
+        var elemA = _this13.elements[a];
+        var elemB = _this13.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -23818,6 +25117,10 @@ function (_DiagramElement2) {
             }
           } else {
             element.transform = elementTransforms[element.name]._dup();
+
+            if (element.internalSetTransformCallback) {
+              element.internalSetTransformCallback(element.transform);
+            }
           }
         }
       }
@@ -25016,8 +26319,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoint", function() { return getPoint; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -25027,6 +26328,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25433,6 +26736,54 @@ function () {
   return Point;
 }();
 
+// point can be defined as:
+//    - Point instance
+//    - [1, 1]
+//    - { x: 1, y: 1 }
+function parsePoint(p, onFail) {
+  if (p instanceof Point) {
+    return p;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (Array.isArray(p)) {
+    if (p.length === 2) {
+      return new Point(p[0], p[1]);
+    }
+
+    return onFailToUse;
+  }
+
+  if (typeof p === 'number') {
+    return new Point(p, p);
+  }
+
+  if (_typeof(p) === 'object') {
+    var keys = Object.keys(p);
+
+    if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
+      return new Point(p.x, p.y);
+    }
+  }
+
+  return onFailToUse;
+}
+
+function getPoint(p) {
+  var parsedPoint = parsePoint(p);
+
+  if (parsedPoint == null) {
+    parsedPoint = new Point(0, 0);
+  }
+
+  return parsedPoint;
+}
+
 function linearPath(start, delta, percent) {
   return start.add(delta.x * percent, delta.y * percent);
 }
@@ -25623,10 +26974,10 @@ function () {
 
     _classCallCheck(this, Line);
 
-    this.p1 = p1._dup();
+    this.p1 = getPoint(p1);
 
-    if (p2OrMag instanceof Point) {
-      this.p2 = p2OrMag._dup();
+    if (p2OrMag instanceof Point || Array.isArray(p2OrMag)) {
+      this.p2 = getPoint(p2OrMag);
       this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
     } else {
       this.p2 = this.p1.add(p2OrMag * Math.cos(angle), p2OrMag * Math.sin(angle));
@@ -27137,54 +28488,6 @@ function getMoveTime(startTransform, stopTransform) // 100%/s
     }
   });
   return maxTime;
-}
-
-// point can be defined as:
-//    - Point instance
-//    - [1, 1]
-//    - { x: 1, y: 1 }
-function parsePoint(p, onFail) {
-  if (p instanceof Point) {
-    return p;
-  }
-
-  var onFailToUse = onFail;
-
-  if (onFailToUse == null) {
-    onFailToUse = null;
-  }
-
-  if (Array.isArray(p)) {
-    if (p.length === 2) {
-      return new Point(p[0], p[1]);
-    }
-
-    return onFailToUse;
-  }
-
-  if (typeof p === 'number') {
-    return new Point(p, p);
-  }
-
-  if (_typeof(p) === 'object') {
-    var keys = Object.keys(p);
-
-    if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
-      return new Point(p.x, p.y);
-    }
-  }
-
-  return onFailToUse;
-}
-
-function getPoint(p) {
-  var parsedPoint = parsePoint(p);
-
-  if (parsedPoint == null) {
-    parsedPoint = new Point(0, 0);
-  }
-
-  return parsedPoint;
 }
 
 

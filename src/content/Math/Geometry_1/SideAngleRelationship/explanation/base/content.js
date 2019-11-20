@@ -132,7 +132,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, content, {
       modifiers: {
         isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
-        triangle: click(this.next, [this], colors.isosceles),
+        triangle: click(this.next, [this, null], colors.isosceles),
       },
       show: [
         fig._tri._line, fig._tri._side01, fig._tri._side12,

@@ -1866,6 +1866,138 @@
     ],
     "enabled": true
   },
+  "Math/Geometry_1/Polygon": {
+    "title": "Polygons",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Properties",
+          "description": "",
+          "htmlTitle": "Discover side and angle relationships of polygons",
+          "htmlDescription": "Develop relationships between sides and angles of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Polygons and Regular Polygons",
+          "description": "",
+          "htmlTitle": "Calculating angles and sides of polygons",
+          "htmlDescription": "Calculating sides from angles and angles from sides of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "Polygons and Regular Polygons",
+          "htmlDescription": "Descriptive and interactive explanation of definition and properties of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "Polygons and Regular Polygons in brief",
+          "htmlDescription": "Brief explanation of definition and properties of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "General",
+          "description": "General links to sources of information for polygons",
+          "htmlTitle": "Polygon Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about polygons",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Polygon",
+              "hash": "ad32fbfff17ed6a028cc353902c09c90",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on polygons"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Regular_polygon",
+              "hash": "2a56c1a857eb3f6dfa0cf43fa678850f",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on regular polygons"
+            },
+            {
+              "url": "https://www.qc.edu.hk/math/Junior%20Secondary/interior%20angle.htm",
+              "hash": "6893ae5dd574fbe1d9f78a9a2da64cdf",
+              "publisher": "Queens College HK",
+              "type": "generic",
+              "description": "Proofs for internal angle sums"
+            },
+            {
+              "url": "https://mathbitsnotebook.com/Geometry/Polygons/POpolygonAnglePractice.html",
+              "hash": "2e81f9b232d9f8374ce849c346d0fe27",
+              "publisher": "MathBitsNotebook",
+              "type": "generic",
+              "description": "Example problems with polygons"
+            },
+            {
+              "url": "https://www.mathsisfun.com/geometry/polygons.html",
+              "hash": "a9e7b79978b071a8b5f7a6b1ddfa522c",
+              "publisher": "Math is Fun",
+              "type": "generic",
+              "description": "Polygon introduction"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "singlePage",
+          "title": "Angles and Sides",
+          "description": "",
+          "htmlTitle": "Quiz: Angles and sides of polygons",
+          "htmlDescription": "Calculate angles and sides of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition and Properties",
+          "description": "",
+          "htmlTitle": "Polygons and Regular Polygons Summary",
+          "htmlDescription": "Definition and properties of polygons and regular polygons",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      "Equilateral"
+    ],
+    "enabled": true
+  },
   "Math/Geometry_1/Quadrangles": {
     "title": "Quadrangles",
     "approaches": {

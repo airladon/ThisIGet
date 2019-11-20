@@ -230,7 +230,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        parallel_lines: click(this.next, [this], colors.parallel),
+        parallel_lines: click(this.next, [this, null], colors.parallel),
       },
     });
     this.addSection(common, {

@@ -74,7 +74,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, {
       modifiers: {
-        line: click(this.next, [this], colors.sides),
+        line: click(this.next, [this, null], colors.sides),
       },
       show: [coll._quad1, coll._quad2, coll._quad3],
     });

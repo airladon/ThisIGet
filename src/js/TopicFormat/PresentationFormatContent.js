@@ -663,8 +663,8 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
-    this.next = () => { this.diagram.version.nextSection(); };
-    this.prev = () => { this.diagram.version.nextSection(); };
+    this.next = (message: ?string = null) => { this.diagram.version.nextSection(message); };
+    this.prev = (message: ?string = null) => { this.diagram.version.nextSection(message); };
     this.setElementContent();
     this.addSections();
     this.addInfoBox();
@@ -827,7 +827,7 @@ class PresentationFormatContent extends SimpleFormatContent {
           diagramPosition = element.getCenterDiagramPosition();
         } else if (location === 'zero'
         || (location === '' && element.interactiveLocation === 'zero')) {
-          diagramPosition = element.getDiagramPosition();
+          diagramPosition = element.getPosition('diagram');
         } else if (location === 'topLeft'
           || (location === '' && element.interactiveLocation === 'topLeft')
         ) {
@@ -931,8 +931,11 @@ class PresentationFormatContent extends SimpleFormatContent {
     }
   }
 
-  bindNext(color: Array<number> = this.diagram.layout.colors.diagram.action) {
-    return click(this.next, [this], color);
+  bindNext(
+    color: Array<number> = this.diagram.layout.colors.diagram.action,
+    message: ?string = null,
+  ) {
+    return click(this.next, [this, message], color);
   }
 
   qr(

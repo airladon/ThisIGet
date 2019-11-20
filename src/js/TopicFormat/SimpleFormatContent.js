@@ -23,6 +23,7 @@ class SimpleFormatContent {
   setVariables: () => {[name: string]: string | number };
   variables: { [name: string]: string | number };
   colors: Object;
+  message: ?string;
 
   constructor(htmlId: string = 'topic__content') {
     this.colors = new Colors();
@@ -34,6 +35,7 @@ class SimpleFormatContent {
     this.key = 0;
     this.variables = {};
     this.setVariables = () => ({});
+    this.message = null;
   }
 
   initialize() {

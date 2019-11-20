@@ -213,7 +213,7 @@ class Content extends PresentationFormatContent {
       ],
       modifiers: {
         center_point: click(circ.pulseCenter, [circ], colors.center),
-        location: click(this.next, [this], colors.center),
+        location: click(this.next, [this, null], colors.center),
       },
       show: [circle._line, circle._center],
       setEnterState: () => {
