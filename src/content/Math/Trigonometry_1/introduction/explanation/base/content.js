@@ -13,10 +13,10 @@ import DiagramCollection from './diagramCollection';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 
 const {
-  // style,
-  click,
+  style,
+  // click,
   // clickW,
-  highlight,
+  // highlight,
   // centerV,
 } = Fig.tools.html;
 
@@ -41,9 +41,48 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
-    const fig = coll._fig;
+    // const fig = coll._fig;
 
     this.addSection({
+      title: 'Introduction',
+      setContent: [
+        '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side lengths| and |angles| of |triangles|.',
+        style({ top: 40 }, 'The word |trigonometry| comes from the the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
+      ],
+      show: [coll._tri],
+    });
+    this.addSection({
+      setContent: style({ centerV: true, centerH: true }, [
+        'So |why| study triangles? Are they really that |important|?',
+      ]),
+    });
+    this.addSection({
+      setEnterState: () => {
+        coll.setScenarios('house');
+      },
+      show: [coll._line, coll._house],
+    });
+    this.addSection({
+      setEnterState: () => {
+        coll.setScenarios('plane');
+      },
+      show: [coll._arrow, coll._plane],
+    });
+    this.addSection({
+      setEnterState: () => {
+        coll.setScenarios('cart');
+      },
+      show: [coll._arrow, coll._cart],
+    });
+
+    this.addSection({
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      show: [coll._rotator],
+      setSteadyState: () => {
+        console.log(coll)
+      }
     });
   }
 }

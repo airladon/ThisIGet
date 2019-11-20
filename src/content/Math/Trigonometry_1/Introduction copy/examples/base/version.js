@@ -2,11 +2,11 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'simple',
-  topic: 'explanation',
-  title: 'Descriptive',
+  uid: 'base',
+  topic: 'examples',
+  title: 'Examples of ',
   description: '',
-  htmlTitle: '',
+  htmlTitle: '... examples',
   htmlDescription: '',
   fullTopic: true,
   type: 'singlePage',

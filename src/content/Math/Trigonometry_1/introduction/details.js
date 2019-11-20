@@ -8,7 +8,7 @@ var topicDetails = {
   ],
   enabled: true,
   path: 'Math/Trigonometry_1',
-  uid: 'introduction',
+  uid: 'Introduction',
 };
 
 module.exports = topicDetails;

@@ -1,3 +1,13 @@
 // .diagram__text {
 //   z-index: 0;
 // }
+
+#id_aeroplane {
+  width: calc(var(--pres__content_width) * 0.3);
+  height: calc(var(--pres__content_width) * 0.3);
+}
+
+#id_cart {
+  width: calc(var(--pres__content_width) * 0.3);
+  height: calc(var(--pres__content_width) * 0.3);
+}
