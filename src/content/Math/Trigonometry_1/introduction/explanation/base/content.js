@@ -60,7 +60,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection({
       setContent: style({ centerV: true, centerH: true }, [
-        'Because the |tools| we develop to analyze triangles are used in almost |every branch of engineering and science|.',
+        'Well the |tools| we develop to analyze triangles are used in most | branches of engineering and science|.',
       ]),
     });
 
@@ -81,15 +81,6 @@ class Content extends PresentationFormatContent {
       show: [coll._line._line],
     });
 
-    // this.addSection(common, {
-    //   setContent: 'As such, this line spans some |horizontal| distance, and spans some |vertical| distance.',
-    //   modifiers: {
-    //     horizontal: this.bindNext(colors.components, 'h'),
-    //     vertical: this.bindNext(colors.components, 'v'),
-    //   },
-    //   show: [coll._line._line],
-    // });
-
     this.addSection(common, {
       setContent: 'As such, this line |spans| some |horizontal| distance, and spans some |vertical| distance.',
       modifiers: {
@@ -97,6 +88,10 @@ class Content extends PresentationFormatContent {
         vertical: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
       },
       show: [coll._line],
+      transitionFromPrev: (done) => {
+        coll._line._h.grow(0.05, 1, true, done);
+        coll._line._v.grow(0.05, 1, true, null);
+      }
       // transitionFromPrev: (done) => {
       //   if (this.message === 'h') {
       //     coll.accent(coll._line._h, done);
@@ -115,6 +110,7 @@ class Content extends PresentationFormatContent {
       setContent: 'Now, this line can represent |many| things. For example, it might represent a |rafter| on a |house|.',
     };
     this.addSection(common, commonContent, {
+      title: 'Object',
       modifiers: {
         rafter: this.bindNext(colors.line),
       },
@@ -141,15 +137,15 @@ class Content extends PresentationFormatContent {
     });
 
     commonContent = {
-      setContent: 'To cut a |rafter| to size, you need to know the relationship between its |length|, the |horizontal| and |vertical| distance it spans.',
+      setContent: 'To cut a |rafter| to size, you need to know the relationship between its |length|, the |horizontal_span| and |vertical_span| spans.',
     };
 
     this.addSection(common, commonContent, {
       modifiers: {
         rafter: coll.bindAccent(coll._line._line),
         length: coll.bindAccent(coll._line._line),
-        horizontal: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
-        vertical: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
+        horizontal_span: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
+        vertical_span: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
       },
       show: [coll._line, coll._house],
       setSteadyState: () => {
@@ -160,11 +156,18 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     commonContent = {
       setContent: 'This line could also represent a |direction_|. For instance, the |direction| of a |plane| coming in to |land|.',
     };
 
     this.addSection(common, commonContent, {
+      title: 'Direction',
       modifiers: {
         direction_: this.bindNext(colors.line),
         direction: this.bindNext(colors.line),
@@ -249,10 +252,10 @@ class Content extends PresentationFormatContent {
       },
       show: [coll._arrow._line, coll._plane],
       transitionFromPrev: (done) => {
-        if (this.message === 'height') {
+        if (this.message === 'distance') {
           coll._arrow._h.showAll();
           coll._arrow._h.grow(0.05, 1, true, done);
-        } else if (this.message === 'distance') {
+        } else if (this.message === 'height') {
           coll._arrow._v.showAll();
           coll._arrow._v.grow(0.05, 1, true, done);
         } else {
@@ -272,6 +275,13 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+
     this.addSection(common, {
       setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
       modifiers: {
