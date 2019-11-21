@@ -22370,6 +22370,9 @@ function () {
 
     this.setTransformCallback = function () {};
 
+    this.beforeDrawCallback = null;
+    this.afterDrawCallback = null;
+
     this.internalSetTransformCallback = function () {};
 
     this.lastDrawTransform = this.transform._dup();
@@ -24122,6 +24125,10 @@ function (_DiagramElement) {
           }
         }
 
+        if (this.beforeDrawCallback != null) {
+          this.beforeDrawCallback(now);
+        }
+
         this.animations.nextFrame(now);
         this.nextMovingFreelyFrame(now);
 
@@ -24168,6 +24175,10 @@ function (_DiagramElement) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
+        }
+
+        if (this.afterDrawCallback != null) {
+          this.afterDrawCallback(now);
         }
       }
     }
@@ -24419,6 +24430,10 @@ function (_DiagramElement2) {
           }
         }
 
+        if (this.beforeDrawCallback != null) {
+          this.beforeDrawCallback(now);
+        }
+
         this.animations.nextFrame(now);
         this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
 
@@ -24449,6 +24464,10 @@ function (_DiagramElement2) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
+        }
+
+        if (this.afterDrawCallback != null) {
+          this.afterDrawCallback(now);
         }
       }
     }

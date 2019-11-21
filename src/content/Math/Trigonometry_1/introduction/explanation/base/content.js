@@ -77,11 +77,13 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setEnterState: () => {
-        coll.setScenarios('default');
+        coll.setScenarios('sine');
+        console.log(new Date().getTime())
       },
       show: [coll._rotator],
       setSteadyState: () => {
         console.log(coll)
+        console.log(new Date().getTime())
       }
     });
   }

@@ -216,7 +216,10 @@ export default function diagramLayout() {
 
   const r = 1;
   const axis = r * 1.2;
-  const time = range(0, 3, 0.02);
+  layout.timeDuration = 2.5;
+  layout.timeStep = 0.02;
+  const time = range(0, layout.timeDuration, layout.timeStep);
+  layout.time = time;
   const f = 1.5;
   const sinePoints = time.map(t => new Point(
     t,
@@ -260,12 +263,14 @@ export default function diagramLayout() {
           color: colors.components,
           width: 0.01,
           close: false,
+          position: [1.5, 0],
         },
       },
     ],
     mods: {
       scenarios: {
         default: { position: [0, -0.5], scale: 1 },
+        sine: { position: [-1.5, -0.5], scale: 1 },
       },
     },
   };

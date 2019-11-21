@@ -2,7 +2,6 @@
 import Fig from 'figureone';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
-import plane from './plane.svg';
 
 const {
   DiagramElementPrimitive,
@@ -11,8 +10,32 @@ const {
   DiagramElementCollection,
   DiagramObjectPolyLine,
   // Equation,
+  Point,
   Transform,
 } = Fig;
+
+const { round } = Fig.tools.math;
+
+class Queue {
+  data: Array<number>;
+  maxLen: number;
+
+  constructor(initialArray) {
+    this.data = initialArray;
+    this.maxLen = this.data.length;
+  }
+
+  add(element, count = 1) {
+    if (count === 1) {
+      this.data.pop();
+      this.data.unshift(element);
+    } else if (count < this.maxLen) {
+      this.data = [...Array(count).fill(element), ...this.data.slice(0, this.data.length - count)];
+    } else {
+      this.data = Array(this.maxLen).fill(element);
+    }
+  }
+}
 
 export default class CommonCollection extends CommonDiagramCollection {
   _rotator: {
@@ -21,6 +44,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     _v: DiagramObjectLine;
     _sine: DiagramObjectPolyLine
   } & DiagramElementCollection;
+
+  lastTime: number;
+  signal: Queue;
+  timeOut: TimeoutID;
+  stationaryTime: number;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -32,6 +60,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this._rotator._line._line.setMovable(true);
     this._rotator._line.setTransformCallback = this.updateRotator.bind(this);
+    this.lastTime = new Date().getTime();
+    this.signal = new Queue(Array(this.layout.time.length).fill(0));
+    // console.log(this.signal.length, this.signal.data.slice(0, 10));
+    // this.signal.add(1, 5)
+    // console.log(this.signal.length, this.signal.data.slice(0, 10));
   }
 
   updateRotator() {
@@ -44,9 +77,35 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._rotator._v.isShown) {
       this._rotator._v.setEndPoints([p.x, 0], p);
     }
-    // if (this._rotator._sine.isShown) {
-    //   const x = 
-    // }
+    if (this._rotator._sine.isShown) {
+      clearTimeout(this.timeOut);
+      this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
+      this.stationaryTime = 0;
+      this.updateSine('movement');
+    }
     // this.diagram.animateNextFrame();
+  }
+
+  updateSine(state: 'movement' | 'stationary') {
+    // console.log(state, this.stationaryTime);
+    const currentTime = new Date().getTime();
+    const delta = Math.min(currentTime - this.lastTime, this.layout.timeDuration * 1000);
+    const numSteps = round(delta / 1000 / this.layout.timeStep, 0);
+    // this.lastTime += numSteps * this.layout.timeStep / 0.001;
+    this.lastTime = currentTime;
+    if (numSteps > 0) {
+      this.signal.add(this._rotator._v.p2.y, numSteps);
+      // console.log(this.signal.data.length, this.signal.data.slice(0, 5))
+      const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index], y));
+      this._rotator._sine.updatePoints(newPoints);
+    }
+    if (state === 'stationary') {
+      this.stationaryTime += 0.02;
+      if (this.stationaryTime < this.layout.timeDuration) {
+        // clearTimeout(this.timeOut);
+        this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
+      }
+      this.diagram.animateNextFrame();
+    }
   }
 }
