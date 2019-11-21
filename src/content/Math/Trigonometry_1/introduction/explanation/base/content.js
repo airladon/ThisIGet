@@ -290,6 +290,7 @@ class Content extends PresentationFormatContent {
       setContent: 'This line could also represent a |phenomenum|. For instance, a |force| applied to a cart.',
     };
     this.addSection(commonContent, {
+      title: 'Phenomenum',
       modifiers: {
         force: this.bindNext(colors.line),
       },
@@ -389,7 +390,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    
+
 
     this.addSection(common, {
       setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
