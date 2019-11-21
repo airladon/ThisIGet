@@ -20,6 +20,8 @@ const {
   // centerV,
 } = Fig.tools.html;
 
+const { round, range } = Fig.tools.math;
+
 const layout = diagramLayout();
 const { colors } = layout;
 
@@ -84,6 +86,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         console.log(coll)
         console.log(new Date().getTime())
+        console.log(range(1, 0, -0.05))
       }
     });
   }

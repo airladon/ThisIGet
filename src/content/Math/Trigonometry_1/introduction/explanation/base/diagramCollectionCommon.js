@@ -14,7 +14,7 @@ const {
   Transform,
 } = Fig;
 
-const { round } = Fig.tools.math;
+const { round, range } = Fig.tools.math;
 
 class Queue {
   data: Array<number>;
@@ -30,7 +30,15 @@ class Queue {
       this.data.pop();
       this.data.unshift(element);
     } else if (count < this.maxLen) {
-      this.data = [...Array(count).fill(element), ...this.data.slice(0, this.data.length - count)];
+      const newElements = [];
+      const delta = (this.data[0] - element) / (count);
+      for (let i = 0; i < count; i += 1) {
+        newElements.push(element + delta * i);
+      }
+      // const r = range(element, this.data[0], (this.data[0] - element) / count);
+      // console.log(element, this.data[0], newElements)
+      // console.log(delta)
+      this.data = [...newElements, ...this.data.slice(0, this.data.length - count)];
     } else {
       this.data = Array(this.maxLen).fill(element);
     }
