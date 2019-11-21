@@ -74,11 +74,12 @@ export default function diagramLayout() {
     ],
     options: {
       position: [0, 0.2],
+      pulse: 1.2,
     },
     mods: {
       scenarios: {
-        default: { position: [0, 0] },
-        low: { position: [0, -0.3] },
+        default: { position: [0, 0], scale: 1 },
+        low: { position: [0, -0.3], scale: 1.2 },
       },
     },
   };
@@ -246,7 +247,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [0, -0.3], scale: 1.4 },
-        rotator: { position: [0.435, -0.25], scale: 0.43 },
+        rotator: { position: [0.435, 0.05], scale: 0.43 },
       },
     },
   };
@@ -351,8 +352,8 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [0, -0.5], scale: 1 },
-        sine: { position: [-1.5, -0.5], scale: 1 },
+        default: { position: [0, -0.2], scale: 1 },
+        sine: { position: [-1.5, -0.2], scale: 1 },
       },
     },
   };

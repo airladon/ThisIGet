@@ -5,6 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
+import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -51,6 +52,9 @@ class Content extends PresentationFormatContent {
         '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side lengths| and |angles| of |triangles|.',
         style({ top: 40 }, 'The word |trigonometry| comes from the the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
       ],
+      modifiers: {
+        angles: highlight(colors.angles),
+      },
       show: [coll._tri],
       setSteadyState: () => {
         coll._tri.setScenario('default');
@@ -94,16 +98,7 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done) => {
         coll._line._h.grow(0.05, 1, true, done);
         coll._line._v.grow(0.05, 1, true, null);
-      }
-      // transitionFromPrev: (done) => {
-      //   if (this.message === 'h') {
-      //     coll.accent(coll._line._h, done);
-      //   } else if (this.message === 'v') {
-      //     coll.accent(coll._line._v, done);
-      //   } else {
-      //     coll.accent(coll._line, ['v', 'h'], done);
-      //   }
-      // },
+      },
     });
 
     // ************************************************************************
@@ -175,10 +170,10 @@ class Content extends PresentationFormatContent {
         direction_: this.bindNext(colors.line),
         direction: this.bindNext(colors.line),
       },
-      show: [coll._line, coll._house],
-      setSteadyState: () => {
-        coll.setScenarios('house');
-      },
+      // show: [coll._line, coll._house],
+      // setSteadyState: () => {
+      //   coll.setScenarios('house');
+      // },
     });
 
     this.addSection(common, commonContent, {
@@ -193,24 +188,24 @@ class Content extends PresentationFormatContent {
         ),
       },
       show: [coll._line, coll._house],
-      transitionFromPrev: (done) => {
-        coll._house.setScenario('house');
-        coll._line.setScenario('house');
-        coll._plane.setScenario('plane');
-        coll._arrow.setScenario('plane');
-        coll.animations.new()
-          .inParallel([
-            coll._house.anim.dissolveOut(0.8),
-            coll._line._h.anim.dissolveOut(0.8),
-            coll._line._v.anim.dissolveOut(0.8),
-          ])
-          .scenario({ element: coll._line, target: 'plane', duration: 1.5 })
-          .dissolveIn({ element: coll._plane, duration: 1 })
-          .dissolveIn({ element: coll._arrow._line, duration: 0 })
-          .dissolveOut({ element: coll._line, duration: 0 })
-          .whenFinished(done)
-          .start();
-      },
+      // transitionFromPrev: (done) => {
+      //   coll._house.setScenario('house');
+      //   coll._line.setScenario('house');
+      //   coll._plane.setScenario('plane');
+      //   coll._arrow.setScenario('plane');
+      //   coll.animations.new()
+      //     .inParallel([
+      //       coll._house.anim.dissolveOut(0.8),
+      //       coll._line._h.anim.dissolveOut(0.8),
+      //       coll._line._v.anim.dissolveOut(0.8),
+      //     ])
+      //     .scenario({ element: coll._line, target: 'plane', duration: 1.5 })
+      //     .dissolveIn({ element: coll._plane, duration: 1 })
+      //     .dissolveIn({ element: coll._arrow._line, duration: 0 })
+      //     .dissolveOut({ element: coll._line, duration: 0 })
+      //     .whenFinished(done)
+      //     .start();
+      // },
       setSteadyState: () => {
         coll.setScenarios('plane');
         coll._house.hide();
@@ -420,18 +415,35 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    commonContent = {
-      setContent: 'In addition, a right angle triangle |relates| |triangles| to |circles|.',
-    };
+    // commonContent = {
+    //   setContent: [
+    //     'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+    //     note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
+    //   ],
+    //   modifiers: {
+    //     line: coll.bindAccent(coll._rotator._line),
+    //   },
+    // };
     this.addSection(common, commonContent, {
+      setContent: [
+        'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+      ],
       title: 'Circles',
       show: [coll._rightTri],
     });
 
     this.addSection(common, commonContent, {
+      setContent: [
+        'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+        note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
+      ],
+      modifiers: {
+        line: coll.bindAccent(coll._rotator._line),
+      },
       setEnterState: () => {
         coll.setScenarios('default');
       },
+      fadeInFromPrev: false,
       show: [coll._rightTri],
       transitionFromPrev: (done) => {
         coll._rotator._h.showAll();
@@ -471,11 +483,15 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonContent, {
-      setContent: 'As a circle\'s radius |sweeps| around the circle, its |horizontal| and |vertical| components change.',
+      setContent: [
+        'As a circle\'s radius |sweeps| around the circle, its |horizontal| and |vertical| components change.',
+        // note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
+      ],
       modifiers: {
         sweeps: click(coll.pushLine, [coll], colors.line),
         horizontal: coll.bindAccent(coll._rotator._h),
         vertical: coll.bindAccent(coll._rotator._v),
+        // line: coll.bindAccent(coll._rotator._line),
       },
       show: [
         coll._rotator._line, coll._rotator._h, coll._rotator._v, coll._rotator._circle,
@@ -492,11 +508,12 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    commonContent = {
-      setContent: 'Now let\'s just track the |vertical| component, and |record| its position in time.',
-    };
+    // commonContent = {
+    //   setContent: 'Now let\'s record just the |vertical| component over |time|.',
+    // };
 
     this.addSection(common, commonContent, {
+      setContent: 'Now let\'s |record| just the |vertical| component over |time|.',
       modifiers: {
         vertical: coll.bindAccent(coll._rotator._v),
         record: this.bindNext(colors.components),
@@ -515,6 +532,11 @@ class Content extends PresentationFormatContent {
 
 
     this.addSection(common, commonContent, {
+      setContent: [
+        'Now let\'s |record| just the |vertical| component over |time|.',
+        note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
+      ],
+      fadeInFromPrev: false,
       modifiers: {
         vertical: coll.bindAccent(coll._rotator._v),
         record: click(coll.accentRecord, [coll], colors.components),
@@ -534,6 +556,7 @@ class Content extends PresentationFormatContent {
             coll._rotator._xExtension.anim.dissolveIn(0.5),
             coll._rotator._pause.anim.dissolveIn(0.5),
           ])
+          .trigger({ callback: coll.accentRecord.bind(coll), duration: 0 })
           .whenFinished(done)
           .start();
       },
@@ -580,22 +603,37 @@ class Content extends PresentationFormatContent {
     });
 
     this.addSection(common, {
-      setContent: 'An |example| recording of the |vertical| component of a spinning line is below.',
+      title: 'Wave',
+      setContent: 'A |recording| of the |vertical| component of a spinning line is below. It |stretches| when the spin is slower, and |compresses| when the spin is faster.',
       modifiers: {
-        example: coll.bindAccent(coll._sineExample),
+        recording: coll.bindAccent(coll._sineExample),
         vertical: highlight(colors.components),
+        compresses: click(coll.stretch, [coll, 1.5, 1.1], colors.components),
+        stretches: click(coll.stretch, [coll, 0.4, 1.1], colors.components),
       },
       show: [coll._sineExample],
+      setSteadyState: () => {
+        coll.setFreq(0.8);
+      },
     });
 
     this.addSection(common, {
-      setContent: style({ top: 0 }, 'This is commonly referred to as a |wave| and is found in many |natural| places including |sound|, |ocean waves|, |wind|, |heat|, |light|, |gravity| and |radiation|. It is present in phenomena as small as |atoms| and as large as |galaxies|.'),
+      setContent: style({ top: 0 }, [
+        'This is commonly referred to as a |wave| and is found in many |natural| places including |ocean waves|, |sound|, |wind|, |heat|, |light|, |gravity| and |radiation|.',
+        // 'It is present in phenomena as small as |atoms| and as large as |galaxies|.',
+      ]),
       show: [coll._sineExample],
+      setSteadyState: () => {
+        coll.setFreq(0.8);
+      },
     });
 
     this.addSection(common, {
-      setContent: style({ top: 0 }, 'We also use it everywhere in technology including |music|, |springs|, |motors|, |electricity|, |wireless communications|, |computers|, |lasers|, |voice recognition|, and |image compression| to name just a |few| examples.'),
+      setContent: style({ top: 0 }, 'We also use it in many |technologies| including |music|, |springs|, |motors|, |electricity|, |wireless communications|, |computers|, |lasers|, |voice recognition|, and |image compression| to name just a |few| examples.'),
       show: [coll._sineExample],
+      setSteadyState: () => {
+        coll.setFreq(0.8);
+      },
     });
 
     // this.addSection(common, {
@@ -604,10 +642,13 @@ class Content extends PresentationFormatContent {
     // });
 
     commonContent = {
-      setContent: 'And our |understanding| of it, and our ability to |analyze| and |use| it, comes from |trigonometry| and the study of |right angle triangles|.',
+      setContent: 'Our |understanding| of it, and our ability to |analyze| and |use| it, comes from |trigonometry| and the study of |right angle triangles|.',
     };
     this.addSection(common, commonContent, {
       show: [coll._sineExample],
+      setSteadyState: () => {
+        coll.setFreq(0.8);
+      },
     });
     this.addSection(commonContent, {
       setEnterState: () => {

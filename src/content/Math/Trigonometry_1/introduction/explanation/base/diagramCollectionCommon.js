@@ -14,7 +14,7 @@ const {
   Transform,
 } = Fig;
 
-const { round, rand } = Fig.tools.math;
+const { round, rand, range } = Fig.tools.math;
 
 class Queue {
   data: Array<number>;
@@ -56,6 +56,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _xExtension: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
+  _sineExample: DiagramObjectPolyLine;
+
   lastTime: number;
   signal: Queue;
   timeOut: TimeoutID;
@@ -86,6 +88,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.signal = new Queue(Array(this.layout.time.length).fill(0));
     this._rotator._sine.beforeDrawCallback = this.updateSine.bind(this);
     this.spin = { f: 1, duration: 1, initialAngle: 0 };
+    this.custom.f = 1;
+    this.custom.timeSteps = range(0, 5, 0.01);
   }
 
   pause() {
@@ -156,6 +160,41 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.stationaryTime += delta / 1000;
       this.diagram.animateNextFrame();
     }
+  }
+
+  setFreq(freq: number) {
+    if (freq === this.custom.f) {
+      return;
+    }
+    this.custom.f = freq;
+    const newPoints = this.custom.timeSteps.map(
+      t => new Point(t - 2.5, Math.sin(2 * Math.PI * freq * t)),
+    );
+    // console.log(newPoints)
+    this._sineExample.updatePoints(newPoints);
+  }
+
+  stretch(newF: number, pulseScale: number = 1) {
+    const start = this.custom.f;
+    const target = newF;
+    const delta = target - start;
+    const velocity = 0.8;
+    const duration = Math.abs(delta / velocity);
+    let scale = pulseScale;
+    if (Math.abs(delta) > 0.1) {
+      scale = 1;
+    }
+    this._sineExample.stop();
+    this._sineExample.animations.new()
+      .custom({
+        duration,
+        callback: (p) => {
+          this.setFreq(start + delta * p);
+        },
+      })
+      .pulse({ scale, duration: 1 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 
   spinNow(f: number, duration: number) {
