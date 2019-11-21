@@ -74,7 +74,7 @@ export default function diagramLayout() {
       position: [0, 0.2],
     },
   };
-  const makeLine = (name, p1, p2, color, width = 0.03, arrow1 = false, arrow2 = false) => ({
+  const makeLine = (name, p1, p2, color, width = 0.02, arrow1 = false, arrow2 = false) => ({
     name,
     method: 'line',
     options: {
@@ -82,8 +82,8 @@ export default function diagramLayout() {
       p2,
       color,
       width,
-      arrowStart: arrow1 ? { width: arrow1, height: 0.08 } : null,
-      arrowEnd: arrow2 ? { width: arrow2, height: 0.08 } : null,
+      arrowStart: arrow1 ? { width: arrow1, height: 0.06 } : null,
+      arrowEnd: arrow2 ? { width: arrow2, height: 0.06 } : null,
     },
   });
   const line = {
@@ -93,18 +93,18 @@ export default function diagramLayout() {
       makeLine('line', points[0], points[1], colors.line),
       makeLine(
         'h', points[0].add(0.015, 0), points[2],
-        colors.components, 0.015, 0.06, true,
+        colors.components, 0.015, 0.06, 0.06,
       ),
       makeLine(
         'v', points[2], points[1].add(0, -0.015),
-        colors.components, 0.015, 0.06, true,
+        colors.components, 0.015, 0.06, 0.06,
       ),
     ],
     mods: {
       scenarios: {
-        center: { position: [0, 0], scale: 1.2 },
+        default: { position: [0, 0], scale: 1.2 },
         house: { position: [-points[2].x, 0], scale: 1 },
-        // plane: { position: [0, -0.5], scale: 1.2 },
+        plane: { position: [0, -0.5], scale: 1.2 },
       },
     },
   };
@@ -121,7 +121,7 @@ export default function diagramLayout() {
         'v', points[2], points[1].add(0, -0.015),
         colors.components, 0.015, 0.06, false,
       ),
-      makeLine('line', points[0], points[1], colors.line, 0.03, 0.09, false),
+      makeLine('line', points[1], points[0], colors.line, 0.03, false, 0.09),
     ],
     mods: {
       scenarios: {

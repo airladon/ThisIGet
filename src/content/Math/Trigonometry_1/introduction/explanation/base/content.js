@@ -16,7 +16,7 @@ const {
   style,
   click,
   // clickW,
-  // highlight,
+  highlight,
   // centerV,
 } = Fig.tools.html;
 
@@ -57,6 +57,194 @@ class Content extends PresentationFormatContent {
       setContent: style({ centerV: true, centerH: true }, [
         'So |why| study triangles? Are they really that |important|?',
       ]),
+    });
+    this.addSection({
+      setContent: style({ centerV: true, centerH: true }, [
+        'Because the |tools| we develop to analyze triangles are used in almost |every branch of engineering and science|.',
+      ]),
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    let common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+    };
+    this.addSection(common, {
+      setContent: 'Consider a |line| that is not |horizontal| or |vertical|.',
+      modifiers: {
+        horizontal: highlight(colors.components),
+        vertical: highlight(colors.components),
+      },
+      show: [coll._line._line],
+    });
+
+    // this.addSection(common, {
+    //   setContent: 'As such, this line spans some |horizontal| distance, and spans some |vertical| distance.',
+    //   modifiers: {
+    //     horizontal: this.bindNext(colors.components, 'h'),
+    //     vertical: this.bindNext(colors.components, 'v'),
+    //   },
+    //   show: [coll._line._line],
+    // });
+
+    this.addSection(common, {
+      setContent: 'As such, this line |spans| some |horizontal| distance, and spans some |vertical| distance.',
+      modifiers: {
+        horizontal: coll.bindAccent(coll._line._h),
+        vertical: coll.bindAccent(coll._line._v),
+      },
+      show: [coll._line],
+      // transitionFromPrev: (done) => {
+      //   if (this.message === 'h') {
+      //     coll.accent(coll._line._h, done);
+      //   } else if (this.message === 'v') {
+      //     coll.accent(coll._line._v, done);
+      //   } else {
+      //     coll.accent(coll._line, ['v', 'h'], done);
+      //   }
+      // },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    let commonContent = {
+      setContent: 'Now, this line can represent |many| things. For example, it might represent a |rafter| on a |house|.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        rafter: this.bindNext(colors.line),
+      },
+      show: [coll._line],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        rafter: coll.bindAccent(coll._line._line),
+      },
+      show: [coll._line],
+      transitionFromPrev: (done) => {
+        coll._house.setScenario('house');
+        coll._line.animations.new()
+          .scenario({ target: 'house', duration: 1.5 })
+          .dissolveIn({ element: coll._house, duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('house');
+        coll._house.showAll();
+      },
+    });
+
+    commonContent = {
+      setContent: 'To cut a |rafter| to size, you need to know the relationship between its |length|, the |horizontal| and |vertical| distance it spans.',
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        rafter: coll.bindAccent(coll._line._line),
+        length: coll.bindAccent(coll._line._line),
+        horizontal: coll.bindAccent(coll._line._h),
+        vertical: coll.bindAccent(coll._line._v),
+      },
+      show: [coll._line, coll._house],
+      setSteadyState: () => {
+        coll.setScenarios('house');
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'This line could also represent a |direction_|. For instance, the |direction| of a |plane| coming in to |land|.',
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        direction_: this.bindNext(colors.line),
+        direction: this.bindNext(colors.line),
+      },
+      show: [coll._line, coll._house],
+      setSteadyState: () => {
+        coll.setScenarios('house');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        direction_: click(coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line),
+        direction: click(coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line),
+      },
+      show: [coll._line, coll._house],
+      transitionFromPrev: (done) => {
+        coll._house.setScenario('house');
+        coll._line.setScenario('house');
+        coll._plane.setScenario('plane');
+        coll._arrow.setScenario('plane');
+        coll.animations.new()
+          .inParallel([
+            coll._house.anim.dissolveOut(0.8),
+            coll._line._h.anim.dissolveOut(0.8),
+            coll._line._v.anim.dissolveOut(0.8),
+          ])
+          .scenario({ element: coll._line, target: 'plane', duration: 1.5 })
+          .inParallel([
+            coll._plane.anim.dissolveIn(1),
+            coll._arrow._line.anim.dissolveIn(1),
+          ])
+          .dissolveOut({ element: coll._line, duration: 0 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('plane');
+        coll._house.hide();
+        coll._line.hide();
+        coll._arrow._line.showAll();
+        coll._plane.showAll();
+      },
+    });
+
+    commonContent = {
+      setContent: 'when a plane comes in to land, you know the height above ground, and the distance to the runway and have to direct the plane to cover both in the same time.',
+    }
+
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection(common, {
+      setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
+      modifiers: {
+        horizontal: coll.bindAccent(coll._line._h),
+        vertical: coll.bindAccent(coll._line._v),
+      },
+      show: [coll._line],
+      // transitionFromPrev: (done) => {
+      //   if (this.message === 'h') {
+      //     coll.accent(coll._line._h, done);
+      //   } else if (this.message === 'v') {
+      //     coll.accent(coll._line._v, done);
+      //   } else {
+      //     coll.accent(coll._line, ['v', 'h'], done);
+      //   }
+      // },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      setContent: 'Consider a |line| that is not |horizontal| or |vertical|.',
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      show: [coll._line._line],
     });
     this.addSection({
       setEnterState: () => {
