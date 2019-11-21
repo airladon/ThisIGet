@@ -62,6 +62,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._rotator._line.setTransformCallback = this.updateRotator.bind(this);
     this.lastTime = new Date().getTime();
     this.signal = new Queue(Array(this.layout.time.length).fill(0));
+    this._rotator._sine.beforeDrawCallback = this.updateSine.bind(this);
     // console.log(this.signal.length, this.signal.data.slice(0, 10));
     // this.signal.add(1, 5)
     // console.log(this.signal.length, this.signal.data.slice(0, 10));
@@ -78,34 +79,37 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._rotator._v.setEndPoints([p.x, 0], p);
     }
     if (this._rotator._sine.isShown) {
-      clearTimeout(this.timeOut);
-      this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
+      // clearTimeout(this.timeOut);
+      // this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
       this.stationaryTime = 0;
-      this.updateSine('movement');
+      // this.updateSine('movement');
     }
     // this.diagram.animateNextFrame();
   }
 
-  updateSine(state: 'movement' | 'stationary') {
+  updateSine() {
     // console.log(state, this.stationaryTime);
-    const currentTime = new Date().getTime();
-    const delta = Math.min(currentTime - this.lastTime, this.layout.timeDuration * 1000);
-    const numSteps = round(delta / 1000 / this.layout.timeStep, 0);
-    // this.lastTime += numSteps * this.layout.timeStep / 0.001;
-    this.lastTime = currentTime;
-    if (numSteps > 0) {
-      this.signal.add(this._rotator._v.p2.y, numSteps);
-      // console.log(this.signal.data.length, this.signal.data.slice(0, 5))
-      const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index], y));
-      this._rotator._sine.updatePoints(newPoints);
-    }
-    if (state === 'stationary') {
-      this.stationaryTime += 0.02;
-      if (this.stationaryTime < this.layout.timeDuration) {
-        // clearTimeout(this.timeOut);
-        this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
+    if (this.stationaryTime < this.layout.timeDuration) {
+      const currentTime = new Date().getTime();
+      const delta = Math.min(currentTime - this.lastTime, this.layout.timeDuration * 1000);
+      const numSteps = round(delta / 1000 / this.layout.timeStep, 0);
+      this.lastTime = currentTime;
+      if (numSteps > 0) {
+        this.signal.add(this._rotator._v.p2.y, numSteps);
+        const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index], y));
+        this._rotator._sine.updatePoints(newPoints);
       }
+      this.stationaryTime += delta / 1000;
+      // console.log(this.stationaryTime)
       this.diagram.animateNextFrame();
     }
+    // if (state === 'stationary') {
+    //   this.stationaryTime += 0.02;
+    //   if (this.stationaryTime < this.layout.timeDuration) {
+    //     // clearTimeout(this.timeOut);
+    //     this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
+    //   }
+    //   this.diagram.animateNextFrame();
+    // }
   }
 }
