@@ -93,8 +93,8 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       setContent: 'As such, this line |spans| some |horizontal| distance, and spans some |vertical| distance.',
       modifiers: {
-        horizontal: coll.bindAccent(coll._line._h),
-        vertical: coll.bindAccent(coll._line._v),
+        horizontal: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
+        vertical: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
       },
       show: [coll._line],
       // transitionFromPrev: (done) => {
@@ -148,8 +148,8 @@ class Content extends PresentationFormatContent {
       modifiers: {
         rafter: coll.bindAccent(coll._line._line),
         length: coll.bindAccent(coll._line._line),
-        horizontal: coll.bindAccent(coll._line._h),
-        vertical: coll.bindAccent(coll._line._v),
+        horizontal: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
+        vertical: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
       },
       show: [coll._line, coll._house],
       setSteadyState: () => {
@@ -177,8 +177,14 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        direction_: click(coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line),
-        direction: click(coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line),
+        direction_: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          colors.line,
+        ),
+        direction: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          colors.line,
+        ),
       },
       show: [coll._line, coll._house],
       transitionFromPrev: (done) => {
@@ -193,10 +199,8 @@ class Content extends PresentationFormatContent {
             coll._line._v.anim.dissolveOut(0.8),
           ])
           .scenario({ element: coll._line, target: 'plane', duration: 1.5 })
-          .inParallel([
-            coll._plane.anim.dissolveIn(1),
-            coll._arrow._line.anim.dissolveIn(1),
-          ])
+          .dissolveIn({ element: coll._plane, duration: 1 })
+          .dissolveIn({ element: coll._arrow._line, duration: 0 })
           .dissolveOut({ element: coll._line, duration: 0 })
           .whenFinished(done)
           .start();
@@ -211,8 +215,58 @@ class Content extends PresentationFormatContent {
     });
 
     commonContent = {
-      setContent: 'when a plane comes in to land, you know the height above ground, and the distance to the runway and have to direct the plane to cover both in the same time.',
-    }
+      setContent: 'To |land| on the runway, you need to |direct| the plane such that the |height_above_ground| and the |distance_to_the_runway| is covered in the same |time|.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        height_above_ground: this.bindNext(colors.components, 'height'),
+        distance_to_the_runway: this.bindNext(colors.components, 'distance'),
+        time: this.bindNext(colors.lines, 'time'),
+        direct: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          colors.line,
+        ),
+      },
+      show: [coll._arrow._line, coll._plane],
+      setSteadyState: () => {
+        coll.setScenarios('plane');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        distance_to_the_runway: click(
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+        ),
+        height_above_ground: click(
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+        ),
+        time: click(() => {
+          coll._arrow._h.grow(0.05, 1, true, null);
+          coll._arrow._v.grow(0.05, 1, true, null);
+          coll._arrow._line.grow(0.05, 1, true, null);
+        }, [this], colors.line),
+      },
+      show: [coll._arrow._line, coll._plane],
+      transitionFromPrev: (done) => {
+        if (this.message === 'height') {
+          coll._arrow._h.showAll();
+          coll._arrow._h.grow(0.05, 1, true, done);
+        } else if (this.message === 'distance') {
+          coll._arrow._v.showAll();
+          coll._arrow._v.grow(0.05, 1, true, done);
+        } else {
+          coll._arrow.showAll();
+          coll._arrow._h.grow(0.05, 1, true, done);
+          coll._arrow._v.grow(0.05, 1, true, null);
+          coll._arrow._line.grow(0.05, 1, true, null);
+        }
+      },
+      setSteadyState: () => {
+        coll.setScenarios('plane');
+        coll._arrow.showAll();
+      },
+    });
 
 
     // ************************************************************************

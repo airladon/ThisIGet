@@ -74,7 +74,7 @@ export default function diagramLayout() {
       position: [0, 0.2],
     },
   };
-  const makeLine = (name, p1, p2, color, width = 0.02, arrow1 = false, arrow2 = false) => ({
+  const makeLine = (name, p1, p2, color, width = 0.02, arrow1 = false, arrow2 = false, vertexSpaceStart = 'start') => ({
     name,
     method: 'line',
     options: {
@@ -84,6 +84,7 @@ export default function diagramLayout() {
       width,
       arrowStart: arrow1 ? { width: arrow1, height: 0.06 } : null,
       arrowEnd: arrow2 ? { width: arrow2, height: 0.06 } : null,
+      vertexSpaceStart,
     },
   });
   const line = {
@@ -93,11 +94,11 @@ export default function diagramLayout() {
       makeLine('line', points[0], points[1], colors.line),
       makeLine(
         'h', points[0].add(0.015, 0), points[2],
-        colors.components, 0.015, 0.06, 0.06,
+        colors.components, 0.015, 0.06, 0.06, 'center',
       ),
       makeLine(
         'v', points[2], points[1].add(0, -0.015),
-        colors.components, 0.015, 0.06, 0.06,
+        colors.components, 0.015, 0.06, 0.06, 'center',
       ),
     ],
     mods: {
@@ -114,12 +115,12 @@ export default function diagramLayout() {
     method: 'collection',
     addElements: [
       makeLine(
-        'h', points[0].add(0.04, 0), points[2],
-        colors.components, 0.015, 0.06, false,
+        'h', points[2], points[0].add(0.04, 0),
+        colors.components, 0.015, false, 0.06,
       ),
       makeLine(
-        'v', points[2], points[1].add(0, -0.015),
-        colors.components, 0.015, 0.06, false,
+        'v', points[1].add(0, -0.015), points[2],
+        colors.components, 0.015, false, 0.06,
       ),
       makeLine('line', points[1], points[0], colors.line, 0.03, false, 0.09),
     ],
