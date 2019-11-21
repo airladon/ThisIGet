@@ -86,8 +86,10 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         console.log(coll)
         console.log(new Date().getTime())
-        console.log(range(1, 0, -0.05))
-      }
+        coll._rotator._line.animations.new()
+          .custom({ callback: coll.spin.bind(coll), duration: 10 })
+          .start();
+      },
     });
   }
 }

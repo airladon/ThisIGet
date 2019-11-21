@@ -104,20 +104,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.lastTime = currentTime;
       if (numSteps > 0) {
         this.signal.add(this._rotator._v.p2.y, numSteps);
-        const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index], y));
+        const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index] / 4, y));
         this._rotator._sine.updatePoints(newPoints);
       }
       this.stationaryTime += delta / 1000;
-      // console.log(this.stationaryTime)
       this.diagram.animateNextFrame();
     }
-    // if (state === 'stationary') {
-    //   this.stationaryTime += 0.02;
-    //   if (this.stationaryTime < this.layout.timeDuration) {
-    //     // clearTimeout(this.timeOut);
-    //     this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
-    //   }
-    //   this.diagram.animateNextFrame();
-    // }
+  }
+
+  spin(percent: number) {
+    const duration = 10;
+    const f = 0.5;
+    const angle = 2 * Math.PI * f * percent * duration;
+    this._rotator._line.setRotation(angle);
   }
 }

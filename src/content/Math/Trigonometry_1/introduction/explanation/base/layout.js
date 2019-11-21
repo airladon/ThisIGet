@@ -216,7 +216,7 @@ export default function diagramLayout() {
 
   const r = 1;
   const axis = r * 1.2;
-  layout.timeDuration = 2.5;
+  layout.timeDuration = 10;
   layout.timeStep = 0.02;
   const time = range(0, layout.timeDuration, layout.timeStep);
   layout.time = time;
@@ -230,8 +230,9 @@ export default function diagramLayout() {
     name: 'rotator',
     method: 'collection',
     addElements: [
-      makeLine('x', [-axis, 0], [axis, 0], colors.axies, 0.01),
-      makeLine('y', [0, -axis], [0, axis], colors.axies, 0.01),
+      makeLine('x', [-axis, 0], [axis, 0], colors.axes, 0.01),
+      makeLine('y', [0, -axis], [0, axis], colors.axes, 0.01),
+      makeLine('xExtension', [axis, 0], [4, 0], colors.axes, 0.01),
       {
         name: 'circle',
         method: 'polygon',
@@ -242,6 +243,8 @@ export default function diagramLayout() {
           color: colors.circle,
         },
       },
+      makeLine('h', [0, 0], [r, 0], colors.components, 0.01),
+      makeLine('v', [r, 0], [r, 0.1], colors.components, 0.01),
       {
         name: 'line',
         method: 'line',
@@ -253,8 +256,6 @@ export default function diagramLayout() {
           color: colors.line,
         },
       },
-      makeLine('h', [0, 0], [r, 0], colors.components, 0.01),
-      makeLine('v', [r, 0], [r, 0.1], colors.components, 0.01),
       {
         name: 'sine',
         method: 'polyLine',
