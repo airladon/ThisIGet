@@ -35,9 +35,6 @@ class Queue {
       for (let i = 0; i < count; i += 1) {
         newElements.push(element + delta * i);
       }
-      // const r = range(element, this.data[0], (this.data[0] - element) / count);
-      // console.log(element, this.data[0], newElements)
-      // console.log(delta)
       this.data = [...newElements, ...this.data.slice(0, this.data.length - count)];
     } else {
       this.data = Array(this.maxLen).fill(element);
@@ -57,6 +54,11 @@ export default class CommonCollection extends CommonDiagramCollection {
   signal: Queue;
   timeOut: TimeoutID;
   stationaryTime: number;
+  spin: {
+    f: number,
+    duration: number,
+    initialAngle: number,
+  };
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -71,14 +73,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.lastTime = new Date().getTime();
     this.signal = new Queue(Array(this.layout.time.length).fill(0));
     this._rotator._sine.beforeDrawCallback = this.updateSine.bind(this);
-    // console.log(this.signal.length, this.signal.data.slice(0, 10));
-    // this.signal.add(1, 5)
-    // console.log(this.signal.length, this.signal.data.slice(0, 10));
+    this.spin = { f: 1, duration: 1, initialAngle: 0 };
   }
 
   updateRotator() {
-    // const p1 = this._rotator._line.p1._dup();
-    // console.log(this._rotator._line.getRotation())
     const p = this._rotator._line.getP2();
     if (this._rotator._h.isShown) {
       this._rotator._h.setEndPoints([0, p.y], p);
@@ -87,16 +85,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._rotator._v.setEndPoints([p.x, 0], p);
     }
     if (this._rotator._sine.isShown) {
-      // clearTimeout(this.timeOut);
-      // this.timeOut = setTimeout(this.updateSine.bind(this, 'stationary'), 20);
       this.stationaryTime = 0;
-      // this.updateSine('movement');
     }
-    // this.diagram.animateNextFrame();
   }
 
   updateSine() {
-    // console.log(state, this.stationaryTime);
+    const slowDown = 4;
     if (this.stationaryTime < this.layout.timeDuration) {
       const currentTime = new Date().getTime();
       const delta = Math.min(currentTime - this.lastTime, this.layout.timeDuration * 1000);
@@ -104,7 +98,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.lastTime = currentTime;
       if (numSteps > 0) {
         this.signal.add(this._rotator._v.p2.y, numSteps);
-        const newPoints = this.signal.data.map((y, index) => new Point(this.layout.time[index] / 4, y));
+        const newPoints = this.signal.data.map(
+          (y, index) => new Point(this.layout.time[index] / slowDown, y),
+        );
         this._rotator._sine.updatePoints(newPoints);
       }
       this.stationaryTime += delta / 1000;
@@ -112,10 +108,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
   }
 
-  spin(percent: number) {
-    const duration = 10;
-    const f = 0.5;
-    const angle = 2 * Math.PI * f * percent * duration;
+  startSpinning(f: number, duration: number) {
+    this.spin.f = f;
+    this.spin.duration = duration;
+    this.spin.initialAngle = this._rotator._line.getRotation();
+    this._rotator._line.stop();
+    this._rotator._line.animations.new()
+      .custom({ callback: this.spinner.bind(this), duration })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  spinner(percent: number) {
+    const angle = this.spin.initialAngle + 2 * Math.PI * this.spin.f * percent * this.spin.duration;
     this._rotator._line.setRotation(angle);
   }
 }
