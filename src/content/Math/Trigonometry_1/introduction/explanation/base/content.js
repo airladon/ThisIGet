@@ -36,7 +36,7 @@ class Content extends PresentationFormatContent {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      // 'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/RightAngleTriangles/base',
     ]);
   }
 
@@ -391,7 +391,55 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
 
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+    };
+    this.addSection(common, {
+      title: 'triangle',
+      setContent: 'This |line|, and its |horizontal| and |vertical| components are a |right_angle_triangle|.',
+      modifiers: {
+        line: coll.bindAccent(coll._rightTri._line),
+        horizontal: coll.bindAccent(coll._rightTri._h),
+        vertical: coll.bindAccent(coll._rightTri._v),
+        right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
+      },
+      show: [coll._rightTri],
+    });
 
+    this.addSection(common, {
+      setContent: '|Trigonometry| studys the |relationship| between the angle of the |line|, and the size of the |components|.',
+      modifiers: {
+        line: coll.bindAccent(coll._rightTri._line),
+        components: highlight(colors.components),
+        horizontal: coll.bindAccent(coll._rightTri._h),
+        vertical: coll.bindAccent(coll._rightTri._v),
+        // horizontal: click(
+        //   coll._arrow._h.grow, [coll._rightTri._h, 0.05, 1, true, null], colors.components,
+        // ),
+        // vertical: click(
+        //   coll._arrow._v.grow, [coll._rightTri._v, 0.05, 1, true, null], colors.components,
+        // ),
+      },
+      show: [coll._rightTri],
+    });
+
+    this.addSection(common, {
+      setContent: style({ centerV: true }, [
+        '|Trigonometry| can be applied to |all objects, scenarios and phenomena| where understanding |horizontal| and |vertical| components is useful.',
+      ]),
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     this.addSection(common, {
       setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
       modifiers: {

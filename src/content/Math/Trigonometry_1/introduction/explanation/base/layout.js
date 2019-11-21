@@ -127,7 +127,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         plane: { position: [0, -0.5], scale: 1.2 },
-        cart: { position: [0.7, 0], scale: 0.9 },
+        cart: { position: [0.7, 0.2], scale: 0.9 },
       },
     },
   };
@@ -210,7 +210,34 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        cart: { position: [0, -1], scale: 1 },
+        cart: { position: [0, -0.8], scale: 1 },
+      },
+    },
+  };
+
+  const rightAngleTriangle = {
+    name: 'rightTri',
+    method: 'collection',
+    addElements: [
+      makeLine('line', points[0], points[1], colors.line, 0.02),
+      makeLine('h', points[2], points[0], colors.components, 0.02),
+      makeLine('v', points[1], points[2], colors.components, 0.02),
+      {
+        name: 'angle',
+        method: 'angle',
+        options: {
+          p1: points[1],
+          p2: points[2],
+          p3: points[0],
+          curve: { radius: 0.2, width: 0.01 },
+          autoRightAngle: true,
+          color: colors.components,
+        },
+      },
+    ],
+    mods: {
+      scenarios: {
+        default: { position: [0, -0.3], scale: 1.4 },
       },
     },
   };
@@ -285,6 +312,7 @@ export default function diagramLayout() {
     arrow,
     line,
     rotator,
+    rightAngleTriangle,
   ];
   return layout;
 }
