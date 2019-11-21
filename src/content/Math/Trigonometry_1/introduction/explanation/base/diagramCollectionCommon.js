@@ -31,6 +31,7 @@ class Queue {
       this.data.unshift(element);
     } else if (count < this.maxLen) {
       const newElements = [];
+      // Interpolate the points so we don't have steps in the output
       const delta = (this.data[0] - element) / (count);
       for (let i = 0; i < count; i += 1) {
         newElements.push(element + delta * i);
@@ -74,6 +75,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this._rotator._line._line.setMovable(true);
+    this._rotator._line._line.increaseBorderSize();
     this._rotator._record.makeTouchable();
     this._rotator._pause.makeTouchable();
     this._rotator._pause.onClick = this.pause.bind(this);
@@ -124,10 +126,11 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   resetSine() {
+    const slowDown = 4;
     const yValue = this._rotator._line.getP2().y;
     this.signal = new Queue(Array(this.layout.time.length).fill(yValue));
     const newPoints = this.signal.data.map(
-      (y, index) => new Point(this.layout.time[index], y),
+      (y, index) => new Point(this.layout.time[index] / slowDown, y),
     );
     this._rotator._sine.updatePoints(newPoints);
     this.diagram.animateNextFrame();
@@ -155,7 +158,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
   }
 
-  startSpinning(f: number, duration: number) {
+  spinNow(f: number, duration: number) {
     this.spin.f = f;
     this.spin.duration = duration;
     this.spin.initialAngle = this._rotator._line.getRotation();
@@ -172,6 +175,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pushLine() {
+    this.record();
     const line = this._rotator._line;
     const r = line.getRotation();
     line.stop();

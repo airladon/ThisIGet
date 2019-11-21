@@ -75,6 +75,12 @@ export default function diagramLayout() {
     options: {
       position: [0, 0.2],
     },
+    mods: {
+      scenarios: {
+        default: { position: [0, 0] },
+        low: { position: [0, -0.3] },
+      },
+    },
   };
   const makeLine = (name, p1, p2, color, width = 0.02, arrow1 = false, arrow2 = false, vertexSpaceStart = 'start') => ({
     name,
@@ -251,12 +257,26 @@ export default function diagramLayout() {
   layout.timeStep = 0.02;
   const time = range(0, layout.timeDuration, layout.timeStep);
   layout.time = time;
-  const f = 1.5;
+  const f = 0.7;
+  const sinePoints0 = time.map(t => new Point(t, 0));
   const sinePoints = time.map(t => new Point(
-    t,
-    0, // r * Math.sin(2 * f * Math.PI * t),
+    t / 2 - 5 / 2,
+    r * Math.sin(2 * f * Math.PI * t),
   ));
-
+  const sineExample = {
+    name: 'sineExample',
+    method: 'polyLine',
+    options: {
+      points: sinePoints,
+      color: colors.components,
+      width: 0.01,
+      close: false,
+      position: [0, -0.3],
+    },
+    mods: {
+      pulseDefault: { scale: 1.2 },
+    },
+  };
   const rotator = {
     name: 'rotator',
     method: 'collection',
@@ -288,13 +308,14 @@ export default function diagramLayout() {
         },
         mods: {
           interactiveLocation: [r / 2, 0],
+          move: { canBeMovedAfterLoosingTouch: true },
         },
       },
       {
         name: 'sine',
         method: 'polyLine',
         options: {
-          points: sinePoints,
+          points: sinePoints0,
           color: colors.components,
           width: 0.01,
           close: false,
@@ -345,6 +366,7 @@ export default function diagramLayout() {
     line,
     rotator,
     rightAngleTriangle,
+    sineExample,
   ];
   return layout;
 }
