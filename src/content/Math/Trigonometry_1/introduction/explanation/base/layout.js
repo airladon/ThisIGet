@@ -24,13 +24,15 @@ export default function diagramLayout() {
   colors.line = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
   colors.components = colors.get('red').rgb;
-  colors.circle = colors.get('green', 'dark').rgb;
-  colors.axes = colors.get('grey', 'darl').rgb;
+  colors.circle = colors.get('grey', 'dark').rgb;
+  colors.axes = colors.get('grey', 'dark').rgb;
+  colors.record = colors.get('red').rgb;
+  colors.pause = colors.get('grey', 'dark').rgb;
 
   const points = [
-    new Point(-1, -0.6),
-    new Point(1, 0.6),
-    new Point(1, -0.6),
+    new Point(-1, -0.577),
+    new Point(1, 0.577),
+    new Point(1, -0.577),
   ];
 
   const side = text => ({ label: { text, offset: 0.1, location: 'outside' } });
@@ -219,9 +221,9 @@ export default function diagramLayout() {
     name: 'rightTri',
     method: 'collection',
     addElements: [
-      makeLine('line', points[0], points[1], colors.line, 0.02),
       makeLine('h', points[2], points[0], colors.components, 0.02),
       makeLine('v', points[1], points[2], colors.components, 0.02),
+      makeLine('line', points[0], points[1], colors.line, 0.02),
       {
         name: 'angle',
         method: 'angle',
@@ -238,6 +240,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [0, -0.3], scale: 1.4 },
+        rotator: { position: [0.435, -0.25], scale: 0.43 },
       },
     },
   };
@@ -251,7 +254,7 @@ export default function diagramLayout() {
   const f = 1.5;
   const sinePoints = time.map(t => new Point(
     t,
-    r * Math.sin(2 * f * Math.PI * t),
+    0, // r * Math.sin(2 * f * Math.PI * t),
   ));
 
   const rotator = {
@@ -283,6 +286,9 @@ export default function diagramLayout() {
           move: { type: 'rotation' },
           color: colors.line,
         },
+        mods: {
+          interactiveLocation: [r / 2, 0],
+        },
       },
       {
         name: 'sine',
@@ -293,6 +299,32 @@ export default function diagramLayout() {
           width: 0.01,
           close: false,
           position: [1.5, 0],
+        },
+      },
+      {
+        name: 'record',
+        method: 'polygon',
+        options: {
+          radius: 0.1,
+          color: colors.record,
+          fill: true,
+          sides: 100,
+          position: [4, -1.2],
+        },
+      },
+      {
+        name: 'pause',
+        method: 'marks',
+        options: {
+          num: 2,
+          width: 0.06,
+          length: 0.2,
+          step: 0.13,
+          color: colors.pause,
+          position: [4, -1.2],
+        },
+        mods: {
+          touchInBoundingRect: true,
         },
       },
     ],

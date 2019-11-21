@@ -14,7 +14,7 @@ const {
   Transform,
 } = Fig;
 
-const { round, range } = Fig.tools.math;
+const { round, rand } = Fig.tools.math;
 
 class Queue {
   data: Array<number>;
@@ -47,7 +47,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
     _h: DiagramObjectLine;
     _v: DiagramObjectLine;
-    _sine: DiagramObjectPolyLine
+    _sine: DiagramObjectPolyLine;
+    _pause: DiagramElementPrimitive;
+    _record: DiagramElementPrimitive;
+    _x: DiagramElementPrimitive;
+    _y: DiagramElementPrimitive;
+    _xExtension: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   lastTime: number;
@@ -69,17 +74,46 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this._rotator._line._line.setMovable(true);
+    this._rotator._record.makeTouchable();
+    this._rotator._pause.makeTouchable();
+    this._rotator._pause.onClick = this.pause.bind(this);
+    this._rotator._record.onClick = this.record.bind(this);
     this._rotator._line.setTransformCallback = this.updateRotator.bind(this);
+    this.custom.recordState = 'record';
     this.lastTime = new Date().getTime();
     this.signal = new Queue(Array(this.layout.time.length).fill(0));
     this._rotator._sine.beforeDrawCallback = this.updateSine.bind(this);
     this.spin = { f: 1, duration: 1, initialAngle: 0 };
   }
 
+  pause() {
+    this.custom.recordState = 'pause';
+    this._rotator._pause.hide();
+    this._rotator._record.show();
+    this.diagram.animateNextFrame();
+  }
+
+  accentRecord() {
+    this.record();
+    this.pushLine();
+  }
+
+  record() {
+    if (this.custom.recordState === 'record') {
+      return;
+    }
+    this.custom.recordState = 'record';
+    this.stationaryTime = 0;
+    this._rotator._pause.show();
+    this._rotator._record.hide();
+    this.lastTime = new Date().getTime();
+    this.diagram.animateNextFrame();
+  }
+
   updateRotator() {
     const p = this._rotator._line.getP2();
     if (this._rotator._h.isShown) {
-      this._rotator._h.setEndPoints([0, p.y], p);
+      this._rotator._h.setEndPoints([0, 0], [p.x, 0]);
     }
     if (this._rotator._v.isShown) {
       this._rotator._v.setEndPoints([p.x, 0], p);
@@ -89,7 +123,20 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
   }
 
+  resetSine() {
+    const yValue = this._rotator._line.getP2().y;
+    this.signal = new Queue(Array(this.layout.time.length).fill(yValue));
+    const newPoints = this.signal.data.map(
+      (y, index) => new Point(this.layout.time[index], y),
+    );
+    this._rotator._sine.updatePoints(newPoints);
+    this.diagram.animateNextFrame();
+  }
+
   updateSine() {
+    if (this.custom.recordState === 'pause') {
+      return;
+    }
     const slowDown = 4;
     if (this.stationaryTime < this.layout.timeDuration) {
       const currentTime = new Date().getTime();
@@ -122,5 +169,16 @@ export default class CommonCollection extends CommonDiagramCollection {
   spinner(percent: number) {
     const angle = this.spin.initialAngle + 2 * Math.PI * this.spin.f * percent * this.spin.duration;
     this._rotator._line.setRotation(angle);
+  }
+
+  pushLine() {
+    const line = this._rotator._line;
+    const r = line.getRotation();
+    line.stop();
+    const delta = rand(Math.PI / 3, Math.PI * 3 / 2);
+    line.animations.new()
+      .rotation({ target: r + delta, duration: 2 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 }

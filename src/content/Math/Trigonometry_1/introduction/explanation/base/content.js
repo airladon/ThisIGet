@@ -408,6 +408,143 @@ class Content extends PresentationFormatContent {
       show: [coll._rightTri],
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    commonContent = {
+      setContent: 'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+    };
+    this.addSection(common, commonContent, {
+      title: 'Circles',
+      show: [coll._rightTri],
+    });
+
+    this.addSection(common, commonContent, {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      show: [coll._rightTri],
+      transitionFromPrev: (done) => {
+        coll._rotator._h.showAll();
+        coll._rotator._v.showAll();
+        coll._rotator._line.setRotation(Math.PI / 6);
+        coll._rotator._h.hide();
+        coll._rotator._v.hide();
+        coll.animations.new()
+          .scenario({ element: coll._rightTri, target: 'rotator', duration: 1 })
+          .dissolveIn({ element: coll._rotator._circle, duration: 1 })
+          .dissolveIn({ element: coll._rotator._line, duration: 0.3 })
+          .dissolveIn({ element: coll._rotator._v, duration: 0 })
+          .dissolveIn({ element: coll._rotator._h, duration: 0 })
+          .dissolveOut({ element: coll._rightTri, duration: 0.3 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._rotator._line.showAll();
+        coll._rotator._h.showAll();
+        coll._rotator._v.showAll();
+        coll._rotator._circle.showAll();
+        coll._rotator._line.setRotation(Math.PI / 6);
+        // coll._rightTri.setScenarios('rotator');
+        coll._rightTri.hide();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        // coll.setScenarios('rotator');
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      setContent: 'As a circle\'s radius |sweeps| around the circle, its |horizontal| and |vertical| components change.',
+      modifiers: {
+        sweeps: click(coll.pushLine, [coll], colors.line),
+        horizontal: coll.bindAccent(coll._rotator._h),
+        vertical: coll.bindAccent(coll._rotator._v),
+      },
+      show: [
+        coll._rotator._line, coll._rotator._h, coll._rotator._v, coll._rotator._circle,
+      ],
+      setSteadyState: () => {
+        if (this.comingFrom !== 'prev') {
+          coll._rotator._line.setRotation(Math.PI / 6);
+        } else {
+          coll.updateRotator();
+        }
+      },
+    });
+
+    commonContent = {
+      setContent: 'Now let\'s just track the |vertical| component, and |record| its position in time.',
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: coll.bindAccent(coll._rotator._v),
+        record: this.bindNext(colors.components),
+      },
+      show: [
+        coll._rotator._line, coll._rotator._h, coll._rotator._v, coll._rotator._circle,
+      ],
+      setSteadyState: () => {
+        if (this.comingFrom !== 'prev') {
+          coll._rotator._line.setRotation(Math.PI / 6);
+        } else {
+          coll.updateRotator();
+        }
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: coll.bindAccent(coll._rotator._v),
+        record: click(coll.accentRecord, [coll], colors.components),
+      },
+      show: [
+        coll._rotator._line, coll._rotator._h, coll._rotator._v, coll._rotator._circle,
+      ],
+      transitionFromPrev: (done) => {
+        coll.resetSine();
+        coll._rotator.animations.new()
+          .scenario({ target: 'sine', duration: 1 })
+          .inParallel([
+            coll._rotator._sine.anim.dissolveIn(0.5),
+            coll._rotator._h.anim.dissolveOut(0.5),
+            coll._rotator._x.anim.dissolveIn(0.5),
+            coll._rotator._y.anim.dissolveIn(0.5),
+            coll._rotator._xExtension.anim.dissolveIn(0.5),
+            coll._rotator._pause.anim.dissolveIn(0.5),
+          ])
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._rotator.showAll();
+        coll._rotator.setScenario('sine');
+        coll._rotator._record.hide();
+        coll._rotator._h.hide();
+        if (this.comingFrom === 'goto') {
+          coll._rotator._line.setRotation(Math.PI / 6);
+        } else {
+          coll.updateRotator();
+        }
+        coll.resetSine();
+      },
+    });
+
+
     this.addSection(common, {
       setContent: '|Trigonometry| studys the |relationship| between the angle of the |line|, and the size of the |components|.',
       modifiers: {
