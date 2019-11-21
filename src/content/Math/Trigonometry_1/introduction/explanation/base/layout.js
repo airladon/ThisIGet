@@ -115,7 +115,7 @@ export default function diagramLayout() {
     method: 'collection',
     addElements: [
       makeLine(
-        'h', points[2], points[0].add(0.04, 0),
+        'h', points[2], points[0].add(0.06, 0),
         colors.components, 0.015, false, 0.06,
       ),
       makeLine(

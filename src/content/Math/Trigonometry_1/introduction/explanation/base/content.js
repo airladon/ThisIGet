@@ -281,6 +281,115 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('cart');
+      },
+    };
+    commonContent = {
+      setContent: 'This line could also represent a |phenomenum|. For instance, a |force| applied to a cart.',
+    };
+    this.addSection(commonContent, {
+      modifiers: {
+        force: this.bindNext(colors.line),
+      },
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        force: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
+        ),
+      },
+      transitionFromPrev: (done) => {
+        coll._arrow.show();
+        coll.animations.new()
+          .dissolveIn({ element: coll._cart, duration: 1 })
+          .dissolveIn({ element: coll._arrow._line, duration: 0 })
+          .trigger({
+            callback: () => {
+              coll._arrow._line.grow(0.05, 1, true, null);
+            },
+            duration: 1,
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._cart.showAll();
+        coll._arrow._line.showAll();
+      },
+    });
+
+    commonContent = {
+      setContent: 'This |force| is made up of a |horizontal| and |vertical| force.',
+      modifiers: {
+        force: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
+        ),
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        horizontal: this.bindNext(colors.components, 'h'),
+        vertical: this.bindNext(colors.components, 'v'),
+      },
+      show: [coll._cart, coll._arrow._line],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        horizontal: click(
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+        ),
+        vertical: click(
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+        ),
+      },
+      show: [coll._cart, coll._arrow._line],
+      transitionFromPrev: (done) => {
+        if (this.message === 'h') {
+          coll._arrow._h.showAll();
+          coll._arrow._h.grow(0.05, 1, true, done);
+        } else if (this.message === 'v') {
+          coll._arrow._v.showAll();
+          coll._arrow._v.grow(0.05, 1, true, done);
+        } else {
+          coll._arrow.showAll();
+          coll._arrow._v.grow(0.05, 1, true, done);
+          coll._arrow._h.grow(0.05, 1, true, null);
+        }
+      },
+      setSteadyState: () => {
+        coll._arrow.showAll();
+      },
+    });
+
+    commonContent = {
+      setContent: 'Only the |horizontal| part of the force |moves| the cart as the |vertical| part just pushes it into the |ground|.',
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        horizontal: click(
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+        ),
+        vertical: click(
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+        ),
+      },
+      show: [coll._cart, coll._arrow],
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    
 
     this.addSection(common, {
       setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
