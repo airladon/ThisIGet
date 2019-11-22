@@ -1839,12 +1839,6 @@
           "title": "Descriptive",
           "description": "",
           "fullTopic": true
-        },
-        "static": {
-          "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
-          "description": "Derivation using area of four right angle triangles",
-          "fullTopic": true
         }
       }
     },
@@ -1968,7 +1962,7 @@
       }
     },
     "dependencies": [
-      "introduction"
+      "Introduction"
     ],
     "enabled": false
   }

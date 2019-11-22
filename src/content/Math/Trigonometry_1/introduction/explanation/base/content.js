@@ -4,7 +4,7 @@ import {
   PresentationFormatContent,
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
-// import Definition from '../../../../../common/tools/definition';
+import Definition from '../../../../../common/tools/definition';
 import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
@@ -50,7 +50,8 @@ class Content extends PresentationFormatContent {
       title: 'Introduction',
       setContent: [
         '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side| lengths and |angles| of |triangles|.',
-        style({ top: 43 }, 'The word |trigonometry| comes from the the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
+        // style({ top: 43 }, 'The word |trigonometry| comes from the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
+        `${new Definition('Trigonometry', 'Greek', ['trigonon', 'triangle', 'metron', 'to measure']).html()}`
       ],
       modifiers: {
         angles: highlight(colors.angles),
@@ -62,7 +63,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection({
       setContent: style({ centerV: true, centerH: true }, [
-        'So |why| study triangles? Are they really that |important|?',
+        'So |why| study |triangles|? Are they really that |important|?',
       ]),
     });
     this.addSection({
@@ -80,31 +81,58 @@ class Content extends PresentationFormatContent {
       },
     };
     this.addSection(common, {
-      setContent: 'Consider a |line| that is not |horizontal| or |vertical|.',
+      setContent: 'Consider a |line| that extends both |horizontally| and |vertically|.',
       modifiers: {
-        horizontal: highlight(colors.components),
-        vertical: highlight(colors.components),
+        horizontally: highlight(colors.components),
+        vertically: highlight(colors.components),
       },
       show: [coll._line._line],
     });
 
-    this.addSection(common, {
+    let commonContent = {
       setContent: 'As such, this line |spans| some |horizontal| distance, and spans some |vertical| distance.',
+    };
+
+    this.addSection(common, commonContent, {
       modifiers: {
-        horizontal: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
-        vertical: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
+        horizontal: this.bindNext(colors.components, 'h'),
+        vertical: this.bindNext(colors.components, 'v'),
+      },
+      show: [coll._line._line],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        horizontal: click(
+          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null],
+          colors.components,
+        ),
+        vertical: click(
+          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null],
+          colors.components,
+        ),
       },
       show: [coll._line],
       transitionFromPrev: (done) => {
-        coll._line._h.grow(0.05, 1, true, done);
-        coll._line._v.grow(0.05, 1, true, null);
+        if (this.message === 'h') {
+          coll.accent(coll._line, ['h', 'v'], () => {
+            coll._line._h.grow(0.05, 1, true, done);
+          });
+        } else if (this.message === 'v') {
+          coll.accent(coll._line, ['h', 'v'], () => {
+            coll._line._v.grow(0.05, 1, true, done);
+          });
+        } else {
+          coll._line._h.grow(0.05, 1, true, done);
+          coll._line._v.grow(0.05, 1, true, null);
+        }
       },
     });
 
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    let commonContent = {
+    commonContent = {
       setContent: 'Now, this line can represent |many| things. For example, it might represent a |rafter| on a |house|.',
     };
     this.addSection(common, commonContent, {
@@ -164,18 +192,6 @@ class Content extends PresentationFormatContent {
       setContent: 'This line could also represent a |direction_|. For instance, the |direction| of a |plane| coming in to |land|.',
     };
 
-    // this.addSection(common, commonContent, {
-    //   title: 'Direction',
-    //   modifiers: {
-    //     direction_: this.bindNext(colors.line),
-    //     direction: this.bindNext(colors.line),
-    //   },
-    //   // show: [coll._line, coll._house],
-    //   // setSteadyState: () => {
-    //   //   coll.setScenarios('house');
-    //   // },
-    // });
-
     this.addSection(common, commonContent, {
       title: 'Direction',
       modifiers: {
@@ -189,51 +205,27 @@ class Content extends PresentationFormatContent {
         ),
       },
       show: [coll._arrow._line, coll._plane],
-      // transitionFromPrev: (done) => {
-      //   coll.setScenarios('plane');
-      //   // coll._arrow._h.hide();
-      //   // coll._arrow._v.hide();
-      //   coll._arrow._line.grow(0.05, 1, true, done);
-      // },
       transitionFromPrev: (done) => {
         coll.setScenarios('plane');
         coll._arrow.hide();
         coll.animations.new()
-          .dissolveIn({ element: coll._plane, duration: 1 })
-          .dissolveIn({ element: coll._arrow._line, duration: 0 })
-          .trigger({
-            callback: () => {
-              coll._arrow._line.grow(0.05, 1, true, null);
-            },
-            duration: 1,
-          })
+          .inParallel([
+            coll._plane.anim.dissolveIn(1),
+            coll._arrow._line.anim.dissolveIn(1),
+            // .dissolveIn({ element: coll._plane, duration: 1 })
+            // .dissolveIn({ element: coll._arrow._line, duration: 1 })
+          ])
+          // .trigger({
+          //   callback: () => {
+          //     coll._arrow._line.grow(0.05, 1, true, null);
+          //   },
+          //   duration: 1,
+          // })
           .whenFinished(done)
           .start();
       },
-      // transitionFromPrev: (done) => {
-      //   coll._house.setScenario('house');
-      //   coll._line.setScenario('house');
-      //   coll._plane.setScenario('plane');
-      //   coll._arrow.setScenario('plane');
-      //   coll.animations.new()
-      //     .inParallel([
-      //       coll._house.anim.dissolveOut(0.8),
-      //       coll._line._h.anim.dissolveOut(0.8),
-      //       coll._line._v.anim.dissolveOut(0.8),
-      //     ])
-      //     .scenario({ element: coll._line, target: 'plane', duration: 1.5 })
-      //     .dissolveIn({ element: coll._plane, duration: 1 })
-      //     .dissolveIn({ element: coll._arrow._line, duration: 0 })
-      //     .dissolveOut({ element: coll._line, duration: 0 })
-      //     .whenFinished(done)
-      //     .start();
-      // },
       setSteadyState: () => {
         coll.setScenarios('plane');
-        // coll._house.hide();
-        // coll._line.hide();
-        // coll._arrow._line.showAll();
-        // coll._plane.showAll();
       },
     });
 
@@ -273,16 +265,13 @@ class Content extends PresentationFormatContent {
           colors.line,
         ),
       },
-      show: [coll._arrow._line, coll._plane],
+      show: [coll._arrow, coll._plane],
       transitionFromPrev: (done) => {
-        coll._arrow._h.showAll();
-        coll._arrow._v.showAll();
         if (this.message === 'distance') {
           coll.accent(coll._arrow, ['v', 'h'], () => {
             coll._arrow._h.grow(0.05, 1, true, done);
           });
         } else if (this.message === 'height') {
-          coll._arrow._v.grow(0.05, 1, true, done);
           coll.accent(coll._arrow, ['v', 'h'], () => {
             coll._arrow._v.grow(0.05, 1, true, done);
           });
@@ -292,7 +281,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         coll.setScenarios('plane');
-        coll._arrow.showAll();
+        // coll._arrow.showAll();
       },
     });
 
@@ -442,6 +431,17 @@ class Content extends PresentationFormatContent {
       show: [coll._rightTri],
     });
 
+    this.addSection(common, {
+      setContent: 'The |relationships| between |angles| and |sides| of a right angle triangle are therefore used to |analyse| these previous |examples|.',
+      modifiers: {
+        line: coll.bindAccent(coll._rightTri._line),
+        horizontal: coll.bindAccent(coll._rightTri._h),
+        vertical: coll.bindAccent(coll._rightTri._v),
+        right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
+      },
+      show: [coll._rightTri],
+    });
+
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
@@ -462,7 +462,7 @@ class Content extends PresentationFormatContent {
     // };
     this.addSection(common, commonContent, {
       setContent: [
-        'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+        'But that\'s not all. A right angle triangle also |relates| |triangles| to |circles|.',
       ],
       title: 'Circles',
       show: [coll._rightTri],
@@ -470,7 +470,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       setContent: [
-        'In addition, a right angle triangle |relates| |triangles| to |circles|.',
+        'But that\'s not all. A right angle triangle also |relates| |triangles| to |circles|.',
         note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
       ],
       modifiers: {
@@ -570,12 +570,13 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       setContent: [
         'Now let\'s |record| just the |vertical| component over |time|.',
-        note({ label: 'Note:' }, 'Rotate the |line| to see how the triangle changes'),
+        note({ label: 'Note:' }, 'Rotate the |line| to see how the vertical component changes'),
       ],
       fadeInFromPrev: false,
       modifiers: {
         vertical: coll.bindAccent(coll._rotator._v),
         record: click(coll.accentRecord, [coll], colors.components),
+        line: coll.bindAccent(coll._rotator._line),
       },
       show: [
         coll._rotator._line, coll._rotator._h, coll._rotator._v, coll._rotator._circle,
@@ -700,7 +701,7 @@ class Content extends PresentationFormatContent {
       title: 'Summary',
       setContent: style({ centerV: true }, [
         'These are a |few examples| where the |tools| we develop with trigonometry extend to uses in an |abundance of applications|.',
-        'But trigonometry is |more| than just the study of right angle triangles, and so its applications are |even more numerous|.',
+        'Trigonometry is |more| than just the study of right angle triangles, and so its applications are |even more numerous|.',
       ]),
     });
 

@@ -178,7 +178,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const start = this.custom.f;
     const target = newF;
     const delta = target - start;
-    const velocity = 0.8;
+    const velocity = 0.5;
     const duration = Math.abs(delta / velocity);
     let scale = pulseScale;
     if (Math.abs(delta) > 0.1) {
