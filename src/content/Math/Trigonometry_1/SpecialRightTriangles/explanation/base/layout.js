@@ -18,6 +18,7 @@ export default function diagramLayout() {
   colors.sides = colors.get('blue').rgb;
   colors.angles = colors.get('red').rgb;
   colors.dim = colors.get('grey', 'dark').rgb;
+  colors.working = colors.get('grey', 'dark').rgb;
 
   const side = 2.5;
   const equilHeight = side * Math.sqrt(3) * 0.5;
@@ -72,7 +73,7 @@ export default function diagramLayout() {
       label: {
         text,
         offset,
-        scale: 1.2,
+        scale: 1,
         location,
         subLocation,
       },
@@ -157,9 +158,225 @@ export default function diagramLayout() {
     },
   };
 
+  const sq = (content, power, bias = 0) => ({
+    sup: [content, power, 0.6, new Point(bias, 0)],
+  });
+
+  const frac = (num, den, v, scale = 1) => ({
+    frac: [num, den, v, scale],
+  });
+
+  const brac = (content, lb, rb) => ({
+    brac: [content, lb, rb],
+  });
+
+  const strike = (content, strike) => ({
+    strike: [content, strike],
+  });
+
+  const root = (content, radical) => ({
+    root: [content, radical],
+  });
+
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        equals: '  =  ',
+        equals1: '  =  ',
+        equals2: '  =  ',
+        H: { color: colors.sides },
+        H2: { text: 'H', color: colors.sides },
+        A1: { text: 'A', color: colors.sides },
+        A2: { text: 'A', color: colors.sides },
+        A3: { text: 'A', color: colors.sides },
+        A4: { text: 'A', color: colors.sides },
+        _21: '2',
+        _22: '2',
+        _23: '2',
+        _24: '2',
+        _25: '2',
+        _31: '3',
+        _32: '3',
+        _33: '3',
+        _4: '4',
+        _41: '4',
+        _42: '4',
+        _2b: { text: '2', color: colors.sides },
+        plus: ' + ',
+        minus: ' – ',
+        minus1: ' – ',
+        v1: { symbol: 'vinculum' },
+        v2: { symbol: 'vinculum' },
+        v3: { symbol: 'vinculum' },
+        vb: { symbol: 'vinculum', color: colors.sides },
+        brace1: {
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+        },
+        brace2: {
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+        },
+        lb: { symbol: 'bracket', side: 'left', numLines: 2 },
+        rb: { symbol: 'bracket', side: 'right', numLines: 2 },
+        strike1: { symbol: 'xStrike', color: colors.working },
+        strike2: { symbol: 'xStrike', color: colors.working },
+        r1: { symbol: 'radical' },
+        r2: { symbol: 'radical' },
+        r3: { symbol: 'radical' },
+        r4: { symbol: 'radical' },
+        r5: { symbol: 'radical' },
+        r6: { symbol: 'radical' },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': [
+          sq('H', '_22', 0.02), 'plus',
+          sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
+          'equals', sq('A1', '_21'),
+        ],
+        '1': [
+          sq('H', '_22', 0.02), 'plus',
+          {
+            topComment: [
+              sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
+              frac(sq('A3', '_24'), '_4', 'v2'),
+              'brace1',
+            ],
+          },
+          'equals', sq('A1', '_21'),
+        ],
+        '2': [
+          sq('H', '_22', 0.02), 'plus',
+          frac(sq('A3', '_24'), '_4', 'v2'),
+          'equals', sq('A1', '_21'),
+        ],
+        '3': [
+          {
+            bottomComment: [
+              [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
+              ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
+            ],
+          },
+          'equals',
+          {
+            bottomComment: {
+              content: sq('A1', '_21'),
+              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
+              contentSpace: 0.14,
+              includeInSize: false,
+            },
+          },
+        ],
+        '4': [
+          {
+            bottomComment: [
+              [
+                sq('H', '_22', 0.02), 'plus',
+                strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
+              ],
+              strike(['minus', frac(sq('A2', '_23'), '_41', 'v1')], 'strike2'),
+            ],
+          },
+          'equals',
+          {
+            bottomComment: {
+              content: sq('A1', '_21'),
+              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
+              contentSpace: 0.14,
+              includeInSize: false,
+            },
+          },
+        ],
+        '5': [
+          sq('H', '_22', 0.02),
+          'equals',
+          sq('A1', '_21'),
+          'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+        ],
+        '6': [
+          sq('H', '_22', 0.02),
+          'equals',
+          {
+            topComment: {
+              content: [
+                sq('A1', '_21'),
+                'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+              ],
+              comment: [frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')],
+              symbol: 'brace1',
+            },
+          },
+        ],
+        '7': [
+          sq('H', '_22', 0.02),
+          'equals',
+          frac('_31', '_4', 'v1', 0.7), sq('A2', '_23'),
+        ],
+        '8': [
+          root(sq('H', '_22', 0.02), 'r1'),
+          'equals',
+          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+        ],
+        '9': [
+          {
+            topComment: {
+              content: root(sq('H', '_22', 0.02), 'r1'),
+              comment: 'H2',
+              symbol: 'brace1',
+              contentSpace: 0.1,
+            },
+          },
+          'equals',
+          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+          'equals1',
+          frac(root('_33', 'r4'), root('_41', 'r5'), 'v2', 0.7),
+          root(sq('A3', '_24'), 'r6'),
+          'equals2',
+          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+        ],
+        // '9': [
+        //   {
+        //     topComment: {
+        //       content: root(sq('H', '_22', 0.02), 'r1'),
+        //       comment: 'H2',
+        //       symbol: 'brace1',
+        //       contentSpace: 0.1,
+        //     },
+        //   },
+        //   'equals',
+        //   {
+        //     topComment: {
+        //       content: root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+        //       comment: [frac(root('_32', 'r3'), '_21', 'v2', 0.7), 'A1'],
+        //       symbol: 'brace2',
+        //       contentSpace: 0.1,
+        //     },
+        //   },
+        // ],
+        '10': [
+          'H2',
+          'equals',
+          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+        ],
+      },
+    },
+    mods: {
+      scenarios: {
+        side: { position: [0.3, 0.6] },
+      },
+    },
+  };
+
   layout.addElements = [
     equil,
-    // eqn2,
+    eqn,
   ];
   return layout;
 }

@@ -45,6 +45,7 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const equil = coll._equil;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Introduction',
@@ -266,8 +267,8 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'Now let\'s |focus| on just |one half| and solve for |H| using the |Pythagorean_Theorem|.',
       modifiers: {
-        Pythagorean_Theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres')
-      }
+        Pythagorean_Theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
+      },
     };
     this.addSection(common, commonContent, {
       show: [
@@ -325,9 +326,38 @@ class Content extends PresentationFormatContent {
         equil._a90Left.hide();
         equil._equil.hide();
         equil._tri.showAll();
-        equil.setScenario('side')
+        equil.setScenario('side');
+        coll._eqn.showForm('0');
+        coll._eqn.setScenario('side');
       },
     });
+
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('side');
+      },
+      show: [
+        // equil._equil,
+        equil._a60,
+        equil._A,
+        equil._H,
+        equil._Aon2,
+        equil._a30,
+        equil._tri,
+        equil._a90,
+      ],
+    }
+    // this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '6', to: '7' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '7', to: '8' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '8', to: '9' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '9', to: '10' }, common, commonContent);
   }
 }
 

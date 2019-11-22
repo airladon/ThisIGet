@@ -42,10 +42,13 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
+    // const eqn = coll._eqn;
 
     this.addSection({
     });
   }
+
+  // this.addSectionEqnStep({ eqn: eqn, from: '0', to: '1' }, common, commonContent);
 }
 
 export default Content;
