@@ -29,7 +29,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   updateEquilRotation() {
     const r = this._equil.getRotation();
-    this._equil.exec(['updateLabel', r], ['a30', 'a60', 'A', 'H', 'Aon2']);
+    this._equil.exec(['updateLabel', r], ['a30', 'a60', 'A', 'H', 'Aon2', 'r32', 'r3', 'ARight', '2A', '1Right', 'r31', '2']);
     this.diagram.animateNextFrame();
   }
 }

@@ -49,6 +49,18 @@ export default function diagramLayout() {
     forms: {
       '0': [{ root: ['_3', 'r'] }, 'A'],
     },
+    scale: 1,
+  });
+
+  const root3 = ({
+    elements: {
+      _3: { text: '3', color: colors.sides },
+      r: { symbol: 'radical', color: colors.sides },
+    },
+    forms: {
+      '0': { root: ['_3', 'r'] },
+    },
+    scale: 1,
   });
 
   const root3Aon2 = ({
@@ -60,7 +72,7 @@ export default function diagramLayout() {
       r: { symbol: 'radical', color: colors.sides },
     },
     forms: {
-      '0': { frac: [[{ root: ['_3', 'r'] }, 'A'], '2', 'v' ]},
+      '0': [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v'] }, 'A'],
     },
   });
 
@@ -107,9 +119,15 @@ export default function diagramLayout() {
     addElements: [
       lineLabel('Aon2Left', Aon2, midPoint, equilPoints[0], 'bottom', 'right'),
       lineLabel('Aon2', Aon2, equilPoints[2], midPoint, 'bottom'),
+      lineLabel('ARight', 'A', equilPoints[2], midPoint, 'bottom'),
+      lineLabel('1Right', '1', equilPoints[2], midPoint, 'bottom'),
       lineLabel('H', 'H', midPoint, equilPoints[1], 'left', 'bottom'),
       lineLabel('r3', root3A, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
+      lineLabel('r31', root3, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
+      lineLabel('r32', root3Aon2, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('A', 'A', equilPoints[1], equilPoints[2], 'right', 'top'),
+      lineLabel('2A', '2A', equilPoints[1], equilPoints[2], 'right', 'top'),
+      lineLabel('2', '2', equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('ALeft', 'A', equilPoints[0], equilPoints[1], 'left', 'top'),
       lineLabel('ABottom', 'A', equilPoints[0], equilPoints[2], 'left', 'bottom'),
       angle('a30', null, midPoint, equilPoints[1], equilPoints[2], 0.5),
@@ -152,8 +170,9 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [0, -0.6], rotation: 0 },
-        side: { position: [0.5, -1.2], rotation: Math.PI / 2 },
+        default: { position: [0, -0.6], rotation: 0, scale: 1 },
+        side: { position: [0.5, -1.2], rotation: Math.PI / 2, scale: 1.2 },
+        sideCenter: { position: [0.5, -0.9], rotation: Math.PI / 2, scale: 1.2 },
       },
     },
   };
@@ -259,14 +278,14 @@ export default function diagramLayout() {
         ],
         '3': [
           {
-            bottomComment: [
+            topComment: [
               [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
               ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
             ],
           },
           'equals',
           {
-            bottomComment: {
+            topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
               contentSpace: 0.14,
@@ -276,7 +295,7 @@ export default function diagramLayout() {
         ],
         '4': [
           {
-            bottomComment: [
+            topComment: [
               [
                 sq('H', '_22', 0.02), 'plus',
                 strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
@@ -286,7 +305,7 @@ export default function diagramLayout() {
           },
           'equals',
           {
-            bottomComment: {
+            topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
               contentSpace: 0.14,
@@ -341,25 +360,6 @@ export default function diagramLayout() {
           'equals2',
           [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
         ],
-        // '9': [
-        //   {
-        //     topComment: {
-        //       content: root(sq('H', '_22', 0.02), 'r1'),
-        //       comment: 'H2',
-        //       symbol: 'brace1',
-        //       contentSpace: 0.1,
-        //     },
-        //   },
-        //   'equals',
-        //   {
-        //     topComment: {
-        //       content: root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
-        //       comment: [frac(root('_32', 'r3'), '_21', 'v2', 0.7), 'A1'],
-        //       symbol: 'brace2',
-        //       contentSpace: 0.1,
-        //     },
-        //   },
-        // ],
         '10': [
           'H2',
           'equals',

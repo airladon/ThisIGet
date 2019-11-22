@@ -38,6 +38,7 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/CongruentTriangles/base',
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/RightAngleTriangles/base',
+      'Math/Geometry_1/SimilarTriangles/base',
     ]);
   }
 
@@ -332,22 +333,23 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
     common = {
       setEnterState: () => {
         coll.setScenarios('side');
       },
       show: [
-        // equil._equil,
-        equil._a60,
-        equil._A,
-        equil._H,
-        equil._Aon2,
-        equil._a30,
+        equil._a60, equil._a30, equil._a90,
+        equil._A, equil._Aon2, equil._H,
         equil._tri,
-        equil._a90,
       ],
-    }
-    // this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, commonContent);
+    };
+    commonContent = {
+      setContent: 'And now we can |rearrange| and |simplify|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, commonContent);
@@ -358,6 +360,106 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({ eqn, from: '7', to: '8' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '8', to: '9' }, common, commonContent);
     this.addSectionEqnStep({ eqn, from: '9', to: '10' }, common, commonContent);
+
+    this.addSection(common, commonContent, {
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._A, equil._Aon2, equil._r32,
+        equil._tri,
+      ],
+      transitionFromPrev: (done) => {
+        coll._eqn.showForm('10');
+        coll.accent(equil._r32, done);
+      },
+      setSteadyState: () => {
+        coll._eqn.showForm('10');
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: 'Rather than dealing with fractions, it is often more convenient to |multiply all sides by 2|.',
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._A, equil._Aon2, equil._r32,
+        equil._tri,
+      ],
+      transitionFromPrev: (done) => {
+        equil.animations.new()
+          .scenario({ target: 'sideCenter', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        equil.setScenario('sideCenter');
+      },
+    });
+    common = {
+      setEnterState: () => {
+        equil.setScenarios('sideCenter');
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._2A, equil._ARight, equil._r3,
+        equil._tri,
+      ],
+      transitionFromPrev: (done) => {
+        coll.accent(equil, ['2A', 'r3', 'ARight'], done);
+      },
+    });
+
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: 'This triangle is often called a |30-60-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |30º|, or |60º|, will be a 30-60-90 triangle.',
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres')
+      },
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._2A, equil._ARight, equil._r3,
+        equil._tri,
+      ],
+    });
+
+    commonContent = {
+      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._2A, equil._ARight, equil._r3,
+        equil._tri,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+      show: [
+        equil._a60, equil._a30, equil._a90,
+        equil._2, equil._1Right, equil._r31,
+        equil._tri,
+      ],
+      transitionFromPrev: (done) => {
+        coll.accent(equil, ['2', 'r31', '1Right'], done);
+      },
+    });
   }
 }
 
