@@ -21,7 +21,7 @@ const {
   // centerV,
 } = Fig.tools.html;
 
-const { round, range } = Fig.tools.math;
+// const { round, range } = Fig.tools.math;
 
 const layout = diagramLayout();
 const { colors } = layout;
@@ -50,8 +50,7 @@ class Content extends PresentationFormatContent {
       title: 'Introduction',
       setContent: [
         '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side| lengths and |angles| of |triangles|.',
-        // style({ top: 43 }, 'The word |trigonometry| comes from the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
-        `${new Definition('Trigonometry', 'Greek', ['trigonon', 'triangle', 'metron', 'to measure']).html()}`
+        `${new Definition('Trigonometry', 'Greek', ['trigonon', 'triangle', 'metron', 'to measure']).html()}`,
       ],
       modifiers: {
         angles: highlight(colors.angles),
@@ -170,8 +169,12 @@ class Content extends PresentationFormatContent {
       modifiers: {
         rafter: coll.bindAccent(coll._line._line),
         length: coll.bindAccent(coll._line._line),
-        horizontal_span: click(coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components),
-        vertical_span: click(coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components),
+        horizontal_span: click(
+          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components,
+        ),
+        vertical_span: click(
+          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components,
+        ),
       },
       show: [coll._line, coll._house],
       setSteadyState: () => {
@@ -673,11 +676,6 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // this.addSection(common, {
-    //   setContent: style({ top: 0 }, 'It is found in any rotating, vibrating, or oscillating machine.'),
-    //   show: [coll._sineExample],
-    // });
-
     commonContent = {
       setContent: 'Our |understanding| of it, and our ability to |analyze| and |use| it, comes from |trigonometry| and the study of |right angle triangles|.',
     };
@@ -712,103 +710,6 @@ class Content extends PresentationFormatContent {
         'We need that understanding to |make| almost |every piece of modern technology| we have.',
       ]),
     });
-
-    // this.addSection(common, {
-    //   setContent: '|Trigonometry| studys the |relationship| between the angle of the |line|, and the size of the |components|.',
-    //   modifiers: {
-    //     line: coll.bindAccent(coll._rightTri._line),
-    //     components: highlight(colors.components),
-    //     horizontal: coll.bindAccent(coll._rightTri._h),
-    //     vertical: coll.bindAccent(coll._rightTri._v),
-    //     // horizontal: click(
-    //     //   coll._arrow._h.grow, [coll._rightTri._h, 0.05, 1, true, null], colors.components,
-    //     // ),
-    //     // vertical: click(
-    //     //   coll._arrow._v.grow, [coll._rightTri._v, 0.05, 1, true, null], colors.components,
-    //     // ),
-    //   },
-    //   show: [coll._rightTri],
-    // });
-
-    // this.addSection(common, {
-    //   setContent: style({ centerV: true }, [
-    //     '|Trigonometry| can be applied to |all objects, scenarios and phenomena| where understanding |horizontal| and |vertical| components is useful.',
-    //   ]),
-    // });
-
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // this.addSection(common, {
-    //   setContent: 'This can be modelled with a right angle triangle, and any tools we have to analyze the right angle triangle can be used.',
-    //   modifiers: {
-    //     horizontal: coll.bindAccent(coll._line._h),
-    //     vertical: coll.bindAccent(coll._line._v),
-    //   },
-    //   show: [coll._line],
-    //   // transitionFromPrev: (done) => {
-    //   //   if (this.message === 'h') {
-    //   //     coll.accent(coll._line._h, done);
-    //   //   } else if (this.message === 'v') {
-    //   //     coll.accent(coll._line._v, done);
-    //   //   } else {
-    //   //     coll.accent(coll._line, ['v', 'h'], done);
-    //   //   }
-    //   // },
-    // });
-
-    // // ************************************************************************
-    // // ************************************************************************
-    // // ************************************************************************
-    // this.addSection({
-    //   setContent: 'Consider a |line| that is not |horizontal| or |vertical|.',
-    //   setEnterState: () => {
-    //     coll.setScenarios('default');
-    //   },
-    //   show: [coll._line._line],
-    // });
-    // this.addSection({
-    //   setEnterState: () => {
-    //     coll.setScenarios('house');
-    //   },
-    //   show: [coll._line, coll._house],
-    // });
-    // this.addSection({
-    //   setEnterState: () => {
-    //     coll.setScenarios('plane');
-    //   },
-    //   show: [coll._arrow, coll._plane],
-    // });
-    // this.addSection({
-    //   setEnterState: () => {
-    //     coll.setScenarios('cart');
-    //   },
-    //   show: [coll._arrow, coll._cart],
-    // });
-
-    // this.addSection({
-    //   setContent: '|1|, |2|, |3|',
-    //   modifiers: {
-    //     '1': click(coll.spinNow, [coll, 0.1, 100]),
-    //     '2': click(coll.spinNow, [coll, 0.25, 100]),
-    //     '3': click(coll.spinNow, [coll, 0.5, 100]),
-    //   },
-    //   setEnterState: () => {
-    //     coll.setScenarios('sine');
-    //   },
-    //   show: [coll._rotator],
-    //   setSteadyState: () => {
-    //     // coll._rotator._line.animations.new()
-    //     //   .custom({ callback: coll.spin.bind(coll), duration: 10 })
-    //     //   .start();
-    //   },
-    // });
   }
 }
 
