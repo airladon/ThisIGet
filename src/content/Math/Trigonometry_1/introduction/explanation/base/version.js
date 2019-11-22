@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Descriptive',
+  title: 'Descriptive & Interactive',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Why study Trigonometry?',
+  htmlDescription: 'Why we should study trigonometry and examples of where it is used.',
   fullTopic: true,
   type: 'presentation',
 };
