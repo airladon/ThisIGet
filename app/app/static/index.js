@@ -4535,6 +4535,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       text: shapes.text.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
       textHTML: shapes.htmlText.bind(shapes),
+      htmlImage: shapes.htmlImage.bind(shapes),
       axes: shapes.axes.bind(shapes),
       radialLines: shapes.radialLines.bind(shapes),
       rectangle: shapes.rectangle.bind(shapes),
@@ -5116,12 +5117,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  // // Equation is a class that takes a set of drawing objects (TextObjects,
 // // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
 // // and arranges their size in a )
+// type TypeBoxElement = {
+//   lineWidth?: number,
+//   setSize: (Rect) => void,
+// };
 
 var Box =
 /*#__PURE__*/
 function (_Elements) {
   _inherits(Box, _Elements);
 
+  // lineWidth: number;
   // boxScale: Point;
   // boxRotation: number;
   function Box(mainContent, box) {
@@ -5139,8 +5145,8 @@ function (_Elements) {
     }
 
     _this.box = box;
-    _this.scaleModifier = 1;
-    _this.lineWidth = 0.01;
+    _this.scaleModifier = 1; // this.lineWidth = 0;
+
     _this.mainContent = mainContent;
 
     if (boxInSize == null) {
@@ -9338,8 +9344,7 @@ function () {
 
           if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
             return parsedContent;
-          } // $FlowFixMe
-          // Case of single annotation in array form
+          } // Case of single annotation in array form
 
 
           if (Array.isArray(annotation)) {
@@ -10738,7 +10743,7 @@ function getRectAndSpace(rectOrParent) {
   var spaceToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
 
   if (Array.isArray(childrenOrSpace)) {
-    if (childrenOrSpace.length > 1) {
+    if (childrenOrSpace.length > 0) {
       if (typeof childrenOrSpace[0] === 'string' || childrenOrSpace[0] instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
         childrenToUse = childrenOrSpace;
       } else {
@@ -10807,7 +10812,8 @@ function Box(shapes, color, fill, width, staticSize) {
       color: color,
       transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
     });
-    box.custom.boxType = 'fill'; // Defined every time a setSize event is called
+    box.custom.boxType = 'fill';
+    box.custom.lineWidth = 0; // Defined every time a setSize event is called
   } else if (staticSize != null) {
     var poly = function poly(p1, p2, w) {
       return shapes.polyLine({
@@ -10871,12 +10877,12 @@ function Box(shapes, color, fill, width, staticSize) {
         spaceToUse = _getRectAndSpace2[1];
 
     if (box.custom.boxType === 'line') {
-      updateStaticLinePoints(box, width, new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](rectToUse.width, rectToUse.height));
+      updateStaticLinePoints(box, box.custom.lineWidth, new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](rectToUse.width, rectToUse.height));
     }
 
     var t = box.transform._dup();
 
-    t.updateScale(rectToUse.width + spaceToUse.x * 2 + width, rectToUse.height + spaceToUse.y * 2 + width);
+    t.updateScale(rectToUse.width + spaceToUse.x * 2 + box.custom.lineWidth, rectToUse.height + spaceToUse.y * 2 + box.custom.lineWidth);
     t.updateTranslation(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
     box.setTransform(t);
   };
@@ -15939,6 +15945,18 @@ function (_DiagramElementCollec) {
         this._label.hideAll();
       }
     }
+  }, {
+    key: "getP1",
+    value: function getP1() {
+      var m = this.transform.matrix();
+      return this.p1.transformBy(m);
+    }
+  }, {
+    key: "getP2",
+    value: function getP2() {
+      var m = this.transform.matrix();
+      return this.p2.transformBy(m);
+    }
   }]);
 
   return DiagramObjectLine;
@@ -17315,6 +17333,44 @@ function () {
     // }
 
   }, {
+    key: "htmlImage",
+    value: function htmlImage() {
+      var defaultOptions = {
+        id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["generateUniqueId"])('id__html_image_'),
+        classes: '',
+        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        alignV: 'middle',
+        alignH: 'left',
+        src: '' // color: [1, 0, 0, 1],
+
+      };
+
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var image = document.createElement('img');
+      image.src = options.src; // setHTML(inside, options.text, options.modifiers);
+
+      var id = options.id,
+          classes = options.classes,
+          position = options.position,
+          alignV = options.alignV,
+          alignH = options.alignH;
+      var element = this.htmlElement(image, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+
+      if (options.color != null) {
+        element.setColor(options.color);
+      }
+
+      if (options.pulse != null) {
+        element.pulseDefault.scale = options.pulse;
+      }
+
+      return element;
+    }
+  }, {
     key: "htmlText",
     value: function htmlText() {
       var defaultOptions = {
@@ -17327,8 +17383,8 @@ function () {
 
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17376,8 +17432,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
       };
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17443,8 +17499,8 @@ function () {
         linePrimitives: false
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
@@ -17518,8 +17574,8 @@ function () {
         position: null
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17568,8 +17624,8 @@ function () {
         position: null
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17602,8 +17658,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17632,8 +17688,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17693,8 +17749,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len13 = arguments.length, moreOptions = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
-          moreOptions[_key13 - 1] = arguments[_key13];
+        for (var _len14 = arguments.length, moreOptions = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+          moreOptions[_key14 - 1] = arguments[_key14];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -17812,8 +17868,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -17962,8 +18018,8 @@ function () {
         position: null
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -18019,8 +18075,8 @@ function () {
         position: null
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        optionsIn[_key17] = arguments[_key17];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22199,7 +22255,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //   if (typeof callback === 'function') {
 //     callbackToUse = callback;
 //   }
-//   return callbackToUse;
+//   return callbackToUse; + width
 // }
 
 // A diagram is composed of multiple diagram elements.
@@ -22313,6 +22369,9 @@ function () {
     this.opacity = 1;
 
     this.setTransformCallback = function () {};
+
+    this.beforeDrawCallback = null;
+    this.afterDrawCallback = null;
 
     this.internalSetTransformCallback = function () {};
 
@@ -24066,6 +24125,10 @@ function (_DiagramElement) {
           }
         }
 
+        if (this.beforeDrawCallback != null) {
+          this.beforeDrawCallback(now);
+        }
+
         this.animations.nextFrame(now);
         this.nextMovingFreelyFrame(now);
 
@@ -24112,6 +24175,10 @@ function (_DiagramElement) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
+        }
+
+        if (this.afterDrawCallback != null) {
+          this.afterDrawCallback(now);
         }
       }
     }
@@ -24363,6 +24430,10 @@ function (_DiagramElement2) {
           }
         }
 
+        if (this.beforeDrawCallback != null) {
+          this.beforeDrawCallback(now);
+        }
+
         this.animations.nextFrame(now);
         this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
 
@@ -24393,6 +24464,10 @@ function (_DiagramElement2) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
+        }
+
+        if (this.afterDrawCallback != null) {
+          this.afterDrawCallback(now);
         }
       }
     }
@@ -28864,6 +28939,10 @@ function style() {
     }
 
     textToUse = "".concat(pFirst).concat(textToUse, "</p>");
+  }
+
+  if (options.centerH) {
+    textToUse = centerH(textToUse);
   }
 
   if (options.centerV) {

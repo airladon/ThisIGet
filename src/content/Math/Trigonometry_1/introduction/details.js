@@ -2,13 +2,13 @@
 
 // eslint-disable-next-line no-var
 var topicDetails = {
-  title: 'Unit Circle',
+  title: 'Why Study Trigonometry',
   dependencies: [
-    'Introduction',
+    '',
   ],
-  enabled: false,
+  enabled: true,
   path: 'Math/Trigonometry_1',
-  uid: 'UnitCircle',
+  uid: 'Introduction',
 };
 
 module.exports = topicDetails;

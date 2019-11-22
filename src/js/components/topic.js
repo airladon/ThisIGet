@@ -76,6 +76,7 @@ export default class TopicComponent extends React.Component
   versionUID: string;
   versionTitle: string;
   versionDescription: string;
+  learningPath: string;
 
   constructor(props: Props) {
     super(props);
@@ -104,6 +105,7 @@ export default class TopicComponent extends React.Component
     );
     this.versionTitle = title;
     this.versionDescription = description;
+    this.learningPath = path.slice(-4, -3);
   }
 
   fillRatings() {
@@ -484,7 +486,7 @@ export default class TopicComponent extends React.Component
       <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
-          learningPath={'Geometry_1'}
+          learningPath={this.learningPath}
           ref={(learningPathNavigator) => { this.learningPathNavigator = learningPathNavigator; }}
         />
       <div className='vertical_blank_space'/>

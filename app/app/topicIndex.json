@@ -2966,6 +2966,26 @@
     ],
     "enabled": false
   },
+  "Math/Trigonometry_1/Introduction": {
+    "title": "Why Study Trigonometry",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "Why study Trigonometry?",
+          "htmlDescription": "Why we should study trigonometry and examples of where it is used.",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      ""
+    ],
+    "enabled": true
+  },
   "Math/Trigonometry_1/LawOfCosines": {
     "title": "Law of Cosines",
     "approaches": {
@@ -3101,7 +3121,9 @@
         }
       }
     },
-    "dependencies": [],
+    "dependencies": [
+      "Introduction"
+    ],
     "enabled": false
   }
 }
