@@ -49,8 +49,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Introduction',
       setContent: [
-        '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side lengths| and |angles| of |triangles|.',
-        style({ top: 40 }, 'The word |trigonometry| comes from the the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
+        '|Trigonometry| is a branch of mathematics that studies the |relationship| between |side| lengths and |angles| of |triangles|.',
+        style({ top: 43 }, 'The word |trigonometry| comes from the the |Greek| words |trigonon| (meaning triangle) and |metron| (to measure).'),
       ],
       modifiers: {
         angles: highlight(colors.angles),
@@ -164,19 +164,20 @@ class Content extends PresentationFormatContent {
       setContent: 'This line could also represent a |direction_|. For instance, the |direction| of a |plane| coming in to |land|.',
     };
 
-    this.addSection(common, commonContent, {
-      title: 'Direction',
-      modifiers: {
-        direction_: this.bindNext(colors.line),
-        direction: this.bindNext(colors.line),
-      },
-      // show: [coll._line, coll._house],
-      // setSteadyState: () => {
-      //   coll.setScenarios('house');
-      // },
-    });
+    // this.addSection(common, commonContent, {
+    //   title: 'Direction',
+    //   modifiers: {
+    //     direction_: this.bindNext(colors.line),
+    //     direction: this.bindNext(colors.line),
+    //   },
+    //   // show: [coll._line, coll._house],
+    //   // setSteadyState: () => {
+    //   //   coll.setScenarios('house');
+    //   // },
+    // });
 
     this.addSection(common, commonContent, {
+      title: 'Direction',
       modifiers: {
         direction_: click(
           coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
@@ -187,7 +188,28 @@ class Content extends PresentationFormatContent {
           colors.line,
         ),
       },
-      show: [coll._line, coll._house],
+      show: [coll._arrow._line, coll._plane],
+      // transitionFromPrev: (done) => {
+      //   coll.setScenarios('plane');
+      //   // coll._arrow._h.hide();
+      //   // coll._arrow._v.hide();
+      //   coll._arrow._line.grow(0.05, 1, true, done);
+      // },
+      transitionFromPrev: (done) => {
+        coll.setScenarios('plane');
+        coll._arrow.hide();
+        coll.animations.new()
+          .dissolveIn({ element: coll._plane, duration: 1 })
+          .dissolveIn({ element: coll._arrow._line, duration: 0 })
+          .trigger({
+            callback: () => {
+              coll._arrow._line.grow(0.05, 1, true, null);
+            },
+            duration: 1,
+          })
+          .whenFinished(done)
+          .start();
+      },
       // transitionFromPrev: (done) => {
       //   coll._house.setScenario('house');
       //   coll._line.setScenario('house');
@@ -208,21 +230,21 @@ class Content extends PresentationFormatContent {
       // },
       setSteadyState: () => {
         coll.setScenarios('plane');
-        coll._house.hide();
-        coll._line.hide();
-        coll._arrow._line.showAll();
-        coll._plane.showAll();
+        // coll._house.hide();
+        // coll._line.hide();
+        // coll._arrow._line.showAll();
+        // coll._plane.showAll();
       },
     });
 
     commonContent = {
-      setContent: 'To |land| on the runway, you need to |direct| the plane such that the |height_above_ground| and the |distance_to_the_runway| is covered in the same |time|.',
+      setContent: 'To |land| on the runway, you need to |direct| the plane such that the |height_above_ground| and the |distance_to_the_runway| is travelled in the same |time|.',
     };
     this.addSection(common, commonContent, {
       modifiers: {
         height_above_ground: this.bindNext(colors.components, 'height'),
         distance_to_the_runway: this.bindNext(colors.components, 'distance'),
-        time: this.bindNext(colors.lines, 'time'),
+        time: this.bindNext(colors.line, 'time'),
         direct: click(
           coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
           colors.line,
@@ -245,22 +267,27 @@ class Content extends PresentationFormatContent {
         time: click(() => {
           coll._arrow._h.grow(0.05, 1, true, null);
           coll._arrow._v.grow(0.05, 1, true, null);
-          coll._arrow._line.grow(0.05, 1, true, null);
         }, [this], colors.line),
+        direct: click(
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          colors.line,
+        ),
       },
       show: [coll._arrow._line, coll._plane],
       transitionFromPrev: (done) => {
+        coll._arrow._h.showAll();
+        coll._arrow._v.showAll();
         if (this.message === 'distance') {
-          coll._arrow._h.showAll();
-          coll._arrow._h.grow(0.05, 1, true, done);
+          coll.accent(coll._arrow, ['v', 'h'], () => {
+            coll._arrow._h.grow(0.05, 1, true, done);
+          });
         } else if (this.message === 'height') {
-          coll._arrow._v.showAll();
           coll._arrow._v.grow(0.05, 1, true, done);
+          coll.accent(coll._arrow, ['v', 'h'], () => {
+            coll._arrow._v.grow(0.05, 1, true, done);
+          });
         } else {
-          coll._arrow.showAll();
-          coll._arrow._h.grow(0.05, 1, true, done);
-          coll._arrow._v.grow(0.05, 1, true, null);
-          coll._arrow._line.grow(0.05, 1, true, null);
+          coll.accent(coll._arrow, ['v', 'h'], done);
         }
       },
       setSteadyState: () => {
@@ -287,13 +314,14 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'This line could also represent a |phenomenum|. For instance, a |force| applied to a cart.',
     };
-    this.addSection(commonContent, {
-      title: 'Phenomenum',
-      modifiers: {
-        force: this.bindNext(colors.line),
-      },
-    });
+    // this.addSection(commonContent, {
+    //   title: 'Phenomenum',
+    //   modifiers: {
+    //     force: this.bindNext(colors.line),
+    //   },
+    // });
     this.addSection(common, commonContent, {
+      title: 'Phenomenum',
       modifiers: {
         force: click(
           coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
@@ -346,16 +374,24 @@ class Content extends PresentationFormatContent {
       },
       show: [coll._cart, coll._arrow._line],
       transitionFromPrev: (done) => {
+        coll._arrow._h.showAll();
+        coll._arrow._v.showAll();
         if (this.message === 'h') {
-          coll._arrow._h.showAll();
-          coll._arrow._h.grow(0.05, 1, true, done);
+          // coll._arrow._h.showAll();
+          // coll._arrow._h.grow(0.05, 1, true, done);
+          coll.accent(coll._arrow, ['v', 'h'], () => {
+            coll._arrow._h.grow(0.05, 1, true, done);
+          });
         } else if (this.message === 'v') {
-          coll._arrow._v.showAll();
-          coll._arrow._v.grow(0.05, 1, true, done);
+          // coll._arrow._v.showAll();
+          coll.accent(coll._arrow, ['v', 'h'], () => {
+            coll._arrow._v.grow(0.05, 1, true, done);
+          });
         } else {
-          coll._arrow.showAll();
-          coll._arrow._v.grow(0.05, 1, true, done);
-          coll._arrow._h.grow(0.05, 1, true, null);
+          coll.accent(coll._arrow, ['v', 'h'], done);
+          // coll._arrow.showAll();
+          // coll._arrow._v.grow(0.05, 1, true, done);
+          // coll._arrow._h.grow(0.05, 1, true, null);
         }
       },
       setSteadyState: () => {
@@ -364,7 +400,7 @@ class Content extends PresentationFormatContent {
     });
 
     commonContent = {
-      setContent: 'Only the |horizontal| part of the force |moves| the cart as the |vertical| part just pushes it into the |ground|.',
+      setContent: 'Only the |horizontal| part of the force |moves| the cart. The |vertical| part just pushes it into the |ground|.',
     };
 
     this.addSection(common, commonContent, {

@@ -43,17 +43,6 @@ export default function diagramLayout() {
     method: 'collection',
     addElements: [
       {
-        name: 'tri',
-        method: 'polyLine',
-        options: {
-          points,
-          width: 0.03,
-          close: true,
-          color: colors.line,
-          side: [side('A'), side('?'), side('?')],
-        },
-      },
-      {
         name: 'angle',
         method: 'angle',
         options: {
@@ -69,6 +58,17 @@ export default function diagramLayout() {
             radius: 0.4,
             text: 'b',
           },
+        },
+      },
+      {
+        name: 'tri',
+        method: 'polyLine',
+        options: {
+          points,
+          width: 0.03,
+          close: true,
+          color: colors.line,
+          side: [side('A'), side('?'), side('?')],
         },
       },
     ],
