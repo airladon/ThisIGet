@@ -304,7 +304,7 @@ class Content extends PresentationFormatContent {
       },
     };
     commonContent = {
-      setContent: 'This line could also represent a |phenomenum|. For instance, a |force| applied to a cart.',
+      setContent: 'This line could also represent a |phenomenon|. For instance, a |force| applied to a cart.',
     };
     // this.addSection(commonContent, {
     //   title: 'Phenomenum',
@@ -313,7 +313,7 @@ class Content extends PresentationFormatContent {
     //   },
     // });
     this.addSection(common, commonContent, {
-      title: 'Phenomenum',
+      title: 'Phenomenon',
       modifiers: {
         force: click(
           coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
