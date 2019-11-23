@@ -79,7 +79,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'This explanation will find |two| more triangles where |side lengths can be calculated from any side|.',
+        'This explanation will find |another| triangle where |side lengths can be calculated from any side|.',
       ]),
       show: [
         equil._equil,
