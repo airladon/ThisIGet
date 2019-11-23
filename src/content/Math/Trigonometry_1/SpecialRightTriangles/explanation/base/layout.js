@@ -29,14 +29,62 @@ export default function diagramLayout() {
   ];
   const midPoint = new Point(0, equilPoints[0].y);
 
+  const eqnA = ({
+    elements: {
+      A: { text: 'A', color: colors.sides },
+      _2: { text: '2', color: colors.sides },
+      _2_: { text: '2', color: colors.sides },
+      times: ' \u00D7 ',
+      equals: ' = ',
+      _1: { text: '1', color: colors.sides },
+      s1: { symbol: 'xStrike', color: colors.working },
+      s2: { symbol: 'xStrike', color: colors.working },
+    },
+    forms: {
+      '0': 'A',
+      '1': {
+        content: ['_2', 'times', 'A'],
+        alignment: { fixTo: 'A' },
+      },
+      '2': ['_2', 'A'],
+      '3': ['_2', 'A'],
+      '4': ['_2', {
+        annotate: {
+          content: { strike: ['A', 's1'] },
+          withAnnotations: ['_1'],
+        },
+      }],
+      '5': ['_2'],
+    },
+  });
+
   const Aon2 = ({
     elements: {
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
+      _2_: { text: '2', color: colors.sides },
+      times: ' \u00D7 ',
+      equals: ' = ',
+      _1: { text: '1', color: colors.sides },
+      s1: { symbol: 'xStrike', color: colors.working },
+      s2: { symbol: 'xStrike', color: colors.working },
       v: { symbol: 'vinculum', color: colors.sides },
     },
     forms: {
       '0': { frac: ['A', '_2', 'v'] },
+      '1': [{ frac: ['A', '_2', 'v'] }, 'times', '_2_'],
+      '2': [
+        { frac: ['A', { strike: ['_2', 's1'] }, 'v'] },
+        'times', { strike: ['_2_', 's2'] },
+      ],
+      '3': 'A',
+      '4': {
+        annotate: {
+          content: { strike: ['A', 's1'] },
+          withAnnotations: ['_1'],
+        },
+      },
+      '5': ['_1'],
     },
   });
 
@@ -45,9 +93,13 @@ export default function diagramLayout() {
       A: { text: 'A', color: colors.sides },
       _3: { text: '3', color: colors.sides },
       r: { symbol: 'radical', color: colors.sides },
+      times: ' \u00D7 ',
+      _1: { text: '1', color: colors.sides },
     },
     forms: {
       '0': [{ root: ['_3', 'r'] }, 'A'],
+      '1': [{ root: ['_3', 'r'] }, 'times', '1'],
+      '2': { root: ['_3', 'r'] },
     },
     scale: 1,
   });
@@ -70,9 +122,36 @@ export default function diagramLayout() {
       _2: { text: '2', color: colors.sides },
       v: { symbol: 'vinculum', color: colors.sides },
       r: { symbol: 'radical', color: colors.sides },
+      times: ' \u00D7 ',
+      _2_: { text: '2', color: colors.sides },
+      _1: { text: '1', color: colors.sides },
+      s1: { symbol: 'xStrike', color: colors.working },
+      s2: { symbol: 'xStrike', color: colors.working },
     },
     forms: {
       '0': [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v'] }, 'A'],
+      '1': [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v'] }, 'A', 'times', '_2_'],
+      '2': [
+        { frac: [{ root: ['_3', 'r'] }, { strike: ['_2', 's1'] }, 'v'] },
+        'A', 'times', { strike: ['_2_', 's2'] },
+      ],
+      '3': {
+        content: [{ root: ['_3', 'r'] }, 'A'],
+        alignment: { alignV: -0.1 },
+      },
+      '4': {
+        content: [{ root: ['_3', 'r'] }, {
+          annotate: {
+            content: { strike: ['A', 's1'] },
+            withAnnotations: ['_1'],
+          },
+        }],
+        alignment: { alignV: -0.1 },
+      },
+      '5': {
+        content: { root: ['_3', 'r'] },
+        alignment: { alignV: -0.1 },
+      },
     },
   });
 
@@ -125,7 +204,7 @@ export default function diagramLayout() {
       lineLabel('r3', root3A, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('r31', root3, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('r32', root3Aon2, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
-      lineLabel('A', 'A', equilPoints[1], equilPoints[2], 'right', 'top'),
+      lineLabel('A', eqnA, equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('2A', '2A', equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('2', '2', equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('ALeft', 'A', equilPoints[0], equilPoints[1], 'left', 'top'),

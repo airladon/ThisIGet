@@ -9,7 +9,7 @@ const {
   // DiagramObjectLine,
   // DiagramElementCollection,
   // DiagramObjectPolyLine,
-  // Equation,
+  Equation,
   Transform,
 } = Fig;
 
@@ -31,5 +31,33 @@ export default class CommonCollection extends CommonDiagramCollection {
     const r = this._equil.getRotation();
     this._equil.exec(['updateLabel', r], ['a30', 'a60', 'A', 'H', 'Aon2', 'r32', 'r3', 'ARight', '2A', '1Right', 'r31', '2']);
     this.diagram.animateNextFrame();
+  }
+
+  setTriEqnForms(form: string) {
+    this._equil._Aon2._label.showForm(form);
+    this._equil._A._label.showForm(form);
+    // this._equil._r3._label.showForm(form);
+    this._equil._r32._label.showForm(form);
+  }
+
+  goToTriEqnForms(form: string, done: ?() => void = null) {
+    let allDoneCount = 0;
+    const allDone = () => {
+      allDoneCount += 1;
+      if (allDoneCount === 3 && done != null) {
+        done();
+      }
+    };
+    this._equil._A._label.goToForm({
+      name: form, duration: 1, animate: 'move', callback: allDone,
+    });
+    this._equil._Aon2._label.goToForm({
+      name: form, duration: 1, animate: 'move', callback: allDone,
+    });
+    // });
+    this._equil._r32._label.goToForm({
+      name: form, duration: 1, animate: 'move', callback: allDone,
+    });
+
   }
 }

@@ -345,6 +345,9 @@ class Content extends PresentationFormatContent {
         equil._A, equil._Aon2, equil._H,
         equil._tri,
       ],
+      setSteadyState: () => {
+        coll.setTriEqnForms('0');
+      },
     };
     commonContent = {
       setContent: 'And now we can |rearrange| and |simplify|.',
@@ -373,6 +376,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         coll._eqn.showForm('10');
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -389,12 +393,14 @@ class Content extends PresentationFormatContent {
         equil._tri,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         equil.animations.new()
           .scenario({ target: 'sideCenter', duration: 1 })
           .whenFinished(done)
           .start();
       },
       setSteadyState: () => {
+        coll.setTriEqnForms('0');
         equil.setScenario('sideCenter');
       },
     });
@@ -402,15 +408,59 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         equil.setScenarios('sideCenter');
       },
-    };
-    this.addSection(common, commonContent, {
       show: [
         equil._a60, equil._a30, equil._a90,
-        equil._2A, equil._ARight, equil._r3,
+        equil._A, equil._Aon2, equil._r32,
         equil._tri,
       ],
+      setLeaveState: () => {
+        coll.setTriEqnForms('0');
+      },
+    };
+    this.addSection(common, commonContent, {
       transitionFromPrev: (done) => {
-        coll.accent(equil, ['2A', 'r3', 'ARight'], done);
+        coll.setTriEqnForms('0');
+        coll.goToTriEqnForms('1', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('1');
+      },
+    });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('1');
+        coll.goToTriEqnForms('2', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('2');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('2');
+        coll.goToTriEqnForms('3', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('3');
+      },
+    });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('3');
+        coll.goToTriEqnForms('4', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('4');
+      },
+    });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('4');
+        coll.goToTriEqnForms('5', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('5');
       },
     });
 
@@ -453,12 +503,16 @@ class Content extends PresentationFormatContent {
       },
       show: [
         equil._a60, equil._a30, equil._a90,
-        equil._2, equil._1Right, equil._r31,
+        equil._2, equil._1Right, equil._r3,
         equil._tri,
       ],
       transitionFromPrev: (done) => {
-        coll.accent(equil, ['2', 'r31', '1Right'], done);
+        coll.accent(equil, ['2', '1Right'], done);
+        equil._r3._label.goToForm({ name: '1', duration: 1, animate: 'move' });
       },
+      setSteadyState: () => {
+        // equil._r3._label.setForm('1');
+      }
     });
   }
 }
