@@ -57,17 +57,16 @@ export default function diagramLayout() {
       '3': {
         content: [{
           annotate: {
-            content: { strike: ['A', 's1'] },
+            content: { strike: ['A', 's1', false] },
             withAnnotations: ['_1'],
+            includeAnnotationInSize: false,
           },
         }],
         scale: 1,
-        alignment: { alignH: 0.15 },
       },
       '4': {
         content: ['_1'],
         scale: 1,
-        alignment: { alignH: 0.05 },
       },
     },
   });
@@ -77,45 +76,42 @@ export default function diagramLayout() {
       D: { text: 'D', color: colors.sides },
       equals: ' = ',
       A: { text: 'A', color: colors.sides },
-      // _3: { text: '3', color: colors.sides },
       _2: { text: '2', color: colors.sides },
-      // v: { symbol: 'vinculum', color: colors.sides },
       r: { symbol: 'radical', color: colors.sides },
-      // times: ' \u00D7 ',
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
       s1: { symbol: 'xStrike', color: colors.working },
-      // s2: { symbol: 'xStrike', color: colors.working },
     },
     forms: {
       '0': {
         content: ['D'],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { fixTo: 'D' },
       },
       '1': {
         content: ['D', 'equals', { root: ['_2', 'r'] }, 'A'],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { fixTo: 'D' },
       },
       '2': {
         content: [{ root: ['_2', 'r'] }, 'A'],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: -0.01, alignH: 0.2 },
       },
       '3': {
         content: [{ root: ['_2', 'r'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
             withAnnotations: ['_1'],
+            includeAnnotationInSize: false,
           },
         }],
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: -0.01, alignH: 0.2 },
         scale: 1,
       },
       '4': {
         content: { root: ['_2', 'r'] },
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: -0.01, alignH: 0.2 },
         scale: 1,
       },
     },
@@ -268,9 +264,9 @@ export default function diagramLayout() {
   //   brac: [content, lb, rb],
   // });
 
-  const strike = (content, strike) => ({
-    strike: [content, strike],
-  });
+  // const strike = (content, strike) => ({
+  //   strike: [content, strike],
+  // });
 
   const root = (content, radical) => ({
     root: [content, radical],
@@ -355,7 +351,7 @@ export default function diagramLayout() {
           root('_26', 'r3'), root(sq('A4', '_27', 0.02), 'r4'),
         ],
         '6': [
-          { 
+          {
             topComment: {
               content: root(sq('D1', '_21', 0.02), 'r1'),
               comment: 'D2',
@@ -372,111 +368,6 @@ export default function diagramLayout() {
           },
         ],
         '7': ['D2', 'equals', root('_26', 'r3'), 'A1'],
-        // '1': [
-        //   sq('H', '_22', 0.02), 'plus',
-        //   {
-        //     topComment: [
-        //       sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
-        //       frac(sq('A3', '_24'), '_4', 'v2'),
-        //       'brace1',
-        //     ],
-        //   },
-        //   'equals', sq('A1', '_21'),
-        // ],
-        // '2': [
-        //   sq('H', '_22', 0.02), 'plus',
-        //   frac(sq('A3', '_24'), '_4', 'v2'),
-        //   'equals', sq('A1', '_21'),
-        // ],
-        // '3': [
-        //   {
-        //     topComment: [
-        //       [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
-        //       ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
-        //     ],
-        //   },
-        //   'equals',
-        //   {
-        //     topComment: {
-        //       content: sq('A1', '_21'),
-        //       comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
-        //       contentSpace: 0.14,
-        //       includeInSize: false,
-        //     },
-        //   },
-        // ],
-        // '4': [
-        //   {
-        //     topComment: [
-        //       [
-        //         sq('H', '_22', 0.02), 'plus',
-        //         strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
-        //       ],
-        //       strike(['minus', frac(sq('A2', '_23'), '_41', 'v1')], 'strike2'),
-        //     ],
-        //   },
-        //   'equals',
-        //   {
-        //     topComment: {
-        //       content: sq('A1', '_21'),
-        //       comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
-        //       contentSpace: 0.14,
-        //       includeInSize: false,
-        //     },
-        //   },
-        // ],
-        // '5': [
-        //   sq('H', '_22', 0.02),
-        //   'equals',
-        //   sq('A1', '_21'),
-        //   'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
-        // ],
-        // '6': [
-        //   sq('H', '_22', 0.02),
-        //   'equals',
-        //   {
-        //     topComment: {
-        //       content: [
-        //         sq('A1', '_21'),
-        //         'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
-        //       ],
-        //       comment: [frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')],
-        //       symbol: 'brace1',
-        //     },
-        //   },
-        // ],
-        // '7': [
-        //   sq('H', '_22', 0.02),
-        //   'equals',
-        //   frac('_31', '_4', 'v1', 0.7), sq('A2', '_23'),
-        // ],
-        // '8': [
-        //   root(sq('H', '_22', 0.02), 'r1'),
-        //   'equals',
-        //   root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
-        // ],
-        // '9': [
-        //   {
-        //     topComment: {
-        //       content: root(sq('H', '_22', 0.02), 'r1'),
-        //       comment: 'H2',
-        //       symbol: 'brace1',
-        //       contentSpace: 0.1,
-        //     },
-        //   },
-        //   'equals',
-        //   root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
-        //   'equals1',
-        //   frac(root('_33', 'r4'), root('_41', 'r5'), 'v2', 0.7),
-        //   root(sq('A3', '_24'), 'r6'),
-        //   'equals2',
-        //   [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
-        // ],
-        // '10': [
-        //   'H2',
-        //   'equals',
-        //   [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
-        // ],
       },
     },
     mods: {

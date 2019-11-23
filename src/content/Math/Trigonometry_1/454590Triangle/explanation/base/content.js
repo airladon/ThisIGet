@@ -190,7 +190,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: 'We can now use the |Pythagorean_Theorem| to solve for |D|.',
+      setContent: 'We now use the |Pythagorean_Theorem| to solve for |D|.',
       modifiers: {
         Pythagorean_Theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
       },
@@ -212,6 +212,7 @@ class Content extends PresentationFormatContent {
           .scenarios({ target: 'side', duration: 1 })
           .trigger({
             callback: () => {
+              eqn.setScenario('side');
               eqn.showForm('0');
               eqn.pulseScaleNow(1, 1.3);
             },
@@ -227,6 +228,9 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
     common = {
       setEnterState: () => {
         coll.setScenarios('side');
@@ -278,192 +282,76 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // this.addSection(common, commonContent, {
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //     equil._a30, equil._a30Left, equil._a90, equil._a90Left,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.animations.new()
-    //       .inParallel([
-    //         equil._a30Left.anim.dissolveOut(1),
-    //         equil._ALeft.anim.dissolveOut(1),
-    //         equil._ABottom.anim.dissolveOut(1),
-    //         equil._a60Left.anim.dissolveOut(1),
-    //         equil._a60Top.anim.dissolveOut(1),
-    //         equil._Aon2Left.anim.dissolveOut(1),
-    //         equil._equil.anim.dissolveOut(1),
-    //         equil._a90Left.anim.dissolveOut(1),
-    //         equil._tri.anim.dissolveIn(0.8),
-    //       ])
-    //       .inParallel([
-    //         equil.anim.scenario({ target: 'side', duration: 1 }),
-    //       ])
-    //       .whenFinished(done)
-    //       .start();
-    //   },
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     equil._a30Left.hide();
-    //     equil._ALeft.hide();
-    //     equil._ABottom.hide();
-    //     equil._a60Left.hide();
-    //     equil._a60Top.hide();
-    //     equil._Aon2Left.hide();
-    //     equil._a90Left.hide();
-    //     equil._equil.hide();
-    //     equil._tri.showAll();
-    //     equil.setScenario('side');
-    //     coll._eqn.showForm('0');
-    //     coll._eqn.setScenario('side');
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        // eqn.showForm('7');
+        coll.setTriEqnForms('2');
+        square.animations.new()
+          .scenario({ target: 'sideCenter', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('2');
+        square.setScenario('sideCenter');
+      },
+    });
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // common = {
-    //   setEnterState: () => {
-    //     coll.setScenarios('side');
-    //   },
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._A, equil._Aon2, equil._H,
-    //     equil._tri,
-    //   ],
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('0');
-    //   },
-    //   beforeTransitionFromPrev: () => {
-    //     console.log('asdf')
-    //     coll.setTriEqnForms('0');
-    //   },
-    // };
-    // commonContent = {
-    //   setContent: 'And now we can |rearrange| and |simplify|.',
-    // };
-    // this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '6', to: '7' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '7', to: '8' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '8', to: '9' }, common, commonContent);
-    // this.addSectionEqnStep({ eqn, from: '9', to: '10' }, common, commonContent);
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('sideCenter');
+      },
+      show: [
+        square._tri, square._right, square._D, square._A1, square._A2,
+        square._451, square._452,
+      ],
+      setSteadyState: () => {
+        coll.setTriEqnForms('2');
+      },
+    };
 
-    // this.addSection(common, commonContent, {
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._A, equil._Aon2, equil._r32,
-    //     equil._tri,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     coll._eqn.showForm('10');
-    //     coll.accent(equil._r32, done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll._eqn.showForm('10');
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    commonContent = {
+      setContent: 'This triangle is often called a |45-45-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |45º| will be a 45-45-90 triangle.',
+      modifiers: {
+        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      // setSteadyState: () => { coll.setTriEqnForms('7'); },
+    });
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'Rather than dealing with |fractions|, it is often more convenient to |multiply all sides by 2|.',
-    // };
-    // this.addSection(common, commonContent, {
-    //   title: 'Simplify',
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._A, equil._Aon2, equil._r32,
-    //     equil._tri,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     equil.animations.new()
-    //       .scenario({ target: 'sideCenter', duration: 1 })
-    //       .whenFinished(done)
-    //       .start();
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('0');
-    //     equil.setScenario('sideCenter');
-    //   },
-    // });
-    // common = {
-    //   setEnterState: () => {
-    //     equil.setScenarios('sideCenter');
-    //   },
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._A, equil._Aon2, equil._r32,
-    //     equil._tri,
-    //   ],
-    //   setLeaveState: () => {
-    //     coll.setTriEqnForms('0');
-    //   },
-    // };
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     coll.goToTriEqnForms('1', done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('1');
-    //   },
-    // });
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('1');
-    //     coll.goToTriEqnForms('2', done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('2');
-    //   },
-    // });
+    commonContent = {
+      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
+      modifiers: {
+        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+    };
 
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('2');
-    //     coll.goToTriEqnForms('3', done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('3');
-    //   },
-    // });
+    this.addSection(common, commonContent, {
+    });
 
-    // commonContent = {
-    //   setContent: 'This triangle is often called a |30-60-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |30º|, or |60º|, will be a 30-60-90 triangle.',
-    // };
-    // this.addSection(common, commonContent, {
-    //   setSteadyState: () => { coll.setTriEqnForms('3'); },
-    // });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('2');
+        coll.goToTriEqnForms('3', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('3');
+      },
+    });
 
-    // commonContent = {
-    //   setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
-    //   modifiers: {
-    //     similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-    //   },
-    // };
-
-    // this.addSection(common, commonContent, {
-    //   setSteadyState: () => { coll.setTriEqnForms('3'); },
-    // });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('3');
+        coll.goToTriEqnForms('4', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('4');
+      },
+    });
 
     // this.addSection(common, commonContent, {
     //   transitionFromPrev: (done) => {
