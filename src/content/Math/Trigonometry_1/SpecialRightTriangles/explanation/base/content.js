@@ -405,12 +405,10 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: 'Rather than dealing |with| fractions, it is often more convenient to |multiply all sides by 2|.',
-      modifiers: {
-        with: coll.bindAccent(equil._a60),
-      },
+      setContent: 'Rather than dealing with |fractions|, it is often more convenient to |multiply all sides by 2|.',
     };
     this.addSection(common, commonContent, {
+      title: 'Simplify',
       show: [
         equil._a60, equil._a30, equil._a90,
         equil._A, equil._Aon2, equil._r32,

@@ -51,12 +51,14 @@ export default function diagramLayout() {
         scale: 1,
       },
       '2': {
-        content: ['_2', 'A'],
+        content: ['_2', 'times', 'A'],
         scale: 1,
+        alignment: { fixTo: 'A' },
       },
       '3': {
         content: ['_2', 'A'],
         scale: 1,
+        alignment: { alignH: 0.15 },
       },
       '4': {
         content: ['_2', {
@@ -66,10 +68,12 @@ export default function diagramLayout() {
           },
         }],
         scale: 1,
+        alignment: { alignH: 0.15 },
       },
       '5': {
         content: ['_2'],
         scale: 1,
+        alignment: { alignH: 0.05 },
       },
     },
   });
@@ -87,15 +91,28 @@ export default function diagramLayout() {
       v: { symbol: 'vinculum', color: colors.sides },
     },
     forms: {
-      '0': { frac: ['A', '_2', 'v'] },
-      '1': [{ frac: ['A', '_2', 'v'] }, 'times', '_2_'],
-      '2': [
-        { frac: ['A', { strike: ['_2', 's1'] }, 'v'] },
-        'times', { strike: ['_2_', 's2'] },
-      ],
+      '0': {
+        content: { frac: ['A', '_2', 'v', 0.7] },
+        alignment: { alignV: 0.03 },
+        scale: 1,
+      },
+      '1': {
+        content: [{ frac: ['A', '_2', 'v', 0.7] }, 'times', '_2_'],
+        scale: 1,
+        alignment: { alignV: 0.03 },
+      },
+      '2': {
+        content: [
+          { frac: ['A', { strike: ['_2', 's1'] }, 'v', 0.7] },
+          'times', { strike: ['_2_', 's2'] },
+        ],
+        scale: 1,
+        alignment: { alignV: 0.03 },
+      },
       '3': {
         content: 'A',
         scale: 1,
+        alignment: { alignV: 0.1 },
       },
       '4': {
         content: {
@@ -105,10 +122,12 @@ export default function diagramLayout() {
           },
         },
         scale: 1,
+        alignment: { alignV: 0.1 },
       },
       '5': {
         content: ['_1'],
         scale: 1,
+        alignment: { alignV: 0.1 },
       },
     },
   });
@@ -130,10 +149,12 @@ export default function diagramLayout() {
       '0': {
         content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A'],
         scale: 1,
+        alignment: { alignV: -0.05 },
       },
       '1': {
         content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A', 'times', '_2_'],
         scale: 1,
+        alignment: { alignV: -0.05 },
       },
       '2': {
         content: [
@@ -141,6 +162,7 @@ export default function diagramLayout() {
           'A', 'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
+        alignment: { alignV: -0.05 },
       },
       '3': {
         content: [{ root: ['_3', 'r'] }, 'A'],
@@ -182,6 +204,7 @@ export default function diagramLayout() {
       color: colors.sides,
     },
   });
+
   const angle = (name, text, p1, p2, p3, radius = 0.25) => ({
     name,
     method: 'angle',
@@ -208,15 +231,9 @@ export default function diagramLayout() {
     addElements: [
       lineLabel('Aon2Left', Aon2, midPoint, equilPoints[0], 'bottom', 'right'),
       lineLabel('Aon2', Aon2, equilPoints[2], midPoint, 'bottom'),
-      // lineLabel('ARight', 'A', equilPoints[2], midPoint, 'bottom'),
-      // lineLabel('1Right', '1', equilPoints[2], midPoint, 'bottom'),
       lineLabel('H', 'H', midPoint, equilPoints[1], 'left', 'bottom'),
-      // lineLabel('r3', root3A, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
-      // lineLabel('r31', root3, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('r32', root3Aon2, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('A', eqnA, equilPoints[1], equilPoints[2], 'right', 'top'),
-      // lineLabel('2A', '2A', equilPoints[1], equilPoints[2], 'right', 'top'),
-      // lineLabel('2', '2', equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('ALeft', 'A', equilPoints[0], equilPoints[1], 'left', 'top'),
       lineLabel('ABottom', 'A', equilPoints[0], equilPoints[2], 'left', 'bottom'),
       angle('a30', null, midPoint, equilPoints[1], equilPoints[2], 0.5),
@@ -260,8 +277,8 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [0, -0.6], rotation: 0, scale: 1 },
-        side: { position: [0.5, -1.2], rotation: Math.PI / 2, scale: 1.2 },
-        sideCenter: { position: [0.5, -0.9], rotation: Math.PI / 2, scale: 1.2 },
+        side: { position: [0.3, -1.4], rotation: Math.PI / 2, scale: 1.1 },
+        sideCenter: { position: [0.3, -0.9], rotation: Math.PI / 2, scale: 1.1 },
       },
     },
   };
@@ -291,7 +308,7 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
-      scale: 0.9,
+      scale: 1.1,
       elements: {
         equals: '  =  ',
         equals1: '  =  ',
@@ -458,7 +475,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        side: { position: [0.3, 0.6] },
+        side: { position: [0, 0.6] },
       },
     },
   };
