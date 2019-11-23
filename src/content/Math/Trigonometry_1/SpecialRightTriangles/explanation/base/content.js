@@ -365,7 +365,6 @@ class Content extends PresentationFormatContent {
         coll.setTriEqnForms('0');
       },
       beforeTransitionFromPrev: () => {
-        console.log('asdf')
         coll.setTriEqnForms('0');
       },
     };

@@ -35,7 +35,8 @@ class Content extends PresentationFormatContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/Equilateral/base',
-      'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/Isosceles/base',
+      'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/RectanglesAndSquares/base',
       'Math/Geometry_1/RightAngleTriangles/base',
       'Math/Geometry_1/SimilarTriangles/base',
@@ -47,7 +48,7 @@ class Content extends PresentationFormatContent {
     const coll = diag._collection;
     const equil = coll._equil;
     const square = coll._square;
-    // const eqn = coll._eqn;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Introduction',
@@ -89,209 +90,194 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     // ************************************************************
-    // let commonContent = {
-    //   setContent: 'We start by |splitting| the equilateral triangle in |half|.',
-    // }
-    // this.addSection(common, commonContent, {
-    //   title: '30-60-90 Triangle',
-    //   modifiers: {
-    //     splitting: this.bindNext(colors.sides),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //   ],
-    // });
+    let commonContent = {
+      setContent: 'We start with a |square| and |split| along its diagonal.',
+      modifiers: {
+        square: this.qr('Math/Geometry_1/RectanglesAndSquares/base/Square'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        split: this.bindNext(colors.sides),
+      },
+      show: [square._square, square._A1, square._A2],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        split: click(coll._square._split.grow, [coll, 0.05, 1, true, null], colors.sides),
+      },
+      show: [square._square, square._split, square._D, square._A1, square._A2],
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
+        square._D.hide();
+        square._split.grow(0.05, 1, true, () => {
+          square._D.show();
+          coll.accent(square._D, done);
+        });
+      },
+    });
 
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     splitting: click(
-    //       coll._equil._split.grow, [coll, 0.05, 1, true, null], colors.sides,
-    //     ),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     equil._split.grow(0.05, 1, true, () => {
-    //       equil._Aon2.showAll();
-    //       equil._Aon2Left.showAll();
-    //       coll.setTriEqnForms('0');
-    //       equil._ABottom.dim();
-    //       equil._a60Top.dim();
-    //       equil._H.showAll();
-    //       coll.accent(equil, ['Aon2', 'Aon2Left'], done);
-    //     });
-    //   },
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     equil._Aon2.showAll();
-    //     equil._Aon2Left.showAll();
-    //     equil._H.showAll();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    commonContent = {
+      setContent: 'Consider just |one| of the triangles.',
+    };
+    this.addSection(common, commonContent, {
+      show: [square._square, square._split, square._D, square._A1, square._A2],
+    });
+    this.addSection(common, commonContent, {
+      show: [square._tri, square._right, square._D, square._A1, square._A2],
+      transitionFromPrev: (done) => {
+        square._split.showAll();
+        square._square.showAll();
+        square._tri.hide();
+        coll.setTriEqnForms('0');
+        coll.animations.new()
+          .inParallel([
+            square._square.anim.dissolveOut(1),
+            square._split.anim.dissolveOut(1),
+            square._tri.anim.dissolveIn(1),
+          ])
+          .inParallel([
+            square.anim.scenario({ target: 'sideCenter', duration: 1 }),
+          ])
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('sideCenter');
+        coll.setTriEqnForms('0');
+      },
+    });
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'Each half triangle has the |same_side_lengths|, and from |SSS| is therefore |congruent|.',
-    // };
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     same_side_lengths: coll.bindToggleGroups(
-    //       equil, [['Aon2', 'A', 'H'], ['Aon2Left', 'ALeft', 'H']],
-    //     ),
-    //     SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //   ],
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: 'The two unknown |angles| must be |_45º| as they are equal (this is an |isosceles| triangle), and a triangle\'s angles |sum_to_180º|.',
+      modifiers: {
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
+        sum_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+        _45º: highlight(colors.angles),
+        angles: this.bindNext(colors.angles),
+      },
+    };
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('sideCenter');
+        coll.undim();
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('0');
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [square._tri, square._right, square._D, square._A1, square._A2],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        angles: coll.bindAccent(square, ['451', '452']),
+      },
+      show: [
+        square._tri, square._right, square._D, square._A1, square._A2,
+        square._451, square._452,
+      ],
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
+        coll.accent(square, ['451', '452'], done);
+      },
+    });
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'This means the top two |angles| must be half of 60º, or |30º|.',
-    // };
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     angles: this.bindNext(colors.angles),
-    //     '30º': highlight(colors.angles),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //   ],
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    // ************************************************************
+    // ************************************************************
+    // ************************************************************
+    commonContent = {
+      setContent: 'We can now use the |Pythagorean_Theorem| to solve for |D|.',
+      modifiers: {
+        Pythagorean_Theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        square._tri, square._right, square._D, square._A1, square._A2,
+        square._451, square._452,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      show: [
+        square._tri, square._right, square._D, square._A1, square._A2,
+        square._451, square._452,
+      ],
+      transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
+        square.animations.new()
+          .scenarios({ target: 'side', duration: 1 })
+          .trigger({
+            callback: () => {
+              eqn.showForm('0');
+              eqn.pulseScaleNow(1, 1.3);
+            },
+            duration: 1,
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('0');
+        coll.setScenarios('side');
+        eqn.showForm('0');
+      },
+    });
 
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     angles: this.bindNext(colors.angles),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //     equil._a30, equil._a30Left,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.accent(equil, ['a30', 'a30Left'], done);
-    //   },
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('side');
+      },
+      show: [
+        square._tri, square._right, square._D, square._A1, square._A2,
+        square._451, square._452,
+      ],
+      setSteadyState: () => {
+        coll.setTriEqnForms('0');
+      },
+      beforeTransitionFromPrev: () => {
+        coll.setTriEqnForms('0');
+      },
+    };
+    commonContent = {
+      setContent: 'And now we can |rearrange| and |simplify|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, commonContent);
+    this.addSectionEqnStep({ eqn, from: '6', to: '7' }, common, commonContent);
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'As a triangle\'s angles |add_to_180º|, the remaining angles must be |right_angles|.',
-    //   modifiers: {
-    //     add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-    //   },
-    // };
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     right_angles: this.bindNext(colors.angles),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //     equil._a30, equil._a30Left,
-    //   ],
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        eqn.showForm('7');
+        coll.setTriEqnForms('0');
+        coll.goToTriEqnForms('1', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('1');
+        eqn.showForm('7');
+      },
+    });
 
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     right_angles: coll.bindAccent(equil, ['a90', 'a90Left']),
-    //   },
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //     equil._a30, equil._a30Left, equil._a90, equil._a90Left,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('0');
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.accent(equil, ['a90', 'a90Left'], done);
-    //   },
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        eqn.showForm('7');
+        coll.setTriEqnForms('1');
+        coll.goToTriEqnForms('2', done);
+      },
+      setSteadyState: () => {
+        coll.setTriEqnForms('2');
+        eqn.showForm('7');
+      },
+    });
 
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'Now let\'s |focus| on just |one half| and solve for |H| using the |Pythagorean_Theorem|.',
-    //   modifiers: {
-    //     Pythagorean_Theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
-    //   },
-    // };
-    // this.addSection(common, commonContent, {
-    //   show: [
-    //     equil._equil,
-    //     equil._a60, equil._a60Left, equil._a60Top,
-    //     equil._A, equil._ALeft, equil._ABottom,
-    //     equil._split, equil._H,
-    //     equil._Aon2, equil._Aon2Left,
-    //     equil._a30, equil._a30Left, equil._a90, equil._a90Left,
-    //   ],
-    //   setSteadyState: () => {
-    //     equil._ABottom.dim();
-    //     equil._a60Top.dim();
-    //     coll.setTriEqnForms('0');
-    //   },
-    // });
     // this.addSection(common, commonContent, {
     //   show: [
     //     equil._equil,
