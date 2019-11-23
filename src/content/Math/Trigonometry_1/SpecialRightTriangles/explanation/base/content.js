@@ -59,6 +59,9 @@ class Content extends PresentationFormatContent {
         coll.setScenarios('default');
         coll.undim();
       },
+      setSteadyState: () => {
+        coll.setTriEqnForms('0');
+      },
     };
     this.addSection(common, {
       setContent: style({ top: 0 }, [
@@ -121,9 +124,11 @@ class Content extends PresentationFormatContent {
         equil._split,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         equil._split.grow(0.05, 1, true, () => {
           equil._Aon2.showAll();
           equil._Aon2Left.showAll();
+          coll.setTriEqnForms('0');
           equil._ABottom.dim();
           equil._a60Top.dim();
           equil._H.showAll();
@@ -136,6 +141,7 @@ class Content extends PresentationFormatContent {
         equil._Aon2.showAll();
         equil._Aon2Left.showAll();
         equil._H.showAll();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -162,6 +168,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -186,6 +193,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -202,6 +210,7 @@ class Content extends PresentationFormatContent {
         equil._a30, equil._a30Left,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         equil._ABottom.dim();
         equil._a60Top.dim();
         coll.accent(equil, ['a30', 'a30Left'], done);
@@ -209,6 +218,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -236,6 +246,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -252,6 +263,7 @@ class Content extends PresentationFormatContent {
         equil._a30, equil._a30Left, equil._a90, equil._a90Left,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         equil._ABottom.dim();
         equil._a60Top.dim();
         coll.accent(equil, ['a90', 'a90Left'], done);
@@ -259,6 +271,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -283,6 +296,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         equil._ABottom.dim();
         equil._a60Top.dim();
+        coll.setTriEqnForms('0');
       },
     });
     this.addSection(common, commonContent, {
@@ -295,6 +309,7 @@ class Content extends PresentationFormatContent {
         equil._a30, equil._a30Left, equil._a90, equil._a90Left,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         equil._ABottom.dim();
         equil._a60Top.dim();
         coll.animations.new()
@@ -330,6 +345,7 @@ class Content extends PresentationFormatContent {
         equil.setScenario('side');
         coll._eqn.showForm('0');
         coll._eqn.setScenario('side');
+        coll.setTriEqnForms('0');
       },
     });
 
@@ -346,6 +362,10 @@ class Content extends PresentationFormatContent {
         equil._tri,
       ],
       setSteadyState: () => {
+        coll.setTriEqnForms('0');
+      },
+      beforeTransitionFromPrev: () => {
+        console.log('asdf')
         coll.setTriEqnForms('0');
       },
     };
@@ -371,6 +391,7 @@ class Content extends PresentationFormatContent {
         equil._tri,
       ],
       transitionFromPrev: (done) => {
+        coll.setTriEqnForms('0');
         coll._eqn.showForm('10');
         coll.accent(equil._r32, done);
       },
@@ -384,7 +405,10 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     commonContent = {
-      setContent: 'Rather than dealing with fractions, it is often more convenient to |multiply all sides by 2|.',
+      setContent: 'Rather than dealing |with| fractions, it is often more convenient to |multiply all sides by 2|.',
+      modifiers: {
+        with: coll.bindAccent(equil._a60),
+      },
     };
     this.addSection(common, commonContent, {
       show: [

@@ -41,20 +41,36 @@ export default function diagramLayout() {
       s2: { symbol: 'xStrike', color: colors.working },
     },
     forms: {
-      '0': 'A',
+      '0': {
+        content: 'A',
+        scale: 1,
+      },
       '1': {
         content: ['_2', 'times', 'A'],
         alignment: { fixTo: 'A' },
+        scale: 1,
       },
-      '2': ['_2', 'A'],
-      '3': ['_2', 'A'],
-      '4': ['_2', {
-        annotate: {
-          content: { strike: ['A', 's1'] },
-          withAnnotations: ['_1'],
-        },
-      }],
-      '5': ['_2'],
+      '2': {
+        content: ['_2', 'A'],
+        scale: 1,
+      },
+      '3': {
+        content: ['_2', 'A'],
+        scale: 1,
+      },
+      '4': {
+        content: ['_2', {
+          annotate: {
+            content: { strike: ['A', 's1'] },
+            withAnnotations: ['_1'],
+          },
+        }],
+        scale: 1,
+      },
+      '5': {
+        content: ['_2'],
+        scale: 1,
+      },
     },
   });
 
@@ -77,42 +93,24 @@ export default function diagramLayout() {
         { frac: ['A', { strike: ['_2', 's1'] }, 'v'] },
         'times', { strike: ['_2_', 's2'] },
       ],
-      '3': 'A',
-      '4': {
-        annotate: {
-          content: { strike: ['A', 's1'] },
-          withAnnotations: ['_1'],
-        },
+      '3': {
+        content: 'A',
+        scale: 1,
       },
-      '5': ['_1'],
+      '4': {
+        content: {
+          annotate: {
+            content: { strike: ['A', 's1'] },
+            withAnnotations: ['_1'],
+          },
+        },
+        scale: 1,
+      },
+      '5': {
+        content: ['_1'],
+        scale: 1,
+      },
     },
-  });
-
-  const root3A = ({
-    elements: {
-      A: { text: 'A', color: colors.sides },
-      _3: { text: '3', color: colors.sides },
-      r: { symbol: 'radical', color: colors.sides },
-      times: ' \u00D7 ',
-      _1: { text: '1', color: colors.sides },
-    },
-    forms: {
-      '0': [{ root: ['_3', 'r'] }, 'A'],
-      '1': [{ root: ['_3', 'r'] }, 'times', '1'],
-      '2': { root: ['_3', 'r'] },
-    },
-    scale: 1,
-  });
-
-  const root3 = ({
-    elements: {
-      _3: { text: '3', color: colors.sides },
-      r: { symbol: 'radical', color: colors.sides },
-    },
-    forms: {
-      '0': { root: ['_3', 'r'] },
-    },
-    scale: 1,
   });
 
   const root3Aon2 = ({
@@ -129,15 +127,25 @@ export default function diagramLayout() {
       s2: { symbol: 'xStrike', color: colors.working },
     },
     forms: {
-      '0': [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v'] }, 'A'],
-      '1': [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v'] }, 'A', 'times', '_2_'],
-      '2': [
-        { frac: [{ root: ['_3', 'r'] }, { strike: ['_2', 's1'] }, 'v'] },
-        'A', 'times', { strike: ['_2_', 's2'] },
-      ],
+      '0': {
+        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A'],
+        scale: 1,
+      },
+      '1': {
+        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A', 'times', '_2_'],
+        scale: 1,
+      },
+      '2': {
+        content: [
+          { frac: [{ root: ['_3', 'r'] }, { strike: ['_2', 's1'] }, 'v', 0.7] },
+          'A', 'times', { strike: ['_2_', 's2'] },
+        ],
+        scale: 1,
+      },
       '3': {
         content: [{ root: ['_3', 'r'] }, 'A'],
         alignment: { alignV: -0.1 },
+        scale: 1,
       },
       '4': {
         content: [{ root: ['_3', 'r'] }, {
@@ -147,10 +155,12 @@ export default function diagramLayout() {
           },
         }],
         alignment: { alignV: -0.1 },
+        scale: 1,
       },
       '5': {
         content: { root: ['_3', 'r'] },
         alignment: { alignV: -0.1 },
+        scale: 1,
       },
     },
   });
@@ -198,15 +208,15 @@ export default function diagramLayout() {
     addElements: [
       lineLabel('Aon2Left', Aon2, midPoint, equilPoints[0], 'bottom', 'right'),
       lineLabel('Aon2', Aon2, equilPoints[2], midPoint, 'bottom'),
-      lineLabel('ARight', 'A', equilPoints[2], midPoint, 'bottom'),
-      lineLabel('1Right', '1', equilPoints[2], midPoint, 'bottom'),
+      // lineLabel('ARight', 'A', equilPoints[2], midPoint, 'bottom'),
+      // lineLabel('1Right', '1', equilPoints[2], midPoint, 'bottom'),
       lineLabel('H', 'H', midPoint, equilPoints[1], 'left', 'bottom'),
-      lineLabel('r3', root3A, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
-      lineLabel('r31', root3, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
+      // lineLabel('r3', root3A, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
+      // lineLabel('r31', root3, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('r32', root3Aon2, midPoint, equilPoints[1], 'left', 'bottom', 0.15),
       lineLabel('A', eqnA, equilPoints[1], equilPoints[2], 'right', 'top'),
-      lineLabel('2A', '2A', equilPoints[1], equilPoints[2], 'right', 'top'),
-      lineLabel('2', '2', equilPoints[1], equilPoints[2], 'right', 'top'),
+      // lineLabel('2A', '2A', equilPoints[1], equilPoints[2], 'right', 'top'),
+      // lineLabel('2', '2', equilPoints[1], equilPoints[2], 'right', 'top'),
       lineLabel('ALeft', 'A', equilPoints[0], equilPoints[1], 'left', 'top'),
       lineLabel('ABottom', 'A', equilPoints[0], equilPoints[2], 'left', 'bottom'),
       angle('a30', null, midPoint, equilPoints[1], equilPoints[2], 0.5),

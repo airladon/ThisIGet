@@ -8567,7 +8567,8 @@ function (_Elements) {
           }
         }
       });
-    }
+    } // Check callback is being called
+
   }, {
     key: "animatePositionsTo",
     value: function animatePositionsTo(delay, dissolveOutTime, moveTime, dissolveInTime) {
@@ -8638,6 +8639,8 @@ function (_Elements) {
       if (elementsToHide.length > 0) {
         this.dissolveElements(elementsToHide, 'out', delay, dissolveOutTime, dissolveOutCallback);
         cumTime += dissolveOutTime;
+      } else if (dissolveOutCallback != null) {
+        dissolveOutCallback();
       }
 
       this.applyElementMods();

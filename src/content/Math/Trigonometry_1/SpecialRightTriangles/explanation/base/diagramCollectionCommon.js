@@ -34,10 +34,19 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   setTriEqnForms(form: string) {
-    this._equil._Aon2._label.showForm(form);
-    this._equil._A._label.showForm(form);
+    if (this._equil._Aon2.isShown) {
+      this._equil._Aon2._label.showForm(form);
+    }
+    if (this._equil._Aon2Left.isShown) {
+      this._equil._Aon2Left._label.showForm(form);
+    }
+    if (this._equil._A.isShown) {
+      this._equil._A._label.showForm(form);
+    }
     // this._equil._r3._label.showForm(form);
-    this._equil._r32._label.showForm(form);
+    if (this._equil._r32.isShown) {
+      this._equil._r32._label.showForm(form);
+    }
   }
 
   goToTriEqnForms(form: string, done: ?() => void = null) {
