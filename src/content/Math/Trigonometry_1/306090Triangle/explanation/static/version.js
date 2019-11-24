@@ -4,10 +4,10 @@
 var version = {
   uid: 'static',
   topic: 'explanation',
-  title: 'Derivation of Pythagorean Theorem',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Brief',
+  description: '',
+  htmlTitle: '',
+  htmlDescription: '',
   fullTopic: true,
   type: 'singlePage',
 };

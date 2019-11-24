@@ -27,6 +27,8 @@ To remove the fractions, we can multiply all sides by 2. Also, people often show
 
 ![](final.png)
 
+Any time you come accross a right angle triangle with a 30º or 60º angle, you will know the proportion of the sides is $$1$$, $$\sqrt3$$ and $$2$$.
+
 <!-- 
 ### Example Equation:
 
