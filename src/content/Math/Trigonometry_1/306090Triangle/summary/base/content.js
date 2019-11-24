@@ -15,7 +15,7 @@ const {
 //   style,
   click,
 //   clickW,
-//   highlight,
+  highlight,
 //   centerV,
 } = Fig.tools.html;
 
@@ -35,18 +35,22 @@ class Content extends PresentationFormatContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const coll = diag._collection;
-    const fig = coll._fig;
+    const coll = this.diagram.elements;
+    const tri = coll._tri;
 
     this.addSection({
       setContent: [
-        '',
+        'A triangle with angles |30º|, |60º| and |90º| has |opposite sides with ratios| of |1|, |√3| and |2| respectively. This is commonly called a |30-60-90 triangle|.',
       ],
-      modifiers: {},
-      show: [
-      ],
-      setEnterState: () => {
+      modifiers: {
+        '30º': highlight(colors.angles),
+        '60º': highlight(colors.angles),
+        '90º': highlight(colors.angles),
+      },
+      show: [tri],
+      setSteadyState: () =>{
+        tri.setScenario('default');
+        tri._r3._label.showForm('0');
       },
     });
   }
