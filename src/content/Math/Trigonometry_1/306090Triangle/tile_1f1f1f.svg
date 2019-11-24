@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 41.163 393.466 L 251.607 393.466 L 251.607 181.446 L 41.163 393.466 Z" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 18px;"/>
-  <path d="M 299.635 115.798 L 299.635 393.929 L 459.32 393.929 L 299.635 115.798 Z" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 18px;"/>
-  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="208.679 391.682 208.679 348.699 251.457 348.699"/>
-  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="300.826 348.44 300.826 391.423 343.604 391.423" transform="matrix(-1, 0, 0, -1, 644.429993, 739.863007)"/>
+  <path d="M 141.605 463.578 L 141.605 56.552 L 375.293 56.552 L 141.605 463.578 Z" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 18px;" transform="matrix(-1, 0, 0, -1, 516.897995, 520.129997)"/>
+  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="310.947 459.911 310.947 397.008 373.55 397.008"/>
 </svg>

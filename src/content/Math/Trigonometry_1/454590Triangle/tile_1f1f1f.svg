@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 41.163 393.466 L 251.607 393.466 L 251.607 181.446 L 41.163 393.466 Z" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 18px;"/>
-  <path d="M 299.635 115.798 L 299.635 393.929 L 459.32 393.929 L 299.635 115.798 Z" style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 18px;"/>
-  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="208.679 391.682 208.679 348.699 251.457 348.699"/>
-  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="300.826 348.44 300.826 391.423 343.604 391.423" transform="matrix(-1, 0, 0, -1, 644.429993, 739.863007)"/>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <polyline style="fill: none; stroke: rgb(31, 31, 31) ; stroke-width: 12px;" points="342.819 428.382 342.388 362.882 407.434 362.882"/>
+  <path d="M 291.92 163.727 L 542.614 414.421 L 41.225 414.421 L 291.92 163.727 Z" style="stroke: rgb(31, 31, 31) ; stroke-width: 18px; fill: none;" transform="matrix(-0.707107, 0.707107, -0.707107, -0.707107, 733.664978, 341.120667)" bx:shape="triangle 41.225 163.727 501.389 250.694 0.5 0 1@931bf95f"/>
 </svg>
