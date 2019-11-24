@@ -13,7 +13,7 @@ import DiagramCollection from './diagramCollection';
 
 const {
 //   style,
-  click,
+  // click,
 //   clickW,
   highlight,
 //   centerV,
@@ -48,7 +48,7 @@ class Content extends PresentationFormatContent {
         '90º': highlight(colors.angles),
       },
       show: [tri],
-      setSteadyState: () =>{
+      setSteadyState: () => {
         tri.setScenario('default');
         tri._r3._label.showForm('0');
       },

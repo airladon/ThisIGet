@@ -13,9 +13,9 @@ import DiagramCollection from './diagramCollection';
 
 const {
 //   style,
-  click,
+  // click,
 //   clickW,
-//   highlight,
+  highlight,
 //   centerV,
 } = Fig.tools.html;
 
@@ -35,18 +35,21 @@ class Content extends PresentationFormatContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const coll = diag._collection;
-    const fig = coll._fig;
+    const coll = this.diagram.elements;
+    const tri = coll._tri;
 
     this.addSection({
       setContent: [
-        '',
+        'A triangle with two |45º| angles, and a |90º| angle have |opposite sides with ratios| of |1|, |1| and |√2| respectively. This is commonly called a |45-45-90 triangle|.',
       ],
-      modifiers: {},
-      show: [
-      ],
-      setEnterState: () => {
+      modifiers: {
+        '45º': highlight(colors.angles),
+        '90º': highlight(colors.angles),
+      },
+      show: [tri],
+      setSteadyState: () => {
+        tri.setScenario('default');
+        tri._r2._label.showForm('0');
       },
     });
   }
