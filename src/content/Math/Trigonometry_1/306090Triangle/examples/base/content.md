@@ -55,7 +55,7 @@ What is the area of this triangle?
 <hintLow>[Answer]
 To solve this problem we need to know:
 
-1. A triangle's angles [[sum to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F))
+1. A triangle's angles [[sum to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)).
 2. The [[area]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Area',#00756F)) of a right angle triangle is half the product of its sides adjacent to the right angle.
 
 Using (1), we know the third angle must be:
