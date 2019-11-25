@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Definition & Properties',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Definition of 45-45-90 triangle',
+  htmlDescription: 'Summary definition of properties of a 45-45-90 triangle',
   fullTopic: true,
   type: 'presentation',
 };

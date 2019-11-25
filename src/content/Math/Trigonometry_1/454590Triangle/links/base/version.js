@@ -6,9 +6,9 @@ var version = {
   topic: 'links',
   type: 'generic',
   title: 'External',
-  description: 'External links to sources of information for <TOPIC>',
-  htmlTitle: '<TOPIC> Links',
-  htmlDescription: 'Explanations, proofs, examples and questions about <TOPIC>',
+  description: 'External links to sources of information for 45-45-90 triangles',
+  htmlTitle: '45-45-90 Triangle Links',
+  htmlDescription: 'Explanations, proofs, examples and questions about 45-45-90 triangles',
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Special_right_triangle',

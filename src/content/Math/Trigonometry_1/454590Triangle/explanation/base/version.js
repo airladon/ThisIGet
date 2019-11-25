@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Descriptive',
+  title: 'Descriptive & Interactive',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: '45-45-90 Triangle',
+  htmlDescription: 'Definition and derivation for a 45-45-90 triangle',
   fullTopic: true,
   type: 'presentation',
 };

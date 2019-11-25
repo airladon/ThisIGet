@@ -4,10 +4,10 @@
 var version = {
   uid: 'static',
   topic: 'explanation',
-  title: 'Derivation of Pythagorean Theorem',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Brief',
+  description: '',
+  htmlTitle: '45-45-90 triangle in brief',
+  htmlDescription: 'Succinct definition and derivation for a 45-45-90 triangle',
   fullTopic: true,
   type: 'singlePage',
 };

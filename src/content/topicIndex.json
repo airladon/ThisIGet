@@ -1768,7 +1768,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Side Lengths",
           "description": "",
           "fullTopic": true
         }
@@ -1776,7 +1776,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Verious Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1784,7 +1784,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
@@ -1799,7 +1799,7 @@
         "base": {
           "type": "generic",
           "title": "External",
-          "description": "External links to sources of information for <TOPIC>",
+          "description": "External links to sources of information for 30-60-90 triangles",
           "fullTopic": false
         }
       },
@@ -1832,7 +1832,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition & Properties",
           "description": "",
           "fullTopic": true
         }
@@ -1849,7 +1849,7 @@
       "discover": {
         "simple": {
           "type": "singlePage",
-          "title": "Base",
+          "title": "Prove the Side Lengths",
           "description": "",
           "fullTopic": true
         }
@@ -1857,7 +1857,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Verious Geometries",
           "description": "",
           "fullTopic": true
         }
@@ -1865,14 +1865,14 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
         "static": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
-          "description": "Derivation using area of four right angle triangles",
+          "title": "Brief",
+          "description": "",
           "fullTopic": true
         }
       },
@@ -1880,7 +1880,7 @@
         "base": {
           "type": "generic",
           "title": "External",
-          "description": "External links to sources of information for <TOPIC>",
+          "description": "External links to sources of information for 45-45-90 triangles",
           "fullTopic": false
         }
       },
@@ -1913,7 +1913,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition & Properties",
           "description": "",
           "fullTopic": true
         }
