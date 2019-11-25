@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Multiple Choice',
   description: '',
   htmlTitle: 'Quiz - find the ',
   htmlDescription: '',

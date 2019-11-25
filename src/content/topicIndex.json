@@ -1818,14 +1818,14 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Multiple Choice",
           "description": "",
           "fullTopic": true
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
           "fullTopic": true
         }
       },
@@ -1899,14 +1899,14 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Multiple Choice",
           "description": "",
           "fullTopic": true
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
           "fullTopic": true
         }
       },

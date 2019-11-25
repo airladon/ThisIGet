@@ -2965,19 +2965,19 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Multiple Choice",
           "description": "",
           "htmlTitle": "Quiz - find the ",
           "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
-          "htmlTitle": "Calculate circle properties",
-          "htmlDescription": "Calculate properties of a circle from other properties",
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         }
@@ -3078,19 +3078,19 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Multiple Choice",
           "description": "",
           "htmlTitle": "Quiz - find the ",
           "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
-          "htmlTitle": "Calculate circle properties",
-          "htmlDescription": "Calculate properties of a circle from other properties",
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         }

@@ -18,7 +18,6 @@ const {
 } = Fig;
 
 const {
-  removeRandElement,
   randElement,
   // randElements,
   round,
@@ -40,15 +39,14 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {
         notSelected: {
           answer: 'Incorrect',
-          details: 'Make sure to select an answer above the "Check" button',
+          details: 'Make sure to enter an answer above the "Check" button',
         },
       },
       transform,
     );
     this.addQuestion();
     this.addCheck();
-    // this.addInput('input', '?', 3, 0);
-    this.addMultipleChoice('tri', ['-', '-', '-', 'No']);
+    this.addInput('input', '?', 5, 1);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
     this.scalingFactor = 1;
@@ -57,12 +55,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   // eslint-disable-next-line class-methods-use-this
   randomTriangle(
   ): Array<Point> {
-    const side = rand(1, 1.5);
-    const sideRoot3 = side * Math.sqrt(3);
+    const side = rand(1.2, 2);
 
-    const p1 = new Point(-sideRoot3 / 2, -side / 3);
-    const p2 = new Point(sideRoot3 / 2, 2 * side / 3);
-    const p3 = new Point(sideRoot3 / 2, -side / 3);
+    const p1 = new Point(-side / 3 * 2, -side / 3);
+    const p2 = new Point(side / 3, 2 * side / 3);
+    const p3 = new Point(side / 3, -side / 3);
 
     return [p1, p2, p3];
   }
@@ -81,8 +78,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
-    this.fillSelection([['-', false], ['-', false], ['-', false]]);
-    this._choice.hide();
     this.calcRandomTri();
     this._tri.hideAll();
     this._tri.show();
@@ -91,14 +86,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._tri._pad1.show();
     this._tri._pad2.show();
     this.transitionToNewProblem({ target: 'quiz', duration: 1 });
-    // this._question.drawingObject.setText('');
   }
 
   setLabels() {
     const tri = this._tri;
     const side12 = round(rand(1, 100), 1);
-    const side01 = side12 * 2;
-    const side20 = round(side12 * Math.sqrt(3), 1);
+    const side01 = round(side12 * Math.sqrt(2), 1);
+    const side20 = side12;
     tri._side12.setLabel(`${side12}`);
     tri._side01.setLabel(`${side01}`);
     tri._side20.setLabel(`${side20}`);
@@ -108,27 +102,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   afterTransitionToNewProblem() {
     super.afterTransitionToNewProblem();
     this.showAnglesAndSides();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  fillSelection(options: Array<[string, boolean]>) {
-    const numOptions = options.length;
-    let answer;
-    for (let i = 0; i < numOptions; i += 1) {
-      const choiceIndex = i;
-      const choiceElement = document.getElementById(
-        `id_approach__quiz_multiple_choice_box_answer__tri_${choiceIndex}`,
-      );
-      if (choiceElement != null) {
-        const option = removeRandElement(options);
-        if (option[1]) {
-          answer = choiceIndex;
-        }
-        // eslint-disable-next-line prefer-destructuring
-        choiceElement.innerHTML = option[0];
-      }
-    }
-    return answer;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -146,50 +119,47 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       [['12'], '01'],
       [['12'], '20'],
       [['20'], '01'],
-      [['20'], '12'],
       [['01', '20'], '12'],
       [['12', '20'], '01'],
-      [['12', '01'], '20'],
     ];
     const scenario = randElement(scenarios);
-    const precision = 1;
-    const side1 = parseFloat(tri._side12.getLabel());
-    const side2 = parseFloat(tri._side01.getLabel());
-    const sideR3 = parseFloat(tri._side20.getLabel());
-    let incorrectAnswers = [];
+    const prec = 1;
+    const sqrt2Low = 1.4;
+    const sqrt2High = Math.sqrt(2);
+    const side12 = parseFloat(tri._side12.getLabel());
+    const side01 = parseFloat(tri._side01.getLabel());
+    const side20 = parseFloat(tri._side20.getLabel());
     let correctAnswer = 0;
+    const correctAnswers = [];
+    let answerToShow;
     // eslint-disable-next-line no-unused-vars
     const answers = (value, index) => {
       const calcs = [
-        round(value / 2, precision),
-        round(value * 2, precision),
-        round(value / Math.sqrt(3), precision),
-        round(value * Math.sqrt(3), precision),
-        round(value / Math.sqrt(3) * 2, precision),
-        round(value / 2 * Math.sqrt(3), precision),
-        round(value / 3, precision),
-        round(value / Math.sqrt(2), precision),
-        round(value * Math.sqrt(2), precision),
+        [round(value / sqrt2High, prec), round(value / sqrt2Low, prec), 0],
+        [round(value * sqrt2Low, prec), round(value * sqrt2High, prec), 1],
+        [value, value, 0],
       ];
-      return [
-        calcs[index],
-        [...calcs.slice(0, index), ...calcs.slice(index + 1)],
-      ];
+      return calcs[index];
     };
     const [knownSides, unknownSide] = scenario;
-    let incorrect;
     if (unknownSide === '12') {
       tri._side12.showAll();
       tri._side12.setLabel('?');
       if (knownSides.indexOf('01') > -1) {
         tri._side01.showAll();
-        [correctAnswer, incorrect] = answers(side2, 0);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side01, 0);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
       if (knownSides.indexOf('20') > -1) {
         tri._side20.showAll();
-        [correctAnswer, incorrect] = answers(sideR3, 2);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side20, 2);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
     }
     if (unknownSide === '01') {
@@ -197,13 +167,19 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       tri._side01.setLabel('?');
       if (knownSides.indexOf('12') > -1) {
         tri._side12.showAll();
-        [correctAnswer, incorrect] = answers(side1, 1);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side12, 1);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
       if (knownSides.indexOf('20') > -1) {
         tri._side20.showAll();
-        [correctAnswer, incorrect] = answers(sideR3, 4);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side20, 1);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
     }
     if (unknownSide === '20') {
@@ -211,56 +187,46 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       tri._side20.setLabel('?');
       if (knownSides.indexOf('12') > -1) {
         tri._side12.showAll();
-        [correctAnswer, incorrect] = answers(side1, 3);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side12, 2);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
       if (knownSides.indexOf('01') > -1) {
         tri._side01.showAll();
-        [correctAnswer, incorrect] = answers(side2, 5);
-        incorrectAnswers = [...incorrectAnswers, ...incorrect];
+        correctAnswer = answers(side01, 0);
+        const [min, max, trueAnswer] = correctAnswer;
+        correctAnswers.push(min);
+        correctAnswers.push(max);
+        answerToShow = correctAnswers[trueAnswer];
       }
     }
 
-    const choiceAnswers = [];
-    choiceAnswers.push([`${correctAnswer}`, true]);
-
-    const chosenIncorrectAnswers = [];
-    chosenIncorrectAnswers.push(removeRandElement(incorrectAnswers));
-    while (choiceAnswers.length < 4 && incorrectAnswers.length > 0) {
-      const incorrectAnswer = removeRandElement(incorrectAnswers);
-      if (chosenIncorrectAnswers.indexOf(incorrectAnswer) === -1) {
-        chosenIncorrectAnswers.push(incorrectAnswer);
-        choiceAnswers.push([`${incorrectAnswer}`, false]);
-      }
+    if (correctAnswers.length > 0) {
+      this.answer = [Math.min(...correctAnswers), Math.max(...correctAnswers), answerToShow];
     }
 
-    this.answer = this.fillSelection(choiceAnswers);
-    this._choice.show();
+    this.answer = correctAnswer;
     this.diagram.animateNextFrame();
   }
 
   showAnswer() {
+    // eslint-disable-next-line prefer-destructuring
+    this.answer = this.answer[2];
     super.showAnswer();
-    this.selectMultipleChoice('tri', this.answer);
-    // this.selectMultipleChoice('pgram', this.answer);
-    // if (this.answer === 0) {
-    //   this.selectMultipleChoice('similar_tri_1', 0);
-    // } else {
-    //   this.selectMultipleChoice('similar_tri_1', 1);
-    // }
-    // this._answerBox.disable();
     this.diagram.animateNextFrame();
   }
 
   findAnswer() {
-    const selection = this.getMultipleChoiceSelection('tri');
-    if (selection === -1) {
+    this._input.disable();
+    const value = this._input.getValue();
+    if (value.length === 0) {
       return 'notSelected';
     }
-    if (selection === this.answer) {
+    if (value >= this.answer[0] && value <= this.answer[1]) {
       return 'correct';
     }
-
     return 'incorrect';
   }
 }
