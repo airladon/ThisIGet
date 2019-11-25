@@ -14,7 +14,7 @@ const {
   // DiagramObjectLine,
   // EquationLabel,
   Point,
-  Line,
+  // Line,
 } = Fig;
 
 const {
@@ -22,7 +22,6 @@ const {
   randElement,
   // randElements,
   round,
-  randInt,
   rand,
 } = Fig.tools.math;
 
@@ -166,6 +165,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         round(value * 2, precision),
         round(value / Math.sqrt(3), precision),
         round(value * Math.sqrt(3), precision),
+        round(value / Math.sqrt(2), precision),
+        round(value * Math.sqrt(2), precision),
         round(value / Math.sqrt(3) * 2, precision),
         round(value / 2 * Math.sqrt(3), precision),
         round(value / 3, precision),
