@@ -11,11 +11,25 @@ var version = {
   htmlDescription: 'Explanations, proofs, examples and questions about <TOPIC>',
   links: [
     {
-      url: '',
-      hash: 'd41d8cd98f00b204e9800998ecf8427e',
-      publisher: '',
+      url: 'https://en.wikipedia.org/wiki/Special_right_triangle',
+      hash: '',
+      publisher: 'Wikipedia',
       type: 'generic',
-      description: '',
+      description: 'General information on 45-45-90 triangle',
+    },
+    {
+      url: 'https://www.katesmathlessons.com/45-45-90-triangles.html',
+      hash: '',
+      publisher: 'Kate\'s Math Lessons',
+      type: 'generic',
+      description: 'Definition and derivation of 45-45-90 triangle',
+    },
+    {
+      url: 'https://mathbitsnotebook.com/Geometry/RightTriangles/RT454590.html',
+      hash: '',
+      publisher: 'MathBitsNotebook',
+      type: 'generic',
+      description: 'Definition, derivation and examples',
     },
   ],
 };
