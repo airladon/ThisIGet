@@ -20,6 +20,9 @@ class Content extends SimpleFormatContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/AreaTriangle/base/',
       'Math/Geometry_1/AngleTypes/base/',
+      // 'Math/Geometry_1/CongruentTriangles/base/',
+      'Math/Geometry_1/Quadrangles/base/',
+      'Math/Geometry_1/RectanglesAndSquares/base/',
     ]);
   }
 

@@ -113,41 +113,84 @@ Therefore the area is:
 $$Area = \frac{1}{2} \times 5 \times 2.89 =  \bbox[10px,border:1px solid gray]{7.23}$$
 </hintLow>
 
-### Example 1
+### Example 5
 
-What are the lengths of sides A and B?
+What are the lengths of the sides of the quadrilateral?
 
-![](ex1.png)
-
-<hintLow>[Answer]
-</hintLow>
-
-### Example 1
-
-What are the lengths of sides A and B?
-
-![](ex1.png)
+![](ex5.png)
 
 <hintLow>[Answer]
+To solve this problem we need to know:
+
+1. A quadrangle or quadrilateral's internal angles [[sum to 360º]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F)).
+2. Any quadrangle or quadrilateral with four right angles is a [[rectangle]]((qr,'Math/Geometry_1/RectanglesAndSquares/base/Rectangle',#00756F)).
+3. A triangle's angles [[sum to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F))
+
+Using (1) we can calculate the fourth angle of the quadrilateral:
+
+$$360^\circ - 90^\circ - 90^\circ - 90^\circ = 90^\circ$$
+
+Therefore, from (2) as all four angles of the quadrilateral are 90º, it must be a rectangle. As a rectangle, the opposite sides are equal, therefore:
+
+$$A = C$$
+
+$$B = D$$
+
+Looking at the triangle to the bottom right of the rectangle, its third angle from (3) is:
+
+$$180^\circ - 90^\circ - 60^\circ = 30^\circ$$
+
+And so we have:
+
+![](ex5a.png)
+
+The bottom right triangle is a 30-60-90 triangle with side ratios of:
+
+![](base.png)
+
+Therefore sides A and B can be calculated from the diagonal:
+
+$$A = \frac{8}{2} =  \bbox[10px,border:1px solid gray]{4}$$
+
+$$B = \frac{8}{2} \times \sqrt{3} =  \bbox[10px,border:1px solid gray]{6.93}$$
 </hintLow>
 
-### Example 1
+### Example 6
 
-What are the lengths of sides A and B?
+What is the length of side A?
 
-![](ex1.png)
+![](ex6.png)
 
 <hintLow>[Answer]
+To solve this problem we need to know:
+
+1. A triangle's angles [[sum to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F))
+
+Using (1) we can calculate the two unknown triangle angles:
+
+$$180^\circ - 90^\circ - 30^\circ = 60^\circ$$
+
+We now have:
+
+![](ex6a.png)
+
+The smaller and larger triangle are both 30-60-90 triangles with side ratios of:
+
+![](base.png)
+
+Therefore we can calculate B as:
+
+$$B = 3 \times \sqrt{3} = 5.20$$
+
+Therefore the total base length of the larger triangle is:
+
+$$8 + 5.20 = 13.20$$
+
+And from this and the 30-60-90 ratios we can calculate A:
+
+$$A = \frac{13.20}{\sqrt{3}} =  \bbox[10px,border:1px solid gray]{7.62}$$
 </hintLow>
 
-### Example 1
-
-What are the lengths of sides A and B?
-
-![](ex1.png)
-
-<hintLow>[Answer]
-</hintLow>
 
 
 <!-- 
