@@ -10,9 +10,12 @@ $$\sqrt{D^2} = \sqrt{2A^2}$$
 
 $$D = \sqrt{2}A$$
 
-The two other angles of the triangle will be 45º as:
-  * It is an [[isosceles triangle]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) and therefore the angles are equal
-  * A triangle's angles [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)), and we know one angle is 90º
+The square is split into two right angle triangles where the other two angles of each triangle will be 45º as:
+
+* A triangle's angles [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)), and we know one angle is 90º.
+* They are [[isosceles triangles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) and therefore their remaining angles are equal. You could also prove the two angles are equal by showing the two triangles are congruent by [[SSS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sss',#00756F)) or [[SAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00756F)) and therefore are equal halves of the square.
+  
+Thus we have:
 
 ![](tri.png)
 

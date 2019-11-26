@@ -36,7 +36,7 @@ export default class QRMainPres extends PopupBoxCollection {
       '90º': highlight(colors.angles),
     };
     this.setTitle('45-45-90 Triangle');
-    this.setDescription('A triangle with two |45º| angles, and a |90º| angle have |opposite sides with ratios| of |1|, |1| and |√2| respectively. This is commonly called a |45-45-90 triangle|.', modifiers);
+    this.setDescription('A triangle with two |45º| angles, and a |90º| angle have |opposite sides with proportions| of |1|, |1| and |√2| respectively. This is commonly called a |45-45-90 triangle|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 

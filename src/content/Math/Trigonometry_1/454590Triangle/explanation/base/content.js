@@ -53,7 +53,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Introduction',
       setContent: style({ centerV: true }, [
-        'Some triangles have |side relationships| that are relatively easy to |calculate| and therefore make problems easier whenever the triangles are |identified|.',
+        'Some triangles have |relationships between sides| that are possible to |calculate| geometrically.',
+        'When you |identify| these triangles, you will only need |one side| length to calculate all |three|.',
       ]),
     });
     let common = {
