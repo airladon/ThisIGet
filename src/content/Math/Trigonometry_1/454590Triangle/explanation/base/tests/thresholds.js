@@ -1,6 +1,13 @@
 const thresholds = {
   pages: {
-    // 1: { goto: 1900, next: 1900, prev: 1900 },
+    19: { goto: 50, next: 150, prev: 150 },
+    20: { goto: 50, next: 150, prev: 250 },
+    21: { goto: 50, next: 150, prev: 150 },
+    22: { goto: 50, next: 150, prev: 150 },
+    23: { goto: 50, next: 150, prev: 150 },
+    24: { goto: 50, next: 150, prev: 150 },
+    25: { goto: 50, next: 200, prev: 300 },
+    26: { goto: 50, next: 150, prev: 150 },
   },
 };
 
