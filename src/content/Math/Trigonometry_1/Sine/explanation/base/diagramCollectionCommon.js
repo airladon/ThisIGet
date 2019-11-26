@@ -9,7 +9,7 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   // DiagramObjectPolyLine,
-  // Equation,
+  Equation,
   Transform,
 } = Fig;
 
@@ -18,11 +18,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
     _h: DiagramObjectLine;
     _v: DiagramObjectLine;
+    _hypotenuse: { _label: Equation } & DiagramObjectLine;
     _theta: DiagramObjectAngle;
     _right: DiagramObjectAngle;
     _real: DiagramObjectAngle;
     _sine: DiagramObjectLine;
-    _sineTheta: DiagramObjectLine;
+    _sineTheta: { _label: Equation } & DiagramObjectLine;
   } & DiagramElementCollection;
 
   constructor(
@@ -40,6 +41,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._fig.hasTouchableElements = true;
   }
 
+  labelForm(form: string) {
+    if (this._fig._sineTheta.isShown) {
+      this._fig._sineTheta._label.showForm(form);
+    }
+    if (this._fig._hypotenuse.isShown) {
+      this._fig._hypotenuse._label.showForm(form);
+    }
+  }
+
   updateRotation() {
     const theta = this._fig._theta;
     const right = this._fig._right;
@@ -48,6 +58,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const sine = this._fig._sine;
     const h = this._fig._h;
     const v = this._fig._v;
+    const hypotenuse = this._fig._hypotenuse;
     const r = this._fig._line.getRotation();
     const p2 = this._fig._line.getP2();
 
@@ -105,6 +116,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (sine.isShown) {
       sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       sine.setOpacity(opacity.sine);
+    }
+    if (hypotenuse.isShown) {
+      hypotenuse.setEndPoints([0, 0], p2);
     }
     this.diagram.animateNextFrame();
   }

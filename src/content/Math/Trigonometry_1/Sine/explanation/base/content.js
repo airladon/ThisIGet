@@ -49,6 +49,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll.setScenarios('default');
         coll._fig._line.setMovable(true);
+        coll.labelForm('2');
       },
     });
   }
