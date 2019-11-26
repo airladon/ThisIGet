@@ -40,7 +40,8 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        style({ top: 0 }, 'What is the unknown side length?'),
+        style({ top: 0 }, 'What is the unknown |side length|?'),
+        style({ size: 0.6, top: 0 }, 'Round answers to |1 decimal place|. Square roots can either be precise, or approximated to 1 decimal place in calculations.'),
       ],
       show: [quiz._tri],
       setSteadyState: () => {

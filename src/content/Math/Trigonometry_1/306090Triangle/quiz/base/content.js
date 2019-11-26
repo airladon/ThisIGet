@@ -40,7 +40,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        style({ top: 0 }, 'What is the unknown side length?'),
+        style({ top: 0 }, 'What is the unknown |side length|?'),
       ],
       show: [quiz._tri],
       setSteadyState: () => {
