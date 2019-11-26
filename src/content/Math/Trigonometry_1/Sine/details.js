@@ -4,9 +4,9 @@
 var topicDetails = {
   title: 'Sine',
   dependencies: [
-    'UnitCircle',
+    'Introduction',
   ],
-  enabled: false,
+  enabled: true,
   path: 'Math/Trigonometry_1',
   uid: 'Sine',
 };
