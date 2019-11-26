@@ -17,6 +17,36 @@ export default function diagramLayout() {
   const { colors } = layout;
   // colors.lines = colors.get('blue').rgb;
 
+  // const eqn = {
+  //   name: 'eqn',
+  //   method: 'addEquation',
+  //   options: {
+  //     color: colors.diagram.text.base,
+  //     scale: 0.9,
+  //     elements: {
+  //       equals: '  =  ',
+  //       a: { color: colors.angles },
+  //       b: { color: colors.angles },
+  //       v: { symbol: 'vinculum' },
+  //       brace: {
+  //         symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+  //       },
+  //       lb: { symbol: 'bracket', side: 'left' },
+  //       rb: { symbol: 'bracket', side: 'right' },
+  //       strike: { symbol: 'xStrike', color: colors.working },
+  //       r: { symbol: 'radical', color: colors.sides },
+  //     },
+  //     defaultFormAlignment: {
+  //       fixTo: 'equals',    // Points can also be defined as objects
+  //       alignH: 'center',
+  //       alignV: 'baseline',
+  //     },
+  //     forms: {
+  //       '0': ['a', 'equals', 'b'],
+  //     },
+  //   },
+  // };
+
   layout.addElements = [
   ];
   return layout;

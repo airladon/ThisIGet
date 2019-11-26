@@ -40,7 +40,7 @@ export default function diagramLayout() {
       },
       angle: {
         color: colors.qrEquilateral_angles,
-        label: { text: 'a', radius: 0.29 },
+        label: { text: '60º', radius: 0.29 },
         curve: { radius: 0.3, sides: 100, width },
       },
     },

@@ -97,13 +97,13 @@ As $$DG = AB$$, $$\angle BAC = \angle GDF$$ and $$AC = DF$$, then from SAS trian
 
 Therefore $$BC = GF$$ and $$\angle ACB = \angle DFG$$.
 
-If point $$G$$ is not at the same position as $$E$$, then $$DFG \neq DFE$$.
+If point $$G$$ is not at the same position as $$E$$, then $$\angle DFG \neq \angle DFE$$.
 
 We now have an inconsistency:
 
-* $$ACB = DFE\ \ $$ (given)
-* $$ACB = DFG\ \ $$ (found)
-* $$DFG \neq DFE\ \ $$ (found)
+* $$\angle ACB = \angle DFE\ \ $$ (given)
+* $$\angle ACB = \angle DFG\ \ $$ (found)
+* $$\angle DFG \neq \angle DFE\ \ $$ (found)
 
 The only way we can make this work is if point $$G$$ **is** at the same position as $$E$$, which means the triangles are **congruent**.
 
