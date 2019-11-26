@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Verious Geometries',
+  title: 'Various Geometries',
   description: '',
   htmlTitle: '45-45-90 triangle examples',
   htmlDescription: 'Example geometries where the 45-45-90 triangle can be used for a solution',

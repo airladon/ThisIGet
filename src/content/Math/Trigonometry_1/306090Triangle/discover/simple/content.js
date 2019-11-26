@@ -18,8 +18,9 @@ class Content extends SimpleFormatContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/CongruentTriangles/base/',
       'Math/Geometry_1/SimilarTriangles/base/',
-      'Math/Geometry_1/AngleGroups/base/',
+      // 'Math/Geometry_1/AngleGroups/base/',
       'Math/Geometry_1/Isosceles/base/',
+      'Math/Geometry_1/Equilateral/base/',
     ]);
   }
 

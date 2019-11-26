@@ -51,7 +51,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Introduction',
       setContent: style({ centerV: true }, [
-        'Some triangles have |side relationships| that are relatively easy to |calculate| and therefore make problems easier whenever the triangles are |identified|.',
+        'Some triangles have |relationships between sides| that are possible to |calculate| geometrically.',
+        'When you |identify| these triangles, you will only need |one side| length to calculate all |three|.',
       ]),
     });
     let common = {
@@ -155,6 +156,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         same_side_lengths: coll.bindToggleGroups(
           equil, [['Aon2', 'A', 'H'], ['Aon2Left', 'ALeft', 'H']],
+          colors.sides,
         ),
         SSS: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
       },
@@ -177,11 +179,13 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     commonContent = {
       setContent: 'This means the top two |angles| must be half of 60º, or |30º|.',
+      modifiers: {
+        '30º': highlight(colors.angles),
+      },
     };
     this.addSection(common, commonContent, {
       modifiers: {
         angles: this.bindNext(colors.angles),
-        '30º': highlight(colors.angles),
       },
       show: [
         equil._equil,
@@ -468,14 +472,17 @@ class Content extends PresentationFormatContent {
     });
 
     commonContent = {
-      setContent: 'This triangle is often called a |30-60-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |30º|, or |60º|, will be a 30-60-90 triangle.',
+      setContent: 'This triangle is often called a |30-60-90 triangle|. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |30º|, or |60º|, will be a 30-60-90 triangle.',
+      modifiers: {
+        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      },
     };
     this.addSection(common, commonContent, {
       setSteadyState: () => { coll.setTriEqnForms('3'); },
     });
 
     commonContent = {
-      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
+      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their sides will have the same proportion |no matter their size|.'),
       modifiers: {
         similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
       },
