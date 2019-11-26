@@ -32,7 +32,7 @@ export default class QRMainPres extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      '45': highlight(colors.angles),
+      '45º': highlight(colors.angles),
       '90º': highlight(colors.angles),
     };
     this.setTitle('45-45-90 Triangle');

@@ -6,7 +6,7 @@ What is the length of side $$A$$?
 ![](ex1.png)
 
 <hintLow>[Answer]
-This triangle is a 45-45-90 triangle, which has the side ratios of:
+This triangle is a 45-45-90 triangle, which has side proportions of:
 
 ![](base.png)
 
@@ -39,7 +39,7 @@ This leaves us with:
 
 ![](ex2a.png)
 
-As the left triangle is a 45-45-90 triangle, its sides will have the ratio:
+As the left triangle is a 45-45-90 triangle, its sides will have the proportion:
 
 ![](base.png)
 
@@ -64,11 +64,11 @@ Note that a [[square]]((qr,'Math/Geometry_1/RectanglesAndSquares/base/Square',#0
 
 This shape has four equal sides, but we need to show all the angles are right angles for it to be a square.
 
-First we know a 45-45-90 triangle has side ratios of:
+First we know a 45-45-90 triangle has side proportions of:
 
 ![](base.png)
 
-Both triangles have the same side lengths scaled by 5. Therefore, they are [[similar triangles]]((qr,'Math/Geometry_1/SimilarTriangles/base/Main',#00756F)), and share the same angles.
+Both triangles have the same side lengths scaled by 5. Therefore, they are [[similar triangles]]((qr,'Math/Geometry_1/SimilarTriangles/base/SimilarPres',#00756F)), and share the same angles.
 
 This means we have:
 

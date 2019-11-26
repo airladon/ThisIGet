@@ -92,7 +92,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     // ************************************************************
     let commonContent = {
-      setContent: 'We start with a |square| and |split| along its diagonal.',
+      setContent: 'We start with a |square| and |split| it along its diagonal.',
       modifiers: {
         square: this.qr('Math/Geometry_1/RectanglesAndSquares/base/Square'),
       },
@@ -105,7 +105,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        split: click(coll._square._split.grow, [coll, 0.05, 1, true, null], colors.sides),
+        split: click(coll._square._split.grow, [coll._square._split, 0.05, 1, true, null], colors.sides),
       },
       show: [square._square, square._split, square._D, square._A1, square._A2],
       transitionFromPrev: (done) => {
@@ -315,7 +315,7 @@ class Content extends PresentationFormatContent {
     };
 
     commonContent = {
-      setContent: 'This triangle is often called a |45-45-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |45º| will be a 45-45-90 triangle.',
+      setContent: 'This triangle is often called a |45-45-90 triangle|. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |45º| will be a 45-45-90 triangle.',
       modifiers: {
         add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       },
@@ -325,7 +325,7 @@ class Content extends PresentationFormatContent {
     });
 
     commonContent = {
-      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
+      setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their sides will have the same proportion |no matter their size|.'),
       modifiers: {
         similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
       },
