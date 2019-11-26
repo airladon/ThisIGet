@@ -28,7 +28,7 @@ export default function diagramLayout() {
     new Point(0.5 * side * Math.sqrt(2), -height / 3),
   ];
 
-  const eqnD = ({
+  const eqnAR2 = ({
     elements: {
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
@@ -37,6 +37,20 @@ export default function diagramLayout() {
     forms: {
       '0': {
         content: [{ root: ['_2', 'r'] }, 'A'],
+        scale: 1,
+        alignment: { alignV: -0.01, alignH: 0.2 },
+      },
+    },
+  });
+
+  const eqnR2 = ({
+    elements: {
+      _2: { text: '2', color: colors.sides },
+      r: { symbol: 'radical', color: colors.sides },
+    },
+    forms: {
+      '0': {
+        content: [{ root: ['_2', 'r'] }],
         scale: 1,
         alignment: { alignV: -0.01, alignH: 0.2 },
       },
@@ -86,9 +100,12 @@ export default function diagramLayout() {
     name: 'tri',
     method: 'collection',
     addElements: [
-      lineLabel('A1', '1A', points[0], points[1], 'top', 'left'),
-      lineLabel('A2', '1A', points[1], points[2], 'top', 'right'),
-      lineLabel('r2', eqnD, points[0], points[2], 'bottom', 'left', 0.2),
+      lineLabel('A1', 'A', points[0], points[1], 'top', 'left'),
+      lineLabel('A2', 'A', points[1], points[2], 'top', 'right'),
+      lineLabel('Ar2', eqnAR2, points[0], points[2], 'bottom', 'left', 0.2),
+      lineLabel('1', '1', points[0], points[1], 'top', 'left'),
+      lineLabel('2', '1', points[1], points[2], 'top', 'right'),
+      lineLabel('r2', eqnR2, points[0], points[2], 'bottom', 'left', 0.2),
       angle('451', null, points[2], points[0], points[1], 0.3),
       angle('452', null, points[1], points[2], points[0], 0.3),
       angle('right', '', points[0], points[1], points[2], 0.3),

@@ -40,16 +40,29 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        'A triangle with two |45º| angles, and a |90º| angle have |opposite sides with ratios| of |1|, |1| and |√2| respectively. This is commonly called a |45-45-90 triangle|.',
+        'A triangle with two |45º| angles, and a |90º| angle have |opposite sides with ratios| of |1|, |1| and |√2| respectively. This is commonly called a |45-45-90_triangle|.',
       ],
       modifiers: {
         '45º': highlight(colors.angles),
         '90º': highlight(colors.angles),
+        '45-45-90_triangle': coll.bindToggleGroups(
+          tri,
+          [
+            ['A1', 'A2', 'Ar2'],
+            ['1', '2', 'r2'],
+          ],
+          colors.sides,
+          ['pulse', 'show'],
+        ),
       },
       show: [tri],
       setSteadyState: () => {
         tri.setScenario('default');
         tri._r2._label.showForm('0');
+        tri._Ar2._label.showForm('0');
+        tri._A1.hide();
+        tri._A2.hide();
+        tri._Ar2.hide();
       },
     });
   }

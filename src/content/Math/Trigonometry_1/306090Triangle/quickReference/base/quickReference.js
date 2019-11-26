@@ -35,9 +35,18 @@ export default class QRMainPres extends PopupBoxCollection {
       '30º': highlight(colors.angles),
       '60º': highlight(colors.angles),
       '90º': highlight(colors.angles),
+      '30-60-90_triangle': this._collection.bindToggleGroups(
+        this._collection._tri,
+        [
+          ['1A', '2A', 'r3A'],
+          ['1', '2', 'r3'],
+        ],
+        colors.sides,
+        ['pulse', 'show'],
+      ),
     };
     this.setTitle('30-60-90 Triangle');
-    this.setDescription('A triangle with angles |30º|, |60º| and |90º| has |opposite sides with proportions| of |1|, |√3| and |2| respectively. This is commonly called a |30-60-90 triangle|.', modifiers);
+    this.setDescription('A triangle with angles |30º|, |60º| and |90º| has |opposite sides with proportions| of |1|, |√3| and |2| respectively. This is commonly called a |30-60-90_triangle|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
@@ -46,6 +55,12 @@ export default class QRMainPres extends PopupBoxCollection {
     const coll = this._collection;
     coll.showAll();
     coll.setScenarios('default');
+    const tri = coll._tri;
+    tri._r3._label.showForm('0');
+    tri._r3A._label.showForm('0');
+    tri._1A.hide();
+    tri._2A.hide();
+    tri._r3A.hide();
     this.setDiagramSpace({ location: 'top', size: 0.6 });
     this.transformToQRWindow(coll, new Rect(-1.75, -1, 3.5, 2.2));
     this.diagram.animateNextFrame();

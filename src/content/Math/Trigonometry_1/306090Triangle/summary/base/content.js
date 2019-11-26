@@ -40,17 +40,30 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        'A triangle with angles |30º|, |60º| and |90º| has |opposite sides with ratios| of |1|, |√3| and |2| respectively. This is commonly called a |30-60-90 triangle|.',
+        'A triangle with angles |30º|, |60º| and |90º| has |opposite sides with ratios| of |1|, |√3| and |2| respectively. This is commonly called a |30-60-90_triangle|.',
       ],
       modifiers: {
         '30º': highlight(colors.angles),
         '60º': highlight(colors.angles),
         '90º': highlight(colors.angles),
+        '30-60-90_triangle': coll.bindToggleGroups(
+          tri,
+          [
+            ['1A', '2A', 'r3A'],
+            ['1', '2', 'r3'],
+          ],
+          colors.sides,
+          ['pulse', 'show'],
+        ),
       },
       show: [tri],
       setSteadyState: () => {
         tri.setScenario('default');
         tri._r3._label.showForm('0');
+        tri._r3A._label.showForm('0');
+        tri._1A.hide();
+        tri._2A.hide();
+        tri._r3A.hide();
       },
     });
   }

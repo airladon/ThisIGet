@@ -40,6 +40,19 @@ export default function diagramLayout() {
     },
   });
 
+  const root3on2 = ({
+    elements: {
+      _3: { text: '3', color: colors.sides },
+      r: { symbol: 'radical', color: colors.sides },
+    },
+    forms: {
+      '0': {
+        content: { root: ['_3', 'r'] },
+        scale: 1,
+      },
+    },
+  });
+
   const lineLabel = (name, text, p1, p2, location = 'below', subLocation = 'left', offset = 0.05) => ({
     name,
     method: 'line',
@@ -82,9 +95,12 @@ export default function diagramLayout() {
     name: 'tri',
     method: 'collection',
     addElements: [
-      lineLabel('1', '1A', equilPoints[1], equilPoints[2], 'right'),
-      lineLabel('2', '2A', equilPoints[0], equilPoints[1], 'top', 'left', 0.1),
-      lineLabel('r3', root3Aon2, equilPoints[0], equilPoints[2], 'left', 'bottom', 0.15),
+      lineLabel('1A', '1A', equilPoints[1], equilPoints[2], 'right'),
+      lineLabel('2A', '2A', equilPoints[0], equilPoints[1], 'top', 'left', 0.1),
+      lineLabel('r3A', root3Aon2, equilPoints[0], equilPoints[2], 'left', 'bottom', 0.15),
+      lineLabel('1', '1', equilPoints[1], equilPoints[2], 'right'),
+      lineLabel('2', '2', equilPoints[0], equilPoints[1], 'top', 'left', 0.1),
+      lineLabel('r3', root3on2, equilPoints[0], equilPoints[2], 'left', 'bottom', 0.15),
       angle('a30', null, equilPoints[2], equilPoints[0], equilPoints[1], 0.5),
       angle('a60', null, equilPoints[0], equilPoints[1], equilPoints[2], 0.3),
       angle('a90', '', equilPoints[1], equilPoints[2], equilPoints[0], 0.4),
