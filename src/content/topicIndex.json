@@ -1779,6 +1779,12 @@
           "title": "Various Geometries",
           "description": "",
           "fullTopic": true
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "fullTopic": true
         }
       },
       "explanation": {
@@ -1858,6 +1864,12 @@
         "base": {
           "type": "singlePage",
           "title": "Various Geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
           "description": "",
           "fullTopic": true
         }

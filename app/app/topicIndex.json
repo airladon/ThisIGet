@@ -2909,6 +2909,15 @@
           "htmlDescription": "Example geometries where the 30-60-90 triangle can be used for a solution",
           "fullTopic": true,
           "links": ""
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "htmlTitle": "30-60-90 triangle basic usage",
+          "htmlDescription": "Simple geometries where the 30-60-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
         }
       },
       "explanation": {
@@ -3035,6 +3044,15 @@
           "description": "",
           "htmlTitle": "45-45-90 triangle examples",
           "htmlDescription": "Example geometries where the 45-45-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "htmlTitle": "45-45-90 triangle basic usage",
+          "htmlDescription": "Simple geometries where the 45-45-90 triangle can be used for a solution",
           "fullTopic": true,
           "links": ""
         }
