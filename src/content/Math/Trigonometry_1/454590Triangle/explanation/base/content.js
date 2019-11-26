@@ -105,7 +105,11 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        split: click(coll._square._split.grow, [coll._square._split, 0.05, 1, true, null], colors.sides),
+        split: click(
+          coll._square._split.grow,
+          [coll._square._split, 0.05, 1, true, null],
+          colors.sides,
+        ),
       },
       show: [square._square, square._split, square._D, square._A1, square._A2],
       transitionFromPrev: (done) => {
