@@ -1762,6 +1762,180 @@
     ],
     "enabled": true
   },
+  "Math/Trigonometry_1/306090Triangle": {
+    "title": "30-60-90 Triange",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Prove the Side Lengths",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for 30-60-90 triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Multiple Choice",
+          "description": "",
+          "fullTopic": true
+        },
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition & Properties",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Introduction"
+    ],
+    "enabled": true
+  },
+  "Math/Trigonometry_1/454590Triangle": {
+    "title": "45-45-90 Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Prove the Side Lengths",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for 45-45-90 triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Multiple Choice",
+          "description": "",
+          "fullTopic": true
+        },
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition & Properties",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Introduction"
+    ],
+    "enabled": true
+  },
   "Math/Trigonometry_1/Chord": {
     "title": "Chord",
     "approaches": {

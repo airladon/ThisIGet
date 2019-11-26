@@ -1032,6 +1032,10 @@ class PresentationFormatContent extends SimpleFormatContent {
     const eqnSection = {
       transitionFromPrev: (done) => {
         let callback = done;
+        // beforeTransitionFromPrev is only used for section eqn steps
+        if (userSections.beforeTransitionFromPrev != null) {
+          userSections.beforeTransitionFromPrev();
+        }
         if (userSections.transitionFromPrev != null) {
           callback = userSections.transitionFromPrev.bind(userSections, done);
         }

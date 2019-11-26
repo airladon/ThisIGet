@@ -35,9 +35,7 @@ class Content extends PresentationFormatContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const coll = diag._collection;
-    const fig = coll._fig;
+    const coll = this.diagram.elements;
 
     this.addSection({
       setContent: [

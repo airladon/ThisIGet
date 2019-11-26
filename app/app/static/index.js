@@ -6130,6 +6130,7 @@ function (_Elements) {
       this.descent = this.mainContent.descent + this.bottom;
       this.ascent = this.mainContent.ascent + this.top;
       this.width = this.mainContent.width + this.left + this.right;
+      this.height = this.descent + this.ascent;
     }
   }, {
     key: "getAllElements",
@@ -8304,6 +8305,8 @@ function (_Elements) {
         fixPoint.x += w;
       } else if (alignH === 'center') {
         fixPoint.x += w / 2;
+      } else if (typeof alignH === 'number') {
+        fixPoint.x += alignH;
       }
 
       if (alignV === 'top') {
@@ -8312,6 +8315,8 @@ function (_Elements) {
         fixPoint.y += p.y - d;
       } else if (alignV === 'middle') {
         fixPoint.y += p.y - d + h / 2;
+      } else if (typeof alignV === 'number') {
+        fixPoint.y += p.y + alignV;
       }
 
       var delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0).sub(fixPoint);
@@ -8562,7 +8567,8 @@ function (_Elements) {
           }
         }
       });
-    }
+    } // Check callback is being called
+
   }, {
     key: "animatePositionsTo",
     value: function animatePositionsTo(delay, dissolveOutTime, moveTime, dissolveInTime) {
@@ -8633,6 +8639,8 @@ function (_Elements) {
       if (elementsToHide.length > 0) {
         this.dissolveElements(elementsToHide, 'out', delay, dissolveOutTime, dissolveOutCallback);
         cumTime += dissolveOutTime;
+      } else if (dissolveOutCallback != null) {
+        dissolveOutCallback();
       }
 
       this.applyElementMods();

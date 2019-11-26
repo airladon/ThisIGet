@@ -2886,6 +2886,279 @@
     ],
     "enabled": true
   },
+  "Math/Trigonometry_1/306090Triangle": {
+    "title": "30-60-90 Triange",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Prove the Side Lengths",
+          "description": "",
+          "htmlTitle": "Prove the side lengths of a 30-60-90 triangle",
+          "htmlDescription": "Follow the hints to prove the side lengths of a 30-60-90 triangle yourself",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "htmlTitle": "30-60-90 triangle examples",
+          "htmlDescription": "Example geometries where the 30-60-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "htmlTitle": "30-60-90 triangle basic usage",
+          "htmlDescription": "Simple geometries where the 30-60-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "30-60-90 Triangle",
+          "htmlDescription": "Definition and derivation for a 30-60-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "30-60-90 triangle in brief",
+          "htmlDescription": "Succinct definition and derivation for a 30-60-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for 30-60-90 triangles",
+          "htmlTitle": "30-60-90 Triangle Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about 30-60-90 triangles",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Special_right_triangle",
+              "hash": "6f40a0cab3d17268c2f84d0743d41aac",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on 30-60-90 triangle"
+            },
+            {
+              "url": "https://blog.prepscholar.com/30-60-90-triangle-ratio-formula",
+              "hash": "6289f552eda75b461c67f163d2ef85f4",
+              "publisher": "PrepScholar",
+              "author": "Courtney Montgomery",
+              "type": "generic",
+              "description": "Definition and derivation of 30-60-90 triangle"
+            },
+            {
+              "url": "https://mathbitsnotebook.com/Geometry/RightTriangles/RT306090.html",
+              "hash": "839ee4d646c34b9dfc196ca2659943dc",
+              "publisher": "MathBitsNotebook",
+              "type": "generic",
+              "description": "Definition, derivation and examples"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Multiple Choice",
+          "description": "",
+          "htmlTitle": "Quiz - Find the Side Length",
+          "htmlDescription": "Find the side length of a 30-60-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        },
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "htmlTitle": "Quiz - Find the Side Length - Entry",
+          "htmlDescription": "Find the side length of a 30-60-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition & Properties",
+          "description": "",
+          "htmlTitle": "Definition of 30-60-90 triangle",
+          "htmlDescription": "Summary definition of properties of a 30-60-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      "Introduction"
+    ],
+    "enabled": true
+  },
+  "Math/Trigonometry_1/454590Triangle": {
+    "title": "45-45-90 Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Prove the Side Lengths",
+          "description": "",
+          "htmlTitle": "Prove the side lengths of a 45-45-90 triangle",
+          "htmlDescription": "Follow the hints to prove the side lengths of a 45-45-90 triangle yourself",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "htmlTitle": "45-45-90 triangle examples",
+          "htmlDescription": "Example geometries where the 45-45-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        },
+        "simpleGeometries": {
+          "type": "singlePage",
+          "title": "Simple Geometries",
+          "description": "",
+          "htmlTitle": "45-45-90 triangle basic usage",
+          "htmlDescription": "Simple geometries where the 45-45-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "45-45-90 Triangle",
+          "htmlDescription": "Definition and derivation for a 45-45-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "45-45-90 triangle in brief",
+          "htmlDescription": "Succinct definition and derivation for a 45-45-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for 45-45-90 triangles",
+          "htmlTitle": "45-45-90 Triangle Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about 45-45-90 triangles",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Special_right_triangle",
+              "hash": "6f40a0cab3d17268c2f84d0743d41aac",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "General information on 45-45-90 triangle"
+            },
+            {
+              "url": "https://www.katesmathlessons.com/45-45-90-triangles.html",
+              "hash": "d26f47835e4e5118d7ddc753f6b384eb",
+              "publisher": "Kate's Math Lessons",
+              "type": "generic",
+              "description": "Definition and derivation of 45-45-90 triangle"
+            },
+            {
+              "url": "https://mathbitsnotebook.com/Geometry/RightTriangles/RT454590.html",
+              "hash": "d9af0fc20b4dafb2315151cab882f5b6",
+              "publisher": "MathBitsNotebook",
+              "type": "generic",
+              "description": "Definition, derivation and examples"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Multiple Choice",
+          "description": "",
+          "htmlTitle": "Quiz - Find the Side Length",
+          "htmlDescription": "Find the side length of a 45-45-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        },
+        "entry": {
+          "type": "presentation",
+          "title": "Entry",
+          "description": "",
+          "htmlTitle": "Quiz - Find the Side Length - Entry",
+          "htmlDescription": "Find the side length of a 45-45-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition & Properties",
+          "description": "",
+          "htmlTitle": "Definition of 45-45-90 triangle",
+          "htmlDescription": "Summary definition of properties of a 45-45-90 triangle",
+          "fullTopic": true,
+          "links": ""
+        }
+      }
+    },
+    "dependencies": [
+      "Introduction"
+    ],
+    "enabled": true
+  },
   "Math/Trigonometry_1/Chord": {
     "title": "Chord",
     "approaches": {
