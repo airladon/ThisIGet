@@ -5,15 +5,35 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   // DiagramElementPrimitive,
-  // DiagramObjectAngle,
-  // DiagramObjectLine,
-  // DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
+  DiagramObjectPolyLine,
   Equation,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _equil: {
+    _Aon2Left: { _label: Equation } & DiagramObjectLine;
+    _Aon2: { _label: Equation } & DiagramObjectLine;
+    _H: DiagramObjectLine;
+    _r32: { _label: Equation } & DiagramObjectLine;
+    _A: DiagramObjectLine;
+    _ALeft: DiagramObjectLine;
+    _ABottom: DiagramObjectLine;
+    _a30: DiagramObjectAngle;
+    _a30Left: DiagramObjectAngle;
+    _a60: DiagramObjectAngle;
+    _a60Left: DiagramObjectAngle;
+    _a90: DiagramObjectAngle;
+    _a90Left: DiagramObjectAngle;
+    _equil: DiagramObjectPolyLine;
+    _split: DiagramObjectLine;
+    _tri: DiagramObjectPolyLine;
+  } & DiagramElementCollection;
+
+  _eqn: Equation;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -67,6 +87,5 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._equil._r32._label.goToForm({
       name: form, duration: 1, animate: 'move', callback: allDone,
     });
-
   }
 }

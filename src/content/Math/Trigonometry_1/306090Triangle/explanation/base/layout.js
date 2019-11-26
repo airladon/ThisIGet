@@ -295,8 +295,8 @@ export default function diagramLayout() {
     brac: [content, lb, rb],
   });
 
-  const strike = (content, strike) => ({
-    strike: [content, strike],
+  const strike = (content, strikeSymbol) => ({
+    strike: [content, strikeSymbol],
   });
 
   const root = (content, radical) => ({

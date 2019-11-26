@@ -5,15 +5,28 @@ import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   // DiagramElementPrimitive,
-  // DiagramObjectAngle,
-  // DiagramObjectLine,
-  // DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
+  DiagramObjectPolyLine,
   Equation,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _square: {
+    _A1: { _label: Equation } & DiagramObjectLine;
+    _A2: { _label: Equation } & DiagramObjectLine;
+    _D: DiagramObjectLine;
+    _451: DiagramObjectAngle;
+    _452: DiagramObjectAngle;
+    _right: DiagramObjectAngle;
+    _square: DiagramObjectPolyLine;
+    _split: DiagramObjectLine;
+    _tri: DiagramObjectPolyLine;
+  } & DiagramElementCollection;
+
+  _eqn: Equation;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -50,13 +63,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._square._452.isShown) {
       this._square._452._label.showForm(form);
     }
-    // if (this._equil._A.isShown) {
-    //   this._equil._A._label.showForm(form);
-    // }
-    // // this._equil._r3._label.showForm(form);
-    // if (this._equil._r32.isShown) {
-    //   this._equil._r32._label.showForm(form);
-    // }
   }
 
   goToTriEqnForms(form: string, done: ?() => void = null) {
@@ -76,6 +82,5 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._square._D._label.goToForm({
       name: form, duration: 1, animate: 'move', callback: allDone,
     });
-
   }
 }
