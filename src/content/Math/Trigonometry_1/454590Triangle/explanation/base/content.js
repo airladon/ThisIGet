@@ -352,26 +352,6 @@ class Content extends PresentationFormatContent {
         coll.setTriEqnForms('4');
       },
     });
-
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('3');
-    //     coll.goToTriEqnForms('4', done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('4');
-    //   },
-    // });
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.setTriEqnForms('4');
-    //     coll.goToTriEqnForms('5', done);
-    //   },
-    //   setSteadyState: () => {
-    //     coll.setTriEqnForms('5');
-    //   },
-    // });
-
   }
 }
 

@@ -98,7 +98,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************
     let commonContent = {
       setContent: 'We start by |splitting| the equilateral triangle in |half|.',
-    }
+    };
     this.addSection(common, commonContent, {
       title: '30-60-90 Triangle',
       modifiers: {
@@ -503,57 +503,6 @@ class Content extends PresentationFormatContent {
         coll.setTriEqnForms('5');
       },
     });
-
-    // // ************************************************************
-    // // ************************************************************
-    // // ************************************************************
-    // commonContent = {
-    //   setContent: 'This triangle is often called a |30-60-90| triangle. As angles in a triangle |add_to_180º|, any |right angle triangle| with an angle of |30º|, or |60º|, will be a 30-60-90 triangle.',
-    // };
-
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres')
-    //   },
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._2A, equil._ARight, equil._r3,
-    //     equil._tri,
-    //   ],
-    // });
-
-    // commonContent = {
-    //   setContent: style({ top: 0 }, 'Sometimes this triangle is shown with |A = 1| for simplicity. Remember, triangles with the same angles are |similar_triangles|, meaning their ratio between sides will be the same |no matter their size|.'),
-    // };
-
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-    //   },
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._2A, equil._ARight, equil._r3,
-    //     equil._tri,
-    //   ],
-    // });
-
-    // this.addSection(common, commonContent, {
-    //   modifiers: {
-    //     similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-    //   },
-    //   show: [
-    //     equil._a60, equil._a30, equil._a90,
-    //     equil._2, equil._1Right, equil._r3,
-    //     equil._tri,
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     coll.accent(equil, ['2', '1Right'], done);
-    //     equil._r3._label.goToForm({ name: '1', duration: 1, animate: 'move' });
-    //   },
-    //   setSteadyState: () => {
-    //     // equil._r3._label.setForm('1');
-    //   }
-    // });
   }
 }
 
