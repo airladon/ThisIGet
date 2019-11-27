@@ -156,6 +156,7 @@ export default function diagramLayout() {
       angle('right', ''),
       lineLabel('sineTheta', eqnSine, colors.components, 'right'),
       lineLabel('sine', null, colors.components, 'right'),
+      lineLabel('opposite', 'opposite', colors.components, 'right'),
       lineLabel('hypotenuse', eqnR, colors.lines, 'left'),
       component('h'),
       component('v'),
@@ -213,39 +214,52 @@ export default function diagramLayout() {
       },
     },
   };
-  // const eqn = {
-  //   name: 'eqn',
-  //   method: 'addEquation',
-  //   options: {
-  //     color: colors.diagram.text.base,
-  //     scale: 0.9,
-  //     elements: {
-  //       equals: '  =  ',
-  //       a: { color: colors.angles },
-  //       b: { color: colors.angles },
-  //       v: { symbol: 'vinculum' },
-  //       brace: {
-  //         symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
-  //       },
-  //       lb: { symbol: 'bracket', side: 'left' },
-  //       rb: { symbol: 'bracket', side: 'right' },
-  //       strike: { symbol: 'xStrike', color: colors.working },
-  //       r: { symbol: 'radical', color: colors.sides },
-  //     },
-  //     defaultFormAlignment: {
-  //       fixTo: 'equals',    // Points can also be defined as objects
-  //       alignH: 'center',
-  //       alignV: 'baseline',
-  //     },
-  //     forms: {
-  //       '0': ['a', 'equals', 'b'],
-  //     },
-  //   },
-  // };
+
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        equals: '  =  ',
+        func: 'function',
+        theta: { text: '\u03B8', color: colors.angles },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+        v: { symbol: 'vinculum' },
+        opp: { text: 'opposite', color: colors.components },
+        // brace: {
+        //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+        // },
+        // strike: { symbol: 'xStrike', color: colors.working },
+        // r: { symbol: 'radical', color: colors.sides },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': {
+          content: ['func', { brac: ['theta', 'lb', 'rb'] }, 'equals', 'opp'],
+          alignment: {
+            fixTo: 'equals',
+          },
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, -1.5] },
+      },
+    },
+  };
 
   layout.addElements = [
     fig,
     triangle,
+    eqn,
   ];
   return layout;
 }

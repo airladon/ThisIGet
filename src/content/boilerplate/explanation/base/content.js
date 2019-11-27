@@ -5,6 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
+// import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -49,6 +50,14 @@ class Content extends PresentationFormatContent {
   }
 
   // this.addSectionEqnStep({ eqn: eqn, from: '0', to: '1' }, common, commonContent);
+
+  // this.addSection({
+  //   setContent: [
+  //     note({ label: 'Note:' }, 'Move the |top_point| of the triangle to change the triangle'),
+  //     `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html()}`,
+  //   ]
+  //   fadeInFromPrev: false,
+  // })
 }
 
 export default Content;

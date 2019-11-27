@@ -26,6 +26,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _real: DiagramObjectAngle;
     _sine: DiagramObjectLine;
     _sineTheta: { _label: Equation } & DiagramObjectLine;
+    _opposite: { _label: Equation } & DiagramObjectLine;
   } & DiagramElementCollection;
 
   constructor(
@@ -106,7 +107,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     } else {
       const r = this._fig._line.getRotation();
-      if (r < 0.1 || r > Math.PI / 2 - 0.1) {
+      if (r < 0.3 || r > Math.PI / 2 - 0.3) {
         this.gotoRotation(Math.PI / 4, 0.8, done);
       } else if (done != null) {
         done();
@@ -123,6 +124,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const h = this._fig._h;
     const v = this._fig._v;
     const hypotenuse = this._fig._hypotenuse;
+    const opposite = this._fig._opposite;
     const r = this._fig._line.getRotation();
     const p2 = this._fig._line.getP2();
 
@@ -139,6 +141,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       real: 1,
       sine: 1,
       sineTheta: 1,
+      opposite: 1,
     };
     if (r < 0.12) {
       opacity.right = 0;
@@ -146,6 +149,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       opacity.real = 0;
       opacity.sineTheta = 0;
       opacity.sine = 0;
+      opacity.opposite = 0;
     } else if (r > Math.PI / 2 * 0.8) {
       opacity.right = 0;
     }
@@ -180,6 +184,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (sine.isShown) {
       sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       sine.setOpacity(opacity.sine);
+    }
+    if (opposite.isShown) {
+      opposite.setEndPoints([p2.x, 0], [p2.x, p2.y]);
+      opposite.setOpacity(opacity.opposite);
     }
     if (hypotenuse.isShown) {
       hypotenuse.setEndPoints([0, 0], p2);
