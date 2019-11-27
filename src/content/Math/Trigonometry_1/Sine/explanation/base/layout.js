@@ -149,7 +149,7 @@ export default function diagramLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
-      axis('x', [0, 0], [r * 1.2, 0]),
+      axis('x', [0, 0], [r * 1, 0]),
       // axis('y', [0, 0], [0, r * 1.2]),
       angle('real', null),
       angle('theta', '\u03B8'),
@@ -163,7 +163,7 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [-1.5, -1] },
+        default: { position: [-r / 2, -1] },
       },
     },
   };
@@ -171,7 +171,7 @@ export default function diagramLayout() {
   const triPoints = [[-2, -1], [1, 1], [2, -1]];
   const basePoint = [triPoints[1][0], triPoints[0][1]];
   const triangle = {
-    name: 'triangle',
+    name: 'tri',
     method: 'collection',
     addElements: [
       angle('right', '', triPoints[1], basePoint, triPoints[0]),

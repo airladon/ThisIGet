@@ -13,6 +13,8 @@ const {
   Transform,
 } = Fig;
 
+const { rand } = Fig.tools.math;
+
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
@@ -47,6 +49,68 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     if (this._fig._hypotenuse.isShown) {
       this._fig._hypotenuse._label.showForm(form);
+    }
+  }
+
+  gotoSmallAngle() {
+    this.gotoRotation(rand(0.1, 0.3), 0.8, null);
+  }
+
+  gotoLargeAngle() {
+    this.gotoRotation(rand(Math.PI / 2 - 0.3, Math.PI / 2 - 0.1), 0.8, null);
+  }
+
+  rotateFrom0To90() {
+    this._fig._line.stop();
+    this._fig._line.animations.new()
+      .rotation({ target: 1 * Math.PI / 180, duration: 0 })
+      .rotation({ target: 89 * Math.PI / 180, duration: 10 })
+      .delay(0.5)
+      .rotation({ target: Math.PI / 3, duration: 1 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  gotoRotation(angle: ?number = null, duration: number = 0, done: ?() => void = null) {
+    let r = 0;
+    if (angle != null) {
+      r = angle;
+    } else {
+      const currentR = this._fig._line.getRotation();
+      let direction = 1;
+      if (currentR > Math.PI / 4) {
+        direction = -1;
+      }
+      r = currentR + direction * rand(Math.PI / 8, Math.PI / 4 * 0.9);
+    }
+    if (duration === 0) {
+      this._fig._line.setRotation(r);
+      if (done != null) {
+        done();
+      }
+    } else {
+      this._fig._line.stop();
+      this._fig._line.animations.new()
+        .rotation({ target: r, duration })
+        .whenFinished(done)
+        .start();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  resetRotation(done: ?() => void = null, duration: number = 0) {
+    if (duration === 0) {
+      this._fig._line.setRotation(Math.PI / 4);
+      if (done != null) {
+        done();
+      }
+    } else {
+      const r = this._fig._line.getRotation();
+      if (r < 0.1 || r > Math.PI / 2 - 0.1) {
+        this.gotoRotation(Math.PI / 4, 0.8, done);
+      } else if (done != null) {
+        done();
+      }
     }
   }
 
