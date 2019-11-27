@@ -225,11 +225,39 @@ export default function diagramLayout() {
       scale: 0.9,
       elements: {
         equals: '  =  ',
+        approx: ' \u2248 ',
         func: 'function',
         theta: { text: '\u03B8', color: colors.angles },
+        theta1: { text: '\u03B8', color: colors.angles },
+        theta2: { text: '\u03B8', color: colors.angles },
+        theta3: { text: '\u03B8', color: colors.angles },
+        theta4: { text: '\u03B8', color: colors.angles },
+        pi1: 'π',
+        pi2: 'π',
+        pi3: 'π',
+        pi4: 'π',
+        '16': '16',
+        '5': '5',
+        '5f': '5!',
+        '4': '4',
+        '2': '2',
+        '3': '3',
+        '3f': '3!',
+        '7': '7',
+        '7f': '7!',
+        'minus1': '  –  ',
+        'minus2': '  –  ',
+        'minus3': '  –  ',
+        'dots': '...',
+        'plus1': '  +  ',
+        'plus2': '  +  ',
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
+        lb1: { symbol: 'bracket', side: 'left' },
+        rb1: { symbol: 'bracket', side: 'right' },
         v: { symbol: 'vinculum' },
+        v1: { symbol: 'vinculum' },
+        v2: { symbol: 'vinculum' },
         opp: { text: 'opposite', color: colors.components },
         // brace: {
         //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
@@ -244,16 +272,47 @@ export default function diagramLayout() {
       },
       forms: {
         '0': {
-          content: ['func', { brac: ['theta', 'lb', 'rb'] }, 'equals', 'opp'],
+          content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
           alignment: {
-            fixTo: 'equals',
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '1': {
+          content: [
+            'opp', 'approx', {
+              frac: [
+                ['16', 'theta', { brac: [['pi1', 'minus1', 'theta1'], 'lb', 'rb'] }],
+                ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
+                  brac: [['pi3', 'minus3', 'theta4'], 'lb1', 'rb1'],
+                }],
+                'v',
+              ],
+            },
+          ],
+          alignment: {
+            alignH: 0.8,
+          },
+        },
+        '2': {
+          content: [
+            'opp', 'equals', 'theta', 'minus1',
+            { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, '3f', 'v'] },
+            'plus1',
+            { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, '5f', 'v1'] },
+            'minus2',
+            { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, '7f', 'v2'] },
+            'plus2', 'dots',
+          ],
+          alignment: {
+            alignH: 0.4,
           },
         },
       },
     },
     mods: {
       scenarios: {
-        default: { position: [0, -1.5] },
+        default: { position: [-0.5, -1.6] },
       },
     },
   };

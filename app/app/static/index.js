@@ -7075,7 +7075,7 @@ function (_DiagramElementCollec) {
 
         var fontToUse = _this2.eqn.fontMath;
 
-        if (textToUse.match(/[A-Z,a-z]/)) {
+        if (textToUse.match(/[A-Z,a-z,\u03B8]/)) {
           fontToUse = _this2.eqn.fontText;
         }
 

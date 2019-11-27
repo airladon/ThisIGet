@@ -456,14 +456,14 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
     });
 
-    const row = angle => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), 3)}</td></tr>`;
+    const row = (angle, prec = 3) => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
     const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
-    this.addSection(commonContent, {
+    this.addSection(common, commonContent, {
       setContent: [
         'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
         `
         <table>
-          <tr><th>Angle</th><th>Opposite</th></tr>
+          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
           ${dots}
           ${row(20)}
           ${row(21)}
@@ -479,15 +479,153 @@ class Content extends PresentationFormatContent {
         </table>
         `,
       ],
+      fadeInFromPrev: false,
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     commonContent = {
       setContent: [
-        style({}, 'By the 7th century, the first formulas that approximated the side length were discovered, and in 1400 a formula that is the side length was discovered.'),
+        style({}, 'By the |7th century|, the first formulas that |approximated| the side length were discovered.'),
       ],
     };
+    this.addSection(common, commonContent, {
+    });
+    this.addSection(common, commonContent, {
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('1');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else if (this.comingFrom === 'prev') {
+          coll.resetRotation(() => {
+            coll.accent(eqn, done);
+          }, 0.8);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({}, 'And in |1400 AD|, a formula that |exactly modeled| the relationship was found.'),
+      ],
+    };
+    this.addSection(common, commonContent, {
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('1');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+    });
+    this.addSection(common, commonContent, {
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('2');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else if (this.comingFrom === 'prev') {
+          coll.resetRotation(() => {
+            coll.accent(eqn, done);
+          }, 0.8);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more defailed, accurate tables which were used most of the time..'),
+      ],
+    };
+    this.addSection(common, commonContent, {
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('2');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+    });
+    this.addSection(common, commonContent, {
+      setContent: [
+        style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more |accurate| tables.'),
+        `<table>
+          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+          ${dots}
+          ${row(20, 8)}
+          ${row(21, 8)}
+          ${row(22, 8)}
+          ${row(23, 8)}
+          ${row(24, 8)}
+          ${row(25, 8)}
+          ${row(26, 8)}
+          ${row(27, 8)}
+          ${row(28, 8)}
+          ${row(29, 8)}
+          ${dots}
+        </table>`,
+      ],
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('2');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+    });
 
     this.addSection(common, commonContent, {
+      setContent: [
+        style({}, 'In fact, tables were used by most people until '),
+        `<table>
+          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+          ${dots}
+          ${row(20, 8)}
+          ${row(21, 8)}
+          ${row(22, 8)}
+          ${row(23, 8)}
+          ${row(24, 8)}
+          ${row(25, 8)}
+          ${row(26, 8)}
+          ${row(27, 8)}
+          ${row(28, 8)}
+          ${row(29, 8)}
+          ${dots}
+        </table>`,
+      ],
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('2');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
     });
 
 
