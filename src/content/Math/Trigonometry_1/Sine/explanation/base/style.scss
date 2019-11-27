@@ -5,3 +5,50 @@
 .presentation__note {
   top: 87%;
 }
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.7em;
+  text-align: center;
+  color: #fdf1aa;
+  color: var(--color-diagram-text);
+  border: 1px solid #444;
+  border: 1px solid var(--color-diagram-disabled);
+}
+
+th {
+  font-size: 1.2em;
+  padding-top: 1em;
+}
+
+td {
+  width: 10em;
+}
+
+th:first-child,
+td:first-child {
+  // color: var(--color-angles);
+  padding-left: 3em;
+}
+
+th:first-child {
+  color: var(--color-angles);
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  // color: var(--color-components);
+  padding-right: 3em;
+}
+
+th:nth-child(2) {
+  color: var(--color-components);
+}
+
+// th:last-child {
+//   color: var(--color-components);
+//   padding-bottom: 1em;
+// }

@@ -19,6 +19,8 @@ export default function diagramLayout() {
   colors.components = colors.get('green').rgb;
   colors.angles = colors.get('red').rgb;
   colors.axes = colors.get('grey', 'dark').rgb;
+  colors.get('red').toCssVar('--color-angles');
+  colors.get('green').toCssVar('--color-components');
 
   const eqnSine = ({
     elements: {

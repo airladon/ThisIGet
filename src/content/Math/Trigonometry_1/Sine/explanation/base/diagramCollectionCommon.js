@@ -64,7 +64,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   rotateFrom0To90() {
     this._fig._line.stop();
     this._fig._line.animations.new()
-      .rotation({ target: 1 * Math.PI / 180, duration: 0 })
+      .rotation({ target: 1 * Math.PI / 180, velocity: 0.5 })
       .rotation({ target: 89 * Math.PI / 180, duration: 10 })
       .delay(0.5)
       .rotation({ target: Math.PI / 3, duration: 1 })

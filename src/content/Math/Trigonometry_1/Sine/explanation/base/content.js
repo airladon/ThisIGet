@@ -22,7 +22,7 @@ const {
   // centerV,
 } = Fig.tools.html;
 
-const { rand } = Fig.tools.math;
+const { round } = Fig.tools.math;
 
 const layout = diagramLayout();
 const { colors } = layout;
@@ -366,6 +366,7 @@ class Content extends PresentationFormatContent {
           fig._hypotenuse.showAll();
           fig._opposite.showAll();
           fig._real.hide();
+          coll.labelForm('0');
           coll.updateRotation();
           coll.accent(fig, ['theta', 'hypotenuse', 'opposite'], done);
         }, 0.8);
@@ -448,11 +449,36 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: [
-        style({}, 'In the first century AD, geometry was used to calculate the opposite side length for a selection of angles. These calculations were then published in large tables.'),
+        style({}, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
       ],
     };
-    
+
     this.addSection(common, commonContent, {
+    });
+
+    const row = angle => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), 3)}</td></tr>`;
+    const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+    this.addSection(commonContent, {
+      setContent: [
+        'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
+        `
+        <table>
+          <tr><th>Angle</th><th>Opposite</th></tr>
+          ${dots}
+          ${row(20)}
+          ${row(21)}
+          ${row(22)}
+          ${row(23)}
+          ${row(24)}
+          ${row(25)}
+          ${row(26)}
+          ${row(27)}
+          ${row(28)}
+          ${row(29)}
+          ${dots}
+        </table>
+        `,
+      ],
     });
 
     commonContent = {
@@ -460,7 +486,7 @@ class Content extends PresentationFormatContent {
         style({}, 'By the 7th century, the first formulas that approximated the side length were discovered, and in 1400 a formula that is the side length was discovered.'),
       ],
     };
-    
+
     this.addSection(common, commonContent, {
     });
 
