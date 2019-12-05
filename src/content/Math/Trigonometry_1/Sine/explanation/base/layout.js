@@ -70,6 +70,7 @@ export default function diagramLayout() {
   });
 
   const r = 2;
+  layout.r = r;
   const line = {
     name: 'line',
     method: 'line',
@@ -112,7 +113,7 @@ export default function diagramLayout() {
       },
     },
   });
-  const angle = (name, text, p1 = [1, 0], p2 = [0, 0], p3 = [0, 1]) => ({
+  const angle = (name, text, radius = 0.3, p1 = [1, 0], p2 = [0, 0], p3 = [0, 1]) => ({
     name,
     method: 'angle',
     options: {
@@ -121,18 +122,18 @@ export default function diagramLayout() {
       p2,
       p3,
       curve: {
-        radius: 0.3,
+        radius,
         width: 0.015,
         sides: 200,
       },
       label: {
         text,
-        radius: 0.3,
+        radius,
       },
       autoRightAngle: true,
     },
   });
-  const lineLabel = (name, text, color, location, p1 = [0, 0], p2 = [1, 0]) => ({
+  const lineLabel = (name, text, color, location, subLocation, p1 = [0, 0], p2 = [1, 0]) => ({
     name,
     method: 'line',
     options: {
@@ -143,6 +144,7 @@ export default function diagramLayout() {
         text,
         offset: 0.1,
         location,
+        subLocation,
       },
       color,
     },
@@ -153,15 +155,26 @@ export default function diagramLayout() {
     addElements: [
       axis('x', [0, 0], [r * 1, 0]),
       // axis('y', [0, 0], [0, r * 1.2]),
+      {
+        name: 'arc',
+        method: 'polygon',
+        options: {
+          sides: 600,
+          width: 0.015,
+          radius: r,
+          color: colors.angles,
+        },
+      },
       angle('real', null),
       angle('theta', '\u03B8'),
       angle('right', ''),
       lineLabel('sineTheta', eqnSine, colors.components, 'right'),
       lineLabel('sine', null, colors.components, 'right'),
       lineLabel('opposite', 'opposite', colors.components, 'right'),
-      lineLabel('hypotenuse', eqnR, colors.lines, 'left'),
+      lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
       component('h'),
       component('v'),
+      // angle('arc', )
       line,
     ],
     mods: {
@@ -171,51 +184,51 @@ export default function diagramLayout() {
     },
   };
 
-  const triPoints = [[-2, -1], [1, 1], [2, -1]];
-  const basePoint = [triPoints[1][0], triPoints[0][1]];
-  const triangle = {
-    name: 'tri',
-    method: 'collection',
-    addElements: [
-      angle('right', '', triPoints[1], basePoint, triPoints[0]),
-      angle('leftAngle', 'b', triPoints[2], triPoints[0], triPoints[1]),
-      angle('rightAngle', 'a', triPoints[1], triPoints[2], triPoints[0]),
-      {
-        name: 'line',
-        method: 'polyLine',
-        options: {
-          points: triPoints,
-          close: true,
-          width: 0.03,
-          color: colors.lines,
-        },
-      },
-      {
-        name: 'height',
-        method: 'line',
-        options: {
-          p1: [1, -1],
-          p2: [1, 1],
-          color: colors.lines,
-          dashStyle: {
-            style: [0.1, 0.05],
-          },
-          width: 0.01,
-          label: {
-            text: 'H',
-            offset: 0.1,
-          },
-        },
-      },
-      lineLabel('leftSide', 'A', colors.lines, 'top', triPoints[0], triPoints[1]),
-      lineLabel('rightSide', 'B', colors.lines, 'top', triPoints[2], triPoints[1]),
-    ],
-    mods: {
-      scenarios: {
-        default: { position: [0, -0.5] },
-      },
-    },
-  };
+  // const triPoints = [[-2, -1], [1, 1], [2, -1]];
+  // const basePoint = [triPoints[1][0], triPoints[0][1]];
+  // const triangle = {
+  //   name: 'tri',
+  //   method: 'collection',
+  //   addElements: [
+  //     angle('right', '', 0.3, triPoints[1], basePoint, triPoints[0]),
+  //     angle('leftAngle', 'b', 0.3, triPoints[2], triPoints[0], triPoints[1]),
+  //     angle('rightAngle', 'a', 0.3, triPoints[1], triPoints[2], triPoints[0]),
+  //     {
+  //       name: 'line',
+  //       method: 'polyLine',
+  //       options: {
+  //         points: triPoints,
+  //         close: true,
+  //         width: 0.03,
+  //         color: colors.lines,
+  //       },
+  //     },
+  //     {
+  //       name: 'height',
+  //       method: 'line',
+  //       options: {
+  //         p1: [1, -1],
+  //         p2: [1, 1],
+  //         color: colors.lines,
+  //         dashStyle: {
+  //           style: [0.1, 0.05],
+  //         },
+  //         width: 0.01,
+  //         label: {
+  //           text: 'H',
+  //           offset: 0.1,
+  //         },
+  //       },
+  //     },
+  //     lineLabel('leftSide', 'A', colors.lines, 'top', 'left', triPoints[0], triPoints[1]),
+  //     lineLabel('rightSide', 'B', colors.lines, 'top', 'right', triPoints[2], triPoints[1]),
+  //   ],
+  //   mods: {
+  //     scenarios: {
+  //       default: { position: [0, -0.5] },
+  //     },
+  //   },
+  // };
 
   const eqn = {
     name: 'eqn',
@@ -225,7 +238,9 @@ export default function diagramLayout() {
       scale: 0.9,
       elements: {
         equals: '  =  ',
-        approx: ' \u2248 ',
+        equals1: '  =  ',
+        equals2: '  =  ',
+        approx: '  \u2248  ',
         func: 'function',
         theta: { text: '\u03B8', color: colors.angles },
         theta1: { text: '\u03B8', color: colors.angles },
@@ -251,6 +266,9 @@ export default function diagramLayout() {
         'dots': '...',
         'plus1': '  +  ',
         'plus2': '  +  ',
+        'sine': { text: 'sine', style: 'normal' },
+        'sin1': { text: 'sin', style: 'normal' },
+        'sin2': { text: 'sin', style: 'normal' },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
         lb1: { symbol: 'bracket', side: 'left' },
@@ -273,6 +291,46 @@ export default function diagramLayout() {
       forms: {
         '0': {
           content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '0a': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        // '0b': {
+        //   content: [
+        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+        //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
+        //   ],
+        //   alignment: {
+        //     fixTo: 'opp',
+        //     alignH: 'right',
+        //   },
+        // },
+        '0b': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+            'equals1', 'sin1', ' ' , 'theta1',
+          ],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '0c': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+            'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
+            'equals2', 'sin2', ' ', 'theta2',
+          ],
           alignment: {
             fixTo: 'opp',
             alignH: 'right',
@@ -319,7 +377,7 @@ export default function diagramLayout() {
 
   layout.addElements = [
     fig,
-    triangle,
+    // triangle,
     eqn,
   ];
   return layout;

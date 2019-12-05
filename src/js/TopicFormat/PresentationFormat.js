@@ -29,6 +29,8 @@ function hideInteractiveHighlightButton() {
 //    - hideOnly                    Guaranteed
 //    - show                        Guaranteed
 //    - hide                        Guaranteed
+//    - setForms                    Guaranteed
+//    - afterShow...................Guaranteed
 //    - transitionFromPrev/Next     Can be cancelled
 //    - transitionFromAny           Can be cancelled / skipped
 //    - setPlannedPositions?        Can be cancelled / skipped

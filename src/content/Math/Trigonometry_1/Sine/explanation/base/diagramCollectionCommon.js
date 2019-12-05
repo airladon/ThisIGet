@@ -13,7 +13,7 @@ const {
   Transform,
 } = Fig;
 
-const { rand } = Fig.tools.math;
+const { rand, round } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
@@ -27,6 +27,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _sine: DiagramObjectLine;
     _sineTheta: { _label: Equation } & DiagramObjectLine;
     _opposite: { _label: Equation } & DiagramObjectLine;
+    _arc: DiagramElementPrimitive;
   } & DiagramElementCollection;
 
   constructor(
@@ -143,12 +144,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       sineTheta: 1,
       opposite: 1,
     };
-    if (r < 0.12) {
+    if (r < 0.05) {
+      opacity.sine = 0;
       opacity.right = 0;
       opacity.theta = 0;
       opacity.real = 0;
       opacity.sineTheta = 0;
-      opacity.sine = 0;
+      opacity.opposite = 0;
+    } else if (r < 0.12) {
+      opacity.right = 0;
+      opacity.theta = 0;
+      opacity.real = 0;
+      opacity.sineTheta = 0;
       opacity.opposite = 0;
     } else if (r > Math.PI / 2 * 0.8) {
       opacity.right = 0;
@@ -182,6 +189,8 @@ export default class CommonCollection extends CommonDiagramCollection {
       sineTheta.setOpacity(opacity.sineTheta);
     }
     if (sine.isShown) {
+      const angle = parseFloat(real.getLabel());
+      sine.setLabel(`${round(Math.sin(angle / 180 * Math.PI), 3)}`);
       sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       sine.setOpacity(opacity.sine);
     }
@@ -191,6 +200,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     if (hypotenuse.isShown) {
       hypotenuse.setEndPoints([0, 0], p2);
+    }
+    if (this._fig._arc.isShown) {
+      let arcAngle = r;
+      while (arcAngle > Math.PI * 2) {
+        arcAngle -= Math.PI * 2;
+      }
+      while (arcAngle < 0) {
+        arcAngle += Math.PI * 2;
+      }
+      // console.log(arcAngle * 180 / Math.PI)
+      this._fig._arc.setAngleToDraw(arcAngle + 0.005);
     }
     this.diagram.animateNextFrame();
   }

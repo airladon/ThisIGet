@@ -114,8 +114,10 @@ class Section {
   hideOnly: Array<DiagramElementPrimitive | DiagramElementCollection>
            | () => {};
 
-  show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
-  hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
+  show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
+  hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
+  showForms: Array<[DiagramElementPrimitive | DiagramElementCollection, string]> | () => void;
+  afterShow: ?() => void;
   initialPositions: Object | () => {};
   blankTransition: {
     toNext: boolean;
@@ -142,6 +144,8 @@ class Section {
     this.infoModifiers = {};
     this.showOnly = [];
     this.blank = [];
+    this.afterShow = null;
+    this.showForms = [];
     this.infoElements = [];
     this.fadeInFromPrev = true;
     this.blankTransition = {
@@ -571,6 +575,20 @@ class Section {
       } else {
         elementsOrMethod();
       }
+    }
+    if ('setForms' in this) {
+      const eqnPairsOrMethod = this.setForms;
+      if (Array.isArray(eqnPairsOrMethod)) {
+        eqnPairsOrMethod.forEach((eqnPair) => {
+          const [eqn, form] = eqnPair;
+          eqn.showForm(form);
+        });
+      } else if (eqnPairsOrMethod != null) {
+        eqnPairsOrMethod();
+      }
+    }
+    if ('afterShow' in this && this.afterShow != null) {
+      this.afterShow();
     }
   }
 

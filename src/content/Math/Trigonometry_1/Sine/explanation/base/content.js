@@ -49,36 +49,10 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
-    const tri = coll._tri;
     const eqn = coll._eqn;
-    // const eqn = coll._eqn;
-
-//     this.addSection({
-//       title: 'Introduction',
-//       setContent: style({ centerV: true }, [
-//         'A goal in studying triangles is to find |relationships between sides and angles|.',
-//         // 'We already have some knowledge of',
-//         // 'Different problems have different |unknowns|, so the more relationships we find, the more problems we will be able to solve.',
-//       ]),
-//     });
-
-//     this.addSection({
-//       setContent: style({}, [
-//         'Any triangle can be split into two right angle triangles, which share the same height.',
-//       ]),
-//       show: [tri._line, tri._height, tri._right],
-//     });
-
-//     this.addSection({
-//       setContent: style({}, [
-//         'Therefore, if we can find a relationship between the hypotenuse, .
-// .',
-//       ]),
-//       show: [tri._line, tri._height, tri._right],
-//     });
 
     let commonContent = {
-      setContent: 'Start with a |line| that can |rotate| up to 90º.',
+      setContent: 'Start with a |line| of |length 1| that can be rotated between |0º_and_90º|.',
     };
     let common = {
       setEnterState: () => {
@@ -92,15 +66,21 @@ class Content extends PresentationFormatContent {
           coll.resetRotation(done, 0.8);
         }
       },
+      setForms: [
+        [fig._hypotenuse._label, '0'],
+      ],
+      setSteadyState: () => {
+        coll.updateRotation();
+      },
     };
     this.addSection(common, commonContent, {
       title: 'Introduction',
       modifiers: {
-        rotate: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+        '0º_and_90º': click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
         line: coll.bindAccent(fig._line),
       },
       show: [
-        fig._line, fig._x, fig._real,
+        fig._line, fig._x, fig._real, fig._hypotenuse, //  fig._arc,
       ],
       setSteadyState: () => {
         fig._line.setRotation(Math.PI / 4);
@@ -116,25 +96,21 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
-        // angle: coll.bindAccent(fig._real),
         horizontal: this.bindNext(colors.components, 'h'),
         vertical: this.bindNext(colors.components, 'v'),
-        // line: coll.bindAccent(fig._line),
       },
       show: [
-        fig._line, fig._x, fig._real,
+        fig._line, fig._x, fig._real, fig._hypotenuse,
       ],
     });
     this.addSection(common, commonContent, {
       modifiers: {
         rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
-        // angle: coll.bindAccent(fig._real),
         horizontal: coll.bindAccent(fig._h),
         vertical: coll.bindAccent(fig._v),
-        // line: coll.bindAccent(fig._line),
       },
       show: [
-        fig._line, fig._x, fig._real,
+        fig._line, fig._x, fig._real, fig._hypotenuse,
       ],
       transitionFromPrev: (done) => {
         coll.resetRotation(() => {
@@ -153,6 +129,85 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         fig._h.showAll();
         fig._v.showAll();
+        coll.updateRotation();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'These |components| and the |line| are a |right_angle_triangle|. |Rotating| the line |changes the shape| of the right angle triangle.',
+      modifiers: {
+        components: coll.bindAccent(fig, ['h', 'v']),
+        line: coll.bindAccent(fig._line),
+        Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+      },
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        right_angle_triangle: this.bindNext(colors.lines),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._h, fig._v,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._h, fig._v,
+      ],
+      transitionFromPrev: (done) => {
+        coll.resetRotation(() => {
+          fig._right.showAll();
+          coll.updateRotation();
+          coll.accent(fig, ['h', 'v', 'line', 'right'], done);
+        }, 0.8);
+      },
+      setSteadyState: () => {
+        fig._right.showAll();
+        coll.updateRotation();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'Now let’s consider just the |vertical| component.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: this.bindNext(colors.components),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._h, fig._v, fig._right,
+      ],
+    });
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: coll.bindAccent(fig._v),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._h, fig._v, fig._right,
+      ],
+      transitionFromPrev: (done) => {
+        coll.resetRotation(() => {
+          coll.accent(fig._v);
+          fig.animations.new()
+            .dissolveOut({ element: fig._h, duration: 1 })
+            .whenFinished(done)
+            .start();
+        }, 0.8);
+      },
+      setSteadyState: () => {
+        fig._h.hide();
         coll.updateRotation();
       },
     });
@@ -223,7 +278,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: [
         'Now, when we |rotate| the line between |0º_to_90º|, we are actually forming |every possible combination of angles| for a right angle triangle.',
-        note('Note: this is because a a triangle\'s angles |sum_to_180º|, so when |one angle is 90º| then other two angles must be |less than 90º|.'),
+        note('Note: a triangle\'s angles |sum_to_180º|, so when |one angle is 90º| then the other two angles must be |less than 90º|. Therefore is we sweep one angle from 0 to 90º, '),
       ]
     };
     this.addSection(common, commonContent, {
@@ -237,6 +292,20 @@ class Content extends PresentationFormatContent {
       ],
     });
 
+    this.addSection({
+      setContent: [
+        'Our setup can create all possible angle combinations of right angle triangles',
+      ],
+    });
+    this.addSection({
+      setContent: [
+        'Our setup creates right angle triangles with all the possible angle combinations.',
+        'Triangles with the same corresponding angles are similar triangles, and the sides of similar triangles all have the same proportion or relatipnship between other sides of',
+        'Similar triangles are just scaled - their corresponding sides all have the same proportion to each other',
+        'Therefore, any relationship we find in out setup between angles and sides, will translate '
+      ],
+      fadeInFromPrev: false,
+    });
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
@@ -269,7 +338,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'So in other words, our setup can create a triangle |similar| to |any possible right angle triangle|.',
+      setContent: 'In other words, we can create a triangle .',
     };
     this.addSection(common, commonContent, {
     });
@@ -288,13 +357,30 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: [
-        'For this topic, we will focus on just the |vertical| component.',
+        'We will focus on just the |vertical| component, which is the side |opposite| to the angle.',
         note('Note: we will see in |future topics| that the horiztonal and vertical components are |closely related| and can be |calculated| from each other.'),
       ],
-    };
-    this.addSection(common, commonContent, {
       modifiers: {
         vertical: coll.bindAccent(fig._v),
+        opposite: coll.bindAccent(fig._v),
+      },
+    };
+    this.addSection(common, commonContent, {
+    });
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        coll.resetRotation(() => {
+          fig._opposite.showAll();
+          coll.labelForm('0');
+          coll.updateRotation();
+          coll.accent(fig, ['opposite'], done);
+        }, 0.8);
+      },
+      setSteadyState: () => {
+        fig._opposite.showAll();
+        coll.updateRotation();
       },
     });
 
@@ -303,8 +389,8 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: [
-        style({ top: 0 }, [
-          'We will also |generalize| the angle with the greek letter |theta|, call the vertical component the |opposite| side (as it is opposite the angle) and make the |hypotenuse| a length of |1|.',
+        style({}, [
+          'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
         ]),
         note('Note: setting the hypotenuse to 1 will make scaling the triangle easier in the future.'),
       ],
@@ -317,7 +403,7 @@ class Content extends PresentationFormatContent {
         hypotenuse: this.qr('Math/Geometry_1/RightAngleTriangles/base/Hypotenuse'),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right,
+        fig._line, fig._x, fig._real, fig._v, fig._right, fig._opposite,
       ],
     });
 
@@ -341,8 +427,8 @@ class Content extends PresentationFormatContent {
     };
     commonContent = {
       setContent: [
-        style({ top: 0 }, [
-          'We will also |generalize| the angle with the greek letter |theta|, call the vertical component the |opposite| side (as it is opposite the angle) and make the |hypotenuse| a length of |1|.',
+        style({}, [
+          'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
         ]),
       ],
     };
@@ -358,17 +444,15 @@ class Content extends PresentationFormatContent {
         fig._theta.hide();
         fig._hypotenuse.hide();
         fig._real.showAll();
-        fig._opposite.hide();
         coll.updateRotation();
         coll.labelForm('0');
         coll.resetRotation(() => {
           fig._theta.showAll();
           fig._hypotenuse.showAll();
-          fig._opposite.showAll();
           fig._real.hide();
           coll.labelForm('0');
           coll.updateRotation();
-          coll.accent(fig, ['theta', 'hypotenuse', 'opposite'], done);
+          coll.accent(fig, ['theta', 'hypotenuse'], done);
         }, 0.8);
       },
     });
@@ -406,6 +490,10 @@ class Content extends PresentationFormatContent {
         coll.resetRotation(() => {
           eqn.showForm('0');
           coll.labelForm('0');
+          // eqn.animations.new()
+          //   .dissolveIn(1)
+          //   .whenFinished(done)
+          //   .start();
           coll.accent(eqn, done);
         }, 0.8);
       },
@@ -413,6 +501,98 @@ class Content extends PresentationFormatContent {
         eqn.showForm('0');
       },
     });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      show: [
+        fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
+        fig._opposite,
+      ],
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('0');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+      setSteadyState: () => {
+        eqn.showForm('0');
+      },
+    };
+    commonContent = {
+      setContent: [
+        style({}, 'We use the name |sine| for this function. Often the name is shortened to |sin| and the brackets are sometimes not used.'),
+      ],
+    };
+    this.addSection(common, commonContent, {
+    });
+
+    this.addSection(common, commonContent, {
+      transitionFromPrev: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('0');
+        coll.resetRotation(() => {
+          // eqn.showForm('0a');
+          coll.labelForm('0');
+          eqn.goToForm({
+            name: '0a',
+            animate: 'move',
+            duration: 1,
+            // callback: done,
+            callback: () => {
+              eqn.goToForm({
+                name: '0b',
+                animate: 'move',
+                duration: 1,
+                callback: done,
+              });
+            },
+          });
+        }, 0.8);
+      },
+      setSteadyState: () => {
+        eqn.showForm('0b');
+      },
+    });
+
+    // this.addSection(common, commonContent, {
+    //   transitionFromPrev: (done) => {
+    //     coll.updateRotation();
+    //     coll.labelForm('0');
+    //     eqn.showForm('0a');
+    //     coll.resetRotation(() => {
+    //       // eqn.showForm('0b');
+    //       coll.labelForm('0');
+    //       // coll.accent(eqn, ['sin1', 'theta1', 'lb1', 'rb1'], done);
+    //       eqn.goToForm({
+    //         name: '0b',
+    //         animate: 'move',
+    //         duration: 1,
+    //         callback: done,
+    //         // callback: () => {
+    //         //   eqn.goToForm({
+    //         //     name: '0c',
+    //         //     animate: 'move',
+    //         //     duration: 1,
+    //         //     callback: done,
+    //         //   });
+    //         // },
+    //       });
+    //     }, 0.8);
+    //   },
+    //   setSteadyState: () => {
+    //     eqn.showForm('0b');
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -479,6 +659,20 @@ class Content extends PresentationFormatContent {
         </table>
         `,
       ],
+      show: [
+        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+        fig._sine,
+      ],
+      transitionFromAny: (done) => {
+        coll.updateRotation();
+        coll.labelForm('0');
+        eqn.showForm('0');
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
       fadeInFromPrev: false,
     });
 
@@ -551,7 +745,8 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: [
-        style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more defailed, accurate tables which were used most of the time..'),
+        style({}, 'But the formulas are |complex|, and for most uses it was still more convenient to use a |table of values|.'),
+        note({ top: 22, id: 'id_computer_note' }, 'Note: it wasn\'t till the |late 20<sup>th</sup> century| when tables were superseded by personal calculators and computers.'),
       ],
     };
     this.addSection(common, commonContent, {
@@ -566,36 +761,36 @@ class Content extends PresentationFormatContent {
         }
       },
     });
-    this.addSection(common, commonContent, {
-      setContent: [
-        style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more |accurate| tables.'),
-        `<table>
-          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
-          ${dots}
-          ${row(20, 8)}
-          ${row(21, 8)}
-          ${row(22, 8)}
-          ${row(23, 8)}
-          ${row(24, 8)}
-          ${row(25, 8)}
-          ${row(26, 8)}
-          ${row(27, 8)}
-          ${row(28, 8)}
-          ${row(29, 8)}
-          ${dots}
-        </table>`,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('2');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
+    // this.addSection(common, commonContent, {
+    //   setContent: [
+    //     style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more |accurate| tables.'),
+    //     `<table>
+    //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+    //       ${dots}
+    //       ${row(20, 8)}
+    //       ${row(21, 8)}
+    //       ${row(22, 8)}
+    //       ${row(23, 8)}
+    //       ${row(24, 8)}
+    //       ${row(25, 8)}
+    //       ${row(26, 8)}
+    //       ${row(27, 8)}
+    //       ${row(28, 8)}
+    //       ${row(29, 8)}
+    //       ${dots}
+    //     </table>`,
+    //   ],
+    //   transitionFromAny: (done) => {
+    //     coll.updateRotation();
+    //     coll.labelForm('0');
+    //     eqn.showForm('2');
+    //     if (this.comingFrom === 'goto') {
+    //       coll.resetRotation(done, 0);
+    //     } else {
+    //       coll.resetRotation(done, 0.8);
+    //     }
+    //   },
+    // });
 
     this.addSection(common, commonContent, {
       setContent: [
