@@ -109,7 +109,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       const r = this._fig._line.getRotation();
       if (r < 0.3 || r > Math.PI / 2 - 0.3) {
-        this.gotoRotation(Math.PI / 4, 0.8, done);
+        const c = (input) => {
+          console.log(input)
+          done();
+        }
+        this.gotoRotation(Math.PI / 4, 0.8, c);
       } else if (done != null) {
         done();
       }

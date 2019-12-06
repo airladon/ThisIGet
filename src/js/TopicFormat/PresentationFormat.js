@@ -220,6 +220,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   transitionStart(direction: 'next' | 'prev' | 'goto' | '' = '') {
+    this.transitionCancelled = false;
     this.inTransition = true;
     this.comingFrom = direction;
     if (direction === 'prev') {
@@ -238,8 +239,8 @@ class PresentationFormat extends SimpleFormat {
     }
   }
 
-  finishTransToNextOrPrev(flag: boolean = true) {
-    if (flag === false) {
+  finishTransToNextOrPrev() {
+    if (this.transitionCancelled) {
       this.finishTransToAny();
     } else {
       this.currentSection().transitionToAny(this.finishTransToAny.bind(this));
@@ -319,8 +320,8 @@ class PresentationFormat extends SimpleFormat {
     }
   }
 
-  finishTransitionReset(flag: boolean = true) {
-    if (flag === false) {
+  finishTransitionReset() {
+    if (this.transitionCancelled) {
       this.finishTransitionFromAny();
     } else {
       const section = this.content.sections[this.currentSectionIndex];
@@ -335,8 +336,8 @@ class PresentationFormat extends SimpleFormat {
     }
   }
 
-  finishTransFromNextOrPrev(flag: boolean = true) {
-    if (flag === false) {
+  finishTransFromNextOrPrev() {
+    if (this.transitionCancelled) {
       this.finishTransitionFromAny();
     } else {
       const section = this.content.sections[this.currentSectionIndex];

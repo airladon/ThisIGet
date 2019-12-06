@@ -58,7 +58,7 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         coll.setScenarios('default');
       },
-      transitionFromAny: (done) => {
+      transitionReset: (done) => {
         coll.updateRotation();
         if (this.comingFrom === 'goto') {
           coll.resetRotation(done, 0);
@@ -113,18 +113,16 @@ class Content extends PresentationFormatContent {
         fig._line, fig._x, fig._real, fig._hypotenuse,
       ],
       transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          fig._h.showAll();
-          fig._v.showAll();
-          coll.updateRotation();
-          if (this.message === 'h') {
-            coll.accent(fig, ['h'], done);
-          } else if (this.message === 'v') {
-            coll.accent(fig, ['v'], done);
-          } else {
-            coll.accent(fig, ['h', 'v'], done);
-          }
-        }, 0.8);
+        fig._h.showAll();
+        fig._v.showAll();
+        coll.updateRotation();
+        if (this.message === 'h') {
+          coll.accent(fig, ['h'], done);
+        } else if (this.message === 'v') {
+          coll.accent(fig, ['v'], done);
+        } else {
+          coll.accent(fig, ['h', 'v'], done);
+        }
       },
       setSteadyState: () => {
         fig._h.showAll();
@@ -162,11 +160,9 @@ class Content extends PresentationFormatContent {
         fig._h, fig._v,
       ],
       transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          fig._right.showAll();
-          coll.updateRotation();
-          coll.accent(fig, ['h', 'v', 'line', 'right'], done);
-        }, 0.8);
+        fig._right.showAll();
+        coll.updateRotation();
+        coll.accent(fig, ['h', 'v', 'line', 'right'], done);
       },
       setSteadyState: () => {
         fig._right.showAll();
@@ -198,13 +194,13 @@ class Content extends PresentationFormatContent {
         fig._h, fig._v, fig._right,
       ],
       transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          coll.accent(fig._v);
-          fig.animations.new()
-            .dissolveOut({ element: fig._h, duration: 1 })
-            .whenFinished(done)
-            .start();
-        }, 0.8);
+        // coll.resetRotation(() => {
+        coll.accent(fig._v);
+        fig.animations.new()
+          .dissolveOut({ element: fig._h, duration: 1 })
+          .whenFinished(done)
+          .start();
+        // }, 0.8);
       },
       setSteadyState: () => {
         fig._h.hide();
