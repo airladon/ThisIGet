@@ -1132,12 +1132,17 @@ class PresentationFormatContent extends SimpleFormatContent {
     };
     const userSections = Object.assign({}, ...sectionObjects);
     const setFirstTransform = () => { this.diagram.setFirstTransform(); };
+
     const eqnSection = {
       transitionEqnForms: (done) => {
+        if (this.comingFrom !== 'prev') {
+          done();
+          return;
+        }
         setFirstTransform();
         let callback = done;
-        if (userSections.transitionFromPrev != null) {
-          callback = userSections.transitionFromPrev.bind(userSections, done);
+        if (userSections.transitionEqnForms != null) {
+          callback = userSections.transitionEqnForms.bind(userSections, done);
         }
         let counter = 0;
         const countUp = () => {
@@ -1277,9 +1282,6 @@ class PresentationFormatContent extends SimpleFormatContent {
         });
       },
       setSteadyState: () => {
-        if (userSections.setSteadyState != null) {
-          userSections.setSteadyState();
-        }
         equations.forEach((eqOptions, i) => {
           if (eqOptions.nav == null && eqOptions.eqn == null) {
             return;
@@ -1310,6 +1312,9 @@ class PresentationFormatContent extends SimpleFormatContent {
             nav.setOpacity(opacity);
           }
         });
+        if (userSections.setSteadyState != null) {
+          userSections.setSteadyState();
+        }
       },
     };
     const section = Object.assign({}, ...sectionObjects, eqnSection);
