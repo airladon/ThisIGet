@@ -247,7 +247,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll.setTriEqnForms('0');
       },
-      beforeTransitionFromPrev: () => {
+      setEqnForms: () => {
         coll.setTriEqnForms('0');
       },
     };

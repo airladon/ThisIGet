@@ -31,12 +31,12 @@ function hideInteractiveHighlightButton() {
 //    - hide                        Guaranteed
 //    - setEqnForms                 Guaranteed
 //    - afterShow...................Guaranteed
-//    - transitionReset             Can be cancelled
+//    - transitionReset             Can be cancelled / skipped
 //    - transitionFromPrev/Next     Can be cancelled / skipped
 //    - transitionEqnForms          Can be cancelled / skipped
 //    - transitionFromAny           Can be cancelled / skipped
 //    - setPlannedPositions?        Can be cancelled / skipped
-//    - setSteadyState              Can be skipped
+//    - setSteadyState              Guaranteed
 //
 //  Go to next, prev or goTo
 //    - transitionToPrev/Next       Can be cancelled / skipped
@@ -331,12 +331,21 @@ class PresentationFormat extends SimpleFormat {
         this.fadeInTextFromPrev();
         section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
       } else {
-        section.transitionFromAny(this.finishTransitionFromAny.bind(this));
+        section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
       }
     }
   }
 
   finishTransFromNextOrPrev() {
+    if (this.transitionCancelled) {
+      this.finishTransitionFromAny();
+    } else {
+      const section = this.content.sections[this.currentSectionIndex];
+      section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
+    }
+  }
+
+  finishTransitionEqnForms() {
     if (this.transitionCancelled) {
       this.finishTransitionFromAny();
     } else {

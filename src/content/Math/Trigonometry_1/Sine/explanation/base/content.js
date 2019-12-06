@@ -128,6 +128,7 @@ class Content extends PresentationFormatContent {
         fig._h.showAll();
         fig._v.showAll();
         coll.updateRotation();
+        console.log('steady')
       },
     });
 
@@ -194,13 +195,11 @@ class Content extends PresentationFormatContent {
         fig._h, fig._v, fig._right,
       ],
       transitionFromPrev: (done) => {
-        // coll.resetRotation(() => {
         coll.accent(fig._v);
         fig.animations.new()
           .dissolveOut({ element: fig._h, duration: 1 })
           .whenFinished(done)
           .start();
-        // }, 0.8);
       },
       setSteadyState: () => {
         fig._h.hide();

@@ -116,7 +116,7 @@ class Section {
 
   show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
   hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
-  setEqnForms: Array<[DiagramElementPrimitive | DiagramElementCollection, string]> | () => void;
+  setEqnForms: Array<[Equation, string] | () => void> | () => void;
   afterShow: ?() => void;
   initialPositions: Object | () => {};
   blankTransition: {
@@ -576,17 +576,23 @@ class Section {
         elementsOrMethod();
       }
     }
+
     if ('setEqnForms' in this) {
       const eqnPairsOrMethod = this.setEqnForms;
       if (Array.isArray(eqnPairsOrMethod)) {
-        eqnPairsOrMethod.forEach((eqnPair) => {
-          const [eqn, form] = eqnPair;
-          eqn.showForm(form);
+        eqnPairsOrMethod.forEach((eqnPairOrMethod) => {
+          if (typeof eqnPairOrMethod === 'function') {
+            eqnPairOrMethod();
+          } else {
+            const [eqn, form] = eqnPairOrMethod;
+            eqn.showForm(form);
+          }
         });
       } else if (eqnPairsOrMethod != null) {
         eqnPairsOrMethod();
       }
     }
+    // this.executeSetEqnForms();
     if ('afterShow' in this && this.afterShow != null) {
       this.afterShow();
     }
@@ -622,6 +628,11 @@ class Section {
 
   // eslint-disable-next-line class-methods-use-this
   transitionReset(done: () => void = function temp() {}): void {
+    done();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  transitionEqnForms(done: () => void = function temp() {}): void {
     done();
   }
   /* eslint-enable no-unused-vars */
@@ -1052,18 +1063,20 @@ class PresentationFormatContent extends SimpleFormatContent {
     }
     const fromForm = options.from;
     const toForm = options.to;
+    let setEqnForms = [() => eqn.showForm(fromForm)];
+    if (Array.isArray(userSections.setEqnForms)) {
+      setEqnForms = [setEqnForms, ...userSections.setEqnForms];
+    } else if (typeof userSections.setEqnForms === 'function') {
+      setEqnForms.push(userSections.setEqnForms);
+    }
     const eqnSection = {
-      transitionFromPrev: (done) => {
+      setEqnForms,
+      transitionEqnForms: (done) => {
         let callback = done;
-        // beforeTransitionFromPrev is only used for section eqn steps
-        if (userSections.beforeTransitionFromPrev != null) {
-          userSections.beforeTransitionFromPrev();
+        if (userSections.transitionEqnForms != null) {
+          callback = userSections.transitionEqnForms.bind(userSections, done);
         }
-        if (userSections.transitionFromPrev != null) {
-          callback = userSections.transitionFromPrev.bind(userSections, done);
-        }
-        eqn.showForm(fromForm);
-        if (fromForm === toForm) {
+        if (fromForm === toForm || this.comingFrom !== 'prev') {
           callback();
           return;
         }
@@ -1078,12 +1091,12 @@ class PresentationFormatContent extends SimpleFormatContent {
         }
       },
       setSteadyState: () => {
-        if (userSections.setSteadyState != null) {
-          userSections.setSteadyState();
-        }
         eqn.showForm(toForm);
         if (nav != null) {
           nav.updateButtons();
+        }
+        if (userSections.setSteadyState != null) {
+          userSections.setSteadyState();
         }
       },
     };
@@ -1120,7 +1133,7 @@ class PresentationFormatContent extends SimpleFormatContent {
     const userSections = Object.assign({}, ...sectionObjects);
     const setFirstTransform = () => { this.diagram.setFirstTransform(); };
     const eqnSection = {
-      transitionFromPrev: (done) => {
+      transitionEqnForms: (done) => {
         setFirstTransform();
         let callback = done;
         if (userSections.transitionFromPrev != null) {
