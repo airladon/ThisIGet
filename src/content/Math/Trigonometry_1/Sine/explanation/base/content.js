@@ -66,7 +66,7 @@ class Content extends PresentationFormatContent {
           coll.resetRotation(done, 0.8);
         }
       },
-      setForms: [
+      setEqnForms: [
         [fig._hypotenuse._label, '0'],
       ],
       setSteadyState: () => {
@@ -216,19 +216,104 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, 'Each component\'s length |depends| on the |angle|. For example, a |larger_angle| makes the |vertical_component_longer|, while a |smaller_angle| makes it |shorter|.'),
+      setContent: style({ top: 0 }, 'As the angle gets |closer_to_90º|, the vertical component gets |longer|. As it gets |closer_to_0º|, the vertical component gets |shorter|.'),
     };
     this.addSection(common, commonContent, {
       modifiers: {
-        smaller_angle: click(coll.gotoSmallAngle, [coll], colors.angles),
-        larger_angle: click(coll.gotoLargeAngle, [coll], colors.angles),
-        angle: coll.bindAccent(fig._real),
-        vertical_component_longer: highlight(colors.components),
+        closer_to_0º: click(coll.gotoSmallAngle, [coll], colors.angles),
+        closer_to_90º: click(coll.gotoLargeAngle, [coll], colors.angles),
+        longer: highlight(colors.components),
         shorter: highlight(colors.components),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._h, fig._v,
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
       ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'Therefore we can say the |vertical| component is |related to|, |dependent on|, or |a function of| the rotation |angle|.'),
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: highlight(colors.components),
+        angle: highlight(colors.angles),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: highlight(colors.components),
+        angle: highlight(colors.angles),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [eqn, '0'],
+      ],
+      transitionFromPrev: (done) => {
+        coll.resetRotation(() => {
+          coll.accent(eqn, done);
+        }, 0.8);
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.'),
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        opposite: coll.bindAccent(fig._v),
+        angle: coll.bindAccent(fig._real),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        opposite: coll.bindAccent(fig._v),
+        angle: coll.bindAccent(fig._real),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        vertical: highlight(colors.components),
+        angle: highlight(colors.angles),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._v, fig._right,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [eqn, '0'],
+      ],
+      transitionFromPrev: (done) => {
+        coll.resetRotation(() => {
+          coll.accent(eqn, done);
+        }, 0.8);
+      },
     });
 
     // **********************************************************************

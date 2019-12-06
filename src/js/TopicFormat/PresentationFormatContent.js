@@ -116,7 +116,7 @@ class Section {
 
   show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
   hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
-  showForms: Array<[DiagramElementPrimitive | DiagramElementCollection, string]> | () => void;
+  setEqnForms: Array<[DiagramElementPrimitive | DiagramElementCollection, string]> | () => void;
   afterShow: ?() => void;
   initialPositions: Object | () => {};
   blankTransition: {
@@ -145,7 +145,7 @@ class Section {
     this.showOnly = [];
     this.blank = [];
     this.afterShow = null;
-    this.showForms = [];
+    this.setEqnForms = [];
     this.infoElements = [];
     this.fadeInFromPrev = true;
     this.blankTransition = {
@@ -576,8 +576,8 @@ class Section {
         elementsOrMethod();
       }
     }
-    if ('setForms' in this) {
-      const eqnPairsOrMethod = this.setForms;
+    if ('setEqnForms' in this) {
+      const eqnPairsOrMethod = this.setEqnForms;
       if (Array.isArray(eqnPairsOrMethod)) {
         eqnPairsOrMethod.forEach((eqnPair) => {
           const [eqn, form] = eqnPair;
@@ -617,6 +617,11 @@ class Section {
   }
 
   transitionToAny(done: () => void = function temp() {}): void {
+    done();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  transitionReset(done: () => void = function temp() {}): void {
     done();
   }
   /* eslint-enable no-unused-vars */

@@ -242,6 +242,7 @@ export default function diagramLayout() {
         equals2: '  =  ',
         approx: '  \u2248  ',
         func: 'function',
+        vert: { text: 'vertical', color: colors.components },
         theta: { text: '\u03B8', color: colors.angles },
         theta1: { text: '\u03B8', color: colors.angles },
         theta2: { text: '\u03B8', color: colors.angles },
@@ -277,9 +278,10 @@ export default function diagramLayout() {
         v1: { symbol: 'vinculum' },
         v2: { symbol: 'vinculum' },
         opp: { text: 'opposite', color: colors.components },
-        // brace: {
-        //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
-        // },
+        angle: { text: 'angle', color: colors.angles },
+        brace: {
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+        },
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
       },
@@ -290,6 +292,33 @@ export default function diagramLayout() {
       },
       forms: {
         '0': {
+          content: ['vert', 'equals', 'func', { brac: ['angle', 'lb', 'rb'] }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '1': {
+          content: [{
+            topComment: {
+              conent: 'vert',
+              comment: 'opp',
+              symbol: 'brace',
+            },
+          }, 'equals', 'func', { brac: ['angle', 'lb', 'rb'] }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2': {
+          content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '0b': {
           content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
           alignment: {
             fixTo: 'opp',
@@ -315,7 +344,7 @@ export default function diagramLayout() {
         //     alignH: 'right',
         //   },
         // },
-        '0b': {
+        '0c': {
           content: [
             'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
             'equals1', 'sin1', ' ' , 'theta1',
@@ -325,7 +354,7 @@ export default function diagramLayout() {
             alignH: 'right',
           },
         },
-        '0c': {
+        '0d': {
           content: [
             'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
             'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
@@ -336,7 +365,7 @@ export default function diagramLayout() {
             alignH: 'right',
           },
         },
-        '1': {
+        '5': {
           content: [
             'opp', 'approx', {
               frac: [
@@ -352,7 +381,7 @@ export default function diagramLayout() {
             alignH: 0.8,
           },
         },
-        '2': {
+        '6': {
           content: [
             'opp', 'equals', 'theta', 'minus1',
             { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, '3f', 'v'] },
@@ -372,6 +401,7 @@ export default function diagramLayout() {
       scenarios: {
         default: { position: [-0.5, -1.6] },
       },
+      pulseDefault: { scale: 1.4 },
     },
   };
 
