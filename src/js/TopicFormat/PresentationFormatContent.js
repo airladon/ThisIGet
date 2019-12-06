@@ -114,8 +114,8 @@ class Section {
   hideOnly: Array<DiagramElementPrimitive | DiagramElementCollection>
            | () => {};
 
-  show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
-  hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => void;
+  show: Array<DiagramElementPrimitive | DiagramElementCollection | () => void> | () => void;
+  hide: Array<DiagramElementPrimitive | DiagramElementCollection | () => void> | () => void;
   setEqnForms: Array<[Equation, string] | () => void> | () => void;
   afterShow: ?() => void;
   initialPositions: Object | () => {};
@@ -554,8 +554,10 @@ class Section {
         elementsOrMethod.forEach((element) => {
           if (element instanceof DiagramElementCollection) {
             element.showAll();
-          } else {
+          } else if (element instanceof DiagramElementPrimitive ) {
             element.show();
+          } else {
+            element();
           }
         });
       } else {
@@ -568,8 +570,10 @@ class Section {
         elementsOrMethod.forEach((element) => {
           if (element instanceof DiagramElementCollection) {
             element.hideAll();
-          } else {
+          } else if (element instanceof DiagramElementPrimitive) {
             element.hide();
+          } else {
+            element();
           }
         });
       } else {
