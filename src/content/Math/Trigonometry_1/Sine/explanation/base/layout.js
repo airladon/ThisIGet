@@ -21,6 +21,7 @@ export default function diagramLayout() {
   colors.axes = colors.get('grey', 'dark').rgb;
   colors.get('red').toCssVar('--color-angles');
   colors.get('green').toCssVar('--color-components');
+  colors.working = colors.get('grey', 'dark').rgb;
 
   const eqnSine = ({
     elements: {
@@ -28,18 +29,44 @@ export default function diagramLayout() {
       times: { text: ' \u00D7 ', color: colors.lines },
       sin: { text: 'sin', color: colors.components, style: 'normal' },
       theta: { text: '\u03B8', color: colors.components },
+      opposite: { text: 'opposite', color: colors.components },
+      vertical: { text: 'vertical', color: colors.components },
+      brace: {
+        symbol: 'brace', side: 'top', color: colors.working, numLines: 3,
+      },
     },
     forms: {
       '0': {
+        content: ['vertical'],
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '0a': {
+        content: {
+          topComment: {
+            content: 'vertical',
+            comment: 'opposite',
+            symbol: 'brace',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1': {
+        content: ['opposite'],
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '2': {
         content: ['sin', ' ', 'theta'],
         scale: 1,
         alignment: { alignH: 'center' },
       },
-      '1': {
+      '3': {
         content: ['r', 'times', 'sin', ' ', 'theta'],
         scale: 1,
       },
-      '2': {
+      '4': {
         content: ['r', ' ', 'sin', ' ', 'theta'],
         scale: 1,
       },
@@ -270,8 +297,8 @@ export default function diagramLayout() {
         'sine': { text: 'sine', style: 'normal' },
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
-        lb: { symbol: 'bracket', side: 'left' },
-        rb: { symbol: 'bracket', side: 'right' },
+        lb: { symbol: 'squareBracketNew', side: 'left', lineWidth: 0.01, endLength: 0.03 },
+        rb: { symbol: 'squareBracketNew', side: 'right' },
         lb1: { symbol: 'bracket', side: 'left' },
         rb1: { symbol: 'bracket', side: 'right' },
         v: { symbol: 'vinculum' },
@@ -282,6 +309,10 @@ export default function diagramLayout() {
         brace: {
           symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
+        brace1: {
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+        },
+        box: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
       },
@@ -292,7 +323,29 @@ export default function diagramLayout() {
       },
       forms: {
         '0': {
-          content: ['vert', 'equals', 'func', { brac: ['angle', 'lb', 'rb'] }],
+          content: ['vert', 'equals', 'func', {
+            box: [
+              {
+                pad: [
+                  {
+                    bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02, null, null, null, null, true],
+                  },
+                  0.1, 0.1, 0.1, 0.1,
+                ],
+              },
+              'box',
+            ],
+          }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'asd': {
+          content: ['vert', 'equals', 'func', {
+            bracNew: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
+            // bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
+          }],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',
@@ -301,11 +354,37 @@ export default function diagramLayout() {
         '1': {
           content: [{
             topComment: {
-              conent: 'vert',
+              content: 'vert',
               comment: 'opp',
               symbol: 'brace',
             },
-          }, 'equals', 'func', { brac: ['angle', 'lb', 'rb'] }],
+          }, 'equals', 'func', {
+            brac: [{
+              topComment: {
+                content: 'angle',
+                comment: 'theta',
+                symbol: 'brace1',
+                includeInSize: false,
+              },
+            }, 'lb', 'rb'],
+          },
+          'minus1',
+          {
+            annotate: {
+              content: 'sin1',
+              withAnnotations: [
+                {
+                  annotation: {
+                    annotation: '4',
+                    relativeToContent: [1, 1],
+                    relativeToAnnotation: [0, 0],
+                    scale: 0.5,
+                  },
+                },
+              ],
+            },
+          },
+          ],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',

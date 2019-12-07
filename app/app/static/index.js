@@ -4817,6 +4817,8 @@ var AnnotationInformation = function AnnotationInformation(content) {
   var xAlign = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
   var yAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'bottom';
   var annotationScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
+  var xOffset = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var yOffset = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
 
   _classCallCheck(this, AnnotationInformation);
 
@@ -4826,6 +4828,8 @@ var AnnotationInformation = function AnnotationInformation(content) {
   this.xAlign = xAlign == null ? 'left' : xAlign;
   this.yAlign = yAlign == null ? 'bottom' : yAlign;
   this.annotationScale = annotationScale == null ? 0.5 : annotationScale;
+  this.xOffset = xOffset;
+  this.yOffset = yOffset;
 }; // Create an annotation to a set of Elements
 // x/yPosition: annotation location relative to mainContent
 // x/yAlign: annotation alignment relative to its location
@@ -4855,6 +4859,8 @@ function (_Elements) {
     var yAlign = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'bottom';
     var annotationScale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.5;
     var annotationInSize = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : false;
+    var xOffset = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0;
+    var yOffset = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 0;
 
     _classCallCheck(this, Annotation);
 
@@ -4887,7 +4893,7 @@ function (_Elements) {
         xPosition = xPositionOrAnnotationInSize;
       }
 
-      _this.annotations = [new AnnotationInformation(annotationOrAnnotationArray, xPosition, yPosition, xAlign, yAlign, annotationScale)];
+      _this.annotations = [new AnnotationInformation(annotationOrAnnotationArray, xPosition, yPosition, xAlign, yAlign, annotationScale, xOffset, yOffset)];
       _this.annotationInSize = annotationInSize;
     }
 
@@ -4923,6 +4929,8 @@ function (_Elements) {
             xAlign = annotationInfo.xAlign,
             yAlign = annotationInfo.yAlign,
             annotationScale = annotationInfo.annotationScale;
+        var annotationXOffset = annotationInfo.xOffset;
+        var annotationYOffset = annotationInfo.yOffset;
         annotation.calcSize(location, incomingScale * annotationScale);
 
         var annotationLoc = _this2.location._dup();
@@ -4972,7 +4980,7 @@ function (_Elements) {
           yOffset = yAlign;
         }
 
-        var annotationOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-xOffset * annotation.width, annotation.descent - yOffset * annotation.height);
+        var annotationOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-xOffset * annotation.width + annotationXOffset * incomingScale, annotation.descent - yOffset * annotation.height + annotationYOffset * incomingScale);
         annotation.calcSize(annotationLoc, incomingScale * annotationScale);
         annotation.offsetLocation(annotationOffset);
         var annotationMaxX = annotation.location.x + annotation.width;
@@ -5320,6 +5328,7 @@ function (_Elements) {
     var outsideSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.05;
     var minLineHeight = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
     var heightScale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1.2;
+    var inSize = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
 
     _classCallCheck(this, Brackets);
 
@@ -5336,6 +5345,7 @@ function (_Elements) {
     _this.outsideSpace = outsideSpace;
     _this.minLineHeight = minLineHeight;
     _this.heightScale = heightScale;
+    _this.inSize = inSize;
     return _this;
   }
 
@@ -5501,7 +5511,18 @@ function (_Elements) {
   }]);
 
   return Brackets;
-}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]); // /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// Make brackets have a custom setabble ascent and descent instead of auto scale
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+
 var Bar =
 /*#__PURE__*/
 function (_Brackets) {
@@ -5514,11 +5535,13 @@ function (_Brackets) {
     var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.03;
     var outsideSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
     var barPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'top';
+    var inSize = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
 
     _classCallCheck(this, Bar);
 
     _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Bar).call(this, content, barGlyph, null, space, outsideSpace));
-    _this2.barPosition = barPosition; // this.outsideSpace = outsideSpace;
+    _this2.barPosition = barPosition;
+    _this2.inSize = inSize; // this.outsideSpace = outsideSpace;
 
     return _this2;
   }
@@ -5568,12 +5591,17 @@ function (_Brackets) {
 
       this.width = contentBounds.width;
 
-      if (this.barPosition === 'top') {
-        this.ascent = contentBounds.ascent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
-        this.descent = contentBounds.descent;
+      if (this.inSize) {
+        if (this.barPosition === 'top') {
+          this.ascent = contentBounds.ascent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
+          this.descent = contentBounds.descent;
+        } else {
+          this.ascent = contentBounds.ascent;
+          this.descent = contentBounds.descent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
+        }
       } else {
         this.ascent = contentBounds.ascent;
-        this.descent = contentBounds.descent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
+        this.descent = contentBounds.descent;
       }
 
       this.height = this.descent + this.ascent;
@@ -5598,6 +5626,425 @@ function (_Brackets) {
 
   return Bar;
 }(Brackets);
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/BracketsNew.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/BracketsNew.js ***!
+  \*************************************************************************/
+/*! exports provided: BracketsNew, BarNew */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BracketsNew", function() { return BracketsNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BarNew", function() { return BarNew; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var BracketsNew =
+/*#__PURE__*/
+function (_Elements) {
+  _inherits(BracketsNew, _Elements);
+
+  // ?
+  function BracketsNew(content, leftGlyph, rightGlyph) {
+    var _this;
+
+    var insideSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
+    var outsideSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.05;
+    var topSpace = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.05;
+    var bottomSpace = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.05;
+    var minContentHeight = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+    var minContentDescent = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+    var forceHeight = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+    var forceDescent = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+    var inSize = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : true;
+
+    _classCallCheck(this, BracketsNew);
+
+    var left = leftGlyph !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](leftGlyph) : null;
+    var right = rightGlyph !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](rightGlyph) : null;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BracketsNew).call(this, [left, content, right]));
+    _this.leftGlyph = leftGlyph;
+    _this.rightGlyph = rightGlyph;
+    _this.mainContent = content;
+    _this.leftGlyphLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    _this.rightGlyphLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0); // this.glyphScale = 1;
+
+    _this.glyphHeight = 1;
+    _this.insideSpace = insideSpace;
+    _this.outsideSpace = outsideSpace;
+    _this.topSpace = topSpace;
+    _this.bottomSpace = bottomSpace;
+    _this.minContentHeight = minContentHeight;
+    _this.minContentDescent = minContentDescent;
+    _this.forceHeight = forceHeight;
+    _this.forceDescent = forceDescent; // this.heightScale = heightScale;
+
+    _this.inSize = inSize;
+    return _this;
+  }
+
+  _createClass(BracketsNew, [{
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var content = this.mainContent == null ? null : this.mainContent._dup(namedCollection);
+      var lglyph = this.leftGlyph;
+
+      if (this.leftGlyph != null && namedCollection) {
+        lglyph = namedCollection[this.leftGlyph.name];
+      }
+
+      var rglyph = this.rightGlyph;
+
+      if (this.rightGlyph != null && namedCollection) {
+        rglyph = namedCollection[this.rightGlyph.name];
+      }
+
+      var bracketCopy = new BracketsNew(content, lglyph, rglyph, this.insideSpace, this.outsideSpace);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, bracketCopy, ['content', 'leftGlyph', 'rightGlyph']); // console.log(this.glyph.getPosition()._dup(), this.rightGlyph.getPosition()._dup());
+
+      return bracketCopy;
+    }
+  }, {
+    key: "getAllElements",
+    value: function getAllElements() {
+      var elements = [];
+
+      if (this.mainContent) {
+        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      }
+
+      if (this.leftGlyph) {
+        elements = [].concat(_toConsumableArray(elements), [this.leftGlyph]);
+      }
+
+      if (this.rightGlyph) {
+        elements = [].concat(_toConsumableArray(elements), [this.rightGlyph]);
+      } // console.log(this.glyph.getPosition()._dup(), this.rightGlyph.getPosition()._dup());
+
+
+      return elements;
+    }
+  }, {
+    key: "setPositions",
+    value: function setPositions() {
+      var leftGlyph = this.leftGlyph,
+          rightGlyph = this.rightGlyph;
+
+      if (leftGlyph != null) {
+        var t = leftGlyph.getTransform()._dup();
+
+        t.updateTranslation(this.leftGlyphLocation.x, this.leftGlyphLocation.y);
+        t.updateScale(this.glyphHeight, this.glyphHeight);
+        leftGlyph.setTransform(t);
+      }
+
+      if (rightGlyph != null) {
+        var _t = rightGlyph.getTransform()._dup();
+
+        _t.updateTranslation(this.rightGlyphLocation.x, this.rightGlyphLocation.y);
+
+        _t.updateScale(this.glyphHeight, this.glyphHeight);
+
+        rightGlyph.setTransform(_t);
+      }
+
+      if (this.mainContent) {
+        this.mainContent.setPositions();
+      }
+    }
+  }, {
+    key: "offsetLocation",
+    value: function offsetLocation() {
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      this.location = this.location.add(offset);
+      var leftGlyph = this.leftGlyph,
+          rightGlyph = this.rightGlyph;
+
+      if (leftGlyph != null) {
+        this.leftGlyphLocation = this.leftGlyphLocation.add(offset);
+      }
+
+      if (rightGlyph != null) {
+        this.rightGlyphLocation = this.rightGlyphLocation.add(offset);
+      }
+
+      if (this.mainContent) {
+        this.mainContent.offsetLocation(offset);
+      } // console.log(this.glyph.getPosition()._dup(), this.rightGlyph.getPosition()._dup());
+
+    }
+  }, {
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var originalContentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var leftGlyphBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var rightGlyphBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var mainContent = this.mainContent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.width = mainContent.width;
+        contentBounds.height = mainContent.ascent + mainContent.descent;
+        contentBounds.ascent = mainContent.ascent;
+        contentBounds.descent = mainContent.descent;
+        originalContentBounds.width = mainContent.width;
+        originalContentBounds.height = mainContent.height;
+        originalContentBounds.ascent = mainContent.ascent;
+        originalContentBounds.descent = mainContent.descent;
+      } // Calculation of descent and height needs to be done in this order to
+      // to preserve precedence (larger number overrides smaller number):
+      //    1. minContentDescent
+      //    2. forceDescent
+      //
+      //    1. Height based on bracket descent, to content ascent
+      //    2. forceHeight
+
+
+      if (this.minContentDescent != null) {
+        contentBounds.descent = Math.max(this.minContentDescent, contentBounds.descent);
+      }
+
+      var glyphDescent = contentBounds.descent + scale * this.bottomSpace;
+
+      if (this.forceDescent != null) {
+        glyphDescent = this.forceDescent;
+      }
+
+      if (this.minContentHeight != null) {
+        contentBounds.height = Math.max(this.minContentHeight, contentBounds.height);
+        contentBounds.ascent = contentBounds.height - contentBounds.descent;
+      }
+
+      var height = glyphDescent + contentBounds.ascent + this.topSpace * scale;
+
+      if (this.forceHeight != null) {
+        height = this.forceHeight;
+      }
+
+      var leftSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + this.outsideSpace * scale, loc.y - glyphDescent);
+      var leftGlyph = this.leftGlyph;
+
+      if (leftGlyph != null) {
+        if (this.inSize === false) {
+          leftSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x - this.insideSpace * scale - leftGlyph.custom.width, loc.y - glyphDescent);
+        }
+
+        leftGlyph.showAll();
+        leftGlyph.transform.updateScale(height, height);
+        leftGlyph.transform.updateTranslation(leftSymbolLocation.x, leftSymbolLocation.y);
+        this.leftGlyphLocation = leftSymbolLocation;
+        this.glyphHeight = height;
+        leftGlyphBounds.width = leftGlyph.custom.width;
+        leftGlyphBounds.height = height;
+        leftGlyphBounds.ascent = height - glyphDescent;
+        leftGlyphBounds.descent = glyphDescent;
+      }
+
+      var rightSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + contentBounds.width + leftGlyphBounds.width + (this.insideSpace * 2 + this.outsideSpace) * scale, leftSymbolLocation.y);
+
+      if (this.inSize === false) {
+        rightSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + contentBounds.width + this.insideSpace * scale, leftSymbolLocation.y);
+      }
+
+      var rightGlyph = this.rightGlyph;
+
+      if (rightGlyph != null) {
+        rightGlyph.showAll();
+        rightGlyph.transform.updateScale(height, height);
+        rightGlyph.transform.updateTranslation(rightSymbolLocation.x, rightSymbolLocation.y);
+        this.rightGlyphLocation = rightSymbolLocation;
+        rightGlyphBounds.width = rightGlyph.custom.width;
+        rightGlyphBounds.height = height;
+        rightGlyphBounds.ascent = height - glyphDescent;
+        rightGlyphBounds.descent = glyphDescent;
+      }
+
+      var contentLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.location.x + leftGlyphBounds.width + (this.insideSpace + this.outsideSpace) * scale, this.location.y);
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"] && this.inSize) {
+        mainContent.offsetLocation(contentLocation.sub(mainContent.location));
+      }
+
+      if (this.inSize) {
+        this.width = leftGlyphBounds.width + originalContentBounds.width + rightGlyphBounds.width + this.insideSpace * scale * 2 + this.outsideSpace * scale * 2;
+        this.ascent = Math.max(leftGlyphBounds.height - glyphDescent, originalContentBounds.ascent);
+        this.descent = Math.max(glyphDescent, originalContentBounds.descent);
+        this.height = this.descent + this.ascent;
+      } else {
+        this.width = originalContentBounds.width;
+        this.ascent = originalContentBounds.ascent;
+        this.descent = originalContentBounds.descent;
+        this.height = originalContentBounds.height;
+      }
+
+      if (leftGlyph) {
+        leftGlyph.custom.setSize(this.leftGlyphLocation, height);
+      }
+
+      if (rightGlyph) {
+        rightGlyph.custom.setSize(this.rightGlyphLocation, height);
+      }
+    }
+  }]);
+
+  return BracketsNew;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]); // /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// Make brackets have a custom setabble ascent and descent instead of auto scale
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////
+
+var BarNew =
+/*#__PURE__*/
+function (_BracketsNew) {
+  _inherits(BarNew, _BracketsNew);
+
+  // outsideSpace: number;
+  function BarNew(content, barGlyph) {
+    var _this2;
+
+    var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.03;
+    var outsideSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
+    var barPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'top';
+    var inSize = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+
+    _classCallCheck(this, BarNew);
+
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(BarNew).call(this, content, barGlyph, null, space, outsideSpace));
+    _this2.barPosition = barPosition;
+    _this2.inSize = inSize; // this.outsideSpace = outsideSpace;
+
+    return _this2;
+  }
+
+  _createClass(BarNew, [{
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var glyphBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var mainContent = this.mainContent;
+
+      if (mainContent instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.width = mainContent.width;
+        contentBounds.height = mainContent.ascent + mainContent.descent;
+        contentBounds.ascent = mainContent.ascent;
+        contentBounds.descent = mainContent.descent;
+      }
+
+      var widthScale = 1;
+      var width = contentBounds.width * widthScale;
+      var bracketScale = width;
+      var leftSymbolLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x - (widthScale - 1) * width / 2, loc.y + contentBounds.ascent + this.insideSpace * scale);
+
+      if (this.barPosition === 'bottom') {
+        leftSymbolLocation.y = loc.y - contentBounds.descent - this.insideSpace * scale;
+      }
+
+      var glyph = this.glyph;
+
+      if (glyph instanceof _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"]) {
+        glyph.show();
+        glyph.transform.updateScale(bracketScale, bracketScale);
+        glyph.transform.updateTranslation(leftSymbolLocation.x, leftSymbolLocation.y);
+        this.glyphLocation = leftSymbolLocation;
+        this.glyphScale = bracketScale;
+        var bounds = glyph.drawingObject.getRelativeVertexSpaceBoundingRect();
+        glyphBounds.width = bounds.width * bracketScale;
+        glyphBounds.height = (-bounds.bottom + bounds.top) * bracketScale;
+        glyphBounds.ascent = bounds.top * bracketScale;
+        glyphBounds.descent = -bounds.bottom * bracketScale;
+      }
+
+      this.width = contentBounds.width;
+
+      if (this.inSize) {
+        if (this.barPosition === 'top') {
+          this.ascent = contentBounds.ascent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
+          this.descent = contentBounds.descent;
+        } else {
+          this.ascent = contentBounds.ascent;
+          this.descent = contentBounds.descent + glyphBounds.height + this.insideSpace * scale + this.outsideSpace * scale;
+        }
+      } else {
+        this.ascent = contentBounds.ascent;
+        this.descent = contentBounds.descent;
+      }
+
+      this.height = this.descent + this.ascent;
+    } // Must make a dup method in a subclass or else the parent class will
+    // create a new copy of its own class type
+
+  }, {
+    key: "_dup",
+    value: function _dup(namedCollection) {
+      var content = this.mainContent == null ? null : this.mainContent._dup(namedCollection);
+      var glyph = this.glyph;
+
+      if (this.glyph != null && namedCollection) {
+        glyph = namedCollection[this.glyph.name];
+      }
+
+      var barCopy = new Bar(content, glyph, this.insideSpace, this.outsideSpace, this.barPosition);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, barCopy, ['content', 'glyph']);
+      return barCopy;
+    }
+  }]);
+
+  return BarNew;
+}(BracketsNew);
 
 /***/ }),
 
@@ -8716,10 +9163,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
 /* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
 /* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
-/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
-/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
-/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
+/* harmony import */ var _Elements_BracketsNew__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Elements/BracketsNew */ "./src/js/diagram/DiagramElements/Equation/Elements/BracketsNew.js");
+/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
+/* harmony import */ var _Elements_Padding__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Elements/Padding */ "./src/js/diagram/DiagramElements/Equation/Elements/Padding.js");
+/* harmony import */ var _Elements_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Elements/Box */ "./src/js/diagram/DiagramElements/Equation/Elements/Box.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -8749,6 +9197,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
+
 
 
 
@@ -8941,6 +9390,11 @@ function () {
 
       if (name === 'brac') {
         return this.brac(params);
+      } // $FlowFixMe
+
+
+      if (name === 'bracNew') {
+        return this.bracNew(params);
       } // $FlowFixMe
 
 
@@ -9245,32 +9699,32 @@ function () {
     value: function strike(optionsOrContent) // options: TypeStrikeObject | TypeStrikeArray) {
     {
       var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var inSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var inSizeIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var content;
       var symbol;
-      var strikeInSize;
+      var inSize;
 
-      if (!(sym == null && inSize == null)) {
+      if (!(sym == null && inSizeIn == null)) {
         content = optionsOrContent;
         symbol = sym;
-        strikeInSize = inSize;
+        inSize = inSizeIn;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
         var _optionsOrContent4 = _slicedToArray(optionsOrContent, 3);
 
         content = _optionsOrContent4[0];
         symbol = _optionsOrContent4[1];
-        strikeInSize = _optionsOrContent4[2];
+        inSize = _optionsOrContent4[2];
       } else {
         content = optionsOrContent.content;
         symbol = optionsOrContent.symbol;
-        strikeInSize = optionsOrContent.strikeInSize;
+        inSize = optionsOrContent.inSize;
       }
 
       return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_5__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
-      strikeInSize);
+      inSize);
     }
   }, {
     key: "box",
@@ -9304,7 +9758,7 @@ function () {
         space = optionsOrContent.space;
       }
 
-      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_11__["default"]( // $FlowFixMe
+      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_12__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
       inSize, // $FlowFixMe
@@ -9316,26 +9770,26 @@ function () {
       var _this2 = this;
 
       var withAnnotationsArray = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var includeAnnotationInSizeCalc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var inSizeCalc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var content;
       var withAnnotations; // let withAnnotation;
 
-      var includeAnnotationInSize;
+      var inSize;
 
-      if (!(withAnnotationsArray == null && includeAnnotationInSizeCalc == null)) {
+      if (!(withAnnotationsArray == null && inSizeCalc == null)) {
         content = optionsOrContent;
         withAnnotations = withAnnotationsArray;
-        includeAnnotationInSize = includeAnnotationInSizeCalc;
+        inSize = inSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         var _optionsOrContent6 = _slicedToArray(optionsOrContent, 3);
 
         content = _optionsOrContent6[0];
         withAnnotations = _optionsOrContent6[1];
-        includeAnnotationInSize = _optionsOrContent6[2];
+        inSize = _optionsOrContent6[2];
       } else {
         content = optionsOrContent.content;
         withAnnotations = optionsOrContent.withAnnotations;
-        includeAnnotationInSize = optionsOrContent.includeAnnotationInSize;
+        inSize = optionsOrContent.inSize;
       }
 
       var annotations; // Case of single annotation in array form or array of annotations
@@ -9343,14 +9797,14 @@ function () {
       if (Array.isArray(withAnnotations)) {
         annotations = withAnnotations.map(function (annotation) {
           // annotation is an already instantiated AnnotationInformation
-          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
+          if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]) {
             return annotation;
           }
 
           var parsedContent = _this2.parseContent(annotation); // case that annotation is a method object
 
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]) {
             return parsedContent;
           } // Case of single annotation in array form
 
@@ -9358,7 +9812,7 @@ function () {
           if (Array.isArray(annotation)) {
             var annotationFromArray = _this2.annotation(annotation);
 
-            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
+            if (annotationFromArray instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]) {
               return annotationFromArray;
             }
           }
@@ -9373,12 +9827,12 @@ function () {
         // AnnotationInformation instantiation
 
       } else if (withAnnotations != null) {
-        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
+        if (withAnnotations instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]) {
           annotations = [withAnnotations];
         } else {
           var parsedContent = this.parseContent(withAnnotations); // Method Object
 
-          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]) {
+          if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]) {
             annotations = [parsedContent]; // Array form only
           } else {
             // $FlowFixMe
@@ -9387,16 +9841,16 @@ function () {
         }
       }
 
-      var includeAnnotationInSizeToUse = true;
+      var inSizeToUse = true;
 
-      if (includeAnnotationInSize != null) {
-        includeAnnotationInSizeToUse = includeAnnotationInSize;
+      if (inSize != null) {
+        inSizeToUse = inSize;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["Annotation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["Annotation"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       annotations, // $FlowFixMe
-      includeAnnotationInSizeToUse);
+      inSizeToUse);
     }
   }, {
     key: "annotation",
@@ -9406,22 +9860,28 @@ function () {
       var positionRelativeToAnnotationH = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var positionRelativeToAnnotationV = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var annotationScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var xOffsetIn = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+      var yOffsetIn = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
       var annotation;
       var relativeToContentH;
       var relativeToContentV;
       var relativeToAnnotationH;
       var relativeToAnnotationV;
       var scale;
+      var xOffset;
+      var yOffset;
 
-      if (!(positionRelativeToContentH == null && positionRelativeToContentV == null && positionRelativeToAnnotationH == null && positionRelativeToAnnotationV == null && annotationScale == null)) {
+      if (!(positionRelativeToContentH == null && positionRelativeToContentV == null && positionRelativeToAnnotationH == null && positionRelativeToAnnotationV == null && annotationScale == null && xOffsetIn == null && yOffsetIn == null)) {
         annotation = optionsOrAnnotation;
         relativeToContentH = positionRelativeToContentH;
         relativeToContentV = positionRelativeToContentV;
         relativeToAnnotationH = positionRelativeToAnnotationH;
         relativeToAnnotationV = positionRelativeToAnnotationV;
         scale = annotationScale;
+        xOffset = xOffsetIn;
+        yOffset = yOffsetIn;
       } else if (Array.isArray(optionsOrAnnotation)) {
-        var _optionsOrAnnotation = _slicedToArray(optionsOrAnnotation, 6);
+        var _optionsOrAnnotation = _slicedToArray(optionsOrAnnotation, 8);
 
         annotation = _optionsOrAnnotation[0];
         relativeToContentH = _optionsOrAnnotation[1];
@@ -9430,6 +9890,9 @@ function () {
         relativeToAnnotationH = _optionsOrAnnotation[3];
         relativeToAnnotationV = _optionsOrAnnotation[4];
         scale = _optionsOrAnnotation[5];
+        // $FlowFixMe
+        xOffset = _optionsOrAnnotation[6];
+        yOffset = _optionsOrAnnotation[7];
       } else {
         var relativeToContent;
         var relativeToAnnotation;
@@ -9437,6 +9900,8 @@ function () {
         relativeToContent = optionsOrAnnotation.relativeToContent;
         relativeToAnnotation = optionsOrAnnotation.relativeToAnnotation;
         scale = optionsOrAnnotation.scale;
+        xOffset = optionsOrAnnotation.xOffset;
+        yOffset = optionsOrAnnotation.yOffset;
         var _relativeToContent = relativeToContent;
 
         var _relativeToContent2 = _slicedToArray(_relativeToContent, 2);
@@ -9457,13 +9922,13 @@ function () {
         scaleToUse = scale;
       }
 
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_9__["AnnotationInformation"]( // $FlowFixMe
+      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_10__["AnnotationInformation"]( // $FlowFixMe
       this.contentToElement(annotation), // $FlowFixMe
       relativeToContentH, // $FlowFixMe
       relativeToContentV, // $FlowFixMe
       relativeToAnnotationH, // $FlowFixMe
       relativeToAnnotationV, // $FlowFixMe
-      scaleToUse);
+      scaleToUse, xOffset, yOffset);
     }
   }, {
     key: "pad",
@@ -9501,12 +9966,166 @@ function () {
         left = optionsOrContent.left;
       }
 
-      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_10__["default"]( // $FlowFixMe
+      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_11__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       top, // $FlowFixMe
       right, // $FlowFixMe
       bottom, // $FlowFixMe
       left);
+    }
+  }, {
+    key: "bracNew",
+    value: function bracNew(optionsOrContent) {
+      var leftBracketString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var rightBracketString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var insideSpaceToContent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var outsideSpaceToContent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var topSpaceToContent = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var bottomSpaceToContent = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+      var minimumContentHeight = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+      var minimumContentDescent = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+      var forceHeight = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+      var forceDescent = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+      var inSizeInput = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : null;
+      var content;
+      var left;
+      var right;
+      var insideSpace;
+      var outsideSpace;
+      var topSpace;
+      var bottomSpace;
+      var minContentHeight;
+      var minContentDescent;
+      var descent;
+      var height;
+      var inSize;
+
+      if (!(leftBracketString == null && rightBracketString == null && insideSpaceToContent == null && outsideSpaceToContent == null && topSpaceToContent == null && bottomSpaceToContent == null && minimumContentHeight == null && minimumContentDescent == null && forceDescent == null && forceHeight == null && inSizeInput == null)) {
+        content = optionsOrContent;
+        left = leftBracketString;
+        right = rightBracketString;
+        insideSpace = insideSpaceToContent;
+        outsideSpace = outsideSpaceToContent;
+        topSpace = topSpaceToContent;
+        bottomSpace = bottomSpaceToContent;
+        minContentHeight = minimumContentHeight;
+        minContentDescent = minimumContentDescent;
+        descent = forceDescent;
+        height = forceHeight;
+        inSize = inSizeInput;
+      } else if (Array.isArray(optionsOrContent)) {
+        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 12);
+
+        // $FlowFixMe
+        content = _optionsOrContent8[0];
+        left = _optionsOrContent8[1];
+        right = _optionsOrContent8[2];
+        insideSpace = _optionsOrContent8[3];
+        outsideSpace = _optionsOrContent8[4];
+        // $FlowFixMe
+        topSpace = _optionsOrContent8[5];
+        bottomSpace = _optionsOrContent8[6];
+        minContentHeight = _optionsOrContent8[7];
+        minContentDescent = _optionsOrContent8[8];
+        height = _optionsOrContent8[9];
+        descent = _optionsOrContent8[10];
+        inSize = _optionsOrContent8[11];
+      } else {
+        content = optionsOrContent.content;
+        left = optionsOrContent.left;
+        right = optionsOrContent.right;
+        insideSpace = optionsOrContent.insideSpace;
+        outsideSpace = optionsOrContent.outsideSpace;
+        topSpace = optionsOrContent.topSpace;
+        bottomSpace = optionsOrContent.bottomSpace;
+        minContentHeight = optionsOrContent.minContentHeight;
+        minContentDescent = optionsOrContent.minContentDescent;
+        height = optionsOrContent.height;
+        descent = optionsOrContent.descent;
+        inSize = optionsOrContent.inSize;
+      }
+
+      var leftBracket = null;
+
+      if (left != null) {
+        // $FlowFixMe
+        leftBracket = getDiagramElement(this.elements, left);
+      }
+
+      var rightBracket = null;
+
+      if (right != null) {
+        // $FlowFixMe
+        rightBracket = getDiagramElement(this.elements, right);
+      }
+
+      var insideSpaceToUse;
+
+      if (insideSpace != null) {
+        insideSpaceToUse = insideSpace;
+      }
+
+      var outsideSpaceToUse;
+
+      if (outsideSpace != null) {
+        outsideSpaceToUse = outsideSpace;
+      }
+
+      var topSpaceToUse;
+
+      if (topSpace != null) {
+        topSpaceToUse = topSpace;
+      }
+
+      var bottomSpaceToUse;
+
+      if (bottomSpace != null) {
+        bottomSpaceToUse = bottomSpace;
+      }
+
+      var minHeightToUse;
+
+      if (minContentHeight != null) {
+        minHeightToUse = minContentHeight;
+      }
+
+      var minDescentToUse;
+
+      if (minContentDescent != null) {
+        minDescentToUse = minContentDescent;
+      }
+
+      var heightToUse;
+
+      if (height != null) {
+        heightToUse = height;
+      }
+
+      var descentToUse;
+
+      if (descent != null) {
+        descentToUse = descent;
+      }
+
+      var inSizeToUse;
+
+      if (inSize != null) {
+        inSizeToUse = inSize;
+      }
+
+      return new _Elements_BracketsNew__WEBPACK_IMPORTED_MODULE_8__["BracketsNew"]( // $FlowFixMe
+      this.contentToElement(content), // $FlowFixMe
+      leftBracket, // $FlowFixMe
+      rightBracket, // $FlowFixMe
+      insideSpaceToUse, // $FlowFixMe
+      outsideSpaceToUse, // $FlowFixMe
+      topSpaceToUse, // $FlowFixMe
+      bottomSpaceToUse, // $FlowFixMe
+      minHeightToUse, // $FlowFixMe
+      minDescentToUse, // $FlowFixMe
+      heightToUse, // $FlowFixMe
+      descentToUse, // $FlowFixMe
+      inSizeToUse);
     }
   }, {
     key: "brac",
@@ -9534,17 +10153,17 @@ function () {
         useMinLineHeight = useMinLineHeightForLine;
         heightScale = bracketHeightScale;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 7);
 
         // $FlowFixMe
-        content = _optionsOrContent8[0];
-        left = _optionsOrContent8[1];
-        right = _optionsOrContent8[2];
-        insideSpace = _optionsOrContent8[3];
-        outsideSpace = _optionsOrContent8[4];
+        content = _optionsOrContent9[0];
+        left = _optionsOrContent9[1];
+        right = _optionsOrContent9[2];
+        insideSpace = _optionsOrContent9[3];
+        outsideSpace = _optionsOrContent9[4];
         // $FlowFixMe
-        useMinLineHeight = _optionsOrContent8[5];
-        heightScale = _optionsOrContent8[6];
+        useMinLineHeight = _optionsOrContent9[5];
+        heightScale = _optionsOrContent9[6];
       } else {
         content = optionsOrContent.content;
         left = optionsOrContent.left;
@@ -9607,24 +10226,29 @@ function () {
     value: function processBar(optionsOrContent) {
       var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var insideSpace = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var barInSize = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var content;
       var symbol;
       var space;
+      var inSize;
 
       if (!(sym == null && insideSpace == null)) {
         content = optionsOrContent;
         symbol = sym;
         space = insideSpace;
+        inSize = barInSize;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 4);
 
-        content = _optionsOrContent9[0];
-        symbol = _optionsOrContent9[1];
-        space = _optionsOrContent9[2];
+        content = _optionsOrContent10[0];
+        symbol = _optionsOrContent10[1];
+        space = _optionsOrContent10[2];
+        inSize = _optionsOrContent10[3];
       } else {
         content = optionsOrContent.content;
         symbol = optionsOrContent.symbol;
         space = optionsOrContent.space;
+        inSize = optionsOrContent.inSize;
       }
 
       var spaceToUse = 0.03;
@@ -9633,37 +10257,45 @@ function () {
         spaceToUse = space;
       }
 
-      return [content, symbol, spaceToUse];
+      var inSizeToUse = true;
+
+      if (inSize != null) {
+        inSizeToUse = inSize;
+      }
+
+      return [content, symbol, spaceToUse, inSizeToUse];
     } // $FlowFixMe
 
   }, {
     key: "topBar",
     value: function topBar() {
       var _this$processBar = this.processBar.apply(this, arguments),
-          _this$processBar2 = _slicedToArray(_this$processBar, 3),
+          _this$processBar2 = _slicedToArray(_this$processBar, 4),
           content = _this$processBar2[0],
           symbol = _this$processBar2[1],
-          spaceToUse = _this$processBar2[2];
+          spaceToUse = _this$processBar2[2],
+          inSize = _this$processBar2[3];
 
       return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
-      spaceToUse, 0.03, 'top');
+      spaceToUse, 0.03, 'top', inSize);
     } // $FlowFixMe
 
   }, {
     key: "bottomBar",
     value: function bottomBar() {
       var _this$processBar3 = this.processBar.apply(this, arguments),
-          _this$processBar4 = _slicedToArray(_this$processBar3, 3),
+          _this$processBar4 = _slicedToArray(_this$processBar3, 4),
           content = _this$processBar4[0],
           symbol = _this$processBar4[1],
-          spaceToUse = _this$processBar4[2];
+          spaceToUse = _this$processBar4[2],
+          inSize = _this$processBar4[3];
 
       return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_7__["Bar"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
       getDiagramElement(this.elements, symbol), // $FlowFixMe
-      spaceToUse, 0.03, 'bottom');
+      spaceToUse, 0.03, 'bottom', inSize);
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -9693,15 +10325,15 @@ function () {
         includeInSize = includeInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent10 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent11 = _slicedToArray(optionsOrContent, 7);
 
-        content = _optionsOrContent10[0];
-        comment = _optionsOrContent10[1];
-        symbol = _optionsOrContent10[2];
-        contentSpace = _optionsOrContent10[3];
-        commentSpace = _optionsOrContent10[4];
-        scale = _optionsOrContent10[5];
-        includeInSize = _optionsOrContent10[6];
+        content = _optionsOrContent11[0];
+        comment = _optionsOrContent11[1];
+        symbol = _optionsOrContent11[2];
+        contentSpace = _optionsOrContent11[3];
+        commentSpace = _optionsOrContent11[4];
+        scale = _optionsOrContent11[5];
+        includeInSize = _optionsOrContent11[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9759,7 +10391,7 @@ function () {
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
-        commentSpaceToUse, 'bottom');
+        commentSpaceToUse, 'bottom', includeInSize);
       } else {
         contentToUse = this.pad( // $FlowFixMe
         content, 0, 0, contentSpaceToUse + commentSpaceToUse);
@@ -9776,7 +10408,7 @@ function () {
           scale: scaleToUse
         })],
         // $FlowFixMe
-        includeAnnotationInSize: includeInSize
+        inSize: includeInSize
       });
     } // $FlowFixMe
 
@@ -9800,7 +10432,7 @@ function () {
         this.contentToElement(content), // $FlowFixMe
         getDiagramElement(this.elements, symbol), // $FlowFixMe
         contentSpaceToUse, // $FlowFixMe
-        commentSpaceToUse, 'top');
+        commentSpaceToUse, 'top', includeInSize);
       } else {
         contentToUse = this.pad( // $FlowFixMe
         content, contentSpaceToUse + commentSpaceToUse);
@@ -9817,7 +10449,7 @@ function () {
           scale: scaleToUse
         })],
         // $FlowFixMe
-        includeAnnotationInSize: includeInSize
+        inSize: includeInSize
       });
     } // eslint-disable-next-line class-methods-use-this
 
@@ -9842,13 +10474,13 @@ function () {
         scale = comScale;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent11 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent12 = _slicedToArray(optionsOrContent, 5);
 
-        content = _optionsOrContent11[0];
-        comment = _optionsOrContent11[1];
-        symbol = _optionsOrContent11[2];
-        space = _optionsOrContent11[3];
-        scale = _optionsOrContent11[4];
+        content = _optionsOrContent12[0];
+        comment = _optionsOrContent12[1];
+        symbol = _optionsOrContent12[2];
+        space = _optionsOrContent12[3];
+        scale = _optionsOrContent12[4];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -9971,6 +10603,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Symbols_Radical__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/Radical */ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js");
 /* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
 /* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
+/* harmony import */ var _Symbols_SquareBracketNew__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Symbols/SquareBracketNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracketNew.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -9982,6 +10615,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import { DiagramElementCollection } from '../../Element';
 
  // import SuperSub from './Elements/SuperSub';
+
 
 
 
@@ -10026,6 +10660,10 @@ function () {
 
       if (name === 'squareBracket') {
         return this.squareBracket(options);
+      }
+
+      if (name === 'squareBracketNew') {
+        return this.squareBracketNew(options);
       }
 
       if (name === 'brace') {
@@ -10161,6 +10799,19 @@ function () {
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
       return new _Symbols_Bar__WEBPACK_IMPORTED_MODULE_6__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.side, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits);
+    }
+  }, {
+    key: "squareBracketNew",
+    value: function squareBracketNew(options) {
+      var defaultOptions = {
+        side: 'left',
+        lineWidth: 0.01,
+        color: this.defaultColor,
+        endLength: 0.04,
+        staticSize: null
+      };
+      var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
+      return new _Symbols_SquareBracketNew__WEBPACK_IMPORTED_MODULE_11__["default"](this.shapes, optionsToUse.color, optionsToUse.side, optionsToUse.lineWidth, optionsToUse.endLength, optionsToUse.staticSize);
     }
   }, {
     key: "squareBracket",
@@ -11230,6 +11881,121 @@ function SquareBracket(webgl, color, side, numLines, transformOrLocation, diagra
   }
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertices, transform, color, diagramLimits);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracketNew.js":
+/*!*****************************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracketNew.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SquareBracket; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+// import VertexSquareBracket from './VertexSquareBracket';
+
+
+ // import WebGLInstance from '../../../webgl/webgl';
+
+function updatePoints(symbol, side, height, lineWidth, endLength) {
+  var line = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, height)];
+  var end1 = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth + endLength, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth + endLength, height - lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, height - lineWidth)];
+  var end2 = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth + endLength, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth + endLength, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](lineWidth, lineWidth)]; // console.log(height, lineWidth, endLength)
+  // console.log(line, end1, end2)
+
+  var maxX = lineWidth + endLength;
+  var t;
+
+  if (side === 'right') {
+    t = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]().scale(-1, 1).translate(maxX, 0);
+  } else if (side === 'top') {
+    t = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]().translate(0, -height / 2).rotate(-Math.PI / 2).translate(height / 2, maxX);
+  } else if (side === 'bottom') {
+    t = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]().translate(0, -height / 2).rotate(Math.PI / 2).translate(height / 2, -maxX);
+  } else {
+    t = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
+  }
+
+  var tLine = line.map(function (p) {
+    return p.transformBy(t.m());
+  });
+  var tEnd1 = end1.map(function (p) {
+    return p.transformBy(t.m());
+  });
+  var tEnd2 = end2.map(function (p) {
+    return p.transformBy(t.m());
+  }); // $FlowFixMe
+
+  symbol._line.drawingObject.changeVertices(tLine); // $FlowFixMe
+
+
+  symbol._end1.drawingObject.changeVertices(tEnd1); // $FlowFixMe
+
+
+  symbol._end2.drawingObject.changeVertices(tEnd2);
+}
+
+var fan = function fan(color) {
+  return {
+    points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 1), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 0)],
+    color: color
+  };
+};
+
+function SquareBracket(shapes, color, side, lineWidth, endLength, staticSize) {
+  var symbol = shapes.collection({
+    color: color,
+    transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('squareBracket').scale(1, 1).translate(0, 0)
+  });
+  symbol.add('line', shapes.fan(fan(color)));
+  symbol.add('end1', shapes.fan(fan(color)));
+  symbol.add('end2', shapes.fan(fan(color)));
+  updatePoints(symbol, side, 1, lineWidth, endLength);
+  symbol.custom.lineWidth = lineWidth;
+  symbol.custom.endLength = endLength;
+  symbol.custom.width = lineWidth + endLength;
+
+  if (staticSize != null) {
+    symbol.custom.type = 'static';
+    updatePoints(symbol, side, staticSize, lineWidth, endLength);
+  } else {
+    symbol.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1);
+
+    symbol.internalSetTransformCallback = function () {
+      var s = symbol.getScale();
+
+      if (symbol.custom.scale.isNotEqualTo(s, 8)) {
+        updatePoints(symbol, side, s.y, symbol.custom.lineWidth, symbol.custom.endLength);
+        symbol.custom.scale = s;
+      }
+    };
+
+    symbol.getTransform = function () {
+      var t = symbol.transform._dup();
+
+      t.updateScale(1, 1);
+      return t;
+    };
+
+    symbol.custom.type = 'dynamic';
+  } // eslint-disable-next-line max-len
+
+
+  symbol.custom.setSize = function (location, height) {
+    var t = symbol.transform._dup();
+
+    t.updateScale(height, height);
+    t.updateTranslation(location.x, location.y);
+    symbol.setTransform(t);
+  };
+
+  return symbol;
 }
 
 /***/ }),
@@ -24769,9 +25535,11 @@ function (_DiagramElement2) {
     value: function getAllBoundaries() {
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var boundaries = [];
+      console.log(this.name, space, this.drawOrder.length);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
+        console.log(element.name, element.isShown);
 
         if (element.isShown) {
           var elementBoundaries = element.getBoundaries(space);
@@ -24779,6 +25547,7 @@ function (_DiagramElement2) {
         }
       }
 
+      console.log(boundaries);
       return boundaries;
     }
   }, {

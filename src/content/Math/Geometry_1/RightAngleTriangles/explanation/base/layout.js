@@ -512,7 +512,7 @@ export default function diagramLayout() {
           scale: 0.5,
         },
       },
-      includeAnnotationInSize: false,
+      inSize: false,
     },
   });
 

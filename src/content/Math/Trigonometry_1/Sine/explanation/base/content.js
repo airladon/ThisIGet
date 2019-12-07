@@ -250,10 +250,11 @@ class Content extends PresentationFormatContent {
       },
       show: [
         fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
+        fig._v, fig._right, fig._sineTheta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0'],
         [eqn, '0'],
       ],
       transitionFromPrev: (done) => {
@@ -268,16 +269,33 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({ top: 0 }, 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.'),
-    };
-    this.addSection(common, commonContent, {
       modifiers: {
         opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._real),
+        // theta: coll.bindAccent(fig._real),
+        theta: click(() => {
+          eqn.showForm('0');
+          eqn.goToForm({
+            name: 'asd',
+            duration: 2,
+            animate: 'move',
+          });
+          this.diagram.animateNextFrame();
+        }, [this], colors.angles),
       },
+    };
+    this.addSection(common, commonContent, {
       show: [
         fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
+        fig._v, fig._right, fig._sineTheta,
       ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0'],
+        [eqn, '0'],
+      ],
+      setSteadyState: () => {
+        console.log(eqn)
+      }
     });
 
     this.addSection(common, commonContent, {
@@ -286,9 +304,17 @@ class Content extends PresentationFormatContent {
         angle: coll.bindAccent(fig._real),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta, fig._sineTheta,
       ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0a'],
+        [eqn, '1'],
+      ],
+      // transitionFromPrev: (done) => {
+      //   coll.accent(fig, ['theta', 'sineTheta'], done);
+      // },
     });
 
     this.addSection(common, commonContent, {

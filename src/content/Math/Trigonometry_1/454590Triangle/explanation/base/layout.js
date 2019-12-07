@@ -59,7 +59,7 @@ export default function diagramLayout() {
           annotate: {
             content: { strike: ['A', 's1', false] },
             withAnnotations: ['_1'],
-            includeAnnotationInSize: false,
+            inSize: false,
           },
         }],
         scale: 1,
@@ -103,7 +103,7 @@ export default function diagramLayout() {
           annotate: {
             content: { strike: ['A', 's1'] },
             withAnnotations: ['_1'],
-            includeAnnotationInSize: false,
+            inSize: false,
           },
         }],
         alignment: { alignV: -0.01, alignH: 0.2 },
