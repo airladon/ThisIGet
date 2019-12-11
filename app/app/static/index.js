@@ -7568,6 +7568,7 @@ function (_DiagramElementCollec) {
         }
 
         if (form != null && _typeof(form) === 'object') {
+          // $FlowFixMe
           var keys = Object.keys(form);
 
           if (keys.length === 1 && keys[0] in _this4.eqn.functions) {
@@ -7595,12 +7596,14 @@ function (_DiagramElementCollec) {
       };
 
       var addFormNormal = function addFormNormal(name, form) {
+        // $FlowFixMe
         var formContent = [_this4.eqn.functions.contentToElement(form)];
 
         _this4.addForm(name, formContent);
       };
 
       var addFormFullObject = function addFormFullObject(name, form) {
+        // $FlowFixMe
         var formContent = [_this4.eqn.functions.contentToElement(form.content)];
         var subForm = form.subForm,
             elementMods = form.elementMods,
@@ -7644,6 +7647,7 @@ function (_DiagramElementCollec) {
 
 
             if (isFormString(subFormValue) || isFormArray(subFormValue) || isFormMethodDefinition(subFormValue) || isFormElements(subFormValue)) {
+              // $FlowFixMe
               addFormFullObject(name, {
                 content: subFormValue,
                 subForm: subFormName
@@ -8085,6 +8089,7 @@ function (_DiagramElementCollec) {
       }
 
       if (subFormToUse != null) {
+        // $FlowFixMe
         subForm = form[subFormToUse];
         var duration = options.duration;
 
@@ -9324,7 +9329,8 @@ function () {
 
       if (name === 'pad') {
         return this.pad(params);
-      } // Add container - where you fix the ascent, descent, and width (content is centered in width) - Content spills out of container by default
+      } // Add container - where you fix the ascent, descent, and width
+      // (content is centered in width) - Content spills out of container by default
 
 
       return null;
@@ -9798,7 +9804,9 @@ function () {
       relativeToContentV, // $FlowFixMe
       relativeToAnnotationH, // $FlowFixMe
       relativeToAnnotationV, // $FlowFixMe
-      scaleToUse, xOffset, yOffset);
+      scaleToUse, // $FlowFixMe
+      xOffset, // $FlowFixMe
+      yOffset);
     } // container(
     //   optionsOrContent: TypeContainerObject | TypeContainerArray
     //                     | TypeEquationPhrase,
@@ -10290,6 +10298,7 @@ function () {
         space = insideSpace;
         inSize = barInSize;
       } else if (Array.isArray(optionsOrContent)) {
+        // $FlowFixMe
         var _optionsOrContent10 = _slicedToArray(optionsOrContent, 4);
 
         content = _optionsOrContent10[0];
@@ -10807,6 +10816,7 @@ function () {
       }
 
       if (name === 'bracket') {
+        // $FlowFixMe
         return this.bracket(options);
       } // if (name === 'bracketNew') {
       //   return this.bracketNew(options);
@@ -10814,6 +10824,7 @@ function () {
 
 
       if (name === 'squareBracket') {
+        // $FlowFixMe
         return this.squareBracket(options);
       } // if (name === 'squareBracketNew') {
       //   return this.squareBracketNew(options);
@@ -10821,6 +10832,7 @@ function () {
 
 
       if (name === 'brace') {
+        // $FlowFixMe
         return this.brace(options);
       } // if (name === 'braceNew') {
       //   return this.braceNew(options);
@@ -10828,9 +10840,10 @@ function () {
 
 
       if (name === 'bar') {
+        // $FlowFixMe
         return this.bar(options);
-      } // if (name === 'barNew') {
-      //   return this.barNew(options);
+      } // if (name === 'bar') {
+      //   return this.bar(options);
       // }
       // if (name === 'roundedSquareBracket') {
       //   return this.roundedSquareBracket(options);
@@ -10838,10 +10851,12 @@ function () {
 
 
       if (name === 'box') {
+        // $FlowFixMe
         return this.box(options);
       }
 
       if (name === 'radical') {
+        // $FlowFixMe
         return this.radical(options);
       }
 
@@ -14298,7 +14313,7 @@ function (_DiagramElementCollec) {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       if (options.position != null) {
-        this.nextPosition = options.position;
+        this.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
       }
 
       if (options.rotation != null) {
