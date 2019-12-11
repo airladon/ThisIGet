@@ -301,7 +301,7 @@ export default function diagramLayout() {
           symbol: 'bracket', side: 'right', numLines: 1,
         },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
         box: {
           symbol: 'box', color: colors.angles, width: 0.008,
@@ -349,7 +349,7 @@ export default function diagramLayout() {
         '2': [
           newTot, 'equals', oldTot, '   ',
           {
-            topComment: {
+            topCommentNew: {
               content: [
                 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'm3', '   ', 'c1'],
               comment: ['m4', ' ', '_180'],
@@ -366,7 +366,7 @@ export default function diagramLayout() {
         '4': [
           newTot, 'equals', oldTot, '   ',
           {
-            topComment: {
+            topCommentNew: {
               content: ['m4', ' ', '_180', '   ', 'p1', '   ', '_360'],
               comment: ['p2', '_1802'],
               symbol: 'brace',
@@ -407,7 +407,7 @@ export default function diagramLayout() {
           'angle', 'equals', {
             frac: {
               numerator: {
-                topComment: {
+                topCommentNew: {
                   content: [
                     { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
                     'times', '_180',

@@ -32,7 +32,7 @@ export default function diagramLayout() {
       opposite: { text: 'opposite', color: colors.components },
       vertical: { text: 'vertical', color: colors.components },
       brace: {
-        symbol: 'brace', side: 'top', color: colors.working, numLines: 3,
+        symbol: 'braceNew', side: 'top', color: colors.working, numLines: 3,
       },
     },
     forms: {
@@ -43,7 +43,7 @@ export default function diagramLayout() {
       },
       '0a': {
         content: {
-          topComment: {
+          topCommentNew: {
             content: 'vertical',
             comment: 'opposite',
             symbol: 'brace',

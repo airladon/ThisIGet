@@ -278,10 +278,10 @@ export default function diagramLayout() {
         equals: '  =  ',
         v: { symbol: 'vinculum' },
         largeBrace: {
-          symbol: 'brace', side: 'top', numLines: 6, color: colors.qrRadians_marks,
+          symbol: 'braceNew', side: 'top', color: colors.qrRadians_marks,
         },
         smallBrace: {
-          symbol: 'brace', side: 'top', numLines: 1, color: colors.qrRadians_marks,
+          symbol: 'braceNew', side: 'top', color: colors.qrRadians_marks,
         },
       },
       defaultFormAlignment: {
@@ -302,7 +302,7 @@ export default function diagramLayout() {
           'arc',
           'equals',
           {
-            topComment: {
+            topCommentNew: {
               content: '_3',
               comment: 'angle',
               symbol: 'smallBrace',
@@ -312,7 +312,7 @@ export default function diagramLayout() {
           },
           '   ',
           {
-            topComment: ['radiusLengths3', 'radius', 'largeBrace'],
+            topCommentNew: ['radiusLengths3', 'radius', 'largeBrace'],
           },
         ],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],
