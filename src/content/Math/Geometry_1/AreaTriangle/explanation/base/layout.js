@@ -398,10 +398,10 @@ export default function diagramLayout() {
           sub('Area', 'tri'), 'equals', '   ', _half, ' ', '_h', ' ', 'B',
           'plus', __half, ' ', '__h', ' ', 'C',
         ],
-        // '2': [
-        //   sub('Area', 'tri'), 'equals', '   ',
-        //   { brac: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb', false] },
-        // ],
+        '3': [
+          sub('Area', 'tri'), 'equals', '   ',
+          { brac: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb', false] },
+        ],
         '4': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {

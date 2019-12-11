@@ -9098,30 +9098,7 @@ function getDiagramElement(elementsObject, name) {
   }
 
   return null;
-} // export type TypeParsablePoint = [number, number] | Point | { x: number, y: number};
-// // point can be defined as:
-// //    - Point instance
-// //    - [1, 1]
-// //    - { x: 1, y: 1 }
-// export const parsePoint = (point: TypeParsablePoint) => {
-//   if (point instanceof Point) {
-//     return point;
-//   }
-//   if (Array.isArray(point)) {
-//     if (point.length === 2) {
-//       return new Point(point[0], point[1]);
-//     }
-//     return point;
-//   }
-//   if (typeof (point) === 'object') {
-//     const keys = Object.keys(point);
-//     if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
-//       return new Point(point.x, point.y);
-//     }
-//   }
-//   return point;
-// };
-
+}
 /* eslint-disable no-use-before-define */
 
 // There are lots of FlowFixMes in this file. This is not perfect, but
@@ -9807,69 +9784,7 @@ function () {
       scaleToUse, // $FlowFixMe
       xOffset, // $FlowFixMe
       yOffset);
-    } // container(
-    //   optionsOrContent: TypeContainerObject | TypeContainerArray
-    //                     | TypeEquationPhrase,
-    //   widthIn: number | null = null,
-    //   ascentIn: number | null = null,
-    //   descentIn: number | null = null,
-    //   fitIn: boolean | null = null,
-    //   xAlignIn: 'center' | 'left' | 'right' | number = null,
-    //   yAlignIn: 'middle' | 'bottom' | 'top' | number = null,
-    //   xOffsetIn: number | null = null,
-    //   yOffsetIn: number | null = null,
-    // ) {
-    //   let content;
-    //   let width;
-    //   let ascent;
-    //   let descent;
-    //   let fit;
-    //   let xAlign;
-    //   let yAlign;
-    //   let xOffset;
-    //   let yOffset;
-    //   if (!(widthIn == null
-    //         && ascentIn == null
-    //         && descentIn == null
-    //         && fitIn == null
-    //         && xAlignIn == null
-    //         && yAlignIn == null
-    //         && xOffsetIn == null
-    //         && yOffsetIn == null)
-    //   ) {
-    //     content = optionsOrContent;
-    //     width = widthIn;
-    //     ascent = ascentIn;
-    //     descent = descentIn;
-    //     fit = fitIn;
-    //     xAlign = xAlignIn;
-    //     yAlign = yAlignIn;
-    //     xOffset = xOffsetIn;
-    //     yOffset = yOffsetIn;
-    //   } else if (Array.isArray(optionsOrContent)) {
-    //     [                                                    // $FlowFixMe
-    //       content, width, ascent, descent, fit,              // $FlowFixMe
-    //       xAlign, yAlign, xOffset, yOffset,
-    //     ] = optionsOrContent;
-    //   } else {
-    //     ({                                                   // $FlowFixMe
-    //       content, width, ascent, descent, fit,              // $FlowFixMe
-    //       xAlign, yAlign, xOffset, yOffset,
-    //     } = optionsOrContent);
-    //   }
-    //   return new Container(                                 // $FlowFixMe
-    //     this.contentToElement(content),                     // $FlowFixMe
-    //     width,                                              // $FlowFixMe
-    //     ascent,                                             // $FlowFixMe
-    //     descent,                                            // $FlowFixMe
-    //     fit,                                                // $FlowFixMe
-    //     xAlign,                                             // $FlowFixMe
-    //     yAlign,                                             // $FlowFixMe
-    //     xOffset,                                            // $FlowFixMe
-    //     yOffset,
-    //   );
-    // }
-
+    }
   }, {
     key: "pad",
     value: function pad(optionsOrContent) {
@@ -10206,80 +10121,7 @@ function () {
       heightToUse, // $FlowFixMe
       descentToUse, // $FlowFixMe
       inSizeToUse);
-    } // brac(
-    //   optionsOrContent: TypeBracketObject | TypeBracketArray | TypeEquationPhrase,
-    //   leftBracketString: string | null = null,
-    //   rightBracketString: string | null = null,
-    //   insideSpaceToContent: number | null = null,
-    //   outsideSpaceToContent: number | null = null,
-    //   useMinLineHeightForLine: boolean | null = null,
-    //   bracketHeightScale: number | null = null,
-    // ) {
-    //   let content;
-    //   let left;
-    //   let right;
-    //   let insideSpace;
-    //   let outsideSpace;
-    //   let useMinLineHeight;
-    //   let heightScale;
-    //   if (!(leftBracketString == null
-    //         && rightBracketString == null
-    //         && insideSpaceToContent == null
-    //         && outsideSpaceToContent == null
-    //         && useMinLineHeightForLine == null)
-    //   ) {
-    //     content = optionsOrContent;
-    //     left = leftBracketString;
-    //     right = rightBracketString;
-    //     insideSpace = insideSpaceToContent;
-    //     outsideSpace = outsideSpaceToContent;
-    //     useMinLineHeight = useMinLineHeightForLine;
-    //     heightScale = bracketHeightScale;
-    //   } else if (Array.isArray(optionsOrContent)) {
-    //     [                                                    // $FlowFixMe
-    //       content, left, right, insideSpace, outsideSpace,   // $FlowFixMe
-    //       useMinLineHeight, heightScale,
-    //     ] = optionsOrContent;
-    //   } else {
-    //     ({                                                   // $FlowFixMe
-    //       content, left, right, insideSpace, outsideSpace, useMinLineHeight, heightScale,
-    //     } = optionsOrContent);
-    //   }
-    //   let leftBracket = null;
-    //   if (left != null) {                                    // $FlowFixMe
-    //     leftBracket = getDiagramElement(this.elements, left);
-    //   }
-    //   let rightBracket = null;
-    //   if (right != null) {                                   // $FlowFixMe
-    //     rightBracket = getDiagramElement(this.elements, right);
-    //   }
-    //   let insideSpaceToUse;
-    //   if (insideSpace != null) {
-    //     insideSpaceToUse = insideSpace;
-    //   }
-    //   let outsideSpaceToUse;
-    //   if (outsideSpace != null) {
-    //     outsideSpaceToUse = outsideSpace;
-    //   }
-    //   let minLineHeight = this.fullLineHeight;
-    //   if (useMinLineHeight != null && useMinLineHeight === false) {
-    //     minLineHeight = null;
-    //   }
-    //   let heightScaleToUse;
-    //   if (heightScale != null) {
-    //     heightScaleToUse = heightScale;
-    //   }
-    //   return new Brackets(                                   // $FlowFixMe
-    //     this.contentToElement(content),                      // $FlowFixMe
-    //     leftBracket,                                         // $FlowFixMe
-    //     rightBracket,                                        // $FlowFixMe
-    //     insideSpaceToUse,                                    // $FlowFixMe
-    //     outsideSpaceToUse,
-    //     minLineHeight,                                       // $FlowFixMe
-    //     heightScaleToUse,
-    //   );
-    // }
-    // eslint-disable-next-line class-methods-use-this
+    } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "processBar",
@@ -10359,31 +10201,7 @@ function () {
       getDiagramElement(this.elements, symbol), 'bottom', // $FlowFixMe
       spaceToUse, null, null, null, null, null, // $FlowFixMe
       inSize);
-    } // $FlowFixMe
-    // topBar(...args) {
-    //   const [content, symbol, spaceToUse, inSize] = this.processBar(...args);
-    //   return new Bar(                                         // $FlowFixMe
-    //     this.contentToElement(content),                       // $FlowFixMe
-    //     getDiagramElement(this.elements, symbol),             // $FlowFixMe
-    //     spaceToUse,
-    //     0.03,
-    //     'top',             // $FlowFixMe
-    //     inSize,
-    //   );
-    // }
-    // // $FlowFixMe
-    // bottomBar(...args) {
-    //   const [content, symbol, spaceToUse, inSize] = this.processBar(...args);
-    //   return new Bar(                                         // $FlowFixMe
-    //     this.contentToElement(content),                       // $FlowFixMe
-    //     getDiagramElement(this.elements, symbol),             // $FlowFixMe
-    //     spaceToUse,
-    //     0.03,
-    //     'bottom',             // $FlowFixMe
-    //     inSize,
-    //   );
-    // }
-    // eslint-disable-next-line class-methods-use-this
+    } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "processComment",
@@ -10456,43 +10274,7 @@ function () {
       }
 
       return [content, comment, symbol, contentSpaceToUse, commentSpaceToUse, scaleToUse, includeInSizeToUse];
-    } // // $FlowFixMe
-    // bottomComment(...args) {
-    //   const [
-    //     content, comment, symbol,
-    //     contentSpaceToUse, commentSpaceToUse, scaleToUse,
-    //     inSize,
-    //   ] = this.processComment(...args);
-    //   let contentToUse;
-    //   if (symbol) {
-    //     contentToUse = new Bar(                                // $FlowFixMe
-    //       this.contentToElement(content),             // $FlowFixMe
-    //       getDiagramElement(this.elements, symbol),            // $FlowFixMe
-    //       contentSpaceToUse,                                   // $FlowFixMe
-    //       commentSpaceToUse,
-    //       'bottom',
-    //       inSize,
-    //     );
-    //   } else {
-    //     contentToUse = this.pad(                               // $FlowFixMe
-    //       content, 0, 0, contentSpaceToUse + commentSpaceToUse,
-    //     );
-    //   }
-    //   return this.annotate({                                   // $FlowFixMe
-    //     content: contentToUse,
-    //     withAnnotations: [                                     // $FlowFixMe
-    //       this.annotation({
-    //         annotation: comment,
-    //         relativeToContent: ['center', 'bottom'],
-    //         relativeToAnnotation: ['center', 'top'],
-    //         scale: scaleToUse,
-    //         // yOffset: commentSpaceToUse,
-    //       }),
-    //     ],                                                    // $FlowFixMe
-    //     inSize,
-    //   });
-    // }
-    // $FlowFixMe
+    } // $FlowFixMe
 
   }, {
     key: "bottomComment",
@@ -10536,42 +10318,6 @@ function () {
         inSize: inSize
       });
     } // $FlowFixMe
-    // topComment(...args) {
-    //   const [
-    //     content, comment, symbol,
-    //     contentSpaceToUse, commentSpaceToUse, scaleToUse,
-    //     inSize,
-    //   ] = this.processComment(...args);
-    //   let contentToUse;
-    //   if (symbol) {
-    //     contentToUse = new Bar(                                // $FlowFixMe
-    //       this.contentToElement(content),             // $FlowFixMe
-    //       getDiagramElement(this.elements, symbol),            // $FlowFixMe
-    //       contentSpaceToUse,                                   // $FlowFixMe
-    //       commentSpaceToUse,
-    //       'top',
-    //       inSize,
-    //     );
-    //   } else {
-    //     contentToUse = this.pad(                               // $FlowFixMe
-    //       content, contentSpaceToUse + commentSpaceToUse,
-    //     );
-    //   }
-    //   return this.annotate({                                   // $FlowFixMe
-    //     content: contentToUse,
-    //     withAnnotations: [                                     // $FlowFixMe
-    //       this.annotation({
-    //         annotation: comment,
-    //         relativeToContent: ['center', 'top'],
-    //         relativeToAnnotation: ['center', 'bottom'],
-    //         scale: scaleToUse,
-    //         // yOffset: commentSpaceToUse,
-    //       }),
-    //     ],                                                    // $FlowFixMe
-    //     inSize,
-    //   });
-    // }
-    // $FlowFixMe
 
   }, {
     key: "topComment",
@@ -10763,7 +10509,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Symbols_Radical__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Symbols/Radical */ "./src/js/diagram/DiagramElements/Equation/Symbols/Radical.js");
 /* harmony import */ var _Symbols_Brace__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
 /* harmony import */ var _Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
-/* harmony import */ var _Symbols_Bar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
+/* harmony import */ var _Symbols_AngleBracket__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Symbols/AngleBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/AngleBracket.js");
+/* harmony import */ var _Symbols_Bar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -10775,6 +10522,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import { DiagramElementCollection } from '../../Element';
 
  // import SuperSub from './Elements/SuperSub';
+
 
 
 
@@ -10818,41 +10566,31 @@ function () {
       if (name === 'bracket') {
         // $FlowFixMe
         return this.bracket(options);
-      } // if (name === 'bracketNew') {
-      //   return this.bracketNew(options);
-      // }
-
+      }
 
       if (name === 'squareBracket') {
         // $FlowFixMe
         return this.squareBracket(options);
-      } // if (name === 'squareBracketNew') {
-      //   return this.squareBracketNew(options);
-      // }
-
+      }
 
       if (name === 'brace') {
         // $FlowFixMe
         return this.brace(options);
-      } // if (name === 'braceNew') {
-      //   return this.braceNew(options);
-      // }
-
+      }
 
       if (name === 'bar') {
         // $FlowFixMe
         return this.bar(options);
-      } // if (name === 'bar') {
-      //   return this.bar(options);
-      // }
-      // if (name === 'roundedSquareBracket') {
-      //   return this.roundedSquareBracket(options);
-      // }
-
+      }
 
       if (name === 'box') {
         // $FlowFixMe
         return this.box(options);
+      }
+
+      if (name === 'angleBracket') {
+        // $FlowFixMe
+        return this.angleBracket(options);
       }
 
       if (name === 'radical') {
@@ -10951,47 +10689,7 @@ function () {
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
       return new _Symbols_Integral__WEBPACK_IMPORTED_MODULE_3__["default"](this.shapes.webgl, optionsToUse.color, optionsToUse.numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('integral').scale(1, 1).translate(0, 0), this.shapes.limits);
-    } // bracket(options: {
-    //   side?: 'left' | 'right' | 'top' | 'bottom',
-    //   numLines?: number,
-    //   color?: Array<number>,
-    // }) {
-    //   const defaultOptions = {
-    //     side: 'left',
-    //     numLines: 1,
-    //     color: this.defaultColor,
-    //   };
-    //   const optionsToUse = joinObjects(defaultOptions, options);
-    //   return new Bracket(
-    //     this.shapes.webgl,
-    //     optionsToUse.color,
-    //     optionsToUse.side,
-    //     optionsToUse.numLines,
-    //     new Transform('bracket').scale(1, 1).translate(0, 0),
-    //     this.shapes.limits,
-    //   );
-    // }
-    // bar(options: {
-    //   side?: 'left' | 'right' | 'top' | 'bottom',
-    //   numLines?: number,
-    //   color?: Array<number>,
-    // }) {
-    //   const defaultOptions = {
-    //     side: 'top',
-    //     numLines: 1,
-    //     color: this.defaultColor,
-    //   };
-    //   const optionsToUse = joinObjects(defaultOptions, options);
-    //   return new Bar(
-    //     this.shapes.webgl,
-    //     optionsToUse.color,
-    //     optionsToUse.side,
-    //     optionsToUse.numLines,
-    //     new Transform('bar').scale(1, 1).translate(0, 0),
-    //     this.shapes.limits,
-    //   );
-    // }
-
+    }
   }, {
     key: "bracket",
     value: function bracket(options) {
@@ -11056,7 +10754,7 @@ function () {
         staticSize: null
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_Bar__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse.side, optionsToUse.staticSize, {
+      return new _Symbols_Bar__WEBPACK_IMPORTED_MODULE_10__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse.side, optionsToUse.staticSize, {
         lineWidth: optionsToUse.lineWidth
       }).symbol;
     }
@@ -11078,6 +10776,22 @@ function () {
         endLength: optionsToUse.endLength,
         radius: optionsToUse.radius,
         sides: optionsToUse.sides
+      }).symbol;
+    }
+  }, {
+    key: "angleBracket",
+    value: function angleBracket(options) {
+      var defaultOptions = {
+        side: 'left',
+        lineWidth: 0.01,
+        width: 0.05,
+        color: this.defaultColor,
+        staticSize: null
+      };
+      var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
+      return new _Symbols_AngleBracket__WEBPACK_IMPORTED_MODULE_9__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('bar').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse.side, optionsToUse.staticSize, {
+        lineWidth: optionsToUse.lineWidth,
+        endLength: optionsToUse.width
       }).symbol;
     } // squareBracket(options: {
     //   side?: 'left' | 'right' | 'top' | 'bottom',
@@ -11625,6 +11339,108 @@ function (_HTMLElements) {
 
   return HTMLEquation;
 }(HTMLElements);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/AngleBracket.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/AngleBracket.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Bar; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Bracket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bracket.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Bar =
+/*#__PURE__*/
+function (_Bracket) {
+  _inherits(Bar, _Bracket);
+
+  function Bar() {
+    _classCallCheck(this, Bar);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Bar).apply(this, arguments));
+  }
+
+  _createClass(Bar, [{
+    key: "getWidth",
+    // eslint-disable-next-line class-methods-use-this
+    value: function getWidth() {
+      // $FlowFixMe
+      return function (type, options, height) {
+        var width = options.width;
+
+        if (type === 'static') {
+          return height * width;
+        }
+
+        return width;
+      };
+    } //                     w
+    //                  |<--->|
+    //
+    //                       /
+    //                      /
+    //                     /
+    //                    /
+    //                   /
+    //                  /
+    //                  \
+    //                   \
+    //                    \
+    //                     \
+    //                      \
+    //                       \
+    //                        \
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getPoints",
+    value: function getPoints() {
+      // $FlowFixMe
+      return function (options, height) {
+        var lineWidth = options.lineWidth,
+            width = options.width;
+        var line = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width, height / 2));
+        var theta = Math.acos(lineWidth / line.distance);
+        var beta = Math.PI / 2 - theta;
+        var alpha = line.ang + beta;
+        var tipWidth = lineWidth / Math.sin(alpha);
+        var leftPoints = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width - tipWidth, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, height / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width - tipWidth, height)];
+        var rightPoints = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tipWidth, height / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width, height)];
+        return [leftPoints, rightPoints, width, height];
+      };
+    }
+  }]);
+
+  return Bar;
+}(_Bracket__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
