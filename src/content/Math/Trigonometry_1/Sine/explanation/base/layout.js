@@ -32,7 +32,7 @@ export default function diagramLayout() {
       opposite: { text: 'opposite', color: colors.components },
       vertical: { text: 'vertical', color: colors.components },
       brace: {
-        symbol: 'braceNew', side: 'top', color: colors.working, numLines: 3,
+        symbol: 'brace', side: 'top', color: colors.working, numLines: 3,
       },
     },
     forms: {
@@ -43,7 +43,7 @@ export default function diagramLayout() {
       },
       '0a': {
         content: {
-          topCommentNew: {
+          topComment: {
             content: 'vertical',
             comment: 'opposite',
             symbol: 'brace',
@@ -298,20 +298,20 @@ export default function diagramLayout() {
         'AB': 'AB',
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
-        lb: { symbol: 'bracketNew', side: 'left', lineWidth: 0.012, staticSize: false },
-        rb: { symbol: 'bracketNew', side: 'right' },
-        lb1: { symbol: 'bracketNew', side: 'left' },
-        rb1: { symbol: 'bracketNew', side: 'right' },
+        lb: { symbol: 'bracket', side: 'left', lineWidth: 0.012, staticSize: false },
+        rb: { symbol: 'bracket', side: 'right' },
+        lb1: { symbol: 'bracket', side: 'left' },
+        rb1: { symbol: 'bracket', side: 'right' },
         v: { symbol: 'vinculum' },
         v1: { symbol: 'vinculum' },
         v2: { symbol: 'vinculum' },
         opp: { text: 'opposite', color: colors.components },
         angle: { text: 'angle', color: colors.angles },
         brace: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
         brace1: {
-          symbol: 'braceNew', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
         box: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
         // strike: { symbol: 'xStrike', color: colors.working },
@@ -329,7 +329,7 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    bracNew: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
+                    brac: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
                     // space: number = 0.03,
                     // overhang: number | null = 0,
                     // barLength: number | null = null,
@@ -339,7 +339,7 @@ export default function diagramLayout() {
                     // bottom: number | null = null,
                     // inSize: boolean = true,
                     // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
-                    // topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05],
+                    // topComment: ['angle', 'opp', 'lb', 0.05, 0.05],
                     // annotate: {
                     //   content: 'angle',
                     //   withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
@@ -362,7 +362,7 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    // bracNew: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
+                    // brac: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
                     // space: number = 0.03,
                     // overhang: number | null = 0,
                     // barLength: number | null = null,
@@ -373,7 +373,7 @@ export default function diagramLayout() {
                     // inSize: boolean = true,
                     // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
                     bottomComment: [
-                      { topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05] },
+                      { topComment: ['angle', 'opp', 'lb', 0.05, 0.05] },
                       'sine',
                       'rb',
                     ],
@@ -394,8 +394,8 @@ export default function diagramLayout() {
             ],
           }],
           // content: ['vert', 'equals', 'func', {
-          //   bracNew: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.0, 0.2, 0.06, 0.02],
-          //   // bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
+          //   brac: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.0, 0.2, 0.06, 0.02],
+          //   // brac: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
           // }],
           alignment: {
             fixTo: 'equals',

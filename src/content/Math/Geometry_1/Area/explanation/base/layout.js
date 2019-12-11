@@ -631,7 +631,7 @@ export default function diagramLayout() {
     },
   });
   const brace = () => ({
-    symbol: 'braceNew', side: 'bottom', color: colors.gridLight,
+    symbol: 'brace', side: 'bottom', color: colors.gridLight,
   });
 
   const eqn = {

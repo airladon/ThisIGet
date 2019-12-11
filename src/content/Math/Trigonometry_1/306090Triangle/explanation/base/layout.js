@@ -292,7 +292,7 @@ export default function diagramLayout() {
   });
 
   const brac = (content, lb, rb) => ({
-    bracNew: [content, lb, rb],
+    brac: [content, lb, rb],
   });
 
   const strike = (content, strikeSymbol) => ({
@@ -339,13 +339,13 @@ export default function diagramLayout() {
         v3: { symbol: 'vinculum' },
         vb: { symbol: 'vinculum', color: colors.sides },
         brace1: {
-          symbol: 'braceNew', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
         brace2: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
-        lb: { symbol: 'bracketNew', side: 'left', width: 0.06 },
-        rb: { symbol: 'bracketNew', side: 'right', width: 0.06 },
+        lb: { symbol: 'bracket', side: 'left', width: 0.06 },
+        rb: { symbol: 'bracket', side: 'right', width: 0.06 },
         strike1: { symbol: 'xStrike', color: colors.working },
         strike2: { symbol: 'xStrike', color: colors.working },
         r1: { symbol: 'radical' },
@@ -369,7 +369,7 @@ export default function diagramLayout() {
         '1': [
           sq('H', '_22', 0.02), 'plus',
           {
-            topCommentNew: [
+            topComment: [
               sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
               frac(sq('A3', '_24'), '_4', 'v2'),
               'brace1',
@@ -384,14 +384,14 @@ export default function diagramLayout() {
         ],
         '3': [
           {
-            topCommentNew: [
+            topComment: [
               [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
               ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
             ],
           },
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
               contentSpace: 0.14,
@@ -401,7 +401,7 @@ export default function diagramLayout() {
         ],
         '4': [
           {
-            topCommentNew: [
+            topComment: [
               [
                 sq('H', '_22', 0.02), 'plus',
                 strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
@@ -411,7 +411,7 @@ export default function diagramLayout() {
           },
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
               contentSpace: 0.14,
@@ -429,7 +429,7 @@ export default function diagramLayout() {
           sq('H', '_22', 0.02),
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: [
                 sq('A1', '_21'),
                 'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
@@ -451,7 +451,7 @@ export default function diagramLayout() {
         ],
         '9': [
           {
-            topCommentNew: {
+            topComment: {
               content: root(sq('H', '_22', 0.02), 'r1'),
               comment: 'H2',
               symbol: 'brace1',

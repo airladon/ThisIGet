@@ -569,29 +569,29 @@ export default function diagramLayout() {
     equals2: ' = ',
     equals3: ' = ',
     brace0: {
-      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace1: {
-      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace2: {
-      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace3: {
-      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace4: {
-      symbol: 'braceNew', side: 'bottom', numLines: 4, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 4, color: colors.grey,
     },
     brace5: {
-      symbol: 'braceNew', side: 'bottom', numLines: 4, color: colors.grey,
+      symbol: 'brace', side: 'bottom', numLines: 4, color: colors.grey,
     },
-    lb1: { symbol: 'bracketNew', side: 'left' },
-    lb2: { symbol: 'bracketNew', side: 'left' },
-    rb1: { symbol: 'bracketNew', side: 'right' },
-    rb2: { symbol: 'bracketNew', side: 'right' },
-    lb3: { symbol: 'bracketNew', side: 'left' },
-    rb3: { symbol: 'bracketNew', side: 'right' },
+    lb1: { symbol: 'bracket', side: 'left' },
+    lb2: { symbol: 'bracket', side: 'left' },
+    rb1: { symbol: 'bracket', side: 'right' },
+    rb2: { symbol: 'bracket', side: 'right' },
+    lb3: { symbol: 'bracket', side: 'left' },
+    rb3: { symbol: 'bracket', side: 'right' },
     'x0': { symbol: 'xStrike', color: colors.grey },
     'x1': { symbol: 'xStrike', color: colors.grey },
     'x2': { symbol: 'xStrike', color: colors.grey },
@@ -621,7 +621,7 @@ export default function diagramLayout() {
   const strike = (content, x) => ({ strike: [content, x] });
   const sub = (content, s) => ({ sub: [content, ['  ', s]] });
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
-  const brac = (content, lb, rb) => ({ bracNew: [content, lb, rb] });
+  const brac = (content, lb, rb) => ({ brac: [content, lb, rb] });
 
   const eqn = (name, y, defaultFormSeries) => ({
     name,
@@ -1174,8 +1174,8 @@ export default function diagramLayout() {
     r_1: { text: 'r', color: colors.highlight },
     r_2: { text: 'r', color: colors.highlight },
     r_3: { text: 'r', color: colors.highlight },
-    lb: { symbol: 'bracketNew', side: 'left', numLines: 1 },
-    rb: { symbol: 'bracketNew', side: 'right', numLines: 1 },
+    lb: { symbol: 'bracket', side: 'left', numLines: 1 },
+    rb: { symbol: 'bracket', side: 'right', numLines: 1 },
     comma_0: ',      ',
     comma_1: ',      ',
   };
@@ -1196,7 +1196,7 @@ export default function diagramLayout() {
         '0': ['B', 'equals', 'B1', 'plus_0', 'B2'],
         '1': [
           'r_0', 'B1_1', 'plus_0', 'r_1', 'B2_1', 'equals',
-          'r_3', { bracNew: [['B1', 'plus_1', 'B2'], 'lb', 'rb'] },
+          'r_3', { brac: [['B1', 'plus_1', 'B2'], 'lb', 'rb'] },
           'equals_1',
           'r_2', 'B_1',
         ],

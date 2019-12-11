@@ -602,14 +602,14 @@ export default function diagramLayout() {
         _2: '2 ',
         equals: '  =  ',
         v: { symbol: 'vinculum' },
-        brace: { symbol: 'braceNew', side: 'top', numLines: 3 },
+        brace: { symbol: 'brace', side: 'top', numLines: 3 },
       },
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
       forms: {
         '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
         '1': ['circumference', 'equals', 'pi', 'diameter'],
         '2': ['circumference', 'equals', 'pi', {
-          topCommentNew: ['diameter', ['_2', 'radius'], 'brace'],
+          topComment: ['diameter', ['_2', 'radius'], 'brace'],
         }],
         '3': {
           content: ['circumference', 'equals', 'pi', '_2', 'radius'],

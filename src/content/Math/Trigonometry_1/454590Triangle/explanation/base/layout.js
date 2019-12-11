@@ -260,10 +260,6 @@ export default function diagramLayout() {
   //   frac: [num, den, v, scale],
   // });
 
-  // const brac = (content, lb, rb) => ({
-  //   brac: [content, lb, rb],
-  // });
-
   // const strike = (content, strike) => ({
   //   strike: [content, strike],
   // });
@@ -297,10 +293,10 @@ export default function diagramLayout() {
         _27: '2',
         plus: ' + ',
         brace1: {
-          symbol: 'braceNew', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
         brace2: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
         // lb: { symbol: 'bracket', side: 'left', numLines: 2 },
         // rb: { symbol: 'bracket', side: 'right', numLines: 2 },
@@ -326,7 +322,7 @@ export default function diagramLayout() {
         '1': [
           sq('D1', '_21', 0.02), 'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: [sq('A1', '_22', 0.02), 'plus', sq('A2', '_23', 0.02)],
               comment: ['_24', sq('A3', '_25', 0.02)],
               symbol: 'brace1',
@@ -352,7 +348,7 @@ export default function diagramLayout() {
         ],
         '6': [
           {
-            topCommentNew: {
+            topComment: {
               content: root(sq('D1', '_21', 0.02), 'r1'),
               comment: 'D2',
               symbol: 'brace1',
@@ -360,7 +356,7 @@ export default function diagramLayout() {
           },
           'equals', root('_26', 'r3'),
           {
-            topCommentNew: {
+            topComment: {
               content: root(sq('A4', '_27', 0.02), 'r4'),
               comment: 'A1',
               symbol: 'brace2',
