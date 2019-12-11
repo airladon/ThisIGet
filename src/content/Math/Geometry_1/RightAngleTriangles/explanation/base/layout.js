@@ -430,8 +430,8 @@ export default function diagramLayout() {
     largeSquare: { text: 'large square', color: colors.sides },
     smallSquare: { text: 'small square', color: colors.sides },
     triangle: { text: 'triangle', color: colors.sides },
-    lb: { symbol: 'bracket', side: 'left' },
-    rb: { symbol: 'bracket', side: 'right' },
+    lb: { symbol: 'bracketNew', side: 'left' },
+    rb: { symbol: 'bracketNew', side: 'right' },
     A: { color: colors.sides },
     B: { color: colors.sides },
     _A: { text: 'A', color: colors.sides },
@@ -542,7 +542,7 @@ export default function diagramLayout() {
           content: [
             top(
               AreaLSquare,
-              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
               'brace',
             ),
             'equals', '_4', 'mul',
@@ -559,7 +559,7 @@ export default function diagramLayout() {
         // ////////////////////////////////////////////////////////////
         '1': {
           content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
             'equals',
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
@@ -569,7 +569,7 @@ export default function diagramLayout() {
         '1a': {
           content: [
             top(
-              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
               [
                 sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
                 '_plus', sup('___B', '_2d'),

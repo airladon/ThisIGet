@@ -151,10 +151,10 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, content);
     content = { setContent: 'We can |rearrange| the right hand side to separate the height |h|.' };
     this.addSectionEqnStep({ eqn, from: '2', to: '2' }, common, content);
-    this.addSectionEqnStep({
-      eqn, from: '2', to: '3', duration: 0,
-    }, common, content);
-    this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, content);
+    // this.addSectionEqnStep({
+    //   eqn, from: '2', to: '4', duration: 0,
+    // }, common, content);
+    this.addSectionEqnStep({ eqn, from: '2', to: '4' }, common, content);
     this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, content);
     content = {
       setContent: 'Sides |B| and |C| form one side of the triangle. As it\'s the bottom side, we call it the |base|.',

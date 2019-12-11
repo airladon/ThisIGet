@@ -292,7 +292,7 @@ export default function diagramLayout() {
   });
 
   const brac = (content, lb, rb) => ({
-    brac: [content, lb, rb],
+    bracNew: [content, lb, rb],
   });
 
   const strike = (content, strikeSymbol) => ({
@@ -344,8 +344,8 @@ export default function diagramLayout() {
         brace2: {
           symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
-        lb: { symbol: 'bracket', side: 'left', numLines: 2 },
-        rb: { symbol: 'bracket', side: 'right', numLines: 2 },
+        lb: { symbol: 'bracketNew', side: 'left', width: 0.06 },
+        rb: { symbol: 'bracketNew', side: 'right', width: 0.06 },
         strike1: { symbol: 'xStrike', color: colors.working },
         strike2: { symbol: 'xStrike', color: colors.working },
         r1: { symbol: 'radical' },

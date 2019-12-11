@@ -328,8 +328,8 @@ export default function diagramLayout() {
         b2: {
           symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
-        lb: { symbol: 'bracket', side: 'left' },
-        rb: { symbol: 'bracket', side: 'right' },
+        lb: { symbol: 'bracketNew', side: 'left' },
+        rb: { symbol: 'bracketNew', side: 'right' },
         strike1: { symbol: 'xStrike', color: colors.working },
         strike2: { symbol: 'xStrike', color: colors.working },
       },
@@ -348,7 +348,7 @@ export default function diagramLayout() {
           'Area', 'equals',
           top(
             { sub: ['Area1', 'rect'] },
-            [{ brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
             'b1',
           ),
           'plus',
@@ -361,7 +361,7 @@ export default function diagramLayout() {
         ],
         '2': [
           'Area', 'equals',
-          { brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1',
+          { bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1',
           'plus',
           '_2', 'mul',
           { frac: ['__1', '__2', 'v', 0.6] }, 'S2', 'H2',
@@ -369,7 +369,7 @@ export default function diagramLayout() {
         '3': [
           'Area', 'equals',
           top(
-            [{ brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
             ['A3', 'H3', 'minus2', 'S3', 'H4'],
             'b1',
           ),

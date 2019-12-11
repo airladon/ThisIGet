@@ -376,8 +376,8 @@ export default function diagramLayout() {
         sBrace: {
           symbol: 'braceNew', side: 'top', numLines: 1, color: colors.disabled,
         },
-        lb: { symbol: 'bracket', side: 'left' },
-        rb: { symbol: 'bracket', side: 'right' },
+        lb: { symbol: 'bracketNew', side: 'left' },
+        rb: { symbol: 'bracketNew', side: 'right' },
         s: { symbol: 'xStrike', color: colors.disabled },
         _s: { symbol: 'xStrike', color: colors.disabled },
         base: { color: colors.sides },
@@ -395,17 +395,17 @@ export default function diagramLayout() {
           top(sub('__Area', 'trihc'), [__half, '__h', 'C'], '_brace'),
         ],
         '2': [
-          sub('Area', 'tri'), 'equals', '    ', _half, ' ', '_h', ' ', 'B',
+          sub('Area', 'tri'), 'equals', '   ', _half, ' ', '_h', ' ', 'B',
           'plus', __half, ' ', '__h', ' ', 'C',
         ],
-        '3': [
-          sub('Area', 'tri'), 'equals',
-          { brac: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb'] },
-        ],
+        // '2': [
+        //   sub('Area', 'tri'), 'equals', '   ',
+        //   { bracNew: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb', false] },
+        // ],
         '4': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
-            brac: [
+            bracNew: [
               [
                 { strike: [[_half, ' ', '_h'], 's'] }, ' ', 'B',
                 'plus',
@@ -417,11 +417,11 @@ export default function diagramLayout() {
         ],
         '5': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { brac: [['B', 'plus', 'C'], 'lb', 'rb'] },
+          { bracNew: [['B', 'plus', 'C'], 'lb', 'rb'] },
         ],
         '6': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ brac: [['B', 'plus', 'C'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ bracNew: [['B', 'plus', 'C'], 'lb', 'rb'] }, 'base', 'brace'),
         ],
         '7': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '8': [
@@ -450,17 +450,17 @@ export default function diagramLayout() {
           top(sub('_Area', 'trihb'), [_half, '_h', 'B'], '_brace'),
         ],
         '22': [
-          sub('Area', 'tri'), 'equals', '    ', __half, ' ', '__h', ' ', 'C',
+          sub('Area', 'tri'), 'equals', '   ', __half, ' ', '__h', ' ', 'C',
           'minus', _half, ' ', '_h', ' ', 'B',
         ],
         '23': [
-          sub('Area', 'tri'), 'equals',
-          { brac: [[__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'lb', 'rb'] },
+          sub('Area', 'tri'), 'equals', '   ',
+          { bracNew: [[__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'lb', 'rb', false] },
         ],
         '24': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
-            brac: [
+            bracNew: [
               [
                 { strike: [[__half, ' ', '__h'], 's'] }, ' ', 'C',
                 'minus',
@@ -472,11 +472,11 @@ export default function diagramLayout() {
         ],
         '25': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { brac: [['C', 'minus', 'B'], 'lb', 'rb'] },
+          { bracNew: [['C', 'minus', 'B'], 'lb', 'rb'] },
         ],
         '26': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ brac: [['C', 'minus', 'B'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ bracNew: [['C', 'minus', 'B'], 'lb', 'rb'] }, 'base', 'brace'),
         ],
         '27': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '28': [

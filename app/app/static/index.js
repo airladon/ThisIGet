@@ -10299,7 +10299,69 @@ function () {
       relativeToAnnotationH, // $FlowFixMe
       relativeToAnnotationV, // $FlowFixMe
       scaleToUse, xOffset, yOffset);
-    }
+    } // container(
+    //   optionsOrContent: TypeContainerObject | TypeContainerArray
+    //                     | TypeEquationPhrase,
+    //   widthIn: number | null = null,
+    //   ascentIn: number | null = null,
+    //   descentIn: number | null = null,
+    //   fitIn: boolean | null = null,
+    //   xAlignIn: 'center' | 'left' | 'right' | number = null,
+    //   yAlignIn: 'middle' | 'bottom' | 'top' | number = null,
+    //   xOffsetIn: number | null = null,
+    //   yOffsetIn: number | null = null,
+    // ) {
+    //   let content;
+    //   let width;
+    //   let ascent;
+    //   let descent;
+    //   let fit;
+    //   let xAlign;
+    //   let yAlign;
+    //   let xOffset;
+    //   let yOffset;
+    //   if (!(widthIn == null
+    //         && ascentIn == null
+    //         && descentIn == null
+    //         && fitIn == null
+    //         && xAlignIn == null
+    //         && yAlignIn == null
+    //         && xOffsetIn == null
+    //         && yOffsetIn == null)
+    //   ) {
+    //     content = optionsOrContent;
+    //     width = widthIn;
+    //     ascent = ascentIn;
+    //     descent = descentIn;
+    //     fit = fitIn;
+    //     xAlign = xAlignIn;
+    //     yAlign = yAlignIn;
+    //     xOffset = xOffsetIn;
+    //     yOffset = yOffsetIn;
+    //   } else if (Array.isArray(optionsOrContent)) {
+    //     [                                                    // $FlowFixMe
+    //       content, width, ascent, descent, fit,              // $FlowFixMe
+    //       xAlign, yAlign, xOffset, yOffset,
+    //     ] = optionsOrContent;
+    //   } else {
+    //     ({                                                   // $FlowFixMe
+    //       content, width, ascent, descent, fit,              // $FlowFixMe
+    //       xAlign, yAlign, xOffset, yOffset,
+    //     } = optionsOrContent);
+    //   }
+    //   return new Container(                                 // $FlowFixMe
+    //     this.contentToElement(content),                     // $FlowFixMe
+    //     width,                                              // $FlowFixMe
+    //     ascent,                                             // $FlowFixMe
+    //     descent,                                            // $FlowFixMe
+    //     fit,                                                // $FlowFixMe
+    //     xAlign,                                             // $FlowFixMe
+    //     yAlign,                                             // $FlowFixMe
+    //     xOffset,                                            // $FlowFixMe
+    //     yOffset,
+    //   );
+    // }
+
   }, {
     key: "pad",
     value: function pad(optionsOrContent) {
@@ -10490,15 +10552,15 @@ function () {
     value: function bracNew(optionsOrContent) {
       var leftBracketString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var rightBracketString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var insideSpaceToContent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var outsideSpaceToContent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var topSpaceToContent = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-      var bottomSpaceToContent = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-      var minimumContentHeight = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-      var minimumContentDescent = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
-      var forceHeight = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
-      var forceDescent = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
-      var inSizeInput = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : null;
+      var inSizeInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var insideSpaceToContent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var outsideSpaceToContent = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var topSpaceToContent = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+      var bottomSpaceToContent = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+      var minimumContentHeight = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+      var minimumContentDescent = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+      var forceHeight = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+      var forceDescent = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : null;
       var content;
       var left;
       var right;
@@ -10532,20 +10594,21 @@ function () {
         content = _optionsOrContent9[0];
         left = _optionsOrContent9[1];
         right = _optionsOrContent9[2];
-        insideSpace = _optionsOrContent9[3];
-        outsideSpace = _optionsOrContent9[4];
+        inSize = _optionsOrContent9[3];
+        insideSpace = _optionsOrContent9[4];
+        outsideSpace = _optionsOrContent9[5];
         // $FlowFixMe
-        topSpace = _optionsOrContent9[5];
-        bottomSpace = _optionsOrContent9[6];
-        minContentHeight = _optionsOrContent9[7];
-        minContentDescent = _optionsOrContent9[8];
-        height = _optionsOrContent9[9];
-        descent = _optionsOrContent9[10];
-        inSize = _optionsOrContent9[11];
+        topSpace = _optionsOrContent9[6];
+        bottomSpace = _optionsOrContent9[7];
+        minContentHeight = _optionsOrContent9[8];
+        minContentDescent = _optionsOrContent9[9];
+        height = _optionsOrContent9[10];
+        descent = _optionsOrContent9[11];
       } else {
         content = optionsOrContent.content;
         left = optionsOrContent.left;
         right = optionsOrContent.right;
+        inSize = optionsOrContent.inSize;
         insideSpace = optionsOrContent.insideSpace;
         outsideSpace = optionsOrContent.outsideSpace;
         topSpace = optionsOrContent.topSpace;
@@ -10554,7 +10617,6 @@ function () {
         minContentDescent = optionsOrContent.minContentDescent;
         height = optionsOrContent.height;
         descent = optionsOrContent.descent;
-        inSize = optionsOrContent.inSize;
       }
 
       var leftBracket = null;
@@ -10626,9 +10688,7 @@ function () {
       }
 
       return new _Elements_BracketsNew__WEBPACK_IMPORTED_MODULE_8__["BracketsNew"]( // $FlowFixMe
-      this.contentToElement(content), // $FlowFixMe
-      leftBracket, // $FlowFixMe
-      rightBracket, // $FlowFixMe
+      this.contentToElement(content), leftBracket, rightBracket, // $FlowFixMe
       insideSpaceToUse, // $FlowFixMe
       outsideSpaceToUse, // $FlowFixMe
       topSpaceToUse, // $FlowFixMe
@@ -11460,7 +11520,7 @@ function () {
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
 
       if (optionsToUse.width == null) {
-        optionsToUse.width = optionsToUse.lineWidth * 4.2;
+        optionsToUse.width = optionsToUse.lineWidth * 2.5;
       }
 
       if (optionsToUse.tipWidth == null) {

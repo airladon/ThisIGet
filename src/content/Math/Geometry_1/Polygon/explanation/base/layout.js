@@ -295,13 +295,13 @@ export default function diagramLayout() {
         m3: '-',
         m4: '-',
         lb: {
-          symbol: 'bracket', side: 'left', numLines: 1,
+          symbol: 'bracketNew', side: 'left',
         },
         rb: {
-          symbol: 'bracket', side: 'right', numLines: 1,
+          symbol: 'bracketNew', side: 'right',
         },
         brace: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'braceNew', side: 'top', color: colors.working,
         },
         box: {
           symbol: 'box', color: colors.angles, width: 0.008,
@@ -380,7 +380,7 @@ export default function diagramLayout() {
         '6': {
           box: {
             content: ['tot1', 'equals', {
-              brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+              bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
             }, 'times', '_180'],
             symbol: 'box2',
             space: 0.2,
@@ -388,14 +388,14 @@ export default function diagramLayout() {
         },
         '7': [
           'tot1', 'equals', {
-            brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+            bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
           }, 'times', '_180',
         ],
         '8': [
           'angle', 'equals', {
             frac: {
               numerator: [
-                { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                { bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
                 'times', '_180',
               ],
               denominator: 'n2',
@@ -409,7 +409,7 @@ export default function diagramLayout() {
               numerator: {
                 topCommentNew: {
                   content: [
-                    { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                    { bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
                     'times', '_180',
                   ],
                   comment: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],

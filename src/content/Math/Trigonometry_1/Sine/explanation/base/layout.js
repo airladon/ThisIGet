@@ -295,12 +295,13 @@ export default function diagramLayout() {
         'plus1': '  +  ',
         'plus2': '  +  ',
         'sine': { text: 'sine', style: 'normal' },
+        'AB': 'AB',
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
-        lb: { symbol: 'braceNew', side: 'bottom', lineWidth: 0.012, staticSize: false },
-        rb: { symbol: 'braceNew', side: 'bottom' },
-        lb1: { symbol: 'bracket', side: 'left' },
-        rb1: { symbol: 'bracket', side: 'right' },
+        lb: { symbol: 'bracketNew', side: 'left', lineWidth: 0.012, staticSize: false },
+        rb: { symbol: 'bracketNew', side: 'right' },
+        lb1: { symbol: 'bracketNew', side: 'left' },
+        rb1: { symbol: 'bracketNew', side: 'right' },
         v: { symbol: 'vinculum' },
         v1: { symbol: 'vinculum' },
         v2: { symbol: 'vinculum' },
@@ -328,7 +329,7 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    // bracNew: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
+                    bracNew: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
                     // space: number = 0.03,
                     // overhang: number | null = 0,
                     // barLength: number | null = null,
@@ -338,7 +339,7 @@ export default function diagramLayout() {
                     // bottom: number | null = null,
                     // inSize: boolean = true,
                     // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
-                    topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05],
+                    // topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05],
                     // annotate: {
                     //   content: 'angle',
                     //   withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
