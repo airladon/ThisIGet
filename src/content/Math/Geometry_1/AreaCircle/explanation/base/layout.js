@@ -251,7 +251,7 @@ export default function diagramLayout() {
       content,
       comment: commentText,
       symbol,
-      includeInSize: false,
+      inSize: false,
     },
   });
   const half = { frac: ['_1', '_2', 'v', 0.6] };

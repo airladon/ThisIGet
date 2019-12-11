@@ -463,13 +463,13 @@ export default function diagramLayout() {
     mul: ' \u00D7 ',
     v: { symbol: 'vinculum' },
     'brace': {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
+      symbol: 'braceNew', side: 'bottom', color: colors.description,
     },
     '_brace': {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
+      symbol: 'braceNew', side: 'bottom', color: colors.description,
     },
     '__brace': {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
+      symbol: 'braceNew', side: 'bottom', color: colors.description,
     },
     'x': { symbol: 'xStrike', color: colors.description },
     '_x': { symbol: 'xStrike', color: colors.description },
@@ -480,7 +480,7 @@ export default function diagramLayout() {
       content,
       comment: commentText,
       symbol,
-      includeInSize: false,
+      inSize: false,
     },
   });
   const AreaTri = {

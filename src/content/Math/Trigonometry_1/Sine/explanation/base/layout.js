@@ -297,8 +297,8 @@ export default function diagramLayout() {
         'sine': { text: 'sine', style: 'normal' },
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
-        lb: { symbol: 'squareBracketNew', side: 'left', lineWidth: 0.01, endLength: 0.03 },
-        rb: { symbol: 'squareBracketNew', side: 'right' },
+        lb: { symbol: 'braceNew', side: 'bottom', lineWidth: 0.012, staticSize: false },
+        rb: { symbol: 'braceNew', side: 'bottom' },
         lb1: { symbol: 'bracket', side: 'left' },
         rb1: { symbol: 'bracket', side: 'right' },
         v: { symbol: 'vinculum' },
@@ -307,10 +307,10 @@ export default function diagramLayout() {
         opp: { text: 'opposite', color: colors.components },
         angle: { text: 'angle', color: colors.angles },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
         brace1: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'braceNew', side: 'top', numLines: 2, color: colors.working,
         },
         box: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
         // strike: { symbol: 'xStrike', color: colors.working },
@@ -328,9 +328,23 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02, null, null, null, null, true],
+                    // bracNew: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
+                    // space: number = 0.03,
+                    // overhang: number | null = 0,
+                    // barLength: number | null = null,
+                    // left: number | null = null,
+                    // right: number | null = null,
+                    // top: number | null = null,
+                    // bottom: number | null = null,
+                    // inSize: boolean = true,
+                    // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
+                    topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05],
+                    // annotate: {
+                    //   content: 'angle',
+                    //   withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+                    // },
                   },
-                  0.1, 0.1, 0.1, 0.1,
+                  0, 0, 0, 0,
                 ],
               },
               'box',
@@ -343,137 +357,173 @@ export default function diagramLayout() {
         },
         'asd': {
           content: ['vert', 'equals', 'func', {
-            bracNew: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
-            // bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
-          }],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '1': {
-          content: [{
-            topComment: {
-              content: 'vert',
-              comment: 'opp',
-              symbol: 'brace',
-            },
-          }, 'equals', 'func', {
-            brac: [{
-              topComment: {
-                content: 'angle',
-                comment: 'theta',
-                symbol: 'brace1',
-                includeInSize: false,
-              },
-            }, 'lb', 'rb'],
-          },
-          'minus1',
-          {
-            annotate: {
-              content: 'sin1',
-              withAnnotations: [
-                {
-                  annotation: {
-                    annotation: '4',
-                    relativeToContent: [1, 1],
-                    relativeToAnnotation: [0, 0],
-                    scale: 0.5,
+            box: [
+              {
+                pad: [
+                  {
+                    // bracNew: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
+                    // space: number = 0.03,
+                    // overhang: number | null = 0,
+                    // barLength: number | null = null,
+                    // left: number | null = null,
+                    // right: number | null = null,
+                    // top: number | null = null,
+                    // bottom: number | null = null,
+                    // inSize: boolean = true,
+                    // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
+                    bottomComment: [
+                      { topCommentNew: ['angle', 'opp', 'lb', 0.05, 0.05] },
+                      'sine',
+                      'rb',
+                    ],
+                    // annotate: {
+                    //   content: {
+                    //     annotate: {
+                    //       content: 'angle',
+                    //       withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+                    //     },
+                    //   },
+                    //   withAnnotations: ['sine', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+                    // },
                   },
-                },
-              ],
-            },
-          },
-          ],
+                  0, 0, 0, 0,
+                ],
+              },
+              'box',
+            ],
+          }],
+          // content: ['vert', 'equals', 'func', {
+          //   bracNew: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.0, 0.2, 0.06, 0.02],
+          //   // bracNew: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
+          // }],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',
           },
         },
-        '2': {
-          content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '0b': {
-          content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
-        '0a': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
+        // '1': {
+        //   content: [{
+        //     topComment: {
+        //       content: 'vert',
+        //       comment: 'opp',
+        //       symbol: 'brace',
+        //     },
+        //   }, 'equals', 'func', {
+        //     brac: [{
+        //       topComment: {
+        //         content: 'angle',
+        //         comment: 'theta',
+        //         symbol: 'brace1',
+        //         inSize: false,
+        //       },
+        //     }, 'lb', 'rb'],
+        //   },
+        //   'minus1',
+        //   {
+        //     annotate: {
+        //       content: 'sin1',
+        //       withAnnotations: [
+        //         {
+        //           annotation: {
+        //             annotation: '4',
+        //             relativeToContent: [1, 1],
+        //             relativeToAnnotation: [0, 0],
+        //             scale: 0.5,
+        //           },
+        //         },
+        //       ],
+        //     },
+        //   },
+        //   ],
+        //   alignment: {
+        //     fixTo: 'equals',
+        //     alignH: 'right',
+        //   },
+        // },
+        // '2': {
+        //   content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
+        //   alignment: {
+        //     fixTo: 'equals',
+        //     alignH: 'right',
+        //   },
+        // },
         // '0b': {
+        //   content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
+        //   alignment: {
+        //     fixTo: 'opp',
+        //     alignH: 'right',
+        //   },
+        // },
+        // '0a': {
         //   content: [
         //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-        //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
         //   ],
         //   alignment: {
         //     fixTo: 'opp',
         //     alignH: 'right',
         //   },
         // },
-        '0c': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-            'equals1', 'sin1', ' ' , 'theta1',
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
-        '0d': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-            'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
-            'equals2', 'sin2', ' ', 'theta2',
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
-        '5': {
-          content: [
-            'opp', 'approx', {
-              frac: [
-                ['16', 'theta', { brac: [['pi1', 'minus1', 'theta1'], 'lb', 'rb'] }],
-                ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
-                  brac: [['pi3', 'minus3', 'theta4'], 'lb1', 'rb1'],
-                }],
-                'v',
-              ],
-            },
-          ],
-          alignment: {
-            alignH: 0.8,
-          },
-        },
-        '6': {
-          content: [
-            'opp', 'equals', 'theta', 'minus1',
-            { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, '3f', 'v'] },
-            'plus1',
-            { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, '5f', 'v1'] },
-            'minus2',
-            { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, '7f', 'v2'] },
-            'plus2', 'dots',
-          ],
-          alignment: {
-            alignH: 0.4,
-          },
-        },
+        // // '0b': {
+        // //   content: [
+        // //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+        // //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
+        // //   ],
+        // //   alignment: {
+        // //     fixTo: 'opp',
+        // //     alignH: 'right',
+        // //   },
+        // // },
+        // '0c': {
+        //   content: [
+        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+        //     'equals1', 'sin1', ' ' , 'theta1',
+        //   ],
+        //   alignment: {
+        //     fixTo: 'opp',
+        //     alignH: 'right',
+        //   },
+        // },
+        // '0d': {
+        //   content: [
+        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
+        //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
+        //     'equals2', 'sin2', ' ', 'theta2',
+        //   ],
+        //   alignment: {
+        //     fixTo: 'opp',
+        //     alignH: 'right',
+        //   },
+        // },
+        // '5': {
+        //   content: [
+        //     'opp', 'approx', {
+        //       frac: [
+        //         ['16', 'theta', { brac: [['pi1', 'minus1', 'theta1'], 'lb', 'rb'] }],
+        //         ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
+        //           brac: [['pi3', 'minus3', 'theta4'], 'lb1', 'rb1'],
+        //         }],
+        //         'v',
+        //       ],
+        //     },
+        //   ],
+        //   alignment: {
+        //     alignH: 0.8,
+        //   },
+        // },
+        // '6': {
+        //   content: [
+        //     'opp', 'equals', 'theta', 'minus1',
+        //     { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, '3f', 'v'] },
+        //     'plus1',
+        //     { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, '5f', 'v1'] },
+        //     'minus2',
+        //     { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, '7f', 'v2'] },
+        //     'plus2', 'dots',
+        //   ],
+        //   alignment: {
+        //     alignH: 0.4,
+        //   },
+        // },
       },
     },
     mods: {

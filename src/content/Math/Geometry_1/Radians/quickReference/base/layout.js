@@ -307,7 +307,7 @@ export default function diagramLayout() {
               comment: 'angle',
               symbol: 'smallBrace',
               contentSpace: 0.04,
-              includeInSize: false,
+              inSize: false,
             },
           },
           '   ',

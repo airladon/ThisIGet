@@ -569,22 +569,22 @@ export default function diagramLayout() {
     equals2: ' = ',
     equals3: ' = ',
     brace0: {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace1: {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace2: {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace3: {
-      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 2, color: colors.grey,
     },
     brace4: {
-      symbol: 'brace', side: 'bottom', numLines: 4, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 4, color: colors.grey,
     },
     brace5: {
-      symbol: 'brace', side: 'bottom', numLines: 4, color: colors.grey,
+      symbol: 'braceNew', side: 'bottom', numLines: 4, color: colors.grey,
     },
     lb1: { symbol: 'bracket', side: 'left', numLines: 1 },
     rb1: { symbol: 'bracket', side: 'right', numLines: 1 },
@@ -607,7 +607,7 @@ export default function diagramLayout() {
       content,
       comment: commentText,
       symbol,
-      includeInSize: false,
+      inSize: false,
     },
   });
 

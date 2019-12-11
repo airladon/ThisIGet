@@ -625,12 +625,13 @@ export default function diagramLayout() {
       content,
       comment: commentText,
       symbol,
+      inSize: false,
       // contentSpace: 0.1,
       // commentSpace: 0.2,
     },
   });
-  const brace = numLines => ({
-    symbol: 'brace', side: 'bottom', color: colors.gridLight, numLines,
+  const brace = () => ({
+    symbol: 'braceNew', side: 'bottom', color: colors.gridLight,
   });
 
   const eqn = {
@@ -662,11 +663,11 @@ export default function diagramLayout() {
         height: { text: ' height ',color: colors.sides },
         _length: ' length ',
         length: ' length ',
-        brace: brace(4),
-        _brace: brace(4),
-        sBrace: brace(1),
-        mBrace: brace(2),
-        _sBrace: brace(1),
+        brace: brace(),
+        _brace: brace(),
+        sBrace: brace(),
+        mBrace: brace(),
+        _sBrace: brace(),
         _60: '60',
         _1: '1',
         __1: '1',
