@@ -247,7 +247,7 @@ export default function diagramLayout() {
     },
   };
   const top = (content, commentText, symbol) => ({
-    topComment: {
+    topCommentNew: {
       content,
       comment: commentText,
       symbol,
@@ -288,10 +288,10 @@ export default function diagramLayout() {
         sides: { text: `${layout.polygonSides[0]}` },
         v: { symbol: 'vinculum' },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabledLabel,
+          symbol: 'braceNew', side: 'top', color: colors.disabledLabel,
         },
         sBrace: {
-          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabledLabel,
+          symbol: 'braceNew', side: 'top', color: colors.disabledLabel,
         },
         x: { symbol: 'xStrike', color: colors.disabledLabel },
         _x: { symbol: 'xStrike', color: colors.disabledLabel },

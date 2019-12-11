@@ -322,10 +322,11 @@ export default function diagramLayout() {
     sub: { content, subscript },
   });
   const top = (content, commentText, symbol) => ({
-    topComment: {
+    topCommentNew: {
       content,
       comment: commentText,
       symbol,
+      inSize: false,
     },
   });
   const half = { frac: ['_1', '_2', 'v', 0.6] };
@@ -367,13 +368,13 @@ export default function diagramLayout() {
         ___2: { text: '2', color: colors.construction2 },
         __v: { symbol: 'vinculum', color: colors.construction2 },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.disabled,
         },
         _brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.disabled,
         },
         sBrace: {
-          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabled,
+          symbol: 'braceNew', side: 'top', numLines: 1, color: colors.disabled,
         },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },

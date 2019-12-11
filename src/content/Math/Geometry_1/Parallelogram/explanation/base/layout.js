@@ -282,10 +282,11 @@ export default function diagramLayout() {
   };
 
   const top = (content, commentText, symbol) => ({
-    topComment: {
+    topCommentNew: {
       content,
       comment: commentText,
       symbol,
+      inSize: false,
     },
   });
 
@@ -322,10 +323,10 @@ export default function diagramLayout() {
         __2: '2',
         v: { symbol: 'vinculum' },
         b1: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
         b2: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
         },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
@@ -454,7 +455,7 @@ export default function diagramLayout() {
         _divide22: '÷2',
         // v: { symbol: 'vinculum' },
         b1: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'braceNew', side: 'top', color: colors.working,
         },
         // b2: {
         //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
@@ -479,7 +480,7 @@ export default function diagramLayout() {
         '2': [
           {
             annotate: [
-              { topComment: ['_360', '_180', 'b1', 0.1, 0.05, 0.6, false] },
+              { topCommentNew: ['_360', '_180', 'b1', 0.05, 0.05, 0.6, false] },
               ['_divide2', 'center', 'bottom', 'center', 2],
               'false',
             ],
