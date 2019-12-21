@@ -611,7 +611,7 @@ export default function diagramLayout() {
     },
   });
 
-  const half = (_1, _2, v) => ({ frac: [_1, _2, v, 0.7] });
+  const half = (_1, _2, v) => ({ frac: [_1, v, _2, 0.7] });
 
   const h0 = half('_1_0', '_2_0', 'v_0');
   const h1 = half('_1_1', '_2_1', 'v_1');
@@ -821,13 +821,13 @@ export default function diagramLayout() {
           content: [
             bot(
               ['B0', 'n0'],
-              ['mul0', { frac: ['_1_1', ['B1', 'N1'], 'v_0'] }],
+              ['mul0', { frac: ['_1_1', 'v_0', ['B1', 'N1']] }],
               '',
             ),
             'equals',
             bot(
               ['b2', 'N4'],
-              ['mul1', { frac: ['_1_0', ['B2', 'N2'], 'v_1'] }],
+              ['mul1', { frac: ['_1_0', 'v_1', ['B2', 'N2']] }],
               '',
             ),
           ],
@@ -837,13 +837,13 @@ export default function diagramLayout() {
           content: [
             bot(
               [strike('B0', 'x0'), 'n0'],
-              ['mul0', { frac: ['_1_1', [strike('B1', 'x1'), 'N1'], 'v_0'] }],
+              ['mul0', { frac: ['_1_1', 'v_0', [strike('B1', 'x1'), 'N1']] }],
               '',
             ),
             'equals',
             bot(
               ['b2', strike('N4', 'x2')],
-              ['mul1', { frac: ['_1_0', ['B2', strike('N2', 'x3')], 'v_1'] }],
+              ['mul1', { frac: ['_1_0', 'v_1', ['B2', strike('N2', 'x3')]] }],
               '',
             ),
           ],
@@ -851,17 +851,17 @@ export default function diagramLayout() {
         },
         '2m': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
           ],
           description: 'After Simplification:',
         },
         '3': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
             'equals1',
             'r0',
           ],
@@ -869,13 +869,13 @@ export default function diagramLayout() {
         },
         '3a': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
             'equals1',
             'r0',
             'arrow',
-            { frac: ['b0', 'B0', 'v_2'] },
+            { frac: ['b0', 'v_2', 'B0'] },
             'equals2',
             'r1',
           ],
@@ -883,14 +883,14 @@ export default function diagramLayout() {
         },
         '3b': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
             'equals1',
             'r0',
             'arrow',
             bot(
-              { frac: ['b0', 'B0', 'v_2'] },
+              { frac: ['b0', 'v_2', 'B0'] },
               ['mul0', 'B1'],
             ),
             'equals2',
@@ -900,14 +900,14 @@ export default function diagramLayout() {
         },
         '3c': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
             'equals1',
             'r0',
             'arrow',
             bot(
-              { frac: ['b0', strike('B0', 'x0'), 'v_2'] },
+              { frac: ['b0', 'v_2', strike('B0', 'x0')] },
               ['mul0', strike('B1', 'x1')],
             ),
             'equals2',
@@ -917,9 +917,9 @@ export default function diagramLayout() {
         },
         '3d': {
           content: [
-            { frac: ['n0', 'N1', 'v_0'] },
+            { frac: ['n0', 'v_0', 'N1'] },
             'equals',
-            { frac: ['b2', 'B2', 'v_1'] },
+            { frac: ['b2', 'v_1', 'B2'] },
             'equals1',
             'r0',
             'arrow',
@@ -1275,15 +1275,15 @@ export default function diagramLayout() {
       },
       forms: {
         '0': {
-          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AE', 'AC', 'v2'] }],
+          content: [{ frac: ['AD', 'v1', 'AB'] }, 'equals1', { frac: ['AE', 'v2', 'AC'] }],
           description: 'Given',
         },
         '1': {
-          content: [{ frac: ['AD', 'AB', 'v1'] }, 'equals1', { frac: ['AF', 'AC', 'v2'] }],
+          content: [{ frac: ['AD', 'v1', 'AB'] }, 'equals1', { frac: ['AF', 'v2', 'AC'] }],
           description: 'DF is parallel with BC',
         },
         '2': {
-          content: [{ frac: ['AE', 'AC', 'v1'] }, 'equals1', { frac: ['AF', 'AC1', 'v2'] }],
+          content: [{ frac: ['AE', 'v1', 'AC'] }, 'equals1', { frac: ['AF', 'v2', 'AC1'] }],
           description: 'Right side of first two equations equal each other',
         },
         '3': {

@@ -111,7 +111,7 @@ export default function diagramLayout() {
           brac: [['n', 'minus', '_2'], 'lb', 'rb'],
         }, 'times', '_180'],
         '1': [
-          'angle', 'equals', '_180', 'minus', { frac: ['_360', 'n', 'v'] },
+          'angle', 'equals', '_180', 'minus', { frac: ['_360', 'v', 'n'] },
         ],
       },
     },

@@ -498,7 +498,7 @@ export default function diagramLayout() {
       content: '__Area', comment: 'largeSquare', scale: 0.5, contentSpace: 0,
     },
   };
-  const half = { frac: ['_1', '_2g', 'v', 0.7] };
+  const half = { frac: ['_1', 'v', '_2g', 0.7] };
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
 
   const ann = (content, annotation) => ({

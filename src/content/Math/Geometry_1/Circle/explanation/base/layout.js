@@ -461,7 +461,7 @@ export default function diagramLayout() {
 
   layout.diameterCircumferenceEquation = eqn(
     'eqnDiameterCircumference',
-    // ['diameter', 'equals', { frac: ['circumference', 'pi', 'v'] }],
+    // ['diameter', 'equals', { frac: ['circumference', 'v', 'pi'] }],
     ['diameter', 'x', 'pi', 'equals', 'circumference'],
     {
       qr: { position: new Point(0, -1.5), scale: 0.7 },
@@ -492,7 +492,7 @@ export default function diagramLayout() {
 
   layout.radiusDiameterEquation = eqn(
     'eqnRadiusDiameter',
-    ['radius', 'equals', { frac: ['diameter', '_2', 'v'] }],
+    ['radius', 'equals', { frac: ['diameter', 'v', '_2'] }],
     {
       qr: { position: new Point(-0.1, -1.2), scale: 0.7 },
     },
@@ -500,7 +500,7 @@ export default function diagramLayout() {
 
   layout.radiusCircumferenceEquation = eqn(
     'eqnRadiusCircumference',
-    ['radius', 'equals', { frac: ['circumference', ['_2', 'pi'], 'v'] }],
+    ['radius', 'equals', { frac: ['circumference', 'v', ['_2', 'pi']] }],
     {
       qr: { position: new Point(-0.3, -1.6), scale: 0.7 },
     },

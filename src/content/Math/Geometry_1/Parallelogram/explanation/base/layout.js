@@ -355,7 +355,7 @@ export default function diagramLayout() {
           '_2', 'mul',
           top(
             { sub: ['Area2', 'tri'] },
-            [{ frac: ['__1', '__2', 'v', 0.6] }, 'S2', 'H2'],
+            [{ frac: ['__1', 'v', '__2', 0.6] }, 'S2', 'H2'],
             'b2',
           ),
         ],
@@ -364,7 +364,7 @@ export default function diagramLayout() {
           { brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1',
           'plus',
           '_2', 'mul',
-          { frac: ['__1', '__2', 'v', 0.6] }, 'S2', 'H2',
+          { frac: ['__1', 'v', '__2', 0.6] }, 'S2', 'H2',
         ],
         '3': [
           'Area', 'equals',
@@ -375,7 +375,7 @@ export default function diagramLayout() {
           ),
           'plus',
           { strike: ['_2', 'strike1'] }, 'mul',
-          { strike: [{ frac: ['__1', '__2', 'v', 0.6] }, 'strike2'] }, 'S2', 'H2',
+          { strike: [{ frac: ['__1', 'v', '__2', 0.6] }, 'strike2'] }, 'S2', 'H2',
         ],
         '4': [
           'Area', 'equals',

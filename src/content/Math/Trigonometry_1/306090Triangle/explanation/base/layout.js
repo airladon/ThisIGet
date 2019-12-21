@@ -92,18 +92,18 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: { frac: ['A', '_2', 'v', 0.7] },
+        content: { frac: ['A', 'v', '_2', 0.7] },
         alignment: { alignV: 0.03 },
         scale: 1,
       },
       '1': {
-        content: [{ frac: ['A', '_2', 'v', 0.7] }, 'times', '_2_'],
+        content: [{ frac: ['A', 'v', '_2', 0.7] }, 'times', '_2_'],
         scale: 1,
         alignment: { alignV: 0.03 },
       },
       '2': {
         content: [
-          { frac: ['A', { strike: ['_2', 's1'] }, 'v', 0.7] },
+          { frac: ['A', 'v', { strike: ['_2', 's1'] }, 0.7] },
           'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
@@ -147,18 +147,18 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A'],
+        content: [{ frac: [{ root: ['_3', 'r'] }, 'v', '_2', 0.7] }, 'A'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '1': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A', 'times', '_2_'],
+        content: [{ frac: [{ root: ['_3', 'r'] }, 'v', '_2', 0.7] }, 'A', 'times', '_2_'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '2': {
         content: [
-          { frac: [{ root: ['_3', 'r'] }, { strike: ['_2', 's1'] }, 'v', 0.7] },
+          { frac: [{ root: ['_3', 'r'] }, 'v', { strike: ['_2', 's1'] }, 0.7] },
           'A', 'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
@@ -287,8 +287,8 @@ export default function diagramLayout() {
     sup: [content, power, 0.6, new Point(bias, 0)],
   });
 
-  const frac = (num, den, v, scale = 1) => ({
-    frac: [num, den, v, scale],
+  const frac = (num, v, den, scale = 1) => ({
+    frac: [num, v, den, scale],
   });
 
   const brac = (content, lb, rb) => ({
@@ -363,15 +363,15 @@ export default function diagramLayout() {
       forms: {
         '0': [
           sq('H', '_22', 0.02), 'plus',
-          sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
+          sq(brac(frac('A2', 'vb', '_2b', 0.8), 'lb', 'rb'), '_23'),
           'equals', sq('A1', '_21'),
         ],
         '1': [
           sq('H', '_22', 0.02), 'plus',
           {
             topComment: [
-              sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
-              frac(sq('A3', '_24'), '_4', 'v2'),
+              sq(brac(frac('A2', 'vb', '_2b', 0.8), 'lb', 'rb'), '_23'),
+              frac(sq('A3', '_24'), 'v2', '_4'),
               'brace1',
             ],
           },
@@ -379,21 +379,21 @@ export default function diagramLayout() {
         ],
         '2': [
           sq('H', '_22', 0.02), 'plus',
-          frac(sq('A3', '_24'), '_4', 'v2'),
+          frac(sq('A3', '_24'), 'v2', '_4'),
           'equals', sq('A1', '_21'),
         ],
         '3': [
           {
             topComment: [
-              [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
-              ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
+              [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), 'v2', '_4')],
+              ['minus', frac(sq('A2', '_23'), 'v1', '_41')],
             ],
           },
           'equals',
           {
             topComment: {
               content: sq('A1', '_21'),
-              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
+              comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
               contentSpace: 0.14,
               inSize: false,
             },
@@ -404,16 +404,16 @@ export default function diagramLayout() {
             topComment: [
               [
                 sq('H', '_22', 0.02), 'plus',
-                strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
+                strike(frac(sq('A3', '_24'), 'v2', '_4'), 'strike1'),
               ],
-              strike(['minus', frac(sq('A2', '_23'), '_41', 'v1')], 'strike2'),
+              strike(['minus', frac(sq('A2', '_23'), 'v1', '_41')], 'strike2'),
             ],
           },
           'equals',
           {
             topComment: {
               content: sq('A1', '_21'),
-              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
+              comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
               contentSpace: 0.14,
               inSize: false,
             },
@@ -423,7 +423,7 @@ export default function diagramLayout() {
           sq('H', '_22', 0.02),
           'equals',
           sq('A1', '_21'),
-          'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+          'minus1', frac(sq('A4', '_25'), 'v3', '_42'),
         ],
         '6': [
           sq('H', '_22', 0.02),
@@ -432,9 +432,9 @@ export default function diagramLayout() {
             topComment: {
               content: [
                 sq('A1', '_21'),
-                'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+                'minus1', frac(sq('A4', '_25'), 'v3', '_42'),
               ],
-              comment: [frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')],
+              comment: [frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')],
               symbol: 'brace1',
             },
           },
@@ -442,12 +442,12 @@ export default function diagramLayout() {
         '7': [
           sq('H', '_22', 0.02),
           'equals',
-          frac('_31', '_4', 'v1', 0.7), sq('A2', '_23'),
+          frac('_31', 'v1', '_4', 0.7), sq('A2', '_23'),
         ],
         '8': [
           root(sq('H', '_22', 0.02), 'r1'),
           'equals',
-          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+          root([frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')], 'r2'),
         ],
         '9': [
           {
@@ -459,17 +459,17 @@ export default function diagramLayout() {
             },
           },
           'equals',
-          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+          root([frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')], 'r2'),
           'equals1',
-          frac(root('_33', 'r4'), root('_41', 'r5'), 'v2', 0.7),
+          frac(root('_33', 'r4'), 'v2', root('_41', 'r5'), 0.7),
           root(sq('A3', '_24'), 'r6'),
           'equals2',
-          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+          [frac(root('_32', 'r3'), 'v3', '_21', 0.7), 'A1'],
         ],
         '10': [
           'H2',
           'equals',
-          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+          [frac(root('_32', 'r3'), 'v3', '_21', 0.7), 'A1'],
         ],
       },
     },

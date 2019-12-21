@@ -8,6 +8,7 @@ const {
   // Line,
 } = Fig.tools.g2;
 
+const { DiagramFont } = Fig;
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
 
@@ -42,13 +43,14 @@ export default function diagramLayout() {
         alignment: { alignH: 'center' },
       },
       '0a': {
-        content: {
-          topComment: {
-            content: 'vertical',
-            comment: 'opposite',
-            symbol: 'brace',
-          },
-        },
+        // content: {
+        //   topComment: {
+        //     content: 'vertical',
+        //     comment: 'opposite',
+        //     symbol: 'brace',
+        //   },
+        // },
+        content: 'vertical',
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
@@ -280,7 +282,7 @@ export default function diagramLayout() {
         pi3: 'π',
         pi4: 'π',
         '16': '16',
-        '5': '5',
+        '5': '5 and here it is',
         '5f': '5!',
         '4': '4',
         '2': '2',
@@ -288,6 +290,7 @@ export default function diagramLayout() {
         '3f': '3!',
         '7': '7',
         '7f': '7!',
+        'a': 'a',
         'minus1': '  –  ',
         'minus2': '  –  ',
         'minus3': '  –  ',
@@ -295,13 +298,42 @@ export default function diagramLayout() {
         'plus1': '  +  ',
         'plus2': '  +  ',
         'sine': { text: 'sine', style: 'normal' },
-        'AB': 'AB',
+        // 'AB': { text: 'AB', font: new DiagramFont('Times New Roman', 'normal', 0.3, 'bold', 'left', 'alphabetic', [1, 0, 0, 1]) },
+        'AB': { text: 'AB', weight: 'normal', size: 0.3 },
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
-        lb: { symbol: 'angleBracket', side: 'left', lineWidth: 0.012, staticSize: false },
-        rb: { symbol: 'angleBracket', side: 'right' },
-        lb1: { symbol: 'bracket', side: 'left' },
-        rb1: { symbol: 'bracket', side: 'right' },
+        lb: {
+          symbol: 'arrow',
+          direction: 'right',
+          // side: 'top',
+          // staticHeight: 'first',
+          // staticHeight: 1,
+          // draw: 'static',
+          // radius: 0.1,
+          // width: 0.05,
+          // tipWidth: 0.01,
+          // height: 0.4,
+          // lineWidth: 0.015,
+        },
+        rb: { symbol: 'bracket', side: 'right' },
+        lb1: { symbol: 'squareBracket', side: 'left' },
+        rb1: { symbol: 'squareBracket', side: 'right' },
+        sym: {
+          symbol: 'int',
+          draw: 'dynamic',
+          sides: 20,
+          // staticHeight: 'first',
+          // width: 1.6,
+          // lineWidth: 0.05,
+          // percentage: 0.99999999999,
+          // tipWidth: 0.06,
+          // lineWidth: 0.17,
+          num: 1,
+          serif: true,
+          // type: 'line',
+          lineIntegralSides: 50,
+        },
+        arrow: { symbol: 'arrow' },
         v: { symbol: 'vinculum' },
         v1: { symbol: 'vinculum' },
         v2: { symbol: 'vinculum' },
@@ -314,6 +346,8 @@ export default function diagramLayout() {
           symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
         box: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
+        box1: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
+        v: { symbol: 'vinculum' },
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
       },
@@ -329,7 +363,52 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    brac: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
+                    // brac: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
+                    // bar: { content: 'AB', symbol: 'lb', side: 'top', length: 1 },
+                    // topComment: { content: ['AB', 'bbb_2', '2'], symbol: 'lb', comment: '4', length: null },
+                    frac: {
+                      numerator: {
+                        content: { frac: ['a', 'v1_vinculumNew', '2'] }
+                        scale: 1,
+                      },
+                      denominator: 'b',
+                      symbol: 'v_vinculumNew',
+                    },
+                    // brac: ['a', 'leftBracket', 'rb_rightBracket']
+                    // simpleIntegral: ['AB', 'sym', true, null, 0.1],
+                    // intLimits: {
+                    //   content: 'AB',
+                    //   from: '4',
+                    //   to: { box: ['2', 'box1'] },
+                    //   symbol: 'sym',
+                    //   // height: 1,
+                    //   limitsPosition: 'side',
+                    //   limitsAroundContent: true,
+                    //   // fromOffset: [-0.5, 0],
+                    //   // toOffset: [0.1, 0.1],
+                    //   // fromOffset: [-0.1, -0.1],
+                    //   // fromSpace: 0,
+                    //   // toSpace: 0,
+                    //   // inSize: false,
+                    //   // fromScale: 1,
+                    //   // toScale: 1,
+                    //   // scale: 0.6,
+                    //   // yOffset: 0.3,
+                    //   topSpace: 0.1,
+                    //   bottomSpace: 0.1,
+                    // },
+                    // matrix: {
+                    //   left: 'lb1',
+                    //   right: 'rb1',
+                    //   order: [2, 2],
+                    //   content: ['a', '5', { frac: ['3', '2', 'v'] }, '7'],
+                    //   fit: 'min',
+                    //   space: [0.1, 0.1],
+                    //   vAlign: 'baseline',
+                    //   brac: { insideSpace: 0.1, inSize: true },
+                    // },
+                    // bar: ['a', 'arrow'],
+                    // simpleIntegral: ['AB', 'sym', '4', { box: ['5', 'box1'] }],
                     // space: number = 0.03,
                     // overhang: number | null = 0,
                     // barLength: number | null = null,
@@ -362,7 +441,17 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    // brac: ['angle', 'lb', 'rb', 0.05, 0, 0.06, 0.02, null, null, null, null, true],
+                    // intLimits: {
+                    //   content: 'bbb_2',
+                    //   from: '4',
+                    //   to: { box: ['5', 'box1'] },
+                    //   symbol: 'sym',
+                    //   // height: 1,
+                    //   limitsPosition: 'top',
+                    // },
+                    frac: [['a', 'b'], 'v', '5'],
+                    // simpleIntegral: ['AB', 'sym', true, null, 0.1, null, null, null, 1],
+                    // brac: ['angle', 'lb', 'rb', true, 0.05, 0.05, 0.05, 0.05, null, null, null, null],
                     // space: number = 0.03,
                     // overhang: number | null = 0,
                     // barLength: number | null = null,
@@ -372,11 +461,11 @@ export default function diagramLayout() {
                     // bottom: number | null = null,
                     // inSize: boolean = true,
                     // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
-                    bottomComment: [
-                      { topComment: ['angle', 'opp', 'lb', 0.05, 0.05] },
-                      'sine',
-                      'rb',
-                    ],
+                    // bottomComment: [
+                    //   { topComment: ['angle', 'opp', 'lb', 0.05, 0.05] },
+                    //   'sine',
+                    //   'rb',
+                    // ],
                     // annotate: {
                     //   content: {
                     //     annotate: {
@@ -529,7 +618,8 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [-0.5, -1.6] },
+        // default: { position: [-0.5, -1.6] },
+        default: { position: [-2, 0] },
       },
       pulseDefault: { scale: 1.4 },
     },

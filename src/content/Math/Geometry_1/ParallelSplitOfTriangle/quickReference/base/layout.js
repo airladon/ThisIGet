@@ -268,16 +268,16 @@ export default function diagramLayout() {
       scale: 1.2,
       forms: {
         '0': [
-          { frac: ['b', 'B', 'v0'] },
+          { frac: ['b', 'v0', 'B'] },
           '   ', 'equals0', '   ',
-          { frac: ['n', 'N', 'v1'] },
+          { frac: ['n', 'v1', 'N'] },
           '   ', 'equals1', '   ',
-          { frac: ['m', 'M', 'v2'] },
+          { frac: ['m', 'v2', 'M'] },
         ],
         '1': [
-          { frac: ['n', 'N', 'v1'] },
+          { frac: ['n', 'v1', 'N'] },
           '   ', 'equals1', '   ',
-          { frac: ['m', 'M', 'v2'] },
+          { frac: ['m', 'v2', 'M'] },
         ],
       },
     },

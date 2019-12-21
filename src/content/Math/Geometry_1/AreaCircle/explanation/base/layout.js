@@ -254,7 +254,7 @@ export default function diagramLayout() {
       inSize: false,
     },
   });
-  const half = { frac: ['_1', '_2', 'v', 0.6] };
+  const half = { frac: ['_1', 'v', '_2', 0.6] };
   const r2 = { sup: ['__r', [' ', '_2']] };
   const eqn = {
     name: 'eqn',

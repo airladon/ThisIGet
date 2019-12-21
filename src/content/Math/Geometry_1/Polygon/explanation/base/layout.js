@@ -482,7 +482,7 @@ export default function diagramLayout() {
           },
         ],
         '14': [
-          'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'n5', 'v2'] },
+          'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'v2', 'n5'] },
           // {
           //   box: {
           //     content: '_1802',

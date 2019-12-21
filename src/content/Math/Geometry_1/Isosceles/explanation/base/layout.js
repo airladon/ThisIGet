@@ -54,7 +54,7 @@ export default function diagramLayout() {
       _2: '2',
     },
     forms: {
-      base: { frac: ['num', '_2', 'v'] },
+      base: { frac: ['num', 'v', '_2'] },
     },
     scale: 0.6,
     defaultFormAlignment: {
@@ -195,7 +195,7 @@ export default function diagramLayout() {
       forms: {
         '0': ['a', 'plus', '_a', '_plus', 'b', 'equals', '_180'],
         '1': ['_2', '_a', '_plus', 'b', 'equals', '_180'],
-        'a': ['a', 'equals', { frac: [['_180', 'minus', 'b'], '_2', 'v'] }],
+        'a': ['a', 'equals', { frac: [['_180', 'minus', 'b'], 'v', '_2'] }],
         'b': ['b', 'equals', '_180', 'minus', '_2', 'a'],
       },
       defaultFormAlignment: {

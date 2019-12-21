@@ -136,7 +136,7 @@ export default function diagramLayout() {
         'tri': [
           { sub: ['Area', 'tri'] },
           'equals',
-          { frac: ['_1', '_2', 'v', 0.7] },
+          { frac: ['_1', 'v', '_2', 0.7] },
           ' ', 'A', 'mul', 'B',
         ],
       },
@@ -329,9 +329,9 @@ export default function diagramLayout() {
       inSize: false,
     },
   });
-  const half = { frac: ['_1', '_2', 'v', 0.6] };
-  const _half = { frac: ['__1', '__2', '_v', 0.6] };
-  const __half = { frac: ['___1', '___2', '__v', 0.6] };
+  const half = { frac: ['_1', 'v', '_2', 0.6] };
+  const _half = { frac: ['__1', '_v', '__2', 0.6] };
+  const __half = { frac: ['___1', '__v', '___2', 0.6] };
 
   const eqn = {
     name: 'eqn',
