@@ -345,8 +345,16 @@ export default function diagramLayout() {
         brace1: {
           symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
         },
-        box: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
-        box1: { symbol: 'box', color: [0, 0.9, 0, 1], width: 0.005 },
+        box: {
+          symbol: 'box',
+          color: [0, 0.9, 0, 1],
+          lineWidth: 0.05,
+          draw: 'static',
+          staticHeight: 'first',
+          staticWidth: 'first',
+          fill: true,
+        },
+        box1: { symbol: 'box', color: [0, 0.9, 0, 1], lineWidth: 0.005 },
         v: { symbol: 'vinculum' },
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
@@ -366,13 +374,17 @@ export default function diagramLayout() {
                     // brac: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
                     // bar: { content: 'AB', symbol: 'lb', side: 'top', length: 1 },
                     // topComment: { content: ['AB', 'bbb_2', '2'], symbol: 'lb', comment: '4', length: null },
-                    frac: {
-                      numerator: {
-                        content: { frac: ['a', 'v1_vinculumNew', '2'] }
-                        scale: 1,
-                      },
-                      denominator: 'b',
-                      symbol: 'v_vinculumNew',
+                    // frac: {
+                    //   numerator: { frac: ['a', 'v1_vinculum', '2'] },
+                    //   symbol: 'v_vinculum',
+                    //   denominator: { scale: ['b', 2] },
+                    //   // symbol: 'v_vinculum',
+                    // },
+                    pad: {
+                      content: ['a', 'b'],
+                      // top: 0.1,
+                      // left: 0.1,
+                      // bottom: 0.05,
                     },
                     // brac: ['a', 'leftBracket', 'rb_rightBracket']
                     // simpleIntegral: ['AB', 'sym', true, null, 0.1],
@@ -428,6 +440,7 @@ export default function diagramLayout() {
                 ],
               },
               'box',
+              true,
             ],
           }],
           alignment: {

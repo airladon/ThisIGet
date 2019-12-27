@@ -5116,83 +5116,6 @@ function (_BaseEquationFunction) {
 
   _createClass(Bar, [{
     key: "calcSize",
-    // constructor(
-    //   content: Elements | null,
-    //   glyph: DiagramElementPrimitive | DiagramElementCollection,
-    //   side: 'left' | 'right' | 'top' | 'bottom' = 'top',
-    //   space: number = 0.03,
-    //   overhang: number | null = 0,
-    //   length: number | null = null,
-    //   left: number | null = null,
-    //   right: number | null = null,
-    //   top: number | null = null,
-    //   bottom: number | null = null,
-    //   inSize: boolean = true,
-    // ) {
-    //   const bar = glyph !== null ? new Element(glyph) : null;
-    //   super([content, bar]);
-    //   glyph = glyph;
-    //   glyphLength = 1;
-    //   mainContent = content;
-    //   glyphLocation = new Point(0, 0);
-    //   space = space;
-    //   side = side;
-    //   overhang = overhang;
-    //   length = length;
-    //   left = left;
-    //   right = right;
-    //   top = top;
-    //   bottom = bottom;
-    //   inSize = inSize;
-    // }
-    // _dup(namedCollection?: Object) {
-    //   const content = mainContent == null ? null : mainContent._dup(namedCollection);
-    //   let { glyph } = this;
-    //   if (glyph != null && namedCollection) {
-    //     glyph = namedCollection[glyph.name];
-    //   }
-    //   const barCopy = new Bar(
-    //     content,
-    //     glyph,
-    //   );
-    //   duplicateFromTo(
-    //     this, barCopy,
-    //     ['content', 'glyph'],
-    //   );
-    //   return barCopy;
-    // }
-    // getAllElements() {
-    //   let elements = [];
-    //   if (mainContent) {
-    //     elements = [...elements, ...mainContent.getAllElements()];
-    //   }
-    //   if (glyph) {
-    //     elements = [...elements, glyph];
-    //   }
-    //   return elements;
-    // }
-    // setPositions() {
-    //   const { glyph } = this;
-    //   if (glyph != null) {
-    //     const t = glyph.getTransform()._dup();
-    //     t.updateTranslation(glyphLocation.x, glyphLocation.y);
-    //     t.updateScale(glyphLength, glyphLength);
-    //     glyph.setTransform(t);
-    //   }
-    //   if (mainContent) {
-    //     mainContent.setPositions();
-    //   }
-    // }
-    // offsetLocation(offset: Point = new Point(0, 0)) {
-    //   this.location = this.location.add(offset);
-    //   const { glyph } = this;
-    //   if (glyph != null) {
-    //     glyphLocation = glyphLocation.add(offset);
-    //   }
-    //   if (mainContent) {
-    //     mainContent.offsetLocation(offset);
-    //   }
-    // }
     value: function calcSize(location, scale) {
       this.location = location._dup();
 
@@ -5479,10 +5402,10 @@ function (_Elements) {
 
     if (Array.isArray(glyph)) {
       glyph.forEach(function (g) {
-        glyphElements.push(g !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](g) : null);
+        glyphElements.push(g != null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](g) : null);
       });
     } else {
-      glyphElements.push(glyph !== null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](glyph) : null);
+      glyphElements.push(glyph != null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](glyph) : null);
     }
 
     var glyphs = [];
@@ -5684,18 +5607,17 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+/* harmony import */ var _BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseEquationFunction */ "./src/js/diagram/DiagramElements/Equation/Elements/BaseEquationFunction.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5716,148 +5638,166 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
-// // and arranges their size in a )
-// type TypeBoxElement = {
-//   lineWidth?: number,
-//   setSize: (Rect) => void,
-// };
 
 var Box =
 /*#__PURE__*/
-function (_Elements) {
-  _inherits(Box, _Elements);
+function (_BaseEquationFunction) {
+  _inherits(Box, _BaseEquationFunction);
 
-  // lineWidth: number;
-  // boxScale: Point;
-  // boxRotation: number;
-  function Box(mainContent, box) {
-    var _this;
-
-    var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
+  function Box() {
     _classCallCheck(this, Box);
 
-    if (box) {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent, new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](box)]));
-    } else {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Box).call(this, [mainContent]));
-    }
-
-    _this.box = box;
-    _this.scaleModifier = 1; // this.lineWidth = 0;
-
-    _this.mainContent = mainContent;
-
-    if (boxInSize == null) {
-      _this.boxInSize = false;
-    } else {
-      _this.boxInSize = boxInSize;
-    }
-
-    _this.space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(space || 0); // space == null ? 0 : space;
-
-    _this.boxWidth = 1;
-    _this.boxHeight = 1;
-    _this.boxPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    return _possibleConstructorReturn(_this);
+    return _possibleConstructorReturn(this, _getPrototypeOf(Box).apply(this, arguments));
   }
 
   _createClass(Box, [{
-    key: "_dup",
-    value: function _dup(namedCollection) {
-      var box = null;
-
-      if (this.box != null && namedCollection) {
-        box = namedCollection[this.box.name];
-      } else {
-        box = this.box;
-      }
-
-      var boxCopy = new Box(this.mainContent._dup(namedCollection), box, this.boxInSize, this.space);
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, boxCopy, ['box', 'mainContent']);
-      return boxCopy;
-    }
-  }, {
     key: "calcSize",
-    value: function calcSize(location, incomingScale) {
-      var scale = incomingScale * this.scaleModifier;
+    value: function calcSize(location, scale) {
       this.location = location._dup();
-      this.mainContent.calcSize(location, scale);
-      var lineWidth = 0;
 
-      if (this.box && this.box.custom.lineWidth != null && typeof this.box.custom.lineWidth === 'number') {
-        lineWidth = this.box.custom.lineWidth;
+      var loc = location._dup();
+
+      var contentLoc = loc._dup();
+
+      var glyphLoc = loc._dup();
+
+      var _this$glyphs = _slicedToArray(this.glyphs, 1),
+          glyph = _this$glyphs[0];
+
+      var _this$contents = _slicedToArray(this.contents, 1),
+          mainContent = _this$contents[0];
+
+      var _this$options = this.options,
+          inSize = _this$options.inSize,
+          space = _this$options.space,
+          topSpace = _this$options.topSpace,
+          rightSpace = _this$options.rightSpace,
+          bottomSpace = _this$options.bottomSpace,
+          leftSpace = _this$options.leftSpace;
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
+      var fullContentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"](); // const { mainContent } = this;
+
+      if (mainContent != null) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.copyFrom(mainContent);
       }
 
-      var boxWidth = this.mainContent.width + this.space.x * 2;
-      var boxHeight = this.mainContent.height + this.space.y * 2; // Position of center of box line in bottom left corner
+      var leftSpaceToUse = space;
+      var rightSpaceToUse = space;
+      var topSpaceToUse = space;
+      var bottomSpaceToUse = space;
 
-      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](location.x - this.space.x, location.y - this.mainContent.descent - this.space.y);
+      if (leftSpace != null) {
+        leftSpaceToUse = leftSpace;
+      }
 
-      if (this.boxInSize) {
-        this.width = boxWidth + lineWidth * 2;
-        this.height = boxHeight + lineWidth * 2;
-        this.ascent = this.mainContent.ascent + this.space.y + lineWidth;
-        this.descent = this.mainContent.descent + this.space.y + lineWidth;
-        this.mainContent.offsetLocation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.space.x + lineWidth, 0));
-        bottomLeft.x += this.space.x + lineWidth;
+      if (topSpace != null) {
+        topSpaceToUse = topSpace;
+      }
+
+      if (bottomSpace != null) {
+        bottomSpaceToUse = bottomSpace;
+      }
+
+      if (rightSpace != null) {
+        rightSpaceToUse = rightSpace;
+      }
+
+      fullContentBounds.width = leftSpaceToUse + rightSpaceToUse + contentBounds.width;
+      fullContentBounds.ascent = contentBounds.ascent + topSpaceToUse;
+      fullContentBounds.descent = contentBounds.descent + bottomSpaceToUse;
+      fullContentBounds.height = fullContentBounds.descent + fullContentBounds.ascent;
+      var boxHeight = fullContentBounds.width;
+      var boxWidth = fullContentBounds.height;
+
+      if (glyph != null) {
+        var lineWidth = glyph.custom.options.lineWidth;
+
+        if (glyph.custom.options.fill) {
+          lineWidth = 0;
+        }
+
+        var widthLineWidth = lineWidth;
+        var heightLineWidth = lineWidth;
+
+        if (glyph.custom.options.draw === 'static') {
+          var _glyph$custom$options = glyph.custom.options,
+              staticWidth = _glyph$custom$options.staticWidth,
+              staticHeight = _glyph$custom$options.staticHeight;
+
+          if (staticWidth === 'first') {
+            staticWidth = fullContentBounds.width + lineWidth * 2;
+          }
+
+          if (staticHeight === 'first') {
+            staticHeight = fullContentBounds.height + lineWidth * 2;
+          }
+
+          var heightLineWidthRatio = lineWidth / staticHeight;
+          var widthLineWidthRatio = lineWidth / staticWidth;
+          boxWidth = fullContentBounds.width / (1 - 2 * widthLineWidthRatio);
+          boxHeight = fullContentBounds.height / (1 - 2 * heightLineWidthRatio);
+          widthLineWidth = boxWidth * widthLineWidthRatio;
+          heightLineWidth = boxHeight * heightLineWidthRatio;
+        } else {
+          boxWidth = fullContentBounds.width + lineWidth * 2;
+          boxHeight = fullContentBounds.height + lineWidth * 2;
+        }
+
+        this.glyphHeights[0] = boxHeight;
+        this.glyphWidths[0] = boxWidth;
+
+        if (glyph.custom.options.fill) {
+          heightLineWidth = 0;
+          widthLineWidth = 0;
+        }
+
+        glyphLoc.y = loc.y - fullContentBounds.descent - heightLineWidth;
+
+        if (glyph != null && glyph.custom.options.height != null) {
+          glyphLoc.y = loc.y - fullContentBounds.descent + fullContentBounds.height / 2 - glyph.custom.options.height / 2;
+        }
+
+        if (inSize) {
+          contentLoc.x = loc.x + widthLineWidth + leftSpaceToUse;
+
+          if (glyph != null && glyph.custom.options.width != null) {
+            contentLoc.x = loc.x + glyph.custom.options.width / 2 - fullContentBounds.width / 2;
+          }
+
+          this.width = boxWidth;
+          this.descent = fullContentBounds.descent + heightLineWidth;
+          this.ascent = fullContentBounds.ascent + heightLineWidth;
+        } else {
+          glyphLoc.x = loc.x - widthLineWidth - leftSpaceToUse;
+
+          if (glyph != null && glyph.custom.options.width != null) {
+            glyphLoc.x = loc.x + fullContentBounds.width / 2 - glyph.custom.options.width / 2;
+          }
+
+          this.width = fullContentBounds.width;
+          this.descent = fullContentBounds.descent;
+          this.ascent = fullContentBounds.ascent;
+        }
+
+        this.glyphLocations[0] = glyphLoc;
+        glyph.custom.setSize(this.glyphLocations[0], boxWidth, boxHeight);
       } else {
-        this.width = this.mainContent.width;
-        this.ascent = this.mainContent.ascent;
-        this.descent = this.mainContent.descent;
+        this.width = fullContentBounds.width;
+        this.descent = fullContentBounds.descent;
+        this.ascent = fullContentBounds.ascent;
       }
 
       this.height = this.descent + this.ascent;
-      var box = this.box;
 
-      if (box) {
-        this.boxPosition = bottomLeft._dup();
-        this.boxWidth = boxWidth;
-        this.boxHeight = boxHeight;
-        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight));
-        box.showAll();
+      if (mainContent != null && inSize) {
+        mainContent.offsetLocation(contentLoc.sub(mainContent.location));
       }
-    }
-  }, {
-    key: "getAllElements",
-    value: function getAllElements() {
-      var elements = [];
-
-      if (this.mainContent) {
-        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
-      }
-
-      if (this.box) {
-        elements = [].concat(_toConsumableArray(elements), [this.box]);
-      }
-
-      return elements;
-    }
-  }, {
-    key: "setPositions",
-    value: function setPositions() {
-      this.mainContent.setPositions();
-      var box = this.box;
-
-      if (box) {
-        box.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](this.boxPosition.x, this.boxPosition.y, this.boxWidth, this.boxHeight)); // box.showAll();
-      }
-    }
-  }, {
-    key: "offsetLocation",
-    value: function offsetLocation() {
-      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      this.location = this.location.add(offset);
-      this.mainContent.offsetLocation(offset);
-      this.boxPosition = this.boxPosition.add(offset);
     }
   }]);
 
   return Box;
-}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+}(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
@@ -5903,10 +5843,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
- // import {
-//   DiagramElementPrimitive, DiagramElementCollection,
-// } from '../../../Element';
-// import { duplicateFromTo } from '../../../../tools/tools';
 
 
 
@@ -6070,6 +6006,153 @@ function (_BaseEquationFunction) {
 
   return Brackets;
 }(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Container.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Container.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Container; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+/* harmony import */ var _BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseEquationFunction */ "./src/js/diagram/DiagramElements/Equation/Elements/BaseEquationFunction.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Container =
+/*#__PURE__*/
+function (_BaseEquationFunction) {
+  _inherits(Container, _BaseEquationFunction);
+
+  function Container() {
+    _classCallCheck(this, Container);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Container).apply(this, arguments));
+  }
+
+  _createClass(Container, [{
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var _this$options = this.options,
+          width = _this$options.width,
+          descent = _this$options.descent,
+          ascent = _this$options.ascent,
+          xAlign = _this$options.xAlign,
+          yAlign = _this$options.yAlign,
+          fit = _this$options.fit,
+          scaleModifier = _this$options.scaleModifier;
+
+      var _this$contents = _slicedToArray(this.contents, 1),
+          mainContent = _this$contents[0];
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
+      var containerBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
+
+      if (mainContent != null) {
+        mainContent.calcSize(loc._dup(), scale * scaleModifier);
+        contentBounds.copyFrom(mainContent);
+        containerBounds.copyFrom(contentBounds);
+      }
+
+      if (width != null) {
+        containerBounds.width = width;
+      }
+
+      if (descent != null) {
+        containerBounds.descent = descent;
+      }
+
+      if (ascent != null) {
+        containerBounds.ascent = ascent;
+      }
+
+      containerBounds.height = containerBounds.descent + containerBounds.ascent;
+
+      if (mainContent != null) {
+        if (fit === 'width') {
+          mainContent.calcSize(loc._dup(), containerBounds.width / contentBounds.width);
+        } else if (fit === 'height') {
+          mainContent.calcSize(loc._dup(), containerBounds.height / contentBounds.height);
+        } else if (fit === 'contain') {
+          var newScale = Math.min(containerBounds.width / contentBounds.width, containerBounds.height / contentBounds.height);
+          mainContent.calcSize(loc._dup(), newScale);
+        }
+
+        contentBounds.copyFrom(mainContent);
+      }
+
+      var contentLoc = loc._dup();
+
+      if (xAlign === 'center') {
+        contentLoc.x = loc.x + containerBounds.width / 2 - contentBounds.width / 2;
+      } else if (xAlign === 'right') {
+        contentLoc.x = loc.x + containerBounds.width - contentBounds.width;
+      } else if (typeof xAlign === 'number') {
+        contentLoc.x = loc.x + containerBounds.width * xAlign;
+      }
+
+      if (yAlign === 'bottom') {
+        contentLoc.y = loc.y - containerBounds.descent + contentBounds.descent;
+      } else if (yAlign === 'middle') {
+        contentLoc.y = loc.y - containerBounds.descent + containerBounds.height / 2 - contentBounds.height / 2 + contentBounds.descent;
+      } else if (yAlign === 'top') {
+        contentLoc.y = loc.y + containerBounds.ascent - contentBounds.height + contentBounds.descent;
+      } else if (typeof yAlign === 'number') {
+        contentLoc.y = loc.y - containerBounds.descent + containerBounds.height * yAlign + contentBounds.descent;
+      }
+
+      if (mainContent != null) {
+        mainContent.offsetLocation(contentLoc.sub(mainContent.location));
+      }
+
+      this.width = containerBounds.width;
+      this.height = containerBounds.height;
+      this.descent = containerBounds.descent;
+      this.ascent = containerBounds.ascent;
+    }
+  }]);
+
+  return Container;
+}(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
@@ -6771,7 +6854,7 @@ function (_BaseEquationFunction) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Integral; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Matrix; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
@@ -6886,18 +6969,18 @@ function getMaxColWidth(numRows, numCols, matrix, bounds) {
 } // Matrix is centered in y.
 
 
-var Integral =
+var Matrix =
 /*#__PURE__*/
 function (_BaseEquationFunction) {
-  _inherits(Integral, _BaseEquationFunction);
+  _inherits(Matrix, _BaseEquationFunction);
 
-  function Integral() {
-    _classCallCheck(this, Integral);
+  function Matrix() {
+    _classCallCheck(this, Matrix);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Integral).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Matrix).apply(this, arguments));
   }
 
-  _createClass(Integral, [{
+  _createClass(Matrix, [{
     key: "calcSize",
     value: function calcSize(location, scale) {
       this.location = location._dup();
@@ -6958,6 +7041,10 @@ function (_BaseEquationFunction) {
           dim = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](maxDim, maxDim);
         } else {
           dim = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(fit);
+
+          if (dim == null) {
+            dim = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+          }
         }
 
         for (var _row = 0; _row < numRows; _row += 1) {
@@ -7017,7 +7104,7 @@ function (_BaseEquationFunction) {
     }
   }]);
 
-  return Integral;
+  return Matrix;
 }(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 
@@ -7033,19 +7120,19 @@ function (_BaseEquationFunction) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Padding; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Brackets; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+/* harmony import */ var _BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseEquationFunction */ "./src/js/diagram/DiagramElements/Equation/Elements/BaseEquationFunction.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7064,82 +7151,57 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
- // import {
-//   DiagramElementPrimitive, DiagramElementCollection,
-// } from '../../../Element';
 
- // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimitives or DiagramElementCollections and HTML Objects
-// // and arranges their size in a )
 
-var Padding =
+
+var Brackets =
 /*#__PURE__*/
-function (_Elements) {
-  _inherits(Padding, _Elements);
+function (_BaseEquationFunction) {
+  _inherits(Brackets, _BaseEquationFunction);
 
-  function Padding(mainContent) {
-    var _this;
+  function Brackets() {
+    _classCallCheck(this, Brackets);
 
-    var top = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var right = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var bottom = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var left = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-
-    _classCallCheck(this, Padding);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Padding).call(this, [mainContent]));
-    _this.left = left == null ? 0 : left;
-    _this.right = right == null ? 0 : right;
-    _this.top = top == null ? 0 : top;
-    _this.bottom = bottom == null ? 0 : bottom;
-    _this.mainContent = mainContent;
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Brackets).apply(this, arguments));
   }
 
-  _createClass(Padding, [{
-    key: "_dup",
-    value: function _dup(namedCollection) {
-      var paddingCopy = new Padding(this.mainContent._dup(namedCollection), this.top, this.right, this.bottom, this.left);
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, paddingCopy, ['mainContent']);
-      return paddingCopy;
-    }
-  }, {
+  _createClass(Brackets, [{
     key: "calcSize",
     value: function calcSize(location, scale) {
       this.location = location._dup();
-      this.mainContent.calcSize(location.add(this.left, 0), scale);
-      this.descent = this.mainContent.descent + this.bottom;
-      this.ascent = this.mainContent.ascent + this.top;
-      this.width = this.mainContent.width + this.left + this.right;
-      this.height = this.descent + this.ascent;
-    }
-  }, {
-    key: "getAllElements",
-    value: function getAllElements() {
-      var elements = [];
 
-      if (this.mainContent) {
-        elements = [].concat(_toConsumableArray(elements), _toConsumableArray(this.mainContent.getAllElements()));
+      var loc = location._dup();
+
+      var _this$contents = _slicedToArray(this.contents, 1),
+          mainContent = _this$contents[0];
+
+      var _this$options = this.options,
+          left = _this$options.left,
+          top = _this$options.top,
+          right = _this$options.right,
+          bottom = _this$options.bottom;
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
+
+      if (mainContent != null) {
+        mainContent.calcSize(loc._dup(), scale);
+        contentBounds.copyFrom(mainContent);
       }
 
-      return elements;
-    }
-  }, {
-    key: "setPositions",
-    value: function setPositions() {
-      this.mainContent.setPositions();
-    }
-  }, {
-    key: "offsetLocation",
-    value: function offsetLocation() {
-      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      this.location = this.location.add(offset);
-      this.mainContent.offsetLocation(offset);
+      var contentLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](loc.x + left, loc.y);
+
+      if (mainContent != null) {
+        mainContent.offsetLocation(contentLocation.sub(mainContent.location));
+      }
+
+      this.descent = contentBounds.descent + bottom;
+      this.ascent = contentBounds.ascent + top;
+      this.width = contentBounds.width + left + right;
+      this.height = this.descent + this.ascent;
     }
   }]);
 
-  return Padding;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__["Elements"]);
+  return Brackets;
+}(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
@@ -7438,6 +7500,93 @@ function (_Elements) {
 
   return Root;
 }(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Equation/Elements/Scale.js":
+/*!*******************************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Equation/Elements/Scale.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Scale; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+/* harmony import */ var _BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BaseEquationFunction */ "./src/js/diagram/DiagramElements/Equation/Elements/BaseEquationFunction.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Scale =
+/*#__PURE__*/
+function (_BaseEquationFunction) {
+  _inherits(Scale, _BaseEquationFunction);
+
+  function Scale() {
+    _classCallCheck(this, Scale);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Scale).apply(this, arguments));
+  }
+
+  _createClass(Scale, [{
+    key: "calcSize",
+    value: function calcSize(location, scale) {
+      this.location = location._dup();
+
+      var loc = location._dup();
+
+      var scaleModifier = this.options.scaleModifier;
+
+      var _this$contents = _slicedToArray(this.contents, 1),
+          mainContent = _this$contents[0];
+
+      var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
+
+      if (mainContent != null) {
+        mainContent.calcSize(loc._dup(), scale * scaleModifier);
+        contentBounds.copyFrom(mainContent);
+      }
+
+      this.width = contentBounds.width;
+      this.height = contentBounds.height;
+      this.descent = contentBounds.descent;
+      this.ascent = contentBounds.ascent;
+    }
+  }]);
+
+  return Scale;
+}(_BaseEquationFunction__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
@@ -8355,7 +8504,8 @@ function (_DiagramElementCollec) {
 
       var _Object$entries$ = _slicedToArray(Object.entries(symbol)[0], 2),
           key = _Object$entries$[0],
-          params = _Object$entries$[1];
+          params = _Object$entries$[1]; // $FlowFixMe
+
 
       return this.getExistingOrAddSymbolFromKey(key, params);
     } // 'text'
@@ -8415,27 +8565,20 @@ function (_DiagramElementCollec) {
       }, options));
       this.add(key, element);
       return element;
-    }
-  }, {
-    key: "addElementFromObject",
-    value: function addElementFromObject(key, options) {
-      if (typeof key !== 'string') {
-        return null;
-      }
+    } // addElementFromObject(key: string, options: Object) {
+    //   if (typeof key !== 'string') {
+    //     return null;
+    //   }
+    //   const existingElement = this.getElement(key);
+    //   if (existingElement != null) {
+    //     return existingElement;
+    //   }
+    //   const text = this.getTextFromKey(key);
+    //   const element = this.makeTextElem({ text });
+    //   this.add(key, element);
+    //   return element;
+    // }
 
-      var existingElement = this.getElement(key);
-
-      if (existingElement != null) {
-        return existingElement;
-      }
-
-      var text = this.getTextFromKey(key);
-      var element = this.makeTextElem({
-        text: text
-      });
-      this.add(key, element);
-      return element;
-    }
   }, {
     key: "makeSymbolElem",
     value: function makeSymbolElem(options) {
@@ -9102,7 +9245,6 @@ function (_DiagramElementCollec) {
       }
 
       if (subFormToUse != null) {
-        // $FlowFixMe
         subForm = form[subFormToUse];
         var duration = options.duration;
 
@@ -10058,6 +10200,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Elements_Integral__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Elements/Integral */ "./src/js/diagram/DiagramElements/Equation/Elements/Integral.js");
 /* harmony import */ var _Elements_SumProd__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Elements/SumProd */ "./src/js/diagram/DiagramElements/Equation/Elements/SumProd.js");
 /* harmony import */ var _Elements_Matrix__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Elements/Matrix */ "./src/js/diagram/DiagramElements/Equation/Elements/Matrix.js");
+/* harmony import */ var _Elements_Scale__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Elements/Scale */ "./src/js/diagram/DiagramElements/Equation/Elements/Scale.js");
+/* harmony import */ var _Elements_Container__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Elements/Container */ "./src/js/diagram/DiagramElements/Equation/Elements/Container.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -10089,6 +10233,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
 
  // import { Brackets, Bar } from './Elements/Brackets';
+
+
 
 
 
@@ -10201,6 +10347,7 @@ function () {
       if (Array.isArray(content)) {
         var elementArray = [];
         content.forEach(function (c) {
+          // $FlowFixMe
           var result = _this.parseContent(c);
 
           if (Array.isArray(result)) {
@@ -10225,10 +10372,12 @@ function () {
 
       if (eqnMethod != null) {
         return eqnMethod;
-      } // If it is not a known function, then it must be a new text or symbol element
+      } // If it is not a known function, then it must be a new text or
+      // symbol element           // $FlowFixMe
 
 
-      var elem = this.addElementFromKey(method, params);
+      var elem = this.addElementFromKey(method, params); // $FlowFixMe
+
       return new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["Element"](elem);
     }
   }, {
@@ -10367,11 +10516,104 @@ function () {
 
       if (name === 'matrix') {
         return this.matrix(params);
+      } // $FlowFixMe
+
+
+      if (name === 'scale') {
+        return this.scale(params);
+      } // $FlowFixMe
+
+
+      if (name === 'container') {
+        return this.container(params);
       } // Add container - where you fix the ascent, descent, and width
       // (content is centered in width) - Content spills out of container by default
 
 
       return null;
+    }
+  }, {
+    key: "container",
+    value: function container(optionsOrArray) {
+      var content;
+      var scale;
+      var fit; // fits content to container - width, height, contain, null
+
+      var width;
+      var ascent;
+      var descent;
+      var xAlign; // left, center, right, multiplier (to left)
+
+      var yAlign; // bottom, baseline, middle, top, multiplier (to bottom)
+
+      var defaultOptions = {
+        scaleModifier: 1,
+        fit: null,
+        width: null,
+        ascent: null,
+        descent: null,
+        xAlign: 'center',
+        yAlign: 'baseline'
+      };
+
+      if (Array.isArray(optionsOrArray)) {
+        var _optionsOrArray = _slicedToArray(optionsOrArray, 8);
+
+        content = _optionsOrArray[0];
+        width = _optionsOrArray[1];
+        descent = _optionsOrArray[2];
+        ascent = _optionsOrArray[3];
+        xAlign = _optionsOrArray[4];
+        yAlign = _optionsOrArray[5];
+        fit = _optionsOrArray[6];
+        scale = _optionsOrArray[7];
+      } else {
+        content = optionsOrArray.content;
+        width = optionsOrArray.width;
+        descent = optionsOrArray.descent;
+        ascent = optionsOrArray.ascent;
+        xAlign = optionsOrArray.xAlign;
+        yAlign = optionsOrArray.yAlign;
+        fit = optionsOrArray.fit;
+        scale = optionsOrArray.scale;
+      }
+
+      var optionsIn = {
+        scaleModifier: scale,
+        fit: fit,
+        width: width,
+        ascent: ascent,
+        descent: descent,
+        xAlign: xAlign,
+        yAlign: yAlign
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return new _Elements_Container__WEBPACK_IMPORTED_MODULE_18__["default"]([this.contentToElement(content)], [], options);
+    }
+  }, {
+    key: "scale",
+    value: function scale(optionsOrArray) {
+      var content;
+      var scale;
+      var defaultOptions = {
+        scaleModifier: 1
+      };
+
+      if (Array.isArray(optionsOrArray)) {
+        var _optionsOrArray2 = _slicedToArray(optionsOrArray, 2);
+
+        content = _optionsOrArray2[0];
+        scale = _optionsOrArray2[1];
+      } else {
+        content = optionsOrArray.content;
+        scale = optionsOrArray.scale;
+      }
+
+      var optionsIn = {
+        scaleModifier: scale
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return new _Elements_Scale__WEBPACK_IMPORTED_MODULE_17__["default"]([this.contentToElement(content)], [], options);
     }
   }, {
     key: "frac",
@@ -10398,18 +10640,16 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray = _slicedToArray(optionsOrArray, 8);
+        var _optionsOrArray3 = _slicedToArray(optionsOrArray, 8);
 
-        numerator = _optionsOrArray[0];
-        symbol = _optionsOrArray[1];
-        denominator = _optionsOrArray[2];
-        scale = _optionsOrArray[3];
-        // $FlowFixMe
-        numeratorSpace = _optionsOrArray[4];
-        denominatorSpace = _optionsOrArray[5];
-        overhang = _optionsOrArray[6];
-        // $FlowFixMe
-        offsetY = _optionsOrArray[7];
+        numerator = _optionsOrArray3[0];
+        symbol = _optionsOrArray3[1];
+        denominator = _optionsOrArray3[2];
+        scale = _optionsOrArray3[3];
+        numeratorSpace = _optionsOrArray3[4];
+        denominatorSpace = _optionsOrArray3[5];
+        overhang = _optionsOrArray3[6];
+        offsetY = _optionsOrArray3[7];
       } else {
         numerator = optionsOrArray.numerator;
         symbol = optionsOrArray.symbol;
@@ -10429,13 +10669,8 @@ function () {
         offsetY: offsetY
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      console.log(symbol);
-      return new _Elements_Fraction__WEBPACK_IMPORTED_MODULE_4__["default"]( // $FlowFixMe
-      [this.contentToElement(numerator), this.contentToElement(denominator)], // $FlowFixMe
-      this.getExistingOrAddSymbol(symbol), options); // if (scale != null) {                            // $FlowFixMe
-      //   f.scaleModifier = scale;
-      // }
-      // return f;
+      return new _Elements_Fraction__WEBPACK_IMPORTED_MODULE_4__["default"]([this.contentToElement(numerator), this.contentToElement(denominator)], // $FlowFixMe
+      this.getExistingOrAddSymbol(symbol), options);
     }
   }, {
     key: "root",
@@ -10575,11 +10810,8 @@ function () {
       superscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_7__["default"]( // $FlowFixMe
       this.contentToElement(content), // $FlowFixMe
-      this.contentToElement(superscript), // $FlowFixMe
-      null, // $FlowFixMe
-      scale, // $FlowFixMe
-      superscriptBias, // $FlowFixMe
-      null);
+      this.contentToElement(superscript), null, // $FlowFixMe
+      scale, superscriptBias, null);
     }
   }, {
     key: "sub",
@@ -10616,12 +10848,9 @@ function () {
       subscriptBias = subscriptBias == null ? null : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])( // $FlowFixMe
       subscriptBias, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_7__["default"]( // $FlowFixMe
-      this.contentToElement(content), // $FlowFixMe
-      null, // $FlowFixMe
+      this.contentToElement(content), null, // $FlowFixMe
       this.contentToElement(subscript), // $FlowFixMe
-      scale, // $FlowFixMe
-      null, // $FlowFixMe
-      subscriptBias);
+      scale, null, subscriptBias);
     }
   }, {
     key: "strike",
@@ -10657,41 +10886,58 @@ function () {
     }
   }, {
     key: "box",
-    value: function box(optionsOrContent) // options: TypeStrikeObject | TypeStrikeArray) {
-    {
-      var sym = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var boxInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var spaceIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    value: function box(optionsOrArray) {
       var content;
       var symbol;
       var inSize;
       var space;
+      var topSpace;
+      var bottomSpace;
+      var leftSpace;
+      var rightSpace;
+      var defaultOptions = {
+        inSize: false,
+        space: 0,
+        topSpace: null,
+        bottomSpace: null,
+        leftSpace: null,
+        rightSpace: null
+      };
 
-      if (!(sym == null && boxInSize == null && spaceIn == null)) {
-        content = optionsOrContent;
-        symbol = sym;
-        inSize = boxInSize;
-        space = spaceIn;
-      } else if (Array.isArray(optionsOrContent)) {
-        // $FlowFixMe
-        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 4);
+      if (Array.isArray(optionsOrArray)) {
+        var _optionsOrArray4 = _slicedToArray(optionsOrArray, 8);
 
-        content = _optionsOrContent5[0];
-        symbol = _optionsOrContent5[1];
-        inSize = _optionsOrContent5[2];
-        space = _optionsOrContent5[3];
+        content = _optionsOrArray4[0];
+        symbol = _optionsOrArray4[1];
+        inSize = _optionsOrArray4[2];
+        space = _optionsOrArray4[3];
+        topSpace = _optionsOrArray4[4];
+        rightSpace = _optionsOrArray4[5];
+        bottomSpace = _optionsOrArray4[6];
+        leftSpace = _optionsOrArray4[7];
       } else {
-        content = optionsOrContent.content;
-        symbol = optionsOrContent.symbol;
-        inSize = optionsOrContent.inSize;
-        space = optionsOrContent.space;
+        content = optionsOrArray.content;
+        symbol = optionsOrArray.symbol;
+        inSize = optionsOrArray.inSize;
+        space = optionsOrArray.space;
+        topSpace = optionsOrArray.topSpace;
+        rightSpace = optionsOrArray.rightSpace;
+        bottomSpace = optionsOrArray.bottomSpace;
+        leftSpace = optionsOrArray.leftSpace;
       }
 
-      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_13__["default"]( // $FlowFixMe
-      this.contentToElement(content), // $FlowFixMe
-      this.getExistingOrAddSymbol(symbol), // $FlowFixMe
-      inSize, // $FlowFixMe
-      space);
+      var optionsIn = {
+        content: content,
+        symbol: symbol,
+        inSize: inSize,
+        space: space,
+        topSpace: topSpace,
+        rightSpace: rightSpace,
+        bottomSpace: bottomSpace,
+        leftSpace: leftSpace
+      };
+      var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return new _Elements_Box__WEBPACK_IMPORTED_MODULE_13__["default"]([this.contentToElement(content)], this.getExistingOrAddSymbol(symbol), optionsToUse);
     }
   }, {
     key: "annotate",
@@ -10710,11 +10956,11 @@ function () {
         withAnnotations = withAnnotationsArray;
         inSize = inSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 3);
+        var _optionsOrContent5 = _slicedToArray(optionsOrContent, 3);
 
-        content = _optionsOrContent6[0];
-        withAnnotations = _optionsOrContent6[1];
-        inSize = _optionsOrContent6[2];
+        content = _optionsOrContent5[0];
+        withAnnotations = _optionsOrContent5[1];
+        inSize = _optionsOrContent5[2];
       } else {
         content = optionsOrContent.content;
         withAnnotations = optionsOrContent.withAnnotations;
@@ -10728,7 +10974,8 @@ function () {
           // annotation is an already instantiated AnnotationInformation
           if (annotation instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_11__["AnnotationInformation"]) {
             return annotation;
-          }
+          } // $FlowFixMe
+
 
           var parsedContent = _this2.parseContent(annotation); // case that annotation is a method object
 
@@ -10764,7 +11011,6 @@ function () {
           if (parsedContent instanceof _Elements_Annotation__WEBPACK_IMPORTED_MODULE_11__["AnnotationInformation"]) {
             annotations = [parsedContent]; // Array form only
           } else {
-            // $FlowFixMe
             annotations = [this.annotation(withAnnotations)];
           }
         }
@@ -10812,6 +11058,7 @@ function () {
       } else if (Array.isArray(optionsOrAnnotation)) {
         var _optionsOrAnnotation = _slicedToArray(optionsOrAnnotation, 8);
 
+        // $FlowFixMe
         annotation = _optionsOrAnnotation[0];
         relativeToContentH = _optionsOrAnnotation[1];
         relativeToContentV = _optionsOrAnnotation[2];
@@ -10864,31 +11111,26 @@ function () {
   }, {
     key: "pad",
     value: function pad(optionsOrContent) {
-      var topPad = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var rightPad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var bottomPad = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var leftPad = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var content;
       var top;
       var right;
       var bottom;
       var left;
+      var defaultOptions = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+      };
 
-      if (!(topPad == null && rightPad == null && leftPad == null && bottomPad == null)) {
-        content = optionsOrContent;
-        top = topPad;
-        left = leftPad;
-        right = rightPad;
-        bottom = bottomPad;
-      } else if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 5);
+      if (Array.isArray(optionsOrContent)) {
+        var _optionsOrContent6 = _slicedToArray(optionsOrContent, 5);
 
-        // $FlowFixMe
-        content = _optionsOrContent7[0];
-        top = _optionsOrContent7[1];
-        right = _optionsOrContent7[2];
-        bottom = _optionsOrContent7[3];
-        left = _optionsOrContent7[4];
+        content = _optionsOrContent6[0];
+        top = _optionsOrContent6[1];
+        right = _optionsOrContent6[2];
+        bottom = _optionsOrContent6[3];
+        left = _optionsOrContent6[4];
       } else {
         content = optionsOrContent.content;
         top = optionsOrContent.top;
@@ -10897,12 +11139,14 @@ function () {
         left = optionsOrContent.left;
       }
 
-      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_12__["default"]( // $FlowFixMe
-      this.contentToElement(content), // $FlowFixMe
-      top, // $FlowFixMe
-      right, // $FlowFixMe
-      bottom, // $FlowFixMe
-      left);
+      var optionsIn = {
+        top: top,
+        right: right,
+        bottom: bottom,
+        left: left
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return new _Elements_Padding__WEBPACK_IMPORTED_MODULE_12__["default"](this.contentToElement(content), [], options);
     }
   }, {
     key: "topBar",
@@ -10946,22 +11190,19 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray2 = _slicedToArray(optionsOrArray, 11);
+        var _optionsOrArray5 = _slicedToArray(optionsOrArray, 11);
 
-        // $FlowFixMe
-        content = _optionsOrArray2[0];
-        symbol = _optionsOrArray2[1];
-        inSize = _optionsOrArray2[2];
-        space = _optionsOrArray2[3];
-        overhang = _optionsOrArray2[4];
-        // $FlowFixMe
-        length = _optionsOrArray2[5];
-        left = _optionsOrArray2[6];
-        right = _optionsOrArray2[7];
-        top = _optionsOrArray2[8];
-        // $FlowFixMe
-        bottom = _optionsOrArray2[9];
-        side = _optionsOrArray2[10];
+        content = _optionsOrArray5[0];
+        symbol = _optionsOrArray5[1];
+        inSize = _optionsOrArray5[2];
+        space = _optionsOrArray5[3];
+        overhang = _optionsOrArray5[4];
+        length = _optionsOrArray5[5];
+        left = _optionsOrArray5[6];
+        right = _optionsOrArray5[7];
+        top = _optionsOrArray5[8];
+        bottom = _optionsOrArray5[9];
+        side = _optionsOrArray5[10];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -10991,12 +11232,10 @@ function () {
       var symbolToUse = null;
 
       if (symbol != null) {
-        // $FlowFixMe
         symbolToUse = this.getExistingOrAddSymbol(symbol);
       }
 
-      return new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
-      [this.contentToElement(content)], symbolToUse, options);
+      return new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]([this.contentToElement(content)], symbolToUse, options);
     }
   }, {
     key: "matrix",
@@ -11021,19 +11260,17 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray3 = _slicedToArray(optionsOrArray, 9);
+        var _optionsOrArray6 = _slicedToArray(optionsOrArray, 9);
 
-        // $FlowFixMe
-        order = _optionsOrArray3[0];
-        left = _optionsOrArray3[1];
-        content = _optionsOrArray3[2];
-        right = _optionsOrArray3[3];
-        // $FlowFixMe
-        scale = _optionsOrArray3[4];
-        fit = _optionsOrArray3[5];
-        space = _optionsOrArray3[6];
-        vAlign = _optionsOrArray3[7];
-        brac = _optionsOrArray3[8];
+        order = _optionsOrArray6[0];
+        left = _optionsOrArray6[1];
+        content = _optionsOrArray6[2];
+        right = _optionsOrArray6[3];
+        scale = _optionsOrArray6[4];
+        fit = _optionsOrArray6[5];
+        space = _optionsOrArray6[6];
+        vAlign = _optionsOrArray6[7];
+        brac = _optionsOrArray6[8];
       } else {
         order = optionsOrArray.order;
         left = optionsOrArray.left;
@@ -11058,6 +11295,7 @@ function () {
       var contentArray = [];
 
       if (content != null) {
+        // $FlowFixMe
         contentArray = content.map(function (c) {
           return _this3.contentToElement(c);
         });
@@ -11113,20 +11351,18 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray4 = _slicedToArray(optionsOrArray, 9);
+        var _optionsOrArray7 = _slicedToArray(optionsOrArray, 9);
 
+        symbol = _optionsOrArray7[0];
+        content = _optionsOrArray7[1];
+        inSize = _optionsOrArray7[2];
+        space = _optionsOrArray7[3];
+        topSpace = _optionsOrArray7[4];
+        bottomSpace = _optionsOrArray7[5];
         // $FlowFixMe
-        symbol = _optionsOrArray4[0];
-        content = _optionsOrArray4[1];
-        inSize = _optionsOrArray4[2];
-        space = _optionsOrArray4[3];
-        // $FlowFixMe
-        topSpace = _optionsOrArray4[4];
-        bottomSpace = _optionsOrArray4[5];
-        // $FlowFixMe
-        height = _optionsOrArray4[6];
-        yOffset = _optionsOrArray4[7];
-        scale = _optionsOrArray4[8];
+        height = _optionsOrArray7[6];
+        yOffset = _optionsOrArray7[7];
+        scale = _optionsOrArray7[8];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -11151,14 +11387,12 @@ function () {
       var symbolToUse = null;
 
       if (symbol != null) {
-        // $FlowFixMe
         symbolToUse = this.getExistingOrAddSymbol(symbol);
       }
 
       var contentArray = [];
 
       if (content != null) {
-        // $FlowFixMe
         contentArray.push(this.contentToElement(content));
       }
 
@@ -11205,32 +11439,32 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray5 = _slicedToArray(optionsOrArray, 19);
+        var _optionsOrArray8 = _slicedToArray(optionsOrArray, 19);
 
         // $FlowFixMe
-        symbol = _optionsOrArray5[0];
-        content = _optionsOrArray5[1];
-        from = _optionsOrArray5[2];
-        to = _optionsOrArray5[3];
-        inSize = _optionsOrArray5[4];
-        space = _optionsOrArray5[5];
+        symbol = _optionsOrArray8[0];
+        content = _optionsOrArray8[1];
+        from = _optionsOrArray8[2];
+        to = _optionsOrArray8[3];
+        inSize = _optionsOrArray8[4];
+        space = _optionsOrArray8[5];
         // $FlowFixMe
-        topSpace = _optionsOrArray5[6];
-        bottomSpace = _optionsOrArray5[7];
+        topSpace = _optionsOrArray8[6];
+        bottomSpace = _optionsOrArray8[7];
         // $FlowFixMe
-        height = _optionsOrArray5[8];
-        yOffset = _optionsOrArray5[9];
-        scale = _optionsOrArray5[10];
+        height = _optionsOrArray8[8];
+        yOffset = _optionsOrArray8[9];
+        scale = _optionsOrArray8[10];
         // $FlowFixMe
-        fromScale = _optionsOrArray5[11];
-        toScale = _optionsOrArray5[12];
-        fromSpace = _optionsOrArray5[13];
-        toSpace = _optionsOrArray5[14];
+        fromScale = _optionsOrArray8[11];
+        toScale = _optionsOrArray8[12];
+        fromSpace = _optionsOrArray8[13];
+        toSpace = _optionsOrArray8[14];
         // $FlowFixMe
-        fromOffset = _optionsOrArray5[15];
-        toOffset = _optionsOrArray5[16];
-        limitsPosition = _optionsOrArray5[17];
-        limitsAroundContent = _optionsOrArray5[18];
+        fromOffset = _optionsOrArray8[15];
+        toOffset = _optionsOrArray8[16];
+        limitsPosition = _optionsOrArray8[17];
+        limitsAroundContent = _optionsOrArray8[18];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -11346,29 +11580,25 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray6 = _slicedToArray(optionsOrArray, 17);
+        var _optionsOrArray9 = _slicedToArray(optionsOrArray, 17);
 
-        // $FlowFixMe
-        symbol = _optionsOrArray6[0];
-        content = _optionsOrArray6[1];
-        from = _optionsOrArray6[2];
-        to = _optionsOrArray6[3];
-        inSize = _optionsOrArray6[4];
-        space = _optionsOrArray6[5];
-        // $FlowFixMe
-        topSpace = _optionsOrArray6[6];
-        bottomSpace = _optionsOrArray6[7];
-        // $FlowFixMe
-        height = _optionsOrArray6[8];
-        yOffset = _optionsOrArray6[9];
-        scale = _optionsOrArray6[10];
-        // $FlowFixMe
-        fromScale = _optionsOrArray6[11];
-        toScale = _optionsOrArray6[12];
-        fromSpace = _optionsOrArray6[13];
-        toSpace = _optionsOrArray6[14];
-        fromOffset = _optionsOrArray6[15];
-        toOffset = _optionsOrArray6[16];
+        symbol = _optionsOrArray9[0];
+        content = _optionsOrArray9[1];
+        from = _optionsOrArray9[2];
+        to = _optionsOrArray9[3];
+        inSize = _optionsOrArray9[4];
+        space = _optionsOrArray9[5];
+        topSpace = _optionsOrArray9[6];
+        bottomSpace = _optionsOrArray9[7];
+        height = _optionsOrArray9[8];
+        yOffset = _optionsOrArray9[9];
+        scale = _optionsOrArray9[10];
+        fromScale = _optionsOrArray9[11];
+        toScale = _optionsOrArray9[12];
+        fromSpace = _optionsOrArray9[13];
+        toSpace = _optionsOrArray9[14];
+        fromOffset = _optionsOrArray9[15];
+        toOffset = _optionsOrArray9[16];
       } else {
         symbol = optionsOrArray.symbol;
         content = optionsOrArray.content;
@@ -11410,24 +11640,20 @@ function () {
       var symbolToUse = null;
 
       if (symbol != null) {
-        // $FlowFixMe
         symbolToUse = this.getExistingOrAddSymbol(symbol);
       }
 
       var contentArray = [];
 
       if (content != null) {
-        // $FlowFixMe
         contentArray.push(this.contentToElement(content));
       }
 
       if (from != null) {
-        // $FlowFixMe
         contentArray.push(this.contentToElement(from));
       }
 
       if (to != null) {
-        // $FlowFixMe
         contentArray.push(this.contentToElement(to));
       }
 
@@ -11450,22 +11676,21 @@ function () {
       var inSize;
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray7 = _slicedToArray(optionsOrArray, 12);
+        var _optionsOrArray10 = _slicedToArray(optionsOrArray, 12);
 
+        content = _optionsOrArray10[0];
+        left = _optionsOrArray10[1];
+        right = _optionsOrArray10[2];
+        inSize = _optionsOrArray10[3];
+        insideSpace = _optionsOrArray10[4];
+        outsideSpace = _optionsOrArray10[5];
         // $FlowFixMe
-        content = _optionsOrArray7[0];
-        left = _optionsOrArray7[1];
-        right = _optionsOrArray7[2];
-        inSize = _optionsOrArray7[3];
-        insideSpace = _optionsOrArray7[4];
-        outsideSpace = _optionsOrArray7[5];
-        // $FlowFixMe
-        topSpace = _optionsOrArray7[6];
-        bottomSpace = _optionsOrArray7[7];
-        minContentHeight = _optionsOrArray7[8];
-        minContentDescent = _optionsOrArray7[9];
-        height = _optionsOrArray7[10];
-        descent = _optionsOrArray7[11];
+        topSpace = _optionsOrArray10[6];
+        bottomSpace = _optionsOrArray10[7];
+        minContentHeight = _optionsOrArray10[8];
+        minContentDescent = _optionsOrArray10[9];
+        height = _optionsOrArray10[10];
+        descent = _optionsOrArray10[11];
       } else {
         content = optionsOrArray.content;
         left = optionsOrArray.left;
@@ -11484,21 +11709,18 @@ function () {
       var leftBracket = null;
 
       if (left != null) {
-        // $FlowFixMe
         leftBracket = this.getExistingOrAddSymbol(left);
       }
 
       var rightBracket = null;
 
       if (right != null) {
-        // $FlowFixMe
         rightBracket = this.getExistingOrAddSymbol(right);
       }
 
       var contentArray = [];
 
       if (content != null) {
-        // $FlowFixMe
         contentArray.push(this.contentToElement(content));
       }
 
@@ -11525,8 +11747,7 @@ function () {
         inSize: inSize
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_8__["default"]( // $FlowFixMe
-      contentArray, [leftBracket, rightBracket], options);
+      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_8__["default"](contentArray, [leftBracket, rightBracket], options);
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -11541,16 +11762,15 @@ function () {
       var inSize;
 
       if (Array.isArray(optionsOrArray)) {
-        // $FlowFixMe
-        var _optionsOrArray8 = _slicedToArray(optionsOrArray, 7);
+        var _optionsOrArray11 = _slicedToArray(optionsOrArray, 7);
 
-        content = _optionsOrArray8[0];
-        comment = _optionsOrArray8[1];
-        symbol = _optionsOrArray8[2];
-        contentSpace = _optionsOrArray8[3];
-        commentSpace = _optionsOrArray8[4];
-        scale = _optionsOrArray8[5];
-        inSize = _optionsOrArray8[6];
+        content = _optionsOrArray11[0];
+        comment = _optionsOrArray11[1];
+        symbol = _optionsOrArray11[2];
+        contentSpace = _optionsOrArray11[3];
+        commentSpace = _optionsOrArray11[4];
+        scale = _optionsOrArray11[5];
+        inSize = _optionsOrArray11[6];
       } else {
         content = optionsOrArray.content;
         comment = optionsOrArray.comment;
@@ -11593,22 +11813,19 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
-        [this.contentToElement(content)], // $FlowFixMe
-        this.getExistingOrAddSymbol(symbol), {
+        contentToUse = new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]([this.contentToElement(content)], this.getExistingOrAddSymbol(symbol), {
           side: 'bottom',
-          // $FlowFixMe
           space: contentSpaceToUse,
-          // $FlowFixMe
           inSize: inSize
         });
       } else {
-        contentToUse = this.pad( // $FlowFixMe
-        content, 0, 0, contentSpaceToUse + commentSpaceToUse);
+        contentToUse = this.pad({
+          content: content,
+          bottom: contentSpaceToUse + commentSpaceToUse
+        });
       }
 
       return this.annotate({
-        // $FlowFixMe
         content: contentToUse,
         withAnnotations: [// $FlowFixMe
         this.annotation({
@@ -11616,10 +11833,8 @@ function () {
           relativeToContent: ['center', 'bottom'],
           relativeToAnnotation: ['center', 'top'],
           scale: scaleToUse,
-          // $FlowFixMe
           yOffset: -commentSpaceToUse
         })],
-        // $FlowFixMe
         inSize: inSize
       });
     } // $FlowFixMe
@@ -11640,22 +11855,19 @@ function () {
       var contentToUse;
 
       if (symbol) {
-        contentToUse = new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
-        [this.contentToElement(content)], // $FlowFixMe
-        this.getExistingOrAddSymbol(symbol), {
+        contentToUse = new _Elements_Bar__WEBPACK_IMPORTED_MODULE_9__["default"]([this.contentToElement(content)], this.getExistingOrAddSymbol(symbol), {
           side: 'top',
-          // $FlowFixMe
           space: contentSpaceToUse,
-          // $FlowFixMe
           inSize: inSize
         });
       } else {
-        contentToUse = this.pad( // $FlowFixMe
-        content, contentSpaceToUse + commentSpaceToUse);
+        contentToUse = this.pad({
+          content: content,
+          top: contentSpaceToUse + commentSpaceToUse
+        });
       }
 
       return this.annotate({
-        // $FlowFixMe
         content: contentToUse,
         withAnnotations: [// $FlowFixMe
         this.annotation({
@@ -11665,7 +11877,6 @@ function () {
           scale: scaleToUse,
           yOffset: commentSpaceToUse
         })],
-        // $FlowFixMe
         inSize: inSize
       });
     } // eslint-disable-next-line class-methods-use-this
@@ -11691,13 +11902,13 @@ function () {
         scale = comScale;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent8 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent7 = _slicedToArray(optionsOrContent, 5);
 
-        content = _optionsOrContent8[0];
-        comment = _optionsOrContent8[1];
-        symbol = _optionsOrContent8[2];
-        space = _optionsOrContent8[3];
-        scale = _optionsOrContent8[4];
+        content = _optionsOrContent7[0];
+        comment = _optionsOrContent7[1];
+        symbol = _optionsOrContent7[2];
+        space = _optionsOrContent7[3];
+        scale = _optionsOrContent7[4];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -11737,8 +11948,7 @@ function () {
       if (symbol) {
         contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
-        this.getExistingOrAddSymbol(symbol), // $FlowFixMe
-        false, // $FlowFixMe
+        this.getExistingOrAddSymbol(symbol), false, // $FlowFixMe
         spaceToUse);
       } else {
         contentToUse = content;
@@ -11773,8 +11983,7 @@ function () {
       if (symbol) {
         contentToUse = new _Elements_Strike__WEBPACK_IMPORTED_MODULE_6__["default"]( // $FlowFixMe
         this.contentToElement(content), // $FlowFixMe
-        this.getExistingOrAddSymbol(symbol), // $FlowFixMe
-        false, // $FlowFixMe
+        this.getExistingOrAddSymbol(symbol), false, // $FlowFixMe
         spaceToUse);
       } else {
         contentToUse = content;
@@ -11866,7 +12075,11 @@ function () {
   _createClass(EquationSymbols, [{
     key: "get",
     value: function get(name, options) {
+      // if (name === 'vinculumOld') {
+      //   return this.vinculum(options);
+      // }
       if (name === 'vinculum') {
+        // $FlowFixMe
         return this.vinculum(options);
       }
 
@@ -11939,28 +12152,23 @@ function () {
         return this.arrow(options);
       }
 
-      if (name === 'vinculumNew') {
-        // $FlowFixMe
-        return this.vinculumNew(options);
-      }
-
       return null;
-    }
+    } // vinculumOld(options: { color?: Array<number> } = {}) {
+    //   let { color } = options;
+    //   if (color == null) {
+    //     color = this.defaultColor;
+    //   }
+    //   return this.shapes.horizontalLine(
+    //     new Point(0, 0),
+    //     1, 1, 0,
+    //     color,
+    //     new Transform('vinculum').scale(1, 1).translate(0, 0),
+    //   );
+    // }
+
   }, {
     key: "vinculum",
-    value: function vinculum() {
-      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var color = options.color;
-
-      if (color == null) {
-        color = this.defaultColor;
-      }
-
-      return this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('vinculum').scale(1, 1).translate(0, 0));
-    }
-  }, {
-    key: "vinculumNew",
-    value: function vinculumNew(options) {
+    value: function vinculum(options) {
       var defaultOptions = {
         color: this.defaultColor,
         lineWidth: null,
@@ -11978,11 +12186,15 @@ function () {
       var defaultOptions = {
         color: this.defaultColor,
         fill: false,
-        width: 0.01,
-        staticSize: null
+        width: null,
+        height: null,
+        lineWidth: 0.01,
+        draw: 'dynamic',
+        staticHeight: 'first',
+        staticWidth: 'first'
       };
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      return Object(_Symbols_Box__WEBPACK_IMPORTED_MODULE_4__["default"])(this.shapes, options.color, options.fill, options.width, options.staticSize);
+      var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+      return new _Symbols_Box__WEBPACK_IMPORTED_MODULE_4__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Box').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse).symbol;
     } // simpleIntegral(optionsIn: {
     //   color?: Array<number>,
     //   lineWidth?: number,
@@ -12845,7 +13057,9 @@ function (_Bracket) {
 
         return _this.getBracketPoints(leftPoints, rightPoints, side, width, height);
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -12963,15 +13177,13 @@ function (_Bracket) {
     value: function getPoints() {
       var _this = this;
 
-      // $FlowFixMe
       return function (options, widthIn, height) {
         var direction = options.direction;
 
         var _this$getDefaultValue = _this.getDefaultValues(height, widthIn, options),
             lineWidth = _this$getDefaultValue.lineWidth,
             arrowWidth = _this$getDefaultValue.arrowWidth,
-            arrowHeight = _this$getDefaultValue.arrowHeight,
-            width = _this$getDefaultValue.width;
+            arrowHeight = _this$getDefaultValue.arrowHeight;
 
         var p0 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](arrowWidth / 2 + lineWidth / 2, 0);
         var p1 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](arrowWidth / 2 - lineWidth / 2, 0);
@@ -13004,7 +13216,9 @@ function (_Bracket) {
 
         return _this.getBracketPoints(leftPoints, rightPoints, side, arrowWidth, height);
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -13103,7 +13317,9 @@ function (_Bracket) {
         var rightPoints = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](lineWidth, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](lineWidth, height)];
         return _this.getBracketPoints(leftPoints, rightPoints, side, width, height);
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -13139,174 +13355,129 @@ function (_Bracket) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Box; });
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _Symbol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Symbol */ "./src/js/diagram/DiagramElements/Equation/Symbols/Symbol.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
+ // import WebGLInstance from '../../../webgl/webgl';
 
+var Box =
+/*#__PURE__*/
+function (_Symbol2) {
+  _inherits(Box, _Symbol2);
 
-function getRectAndSpace(rectOrParent) {
-  var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var rectToUse;
-  var childrenToUse = null;
-  var spaceToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+  function Box() {
+    _classCallCheck(this, Box);
 
-  if (Array.isArray(childrenOrSpace)) {
-    if (childrenOrSpace.length > 0) {
-      if (typeof childrenOrSpace[0] === 'string' || childrenOrSpace[0] instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
-        childrenToUse = childrenOrSpace;
-      } else {
-        // $FlowFixMe
-        spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
-      }
+    return _possibleConstructorReturn(this, _getPrototypeOf(Box).apply(this, arguments));
+  }
+
+  _createClass(Box, [{
+    key: "getTriangles",
+    // eslint-disable-next-line class-methods-use-this
+    value: function getTriangles() {
+      return 'strip';
+    } //                                          width
+    //                 |<--------------------------------------------------->|
+    //                 |                                                     |
+    //                 |                                                     |
+    //                2                                                       4
+    //         ------- 0000000000000000000000000000000000000000000000000000000
+    //         A       0000000000000000000000000000000000000000000000000000000
+    //         |       0000 3                                           5 0000
+    //         |       0000                                               0000
+    //         |       0000                                               0000
+    //  height |       0000                                               0000
+    //         |       0000                                               0000
+    //         |       0000                                               0000
+    //         |       0000                                               0000
+    //         |       0000 1                                           7 0000
+    //         |       0000000000000000000000000000000000000000000000000000000
+    //         V______ 0000000000000000000000000000000000000000000000000000000
+    //                0                                                        6
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getPoints",
+    value: function getPoints() {
+      var _this = this;
+
+      // eslint-disable-next-line no-unused-vars
+      return function (options, widthIn, heightIn) {
+        var fill = options.fill;
+
+        var _this$getDefaultValue = _this.getDefaultValues(heightIn, widthIn, options),
+            lineWidth = _this$getDefaultValue.lineWidth,
+            width = _this$getDefaultValue.width,
+            height = _this$getDefaultValue.height;
+
+        var points;
+
+        if (fill) {
+          points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, height)];
+        } else {
+          points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](lineWidth, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](lineWidth, height - lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width - lineWidth, height - lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width - lineWidth, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](lineWidth, lineWidth)];
+        }
+
+        return [points, width, height];
+      };
     }
-  }
-
-  if (typeof childrenOrSpace === 'number') {
-    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(childrenOrSpace);
-  }
-
-  if (space != null) {
-    spaceToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(space);
-  }
-
-  if (rectOrParent instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"]) {
-    rectToUse = rectOrParent;
-  } else {
+    /* eslint-disable class-methods-use-this */
     // $FlowFixMe
-    rectToUse = rectOrParent.getBoundingRect('local', childrenToUse);
-  }
 
-  return [rectToUse, spaceToUse];
-}
+  }, {
+    key: "getDefaultValues",
+    value: function getDefaultValues(height, width, options) {
+      var out = {};
 
-function updateStaticLinePoints(box, width, sizeIn) {
-  var size = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(sizeIn);
-  var x = size.x,
-      y = size.y;
-  var xWidth = width / y / 2;
-  var yWidth = width / x / 2;
-  var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, -0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 - yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5 + yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, 0.5 + xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, 0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 + yWidth, -0.5 - xWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5 - yWidth, -0.5 + xWidth)];
-
-  var getPoints = function getPoints(indexes) {
-    return indexes.map(function (index) {
-      return points[index]._dup();
-    });
-  };
-
-  var left = box._left;
-  var right = box._right;
-  var top = box._top;
-  var bottom = box._bottom;
-
-  if (left == null || right == null || top == null || bottom == null) {
-    return;
-  } // $FlowFixMe
-
-
-  left.drawingObject.changeVertices(getPoints([0, 1, 2, 1, 3, 2])); // $FlowFixMe
-
-  top.drawingObject.changeVertices(getPoints([2, 3, 4, 3, 5, 4])); // $FlowFixMe
-
-  right.drawingObject.changeVertices(getPoints([4, 5, 6, 5, 7, 6])); // $FlowFixMe
-
-  bottom.drawingObject.changeVertices(getPoints([6, 7, 0, 7, 1, 0]));
-}
-
-function Box(shapes, color, fill, width, staticSize) {
-  var box; // Defined once, just scaled
-
-  if (fill) {
-    box = shapes.rectangle({
-      color: color,
-      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
-    });
-    box.custom.boxType = 'fill';
-    box.custom.lineWidth = 0; // Defined every time a setSize event is called
-  } else if (staticSize != null) {
-    var poly = function poly(p1, p2, w) {
-      return shapes.polyLine({
-        points: [p1, p2],
-        color: color,
-        width: w,
-        close: false
-      });
-    };
-
-    box = shapes.collection({
-      color: color,
-      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
-    });
-    var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)];
-    box.add('left', poly(points[0], points[1], 0.1));
-    box.add('top', poly(points[0], points[1], 0.1));
-    box.add('right', poly(points[0], points[1], 0.1));
-    box.add('bottom', poly(points[0], points[1], 0.1));
-    updateStaticLinePoints(box, width, staticSize);
-    box.custom.boxType = 'line';
-    box.custom.lineWidth = width; // defined everytime a setTransform event is called
-  } else {
-    box = shapes.polyLine({
-      points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, -0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, 0.5), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0.5, -0.5)],
-      color: color,
-      width: width,
-      close: true,
-      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('box').scale(1, 1).translate(0, 0)
-    });
-    box.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](1, 1);
-    box.custom.lineWidth = width;
-
-    box.internalSetTransformCallback = function () {
-      var s = box.getScale();
-
-      if (box.custom.scale.isNotEqualTo(s, 8)) {
-        box.drawingObject.change([new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, -s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](-s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, s.y / 2), new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](s.x / 2, -s.y / 2)]);
-        box.custom.scale = s;
+      if (options.lineWidth != null && typeof options.lineWidth === 'number') {
+        out.lineWidth = options.lineWidth;
+      } else {
+        out.lineWidth = 0.01;
       }
-    };
 
-    box.getTransform = function () {
-      var t = box.transform._dup();
+      if (options.height != null && typeof options.height === 'number') {
+        out.height = options.height;
+      } else if (height != null) {
+        out.height = height;
+      } else {
+        out.height = 1;
+      }
 
-      t.updateScale(1, 1);
-      return t;
-    };
+      if (options.width != null && typeof options.width === 'number') {
+        out.width = options.width;
+      } else if (width != null) {
+        out.width = width;
+      } else {
+        out.width = 1;
+      }
 
-    box.custom.boxType = 'dynamic';
-  } // eslint-disable-next-line max-len
-
-
-  box.custom.setSize = function (rectOrParent) {
-    var childrenOrSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-    var _getRectAndSpace = getRectAndSpace(rectOrParent, childrenOrSpace, space),
-        _getRectAndSpace2 = _slicedToArray(_getRectAndSpace, 2),
-        rectToUse = _getRectAndSpace2[0],
-        spaceToUse = _getRectAndSpace2[1];
-
-    if (box.custom.boxType === 'line') {
-      updateStaticLinePoints(box, box.custom.lineWidth, new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](rectToUse.width, rectToUse.height));
+      return out;
     }
+  }]);
 
-    var t = box.transform._dup();
+  return Box;
+}(_Symbol__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-    t.updateScale(rectToUse.width + spaceToUse.x * 2 + box.custom.lineWidth, rectToUse.height + spaceToUse.y * 2 + box.custom.lineWidth);
-    t.updateTranslation(rectToUse.left + rectToUse.width / 2, rectToUse.bottom + rectToUse.height / 2);
-    box.setTransform(t);
-  };
 
-  return box;
-}
 
 /***/ }),
 
@@ -13781,7 +13952,9 @@ function (_Symbol2) {
     //   0.5            0.05          0.015
     //   0.3            0.05          0.015
     //   0.2            0.03          0.012
-    // eslint-disable-next-line class-methods-use-this
+
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -14125,7 +14298,9 @@ function (_Symbol2) {
       }
 
       return points;
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -14412,7 +14587,9 @@ function (_Symbol2) {
     //   0.5            0.4            0.012
     //   0.3            0.25           0.009
     //   0.2            0.2           0.008
-    // eslint-disable-next-line class-methods-use-this
+
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -14420,7 +14597,8 @@ function (_Symbol2) {
       var out = {
         lineWidth: options.lineWidth || 1,
         // height * 0.93 / (25 * height + 15),
-        width: width || 1
+        width: width || 1,
+        height: height
       };
 
       if (options.lineWidth == null && width != null) {
@@ -14726,7 +14904,8 @@ function (_Bracket) {
 
         return _this.getBracketPoints(outsidePoints, insidePoints, side, width, height);
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
 
   }, {
     key: "getDefaultValues",
@@ -14962,14 +15141,17 @@ function (_Symbol2) {
         var points = [p0, p1].concat(bottomCurvePairs, [p4, p5, p6, p7, p8, p9], topCurvePairs, [p12, p13]);
         return [points, width, height];
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
     value: function getDefaultValues(height, width, options) {
       var out = {
         lineWidth: height * 0.88 / (25 * height + 15),
-        width: height * 0.88
+        width: height * 0.88,
+        height: height
       };
 
       if (options.lineWidth != null) {
@@ -15162,6 +15344,11 @@ function () {
           var _this$getDefaultValue = _this.getDefaultValues(staticHeight, staticWidth, options);
 
           width = _this$getDefaultValue.width;
+
+          if (width == null) {
+            width = height;
+          }
+
           return width / staticHeight * height;
         }
 
@@ -15203,6 +15390,11 @@ function () {
           var _this2$getDefaultValu = _this2.getDefaultValues(staticHeight, staticWidth, options);
 
           height = _this2$getDefaultValu.height;
+
+          if (height == null) {
+            height = width;
+          }
+
           return height / staticWidth * width;
         }
 
@@ -15226,31 +15418,48 @@ function () {
         var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, height)];
         return [points, width, height];
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // getDefaultValues(height: number, width: ?number, options: {
+    //     height?: number,
+    //     width?: number,
+    //     lineWidth?: number,
+    //     tipWidth?: number,
+    //     arrowWidth?: number,
+    //     arrowHeight?: number,
+    //   }) {
+    //   const out: {
+    //     height?: number,
+    //     width?: number,
+    //     lineWidth?: number,
+    //     tipWidth?: number,
+    //     arrowWidth?: number,
+    //     arrowHeight?: number,
+    //   } = {
+    //     width: height,
+    //   };
+    //   if (width != null) {
+    //     out.width = width;
+    //   }
+    //   if (options.width != null) {
+    //     out.width = options.width;
+    //   }
+    //   if (height != null) {
+    //     out.height = height;
+    //   }
+    //   if (options.height != null) {
+    //     out.height = options.height;
+    //   }
+    //   return out;
+    // }
+
+    /* eslint-disable no-unused-vars */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
     value: function getDefaultValues(height, width, options) {
-      var out = {
-        width: height
-      };
-
-      if (width != null) {
-        out.width = width;
-      }
-
-      if (options.width != null) {
-        out.width = options.width;
-      }
-
-      if (height != null) {
-        out.height = height;
-      }
-
-      if (options.height != null) {
-        out.height = options.height;
-      }
-
+      var out = {};
       return out;
     }
   }]);
@@ -15427,7 +15636,9 @@ function (_Symbol2) {
         var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, lineWidth)];
         return [points, width, height];
       };
-    } // eslint-disable-next-line class-methods-use-this
+    }
+    /* eslint-disable class-methods-use-this */
+    // $FlowFixMe
 
   }, {
     key: "getDefaultValues",
@@ -27573,8 +27784,6 @@ function (_DiagramElement) {
         }
 
         if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-          // console.log(this.name, this.drawingObject)
-          // $FlowFixMe
           // this.drawingObject.element.style.color =
           // colorArrayToRGBA([...this.color.slice(0, 2), opacity]);
           // console.log(this.drawingObject.element)
