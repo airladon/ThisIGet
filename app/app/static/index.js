@@ -9776,7 +9776,7 @@ function () {
 
       var defaultOptions = {
         insideSpace: 0.03,
-        outsideSpace: 0,
+        outsideSpace: 0.03,
         topSpace: 0.05,
         bottomSpace: 0.05,
         minContentHeight: null,
@@ -11467,7 +11467,7 @@ function () {
       var rightSpace;
       var defaultOptions = {
         inSize: false,
-        space: 0,
+        space: 0.02,
         topSpace: null,
         bottomSpace: null,
         leftSpace: null,
@@ -11494,6 +11494,14 @@ function () {
         rightSpace = optionsOrArray.rightSpace;
         bottomSpace = optionsOrArray.bottomSpace;
         leftSpace = optionsOrArray.leftSpace;
+      }
+
+      var glyph = this.getExistingOrAddSymbol(symbol);
+
+      if (glyph != null && glyph.custom.options.style === 'horizontal') {
+        defaultOptions.space = 0;
+        defaultOptions.leftSpace = 0.02;
+        defaultOptions.rightSpace = 0.02;
       }
 
       var optionsIn = {
@@ -15189,7 +15197,7 @@ function (_Symbol2) {
       if (options.lineWidth != null && typeof options.lineWidth === 'number') {
         out.lineWidth = options.lineWidth;
       } else {
-        out.lineWidth = 0.01;
+        out.lineWidth = 0.015;
       }
 
       if (options.height != null && typeof options.height === 'number') {

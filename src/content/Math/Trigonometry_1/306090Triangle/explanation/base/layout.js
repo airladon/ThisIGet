@@ -394,7 +394,7 @@ export default function diagramLayout() {
             topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
-              contentSpace: 0.14,
+              commentSpace: 0.16,
               inSize: false,
             },
           },
@@ -414,7 +414,7 @@ export default function diagramLayout() {
             topComment: {
               content: sq('A1', '_21'),
               comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
-              contentSpace: 0.14,
+              commentSpace: 0.16,
               inSize: false,
             },
           },

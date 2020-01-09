@@ -95,6 +95,7 @@ export default function diagramLayout() {
         lb: {
           symbol: 'bracket', side: 'left', numLines: 1,
         },
+        times: ' \u00D7 ',
         rb: {
           symbol: 'bracket', side: 'right', numLines: 1,
         },

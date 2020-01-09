@@ -304,12 +304,12 @@ export default function diagramLayout() {
           symbol: 'brace', side: 'top', color: colors.working,
         },
         box: {
-          symbol: 'box', color: colors.angles, width: 0.008,
+          symbol: 'box', color: colors.angles, lineWidth: 0.008,
           // symbol: 'box', color: colors.angles, width: 0.08,
           // staticSize: [1, 0.2],
         },
         box2: {
-          symbol: 'box', color: colors.angles, width: 0.01,
+          symbol: 'box', color: colors.angles, lineWidth: 0.01,
           // staticSize: [1, 0.2],
         },
         v: { symbol: 'vinculum' },
