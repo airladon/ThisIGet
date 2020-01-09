@@ -37,7 +37,7 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: [{ root: ['_2', 'r'] }, 'A'],
+        content: [{ root: ['r', '_2'] }, 'A'],
         scale: 1,
         alignment: { alignV: -0.01, alignH: 0.2 },
       },
@@ -51,7 +51,7 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: [{ root: ['_2', 'r'] }],
+        content: [{ root: ['r', '_2'] }],
         scale: 1,
         alignment: { alignV: -0.01, alignH: 0.2 },
       },

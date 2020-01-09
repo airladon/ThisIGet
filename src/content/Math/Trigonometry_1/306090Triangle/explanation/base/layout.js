@@ -37,8 +37,8 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       equals: ' = ',
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -86,8 +86,8 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       equals: ' = ',
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
       v: { symbol: 'vinculum', color: colors.sides },
     },
     forms: {
@@ -142,35 +142,35 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, 'v', '_2', 0.7] }, 'A'],
+        content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '1': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, 'v', '_2', 0.7] }, 'A', 'times', '_2_'],
+        content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A', 'times', '_2_'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '2': {
         content: [
-          { frac: [{ root: ['_3', 'r'] }, 'v', { strike: ['_2', 's1'] }, 0.7] },
+          { frac: [{ root: ['r', '_3'] }, 'v', { strike: ['_2', 's1'] }, 0.7] },
           'A', 'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '3': {
-        content: [{ root: ['_3', 'r'] }, 'A'],
+        content: [{ root: ['r', '_3'] }, 'A'],
         alignment: { alignV: -0.1 },
         scale: 1,
       },
       '4': {
-        content: [{ root: ['_3', 'r'] }, {
+        content: [{ root: ['r', '_3'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
             withAnnotations: ['_1'],
@@ -180,7 +180,7 @@ export default function diagramLayout() {
         scale: 1,
       },
       '5': {
-        content: { root: ['_3', 'r'] },
+        content: { root: ['r', '_3'] },
         alignment: { alignV: -0.1 },
         scale: 1,
       },
@@ -292,7 +292,7 @@ export default function diagramLayout() {
   });
 
   const brac = (content, lb, rb) => ({
-    brac: [content, lb, rb],
+    brac: [lb, content, rb],
   });
 
   const strike = (content, strikeSymbol) => ({
@@ -300,7 +300,7 @@ export default function diagramLayout() {
   });
 
   const root = (content, radical) => ({
-    root: [content, radical],
+    root: [radical, content],
   });
 
   const eqn = {
@@ -346,8 +346,8 @@ export default function diagramLayout() {
         },
         lb: { symbol: 'bracket', side: 'left', width: 0.06 },
         rb: { symbol: 'bracket', side: 'right', width: 0.06 },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
         r1: { symbol: 'radical' },
         r2: { symbol: 'radical' },
         r3: { symbol: 'radical' },

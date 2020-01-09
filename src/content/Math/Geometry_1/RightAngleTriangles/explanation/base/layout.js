@@ -471,8 +471,8 @@ export default function diagramLayout() {
     '__brace': {
       symbol: 'brace', side: 'bottom', color: colors.description,
     },
-    'x': { symbol: 'xStrike', color: colors.description },
-    '_x': { symbol: 'xStrike', color: colors.description },
+    'x': { symbol: 'strike', style: 'cross', color: colors.description },
+    '_x': { symbol: 'strike', style: 'cross', color: colors.description },
   };
 
   const top = (content, commentText, symbol) => ({
@@ -542,7 +542,7 @@ export default function diagramLayout() {
           content: [
             top(
               AreaLSquare,
-              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
               'brace',
             ),
             'equals', '_4', 'mul',
@@ -559,7 +559,7 @@ export default function diagramLayout() {
         // ////////////////////////////////////////////////////////////
         '1': {
           content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
             'equals',
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
@@ -569,7 +569,7 @@ export default function diagramLayout() {
         '1a': {
           content: [
             top(
-              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
               [
                 sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
                 '_plus', sup('___B', '_2d'),

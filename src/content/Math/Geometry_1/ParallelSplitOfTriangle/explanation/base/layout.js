@@ -592,10 +592,10 @@ export default function diagramLayout() {
     rb2: { symbol: 'bracket', side: 'right' },
     lb3: { symbol: 'bracket', side: 'left' },
     rb3: { symbol: 'bracket', side: 'right' },
-    'x0': { symbol: 'xStrike', color: colors.grey },
-    'x1': { symbol: 'xStrike', color: colors.grey },
-    'x2': { symbol: 'xStrike', color: colors.grey },
-    'x3': { symbol: 'xStrike', color: colors.grey },
+    'x0': { symbol: 'strike', style: 'cross', color: colors.grey },
+    'x1': { symbol: 'strike', style: 'cross', color: colors.grey },
+    'x2': { symbol: 'strike', style: 'cross', color: colors.grey },
+    'x3': { symbol: 'strike', style: 'cross', color: colors.grey },
 
     arrow: { text: '     =>     ' },
     comma: { text: ',      ' },
@@ -621,7 +621,7 @@ export default function diagramLayout() {
   const strike = (content, x) => ({ strike: [content, x] });
   const sub = (content, s) => ({ sub: [content, ['  ', s]] });
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
-  const brac = (content, lb, rb) => ({ brac: [content, lb, rb] });
+  const brac = (content, lb, rb) => ({ brac: [lb, content, rb] });
 
   const eqn = (name, y, defaultFormSeries) => ({
     name,
@@ -1196,7 +1196,7 @@ export default function diagramLayout() {
         '0': ['B', 'equals', 'B1', 'plus_0', 'B2'],
         '1': [
           'r_0', 'B1_1', 'plus_0', 'r_1', 'B2_1', 'equals',
-          'r_3', { brac: [['B1', 'plus_1', 'B2'], 'lb', 'rb'] },
+          'r_3', { brac: ['lb', ['B1', 'plus_1', 'B2'], 'rb'] },
           'equals_1',
           'r_2', 'B_1',
         ],

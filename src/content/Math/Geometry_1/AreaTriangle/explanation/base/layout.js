@@ -378,8 +378,8 @@ export default function diagramLayout() {
         },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
-        s: { symbol: 'xStrike', color: colors.disabled },
-        _s: { symbol: 'xStrike', color: colors.disabled },
+        s: { symbol: 'strike', style: 'cross', color: colors.disabled },
+        _s: { symbol: 'strike', style: 'cross', color: colors.disabled },
         base: { color: colors.sides },
         height: { color: colors.sides },
       },
@@ -400,28 +400,29 @@ export default function diagramLayout() {
         ],
         '3': [
           sub('Area', 'tri'), 'equals', '   ',
-          { brac: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb', false] },
+          { brac: ['lb', [_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'rb', false] },
         ],
         '4': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
             brac: [
+              'lb',
               [
                 { strike: [[_half, ' ', '_h'], 's'] }, ' ', 'B',
                 'plus',
                 { strike: [[__half, ' ', '__h'], '_s'] }, ' ', 'C',
               ],
-              'lb', 'rb',
+              'rb',
             ],
           },
         ],
         '5': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { brac: [['B', 'plus', 'C'], 'lb', 'rb'] },
+          { brac: ['lb', ['B', 'plus', 'C'], 'rb'] },
         ],
         '6': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ brac: [['B', 'plus', 'C'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ brac: ['lb', ['B', 'plus', 'C'], 'rb'] }, 'base', 'brace'),
         ],
         '7': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '8': [
@@ -455,28 +456,29 @@ export default function diagramLayout() {
         ],
         '23': [
           sub('Area', 'tri'), 'equals', '   ',
-          { brac: [[__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'lb', 'rb', false] },
+          { brac: ['lb', [__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'rb', false] },
         ],
         '24': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
             brac: [
+              'lb',
               [
                 { strike: [[__half, ' ', '__h'], 's'] }, ' ', 'C',
                 'minus',
                 { strike: [[_half, ' ', '_h'], '_s'] }, ' ', 'B',
               ],
-              'lb', 'rb',
+              'rb',
             ],
           },
         ],
         '25': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { brac: [['C', 'minus', 'B'], 'lb', 'rb'] },
+          { brac: ['lb', ['C', 'minus', 'B'], 'rb'] },
         ],
         '26': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ brac: [['C', 'minus', 'B'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ brac: ['lb', ['C', 'minus', 'B'], 'rb'] }, 'base', 'brace'),
         ],
         '27': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '28': [

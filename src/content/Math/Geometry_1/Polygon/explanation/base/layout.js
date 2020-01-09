@@ -327,8 +327,8 @@ export default function diagramLayout() {
           proportionalToHeight: true,
           // staticSize: [3, 1],
         },
-        s1: { symbol: 'xStrike', color: colors.working },
-        s2: { symbol: 'xStrike', color: colors.working },
+        s1: { symbol: 'strike', style: 'cross', color: colors.working },
+        s2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -380,7 +380,7 @@ export default function diagramLayout() {
         '6': {
           box: {
             content: ['tot1', 'equals', {
-              brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+              brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'],
             }, 'times', '_180'],
             symbol: 'box2',
             space: 0.2,
@@ -388,14 +388,14 @@ export default function diagramLayout() {
         },
         '7': [
           'tot1', 'equals', {
-            brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+            brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'],
           }, 'times', '_180',
         ],
         '8': [
           'angle', 'equals', {
             frac: {
               numerator: [
-                { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                { brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'] },
                 'times', '_180',
               ],
               denominator: 'n2',
@@ -409,7 +409,7 @@ export default function diagramLayout() {
               numerator: {
                 topComment: {
                   content: [
-                    { brac: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                    { brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'] },
                     'times', '_180',
                   ],
                   comment: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],

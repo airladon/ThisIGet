@@ -330,8 +330,8 @@ export default function diagramLayout() {
         },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -348,7 +348,7 @@ export default function diagramLayout() {
           'Area', 'equals',
           top(
             { sub: ['Area1', 'rect'] },
-            [{ brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1'],
             'b1',
           ),
           'plus',
@@ -361,7 +361,7 @@ export default function diagramLayout() {
         ],
         '2': [
           'Area', 'equals',
-          { brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1',
+          { brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1',
           'plus',
           '_2', 'mul',
           { frac: ['__1', 'v', '__2', 0.6] }, 'S2', 'H2',
@@ -369,7 +369,7 @@ export default function diagramLayout() {
         '3': [
           'Area', 'equals',
           top(
-            [{ brac: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1'],
             ['A3', 'H3', 'minus2', 'S3', 'H4'],
             'b1',
           ),
@@ -462,8 +462,8 @@ export default function diagramLayout() {
         // },
         // lb: { symbol: 'bracket', side: 'left' },
         // rb: { symbol: 'bracket', side: 'right' },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects

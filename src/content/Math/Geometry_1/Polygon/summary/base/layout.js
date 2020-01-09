@@ -107,7 +107,7 @@ export default function diagramLayout() {
       },
       forms: {
         '0': ['tot1', 'equals', {
-          brac: [['n', 'minus', '_2'], 'lb', 'rb'],
+          brac: ['lb', ['n', 'minus', '_2'], 'rb'],
         }, 'times', '_180'],
         '1': [
           'angle', 'equals', '_180', 'minus', { frac: ['_360', 'v', 'n'] },

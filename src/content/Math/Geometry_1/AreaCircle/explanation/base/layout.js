@@ -293,8 +293,8 @@ export default function diagramLayout() {
         sBrace: {
           symbol: 'brace', side: 'top', color: colors.disabledLabel,
         },
-        x: { symbol: 'xStrike', color: colors.disabledLabel },
-        _x: { symbol: 'xStrike', color: colors.disabledLabel },
+        x: { symbol: 'strike', style: 'cross', color: colors.disabledLabel },
+        _x: { symbol: 'strike', style: 'cross', color: colors.disabledLabel },
       },
       forms: {
         '0': [AreaTri, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b'],

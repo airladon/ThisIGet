@@ -328,9 +328,9 @@ export default function diagramLayout() {
           // percentage: 0.99999999999,
           // tipWidth: 0.06,
           // lineWidth: 0.17,
-          num: 1,
+          num: 3,
           serif: true,
-          // type: 'line',
+          type: 'line',
           lineIntegralSides: 50,
         },
         arrow: { symbol: 'arrow' },
@@ -340,7 +340,7 @@ export default function diagramLayout() {
         opp: { text: 'opposite', color: colors.components },
         angle: { text: 'angle', color: colors.angles },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'bottom', color: colors.working,
         },
         brace1: {
           symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
@@ -352,10 +352,22 @@ export default function diagramLayout() {
           draw: 'static',
           staticHeight: 'first',
           staticWidth: 'first',
-          fill: true,
+          // fill: true,
+        },
+        l1: {
+          symbol: 'brace',
+          side: 'left',
+        },
+        r1: {
+          symbol: 'brace',
+          side: 'right',
+          lineWidth: 0.02,
+          width: 0.1,
         },
         box1: { symbol: 'box', color: [0, 0.9, 0, 1], lineWidth: 0.005 },
         v: { symbol: 'vinculum' },
+        s1: { symbol: 'strike', style: 'horizontal', lineWidth: 0.05 },
+        rad: { symbol: 'radical', draw: 'dynamic' },
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
       },
@@ -371,31 +383,72 @@ export default function diagramLayout() {
               {
                 pad: [
                   {
-                    // brac: ['AB', 'lb', 'rb', true, null, null, null, null, null, null, null, null],
+                    // brac: ['AB', 'l1', 'r1', true, null, null, null, null, null, null, null, null],
                     // bar: { content: 'AB', symbol: 'lb', side: 'top', length: 1 },
-                    // topComment: { content: ['AB', 'bbb_2', '2'], symbol: 'lb', comment: '4', length: null },
+                    // bottomComment: {
+                    //   content: ['AB', 'bbb_2', '2'],
+                    //   symbol: 'brace',
+                    //   comment: '4',
+                    //   length: null,
+                    //   inSize: false,
+                    // },
+                    // prodOf: ['prod', 'a', '2', '4'],
+                    // strike: ['a', 's1', true, 0.1],
+                    // ann: {
+                    //   content: 'AB',
+                      
+                    //   glyphs: {
+                    //     encompass: {
+                    //       symbol: 'b2_box',
+                    //       space: 0.2,
+                    //       annotations: [{
+                    //         content: 'b',
+                    //         yPosition: 'bottom',
+                    //         xPosition: 'right',
+                    //         yAlign: 'middle',
+                    //         xAlign: 'left',
+                    //         offset: new Point(0.1, 0),
+                    //       }],
+                    //     },
+                    //     left: {
+                    //       symbol: 'l1',
+                    //     },
+                    //     right: { symbol: 'r1' },
+                    //   },
+                    //   inSize: false,
+                    // },
                     // frac: {
                     //   numerator: { frac: ['a', 'v1_vinculum', '2'] },
                     //   symbol: 'v_vinculum',
                     //   denominator: { scale: ['b', 2] },
                     //   // symbol: 'v_vinculum',
                     // },
-                    pad: {
-                      content: ['a', 'b'],
+                    // pad: {
+                    //   content: ['a', 'b'],
                       // top: 0.1,
                       // left: 0.1,
                       // bottom: 0.05,
-                    },
+                    // },
                     // brac: ['a', 'leftBracket', 'rb_rightBracket']
                     // simpleIntegral: ['AB', 'sym', true, null, 0.1],
-                    // intLimits: {
-                    //   content: 'AB',
-                    //   from: '4',
-                    //   to: { box: ['2', 'box1'] },
+                    // int: {
+                    //   content: [
+                    //     'a',
+                    //     { strike: {
+                    //       content: 'AB',
+                    //       symbol: 's5_strike',
+                    //       inSize: false,
+                    //       space: 0.2,
+                    //     },
+                    //     },
+                    //     'c',
+                    //   ],
+                    //   // from: 'asdfjhalsdf',
+                    //   // to: { box: ['2', 'box1'] },
                     //   symbol: 'sym',
                     //   // height: 1,
                     //   limitsPosition: 'side',
-                    //   limitsAroundContent: true,
+                    //   limitsOverContent: false,
                     //   // fromOffset: [-0.5, 0],
                     //   // toOffset: [0.1, 0.1],
                     //   // fromOffset: [-0.1, -0.1],
@@ -409,6 +462,12 @@ export default function diagramLayout() {
                     //   topSpace: 0.1,
                     //   bottomSpace: 0.1,
                     // },
+                    root: {
+                      symbol: 'rad',
+                      content: 'AB',
+                      root: '2',
+                      // rootOffset: [0, 0],
+                    },
                     // matrix: {
                     //   left: 'lb1',
                     //   right: 'rb1',
@@ -462,7 +521,12 @@ export default function diagramLayout() {
                     //   // height: 1,
                     //   limitsPosition: 'top',
                     // },
-                    frac: [['a', 'b'], 'v', '5'],
+                    // frac: [['a', 'b'], 'v', '5'],
+                    root: {
+                      symbol: 'rad',
+                      content: { frac: [['a', 'b'], 'v', '5'] },
+                      root: '2',
+                    },
                     // simpleIntegral: ['AB', 'sym', true, null, 0.1, null, null, null, 1],
                     // brac: ['angle', 'lb', 'rb', true, 0.05, 0.05, 0.05, 0.05, null, null, null, null],
                     // space: number = 0.03,

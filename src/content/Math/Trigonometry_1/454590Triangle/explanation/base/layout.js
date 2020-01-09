@@ -39,7 +39,7 @@ export default function diagramLayout() {
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -80,7 +80,7 @@ export default function diagramLayout() {
       r: { symbol: 'radical', color: colors.sides },
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -89,17 +89,17 @@ export default function diagramLayout() {
         alignment: { fixTo: 'D' },
       },
       '1': {
-        content: ['D', 'equals', { root: ['_2', 'r'] }, 'A'],
+        content: ['D', 'equals', { root: ['r', '_2'] }, 'A'],
         scale: 1,
         alignment: { fixTo: 'D' },
       },
       '2': {
-        content: [{ root: ['_2', 'r'] }, 'A'],
+        content: [{ root: ['r', '_2'] }, 'A'],
         scale: 1,
         alignment: { alignV: -0.01, alignH: 0.2 },
       },
       '3': {
-        content: [{ root: ['_2', 'r'] }, {
+        content: [{ root: ['r', '_2'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
             withAnnotations: ['_1'],
@@ -110,7 +110,7 @@ export default function diagramLayout() {
         scale: 1,
       },
       '4': {
-        content: { root: ['_2', 'r'] },
+        content: { root: ['r', '_2'] },
         alignment: { alignV: -0.01, alignH: 0.2 },
         scale: 1,
       },
@@ -265,7 +265,7 @@ export default function diagramLayout() {
   // });
 
   const root = (content, radical) => ({
-    root: [content, radical],
+    root: [radical, content],
   });
 
   const eqn = {
@@ -300,8 +300,8 @@ export default function diagramLayout() {
         },
         // lb: { symbol: 'bracket', side: 'left', numLines: 2 },
         // rb: { symbol: 'bracket', side: 'right', numLines: 2 },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
         r1: { symbol: 'radical' },
         r2: { symbol: 'radical' },
         r3: { symbol: 'radical' },

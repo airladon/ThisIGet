@@ -625,13 +625,13 @@ export default function diagramLayout() {
       content,
       comment: commentText,
       symbol,
-      inSize: false,
+      inSize: true,
       // contentSpace: 0.1,
       // commentSpace: 0.2,
     },
   });
   const brace = () => ({
-    symbol: 'brace', side: 'bottom', color: colors.gridLight,
+    symbol: 'brace', side: 'bottom', color: colors.gridLight, lineWidth: 0.01,
   });
 
   const eqn = {
