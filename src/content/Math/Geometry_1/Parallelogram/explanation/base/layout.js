@@ -473,26 +473,70 @@ export default function diagramLayout() {
       forms: {
         '0': ['_360', 'equals', '_21', 'a', 'plus', '_22', 'b'],
         '1': [
-          { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
-          'equals',
-          { annotate: [['_21', 'a', 'plus', '_22', 'b'], ['_divide21', 'center', 'bottom', 'center', 2], 'false'] },
-        ],
-        '2': [
           {
-            annotate: [
-              { topComment: ['_360', '_180', 'b1', 0.05, 0.05, 0.6, false] },
-              ['_divide2', 'center', 'bottom', 'center', 2],
-              'false',
-            ],
+            annotate: {
+              content: '_360',
+              annotation: {
+                content: '_divide2',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
           },
           'equals',
           {
-            annotate: [[
-              { strike: ['_21', 'strike1'] },
-              'a', 'plus',
-              { strike: ['_22', 'strike2'] },
-              'b',
-            ], ['_divide21', 'center', 'bottom', 'center', 2], 'false'],
+            annotate: {
+              content: ['_21', 'a', 'plus', '_22', 'b'],
+              annotation: {
+                content: '_divide21',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+          },
+        ],
+        '2': [
+          {
+            annotate: {
+              content: { topComment: ['_360', '_180', 'b1', 0.05, 0.05, 0.6, false] },
+              annotation: {
+                content: '_divide2',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+          },
+          'equals',
+          {
+            annotate: {
+              content: [
+                { strike: ['_21', 'strike1'] },
+                'a', 'plus',
+                { strike: ['_22', 'strike2'] },
+                'b',
+              ],
+              annotation: {
+                content: '_divide21',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
           },
         ],
         // '3': [

@@ -463,13 +463,25 @@ export default function diagramLayout() {
     mul: ' \u00D7 ',
     v: { symbol: 'vinculum' },
     'brace': {
-      symbol: 'brace', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
     '_brace': {
-      symbol: 'brace', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
     '__brace': {
-      symbol: 'brace', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
     'x': { symbol: 'strike', style: 'cross', color: colors.description },
     '_x': { symbol: 'strike', style: 'cross', color: colors.description },
@@ -504,13 +516,13 @@ export default function diagramLayout() {
   const ann = (content, annotation) => ({
     annotate: {
       content,
-      withAnnotations: {
-        annotation: {
-          annotation,
-          relativeToContent: ['center', -0.5],
-          relativeToAnnotation: ['center', 'top'],
-          scale: 0.5,
-        },
+      annotation: {
+        content: annotation,
+        xPosition: 'center',
+        yPosition: -0.5,
+        xAlign: 'center',
+        yAlign: 'top',
+        scale: 0.5,
       },
       inSize: false,
     },

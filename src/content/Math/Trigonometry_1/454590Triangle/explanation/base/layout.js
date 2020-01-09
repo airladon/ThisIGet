@@ -58,14 +58,21 @@ export default function diagramLayout() {
         content: [{
           annotate: {
             content: { strike: ['A', 's1', false] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
             inSize: false,
           },
         }],
         scale: 1,
       },
       '4': {
-        content: ['_1'],
+        content: '_1',
         scale: 1,
       },
     },
@@ -102,7 +109,14 @@ export default function diagramLayout() {
         content: [{ root: ['r', '_2'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
             inSize: false,
           },
         }],
@@ -293,10 +307,18 @@ export default function diagramLayout() {
         _27: '2',
         plus: ' + ',
         brace1: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         brace2: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         // lb: { symbol: 'bracket', side: 'left', numLines: 2 },
         // rb: { symbol: 'bracket', side: 'right', numLines: 2 },

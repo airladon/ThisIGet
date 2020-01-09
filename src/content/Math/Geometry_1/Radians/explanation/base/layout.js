@@ -283,10 +283,11 @@ export default function diagramLayout() {
         equals: '  =  ',
         v: { symbol: 'vinculum' },
         largeBrace: {
-          symbol: 'brace', side: 'top', color: colors.marks,
+          symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012,
+          width: 0.05,
         },
         smallBrace: {
-          symbol: 'brace', side: 'top', color: colors.marks,
+          symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012, width: 0.05,
         },
       },
       defaultFormAlignment: {
@@ -317,7 +318,7 @@ export default function diagramLayout() {
           },
           '   ',
           {
-            topComment: ['radiusLengths3', 'radius', 'largeBrace'],
+            topComment: ['radiusLengths3', 'radius', 'largeBrace', 0.04, 0.06],
           },
         ],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],
@@ -393,13 +394,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: 'arc',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'circumference',
-                  relativeToContent: ['center', 'bottom'],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'circumference',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
             },
           },
@@ -407,13 +408,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: 'angle',
-              withAnnotations: {
-                annotation: {
-                  annotation: '_2pi',
-                  relativeToContent: ['center', 1.5],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.6,
-                },
+              annotation: {
+                content: '_2pi',
+                xPosition: 'center',
+                yPosition:  1.5,
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.6,
               },
             },
           },
@@ -423,13 +424,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: 'arc',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'circumference',
-                  relativeToContent: ['center', 'bottom'],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'circumference',
+                xPosition: 'center',
+                yPosition:  'bottom',
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
             },
           },
@@ -437,13 +438,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: '_2pi',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'angle',
-                  relativeToContent: ['center',-0.3],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'angle',
+                xPosition: 'center',
+                yPosition: -0.3,
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
             },
           },
@@ -511,13 +512,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: 'angle',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'circle',
-                  relativeToContent: ['center', 'bottom'],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'circle',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
             },
           },
@@ -548,13 +549,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: '_360',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'degrees',
-                  relativeToContent: ['center', -0.2],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'degrees',
+                xPosition: 'center',
+                yPosition: -0.2,
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
               inSize: false,
             },
@@ -563,13 +564,13 @@ export default function diagramLayout() {
           {
             annotate: {
               content: '_2pi',
-              withAnnotations: {
-                annotation: {
-                  annotation: 'radians',
-                  relativeToContent: ['center', -0.2],
-                  relativeToAnnotation: ['center', 'top'],
-                  scale: 0.5,
-                },
+              annotation: {
+                content: 'radians',
+                xPosition: 'center',
+                yPosition: -0.2,
+                xAlign: 'center',
+                yAlign: 'top',
+                scale: 0.5,
               },
               inSize: false,
             },

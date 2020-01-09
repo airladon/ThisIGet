@@ -64,7 +64,14 @@ export default function diagramLayout() {
         content: ['_2', {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         }],
         scale: 1,
@@ -118,7 +125,14 @@ export default function diagramLayout() {
         content: {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         },
         scale: 1,
@@ -173,7 +187,14 @@ export default function diagramLayout() {
         content: [{ root: ['r', '_3'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         }],
         alignment: { alignV: -0.1 },
@@ -339,10 +360,18 @@ export default function diagramLayout() {
         v3: { symbol: 'vinculum' },
         vb: { symbol: 'vinculum', color: colors.sides },
         brace1: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         brace2: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         lb: { symbol: 'bracket', side: 'left', width: 0.06 },
         rb: { symbol: 'bracket', side: 'right', width: 0.06 },
