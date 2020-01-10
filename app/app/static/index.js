@@ -4779,8 +4779,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BaseAnnotationFunction; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Symbols_SymbolNew__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Symbols/SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -4808,9 +4808,14 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
  // import BaseEquationFunction from './BaseEquationFunction';
 // import type { TypeParsablePoint } from '../../../../tools/g2';
 // import type {TypeAnnotation } from './Base'
-
+// import {
+//   DiagramElementPrimitive, DiagramElementCollection,
+// } from '../../../Element';
 
  // import { Element, Elements } from './Element';
+
+// import Symbol from '../Symbols/Symbol';
+
 
 // export type TypeGlyphsIn = {
 //   left?: TypeAnnotatedGlyph;
@@ -4828,7 +4833,8 @@ function copyAnnotation(annotation, namedCollection) {
     offset: annotation.offset._dup(),
     scale: annotation.scale,
     content: annotation.content._dup(namedCollection),
-    inSize: annotation.inSize
+    inSize: annotation.inSize,
+    fullContentBounds: annotation.fullContentBounds
   };
 }
 
@@ -4844,21 +4850,18 @@ function copyGlyphs(glyphs, namedCollection) {
   var copy = {};
   Object.keys(glyphs).forEach(function (key) {
     if (glyphs[key] == null) {
-      return {};
+      return;
     }
 
     var glyph = glyphs[key];
     var copyGlyph = {};
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["duplicateFromTo"])(glyph, copyGlyph, ['glyph', 'annotations']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(glyph, copyGlyph, ['glyph', 'annotations']);
 
     if (namedCollection != null) {
       copyGlyph.glyph = namedCollection[glyph.glyph.name];
     } else {
       copyGlyph.glyph = glyph.glyph;
-    } // copyGlyph.width = glyph.width;
-    // copyGlyph.height = glyph.height;
-    // copyGlyph.location = glyph.location;
-
+    }
 
     copyGlyph.annotations = copyAnnotations(glyph.annotations, namedCollection);
     copy[key] = copyGlyph;
@@ -4880,7 +4883,7 @@ function getAllElementsFromGlyphs(glyphs) {
     var glyph = glyphs[key];
 
     if (glyph == null) {
-      return [];
+      return;
     }
 
     elements = [].concat(_toConsumableArray(elements), [glyph.glyph], _toConsumableArray(getAllElementsFromAnnotations(glyph.annotations)));
@@ -4948,8 +4951,9 @@ function () {
 
       var glyphsCopy = copyGlyphs(this.glyphs);
       var annotationsCopy = copyAnnotations(this.annotations);
-      var copy = new this.constructor(contentCopy, annotationsCopy, glyphsCopy, this.options);
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["duplicateFromTo"])(this, copy, ['content', 'glyphs', 'annotations']);
+      var copy = new this.constructor( // $FlowFixMe
+      contentCopy, annotationsCopy, glyphsCopy, this.options);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, copy, ['content', 'glyphs', 'annotations']);
       return copy;
     }
   }, {
@@ -6617,7 +6621,7 @@ function (_BaseEquationFunction) {
       vinculumBounds.width = Math.max(numeratorBounds.width, denominatorBounds.width) + overhang * 2 * scale;
 
       if (vinculum != null) {
-        vinculumBounds.height = vinculum.custom.getHeight(vinculum.custom.options, vinculumBounds.width);
+        vinculumBounds.height = vinculum.getHeight(vinculum.custom.options, vinculumBounds.width);
       } // const vSpaceNum = scale * numeratorSpace;
       // const vSpaceDenom = scale * denominatorSpace;
 
@@ -9185,6 +9189,7 @@ function () {
       if (Array.isArray(content)) {
         var elementArray = [];
         content.forEach(function (c) {
+          // $FlowFixMe
           var result = _this.parseContent(c);
 
           if (Array.isArray(result)) {
@@ -9533,7 +9538,7 @@ function () {
       return this.annotate({
         content: content,
         glyphs: glyphs,
-        inSize: inSize,
+        inSize: options.inSize,
         leftSpace: options.outsideSpace,
         rightSpace: options.outsideSpace,
         useFullBounds: options.useFullBounds,
@@ -9693,12 +9698,11 @@ function () {
 
       return this.annotate({
         content: content,
+        // $FlowFixMe
         glyphs: glyphs,
-        inSize: inSize,
+        inSize: options.inSize,
         fullContentBounds: options.fullContentBounds,
-        useFullBounds: options.useFullBounds // leftSpace: options.outsideSpace,
-        // rightSpace: options.outsideSpace,
-
+        useFullBounds: options.useFullBounds
       });
     }
   }, {
@@ -9763,37 +9767,9 @@ function () {
       }
 
       var fillAnnotation = function fillAnnotation(ann) {
-        var annCopy = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultAnnotation, ann);
-        /* eslint-disable no-param-reassign */
-        // if (ann.xPosition == null) {
-        //   ann.xPosition = defaultAnnotation.xPosition;
-        // }
-        // if (ann.yPosition == null) {
-        //   ann.yPosition = defaultAnnotation.yPosition;
-        // }
-        // if (ann.xAlign == null) {
-        //   ann.xAlign = defaultAnnotation.xAlign;
-        // }
-        // if (ann.yAlign == null) {
-        //   ann.yAlign = defaultAnnotation.yAlign;
-        // }
-        // if (ann.offset == null) {
-        //   ann.offset = defaultAnnotation.offset;
-        // }
-        // if (ann.scale == null) {
-        //   ann.scale = defaultAnnotation.scale;
-        // }
-        // if (ann.inSize == null) {
-        //   ann.inSize = defaultAnnotation.inSize;
-        // }
-        // if (ann.fullContentBounds == null) {
-        //   ann.fullContentBounds = defaultAnnotation.fullContentBounds;
-        // }
+        var annCopy = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultAnnotation, ann); // $FlowFixMe
 
-        annCopy.content = _this2.contentToElement(ann.content); // ann.content = this.contentToElement(ann.content);
-
-        /* eslint-enable no-param-reassign */
-
+        annCopy.content = _this2.contentToElement(ann.content);
         return annCopy;
       };
 
@@ -9809,8 +9785,7 @@ function () {
         return annsCopy;
       };
 
-      var annotationsToUse = fillAnnotations(annotationsToProcess); // console.log(annotationsToUse)
-
+      var annotationsToUse = fillAnnotations(annotationsToProcess);
       var glyphsToUse = {};
 
       var fillGlyphAnnotation = function fillGlyphAnnotation(side) {
@@ -9825,16 +9800,18 @@ function () {
         }
 
         glyphsToUse[side] = {};
-        var glyphAnnotationsToProcess = glyphSide.annotations;
+        var glyphAnnotationsToProcess = glyphSide.annotations; // $FlowFixMe
 
         if (glyphSide.annotate != null) {
+          // $FlowFixMe
           glyphAnnotationsToProcess = [glyphSide.annotate];
         }
 
         var glyphAnnotationsToUse = fillAnnotations(glyphAnnotationsToProcess);
         glyphsToUse[side] = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions[side], glyphSide);
-        glyphsToUse[side].annotations = glyphAnnotationsToUse;
-        glyphsToUse[side].glyph = _this2.getExistingOrAddSymbol(glyphSide.symbol);
+        glyphsToUse[side].annotations = glyphAnnotationsToUse; // $FlowFixMe
+
+        glyphsToUse[side].glyph = _this2.getExistingOrAddSymbol(glyphSide.symbol || '');
       };
 
       fillGlyphAnnotation('encompass');
@@ -9843,8 +9820,8 @@ function () {
       fillGlyphAnnotation('top');
       fillGlyphAnnotation('bottom');
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      return new _Elements_BaseAnnotationFunction__WEBPACK_IMPORTED_MODULE_9__["default"]( // $FlowFixMe
-      this.contentToElement(content), annotationsToUse, glyphsToUse, options);
+      return new _Elements_BaseAnnotationFunction__WEBPACK_IMPORTED_MODULE_9__["default"](this.contentToElement(content), annotationsToUse, // $FlowFixMe
+      glyphsToUse, options);
     }
   }, {
     key: "scale",
@@ -9937,55 +9914,7 @@ function () {
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       return new _Elements_Fraction__WEBPACK_IMPORTED_MODULE_4__["default"]([this.contentToElement(numerator), this.contentToElement(denominator)], // $FlowFixMe
       this.getExistingOrAddSymbol(symbol), options);
-    } // rootLegacy(
-    //   optionsOrNum: TypeRootObject | TypeRootArray | TypeEquationPhrase,
-    //   sym: string | null = null,
-    //   rootIn: TypeEquationPhrase | null = null,
-    //   contentSpaceIn: ?({
-    //     left: ?number,
-    //     right: ?number,
-    //     top: ?number,
-    //     bottom: ?number,
-    //   } | Point | [number, number] | number) = null,
-    //   rootSpaceIn: ?number = null,
-    //   rootScaleIn: ?number = null,
-    // ) {
-    //   let content;
-    //   let root;
-    //   let symbol;
-    //   let contentSpace;
-    //   let rootSpace;
-    //   let rootScale;
-    //   if (!(sym == null && root == null)) {
-    //     content = optionsOrNum;
-    //     root = rootIn;
-    //     symbol = sym;
-    //     contentSpace = contentSpaceIn;
-    //     rootSpace = rootSpaceIn;
-    //     rootScale = rootScaleIn;
-    //   } else if (Array.isArray(optionsOrNum)) {
-    //     [                                                  // $FlowFixMe
-    //       content, symbol, root,                           // $FlowFixMe
-    //       contentSpace, rootSpace, rootScale,
-    //     ] = optionsOrNum;
-    //   } else {
-    //     ({                                            // $FlowFixMe
-    //       content, symbol, root,
-    //       // lineWidth, startWidth, startHeight,    // $FlowFixMe
-    //       contentSpace, rootSpace, rootScale,
-    //     } = optionsOrNum);
-    //   }
-    //   const f = new Root(                         // $FlowFixMe
-    //     this.contentToElement(content),             // $FlowFixMe
-    //     this.getExistingOrAddSymbol(symbol),     // $FlowFixMe
-    //     this.contentToElement(root),           // $FlowFixMe
-    //     contentSpace,           // $FlowFixMe
-    //     rootSpace,           // $FlowFixMe
-    //     rootScale,
-    //   );
-    //   return f;
-    // }
-
+    }
   }, {
     key: "root",
     value: function root(optionsOrArray) {
@@ -11608,7 +11537,7 @@ function () {
         staticWidth: 'first'
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
-      return new _Symbols_Vinculum__WEBPACK_IMPORTED_MODULE_13__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('VinculumSymbol').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse).symbol;
+      return new _Symbols_Vinculum__WEBPACK_IMPORTED_MODULE_13__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('VinculumSymbol').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse, 'strip');
     }
   }, {
     key: "box",
@@ -14985,7 +14914,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Sum; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _SymbolNew__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
-/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15005,8 +14933,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
+ // import Bounds from '../Elements/Bounds';
 
 var Sum =
 /*#__PURE__*/
@@ -15215,317 +15142,6 @@ function (_Symbol2) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DiagramElements/Equation/Symbols/Symbol.js":
-/*!*******************************************************************!*\
-  !*** ./src/js/diagram/DiagramElements/Equation/Symbols/Symbol.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Symbol; });
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _VertexSymbol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexSymbol */ "./src/js/diagram/DiagramElements/Equation/Symbols/VertexSymbol.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-
-var _Symbol =
-/*#__PURE__*/
-function () {
-  _createClass(_Symbol, [{
-    key: "getTriangles",
-    // eslint-disable-next-line class-methods-use-this
-    value: function getTriangles() {
-      return 'strip';
-    }
-  }]);
-
-  function _Symbol(webgl, color, transformOrLocation, diagramLimits, symbolOptions) {
-    _classCallCheck(this, _Symbol);
-
-    var getPoints = this.getPoints();
-    var getWidth = this.getWidth();
-    var getHeight = this.getHeight();
-    var triangles = this.getTriangles();
-    var getBounds = this.getBounds();
-    var vertexObject = new _VertexSymbol__WEBPACK_IMPORTED_MODULE_2__["default"](webgl, triangles); // const widthFromheight = getWidth('static', symbolOptions, 1);
-    // const [points, width, height] = getPoints(symbolOptions, 1, 1);
-    // const [points, width, height] = getPoints(symbolOptions, 1, 1);
-    // vertexObject.updatePoints(points, width, height, true);
-
-    var initialT;
-
-    if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]) {
-      initialT = transformOrLocation;
-    } else {
-      initialT = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('Symbol').scale(1, 1).translate(0, 0);
-    }
-
-    var symbol = new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](vertexObject, initialT, color, diagramLimits);
-    symbol.custom.options = symbolOptions;
-    symbol.custom.getWidth = getWidth;
-    symbol.custom.getHeight = getHeight;
-    symbol.custom.getBounds = getBounds;
-
-    if (symbol.custom.options.draw === 'static') {
-      // symbol.custom.type = 'static';
-      symbol.getTransform = function () {
-        var t = symbol.transform._dup();
-
-        var s = t.s();
-
-        if (s != null) {
-          t.updateScale(s.x / symbol.custom.options.staticWidth, s.y / symbol.custom.options.staticHeight);
-        }
-
-        return t;
-      };
-    } else {
-      symbol.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](1, 1);
-
-      symbol.internalSetTransformCallback = function () {
-        var s = symbol.getScale();
-
-        if (symbol.custom.scale.isNotEqualTo(s, 8)) {
-          var _getPoints = getPoints(symbol.custom.options, s.x, s.y),
-              _getPoints2 = _slicedToArray(_getPoints, 3),
-              pointsNew = _getPoints2[0],
-              widthNew = _getPoints2[1],
-              heightNew = _getPoints2[2];
-
-          symbol.drawingObject.updatePoints(pointsNew, widthNew, heightNew);
-          symbol.custom.scale = s;
-        }
-      };
-
-      symbol.getTransform = function () {
-        var t = symbol.transform._dup();
-
-        t.updateScale(1, 1);
-        return t;
-      }; // symbol.custom.type = 'dynamic';
-
-    } // eslint-disable-next-line max-len
-
-
-    symbol.custom.setSize = function (location, widthIn, heightIn) {
-      var t = symbol.transform._dup();
-
-      if (symbol.custom.options.draw === 'static' && symbol.drawingObject.points.length === 0) {
-        var points;
-        var width;
-        var height;
-
-        if (symbol.custom.options.staticHeight === 'first' || symbol.custom.options.staticWidth === 'first') {
-          var _getPoints3 = getPoints(symbolOptions, widthIn, heightIn);
-
-          var _getPoints4 = _slicedToArray(_getPoints3, 3);
-
-          points = _getPoints4[0];
-          width = _getPoints4[1];
-          height = _getPoints4[2];
-        } else if (symbol.custom.options.staticHeight != null || symbol.custom.options.staticWidth != null) {
-          var _getPoints5 = getPoints(symbolOptions, symbol.custom.options.staticWidth, symbol.custom.options.staticHeight);
-
-          var _getPoints6 = _slicedToArray(_getPoints5, 3);
-
-          points = _getPoints6[0];
-          width = _getPoints6[1];
-          height = _getPoints6[2];
-        }
-
-        symbol.drawingObject.updatePoints(points, width, height);
-        symbol.custom.options.staticHeight = height;
-        symbol.custom.options.staticWidth = width;
-        t.updateScale(width, height);
-      } else {
-        t.updateScale(widthIn, heightIn);
-      }
-
-      t.updateTranslation(location.x, location.y);
-      symbol.setTransform(t);
-    };
-
-    this.symbol = symbol;
-  } // eslint-disable-next-line class-methods-use-this
-
-
-  _createClass(_Symbol, [{
-    key: "getWidth",
-    value: function getWidth() {
-      var _this = this;
-
-      return function (options, height) {
-        var width;
-
-        if (options.draw === 'static') {
-          var staticHeight = options.staticHeight;
-          var staticWidth = options.staticWidth;
-
-          if (staticHeight === 'first') {
-            staticHeight = height;
-          }
-
-          var _this$getDefaultValue = _this.getDefaultValues(staticHeight, staticWidth, options);
-
-          width = _this$getDefaultValue.width;
-
-          if (width == null) {
-            width = height;
-          }
-
-          return width / staticHeight * height;
-        }
-
-        width = options.width;
-
-        var _this$getDefaultValue2 = _this.getDefaultValues(height, width, options);
-
-        width = _this$getDefaultValue2.width;
-        return width;
-      };
-    } // eslint-disable-next-line class-methods-use-this
-    // getHeight() {
-    //   return (options: Object, width: number) => {
-    //     const { height } = options;
-    //     if (options.draw === 'static') {
-    //       return height * width;
-    //     }
-    //     return height;
-    //   };
-    // }
-
-  }, {
-    key: "getHeight",
-    value: function getHeight() {
-      var _this2 = this;
-
-      return function (options, width) {
-        var height;
-
-        if (options.draw === 'static') {
-          var staticWidth = options.staticWidth;
-          var staticHeight = options.staticHeight;
-
-          if (staticWidth === 'first') {
-            staticWidth = width;
-          } // ????
-
-
-          var _this2$getDefaultValu = _this2.getDefaultValues(staticHeight, staticWidth, options);
-
-          height = _this2$getDefaultValu.height;
-
-          if (height == null) {
-            height = width;
-          }
-
-          return height / staticWidth * width;
-        }
-
-        height = options.height;
-
-        var _this2$getDefaultValu2 = _this2.getDefaultValues(height, width, options);
-
-        height = _this2$getDefaultValu2.height;
-        return height;
-      };
-    } // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "getBounds",
-    value: function getBounds() {
-      // eslint-disable-next-line no-unused-vars
-      return function (options, leftIn, bottomIn, widthIn, heightIn) {
-        return new _Elements_Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
-      };
-    } // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "getPoints",
-    value: function getPoints() {
-      // eslint-disable-next-line no-unused-vars
-      return function (options, width, height) {
-        // const {
-        //   lineWidth, width,
-        // } = options;
-        var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, height), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, height)];
-        return [points, width, height];
-      };
-    }
-    /* eslint-disable class-methods-use-this */
-    // getDefaultValues(height: number, width: ?number, options: {
-    //     height?: number,
-    //     width?: number,
-    //     lineWidth?: number,
-    //     tipWidth?: number,
-    //     arrowWidth?: number,
-    //     arrowHeight?: number,
-    //   }) {
-    //   const out: {
-    //     height?: number,
-    //     width?: number,
-    //     lineWidth?: number,
-    //     tipWidth?: number,
-    //     arrowWidth?: number,
-    //     arrowHeight?: number,
-    //   } = {
-    //     width: height,
-    //   };
-    //   if (width != null) {
-    //     out.width = width;
-    //   }
-    //   if (options.width != null) {
-    //     out.width = options.width;
-    //   }
-    //   if (height != null) {
-    //     out.height = height;
-    //   }
-    //   if (options.height != null) {
-    //     out.height = options.height;
-    //   }
-    //   return out;
-    // }
-
-    /* eslint-disable no-unused-vars */
-    // $FlowFixMe
-
-  }, {
-    key: "getDefaultValues",
-    value: function getDefaultValues(height, width, options) {
-      var out = {};
-      return out;
-    }
-  }]);
-
-  return _Symbol;
-}();
-
-
-
-/***/ }),
-
 /***/ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js":
 /*!**********************************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js ***!
@@ -15606,7 +15222,8 @@ function (_DiagramElementPrimit) {
               _this$getPoints2 = _slicedToArray(_this$getPoints, 3),
               pointsNew = _this$getPoints2[0],
               widthNew = _this$getPoints2[1],
-              heightNew = _this$getPoints2[2];
+              heightNew = _this$getPoints2[2]; // $FlowFixMe
+
 
           _this.drawingObject.updatePoints(pointsNew, widthNew, heightNew);
 
@@ -15622,8 +15239,8 @@ function (_DiagramElementPrimit) {
       if (_this.custom.options.draw === 'static' // && this.drawingObject.points.length === 0
       ) {
           var points;
-          var width;
-          var height;
+          var width = 0;
+          var height = 0;
 
           if (_this.custom.options.staticHeight === 'first' || _this.custom.options.staticWidth === 'first') {
             var _this$getPoints3 = _this.getPoints(symbolOptions, widthIn, heightIn);
@@ -15641,7 +15258,8 @@ function (_DiagramElementPrimit) {
             points = _this$getPoints6[0];
             width = _this$getPoints6[1];
             height = _this$getPoints6[2];
-          }
+          } // $FlowFixMe
+
 
           _this.drawingObject.updatePoints(points, width, height);
 
@@ -15653,7 +15271,8 @@ function (_DiagramElementPrimit) {
             _this$getPoints8 = _slicedToArray(_this$getPoints7, 3),
             pointsNew = _this$getPoints8[0],
             widthNew = _this$getPoints8[1],
-            heightNew = _this$getPoints8[2];
+            heightNew = _this$getPoints8[2]; // $FlowFixMe
+
 
         _this.drawingObject.updatePoints(pointsNew, widthNew, heightNew);
 
@@ -15688,52 +15307,79 @@ function (_DiagramElementPrimit) {
 
       t.updateScale(1, 1);
       return t;
-    } // // eslint-disable-next-line class-methods-use-this
-    // getWidth(options: Object, height: number) {
-    //   let width;
-    //   if (options.draw === 'static') {
-    //     let { staticHeight } = options;
-    //     const { staticWidth } = options;
-    //     if (staticHeight === 'first') {
-    //       staticHeight = height;
-    //     }
-    //     ({ width } = this.getDefaultValues(staticHeight, staticWidth, options));
-    //     if (width == null) {
-    //       width = height;
-    //     }
-    //     return width / staticHeight * height;
-    //   }
-    //   ({ width } = options);
-    //   ({ width } = this.getDefaultValues(height, width, options));
-    //   return width;
-    // }
-    // // eslint-disable-next-line class-methods-use-this
-    // getHeight(options: Object, width: number) {
-    //   let height;
-    //   if (options.draw === 'static') {
-    //     let { staticWidth } = options;
-    //     const { staticHeight } = options;
-    //     if (staticWidth === 'first') {
-    //       staticWidth = width;
-    //     } // ????
-    //     ({ height } = this.getDefaultValues(staticHeight, staticWidth, options));
-    //     if (height == null) {
-    //       height = width;
-    //     }
-    //     return height / staticWidth * width;
-    //   }
-    //   ({ height } = options);
-    //   ({ height } = this.getDefaultValues(height, width, options));
-    //   return height;
-    // }
-    // eslint-disable-next-line class-methods-use-this, no-unused-vars
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getWidth",
+    value: function getWidth(options, height) {
+      var width;
+
+      if (options.draw === 'static') {
+        var staticHeight = options.staticHeight;
+        var staticWidth = options.staticWidth;
+
+        if (staticHeight === 'first') {
+          staticHeight = height;
+        }
+
+        var _this$getDefaultValue = this.getDefaultValues(staticHeight, staticWidth, options);
+
+        width = _this$getDefaultValue.width;
+
+        if (width == null) {
+          width = height;
+        }
+
+        return width / staticHeight * height;
+      }
+
+      width = options.width;
+
+      var _this$getDefaultValue2 = this.getDefaultValues(height, width, options);
+
+      width = _this$getDefaultValue2.width;
+      return width;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "getHeight",
+    value: function getHeight(options, width) {
+      var height;
+
+      if (options.draw === 'static') {
+        var staticWidth = options.staticWidth;
+        var staticHeight = options.staticHeight;
+
+        if (staticWidth === 'first') {
+          staticWidth = width;
+        } // ????
+
+
+        var _this$getDefaultValue3 = this.getDefaultValues(staticHeight, staticWidth, options);
+
+        height = _this$getDefaultValue3.height;
+
+        if (height == null) {
+          height = width;
+        }
+
+        return height / staticWidth * width;
+      }
+
+      height = options.height;
+
+      var _this$getDefaultValue4 = this.getDefaultValues(height, width, options);
+
+      height = _this$getDefaultValue4.height;
+      return height;
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
 
   }, {
     key: "getBounds",
     value: function getBounds(options, contentX, contentY, widthIn, heightIn, side) {
-      var _this$getDefaultValue = this.getDefaultValues(heightIn, widthIn, options),
-          width = _this$getDefaultValue.width,
-          height = _this$getDefaultValue.height;
+      var _this$getDefaultValue5 = this.getDefaultValues(heightIn, widthIn, options),
+          width = _this$getDefaultValue5.width,
+          height = _this$getDefaultValue5.height;
 
       var bounds = new _Elements_Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
@@ -15896,7 +15542,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Bracket; });
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Symbol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Symbol */ "./src/js/diagram/DiagramElements/Equation/Symbols/Symbol.js");
+/* harmony import */ var _SymbolNew__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15931,11 +15577,12 @@ function (_Symbol2) {
   }
 
   _createClass(Bracket, [{
-    key: "getTriangles",
+    key: "getPoints",
     // eslint-disable-next-line class-methods-use-this
-    value: function getTriangles() {
-      return 'strip';
-    } //                             width
+    // getTriangles() {
+    //   return 'strip';
+    // }
+    //                             width
     //          |<---------------------------------------->|
     //          |                                          |  3
     //        1 |                                          | ____
@@ -15945,22 +15592,14 @@ function (_Symbol2) {
     //         0                                            2
     //
     // eslint-disable-next-line class-methods-use-this
+    value: function getPoints(options, widthIn, heightIn) {
+      var _this$getDefaultValue = this.getDefaultValues(heightIn, widthIn, options),
+          lineWidth = _this$getDefaultValue.lineWidth,
+          width = _this$getDefaultValue.width,
+          height = _this$getDefaultValue.height;
 
-  }, {
-    key: "getPoints",
-    value: function getPoints() {
-      var _this = this;
-
-      // eslint-disable-next-line no-unused-vars
-      return function (options, widthIn, heightIn) {
-        var _this$getDefaultValue = _this.getDefaultValues(heightIn, widthIn, options),
-            lineWidth = _this$getDefaultValue.lineWidth,
-            width = _this$getDefaultValue.width,
-            height = _this$getDefaultValue.height;
-
-        var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, lineWidth)];
-        return [points, width, height];
-      };
+      var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, lineWidth), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](width, lineWidth)];
+      return [points, width, height];
     }
     /* eslint-disable class-methods-use-this */
     // $FlowFixMe
@@ -15989,7 +15628,7 @@ function (_Symbol2) {
   }]);
 
   return Bracket;
-}(_Symbol__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}(_SymbolNew__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
