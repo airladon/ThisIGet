@@ -248,13 +248,14 @@ class Content extends PresentationFormatContent {
         angle: highlight(colors.angles),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._line, fig._x, fig._theta, fig._hypotenuse,
         fig._v, fig._right, fig._sineTheta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0'],
         [eqn, '0'],
+        [fig._theta._label, '0'],
       ],
       transitionFromPrev: (done) => {
         coll.resetRotation(() => {
@@ -310,6 +311,7 @@ class Content extends PresentationFormatContent {
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0a'],
         [eqn, '0'],
+        [fig._theta._label, '0'],
       ],
       transitionFromPrev: (done) => {
         // coll.accent(fig, ['theta', 'sineTheta'], done);
@@ -324,6 +326,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.showForm('1');
         fig._sineTheta._label.showForm('0b');
+        fig._theta._label.showForm('0');
       },
     });
 
@@ -340,6 +343,7 @@ class Content extends PresentationFormatContent {
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0b'],
         [eqn, '1'],
+        [fig._theta._label, '0'],
       ],
       transitionFromPrev: (done) => {
         eqn.goToForm({

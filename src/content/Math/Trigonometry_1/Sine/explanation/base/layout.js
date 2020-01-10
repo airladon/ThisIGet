@@ -24,6 +24,28 @@ export default function diagramLayout() {
   colors.get('green').toCssVar('--color-components');
   colors.working = colors.get('grey', 'dark').rgb;
 
+  const eqnAngle = ({
+    elements: {
+      angle: { color: colors.angles },
+      theta: { text: '\u03B8', color: colors.angles },
+      brace: {
+        symbol: 'brace', lineWidth: 0.012, width: 0.05, side: 'top', color: colors.working,
+      },
+    },
+    defaultFormAlignment: {
+      alignment: { alignH: 'center' },
+    },
+    forms: {
+      '0': {
+        content: 'angle',
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      '1': { topComment: ['angle', 'theta', 'brace'] },
+      '2': 'theta',
+    },
+  });
+
   const eqnSine = ({
     elements: {
       r: { text: 'r', color: colors.lines },
@@ -200,7 +222,7 @@ export default function diagramLayout() {
         },
       },
       angle('real', null),
-      angle('theta', '\u03B8'),
+      angle('theta', eqnAngle),
       angle('right', ''),
       lineLabel('sineTheta', eqnSine, colors.components, 'right'),
       lineLabel('sine', null, colors.components, 'right'),
