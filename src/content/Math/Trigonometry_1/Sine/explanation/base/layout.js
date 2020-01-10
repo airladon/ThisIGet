@@ -31,18 +31,55 @@ export default function diagramLayout() {
       brace: {
         symbol: 'brace', lineWidth: 0.012, width: 0.05, side: 'top', color: colors.working,
       },
-    },
-    defaultFormAlignment: {
-      alignment: { alignH: 'center' },
+      box: { symbol: 'box', color: [0, 0, 0, 0] },
     },
     forms: {
       '0': {
-        content: 'angle',
+        content: {
+          container: {
+            content: 'angle',
+            width: 0.5,
+            descent: 0.04,
+            ascent: 0.13,
+            xAlign: 0.1,
+            yAlign: 'bottom',
+          },
+        },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { alignH: 'center', alignV: 0.7 },
       },
-      '1': { topComment: ['angle', 'theta', 'brace'] },
-      '2': 'theta',
+      '1': {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: 'angle', comment: 'theta', symbol: 'brace', inSize: false,
+              },
+            },
+            width: 0.5,
+            descent: 0.04,
+            ascent: 0.13,
+            xAlign: 0.1,
+            yAlign: 'bottom',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 0.7 },
+      },
+      '2': {
+        content: {
+          container: {
+            content: 'theta',
+            width: 0.5,
+            descent: 0.04,
+            ascent: 0.13,
+            xAlign: 0.1,
+            yAlign: 'bottom',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 0.7 },
+      },
     },
   });
 
@@ -60,29 +97,61 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: ['vertical'],
+        content: {
+          container: {
+            content: 'vertical',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
       '0a': {
-        // content: {
-        //   topComment: {
-        //     content: 'vertical',
-        //     comment: 'opposite',
-        //     symbol: 'brace',
-        //   },
-        // },
-        content: 'vertical',
+        content: {
+          container: {
+            content: 'vertical',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
       '0b': {
-        content: { topComment: ['vertical', 'opposite', 'brace'] },
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: 'vertical',
+                comment: 'opposite',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
       '1': {
-        content: ['opposite'],
+        content: {
+          container: {
+            content: 'opposite',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
         scale: 0.9,
         alignment: { alignH: 'center' },
       },

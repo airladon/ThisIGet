@@ -121,6 +121,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   updateRotation() {
+    // console.log('asdfasdf');
     const theta = this._fig._theta;
     const right = this._fig._right;
     const real = this._fig._real;

@@ -260,6 +260,7 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done) => {
         coll.resetRotation(() => {
           coll.accent(eqn, done);
+          // coll.accent(fig._theta);
         }, 0.8);
       },
     });
@@ -271,7 +272,7 @@ class Content extends PresentationFormatContent {
       setContent: style({ top: 0 }, 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.'),
       modifiers: {
         opposite: coll.bindAccent(fig._v),
-        theta: coll.bindAccent(fig._real),
+        theta: coll.bindAccent(fig._theta),
         // theta: click(() => {
         //   eqn.showForm('0');
         //   eqn.goToForm({
@@ -285,13 +286,14 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, commonContent, {
       show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._line, fig._x, fig._theta, fig._hypotenuse,
         fig._v, fig._right, fig._sineTheta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0'],
         [eqn, '0'],
+        [fig._theta._label, '0'],
       ],
       // setSteadyState: () => {
       //   console.log(eqn)
@@ -309,7 +311,7 @@ class Content extends PresentationFormatContent {
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0a'],
+        [fig._sineTheta._label, '0'],
         [eqn, '0'],
         [fig._theta._label, '0'],
       ],
@@ -322,11 +324,13 @@ class Content extends PresentationFormatContent {
           callback: done,
         });
         fig._sineTheta._label.goToForm({ name: '0b', duration: 2, animate: 'move' });
+        fig._theta._label.goToForm({ name: '1', duration: 2, animate: 'move' });
       },
       setSteadyState: () => {
         eqn.showForm('1');
         fig._sineTheta._label.showForm('0b');
-        fig._theta._label.showForm('0');
+        fig._theta._label.showForm('1');
+        coll.updateRotation();
       },
     });
 
@@ -343,7 +347,7 @@ class Content extends PresentationFormatContent {
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0b'],
         [eqn, '1'],
-        [fig._theta._label, '0'],
+        [fig._theta._label, '1'],
       ],
       transitionFromPrev: (done) => {
         eqn.goToForm({
@@ -357,10 +361,16 @@ class Content extends PresentationFormatContent {
           duration: 2,
           animate: 'move',
         });
+        fig._theta._label.goToForm({
+          name: '2',
+          duration: 2,
+          animate: 'move',
+        });
       },
       setSteadyState: () => {
         eqn.showForm('2');
         fig._sineTheta._label.showForm('1');
+        fig._theta._label.showForm('2');
       },
     });
 
@@ -383,8 +393,9 @@ class Content extends PresentationFormatContent {
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0a'],
+        [fig._sineTheta._label, '1'],
         [eqn, '2'],
+        [fig._theta._label, '2'],
       ],
     });
 
