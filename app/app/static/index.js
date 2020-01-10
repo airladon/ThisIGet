@@ -5186,10 +5186,11 @@ function () {
           topSpace = _this$glyphs$encompas.topSpace,
           space = _this$glyphs$encompas.space;
       var glyph = this.glyphs.encompass;
-      var left = leftSpace != null ? leftSpace : space;
-      var right = rightSpace != null ? rightSpace : space;
-      var top = topSpace != null ? topSpace : space;
-      var bottom = bottomSpace != null ? bottomSpace : space;
+      var spaceToUse = space != null ? space : 0;
+      var left = leftSpace != null ? leftSpace : spaceToUse;
+      var right = rightSpace != null ? rightSpace : spaceToUse;
+      var top = topSpace != null ? topSpace : spaceToUse;
+      var bottom = bottomSpace != null ? bottomSpace : spaceToUse;
       var contentBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
       contentBounds.copyFrom(contentBoundsIn);
       contentBounds.offset(top * scale, right * scale, -bottom * scale, -left * scale);
@@ -5294,7 +5295,8 @@ function () {
         glyphBottom = contentBounds.bottom + contentBounds.height / 2 - height / 2;
       }
 
-      var glyphBounds = glyph.glyph.getBounds(glyph.glyph.custom.options, contentX, glyphBottom + yOffset, null, glyphHeight, glyphName); // const totalBounds = new Bounds();
+      var glyphBounds = glyph.glyph.getBounds(glyph.glyph.custom.options, contentX, glyphBottom + yOffset, // $FlowFixMe
+      null, glyphHeight, glyphName); // const totalBounds = new Bounds();
 
       var inSizeBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
       var fullBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
@@ -5381,7 +5383,7 @@ function () {
       }
 
       if (leftSpace != null || rightSpace != null) {
-        glyphLength = (leftSpace * scale || 0) + contentBounds.width + (rightSpace * scale || 0);
+        glyphLength = (leftSpace || 0) * scale + contentBounds.width + (rightSpace || 0) * scale;
 
         if (leftSpace != null) {
           contentX = contentBounds.left - leftSpace * scale;
@@ -5402,7 +5404,8 @@ function () {
         contentY = contentBounds.bottom - space * scale;
       }
 
-      var glyphBounds = glyph.glyph.getBounds(glyph.glyph.custom.options, contentX + xOffset, contentY, glyphLength, null, glyphName);
+      var glyphBounds = glyph.glyph.getBounds(glyph.glyph.custom.options, contentX + xOffset, contentY, glyphLength, // $FlowFixMe
+      null, glyphName);
       var inSizeBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
       var fullBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
       inSizeBounds.copyFrom(contentBounds);
@@ -5464,9 +5467,10 @@ function () {
           fullContentBounds = annotation.fullContentBounds;
       var locationContentToAnnotate = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](contentToAnnotateBounds.left, contentToAnnotateBounds.bottom + contentToAnnotateBounds.descent);
       var xPos;
-      var yPos;
+      var yPos; // $FlowFixMe
 
       if (contentToAnnotateBounds.annotations != null && annotation.reference != null) {
+        // $FlowFixMe
         var reference = contentToAnnotateBounds.annotations[annotation.reference];
 
         if (reference.xPosition != null) {
@@ -5601,9 +5605,9 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BaseEquationFunction; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _Symbols_SymbolNew__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Symbols/SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -5630,6 +5634,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+ // import {
+//   DiagramElementPrimitive, DiagramElementCollection,
+// } from '../../../Element';
 
 
 
@@ -5652,10 +5659,10 @@ function (_Elements) {
 
     if (Array.isArray(glyph)) {
       glyph.forEach(function (g) {
-        glyphElements.push(g != null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](g) : null);
+        glyphElements.push(g != null ? new _Element__WEBPACK_IMPORTED_MODULE_2__["Element"](g) : null);
       });
     } else {
-      glyphElements.push(glyph != null ? new _Element__WEBPACK_IMPORTED_MODULE_3__["Element"](glyph) : null);
+      glyphElements.push(glyph != null ? new _Element__WEBPACK_IMPORTED_MODULE_2__["Element"](glyph) : null);
     }
 
     var glyphs = [];
@@ -5729,7 +5736,7 @@ function (_Elements) {
       }
 
       var copy = new this.constructor(copyContent, glyphs, this.options);
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, copy, ['content', 'contents', 'glyphs']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, copy, ['content', 'contents', 'glyphs']);
       return copy;
     }
   }, {
@@ -5808,7 +5815,7 @@ function (_Elements) {
   }]);
 
   return BaseEquationFunction;
-}(_Element__WEBPACK_IMPORTED_MODULE_3__["Elements"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_2__["Elements"]);
 
 
 
@@ -7579,7 +7586,8 @@ function (_DiagramElementCollec) {
         }
 
         return false;
-      };
+      }; // eslint-disable-next-line max-len
+
 
       var isFormElements = function isFormElements(form) {
         return form instanceof _Elements_Element__WEBPACK_IMPORTED_MODULE_4__["Elements"] || form instanceof _Elements_BaseAnnotationFunction__WEBPACK_IMPORTED_MODULE_5__["default"];
@@ -9065,19 +9073,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import Root from './Elements/Root';
-// import Strike from './Elements/Strike';
-// import DiagramPrimitives from '../../DiagramPrimitives/DiagramPrimitives';
-// import SuperSub from './Elements/SuperSub';
-// import { Brackets, Bar } from './Elements/Brackets';
-// import Brackets from './Elements/Brackets';
-// import Bar from './Elements/Bar';
 
- // import { Annotation, AnnotationInformation } from './Elements/Annotation';
-// import Padding from './Elements/Padding';
-// import Box from './Elements/Box';
-// import Integral from './Elements/Integral';
-// import SumProd from './Elements/SumProd';
 
 
 
@@ -9248,7 +9244,8 @@ function () {
       // $FlowFixMe
       if (name === 'frac') {
         return this.frac(params);
-      }
+      } // $FlowFixMe
+
 
       if (name === 'strike') {
         return this.strike(params);
@@ -9357,8 +9354,7 @@ function () {
 
       if (name === 'container') {
         return this.container(params);
-      } // $FlowFixMe
-
+      }
 
       return null;
     }
@@ -9988,16 +9984,12 @@ function () {
         useFullBounds: useFullBounds
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      options.rootOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.rootOffset, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+      options.rootOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.rootOffset);
       var annotations = [];
 
       if (root != null) {
         annotations.push({
           content: root,
-          // xPosition: 'left',
-          // yPosition: 'top',
-          // xAlign: 'right',
-          // yAlign: 'middle',
           offset: options.rootOffset,
           scale: options.rootScale,
           reference: 'root'
@@ -10006,12 +9998,13 @@ function () {
 
       return this.annotate({
         content: content,
-        inSize: inSize,
+        inSize: options.inSize,
         useFullBounds: options.useFullBounds,
         fullContentBounds: options.fullContentBounds,
         glyphs: {
           encompass: {
             symbol: symbol,
+            // $FlowFixMe
             annotations: annotations,
             space: options.space,
             leftSpace: options.leftSpace,
@@ -10024,48 +10017,50 @@ function () {
     }
   }, {
     key: "supSub",
-    value: function supSub(optionsOrContent) {
+    value: function supSub(optionsOrArray) {
       var content;
       var superscript = null;
       var subscript = null;
       var scale = null;
       var subscriptOffset = null;
       var superscriptOffset = null;
-      var inSize = true;
+      var inSize;
 
-      if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent = _slicedToArray(optionsOrContent, 7);
+      if (Array.isArray(optionsOrArray)) {
+        var _optionsOrArray7 = _slicedToArray(optionsOrArray, 7);
 
         // $FlowFixMe
-        content = _optionsOrContent[0];
-        superscript = _optionsOrContent[1];
-        subscript = _optionsOrContent[2];
-        scale = _optionsOrContent[3];
+        content = _optionsOrArray7[0];
+        superscript = _optionsOrArray7[1];
+        subscript = _optionsOrArray7[2];
+        scale = _optionsOrArray7[3];
         // $FlowFixMe
-        superscriptOffset = _optionsOrContent[4];
-        subscriptOffset = _optionsOrContent[5];
-        inSize = _optionsOrContent[6];
+        superscriptOffset = _optionsOrArray7[4];
+        subscriptOffset = _optionsOrArray7[5];
+        inSize = _optionsOrArray7[6];
       } else {
-        content = optionsOrContent.content;
-        superscript = optionsOrContent.superscript;
-        subscript = optionsOrContent.subscript;
-        scale = optionsOrContent.scale;
-        superscriptOffset = optionsOrContent.superscriptOffset;
-        subscriptOffset = optionsOrContent.subscriptOffset;
-        inSize = optionsOrContent.inSize;
+        content = optionsOrArray.content;
+        superscript = optionsOrArray.superscript;
+        subscript = optionsOrArray.subscript;
+        scale = optionsOrArray.scale;
+        superscriptOffset = optionsOrArray.superscriptOffset;
+        subscriptOffset = optionsOrArray.subscriptOffset;
+        inSize = optionsOrArray.inSize;
       }
 
       var defaultOptions = {
         scale: 0.5,
         subscriptOffset: [0, 0],
-        superscriptOffset: [0, 0]
+        superscriptOffset: [0, 0],
+        inSize: true
       };
       var optionsIn = {
         superscript: superscript,
         subscript: subscript,
         scale: scale,
         subscriptOffset: subscriptOffset,
-        superscriptOffset: superscriptOffset
+        superscriptOffset: superscriptOffset,
+        inSize: inSize
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       var annotations = [];
@@ -10096,8 +10091,9 @@ function () {
 
       return this.annotate({
         content: content,
+        // $FlowFixMe
         annotations: annotations,
-        inSize: inSize
+        inSize: options.inSize
       });
     }
   }, {
@@ -10111,27 +10107,33 @@ function () {
       var inSize;
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray7 = _slicedToArray(optionsOrArray, 5);
+        var _optionsOrArray8 = _slicedToArray(optionsOrArray, 5);
 
         // $FlowFixMe
-        content = _optionsOrArray7[0];
-        superscript = _optionsOrArray7[1];
-        scale = _optionsOrArray7[2];
-        offset = _optionsOrArray7[3];
-        inSize = _optionsOrArray7[4];
+        content = _optionsOrArray8[0];
+        superscript = _optionsOrArray8[1];
+        scale = _optionsOrArray8[2];
+        offset = _optionsOrArray8[3];
+        inSize = _optionsOrArray8[4];
       } else {
         content = optionsOrArray.content;
         superscript = optionsOrArray.superscript;
         scale = optionsOrArray.scale;
         offset = optionsOrArray.offset;
         inSize = optionsOrArray.inSize;
-      }
+      } // $FlowFixMe
+
 
       return this.supSub({
+        // $FlowFixMe
         content: content,
+        // $FlowFixMe
         superscript: superscript,
+        // $FlowFixMe
         superscriptOffset: offset,
+        // $FlowFixMe
         inSize: inSize,
+        // $FlowFixMe
         scale: scale
       });
     }
@@ -10145,27 +10147,33 @@ function () {
       var inSize;
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray8 = _slicedToArray(optionsOrArray, 5);
+        var _optionsOrArray9 = _slicedToArray(optionsOrArray, 5);
 
         // $FlowFixMe
-        content = _optionsOrArray8[0];
-        subscript = _optionsOrArray8[1];
-        scale = _optionsOrArray8[2];
-        offset = _optionsOrArray8[3];
-        inSize = _optionsOrArray8[4];
+        content = _optionsOrArray9[0];
+        subscript = _optionsOrArray9[1];
+        scale = _optionsOrArray9[2];
+        offset = _optionsOrArray9[3];
+        inSize = _optionsOrArray9[4];
       } else {
         content = optionsOrArray.content;
         subscript = optionsOrArray.subscript;
         scale = optionsOrArray.scale;
         offset = optionsOrArray.offset;
         inSize = optionsOrArray.inSize;
-      }
+      } // $FlowFixMe
+
 
       return this.supSub({
+        // $FlowFixMe
         content: content,
+        // $FlowFixMe
         subscript: subscript,
+        // $FlowFixMe
         subscriptOffset: offset,
+        // $FlowFixMe
         inSize: inSize,
+        // $FlowFixMe
         scale: scale
       });
     }
@@ -10194,18 +10202,18 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray9 = _slicedToArray(optionsOrArray, 10);
+        var _optionsOrArray10 = _slicedToArray(optionsOrArray, 10);
 
-        content = _optionsOrArray9[0];
-        symbol = _optionsOrArray9[1];
-        inSize = _optionsOrArray9[2];
-        space = _optionsOrArray9[3];
-        topSpace = _optionsOrArray9[4];
-        rightSpace = _optionsOrArray9[5];
-        bottomSpace = _optionsOrArray9[6];
-        leftSpace = _optionsOrArray9[7];
-        fullContentBounds = _optionsOrArray9[8];
-        useFullBounds = _optionsOrArray9[9];
+        content = _optionsOrArray10[0];
+        symbol = _optionsOrArray10[1];
+        inSize = _optionsOrArray10[2];
+        space = _optionsOrArray10[3];
+        topSpace = _optionsOrArray10[4];
+        rightSpace = _optionsOrArray10[5];
+        bottomSpace = _optionsOrArray10[6];
+        leftSpace = _optionsOrArray10[7];
+        fullContentBounds = _optionsOrArray10[8];
+        useFullBounds = _optionsOrArray10[9];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -10248,153 +10256,7 @@ function () {
           }
         }
       });
-    } // annotate(
-    //   optionsOrContent: TypeAnnotateObject
-    //                     | TypeAnnotateArray                 // $FlowFixMe
-    //                     | TypeEquationPhrase,               // $FlowFixMe
-    //   withAnnotationsArray: Array<TypeEquationPhrase | AnnotationInformation>
-    //                       | AnnotationInformation | TypeEquationPhrase | null = null,
-    //   inSizeCalc: boolean | null = null,
-    // ) {
-    //   let content;
-    //   let withAnnotations;
-    //   // let withAnnotation;
-    //   let inSize;
-    //   if (!(withAnnotationsArray == null && inSizeCalc == null)) {
-    //     content = optionsOrContent;
-    //     withAnnotations = withAnnotationsArray;
-    //     inSize = inSizeCalc;
-    //   } else if (Array.isArray(optionsOrContent)) {
-    //     [content, withAnnotations, inSize] = optionsOrContent;
-    //   } else {
-    //     ({                                                    // $FlowFixMe
-    //       content, withAnnotations, inSize,
-    //     } = optionsOrContent);
-    //     // console.log(withAnnotation)
-    //     // if (withAnnotation != null) {
-    //     //   withAnnotations = withAnnotation;
-    //     // }
-    //   }
-    //   let annotations;
-    //   // Case of single annotation in array form or array of annotations
-    //   if (Array.isArray(withAnnotations)) {
-    //     annotations = withAnnotations.map(
-    //       (annotation) => {
-    //         // annotation is an already instantiated AnnotationInformation
-    //         if (annotation instanceof AnnotationInformation) {
-    //           return annotation;
-    //         }       // $FlowFixMe
-    //         const parsedContent = this.parseContent(annotation);
-    //         // case that annotation is a method object
-    //         if (parsedContent instanceof AnnotationInformation) {
-    //           return parsedContent;
-    //         }
-    //         // Case of single annotation in array form
-    //         if (Array.isArray(annotation)) {
-    //           const annotationFromArray = this.annotation(annotation);
-    //           if (annotationFromArray instanceof AnnotationInformation) {
-    //             return annotationFromArray;
-    //           }
-    //         }
-    //         return null;
-    //       },
-    //     );
-    //     // Case of single annotation in array form
-    //     if (annotations[0] === null) {                           // $FlowFixMe
-    //       annotations = [this.annotation(withAnnotations)];
-    //     }
-    //   // Case of annotation as a Method Object, Method Array or
-    //   // AnnotationInformation instantiation
-    //   } else if (withAnnotations != null) {
-    //     if (withAnnotations instanceof AnnotationInformation) {
-    //       annotations = [withAnnotations];
-    //     } else {
-    //       const parsedContent = this.parseContent(withAnnotations);
-    //       // Method Object
-    //       if (parsedContent instanceof AnnotationInformation) {
-    //         annotations = [parsedContent];
-    //       // Array form only
-    //       } else {
-    //         annotations = [this.annotation(withAnnotations)];
-    //       }
-    //     }
-    //   }
-    //   let inSizeToUse = true;
-    //   if (inSize != null) {
-    //     inSizeToUse = inSize;
-    //   }
-    //   return new Annotation(               // $FlowFixMe
-    //     this.contentToElement(content),    // $FlowFixMe
-    //     annotations,                       // $FlowFixMe
-    //     inSizeToUse,
-    //   );
-    // }
-    // annotation(
-    //   optionsOrAnnotation: TypeAnnotationObject | TypeAnnotationArray | TypeEquationPhrase,
-    //   positionRelativeToContentH: 'left' | 'right' | 'center' | number | null = null,
-    //   positionRelativeToContentV: 'bottom' | 'top' | 'middle' | 'baseline' | number | null = null,
-    //   positionRelativeToAnnotationH: 'left' | 'right' | 'center' | number | null = null,
-    //   positionRelativeToAnnotationV: 'bottom' | 'top' | 'middle' | 'baseline' | number | null = null,
-    //   annotationScale: number | null = null,
-    //   xOffsetIn: number | null = null,
-    //   yOffsetIn: number | null = null,
-    // ) {
-    //   let annotation;
-    //   let relativeToContentH;
-    //   let relativeToContentV;
-    //   let relativeToAnnotationH;
-    //   let relativeToAnnotationV;
-    //   let scale;
-    //   let xOffset;
-    //   let yOffset;
-    //   if (!(positionRelativeToContentH == null
-    //         && positionRelativeToContentV == null
-    //         && positionRelativeToAnnotationH == null
-    //         && positionRelativeToAnnotationV == null
-    //         && annotationScale == null
-    //         && xOffsetIn == null
-    //         && yOffsetIn == null)
-    //   ) {
-    //     annotation = optionsOrAnnotation;
-    //     relativeToContentH = positionRelativeToContentH;
-    //     relativeToContentV = positionRelativeToContentV;
-    //     relativeToAnnotationH = positionRelativeToAnnotationH;
-    //     relativeToAnnotationV = positionRelativeToAnnotationV;
-    //     scale = annotationScale;
-    //     xOffset = xOffsetIn;
-    //     yOffset = yOffsetIn;
-    //   } else if (Array.isArray(optionsOrAnnotation)) {
-    //     [   // $FlowFixMe
-    //       annotation, relativeToContentH, relativeToContentV,   // $FlowFixMe
-    //       relativeToAnnotationH, relativeToAnnotationV, scale,  // $FlowFixMe
-    //       xOffset, yOffset,
-    //     ] = optionsOrAnnotation;
-    //   } else {
-    //     let relativeToContent;
-    //     let relativeToAnnotation;
-    //     ({                                                      // $FlowFixMe
-    //       annotation, relativeToContent, relativeToAnnotation, scale, // $FlowFixMe
-    //       xOffset, yOffset,
-    //     } = optionsOrAnnotation);
-    //     [relativeToContentH, relativeToContentV] = relativeToContent;
-    //     [relativeToAnnotationH, relativeToAnnotationV] = relativeToAnnotation;
-    //   }
-    //   let scaleToUse = 0.6;
-    //   if (scale != null) {
-    //     scaleToUse = scale;
-    //   }
-    //   return new AnnotationInformation(           // $FlowFixMe
-    //     this.contentToElement(annotation),        // $FlowFixMe
-    //     relativeToContentH,                       // $FlowFixMe
-    //     relativeToContentV,                       // $FlowFixMe
-    //     relativeToAnnotationH,                    // $FlowFixMe
-    //     relativeToAnnotationV,                    // $FlowFixMe
-    //     scaleToUse,                               // $FlowFixMe
-    //     xOffset,                                  // $FlowFixMe
-    //     yOffset,
-    //   );
-    // }
-
+    }
   }, {
     key: "pad",
     value: function pad(optionsOrContent) {
@@ -10411,13 +10273,13 @@ function () {
       };
 
       if (Array.isArray(optionsOrContent)) {
-        var _optionsOrContent2 = _slicedToArray(optionsOrContent, 5);
+        var _optionsOrContent = _slicedToArray(optionsOrContent, 5);
 
-        content = _optionsOrContent2[0];
-        top = _optionsOrContent2[1];
-        right = _optionsOrContent2[2];
-        bottom = _optionsOrContent2[3];
-        left = _optionsOrContent2[4];
+        content = _optionsOrContent[0];
+        top = _optionsOrContent[1];
+        right = _optionsOrContent[2];
+        bottom = _optionsOrContent[3];
+        left = _optionsOrContent[4];
       } else {
         content = optionsOrContent.content;
         top = optionsOrContent.top;
@@ -10480,18 +10342,18 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray10 = _slicedToArray(optionsOrArray, 10);
+        var _optionsOrArray11 = _slicedToArray(optionsOrArray, 10);
 
-        order = _optionsOrArray10[0];
-        left = _optionsOrArray10[1];
-        content = _optionsOrArray10[2];
-        right = _optionsOrArray10[3];
-        scale = _optionsOrArray10[4];
-        fit = _optionsOrArray10[5];
-        space = _optionsOrArray10[6];
-        vAlign = _optionsOrArray10[7];
-        brac = _optionsOrArray10[8];
-        fullContentBounds = _optionsOrArray10[9];
+        order = _optionsOrArray11[0];
+        left = _optionsOrArray11[1];
+        content = _optionsOrArray11[2];
+        right = _optionsOrArray11[3];
+        scale = _optionsOrArray11[4];
+        fit = _optionsOrArray11[5];
+        space = _optionsOrArray11[6];
+        vAlign = _optionsOrArray11[7];
+        brac = _optionsOrArray11[8];
+        fullContentBounds = _optionsOrArray11[9];
       } else {
         order = optionsOrArray.order;
         left = optionsOrArray.left;
@@ -10529,7 +10391,7 @@ function () {
       }
 
       if (options.space != null) {
-        options.space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.space);
+        options.space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.space);
       }
 
       var matrixContent = new _Elements_Matrix__WEBPACK_IMPORTED_MODULE_6__["default"](contentArray, [], options);
@@ -10605,44 +10467,44 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray11 = _slicedToArray(optionsOrArray, 27);
+        var _optionsOrArray12 = _slicedToArray(optionsOrArray, 27);
 
         // $FlowFixMe
-        symbol = _optionsOrArray11[0];
-        content = _optionsOrArray11[1];
-        from = _optionsOrArray11[2];
-        to = _optionsOrArray11[3];
-        inSize = _optionsOrArray11[4];
-        space = _optionsOrArray11[5];
+        symbol = _optionsOrArray12[0];
+        content = _optionsOrArray12[1];
+        from = _optionsOrArray12[2];
+        to = _optionsOrArray12[3];
+        inSize = _optionsOrArray12[4];
+        space = _optionsOrArray12[5];
         // $FlowFixMe
-        topSpace = _optionsOrArray11[6];
-        bottomSpace = _optionsOrArray11[7];
+        topSpace = _optionsOrArray12[6];
+        bottomSpace = _optionsOrArray12[7];
         // $FlowFixMe
-        height = _optionsOrArray11[8];
-        yOffset = _optionsOrArray11[9];
-        scale = _optionsOrArray11[10];
+        height = _optionsOrArray12[8];
+        yOffset = _optionsOrArray12[9];
+        scale = _optionsOrArray12[10];
         // $FlowFixMe
-        fromScale = _optionsOrArray11[11];
-        toScale = _optionsOrArray11[12];
+        fromScale = _optionsOrArray12[11];
+        toScale = _optionsOrArray12[12];
         // $FlowFixMe
-        fromOffset = _optionsOrArray11[13];
-        toOffset = _optionsOrArray11[14];
-        limitsPosition = _optionsOrArray11[15];
+        fromOffset = _optionsOrArray12[13];
+        toOffset = _optionsOrArray12[14];
+        limitsPosition = _optionsOrArray12[15];
         // $FlowFixMe
-        limitsAroundContent = _optionsOrArray11[16];
+        limitsAroundContent = _optionsOrArray12[16];
         // $FlowFixMe
-        fromXPosition = _optionsOrArray11[17];
-        fromYPosition = _optionsOrArray11[18];
-        fromXAlign = _optionsOrArray11[19];
-        fromYAlign = _optionsOrArray11[20];
+        fromXPosition = _optionsOrArray12[17];
+        fromYPosition = _optionsOrArray12[18];
+        fromXAlign = _optionsOrArray12[19];
+        fromYAlign = _optionsOrArray12[20];
         // $FlowFixMe
-        toXPosition = _optionsOrArray11[21];
-        toYPosition = _optionsOrArray11[22];
-        toXAlign = _optionsOrArray11[23];
-        toYAlign = _optionsOrArray11[24];
+        toXPosition = _optionsOrArray12[21];
+        toYPosition = _optionsOrArray12[22];
+        toXAlign = _optionsOrArray12[23];
+        toYAlign = _optionsOrArray12[24];
         // $FlowFixMe
-        fullBoundsContent = _optionsOrArray11[25];
-        useFullBounds = _optionsOrArray11[26];
+        fullBoundsContent = _optionsOrArray12[25];
+        useFullBounds = _optionsOrArray12[26];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -10677,7 +10539,8 @@ function () {
         defaultOptions.fromXPosition = 0.1;
         defaultOptions.fromYPosition = 'bottom';
         defaultOptions.fromXAlign = 'center';
-        defaultOptions.fromYAlign = 'top';
+        defaultOptions.fromYAlign = 'top'; // $FlowFixMe
+
         defaultOptions.toXPosition = 0.9;
         defaultOptions.toYPosition = 'top';
         defaultOptions.toXAlign = 'center';
@@ -10687,6 +10550,7 @@ function () {
       }
 
       if (limitsPosition === 'topBottomCenter') {
+        // $FlowFixMe
         defaultOptions.fromXPosition = 'center';
         defaultOptions.fromYPosition = 'bottom';
         defaultOptions.fromXAlign = 'center';
@@ -10727,10 +10591,27 @@ function () {
         useFullBounds: useFullBounds
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
-      options.fromOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.fromOffset);
-      options.toOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.toOffset); // if (options.limitsPosition === 'side') {
-
+      options.fromOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.fromOffset);
+      options.toOffset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.toOffset);
+      var annotations = [{
+        content: to,
+        xPosition: options.toXPosition,
+        yPosition: options.toYPosition,
+        xAlign: options.toXAlign,
+        yAlign: options.toYAlign,
+        offset: options.toOffset,
+        scale: options.toScale
+      }, {
+        content: from,
+        xPosition: options.fromXPosition,
+        yPosition: options.fromYPosition,
+        xAlign: options.fromXAlign,
+        yAlign: options.fromYAlign,
+        offset: options.fromOffset,
+        scale: options.fromScale
+      }];
       return this.annotate({
+        // $FlowFixMe
         content: content,
         inSize: options.inSize,
         contentScale: options.contentScale,
@@ -10738,6 +10619,7 @@ function () {
         useFullBounds: options.useFullBounds,
         glyphs: {
           left: {
+            // $FlowFixMe
             symbol: symbol,
             space: options.space,
             topSpace: options.topSpace,
@@ -10745,79 +10627,11 @@ function () {
             height: options.height,
             yOffset: options.yOffset,
             annotationsOverContent: options.limitsAroundContent,
-            annotations: [{
-              content: from,
-              xPosition: options.fromXPosition,
-              yPosition: options.fromYPosition,
-              xAlign: options.fromXAlign,
-              yAlign: options.fromYAlign,
-              offset: options.fromOffset,
-              scale: options.fromScale
-            }, {
-              content: to,
-              xPosition: options.toXPosition,
-              yPosition: options.toYPosition,
-              xAlign: options.toXAlign,
-              yAlign: options.toYAlign,
-              offset: options.toOffset,
-              scale: options.toScale
-            }]
+            // $FlowFixMe
+            annotations: annotations
           }
         }
-      }); // }
-      // return this.annotate({
-      //   content,
-      //   inSize: options.inSize,
-      //   glyphs: {
-      //     left: {
-      //       symbol,
-      //       space: options.space,
-      //       topSpace: options.topSpace,
-      //       bottomSpace: options.bottomSpace,
-      //       height: options.height,
-      //       yOffset: options.yOffset,
-      //       annotations: [
-      //         {
-      //           content: from,
-      //           xPosition: 0.1,
-      //           yPosition: 'bottom',
-      //           xAlign: 'center',
-      //           yAlign: 'top',
-      //           offset: parsePoint(options.fromOffset).add(0, -options.fromSpace),
-      //           scale: options.fromScale,
-      //         },
-      //         {
-      //           content: to,
-      //           xPosition: 0.9,
-      //           yPosition: 'top',
-      //           xAlign: 'center',
-      //           yAlign: 'bottom',
-      //           offset: parsePoint(options.toOffset).add(0, options.toSpace),
-      //           scale: options.toScale,
-      //         },
-      //       ],
-      //     },
-      //   },
-      // });
-      // let symbolToUse = null;
-      // if (symbol != null) {                                    // $FlowFixMe
-      //   symbolToUse = this.getExistingOrAddSymbol(symbol);
-      // }
-      // const contentArray = [];
-      // if (content != null) {                           // $FlowFixMe
-      //   contentArray.push(this.contentToElement(content));
-      // }
-      // if (from != null) {                              // $FlowFixMe
-      //   contentArray.push(this.contentToElement(from));
-      // }
-      // if (to != null) {                                // $FlowFixMe
-      //   contentArray.push(this.contentToElement(to));
-      // }
-      // return new Integral(
-      //   contentArray,
-      //   symbolToUse,
-      //   options,
-      // );
+      });
     }
   }, {
     key: "sumOf",
@@ -10870,27 +10684,27 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray12 = _slicedToArray(optionsOrArray, 19);
+        var _optionsOrArray13 = _slicedToArray(optionsOrArray, 19);
 
-        symbol = _optionsOrArray12[0];
-        content = _optionsOrArray12[1];
-        from = _optionsOrArray12[2];
-        to = _optionsOrArray12[3];
-        inSize = _optionsOrArray12[4];
-        space = _optionsOrArray12[5];
-        topSpace = _optionsOrArray12[6];
-        bottomSpace = _optionsOrArray12[7];
-        height = _optionsOrArray12[8];
-        yOffset = _optionsOrArray12[9];
-        scale = _optionsOrArray12[10];
-        fromScale = _optionsOrArray12[11];
-        toScale = _optionsOrArray12[12];
-        fromSpace = _optionsOrArray12[13];
-        toSpace = _optionsOrArray12[14];
-        fromOffset = _optionsOrArray12[15];
-        toOffset = _optionsOrArray12[16];
-        fullBoundsContent = _optionsOrArray12[17];
-        useFullBounds = _optionsOrArray12[18];
+        symbol = _optionsOrArray13[0];
+        content = _optionsOrArray13[1];
+        from = _optionsOrArray13[2];
+        to = _optionsOrArray13[3];
+        inSize = _optionsOrArray13[4];
+        space = _optionsOrArray13[5];
+        topSpace = _optionsOrArray13[6];
+        bottomSpace = _optionsOrArray13[7];
+        height = _optionsOrArray13[8];
+        yOffset = _optionsOrArray13[9];
+        scale = _optionsOrArray13[10];
+        fromScale = _optionsOrArray13[11];
+        toScale = _optionsOrArray13[12];
+        fromSpace = _optionsOrArray13[13];
+        toSpace = _optionsOrArray13[14];
+        fromOffset = _optionsOrArray13[15];
+        toOffset = _optionsOrArray13[16];
+        fullBoundsContent = _optionsOrArray13[17];
+        useFullBounds = _optionsOrArray13[18];
       } else {
         symbol = optionsOrArray.symbol;
         content = optionsOrArray.content;
@@ -10931,6 +10745,23 @@ function () {
         useFullBounds: useFullBounds
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+      var annotations = [{
+        content: to,
+        xPosition: 'center',
+        yPosition: 'top',
+        xAlign: 'center',
+        yAlign: 'bottom',
+        offset: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.toOffset).add(0, options.toSpace),
+        scale: options.toScale
+      }, {
+        content: from,
+        xPosition: 'center',
+        yPosition: 'bottom',
+        xAlign: 'center',
+        yAlign: 'top',
+        offset: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.fromOffset).add(0, -options.fromSpace),
+        scale: options.fromScale
+      }];
       return this.annotate({
         content: content,
         contentScale: options.contentScale,
@@ -10938,24 +10769,11 @@ function () {
         useFullBounds: options.useFullBounds,
         glyphs: {
           left: {
+            // $FlowFixMe
             symbol: symbol,
-            annotations: [{
-              content: to,
-              xPosition: 'center',
-              yPosition: 'top',
-              xAlign: 'center',
-              yAlign: 'bottom',
-              offset: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.toOffset).add(0, options.toSpace),
-              scale: options.toScale
-            }, {
-              content: from,
-              xPosition: 'center',
-              yPosition: 'bottom',
-              xAlign: 'center',
-              yAlign: 'top',
-              offset: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(options.fromOffset).add(0, -options.fromSpace),
-              scale: options.fromScale
-            }],
+            // $FlowFixMe
+            annotations: annotations,
+            // $FlowFixMe
             space: space,
             topSpace: options.topSpace,
             bottomSpace: options.bottomSpace,
@@ -10963,7 +10781,7 @@ function () {
             height: options.height
           }
         },
-        inSize: inSize
+        inSize: options.inSize
       });
     } // eslint-disable-next-line class-methods-use-this
 
@@ -10981,17 +10799,17 @@ function () {
       var useFullBounds;
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray13 = _slicedToArray(optionsOrArray, 9);
+        var _optionsOrArray14 = _slicedToArray(optionsOrArray, 9);
 
-        content = _optionsOrArray13[0];
-        comment = _optionsOrArray13[1];
-        symbol = _optionsOrArray13[2];
-        contentSpace = _optionsOrArray13[3];
-        commentSpace = _optionsOrArray13[4];
-        scale = _optionsOrArray13[5];
-        inSize = _optionsOrArray13[6];
-        fullContentBounds = _optionsOrArray13[7];
-        useFullBounds = _optionsOrArray13[8];
+        content = _optionsOrArray14[0];
+        comment = _optionsOrArray14[1];
+        symbol = _optionsOrArray14[2];
+        contentSpace = _optionsOrArray14[3];
+        commentSpace = _optionsOrArray14[4];
+        scale = _optionsOrArray14[5];
+        inSize = _optionsOrArray14[6];
+        fullContentBounds = _optionsOrArray14[7];
+        useFullBounds = _optionsOrArray14[8];
       } else {
         content = optionsOrArray.content;
         comment = optionsOrArray.comment;
@@ -11008,7 +10826,9 @@ function () {
         contentSpace: contentSpace,
         commentSpace: commentSpace,
         scale: scale,
-        inSize: inSize
+        inSize: inSize,
+        useFullBounds: useFullBounds,
+        fullContentBounds: fullContentBounds
       };
       var defaultOptions = {
         contentSpace: 0.03,
@@ -11050,6 +10870,7 @@ function () {
       if (symbol === '' || symbol == null) {
         return this.annotate({
           content: content,
+          // $FlowFixMe
           annotations: annotations,
           inSize: inSize
         });
@@ -11062,6 +10883,7 @@ function () {
         glyphs: {
           top: {
             symbol: symbol,
+            // $FlowFixMe
             annotations: annotations,
             space: contentSpaceToUse
           }
@@ -11098,6 +10920,7 @@ function () {
       if (symbol === '' || symbol == null) {
         return this.annotate({
           content: content,
+          // $FlowFixMe
           annotations: annotations,
           inSize: inSize
         });
@@ -11110,6 +10933,7 @@ function () {
         glyphs: {
           bottom: {
             symbol: symbol,
+            // $FlowFixMe
             annotations: annotations,
             space: contentSpaceToUse
           }
@@ -11142,18 +10966,18 @@ function () {
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray14 = _slicedToArray(optionsOrArray, 10);
+        var _optionsOrArray15 = _slicedToArray(optionsOrArray, 10);
 
-        content = _optionsOrArray14[0];
-        symbol = _optionsOrArray14[1];
-        inSize = _optionsOrArray14[2];
-        space = _optionsOrArray14[3];
-        topSpace = _optionsOrArray14[4];
-        rightSpace = _optionsOrArray14[5];
-        bottomSpace = _optionsOrArray14[6];
-        leftSpace = _optionsOrArray14[7];
-        fullContentBounds = _optionsOrArray14[8];
-        useFullBounds = _optionsOrArray14[9];
+        content = _optionsOrArray15[0];
+        symbol = _optionsOrArray15[1];
+        inSize = _optionsOrArray15[2];
+        space = _optionsOrArray15[3];
+        topSpace = _optionsOrArray15[4];
+        rightSpace = _optionsOrArray15[5];
+        bottomSpace = _optionsOrArray15[6];
+        leftSpace = _optionsOrArray15[7];
+        fullContentBounds = _optionsOrArray15[8];
+        useFullBounds = _optionsOrArray15[9];
       } else {
         content = optionsOrArray.content;
         symbol = optionsOrArray.symbol;
@@ -11170,9 +10994,11 @@ function () {
       var glyph = this.getExistingOrAddSymbol(symbol);
 
       if (glyph != null && glyph.custom.options.style === 'horizontal') {
-        defaultOptions.space = 0;
-        defaultOptions.leftSpace = 0.02;
-        defaultOptions.rightSpace = 0.02;
+        defaultOptions.space = 0; // $FlowFixMe
+
+        defaultOptions.leftSpace = 0.02; // $FlowFixMe
+
+        defaultOptions.rightSpace = 0.02; // $FlowFixMe
       }
 
       var optionsIn = {
@@ -11219,15 +11045,15 @@ function () {
 
       if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent3 = _slicedToArray(optionsOrContent, 7);
+        var _optionsOrContent2 = _slicedToArray(optionsOrContent, 7);
 
-        content = _optionsOrContent3[0];
-        symbol = _optionsOrContent3[1];
-        comment = _optionsOrContent3[2];
-        inSize = _optionsOrContent3[3];
-        space = _optionsOrContent3[4];
-        scale = _optionsOrContent3[5];
-        overhang = _optionsOrContent3[6];
+        content = _optionsOrContent2[0];
+        symbol = _optionsOrContent2[1];
+        comment = _optionsOrContent2[2];
+        inSize = _optionsOrContent2[3];
+        space = _optionsOrContent2[4];
+        scale = _optionsOrContent2[5];
+        overhang = _optionsOrContent2[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -11267,22 +11093,26 @@ function () {
           scale = _this$processStrike2[5],
           overhang = _this$processStrike2[6];
 
+      var annotations = [{
+        content: comment,
+        xPosition: 'center',
+        yPosition: 'top',
+        xAlign: 'center',
+        yAlign: 'bottom',
+        offset: [0, space],
+        scale: scale
+      }];
       return this.annotate({
+        // $FlowFixMe
         content: content,
         inSize: inSize,
         glyphs: {
           encompass: {
+            // $FlowFixMe
             symbol: symbol,
             space: overhang,
-            annotations: [{
-              content: comment,
-              xPosition: 'center',
-              yPosition: 'top',
-              xAlign: 'center',
-              yAlign: 'bottom',
-              offset: [0, space],
-              scale: scale
-            }]
+            // $FlowFixMe
+            annotations: annotations
           }
         }
       });
@@ -11301,55 +11131,30 @@ function () {
           scale = _this$processStrike4[5],
           overhang = _this$processStrike4[6];
 
+      var annotations = [{
+        content: comment,
+        xPosition: 'center',
+        yPosition: 'bottom',
+        xAlign: 'center',
+        yAlign: 'top',
+        offset: [0, -space],
+        scale: scale
+      }];
       return this.annotate({
+        // $FlowFixMe
         content: content,
         inSize: inSize,
         glyphs: {
           encompass: {
+            // $FlowFixMe
             symbol: symbol,
             space: overhang,
-            annotations: [{
-              content: comment,
-              xPosition: 'center',
-              yPosition: 'bottom',
-              xAlign: 'center',
-              yAlign: 'top',
-              offset: [0, -space],
-              scale: scale
-            }]
+            // $FlowFixMe
+            annotations: annotations
           }
         }
       });
-    } // // $FlowFixMe
-    // bottomStrike(...args) {
-    //   const [
-    //     content, comment, symbol,
-    //     spaceToUse, scaleToUse,
-    //   ] = this.processStrike(...args);
-    //   let contentToUse;
-    //   if (symbol) {
-    //     contentToUse = new Strike(                             // $FlowFixMe
-    //       this.contentToElement(content),             // $FlowFixMe
-    //       this.getExistingOrAddSymbol(symbol),
-    //       false,                                               // $FlowFixMe
-    //       spaceToUse,
-    //     );
-    //   } else {
-    //     contentToUse = content;
-    //   }
-    //   return this.annotate({                                   // $FlowFixMe
-    //     content: contentToUse,
-    //     withAnnotations: [                                     // $FlowFixMe
-    //       this.annotation({
-    //         annotation: comment,
-    //         relativeToContent: ['center', 'bottom'],
-    //         relativeToAnnotation: ['center', 'top'],
-    //         scale: scaleToUse,
-    //       }),
-    //     ],
-    //   });
-    // }
-
+    }
   }]);
 
   return EquationFunctions;
@@ -11437,23 +11242,18 @@ function () {
       }
 
       if (name === 'strike') {
+        // $FlowFixMe
         return this.strike(options);
       }
 
       if (name === 'xStrike') {
         return this.xStrike(options);
-      } // if (name === 'integral') {
-      //   return this.integral(options);
-      // }
-
+      }
 
       if (name === 'bracket') {
         // $FlowFixMe
         return this.bracket(options);
-      } // if (name === 'bracketNew') {         // $FlowFixMe
-      //   return this.bracketNew(options);
-      // }
-
+      }
 
       if (name === 'squareBracket') {
         // $FlowFixMe
@@ -11483,13 +11283,7 @@ function () {
       if (name === 'radical') {
         // $FlowFixMe
         return this.radical(options);
-      } // if (name === 'radicalNew') {         // $FlowFixMe
-      //   return this.radicalNew(options);
-      // }
-      // if (name === 'simpleIntegral') {
-      //   return this.simpleIntegral(options);
-      // }
-
+      }
 
       if (name === 'sum') {
         // $FlowFixMe
@@ -11662,30 +11456,6 @@ function () {
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, options);
       return new _Symbols_Integral__WEBPACK_IMPORTED_MODULE_11__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Integral').scale(1, 1).translate(0, 0), this.shapes.limits, // optionsToUse.staticSize,
       optionsToUse, 'triangles');
-    }
-  }, {
-    key: "radicalLegacy",
-    value: function radicalLegacy(optionsIn) {
-      var defaultOptions = {
-        color: this.defaultColor,
-        lineWidth: 0.01,
-        staticSize: null,
-        startHeight: 0.5,
-        startWidth: 0.7,
-        maxStartWidth: 0.15,
-        maxStartHeight: 0.15,
-        proportionalToHeight: true
-      };
-
-      if (optionsIn.proportionalToHeight != null && optionsIn.proportionalToHeight === false) {
-        defaultOptions.startHeight = 0.15;
-        defaultOptions.startWidth = 0.15;
-        defaultOptions.maxStartHeight = null;
-        defaultOptions.maxStartWidth = null;
-      }
-
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      return Object(_Symbols_Radical__WEBPACK_IMPORTED_MODULE_15__["default"])(this.shapes, options.color, options.lineWidth, options.startWidth, options.startHeight, options.proportionalToHeight, options.maxStartWidth, options.maxStartHeight, options.staticSize);
     }
   }, {
     key: "radical",
@@ -12593,10 +12363,12 @@ function (_Bracket) {
       var rightPoints = [p0._dup(), p2._dup(), p4._dup(), p6._dup()];
 
       if (direction === 'down' || direction === 'left') {
-        var m = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, -1).translate(0, height).m();
+        var m = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, -1).translate(0, height).m(); // $FlowFixMe
+
         leftPoints = leftPoints.map(function (p) {
           return p.transformBy(m);
-        });
+        }); // $FlowFixMe
+
         rightPoints = rightPoints.map(function (p) {
           return p.transformBy(m);
         });
@@ -13216,7 +12988,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Bracket; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _SymbolNew__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
-/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -13244,8 +13015,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
+ // import Bounds from '../Elements/Bounds';
 
 var Bracket =
 /*#__PURE__*/
@@ -13409,13 +13179,15 @@ function (_Symbol2) {
       var out = {};
 
       if (options.side === 'left' || options.side === 'right') {
-        out = this.getVerticalDefaultValues(contentHeight, contentWidth, options);
+        out = this.getVerticalDefaultValues(contentHeight, contentWidth, options); // $FlowFixMe
+
         out.height = contentHeight;
       } else {
         out = this.getVerticalDefaultValues(contentWidth, contentHeight, options);
         var _out = out,
             width = _out.width;
-        out.width = contentWidth;
+        out.width = contentWidth; // $FlowFixMe
+
         out.height = width;
       }
 
@@ -13842,7 +13614,8 @@ function (_Symbol2) {
       var out = {
         lineWidth: defaultLineWidth,
         width: defaultTotalWidth,
-        tipWidth: 0.01033455 + (0.000004751934 - 0.01033455) / (1 + Math.pow(height / 0.2588074, 2.024942))
+        tipWidth: 0.01033455 + (0.000004751934 - 0.01033455) / (1 + Math.pow(height / 0.2588074, 2.024942)),
+        height: height
       };
 
       if (width != null) {
@@ -13859,7 +13632,6 @@ function (_Symbol2) {
         out.tipWidth = out.lineWidth / 3;
       }
 
-      out.height = height;
       return out;
     }
   }]);
@@ -13883,7 +13655,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Product; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _SymbolNew__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
-/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -13911,8 +13682,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
-
+ // import Bounds from '../Elements/Bounds';
 
 var Product =
 /*#__PURE__*/
@@ -14289,9 +14059,11 @@ function (_Symbol2) {
   }, {
     key: "getBounds",
     value: function getBounds(options, contentX, contentY, contentWidthIn, contentHeightIn) {
+      // $FlowFixMe
       var height = this.getHeightFromContentHeight(contentHeightIn, options);
 
-      var _this$getDefaultValue2 = this.getDefaultValues(height, contentWidthIn, options),
+      var _this$getDefaultValue2 = this.getDefaultValues( // $FlowFixMe
+      height, contentWidthIn, options),
           width = _this$getDefaultValue2.width,
           startWidth = _this$getDefaultValue2.startWidth,
           lineWidth = _this$getDefaultValue2.lineWidth,
@@ -14335,7 +14107,8 @@ function (_Symbol2) {
         bounds.bottom = contentY;
         bounds.top = bounds.bottom + bounds.height;
         bounds.ascent = bounds.height;
-        bounds.descent = 0;
+        bounds.descent = 0; // $FlowFixMe
+
         bounds.annotations = {
           root: {
             xPosition: 'left',
@@ -14353,7 +14126,8 @@ function (_Symbol2) {
         bounds.right = bounds.left + bounds.width;
         bounds.top = bounds.bottom + bounds.height;
         bounds.descent = 0;
-        bounds.ascent = bounds.height;
+        bounds.ascent = bounds.height; // $FlowFixMe
+
         bounds.annotations = {
           root: {
             xPosition: 'left',
@@ -14381,9 +14155,7 @@ function (_Symbol2) {
         lineWidth = 0.01;
       }
 
-      if (options.contentHeight != null && typeof options.contentHeight === 'number') {
-        contentHeight = options.contentHeight;
-      } else if (contentHeightIn != null) {
+      if (contentHeightIn != null) {
         contentHeight = contentHeightIn;
       } else {
         contentHeight = 1;
@@ -14423,6 +14195,7 @@ function (_Symbol2) {
         out.startHeight = options.startHeight;
 
         if (options.proportionalToHeight) {
+          // $FlowFixMe
           out.startHeight = options.startHeight * out.height;
         }
       } else {
@@ -14437,6 +14210,7 @@ function (_Symbol2) {
         out.tickHeight = options.tickHeight;
 
         if (options.proportionalToHeight) {
+          // $FlowFixMe
           out.tickHeight = options.tickHeight * out.startHeight;
         }
       } else {
@@ -14447,6 +14221,7 @@ function (_Symbol2) {
         out.startWidth = options.startWidth;
 
         if (options.proportionalToHeight) {
+          // $FlowFixMe
           out.startWidth = options.startWidth * out.height;
         }
       } else {
@@ -14461,6 +14236,7 @@ function (_Symbol2) {
         out.tickWidth = options.tickWidth;
 
         if (options.proportionalToHeight) {
+          // $FlowFixMe
           out.tickWidth = options.tickWidth * out.startWidth;
         }
       } else {
@@ -14471,6 +14247,7 @@ function (_Symbol2) {
         out.downWidth = options.downWidth;
 
         if (options.proportionalToHeight) {
+          // $FlowFixMe
           out.downWidth = options.downWidth * out.startWidth;
         }
       } else {

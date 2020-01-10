@@ -568,129 +568,127 @@ export default function diagramLayout() {
             alignH: 'right',
           },
         },
-        // '1': {
-        //   content: [{
-        //     topComment: {
-        //       content: 'vert',
-        //       comment: 'opp',
-        //       symbol: 'brace',
-        //     },
-        //   }, 'equals', 'func', {
-        //     brac: [{
-        //       topComment: {
-        //         content: 'angle',
-        //         comment: 'theta',
-        //         symbol: 'brace1',
-        //         inSize: false,
-        //       },
-        //     }, 'lb', 'rb'],
-        //   },
-        //   'minus1',
-        //   {
-        //     annotate: {
-        //       content: 'sin1',
-        //       withAnnotations: [
-        //         {
-        //           annotation: {
-        //             annotation: '4',
-        //             relativeToContent: [1, 1],
-        //             relativeToAnnotation: [0, 0],
-        //             scale: 0.5,
-        //           },
-        //         },
-        //       ],
-        //     },
-        //   },
-        //   ],
-        //   alignment: {
-        //     fixTo: 'equals',
-        //     alignH: 'right',
-        //   },
-        // },
-        // '2': {
-        //   content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
-        //   alignment: {
-        //     fixTo: 'equals',
-        //     alignH: 'right',
-        //   },
-        // },
+        '1': {
+          content: [{
+            topComment: {
+              content: 'vert',
+              comment: 'opp',
+              symbol: 'brace',
+            },
+          }, 'equals', 'func', {
+            brac: ['lb', {
+              topComment: {
+                content: 'angle',
+                comment: 'theta',
+                symbol: 'brace1',
+                inSize: false,
+              },
+            }, 'rb'],
+          },
+          'minus1',
+          {
+            annotate: {
+              content: 'sin1',
+              annotation: {
+                content: '4',
+                xPosition: 1,
+                yPosition: 1,
+                xAlign: 0,
+                yAlign: 0,
+                scale: 0.5,
+              },
+            },
+          },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2': {
+          content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '0b': {
+          content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '0a': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
         // '0b': {
-        //   content: ['opp', 'equals', 'func', { brac: ['theta', 'lb', 'rb'] }],
-        //   alignment: {
-        //     fixTo: 'opp',
-        //     alignH: 'right',
-        //   },
-        // },
-        // '0a': {
-        //   content: [
-        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-        //   ],
-        //   alignment: {
-        //     fixTo: 'opp',
-        //     alignH: 'right',
-        //   },
-        // },
-        // // '0b': {
-        // //   content: [
-        // //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-        // //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
-        // //   ],
-        // //   alignment: {
-        // //     fixTo: 'opp',
-        // //     alignH: 'right',
-        // //   },
-        // // },
-        // '0c': {
-        //   content: [
-        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-        //     'equals1', 'sin1', ' ' , 'theta1',
-        //   ],
-        //   alignment: {
-        //     fixTo: 'opp',
-        //     alignH: 'right',
-        //   },
-        // },
-        // '0d': {
         //   content: [
         //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
         //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
-        //     'equals2', 'sin2', ' ', 'theta2',
         //   ],
         //   alignment: {
         //     fixTo: 'opp',
         //     alignH: 'right',
         //   },
         // },
-        // '5': {
-        //   content: [
-        //     'opp', 'approx', {
-        //       frac: [
-        //         ['16', 'theta', { brac: [['pi1', 'minus1', 'theta1'], 'lb', 'rb'] }],
-        //         ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
-        //           brac: [['pi3', 'minus3', 'theta4'], 'lb1', 'rb1'],
-        //         }],
-        //         'v',
-        //       ],
-        //     },
-        //   ],
-        //   alignment: {
-        //     alignH: 0.8,
-        //   },
-        // },
-        // '6': {
-        //   content: [
-        //     'opp', 'equals', 'theta', 'minus1',
-        //     { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, '3f', 'v'] },
-        //     'plus1',
-        //     { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, '5f', 'v1'] },
-        //     'minus2',
-        //     { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, '7f', 'v2'] },
-        //     'plus2', 'dots',
-        //   ],
-        //   alignment: {
-        //     alignH: 0.4,
-        //   },
-        // },
+        '0c': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
+            'equals1', 'sin1', ' ' , 'theta1',
+          ],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '0d': {
+          content: [
+            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
+            'equals1', 'sin1', { brac: ['lb1', 'theta1', 'rb1'] },
+            'equals2', 'sin2', ' ', 'theta2',
+          ],
+          alignment: {
+            fixTo: 'opp',
+            alignH: 'right',
+          },
+        },
+        '5': {
+          content: [
+            'opp', 'approx', {
+              frac: [
+                ['16', 'theta', { brac: ['lb', ['pi1', 'minus1', 'theta1'], 'rb'] }],
+                'v',
+                ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
+                  brac: ['lb1', ['pi3', 'minus3', 'theta4'], 'rb1'],
+                }],
+              ],
+            },
+          ],
+          alignment: {
+            alignH: 0.8,
+          },
+        },
+        '6': {
+          content: [
+            'opp', 'equals', 'theta', 'minus1',
+            { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, 'v', '3f'] },
+            'plus1',
+            { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, 'v1', '5f'] },
+            'minus2',
+            { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, 'v2', '7f'] },
+            'plus2', 'dots',
+          ],
+          alignment: {
+            alignH: 0.4,
+          },
+        },
       },
     },
     mods: {
