@@ -247,14 +247,14 @@ export default function diagramLayout() {
     },
   };
   const top = (content, commentText, symbol) => ({
-    topCommentNew: {
+    topComment: {
       content,
       comment: commentText,
       symbol,
       inSize: false,
     },
   });
-  const half = { frac: ['_1', '_2', 'v', 0.6] };
+  const half = { frac: ['_1', 'v', '_2', 0.6] };
   const r2 = { sup: ['__r', [' ', '_2']] };
   const eqn = {
     name: 'eqn',
@@ -288,13 +288,13 @@ export default function diagramLayout() {
         sides: { text: `${layout.polygonSides[0]}` },
         v: { symbol: 'vinculum' },
         brace: {
-          symbol: 'braceNew', side: 'top', color: colors.disabledLabel,
+          symbol: 'brace', side: 'top', color: colors.disabledLabel,
         },
         sBrace: {
-          symbol: 'braceNew', side: 'top', color: colors.disabledLabel,
+          symbol: 'brace', side: 'top', color: colors.disabledLabel,
         },
-        x: { symbol: 'xStrike', color: colors.disabledLabel },
-        _x: { symbol: 'xStrike', color: colors.disabledLabel },
+        x: { symbol: 'strike', style: 'cross', color: colors.disabledLabel },
+        _x: { symbol: 'strike', style: 'cross', color: colors.disabledLabel },
       },
       forms: {
         '0': [AreaTri, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b'],

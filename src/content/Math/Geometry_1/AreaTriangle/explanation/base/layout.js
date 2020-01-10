@@ -136,7 +136,7 @@ export default function diagramLayout() {
         'tri': [
           { sub: ['Area', 'tri'] },
           'equals',
-          { frac: ['_1', '_2', 'v', 0.7] },
+          { frac: ['_1', 'v', '_2', 0.7] },
           ' ', 'A', 'mul', 'B',
         ],
       },
@@ -322,16 +322,16 @@ export default function diagramLayout() {
     sub: { content, subscript },
   });
   const top = (content, commentText, symbol) => ({
-    topCommentNew: {
+    topComment: {
       content,
       comment: commentText,
       symbol,
       inSize: false,
     },
   });
-  const half = { frac: ['_1', '_2', 'v', 0.6] };
-  const _half = { frac: ['__1', '__2', '_v', 0.6] };
-  const __half = { frac: ['___1', '___2', '__v', 0.6] };
+  const half = { frac: ['_1', 'v', '_2', 0.6] };
+  const _half = { frac: ['__1', '_v', '__2', 0.6] };
+  const __half = { frac: ['___1', '__v', '___2', 0.6] };
 
   const eqn = {
     name: 'eqn',
@@ -368,18 +368,18 @@ export default function diagramLayout() {
         ___2: { text: '2', color: colors.construction2 },
         __v: { symbol: 'vinculum', color: colors.construction2 },
         brace: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.disabled,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
         },
         _brace: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.disabled,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
         },
         sBrace: {
-          symbol: 'braceNew', side: 'top', numLines: 1, color: colors.disabled,
+          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabled,
         },
-        lb: { symbol: 'bracketNew', side: 'left' },
-        rb: { symbol: 'bracketNew', side: 'right' },
-        s: { symbol: 'xStrike', color: colors.disabled },
-        _s: { symbol: 'xStrike', color: colors.disabled },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+        s: { symbol: 'strike', style: 'cross', color: colors.disabled },
+        _s: { symbol: 'strike', style: 'cross', color: colors.disabled },
         base: { color: colors.sides },
         height: { color: colors.sides },
       },
@@ -398,30 +398,31 @@ export default function diagramLayout() {
           sub('Area', 'tri'), 'equals', '   ', _half, ' ', '_h', ' ', 'B',
           'plus', __half, ' ', '__h', ' ', 'C',
         ],
-        // '2': [
-        //   sub('Area', 'tri'), 'equals', '   ',
-        //   { bracNew: [[_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'lb', 'rb', false] },
-        // ],
+        '3': [
+          sub('Area', 'tri'), 'equals', '   ',
+          { brac: ['lb', [_half, ' ', '_h', ' ', 'B', 'plus', __half, ' ', '__h', ' ', 'C'], 'rb', false] },
+        ],
         '4': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
-            bracNew: [
+            brac: [
+              'lb',
               [
                 { strike: [[_half, ' ', '_h'], 's'] }, ' ', 'B',
                 'plus',
                 { strike: [[__half, ' ', '__h'], '_s'] }, ' ', 'C',
               ],
-              'lb', 'rb',
+              'rb',
             ],
           },
         ],
         '5': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { bracNew: [['B', 'plus', 'C'], 'lb', 'rb'] },
+          { brac: ['lb', ['B', 'plus', 'C'], 'rb'] },
         ],
         '6': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ bracNew: [['B', 'plus', 'C'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ brac: ['lb', ['B', 'plus', 'C'], 'rb'] }, 'base', 'brace'),
         ],
         '7': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '8': [
@@ -455,28 +456,29 @@ export default function diagramLayout() {
         ],
         '23': [
           sub('Area', 'tri'), 'equals', '   ',
-          { bracNew: [[__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'lb', 'rb', false] },
+          { brac: ['lb', [__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'rb', false] },
         ],
         '24': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
           {
-            bracNew: [
+            brac: [
+              'lb',
               [
                 { strike: [[__half, ' ', '__h'], 's'] }, ' ', 'C',
                 'minus',
                 { strike: [[_half, ' ', '_h'], '_s'] }, ' ', 'B',
               ],
-              'lb', 'rb',
+              'rb',
             ],
           },
         ],
         '25': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          { bracNew: [['C', 'minus', 'B'], 'lb', 'rb'] },
+          { brac: ['lb', ['C', 'minus', 'B'], 'rb'] },
         ],
         '26': [
           sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
-          top({ bracNew: [['C', 'minus', 'B'], 'lb', 'rb'] }, 'base', 'brace'),
+          top({ brac: ['lb', ['C', 'minus', 'B'], 'rb'] }, 'base', 'brace'),
         ],
         '27': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
         '28': [

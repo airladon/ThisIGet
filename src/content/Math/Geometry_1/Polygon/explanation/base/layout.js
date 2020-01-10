@@ -295,21 +295,21 @@ export default function diagramLayout() {
         m3: '-',
         m4: '-',
         lb: {
-          symbol: 'bracketNew', side: 'left',
+          symbol: 'bracket', side: 'left',
         },
         rb: {
-          symbol: 'bracketNew', side: 'right',
+          symbol: 'bracket', side: 'right',
         },
         brace: {
-          symbol: 'braceNew', side: 'top', color: colors.working,
+          symbol: 'brace', side: 'top', color: colors.working,
         },
         box: {
-          symbol: 'box', color: colors.angles, width: 0.008,
+          symbol: 'box', color: colors.angles, lineWidth: 0.008,
           // symbol: 'box', color: colors.angles, width: 0.08,
           // staticSize: [1, 0.2],
         },
         box2: {
-          symbol: 'box', color: colors.angles, width: 0.01,
+          symbol: 'box', color: colors.angles, lineWidth: 0.01,
           // staticSize: [1, 0.2],
         },
         v: { symbol: 'vinculum' },
@@ -327,8 +327,8 @@ export default function diagramLayout() {
           proportionalToHeight: true,
           // staticSize: [3, 1],
         },
-        s1: { symbol: 'xStrike', color: colors.working },
-        s2: { symbol: 'xStrike', color: colors.working },
+        s1: { symbol: 'strike', style: 'cross', color: colors.working },
+        s2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -349,7 +349,7 @@ export default function diagramLayout() {
         '2': [
           newTot, 'equals', oldTot, '   ',
           {
-            topCommentNew: {
+            topComment: {
               content: [
                 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'm3', '   ', 'c1'],
               comment: ['m4', ' ', '_180'],
@@ -366,7 +366,7 @@ export default function diagramLayout() {
         '4': [
           newTot, 'equals', oldTot, '   ',
           {
-            topCommentNew: {
+            topComment: {
               content: ['m4', ' ', '_180', '   ', 'p1', '   ', '_360'],
               comment: ['p2', '_1802'],
               symbol: 'brace',
@@ -380,7 +380,7 @@ export default function diagramLayout() {
         '6': {
           box: {
             content: ['tot1', 'equals', {
-              bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+              brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'],
             }, 'times', '_180'],
             symbol: 'box2',
             space: 0.2,
@@ -388,14 +388,14 @@ export default function diagramLayout() {
         },
         '7': [
           'tot1', 'equals', {
-            bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'],
+            brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'],
           }, 'times', '_180',
         ],
         '8': [
           'angle', 'equals', {
             frac: {
               numerator: [
-                { bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                { brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'] },
                 'times', '_180',
               ],
               denominator: 'n2',
@@ -407,9 +407,9 @@ export default function diagramLayout() {
           'angle', 'equals', {
             frac: {
               numerator: {
-                topCommentNew: {
+                topComment: {
                   content: [
-                    { bracNew: [['n', ' ', 'm1',' ', '_2'], 'lb', 'rb'] },
+                    { brac: ['lb', ['n', ' ', 'm1',' ', '_2'], 'rb'] },
                     'times', '_180',
                   ],
                   comment: ['n3', '_1802', '  ', 'm2', '  ', '_3602'],
@@ -482,7 +482,7 @@ export default function diagramLayout() {
           },
         ],
         '14': [
-          'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'n5', 'v2'] },
+          'angle', 'equals', '_180', '  ', 'm1', '  ', { frac: ['_360', 'v2', 'n5'] },
           // {
           //   box: {
           //     content: '_1802',

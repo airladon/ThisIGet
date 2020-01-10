@@ -54,7 +54,7 @@ export default function diagramLayout() {
       _2: '2',
     },
     forms: {
-      base: { frac: ['num', '_2', 'v'] },
+      base: { frac: ['num', 'v', '_2'] },
     },
     scale: 0.6,
     defaultFormAlignment: {

@@ -34,7 +34,7 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: [{ root: ['_3', 'r'] }, 'A'],
+        content: [{ root: ['r', '_3'] }, 'A'],
         scale: 1,
       },
     },
@@ -47,7 +47,7 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: { root: ['_3', 'r'] },
+        content: { root: ['r', '_3'] },
         scale: 1,
       },
     },

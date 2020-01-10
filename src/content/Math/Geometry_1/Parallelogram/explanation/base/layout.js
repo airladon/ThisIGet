@@ -282,7 +282,7 @@ export default function diagramLayout() {
   };
 
   const top = (content, commentText, symbol) => ({
-    topCommentNew: {
+    topComment: {
       content,
       comment: commentText,
       symbol,
@@ -323,15 +323,15 @@ export default function diagramLayout() {
         __2: '2',
         v: { symbol: 'vinculum' },
         b1: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
         b2: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         },
-        lb: { symbol: 'bracketNew', side: 'left' },
-        rb: { symbol: 'bracketNew', side: 'right' },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -348,34 +348,34 @@ export default function diagramLayout() {
           'Area', 'equals',
           top(
             { sub: ['Area1', 'rect'] },
-            [{ bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1'],
             'b1',
           ),
           'plus',
           '_2', 'mul',
           top(
             { sub: ['Area2', 'tri'] },
-            [{ frac: ['__1', '__2', 'v', 0.6] }, 'S2', 'H2'],
+            [{ frac: ['__1', 'v', '__2', 0.6] }, 'S2', 'H2'],
             'b2',
           ),
         ],
         '2': [
           'Area', 'equals',
-          { bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1',
+          { brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1',
           'plus',
           '_2', 'mul',
-          { frac: ['__1', '__2', 'v', 0.6] }, 'S2', 'H2',
+          { frac: ['__1', 'v', '__2', 0.6] }, 'S2', 'H2',
         ],
         '3': [
           'Area', 'equals',
           top(
-            [{ bracNew: [['A1', 'minus', 'S1'], 'lb', 'rb'] }, 'mul2', 'H1'],
+            [{ brac: ['lb', ['A1', 'minus', 'S1'], 'rb'] }, 'mul2', 'H1'],
             ['A3', 'H3', 'minus2', 'S3', 'H4'],
             'b1',
           ),
           'plus',
           { strike: ['_2', 'strike1'] }, 'mul',
-          { strike: [{ frac: ['__1', '__2', 'v', 0.6] }, 'strike2'] }, 'S2', 'H2',
+          { strike: [{ frac: ['__1', 'v', '__2', 0.6] }, 'strike2'] }, 'S2', 'H2',
         ],
         '4': [
           'Area', 'equals',
@@ -455,15 +455,15 @@ export default function diagramLayout() {
         _divide22: '÷2',
         // v: { symbol: 'vinculum' },
         b1: {
-          symbol: 'braceNew', side: 'top', color: colors.working,
+          symbol: 'brace', side: 'top', color: colors.working,
         },
         // b2: {
         //   symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
         // },
         // lb: { symbol: 'bracket', side: 'left' },
         // rb: { symbol: 'bracket', side: 'right' },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -473,26 +473,70 @@ export default function diagramLayout() {
       forms: {
         '0': ['_360', 'equals', '_21', 'a', 'plus', '_22', 'b'],
         '1': [
-          { annotate: ['_360', ['_divide2', 'center', 'bottom', 'center', 2], 'false'] },
-          'equals',
-          { annotate: [['_21', 'a', 'plus', '_22', 'b'], ['_divide21', 'center', 'bottom', 'center', 2], 'false'] },
-        ],
-        '2': [
           {
-            annotate: [
-              { topCommentNew: ['_360', '_180', 'b1', 0.05, 0.05, 0.6, false] },
-              ['_divide2', 'center', 'bottom', 'center', 2],
-              'false',
-            ],
+            annotate: {
+              content: '_360',
+              annotation: {
+                content: '_divide2',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
           },
           'equals',
           {
-            annotate: [[
-              { strike: ['_21', 'strike1'] },
-              'a', 'plus',
-              { strike: ['_22', 'strike2'] },
-              'b',
-            ], ['_divide21', 'center', 'bottom', 'center', 2], 'false'],
+            annotate: {
+              content: ['_21', 'a', 'plus', '_22', 'b'],
+              annotation: {
+                content: '_divide21',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+          },
+        ],
+        '2': [
+          {
+            annotate: {
+              content: { topComment: ['_360', '_180', 'b1', 0.05, 0.05, 0.6, false] },
+              annotation: {
+                content: '_divide2',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+          },
+          'equals',
+          {
+            annotate: {
+              content: [
+                { strike: ['_21', 'strike1'] },
+                'a', 'plus',
+                { strike: ['_22', 'strike2'] },
+                'b',
+              ],
+              annotation: {
+                content: '_divide21',
+                xPosition: 'center',
+                yPosition: 'bottom',
+                xAlign: 'center',
+                yAlign: 2,
+                inSize: false,
+                scale: 0.5,
+              },
+            },
           },
         ],
         // '3': [

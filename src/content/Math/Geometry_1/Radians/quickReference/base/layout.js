@@ -278,10 +278,10 @@ export default function diagramLayout() {
         equals: '  =  ',
         v: { symbol: 'vinculum' },
         largeBrace: {
-          symbol: 'braceNew', side: 'top', color: colors.qrRadians_marks,
+          symbol: 'brace', side: 'top', color: colors.qrRadians_marks,
         },
         smallBrace: {
-          symbol: 'braceNew', side: 'top', color: colors.qrRadians_marks,
+          symbol: 'brace', side: 'top', color: colors.qrRadians_marks,
         },
       },
       defaultFormAlignment: {
@@ -293,8 +293,8 @@ export default function diagramLayout() {
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         // 'radius': [{ frac: ['_arc', '_angle', 'v'] }, 'equals', '_radius'],
         // 'angle': [{ frac: ['_arc', '_radius', 'v'] }, 'equals', '_angle'],
-        'radius': ['_radius', 'equals', { frac: ['_arc', '_angle', 'v'] }],
-        'angle': ['_angle', 'equals', { frac: ['_arc', '_radius', 'v'] }],
+        'radius': ['_radius', 'equals', { frac: ['_arc', 'v', '_angle'] }],
+        'angle': ['_angle', 'equals', { frac: ['_arc', 'v', '_radius'] }],
         '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength1'],
         '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths2'],
         '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths3'],
@@ -302,7 +302,7 @@ export default function diagramLayout() {
           'arc',
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: '_3',
               comment: 'angle',
               symbol: 'smallBrace',
@@ -312,7 +312,7 @@ export default function diagramLayout() {
           },
           '   ',
           {
-            topCommentNew: ['radiusLengths3', 'radius', 'largeBrace'],
+            topComment: ['radiusLengths3', 'radius', 'largeBrace'],
           },
         ],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],

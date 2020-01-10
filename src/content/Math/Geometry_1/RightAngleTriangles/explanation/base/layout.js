@@ -430,8 +430,8 @@ export default function diagramLayout() {
     largeSquare: { text: 'large square', color: colors.sides },
     smallSquare: { text: 'small square', color: colors.sides },
     triangle: { text: 'triangle', color: colors.sides },
-    lb: { symbol: 'bracketNew', side: 'left' },
-    rb: { symbol: 'bracketNew', side: 'right' },
+    lb: { symbol: 'bracket', side: 'left' },
+    rb: { symbol: 'bracket', side: 'right' },
     A: { color: colors.sides },
     B: { color: colors.sides },
     _A: { text: 'A', color: colors.sides },
@@ -463,16 +463,28 @@ export default function diagramLayout() {
     mul: ' \u00D7 ',
     v: { symbol: 'vinculum' },
     'brace': {
-      symbol: 'braceNew', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
     '_brace': {
-      symbol: 'braceNew', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
     '__brace': {
-      symbol: 'braceNew', side: 'bottom', color: colors.description,
+      symbol: 'brace',
+      side: 'bottom',
+      color: colors.description,
+      width: 0.05,
+      lineWidth: 0.012,
     },
-    'x': { symbol: 'xStrike', color: colors.description },
-    '_x': { symbol: 'xStrike', color: colors.description },
+    'x': { symbol: 'strike', style: 'cross', color: colors.description },
+    '_x': { symbol: 'strike', style: 'cross', color: colors.description },
   };
 
   const top = (content, commentText, symbol) => ({
@@ -498,19 +510,19 @@ export default function diagramLayout() {
       content: '__Area', comment: 'largeSquare', scale: 0.5, contentSpace: 0,
     },
   };
-  const half = { frac: ['_1', '_2g', 'v', 0.7] };
+  const half = { frac: ['_1', 'v', '_2g', 0.7] };
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
 
   const ann = (content, annotation) => ({
     annotate: {
       content,
-      withAnnotations: {
-        annotation: {
-          annotation,
-          relativeToContent: ['center', -0.5],
-          relativeToAnnotation: ['center', 'top'],
-          scale: 0.5,
-        },
+      annotation: {
+        content: annotation,
+        xPosition: 'center',
+        yPosition: -0.5,
+        xAlign: 'center',
+        yAlign: 'top',
+        scale: 0.5,
       },
       inSize: false,
     },
@@ -542,7 +554,7 @@ export default function diagramLayout() {
           content: [
             top(
               AreaLSquare,
-              { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
               'brace',
             ),
             'equals', '_4', 'mul',
@@ -559,7 +571,7 @@ export default function diagramLayout() {
         // ////////////////////////////////////////////////////////////
         '1': {
           content: [
-            { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
             'equals',
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
@@ -569,7 +581,7 @@ export default function diagramLayout() {
         '1a': {
           content: [
             top(
-              { sup: [{ bracNew: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              { sup: [{ brac: ['lb', ['A', '___plus', 'B'], 'rb'] }, '_2a'] },
               [
                 sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
                 '_plus', sup('___B', '_2d'),

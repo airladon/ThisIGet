@@ -37,8 +37,8 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       equals: ' = ',
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -64,7 +64,14 @@ export default function diagramLayout() {
         content: ['_2', {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         }],
         scale: 1,
@@ -86,24 +93,24 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       equals: ' = ',
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
       v: { symbol: 'vinculum', color: colors.sides },
     },
     forms: {
       '0': {
-        content: { frac: ['A', '_2', 'v', 0.7] },
+        content: { frac: ['A', 'v', '_2', 0.7] },
         alignment: { alignV: 0.03 },
         scale: 1,
       },
       '1': {
-        content: [{ frac: ['A', '_2', 'v', 0.7] }, 'times', '_2_'],
+        content: [{ frac: ['A', 'v', '_2', 0.7] }, 'times', '_2_'],
         scale: 1,
         alignment: { alignV: 0.03 },
       },
       '2': {
         content: [
-          { frac: ['A', { strike: ['_2', 's1'] }, 'v', 0.7] },
+          { frac: ['A', 'v', { strike: ['_2', 's1'] }, 0.7] },
           'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
@@ -118,7 +125,14 @@ export default function diagramLayout() {
         content: {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         },
         scale: 1,
@@ -142,45 +156,52 @@ export default function diagramLayout() {
       times: ' \u00D7 ',
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
-      s2: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      s2: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A'],
+        content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '1': {
-        content: [{ frac: [{ root: ['_3', 'r'] }, '_2', 'v', 0.7] }, 'A', 'times', '_2_'],
+        content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A', 'times', '_2_'],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '2': {
         content: [
-          { frac: [{ root: ['_3', 'r'] }, { strike: ['_2', 's1'] }, 'v', 0.7] },
+          { frac: [{ root: ['r', '_3'] }, 'v', { strike: ['_2', 's1'] }, 0.7] },
           'A', 'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
         alignment: { alignV: -0.05 },
       },
       '3': {
-        content: [{ root: ['_3', 'r'] }, 'A'],
+        content: [{ root: ['r', '_3'] }, 'A'],
         alignment: { alignV: -0.1 },
         scale: 1,
       },
       '4': {
-        content: [{ root: ['_3', 'r'] }, {
+        content: [{ root: ['r', '_3'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
           },
         }],
         alignment: { alignV: -0.1 },
         scale: 1,
       },
       '5': {
-        content: { root: ['_3', 'r'] },
+        content: { root: ['r', '_3'] },
         alignment: { alignV: -0.1 },
         scale: 1,
       },
@@ -287,12 +308,12 @@ export default function diagramLayout() {
     sup: [content, power, 0.6, new Point(bias, 0)],
   });
 
-  const frac = (num, den, v, scale = 1) => ({
-    frac: [num, den, v, scale],
+  const frac = (num, v, den, scale = 1) => ({
+    frac: [num, v, den, scale],
   });
 
   const brac = (content, lb, rb) => ({
-    bracNew: [content, lb, rb],
+    brac: [lb, content, rb],
   });
 
   const strike = (content, strikeSymbol) => ({
@@ -300,7 +321,7 @@ export default function diagramLayout() {
   });
 
   const root = (content, radical) => ({
-    root: [content, radical],
+    root: [radical, content],
   });
 
   const eqn = {
@@ -339,15 +360,23 @@ export default function diagramLayout() {
         v3: { symbol: 'vinculum' },
         vb: { symbol: 'vinculum', color: colors.sides },
         brace1: {
-          symbol: 'braceNew', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         brace2: {
-          symbol: 'braceNew', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
-        lb: { symbol: 'bracketNew', side: 'left', width: 0.06 },
-        rb: { symbol: 'bracketNew', side: 'right', width: 0.06 },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        lb: { symbol: 'bracket', side: 'left', width: 0.06 },
+        rb: { symbol: 'bracket', side: 'right', width: 0.06 },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
         r1: { symbol: 'radical' },
         r2: { symbol: 'radical' },
         r3: { symbol: 'radical' },
@@ -363,15 +392,15 @@ export default function diagramLayout() {
       forms: {
         '0': [
           sq('H', '_22', 0.02), 'plus',
-          sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
+          sq(brac(frac('A2', 'vb', '_2b', 0.8), 'lb', 'rb'), '_23'),
           'equals', sq('A1', '_21'),
         ],
         '1': [
           sq('H', '_22', 0.02), 'plus',
           {
-            topCommentNew: [
-              sq(brac(frac('A2', '_2b', 'vb', 0.8), 'lb', 'rb'), '_23'),
-              frac(sq('A3', '_24'), '_4', 'v2'),
+            topComment: [
+              sq(brac(frac('A2', 'vb', '_2b', 0.8), 'lb', 'rb'), '_23'),
+              frac(sq('A3', '_24'), 'v2', '_4'),
               'brace1',
             ],
           },
@@ -379,42 +408,42 @@ export default function diagramLayout() {
         ],
         '2': [
           sq('H', '_22', 0.02), 'plus',
-          frac(sq('A3', '_24'), '_4', 'v2'),
+          frac(sq('A3', '_24'), 'v2', '_4'),
           'equals', sq('A1', '_21'),
         ],
         '3': [
           {
-            topCommentNew: [
-              [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), '_4', 'v2')],
-              ['minus', frac(sq('A2', '_23'), '_41', 'v1')],
+            topComment: [
+              [sq('H', '_22', 0.02), 'plus', frac(sq('A3', '_24'), 'v2', '_4')],
+              ['minus', frac(sq('A2', '_23'), 'v1', '_41')],
             ],
           },
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: sq('A1', '_21'),
-              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
-              contentSpace: 0.14,
+              comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
+              commentSpace: 0.16,
               inSize: false,
             },
           },
         ],
         '4': [
           {
-            topCommentNew: [
+            topComment: [
               [
                 sq('H', '_22', 0.02), 'plus',
-                strike(frac(sq('A3', '_24'), '_4', 'v2'), 'strike1'),
+                strike(frac(sq('A3', '_24'), 'v2', '_4'), 'strike1'),
               ],
-              strike(['minus', frac(sq('A2', '_23'), '_41', 'v1')], 'strike2'),
+              strike(['minus', frac(sq('A2', '_23'), 'v1', '_41')], 'strike2'),
             ],
           },
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: sq('A1', '_21'),
-              comment: ['minus1', frac(sq('A4', '_25'), '_42', 'v3')],
-              contentSpace: 0.14,
+              comment: ['minus1', frac(sq('A4', '_25'), 'v3', '_42')],
+              commentSpace: 0.16,
               inSize: false,
             },
           },
@@ -423,18 +452,18 @@ export default function diagramLayout() {
           sq('H', '_22', 0.02),
           'equals',
           sq('A1', '_21'),
-          'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+          'minus1', frac(sq('A4', '_25'), 'v3', '_42'),
         ],
         '6': [
           sq('H', '_22', 0.02),
           'equals',
           {
-            topCommentNew: {
+            topComment: {
               content: [
                 sq('A1', '_21'),
-                'minus1', frac(sq('A4', '_25'), '_42', 'v3'),
+                'minus1', frac(sq('A4', '_25'), 'v3', '_42'),
               ],
-              comment: [frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')],
+              comment: [frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')],
               symbol: 'brace1',
             },
           },
@@ -442,16 +471,16 @@ export default function diagramLayout() {
         '7': [
           sq('H', '_22', 0.02),
           'equals',
-          frac('_31', '_4', 'v1', 0.7), sq('A2', '_23'),
+          frac('_31', 'v1', '_4', 0.7), sq('A2', '_23'),
         ],
         '8': [
           root(sq('H', '_22', 0.02), 'r1'),
           'equals',
-          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+          root([frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')], 'r2'),
         ],
         '9': [
           {
-            topCommentNew: {
+            topComment: {
               content: root(sq('H', '_22', 0.02), 'r1'),
               comment: 'H2',
               symbol: 'brace1',
@@ -459,17 +488,17 @@ export default function diagramLayout() {
             },
           },
           'equals',
-          root([frac('_31', '_4', 'v1', 0.7), sq('A2', '_23')], 'r2'),
+          root([frac('_31', 'v1', '_4', 0.7), sq('A2', '_23')], 'r2'),
           'equals1',
-          frac(root('_33', 'r4'), root('_41', 'r5'), 'v2', 0.7),
+          frac(root('_33', 'r4'), 'v2', root('_41', 'r5'), 0.7),
           root(sq('A3', '_24'), 'r6'),
           'equals2',
-          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+          [frac(root('_32', 'r3'), 'v3', '_21', 0.7), 'A1'],
         ],
         '10': [
           'H2',
           'equals',
-          [frac(root('_32', 'r3'), '_21', 'v3', 0.7), 'A1'],
+          [frac(root('_32', 'r3'), 'v3', '_21', 0.7), 'A1'],
         ],
       },
     },

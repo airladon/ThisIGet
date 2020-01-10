@@ -128,7 +128,6 @@ class Content extends PresentationFormatContent {
         fig._h.showAll();
         fig._v.showAll();
         coll.updateRotation();
-        console.log('steady')
       },
     });
 
@@ -249,13 +248,14 @@ class Content extends PresentationFormatContent {
         angle: highlight(colors.angles),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._line, fig._x, fig._theta, fig._hypotenuse,
         fig._v, fig._right, fig._sineTheta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0'],
         [eqn, '0'],
+        [fig._theta._label, '0'],
       ],
       transitionFromPrev: (done) => {
         coll.resetRotation(() => {
@@ -271,16 +271,16 @@ class Content extends PresentationFormatContent {
       setContent: style({ top: 0 }, 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.'),
       modifiers: {
         opposite: coll.bindAccent(fig._v),
-        // theta: coll.bindAccent(fig._real),
-        theta: click(() => {
-          eqn.showForm('0');
-          eqn.goToForm({
-            name: 'asd',
-            duration: 2,
-            animate: 'move',
-          });
-          this.diagram.animateNextFrame();
-        }, [this], colors.angles),
+        theta: coll.bindAccent(fig._real),
+        // theta: click(() => {
+        //   eqn.showForm('0');
+        //   eqn.goToForm({
+        //     name: 'asd',
+        //     duration: 2,
+        //     animate: 'move',
+        //   });
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.angles),
       },
     };
     this.addSection(common, commonContent, {
@@ -293,9 +293,9 @@ class Content extends PresentationFormatContent {
         [fig._sineTheta._label, '0'],
         [eqn, '0'],
       ],
-      setSteadyState: () => {
-        console.log(eqn)
-      }
+      // setSteadyState: () => {
+      //   console.log(eqn)
+      // }
     });
 
     this.addSection(common, commonContent, {
@@ -310,30 +310,57 @@ class Content extends PresentationFormatContent {
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '0a'],
-        [eqn, '1'],
+        [eqn, '0'],
+        [fig._theta._label, '0'],
       ],
-      // transitionFromPrev: (done) => {
-      //   coll.accent(fig, ['theta', 'sineTheta'], done);
-      // },
+      transitionFromPrev: (done) => {
+        // coll.accent(fig, ['theta', 'sineTheta'], done);
+        eqn.goToForm({
+          name: '1',
+          duration: 2,
+          animate: 'move',
+          callback: done,
+        });
+        fig._sineTheta._label.goToForm({ name: '0b', duration: 2, animate: 'move' });
+      },
+      setSteadyState: () => {
+        eqn.showForm('1');
+        fig._sineTheta._label.showForm('0b');
+        fig._theta._label.showForm('0');
+      },
     });
 
     this.addSection(common, commonContent, {
       modifiers: {
         vertical: highlight(colors.components),
-        angle: highlight(colors.angles),
+        angle: coll.bindAccent(fig._theta),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
-        [eqn, '0'],
+        [fig._sineTheta._label, '0b'],
+        [eqn, '1'],
+        [fig._theta._label, '0'],
       ],
       transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          coll.accent(eqn, done);
-        }, 0.8);
+        eqn.goToForm({
+          name: '2',
+          duration: 2,
+          animate: 'move',
+          callback: done,
+        });
+        fig._sineTheta._label.goToForm({
+          name: '1',
+          duration: 2,
+          animate: 'move',
+        });
+      },
+      setSteadyState: () => {
+        eqn.showForm('2');
+        fig._sineTheta._label.showForm('1');
       },
     });
 
@@ -351,7 +378,13 @@ class Content extends PresentationFormatContent {
         right_angle_triangle: this.bindNext(colors.lines),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._h, fig._v,
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0a'],
+        [eqn, '2'],
       ],
     });
 

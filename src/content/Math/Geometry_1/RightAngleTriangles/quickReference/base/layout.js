@@ -104,7 +104,7 @@ export default function diagramLayout() {
     Area: { text: 'Area', color: colors.qrRightAngleTriangle_sides },
   };
 
-  const half = { frac: ['_1', '_2a', 'v', 0.7] };
+  const half = { frac: ['_1', 'v', '_2a', 0.7] };
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
 
   const eqn = {

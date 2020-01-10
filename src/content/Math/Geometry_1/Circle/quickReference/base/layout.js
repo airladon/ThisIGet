@@ -218,7 +218,7 @@ export default function diagramLayout() {
 
   layout.radiusDiameterEquation = eqn(
     'eqnRadiusDiameter',
-    ['radius', 'equals', { frac: ['diameter', '_2', 'v'] }],
+    ['radius', 'equals', { frac: ['diameter', 'v', '_2'] }],
     {
       qr: { position: new Point(-0.1, -1.2), scale: 0.7 },
     },
@@ -226,7 +226,7 @@ export default function diagramLayout() {
 
   layout.radiusCircumferenceEquation = eqn(
     'eqnRadiusCircumference',
-    ['radius', 'equals', { frac: ['circumference', ['_2', 'pi'], 'v'] }],
+    ['radius', 'equals', { frac: ['circumference', 'v', ['_2', 'pi']] }],
     {
       qr: { position: new Point(-0.3, -1.6), scale: 0.7 },
     },

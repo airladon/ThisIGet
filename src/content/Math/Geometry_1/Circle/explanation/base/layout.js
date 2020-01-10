@@ -461,7 +461,7 @@ export default function diagramLayout() {
 
   layout.diameterCircumferenceEquation = eqn(
     'eqnDiameterCircumference',
-    // ['diameter', 'equals', { frac: ['circumference', 'pi', 'v'] }],
+    // ['diameter', 'equals', { frac: ['circumference', 'v', 'pi'] }],
     ['diameter', 'x', 'pi', 'equals', 'circumference'],
     {
       qr: { position: new Point(0, -1.5), scale: 0.7 },
@@ -492,7 +492,7 @@ export default function diagramLayout() {
 
   layout.radiusDiameterEquation = eqn(
     'eqnRadiusDiameter',
-    ['radius', 'equals', { frac: ['diameter', '_2', 'v'] }],
+    ['radius', 'equals', { frac: ['diameter', 'v', '_2'] }],
     {
       qr: { position: new Point(-0.1, -1.2), scale: 0.7 },
     },
@@ -500,7 +500,7 @@ export default function diagramLayout() {
 
   layout.radiusCircumferenceEquation = eqn(
     'eqnRadiusCircumference',
-    ['radius', 'equals', { frac: ['circumference', ['_2', 'pi'], 'v'] }],
+    ['radius', 'equals', { frac: ['circumference', 'v', ['_2', 'pi']] }],
     {
       qr: { position: new Point(-0.3, -1.6), scale: 0.7 },
     },
@@ -602,14 +602,14 @@ export default function diagramLayout() {
         _2: '2 ',
         equals: '  =  ',
         v: { symbol: 'vinculum' },
-        brace: { symbol: 'braceNew', side: 'top', numLines: 3 },
+        brace: { symbol: 'brace', side: 'top', numLines: 3 },
       },
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
       forms: {
         '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
         '1': ['circumference', 'equals', 'pi', 'diameter'],
         '2': ['circumference', 'equals', 'pi', {
-          topCommentNew: ['diameter', ['_2', 'radius'], 'brace'],
+          topComment: ['diameter', ['_2', 'radius'], 'brace'],
         }],
         '3': {
           content: ['circumference', 'equals', 'pi', '_2', 'radius'],
