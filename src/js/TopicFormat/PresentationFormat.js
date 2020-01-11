@@ -308,6 +308,9 @@ class PresentationFormat extends SimpleFormat {
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
       }
+      if (this.comingFrom === 'prev') {
+        this.fadeInTextFromPrev();
+      }
       section.transitionReset(this.finishTransitionReset.bind(this));
       // if (this.comingFrom === 'next') {
       //   section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
@@ -328,7 +331,7 @@ class PresentationFormat extends SimpleFormat {
       if (this.comingFrom === 'next') {
         section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
       } else if (this.comingFrom === 'prev') {
-        this.fadeInTextFromPrev();
+        // this.fadeInTextFromPrev();
         section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
       } else {
         section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
