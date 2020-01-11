@@ -378,6 +378,30 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
+      setContent: 'The |hypotenuse| has length 1. If it were to |change| length, then the opposite side length will also change.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        // hypotenuse: coll.bindAccent(fig._line),
+        hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
+        change: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+      },
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
+      ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
       setContent: 'As the |horizontal| and |vertical| components are |perpendicular|, we have a |right_angle_triangle|.',
     };
     this.addSection(common, commonContent, {
@@ -407,7 +431,14 @@ class Content extends PresentationFormatContent {
         right_angle_triangle: coll.bindAccent(fig, ['line', 'v', 'h']),
       },
       show: [
-        fig._line, fig._x, fig._real, fig._h, fig._v,
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
       ],
       transitionFromPrev: (done) => {
         coll.resetRotation(() => {

@@ -11,6 +11,7 @@ const {
   // DiagramObjectPolyLine,
   Equation,
   Transform,
+  Point,
 } = Fig;
 
 const { rand, round } = Fig.tools.math;
@@ -102,22 +103,81 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   resetRotation(done: ?() => void = null, duration: number = 0) {
     if (duration === 0) {
+      this._fig._line.setLength(this.layout.r);
       this._fig._line.setRotation(Math.PI / 4);
       if (done != null) {
         done();
       }
     } else {
       const r = this._fig._line.getRotation();
-      if (r < 0.3 || r > Math.PI / 2 - 0.3) {
-        const c = (input) => {
-          console.log(input)
+      const l = this._fig._line.getLength();
+      const callback = () => {
+        if (done != null) {
           done();
         }
-        this.gotoRotation(Math.PI / 4, 0.8, c);
-      } else if (done != null) {
-        done();
+      };
+      let callback2 = () => {
+        if (done != null) {
+          done();
+        }
+      };
+      let callback3 = () => {
+        if (done != null) {
+          done();
+        }
+      };
+      if (r < 0.3 || r > Math.PI / 2 - 0.3) {
+        this.gotoRotation(Math.PI / 4, 1, callback);
+        callback2 = null;
+        callback3 = null;
+      }
+      if (l !== this.layout.r) {
+        this.setLineLength(this.layout.r, true, callback2, false);
+        callback3 = null;
+      }
+
+      if (callback3 != null) {
+        callback3();
       }
     }
+  }
+
+  setLineLength(
+    length: ?number,
+    animate: boolean = false,
+    done: ?() => void = null,
+    stop: ?boolean = true,
+  ) {
+    const currentLength = this._fig._line.getLength();
+    let newLength;
+    if (length == null) {
+      const delta = rand(this.layout.r * 0.2, this.layout.r * 0.3);
+      newLength = currentLength;
+      if (currentLength > this.layout.r * 0.7) {
+        newLength -= delta;
+      } else {
+        newLength += delta;
+      }
+    } else {
+      newLength = length;
+    }
+    if (newLength === currentLength) {
+      this.accent(this._fig._line, done);
+      return;
+    }
+    if (animate === false) {
+      this._fig._line.setLength(newLength);
+      this.diagram.animateNextFrame();
+      if (done != null) {
+        done();
+      }
+      return;
+    }
+    this._fig._line.animateLengthTo(
+      newLength, 1, true, done, this.updateRotation.bind(this), stop,
+    );
+    this.diagram.animateNextFrame();
+    // this.updateRotation();
   }
 
   updateRotation() {
@@ -132,13 +192,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     const hypotenuse = this._fig._hypotenuse;
     const opposite = this._fig._opposite;
     const r = this._fig._line.getRotation();
-    const p2 = this._fig._line.getP2();
-
+    const length = this._fig._line.getLength();
+    const p2 = new Point(length * Math.cos(r), length * Math.sin(r));
     if (h.isShown) {
       h.setEndPoints([0, 0], [p2.x, 0]);
     }
     if (v.isShown) {
       v.setEndPoints([p2.x, 0], [p2.x, p2.y]);
+    }
+
+    if (length !== this.layout.r) {
+      hypotenuse._label.setOpacity(0);
+    } else {
+      hypotenuse._label.setOpacity(1);
     }
 
     const opacity = {
@@ -149,14 +215,17 @@ export default class CommonCollection extends CommonDiagramCollection {
       sineTheta: 1,
       opposite: 1,
     };
-    if (r < 0.05) {
-      opacity.sine = 0;
+
+    if (p2.y < 0.28 && r >= 0.12) {
+      opacity.right = 0;
+    } else if (r < 0.12 && r >= 0.05) {
       opacity.right = 0;
       opacity.theta = 0;
       opacity.real = 0;
       opacity.sineTheta = 0;
       opacity.opposite = 0;
-    } else if (r < 0.12) {
+    } else if (r < 0.05) {
+      opacity.sine = 0;
       opacity.right = 0;
       opacity.theta = 0;
       opacity.real = 0;

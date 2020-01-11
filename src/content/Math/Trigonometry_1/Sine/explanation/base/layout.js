@@ -297,6 +297,7 @@ export default function diagramLayout() {
       lineLabel('sine', null, colors.components, 'right'),
       lineLabel('opposite', 'opposite', colors.components, 'right'),
       lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
+      lineLabel('realHyp', null, colors.lines, 'top', 'left'),
       component('h'),
       component('v'),
       // angle('arc', )

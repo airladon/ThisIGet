@@ -8636,7 +8636,7 @@ function (_Elements) {
         fixPoint.x += w / 2;
       } else if (typeof alignH === 'number') {
         fixPoint.x += alignH * w;
-      } else if (alignH.slice(-1)[0] === 'o') {
+      } else if (alignH != null && alignH.slice(-1)[0] === 'o') {
         var offset = parseFloat(alignH);
         fixPoint.x += offset;
       }
@@ -8649,7 +8649,7 @@ function (_Elements) {
         fixPoint.y += p.y - d + h / 2;
       } else if (typeof alignV === 'number') {
         fixPoint.y += p.y - d + alignV * h;
-      } else if (alignV.slice(-1)[0] === 'o') {
+      } else if (alignV != null && alignV.slice(-1)[0] === 'o') {
         var _offset = parseFloat(alignV);
 
         fixPoint.y += p.y + _offset;
@@ -19376,12 +19376,22 @@ function (_DiagramElementCollec) {
       var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var finishOnCancel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      this.stop();
+      var onStepCallback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var stop = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+
+      if (stop) {
+        this.stop();
+      }
+
       var initialLength = this.currentLength;
       var deltaLength = toLength - this.currentLength;
 
       var func = function func(percent) {
         _this3.setLength(initialLength + deltaLength * percent);
+
+        if (onStepCallback != null) {
+          onStepCallback(percent, initialLength + deltaLength * percent);
+        }
       };
 
       var done = function done() {
@@ -19409,10 +19419,11 @@ function (_DiagramElementCollec) {
       var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var finishOnCancel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var onStepCallback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       this.stop();
       var target = this.currentLength;
       this.setLength(fromLength);
-      this.animateLengthTo(target, time, finishOnCancel, callback);
+      this.animateLengthTo(target, time, finishOnCancel, callback, onStepCallback);
     }
   }, {
     key: "showLineOnly",
