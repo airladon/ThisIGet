@@ -1054,13 +1054,7 @@ class PresentationFormatContent extends SimpleFormatContent {
           animate?: 'dissolve' | 'move',
           duration?: number,
         } |
-        [
-          { eqn: Equation } & Equation,
-          string,
-          ?string,
-          ?animate,
-          ?duration,
-        ]>,
+        Array<{ eqn: Equation } & Equation | string | 'dissolve' | 'move' | number>>,
       duration?: number,                   // duration
       animate?: 'dissolve' | 'move',
     },
@@ -1083,8 +1077,8 @@ class PresentationFormatContent extends SimpleFormatContent {
       }];
     }
     const equations = [];
-    let maxDuration = 0;
-    let maxDurationIndex = 0;
+    let maxDuration = -1;
+    let maxDurationIndex = -1;
     eqns.forEach((e, index) => {
       let to;
       let from;
@@ -1100,34 +1094,27 @@ class PresentationFormatContent extends SimpleFormatContent {
       if (to == null) {
         to = from;
       }
-      const newEqn = {
+      const newEqn = joinObjects({
         eqn: e.table != null ? eqn.eqn : eqn,
         nav: e.table != null ? eqn : null,
         from,
         to,
         animate,
         duration,
-      };
-      if (e.duration > maxDuration) {
-        maxDuration = e.duration;
-        maxDurationIndex = index;
-      }
-      equations.push(joinObjects({}, {
+      }, {
         duration: options.duration,
         animate: options.animate,
-      }, newEqn));
+      });
+      equations.push(newEqn);
+
+      if (newEqn.duration > maxDuration && from !== to) {
+        maxDuration = newEqn.duration;
+        maxDurationIndex = index;
+      }
     });
-    // const { animate, duration } = options;
-    // let nav = null;
-    // if (eqn.table != null) {
-    //   nav = eqn;
-    //   ({ eqn } = nav);
-    // }
-    // const fromForm = options.from;
-    // const toForm = options.to;
+
     let setEqnForms = [() => {
       equations.forEach(e => e.eqn.showForm(e.from));
-      // eqn.showForm(fromForm)
     }];
     if (Array.isArray(userSections.setEqnForms)) {
       setEqnForms = [...setEqnForms, ...userSections.setEqnForms];
@@ -1159,6 +1146,9 @@ class PresentationFormatContent extends SimpleFormatContent {
             e.nav.updateButtons();
           }
         });
+        if (maxDurationIndex === -1) {
+          callback();
+        }
       },
       setSteadyState: () => {
         equations.forEach((e) => {

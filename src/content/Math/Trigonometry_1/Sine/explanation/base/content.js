@@ -210,7 +210,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, 'As the angle gets |closer_to_90º|, the vertical component gets |longer|. As it gets |closer_to_0º|, the vertical component gets |shorter|.'),
+      setContent: 'As the angle gets |closer_to_90º|, the vertical component gets |longer|. As it gets |closer_to_0º|, the vertical component gets |shorter|.',
     };
     this.addSection(common, commonContent, {
       modifiers: {
@@ -229,7 +229,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, 'Therefore we can say the |vertical| component is |related to|, |dependent on|, or |a function of| the rotation |angle|.'),
+      setContent: 'Therefore we can say the |vertical| component is |related to|, |dependent on|, or |a function of| the rotation |angle|.',
     };
     this.addSection(common, commonContent, {
       modifiers: {
@@ -269,182 +269,111 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.'),
+      setContent: 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.',
       modifiers: {
         opposite: coll.bindAccent(fig._v),
         theta: coll.bindAccent(fig._theta),
-        // theta: click(() => {
-        //   eqn.showForm('0');
-        //   eqn.goToForm({
-        //     name: 'asd',
-        //     duration: 2,
-        //     animate: 'move',
-        //   });
-        //   this.diagram.animateNextFrame();
-        // }, [this], colors.angles),
       },
     };
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._theta, fig._hypotenuse,
-        fig._v, fig._right, fig._sineTheta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-        [eqn, '0'],
-        [fig._theta._label, '0'],
-      ],
-      // setSteadyState: () => {
-      //   console.log(eqn)
-      // }
-    });
-
-    this.addSection(common, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._real),
-      },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta, fig._sineTheta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-        [eqn, '0'],
-        [fig._theta._label, '0'],
-      ],
-      transitionFromPrev: (done) => {
-        // coll.accent(fig, ['theta', 'sineTheta'], done);
-        eqn.goToForm({
-          name: '1',
-          duration: 2,
-          animate: 'move',
-          callback: done,
-        });
-        fig._sineTheta._label.goToForm({ name: '0b', duration: 2, animate: 'move' });
-        fig._theta._label.goToForm({ name: '1', duration: 2, animate: 'move' });
-      },
-      setSteadyState: () => {
-        eqn.showForm('1');
-        fig._sineTheta._label.showForm('0b');
-        fig._theta._label.showForm('1');
-        coll.updateRotation();
-      },
-    });
-
-    this.addSection(common, commonContent, {
-      modifiers: {
-        vertical: highlight(colors.components),
-        angle: coll.bindAccent(fig._theta),
-      },
+    let commonShow = {
       show: [
         fig._line, fig._x, fig._hypotenuse,
         fig._v, fig._right, fig._theta,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0b'],
-        [eqn, '1'],
-        [fig._theta._label, '1'],
       ],
-      transitionFromPrev: (done) => {
-        eqn.goToForm({
-          name: '2',
-          duration: 2,
-          animate: 'move',
-          callback: done,
-        });
-        fig._sineTheta._label.goToForm({
-          name: '1',
-          duration: 2,
-          animate: 'move',
-        });
-        fig._theta._label.goToForm({
-          name: '2',
-          duration: 2,
-          animate: 'move',
-        });
-      },
-      setSteadyState: () => {
-        eqn.showForm('2');
-        fig._sineTheta._label.showForm('1');
-        fig._theta._label.showForm('2');
-      },
-    });
+    };
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '0', '0'],
+        [fig._theta._label, '0', '0'],
+        [fig._sineTheta._label, '0', '0'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '0', '1'],
+        [fig._theta._label, '0', '1'],
+        [fig._sineTheta._label, '0', '0b'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '1', '2'],
+        [fig._theta._label, '1', '2'],
+        [fig._sineTheta._label, '0b', '1'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
       setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
-    };
-    this.addSection(common, commonContent, {
       modifiers: {
         opposite_side: coll.bindAccent(fig._v),
         hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
         changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
       },
+    };
+    commonShow = {
       show: [
         fig._line, fig._x, fig._hypotenuse,
         fig._v, fig._right, fig._theta,
       ],
       setEqnForms: [
-        [fig._hypotenuse._label, '0'],
         [fig._sineTheta._label, '1'],
-        [eqn, '2'],
         [fig._theta._label, '2'],
       ],
-    });
+    };
+    this.addSectionEqnStep({
+      eqns: [
+        { eqn, from: '2', to: '2' },
+        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
+      ],
+    }, common, commonShow, commonContent);
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
       setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
-    };
-    this.addSection(common, commonContent, {
       modifiers: {
         opposite_side: coll.bindAccent(fig._v),
         hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
         changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
       },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
+    };
+    this.addSectionEqnStep({
+      eqns: [
+        { eqn, from: '2', to: '2' },
+        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2'],
-        [fig._theta._label, '2'],
-      ],
-    });
+    }, common, commonShow, commonContent);
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
       setContent: '|Changing| the hypotenuse doesn’t change the |angles| of the triangle - therefore triangles with different hypotenuse lengths are |similar|.',
-    };
-    this.addSection(common, commonContent, {
       modifiers: {
         angles: coll.bindAccent(fig, ['right', 'theta']),
         Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
         similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
       },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
+    };
+    this.addSectionEqnStep({
+      eqns: [
+        { eqn, from: '2', to: '2' },
+        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2'],
-        [fig._theta._label, '2'],
-      ],
-    });
+    }, common, commonShow, commonContent);
 
     // **********************************************************************
     // **********************************************************************
@@ -455,46 +384,31 @@ class Content extends PresentationFormatContent {
         opposite: highlight(colors.components),
         similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
       },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._sineTheta._label, '1'],
-        [fig._theta._label, '2'],
-      ],
     };
-    // this.addSection(common, commonContent, {
-    //   show: [
-    //     fig._line, fig._x, fig._hypotenuse,
-    //     fig._v, fig._right, fig._theta,
-    //   ],
-    //   setEqnForms: [
-    //     [fig._hypotenuse._label, '0'],
-    //     [fig._sineTheta._label, '1'],
-    //     [eqn, '2'],
-    //     [fig._theta._label, '2'],
-    //   ],
-    // });
+
     this.addSectionEqnStep({
       eqns: [
         { eqn, from: '2', to: '2' },
         { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
-    }, common, commonContent);
-    // this.addSectionEqnStep({
-    //   eqns: [
-    //     { eqn, from: '2', to: '2a', duration: 2 },
-    //     { eqn: fig._hypotenuse._label, from: '0', to: '1', duration: 2 },
-    //   ],
-    // }, common, commonContent);
+    }, common, commonShow, commonContent);
+
     this.addSectionEqnStep({
       eqns: [
         [eqn, '2', '2a'],
         [fig._hypotenuse._label, '0', '1'],
       ],
       duration: 2,
-    }, common, commonContent);
+    }, common, commonShow, commonContent);
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2a', '2b'],
+        [fig._hypotenuse._label, '1', '2'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
 
     // this.addSection(common, commonContent, {
     //   show: [
@@ -502,59 +416,29 @@ class Content extends PresentationFormatContent {
     //     fig._v, fig._right, fig._theta,
     //   ],
     //   setEqnForms: [
-    //     [fig._hypotenuse._label, '0'],
+    //     [fig._hypotenuse._label, '1'],
     //     [fig._sineTheta._label, '1'],
-    //     [eqn, '2'],
+    //     [eqn, '2a'],
     //     [fig._theta._label, '2'],
     //   ],
     //   transitionFromPrev: (done) => {
     //     eqn.goToForm({
-    //       name: '2a',
+    //       name: '2b',
     //       duration: 2,
     //       animate: 'move',
     //       callback: done,
     //     });
     //     fig._hypotenuse._label.goToForm({
-    //       name: '1',
+    //       name: '2',
     //       duration: 2,
     //       animate: 'move',
     //     });
     //   },
     //   setSteadyState: () => {
-    //     eqn.showForm('2a');
-    //     fig._hypotenuse._label.showForm('1');
+    //     eqn.showForm('2b');
+    //     fig._hypotenuse._label.showForm('2');
     //   },
     // });
-
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '1'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2a'],
-        [fig._theta._label, '2'],
-      ],
-      transitionFromPrev: (done) => {
-        eqn.goToForm({
-          name: '2b',
-          duration: 2,
-          animate: 'move',
-          callback: done,
-        });
-        fig._hypotenuse._label.goToForm({
-          name: '2',
-          duration: 2,
-          animate: 'move',
-        });
-      },
-      setSteadyState: () => {
-        eqn.showForm('2b');
-        fig._hypotenuse._label.showForm('2');
-      },
-    });
 
     // **********************************************************************
     // **********************************************************************
@@ -567,42 +451,22 @@ class Content extends PresentationFormatContent {
       },
     };
 
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2b', '2b'],
+        [fig._hypotenuse._label, '2', '2'],
       ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '2'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2b'],
-        [fig._theta._label, '2'],
-      ],
-    });
+      duration: 2,
+    }, common, commonShow, commonContent);
 
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2b', '2c'],
+        [fig._hypotenuse._label, '2', '2'],
       ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '2'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2b'],
-        [fig._theta._label, '2'],
-      ],
-      transitionFromPrev: (done) => {
-        eqn.goToForm({
-          name: '2c',
-          duration: 2,
-          animate: 'move',
-          callback: done,
-        });
-      },
-      setSteadyState: () => {
-        eqn.showForm('2c');
-      },
-    });
+      duration: 2,
+    }, common, commonShow, commonContent);
+
 
     // **********************************************************************
     // **********************************************************************
