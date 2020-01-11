@@ -94,6 +94,7 @@ export default function diagramLayout() {
       brace: {
         symbol: 'brace', side: 'top', color: colors.working, numLines: 3,
       },
+      hyp1: { text: 'hypotenuse = 1', color: colors.components },
     },
     forms: {
       '0': {
@@ -146,6 +147,25 @@ export default function diagramLayout() {
         content: {
           container: {
             content: 'opposite',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1a': {
+        content: {
+          container: {
+            content: {
+              bottomComment: {
+                content: 'opposite',
+                comment: 'hyp1',
+                inSize: false,
+              },
+            },
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -731,6 +751,15 @@ export default function diagramLayout() {
         },
         '2': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2a0': {
+          content: [
+            { bottomComment: { content: 'opp', comment: 'hyp1', inSize: false } },
+            'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',

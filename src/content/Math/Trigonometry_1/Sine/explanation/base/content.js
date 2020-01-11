@@ -315,11 +315,40 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
+      setContent: 'More specifically, this function relates the |opposite| side to |theta| only when the |hypotenuse is 1|.',
+      modifiers: {
+        opposite: coll.bindAccent(fig._sineTheta),
+        theta: coll.bindAccent(fig._theta),
+      },
+    };
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2', '2'],
+        [fig._theta._label, '2', '2'],
+        [fig._sineTheta._label, '1', '1'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2', '2a0'],
+        [fig._theta._label, '2', '2'],
+        [fig._sineTheta._label, '1', '1a'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'If the |hypotenuse_changes| length, then the |opposite_side| length will also change.',
       modifiers: {
         opposite_side: coll.bindAccent(fig._v),
-        hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
-        changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+        // hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
+        hypotenuse_changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
       },
     };
     commonShow = {
@@ -328,13 +357,12 @@ class Content extends PresentationFormatContent {
         fig._v, fig._right, fig._theta,
       ],
       setEqnForms: [
-        [fig._sineTheta._label, '1'],
         [fig._theta._label, '2'],
       ],
     };
     this.addSectionEqnStep({
       eqns: [
-        { eqn, from: '2', to: '2' },
+        // { eqn, from: '2a0', to: '2a0' },
         { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
     }, common, commonShow, commonContent);
@@ -343,25 +371,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
-      modifiers: {
-        opposite_side: coll.bindAccent(fig._v),
-        hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
-        changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
-      },
-    };
-    this.addSectionEqnStep({
-      eqns: [
-        { eqn, from: '2', to: '2' },
-        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
-      ],
-    }, common, commonShow, commonContent);
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: '|Changing| the hypotenuse doesn’t change the |angles| of the triangle - therefore triangles with different hypotenuse lengths are |similar|.',
+      setContent: style({ top: 0 }, '|Changing| the hypotenuse doesn’t change the |angles| of the triangle and thus creates a |similar| triangle whose opposite side will be scaled by the same amount as the hypotenuse.'),
       modifiers: {
         angles: coll.bindAccent(fig, ['right', 'theta']),
         Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
@@ -370,7 +380,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSectionEqnStep({
       eqns: [
-        { eqn, from: '2', to: '2' },
+        // { eqn, from: '2', to: '2' },
         { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
     }, common, commonShow, commonContent);
@@ -386,6 +396,16 @@ class Content extends PresentationFormatContent {
       },
     };
 
+    commonShow = {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._sineTheta._label, '1a'],
+        [fig._theta._label, '2'],
+      ],
+    };
     this.addSectionEqnStep({
       eqns: [
         { eqn, from: '2', to: '2' },
