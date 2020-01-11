@@ -1044,9 +1044,16 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   addSectionEqnStep(
     optionsIn: {
-      eqn: { eqn: Equation } & Equation,  // or navigator
-      from: string,                       // From form
-      to: string,                         // To Form
+      eqn?: { eqn: Equation } & Equation,  // or navigator
+      from?: string,                       // From form
+      to?: string,                         // To Form
+      eqns?: Array<{
+        eqn: { eqn: Equation } & Equation,  // or navigator
+        from: string,                       // From form
+        to: string,                         // To Form
+        animate?: 'dissolve' | 'move',
+        duration?: number,
+      }>,
       duration?: number,                   // duration
       animate?: 'dissolve' | 'move',
     },
@@ -1058,18 +1065,48 @@ class PresentationFormatContent extends SimpleFormatContent {
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
     const userSections = Object.assign({}, ...sectionObjects);
-    let { eqn } = options;
-    const { animate, duration } = options;
-    let nav = null;
-    if (eqn.table != null) {
-      nav = eqn;
-      ({ eqn } = nav);
+    let { eqns } = options;
+    const { eqn } = options;
+    if (eqns == null) {
+      const {
+        from, to, animate, duration,
+      } = options;
+      eqns = [{
+        eqn, from, to, animate, duration,
+      }];
     }
-    const fromForm = options.from;
-    const toForm = options.to;
-    let setEqnForms = [() => eqn.showForm(fromForm)];
+    const equations = [];
+    let maxDuration = 0;
+    let maxDurationIndex = 0;
+    eqns.forEach((e, index) => {
+      const newEqn = {
+        eqn: e.table != null ? e.eqn.eqn : e.eqn,
+        nav: e.table != null ? e.eqn : null,
+        from: e.from,
+        to: e.to,
+        animate: e.animate,
+        duration: e.duration,
+      };
+      if (e.duration > maxDuration) {
+        maxDuration = e.duration;
+        maxDurationIndex = index;
+      }
+      equations.push(joinObjects({}, defaultOptions, newEqn));
+    });
+    // const { animate, duration } = options;
+    // let nav = null;
+    // if (eqn.table != null) {
+    //   nav = eqn;
+    //   ({ eqn } = nav);
+    // }
+    // const fromForm = options.from;
+    // const toForm = options.to;
+    let setEqnForms = [() => {
+      equations.forEach(e => e.eqn.showForm(e.from));
+      // eqn.showForm(fromForm)
+    }];
     if (Array.isArray(userSections.setEqnForms)) {
-      setEqnForms = [setEqnForms, ...userSections.setEqnForms];
+      setEqnForms = [...setEqnForms, ...userSections.setEqnForms];
     } else if (typeof userSections.setEqnForms === 'function') {
       setEqnForms.push(userSections.setEqnForms);
     }
@@ -1080,25 +1117,32 @@ class PresentationFormatContent extends SimpleFormatContent {
         if (userSections.transitionEqnForms != null) {
           callback = userSections.transitionEqnForms.bind(userSections, done);
         }
-        if (fromForm === toForm || this.comingFrom !== 'prev') {
+        if (this.comingFrom !== 'prev') {
           callback();
           return;
         }
-        eqn.goToForm({
-          name: toForm,
-          duration,
-          callback,
-          animate,
+        equations.forEach((e, index) => {
+          if (e.from === e.to) {
+            return;
+          }
+          e.eqn.goToForm({
+            name: e.to,
+            duration: e.duration,
+            callback: index === maxDurationIndex ? callback : null,
+            animate: e.animate,
+          });
+          if (e.nav != null) {
+            e.nav.updateButtons();
+          }
         });
-        if (nav != null) {
-          nav.updateButtons();
-        }
       },
       setSteadyState: () => {
-        eqn.showForm(toForm);
-        if (nav != null) {
-          nav.updateButtons();
-        }
+        equations.forEach((e) => {
+          e.eqn.showForm(e.to);
+          if (e.nav != null) {
+            e.nav.updateButtons();
+          }
+        });
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
         }
