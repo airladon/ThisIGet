@@ -482,42 +482,49 @@ class Content extends PresentationFormatContent {
         { eqn: fig._hypotenuse._label, from: '0', to: '0' },
       ],
     }, common, commonContent);
+    // this.addSectionEqnStep({
+    //   eqns: [
+    //     { eqn, from: '2', to: '2a', duration: 2 },
+    //     { eqn: fig._hypotenuse._label, from: '0', to: '1', duration: 2 },
+    //   ],
+    // }, common, commonContent);
     this.addSectionEqnStep({
       eqns: [
-        { eqn, from: '2', to: '2a', duration: 2 },
-        { eqn: fig._hypotenuse._label, from: '0', to: '1', duration: 2 },
+        [eqn, '2', '2a'],
+        [fig._hypotenuse._label, '0', '1'],
       ],
+      duration: 2,
     }, common, commonContent);
 
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2'],
-        [fig._theta._label, '2'],
-      ],
-      transitionFromPrev: (done) => {
-        eqn.goToForm({
-          name: '2a',
-          duration: 2,
-          animate: 'move',
-          callback: done,
-        });
-        fig._hypotenuse._label.goToForm({
-          name: '1',
-          duration: 2,
-          animate: 'move',
-        });
-      },
-      setSteadyState: () => {
-        eqn.showForm('2a');
-        fig._hypotenuse._label.showForm('1');
-      },
-    });
+    // this.addSection(common, commonContent, {
+    //   show: [
+    //     fig._line, fig._x, fig._hypotenuse,
+    //     fig._v, fig._right, fig._theta,
+    //   ],
+    //   setEqnForms: [
+    //     [fig._hypotenuse._label, '0'],
+    //     [fig._sineTheta._label, '1'],
+    //     [eqn, '2'],
+    //     [fig._theta._label, '2'],
+    //   ],
+    //   transitionFromPrev: (done) => {
+    //     eqn.goToForm({
+    //       name: '2a',
+    //       duration: 2,
+    //       animate: 'move',
+    //       callback: done,
+    //     });
+    //     fig._hypotenuse._label.goToForm({
+    //       name: '1',
+    //       duration: 2,
+    //       animate: 'move',
+    //     });
+    //   },
+    //   setSteadyState: () => {
+    //     eqn.showForm('2a');
+    //     fig._hypotenuse._label.showForm('1');
+    //   },
+    // });
 
     this.addSection(common, commonContent, {
       show: [

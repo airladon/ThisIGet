@@ -1048,12 +1048,19 @@ class PresentationFormatContent extends SimpleFormatContent {
       from?: string,                       // From form
       to?: string,                         // To Form
       eqns?: Array<{
-        eqn: { eqn: Equation } & Equation,  // or navigator
-        from: string,                       // From form
-        to: string,                         // To Form
-        animate?: 'dissolve' | 'move',
-        duration?: number,
-      }>,
+          eqn: { eqn: Equation } & Equation,  // or navigator
+          from: string,                       // From form
+          to: string,                         // To Form
+          animate?: 'dissolve' | 'move',
+          duration?: number,
+        } |
+        [
+          { eqn: Equation } & Equation,
+          string,
+          ?string,
+          ?animate,
+          ?duration,
+        ]>,
       duration?: number,                   // duration
       animate?: 'dissolve' | 'move',
     },
@@ -1066,7 +1073,7 @@ class PresentationFormatContent extends SimpleFormatContent {
     const options = joinObjects({}, defaultOptions, optionsIn);
     const userSections = Object.assign({}, ...sectionObjects);
     let { eqns } = options;
-    const { eqn } = options;
+    let { eqn } = options;
     if (eqns == null) {
       const {
         from, to, animate, duration,
@@ -1079,19 +1086,36 @@ class PresentationFormatContent extends SimpleFormatContent {
     let maxDuration = 0;
     let maxDurationIndex = 0;
     eqns.forEach((e, index) => {
+      let to;
+      let from;
+      let animate;
+      let duration;
+      if (Array.isArray(e)) {
+        [eqn, from, to, duration, animate] = e;
+      } else {
+        ({
+          eqn, from, to, duration, animate,
+        } = e);
+      }
+      if (to == null) {
+        to = from;
+      }
       const newEqn = {
-        eqn: e.table != null ? e.eqn.eqn : e.eqn,
-        nav: e.table != null ? e.eqn : null,
-        from: e.from,
-        to: e.to,
-        animate: e.animate,
-        duration: e.duration,
+        eqn: e.table != null ? eqn.eqn : eqn,
+        nav: e.table != null ? eqn : null,
+        from,
+        to,
+        animate,
+        duration,
       };
       if (e.duration > maxDuration) {
         maxDuration = e.duration;
         maxDurationIndex = index;
       }
-      equations.push(joinObjects({}, defaultOptions, newEqn));
+      equations.push(joinObjects({}, {
+        duration: options.duration,
+        animate: options.animate,
+      }, newEqn));
     });
     // const { animate, duration } = options;
     // let nav = null;
