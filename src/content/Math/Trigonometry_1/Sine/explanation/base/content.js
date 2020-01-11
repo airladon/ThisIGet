@@ -378,13 +378,13 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'The |hypotenuse| has length 1. If it were to |change| length, then the opposite side length will also change.',
+      setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
     };
     this.addSection(common, commonContent, {
       modifiers: {
-        // hypotenuse: coll.bindAccent(fig._line),
+        opposite_side: coll.bindAccent(fig._v),
         hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
-        change: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+        changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
       },
       show: [
         fig._line, fig._x, fig._hypotenuse,
@@ -396,6 +396,184 @@ class Content extends PresentationFormatContent {
         [eqn, '2'],
         [fig._theta._label, '2'],
       ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'The |hypotenuse| has length 1. If it |changes| length, then the |opposite_side| length will also change.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        opposite_side: coll.bindAccent(fig._v),
+        hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
+        changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+      },
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
+      ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: '|Changing| the hypotenuse doesn’t change the |angles| of the triangle - therefore triangles with different hypotenuse lengths are |similar|.',
+    };
+    this.addSection(common, commonContent, {
+      modifiers: {
+        angles: coll.bindAccent(fig, ['right', 'theta']),
+        Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+        similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
+      ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'The corresponding sides of |similar_triangles| are all |scaled by the same factor|. Thus if we scale the hypotenuse by |r|, then the |opposite| side must also be scaled by |r|.'),
+      modifiers: {
+        opposite: highlight(colors.components),
+        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
+      ],
+    });
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2'],
+        [fig._theta._label, '2'],
+      ],
+      transitionFromPrev: (done) => {
+        eqn.goToForm({
+          name: '2a',
+          duration: 2,
+          animate: 'move',
+          callback: done,
+        });
+        fig._hypotenuse._label.goToForm({
+          name: '1',
+          duration: 2,
+          animate: 'move',
+        });
+      },
+      setSteadyState: () => {
+        eqn.showForm('2a');
+        fig._hypotenuse._label.showForm('1');
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '1'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2a'],
+        [fig._theta._label, '2'],
+      ],
+      transitionFromPrev: (done) => {
+        eqn.goToForm({
+          name: '2b',
+          duration: 2,
+          animate: 'move',
+          callback: done,
+        });
+        fig._hypotenuse._label.goToForm({
+          name: '2',
+          duration: 2,
+          animate: 'move',
+        });
+      },
+      setSteadyState: () => {
+        eqn.showForm('2b');
+        fig._hypotenuse._label.showForm('2');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'This is a |general relationship|, as |r| (the hypotenuse) can be |any length|.',
+      modifiers: {
+        opposite: highlight(colors.components),
+        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '2'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2b'],
+        [fig._theta._label, '2'],
+      ],
+    });
+
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '2'],
+        [fig._sineTheta._label, '1'],
+        [eqn, '2b'],
+        [fig._theta._label, '2'],
+      ],
+      transitionFromPrev: (done) => {
+        eqn.goToForm({
+          name: '2c',
+          duration: 2,
+          animate: 'move',
+          callback: done,
+        });
+      },
+      setSteadyState: () => {
+        eqn.showForm('2c');
+      },
     });
 
     // **********************************************************************

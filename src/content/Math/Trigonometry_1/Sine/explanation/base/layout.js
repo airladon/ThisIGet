@@ -179,16 +179,34 @@ export default function diagramLayout() {
     },
     forms: {
       '0': {
-        content: ['_1'],
+        content: {
+          container: {
+            content: '_1',
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
         scale: 1,
-        alignment: { alignH: 'center' },
+        // alignment: { alignH: 'center' },
       },
       '1': {
-        content: ['r', 'times', '_1'],
+        content: {
+          container: {
+            content: ['r', 'times', '_1'],
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
         scale: 1,
       },
       '2': {
-        content: ['r'],
+        content: {
+          container: {
+            content: 'r',
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
         scale: 1,
       },
     },
@@ -374,6 +392,12 @@ export default function diagramLayout() {
         theta2: { text: '\u03B8', color: colors.angles },
         theta3: { text: '\u03B8', color: colors.angles },
         theta4: { text: '\u03B8', color: colors.angles },
+        hyp1: { text: 'hypotenuse = 1', color: colors.components },
+        hypr: { text: 'hypotenuse = r', color: colors.components },
+        r: { color: colors.lines },
+        r_1: { color: colors.lines },
+        times: ' \u00D7 ',
+        times1: ' \u00D7 ',
         pi1: 'π',
         pi2: 'π',
         pi3: 'π',
@@ -435,6 +459,7 @@ export default function diagramLayout() {
         v1: { symbol: 'vinculum' },
         v2: { symbol: 'vinculum' },
         opp: { text: 'opposite', color: colors.components },
+        opp1: { text: 'opposite', color: colors.components },
         angle: { text: 'angle', color: colors.angles },
         brace: {
           symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
@@ -455,12 +480,12 @@ export default function diagramLayout() {
           symbol: 'brace',
           side: 'left',
         },
-        r1: {
-          symbol: 'brace',
-          side: 'right',
-          lineWidth: 0.02,
-          width: 0.1,
-        },
+        // r1: {
+        //   symbol: 'brace',
+        //   side: 'right',
+        //   lineWidth: 0.02,
+        //   width: 0.1,
+        // },
         box1: { symbol: 'box', color: [0, 0.9, 0, 1], lineWidth: 0.005 },
         v: { symbol: 'vinculum' },
         s1: { symbol: 'strike', style: 'horizontal', lineWidth: 0.05 },
@@ -711,6 +736,46 @@ export default function diagramLayout() {
             alignH: 'right',
           },
         },
+        '2a': {
+          content: [
+            { bottomComment: { content: 'opp', comment: 'hypr', inSize: false } },
+            'equals',
+            'r', 'times',
+            { bottomComment: { content: 'opp1', comment: 'hyp1', inSize: false } },
+            'equals1',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'theta', 'rb'] },
+            
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2b': {
+          content: [
+            { bottomComment: { content: 'opp', comment: 'hypr', inSize: false } },
+            'equals',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2c': {
+          content: [
+            'opp',
+            'equals',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
         '0b': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
           alignment: {
@@ -792,7 +857,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [-0.5, -1.6] },
+        default: { position: [-0.3, -1.6] },
         // default: { position: [-2, 0] },
       },
       pulseDefault: { scale: 1.4 },
