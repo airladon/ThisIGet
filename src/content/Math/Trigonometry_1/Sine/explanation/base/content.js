@@ -5,7 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
-import { note } from '../../../../../common/tools/note';
+import { note, hint } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -42,6 +42,7 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/SimilarTriangles/base',
       'Math/Geometry_1/RightAngleTriangles/base',
+      'Math/Geometry_1/CongruentTriangles/base',
     ]);
   }
 
@@ -174,6 +175,53 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
+      setContent: [
+        'In fact, sweeping the line between 0º to 90º represents |all right angle triangles with a hypotenuse of 1|.',
+        hint({ label: 'Why?', top: 80, size: 0.6 }, 'As a triangle\'s angles |add_to_180º|, the right angle must be the largest angle and the other two angles must be |less than 90º|. Thus sweeping the line between 0º and 90º represents |all angle combinations| of a right angle triangle. At each angle, all angles and the hypotenuse are |known|, thus the |ASA| similarity criteria can be used to determine |all triangles with those angles and hypotenuse are congruent|.'),
+      ],
+      modifiers: {
+        components: coll.bindAccent(fig, ['h', 'v']),
+        line: coll.bindAccent(fig._line),
+        Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+        ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Asa'),
+        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      modifiers: {
+        right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+      },
+      show: [
+        fig._line, fig._x, fig._real, fig._hypotenuse,
+        fig._h, fig._v, fig._right,
+      ],
+    });
+
+    // commonContent = {
+    //   setContent: [
+    //     'This is because:',
+    //     style({ list: 'unordered', listStyleType: 'disc' }, [
+    //       'All angles in a triangle add to 180º',
+    //       'Therefore the two angles that aren\'t the right angle add to 90º',
+    //       'Therefore the two angles are less than 90º',
+    //       'Therefore sweeping the line between 0º and 90º represents all possible angle combinations of a right angle triangle',
+    //       'At each angle combination, the ASA triangle congruence critieria is met (using the known hypotenuse of 1)',
+    //       'Therefore all triangles with that hypotenuse and angle combination are contruent',
+    //       'Therefore sweeping a fixed hypotenuse between 0º and 90º and forming a right angle triangle with the vertical and horizontal components will represent all right angle triangles with that hypotenuse',
+    //     ]),
+    //   ],
+    // };
+    // this.addSection(commonContent, {
+    //   modifiers: {
+    //     right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+    //   },
+    // });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
       setContent: 'Now let’s consider just the |vertical| component.',
     };
     this.addSection(common, commonContent, {
@@ -269,13 +317,126 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
+      setContent: 'The name we use for this function is |sine|, though sometimes just |sin| is also used.',
+    };
+    let commonShow = {
+      show: [
+        fig._line, fig._x, fig._theta, fig._hypotenuse,
+        fig._v, fig._right, fig._sineTheta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0'],
+        // [eqn, '0'],
+        [fig._theta._label, '0'],
+      ],
+    };
+    this.addSectionEqnStep(
+      {
+        eqns: [[eqn, '0', '0']],
+        duration: 2,
+      }, common, commonShow, commonContent,
+    );
+    this.addSectionEqnStep(
+      {
+        eqns: [[eqn, '0', '0sine1']],
+        duration: 2,
+      }, common, commonShow, commonContent,
+    );
+    this.addSectionEqnStep(
+      {
+        eqns: [[eqn, '0sine1', '0sine2']],
+        duration: 2,
+      }, common, commonShow, commonContent,
+    );
+
+    this.addSection(common, commonContent, {
+      show: [
+        fig._line, fig._x, fig._theta, fig._hypotenuse,
+        fig._v, fig._right, fig._sineTheta,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [fig._sineTheta._label, '0'],
+        [eqn, '0sine2'],
+        [fig._theta._label, '0'],
+      ],
+      transitionFromPrev: (done) => {
+        fig.animations.new()
+          .inParallel([
+            fig._sineTheta.anim.dissolveOut({ duration: 1 }),
+            fig._right.anim.dissolveOut({ duration: 1 }),
+            fig._theta.anim.dissolveOut({ duration: 1 }),
+            fig._hypotenuse.anim.dissolveOut({ duration: 1 }),
+            fig._right.anim.dissolveOut({ duration: 1 }),
+            fig._line.anim.dim({ duration: 1 }),
+            // fig._hypotenuse.anim.dim({ duration: 1 }),
+            // fig._theta.anim.dim({ duration: 1 }),
+          ])
+          .scenario({ target: 'small', duration: 2 })
+          .trigger({
+            callback: () => {
+              fig._mirrorLine.showAll();
+              fig._mirrorArc.showAll();
+              fig._mirrorV.showAll();
+              fig._arc.showAll();
+              fig._mirrorLine.dim();
+              fig._mirrorArc.dim();
+              fig._mirrorV.dim();
+              fig._arc.dim();
+              fig._circle.dim();
+              coll.updateRotation();
+            },
+          })
+          .inParallel([
+            fig._circle.anim.dissolveIn({ duration: 1 }),
+            fig._arc.anim.dissolveIn({ duration: 1 }),
+            fig._mirrorV.anim.dissolveIn({ duration: 1 }),
+            fig._mirrorArc.anim.dissolveIn({ duration: 1 }),
+            fig._mirrorLine.anim.dissolveIn({ duration: 1 }),
+          ])
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig._circle.showAll();
+        fig.setScenario('small');
+        fig._arc.showAll();
+        fig._mirrorLine.showAll();
+        fig._mirrorArc.showAll();
+        fig._mirrorV.showAll();
+        fig._sineTheta.hide();
+        fig._right.hide();
+        fig._theta.hide();
+        fig._hypotenuse.hide();
+        coll.accent({
+          element: fig,
+          children: [
+            'v',
+            // 'mirrorV',
+            // 'arc',
+            // 'mirrorArc',
+          ],
+          style: 'highlight',
+        });
+        coll.updateRotation();
+      },
+      setLeaveState: () => {
+        coll.undim();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
       setContent: 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.',
       modifiers: {
         opposite: coll.bindAccent(fig._v),
         theta: coll.bindAccent(fig._theta),
       },
     };
-    let commonShow = {
+    commonShow = {
       show: [
         fig._line, fig._x, fig._hypotenuse,
         fig._v, fig._right, fig._theta,
@@ -371,7 +532,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, '|Changing| the hypotenuse doesn’t change the |angles| of the triangle and thus creates a |similar| triangle whose opposite side will be scaled by the same amount as the hypotenuse.'),
+      setContent: style({ top: 0 }, '|Changing| the hypotenuse doesn’t change the |angles| of the triangle and thus creates a |similar| triangle whose sides will be |scaled by the same amount as the hypotenuse|.'),
       modifiers: {
         angles: coll.bindAccent(fig, ['right', 'theta']),
         Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
@@ -396,27 +557,39 @@ class Content extends PresentationFormatContent {
       },
     };
 
+    // this.addSectionEqnStep({
+    //   eqns: [
+    //     [eqn, '2', '2a0'],
+    //     [fig._theta._label, '2', '2'],
+    //     [fig._sineTheta._label, '1', '1a'],
+    //   ],
+    //   duration: 2,
+    // }, common, commonShow, commonContent);
+
+
     commonShow = {
       show: [
         fig._line, fig._x, fig._hypotenuse,
         fig._v, fig._right, fig._theta,
       ],
       setEqnForms: [
-        [fig._sineTheta._label, '1a'],
         [fig._theta._label, '2'],
       ],
     };
     this.addSectionEqnStep({
       eqns: [
-        { eqn, from: '2', to: '2' },
-        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
+        [eqn, '2a0', '2a0'],
+        [fig._hypotenuse._label, '0', '0'],
+        [fig._sineTheta._label, '1a', '1a'],
       ],
+      duration: 2,
     }, common, commonShow, commonContent);
 
     this.addSectionEqnStep({
       eqns: [
-        [eqn, '2', '2a'],
+        [eqn, '2a0', '2a'],
         [fig._hypotenuse._label, '0', '1'],
+        [fig._sineTheta._label, '1a', '1b'],
       ],
       duration: 2,
     }, common, commonShow, commonContent);
@@ -424,57 +597,8 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqns: [
         [eqn, '2a', '2b'],
-        [fig._hypotenuse._label, '1', '2'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-
-    // this.addSection(common, commonContent, {
-    //   show: [
-    //     fig._line, fig._x, fig._hypotenuse,
-    //     fig._v, fig._right, fig._theta,
-    //   ],
-    //   setEqnForms: [
-    //     [fig._hypotenuse._label, '1'],
-    //     [fig._sineTheta._label, '1'],
-    //     [eqn, '2a'],
-    //     [fig._theta._label, '2'],
-    //   ],
-    //   transitionFromPrev: (done) => {
-    //     eqn.goToForm({
-    //       name: '2b',
-    //       duration: 2,
-    //       animate: 'move',
-    //       callback: done,
-    //     });
-    //     fig._hypotenuse._label.goToForm({
-    //       name: '2',
-    //       duration: 2,
-    //       animate: 'move',
-    //     });
-    //   },
-    //   setSteadyState: () => {
-    //     eqn.showForm('2b');
-    //     fig._hypotenuse._label.showForm('2');
-    //   },
-    // });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'This is a |general relationship|, as |r| (the hypotenuse) can be |any length|.',
-      modifiers: {
-        opposite: highlight(colors.components),
-        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-      },
-    };
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2b', '2b'],
-        [fig._hypotenuse._label, '2', '2'],
+        [fig._hypotenuse._label, '1', '1a'],
+        [fig._sineTheta._label, '1b', '1c'],
       ],
       duration: 2,
     }, common, commonShow, commonContent);
@@ -482,11 +606,317 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqns: [
         [eqn, '2b', '2c'],
-        [fig._hypotenuse._label, '2', '2'],
+        [fig._hypotenuse._label, '1a', '2'],
+        [fig._sineTheta._label, '1c', '1d'],
       ],
       duration: 2,
     }, common, commonShow, commonContent);
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'We have now extended the last relationship that applied to all right angle triangles with a hypotenuse of 1, to include any hypotenuse |r|. Therefore, this relationship holds for |all right angle triangles|.'),
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2c', '2c'],
+        [fig._hypotenuse._label, '2', '2'],
+        [fig._sineTheta._label, '1d', '1d'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, '2c', '2d'],
+        [fig._hypotenuse._label, '2', '2'],
+        [fig._sineTheta._label, '1d', '1e'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
+
+
+    // this.addSectionEqnStep({
+    //   eqns: [
+    //     [eqn, '2b', '2b'],
+    //     [fig._hypotenuse._label, '2', '2'],
+    //     [fig._sineTheta._label, '1e', '1e'],
+    //   ],
+    //   duration: 2,
+    // }, common, commonShow, commonContent);
+
+    // this.addSectionEqnStep({
+    //   eqns: [
+    //     [eqn, '2b', '2c'],
+    //     [fig._hypotenuse._label, '2', '2'],
+    //     [fig._sineTheta._label, '1e', '1e'],
+    //   ],
+    //   duration: 2,
+    // }, common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        'So |what is this function|?',
+      ],
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._x, fig._hypotenuse,
+        fig._v, fig._right, fig._theta,
+      ],
+      setEqnForms: [
+        [fig._sineTheta._label, '1e'],
+        [fig._hypotenuse._label, '2'],
+        [fig._theta._label, '2'],
+        [eqn, '2d'],
+      ],
+      setSteadyState: () => {
+        coll.accent({
+          element: coll,
+          children: [
+            'eqn.func',
+            'eqn.lb',
+            'eqn.rb',
+            'eqn.theta',
+            'eqn.hyp1_1',
+          ],
+          style: 'highlight',
+        });
+      },
+      setLeaveState: () => {
+        coll.undim();
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'Actually, for over a |thousand years| it was not known exactly what the formula of this function was even though the |relationship| between |side and angle was clear|, and side lengths could be |measured or geometrically calculated| for different angles.'),
+      ],
+    };
+    this.addSection(common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+    const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+    const table = `
+        <table id="angle_table">
+          <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
+          ${dots}
+          ${row(20)}
+          ${row(21)}
+          ${row(22)}
+          ${row(23)}
+          ${row(24)}
+          ${row(25)}
+          ${dots}
+          ${row(75)}
+          ${row(76)}
+          ${row(77)}
+          ${row(78)}
+          ${row(79)}
+          ${row(80)}
+          ${dots}
+        </table>
+        `;
+    const tableModifiers = {
+      '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
+      '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
+      '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
+      '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
+      '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
+      '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
+      '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
+      '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
+      '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
+      '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
+      '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
+      '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
+    };
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
+        table,
+      ],
+      modifiers: tableModifiers,
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+        fig._sine,
+      ],
+      setEqnForms: [
+        // [fig._sineTheta._label, '1e'],
+        [fig._hypotenuse._label, '2'],
+        // [fig._theta._label, '2'],
+        [eqn, '2d'],
+      ],
+    };
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        const angleTable = document.getElementById('angle_table');
+        if (angleTable != null) {
+          angleTable.classList.add('angle_table_hide')
+        }
+
+        eqn.goToForm({ name: '2e', duration: 1.5, animate: 'move' });
+        fig._hypotenuse._label.goToForm({ name: '0', duration: 1.5, animate: 'move' });
+
+        eqn.animations.new()
+          .scenario({ target: 'left', duration: 1.5 })
+          .start();
+
+        fig.animations.new()
+          .scenario({ target: 'left', duration: 1.5 })
+          .trigger({
+            callback: () => {
+              if (angleTable != null) {
+                angleTable.classList.remove('angle_table_hide');
+                angleTable.classList.add('topic__diagram_text_fade_in');
+              }
+            },
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('left');
+        eqn.showForm('2e');
+        fig._hypotenuse._label.showForm('0');
+      },
+      // fadeInFromPrev: false,
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonShow = {
+      show: [
+        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+        fig._sine,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [eqn, '2e'],
+      ],
+    };
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'Even when the formula for the function was first discovered in |1400 A.D.|, tables continued to be used for most applications as it was |simpler| than calculating each time.'),
+        table,
+      ],
+      modifiers: tableModifiers,
+    };
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('left');
+        if (this.comingFrom === 'prev') {
+          const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
+          pgraphs.forEach((p) => {
+            p.classList.add('topic__diagram_text_fade_in');
+          });
+        }
+      },
+      fadeInFromPrev: false,
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'In fact, tables that represented this function were used up until the |late 20th century|, when personal calculators and computers started to replace tables.'),
+        table,
+      ],
+      modifiers: tableModifiers,
+    };
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('left');
+        if (this.comingFrom === 'prev') {
+          const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
+          pgraphs.forEach((p) => {
+            p.classList.add('topic__diagram_text_fade_in');
+          });
+        }
+      },
+      fadeInFromPrev: false,
+    });
+
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        style({ top: 0 }, 'Today we call this function the |sine| function.'),
+      ],
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+        fig._sine,
+      ],
+      setEqnForms: [
+        [fig._hypotenuse._label, '0'],
+        [eqn, '2e'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        const moveDone = () => {
+          eqn.goToForm({ name: '2f', duration: 1.5, animate: 'move' });
+          fig._real._label.animations.new()
+            .dissolveOut({ duration: 0.75 })
+            .start();
+          fig._theta._label.showForm('2');
+          coll.updateRotation();
+          fig._theta._label.setOpacity(0);
+          fig._theta._label.animations.new()
+            .delay({ duration: 0.75 })
+            // .trigger({ callback: () => { fig._theta._label.showForm('2'); } })
+            .dissolveIn({ duration: 0.75 })
+            .whenFinished(done)
+            .start();
+        };
+
+        eqn.setScenario('left');
+        eqn.animations.new()
+          .scenario({ target: 'default', duration: 1.5 })
+          .start();
+        fig.setScenario('left');
+        fig.animations.new()
+          .scenario({ target: 'default', duration: 1.5 })
+          .whenFinished(moveDone)
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenario('default');
+        eqn.setScenario('default');
+        eqn.showForm('2f');
+        fig._real.hide();
+        // fig._theta._label.showForm('2');
+        coll.updateRotation();
+      },
+      // fadeInFromPrev: false,
+    });
 
     // **********************************************************************
     // **********************************************************************
@@ -907,45 +1337,45 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
     });
 
-    const row = (angle, prec = 3) => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
-    const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
-    this.addSection(common, commonContent, {
-      setContent: [
-        'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
-        `
-        <table>
-          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
-          ${dots}
-          ${row(20)}
-          ${row(21)}
-          ${row(22)}
-          ${row(23)}
-          ${row(24)}
-          ${row(25)}
-          ${row(26)}
-          ${row(27)}
-          ${row(28)}
-          ${row(29)}
-          ${dots}
-        </table>
-        `,
-      ],
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
-        fig._sine,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('0');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-      fadeInFromPrev: false,
-    });
+    // const row = (angle, prec = 3) => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+    // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+    // this.addSection(common, commonContent, {
+    //   setContent: [
+    //     'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
+    //     `
+    //     <table>
+    //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+    //       ${dots}
+    //       ${row(20)}
+    //       ${row(21)}
+    //       ${row(22)}
+    //       ${row(23)}
+    //       ${row(24)}
+    //       ${row(25)}
+    //       ${row(26)}
+    //       ${row(27)}
+    //       ${row(28)}
+    //       ${row(29)}
+    //       ${dots}
+    //     </table>
+    //     `,
+    //   ],
+    //   show: [
+    //     fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+    //     fig._sine,
+    //   ],
+    //   transitionFromAny: (done) => {
+    //     coll.updateRotation();
+    //     coll.labelForm('0');
+    //     eqn.showForm('0');
+    //     if (this.comingFrom === 'goto') {
+    //       coll.resetRotation(done, 0);
+    //     } else {
+    //       coll.resetRotation(done, 0.8);
+    //     }
+    //   },
+    //   fadeInFromPrev: false,
+    // });
 
     // **********************************************************************
     // **********************************************************************

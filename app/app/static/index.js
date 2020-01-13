@@ -203,7 +203,7 @@ var FigureOne = {
 /*!***********************************************!*\
   !*** ./src/js/diagram/Animation/Animation.js ***!
   \***********************************************/
-/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep */
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep, DimAnimationStep, dim, UndimAnimationStep, undim */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -212,7 +212,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PositionAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PositionAnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 /* harmony import */ var _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ColorAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DimAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["DimAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dim", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["dim"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UndimAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["UndimAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "undim", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["undim"]; });
 
 /* harmony import */ var _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/OpacityAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["DissolveInAnimationStep"]; });
@@ -572,12 +580,60 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
+    key: "dim",
+    value: function dim() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        args[_key13 - 1] = arguments[_key13];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["dim"](options));
+      return this;
+    }
+  }, {
+    key: "undim",
+    value: function undim() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        args[_key14 - 1] = arguments[_key14];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["undim"](options));
+      return this;
+    }
+  }, {
     key: "delay",
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
-        args[_key13 - 1] = arguments[_key13];
+      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        args[_key15 - 1] = arguments[_key15];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -588,8 +644,8 @@ function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-        optionsIn[_key14 - 1] = arguments[_key14];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        optionsIn[_key16 - 1] = arguments[_key16];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
@@ -600,8 +656,8 @@ function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-        optionsIn[_key15 - 1] = arguments[_key15];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        optionsIn[_key17 - 1] = arguments[_key17];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -612,8 +668,8 @@ function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
-        optionsIn[_key16 - 1] = arguments[_key16];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+        optionsIn[_key18 - 1] = arguments[_key18];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -626,8 +682,8 @@ function (_animation$SerialAnim) {
         element: this.element
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -1507,15 +1563,23 @@ function (_AnimationStep) {
 /*!*******************************************************************************************!*\
   !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js ***!
   \*******************************************************************************************/
-/*! exports provided: default */
+/*! exports provided: ColorAnimationStep, DimAnimationStep, dim, UndimAnimationStep, undim */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ColorAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return ColorAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DimAnimationStep", function() { return DimAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dim", function() { return dim; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UndimAnimationStep", function() { return UndimAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "undim", function() { return undim; });
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1584,6 +1648,15 @@ function (_ElementAnimationStep) {
 
     _this.color = {};
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.color, ['start', 'delta', 'target', 'dissolve']);
+
+    if (_this.color.target === 'dim') {
+      _this.color.target = _this.element.dimColor.slice();
+    }
+
+    if (_this.color.target === 'undim') {
+      _this.color.target = _this.element.defaultColor.slice();
+    }
+
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -1704,7 +1777,93 @@ function (_ElementAnimationStep) {
   }]);
 
   return ColorAnimationStep;
-}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]); // export class DissolveInAnimationStep extends ColorAnimationStep {
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var DimAnimationStep =
+/*#__PURE__*/
+function (_ColorAnimationStep) {
+  _inherits(DimAnimationStep, _ColorAnimationStep);
+
+  function DimAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DimAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      target: 'dim',
+      completeOnCancel: true
+    };
+
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DimAnimationStep).call(this, options));
+  }
+
+  return DimAnimationStep;
+}(ColorAnimationStep);
+function dim() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    args[_key3 - 1] = arguments[_key3];
+  }
+
+  return _construct(DimAnimationStep, [timeOrOptionsIn].concat(args));
+}
+var UndimAnimationStep =
+/*#__PURE__*/
+function (_ColorAnimationStep2) {
+  _inherits(UndimAnimationStep, _ColorAnimationStep2);
+
+  function UndimAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, UndimAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      target: 'undim',
+      completeOnCancel: true
+    };
+
+    for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(UndimAnimationStep).call(this, options));
+  }
+
+  return UndimAnimationStep;
+}(ColorAnimationStep);
+function undim() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+    args[_key5 - 1] = arguments[_key5];
+  }
+
+  return _construct(UndimAnimationStep, [timeOrOptionsIn].concat(args));
+} // export class DissolveInAnimationStep extends ColorAnimationStep {
 //   constructor(
 //     timeOrOptionsIn: number | TypeElementAnimationStepInputOptions = {},
 //     ...args: Array<TypeElementAnimationStepInputOptions>
@@ -1746,9 +1905,6 @@ function (_ElementAnimationStep) {
 // ) {
 //   return new DissolveOutAnimationStep(timeOrOptionsIn, ...args);
 // }
-
-
-
 
 /***/ }),
 
@@ -26016,9 +26172,53 @@ function () {
         return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
+      dim: function dim() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len10 = arguments.length, args = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
+          args[_key10 - 1] = arguments[_key10];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DimAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      undim: function undim() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+          args[_key11 - 1] = arguments[_key11];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["UndimAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
       builder: function builder() {
-        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-          optionsIn[_key10] = arguments[_key10];
+        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+          optionsIn[_key12] = arguments[_key12];
         }
 
         return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
@@ -26029,8 +26229,8 @@ function () {
           element: _this
         };
 
-        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-          optionsIn[_key11] = arguments[_key11];
+        for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+          optionsIn[_key13] = arguments[_key13];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -26056,8 +26256,8 @@ function () {
       scenarios: function scenarios() {
         var defaultOptions = {};
 
-        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-          optionsIn[_key12] = arguments[_key12];
+        for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+          optionsIn[_key14] = arguments[_key14];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));

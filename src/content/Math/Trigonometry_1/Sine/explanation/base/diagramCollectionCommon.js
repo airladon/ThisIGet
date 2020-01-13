@@ -200,6 +200,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (v.isShown) {
       v.setEndPoints([p2.x, 0], [p2.x, p2.y]);
     }
+    if (this._fig._mirrorV) {
+      this._fig._mirrorV.setEndPoints([p2.x, 0], [p2.x, -p2.y]);
+    }
 
     if (length !== this.layout.r) {
       hypotenuse._label.setOpacity(0);
@@ -242,6 +245,10 @@ export default class CommonCollection extends CommonDiagramCollection {
       });
       right.setOpacity(opacity.right);
     }
+    if (this._fig._mirrorLine.isShown) {
+      this._fig._mirrorLine.setRotation(-r);
+    }
+
     if (theta.isShown) {
       theta.setAngle({
         p1: [p2.x, 0],
@@ -275,6 +282,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (hypotenuse.isShown) {
       hypotenuse.setEndPoints([0, 0], p2);
     }
+
     if (this._fig._arc.isShown) {
       let arcAngle = r;
       while (arcAngle > Math.PI * 2) {
@@ -285,6 +293,17 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
       // console.log(arcAngle * 180 / Math.PI)
       this._fig._arc.setAngleToDraw(arcAngle + 0.005);
+    }
+    if (this._fig._mirrorArc.isShown) {
+      let arcAngle = r;
+      while (arcAngle > Math.PI * 2) {
+        arcAngle -= Math.PI * 2;
+      }
+      while (arcAngle < 0) {
+        arcAngle += Math.PI * 2;
+      }
+      // console.log(arcAngle * 180 / Math.PI)
+      this._fig._mirrorArc.setAngleToDraw(arcAngle + 0.005);
     }
     this.diagram.animateNextFrame();
   }

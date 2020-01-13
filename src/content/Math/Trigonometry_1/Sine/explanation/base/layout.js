@@ -90,11 +90,13 @@ export default function diagramLayout() {
       sin: { text: 'sin', color: colors.components, style: 'normal' },
       theta: { text: '\u03B8', color: colors.components },
       opposite: { text: 'opposite', color: colors.components },
+      opposite_1: { text: 'opposite', color: colors.components },
       vertical: { text: 'vertical', color: colors.components },
       brace: {
-        symbol: 'brace', side: 'top', color: colors.working, numLines: 3,
+        symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
       },
       hyp1: { text: 'hypotenuse = 1', color: colors.components },
+      hypr: { text: 'hypotenuse = r', color: colors.components },
     },
     forms: {
       '0': {
@@ -164,8 +166,101 @@ export default function diagramLayout() {
                 content: 'opposite',
                 comment: 'hyp1',
                 inSize: false,
+                scale: 0.5,
               },
             },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1b': {
+        content: {
+          container: {
+            content: [
+              'r', 'times',
+              {
+                bottomComment: {
+                  content: 'opposite',
+                  comment: 'hyp1',
+                  inSize: false,
+                  scale: 0.5,
+                },
+              },
+            ],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1c': {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: [
+                  'r', 'times',
+                  {
+                    bottomComment: {
+                      content: 'opposite',
+                      comment: 'hyp1',
+                      inSize: false,
+                      scale: 0.5,
+                    },
+                  },
+                ],
+                comment: {
+                  bottomComment: {
+                    content: 'opposite_1',
+                    comment: 'hypr',
+                    inSize: true,
+                    scale: 0.7,
+                  },
+                },
+                symbol: 'brace',
+              },
+            },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1d': {
+        content: {
+          container: {
+            content: {
+              bottomComment: {
+                content: 'opposite_1',
+                comment: 'hypr',
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1e': {
+        content: {
+          container: {
+            content: 'opposite_1',
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -196,6 +291,7 @@ export default function diagramLayout() {
       r: { text: 'r', color: colors.lines },
       times: { text: ' \u00D7 ', color: colors.lines },
       _1: { text: '1', color: colors.lines },
+      s: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -219,6 +315,20 @@ export default function diagramLayout() {
         },
         scale: 1,
       },
+      '1a': {
+        content: {
+          container: {
+            content: [
+              'r',
+              'times',
+              { strike: ['_1', 's'] },
+            ],
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+      },
       '2': {
         content: {
           container: {
@@ -234,8 +344,8 @@ export default function diagramLayout() {
 
   const r = 2;
   layout.r = r;
-  const line = {
-    name: 'line',
+  const line = (name, min, max) => ({
+    name,
     method: 'line',
     options: {
       length: r,
@@ -248,11 +358,11 @@ export default function diagramLayout() {
       interactiveLocation: [r / 2, 0],
       move: {
         canBeMovedAfterLoosingTouch: true,
-        maxTransform: new Transform().scale(1, 1).rotate(Math.PI / 2).translate(1000, 1000),
-        minTransform: new Transform().scale(1, 1).rotate(0).translate(-1000, -1000),
+        maxTransform: new Transform().scale(1, 1).rotate(max).translate(1000, 1000),
+        minTransform: new Transform().scale(1, 1).rotate(min).translate(-1000, -1000),
       },
     },
-  };
+  });
   const component = name => ({
     name,
     method: 'line',
@@ -296,6 +406,18 @@ export default function diagramLayout() {
       autoRightAngle: true,
     },
   });
+
+  const circle = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      sides: 400,
+      lineWidth: 0.008,
+      radius: r,
+      color: colors.working,
+    },
+  };
+
   const lineLabel = (name, text, color, location, subLocation, p1 = [0, 0], p2 = [1, 0]) => ({
     name,
     method: 'line',
@@ -312,20 +434,43 @@ export default function diagramLayout() {
       color,
     },
   });
+
   const fig = {
     name: 'fig',
     method: 'collection',
     addElements: [
       axis('x', [0, 0], [r * 1, 0]),
       // axis('y', [0, 0], [0, r * 1.2]),
+      // {
+      //   name: 'arc1',
+      //   method: 'polygon',
+      //   options: {
+      //     sides: 600,
+      //     width: 0.015,
+      //     radius: r,
+      //     color: colors.angles,
+      //   },
+      // },
+      circle,
       {
         name: 'arc',
         method: 'polygon',
         options: {
-          sides: 600,
+          sides: 400,
           width: 0.015,
           radius: r,
           color: colors.angles,
+        },
+      },
+      {
+        name: 'mirrorArc',
+        method: 'polygon',
+        options: {
+          sides: 400,
+          width: 0.015,
+          radius: r,
+          color: colors.angles,
+          clockwise: true,
         },
       },
       angle('real', null),
@@ -338,12 +483,16 @@ export default function diagramLayout() {
       lineLabel('realHyp', null, colors.lines, 'top', 'left'),
       component('h'),
       component('v'),
+      component('mirrorV'),
       // angle('arc', )
-      line,
+      line('mirrorLine', -Math.PI / 2, 0),
+      line('line', 0, Math.PI / 2),
     ],
     mods: {
       scenarios: {
-        default: { position: [-r / 2, -1] },
+        default: { position: [-r / 2, -1], scale: 1 },
+        left: { position: [-2, -1], scale: 1 },
+        small: { position: [0, 0], scale: 0.5 },
       },
     },
   };
@@ -413,6 +562,7 @@ export default function diagramLayout() {
         theta3: { text: '\u03B8', color: colors.angles },
         theta4: { text: '\u03B8', color: colors.angles },
         hyp1: { text: 'hypotenuse = 1', color: colors.components },
+        hyp1_1: { text: 'hypotenuse = 1' },
         hypr: { text: 'hypotenuse = r', color: colors.components },
         r: { color: colors.lines },
         r_1: { color: colors.lines },
@@ -439,6 +589,7 @@ export default function diagramLayout() {
         'plus1': '  +  ',
         'plus2': '  +  ',
         'sine': { text: 'sine', style: 'normal' },
+        'sin': { text: 'sin', style: 'normal' },
         // 'AB': { text: 'AB', font: new DiagramFont('Times New Roman', 'normal', 0.3, 'bold', 'left', 'alphabetic', [1, 0, 0, 1]) },
         'AB': { text: 'AB', weight: 'normal', size: 0.3 },
         'sin1': { text: 'sin', style: 'normal' },
@@ -712,6 +863,40 @@ export default function diagramLayout() {
         //     alignH: 'right',
         //   },
         // },
+        '0sine1': {
+          content: [
+            'vert',
+            'equals',
+            {
+              topComment: {
+                content: 'func',
+                comment: 'sin',
+                symbol: 'brace',
+              },
+            },
+            {
+              brac: ['lb', 'angle', 'rb'],
+            },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '0sine2': {
+          content: [
+            'vert',
+            'equals',
+            'sin',
+            {
+              brac: ['lb', 'angle', 'rb'],
+            },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
         '1': {
           content: [{
             topComment: {
@@ -758,8 +943,19 @@ export default function diagramLayout() {
         },
         '2a0': {
           content: [
-            { bottomComment: { content: 'opp', comment: 'hyp1', inSize: false } },
-            'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
+            {
+              bottomComment: {
+                content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
+              },
+            },
+            'equals',
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',
@@ -767,14 +963,20 @@ export default function diagramLayout() {
         },
         '2a': {
           content: [
-            { bottomComment: { content: 'opp', comment: 'hypr', inSize: false } },
-            'equals',
             'r', 'times',
-            { bottomComment: { content: 'opp1', comment: 'hyp1', inSize: false } },
-            'equals1',
+            {
+              bottomComment: {
+                content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
+              },
+            },
+            'equals',
             'r_1', 'times1',
-            'func', { brac: ['lb', 'theta', 'rb'] },
-            
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
           ],
           alignment: {
             fixTo: 'equals',
@@ -783,6 +985,106 @@ export default function diagramLayout() {
         },
         '2b': {
           content: [
+            {
+              topComment: {
+                content: [
+                  'r', 'times',
+                  {
+                    bottomComment: {
+                      content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
+                    },
+                  },
+                ],
+                comment: {
+                  bottomComment: {
+                    content: 'opp1', comment: 'hypr', inSize: true, scale: 0.7,
+                  },
+                },
+                symbol: 'brace',
+              },
+            },
+            'equals',
+            'r_1', 'times1',
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2c': {
+          content: [
+            {
+              bottomComment: {
+                content: 'opp1', comment: 'hypr', inSize: false, scale: 0.5,
+              },
+            },
+            'equals',
+            'r_1', 'times1',
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2d': {
+          content: [
+            'opp1',
+            'equals',
+            'r_1', 'times1',
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2e': {
+          content: [
+            'opp1',
+            'equals',
+            {
+              bottomComment: {
+                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
+              },
+            },
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2f': {
+          content: [
+            'opp1',
+            'equals',
+            'sine',
+            { brac: ['lb', 'theta', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        '2b2': {
+          content: [
             { bottomComment: { content: 'opp', comment: 'hypr', inSize: false } },
             'equals',
             'r_1', 'times1',
@@ -793,7 +1095,7 @@ export default function diagramLayout() {
             alignH: 'right',
           },
         },
-        '2c': {
+        '2c2': {
           content: [
             'opp',
             'equals',
@@ -887,6 +1189,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [-0.3, -1.6] },
+        left: { position: [-1.3, -1.6] },
         // default: { position: [-2, 0] },
       },
       pulseDefault: { scale: 1.4 },
