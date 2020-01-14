@@ -57,7 +57,7 @@ class Content extends PresentationFormatContent {
       setContent: 'Consider a |right angle triangle| with |hypotenuse| 1, and |angle| 40º.',
       modifiers: {
         hypotenuse: coll.bindAccent(fig._line),
-        angle: coll.bindAccent(fig._real),
+        angle: coll.bindAccent(fig._theta),
       },
     };
     let common = {
@@ -81,10 +81,11 @@ class Content extends PresentationFormatContent {
     };
     let commonShow = {
       show: [
-        fig._line, fig._h, fig._real, fig._hypotenuse,
-        fig._v, fig._right, // fig._sineTheta,
+        fig._line, fig._h, fig._hypotenuse,
+        fig._v, fig._right,
       ],
       setEqnForms: [
+        [fig._theta._label, 'real'],
         [fig._hypotenuse._label, 'real'],
       ],
     };
@@ -141,7 +142,7 @@ class Content extends PresentationFormatContent {
       setContent: style({}, 'If we measure the side |opposite| the |angle|, we will see it is |0_643|.'),
       modifiers: {
         '0_643': highlightWord('0.643', colors.components),
-        angle: coll.bindAccent(fig._real),
+        angle: coll.bindAccent(fig._theta),
       },
     };
 
@@ -158,11 +159,12 @@ class Content extends PresentationFormatContent {
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real, fig._hypotenuse,
+        fig._line, fig._h, fig._theta, fig._hypotenuse,
         fig._right, fig._opp,
       ],
       setEqnForms: [
         [fig._hypotenuse._label, 'real'],
+        [fig._theta._label, 'real'],
         [fig._oppLabel._label, 'real'],
       ],
     };
@@ -190,7 +192,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         '0_643': highlightWord('0.643', colors.components),
         '40º_angle': highlight(colors.angles),
-        '40º_angle_': coll.bindAccent(fig._real),
+        '40º_angle_': coll.bindAccent(fig._theta),
         hypotenuse_of_1: coll.bindAccent(fig._line),
         opposite: coll.bindAccent(fig._opp),
       },
@@ -212,7 +214,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         'side_length_of_0.643': coll.bindAccent(fig._opp),
         hypotenuse_of_1: coll.bindAccent(fig._line),
-        opposite_angle_is_40º: coll.bindAccent(fig._real),
+        opposite_angle_is_40º: coll.bindAccent(fig._theta),
       },
     };
 
@@ -228,43 +230,26 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // commonContent = {
-    //   setContent: style({}, 'Now, triangles that have the same angles are |similar_triangles|, that have |corresponding side lengths| scaled by the same factor.'),
-    //   modifiers: {
-    //     similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-    //   },
-    // };
-
-    // this.addSection(common, commonShow, commonContent, {
-    //   setSteadyState: () => {
-    //     fig._line.setRotation(Math.PI / 18 * 4);
-    //     coll.updateRotation();
-    //     fig._line._line.isTouchable = false;
-    //   },
-    // });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
     commonContent = {
       setContent: style({}, 'Now, if we |change| the length of the hypotenuse but keep the angles the |same|, then the new triangle is |similar| to the |original|.'),
       modifiers: {
         change: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
         similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-        same: coll.bindAccent(fig, ['real', 'right']),
+        same: coll.bindAccent(fig, ['theta', 'right']),
         original: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp,
       ],
     };
     this.addSectionEqnStep(
       {
         eqns: [
+          [fig._theta._label, 'real', 'real'],
           [fig._oppLabel._label, 'real', 'real'],
           [fig._hypotenuse._label, 'real', 'real'],
         ],
@@ -290,13 +275,14 @@ class Content extends PresentationFormatContent {
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp,
       ],
     };
     this.addSectionEqnStep(
       {
         eqns: [
+          [fig._theta._label, 'real', 'real'],
           [fig._oppLabel._label, 'real', 'real'],
           [fig._hypotenuse._label, 'real', 'real'],
         ],
@@ -312,6 +298,7 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
+          [fig._theta._label, 'real', 'real'],
           [fig._oppLabel._label, 'real', 'realTimesR'],
           [fig._hypotenuse._label, 'real', 'realTimesR'],
         ],
@@ -327,6 +314,7 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
+          [fig._theta._label, 'real', 'real'],
           [fig._oppLabel._label, 'realTimesR', 'realR'],
           [fig._hypotenuse._label, 'realTimesR', 'r'],
         ],
@@ -347,17 +335,18 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643 times the hypotenuse|.'),
       modifiers: {
-        '40º_angle': coll.bindAccent(fig._real),
+        '40º_angle': coll.bindAccent(fig._theta),
         opposite: coll.bindAccent(fig._opp),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp,
       ],
       setEqnForms: [
+        [fig._theta._label, 'real'],
         [fig._oppLabel._label, 'realR'],
         [fig._hypotenuse._label, 'r'],
       ],
@@ -377,14 +366,17 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({}, 'Now let\'s consider the |angles| of a right angle triangle more generally.'),
       modifiers: {
-        angles: coll.bindAccent(fig, ['real', 'complement', 'right']),
+        angles: coll.bindAccent(fig, ['theta', 'complement', 'right']),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp, fig._complement,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
       ],
     };
 
@@ -405,14 +397,17 @@ class Content extends PresentationFormatContent {
       modifiers: {
         complementary: this.qr('Math/Geometry_1/AngleGroups/base/ComplementaryPres'),
         add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-        two_angles: coll.bindAccent(fig, ['real', 'complement']),
+        two_angles: coll.bindAccent(fig, ['theta', 'complement']),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp, fig._complement,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
       ],
     };
 
@@ -430,15 +425,18 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({}, 'So |all| right angles triangles have one angle that is |90º|, and two angles |less_than_90º|.'),
       modifiers: {
-        less_than_90º: coll.bindAccent(fig, ['real', 'complement']),
+        less_than_90º: coll.bindAccent(fig, ['theta', 'complement']),
         '90º': coll.bindAccent(fig._right),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp, fig._complement,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
       ],
     };
 
@@ -462,14 +460,16 @@ class Content extends PresentationFormatContent {
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp, fig._complement,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
       ],
     };
 
     this.addSection(common, commonShow, commonContent, {
     });
-
 
 
     // **********************************************************************
@@ -484,14 +484,14 @@ class Content extends PresentationFormatContent {
       angles.forEach((angle, index) => {
         if (typeof angle === 'number') {
           table = `${table}${row(angle, index)}`;
-          tableModifiers[`${angle}º`] = click(coll.gotoRotation, [coll, angle * Math.PI / 180, 0.5, null])
+          tableModifiers[`${angle}º`] = click(coll.gotoRotation, [coll, angle * Math.PI / 180, 0.5, null]);
         } else {
           table = `${table}${dots(index)}`;
         }
       });
       table = `${table}</table></div>`;
       return [table, tableModifiers];
-    }
+    };
 
     let text = 'We can then |measure| the length of the |opposite| side for different |angles| when the hypotenuse is |1|, and make a |reference_table|.';
     commonContent = {
@@ -499,18 +499,18 @@ class Content extends PresentationFormatContent {
       modifiers: {
         measure: click(coll.measureAngles, [coll, null], colors.components),
         opposite: coll.bindAccent(fig._opp),
-        angles: coll.bindAccent(fig._real),
+        angles: coll.bindAccent(fig._theta),
         reference_table: this.bindNext(),
       },
     };
 
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
+        fig._line, fig._h, fig._theta,
         fig._right, fig._opp,
       ],
       setEqnForms: [
-        // [fig._sineTheta._label, '0'],
+        [fig._theta._label, 'real'],
         [fig._oppLabel._label, 'real'],
         [fig._hypotenuse._label, 'real'],
       ],
@@ -528,21 +528,13 @@ class Content extends PresentationFormatContent {
       modifiers: {
         measure: click(coll.measureAngles, [coll, null], colors.components),
         opposite: coll.bindAccent(fig._opp),
-        angles: coll.bindAccent(fig._real),
-        reference_table: click(() => {
-          const angleTable = document.getElementById('angle_table');
-          if (angleTable != null) {
-            angleTable.classList.remove('topic__diagram_text_pulse');
-            // eslint-disable-next-line
-            void angleTable.offsetWidth;
-            angleTable.classList.add('topic__diagram_text_pulse');
-          }
-        }, [this], colors.diagram.action),
+        angles: coll.bindAccent(fig._theta),
+        reference_table: click(coll.pulseTable, [coll], colors.diagram.action),
       },
       transitionFromPrev: (done) => {
         const angleTable = document.getElementById('angle_table');
         if (angleTable != null) {
-          angleTable.classList.add('angle_table_hide')
+          angleTable.classList.add('angle_table_hide');
         }
 
         fig.animations.new()
@@ -585,1586 +577,1648 @@ class Content extends PresentationFormatContent {
     commonContent = { setContent: [text, tableContent], modifiers };
     this.addSection(common, commonShow, commonContent, {
       transitionFromPrev: (done) => {
-        
+        fig.setScenario('left');
+        fig._oppLabel._label.goToForm({ name: 'realTimesR', duration: 1, animate: 'move' });
+        fig._hypotenuse._label.goToForm({
+          name: 'realTimesR', duration: 1, animate: 'move', callback: done,
+        });
+        const rElements = document.querySelectorAll('.angle_table_r');
+        rElements.forEach((r) => {
+          r.classList.add('topic__diagram_text_fade_in');
+        });
       },
       setSteadyState: () => {
         fig._oppLabel._label.showForm('realTimesR');
+        fig._hypotenuse._label.showForm('realTimesR');
         fig.setScenario('left');
-        console.log(fig._sineTheta)
       },
       fadeInFromPrev: false,
     });
 
-
-    commonContent = {
-      setContent: [
-        text,
-        tableContent,
-      ],
-      modifiers,
-    };
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    text = [
+      'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
+    ];
+    commonContent = { setContent: [...text, tableContent], modifiers };
     commonShow = {
       show: [
-        fig._line, fig._h, fig._real,
-        fig._right, fig._opp, fig._sine,
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp,
       ],
       setEqnForms: [
-        // [fig._sineTheta._label, '0'],
-        [fig._hypotenuse._label, '0'],
+        [fig._theta._label, 'real'],
+        [fig._oppLabel._label, 'realTimesR'],
+        [fig._hypotenuse._label, 'realTimesR'],
       ],
     };
-    // this.addSection(common, commonShow, commonContent, {
-    //   modifiers: {
-    //     measure: click(coll.growTable, [coll, null], colors.components),
-    //   },
-    //   transitionFromPrev: (done) => {
-    //     fig.setScenario('left');
-    //     // coll.growTable(done);
-    //   },
-    //   fadeInFromPrev: false,
-    //   setSteadyState: () => {
-    //     fig.setScenario('left');
-    //   },
-    // });
-
-    // const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
-    // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
-    // const table = `
-    //     <table id="angle_table">
-    //       <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
-    //       ${dots}
-    //       ${row(20)}
-    //       ${row(21)}
-    //       ${row(22)}
-    //       ${row(23)}
-    //       ${row(24)}
-    //       ${row(25)}
-    //       ${dots}
-    //       ${row(75)}
-    //       ${row(76)}
-    //       ${row(77)}
-    //       ${row(78)}
-    //       ${row(79)}
-    //       ${row(80)}
-    //       ${dots}
-    //     </table>
-    //     `;
-    // const tableModifiers = {
-    //   '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
-    //   '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
-    //   '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
-    //   '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
-    //   '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
-    //   '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
-    //   '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
-    //   '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
-    //   '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
-    //   '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
-    //   '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
-    //   '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
-    // };
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'The line has |horizontal| and |vertical| components, that change with |rotation_angle|.',
-    };
-    this.addSection(common, commonContent, {
+    this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
-        horizontal: this.bindNext(colors.components, 'h'),
-        vertical: this.bindNext(colors.components, 'v'),
+        table: click(coll.pulseTable, [coll], colors.diagram.action),
+        angle: highlight(colors.angles),
+        opposite_side: highlight(colors.components),
       },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-      ],
+      setSteadyState: () => {
+        fig.setScenario('left');
+      },
+      fadeInFromPrev: false,
     });
-    this.addSection(common, commonContent, {
+
+    text = [
+      'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
+      note({ label: 'Note:', top: 93 }, 'This is only an approximation as the table values are from measurement which is inexact.'),
+    ];
+    commonContent = { setContent: [...text, tableContent], modifiers };
+    this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
-        horizontal: coll.bindAccent(fig._h),
-        vertical: coll.bindAccent(fig._v),
+        table: click(coll.pulseTable, [coll], colors.diagram.action),
+        angle: highlight(colors.angles),
+        opposite_side: highlight(colors.components),
       },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-      ],
       transitionFromPrev: (done) => {
-        fig._h.showAll();
-        fig._v.showAll();
-        coll.updateRotation();
-        if (this.message === 'h') {
-          coll.accent(fig, ['h'], done);
-        } else if (this.message === 'v') {
-          coll.accent(fig, ['v'], done);
-        } else {
-          coll.accent(fig, ['h', 'v'], done);
+        fig.setScenario('left');
+        const noteLabel = document.querySelector('.presentation__note');
+        if (noteLabel != null) {
+          noteLabel.classList.add('topic__diagram_text_pulse');
         }
+        done();
       },
       setSteadyState: () => {
-        fig._h.showAll();
-        fig._v.showAll();
-        coll.updateRotation();
+        fig.setScenario('left');
       },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'These |components| and the |line| are a |right_angle_triangle|. |Rotating| the line |changes the shape| of the right angle triangle.',
-      modifiers: {
-        components: coll.bindAccent(fig, ['h', 'v']),
-        line: coll.bindAccent(fig._line),
-        Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
-      },
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        right_angle_triangle: this.bindNext(colors.lines),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._h, fig._v,
-      ],
-    });
-    this.addSection(common, commonContent, {
-      modifiers: {
-        right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._h, fig._v,
-      ],
-      transitionFromPrev: (done) => {
-        fig._right.showAll();
-        coll.updateRotation();
-        coll.accent(fig, ['h', 'v', 'line', 'right'], done);
-      },
-      setSteadyState: () => {
-        fig._right.showAll();
-        coll.updateRotation();
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        'In fact, sweeping the line between 0º to 90º represents |all right angle triangles with a hypotenuse of 1|.',
-        hint({ label: 'Why?', top: 80, size: 0.6 }, 'As a triangle\'s angles |add_to_180º|, the right angle must be the largest angle and the other two angles must be |less than 90º|. Thus sweeping the line between 0º and 90º represents |all angle combinations| of a right angle triangle. At each angle, all angles and the hypotenuse are |known|, thus the |ASA| similarity criteria can be used to determine |all triangles with those angles and hypotenuse are congruent|.'),
-      ],
-      modifiers: {
-        components: coll.bindAccent(fig, ['h', 'v']),
-        line: coll.bindAccent(fig._line),
-        Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
-        ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Asa'),
-        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-      },
-    };
-
-    this.addSection(common, commonContent, {
-      modifiers: {
-        right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._h, fig._v, fig._right,
-      ],
+      fadeInFromPrev: false,
     });
 
     // commonContent = {
     //   setContent: [
-    //     'This is because:',
-    //     style({ list: 'unordered', listStyleType: 'disc' }, [
-    //       'All angles in a triangle add to 180º',
-    //       'Therefore the two angles that aren\'t the right angle add to 90º',
-    //       'Therefore the two angles are less than 90º',
-    //       'Therefore sweeping the line between 0º and 90º represents all possible angle combinations of a right angle triangle',
-    //       'At each angle combination, the ASA triangle congruence critieria is met (using the known hypotenuse of 1)',
-    //       'Therefore all triangles with that hypotenuse and angle combination are contruent',
-    //       'Therefore sweeping a fixed hypotenuse between 0º and 90º and forming a right angle triangle with the vertical and horizontal components will represent all right angle triangles with that hypotenuse',
-    //     ]),
+    //     text,
+    //     tableContent,
+    //   ],
+    //   modifiers,
+    // };
+    // commonShow = {
+    //   show: [
+    //     fig._line, fig._h, fig._real,
+    //     fig._right, fig._opp, fig._sine,
+    //   ],
+    //   setEqnForms: [
+    //     // [fig._sineTheta._label, '0'],
+    //     [fig._hypotenuse._label, '0'],
     //   ],
     // };
-    // this.addSection(commonContent, {
-    //   modifiers: {
-    //     right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
-    //   },
-    // });
+  //   // this.addSection(common, commonShow, commonContent, {
+  //   //   modifiers: {
+  //   //     measure: click(coll.growTable, [coll, null], colors.components),
+  //   //   },
+  //   //   transitionFromPrev: (done) => {
+  //   //     fig.setScenario('left');
+  //   //     // coll.growTable(done);
+  //   //   },
+  //   //   fadeInFromPrev: false,
+  //   //   setSteadyState: () => {
+  //   //     fig.setScenario('left');
+  //   //   },
+  //   // });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'Now let’s consider just the |vertical| component.',
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        vertical: this.bindNext(colors.components),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._h, fig._v, fig._right,
-      ],
-    });
-    this.addSection(common, commonContent, {
-      modifiers: {
-        vertical: coll.bindAccent(fig._v),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._h, fig._v, fig._right,
-      ],
-      transitionFromPrev: (done) => {
-        coll.accent(fig._v);
-        fig.animations.new()
-          .dissolveOut({ element: fig._h, duration: 1 })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        fig._h.hide();
-        coll.updateRotation();
-      },
-    });
+  //   // const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+  //   // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+  //   // const table = `
+  //   //     <table id="angle_table">
+  //   //       <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
+  //   //       ${dots}
+  //   //       ${row(20)}
+  //   //       ${row(21)}
+  //   //       ${row(22)}
+  //   //       ${row(23)}
+  //   //       ${row(24)}
+  //   //       ${row(25)}
+  //   //       ${dots}
+  //   //       ${row(75)}
+  //   //       ${row(76)}
+  //   //       ${row(77)}
+  //   //       ${row(78)}
+  //   //       ${row(79)}
+  //   //       ${row(80)}
+  //   //       ${dots}
+  //   //     </table>
+  //   //     `;
+  //   // const tableModifiers = {
+  //   //   '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
+  //   //   '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
+  //   //   '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
+  //   //   '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
+  //   //   '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
+  //   //   '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
+  //   //   '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
+  //   //   '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
+  //   //   '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
+  //   //   '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
+  //   //   '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
+  //   //   '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
+  //   // };
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'As the angle gets |closer_to_90º|, the vertical component gets |longer|. As it gets |closer_to_0º|, the vertical component gets |shorter|.',
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        closer_to_0º: click(coll.gotoSmallAngle, [coll], colors.angles),
-        closer_to_90º: click(coll.gotoLargeAngle, [coll], colors.angles),
-        longer: highlight(colors.components),
-        shorter: highlight(colors.components),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
-      ],
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'The line has |horizontal| and |vertical| components, that change with |rotation_angle|.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
+  //       horizontal: this.bindNext(colors.components, 'h'),
+  //       vertical: this.bindNext(colors.components, 'v'),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //     ],
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       rotation_angle: click(coll.gotoRotation, [coll, null, 0.8, null], colors.angles),
+  //       horizontal: coll.bindAccent(fig._h),
+  //       vertical: coll.bindAccent(fig._v),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       fig._h.showAll();
+  //       fig._v.showAll();
+  //       coll.updateRotation();
+  //       if (this.message === 'h') {
+  //         coll.accent(fig, ['h'], done);
+  //       } else if (this.message === 'v') {
+  //         coll.accent(fig, ['v'], done);
+  //       } else {
+  //         coll.accent(fig, ['h', 'v'], done);
+  //       }
+  //     },
+  //     setSteadyState: () => {
+  //       fig._h.showAll();
+  //       fig._v.showAll();
+  //       coll.updateRotation();
+  //     },
+  //   });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'Therefore we can say the |vertical| component is |related to|, |dependent on|, or |a function of| the rotation |angle|.',
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        vertical: highlight(colors.components),
-        angle: highlight(colors.angles),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._hypotenuse,
-        fig._v, fig._right,
-      ],
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'These |components| and the |line| are a |right_angle_triangle|. |Rotating| the line |changes the shape| of the right angle triangle.',
+  //     modifiers: {
+  //       components: coll.bindAccent(fig, ['h', 'v']),
+  //       line: coll.bindAccent(fig._line),
+  //       Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+  //     },
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       right_angle_triangle: this.bindNext(colors.lines),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._h, fig._v,
+  //     ],
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._h, fig._v,
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       fig._right.showAll();
+  //       coll.updateRotation();
+  //       coll.accent(fig, ['h', 'v', 'line', 'right'], done);
+  //     },
+  //     setSteadyState: () => {
+  //       fig._right.showAll();
+  //       coll.updateRotation();
+  //     },
+  //   });
 
-    this.addSection(common, commonContent, {
-      modifiers: {
-        vertical: highlight(colors.components),
-        angle: highlight(colors.angles),
-      },
-      show: [
-        fig._line, fig._x, fig._theta, fig._hypotenuse,
-        fig._v, fig._right, fig._sineTheta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-        [eqn, '0'],
-        [fig._theta._label, '0'],
-      ],
-      transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          coll.accent(eqn, done);
-          // coll.accent(fig._theta);
-        }, 0.8);
-      },
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       'In fact, sweeping the line between 0º to 90º represents |all right angle triangles with a hypotenuse of 1|.',
+  //       hint({ label: 'Why?', top: 80, size: 0.6 }, 'As a triangle\'s angles |add_to_180º|, the right angle must be the largest angle and the other two angles must be |less than 90º|. Thus sweeping the line between 0º and 90º represents |all angle combinations| of a right angle triangle. At each angle, all angles and the hypotenuse are |known|, thus the |ASA| similarity criteria can be used to determine |all triangles with those angles and hypotenuse are congruent|.'),
+  //     ],
+  //     modifiers: {
+  //       components: coll.bindAccent(fig, ['h', 'v']),
+  //       line: coll.bindAccent(fig._line),
+  //       Rotating: click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+  //       ASA: this.qr('Math/Geometry_1/CongruentTriangles/base/Asa'),
+  //       add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+  //     },
+  //   };
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'The name we use for this function is |sine|, though sometimes just |sin| is also used.',
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._theta, fig._hypotenuse,
-        fig._v, fig._right, fig._sineTheta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-        // [eqn, '0'],
-        [fig._theta._label, '0'],
-      ],
-    };
-    this.addSectionEqnStep(
-      {
-        eqns: [[eqn, '0', '0']],
-        duration: 2,
-      }, common, commonShow, commonContent,
-    );
-    this.addSectionEqnStep(
-      {
-        eqns: [[eqn, '0', '0sine1']],
-        duration: 2,
-      }, common, commonShow, commonContent,
-    );
-    this.addSectionEqnStep(
-      {
-        eqns: [[eqn, '0sine1', '0sine2']],
-        duration: 2,
-      }, common, commonShow, commonContent,
-    );
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._h, fig._v, fig._right,
+  //     ],
+  //   });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    const pulseBowString = () => {
-      fig._arc.pulseThickNow(1, 1.02, 8);
-      fig._mirrorArc.pulseThickNow(1, 1.02, 8);
-      coll.accent({
-        element: fig, children: ['v', 'mirrorV', 'arc', 'mirrorArc'], style: ['highlight'],
-      });
+  //   // commonContent = {
+  //   //   setContent: [
+  //   //     'This is because:',
+  //   //     style({ list: 'unordered', listStyleType: 'disc' }, [
+  //   //       'All angles in a triangle add to 180º',
+  //   //       'Therefore the two angles that aren\'t the right angle add to 90º',
+  //   //       'Therefore the two angles are less than 90º',
+  //   //       'Therefore sweeping the line between 0º and 90º represents all possible angle combinations of a right angle triangle',
+  //   //       'At each angle combination, the ASA triangle congruence critieria is met (using the known hypotenuse of 1)',
+  //   //       'Therefore all triangles with that hypotenuse and angle combination are contruent',
+  //   //       'Therefore sweeping a fixed hypotenuse between 0º and 90º and forming a right angle triangle with the vertical and horizontal components will represent all right angle triangles with that hypotenuse',
+  //   //     ]),
+  //   //   ],
+  //   // };
+  //   // this.addSection(commonContent, {
+  //   //   modifiers: {
+  //   //     right_angle_triangle: coll.bindAccent(fig, ['line', 'h', 'v', 'right']),
+  //   //   },
+  //   // });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'Now let’s consider just the |vertical| component.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       vertical: this.bindNext(colors.components),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._h, fig._v, fig._right,
+  //     ],
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       vertical: coll.bindAccent(fig._v),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._h, fig._v, fig._right,
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       coll.accent(fig._v);
+  //       fig.animations.new()
+  //         .dissolveOut({ element: fig._h, duration: 1 })
+  //         .whenFinished(done)
+  //         .start();
+  //     },
+  //     setSteadyState: () => {
+  //       fig._h.hide();
+  //       coll.updateRotation();
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'As the angle gets |closer_to_90º|, the vertical component gets |longer|. As it gets |closer_to_0º|, the vertical component gets |shorter|.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       closer_to_0º: click(coll.gotoSmallAngle, [coll], colors.angles),
+  //       closer_to_90º: click(coll.gotoLargeAngle, [coll], colors.angles),
+  //       longer: highlight(colors.components),
+  //       shorter: highlight(colors.components),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._v, fig._right,
+  //     ],
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'Therefore we can say the |vertical| component is |related to|, |dependent on|, or |a function of| the rotation |angle|.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       vertical: highlight(colors.components),
+  //       angle: highlight(colors.angles),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._hypotenuse,
+  //       fig._v, fig._right,
+  //     ],
+  //   });
+
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       vertical: highlight(colors.components),
+  //       angle: highlight(colors.angles),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._hypotenuse,
+  //       fig._v, fig._right, fig._sineTheta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [fig._sineTheta._label, '0'],
+  //       [eqn, '0'],
+  //       [fig._theta._label, '0'],
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       coll.resetRotation(() => {
+  //         coll.accent(eqn, done);
+  //         // coll.accent(fig._theta);
+  //       }, 0.8);
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'The name we use for this function is |sine|, though sometimes just |sin| is also used.',
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._hypotenuse,
+  //       fig._v, fig._right, fig._sineTheta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [fig._sineTheta._label, '0'],
+  //       // [eqn, '0'],
+  //       [fig._theta._label, '0'],
+  //     ],
+  //   };
+  //   this.addSectionEqnStep(
+  //     {
+  //       eqns: [[eqn, '0', '0']],
+  //       duration: 2,
+  //     }, common, commonShow, commonContent,
+  //   );
+  //   this.addSectionEqnStep(
+  //     {
+  //       eqns: [[eqn, '0', '0sine1']],
+  //       duration: 2,
+  //     }, common, commonShow, commonContent,
+  //   );
+  //   this.addSectionEqnStep(
+  //     {
+  //       eqns: [[eqn, '0sine1', '0sine2']],
+  //       duration: 2,
+  //     }, common, commonShow, commonContent,
+  //   );
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   const pulseBowString = () => {
+  //     fig._arc.pulseThickNow(1, 1.02, 8);
+  //     fig._mirrorArc.pulseThickNow(1, 1.02, 8);
+  //     coll.accent({
+  //       element: fig, children: ['v', 'mirrorV', 'arc', 'mirrorArc'], style: ['highlight'],
+  //     });
       
-      coll.accent({
-        element: fig, children: ['v', 'mirrorV'], style: ['pulse'],
-      });
-    };
-    commonContent = {
-      setContent: [
-        'The word |sine| originates in the word for meaning bow string.',
-        // `${new Definition('Sine', 'Latin', ['sinus', 'bay, bossum'], 'Arabic', ['juib', 'something']).html()}`,
-        note({ top: 75 }, 'Ancient Greeks called the line between two points on a circle a |khordḗ|, meaning chord or |bowstring|.'),
-        note({ top: 80 }, 'The |sine_function| was first named in Sanskrit as ardha-jya (half chord) or jya (chord).'),
-        note({ top: 85 }, 'Arabic translated this into jiba, which was then confused with jaib (meaning bay or bossom) when it was translated into Latin as sinus (bay or bossom). Our term |sine| comes from |sinus|.'),
-      ],
-      modifiers: {
-        'khordḗ': coll.bindAccent({
-          element: fig, children: ['v', 'mirrorV'], style: ['highlight', 'pulse'],
-        }),
-        bowstring: click(pulseBowString, [this], colors.components),
-        sine_function: coll.bindAccent({
-          element: fig, children: ['v'], style: ['highlight', 'pulse'],
-        }),
-      },
-    };
-    this.addSection(common, commonContent, {
-      show: [
-        fig._line, fig._x, fig._theta, fig._hypotenuse,
-        fig._v, fig._right, fig._sineTheta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-        // [eqn, '0sine2'],
-        [fig._theta._label, '0'],
-      ],
-      transitionFromPrev: (done) => {
-        fig.animations.new()
-          .inParallel([
-            fig._sineTheta.anim.dissolveOut({ duration: 1 }),
-            fig._right.anim.dim({ duration: 1 }),
-            fig._theta.anim.dissolveOut({ duration: 1 }),
-            fig._hypotenuse.anim.dissolveOut({ duration: 1 }),
-            fig._right.anim.dissolveOut({ duration: 1 }),
-            fig._line.anim.dim({ duration: 1 }),
-            // fig._hypotenuse.anim.dim({ duration: 1 }),
-            // fig._theta.anim.dim({ duration: 1 }),
-          ])
-          .scenario({ target: 'small', duration: 2 })
-          .trigger({
-            callback: () => {
-              fig._mirrorLine.showAll();
-              fig._mirrorArc.showAll();
-              fig._mirrorV.showAll();
-              fig._arc.showAll();
-              fig._mirrorLine.dim();
-              fig._mirrorArc.dim();
-              fig._mirrorV.dim();
-              fig._arc.dim();
-              fig._circle.dim();
-              coll.updateRotation();
-            },
-          })
-          .inParallel([
-            fig._circle.anim.dissolveIn({ duration: 1 }),
-            fig._arc.anim.dissolveIn({ duration: 1 }),
-            fig._mirrorV.anim.dissolveIn({ duration: 1 }),
-            fig._mirrorArc.anim.dissolveIn({ duration: 1 }),
-            fig._mirrorLine.anim.dissolveIn({ duration: 1 }),
-          ])
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        fig._circle.showAll();
-        fig.setScenario('small');
-        fig._arc.showAll();
-        fig._mirrorLine.showAll();
-        fig._mirrorArc.showAll();
-        fig._mirrorV.showAll();
-        fig._sineTheta.hide();
-        fig._right.hide();
-        fig._theta.hide();
-        fig._hypotenuse.hide();
-        coll.accent({
-          element: fig,
-          children: [
-            'v',
-            // 'mirrorV',
-            // 'arc',
-            // 'mirrorArc',
-          ],
-          style: 'highlight',
-        });
-        coll.updateRotation();
-      },
-      setLeaveState: () => {
-        coll.undim();
-        fig._line.undim();
-      },
-    });
+  //     coll.accent({
+  //       element: fig, children: ['v', 'mirrorV'], style: ['pulse'],
+  //     });
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       'The word |sine| originates in the word for meaning bow string.',
+  //       // `${new Definition('Sine', 'Latin', ['sinus', 'bay, bossum'], 'Arabic', ['juib', 'something']).html()}`,
+  //       note({ top: 75 }, 'Ancient Greeks called the line between two points on a circle a |khordḗ|, meaning chord or |bowstring|.'),
+  //       note({ top: 80 }, 'The |sine_function| was first named in Sanskrit as ardha-jya (half chord) or jya (chord).'),
+  //       note({ top: 85 }, 'Arabic translated this into jiba, which was then confused with jaib (meaning bay or bossom) when it was translated into Latin as sinus (bay or bossom). Our term |sine| comes from |sinus|.'),
+  //     ],
+  //     modifiers: {
+  //       'khordḗ': coll.bindAccent({
+  //         element: fig, children: ['v', 'mirrorV'], style: ['highlight', 'pulse'],
+  //       }),
+  //       bowstring: click(pulseBowString, [this], colors.components),
+  //       sine_function: coll.bindAccent({
+  //         element: fig, children: ['v'], style: ['highlight', 'pulse'],
+  //       }),
+  //     },
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._hypotenuse,
+  //       fig._v, fig._right, fig._sineTheta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [fig._sineTheta._label, '0'],
+  //       // [eqn, '0sine2'],
+  //       [fig._theta._label, '0'],
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       fig.animations.new()
+  //         .inParallel([
+  //           fig._sineTheta.anim.dissolveOut({ duration: 1 }),
+  //           fig._right.anim.dim({ duration: 1 }),
+  //           fig._theta.anim.dissolveOut({ duration: 1 }),
+  //           fig._hypotenuse.anim.dissolveOut({ duration: 1 }),
+  //           fig._right.anim.dissolveOut({ duration: 1 }),
+  //           fig._line.anim.dim({ duration: 1 }),
+  //           // fig._hypotenuse.anim.dim({ duration: 1 }),
+  //           // fig._theta.anim.dim({ duration: 1 }),
+  //         ])
+  //         .scenario({ target: 'small', duration: 2 })
+  //         .trigger({
+  //           callback: () => {
+  //             fig._mirrorLine.showAll();
+  //             fig._mirrorArc.showAll();
+  //             fig._mirrorV.showAll();
+  //             fig._arc.showAll();
+  //             fig._mirrorLine.dim();
+  //             fig._mirrorArc.dim();
+  //             fig._mirrorV.dim();
+  //             fig._arc.dim();
+  //             fig._circle.dim();
+  //             coll.updateRotation();
+  //           },
+  //         })
+  //         .inParallel([
+  //           fig._circle.anim.dissolveIn({ duration: 1 }),
+  //           fig._arc.anim.dissolveIn({ duration: 1 }),
+  //           fig._mirrorV.anim.dissolveIn({ duration: 1 }),
+  //           fig._mirrorArc.anim.dissolveIn({ duration: 1 }),
+  //           fig._mirrorLine.anim.dissolveIn({ duration: 1 }),
+  //         ])
+  //         .whenFinished(done)
+  //         .start();
+  //     },
+  //     setSteadyState: () => {
+  //       fig._circle.showAll();
+  //       fig.setScenario('small');
+  //       fig._arc.showAll();
+  //       fig._mirrorLine.showAll();
+  //       fig._mirrorArc.showAll();
+  //       fig._mirrorV.showAll();
+  //       fig._sineTheta.hide();
+  //       fig._right.hide();
+  //       fig._theta.hide();
+  //       fig._hypotenuse.hide();
+  //       coll.accent({
+  //         element: fig,
+  //         children: [
+  //           'v',
+  //           // 'mirrorV',
+  //           // 'arc',
+  //           // 'mirrorArc',
+  //         ],
+  //         style: 'highlight',
+  //       });
+  //       coll.updateRotation();
+  //     },
+  //     setLeaveState: () => {
+  //       coll.undim();
+  //       fig._line.undim();
+  //     },
+  //   });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'In greek, a line between two points of a circle was called a khordḗ (meaning |chord| of a bow).',
-    };
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'In greek, a line between two points of a circle was called a khordḗ (meaning |chord| of a bow).',
+  //   };
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.',
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        theta: coll.bindAccent(fig._theta),
-      },
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-      ],
-    };
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '0', '0'],
-        [fig._theta._label, '0', '0'],
-        [fig._sineTheta._label, '0', '0'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'Moving forward, we will call the vertical component the side |opposite| the angle, and call the angle |theta|.',
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._v),
+  //       theta: coll.bindAccent(fig._theta),
+  //     },
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //     ],
+  //   };
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '0', '0'],
+  //       [fig._theta._label, '0', '0'],
+  //       [fig._sineTheta._label, '0', '0'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '0', '1'],
-        [fig._theta._label, '0', '1'],
-        [fig._sineTheta._label, '0', '0b'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '0', '1'],
+  //       [fig._theta._label, '0', '1'],
+  //       [fig._sineTheta._label, '0', '0b'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '1', '2'],
-        [fig._theta._label, '1', '2'],
-        [fig._sineTheta._label, '0b', '1'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '1', '2'],
+  //       [fig._theta._label, '1', '2'],
+  //       [fig._sineTheta._label, '0b', '1'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'More specifically, this function relates the |opposite| side to |theta| only when the |hypotenuse is 1|.',
-      modifiers: {
-        opposite: coll.bindAccent(fig._sineTheta),
-        theta: coll.bindAccent(fig._theta),
-      },
-    };
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'More specifically, this function relates the |opposite| side to |theta| only when the |hypotenuse is 1|.',
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._sineTheta),
+  //       theta: coll.bindAccent(fig._theta),
+  //     },
+  //   };
 
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2', '2'],
-        [fig._theta._label, '2', '2'],
-        [fig._sineTheta._label, '1', '1'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2', '2'],
+  //       [fig._theta._label, '2', '2'],
+  //       [fig._sineTheta._label, '1', '1'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2', '2a0'],
-        [fig._theta._label, '2', '2'],
-        [fig._sineTheta._label, '1', '1a'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2', '2a0'],
+  //       [fig._theta._label, '2', '2'],
+  //       [fig._sineTheta._label, '1', '1a'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'If the |hypotenuse_changes| length, then the |opposite_side| length will also change.',
-      modifiers: {
-        opposite_side: coll.bindAccent(fig._v),
-        // hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
-        hypotenuse_changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
-      },
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._theta._label, '2'],
-      ],
-    };
-    this.addSectionEqnStep({
-      eqns: [
-        // { eqn, from: '2a0', to: '2a0' },
-        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
-      ],
-    }, common, commonShow, commonContent);
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'If the |hypotenuse_changes| length, then the |opposite_side| length will also change.',
+  //     modifiers: {
+  //       opposite_side: coll.bindAccent(fig._v),
+  //       // hypotenuse: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
+  //       hypotenuse_changes: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+  //     },
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._theta._label, '2'],
+  //     ],
+  //   };
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       // { eqn, from: '2a0', to: '2a0' },
+  //       { eqn: fig._hypotenuse._label, from: '0', to: '0' },
+  //     ],
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({ top: 0 }, '|Changing| the hypotenuse doesn’t change the |angles| of the triangle and thus creates a |similar| triangle whose sides will be |scaled by the same amount as the hypotenuse|.'),
-      modifiers: {
-        angles: coll.bindAccent(fig, ['right', 'theta']),
-        Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
-        similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-      },
-    };
-    this.addSectionEqnStep({
-      eqns: [
-        // { eqn, from: '2', to: '2' },
-        { eqn: fig._hypotenuse._label, from: '0', to: '0' },
-      ],
-    }, common, commonShow, commonContent);
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: style({ top: 0 }, '|Changing| the hypotenuse doesn’t change the |angles| of the triangle and thus creates a |similar| triangle whose sides will be |scaled by the same amount as the hypotenuse|.'),
+  //     modifiers: {
+  //       angles: coll.bindAccent(fig, ['right', 'theta']),
+  //       Changing: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
+  //       similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+  //     },
+  //   };
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       // { eqn, from: '2', to: '2' },
+  //       { eqn: fig._hypotenuse._label, from: '0', to: '0' },
+  //     ],
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({ top: 0 }, 'The corresponding sides of |similar_triangles| are all |scaled by the same factor|. Thus if we scale the hypotenuse by |r|, then the |opposite| side must also be scaled by |r|.'),
-      modifiers: {
-        opposite: highlight(colors.components),
-        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-      },
-    };
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: style({ top: 0 }, 'The corresponding sides of |similar_triangles| are all |scaled by the same factor|. Thus if we scale the hypotenuse by |r|, then the |opposite| side must also be scaled by |r|.'),
+  //     modifiers: {
+  //       opposite: highlight(colors.components),
+  //       similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+  //     },
+  //   };
 
-    // this.addSectionEqnStep({
-    //   eqns: [
-    //     [eqn, '2', '2a0'],
-    //     [fig._theta._label, '2', '2'],
-    //     [fig._sineTheta._label, '1', '1a'],
-    //   ],
-    //   duration: 2,
-    // }, common, commonShow, commonContent);
-
-
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._theta._label, '2'],
-      ],
-    };
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2a0', '2a0'],
-        [fig._hypotenuse._label, '0', '0'],
-        [fig._sineTheta._label, '1a', '1a'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2a0', '2a'],
-        [fig._hypotenuse._label, '0', '1'],
-        [fig._sineTheta._label, '1a', '1b'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2a', '2b'],
-        [fig._hypotenuse._label, '1', '1a'],
-        [fig._sineTheta._label, '1b', '1c'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2b', '2c'],
-        [fig._hypotenuse._label, '1a', '2'],
-        [fig._sineTheta._label, '1c', '1d'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'We have now extended the last relationship that applied to all right angle triangles with a hypotenuse of 1, to include any hypotenuse |r|. Therefore, this relationship holds for |all right angle triangles|.'),
-      ],
-    };
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2c', '2c'],
-        [fig._hypotenuse._label, '2', '2'],
-        [fig._sineTheta._label, '1d', '1d'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
-
-    this.addSectionEqnStep({
-      eqns: [
-        [eqn, '2c', '2d'],
-        [fig._hypotenuse._label, '2', '2'],
-        [fig._sineTheta._label, '1d', '1e'],
-      ],
-      duration: 2,
-    }, common, commonShow, commonContent);
+  //   // this.addSectionEqnStep({
+  //   //   eqns: [
+  //   //     [eqn, '2', '2a0'],
+  //   //     [fig._theta._label, '2', '2'],
+  //   //     [fig._sineTheta._label, '1', '1a'],
+  //   //   ],
+  //   //   duration: 2,
+  //   // }, common, commonShow, commonContent);
 
 
-    // this.addSectionEqnStep({
-    //   eqns: [
-    //     [eqn, '2b', '2b'],
-    //     [fig._hypotenuse._label, '2', '2'],
-    //     [fig._sineTheta._label, '1e', '1e'],
-    //   ],
-    //   duration: 2,
-    // }, common, commonShow, commonContent);
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._theta._label, '2'],
+  //     ],
+  //   };
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2a0', '2a0'],
+  //       [fig._hypotenuse._label, '0', '0'],
+  //       [fig._sineTheta._label, '1a', '1a'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    // this.addSectionEqnStep({
-    //   eqns: [
-    //     [eqn, '2b', '2c'],
-    //     [fig._hypotenuse._label, '2', '2'],
-    //     [fig._sineTheta._label, '1e', '1e'],
-    //   ],
-    //   duration: 2,
-    // }, common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2a0', '2a'],
+  //       [fig._hypotenuse._label, '0', '1'],
+  //       [fig._sineTheta._label, '1a', '1b'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        'So |what is this function|?',
-      ],
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._sineTheta._label, '1e'],
-        [fig._hypotenuse._label, '2'],
-        [fig._theta._label, '2'],
-        [eqn, '2d'],
-      ],
-      setSteadyState: () => {
-        coll.accent({
-          element: coll,
-          children: [
-            'eqn.func',
-            'eqn.lb',
-            'eqn.rb',
-            'eqn.theta',
-            'eqn.hyp1_1',
-          ],
-          style: 'highlight',
-        });
-      },
-      setLeaveState: () => {
-        coll.undim();
-      },
-    };
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2a', '2b'],
+  //       [fig._hypotenuse._label, '1', '1a'],
+  //       [fig._sineTheta._label, '1b', '1c'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    this.addSection(common, commonShow, commonContent);
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2b', '2c'],
+  //       [fig._hypotenuse._label, '1a', '2'],
+  //       [fig._sineTheta._label, '1c', '1d'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'Actually, for over a |thousand years| it was not known exactly what the formula of this function was even though the |relationship| between |side and angle was clear|, and side lengths could be |measured or geometrically calculated| for different angles.'),
-      ],
-    };
-    this.addSection(common, commonShow, commonContent);
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'We have now extended the last relationship that applied to all right angle triangles with a hypotenuse of 1, to include any hypotenuse |r|. Therefore, this relationship holds for |all right angle triangles|.'),
+  //     ],
+  //   };
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
-    const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
-    const table = `
-        <table id="angle_table">
-          <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
-          ${dots}
-          ${row(20)}
-          ${row(21)}
-          ${row(22)}
-          ${row(23)}
-          ${row(24)}
-          ${row(25)}
-          ${dots}
-          ${row(75)}
-          ${row(76)}
-          ${row(77)}
-          ${row(78)}
-          ${row(79)}
-          ${row(80)}
-          ${dots}
-        </table>
-        `;
-    const tableModifiers = {
-      '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
-      '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
-      '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
-      '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
-      '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
-      '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
-      '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
-      '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
-      '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
-      '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
-      '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
-      '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
-    };
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
-        table,
-      ],
-      modifiers: tableModifiers,
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
-        fig._sine,
-      ],
-      setEqnForms: [
-        // [fig._sineTheta._label, '1e'],
-        [fig._hypotenuse._label, '2'],
-        // [fig._theta._label, '2'],
-        [eqn, '2d'],
-      ],
-    };
-    this.addSection(common, commonShow, commonContent, {
-      transitionFromPrev: (done) => {
-        const angleTable = document.getElementById('angle_table');
-        if (angleTable != null) {
-          angleTable.classList.add('angle_table_hide')
-        }
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2c', '2c'],
+  //       [fig._hypotenuse._label, '2', '2'],
+  //       [fig._sineTheta._label, '1d', '1d'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
-        eqn.goToForm({ name: '2e', duration: 1.5, animate: 'move' });
-        fig._hypotenuse._label.goToForm({ name: '0', duration: 1.5, animate: 'move' });
-
-        eqn.animations.new()
-          .scenario({ target: 'left', duration: 1.5 })
-          .start();
-
-        fig.animations.new()
-          .scenario({ target: 'left', duration: 1.5 })
-          .trigger({
-            callback: () => {
-              if (angleTable != null) {
-                angleTable.classList.remove('angle_table_hide');
-                angleTable.classList.add('topic__diagram_text_fade_in');
-              }
-            },
-          })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        fig.setScenario('left');
-        eqn.setScenario('left');
-        eqn.showForm('2e');
-        fig._hypotenuse._label.showForm('0');
-      },
-      // fadeInFromPrev: false,
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
-        fig._sine,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [eqn, '2e'],
-      ],
-    };
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'Even when the formula for the function was first discovered in |1400 CE|, tables continued to be used for most applications as it was |simpler| than calculating each time.'),
-        table,
-      ],
-      modifiers: tableModifiers,
-    };
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig.setScenario('left');
-        eqn.setScenario('left');
-        if (this.comingFrom === 'prev') {
-          const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
-          pgraphs.forEach((p) => {
-            p.classList.add('topic__diagram_text_fade_in');
-          });
-        }
-      },
-      fadeInFromPrev: false,
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'In fact, tables that represented this function were used up until the |late 20th century|, when personal calculators and computers started to replace tables.'),
-        table,
-      ],
-      modifiers: tableModifiers,
-    };
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig.setScenario('left');
-        eqn.setScenario('left');
-        if (this.comingFrom === 'prev') {
-          const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
-          pgraphs.forEach((p) => {
-            p.classList.add('topic__diagram_text_fade_in');
-          });
-        }
-      },
-      fadeInFromPrev: false,
-    });
+  //   this.addSectionEqnStep({
+  //     eqns: [
+  //       [eqn, '2c', '2d'],
+  //       [fig._hypotenuse._label, '2', '2'],
+  //       [fig._sineTheta._label, '1d', '1e'],
+  //     ],
+  //     duration: 2,
+  //   }, common, commonShow, commonContent);
 
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({ top: 0 }, 'Today we call this function the |sine| function.'),
-      ],
-    };
-    commonShow = {
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
-        fig._sine,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [eqn, '2e'],
-      ],
-    };
+  //   // this.addSectionEqnStep({
+  //   //   eqns: [
+  //   //     [eqn, '2b', '2b'],
+  //   //     [fig._hypotenuse._label, '2', '2'],
+  //   //     [fig._sineTheta._label, '1e', '1e'],
+  //   //   ],
+  //   //   duration: 2,
+  //   // }, common, commonShow, commonContent);
 
-    this.addSection(common, commonShow, commonContent, {
-      transitionFromPrev: (done) => {
-        const moveDone = () => {
-          eqn.goToForm({ name: '2f', duration: 1.5, animate: 'move' });
-          fig._real._label.animations.new()
-            .dissolveOut({ duration: 0.75 })
-            .start();
-          fig._theta._label.showForm('2');
-          coll.updateRotation();
-          fig._theta._label.setOpacity(0);
-          fig._theta._label.animations.new()
-            .delay({ duration: 0.75 })
-            // .trigger({ callback: () => { fig._theta._label.showForm('2'); } })
-            .dissolveIn({ duration: 0.75 })
-            .whenFinished(done)
-            .start();
-        };
+  //   // this.addSectionEqnStep({
+  //   //   eqns: [
+  //   //     [eqn, '2b', '2c'],
+  //   //     [fig._hypotenuse._label, '2', '2'],
+  //   //     [fig._sineTheta._label, '1e', '1e'],
+  //   //   ],
+  //   //   duration: 2,
+  //   // }, common, commonShow, commonContent);
 
-        eqn.setScenario('left');
-        eqn.animations.new()
-          .scenario({ target: 'default', duration: 1.5 })
-          .start();
-        fig.setScenario('left');
-        fig.animations.new()
-          .scenario({ target: 'default', duration: 1.5 })
-          .whenFinished(moveDone)
-          .start();
-      },
-      setSteadyState: () => {
-        fig.setScenario('default');
-        eqn.setScenario('default');
-        eqn.showForm('2f');
-        fig._real.hide();
-        // fig._theta._label.showForm('2');
-        coll.updateRotation();
-      },
-      // fadeInFromPrev: false,
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       'So |what is this function|?',
+  //     ],
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._sineTheta._label, '1e'],
+  //       [fig._hypotenuse._label, '2'],
+  //       [fig._theta._label, '2'],
+  //       [eqn, '2d'],
+  //     ],
+  //     setSteadyState: () => {
+  //       coll.accent({
+  //         element: coll,
+  //         children: [
+  //           'eqn.func',
+  //           'eqn.lb',
+  //           'eqn.rb',
+  //           'eqn.theta',
+  //           'eqn.hyp1_1',
+  //         ],
+  //         style: 'highlight',
+  //       });
+  //     },
+  //     setLeaveState: () => {
+  //       coll.undim();
+  //     },
+  //   };
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'As the |horizontal| and |vertical| components are |perpendicular|, we have a |right_angle_triangle|.',
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        horizontal: coll.bindAccent(fig._h),
-        vertical: coll.bindAccent(fig._v),
-        perpendicular: this.qr('Math/Geometry_1/AngleTypes/base/Perpendicular'),
-        right_angle_triangle: this.bindNext(colors.lines),
-      },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2'],
-        [fig._theta._label, '2'],
-      ],
-    });
+  //   this.addSection(common, commonShow, commonContent);
 
-    this.addSection(common, commonContent, {
-      modifiers: {
-        horizontal: coll.bindAccent(fig._h),
-        vertical: coll.bindAccent(fig._v),
-        perpendicular: this.qr('Math/Geometry_1/AngleTypes/base/Perpendicular'),
-        right_angle_triangle: coll.bindAccent(fig, ['line', 'v', 'h']),
-      },
-      show: [
-        fig._line, fig._x, fig._hypotenuse,
-        fig._v, fig._right, fig._theta,
-      ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '1'],
-        [eqn, '2'],
-        [fig._theta._label, '2'],
-      ],
-      transitionFromPrev: (done) => {
-        coll.resetRotation(() => {
-          fig._right.showAll();
-          coll.updateRotation();
-          coll.accent(fig, ['h', 'v', 'line', 'right'], done);
-        }, 0.8);
-      },
-      setSteadyState: () => {
-        fig._right.showAll();
-        coll.updateRotation();
-      },
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'Actually, for over a |thousand years| it was not known exactly what the formula of this function was even though the |relationship| between |side and angle was clear|, and side lengths could be |measured or geometrically calculated| for different angles.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonShow, commonContent);
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        'Now, when we |rotate| the line between |0º_to_90º|, we are actually forming |every possible combination of angles| for a right angle triangle.',
-        note('Note: a triangle\'s angles |sum_to_180º|, so when |one angle is 90º| then the other two angles must be |less than 90º|. Therefore is we sweep one angle from 0 to 90º, '),
-      ]
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        '0º_to_90º': click(coll.rotateFrom0To90, [coll], colors.angles),
-        sum_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-        // angles: highlight(colors.angles),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._h, fig._v, fig._right,
-      ],
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+  //   const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+  //   const table = `
+  //       <table id="angle_table">
+  //         <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
+  //         ${dots}
+  //         ${row(20)}
+  //         ${row(21)}
+  //         ${row(22)}
+  //         ${row(23)}
+  //         ${row(24)}
+  //         ${row(25)}
+  //         ${dots}
+  //         ${row(75)}
+  //         ${row(76)}
+  //         ${row(77)}
+  //         ${row(78)}
+  //         ${row(79)}
+  //         ${row(80)}
+  //         ${dots}
+  //       </table>
+  //       `;
+  //   const tableModifiers = {
+  //     '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
+  //     '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
+  //     '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
+  //     '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
+  //     '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
+  //     '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
+  //     '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
+  //     '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
+  //     '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
+  //     '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
+  //     '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
+  //     '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
+  //       table,
+  //     ],
+  //     modifiers: tableModifiers,
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+  //       fig._sine,
+  //     ],
+  //     setEqnForms: [
+  //       // [fig._sineTheta._label, '1e'],
+  //       [fig._hypotenuse._label, '2'],
+  //       // [fig._theta._label, '2'],
+  //       [eqn, '2d'],
+  //     ],
+  //   };
+  //   this.addSection(common, commonShow, commonContent, {
+  //     transitionFromPrev: (done) => {
+  //       const angleTable = document.getElementById('angle_table');
+  //       if (angleTable != null) {
+  //         angleTable.classList.add('angle_table_hide')
+  //       }
 
-    this.addSection({
-      setContent: [
-        'Our setup can create all possible angle combinations of right angle triangles',
-      ],
-    });
-    this.addSection({
-      setContent: [
-        'Our setup creates right angle triangles with all the possible angle combinations.',
-        'Triangles with the same corresponding angles are similar triangles, and the sides of similar triangles all have the same proportion or relatipnship between other sides of',
-        'Similar triangles are just scaled - their corresponding sides all have the same proportion to each other',
-        'Therefore, any relationship we find in out setup between angles and sides, will translate '
-      ],
-      fadeInFromPrev: false,
-    });
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    common = {
-      setEnterState: () => {
-        coll.setScenarios('default');
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._h, fig._v, fig._right,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    };
-    commonContent = {
-      setContent: 'We also know from |similar_triangles| that any triangles with the |same corresponding angles| will be |similar|.',
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-      },
-    });
+  //       eqn.goToForm({ name: '2e', duration: 1.5, animate: 'move' });
+  //       fig._hypotenuse._label.goToForm({ name: '0', duration: 1.5, animate: 'move' });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: 'In other words, we can create a triangle .',
-    };
-    this.addSection(common, commonContent, {
-    });
+  //       eqn.animations.new()
+  //         .scenario({ target: 'left', duration: 1.5 })
+  //         .start();
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({ top: 0 }, 'This also means that |any relationship we find| between angle and side length in our setup, will be |valid for all right angle triangles| with the |same corresponding angles|.'),
-    };
-    this.addSection(common, commonContent, {
-    });
+  //       fig.animations.new()
+  //         .scenario({ target: 'left', duration: 1.5 })
+  //         .trigger({
+  //           callback: () => {
+  //             if (angleTable != null) {
+  //               angleTable.classList.remove('angle_table_hide');
+  //               angleTable.classList.add('topic__diagram_text_fade_in');
+  //             }
+  //           },
+  //         })
+  //         .whenFinished(done)
+  //         .start();
+  //     },
+  //     setSteadyState: () => {
+  //       fig.setScenario('left');
+  //       eqn.setScenario('left');
+  //       eqn.showForm('2e');
+  //       fig._hypotenuse._label.showForm('0');
+  //     },
+  //     // fadeInFromPrev: false,
+  //   });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        'We will focus on just the |vertical| component, which is the side |opposite| to the angle.',
-        note('Note: we will see in |future topics| that the horiztonal and vertical components are |closely related| and can be |calculated| from each other.'),
-      ],
-      modifiers: {
-        vertical: coll.bindAccent(fig._v),
-        opposite: coll.bindAccent(fig._v),
-      },
-    };
-    this.addSection(common, commonContent, {
-    });
-    this.addSection(common, commonContent, {
-      transitionFromPrev: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        coll.resetRotation(() => {
-          fig._opposite.showAll();
-          coll.labelForm('0');
-          coll.updateRotation();
-          coll.accent(fig, ['opposite'], done);
-        }, 0.8);
-      },
-      setSteadyState: () => {
-        fig._opposite.showAll();
-        coll.updateRotation();
-      },
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+  //       fig._sine,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [eqn, '2e'],
+  //     ],
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'Even when the formula for the function was first discovered in |1400 CE|, tables continued to be used for most applications as it was |simpler| than calculating each time.'),
+  //       table,
+  //     ],
+  //     modifiers: tableModifiers,
+  //   };
+  //   this.addSection(common, commonShow, commonContent, {
+  //     setSteadyState: () => {
+  //       fig.setScenario('left');
+  //       eqn.setScenario('left');
+  //       if (this.comingFrom === 'prev') {
+  //         const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
+  //         pgraphs.forEach((p) => {
+  //           p.classList.add('topic__diagram_text_fade_in');
+  //         });
+  //       }
+  //     },
+  //     fadeInFromPrev: false,
+  //   });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, [
-          'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
-        ]),
-        note('Note: setting the hypotenuse to 1 will make scaling the triangle easier in the future.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._real),
-        theta: highlightWord('\u03B8', colors.angles),
-        hypotenuse: this.qr('Math/Geometry_1/RightAngleTriangles/base/Hypotenuse'),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right, fig._opposite,
-      ],
-    });
-
-    common = {
-      setEnterState: () => {
-        coll.setScenarios('default');
-      },
-      show: [
-        fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
-        fig._opposite,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    };
-    commonContent = {
-      setContent: [
-        style({}, [
-          'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
-        ]),
-      ],
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._real),
-        theta: highlightWord('\u03B8', colors.angles),
-        hypotenuse: this.qr('Math/Geometry_1/RightAngleTriangles/base/Hypotenuse'),
-      },
-      fadeInFromPrev: false,
-      transitionFromPrev: (done) => {
-        fig._theta.hide();
-        fig._hypotenuse.hide();
-        fig._real.showAll();
-        coll.updateRotation();
-        coll.labelForm('0');
-        coll.resetRotation(() => {
-          fig._theta.showAll();
-          fig._hypotenuse.showAll();
-          fig._real.hide();
-          coll.labelForm('0');
-          coll.updateRotation();
-          coll.accent(fig, ['theta', 'hypotenuse'], done);
-        }, 0.8);
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'So, can we find a |relationship| between the |angle| and |opposite| side?.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._theta),
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'Ideally we would find a |mathematical formula| or |function| that can be used to |calculate| one from the other.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-    });
-
-    this.addSection(common, commonContent, {
-      transitionFromPrev: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        coll.resetRotation(() => {
-          eqn.showForm('0');
-          coll.labelForm('0');
-          // eqn.animations.new()
-          //   .dissolveIn(1)
-          //   .whenFinished(done)
-          //   .start();
-          coll.accent(eqn, done);
-        }, 0.8);
-      },
-      setSteadyState: () => {
-        eqn.showForm('0');
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    common = {
-      setEnterState: () => {
-        coll.setScenarios('default');
-      },
-      show: [
-        fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
-        fig._opposite,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('0');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-      setSteadyState: () => {
-        eqn.showForm('0');
-      },
-    };
-    commonContent = {
-      setContent: [
-        style({}, 'We use the name |sine| for this function. Often the name is shortened to |sin| and the brackets are sometimes not used.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-    });
-
-    this.addSection(common, commonContent, {
-      transitionFromPrev: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('0');
-        coll.resetRotation(() => {
-          // eqn.showForm('0a');
-          coll.labelForm('0');
-          eqn.goToForm({
-            name: '0a',
-            animate: 'move',
-            duration: 1,
-            // callback: done,
-            callback: () => {
-              eqn.goToForm({
-                name: '0b',
-                animate: 'move',
-                duration: 1,
-                callback: done,
-              });
-            },
-          });
-        }, 0.8);
-      },
-      setSteadyState: () => {
-        eqn.showForm('0b');
-      },
-    });
-
-    // this.addSection(common, commonContent, {
-    //   transitionFromPrev: (done) => {
-    //     coll.updateRotation();
-    //     coll.labelForm('0');
-    //     eqn.showForm('0a');
-    //     coll.resetRotation(() => {
-    //       // eqn.showForm('0b');
-    //       coll.labelForm('0');
-    //       // coll.accent(eqn, ['sin1', 'theta1', 'lb1', 'rb1'], done);
-    //       eqn.goToForm({
-    //         name: '0b',
-    //         animate: 'move',
-    //         duration: 1,
-    //         callback: done,
-    //         // callback: () => {
-    //         //   eqn.goToForm({
-    //         //     name: '0c',
-    //         //     animate: 'move',
-    //         //     duration: 1,
-    //         //     callback: done,
-    //         //   });
-    //         // },
-    //       });
-    //     }, 0.8);
-    //   },
-    //   setSteadyState: () => {
-    //     eqn.showForm('0b');
-    //   },
-    // });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    common = {
-      setEnterState: () => {
-        coll.setScenarios('default');
-      },
-      show: [
-        fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
-        fig._opposite,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('0');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    };
-    commonContent = {
-      setContent: [
-        style({}, 'However, for over one |thousand| years, such a formula or function couldn\'t be found.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
-      ],
-    };
-
-    this.addSection(common, commonContent, {
-    });
-
-    // const row = (angle, prec = 3) => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
-    // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
-    // this.addSection(common, commonContent, {
-    //   setContent: [
-    //     'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
-    //     `
-    //     <table>
-    //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
-    //       ${dots}
-    //       ${row(20)}
-    //       ${row(21)}
-    //       ${row(22)}
-    //       ${row(23)}
-    //       ${row(24)}
-    //       ${row(25)}
-    //       ${row(26)}
-    //       ${row(27)}
-    //       ${row(28)}
-    //       ${row(29)}
-    //       ${dots}
-    //     </table>
-    //     `,
-    //   ],
-    //   show: [
-    //     fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
-    //     fig._sine,
-    //   ],
-    //   transitionFromAny: (done) => {
-    //     coll.updateRotation();
-    //     coll.labelForm('0');
-    //     eqn.showForm('0');
-    //     if (this.comingFrom === 'goto') {
-    //       coll.resetRotation(done, 0);
-    //     } else {
-    //       coll.resetRotation(done, 0.8);
-    //     }
-    //   },
-    //   fadeInFromPrev: false,
-    // });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'By the |7th century|, the first formulas that |approximated| the side length were discovered.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-    });
-    this.addSection(common, commonContent, {
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('1');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else if (this.comingFrom === 'prev') {
-          coll.resetRotation(() => {
-            coll.accent(eqn, done);
-          }, 0.8);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'And in |1400 AD|, a formula that |exactly modeled| the relationship was found.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('1');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
-    this.addSection(common, commonContent, {
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('2');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else if (this.comingFrom === 'prev') {
-          coll.resetRotation(() => {
-            coll.accent(eqn, done);
-          }, 0.8);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: [
-        style({}, 'But the formulas are |complex|, and for most uses it was still more convenient to use a |table of values|.'),
-        note({ top: 22, id: 'id_computer_note' }, 'Note: it wasn\'t till the |late 20<sup>th</sup> century| when tables were superseded by personal calculators and computers.'),
-      ],
-    };
-    this.addSection(common, commonContent, {
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('2');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
-    // this.addSection(common, commonContent, {
-    //   setContent: [
-    //     style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more |accurate| tables.'),
-    //     `<table>
-    //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
-    //       ${dots}
-    //       ${row(20, 8)}
-    //       ${row(21, 8)}
-    //       ${row(22, 8)}
-    //       ${row(23, 8)}
-    //       ${row(24, 8)}
-    //       ${row(25, 8)}
-    //       ${row(26, 8)}
-    //       ${row(27, 8)}
-    //       ${row(28, 8)}
-    //       ${row(29, 8)}
-    //       ${dots}
-    //     </table>`,
-    //   ],
-    //   transitionFromAny: (done) => {
-    //     coll.updateRotation();
-    //     coll.labelForm('0');
-    //     eqn.showForm('2');
-    //     if (this.comingFrom === 'goto') {
-    //       coll.resetRotation(done, 0);
-    //     } else {
-    //       coll.resetRotation(done, 0.8);
-    //     }
-    //   },
-    // });
-
-    this.addSection(common, commonContent, {
-      setContent: [
-        style({}, 'In fact, tables were used by most people until '),
-        `<table>
-          <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
-          ${dots}
-          ${row(20, 8)}
-          ${row(21, 8)}
-          ${row(22, 8)}
-          ${row(23, 8)}
-          ${row(24, 8)}
-          ${row(25, 8)}
-          ${row(26, 8)}
-          ${row(27, 8)}
-          ${row(28, 8)}
-          ${row(29, 8)}
-          ${dots}
-        </table>`,
-      ],
-      transitionFromAny: (done) => {
-        coll.updateRotation();
-        coll.labelForm('0');
-        eqn.showForm('2');
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'In fact, tables that represented this function were used up until the |late 20th century|, when personal calculators and computers started to replace tables.'),
+  //       table,
+  //     ],
+  //     modifiers: tableModifiers,
+  //   };
+  //   this.addSection(common, commonShow, commonContent, {
+  //     setSteadyState: () => {
+  //       fig.setScenario('left');
+  //       eqn.setScenario('left');
+  //       if (this.comingFrom === 'prev') {
+  //         const pgraphs = document.querySelectorAll('#id_topic__diagram_text p');
+  //         pgraphs.forEach((p) => {
+  //           p.classList.add('topic__diagram_text_fade_in');
+  //         });
+  //       }
+  //     },
+  //     fadeInFromPrev: false,
+  //   });
 
 
-    commonContent = {
-      setContent: [
-        'So, can we find a |relationship| between the |angle| and |opposite| side?. Ideally we would find a |mathematical formula| or |function| that can be used to |calculate| one from the other.',
-      ],
-    };
-    this.addSection(common, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._v),
-        angle: coll.bindAccent(fig._real),
-      },
-      show: [
-        fig._line, fig._x, fig._real, fig._v, fig._right,
-      ],
-    });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({ top: 0 }, 'Today we call this function the |sine| function.'),
+  //     ],
+  //   };
+  //   commonShow = {
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+  //       fig._sine,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [eqn, '2e'],
+  //     ],
+  //   };
+
+  //   this.addSection(common, commonShow, commonContent, {
+  //     transitionFromPrev: (done) => {
+  //       const moveDone = () => {
+  //         eqn.goToForm({ name: '2f', duration: 1.5, animate: 'move' });
+  //         fig._real._label.animations.new()
+  //           .dissolveOut({ duration: 0.75 })
+  //           .start();
+  //         fig._theta._label.showForm('2');
+  //         coll.updateRotation();
+  //         fig._theta._label.setOpacity(0);
+  //         fig._theta._label.animations.new()
+  //           .delay({ duration: 0.75 })
+  //           // .trigger({ callback: () => { fig._theta._label.showForm('2'); } })
+  //           .dissolveIn({ duration: 0.75 })
+  //           .whenFinished(done)
+  //           .start();
+  //       };
+
+  //       eqn.setScenario('left');
+  //       eqn.animations.new()
+  //         .scenario({ target: 'default', duration: 1.5 })
+  //         .start();
+  //       fig.setScenario('left');
+  //       fig.animations.new()
+  //         .scenario({ target: 'default', duration: 1.5 })
+  //         .whenFinished(moveDone)
+  //         .start();
+  //     },
+  //     setSteadyState: () => {
+  //       fig.setScenario('default');
+  //       eqn.setScenario('default');
+  //       eqn.showForm('2f');
+  //       fig._real.hide();
+  //       // fig._theta._label.showForm('2');
+  //       coll.updateRotation();
+  //     },
+  //     // fadeInFromPrev: false,
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'As the |horizontal| and |vertical| components are |perpendicular|, we have a |right_angle_triangle|.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       horizontal: coll.bindAccent(fig._h),
+  //       vertical: coll.bindAccent(fig._v),
+  //       perpendicular: this.qr('Math/Geometry_1/AngleTypes/base/Perpendicular'),
+  //       right_angle_triangle: this.bindNext(colors.lines),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [fig._sineTheta._label, '1'],
+  //       [eqn, '2'],
+  //       [fig._theta._label, '2'],
+  //     ],
+  //   });
+
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       horizontal: coll.bindAccent(fig._h),
+  //       vertical: coll.bindAccent(fig._v),
+  //       perpendicular: this.qr('Math/Geometry_1/AngleTypes/base/Perpendicular'),
+  //       right_angle_triangle: coll.bindAccent(fig, ['line', 'v', 'h']),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._hypotenuse,
+  //       fig._v, fig._right, fig._theta,
+  //     ],
+  //     setEqnForms: [
+  //       [fig._hypotenuse._label, '0'],
+  //       [fig._sineTheta._label, '1'],
+  //       [eqn, '2'],
+  //       [fig._theta._label, '2'],
+  //     ],
+  //     transitionFromPrev: (done) => {
+  //       coll.resetRotation(() => {
+  //         fig._right.showAll();
+  //         coll.updateRotation();
+  //         coll.accent(fig, ['h', 'v', 'line', 'right'], done);
+  //       }, 0.8);
+  //     },
+  //     setSteadyState: () => {
+  //       fig._right.showAll();
+  //       coll.updateRotation();
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       'Now, when we |rotate| the line between |0º_to_90º|, we are actually forming |every possible combination of angles| for a right angle triangle.',
+  //       note('Note: a triangle\'s angles |sum_to_180º|, so when |one angle is 90º| then the other two angles must be |less than 90º|. Therefore is we sweep one angle from 0 to 90º, '),
+  //     ]
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       '0º_to_90º': click(coll.rotateFrom0To90, [coll], colors.angles),
+  //       sum_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+  //       // angles: highlight(colors.angles),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._h, fig._v, fig._right,
+  //     ],
+  //   });
+
+  //   this.addSection({
+  //     setContent: [
+  //       'Our setup can create all possible angle combinations of right angle triangles',
+  //     ],
+  //   });
+  //   this.addSection({
+  //     setContent: [
+  //       'Our setup creates right angle triangles with all the possible angle combinations.',
+  //       'Triangles with the same corresponding angles are similar triangles, and the sides of similar triangles all have the same proportion or relatipnship between other sides of',
+  //       'Similar triangles are just scaled - their corresponding sides all have the same proportion to each other',
+  //       'Therefore, any relationship we find in out setup between angles and sides, will translate '
+  //     ],
+  //     fadeInFromPrev: false,
+  //   });
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   common = {
+  //     setEnterState: () => {
+  //       coll.setScenarios('default');
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._h, fig._v, fig._right,
+  //     ],
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   };
+  //   commonContent = {
+  //     setContent: 'We also know from |similar_triangles| that any triangles with the |same corresponding angles| will be |similar|.',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: 'In other words, we can create a triangle .',
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: style({ top: 0 }, 'This also means that |any relationship we find| between angle and side length in our setup, will be |valid for all right angle triangles| with the |same corresponding angles|.'),
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       'We will focus on just the |vertical| component, which is the side |opposite| to the angle.',
+  //       note('Note: we will see in |future topics| that the horiztonal and vertical components are |closely related| and can be |calculated| from each other.'),
+  //     ],
+  //     modifiers: {
+  //       vertical: coll.bindAccent(fig._v),
+  //       opposite: coll.bindAccent(fig._v),
+  //     },
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     transitionFromPrev: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       coll.resetRotation(() => {
+  //         fig._opposite.showAll();
+  //         coll.labelForm('0');
+  //         coll.updateRotation();
+  //         coll.accent(fig, ['opposite'], done);
+  //       }, 0.8);
+  //     },
+  //     setSteadyState: () => {
+  //       fig._opposite.showAll();
+  //       coll.updateRotation();
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, [
+  //         'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
+  //       ]),
+  //       note('Note: setting the hypotenuse to 1 will make scaling the triangle easier in the future.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._v),
+  //       angle: coll.bindAccent(fig._real),
+  //       theta: highlightWord('\u03B8', colors.angles),
+  //       hypotenuse: this.qr('Math/Geometry_1/RightAngleTriangles/base/Hypotenuse'),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._v, fig._right, fig._opposite,
+  //     ],
+  //   });
+
+  //   common = {
+  //     setEnterState: () => {
+  //       coll.setScenarios('default');
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
+  //       fig._opposite,
+  //     ],
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, [
+  //         'We will also label the angle |theta|, and set the |hypotenuse| to length |1|.',
+  //       ]),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._v),
+  //       angle: coll.bindAccent(fig._real),
+  //       theta: highlightWord('\u03B8', colors.angles),
+  //       hypotenuse: this.qr('Math/Geometry_1/RightAngleTriangles/base/Hypotenuse'),
+  //     },
+  //     fadeInFromPrev: false,
+  //     transitionFromPrev: (done) => {
+  //       fig._theta.hide();
+  //       fig._hypotenuse.hide();
+  //       fig._real.showAll();
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       coll.resetRotation(() => {
+  //         fig._theta.showAll();
+  //         fig._hypotenuse.showAll();
+  //         fig._real.hide();
+  //         coll.labelForm('0');
+  //         coll.updateRotation();
+  //         coll.accent(fig, ['theta', 'hypotenuse'], done);
+  //       }, 0.8);
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'So, can we find a |relationship| between the |angle| and |opposite| side?.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._v),
+  //       angle: coll.bindAccent(fig._theta),
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'Ideally we would find a |mathematical formula| or |function| that can be used to |calculate| one from the other.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   this.addSection(common, commonContent, {
+  //     transitionFromPrev: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       coll.resetRotation(() => {
+  //         eqn.showForm('0');
+  //         coll.labelForm('0');
+  //         // eqn.animations.new()
+  //         //   .dissolveIn(1)
+  //         //   .whenFinished(done)
+  //         //   .start();
+  //         coll.accent(eqn, done);
+  //       }, 0.8);
+  //     },
+  //     setSteadyState: () => {
+  //       eqn.showForm('0');
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   common = {
+  //     setEnterState: () => {
+  //       coll.setScenarios('default');
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
+  //       fig._opposite,
+  //     ],
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('0');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //     setSteadyState: () => {
+  //       eqn.showForm('0');
+  //     },
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'We use the name |sine| for this function. Often the name is shortened to |sin| and the brackets are sometimes not used.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   this.addSection(common, commonContent, {
+  //     transitionFromPrev: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('0');
+  //       coll.resetRotation(() => {
+  //         // eqn.showForm('0a');
+  //         coll.labelForm('0');
+  //         eqn.goToForm({
+  //           name: '0a',
+  //           animate: 'move',
+  //           duration: 1,
+  //           // callback: done,
+  //           callback: () => {
+  //             eqn.goToForm({
+  //               name: '0b',
+  //               animate: 'move',
+  //               duration: 1,
+  //               callback: done,
+  //             });
+  //           },
+  //         });
+  //       }, 0.8);
+  //     },
+  //     setSteadyState: () => {
+  //       eqn.showForm('0b');
+  //     },
+  //   });
+
+  //   // this.addSection(common, commonContent, {
+  //   //   transitionFromPrev: (done) => {
+  //   //     coll.updateRotation();
+  //   //     coll.labelForm('0');
+  //   //     eqn.showForm('0a');
+  //   //     coll.resetRotation(() => {
+  //   //       // eqn.showForm('0b');
+  //   //       coll.labelForm('0');
+  //   //       // coll.accent(eqn, ['sin1', 'theta1', 'lb1', 'rb1'], done);
+  //   //       eqn.goToForm({
+  //   //         name: '0b',
+  //   //         animate: 'move',
+  //   //         duration: 1,
+  //   //         callback: done,
+  //   //         // callback: () => {
+  //   //         //   eqn.goToForm({
+  //   //         //     name: '0c',
+  //   //         //     animate: 'move',
+  //   //         //     duration: 1,
+  //   //         //     callback: done,
+  //   //         //   });
+  //   //         // },
+  //   //       });
+  //   //     }, 0.8);
+  //   //   },
+  //   //   setSteadyState: () => {
+  //   //     eqn.showForm('0b');
+  //   //   },
+  //   // });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   common = {
+  //     setEnterState: () => {
+  //       coll.setScenarios('default');
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._theta, fig._v, fig._right, fig._hypotenuse,
+  //       fig._opposite,
+  //     ],
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('0');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   };
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'However, for over one |thousand| years, such a formula or function couldn\'t be found.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.'),
+  //     ],
+  //   };
+
+  //   this.addSection(common, commonContent, {
+  //   });
+
+  //   // const row = (angle, prec = 3) => `<tr><td>${angle}º</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+  //   // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+  //   // this.addSection(common, commonContent, {
+  //   //   setContent: [
+  //   //     'In the |first century| AD, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were then published in |large tables|.',
+  //   //     `
+  //   //     <table>
+  //   //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+  //   //       ${dots}
+  //   //       ${row(20)}
+  //   //       ${row(21)}
+  //   //       ${row(22)}
+  //   //       ${row(23)}
+  //   //       ${row(24)}
+  //   //       ${row(25)}
+  //   //       ${row(26)}
+  //   //       ${row(27)}
+  //   //       ${row(28)}
+  //   //       ${row(29)}
+  //   //       ${dots}
+  //   //     </table>
+  //   //     `,
+  //   //   ],
+  //   //   show: [
+  //   //     fig._line, fig._x, fig._real, fig._v, fig._right, fig._hypotenuse,
+  //   //     fig._sine,
+  //   //   ],
+  //   //   transitionFromAny: (done) => {
+  //   //     coll.updateRotation();
+  //   //     coll.labelForm('0');
+  //   //     eqn.showForm('0');
+  //   //     if (this.comingFrom === 'goto') {
+  //   //       coll.resetRotation(done, 0);
+  //   //     } else {
+  //   //       coll.resetRotation(done, 0.8);
+  //   //     }
+  //   //   },
+  //   //   fadeInFromPrev: false,
+  //   // });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'By the |7th century|, the first formulas that |approximated| the side length were discovered.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('1');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else if (this.comingFrom === 'prev') {
+  //         coll.resetRotation(() => {
+  //           coll.accent(eqn, done);
+  //         }, 0.8);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'And in |1400 AD|, a formula that |exactly modeled| the relationship was found.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('1');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   });
+  //   this.addSection(common, commonContent, {
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('2');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else if (this.comingFrom === 'prev') {
+  //         coll.resetRotation(() => {
+  //           coll.accent(eqn, done);
+  //         }, 0.8);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   });
+
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   // **********************************************************************
+  //   commonContent = {
+  //     setContent: [
+  //       style({}, 'But the formulas are |complex|, and for most uses it was still more convenient to use a |table of values|.'),
+  //       note({ top: 22, id: 'id_computer_note' }, 'Note: it wasn\'t till the |late 20<sup>th</sup> century| when tables were superseded by personal calculators and computers.'),
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('2');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   });
+  //   // this.addSection(common, commonContent, {
+  //   //   setContent: [
+  //   //     style({}, 'These formulas provided insight into the properties of the relationship, but were also used to generate more |accurate| tables.'),
+  //   //     `<table>
+  //   //       <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+  //   //       ${dots}
+  //   //       ${row(20, 8)}
+  //   //       ${row(21, 8)}
+  //   //       ${row(22, 8)}
+  //   //       ${row(23, 8)}
+  //   //       ${row(24, 8)}
+  //   //       ${row(25, 8)}
+  //   //       ${row(26, 8)}
+  //   //       ${row(27, 8)}
+  //   //       ${row(28, 8)}
+  //   //       ${row(29, 8)}
+  //   //       ${dots}
+  //   //     </table>`,
+  //   //   ],
+  //   //   transitionFromAny: (done) => {
+  //   //     coll.updateRotation();
+  //   //     coll.labelForm('0');
+  //   //     eqn.showForm('2');
+  //   //     if (this.comingFrom === 'goto') {
+  //   //       coll.resetRotation(done, 0);
+  //   //     } else {
+  //   //       coll.resetRotation(done, 0.8);
+  //   //     }
+  //   //   },
+  //   // });
+
+  //   this.addSection(common, commonContent, {
+  //     setContent: [
+  //       style({}, 'In fact, tables were used by most people until '),
+  //       `<table>
+  //         <tr><th><i>\u03B8</i></th><th>Opposite</th></tr>
+  //         ${dots}
+  //         ${row(20, 8)}
+  //         ${row(21, 8)}
+  //         ${row(22, 8)}
+  //         ${row(23, 8)}
+  //         ${row(24, 8)}
+  //         ${row(25, 8)}
+  //         ${row(26, 8)}
+  //         ${row(27, 8)}
+  //         ${row(28, 8)}
+  //         ${row(29, 8)}
+  //         ${dots}
+  //       </table>`,
+  //     ],
+  //     transitionFromAny: (done) => {
+  //       coll.updateRotation();
+  //       coll.labelForm('0');
+  //       eqn.showForm('2');
+  //       if (this.comingFrom === 'goto') {
+  //         coll.resetRotation(done, 0);
+  //       } else {
+  //         coll.resetRotation(done, 0.8);
+  //       }
+  //     },
+  //   });
 
 
-    this.addSection({
-      show: [coll],
-      setSteadyState: () => {
-        coll.setScenarios('default');
-        coll._fig._line.setMovable(true);
-        coll.labelForm('2');
-      },
-    });
+  //   commonContent = {
+  //     setContent: [
+  //       'So, can we find a |relationship| between the |angle| and |opposite| side?. Ideally we would find a |mathematical formula| or |function| that can be used to |calculate| one from the other.',
+  //     ],
+  //   };
+  //   this.addSection(common, commonContent, {
+  //     modifiers: {
+  //       opposite: coll.bindAccent(fig._v),
+  //       angle: coll.bindAccent(fig._real),
+  //     },
+  //     show: [
+  //       fig._line, fig._x, fig._real, fig._v, fig._right,
+  //     ],
+  //   });
+
+
+  //   this.addSection({
+  //     show: [coll],
+  //     setSteadyState: () => {
+  //       coll.setScenarios('default');
+  //       coll._fig._line.setMovable(true);
+  //       coll.labelForm('2');
+  //     },
+  //   });
   }
 
   // this.addSectionEqnStep({ eqn: eqn, from: '0', to: '1' }, common, commonContent);

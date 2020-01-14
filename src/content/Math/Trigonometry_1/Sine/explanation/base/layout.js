@@ -122,12 +122,13 @@ export default function diagramLayout() {
         symbol: 'brace', lineWidth: 0.012, width: 0.05, side: 'top', color: colors.working,
       },
       box: { symbol: 'box', color: [0, 0, 0, 0] },
+      value: { text: '40º', color: colors.angles },
     },
     forms: {
-      '0': {
+      'real': {
         content: {
           container: {
-            content: 'angle',
+            content: ['value'],
             width: 0.5,
             descent: 0.04,
             ascent: 0.13,
@@ -138,7 +139,21 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center', alignV: 0.7 },
       },
-      '1': {
+      'angle': {
+        content: {
+          container: {
+            content: ['angle'],
+            width: 0.5,
+            descent: 0.04,
+            ascent: 0.13,
+            xAlign: 0.1,
+            yAlign: 'bottom',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 0.7 },
+      },
+      'angleToTheta': {
         content: {
           container: {
             content: {
@@ -156,10 +171,10 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center', alignV: 0.7 },
       },
-      '2': {
+      'theta': {
         content: {
           container: {
-            content: 'theta',
+            content: ['theta'],
             width: 0.5,
             descent: 0.04,
             ascent: 0.13,
@@ -169,123 +184,6 @@ export default function diagramLayout() {
         },
         scale: 0.9,
         alignment: { alignH: 'center', alignV: 0.7 },
-      },
-    },
-  });
-
-  const eqnSine = ({
-    elements: {
-      r: { text: 'r', color: colors.lines },
-      times: { text: ' \u00D7 ', color: colors.lines },
-      sin: { text: 'sin', color: colors.components, style: 'normal' },
-      theta: { text: '\u03B8', color: colors.components },
-      opposite: { text: 'opposite', color: colors.components },
-      // opposite_1: { text: 'opposite', color: colors.components },
-      // vertical: { text: 'vertical', color: colors.components },
-      // brace: {
-      //   symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
-      // },
-      hyp1: { text: 'hypotenuse = 1', color: colors.components },
-      hypr: { text: 'hypotenuse = r', color: colors.components },
-    },
-    forms: {
-      '0': {
-        content: {
-          container: {
-            content: '0.643',
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '1': {
-        content: {
-          container: {
-            content: ['0.643', 'times', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '2': {
-        content: {
-          container: {
-            content: ['0.643', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '5': {
-        content: {
-          container: {
-            content: 'opposite',
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '6': {
-        content: {
-          container: {
-            content: ['r', 'times', 'opposite'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      // '1a': {
-      //   content: {
-      //     container: {
-      //       content: {
-      //         bottomComment: {
-      //           content: 'opposite',
-      //           comment: 'hyp1',
-      //           inSize: false,
-      //           scale: 0.5,
-      //         },
-      //       },
-      //       width: 0.7,
-      //       ascent: 0.13,
-      //       descent: 0.05,
-      //       xAlign: 'left',
-      //     },
-      //   },
-      //   scale: 0.9,
-      //   alignment: { alignH: 'center' },
-      // },
-      '7': {
-        content: ['sin', ' ', 'theta'],
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      '8': {
-        content: ['r', 'times', 'sin', ' ', 'theta'],
-        scale: 1,
-      },
-      '9': {
-        content: ['r', ' ', 'sin', ' ', 'theta'],
-        scale: 1,
       },
     },
   });
@@ -512,13 +410,14 @@ export default function diagramLayout() {
           clockwise: true,
         },
       },
-      angle('real', null),
+      // angle('real', null),
       angle('theta', eqnAngle),
+      // angle('theta', eqnAngle),
       angle('right', ''),
       angle('complement', null),
-      lineLabel('sineTheta', eqnSine, colors.components, 'right'),
-      lineLabel('sine', null, colors.components, 'right'),
-      lineLabel('opposite', 'opposite', colors.components, 'right'),
+      // lineLabel('sineTheta', eqnSine, colors.components, 'right'),
+      // lineLabel('sine', null, colors.components, 'right'),
+      // lineLabel('opposite', 'opposite', colors.components, 'right'),
       lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
       // lineLabel('realHyp', null, colors.lines, 'top', 'left'),
       lineLabel('oppLabel', eqnOpp, colors.components, 'right'),
