@@ -14,7 +14,7 @@ const {
   Point,
 } = Fig;
 
-const { rand, round } = Fig.tools.math;
+const { rand, round, randInt } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
@@ -74,7 +74,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  gotoRotation(angle: ?number = null, duration: number = 0, done: ?() => void = null) {
+  gotoRotation(angle: ?number = null, duration: ?number = 0, done: ?() => void = null) {
     let r = 0;
     if (angle != null) {
       r = angle;
@@ -93,12 +93,24 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     } else {
       this._fig._line.stop();
+      let rotationOptions = { target: r, duration };
+      if (duration === null) {
+        rotationOptions = { target: r, velocity: 2 };
+      }
       this._fig._line.animations.new()
-        .rotation({ target: r, duration })
+        .rotation(rotationOptions)
         .whenFinished(done)
         .start();
     }
     this.diagram.animateNextFrame();
+  }
+
+  sweepRotation(done: ?() => void) {
+    this.gotoRotation(Math.PI / 180 * 1, 0.5, () => {
+      this.gotoRotation(Math.PI / 2, 3, () => {
+        this.gotoRotation(Math.PI / 18 * 4, 1, done);
+      });
+    });
   }
 
   resetRotation(done: ?() => void = null, duration: number = 0) {
@@ -185,6 +197,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const theta = this._fig._theta;
     const right = this._fig._right;
     const real = this._fig._real;
+    const complement = this._fig._complement;
     const opp = this._fig._opp;
     const sineTheta = this._fig._sineTheta;
     const sine = this._fig._sine;
@@ -194,6 +207,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const opposite = this._fig._opposite;
     const r = this._fig._line.getRotation();
     const length = this._fig._line.getLength();
+    const oppLabel = this._fig._oppLabel;
     const p2 = new Point(length * Math.cos(r), length * Math.sin(r));
     if (h.isShown) {
       h.setEndPoints([0, 0], [p2.x, 0]);
@@ -215,25 +229,38 @@ export default class CommonCollection extends CommonDiagramCollection {
       sine: 1,
       sineTheta: 1,
       opposite: 1,
+      complement: 1,
+      oppLabel: 1,
     };
 
     if (p2.y < 0.28 && r >= 0.12) {
       opacity.right = 0;
+      opacity.complement = 0;
     } else if (r < 0.12 && r >= 0.05) {
       opacity.right = 0;
       opacity.theta = 0;
       opacity.real = 0;
       opacity.sineTheta = 0;
+      opacity.oppLabel = 0;
       opacity.opposite = 0;
+      opacity.complement = 0;
     } else if (r < 0.05) {
       opacity.sine = 0;
       opacity.right = 0;
       opacity.theta = 0;
       opacity.real = 0;
       opacity.sineTheta = 0;
+      opacity.oppLabel = 0;
       opacity.opposite = 0;
-    } else if (r > Math.PI / 2 * 0.8) {
+      opacity.complement = 0;
+    } else if (r > Math.PI / 2 * 0.8 && r < Math.PI / 2 * 0.9) {
       opacity.right = 0;
+      opacity.complement = 0;
+    } else if (r > Math.PI / 2 * 0.9) {
+      opacity.right = 0;
+      opacity.complement = 0;
+      opacity.real = 0;
+      opacity.theta = 0;
     }
     if (right.isShown) {
       right.setAngle({
@@ -263,6 +290,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       });
       real.setOpacity(opacity.real);
     }
+    if (complement.isShown) {
+      complement.setAngle({
+        p1: [0, 0],
+        p2,
+        p3: [p2.x, 0],
+      });
+      complement.setOpacity(opacity.complement);
+    }
     if (sineTheta.isShown) {
       sineTheta.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       sineTheta.setOpacity(opacity.sineTheta);
@@ -273,12 +308,19 @@ export default class CommonCollection extends CommonDiagramCollection {
       sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       sine.setOpacity(opacity.sine);
     }
+    if (oppLabel.isShown) {
+      const angle = parseFloat(real.getLabel());
+      oppLabel._label._value.drawingObject.setText(`${round(length / this.layout.r * Math.sin(angle / 180 * Math.PI), 3)}`);
+      oppLabel.setEndPoints([p2.x, 0], [p2.x, p2.y]);
+      oppLabel.setOpacity(opacity.oppLabel);
+    }
     if (opposite.isShown) {
       opposite.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       opposite.setOpacity(opacity.opposite);
     }
     if (hypotenuse.isShown) {
       hypotenuse.setEndPoints([0, 0], p2);
+      hypotenuse._label._value.drawingObject.setText(`${round(length / this.layout.r, 2)}`);
     }
 
     if (this._fig._arc.isShown) {
@@ -303,13 +345,104 @@ export default class CommonCollection extends CommonDiagramCollection {
       // console.log(arcAngle * 180 / Math.PI)
       this._fig._mirrorArc.setAngleToDraw(arcAngle + 0.005);
     }
-    if (length !== this.layout.r) {
-      hypotenuse._label.setOpacity(0);
-      sineTheta._label.setOpacity(0);
-    } else {
-      hypotenuse._label.setOpacity(1);
-      sineTheta._label.setOpacity(1);
-    }
+    // if (length !== this.layout.r) {
+    //   hypotenuse._label.setOpacity(0);
+    //   sineTheta._label.setOpacity(0);
+    //   complement._label.setOpacity(0);
+    // } else {
+    //   hypotenuse._label.setOpacity(1);
+    //   sineTheta._label.setOpacity(opacity.sineTheta);
+    //   complement._label.setOpacity(opacity.complement);
+    // }
     this.diagram.animateNextFrame();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  showTable(index: number, fadeIn: boolean = true) {
+    for (let i = 0; i < index; i += 1) {
+      const row = document.getElementById(`id_row${i}`);
+      if (row != null) {
+        row.classList.remove('angle_table_hide');
+      }
+    }
+    const row = document.getElementById(`id_row${index}`);
+    if (row != null) {
+      row.classList.remove('angle_table_hide');
+      if (fadeIn) {
+        row.classList.add('topic__diagram_text_fade_in');
+      }
+    }
+  }
+
+  // measureOpp(angle: number, index: number, done: ?() => void) {
+  //   this._fig._line.stop();
+  //   this._fig._line.animations.new()
+  //     .rotation({ target: angle, duration: 0.5 })
+  //     .trigger({
+  //       callback: () => {
+  //         this.accent(this._fig._sine, null, null);
+  //         this.accent(this._fig._real, null, null);
+  //         this.diagram.animateNextFrame();
+  //       },
+  //       duration: 1,
+  //     })
+  //     .trigger({
+  //       callback: this.showTable.bind(this, index, true),
+  //       duration: 0.5,
+  //     })
+  //     .whenFinished(done)
+  //     .start();
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // growTable(done: ?() => void) {
+  //   const rows = document.querySelectorAll('.angle_row');
+  //   rows.forEach((row) => {
+  //     row.classList.add('angle_table_hide');
+  //   });
+  //   this._fig.stop();
+  //   this._fig.animations.new()
+  //     // .trigger({
+  //     //   callback: this.measureOpp.bind(this, Math.PI / 180 * 0, 0, null),
+  //     //   duration: 3,
+  //     // })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 10, 0, null),
+  //       duration: 2,
+  //     })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 20, 1, null),
+  //       duration: 2,
+  //     })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 30, 2, null),
+  //       duration: 2,
+  //     })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 40, 3, null),
+  //       duration: 2,
+  //     })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 50, 4, null),
+  //       duration: 2,
+  //     })
+  //     .trigger({
+  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 60, 5, null),
+  //       duration: 2,
+  //     })
+  //     .whenFinished(done)
+  //     .start();
+  //   this.diagram.animateNextFrame();
+  // }
+
+  measureAngles(done: ?() => void = null) {
+    // const angles = [0, 1, 2, 3, 43, 44, 45, 46, 47, 90].map(a => round(a * Math.PI / 180, 3));
+    // const r = round(this._fig._line.getRotation(), 3);
+    // const index = angles.indexOf(r);
+    // const newIndex = (index + 1) % 10;
+    // this.gotoRotation(angles[newIndex], 1, done);
+    this.gotoRotation(null, 1, () => {
+      this.accent(this._fig._sine, done);
+    });
   }
 }

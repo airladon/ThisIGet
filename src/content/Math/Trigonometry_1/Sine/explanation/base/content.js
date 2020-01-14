@@ -40,6 +40,7 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/AngleTypes/base',
       'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/AngleGroups/base',
       'Math/Geometry_1/SimilarTriangles/base',
       'Math/Geometry_1/RightAngleTriangles/base',
       'Math/Geometry_1/CongruentTriangles/base',
@@ -84,7 +85,7 @@ class Content extends PresentationFormatContent {
         fig._v, fig._right, // fig._sineTheta,
       ],
       setEqnForms: [
-        [fig._hypotenuse._label, '0'],
+        [fig._hypotenuse._label, 'real'],
       ],
     };
     this.addSection(common, commonShow, commonContent, {
@@ -161,8 +162,8 @@ class Content extends PresentationFormatContent {
         fig._right, fig._opp,
       ],
       setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
+        [fig._hypotenuse._label, 'real'],
+        [fig._oppLabel._label, 'real'],
       ],
     };
     this.addSection(common, commonShow, commonContent, {
@@ -176,6 +177,8 @@ class Content extends PresentationFormatContent {
         fig._line.setRotation(Math.PI / 18 * 4);
         coll.updateRotation();
         fig._line._line.isTouchable = false;
+        // fig._oppLabel._label.showForm('real');
+        // console.log(fig._oppLabel)
       },
     });
 
@@ -262,8 +265,8 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
-          [fig._sineTheta._label, '0', '0'],
-          [fig._hypotenuse._label, '0', '0'],
+          [fig._oppLabel._label, 'real', 'real'],
+          [fig._hypotenuse._label, 'real', 'real'],
         ],
       }, common, commonShow, commonContent,
       {
@@ -294,8 +297,8 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
-          [fig._sineTheta._label, '0', '0'],
-          [fig._hypotenuse._label, '0', '0'],
+          [fig._oppLabel._label, 'real', 'real'],
+          [fig._hypotenuse._label, 'real', 'real'],
         ],
       }, common, commonShow, commonContent,
       {
@@ -309,8 +312,8 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
-          [fig._sineTheta._label, '0', '1'],
-          [fig._hypotenuse._label, '0', '1'],
+          [fig._oppLabel._label, 'real', 'realTimesR'],
+          [fig._hypotenuse._label, 'real', 'realTimesR'],
         ],
       }, common, commonShow, commonContent,
       {
@@ -324,8 +327,8 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep(
       {
         eqns: [
-          [fig._sineTheta._label, '1', '2'],
-          [fig._hypotenuse._label, '1', '2'],
+          [fig._oppLabel._label, 'realTimesR', 'realR'],
+          [fig._hypotenuse._label, 'realTimesR', 'r'],
         ],
       }, common, commonShow, commonContent,
       {
@@ -355,8 +358,8 @@ class Content extends PresentationFormatContent {
         fig._right, fig._opp,
       ],
       setEqnForms: [
-        [fig._sineTheta._label, '2'],
-        [fig._hypotenuse._label, '2'],
+        [fig._oppLabel._label, 'realR'],
+        [fig._hypotenuse._label, 'r'],
       ],
     };
 
@@ -368,6 +371,298 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'Now let\'s consider the |angles| of a right angle triangle more generally.'),
+      modifiers: {
+        angles: coll.bindAccent(fig, ['real', 'complement', 'right']),
+      },
+    };
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp, fig._complement,
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig._line.setRotation(Math.PI / 18 * 4);
+        coll.updateRotation();
+        fig._line._line.isTouchable = false;
+      },
+    });
+
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'All angles in a triangle |add_to_180º|, which means the |two_angles| that are not right angles must be |complementary| and each therefore |less than 90º|.'),
+      modifiers: {
+        complementary: this.qr('Math/Geometry_1/AngleGroups/base/ComplementaryPres'),
+        add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+        two_angles: coll.bindAccent(fig, ['real', 'complement']),
+      },
+    };
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp, fig._complement,
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig._line.setRotation(Math.PI / 18 * 4);
+        coll.updateRotation();
+        fig._line._line.isTouchable = false;
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'So |all| right angles triangles have one angle that is |90º|, and two angles |less_than_90º|.'),
+      modifiers: {
+        less_than_90º: coll.bindAccent(fig, ['real', 'complement']),
+        '90º': coll.bindAccent(fig._right),
+      },
+    };
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp, fig._complement,
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig._line.setRotation(Math.PI / 18 * 4);
+        coll.updateRotation();
+        fig._line._line.isTouchable = false;
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'This means if we |sweep| our angle between 0º and 90º, we will create right angle triangles with |all possible angle combinations|.'),
+      modifiers: {
+        sweep: click(coll.gotoRotation, [coll, null, 1, null], colors.lines),
+      },
+    };
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp, fig._complement,
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+    });
+
+
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    const makeTable = (angleText: string, functionText: string, angles: Array<number | 'dots'>, r: boolean = false) => {
+      const row = (angle, index, prec = 3) => `<tr id="id_row${index}" class="angle_row"><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}${r ? '<span class="angle_table_r">r</span>' : '<span class="angle_table_r angle_table_r_invisible">r</span>'}</td></tr>`;
+      const dots = index => `<tr id="id_row${index}" class="angle_row"><td>\u22EE</td><td>\u22EE</td></tr>`;
+      let table = '<div class="table_container" id="angle_table"><table>';
+      table = `${table}<tr><th><i>${angleText}</i></th><th>${functionText}</th></tr>`;
+      const tableModifiers = {};
+      angles.forEach((angle, index) => {
+        if (typeof angle === 'number') {
+          table = `${table}${row(angle, index)}`;
+          tableModifiers[`${angle}º`] = click(coll.gotoRotation, [coll, angle * Math.PI / 180, 0.5, null])
+        } else {
+          table = `${table}${dots(index)}`;
+        }
+      });
+      table = `${table}</table></div>`;
+      return [table, tableModifiers];
+    }
+
+    let text = 'We can then |measure| the length of the |opposite| side for different |angles| when the hypotenuse is |1|, and make a |reference_table|.';
+    commonContent = {
+      setContent: text,
+      modifiers: {
+        measure: click(coll.measureAngles, [coll, null], colors.components),
+        opposite: coll.bindAccent(fig._opp),
+        angles: coll.bindAccent(fig._real),
+        reference_table: this.bindNext(),
+      },
+    };
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp,
+      ],
+      setEqnForms: [
+        // [fig._sineTheta._label, '0'],
+        [fig._oppLabel._label, 'real'],
+        [fig._hypotenuse._label, 'real'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+    });
+    let [tableContent, modifiers] = makeTable(
+      '<span class="angle_text">angle</span>',
+      '<span class="component_text">opposite</span>',
+      [0, 1, 2, 3, 'dots', 43, 44, 45, 46, 47, 'dots', 90],
+    );
+    commonContent = { setContent: [text, tableContent], modifiers };
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        measure: click(coll.measureAngles, [coll, null], colors.components),
+        opposite: coll.bindAccent(fig._opp),
+        angles: coll.bindAccent(fig._real),
+        reference_table: click(() => {
+          const angleTable = document.getElementById('angle_table');
+          if (angleTable != null) {
+            angleTable.classList.remove('topic__diagram_text_pulse');
+            // eslint-disable-next-line
+            void angleTable.offsetWidth;
+            angleTable.classList.add('topic__diagram_text_pulse');
+          }
+        }, [this], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        const angleTable = document.getElementById('angle_table');
+        if (angleTable != null) {
+          angleTable.classList.add('angle_table_hide')
+        }
+
+        fig.animations.new()
+          .scenario({ target: 'left', duration: 2 })
+          .trigger({
+            callback: () => {
+              if (angleTable != null) {
+                angleTable.classList.remove('angle_table_hide');
+                angleTable.classList.add('topic__diagram_text_fade_in');
+              }
+            },
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenario('left');
+      },
+      fadeInFromPrev: false,
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    text = 'Similarly, if the hypotenuse is scaled by |r|, we can scale the table by |r|.';
+    commonContent = { setContent: [text, tableContent], modifiers };
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
+      },
+      fadeInFromPrev: false,
+    });
+
+    [tableContent, modifiers] = makeTable(
+      '<span class="angle_text">angle</span>',
+      '<span class="component_text">opposite</span>',
+      [0, 1, 2, 3, 'dots', 43, 44, 45, 46, 47, 'dots', 90],
+      true,
+    );
+    commonContent = { setContent: [text, tableContent], modifiers };
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        
+      },
+      setSteadyState: () => {
+        fig._oppLabel._label.showForm('realTimesR');
+        fig.setScenario('left');
+        console.log(fig._sineTheta)
+      },
+      fadeInFromPrev: false,
+    });
+
+
+    commonContent = {
+      setContent: [
+        text,
+        tableContent,
+      ],
+      modifiers,
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._real,
+        fig._right, fig._opp, fig._sine,
+      ],
+      setEqnForms: [
+        // [fig._sineTheta._label, '0'],
+        [fig._hypotenuse._label, '0'],
+      ],
+    };
+    // this.addSection(common, commonShow, commonContent, {
+    //   modifiers: {
+    //     measure: click(coll.growTable, [coll, null], colors.components),
+    //   },
+    //   transitionFromPrev: (done) => {
+    //     fig.setScenario('left');
+    //     // coll.growTable(done);
+    //   },
+    //   fadeInFromPrev: false,
+    //   setSteadyState: () => {
+    //     fig.setScenario('left');
+    //   },
+    // });
+
+    // const row = (angle, prec = 3) => `<tr><td>|${angle}º|</td><td>${round(Math.sin(angle * Math.PI / 180), prec)}</td></tr>`;
+    // const dots = '<tr><td>\u22EE</td><td>\u22EE</td></tr>';
+    // const table = `
+    //     <table id="angle_table">
+    //       <tr><th><i>\u03B8</i></th><th>function(<span id='angle_text'>\u03B8</span>)</th></tr>
+    //       ${dots}
+    //       ${row(20)}
+    //       ${row(21)}
+    //       ${row(22)}
+    //       ${row(23)}
+    //       ${row(24)}
+    //       ${row(25)}
+    //       ${dots}
+    //       ${row(75)}
+    //       ${row(76)}
+    //       ${row(77)}
+    //       ${row(78)}
+    //       ${row(79)}
+    //       ${row(80)}
+    //       ${dots}
+    //     </table>
+    //     `;
+    // const tableModifiers = {
+    //   '20º': click(coll.gotoRotation, [coll, 20 * Math.PI / 180, 0.5, null]),
+    //   '21º': click(coll.gotoRotation, [coll, 21 * Math.PI / 180, 0.5, null]),
+    //   '22º': click(coll.gotoRotation, [coll, 22 * Math.PI / 180, 0.5, null]),
+    //   '23º': click(coll.gotoRotation, [coll, 23 * Math.PI / 180, 0.5, null]),
+    //   '24º': click(coll.gotoRotation, [coll, 24 * Math.PI / 180, 0.5, null]),
+    //   '25º': click(coll.gotoRotation, [coll, 25 * Math.PI / 180, 0.5, null]),
+    //   '75º': click(coll.gotoRotation, [coll, 75 * Math.PI / 180, 0.5, null]),
+    //   '76º': click(coll.gotoRotation, [coll, 76 * Math.PI / 180, 0.5, null]),
+    //   '77º': click(coll.gotoRotation, [coll, 77 * Math.PI / 180, 0.5, null]),
+    //   '78º': click(coll.gotoRotation, [coll, 78 * Math.PI / 180, 0.5, null]),
+    //   '79º': click(coll.gotoRotation, [coll, 79 * Math.PI / 180, 0.5, null]),
+    //   '80º': click(coll.gotoRotation, [coll, 80 * Math.PI / 180, 0.5, null]),
+    // };
 
     // **********************************************************************
     // **********************************************************************

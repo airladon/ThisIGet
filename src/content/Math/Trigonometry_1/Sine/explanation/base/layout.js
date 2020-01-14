@@ -22,7 +22,97 @@ export default function diagramLayout() {
   colors.axes = colors.get('grey', 'dark').rgb;
   colors.get('red').toCssVar('--color-angles');
   colors.get('green').toCssVar('--color-components');
+  colors.get('blue').toCssVar('--color-lines');
   colors.working = colors.get('grey', 'dark').rgb;
+
+  const eqnOpp = ({
+    elements: {
+      value: { text: '0.000', color: colors.components },
+      r: { color: colors.lines },
+      times: { text: ' \u00D7 ', color: colors.lines },
+      opposite: { color: colors.components },
+    },
+    forms: {
+      'real': {
+        content: {
+          container: {
+            content: 'value',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'realTimesR': {
+        content: {
+          container: {
+            content: ['value', 'times', 'r'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'realR': {
+        content: {
+          container: {
+            content: ['value', 'r'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'opposite': {
+        content: {
+          container: {
+            content: ['opposite'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'oppositeTimesR': {
+        content: {
+          container: {
+            content: ['opposite', 'times', 'r'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'oppositeR': {
+        content: {
+          container: {
+            content: ['opposite', 'r'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+    },
+  });
 
   const eqnAngle = ({
     elements: {
@@ -206,8 +296,42 @@ export default function diagramLayout() {
       times: { text: ' \u00D7 ', color: colors.lines },
       _1: { text: '1', color: colors.lines },
       s: { symbol: 'strike', style: 'cross', color: colors.working },
+      value: { text: '1.', color: colors.line },
     },
     forms: {
+      real: {
+        content: {
+          container: {
+            content: 'value',
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+        alignment: { alignH: 'center' },
+      },
+      realTimesR: {
+        content: {
+          container: {
+            content: ['r', 'times', 'value'],
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+        alignment: { alignH: 'center' },
+      },
+      r: {
+        content: {
+          container: {
+            content: ['r'],
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+        alignment: { alignH: 'center' },
+      },
       '0': {
         content: {
           container: {
@@ -344,6 +468,7 @@ export default function diagramLayout() {
         offset: 0.1,
         location,
         subLocation,
+        scale: 0.9,
       },
       color,
     },
@@ -390,11 +515,13 @@ export default function diagramLayout() {
       angle('real', null),
       angle('theta', eqnAngle),
       angle('right', ''),
+      angle('complement', null),
       lineLabel('sineTheta', eqnSine, colors.components, 'right'),
       lineLabel('sine', null, colors.components, 'right'),
       lineLabel('opposite', 'opposite', colors.components, 'right'),
       lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
-      lineLabel('realHyp', null, colors.lines, 'top', 'left'),
+      // lineLabel('realHyp', null, colors.lines, 'top', 'left'),
+      lineLabel('oppLabel', eqnOpp, colors.components, 'right'),
       component('h', colors.lines),
       component('v', colors.lines),
       component('opp', colors.components),
@@ -406,7 +533,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [-r / 2, -1], scale: 1 },
-        left: { position: [-2, -1], scale: 1 },
+        left: { position: [-2.3, -1], scale: 1 },
         small: { position: [0, 0.3], scale: 0.5 },
       },
     },

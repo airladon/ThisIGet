@@ -2,6 +2,12 @@
 //   z-index: 0;
 // }
 
+.table_container {
+  position: absolute;
+  left: 55%;
+  top: 20%;
+}
+
 .presentation__note {
   top: 87%;
 }
@@ -10,12 +16,20 @@
   display: none;
 }
 
+.angle_table_r {
+  color: var(--color-lines);
+}
+
+.angle_table_r_invisible {
+  visibility: hidden;
+}
+
 table {
   border-collapse: collapse;
   table-layout: fixed;
-  margin-left: 60%;
+  // margin-left: 50%;
   // margin-right: auto;
-  font-size: 0.6em;
+  font-size: 0.7em;
   text-align: center;
   color: #fdf1aa;
   color: var(--color-diagram-text);
@@ -24,17 +38,42 @@ table {
 }
 
 th {
-  font-size: 1.2em;
+  font-size: 1.5em;
   padding-top: 1em;
   border-bottom: 1px solid var(--color-diagram-text);
 }
 
 td:first-child {
   width: 5em;
+  color: var(--color-angles);
 }
 
 td:nth-child(2) {
-  width: 9em;
+  width: 6em;
+  color: var(--color-components);
+}
+
+th:first-child {
+  width: 5em;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  color: var(--color-angles);
+}
+
+th:nth-child(2) {
+  width: 6em;
+  color: var(--color-diagram-text-base);
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+}
+
+tr:first-child {
+  height: 4em;
+}
+
+tr:nth-child(2) {
+  height: 2em;
+  vertical-align: bottom;
 }
 
 // th:first-child,
@@ -43,24 +82,28 @@ td:nth-child(2) {
 //   // padding-left: 3em;
 // }
 
-th:first-child {
-  color: var(--color-angles);
-}
-
-// th:nth-child(2),
-// td:nth-child(2) {
-//   // color: var(--color-components);
-//   // padding-right: 3em;
+// th:first-child {
+//   color: var(--color-angles);
 // }
 
-th:nth-child(2) {
-  color: var(--color-diagram-text-base);
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
+// // th:nth-child(2),
+// // td:nth-child(2) {
+// //   // color: var(--color-components);
+// //   // padding-right: 3em;
+// // }
+
+// th:nth-child(2) {
+//   color: var(--color-diagram-text-base);
+//   font-family: 'Times New Roman', Times, serif;
+//   font-style: italic;
+// }
+
+.angle_text {
+  color: var(--color-angles);
 }
 
-#angle_text {
-  color: var(--color-angles);
+.component_text {
+  color: var(--color-components);
 }
 
 // th:last-child {
