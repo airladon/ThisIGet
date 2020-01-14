@@ -3374,6 +3374,15 @@
           "fullTopic": true,
           "links": ""
         },
+        "base1": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
         "markdown": {
           "type": "singlePage",
           "title": "Derivation of Pythagorean Theorem",

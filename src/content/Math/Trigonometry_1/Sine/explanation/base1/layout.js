@@ -90,11 +90,11 @@ export default function diagramLayout() {
       sin: { text: 'sin', color: colors.components, style: 'normal' },
       theta: { text: '\u03B8', color: colors.components },
       opposite: { text: 'opposite', color: colors.components },
-      // opposite_1: { text: 'opposite', color: colors.components },
-      // vertical: { text: 'vertical', color: colors.components },
-      // brace: {
-      //   symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
-      // },
+      opposite_1: { text: 'opposite', color: colors.components },
+      vertical: { text: 'vertical', color: colors.components },
+      brace: {
+        symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
+      },
       hyp1: { text: 'hypotenuse = 1', color: colors.components },
       hypr: { text: 'hypotenuse = r', color: colors.components },
     },
@@ -102,7 +102,40 @@ export default function diagramLayout() {
       '0': {
         content: {
           container: {
-            content: '0.643',
+            content: 'vertical',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '0a': {
+        content: {
+          container: {
+            content: 'vertical',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '0b': {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: 'vertical',
+                comment: 'opposite',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -115,32 +148,6 @@ export default function diagramLayout() {
       '1': {
         content: {
           container: {
-            content: ['0.643', 'times', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '2': {
-        content: {
-          container: {
-            content: ['0.643', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center' },
-      },
-      '5': {
-        content: {
-          container: {
             content: 'opposite',
             width: 0.7,
             ascent: 0.13,
@@ -151,10 +158,17 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
-      '6': {
+      '1a': {
         content: {
           container: {
-            content: ['r', 'times', 'opposite'],
+            content: {
+              bottomComment: {
+                content: 'opposite',
+                comment: 'hyp1',
+                inSize: false,
+                scale: 0.5,
+              },
+            },
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -164,36 +178,108 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center' },
       },
-      // '1a': {
-      //   content: {
-      //     container: {
-      //       content: {
-      //         bottomComment: {
-      //           content: 'opposite',
-      //           comment: 'hyp1',
-      //           inSize: false,
-      //           scale: 0.5,
-      //         },
-      //       },
-      //       width: 0.7,
-      //       ascent: 0.13,
-      //       descent: 0.05,
-      //       xAlign: 'left',
-      //     },
-      //   },
-      //   scale: 0.9,
-      //   alignment: { alignH: 'center' },
-      // },
-      '7': {
+      '1b': {
+        content: {
+          container: {
+            content: [
+              'r', 'times',
+              {
+                bottomComment: {
+                  content: 'opposite',
+                  comment: 'hyp1',
+                  inSize: false,
+                  scale: 0.5,
+                },
+              },
+            ],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1c': {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: [
+                  'r', 'times',
+                  {
+                    bottomComment: {
+                      content: 'opposite',
+                      comment: 'hyp1',
+                      inSize: false,
+                      scale: 0.5,
+                    },
+                  },
+                ],
+                comment: {
+                  bottomComment: {
+                    content: 'opposite_1',
+                    comment: 'hypr',
+                    inSize: true,
+                    scale: 0.7,
+                  },
+                },
+                symbol: 'brace',
+              },
+            },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1d': {
+        content: {
+          container: {
+            content: {
+              bottomComment: {
+                content: 'opposite_1',
+                comment: 'hypr',
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '1e': {
+        content: {
+          container: {
+            content: 'opposite_1',
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center' },
+      },
+      '2': {
         content: ['sin', ' ', 'theta'],
         scale: 1,
         alignment: { alignH: 'center' },
       },
-      '8': {
+      '3': {
         content: ['r', 'times', 'sin', ' ', 'theta'],
         scale: 1,
       },
-      '9': {
+      '4': {
         content: ['r', ' ', 'sin', ' ', 'theta'],
         scale: 1,
       },
@@ -277,13 +363,13 @@ export default function diagramLayout() {
       },
     },
   });
-  const component = (name, color) => ({
+  const component = name => ({
     name,
     method: 'line',
     options: {
       p1: [0, 0],
       p2: [1, 0],
-      color,
+      color: colors.components,
       width: 0.015,
     },
   });
@@ -395,9 +481,8 @@ export default function diagramLayout() {
       lineLabel('opposite', 'opposite', colors.components, 'right'),
       lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
       lineLabel('realHyp', null, colors.lines, 'top', 'left'),
-      component('h', colors.lines),
-      component('v', colors.lines),
-      component('opp', colors.components),
+      component('h'),
+      component('v'),
       component('mirrorV'),
       // angle('arc', )
       line('mirrorLine', -Math.PI / 2, 0),
@@ -586,13 +671,198 @@ export default function diagramLayout() {
       },
       forms: {
         '0': {
-          content: ['opp', 'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
+          content: ['vert', 'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
+          // {
+          //   box: [
+          //     {
+          //       pad: [
+          //         {
+          //           // brac: ['AB', 'l1', 'r1', true, null, null, null, null, null, null, null, null],
+          //           // bar: { content: 'AB', symbol: 'lb', side: 'top', length: 1 },
+          //           // bottomComment: {
+          //           //   content: ['AB', 'bbb_2', '2'],
+          //           //   symbol: 'brace',
+          //           //   comment: '4',
+          //           //   length: null,
+          //           //   inSize: false,
+          //           // },
+          //           // prodOf: ['prod', 'a', '2', '4'],
+          //           // strike: ['a', 's1', true, 0.1],
+          //           // ann: {
+          //           //   content: 'AB',
+                      
+          //           //   glyphs: {
+          //           //     encompass: {
+          //           //       symbol: 'b2_box',
+          //           //       space: 0.2,
+          //           //       annotations: [{
+          //           //         content: 'b',
+          //           //         yPosition: 'bottom',
+          //           //         xPosition: 'right',
+          //           //         yAlign: 'middle',
+          //           //         xAlign: 'left',
+          //           //         offset: new Point(0.1, 0),
+          //           //       }],
+          //           //     },
+          //           //     left: {
+          //           //       symbol: 'l1',
+          //           //     },
+          //           //     right: { symbol: 'r1' },
+          //           //   },
+          //           //   inSize: false,
+          //           // },
+          //           // frac: {
+          //           //   numerator: { frac: ['a', 'v1_vinculum', '2'] },
+          //           //   symbol: 'v_vinculum',
+          //           //   denominator: { scale: ['b', 2] },
+          //           //   // symbol: 'v_vinculum',
+          //           // },
+          //           // pad: {
+          //           //   content: ['a', 'b'],
+          //             // top: 0.1,
+          //             // left: 0.1,
+          //             // bottom: 0.05,
+          //           // },
+          //           // brac: ['a', 'leftBracket', 'rb_rightBracket']
+          //           // simpleIntegral: ['AB', 'sym', true, null, 0.1],
+          //           // int: {
+          //           //   content: [
+          //           //     'a',
+          //           //     { strike: {
+          //           //       content: 'AB',
+          //           //       symbol: 's5_strike',
+          //           //       inSize: false,
+          //           //       space: 0.2,
+          //           //     },
+          //           //     },
+          //           //     'c',
+          //           //   ],
+          //           //   // from: 'asdfjhalsdf',
+          //           //   // to: { box: ['2', 'box1'] },
+          //           //   symbol: 'sym',
+          //           //   // height: 1,
+          //           //   limitsPosition: 'side',
+          //           //   limitsOverContent: false,
+          //           //   // fromOffset: [-0.5, 0],
+          //           //   // toOffset: [0.1, 0.1],
+          //           //   // fromOffset: [-0.1, -0.1],
+          //           //   // fromSpace: 0,
+          //           //   // toSpace: 0,
+          //           //   // inSize: false,
+          //           //   // fromScale: 1,
+          //           //   // toScale: 1,
+          //           //   // scale: 0.6,
+          //           //   // yOffset: 0.3,
+          //           //   topSpace: 0.1,
+          //           //   bottomSpace: 0.1,
+          //           // },
+          //           root: {
+          //             symbol: 'rad',
+          //             content: 'AB',
+          //             root: '2',
+          //             // rootOffset: [0, 0],
+          //           },
+          //           // matrix: {
+          //           //   left: 'lb1',
+          //           //   right: 'rb1',
+          //           //   order: [2, 2],
+          //           //   content: ['a', '5', { frac: ['3', '2', 'v'] }, '7'],
+          //           //   fit: 'min',
+          //           //   space: [0.1, 0.1],
+          //           //   vAlign: 'baseline',
+          //           //   brac: { insideSpace: 0.1, inSize: true },
+          //           // },
+          //           // bar: ['a', 'arrow'],
+          //           // simpleIntegral: ['AB', 'sym', '4', { box: ['5', 'box1'] }],
+          //           // space: number = 0.03,
+          //           // overhang: number | null = 0,
+          //           // barLength: number | null = null,
+          //           // left: number | null = null,
+          //           // right: number | null = null,
+          //           // top: number | null = null,
+          //           // bottom: number | null = null,
+          //           // inSize: boolean = true,
+          //           // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
+          //           // topComment: ['angle', 'opp', 'lb', 0.05, 0.05],
+          //           // annotate: {
+          //           //   content: 'angle',
+          //           //   withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+          //           // },
+          //         },
+          //         0, 0, 0, 0,
+          //       ],
+          //     },
+          //     'box',
+          //     true,
+          //   ],
+          // }
           ],
           alignment: {
             fixTo: 'equals',
             alignH: 'right',
           },
         },
+        // 'asd': {
+        //   content: ['vert', 'equals', 'func', {
+        //     box: [
+        //       {
+        //         pad: [
+        //           {
+        //             // intLimits: {
+        //             //   content: 'bbb_2',
+        //             //   from: '4',
+        //             //   to: { box: ['5', 'box1'] },
+        //             //   symbol: 'sym',
+        //             //   // height: 1,
+        //             //   limitsPosition: 'top',
+        //             // },
+        //             // frac: [['a', 'b'], 'v', '5'],
+        //             root: {
+        //               symbol: 'rad',
+        //               content: { frac: [['a', 'b'], 'v', '5'] },
+        //               root: '2',
+        //             },
+        //             // simpleIntegral: ['AB', 'sym', true, null, 0.1, null, null, null, 1],
+        //             // brac: ['angle', 'lb', 'rb', true, 0.05, 0.05, 0.05, 0.05, null, null, null, null],
+        //             // space: number = 0.03,
+        //             // overhang: number | null = 0,
+        //             // barLength: number | null = null,
+        //             // left: number | null = null,
+        //             // right: number | null = null,
+        //             // top: number | null = null,
+        //             // bottom: number | null = null,
+        //             // inSize: boolean = true,
+        //             // bar: ['angle', 'lb', 'right', 0.1, 0.1, null, null, null, null, null, false],
+        //             // bottomComment: [
+        //             //   { topComment: ['angle', 'opp', 'lb', 0.05, 0.05] },
+        //             //   'sine',
+        //             //   'rb',
+        //             // ],
+        //             // annotate: {
+        //             //   content: {
+        //             //     annotate: {
+        //             //       content: 'angle',
+        //             //       withAnnotations: ['opp', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+        //             //     },
+        //             //   },
+        //             //   withAnnotations: ['sine', 'center', 'top', 'center', 'bottom', 0.5, 0, 0.1],
+        //             // },
+        //           },
+        //           0, 0, 0, 0,
+        //         ],
+        //       },
+        //       'box',
+        //     ],
+        //   }],
+        //   // content: ['vert', 'equals', 'func', {
+        //   //   brac: [{ frac: ['angle', 'opp', 'v1'] }, 'lb', 'rb', 0.0, 0.2, 0.06, 0.02],
+        //   //   // brac: ['angle', 'lb', 'rb', 0.05, 0.2, 0.06, 0.02],
+        //   // }],
+        //   alignment: {
+        //     fixTo: 'equals',
+        //     alignH: 'right',
+        //   },
+        // },
         '0sine1': {
           content: [
             'vert',
@@ -644,6 +914,20 @@ export default function diagramLayout() {
               },
             }, 'rb'],
           },
+          // 'minus1',
+          // {
+          //   annotate: {
+          //     content: 'sin1',
+          //     annotation: {
+          //       content: '4',
+          //       xPosition: 1,
+          //       yPosition: 1,
+          //       xAlign: 0,
+          //       yAlign: 0,
+          //       scale: 0.5,
+          //     },
+          //   },
+          // },
           ],
           alignment: {
             fixTo: 'equals',

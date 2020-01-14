@@ -53,11 +53,7 @@ class Content extends PresentationFormatContent {
     const eqn = coll._eqn;
 
     let commonContent = {
-      setContent: 'Consider a |right angle triangle| with |hypotenuse| 1, and |angle| 40º.',
-      modifiers: {
-        hypotenuse: coll.bindAccent(fig._line),
-        angle: coll.bindAccent(fig._real),
-      },
+      setContent: 'Start with a |line| of |length 1| that can be rotated between |0º_and_90º|.',
     };
     let common = {
       setEnterState: () => {
@@ -71,303 +67,26 @@ class Content extends PresentationFormatContent {
           coll.resetRotation(done, 0.8);
         }
       },
-      setSteadyState: () => {
-        coll.updateRotation();
-      },
-      setLeaveState: () => {
-        fig._line._line.isTouchable = true;
-      },
-    };
-    let commonShow = {
-      show: [
-        fig._line, fig._h, fig._real, fig._hypotenuse,
-        fig._v, fig._right, // fig._sineTheta,
-      ],
       setEqnForms: [
         [fig._hypotenuse._label, '0'],
       ],
+      setSteadyState: () => {
+        coll.updateRotation();
+      },
     };
-    this.addSection(common, commonShow, commonContent, {
+    this.addSection(common, commonContent, {
       title: 'Introduction',
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Any two triangles with the same |AAS| combination of properties, will be |congruent|.'),
       modifiers: {
-        AAS: this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
-        congruent: this.qr('Math/Geometry_1/CongruentTriangles/base/CongruentTriangles'),
+        '0º_and_90º': click(coll.gotoRotation, [coll, null, 0.8, null], colors.lines),
+        line: coll.bindAccent(fig._line),
       },
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Therefore |all| right angle triangles with a 40º angle and a hypotenuse of 1 will be |congruent|. This means the |unknown_sides| can have |only one set of values|.'),
-      modifiers: {
-        unknown_sides: coll.bindAccent(fig, ['v', 'h']),
-        congruent: this.qr('Math/Geometry_1/CongruentTriangles/base/CongruentTriangles'),
-      },
-    };
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'If we measure the side |opposite| the |angle|, we will see it is |0_643|.'),
-      modifiers: {
-        '0_643': highlightWord('0.643', colors.components),
-        angle: coll.bindAccent(fig._real),
-      },
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        opposite: this.bindNext(colors.components),
-      },
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-    commonShow = {
       show: [
-        fig._line, fig._h, fig._real, fig._hypotenuse,
-        fig._right, fig._opp,
+        fig._line, fig._x, fig._real, fig._hypotenuse, //  fig._arc,
       ],
-      setEqnForms: [
-        [fig._hypotenuse._label, '0'],
-        [fig._sineTheta._label, '0'],
-      ],
-    };
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        opposite: coll.bindAccent(fig._opp),
-      },
-      transitionFromPrev: (done) => {
-        coll.accent(fig._opp, done);
-      },
       setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
+        fig._line.setRotation(Math.PI / 4);
       },
     });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Therefore if we see |any| right angle triangle with a |40º_angle_| and |hypotenuse_of_1|, we will |know| the side length |opposite| the |40º_angle| is |0_643|.'),
-      modifiers: {
-        '0_643': highlightWord('0.643', colors.components),
-        '40º_angle': highlight(colors.angles),
-        '40º_angle_': coll.bindAccent(fig._real),
-        hypotenuse_of_1: coll.bindAccent(fig._line),
-        opposite: coll.bindAccent(fig._opp),
-      },
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Conversely, if we ever see a right angle triangle with a |hypotenuse_of_1|, and |side_length_of_0.643|, we will know the |opposite_angle_is_40º|.'),
-      modifiers: {
-        'side_length_of_0.643': coll.bindAccent(fig._opp),
-        hypotenuse_of_1: coll.bindAccent(fig._line),
-        opposite_angle_is_40º: coll.bindAccent(fig._real),
-      },
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // commonContent = {
-    //   setContent: style({}, 'Now, triangles that have the same angles are |similar_triangles|, that have |corresponding side lengths| scaled by the same factor.'),
-    //   modifiers: {
-    //     similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-    //   },
-    // };
-
-    // this.addSection(common, commonShow, commonContent, {
-    //   setSteadyState: () => {
-    //     fig._line.setRotation(Math.PI / 18 * 4);
-    //     coll.updateRotation();
-    //     fig._line._line.isTouchable = false;
-    //   },
-    // });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Now, if we |change| the length of the hypotenuse but keep the angles the |same|, then the new triangle is |similar| to the |original|.'),
-      modifiers: {
-        change: click(coll.setLineLength, [coll, null, true, null, true], colors.lines),
-        similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-        same: coll.bindAccent(fig, ['real', 'right']),
-        original: click(coll.setLineLength, [coll, layout.r, true, null, true], colors.lines),
-      },
-    };
-
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._real,
-        fig._right, fig._opp,
-      ],
-    };
-    this.addSectionEqnStep(
-      {
-        eqns: [
-          [fig._sineTheta._label, '0', '0'],
-          [fig._hypotenuse._label, '0', '0'],
-        ],
-      }, common, commonShow, commonContent,
-      {
-        setSteadyState: () => {
-          fig._line.setRotation(Math.PI / 18 * 4);
-          coll.updateRotation();
-          fig._line._line.isTouchable = false;
-        },
-      },
-    );
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'As |similar_triangles| have |equally scaled| corresponding sides, then if we scale the hypotenuse by |r|, then the opposite side must also scale by |r|.'),
-      modifiers: {
-        similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
-      },
-    };
-
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._real,
-        fig._right, fig._opp,
-      ],
-    };
-    this.addSectionEqnStep(
-      {
-        eqns: [
-          [fig._sineTheta._label, '0', '0'],
-          [fig._hypotenuse._label, '0', '0'],
-        ],
-      }, common, commonShow, commonContent,
-      {
-        setSteadyState: () => {
-          fig._line.setRotation(Math.PI / 18 * 4);
-          coll.updateRotation();
-          fig._line._line.isTouchable = false;
-        },
-      },
-    );
-    this.addSectionEqnStep(
-      {
-        eqns: [
-          [fig._sineTheta._label, '0', '1'],
-          [fig._hypotenuse._label, '0', '1'],
-        ],
-      }, common, commonShow, commonContent,
-      {
-        setSteadyState: () => {
-          fig._line.setRotation(Math.PI / 18 * 4);
-          coll.updateRotation();
-          fig._line._line.isTouchable = false;
-        },
-      },
-    );
-    this.addSectionEqnStep(
-      {
-        eqns: [
-          [fig._sineTheta._label, '1', '2'],
-          [fig._hypotenuse._label, '1', '2'],
-        ],
-      }, common, commonShow, commonContent,
-      {
-        setSteadyState: () => {
-          fig._line.setRotation(Math.PI / 18 * 4);
-          coll.updateRotation();
-          fig._line._line.isTouchable = false;
-        },
-      },
-    );
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643 times the hypotenuse|.'),
-      modifiers: {
-        '40º_angle': coll.bindAccent(fig._real),
-        opposite: coll.bindAccent(fig._opp),
-      },
-    };
-
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._real,
-        fig._right, fig._opp,
-      ],
-      setEqnForms: [
-        [fig._sineTheta._label, '2'],
-        [fig._hypotenuse._label, '2'],
-      ],
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
-
 
     // **********************************************************************
     // **********************************************************************
@@ -600,7 +319,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'The name we use for this function is |sine|, though sometimes just |sin| is also used.',
     };
-    commonShow = {
+    let commonShow = {
       show: [
         fig._line, fig._x, fig._theta, fig._hypotenuse,
         fig._v, fig._right, fig._sineTheta,

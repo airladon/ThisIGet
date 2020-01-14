@@ -153,7 +153,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (length == null) {
       const delta = rand(this.layout.r * 0.2, this.layout.r * 0.3);
       newLength = currentLength;
-      if (currentLength > this.layout.r * 1.2) {
+      if (currentLength > this.layout.r * 0.7) {
         newLength -= delta;
       } else {
         newLength += delta;
@@ -185,7 +185,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     const theta = this._fig._theta;
     const right = this._fig._right;
     const real = this._fig._real;
-    const opp = this._fig._opp;
     const sineTheta = this._fig._sineTheta;
     const sine = this._fig._sine;
     const h = this._fig._h;
@@ -201,11 +200,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (v.isShown) {
       v.setEndPoints([p2.x, 0], [p2.x, p2.y]);
     }
-    if (opp.isShown) {
-      opp.setEndPoints([p2.x, 0], [p2.x, p2.y]);
-    }
     if (this._fig._mirrorV) {
       this._fig._mirrorV.setEndPoints([p2.x, 0], [p2.x, -p2.y]);
+    }
+
+    if (length !== this.layout.r) {
+      hypotenuse._label.setOpacity(0);
+    } else {
+      hypotenuse._label.setOpacity(1);
     }
 
     const opacity = {
@@ -302,13 +304,6 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
       // console.log(arcAngle * 180 / Math.PI)
       this._fig._mirrorArc.setAngleToDraw(arcAngle + 0.005);
-    }
-    if (length !== this.layout.r) {
-      hypotenuse._label.setOpacity(0);
-      sineTheta._label.setOpacity(0);
-    } else {
-      hypotenuse._label.setOpacity(1);
-      sineTheta._label.setOpacity(1);
     }
     this.diagram.animateNextFrame();
   }
