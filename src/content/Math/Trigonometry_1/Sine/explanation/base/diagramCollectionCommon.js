@@ -461,4 +461,30 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.accent(this._fig._oppLabel, done);
     });
   }
+
+  tableForm(fromForm: string, toForm: string, fromOnly: boolean = true) {
+    const elements = [];
+    Object.keys(this._table.elements).forEach((elementName) => {
+      if (elementName.slice(0, 4) === 'eqn_') {
+        const element = this._table.elements[elementName];
+        if (fromOnly) {
+          elements.push([element, fromForm]);
+        } else {
+          elements.push([element, fromForm, toForm]);
+        }
+      }
+    });
+    return elements;
+  }
+
+  showTableForms(angleForm: string, sineForm: string, valuesForm: string) {
+    Object.keys(this._table.elements).forEach((elementName) => {
+      if (elementName.slice(0, 4) === 'eqn_') {
+        const element = this._table.elements[elementName];
+        element.showForm(valuesForm);
+      }
+    });
+    this._table._angleHeading.showForm(angleForm);
+    this._table._sineHeading.showForm(sineForm);
+  }
 }

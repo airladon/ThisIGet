@@ -52,6 +52,7 @@ class Content extends PresentationFormatContent {
     const coll = diag._collection;
     const fig = coll._fig;
     const eqn = coll._eqn;
+    const tab = coll._table;
 
     let commonContent = {
       setContent: 'Consider a |right angle triangle| with |hypotenuse| 1, and |angle| 40º.',
@@ -881,17 +882,30 @@ class Content extends PresentationFormatContent {
     }, common, commonShow, commonContent, {
       fadeInFromPrev: false,
     });
+    commonContent = { setContent: [...text], modifiers };
     this.addSectionEqnStep({
       eqns: [
         [eqn, 'baseTimesRToHypR', 'hypR', 2],
         [fig._hypotenuse._label, 'realTimesR', 'realTimesR', 2],
         [fig._oppLabel._label, 'realTimesR', 'realTimesR', 2],
+        ...coll.tableForm('base', 'baseTimesR', false),
+        [tab._sineHeading, 'opp', 'oppHyp1'],
+        [tab._angleHeading, 'angle', 'angleToTheta'],
       ],
       duration: 2,
     }, common, commonShow, commonContent, {
       fadeInFromPrev: false,
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, tab,
+      ],
+      setSteadyState: () => {
+        // tab.showAll();
+      },
     });
 
+
+  // Rename table heading "opposite" to "Function"
 
 
     

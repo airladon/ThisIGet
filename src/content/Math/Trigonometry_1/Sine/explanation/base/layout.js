@@ -8,6 +8,8 @@ const {
   // Line,
 } = Fig.tools.g2;
 
+const { round } = Fig.tools.math;
+
 const { DiagramFont } = Fig;
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
@@ -1030,10 +1032,182 @@ export default function diagramLayout() {
     },
   };
 
+  const cell = (name, text, x, y, color) => ({
+    name,
+    method: 'text',
+    options: {
+      text,
+      hAlign: 'center',
+      vAlign: 'baseline',
+      color,
+      position: [x, y],
+      size: 0.15,
+      style: 'normal',
+    },
+  });
+
+  const sineCell = (name, a, x, y) => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.7,
+      elements: {
+        value: { text: `${round(Math.sin(a * Math.PI / 180), 3)}`, color: colors.components },
+        r: { color: colors.lines },
+        times: { text: ' \u00D7 ', color: colors.lines },
+      },
+      defaultFormAlignment: {
+        fixTo: 'value',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        'base': ['value'],
+        'baseTimesR': ['value', 'times', 'r'],
+        'baseR': a === 0 ? ['value'] : ['value', 'r'],
+      },
+      position: [x, y],
+    },
+  });
+
+  const angleHeading = (x, y) => ({
+    name: 'angleHeading',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        angle: { color: colors.angles },
+        brace: {
+          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.angles,
+        },
+        theta: { text: '\u03B8', color: colors.angles },
+      },
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        angle: 'angle',
+        angleToTheta: {
+          topComment: {
+            content: 'angle',
+            comment: 'theta',
+            symbol: 'brace',
+          },
+        },
+        theta: 'theta',
+      },
+      position: [x, y],
+    },
+  });
+
+  const sineHeading = (x, y) => ({
+    name: 'sineHeading',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        opp: { text: 'opposite', color: colors.components },
+        hyp1: { text: 'hypotenuse = 1', color: colors.components },
+        hypR: { text: 'hypotenuse = r', color: colors.components },
+        // brace: {
+        //   symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.angles,
+        // },
+        func: { text: 'function' },
+        theta: { text: '\u03B8', color: colors.angles },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+      },
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        opp: 'opp',
+        oppHyp1: {
+          content: {
+            bottomComment: {
+              content: 'opp',
+              comment: 'hyp1',
+              scale: 0.5,
+            },
+          },
+          alignment: {
+            alignV: 0.1,
+          },
+        },
+        oppHypR: {
+          content: {
+            bottomComment: {
+              content: 'opp',
+              comment: 'hypR',
+              scale: 0.5,
+            },
+          },
+          alignment: {
+            alignV: 0.1,
+          },
+        },
+        func: [
+          'func',
+          { brac: ['lb', 'theta', 'rb'] },
+        ],
+      },
+      position: [x, y],
+    },
+  });
+
+  const createTableElements = (angles) => {
+    const elements = [];
+    const x = 0.8;
+    const y = 0.15;
+    elements.push(angleHeading(0, 0.25));
+    elements.push(sineHeading(x, 0.25));
+    elements.push({
+      name: 'line',
+      method: 'line',
+      options: {
+        p1: [-0.25, 0.16],
+        p2: [x + 0.4, 0.16],
+        lineWidth: 0.01,
+        color: colors.diagram.text.base,
+      },
+    });
+    angles.forEach((a, index) => {
+      if (typeof a === 'number') {
+        elements.push(cell(`${index}`, `${a}º`, 0, 0 - index * y, colors.angles));
+        elements.push(sineCell(`eqn_${index}`, a, x, 0 - index * y));
+      } else {
+        elements.push(cell(`${index}`, '\u22EE', 0, 0 - index * y, colors.angles));
+        elements.push(cell(`${index}_1`, '\u22EE', x, 0 - index * y, colors.components));
+      }
+    });
+    return elements;
+  };
+  const table = {
+    name: 'table',
+    method: 'collection',
+    addElements: [
+      // cell('0', '0º', 0),
+      // cell('1', '1º', -0.15),
+      // cell('2', '2º', -0.3),
+      // cell('d1', '\u22EE', -0.45),
+      // cell('43', '43º', -0.6),
+      ...createTableElements([0, 1, 2, 'd', 39, 40, 41, 'd', 59, 60, 61, 'd', 90]),
+    ],
+    options: {
+      position: [1, 0.5],
+    },
+  };
+
   layout.addElements = [
     fig,
     // triangle,
     eqn,
+    table,
   ];
   return layout;
 }
