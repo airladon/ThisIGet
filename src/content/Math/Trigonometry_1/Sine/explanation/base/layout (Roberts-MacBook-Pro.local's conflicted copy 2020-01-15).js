@@ -74,7 +74,7 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center', alignV: 'middle' },
       },
-      'opposite': {
+      'opp': {
         content: {
           container: {
             content: ['opposite'],
@@ -1214,3 +1214,4 @@ export default function diagramLayout() {
   ];
   return layout;
 }
+

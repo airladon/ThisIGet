@@ -378,7 +378,6 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     }
     box.surround(eqn, childrenToUse, space);
     box.showAll();
-    box.
     this.accent(box, done);
   }
 

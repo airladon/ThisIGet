@@ -1051,8 +1051,8 @@ class PresentationFormatContent extends SimpleFormatContent {
           eqn: { eqn: Equation } & Equation,  // or navigator
           from: string,                       // From form
           to: string,                         // To Form
-          animate?: 'dissolve' | 'move',
           duration?: number,
+          animate?: 'dissolve' | 'move',
         } |
         Array<{ eqn: Equation } & Equation | string | 'dissolve' | 'move' | number>>,
       duration?: number,                   // duration
@@ -1070,15 +1070,13 @@ class PresentationFormatContent extends SimpleFormatContent {
     let { eqn } = options;
     if (eqns == null) {
       const {
-        from, to, animate, duration,
+        from, to, duration, animate,
       } = options;
       eqns = [{
-        eqn, from, to, animate, duration,
+        eqn, from, to, duration, animate,
       }];
     }
     const equations = [];
-    let maxDuration = -1;
-    let maxDurationIndex = -1;
     eqns.forEach((e, index) => {
       let to;
       let from;
@@ -1106,11 +1104,6 @@ class PresentationFormatContent extends SimpleFormatContent {
         animate: options.animate,
       });
       equations.push(newEqn);
-
-      if (newEqn.duration > maxDuration && from !== to) {
-        maxDuration = newEqn.duration;
-        maxDurationIndex = index;
-      }
     });
 
     let setEqnForms = [() => {
@@ -1128,27 +1121,33 @@ class PresentationFormatContent extends SimpleFormatContent {
         if (userSections.transitionEqnForms != null) {
           callback = userSections.transitionEqnForms.bind(userSections, done);
         }
-        if (this.comingFrom !== 'prev') {
+        if (this.comingFrom !== 'prev' || equations.length === 0) {
           callback();
           return;
         }
-        equations.forEach((e, index) => {
+        let count = 0;
+        const callBackSet = () => {
+          count += 1;
+          if (count === equations.length) {
+            callback();
+          }
+        };
+        equations.forEach((e) => {
           if (e.from === e.to) {
+            callBackSet();
             return;
           }
+          e.eqn.showForm(e.from);
           e.eqn.goToForm({
             name: e.to,
             duration: e.duration,
-            callback: index === maxDurationIndex ? callback : null,
+            callback: callBackSet,
             animate: e.animate,
           });
           if (e.nav != null) {
             e.nav.updateButtons();
           }
         });
-        if (maxDurationIndex === -1) {
-          callback();
-        }
       },
       setSteadyState: () => {
         equations.forEach((e) => {
