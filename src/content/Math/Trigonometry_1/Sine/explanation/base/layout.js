@@ -611,6 +611,98 @@ export default function diagramLayout() {
         alignV: 'baseline',
       },
       forms: {
+        'base': {
+          content: [
+            {
+              bottomComment: {
+                content: 'opp',
+                comment: 'hyp1',
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+            'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'baseTimesR': {
+          content: [
+            'r', 'times',
+            {
+              bottomComment: {
+                content: 'opp',
+                comment: 'hyp1',
+                inSize: false,
+                scale: 0.5,
+              },
+            },
+            'equals',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'baseTimesRToHypR': {
+          content: [
+            {
+              topComment: {
+                content: [
+                  'r', 'times',
+                  {
+                    bottomComment: {
+                      content: 'opp',
+                      comment: 'hyp1',
+                      inSize: false,
+                      scale: 0.5,
+                    },
+                  },
+                ],
+                comment: {
+                  bottomComment: {
+                    content: 'opp1',
+                    comment: 'hypr',
+                    scale: 0.6,
+                    insize: false,
+                  },
+                },
+                symbol: 'brace1',
+                inSize: false,
+              },
+            },
+            'equals',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'hypR': {
+          content: [
+            {
+              bottomComment: {
+                content: 'opp1',
+                comment: 'hypr',
+                scale: 0.6,
+                insize: false,
+              },
+            },
+            'equals',
+            'r_1', 'times1',
+            'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
         '0': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
           ],
@@ -930,7 +1022,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [-0.3, -1.6] },
+        default: { position: [-1.5, -1.6] },
         left: { position: [-1.3, -1.6] },
         // default: { position: [-2, 0] },
       },
