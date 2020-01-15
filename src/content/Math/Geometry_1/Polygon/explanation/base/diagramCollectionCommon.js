@@ -146,7 +146,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (eqnElementsToPulse != null && eqnElementsToPulse.length > 0) {
       trigger = () => {
         this._eqnTot._box.show();
-        this.accentEqn(this._eqnTot, eqnElementsToPulse || [], 'box', [0.02, 0.05]);
+        this.accentEqn(this._eqnTot, eqnElementsToPulse || [], this._box, [0.02, 0.05]);
       };
       triggerDuration = 1;
     }

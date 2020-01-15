@@ -74,7 +74,7 @@ export default function diagramLayout() {
         scale: 0.9,
         alignment: { alignH: 'center', alignV: 'middle' },
       },
-      'opposite': {
+      'opp': {
         content: {
           container: {
             content: ['opposite'],
@@ -1065,7 +1065,7 @@ export default function diagramLayout() {
       forms: {
         'base': ['value'],
         'baseTimesR': ['value', 'times', 'r'],
-        'baseR': a === 0 ? ['value'] : ['value', 'r'],
+        'baseR': a === 0 ? ['value'] : ['value', ' ', 'r'],
       },
       position: [x, y],
     },
@@ -1080,7 +1080,7 @@ export default function diagramLayout() {
       elements: {
         angle: { color: colors.angles },
         brace: {
-          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.angles,
+          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.working,
         },
         theta: { text: '\u03B8', color: colors.angles },
       },
@@ -1163,14 +1163,14 @@ export default function diagramLayout() {
   const createTableElements = (angles) => {
     const elements = [];
     const x = 0.8;
-    const y = 0.15;
+    const y = 0.16;
     elements.push(angleHeading(0, 0.25));
     elements.push(sineHeading(x, 0.25));
     elements.push({
       name: 'line',
       method: 'line',
       options: {
-        p1: [-0.25, 0.16],
+        p1: [-0.3, 0.16],
         p2: [x + 0.4, 0.16],
         lineWidth: 0.01,
         color: colors.diagram.text.base,
@@ -1201,6 +1201,9 @@ export default function diagramLayout() {
     options: {
       position: [1, 0.5],
     },
+    mods: {
+      pulseDefault: { scale: 1.15 },
+    },
   };
 
   layout.addElements = [
@@ -1211,3 +1214,4 @@ export default function diagramLayout() {
   ];
   return layout;
 }
+

@@ -376,8 +376,9 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     } else {
       childrenToUse = [children];
     }
-    box.custom.setSize(eqn, childrenToUse, space);
+    box.surround(eqn, childrenToUse, space);
     box.showAll();
+    box.
     this.accent(box, done);
   }
 

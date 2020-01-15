@@ -22,6 +22,7 @@ const {
   // centerV,
 } = Fig.tools.html;
 
+const  { Transform } = Fig;
 const { round } = Fig.tools.math;
 
 const layout = diagramLayout();
@@ -494,14 +495,14 @@ class Content extends PresentationFormatContent {
       return [table, tableModifiers];
     };
 
-    let text = 'We can then |measure| the length of the |opposite| side for different |angles| when the hypotenuse is |1|, and make a |reference_table|.';
+    let text = '';
     commonContent = {
-      setContent: text,
+      setContent: 'We can then |measure| the length of the |opposite| side for different |angles| when the hypotenuse is |1|, and make a |reference_table|.',
       modifiers: {
         measure: click(coll.measureAngles, [coll, null], colors.components),
         opposite: coll.bindAccent(fig._opp),
         angles: coll.bindAccent(fig._theta),
-        reference_table: this.bindNext(),
+        reference_table: this.bindNext(colors.diagram.action),
       },
     };
 
@@ -519,18 +520,28 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonShow, commonContent, {
     });
 
-    let [tableContent, modifiers] = makeTable(
-      '<span class="angle_text">angle</span>',
-      '<span class="component_text">opposite</span>',
-      [0, 1, 2, 3, 'dots', 43, 44, 45, 46, 47, 'dots', 90],
-    );
-    commonContent = { setContent: [text, tableContent], modifiers };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        [fig._oppLabel._label, 'real'],
+        [fig._hypotenuse._label, 'real'],
+        // ...coll.tableForm('base'),
+        // [tab._sineHeading, 'opp'],
+        // [tab._angleHeading, 'angle'],
+      ],
+    };
+    
+    // commonContent = { setContent: [text, tableContent], modifiers };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
         measure: click(coll.measureAngles, [coll, null], colors.components),
         opposite: coll.bindAccent(fig._opp),
         angles: coll.bindAccent(fig._theta),
-        reference_table: click(coll.pulseTable, [coll], colors.diagram.action),
+        reference_table: coll.bindAccent(tab, colors.diagram.action),
       },
       transitionReset: (done) => {
         coll.updateRotation();
@@ -546,26 +557,21 @@ class Content extends PresentationFormatContent {
         }
       },
       transitionFromPrev: (done) => {
-        const angleTable = document.getElementById('angle_table');
-        if (angleTable != null) {
-          angleTable.classList.add('angle_table_hide');
-        }
-
         fig.animations.new()
           .scenario({ target: 'left', duration: 2 })
           .trigger({
             callback: () => {
-              if (angleTable != null) {
-                angleTable.classList.remove('angle_table_hide');
-                angleTable.classList.add('topic__diagram_text_fade_in');
-              }
+              coll.showTableForms('angle', 'opp', 'base');
+              tab.pulseScaleNow(1, 1.15);
             },
+            duration: 1,
           })
           .whenFinished(done)
           .start();
       },
       setSteadyState: () => {
         fig.setScenario('left');
+        coll.showTableForms('angle', 'opp', 'base');
       },
       fadeInFromPrev: false,
     });
@@ -593,86 +599,127 @@ class Content extends PresentationFormatContent {
         fig._line._line.isTouchable = true;
       },
     };
-    text = 'Similarly, if the hypotenuse is scaled by |r|, we can scale the table by |r|.';
-    commonContent = { setContent: [text, tableContent], modifiers };
+    commonContent = {
+      setContent: 'Similarly, if the hypotenuse is scaled by |r|, we can scale the table by |r|.',
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, tab,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        [fig._oppLabel._label, 'real'],
+        [fig._hypotenuse._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'opp'],
+        [tab._angleHeading, 'angle'],
+      ],
+    };
+    // commonContent = { setContent: [text, tableContent], modifiers };
     this.addSection(common, commonShow, commonContent, {
       // setSteadyState: () => {
       //   fig.setScenario('left');
       // },
-      fadeInFromPrev: false,
+      // fadeInFromPrev: false,
     });
 
-    [tableContent, modifiers] = makeTable(
+    let [tableContent, modifiers] = makeTable(
       '<span class="angle_text">angle</span>',
       '<span class="component_text">opposite</span>',
       [0, 1, 2, 3, 'dots', 43, 44, 45, 46, 47, 'dots', 90],
       true,
     );
-    commonContent = { setContent: [text, tableContent], modifiers };
-    this.addSection(common, commonShow, commonContent, {
-      transitionFromPrev: (done) => {
-        fig.setScenario('left');
-        fig._oppLabel._label.goToForm({ name: 'realTimesR', duration: 1, animate: 'move' });
-        fig._hypotenuse._label.goToForm({
-          name: 'realTimesR', duration: 1, animate: 'move', callback: done,
-        });
-        const rElements = document.querySelectorAll('.angle_table_r');
-        rElements.forEach((r) => {
-          r.classList.add('topic__diagram_text_fade_in');
-        });
-      },
+    // commonContent = { setContent: [text, tableContent], modifiers };
+    this.addSectionEqnStep({
+      eqns: [
+        [tab._sineHeading, 'opp', 'oppHypR'],
+        [fig._oppLabel._label, 'real', 'realTimesR'],
+        [fig._hypotenuse._label, 'real', 'realTimesR'],
+        ...coll.tableForm('base', 'baseTimesR', false),
+      ],
+      duration: 1,
+    }, common, commonShow, commonContent, {
       setSteadyState: () => {
-        fig._oppLabel._label.showForm('realTimesR');
-        fig._hypotenuse._label.showForm('realTimesR');
         fig.setScenario('left');
       },
-      fadeInFromPrev: false,
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    text = [
-      'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
     commonShow = {
       show: [
         fig._line, fig._h, fig._theta,
-        fig._right, fig._opp,
+        fig._right, fig._opp, tab,
       ],
       setEqnForms: [
         [fig._theta._label, 'real'],
-        [fig._oppLabel._label, 'realTimesR'],
-        [fig._hypotenuse._label, 'realTimesR'],
+        [fig._oppLabel._label, 'real'],
+        [fig._hypotenuse._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'oppHypR'],
+        [tab._angleHeading, 'angle'],
       ],
     };
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
-        angle: highlight(colors.angles),
-        opposite_side: highlight(colors.components),
+
+    this.addSectionEqnStep({
+      eqns: [
+        [tab._sineHeading, 'oppHypR', 'oppHypR'],
+        [fig._oppLabel._label, 'realTimesR', 'realR'],
+        [fig._hypotenuse._label, 'realTimesR', 'r'],
+        ...coll.tableForm('baseTimesR', 'baseR', false),
+      ],
+      duration: 2,
+      // animate: 'move',
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
       },
-      // setSteadyState: () => {
-      //   fig.setScenario('left');
-      // },
-      fadeInFromPrev: false,
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    text = [
-      'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
-      note({ label: 'Note:', top: 93 }, 'This is only an approximation as the table values are from measurement which is inexact.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
-    this.addSection(common, commonShow, commonContent, {
+    commonContent = {
+      setContent: [
+        'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
+      ],
       modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+        table: coll.bindAccent(tab, colors.diagram.action),
         angle: highlight(colors.angles),
         opposite_side: highlight(colors.components),
       },
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, tab,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        [fig._oppLabel._label, 'realR'],
+        [fig._hypotenuse._label, 'r'],
+        ...coll.tableForm('baseR'),
+        [tab._sineHeading, 'oppHypR'],
+        [tab._angleHeading, 'angle'],
+      ],
+    };
+    this.addSection(common, commonShow, commonContent, {
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: [
+        'For |any size| right angle triangle, if the |angle| is in the |table|, then we will have an |approximation| of the |opposite_side|.',
+        note({ label: 'Note:', top: 93 }, 'This is only an approximation as the table values are from measurement which is inexact.'),
+      ],
+      modifiers: {
+        table: coll.bindAccent(tab, colors.diagram.action),
+        angle: highlight(colors.angles),
+        opposite_side: highlight(colors.components),
+      },
+    };
+    this.addSection(common, commonShow, commonContent, {
       transitionFromPrev: (done) => {
         fig.setScenario('left');
         const noteLabel = document.querySelector('.presentation__note');
@@ -681,142 +728,125 @@ class Content extends PresentationFormatContent {
         }
         done();
       },
-      // setSteadyState: () => {
-      //   fig.setScenario('left');
-      // },
       fadeInFromPrev: false,
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    text = [
-      style({ top: 0 }, 'In the |first century CE|, instead of |measuring| the values for the |table|, |geometric techniques| were used to find |precise| side lengths for many different right angle triangles.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
+    commonContent = {
+      setContent: style({ top: 0 }, 'In the |first century CE|, instead of |measuring| the values for the |table|, |geometric techniques| were used to find |precise| side lengths for many different right angle triangles.'),
+    };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+        table: coll.bindAccent(tab, colors.diagram.action),
       },
-      // setSteadyState: () => {
-      //   fig.setScenario('left');
-      // },
-      fadeInFromPrev: false,
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    text = [
-      style({}, 'While this is a |difficult set of calculations|, it can provide sufficient resolution and accuracy for |many applications|.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
+    commonContent = {
+      setContent: style({}, 'While this is a |difficult set of calculations| that limits the number of angles, it is sufficient for |many applications|.'),
+    };
+    this.addSection(common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'Now, let\'s make this a |mathematical expression| starting with the |hypotenuse = 1| case.'),
+    };
     this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+    });
+
+    this.addSectionEqnStep({
+      eqns: [
+        [tab._sineHeading, 'oppHypR', 'oppHyp1'],
+        [fig._oppLabel._label, 'realR', 'real'],
+        [fig._hypotenuse._label, 'realR', 'real'],
+        ...coll.tableForm('baseR', 'base', false),
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        fig._oppLabel._label.showForm('real');
+        fig._hypotenuse._label.showForm('real');
+        coll.showTableForms('angle', 'oppHyp1', 'base');
       },
-      // setSteadyState: () => {
-      //   fig.setScenario('left');
-      // },
-      fadeInFromPrev: false,
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    text = [
-      style({}, 'Now, let\'s make this a |mathematical expression| starting with the |hypotenuse = 1| case.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
-    this.addSection(common, commonShow, commonContent, {
+    commonContent = {
+      setContent: style({}, 'We can see from |rotating| the hypotenuse, or looking at the |table|, that the opposite side length is |dependent on|, or |a function of| the angle.'),
       modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+        table: coll.bindAccent(tab, colors.diagram.action),
+        rotating: click(coll.gotoRotation, [coll, null, 1, null], colors.lines),
       },
-      // setSteadyState: () => {
-      //   fig.setScenario('left');
-      // },
-      fadeInFromPrev: false,
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    text = [
-      style({}, 'Now, let\'s make this a |mathematical expression| starting with the |hypotenuse = 1| case.'),
-    ];
-    [tableContent, modifiers] = makeTable(
-      '<span class="angle_text">angle</span>',
-      '<span class="component_text">opposite</span>',
-      [0, 1, 2, 3, 'dots', 43, 44, 45, 46, 47, 'dots', 90],
-      false,
-    );
-    commonContent = { setContent: [...text, tableContent], modifiers };
+    };
     commonShow = {
       show: [
         fig._line, fig._h, fig._theta,
-        fig._right, fig._opp,
+        fig._right, fig._opp, tab,
       ],
       setEqnForms: [
         [fig._theta._label, 'real'],
         [fig._oppLabel._label, 'real'],
         [fig._hypotenuse._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'oppHyp1'],
+        [tab._angleHeading, 'angle'],
       ],
     };
+    this.addSection(common, commonShow, commonContent);
+
     this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+      transitionFromPrev: (done) => {
+        eqn.setScenario('default');
+        eqn.showForm('base');
+        coll.accent(eqn, done);
       },
-      fadeInFromPrev: false,
+      setSteadyState: () => {
+        eqn.setScenario('default');
+        eqn.showForm('base');
+      },
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    text = [
-      style({}, 'We can see from |rotating| the hypotenuse, or looking at the |table|, that the opposite side length is dependent on, or |a function of| the angle.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
-        rotating: click(coll.gotoRotation, [coll, null, 1, null], colors.lines),
-      },
-      fadeInFromPrev: false,
-    });
-
+    commonContent = {
+      setContent: style({}, 'This |function| is an idealized form of the |table|, where it always provides the |exact| opposite side length for any angle.'),
+    };
     commonShow = {
       show: [
         fig._line, fig._h, fig._theta,
-        fig._right, fig._opp,
+        fig._right, fig._opp, tab,
       ],
       setEqnForms: [
+        [fig._theta._label, 'real'],
+        [fig._oppLabel._label, 'real'],
+        [fig._hypotenuse._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'oppHyp1'],
+        [tab._angleHeading, 'angle'],
         [eqn, 'base'],
-        [fig._theta._label, 'real'],
-        [fig._oppLabel._label, 'real'],
-        [fig._hypotenuse._label, 'real'],
       ],
     };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
         table: click(coll.pulseTable, [coll], colors.diagram.action),
-        rotating: click(coll.gotoRotation, [coll, null, 1, null], colors.lines),
+        function: coll.bindAccent(eqn._func, colors.diagram.action),
       },
-      fadeInFromPrev: false,
-    });
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    text = [
-      style({}, 'This |function| is an idealized form of the |table|, where it always provides the |exact| opposite side length for any angle.'),
-    ];
-    commonContent = { setContent: [...text, tableContent], modifiers };
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: click(coll.pulseTable, [coll], colors.diagram.action),
+      setSteadyState: () => {
+        eqn._func.pulseSettings.transformMethod = (s) => {
+          const bounds = eqn._func.getBoundingRect('vertex');
+          return new Transform().translate(-bounds.left - bounds.width / 2, -bounds.bottom - bounds.height / 2).scale(s, s).translate(bounds.width / 2 + bounds.left, bounds.height / 2 + bounds.bottom);
+        };
       },
-      fadeInFromPrev: false,
     });
 
     // **********************************************************************
