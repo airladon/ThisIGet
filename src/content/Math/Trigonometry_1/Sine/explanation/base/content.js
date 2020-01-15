@@ -561,6 +561,7 @@ class Content extends PresentationFormatContent {
           .scenario({ target: 'left', duration: 2 })
           .trigger({
             callback: () => {
+              tab.showAll();
               coll.showTableForms('angle', 'opp', 'base');
               tab.pulseScaleNow(1, 1.15);
             },
@@ -571,6 +572,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         fig.setScenario('left');
+        tab.showAll();
         coll.showTableForms('angle', 'opp', 'base');
       },
       fadeInFromPrev: false,
