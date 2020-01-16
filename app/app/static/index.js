@@ -22868,7 +22868,7 @@ function (_DrawingObject) {
         left = width;
       }
 
-      if (text.font.alignV === 'alphabetic') {
+      if (text.font.alignV === 'alphabetic' || text.font.alignV === 'baseline') {
         asc = ascent;
         des = descent;
       }
@@ -28203,6 +28203,11 @@ function (_DiagramElement) {
       return this.drawingObject.getGLBoundaries(this.getTransform().matrix());
     }
   }, {
+    key: "getDiagramBoundaries",
+    value: function getDiagramBoundaries() {
+      return this.drawingObject.getGLBoundaries(this.vertexToDiagramSpaceTransformMatrix());
+    }
+  }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
       return this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
@@ -28735,7 +28740,7 @@ function (_DiagramElement2) {
       var boundaries = [];
 
       if (children == null) {
-        return this.getAllBoundaries();
+        return this.getAllBoundaries(space);
       }
 
       children.forEach(function (child) {
