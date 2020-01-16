@@ -12951,8 +12951,8 @@ function (_Symbol2) {
       var maxBounds = parent.getBoundingRect('local', children);
       maxBounds.left -= space.x;
       maxBounds.bottom -= space.y;
-      maxBounds.height += 2 * space.x;
-      maxBounds.width += 2 * space.y;
+      maxBounds.width += 2 * space.x;
+      maxBounds.height += 2 * space.y;
       maxBounds.right = maxBounds.left + maxBounds.width;
       maxBounds.top = maxBounds.bottom + maxBounds.height;
       this.custom.setSize(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](maxBounds.left, maxBounds.bottom), maxBounds.width, maxBounds.height); // this.drawingObject.updateBox(

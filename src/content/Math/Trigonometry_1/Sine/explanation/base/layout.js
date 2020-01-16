@@ -1211,6 +1211,17 @@ export default function diagramLayout() {
     // triangle,
     eqn,
     table,
+    {
+      name: 'box',
+      method: 'box',
+      options: {
+        lineWidth: 0.01,
+        color: colors.angles,
+      },
+      mods: {
+        pulseDefault: { scale: 1.2 },
+      }
+    },
   ];
   return layout;
 }

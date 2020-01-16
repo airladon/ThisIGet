@@ -841,7 +841,14 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
         table: click(coll.pulseTable, [coll], colors.diagram.action),
-        function: coll.bindAccent(eqn._func, colors.diagram.action),
+        // function: coll.bindAccent(eqn._func, colors.diagram.action),
+        function: click(() => {
+          coll._box.showAll();
+          coll._box.surround(eqn, ['func', 'rb'], 0.08);
+          coll.accent(coll._box);
+          // coll._box.pulseScaleNow(1.2, 1.2)
+          // this.diagram.animateNextFrame();
+        }, [this], colors.diagram.action),
       },
       setSteadyState: () => {
         eqn._func.pulseSettings.transformMethod = (s) => {
