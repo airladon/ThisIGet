@@ -534,7 +534,7 @@ class Content extends PresentationFormatContent {
         // [tab._angleHeading, 'angle'],
       ],
     };
-    
+
     // commonContent = { setContent: [text, tableContent], modifiers };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {

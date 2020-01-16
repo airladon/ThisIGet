@@ -378,6 +378,13 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     }
     box.surround(eqn, childrenToUse, space);
     box.showAll();
+    box.pulseSettings.transformMethod = (s) => {
+      const bounds = box.getBoundingRect('vertex');
+      return new Transform()
+        .translate(-bounds.left - bounds.width / 2, -bounds.bottom - bounds.height / 2)
+        .scale(s, s)
+        .translate(bounds.width / 2 + bounds.left, bounds.height / 2 + bounds.bottom);
+    };
     this.accent(box, done);
   }
 
