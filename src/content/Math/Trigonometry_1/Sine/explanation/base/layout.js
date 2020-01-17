@@ -33,6 +33,9 @@ export default function diagramLayout() {
       r: { color: colors.lines },
       times: { text: ' \u00D7 ', color: colors.lines },
       opposite: { color: colors.components },
+      brace: {
+        symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top',
+      },
     },
     forms: {
       'real': {
@@ -65,6 +68,26 @@ export default function diagramLayout() {
         content: {
           container: {
             content: ['value', 'r'],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'realRToOpposite': {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: ['value', 'r'],
+                comment: 'opposite',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -197,6 +220,8 @@ export default function diagramLayout() {
       _1: { text: '1', color: colors.lines },
       s: { symbol: 'strike', style: 'cross', color: colors.working },
       value: { text: '1.', color: colors.line },
+      hyp: { text: 'hypotenuse', color: colors.line },
+      brace: { symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top' },
     },
     forms: {
       real: {
@@ -225,6 +250,35 @@ export default function diagramLayout() {
         content: {
           container: {
             content: ['r'],
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+        alignment: { alignH: 'center' },
+      },
+      rToHyp: {
+        content: {
+          container: {
+            content: {
+              topComment: {
+                content: ['  ', 'r', '  '],
+                comment: 'hyp',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
+            width: 0.07,
+            xAlign: 'right',
+          },
+        },
+        scale: 1,
+        alignment: { alignH: 'center' },
+      },
+      hyp: {
+        content: {
+          container: {
+            content: 'hyp',
             width: 0.07,
             xAlign: 'right',
           },
@@ -505,6 +559,7 @@ export default function diagramLayout() {
         theta3: { text: '\u03B8', color: colors.angles },
         theta4: { text: '\u03B8', color: colors.angles },
         hyp1: { text: 'hypotenuse = 1', color: colors.components },
+        hyp: { text: 'hypotenuse', color: colors.lines },
         hyp1_1: { text: 'hypotenuse = 1' },
         hypr: { text: 'hypotenuse = r', color: colors.components },
         r: { color: colors.lines },
@@ -698,6 +753,54 @@ export default function diagramLayout() {
             },
             'equals',
             'r_1', 'times1',
+            'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'hypRToGeneral': {
+          content: [
+            {
+              topComment: {
+                content: {
+                  bottomComment: {
+                    content: 'opp1',
+                    comment: 'hypr',
+                    scale: 0.6,
+                    insize: false,
+                  },
+                },
+                comment: 'opp',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
+            'equals',
+            {
+              topComment: {
+                content: ['  ', 'r_1', '  '],
+                comment: 'hyp',
+                symbol: 'brace1',
+                inSize: false,
+                contentSpace: 0.08,
+              },
+            },
+            'times1',
+            'func', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 'right',
+          },
+        },
+        'general': {
+          content: [
+            'opp',
+            'equals',
+            'hyp',
+            'times1',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -1113,11 +1216,12 @@ export default function diagramLayout() {
         opp: { text: 'opposite', color: colors.components },
         hyp1: { text: 'hypotenuse = 1', color: colors.components },
         hypR: { text: 'hypotenuse = r', color: colors.components },
-        // brace: {
-        //   symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.angles,
-        // },
+        brace: {
+          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.working,
+        },
         func: { text: 'function' },
         theta: { text: '\u03B8', color: colors.angles },
+        angle: { color: colors.angles },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
       },
@@ -1151,10 +1255,29 @@ export default function diagramLayout() {
             alignV: 0.1,
           },
         },
-        func: [
-          'func',
-          { brac: ['lb', 'theta', 'rb'] },
-        ],
+        oppHyp1ToFunc: {
+          content: {
+            topComment: {
+              content: {
+                bottomComment: {
+                  content: 'opp',
+                  comment: 'hyp1',
+                  scale: 0.5,
+                },
+              },
+              comment: ['func', { brac: ['lb', 'angle', 'rb'] }],
+              symbol: 'brace',
+              inSize: false,
+            },
+          },
+          alignment: {
+            alignV: 0.1,
+          },
+        },
+        func: {
+          content: ['func', { brac: ['lb', 'angle', 'rb'] }],
+          scale: 0.9,
+        },
       },
       position: [x, y],
     },
@@ -1174,7 +1297,7 @@ export default function diagramLayout() {
 
   const createTableElements = (angles) => {
     const elements = [];
-    const x = 0.8;
+    const x = 1;
     const y = 0.16;
     elements.push(angleHeading(0, 0.25));
     elements.push(sineHeading(x, 0.25));
@@ -1183,7 +1306,7 @@ export default function diagramLayout() {
       method: 'line',
       options: {
         p1: [-0.3, 0.16],
-        p2: [x + 0.4, 0.16],
+        p2: [x + 0.6, 0.16],
         lineWidth: 0.01,
         color: colors.diagram.text.base,
       },

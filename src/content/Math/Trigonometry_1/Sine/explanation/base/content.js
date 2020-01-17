@@ -822,6 +822,21 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({}, 'This |function| is an idealized form of the |table|, where it always provides the |exact| opposite side length for any angle.'),
+      modifiers: {
+        // table: click(coll.pulseTable, [coll], colors.diagram.action),
+        table: click(() => {
+          coll._box2.showAll();
+          this.diagram.setFirstTransform();
+          coll._box2.surround(tab, '', 0.08, 'diagram');
+          coll.accent(coll._box2);
+        }, [this], colors.diagram.action),
+        // function: coll.bindAccent(eqn._func, colors.diagram.action),
+        function: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(eqn, ['func', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+      },
     };
     commonShow = {
       show: [
@@ -839,26 +854,144 @@ class Content extends PresentationFormatContent {
       ],
     };
     this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        // table: click(coll.pulseTable, [coll], colors.diagram.action),
-        table: click(() => {
-          coll._box2.showAll();
-          this.diagram.setFirstTransform();
-          coll._box2.surround(tab, '', 0.08, 'diagram');
-          coll.accent(coll._box2);
-        }, [this], colors.diagram.action),
-        // function: coll.bindAccent(eqn._func, colors.diagram.action),
-        function: click(() => {
-          coll._box1.showAll();
-          coll._box1.surround(eqn, ['func', 'rb'], 0.08);
-          coll.accent(coll._box1);
-        }, [this], colors.diagram.action),
-      },
+      // setSteadyState: () => {
+      //   eqn._func.pulseSettings.transformMethod = (s) => {
+      //     const bounds = eqn._func.getBoundingRect('vertex');
+      //     return new Transform().translate(-bounds.left - bounds.width / 2, -bounds.bottom - bounds.height / 2).scale(s, s).translate(bounds.width / 2 + bounds.left, bounds.height / 2 + bounds.bottom);
+      //   };
+      // },
+    });
+    this.addSectionEqnStep({
+      eqns: [[tab._sineHeading, 'oppHyp1', 'oppHyp1ToFunc']],
+      duration: 2,
+    }, common, commonShow, commonContent, {
       setSteadyState: () => {
-        eqn._func.pulseSettings.transformMethod = (s) => {
-          const bounds = eqn._func.getBoundingRect('vertex');
-          return new Transform().translate(-bounds.left - bounds.width / 2, -bounds.bottom - bounds.height / 2).scale(s, s).translate(bounds.width / 2 + bounds.left, bounds.height / 2 + bounds.bottom);
-        };
+        tab._sineHeading.showForm('opHyp1ToFunc');
+      },
+    });
+
+    this.addSectionEqnStep({
+      eqns: [[tab._sineHeading, 'oppHyp1ToFunc', 'func']],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        tab._sineHeading.showForm('func');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'Now, when we scale the hypotenuse by |r|, the mathematical expression also scales by |r|.'),
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, tab,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        // [fig._oppLabel._label, 'real'],
+        // [fig._hypotenuse._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'func'],
+        [tab._angleHeading, 'angle'],
+        // [eqn, 'base'],
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'base', 'baseTimesR'],
+        [fig._oppLabel._label, 'real', 'realTimesR'],
+        [fig._hypotenuse._label, 'real', 'realTimesR'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('baseTimesR');
+        fig._oppLabel._label.showForm('realTimesR');
+        fig._hypotenuse._label.showForm('realTimesR');
+      },
+    });
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'baseTimesR', 'baseTimesRToHypR'],
+        [fig._oppLabel._label, 'realTimesR', 'realTimesR'],
+        [fig._hypotenuse._label, 'realTimesR', 'realTimesR'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('baseTimesRToHypR');
+        fig._oppLabel._label.showForm('realTimesR');
+        fig._hypotenuse._label.showForm('realTimesR');
+      },
+    });
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'baseTimesRToHypR', 'hypR'],
+        [fig._oppLabel._label, 'realTimesR', 'realR'],
+        [fig._hypotenuse._label, 'realTimesR', 'r'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('hypR');
+        fig._oppLabel._label.showForm('realR');
+        fig._hypotenuse._label.showForm('r');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'We can now generalize this.'),
+    };
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, tab,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'func'],
+        [tab._angleHeading, 'angle'],
+      ],
+    };
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'hypR', 'hypRToGeneral'],
+        [fig._oppLabel._label, 'realR', 'realRToOpposite'],
+        [fig._hypotenuse._label, 'r', 'rToHyp'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('hypRToGeneral');
+        fig._oppLabel._label.showForm('realRToOpposite');
+        fig._hypotenuse._label.showForm('rToHyp');
+      },
+    });
+
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'hypRToGeneral', 'general'],
+        [fig._oppLabel._label, 'realRToOpposite', 'opposite'],
+        [fig._hypotenuse._label, 'rToHyp', 'hyp'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        eqn.showForm('general');
+        fig._oppLabel._label.showForm('opposite');
+        fig._hypotenuse._label.showForm('hyp');
       },
     });
 
