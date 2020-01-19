@@ -74,6 +74,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  sweep() {
+    this._fig._line.animations.new()
+      .rotation({ target: 0, velocity: 1 })
+      .rotation({ target: Math.PI / 2, velocity: 0.25 })
+      .rotation({ target: Math.PI / 18 * 4, velocity: 1 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   gotoRotation(angle: ?number = null, duration: ?number = 0, done: ?() => void = null) {
     let r = 0;
     if (angle != null) {

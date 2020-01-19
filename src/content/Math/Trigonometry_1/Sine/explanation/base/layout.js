@@ -670,14 +670,15 @@ export default function diagramLayout() {
       forms: {
         'base': {
           content: [
-            {
-              bottomComment: {
-                content: 'opp',
-                comment: 'hyp1',
-                inSize: false,
-                scale: 0.5,
-              },
-            },
+            // {
+            //   bottomComment: {
+            //     content: 'opp',
+            //     comment: 'hyp1',
+            //     inSize: false,
+            //     scale: 0.5,
+            //   },
+            // },
+            'opp',
             'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -805,7 +806,41 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            alignH: 2.2,
+          },
+        },
+        'generalToSin': {
+          content: [
+            'opp',
+            'equals',
+            'hyp',
+            'times1',
+            {
+              topComment: {
+                content: 'func',
+                comment: 'sin',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
+            { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 2.2,
+          },
+        },
+        'sin': {
+          content: [
+            'opp',
+            'equals',
+            'hyp',
+            'times1',
+            'sin', { brac: ['lb', 'angle', 'rb'] },
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 2.2,
           },
         },
         '0': {
@@ -1224,6 +1259,7 @@ export default function diagramLayout() {
         angle: { color: colors.angles },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
+        sin: { style: 'normal' },
       },
       defaultFormAlignment: {
         alignH: 'center',
@@ -1274,8 +1310,38 @@ export default function diagramLayout() {
             alignV: 0.1,
           },
         },
+        oppToFunc: {
+          content: {
+            topComment: {
+              content: 'opp',
+              comment: ['func', { brac: ['lb', 'angle', 'rb'] }],
+              symbol: 'brace',
+              inSize: false,
+            },
+          },
+          // alignment: {
+          //   alignV: 0.1,
+          // },
+        },
         func: {
           content: ['func', { brac: ['lb', 'angle', 'rb'] }],
+          scale: 0.9,
+        },
+        funcToSin: {
+          content: [
+            {
+              topComment: {
+                content: 'func',
+                comment: 'sin',
+                symbol: 'brace',
+                inSize: false,
+              },
+            },
+            { brac: ['lb', 'angle', 'rb'] }],
+          scale: 0.9,
+        },
+        sin: {
+          content: ['sin', { brac: ['lb', 'angle', 'rb'] }],
           scale: 0.9,
         },
       },
