@@ -572,6 +572,7 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         coll.setScenarios('default');
         fig.setScenario('left');
+        eqn.setScenario('left');
       },
       transitionReset: (done) => {
         coll.updateRotation();
@@ -808,12 +809,12 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonShow, commonContent, {
       transitionFromPrev: (done) => {
-        eqn.setScenario('default');
+        eqn.setScenario('left');
         eqn.showForm('base');
         coll.accent(eqn, done);
       },
       setSteadyState: () => {
-        eqn.setScenario('default');
+        eqn.setScenario('left');
         eqn.showForm('base');
       },
     });
@@ -1118,6 +1119,59 @@ class Content extends PresentationFormatContent {
       duration: 2,
     }, common, commonShow, commonContent);
 
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        // ...coll.tableForm('base'),
+        // [tab._sineHeading, 'func'],
+        // [tab._angleHeading, 'angle'],
+        [eqn, 'sin'],
+        [fig._oppLabel._label, 'opposite'],
+        [fig._hypotenuse._label, 'hyp'],
+      ],
+    };
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        fig.animations.new()
+          .scenario({ target: 'default', duration: 1.5 })
+          .whenFinished(done)
+          .start();
+        eqn.animations.new()
+          .scenario({ target: 'default', duration: 1.5 })
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenario('default');
+        eqn.setScenario('default');
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        fig.setScenario('default');
+        eqn.setScenario('default');
+      },
+      transitionReset: (done) => {
+        coll.updateRotation();
+        if (this.comingFrom === 'goto') {
+          coll.resetRotation(done, 0);
+        } else {
+          coll.resetRotation(done, 0.8);
+        }
+      },
+      setSteadyState: () => {
+        coll.updateRotation();
+      },
+      setLeaveState: () => {
+        fig._line._line.isTouchable = true;
+      },
+    };
+
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
@@ -1157,15 +1211,15 @@ class Content extends PresentationFormatContent {
       ],
       setEqnForms: [
         [fig._theta._label, 'real'],
-        ...coll.tableForm('base'),
+        // ...coll.tableForm('base'),
         // [tab._sineHeading, 'sin'],
         // [tab._angleHeading, 'angle'],
-        [eqn, 'sin'],
+        // [eqn, 'sin'],
         [fig._oppLabel._label, 'opposite'],
         [fig._hypotenuse._label, 'hyp'],
       ],
     };
-    this.addSection(common, commonContent, {
+    this.addSection(common, commonContent, commonShow, {
       // show: [
       //   fig._line, fig._x, fig._theta, fig._hypotenuse,
       //   fig._v, fig._right, fig._sineTheta,
@@ -1179,12 +1233,10 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done) => {
         fig.animations.new()
           .inParallel([
-            fig._sineTheta.anim.dissolveOut({ duration: 1 }),
-            fig._right.anim.dim({ duration: 1 }),
+            fig._oppLabel.anim.dissolveOut({ duration: 1 }),
             fig._theta.anim.dissolveOut({ duration: 1 }),
             fig._hypotenuse.anim.dissolveOut({ duration: 1 }),
             fig._right.anim.dissolveOut({ duration: 1 }),
-            fig._line.anim.dim({ duration: 1 }),
             // fig._hypotenuse.anim.dim({ duration: 1 }),
             // fig._theta.anim.dim({ duration: 1 }),
           ])
@@ -1204,11 +1256,15 @@ class Content extends PresentationFormatContent {
             },
           })
           .inParallel([
+            fig._opp.anim.dim({ duration: 1 }),
+            fig._line.anim.dim({ duration: 1 }),
             fig._circle.anim.dissolveIn({ duration: 1 }),
             fig._arc.anim.dissolveIn({ duration: 1 }),
             fig._mirrorV.anim.dissolveIn({ duration: 1 }),
             fig._mirrorArc.anim.dissolveIn({ duration: 1 }),
             fig._mirrorLine.anim.dissolveIn({ duration: 1 }),
+            fig._x.anim.dissolveIn({ duration: 1 }),
+            fig._h.anim.dissolveOut({ duration: 1 }),
           ])
           .whenFinished(done)
           .start();
@@ -1220,10 +1276,11 @@ class Content extends PresentationFormatContent {
         fig._mirrorLine.showAll();
         fig._mirrorArc.showAll();
         fig._mirrorV.showAll();
-        fig._sineTheta.hide();
+        // fig._opp.hide();
         fig._right.hide();
         fig._theta.hide();
         fig._hypotenuse.hide();
+        fig._oppLabel.hide();
         coll.accent({
           element: fig,
           children: [
@@ -1238,7 +1295,6 @@ class Content extends PresentationFormatContent {
       },
       setLeaveState: () => {
         coll.undim();
-        fig._line.undim();
       },
     });
 

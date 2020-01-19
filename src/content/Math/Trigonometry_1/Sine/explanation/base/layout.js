@@ -1162,9 +1162,9 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [-1.5, -1.6] },
-        left: { position: [-1.3, -1.6] },
-        // default: { position: [-2, 0] },
+        left: { position: [-1.5, -1.6] },
+        // left: { position: [-1.3, -1.6] },
+        default: { position: [-0.3, -1.6] },
       },
       pulseDefault: { scale: 1.4 },
     },

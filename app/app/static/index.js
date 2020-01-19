@@ -1651,10 +1651,12 @@ function (_ElementAnimationStep) {
 
     if (_this.color.target === 'dim') {
       _this.color.target = _this.element.dimColor.slice();
-    }
-
-    if (_this.color.target === 'undim') {
+      _this.color.setDefault = false;
+    } else if (_this.color.target === 'undim') {
       _this.color.target = _this.element.defaultColor.slice();
+      _this.color.setDefault = false;
+    } else {
+      _this.color.setDefault = true;
     }
 
     return _this;
@@ -1690,7 +1692,7 @@ function (_ElementAnimationStep) {
 
         if (this.color.dissolve === 'in') {
           this.color.start[3] = 0.001;
-          element.setColor(this.color.start);
+          element.setColor(this.color.start, this.color.setDefault);
           element.showAll();
         }
 
@@ -1722,7 +1724,7 @@ function (_ElementAnimationStep) {
       });
 
       if (this.element != null) {
-        this.element.setColor(next);
+        this.element.setColor(next, this.color.setDefault);
       }
     }
   }, {
@@ -1732,7 +1734,7 @@ function (_ElementAnimationStep) {
 
       if (element != null) {
         // console.log(this.name, this.color.whenComplete)
-        element.setColor(this.color.whenComplete);
+        element.setColor(this.color.whenComplete, this.color.setDefault);
 
         if (this.color.dissolve === 'out') {
           element.hide();
