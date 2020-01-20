@@ -249,7 +249,7 @@ export default function diagramLayout() {
       r: {
         content: {
           container: {
-            content: ['r'],
+            content: ['  ', 'r', '  '],
             width: 0.07,
             xAlign: 'right',
           },

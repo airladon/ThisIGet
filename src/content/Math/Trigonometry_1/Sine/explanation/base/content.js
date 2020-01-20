@@ -56,10 +56,11 @@ class Content extends PresentationFormatContent {
     const tab = coll._table;
 
     let commonContent = {
-      setContent: 'Consider a |right angle triangle| with |hypotenuse| 1, and |angle| 40º.',
+      setContent: 'Consider a |right_angle| |triangle| with |hypotenuse_of_1|, and an |angle_of_40º|.',
       modifiers: {
-        hypotenuse: coll.bindAccent(fig._line),
-        angle: coll.bindAccent(fig._theta),
+        hypotenuse_of_1: coll.bindAccent(fig._line),
+        angle_of_40º: coll.bindAccent(fig._theta),
+        right_angle: coll.bindAccent(fig._right),
       },
     };
     let common = {
@@ -153,7 +154,28 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Any two triangles with the same |AAS| combination of properties, will be |congruent|. The |right_angle|, |40º_angle| and |hyptoenuse| are an |AAS_combination|.'),
+      setContent: style({}, 'No matter how many different ways we draw this |right angle triangle|, if it has a |40º_angle| and a |hypotenuse_of_1|, then the |opposite| side will |always| be |0_643|.'),
+      modifiers: {
+        '0_643': highlightWord('0.643', colors.components),
+        '40º_angle': coll.bindAccent(fig._theta),
+        hypotenuse_of_1: coll.bindAccent(fig._hypotenuse),
+        opposite: coll.bindAccent(fig._opp),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig._line.setRotation(Math.PI / 18 * 4);
+        coll.updateRotation();
+        fig._line._line.isTouchable = false;
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'This is because any two triangles with the same |AAS| combination of properties, will be |congruent|. The |right_angle|, |40º_angle| and |hyptoenuse| are an |AAS_combination|.'),
       modifiers: {
         AAS: this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
         congruent: this.qr('Math/Geometry_1/CongruentTriangles/base/CongruentTriangles'),
@@ -197,7 +219,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Therefore if we see |any| right angle triangle with a |40º_angle_| and |hypotenuse_of_1|, we will |know| the side length |opposite| the |40º_angle| can only be |0_643|.'),
+      setContent: style({}, 'Therefore if we see |any right angle triangle| with a |40º_angle_| and |hypotenuse_of_1|, we will |know| the side length |opposite| the |40º_angle| can only be |0_643|.'),
       modifiers: {
         '0_643': highlightWord('0.643', colors.components),
         '40º_angle': highlight(colors.angles),
@@ -215,25 +237,25 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'Conversely, if we ever see a right angle triangle with a |hypotenuse_of_1|, and |side_length_of_0.643|, we will know the |opposite_angle_is_40º|.'),
-      modifiers: {
-        'side_length_of_0.643': coll.bindAccent(fig._opp),
-        hypotenuse_of_1: coll.bindAccent(fig._line),
-        opposite_angle_is_40º: coll.bindAccent(fig._theta),
-      },
-    };
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // commonContent = {
+    //   setContent: style({}, 'Conversely, if we ever see a right angle triangle with a |hypotenuse_of_1|, and |side_length_of_0.643|, we will know the |opposite_angle_is_40º|.'),
+    //   modifiers: {
+    //     'side_length_of_0.643': coll.bindAccent(fig._opp),
+    //     hypotenuse_of_1: coll.bindAccent(fig._line),
+    //     opposite_angle_is_40º: coll.bindAccent(fig._theta),
+    //   },
+    // };
 
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
-      },
-    });
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     fig._line.setRotation(Math.PI / 18 * 4);
+    //     coll.updateRotation();
+    //     fig._line._line.isTouchable = false;
+    //   },
+    // });
 
 
     // **********************************************************************
@@ -276,7 +298,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'As |similar_triangles| have |equally scaled| corresponding sides, then if we scale the hypotenuse by |r|, so the opposite side must also scale by |r|.'),
+      setContent: style({}, 'As |similar_triangles| have |equally scaled| corresponding sides, then if we |scale the hypotenuse by r|, so the opposite side must also |scale by r|.'),
       modifiers: {
         similar_triangles: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
       },
@@ -342,10 +364,11 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643 times the hypotenuse|.'),
+      setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
       modifiers: {
         '40º_angle': coll.bindAccent(fig._theta),
         opposite: coll.bindAccent(fig._opp),
+        '0.643_times_the_hypotenuse': coll.bindAccent(fig._oppLabel),
       },
     };
 
@@ -525,7 +548,7 @@ class Content extends PresentationFormatContent {
     // commonContent = { setContent: [text, tableContent], modifiers };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        measure: click(coll.measureAngles, [coll, null], colors.components),
+        // measure: click(coll.measureAngles, [coll, null], colors.components),
         opposite: coll.bindAccent(fig._opp),
         angles: coll.bindAccent(fig._theta),
         reference_table: coll.bindAccent(tab, colors.diagram.action),
@@ -902,8 +925,17 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Now, when we scale the hypotenuse by |r|, the mathematical expression also scales by |r|.'),
+      setContent: style({}, 'Now, when we |scale the hypotenuse by r|, the mathematical expression also |scales by r|.'),
     };
+    this.addSectionEqnStep({
+      eqns: [[tab._sineHeading, 'func', 'func']],
+      duration: 2,
+    }, common, commonShow, commonContent, {
+      setSteadyState: () => {
+        tab._sineHeading.showForm('func');
+      },
+    });
+
     commonShow = {
       show: [
         fig._line, fig._h, fig._theta,
@@ -1191,19 +1223,23 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'The word |sine| originates from the word for bowstring.',
-        note({ top: 75 }, 'Ancient Greeks called the line between two points on a circle a |khordḗ|, meaning chord or |bowstring|.'),
-        note({ top: 80 }, 'The |sine_function| was first named in Sanskrit as ardha-jya (half chord) or jya (chord).'),
-        note({ top: 85 }, 'Arabic translated this into jiba, which was then confused with jaib (meaning bay or bossom) when it was translated into Latin as sinus (bay or bossom). Our term |sine| comes from |sinus|.'),
+        'The word |sine| originates from the word for |bowstring|.',
+        note({ top: 75 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|).'),
+        note({ top: 80 }, 'The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).'),
+        note({ top: 85 }, 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
       ],
       modifiers: {
         'khordḗ': coll.bindAccent({
           element: fig, children: ['opp', 'mirrorV'], style: ['highlight', 'pulse'],
         }),
-        bowstring: click(pulseBowString, [this], colors.components),
+        bow: click(pulseBowString, [this], colors.components),
         sine_function: coll.bindAccent({
           element: fig, children: ['opp'], style: ['highlight', 'pulse'],
         }),
+        Ancient_Greeks: highlight(colors.diagram.text.greek),
+        Sanskrit: highlight(colors.diagram.text.sanskrit),
+        Arabic: highlight(colors.diagram.text.arabic),
+        Latin: highlight(colors.diagram.text.latin),
       },
     };
 
