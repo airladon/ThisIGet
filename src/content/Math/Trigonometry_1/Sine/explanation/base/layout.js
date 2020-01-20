@@ -480,7 +480,7 @@ export default function diagramLayout() {
       component('h', colors.lines),
       component('v', colors.lines),
       component('opp', colors.components),
-      component('mirrorV'),
+      component('mirrorV', colors.components),
       // angle('arc', )
       line('mirrorLine', -Math.PI / 2, 0),
       line('line', 0, Math.PI / 2),
