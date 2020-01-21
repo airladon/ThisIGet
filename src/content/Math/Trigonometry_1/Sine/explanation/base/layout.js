@@ -1404,6 +1404,74 @@ export default function diagramLayout() {
     },
     mods: {
       pulseDefault: { scale: 1.15 },
+      scenarios: {
+        default: { position: [1, 0.5] },
+        center: { position: [-0.5, 0.5] },
+        high: { position: [-0.5, 0.65] },
+      },
+    },
+  };
+
+  const frac = (num, v, dem) => ({
+    frac: [num, v, dem],
+  });
+
+  const sup = (num, pow) => ({
+    sup: {
+      content: num,
+      superscript: pow,
+      scale: 0.7,
+    },
+  });
+
+  const powerSeries = {
+    name: 'powerSeries',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.8,
+      elements: {
+        sin: { style: 'normal' },
+        a_0: { text: 'angle', color: colors.angles },
+        a_1: { text: 'angle', color: colors.angles },
+        a_3: { text: 'angle', color: colors.angles },
+        a_5: { text: 'angle', color: colors.angles },
+        a_7: { text: 'angle', color: colors.angles },
+        equals: ' = ',
+        v_3: { symbol: 'vinculum' },
+        v_5: { symbol: 'vinculum' },
+        v_7: { symbol: 'vinculum' },
+        m_1: ' – ',
+        m_2: ' – ',
+        p_1: ' + ',
+        dots: ' + ...',
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+      },
+      forms: {
+        base: {
+          content: [
+            'sin',
+            { brac: ['lb', 'a_0', 'rb'] },
+            'equals', 'a_1', 'm_1',
+            frac(sup('a_3', '3_a'), 'v_3', '3\u00D72\u00D71'),
+            'p_1',
+            frac(sup('a_5', '5_a'), 'v_5', '5\u00D74\u00D73\u00D72\u00D71'),
+            'm_2',
+            frac(sup('a_7', '7_a'), 'v_7', '7\u00D76\u00D75\u00D74\u00D73\u00D72\u00D71'),
+            'dots',
+          ],
+          alignment: {
+            alignH: 'center',
+          },
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, -1.8] },
+      },
+      pulseDefault: { scale: 1.1 },
     },
   };
 
@@ -1414,6 +1482,7 @@ export default function diagramLayout() {
     table,
     box('box1'),
     box('box2'),
+    powerSeries,
   ];
   return layout;
 }

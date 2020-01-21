@@ -16,7 +16,7 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 const {
   style,
   click,
-  // clickW,
+  clickW,
   highlight,
   highlightWord,
   // centerV,
@@ -66,6 +66,7 @@ class Content extends PresentationFormatContent {
     let common = {
       setEnterState: () => {
         coll.setScenarios('default');
+        tab.setScenario('default');
       },
       transitionReset: (done) => {
         coll.updateRotation();
@@ -105,10 +106,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'If we measure the |opposite_side| to the |angle|, we will see it is |0_643|.'),
+      setContent: style({}, 'If we measure the the |angles| |opposite_side|, we will see it is |0_643|.'),
       modifiers: {
         '0_643': highlightWord('0.643', colors.components),
-        angle: coll.bindAccent(fig._theta),
+        angles: clickW('angle\'s', coll.accent, [coll, fig._theta, null, null], colors.angles),
       },
     };
 
@@ -596,6 +597,7 @@ class Content extends PresentationFormatContent {
         coll.setScenarios('default');
         fig.setScenario('left');
         eqn.setScenario('left');
+        tab.setScenario('default');
       },
       transitionReset: (done) => {
         coll.updateRotation();
@@ -1115,59 +1117,71 @@ class Content extends PresentationFormatContent {
       duration: 2,
     }, common, commonShow, commonContent);
 
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._theta,
-        fig._right, fig._opp,
-      ],
-      setEqnForms: [
-        [fig._theta._label, 'real'],
-        // ...coll.tableForm('base'),
-        // [tab._sineHeading, 'func'],
-        // [tab._angleHeading, 'angle'],
-        [eqn, 'sin'],
-        [fig._oppLabel._label, 'opposite'],
-        [fig._hypotenuse._label, 'hyp'],
+    // commonShow = {
+    //   show: [
+    //     fig._line, fig._h, fig._theta,
+    //     fig._right, fig._opp,
+    //   ],
+    //   setEqnForms: [
+    //     [fig._theta._label, 'real'],
+    //     // ...coll.tableForm('base'),
+    //     // [tab._sineHeading, 'func'],
+    //     // [tab._angleHeading, 'angle'],
+    //     [eqn, 'sin'],
+    //     [fig._oppLabel._label, 'opposite'],
+    //     [fig._hypotenuse._label, 'hyp'],
+    //   ],
+    // };
+    // this.addSection(common, commonShow, commonContent, {
+    //   transitionFromPrev: (done) => {
+    //     fig.animations.new()
+    //       .scenario({ target: 'default', duration: 1.5 })
+    //       .whenFinished(done)
+    //       .start();
+    //     eqn.animations.new()
+    //       .scenario({ target: 'default', duration: 1.5 })
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     fig.setScenario('default');
+    //     eqn.setScenario('default');
+    //   },
+    // });
+
+    // common = {
+    //   setEnterState: () => {
+    //     coll.setScenarios('default');
+    //     fig.setScenario('default');
+    //     eqn.setScenario('default');
+    //   },
+    //   transitionReset: (done) => {
+    //     coll.updateRotation();
+    //     if (this.comingFrom === 'goto') {
+    //       coll.resetRotation(done, 0);
+    //     } else {
+    //       coll.resetRotation(done, 0.8);
+    //     }
+    //   },
+    //   setSteadyState: () => {
+    //     coll.updateRotation();
+    //   },
+    //   setLeaveState: () => {
+    //     fig._line._line.isTouchable = true;
+    //   },
+    // };
+
+    commonContent = {
+      setContent: [
+        'The word |sine| originates from the word for |bowstring|.',
       ],
     };
-    this.addSection(common, commonShow, commonContent, {
-      transitionFromPrev: (done) => {
-        fig.animations.new()
-          .scenario({ target: 'default', duration: 1.5 })
-          .whenFinished(done)
-          .start();
-        eqn.animations.new()
-          .scenario({ target: 'default', duration: 1.5 })
-          .start();
-      },
-      setSteadyState: () => {
-        fig.setScenario('default');
-        eqn.setScenario('default');
-      },
-    });
-
-    common = {
-      setEnterState: () => {
-        coll.setScenarios('default');
-        fig.setScenario('default');
-        eqn.setScenario('default');
-      },
-      transitionReset: (done) => {
-        coll.updateRotation();
-        if (this.comingFrom === 'goto') {
-          coll.resetRotation(done, 0);
-        } else {
-          coll.resetRotation(done, 0.8);
-        }
-      },
-      setSteadyState: () => {
-        coll.updateRotation();
-      },
-      setLeaveState: () => {
-        fig._line._line.isTouchable = true;
-      },
-    };
-
+    this.addSectionEqnStep({
+      eqns: [
+        [eqn, 'sin', 'sin'],
+        [tab._sineHeading, 'sin', 'sin'],
+      ],
+      duration: 2,
+    }, common, commonShow, commonContent);
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
@@ -1188,9 +1202,10 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: [
         'The word |sine| originates from the word for |bowstring|.',
-        note({ top: 75 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|).'),
-        note({ top: 80 }, 'The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).'),
-        note({ top: 85 }, 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
+        // note({ top: 75 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|).'),
+        // note({ top: 80 }, 'The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).'),
+        // note({ top: 85 }, 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
+        note({ top: 70, size: 0.9 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|). The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord). This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
       ],
       modifiers: {
         'khordḗ': coll.bindAccent({
@@ -1324,7 +1339,7 @@ class Content extends PresentationFormatContent {
             // fig._theta.anim.dissolveIn({ duration: 1 }),
             // fig._theta._label.showForm('real'),
           ])
-          .scenario({ target: 'default', duration: 2 })
+          .scenario({ target: 'left', duration: 2 })
           // .trigger({
           //   callback: () => {
           //     // fig._mirrorLine.showAll();
@@ -1347,10 +1362,17 @@ class Content extends PresentationFormatContent {
               // delay: 0.05,
               callback: () => {
                 fig.undim();
-                fig._theta._label.showForm('real');
+                fig._theta._label.showForm('angle');
                 fig._hypotenuse._label.showForm('hyp');
                 fig._oppLabel._label.showForm('opposite');
                 coll.updateRotation();
+              },
+            }),
+            eqn.anim.dissolveIn({ duration: 1 }),
+            fig.anim.trigger({
+              callback: () => {
+                eqn.setScenario('left');
+                eqn.showForm('sin');
               },
             }),
             // fig._h.anim.dissolveIn({ duration: 1 }),
@@ -1364,14 +1386,8 @@ class Content extends PresentationFormatContent {
           //   },
           //   duration: 0.5,
           // })
-          .inParallel([
-            eqn.anim.dissolveIn({ duration: 1 }),
-            fig.anim.trigger({
-              callback: () => {
-                eqn.showForm('sin');
-              },
-            }),
-          ])
+          // .inParallel([
+          // ])
           .whenFinished(done)
           .start();
         // eqn.animations.new()
@@ -1388,39 +1404,173 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'The |sine function| created from right angle triangles with |hypotenuse = 1|, |relates_the_hypotenuse,_angle_and_opposite_side| for |any| right angle triangle.'),
+      setContent: style({}, 'So the |sine_function| relates the |hypotenuse|, |angle| and |opposite_side| for |any| right angle triangle.'),
       modifiers: {
         function: click(() => {
           coll._box1.showAll();
           coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
           coll.accent(coll._box1);
         }, [this], colors.diagram.action),
-        'relates_the_hypotenuse,_angle_and_opposite_side': click(() => {
+        opposite_side: coll.bindAccent(fig._opp),
+        hypotenuse: coll.bindAccent(fig._line),
+        angle: coll.bindAccent(fig._theta),
+        'sine_function': click(() => {
           coll._box1.showAll();
-          coll._box1.surround(eqn, ['opp', 'rb'], 0.08);
+          coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
           coll.accent(coll._box1);
         }, [this], colors.diagram.action),
+        // right_angle_triangle: coll.bindAccent(fig, ['right', 'h', 'opp', 'line']),
       },
     };
 
     commonShow = {
       show: [
         fig._line, fig._h, fig._theta,
-        fig._right, fig._opp, // tab,
+        fig._right, fig._opp, tab,
       ],
       setEqnForms: [
-        [fig._theta._label, 'real'],
-        // ...coll.tableForm('base'),
-        // [tab._sineHeading, 'sin'],
-        // [tab._angleHeading, 'angle'],
+        [fig._theta._label, 'angle'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'sin'],
+        [tab._angleHeading, 'angle'],
         [eqn, 'sin'],
         [fig._oppLabel._label, 'opposite'],
         [fig._hypotenuse._label, 'hyp'],
       ],
     };
 
-    this.addSection(common, commonShow, commonContent);
-    
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('left');
+        tab.setScenario('default');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'Now, we constructed the |table| of sine values by |measuring| the opposite sides of right angle triangles with hypotenuse 1. Over |millenia| however, increasingly |accurate| ways have been found to do this.'),
+      modifiers: {
+        table: coll.bindAccent(tab, colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        table: this.bindNext(),
+      },
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('left');
+        tab.setScenario('default');
+      },
+    });
+
+    commonShow = {
+      show: [
+        // fig._line, fig._h, fig._theta,
+        // fig._right, fig._opp, tab,
+        tab,
+      ],
+      setEqnForms: [
+        // [fig._theta._label, 'angle'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'sin'],
+        [tab._angleHeading, 'angle'],
+        // [eqn, 'sin'],
+        // [fig._oppLabel._label, 'opposite'],
+        // [fig._hypotenuse._label, 'hyp'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        table: coll.bindAccent(tab, colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        tab.animations.new()
+          .scenario({ target: 'center', duration: 1.5 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        // fig.setScenario('left');
+        // eqn.setScenario('left');
+        tab.setScenario('center');
+      },
+    });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // commonContent = {
+    //   setContent: style({}, '.'),
+    //   modifiers: {
+    //   },
+    // };
+
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     fig.setScenario('left');
+    //     eqn.setScenario('left');
+    //   },
+    // });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ top: 0 }, 'In the |first century| CE, |geometry| was used to calculate the opposite side length for a selection of angles. These calculations were difficult and somewhat limited, but sufficient for many applications.'),
+      modifiers: {
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        tab.setScenario('center');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'It was not until |1400 CE| that a mathematical |formula| was found that exactly represented the sine function.'),
+      modifiers: {
+        formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        tab.setScenario('center');
+      },
+    });
+
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        tab.setScenario('center');
+        tab.animations.new()
+          .scenario({ target: 'high', duration: 0.4 })
+          .trigger({
+            callback: () => {
+              coll._powerSeries.showForm('base');
+              coll.accent(coll._powerSeries);
+            },
+            duration: 1,
+          })
+          .whenFinished(done)
+          .start();
+        // coll._powerSeries.showForm('base');
+        // coll.accent(coll._powerSeries, done);
+      },
+      setSteadyState: () => {
+        tab.setScenario('high');
+        coll._powerSeries.showForm('base');
+      },
+    });
 
 
     // // **********************************************************************
