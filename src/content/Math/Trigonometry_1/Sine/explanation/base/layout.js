@@ -688,7 +688,7 @@ export default function diagramLayout() {
         },
         'baseTimesR': {
           content: [
-            'r', 'times',
+            '  ', 'r', '  ', 'times', '  ',
             {
               bottomComment: {
                 content: 'opp',
@@ -698,7 +698,7 @@ export default function diagramLayout() {
               },
             },
             'equals',
-            'r_1', 'times1',
+            ['  ', 'r_1', '  '], 'times1', '  ',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -711,7 +711,7 @@ export default function diagramLayout() {
             {
               topComment: {
                 content: [
-                  'r', 'times',
+                  '  ', 'r', '  ', 'times', '  ',
                   {
                     bottomComment: {
                       content: 'opp',
@@ -734,7 +734,7 @@ export default function diagramLayout() {
               },
             },
             'equals',
-            'r_1', 'times1',
+            ['  ', 'r_1', '  '], 'times1', '  ',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -753,7 +753,7 @@ export default function diagramLayout() {
               },
             },
             'equals',
-            'r_1', 'times1',
+            ['  ', 'r_1', '  '], 'times1', '  ',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -788,7 +788,7 @@ export default function diagramLayout() {
                 contentSpace: 0.08,
               },
             },
-            'times1',
+            'times1', '  ',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -801,7 +801,7 @@ export default function diagramLayout() {
             'opp',
             'equals',
             'hyp',
-            'times1',
+            '  ', 'times1', '  ',
             'func', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {
@@ -814,7 +814,7 @@ export default function diagramLayout() {
             'opp',
             'equals',
             'hyp',
-            'times1',
+            '  ', 'times1', '  ',
             {
               topComment: {
                 content: 'func',
@@ -835,7 +835,7 @@ export default function diagramLayout() {
             'opp',
             'equals',
             'hyp',
-            'times1',
+            '  ', 'times1', '  ',
             'sin', { brac: ['lb', 'angle', 'rb'] },
           ],
           alignment: {

@@ -1061,42 +1061,6 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'This |function| created from right angle triangles with |hypotenuse = 1|, now |relates_the_hypotenuse,_angle_and_opposite_side| for |any| right angle triangle.'),
-      modifiers: {
-        function: click(() => {
-          coll._box1.showAll();
-          coll._box1.surround(eqn, ['func', 'rb'], 0.08);
-          coll.accent(coll._box1);
-        }, [this], colors.diagram.action),
-        'relates_the_hypotenuse,_angle_and_opposite_side': click(() => {
-          coll._box1.showAll();
-          coll._box1.surround(eqn, ['opp', 'rb'], 0.08);
-          coll.accent(coll._box1);
-        }, [this], colors.diagram.action),
-      },
-    };
-
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._theta,
-        fig._right, fig._opp, tab,
-      ],
-      setEqnForms: [
-        [fig._theta._label, 'real'],
-        ...coll.tableForm('base'),
-        [tab._sineHeading, 'func'],
-        [tab._angleHeading, 'angle'],
-        [eqn, 'general'],
-        [fig._oppLabel._label, 'opposite'],
-        [fig._hypotenuse._label, 'hyp'],
-      ],
-    };
-
-    this.addSection(common, commonShow, commonContent);
 
     // **********************************************************************
     // **********************************************************************
@@ -1336,6 +1300,84 @@ class Content extends PresentationFormatContent {
         });
         coll.updateRotation();
       },
+      blankTransition: {
+        toNext: true,
+      },
+      transitionToNext: (done) => {
+        const notes = document.querySelectorAll('.presentation__note');
+        notes.forEach((n) => {
+          n.classList.add('angle_table_hide');
+        });
+        fig.animations.new()
+          .inParallel([
+            fig._mirrorV.anim.dissolveOut({ duration: 1 }),
+            fig._mirrorArc.anim.dissolveOut({ duration: 1 }),
+            fig._mirrorLine.anim.dissolveOut({ duration: 1 }),
+            fig._x.anim.dissolveOut({ duration: 1 }),
+            fig._arc.anim.dissolveOut({ duration: 1 }),
+            fig._circle.anim.dissolveOut({ duration: 1 }),
+            fig._line.anim.undim({ duration: 1 }),
+            fig._opp.anim.undim({ duration: 1 }),
+            fig._h.anim.dissolveIn({ duration: 1 }),
+            fig._h.anim.undim({ duration: 0 }),
+            // fig._right.anim.dissolveIn({ duration: 1 }),
+            // fig._theta.anim.dissolveIn({ duration: 1 }),
+            // fig._theta._label.showForm('real'),
+          ])
+          .scenario({ target: 'default', duration: 2 })
+          // .trigger({
+          //   callback: () => {
+          //     // fig._mirrorLine.showAll();
+          //     // fig._mirrorArc.showAll();
+          //     // fig._mirrorV.showAll();
+          //     // fig._arc.showAll();
+          //     // fig._mirrorLine.dim();
+          //     // fig._circle.dim();
+          //     fig._oppLabel._label.showForm('opposite')
+          //     fig._hypotenuse._label.showForm('hyp')
+          //     coll.updateRotation();
+          //   },
+          // })
+          .inParallel([
+            fig._oppLabel.anim.dissolveIn({ duration: 1 }),
+            fig._theta.anim.dissolveIn({ duration: 1 }),
+            fig._hypotenuse.anim.dissolveIn({ duration: 1 }),
+            fig._right.anim.dissolveIn({ duration: 1 }),
+            fig.anim.trigger({
+              // delay: 0.05,
+              callback: () => {
+                fig.undim();
+                fig._theta._label.showForm('real');
+                fig._hypotenuse._label.showForm('hyp');
+                fig._oppLabel._label.showForm('opposite');
+                coll.updateRotation();
+              },
+            }),
+            // fig._h.anim.dissolveIn({ duration: 1 }),
+          ])
+          // .trigger({
+          //   callback: () => {
+          //     notes.forEach((n) => {
+          //       n.classList.remove('angle_table_hide');
+          //       n.classList.add('topic__diagram_text_fade_in');
+          //     });
+          //   },
+          //   duration: 0.5,
+          // })
+          .inParallel([
+            eqn.anim.dissolveIn({ duration: 1 }),
+            fig.anim.trigger({
+              callback: () => {
+                eqn.showForm('sin');
+              },
+            }),
+          ])
+          .whenFinished(done)
+          .start();
+        // eqn.animations.new()
+        //   .dissolveIn(1)
+        //   .start();
+      },
       setLeaveState: () => {
         coll.undim();
       },
@@ -1345,67 +1387,42 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // const pulseBowString = () => {
-    //   fig._arc.pulseThickNow(1, 1.02, 8);
-    //   fig._mirrorArc.pulseThickNow(1, 1.02, 8);
-    //   coll.accent({
-    //     element: fig, children: ['opp', 'mirrorV', 'arc', 'mirrorArc'], style: ['highlight'],
-    //   });
-    //   coll.accent({
-    //     element: fig, children: ['opp', 'mirrorV'], style: ['pulse'],
-    //   });
-    // };
-
-    // commonContent = {
-    //   setContent: [
-    //     'The word |sine| originates from the word for bowstring.',
-    //     note({ top: 75 }, 'Ancient Greeks called the line between two points on a circle a |khordḗ|, meaning chord or |bowstring|.'),
-    //     note({ top: 80 }, 'The |sine_function| was first named in Sanskrit as ardha-jya (half chord) or jya (chord).'),
-    //     note({ top: 85 }, 'Arabic translated this into jiba, which was then confused with jaib (meaning bay or bossom) when it was translated into Latin as sinus (bay or bossom). Our term |sine| comes from |sinus|.'),
-    //   ],
-    //   modifiers: {
-    //     'khordḗ': coll.bindAccent({
-    //       element: fig, children: ['opp', 'mirrorV'], style: ['highlight', 'pulse'],
-    //     }),
-    //     bowstring: click(pulseBowString, [this], colors.components),
-    //     sine_function: coll.bindAccent({
-    //       element: fig, children: ['opp'], style: ['highlight', 'pulse'],
-    //     }),
-    //   },
-    // };
+    commonContent = {
+      setContent: style({}, 'The |sine function| created from right angle triangles with |hypotenuse = 1|, |relates_the_hypotenuse,_angle_and_opposite_side| for |any| right angle triangle.'),
+      modifiers: {
+        function: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+        'relates_the_hypotenuse,_angle_and_opposite_side': click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(eqn, ['opp', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+      },
+    };
 
     commonShow = {
       show: [
-        fig._line,
-        fig._opp, fig._x,
-        fig._arc, fig._mirrorLine, fig._mirrorArc,
-        fig._mirrorV,
-        fig._circle,
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp, // tab,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'real'],
+        // ...coll.tableForm('base'),
+        // [tab._sineHeading, 'sin'],
+        // [tab._angleHeading, 'angle'],
+        [eqn, 'sin'],
+        [fig._oppLabel._label, 'opposite'],
+        [fig._hypotenuse._label, 'hyp'],
       ],
     };
 
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig.setScenario('small');
-        eqn.hide();
-        coll.accent({
-          element: fig,
-          children: [
-            'opp',
-            'mirrorV',
-            'arc',
-            'mirrorArc',
-          ],
-          style: 'highlight',
-        });
-      }
-    });
+    this.addSection(common, commonShow, commonContent);
+    
 
 
-
-    commonContent = {
-      setContent: 'In greek, a line between two points of a circle was called a khordḗ (meaning |chord| of a bow).',
-    };
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
