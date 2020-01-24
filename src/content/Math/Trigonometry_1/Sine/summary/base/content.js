@@ -43,8 +43,10 @@ class Content extends PresentationFormatContent {
       ],
       modifiers: {},
       show: [
+        coll._tri, coll._eqn,
       ],
-      setEnterState: () => {
+      setSteadyState: () => {
+        coll._eqn.showForm('sineFromHyp');
       },
     });
   }
