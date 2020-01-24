@@ -94,7 +94,7 @@ class Content extends PresentationFormatContent {
       ],
     };
     this.addSection(common, commonShow, commonContent, {
-      title: 'Unit Right Triangle',
+      title: 'Hypotenuse 1, Fixed Angle',
       setSteadyState: () => {
         fig._line.setRotation(Math.PI / 18 * 4);
         coll.updateRotation();
@@ -287,7 +287,7 @@ class Content extends PresentationFormatContent {
         ],
       }, common, commonShow, commonContent,
       {
-        title: 'Scale Triangle',
+        title: 'Any Size',
         setSteadyState: () => {
           fig._line.setRotation(Math.PI / 18 * 4);
           coll.updateRotation();
@@ -361,12 +361,11 @@ class Content extends PresentationFormatContent {
       },
     );
 
-
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
+      setContent: style({}, 'Here |r| is the |hypotenuse|, so, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
       modifiers: {
         '40º_angle': coll.bindAccent(fig._theta),
         opposite: coll.bindAccent(fig._opp),
@@ -374,25 +373,87 @@ class Content extends PresentationFormatContent {
       },
     };
 
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._theta,
-        fig._right, fig._opp,
-      ],
-      setEqnForms: [
-        [fig._theta._label, 'real'],
-        [fig._oppLabel._label, 'realR'],
-        [fig._hypotenuse._label, 'r'],
-      ],
-    };
-
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig._line.setRotation(Math.PI / 18 * 4);
-        coll.updateRotation();
-        fig._line._line.isTouchable = false;
+    this.addSectionEqnStep(
+      {
+        eqns: [
+          [fig._theta._label, 'real', 'real'],
+          [fig._oppLabel._label, 'realR', 'realR'],
+          [fig._hypotenuse._label, 'r', 'r'],
+        ],
+      }, common, commonShow, commonContent,
+      {
+        setSteadyState: () => {
+          fig._line.setRotation(Math.PI / 18 * 4);
+          coll.updateRotation();
+          fig._line._line.isTouchable = false;
+        },
       },
-    });
+    );
+
+    this.addSectionEqnStep(
+      {
+        eqns: [
+          [fig._theta._label, 'real', 'real'],
+          [fig._oppLabel._label, 'realR', 'realRToHypotenuse'],
+          [fig._hypotenuse._label, 'r', 'rToHyp'],
+        ],
+      }, common, commonShow, commonContent,
+      {
+        setSteadyState: () => {
+          fig._line.setRotation(Math.PI / 18 * 4);
+          coll.updateRotation();
+          fig._line._line.isTouchable = false;
+        },
+      },
+    );
+
+    this.addSectionEqnStep(
+      {
+        eqns: [
+          [fig._theta._label, 'real', 'real'],
+          [fig._oppLabel._label, 'realRToHypotenuse', 'realRHypotenuse'],
+          [fig._hypotenuse._label, 'rToHyp', 'hyp'],
+        ],
+      }, common, commonShow, commonContent,
+      {
+        setSteadyState: () => {
+          fig._line.setRotation(Math.PI / 18 * 4);
+          coll.updateRotation();
+          fig._line._line.isTouchable = false;
+        },
+      },
+    );
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // commonContent = {
+    //   setContent: style({}, 'So, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
+    //   modifiers: {
+    //     '40º_angle': coll.bindAccent(fig._theta),
+    //     opposite: coll.bindAccent(fig._opp),
+    //     '0.643_times_the_hypotenuse': coll.bindAccent(fig._oppLabel),
+    //   },
+    // };
+
+    // commonShow = {
+    //   show: [
+    //     fig._line, fig._h, fig._theta,
+    //     fig._right, fig._opp,
+    //   ],
+    //   setEqnForms: [
+    //     [fig._theta._label, 'real'],
+    //     [fig._oppLabel._label, 'realRHypotenuse'],
+    //     [fig._hypotenuse._label, 'hyp'],
+    //   ],
+    // };
+
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     fig._line.setRotation(Math.PI / 18 * 4);
+    //     coll.updateRotation();
+    //     fig._line._line.isTouchable = false;
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -415,7 +476,7 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonShow, commonContent, {
-      title: 'Angles',
+      title: 'Any Angle',
       setSteadyState: () => {
         fig._line.setRotation(Math.PI / 18 * 4);
         coll.updateRotation();
@@ -1092,19 +1153,13 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSectionEqnStep({
-      introduction: 'Sine',
+      title: 'Sine',
       eqns: [
         [eqn, 'general', 'general'],
         [tab._sineHeading, 'func', 'func'],
       ],
       duration: 2,
-    }, common, commonShow, commonContent, {
-      // setSteadyState: () => {
-      //   eqn.showForm('general');
-      //   fig._oppLabel._label.showForm('opposite');
-      //   fig._hypotenuse._label.showForm('hyp');
-      // },
-    });
+    }, common, commonShow, commonContent);
 
     this.addSectionEqnStep({
       eqns: [

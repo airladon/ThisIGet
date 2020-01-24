@@ -30,12 +30,13 @@ export default function diagramLayout() {
   const eqnOpp = ({
     elements: {
       value: { text: '0.000', color: colors.components },
-      r: { color: colors.lines },
+      r: { text: 'r', color: colors.lines },
       times: { text: ' \u00D7 ', color: colors.lines },
       opposite: { color: colors.components },
       brace: {
         symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top',
       },
+      hypotenuse: { color: colors.lines },
     },
     forms: {
       'real': {
@@ -67,7 +68,7 @@ export default function diagramLayout() {
       'realR': {
         content: {
           container: {
-            content: ['value', 'r'],
+            content: ['value', ' ', '  ', 'r', '  '],
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -82,12 +83,48 @@ export default function diagramLayout() {
           container: {
             content: {
               topComment: {
-                content: ['value', 'r'],
+                content: ['value', ' ', '  ', 'r', '  '],
                 comment: 'opposite',
                 symbol: 'brace',
                 inSize: false,
               },
             },
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'realRToHypotenuse': {
+        content: {
+          container: {
+            content: [
+              'value', ' ',
+              {
+                topComment: {
+                  content: ['  ', 'r', '  '],
+                  comment: 'hypotenuse',
+                  symbol: 'brace',
+                  inSize: false,
+                },
+              },
+            ],
+            width: 0.7,
+            ascent: 0.13,
+            descent: 0.05,
+            xAlign: 'left',
+          },
+        },
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+      'realRHypotenuse': {
+        content: {
+          container: {
+            content: ['value', ' ', 'hypotenuse'],
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
