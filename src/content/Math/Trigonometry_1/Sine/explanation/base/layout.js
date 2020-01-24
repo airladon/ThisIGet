@@ -55,7 +55,7 @@ export default function diagramLayout() {
       'realTimesR': {
         content: {
           container: {
-            content: ['value', 'times', 'r'],
+            content: ['value', ' ', 'times', '  ', 'r', '  '],
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -83,7 +83,7 @@ export default function diagramLayout() {
           container: {
             content: {
               topComment: {
-                content: ['value', ' ', '  ', 'r', '  '],
+                content: ['value', ' ', 'times', '  ', 'r', '  '],
                 comment: 'opposite',
                 symbol: 'brace',
                 inSize: false,
@@ -102,7 +102,7 @@ export default function diagramLayout() {
         content: {
           container: {
             content: [
-              'value', ' ',
+              'value', ' ', 'times',
               {
                 topComment: {
                   content: ['  ', 'r', '  '],
@@ -124,7 +124,7 @@ export default function diagramLayout() {
       'realRHypotenuse': {
         content: {
           container: {
-            content: ['value', ' ', 'hypotenuse'],
+            content: ['value', 'times', 'hypotenuse'],
             width: 0.7,
             ascent: 0.13,
             descent: 0.05,
@@ -526,7 +526,7 @@ export default function diagramLayout() {
       scenarios: {
         default: { position: [-r / 2, -1], scale: 1 },
         left: { position: [-2.3, -1], scale: 1 },
-        small: { position: [0, 0.3], scale: 0.5 },
+        small: { position: [0, 0.48], scale: 0.43 },
       },
     },
   };

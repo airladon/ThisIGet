@@ -43,6 +43,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._line.setMovable(true);
     this._fig._line._line.increaseBorderSize();
     this._fig._line.setTransformCallback = this.updateRotation.bind(this);
+    this._fig._mirrorLine.setMovable(false);
     // this._fig.hasTouchableElements = true;
   }
 

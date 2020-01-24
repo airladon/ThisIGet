@@ -220,7 +220,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Therefore if we see |any right angle triangle| with a |40º_angle_| and |hypotenuse_of_1|, we will |know| the side length |opposite| the |40º_angle| can only be |0_643|.'),
+      setContent: style({}, 'Therefore if we see |any right angle triangle| with a |40º_angle_| and |hypotenuse_of_1|, we will |know| the side length |opposite| the |40º_angle| can |only| be |0_643|.'),
       modifiers: {
         '0_643': highlightWord('0.643', colors.components),
         '40º_angle': highlight(colors.angles),
@@ -348,7 +348,7 @@ class Content extends PresentationFormatContent {
       {
         eqns: [
           [fig._theta._label, 'real', 'real'],
-          [fig._oppLabel._label, 'realTimesR', 'realR'],
+          [fig._oppLabel._label, 'realTimesR', 'realTimesR'],
           [fig._hypotenuse._label, 'realTimesR', 'r'],
         ],
       }, common, commonShow, commonContent,
@@ -365,7 +365,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Here |r| is the |hypotenuse|, so, now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
+      setContent: style({}, 'Here |r| is the |hypotenuse|, so now if we see |any| right angle triangle with a |40º_angle|, we know the |opposite| side will be |0.643_times_the_hypotenuse|.'),
       modifiers: {
         '40º_angle': coll.bindAccent(fig._theta),
         opposite: coll.bindAccent(fig._opp),
@@ -377,7 +377,7 @@ class Content extends PresentationFormatContent {
       {
         eqns: [
           [fig._theta._label, 'real', 'real'],
-          [fig._oppLabel._label, 'realR', 'realR'],
+          [fig._oppLabel._label, 'realTimesR', 'realTimesR'],
           [fig._hypotenuse._label, 'r', 'r'],
         ],
       }, common, commonShow, commonContent,
@@ -394,7 +394,7 @@ class Content extends PresentationFormatContent {
       {
         eqns: [
           [fig._theta._label, 'real', 'real'],
-          [fig._oppLabel._label, 'realR', 'realRToHypotenuse'],
+          [fig._oppLabel._label, 'realTimesR', 'realRToHypotenuse'],
           [fig._hypotenuse._label, 'r', 'rToHyp'],
         ],
       }, common, commonShow, commonContent,
@@ -992,7 +992,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'Now, when we |scale the hypotenuse by r|, the mathematical expression also |scales by r|.'),
+      setContent: style({}, 'Now, when we |scale the hypotenuse by r| and keep the |same angles|, the mathematical expression also |scales by r| as the triangles are |similar|.'),
+      modifiers: {
+        similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
+      }
     };
     this.addSectionEqnStep({
       eqns: [[tab._sineHeading, 'func', 'func']],
@@ -1052,14 +1055,14 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqns: [
         [eqn, 'baseTimesRToHypR', 'hypR'],
-        [fig._oppLabel._label, 'realTimesR', 'realR'],
+        [fig._oppLabel._label, 'realTimesR', 'realTimesR'],
         [fig._hypotenuse._label, 'realTimesR', 'r'],
       ],
       duration: 2,
     }, common, commonShow, commonContent, {
       setSteadyState: () => {
         eqn.showForm('hypR');
-        fig._oppLabel._label.showForm('realR');
+        fig._oppLabel._label.showForm('realTimesR');
         fig._hypotenuse._label.showForm('r');
       },
     });
@@ -1086,14 +1089,14 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqns: [
         [eqn, 'hypR', 'hypR'],
-        [fig._oppLabel._label, 'realR', 'realR'],
+        [fig._oppLabel._label, 'realTimesR', 'realTimesR'],
         [fig._hypotenuse._label, 'r', 'r'],
       ],
       duration: 2,
     }, common, commonShow, commonContent, {
       setSteadyState: () => {
         eqn.showForm('hypRTohypRGeneral');
-        fig._oppLabel._label.showForm('realR');
+        fig._oppLabel._label.showForm('realTimesR');
         fig._hypotenuse._label.showForm('r');
       },
     });
@@ -1101,7 +1104,7 @@ class Content extends PresentationFormatContent {
     this.addSectionEqnStep({
       eqns: [
         [eqn, 'hypR', 'hypRToGeneral'],
-        [fig._oppLabel._label, 'realR', 'realRToOpposite'],
+        [fig._oppLabel._label, 'realTimesR', 'realRToOpposite'],
         [fig._hypotenuse._label, 'r', 'rToHyp'],
       ],
       duration: 2,
@@ -1232,8 +1235,11 @@ class Content extends PresentationFormatContent {
 
     commonContent = {
       setContent: [
-        'The word |sine| originates from the word for |bowstring|.',
+        style({}, 'The word |sine| originates from the word for |bowstring|.'),
       ],
+      // modifiers: {
+      //   right_angle_triangle: this.bindNext(colors.diagram.action, 'right_tri'),
+      // },
     };
     this.addSectionEqnStep({
       eqns: [
@@ -1258,23 +1264,47 @@ class Content extends PresentationFormatContent {
         element: fig, children: ['opp', 'mirrorV'], style: ['pulse'],
       });
     };
+    const pulseChord = () => {
+      fig._h.hide();
+      fig._right.hide();
+      coll.accent({
+        element: fig, children: ['opp', 'mirrorV'], style: ['highlight', 'pulse'],
+      });
+    };
+
+    const pulseRightAngle = () => {
+      fig._h.showAll();
+      fig._right.showAll();
+      coll.updateRotation();
+      coll.accent({
+        element: fig, children: ['h', 'right', 'line', 'opp'], style: ['highlight', 'pulse'],
+      });
+    };
+
+    const pulseSine = () => {
+      fig._h.hide();
+      fig._right.hide();
+      coll.accent({
+        element: fig, children: ['opp'], style: ['highlight', 'pulse'],
+      });
+    };
 
     commonContent = {
       setContent: [
-        'The word |sine| originates from the word for |bowstring|.',
+        style({}, 'The word |sine| originates from the word for |bowstring|.'),
         // note({ top: 75 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|).'),
         // note({ top: 80 }, 'The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).'),
         // note({ top: 85 }, 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
-        note({ top: 70, size: 0.9 }, '|Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|). The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord). This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
+        note({ top: 62, size: 0.9 }, 'A |right_angle_triangle| and cirlce are closely related. |Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|). The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord). This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
       ],
       modifiers: {
-        'khordḗ': coll.bindAccent({
-          element: fig, children: ['opp', 'mirrorV'], style: ['highlight', 'pulse'],
-        }),
+        // 'khordḗ': coll.bindAccent({
+        //   element: fig, children: ['opp', 'mirrorV'], style: ['highlight', 'pulse'],
+        // }),
+        'khordḗ': click(pulseChord, [this], colors.components),
+        'right_angle_triangle': click(pulseRightAngle, [this], colors.components),
         bow: click(pulseBowString, [this], colors.components),
-        sine_function: coll.bindAccent({
-          element: fig, children: ['opp'], style: ['highlight', 'pulse'],
-        }),
+        sine_function: click(pulseSine, [this], colors.components),
         Ancient_Greeks: highlight(colors.diagram.text.greek),
         Sanskrit: highlight(colors.diagram.text.sanskrit),
         Arabic: highlight(colors.diagram.text.arabic),
