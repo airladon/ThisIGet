@@ -94,7 +94,7 @@ class Content extends PresentationFormatContent {
       ],
     };
     this.addSection(common, commonShow, commonContent, {
-      title: 'Introduction',
+      title: 'Unit Right Triangle',
       setSteadyState: () => {
         fig._line.setRotation(Math.PI / 18 * 4);
         coll.updateRotation();
@@ -287,6 +287,7 @@ class Content extends PresentationFormatContent {
         ],
       }, common, commonShow, commonContent,
       {
+        title: 'Scale Triangle',
         setSteadyState: () => {
           fig._line.setRotation(Math.PI / 18 * 4);
           coll.updateRotation();
@@ -414,6 +415,7 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonShow, commonContent, {
+      title: 'Angles',
       setSteadyState: () => {
         fig._line.setRotation(Math.PI / 18 * 4);
         coll.updateRotation();
@@ -529,6 +531,7 @@ class Content extends PresentationFormatContent {
       ],
     };
     this.addSection(common, commonShow, commonContent, {
+      title: 'Table',
     });
 
     commonShow = {
@@ -787,6 +790,7 @@ class Content extends PresentationFormatContent {
       setContent: style({}, 'Now, let\'s make this a |mathematical expression|.'),
     };
     this.addSection(common, commonShow, commonContent, {
+      title: 'Mathematical Expression',
     });
 
     // this.addSectionEqnStep({
@@ -1088,6 +1092,7 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSectionEqnStep({
+      introduction: 'Sine',
       eqns: [
         [eqn, 'general', 'general'],
         [tab._sineHeading, 'func', 'func'],
@@ -1318,7 +1323,7 @@ class Content extends PresentationFormatContent {
       blankTransition: {
         toNext: true,
       },
-      transitionToNext: (done) => {
+      transitionToNextSkip: (done) => {
         const notes = document.querySelectorAll('.presentation__note');
         notes.forEach((n) => {
           n.classList.add('angle_table_hide');
@@ -1400,52 +1405,52 @@ class Content extends PresentationFormatContent {
       fadeInFromPrev: false,
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    commonContent = {
-      setContent: style({}, 'So the |sine_function| relates the |hypotenuse|, |angle| and |opposite_side| for |any| right angle triangle.'),
-      modifiers: {
-        function: click(() => {
-          coll._box1.showAll();
-          coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
-          coll.accent(coll._box1);
-        }, [this], colors.diagram.action),
-        opposite_side: coll.bindAccent(fig._opp),
-        hypotenuse: coll.bindAccent(fig._line),
-        angle: coll.bindAccent(fig._theta),
-        'sine_function': click(() => {
-          coll._box1.showAll();
-          coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
-          coll.accent(coll._box1);
-        }, [this], colors.diagram.action),
-        // right_angle_triangle: coll.bindAccent(fig, ['right', 'h', 'opp', 'line']),
-      },
-    };
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // commonContent = {
+    //   setContent: style({}, 'So the |sine_function| relates the |hypotenuse|, |angle| and |opposite_side| for |any| right angle triangle.'),
+    //   modifiers: {
+    //     function: click(() => {
+    //       coll._box1.showAll();
+    //       coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
+    //       coll.accent(coll._box1);
+    //     }, [this], colors.diagram.action),
+    //     opposite_side: coll.bindAccent(fig._opp),
+    //     hypotenuse: coll.bindAccent(fig._line),
+    //     angle: coll.bindAccent(fig._theta),
+    //     'sine_function': click(() => {
+    //       coll._box1.showAll();
+    //       coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
+    //       coll.accent(coll._box1);
+    //     }, [this], colors.diagram.action),
+    //     // right_angle_triangle: coll.bindAccent(fig, ['right', 'h', 'opp', 'line']),
+    //   },
+    // };
 
-    commonShow = {
-      show: [
-        fig._line, fig._h, fig._theta,
-        fig._right, fig._opp, tab,
-      ],
-      setEqnForms: [
-        [fig._theta._label, 'angle'],
-        ...coll.tableForm('base'),
-        [tab._sineHeading, 'sin'],
-        [tab._angleHeading, 'angle'],
-        [eqn, 'sin'],
-        [fig._oppLabel._label, 'opposite'],
-        [fig._hypotenuse._label, 'hyp'],
-      ],
-    };
+    // commonShow = {
+    //   show: [
+    //     fig._line, fig._h, fig._theta,
+    //     fig._right, fig._opp, tab,
+    //   ],
+    //   setEqnForms: [
+    //     [fig._theta._label, 'angle'],
+    //     ...coll.tableForm('base'),
+    //     [tab._sineHeading, 'sin'],
+    //     [tab._angleHeading, 'angle'],
+    //     [eqn, 'sin'],
+    //     [fig._oppLabel._label, 'opposite'],
+    //     [fig._hypotenuse._label, 'hyp'],
+    //   ],
+    // };
 
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        fig.setScenario('left');
-        eqn.setScenario('left');
-        tab.setScenario('default');
-      },
-    });
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     fig.setScenario('left');
+    //     eqn.setScenario('left');
+    //     tab.setScenario('default');
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -1457,16 +1462,16 @@ class Content extends PresentationFormatContent {
       },
     };
 
-    this.addSection(common, commonShow, commonContent, {
-      modifiers: {
-        table: this.bindNext(),
-      },
-      setSteadyState: () => {
-        fig.setScenario('left');
-        eqn.setScenario('left');
-        tab.setScenario('default');
-      },
-    });
+    // this.addSection(common, commonShow, commonContent, {
+    //   modifiers: {
+    //     table: this.bindNext(),
+    //   },
+    //   setSteadyState: () => {
+    //     fig.setScenario('left');
+    //     eqn.setScenario('left');
+    //     tab.setScenario('default');
+    //   },
+    // });
 
     commonShow = {
       show: [
@@ -1486,15 +1491,16 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonShow, commonContent, {
+      title: 'History',
       modifiers: {
         table: coll.bindAccent(tab, colors.diagram.action),
       },
-      transitionFromPrev: (done) => {
-        tab.animations.new()
-          .scenario({ target: 'center', duration: 1.5 })
-          .whenFinished(done)
-          .start();
-      },
+      // transitionFromPrev: (done) => {
+      //   tab.animations.new()
+      //     .scenario({ target: 'center', duration: 1.5 })
+      //     .whenFinished(done)
+      //     .start();
+      // },
       setSteadyState: () => {
         // fig.setScenario('left');
         // eqn.setScenario('left');
@@ -1538,22 +1544,37 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({}, 'It was not until |1400 CE| that a mathematical |formula| was found that exactly represented the sine function.'),
-      modifiers: {
-        formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
-      },
     };
 
     this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        formula: this.bindNext(),
+      },
       setSteadyState: () => {
         tab.setScenario('center');
       },
     });
 
     this.addSection(common, commonShow, commonContent, {
+      title: 'Sine Formula',
+      modifiers: {
+        formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
+      },
       transitionFromPrev: (done) => {
         tab.setScenario('center');
-        tab.animations.new()
-          .scenario({ target: 'high', duration: 0.4 })
+        // tab.animations.new()
+        //   .scenario({ target: 'high', duration: 0.4 })
+        //   .trigger({
+        //     callback: () => {
+        //       coll._powerSeries.showForm('base');
+        //       coll.accent(coll._powerSeries);
+        //     },
+        //     duration: 1,
+        //   })
+        //   .whenFinished(done)
+        //   .start();
+        coll.animations.new()
+          .dissolveOut({ element: tab, duration: 0.5 })
           .trigger({
             callback: () => {
               coll._powerSeries.showForm('base');
@@ -1563,15 +1584,129 @@ class Content extends PresentationFormatContent {
           })
           .whenFinished(done)
           .start();
-        // coll._powerSeries.showForm('base');
-        // coll.accent(coll._powerSeries, done);
       },
       setSteadyState: () => {
         tab.setScenario('high');
+        tab.hide();
         coll._powerSeries.showForm('base');
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'However, calculating sine with this formula is still |complex without a computer|. Consequently |tables| were used for many applications up until the |late 20th century CE|, when calculators and computers replaced them.'),
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        tab.setScenario('high');
+        tab.hide();
+        coll._powerSeries.showForm('base');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'In |all| right angle triangles, the |sine_function| relates an |angle|, the |opposite_side| to the angle and the |hypotenuse|.'),
+      modifiers: {
+        opposite_side: coll.bindAccent(fig, ['opp']),
+        angle: coll.bindAccent(fig._theta),
+        hypotenuse: coll.bindAccent(fig, ['line']),
+        sine_function: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+      },
+    };
+
+
+    commonShow = {
+      show: [
+        fig._line, fig._h, fig._theta,
+        fig._right, fig._opp,
+      ],
+      setEqnForms: [
+        [fig._theta._label, 'angle'],
+        // ...coll.tableForm('base'),
+        // [tab._sineHeading, 'sin'],
+        // [tab._angleHeading, 'angle'],
+        [eqn, 'sin'],
+        [fig._oppLabel._label, 'opposite'],
+        [fig._hypotenuse._label, 'hyp'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      title: 'Summary',
+      setSteadyState: () => {
+        coll.setScenarios('default');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'This |relationship| |leads| to many other relationships between sides and angles in |triangles| and |circles|. |Trigonometry| explores many of these relationships.'),
+      modifiers: {
+        relationship: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(eqn, ['opp', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        coll.setScenarios('default');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, 'If you need to find the |value| of the |sine_function| for a given |angle|, you can use a |table_of_sines|, |calculator| or |computer|.'),
+      modifiers: {
+        // table_of_sines: coll.bindAccent(tab, colors.diagram.action),
+        angle: highlight(colors.angles),
+        sine_function: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(tab._sineHeading, ['sin', 'rb'], 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+        table_of_sines: click(() => {
+          coll._box1.showAll();
+          coll._box1.surround(tab, '', 0.08);
+          coll.accent(coll._box1);
+        }, [this], colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonContent, {
+      show: [tab],
+      setEqnForms: [
+        // [fig._theta._label, 'angle'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'sin'],
+        [tab._angleHeading, 'angle'],
+        // [eqn, 'sin'],
+        // [fig._oppLabel._label, 'opposite'],
+        // [fig._hypotenuse._label, 'hyp'],
+      ],
+      setSteadyState: () => {
+        tab.setScenario('center');
+        console.log(tab)
+      },
+    });
+
+    
 
     // // **********************************************************************
     // // **********************************************************************

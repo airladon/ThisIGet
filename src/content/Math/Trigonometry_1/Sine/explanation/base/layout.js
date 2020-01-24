@@ -1354,7 +1354,7 @@ export default function diagramLayout() {
     method: 'box',
     options: {
       lineWidth: 0.01,
-      color: colors.angles,
+      color: colors.diagram.action,
     },
     mods: {
       pulseDefault: { scale: 1.2 },
@@ -1437,13 +1437,13 @@ export default function diagramLayout() {
         a_3: { text: 'angle', color: colors.angles },
         a_5: { text: 'angle', color: colors.angles },
         a_7: { text: 'angle', color: colors.angles },
-        equals: ' = ',
+        equals: '  =  ',
         v_3: { symbol: 'vinculum' },
         v_5: { symbol: 'vinculum' },
         v_7: { symbol: 'vinculum' },
-        m_1: ' – ',
-        m_2: ' – ',
-        p_1: ' + ',
+        m_1: '  –  ',
+        m_2: '  –  ',
+        p_1: '  +  ',
         dots: ' + ...',
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
@@ -1469,7 +1469,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [0, -1.8] },
+        default: { position: [0, -0.5] },
       },
       pulseDefault: { scale: 1.1 },
     },
