@@ -141,7 +141,7 @@ export default function diagramLayout() {
         },
       ],
       options: {
-        position: [-1.5, -0.5],
+        position: [-1.5, -0.8],
       },
     },
     {
@@ -290,7 +290,7 @@ export default function diagramLayout() {
             },
           },
         },
-        position: [0, -1.3],
+        position: [0, -1.4],
       },
     },
   ];

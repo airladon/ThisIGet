@@ -26566,8 +26566,13 @@ function () {
       C: 0,
       style: _tools_math__WEBPACK_IMPORTED_MODULE_2__["sinusoid"],
       num: 1,
-      transformMethod: function transformMethod(s) {
-        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(s, s);
+      delta: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      transformMethod: function transformMethod(s, d) {
+        if (d == null || d.x === 0 && d.y === 0) {
+          return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(s, s);
+        }
+
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(-d.x, -d.y).scale(s, s).translate(d.x, d.y);
       },
       callback: function callback() {}
     };
@@ -27204,7 +27209,7 @@ function () {
           // Get the current pulse magnitude
           var pulseMag = this.pulseSettings.style(deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
-          var pTransform = this.pulseSettings.transformMethod(pulseMag); // if(this.name === '_radius') {
+          var pTransform = this.pulseSettings.transformMethod(pulseMag, this.pulseSettings.delta); // if(this.name === '_radius') {
           // }
           // Transform the current transformMatrix by the pulse transform matrix
           // const pMatrix = m2.mul(m2.copy(transform), pTransform.matrix());
@@ -27224,6 +27229,7 @@ function () {
     value: function pulseScaleNow(time, scale) {
       var frequency = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var delta = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       this.pulseSettings.time = time;
 
       if (frequency === 0 && time === 0) {
@@ -27242,10 +27248,7 @@ function () {
       this.pulseSettings.B = scale - 1;
       this.pulseSettings.C = 0;
       this.pulseSettings.num = 1;
-
-      this.pulseSettings.transformMethod = function (s) {
-        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(s, s);
-      };
+      this.pulseSettings.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(delta); // this.pulseSettings.transformMethod = s => new Transform().scale(s, s);
 
       this.pulseSettings.callback = callback;
       this.pulseNow();
@@ -27255,33 +27258,28 @@ function () {
     value: function pulseScaleRelativeToPoint(p, space, time, scale) {
       var frequency = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
       var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-      this.pulseSettings.time = time;
-
-      if (frequency === 0 && time === 0) {
-        this.pulseSettings.frequency = 1;
-      }
-
-      if (frequency !== 0) {
-        this.pulseSettings.frequency = frequency;
-      }
-
-      if (time !== 0 && frequency === 0) {
-        this.pulseSettings.frequency = 1 / (time * 2);
-      }
-
-      this.pulseSettings.A = 1;
-      this.pulseSettings.B = scale - 1;
-      this.pulseSettings.C = 0;
-      this.pulseSettings.num = 1;
-      this.pulseSettings.callback = callback;
+      // this.pulseSettings.time = time;
+      // if (frequency === 0 && time === 0) {
+      //   this.pulseSettings.frequency = 1;
+      // }
+      // if (frequency !== 0) {
+      //   this.pulseSettings.frequency = frequency;
+      // }
+      // if (time !== 0 && frequency === 0) {
+      //   this.pulseSettings.frequency = 1 / (time * 2);
+      // }
+      // this.pulseSettings.A = 1;
+      // this.pulseSettings.B = scale - 1;
+      // this.pulseSettings.C = 0;
+      // this.pulseSettings.num = 1;
+      // this.pulseSettings.callback = callback;
       var currentPosition = this.getPosition(space);
       var delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p).sub(currentPosition);
-
-      this.pulseSettings.transformMethod = function (s) {
-        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(-delta.x, -delta.y).scale(s, s).translate(delta.x, delta.y);
-      };
-
-      this.pulseNow();
+      this.pulseScaleNow(time, scale, frequency, callback, delta); // this.pulseSettings.transformMethod = s => new Transform()
+      //   .translate(-delta.x, -delta.y)
+      //   .scale(s, s)
+      //   .translate(delta.x, delta.y);
+      // this.pulseNow();
     }
   }, {
     key: "pulseScaleRelativeToElement",
