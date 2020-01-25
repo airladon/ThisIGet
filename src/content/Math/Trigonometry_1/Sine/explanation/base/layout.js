@@ -762,7 +762,7 @@ export default function diagramLayout() {
                   bottomComment: {
                     content: 'opp1',
                     comment: 'hypr',
-                    scale: 0.6,
+                    scale: 0.7,
                     insize: false,
                   },
                 },
@@ -785,7 +785,7 @@ export default function diagramLayout() {
               bottomComment: {
                 content: 'opp1',
                 comment: 'hypr',
-                scale: 0.6,
+                scale: 0.5,
                 insize: false,
               },
             },
@@ -878,6 +878,28 @@ export default function diagramLayout() {
           alignment: {
             fixTo: 'equals',
             alignH: 2.2,
+          },
+        },
+        'sinLeft': {
+          content: [
+            'sin', { brac: ['lb', 'angle', 'rb'] },
+            'equals',
+            { frac: ['opp', 'v', 'hyp'] },
+            // 'hyp',
+            // '  ', 'times1', '  ',
+            // ,
+          ],
+          alignment: {
+            fixTo: 'equals',
+            alignH: 0,
+          },
+          translation: {
+            'opp': ['curved', 'up', 0.45],
+            'hyp': ['linear'],
+            'sin': ['curved', 'down', 0.4],
+            'lb': ['curved', 'down', 0.4],
+            'rb': ['curved', 'down', 0.4],
+            'angle': ['curved', 'down', 0.4],
           },
         },
         '0': {

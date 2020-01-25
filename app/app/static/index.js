@@ -27258,28 +27258,9 @@ function () {
     value: function pulseScaleRelativeToPoint(p, space, time, scale) {
       var frequency = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
       var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-      // this.pulseSettings.time = time;
-      // if (frequency === 0 && time === 0) {
-      //   this.pulseSettings.frequency = 1;
-      // }
-      // if (frequency !== 0) {
-      //   this.pulseSettings.frequency = frequency;
-      // }
-      // if (time !== 0 && frequency === 0) {
-      //   this.pulseSettings.frequency = 1 / (time * 2);
-      // }
-      // this.pulseSettings.A = 1;
-      // this.pulseSettings.B = scale - 1;
-      // this.pulseSettings.C = 0;
-      // this.pulseSettings.num = 1;
-      // this.pulseSettings.callback = callback;
       var currentPosition = this.getPosition(space);
       var delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p).sub(currentPosition);
-      this.pulseScaleNow(time, scale, frequency, callback, delta); // this.pulseSettings.transformMethod = s => new Transform()
-      //   .translate(-delta.x, -delta.y)
-      //   .scale(s, s)
-      //   .translate(delta.x, delta.y);
-      // this.pulseNow();
+      this.pulseScaleNow(time, scale, frequency, callback, delta);
     }
   }, {
     key: "pulseScaleRelativeToElement",
@@ -28891,6 +28872,38 @@ function (_DiagramElement2) {
     //   return boundaries;
     // }
 
+  }, {
+    key: "getPositionInBounds",
+    value: function getPositionInBounds() {
+      var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
+      var x = arguments.length > 1 ? arguments[1] : undefined;
+      var y = arguments.length > 2 ? arguments[2] : undefined;
+      var children = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var bounds = this.getBoundingRect(space, children);
+      var p = this.getPosition(space);
+
+      if (x === 'left') {
+        p.x = bounds.left;
+      } else if (x === 'right') {
+        p.x = bounds.right;
+      } else if (x === 'center') {
+        p.x = bounds.left + bounds.width / 2;
+      } else if (typeof x === 'number') {
+        p.x = bounds.left + bounds.width * x;
+      }
+
+      if (y === 'top') {
+        p.y = bounds.top;
+      } else if (y === 'bottom') {
+        p.y = bounds.bottom;
+      } else if (y === 'middle') {
+        p.y = bounds.bottom + bounds.height / 2;
+      } else if (typeof y === 'number') {
+        p.y = bounds.bottom + bounds.height * y;
+      }
+
+      return p;
+    }
   }, {
     key: "getBoundingRect",
     value: function getBoundingRect() {
