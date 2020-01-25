@@ -39,9 +39,36 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        '',
+        'In a |right angle triangle|, the |sine_function| of an |angle| is the ratio between the angle\'s |opposite_side| and the |hypotenuse|.',
       ],
-      modifiers: {},
+      modifiers: {
+        sine_function: click(() => {
+          const p = coll._eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
+          coll._eqn._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._eqn._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._eqn._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          this.diagram.animateNextFrame();
+        }, [this], colors.diagram.action),
+        opposite_side: click(() => {
+          const p = coll._eqn._opposite.getPositionInBounds('diagram', 'center', 'middle');
+          coll._eqn._opposite.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._tri._opp._label.pulseScaleNow(1, 1.2);
+          this.diagram.animateNextFrame();
+        }, [this], colors.components),
+        angle: click(() => {
+          const p = coll._eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
+          coll._eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._tri._angle.pulseScaleNow(1, 1.2);
+          this.diagram.animateNextFrame();
+        }, [this], colors.angles),
+        hypotenuse: click(() => {
+          const p = coll._eqn._hypotenuse.getPositionInBounds('diagram', 'center', 'middle');
+          coll._eqn._hypotenuse.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+          coll._tri._hyp._label.pulseScaleNow(1, 1.2);
+          this.diagram.animateNextFrame();
+        }, [this], colors.lines),
+      },
       show: [
         coll._tri, coll._eqn,
       ],
