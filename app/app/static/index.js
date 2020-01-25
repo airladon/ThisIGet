@@ -26763,10 +26763,63 @@ function () {
           this[execFunc].apply(this, _toConsumableArray(args));
         }
       }
-    }
+    } // pulseScaleRelativeTo(
+    //   e: DiagramElement | TypeParsablePoint | null,
+    //   x: 'left' | 'center' | 'right' | 'origin' | number,
+    //   y: 'bottom' | 'middle' | 'top' | 'origin' | number,
+    //   space: 'diagram' | 'gl' | 'vertex' | 'local',
+    //   time: number,
+    //   scale: number,
+    //   frequency: number = 0,
+    //   callback: ?(?mixed) => void = null,
+    // ) {
+    //   if (e == null || e instanceof DiagramElement) {
+    //     this.pulseScaleRelativeToElement(e, x, y, space, time, scale, frequency, callback);
+    //   } else {
+    //     this.pulseScaleRelativeToPoint(e, space, time, scale, frequency, callback)
+    //   }
+    // }
+
   }, {
     key: "pulse",
     value: function pulse() {
+      var optionsOrDone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var defaultOptions = {
+        x: 'center',
+        y: 'middle',
+        space: 'diagram',
+        centerOn: null,
+        frequency: this.pulseDefault.frequency,
+        time: this.pulseDefault.time,
+        scale: this.pulseDefault.scale,
+        done: null
+      };
+      var done;
+      var options = defaultOptions;
+
+      if (typeof optionsOrDone === 'function') {
+        options = defaultOptions;
+        done = optionsOrDone;
+      } else if (optionsOrDone == null) {
+        options = defaultOptions;
+        done = null;
+      } else {
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])({}, defaultOptions, optionsOrDone);
+        var _options = options;
+        done = _options.done;
+      }
+
+      if (typeof this.pulseDefault === 'function') {
+        this.pulseDefault(done);
+      } else {
+        // const { frequency, time, scale } = this.pulseDefault;
+        // this.pulseScaleNow(time, scale, frequency, done);
+        this.pulseScaleRelativeTo(options.centerOn, options.x, options.y, options.space, options.time, options.scale, options.frequency, done);
+      }
+    }
+  }, {
+    key: "pulseLegacy",
+    value: function pulseLegacy() {
       var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if (typeof this.pulseDefault === 'function') {
@@ -27264,11 +27317,30 @@ function () {
     }
   }, {
     key: "pulseScaleRelativeToElement",
-    value: function pulseScaleRelativeToElement(e, space, time, scale) {
-      var frequency = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-      var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-      var p = e.getPosition(space);
+    value: function pulseScaleRelativeToElement(e, x, y, space, time, scale) {
+      var frequency = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+      var callback = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+      var p;
+
+      if (e == null) {
+        p = this.getPositionInBounds(space, x, y);
+      } else {
+        p = e.getPositionInBounds(space, x, y);
+      }
+
       this.pulseScaleRelativeToPoint(p, space, time, scale, frequency, callback);
+    }
+  }, {
+    key: "pulseScaleRelativeTo",
+    value: function pulseScaleRelativeTo(e, x, y, space, time, scale) {
+      var frequency = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+      var callback = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+
+      if (e == null || e instanceof DiagramElement) {
+        this.pulseScaleRelativeToElement(e, x, y, space, time, scale, frequency, callback);
+      } else {
+        this.pulseScaleRelativeToPoint(e, space, time, scale, frequency, callback);
+      }
     }
   }, {
     key: "pulseThickNow",
@@ -28540,8 +28612,101 @@ function (_DiagramElement2) {
     }
   }, {
     key: "pulse",
-    value: function pulse(elementsOrDone) {
+    value: function pulse() {
       var _this7 = this;
+
+      var optionsOrElementsOrDone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (optionsOrElementsOrDone == null || typeof optionsOrElementsOrDone === 'function') {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, optionsOrElementsOrDone);
+
+        return;
+      }
+
+      var defaultOptions = {
+        x: 'center',
+        y: 'middle',
+        space: 'diagram',
+        centerOn: null,
+        frequency: this.pulseDefault.frequency,
+        time: this.pulseDefault.time,
+        scale: this.pulseDefault.scale,
+        done: null,
+        elements: null
+      };
+      var doneToUse;
+      var options;
+      var elements;
+
+      if (Array.isArray(optionsOrElementsOrDone)) {
+        options = defaultOptions;
+        doneToUse = done;
+        elements = optionsOrElementsOrDone;
+      } else {
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])({}, defaultOptions, optionsOrElementsOrDone);
+        var _options2 = options;
+        elements = _options2.elements;
+        doneToUse = options.done;
+      }
+
+      if (elements == null || elements.length === 1) {
+        _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, optionsOrElementsOrDone);
+
+        return;
+      }
+
+      var counter = 0;
+
+      var combinedCallback = function combinedCallback() {
+        counter += 1;
+
+        if (counter === elements.length) {
+          if (doneToUse != null) {
+            doneToUse();
+          }
+        }
+      };
+
+      options.done = combinedCallback; // let doneToUse = done;
+
+      elements.forEach(function (elementToPulse) {
+        var element;
+
+        if (typeof elementToPulse === 'string') {
+          element = _this7.getElement(elementToPulse);
+        } else {
+          element = elementToPulse;
+        }
+
+        if (element != null) {
+          // element.pulseDefault(doneToUse);
+          element.pulse(options); // doneToUse = null;
+        }
+      }); // if (doneToUse != null) {
+      //   doneToUse();
+      // }
+      // if (typeof this.pulseDefault === 'function') {
+      //   this.pulseDefault(done);
+      // } else {
+      //   // const { frequency, time, scale } = this.pulseDefault;
+      //   // this.pulseScaleNow(time, scale, frequency, done);
+      //   this.pulseScaleRelativeTo(
+      //     options.centeredOn,
+      //     options.x,
+      //     options.y,
+      //     options.space,
+      //     options.time,
+      //     options.scale,
+      //     options.frequency,
+      //     done,
+      //   );
+      // }
+    }
+  }, {
+    key: "pulseLegacy",
+    value: function pulseLegacy(elementsOrDone) {
+      var _this8 = this;
 
       var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -28556,7 +28721,7 @@ function (_DiagramElement2) {
         var element;
 
         if (typeof elementToPulse === 'string') {
-          element = _this7.getElement(elementToPulse);
+          element = _this8.getElement(elementToPulse);
         } else {
           element = elementToPulse;
         }
@@ -28613,11 +28778,11 @@ function (_DiagramElement2) {
   }, {
     key: "getElements",
     value: function getElements(children) {
-      var _this8 = this;
+      var _this9 = this;
 
       var elements = [];
       children.forEach(function (child) {
-        var element = _this8.getElement(child);
+        var element = _this9.getElement(child);
 
         if (element != null) {
           elements.push(element);
@@ -28805,7 +28970,7 @@ function (_DiagramElement2) {
   }, {
     key: "getBoundaries",
     value: function getBoundaries() {
-      var _this9 = this;
+      var _this10 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -28816,7 +28981,7 @@ function (_DiagramElement2) {
       }
 
       children.forEach(function (child) {
-        var e = _this9.getElement(child);
+        var e = _this10.getElement(child);
 
         if (e == null) {
           return;
@@ -28907,7 +29072,7 @@ function (_DiagramElement2) {
   }, {
     key: "getBoundingRect",
     value: function getBoundingRect() {
-      var _this10 = this;
+      var _this11 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -28919,7 +29084,7 @@ function (_DiagramElement2) {
 
       var points = [];
       children.forEach(function (child) {
-        var e = _this10.getElement(child);
+        var e = _this11.getElement(child);
 
         if (e == null) {
           return;
@@ -28940,7 +29105,7 @@ function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var _this11 = this;
+      var _this12 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -28952,7 +29117,7 @@ function (_DiagramElement2) {
 
       var points = [];
       elementsToBound.forEach(function (element) {
-        var e = _this11.getElement(element);
+        var e = _this12.getElement(element);
 
         if (e == null) {
           return;
@@ -29142,7 +29307,7 @@ function (_DiagramElement2) {
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
-      var _this12 = this;
+      var _this13 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -29155,7 +29320,7 @@ function (_DiagramElement2) {
         var e;
 
         if (typeof element === 'string') {
-          e = _this12.getElement(element);
+          e = _this13.getElement(element);
         } else {
           e = element;
         }
@@ -29211,11 +29376,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this13 = this;
+      var _this14 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this13.elements[a];
-        var elemB = _this13.elements[b];
+        var elemA = _this14.elements[a];
+        var elemB = _this14.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA

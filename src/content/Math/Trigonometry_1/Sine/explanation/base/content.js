@@ -1398,14 +1398,21 @@ class Content extends PresentationFormatContent {
           this.diagram.animateNextFrame();
         }, [this], colors.diagram.action),
         // asdf: coll.bindAccent(tab._sineHeading, ['sin', 'lb', 'rb', 'angle'], 'lb', 'center', 'middle', color.),
-        sine_function: click(() => {
-          const p = tab._sineHeading._lb.getPositionInBounds('diagram', 'center', 'middle');
-          tab._sineHeading._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          tab._sineHeading._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          tab._sineHeading._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          tab._sineHeading._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          this.diagram.animateNextFrame();
-        }, [this], colors.diagram.action),
+        // sine_function: click(() => {
+        //   const p = tab._sineHeading._lb.getPositionInBounds('diagram', 'center', 'middle');
+        //   tab._sineHeading._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   tab._sineHeading._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   tab._sineHeading._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   tab._sineHeading._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.diagram.action),
+        sine_function: coll.bindAccent({
+          element: tab._sineHeading,
+          children: ['sin', 'lb', 'rb', 'angle'],
+          centerOn: 'angle',
+          x: 0.2,
+          scale: 1.4,
+        }, colors.diagram.action),
       },
     };
 

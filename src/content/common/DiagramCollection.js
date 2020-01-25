@@ -69,12 +69,19 @@ function mergeAccentOptions(
   children: ?Array<DiagramElement | string>,
   style: TypeAccent,
   done: ?() => void,
+  x: 'center' | 'left' | 'right' | 'origin' | number,
+  y: 'middle' | 'top' | 'bottom' | 'origin' | number,
+  centerOn: DiagramElement | string | Point | null,
 } {
   const defaultOptions: TypeAccentOptions = {
     element: null,
+    elements: null,
     children: null,
     style: 'pulse',
     done: null,
+    centerOn: null,
+    x: 'center',
+    y: 'middle',
   };
   let options;
   if (typeof childrenOrDoneOrColor === 'function') {
@@ -98,6 +105,10 @@ function mergeAccentOptions(
     options = joinObjects({}, defaultOptions, elementOrOptions);
   }
 
+  if (options.elements != null) {
+    options.element = options.elements;
+  }
+
   if (options.element instanceof DiagramElement) {
     options.element = [options.element];
   }
@@ -112,6 +123,13 @@ function mergeAccentOptions(
     style = styleIn;
   }
   options.style = style;
+
+  if (typeof options.centerOn === 'string') {
+    const centerOn = options.element[0].getElement(options.centerOn);
+    if (centerOn != null) {
+      options.centerOn = centerOn;
+    }
+  }
   // $FlowFixMe
   return options;
 }
@@ -289,7 +307,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
           element.highlight();
         }
         if (style.includes('pulse')) {
-          element.pulse(doneToUse);
+          element.pulse(options);
           doneToUse = null;
         }
       } else {
@@ -300,7 +318,8 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
           element.highlight(children);
         }
         if (style.includes('pulse')) {
-          element.pulse(children, doneToUse);
+          options.elements = children;
+          element.pulse(options);
           doneToUse = null;
         }
       }
