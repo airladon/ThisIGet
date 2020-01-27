@@ -28650,7 +28650,9 @@ function (_DiagramElement2) {
         doneToUse = options.done;
       }
 
-      if (elements == null || elements.length === 1) {
+      options.elements = null;
+
+      if (elements == null || elements.length === 0) {
         _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, optionsOrElementsOrDone);
 
         return;

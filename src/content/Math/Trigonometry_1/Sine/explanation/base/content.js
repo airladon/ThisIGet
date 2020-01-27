@@ -45,6 +45,7 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/SimilarTriangles/base',
       'Math/Geometry_1/RightAngleTriangles/base',
       'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/Radians/base',
     ]);
   }
 
@@ -183,9 +184,7 @@ class Content extends PresentationFormatContent {
         right_angle: coll.bindAccent(fig._right),
         '40º_angle': coll.bindAccent(fig._theta),
         hyptoenuse: coll.bindAccent(fig._hypotenuse),
-        AAS_combination: coll.bindAccent(
-          fig, ['right', 'theta', 'hypotenuse'], colors.diagram.action,
-        ),
+        AAS_combination: coll.bindAccent(fig, ['right', 'theta', 'hypotenuse'], colors.diagram.action),
       },
     };
 
@@ -568,7 +567,8 @@ class Content extends PresentationFormatContent {
             callback: () => {
               tab.showAll();
               coll.showTableForms('angle', 'opp', 'base');
-              tab.pulseScaleNow(1, 1.15);
+              coll.accent(tab);
+              // tab.pulseScaleNow(1, 1.15);
             },
             duration: 1,
           })
@@ -1150,7 +1150,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({}, 'It was not until |1400 CE| that a mathematical |formula| was found that exactly represented the sine function.'),
+      setContent: [
+        style({}, 'It was not until |1400 CE| that a mathematical |formula| was found that exactly represented the sine function.'),
+        // note({ top: 90 }, 'Note: for |angle| in |radians|.'),
+      ],
     };
 
     this.addSection(common, commonShow, commonContent, {
@@ -1164,8 +1167,14 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonShow, commonContent, {
       title: 'Sine Formula',
+      setContent: [
+        style({}, 'It was not until |1400 CE| that a mathematical |formula| was found that exactly represented the sine function.'),
+        note({ top: 90 }, 'For |angle| in |radians|.'),
+      ],
       modifiers: {
         formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
+        angle: highlight(colors.angles),
+        radians: this.qr('Math/Geometry_1/Radians/base/Main'),
       },
       transitionFromPrev: (done) => {
         tab.setScenario('center');
@@ -1186,6 +1195,7 @@ class Content extends PresentationFormatContent {
         tab.hide();
         coll._powerSeries.showForm('base');
       },
+      fadeInFromPrev: false,
     });
 
     // **********************************************************************
@@ -1209,46 +1219,28 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({}, 'In |all| right angle triangles, the |sine_function| relates an |angle|, the |opposite_side| to the angle and the |hypotenuse|.'),
       modifiers: {
-        // opposite_side: coll.bindAccent(fig, ['opp']),
-        opposite_side: click(() => {
-          const p = eqn._opp.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._opp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          const p2 = fig._oppLabel._label.getPositionInBounds('diagram', 'center', 'middle');
-          fig._oppLabel._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
-          coll.accent(fig._opp);
-          this.diagram.animateNextFrame();
-        }, [this], colors.components),
-        // angle: coll.bindAccent(fig._theta),
-        angle: click(() => {
-          const p = eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          // const p2 = fig._oppLabel._label.getPositionInBounds('diagram', 'center', 'middle');
-          // fig._oppLabel._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
-          coll.accent(fig._theta);
-          this.diagram.animateNextFrame();
-        }, [this], colors.angles),
-        // hypotenuse: coll.bindAccent(coll, ['fig.line', 'fig.hypotenuse._label', 'eqn._hyp']),
-        hypotenuse: click(() => {
-          const p = eqn._hyp.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._hyp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          const p2 = fig._hypotenuse._label.getPositionInBounds('diagram', 'center', 'middle');
-          fig._hypotenuse._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
-          coll.accent(fig._line);
-          this.diagram.animateNextFrame();
-        }, [this], colors.lines),
-        // sine_function: click(() => {
-        //   coll._box1.showAll();
-        //   coll._box1.surround(eqn, ['sin', 'rb'], 0.08);
-        //   coll.accent(coll._box1);
-        // }, [this], colors.diagram.action),
-        sine_function: click(() => {
-          const p = eqn._lb.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          this.diagram.animateNextFrame();
-        }, [this], colors.diagram.action),
+        opposite_side: coll.bindAccent({
+          element: coll,
+          children: ['fig.opp', 'fig.oppLabel.label', 'eqn.opp'],
+          scale: 1.4,
+        }),
+        angle: coll.bindAccent({
+          element: coll,
+          children: ['fig.theta', 'eqn.angle'],
+          scale: 1.4,
+        }),
+        hypotenuse: coll.bindAccent({
+          element: coll,
+          children: ['fig.line', 'fig.hypotenuse.label', 'eqn.hyp'],
+          scale: 1.4,
+        }),
+        sine_function: coll.bindAccent({
+          element: eqn,
+          children: ['sin', 'lb', 'rb', 'angle'],
+          scale: 1.4,
+          centerOn: 'lb',
+          color: colors.diagram.action,
+        }),
       },
     };
 
@@ -1301,36 +1293,58 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: style({}, 'Often this relationship is |rearranged| to show the |sine_function| is equal to the |ratio| of the |opposite_side| and |hypotenuse|.'),
       modifiers: {
-        opposite_side: click(() => {
-          const p = eqn._opp.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._opp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          const p2 = fig._oppLabel._label.getPositionInBounds('diagram', 'center', 'middle');
-          fig._oppLabel._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
-          coll.accent(fig._opp);
-          this.diagram.animateNextFrame();
-        }, [this], colors.components),
-        angle: click(() => {
-          const p = eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          coll.accent(fig._theta);
-          this.diagram.animateNextFrame();
-        }, [this], colors.angles),
-        hypotenuse: click(() => {
-          const p = eqn._hyp.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._hyp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          const p2 = fig._hypotenuse._label.getPositionInBounds('diagram', 'center', 'middle');
-          fig._hypotenuse._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
-          coll.accent(fig._line);
-          this.diagram.animateNextFrame();
-        }, [this], colors.lines),
-        sine_function: click(() => {
-          const p = eqn._lb.getPositionInBounds('diagram', 'center', 'middle');
-          eqn._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-          this.diagram.animateNextFrame();
-        }, [this], colors.diagram.action),
+        // opposite_side: click(() => {
+        //   const p = eqn._opp.getPositionInBounds('diagram', 'center', 'middle');
+        //   eqn._opp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   const p2 = fig._oppLabel._label.getPositionInBounds('diagram', 'center', 'middle');
+        //   fig._oppLabel._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
+        //   coll.accent(fig._opp);
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.components),
+        // angle: click(() => {
+        //   const p = eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
+        //   eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   coll.accent(fig._theta);
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.angles),
+        // hypotenuse: click(() => {
+        //   const p = eqn._hyp.getPositionInBounds('diagram', 'center', 'middle');
+        //   eqn._hyp.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   const p2 = fig._hypotenuse._label.getPositionInBounds('diagram', 'center', 'middle');
+        //   fig._hypotenuse._label.pulseScaleRelativeToPoint(p2, 'diagram', 1, 1.3);
+        //   coll.accent(fig._line);
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.lines),
+        // sine_function: click(() => {
+        //   const p = eqn._lb.getPositionInBounds('diagram', 'center', 'middle');
+        //   eqn._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   eqn._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   eqn._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        //   this.diagram.animateNextFrame();
+        // }, [this], colors.diagram.action),
+        opposite_side: coll.bindAccent({
+          element: coll,
+          children: ['fig.opp', 'fig.oppLabel.label', 'eqn.opp'],
+          scale: 1.4,
+        }),
+        // angle: coll.bindAccent({
+        //   element: coll,
+        //   children: ['fig.theta', 'eqn.angle'],
+        //   scale: 1.4,
+        // }),
+        hypotenuse: coll.bindAccent({
+          element: coll,
+          children: ['fig.line', 'fig.hypotenuse.label', 'eqn.hyp'],
+          scale: 1.4,
+        }),
+        sine_function: coll.bindAccent({
+          element: eqn,
+          children: ['sin', 'lb', 'rb', 'angle'],
+          scale: 1.4,
+          centerOn: 'lb',
+          color: colors.diagram.action,
+        }),
       },
     };
 
@@ -1381,31 +1395,11 @@ class Content extends PresentationFormatContent {
       setContent: style({}, 'If you need to find the |value| of the |sine_function| for a given |angle|, you can use a |table_of_sines|, |calculator| or |computer|.'),
       modifiers: {
         angle: highlight(colors.angles),
-        // sine_function: click(() => {
-        //   coll._box1.showAll();
-        //   coll._box1.surround(tab._sineHeading, ['sin', 'rb'], 0.08);
-        //   coll.accent(coll._box1);
-        // }, [this], colors.diagram.action),
-        // table_of_sines: click(() => {
-        //   coll._box1.showAll();
-        //   coll._box1.surround(tab, '', 0.08);
-        //   coll.accent(coll._box1);
-        // }, [this], colors.diagram.action),
         table_of_sines: click(() => {
-          // coll.bindAccent(tab, colors.diagram.action);
           const p = tab.getPositionInBounds('diagram', 'center', 'middle');
           tab.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.2);
           this.diagram.animateNextFrame();
         }, [this], colors.diagram.action),
-        // asdf: coll.bindAccent(tab._sineHeading, ['sin', 'lb', 'rb', 'angle'], 'lb', 'center', 'middle', color.),
-        // sine_function: click(() => {
-        //   const p = tab._sineHeading._lb.getPositionInBounds('diagram', 'center', 'middle');
-        //   tab._sineHeading._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-        //   tab._sineHeading._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-        //   tab._sineHeading._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-        //   tab._sineHeading._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
-        //   this.diagram.animateNextFrame();
-        // }, [this], colors.diagram.action),
         sine_function: coll.bindAccent({
           element: tab._sineHeading,
           children: ['sin', 'lb', 'rb', 'angle'],

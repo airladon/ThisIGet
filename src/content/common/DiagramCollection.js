@@ -72,6 +72,7 @@ function mergeAccentOptions(
   x: 'center' | 'left' | 'right' | 'origin' | number,
   y: 'middle' | 'top' | 'bottom' | 'origin' | number,
   centerOn: DiagramElement | string | Point | null,
+  color?: Array<number>,
 } {
   const defaultOptions: TypeAccentOptions = {
     element: null,
@@ -319,6 +320,8 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
         }
         if (style.includes('pulse')) {
           options.elements = children;
+          // console.log(options)
+          // console.log(element)
           element.pulse(options);
           doneToUse = null;
         }
@@ -357,7 +360,9 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     if (allElements.length > 0) {
       colorToUse = allElements[0].color.slice();
     }
-
+    if (options.color != null) {
+      colorToUse = options.color;
+    }
     if (Array.isArray(childrenOrColor)
       && childrenOrColor.length > 0
       && typeof childrenOrColor[0] === 'number'
