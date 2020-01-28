@@ -7,7 +7,7 @@ var version = {
   type: 'presentation',
   references: [
     'MainPres',
-    '// Main',
+    'TableOfSines',
   ],
 };
 

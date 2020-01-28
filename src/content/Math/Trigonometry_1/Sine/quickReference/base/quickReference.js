@@ -9,7 +9,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 import StaticQR from '../../../../../../js/components/staticQR';
-// import external from './external.md';
+import external from './tableOfSines.md';
+import './style.scss';
 
 const topicUID = details.uid;
 const versionUID = version.uid;
@@ -49,9 +50,9 @@ export default class QRMainPres extends PopupBoxCollection {
 
 attachQuickReference(details.path, topicUID, versionUID, {
   MainPres: QRMainPres,
-  // Main: <StaticQR
-  //   title=""
-  //   content={external}
-  //   link={`${details.path}/${details.uid}/explanation/base?page=1`}
-  // />,
+  TableOfSines: <StaticQR
+    title="Table of Sines"
+    content={external}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
 });

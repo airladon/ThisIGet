@@ -2092,14 +2092,6 @@
   "Math/Trigonometry_1/Sine": {
     "title": "Sine",
     "approaches": {
-      "discover": {
-        "simple": {
-          "type": "singlePage",
-          "title": "Base",
-          "description": "",
-          "fullTopic": true
-        }
-      },
       "examples": {
         "base": {
           "type": "singlePage",
@@ -2115,22 +2107,10 @@
           "description": "",
           "fullTopic": true
         },
-        "base1": {
-          "type": "presentation",
-          "title": "Descriptive",
-          "description": "",
-          "fullTopic": true
-        },
-        "markdown": {
+        "brief": {
           "type": "singlePage",
-          "title": "Derivation of Pythagorean Theorem",
+          "title": "Sine Function",
           "description": "Derivation using area of four right angle triangles",
-          "fullTopic": true
-        },
-        "simple": {
-          "type": "singlePage",
-          "title": "Descriptive",
-          "description": "",
           "fullTopic": true
         }
       },

@@ -1,3 +1,13 @@
 // .diagram__text {
 //   z-index: 0;
 // }
+
+.topic__qr__content table {
+  table-layout: fixed;
+}
+
+.topic__qr__content th {
+  text-align: center;
+  width: 7em;
+  border-bottom: 1px solid var(--color-diagram-disabled);
+}

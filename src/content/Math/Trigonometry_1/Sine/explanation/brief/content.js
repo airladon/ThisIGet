@@ -11,13 +11,13 @@ import content from './content.md';
 class Content extends SimpleFormatContent {
   setTitle() {
     this.title = details.title;
-    //  this.iconLink = imgLink;
-    //  this.iconLinkGrey = imgLinkGrey;
+    // this.iconLink = imgLink;
+    // this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
+      'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/SimilarTriangles/base',
+      'Math/Geometry_1/CongruentTriangles/base',
       'Math/Trigonometry_1/Sine/base',
-      // 'Math/Geometry_1/Triangles/base',
-      // 'Math/Geometry_1/AnglesAtIntersections/base/',
-      // 'Math/Geometry_1/AngleGroups/base/',
     ]);
   }
 

@@ -1104,7 +1104,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: style({ top: 0 }, 'Now, we constructed the |table| of sine values by |measuring| the opposite sides of right angle triangles with hypotenuse 1. Over |millenia| however, increasingly |accurate| ways have been found to do this.'),
+      setContent: style({ top: 0 }, 'Now, we constructed the |table| of sine values by |measuring| the opposite sides of right angle triangles with hypotenuse 1. Over |millennia| however, increasingly |accurate| ways have been found to do this.'),
       modifiers: {
         table: coll.bindAccent(tab, colors.diagram.action),
       },
