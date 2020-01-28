@@ -15,9 +15,10 @@ class Content extends SimpleFormatContent {
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
       'Math/Trigonometry_1/Sine/base',
-      // 'Math/Geometry_1/Triangles/base',
-      // 'Math/Geometry_1/AnglesAtIntersections/base/',
-      // 'Math/Geometry_1/AngleGroups/base/',
+      'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/Equilateral/base',
+      'Math/Geometry_1/AreaTriangle/base/',
+      // 'Math/Geometry_1/Isosceles/base/',
     ]);
   }
 
