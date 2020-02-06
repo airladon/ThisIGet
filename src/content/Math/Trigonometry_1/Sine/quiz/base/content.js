@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationFormatContent,
   // interactiveItem,
@@ -11,11 +11,12 @@ import details from '../../details';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
+const {
+  style,
 //   click,
 //   centerV,
 //   highlight,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = diagramLayout();
 // const { colors } = layout;
@@ -35,11 +36,13 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
-    const fig = quiz._fig;
+    // const fig = quiz._fig;
 
     this.addSection({
-      // setContent: ['Find the unknown angle:'],
-      show: [fig],
+      setContent: [
+        style({ top: 0 }, 'What is the unknown |side length|?'),
+      ],
+      show: [quiz._tri],
       setSteadyState: () => {
         quiz.newProblem();
       },

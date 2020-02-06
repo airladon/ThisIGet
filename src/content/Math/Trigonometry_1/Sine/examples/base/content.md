@@ -81,7 +81,7 @@ Side $$\color{b}A$$ is adjacent to the known angle, but opposite the unknown ang
 
 ![](ex4a.png)
 
-As angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) , the unknown angle must be:
+As angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)), the unknown angle must be:
 
 $$\color{r}a\color{black} = 180^\circ - 90^\circ - 35^\circ = 55^\circ$$
 
@@ -117,11 +117,11 @@ We can now reference a [[table of sines]]((qr,'Math/Trigonometry_1/Sine/base/Tab
 The angle 30º has a sine of 0.5, therefore:
 
 
- $$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{30^\circ}$$
- </hintLow>
+$$\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{30^\circ}$$
+</hintLow>
 
 
- ### Example 6
+### Example 6
 
 What is the length of side $$\color{b}A$$?
 
@@ -148,19 +148,43 @@ Where the sine of 60º can be computed with a calculator or [[table of sines]]((
 
 Therefore $$\color{b}H$$ is:
 
-$$\color{b}H\color{black} = \color{b}A\color{black} \times 0.866$$
+$$\color{b}H\color{black} = \color{b}A\color{black} \times 0.866 = 0.866\color{b}A$$
 
 The area of a triangle is:
 
-$$area = \frac{1}{2} height \times base$$
+$$area = \frac{1}{2} height \times base \ \frac{1}{2}\color{b}H\color{black}\times\color{b}A$$
 
-Where the base is $$\color{b}A$$.
-
-Therefore we have:
-
-$$5 = \frac{1}{2} 0.866\color{b}A\color{black}\times\color{b}A$$
-
-$$5 = 0.433\color{b}A\color{black}^2$$
+$$5 = \frac{1}{2} 0.866\color{b}A\color{black}\times\color{b}A\color{black} = 0.433\color{b}A\color{black}^2$$
 
 $$\color{b}A\color{black} = \sqrt{\frac{5}{0.2165}} = \bbox[10px,border:1px solid gray]{3.398}$$
- </hintLow>
+</hintLow>
+
+### Example 7
+
+What is the length of sides $$\color{b}A$$ and $$\color{b}B$$?
+
+![](ex7.png)
+
+<hintLow>[Answer]
+First we can find side $$\color{b}A$$ which is the hypotenuse of the left triangle using
+
+$$\color{b}hypotenuse\color{black} = \frac{\color{b}opposite\color{black}}{\sin \left( \color{r}angle \color{black} \right)}\ \ \ \ \ \ \ \ \ \color{grey}(1)$$
+
+Where the sine of 40º can be computed with a calculator or [[table of sines]]((qr,'Math/Trigonometry_1/Sine/base/TableOfSines',#00756F)) and is 0.6428.
+
+Therefore:
+
+$$\color{b}A\color{black} = \frac{0.7}{0.6428} = \bbox[10px,border:1px solid gray]{1.089}$$
+
+Next we find the unknown angle $$\color{r}a$$:
+
+![](ex7a.png)
+
+As angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)), the unknown angle must be:
+
+$$\color{r}a\color{black} = 180^\circ - 90^\circ - 50^\circ = 40^\circ$$
+
+Now we consider the triangle on the right. $$\color{b}B$$ is the hypotenuse and using $$\color{grey}(1)$$ from above and finding the sine of 40º to be 0.766:
+
+$$\color{b}B\color{black} = \frac{0.7}{0.766} = \bbox[10px,border:1px solid gray]{0.914}$$
+</hintLow>
