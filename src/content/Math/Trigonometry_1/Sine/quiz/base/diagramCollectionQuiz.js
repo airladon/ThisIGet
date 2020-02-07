@@ -99,8 +99,14 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const tri = this._tri;
     const angle0 = tri._angle0.getLabel();
     const angle1 = tri._angle1.getLabel();
+    const sine0 = round(Math.sin(angle0 * Math.PI / 180), 4);
+    const sine1 = round(Math.sin(angle1 * Math.PI / 180), 4);
 
     const side01 = round(rand(1, 100), 1);
+    // const side12 = round(rand(1, 100), 1);
+    // const side01 = round(rand(1, 100), 1);
+    tri._side01.setLabel(`${side01}`);
+    tri._side01.setLabel(`${side01}`);
     tri._side01.setLabel(`${side01}`);
 
     // const side12 = round(rand(1, 100), 1);
@@ -145,7 +151,20 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.setLabels();
     tri.exec('showAll', ['line', 'angle0', 'angle1', 'angle2']);
     tri._angle2.setLabel('');
+    const angle0 = tri._angle0.getLabel();
+    const angle1 = tri._angle1.getLabel();
+    const sine0 = round(Math.sin(angle0 * Math.PI / 180), 4);
+    const sine1 = round(Math.sin(angle1 * Math.PI / 180), 4);
 
+    const len = round(rand(1, 100), 1);
+    const scenarios1 = [
+      // unknown side 01 (hypotenuse), known angle and opposite
+      () => {
+        tri._angle0.showAll();
+        tri._side01.setLabel('?');
+        tri._side12.setLabel(len.toFixed(2));
+      },
+    ];
     // eslint-disable-next-line max-len
     const scenarios: Array<[Array<string>, string]> = [
       [['01'], '20'],

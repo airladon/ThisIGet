@@ -5,9 +5,15 @@ import diagramLayout from './layout';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
-const { Transform, Point } = Fig;
+const { Transform, Equation, DiagramElementPrimitive } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
+  _eqn: {
+    _oppContainer: DiagramElementPrimitive;
+    _hypContainer: DiagramElementPrimitive;
+    _sinContainer: DiagramElementPrimitive;
+  } & Equation;
+
   constructor(
     diagram: CommonTopicDiagram,
     transform: Transform = new Transform(),

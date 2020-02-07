@@ -14,14 +14,14 @@ const {
   Point,
 } = Fig;
 
-const { rand, round, randInt } = Fig.tools.math;
+const { rand, round } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
     _h: DiagramObjectLine;
     _v: DiagramObjectLine;
-    _hypotenuse: { _label: Equation } & DiagramObjectLine;
+    _hypotenuse: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
     _theta: DiagramObjectAngle;
     _right: DiagramObjectAngle;
     // _real: DiagramObjectAngle;
@@ -29,6 +29,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     // _sineTheta: { _label: Equation } & DiagramObjectLine;
     _opposite: { _label: Equation } & DiagramObjectLine;
     _arc: DiagramElementPrimitive;
+  } & DiagramElementCollection;
+
+  _table: {
+    _sineHeading: Equation;
+    _angleHeading: Equation;
   } & DiagramElementCollection;
 
   constructor(
@@ -325,7 +330,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     //   sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
     //   sine.setOpacity(opacity.sine);
     // }
-    if (oppLabel.isShown) {      
+    if (oppLabel.isShown) {
       oppLabel._label._value.drawingObject.setText(`${round(length / this.layout.r * Math.sin(deg / 180 * Math.PI), 3)}`);
       oppLabel.setEndPoints([p2.x, 0], [p2.x, p2.y]);
       oppLabel.setOpacity(opacity.oppLabel);

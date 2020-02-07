@@ -67,6 +67,7 @@ function mergeAccentOptions(
 ): {
   element: ?Array<DiagramElement>,
   children: ?Array<DiagramElement | string>,
+  elements: ?Array<DiagramElement | string>,
   style: TypeAccent,
   done: ?() => void,
   x: 'center' | 'left' | 'right' | 'origin' | number,
@@ -125,7 +126,7 @@ function mergeAccentOptions(
   }
   options.style = style;
 
-  if (typeof options.centerOn === 'string') {
+  if (typeof options.centerOn === 'string' && options.element != null) {
     const centerOn = options.element[0].getElement(options.centerOn);
     if (centerOn != null) {
       options.centerOn = centerOn;

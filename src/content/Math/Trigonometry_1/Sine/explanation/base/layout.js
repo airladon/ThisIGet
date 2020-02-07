@@ -3,14 +3,14 @@ import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 
 const {
-  Point,
+  // Point,
   Transform,
   // Line,
 } = Fig.tools.g2;
 
 const { round } = Fig.tools.math;
 
-const { DiagramFont } = Fig;
+// const { DiagramFont } = Fig;
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
 
@@ -258,7 +258,9 @@ export default function diagramLayout() {
       s: { symbol: 'strike', style: 'cross', color: colors.working },
       value: { text: '1.', color: colors.line },
       hyp: { text: 'hypotenuse', color: colors.line },
-      brace: { symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top' },
+      brace: {
+        symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top',
+      },
     },
     forms: {
       real: {
@@ -625,7 +627,6 @@ export default function diagramLayout() {
         'plus2': '  +  ',
         'sine': { text: 'sine', style: 'normal' },
         'sin': { text: 'sin', style: 'normal' },
-        // 'AB': { text: 'AB', font: new DiagramFont('Times New Roman', 'normal', 0.3, 'bold', 'left', 'alphabetic', [1, 0, 0, 1]) },
         'AB': { text: 'AB', weight: 'normal', size: 0.3 },
         'sin1': { text: 'sin', style: 'normal' },
         'sin2': { text: 'sin', style: 'normal' },
@@ -693,7 +694,7 @@ export default function diagramLayout() {
         //   width: 0.1,
         // },
         box1: { symbol: 'box', color: [0, 0.9, 0, 1], lineWidth: 0.005 },
-        v: { symbol: 'vinculum' },
+        // v: { symbol: 'vinculum' },
         s1: { symbol: 'strike', style: 'horizontal', lineWidth: 0.05 },
         rad: { symbol: 'radical', draw: 'dynamic' },
         // strike: { symbol: 'xStrike', color: colors.working },
