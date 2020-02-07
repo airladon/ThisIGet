@@ -20,12 +20,12 @@ class Queue {
   data: Array<number>;
   maxLen: number;
 
-  constructor(initialArray) {
+  constructor(initialArray: Array<number>) {
     this.data = initialArray;
     this.maxLen = this.data.length;
   }
 
-  add(element, count = 1) {
+  add(element: number, count: number = 1) {
     if (count === 1) {
       this.data.pop();
       this.data.unshift(element);

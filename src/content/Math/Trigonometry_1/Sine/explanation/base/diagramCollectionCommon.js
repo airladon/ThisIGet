@@ -21,9 +21,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
     _h: DiagramObjectLine;
     _v: DiagramObjectLine;
+    _mirrorLine: DiagramObjectLine;
     _hypotenuse: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
-    _theta: DiagramObjectAngle;
+    _theta: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectAngle;
     _right: DiagramObjectAngle;
+    _complement: DiagramObjectAngle;
+    _opp: DiagramObjectLine;
+    _oppLabel: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
+    _mirrorV: DiagramObjectLine;
+    _mirrorArc: DiagramElementPrimitive;
     // _real: DiagramObjectAngle;
     // _sine: DiagramObjectLine;
     // _sineTheta: { _label: Equation } & DiagramObjectLine;

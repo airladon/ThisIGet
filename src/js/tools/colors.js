@@ -438,7 +438,7 @@ class Color {
     return this;
   }
 
-  _dup() {
+  _dup() {  // $FlowFixMe
     return new Color(this.rgb, this.shadePresets);
   }
 

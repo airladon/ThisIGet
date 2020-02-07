@@ -22,4 +22,3 @@ module.name_mapper.extension='md' -> 'empty/object'
 <PROJECT_ROOT>/reports/.*
 <PROJECT_ROOT>/tools/.*
 <PROJECT_ROOT>/webpack/.*
-.*png

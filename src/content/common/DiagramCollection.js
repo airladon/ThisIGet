@@ -34,6 +34,7 @@ type TypeAccentOptions = {
   children?: ?Array<DiagramElement | string>,
   style?: TypeAccent,
   done?: ?() => void,
+  centerOn?: DiagramElement | string | Point | null,
 }
 
 function getColor(
@@ -107,6 +108,7 @@ function mergeAccentOptions(
     options = joinObjects({}, defaultOptions, elementOrOptions);
   }
 
+  // $FlowFixMe
   if (options.elements != null) {
     options.element = options.elements;
   }
@@ -401,6 +403,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     } else {
       childrenToUse = [children];
     }
+    // $FlowFixMe
     box.surround(eqn, childrenToUse, space);
     box.showAll();
     box.pulseSettings.transformMethod = (s) => {
