@@ -74,6 +74,14 @@ $title_bar_space_low: 90px;
   display: none;
 }
 
+.hide {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
 .topic__diagram {
   background-color: #000;
   background-color: var(--color-diagram-background);

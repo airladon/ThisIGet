@@ -6,7 +6,7 @@ var topicDetails = {
   dependencies: [
     'Introduction',
   ],
-  enabled: true,
+  enabled: false,
   path: 'Math/Trigonometry_1',
   uid: 'Sine',
 };

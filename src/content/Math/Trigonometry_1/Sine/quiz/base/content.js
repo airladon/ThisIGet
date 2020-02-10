@@ -26,6 +26,9 @@ class Content extends PresentationFormatContent {
     this.title = details.title;
     //  this.iconLink = imgLink;
     //  this.iconLinkGrey = imgLinkGrey;
+    this.loadQRs([
+      'Math/Trigonometry_1/Sine/base',
+    ]);
   }
 
   setDiagram(htmlId: string = '') {
@@ -40,8 +43,12 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        style({ top: 0 }, 'What is the unknown |side length|?'),
+        style({ top: 0 }, 'What is the unknown |property|?'),
+        style({ size: 0.5 }, '|Table_of_sines|'),
       ],
+      modifiers: {
+        Table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+      },
       show: [quiz._tri],
       setSteadyState: () => {
         quiz.newProblem();

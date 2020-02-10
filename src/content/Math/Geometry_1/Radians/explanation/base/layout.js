@@ -283,7 +283,10 @@ export default function diagramLayout() {
         equals: '  =  ',
         v: { symbol: 'vinculum' },
         largeBrace: {
-          symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.marks,
+          lineWidth: 0.012,
           width: 0.05,
         },
         smallBrace: {
