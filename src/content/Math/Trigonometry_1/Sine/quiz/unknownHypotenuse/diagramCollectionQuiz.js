@@ -9,9 +9,9 @@ export default class BaseQuizCollection extends QuizCollection {
     tri.makeValidTriangle();
     tri.exec('showAll', ['line', 'angle2']);
     tri._angle2.setLabel('');
-    this.scenarioUnknownSine0();
+    // this.scenarioUnknownSine0();
     // this.scenarioUnknownCosine();
-    // this.scenarioUnknownHypotenuse();
+    this.scenarioUnknownHypotenuse();
     this._choice.show();
     this.diagram.animateNextFrame();
   }

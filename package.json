@@ -9,6 +9,7 @@
   "scripts": {
     "build": "webpack --env.mode=prod",
     "webpack": "webpack",
+    "watchWithMoreMemory": "node --max_old_space_size=2048 ./node_modules/webpack/bin/webpack.js --watch --progress",
     "watch": "webpack --watch --progress",
     "flow": "flow",
     "jest": "jest",

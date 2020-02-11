@@ -2137,14 +2137,20 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find Opposite",
           "description": "",
           "fullTopic": true
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
+        "unknownAdjacent": {
+          "type": "presentation",
+          "title": "Find Adjacent",
+          "description": "",
+          "fullTopic": true
+        },
+        "unknownHypotenuse": {
+          "type": "presentation",
+          "title": "Find Hypotenuse",
+          "description": "",
           "fullTopic": true
         }
       },

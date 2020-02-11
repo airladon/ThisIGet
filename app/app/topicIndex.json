@@ -3407,19 +3407,28 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Find Opposite",
           "description": "",
           "htmlTitle": "Quiz - find the ",
           "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         },
-        "markdown": {
-          "type": "singlePage",
-          "title": "Calculate Properties",
-          "description": "Calculate properties of a circle from other properties",
-          "htmlTitle": "Calculate circle properties",
-          "htmlDescription": "Calculate properties of a circle from other properties",
+        "unknownAdjacent": {
+          "type": "presentation",
+          "title": "Find Adjacent",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "unknownHypotenuse": {
+          "type": "presentation",
+          "title": "Find Hypotenuse",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         }
