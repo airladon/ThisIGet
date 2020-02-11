@@ -3448,7 +3448,7 @@
     "dependencies": [
       "Introduction"
     ],
-    "enabled": false
+    "enabled": true
   },
   "Math/Trigonometry_1/Tangent": {
     "title": "Tangent",
