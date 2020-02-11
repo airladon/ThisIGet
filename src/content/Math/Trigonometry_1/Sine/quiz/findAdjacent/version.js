@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'base',
+  uid: 'findAdjacent',
   topic: 'quiz',
-  title: 'Find Property',
+  title: 'Find Adjacent',
   description: '',
   htmlTitle: 'Quiz - find the ',
   htmlDescription: '',

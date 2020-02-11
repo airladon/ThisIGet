@@ -3407,14 +3407,14 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find Opposite",
+          "title": "Find Property",
           "description": "",
           "htmlTitle": "Quiz - find the ",
           "htmlDescription": "",
           "fullTopic": true,
           "links": ""
         },
-        "unknownAdjacent": {
+        "findAdjacent": {
           "type": "presentation",
           "title": "Find Adjacent",
           "description": "",
@@ -3423,9 +3423,27 @@
           "fullTopic": true,
           "links": ""
         },
-        "unknownHypotenuse": {
+        "findAngle": {
+          "type": "presentation",
+          "title": "Find Angle",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findHypotenuse": {
           "type": "presentation",
           "title": "Find Hypotenuse",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findOpposite": {
+          "type": "presentation",
+          "title": "Find Opposite",
           "description": "",
           "htmlTitle": "Quiz - find the ",
           "htmlDescription": "",

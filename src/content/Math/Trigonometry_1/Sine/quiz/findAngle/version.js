@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'unknownHypotenuse',
+  uid: 'findAngle',
   topic: 'quiz',
-  title: 'Find Hypotenuse',
+  title: 'Find Angle',
   description: '',
   htmlTitle: 'Quiz - find the ',
   htmlDescription: '',

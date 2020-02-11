@@ -2137,19 +2137,31 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Find Opposite",
+          "title": "Find Property",
           "description": "",
           "fullTopic": true
         },
-        "unknownAdjacent": {
+        "findAdjacent": {
           "type": "presentation",
           "title": "Find Adjacent",
           "description": "",
           "fullTopic": true
         },
-        "unknownHypotenuse": {
+        "findAngle": {
+          "type": "presentation",
+          "title": "Find Angle",
+          "description": "",
+          "fullTopic": true
+        },
+        "findHypotenuse": {
           "type": "presentation",
           "title": "Find Hypotenuse",
+          "description": "",
+          "fullTopic": true
+        },
+        "findOpposite": {
+          "type": "presentation",
+          "title": "Find Opposite",
           "description": "",
           "fullTopic": true
         }

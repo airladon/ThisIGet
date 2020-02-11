@@ -98,83 +98,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this._question.drawingObject.setText('');
   }
 
-  // setLabels() {
-  //   const tri = this._tri;
-  //   const angle0 = tri._angle0.getLabel();
-  //   const angle1 = tri._angle1.getLabel();
-  //   const sine0 = round(Math.sin(angle0 * Math.PI / 180), 4);
-  //   const sine1 = round(Math.sin(angle1 * Math.PI / 180), 4);
-
-  //   const side01 = round(rand(1, 100), 1);
-  //   // const side12 = round(rand(1, 100), 1);
-  //   // const side01 = round(rand(1, 100), 1);
-  //   tri._side01.setLabel(`${side01}`);
-  //   tri._side01.setLabel(`${side01}`);
-  //   tri._side01.setLabel(`${side01}`);
-
-  //   // const side12 = round(rand(1, 100), 1);
-  //   // const side01 = side12 * 2;
-  //   // const side20 = round(side12 * Math.sqrt(3), 1);
-  //   // tri._side12.setLabel(`${side12}`);
-  //   // tri._side01.setLabel(`${side01}`);
-  //   // tri._side20.setLabel(`${side20}`);
-  //   // tri._angle2.setLabel('');
-  // }
-
   afterTransitionToNewProblem() {
     super.afterTransitionToNewProblem();
     this.showAnglesAndSides();
   }
-
-  // eslint-disable-next-line class-methods-use-this
-  // fillSelection(correct: ?(number | string), incorrect: Array<number | string>, precision: number = 1) {
-  //   const possibleAnswers = [];
-  //   if (correct != null) {
-  //     possibleAnswers.push([correct, true]);
-  //   }
-  //   const numIncorrect = Math.min(4, incorrect.length + possibleAnswers.length) - possibleAnswers.length;
-  //   for (let i = 0; i < numIncorrect; i += 1) {
-  //     possibleAnswers.push([removeRandElement(incorrect), false]);
-  //   }
-  //   console.log(possibleAnswers)
-  //   let trueAnswer;
-  //   const totalAnswers = possibleAnswers.length;
-  //   for (let i = 0; i < totalAnswers; i += 1) {
-  //     const choiceIndex = 4 - 1 - i;
-  //     const choiceElement = document.getElementById(
-  //       `id_approach__quiz_multiple_choice_box_answer__tri_${choiceIndex}`,
-  //     );
-  //     if (choiceElement != null) {
-  //       if (choiceElement.parentElement != null && choiceElement.parentElement.parentElement != null) {
-  //         choiceElement.parentElement.parentElement.classList.remove('invisible');
-  //       }
-  //       // choiceElement.classList.remove('invisible');
-  //       const answer = removeRandElement(possibleAnswers);
-  //       if (answer[1]) {
-  //         trueAnswer = choiceIndex;
-  //       }
-  //       // eslint-disable-next-line prefer-destructuring
-  //       if (typeof answer[0] === 'number') {
-  //         choiceElement.innerHTML = `${round(answer[0], precision)}`;
-  //       } else {
-  //         choiceElement.innerHTML = answer[0];
-  //       }
-  //     }
-  //   }
-  //   for (let i = totalAnswers; i < 4; i += 1) {
-  //     const index = 4 - 1 - i;
-  //     const answerElement = document.getElementById(
-  //       `id_approach__quiz_multiple_choice_box_answer__tri_${index}`,
-  //     );
-  //     if (answerElement != null
-  //       && answerElement.parentElement != null
-  //       && answerElement.parentElement.parentElement != null
-  //     ) {
-  //         answerElement.parentElement.parentElement.classList.add('invisible');
-  //     }
-  //   }
-  //   return trueAnswer;
-  // }
 
   addIfDifferent(
     correct: number,
@@ -256,6 +183,38 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addIfDifferent(right, opposite / (1 - sine0), wrong);
     this.addIfDifferent(right, opposite / (angle0 * Math.PI / 180), wrong);
     this.addIfDifferent(right, opposite / (1 / angle0), wrong);
+    this.answer = this.fillSelection(right, wrong);
+  }
+
+  scenarioUnknownAngle() {
+    const tri = this._tri;
+    const angle0 = parseFloat(tri._angle0.getLabel());
+    const sine0 = round(Math.sin(angle0 * Math.PI / 180), 4);
+    const hypotenuse = randElement([
+      1, 2, 3, 4, 5, 6, 7, 8, 9,
+      10, 20, 30, 40, 50, 60, 70, 80,90,
+      100, 200, 300, 400, 500, 600, 700, 800, 900,
+      1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000,
+    ]);
+    const opposite = round(sine0 * hypotenuse, 4);
+    
+    tri._side01.showAll();
+    tri._side01.setLabel(`${hypotenuse}`);
+    tri._side12.showAll();
+    tri._side12.setLabel(`${opposite}`);
+    tri._angle0.showAll();
+    tri._angle0.setLabel('?');
+    tri._angle1.hide();
+    const right = angle0;
+    const wrong = [];
+    this.addIfDifferent(right, Math.min(angle0 + randInt(1, 2), 90), wrong, 0);
+    this.addIfDifferent(right, Math.min(angle0 + randInt(3, 5), 90), wrong, 0);
+    this.addIfDifferent(right, Math.min(angle0 + randInt(6, 9), 90), wrong, 0);
+    this.addIfDifferent(right, Math.min(angle0 + randInt(10, 20), 90), wrong, 0);
+    this.addIfDifferent(right, Math.max(angle0 - randInt(1, 2), 0), wrong, 0);
+    this.addIfDifferent(right, Math.max(angle0 - randInt(3, 5), 0), wrong, 0);
+    this.addIfDifferent(right, Math.max(angle0 - randInt(6, 9), 0), wrong, 0);
+    this.addIfDifferent(right, Math.max(angle0 - randInt(10, 20), 0), wrong, 0);
     this.answer = this.fillSelection(right, wrong);
   }
 

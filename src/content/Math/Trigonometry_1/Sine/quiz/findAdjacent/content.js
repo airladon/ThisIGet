@@ -43,8 +43,8 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        style({ top: 0 }, 'What is the unknown |property|?'),
-        style({ size: 0.5 }, '|Table_of_sines|'),
+        style({ top: 0 }, 'What is the unknown |side length|?'),
+        style({ top: 1, size: 0.7 }, 'A |Table_of_sines| may be helpful.'),
       ],
       modifiers: {
         Table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
