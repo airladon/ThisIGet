@@ -59,7 +59,7 @@ const CommonQuizMixin = superclass => class extends superclass {
   setupNewProblem() {}
 
   // eslint-disable-next-line class-methods-use-this
-  fillSelection(
+  fillMultiChoice(
     correct: ?(number | string),
     incorrect: Array<number | string>,
     precision: number = 1,

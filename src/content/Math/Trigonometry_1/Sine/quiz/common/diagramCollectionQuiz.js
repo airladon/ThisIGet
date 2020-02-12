@@ -85,7 +85,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
-    this.fillSelection(null, ['-', '-', '-', '-']);
+    this.fillMultiChoice(null, ['-', '-', '-', '-']);
     this._choice.hide();
     this.calcRandomTri();
     this._tri.hideAll();
@@ -215,7 +215,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addIfDifferent(right, Math.max(angle0 - randInt(3, 5), 0), wrong, 0);
     this.addIfDifferent(right, Math.max(angle0 - randInt(6, 9), 0), wrong, 0);
     this.addIfDifferent(right, Math.max(angle0 - randInt(10, 20), 0), wrong, 0);
-    this.answer = this.fillSelection(right, wrong);
+    this.answer = this.fillMultiChoice(right, wrong);
   }
 
   // eslint-disable-next-line class-methods-use-this

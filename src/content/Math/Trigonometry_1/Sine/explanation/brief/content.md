@@ -2,9 +2,9 @@ Consider a right angle triangle with known angle $$\theta$$ and hypotenuse 1.
 
 ![](./initial.png)
 
-These three properties satisfy the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) condition for congruent triangles, thus there can only be one possible dimension for the side A, the side opposite the theta. 
+These three properties satisfy the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) condition for congruent triangles, thus there can only be one possible dimension for the side A, the side opposite the angle $$\theta$$. 
 
-This holds for any angle theta.
+**(1) Therefore for any angle $$\theta$$, there can only be one possible opposite side length for a fixed length hypotenuse in a right angle triangle.**
 
 As all angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)).
 
@@ -12,7 +12,9 @@ As all angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base
 * Therefore the other angles are always less than 90º
 * Thus sweeping theta between 0º and 90º covers all possible angle combinations of right angle triangles.
 
-We can say the when the hypotenuse is 1, opposite side is a function of the angle theta:
+**Therefore (1) holds for all right angle triangles**
+
+We can say the when the hypotenuse is 1, the opposite side is a function of the angle theta $$\theta$$:
 
 $$opposite_{hypotenuse = 1} = function \left( \theta \right)$$
 
@@ -26,7 +28,7 @@ If we scale the hypotenuse without changing the angles, we create a [[similar]](
 
 $$opposite_{hypotenuse = s} = s \times \sin \left( \theta \right)$$
 
-As s is the hypotenuse of any triangle, we can generalize this to.
+As s is the hypotenuse of any triangle, we can generalize this:
 
 ![](./general.png)
 
@@ -36,9 +38,7 @@ This is often rearranged to show that the sine function is the ratio of the oppo
 
 $$\bbox[10px,border:1px solid gray]{\sin \left( \theta \right) = \frac{opposite}{hypotenuse}}$$
 
-So the sine function is defined from all the possible right angle triangles with hypotenuse 1.
-
-It can be extended to any size right angle triangle by using similar triangles and thus ultimately is the ratio between the opposite side and hypotenuse.
+This relationship applies to all right angle triangles as we have shown the sine function that comes from all possible right angle triangles with hypotenuse 1, and can be extended to any hypotenuse length by using similar triangles.
 
 ### Sine function value
 Calculating the actual value of the sine function can be difficult.
