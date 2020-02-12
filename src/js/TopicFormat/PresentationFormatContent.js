@@ -554,7 +554,7 @@ class Section {
         elementsOrMethod.forEach((element) => {
           if (element instanceof DiagramElementCollection) {
             element.showAll();
-          } else if (element instanceof DiagramElementPrimitive ) {
+          } else if (element instanceof DiagramElementPrimitive) {
             element.show();
           } else {
             element();
@@ -1077,7 +1077,7 @@ class PresentationFormatContent extends SimpleFormatContent {
       }];
     }
     const equations = [];
-    eqns.forEach((e, index) => {
+    eqns.forEach((e) => {
       let to;
       let from;
       let animate;

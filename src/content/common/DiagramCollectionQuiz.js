@@ -68,7 +68,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     if (correct != null) {
       possibleAnswers.push([correct, true]);
     }
-    const numIncorrect = 
+    const numIncorrect =
       Math.min(4, incorrect.length + possibleAnswers.length) - possibleAnswers.length;
     for (let i = 0; i < numIncorrect; i += 1) {
       possibleAnswers.push([removeRandElement(incorrect), false]);
@@ -95,6 +95,7 @@ const CommonQuizMixin = superclass => class extends superclass {
         if (typeof answer[0] === 'number') {
           choiceElement.innerHTML = `${round(answer[0], precision)}`;
         } else {
+          // eslint-disable-next-line prefer-destructuring
           choiceElement.innerHTML = answer[0];
         }
       }
