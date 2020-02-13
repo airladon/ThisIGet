@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'External angle summary',
+  title: 'Definition',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Definition of Sine Function',
+  htmlDescription: 'Summary definition of sine function and its relationship with the opposite side and hypotenuse',
   fullTopic: true,
   type: 'presentation',
 };

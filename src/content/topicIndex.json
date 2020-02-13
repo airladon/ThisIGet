@@ -2095,7 +2095,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Various Geometries ",
           "description": "",
           "fullTopic": true
         }
@@ -2103,14 +2103,14 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         },
         "brief": {
           "type": "singlePage",
-          "title": "Sine Function",
-          "description": "Derivation using area of four right angle triangles",
+          "title": "Brief",
+          "description": "",
           "fullTopic": true
         }
       },
@@ -2169,7 +2169,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition",
           "description": "",
           "fullTopic": true
         }

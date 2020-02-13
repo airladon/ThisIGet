@@ -29,21 +29,49 @@ export default class QRMainPres extends PopupBoxCollection {
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
-
     const coll = this._collection;
     const { colors } = this.layout;
-    const modifiers = {};
-    this.setTitle('');
-    this.setDescription('', modifiers);
+    const modifiers = {
+      sine_function: click(() => {
+        const p = coll._eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
+        coll._eqn._sin.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._eqn._lb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._eqn._rb.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        this.diagram.animateNextFrame();
+      }, [this], colors.diagram.action),
+      opposite_side: click(() => {
+        const p = coll._eqn._opposite.getPositionInBounds('diagram', 'center', 'middle');
+        coll._eqn._opposite.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._tri._opp._label.pulseScaleNow(1, 1.2);
+        this.diagram.animateNextFrame();
+      }, [this], colors.components),
+      angle: click(() => {
+        const p = coll._eqn._angle.getPositionInBounds('diagram', 'center', 'middle');
+        coll._eqn._angle.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._tri._angle.pulseScaleNow(1, 1.2);
+        this.diagram.animateNextFrame();
+      }, [this], colors.angles),
+      hypotenuse: click(() => {
+        const p = coll._eqn._hypotenuse.getPositionInBounds('diagram', 'center', 'middle');
+        coll._eqn._hypotenuse.pulseScaleRelativeToPoint(p, 'diagram', 1, 1.3);
+        coll._tri._hyp._label.pulseScaleNow(1, 1.2);
+        this.diagram.animateNextFrame();
+      }, [this], colors.lines),
+    };
+    this.setTitle('Sine Function');
+    this.setDescription('In a |right angle triangle|, the |sine_function| of an |angle| is the ratio between the angle\'s |opposite_side| and the |hypotenuse|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    
     super.show();
     const coll = this._collection;
-    this.setDiagramSpace({ location: 'top', size: 0.6 });
-    this.transformToQRWindow(coll, new Rect(-2, -1, 3.5, 2.2));
+    coll.showAll();
+    coll._eqn.showForm('sineFromOpp');
+    coll.makeInteractive();
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
+    this.transformToQRWindow(coll, new Rect(-1.5, -1.5, 3.5, 2.6));
     this.diagram.animateNextFrame();
   }
 }

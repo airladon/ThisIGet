@@ -3345,10 +3345,10 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of ",
+          "title": "Various Geometries ",
           "description": "",
-          "htmlTitle": "... examples",
-          "htmlDescription": "",
+          "htmlTitle": "Sine function examples",
+          "htmlDescription": "Example geometries where using the sine function can help find unknown properties",
           "fullTopic": true,
           "links": ""
         }
@@ -3356,19 +3356,19 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Descriptive",
+          "title": "Descriptive & Interactive",
           "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "htmlTitle": "Sine Function Concept",
+          "htmlDescription": "Definition and derivation for the sine function concept",
           "fullTopic": true,
           "links": ""
         },
         "brief": {
           "type": "singlePage",
-          "title": "Sine Function",
-          "description": "Derivation using area of four right angle triangles",
-          "htmlTitle": "Pythagorean Theorem Derivation",
-          "htmlDescription": "Derivation using area of four right angle triangles",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "Sine function concept in brief",
+          "htmlDescription": "Succinct definition and derivation for the Sine Function",
           "fullTopic": true,
           "links": ""
         }
@@ -3409,8 +3409,8 @@
           "type": "presentation",
           "title": "Find Property",
           "description": "",
-          "htmlTitle": "Quiz - find the ",
-          "htmlDescription": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn opposite side, adjacent side, hypotenuse or angle using the sine function",
           "fullTopic": true,
           "links": ""
         },
@@ -3418,8 +3418,8 @@
           "type": "presentation",
           "title": "Find Adjacent",
           "description": "",
-          "htmlTitle": "Quiz - find the ",
-          "htmlDescription": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn adjacent side using the sine function",
           "fullTopic": true,
           "links": ""
         },
@@ -3427,8 +3427,8 @@
           "type": "presentation",
           "title": "Find Angle",
           "description": "",
-          "htmlTitle": "Quiz - find the ",
-          "htmlDescription": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn angle using the sine function",
           "fullTopic": true,
           "links": ""
         },
@@ -3436,8 +3436,8 @@
           "type": "presentation",
           "title": "Find Hypotenuse",
           "description": "",
-          "htmlTitle": "Quiz - find the ",
-          "htmlDescription": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn hypotenuse using the sine function",
           "fullTopic": true,
           "links": ""
         },
@@ -3445,8 +3445,8 @@
           "type": "presentation",
           "title": "Find Opposite",
           "description": "",
-          "htmlTitle": "Quiz - find the ",
-          "htmlDescription": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn opposite side using the sine function",
           "fullTopic": true,
           "links": ""
         }
@@ -3454,10 +3454,10 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "External angle summary",
+          "title": "Definition",
           "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "htmlTitle": "Definition of Sine Function",
+          "htmlDescription": "Summary definition of sine function and its relationship with the opposite side and hypotenuse",
           "fullTopic": true,
           "links": ""
         }

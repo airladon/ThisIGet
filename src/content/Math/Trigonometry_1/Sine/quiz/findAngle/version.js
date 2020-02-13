@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Find Angle',
   description: '',
-  htmlTitle: 'Quiz - find the ',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - Find the unknown property using the sine function',
+  htmlDescription: 'Find the unknonwn angle using the sine function',
   fullTopic: true,
   type: 'presentation',
 };

@@ -4,10 +4,10 @@
 var version = {
   uid: 'brief',
   topic: 'explanation',
-  title: 'Sine Function',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Brief',
+  description: '',
+  htmlTitle: 'Sine function concept in brief',
+  htmlDescription: 'Succinct definition and derivation for the Sine Function',
   fullTopic: true,
   type: 'singlePage',
 };

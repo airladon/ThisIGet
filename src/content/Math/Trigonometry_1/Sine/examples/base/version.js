@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Examples of ',
+  title: 'Various Geometries ',
   description: '',
-  htmlTitle: '... examples',
-  htmlDescription: '',
+  htmlTitle: 'Sine function examples',
+  htmlDescription: 'Example geometries where using the sine function can help find unknown properties',
   fullTopic: true,
   type: 'singlePage',
 };

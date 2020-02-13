@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Find Hypotenuse',
   description: '',
-  htmlTitle: 'Quiz - find the ',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - Find the unknown property using the sine function',
+  htmlDescription: 'Find the unknonwn hypotenuse using the sine function',
   fullTopic: true,
   type: 'presentation',
 };
