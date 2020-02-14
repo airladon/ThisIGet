@@ -99,6 +99,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     ]);
   });
 
+  // eslint-disable-next-line jest/valid-describe
   describe(`${fullPath}`, () => {
     test.each(allTests)(
       'width: %i height: %p, viewHeight: %p, QRs: %p, endpoint: %s',
