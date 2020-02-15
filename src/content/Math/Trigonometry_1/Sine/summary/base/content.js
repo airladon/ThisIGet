@@ -39,7 +39,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        'In a |right angle triangle|, the |sine_function| of an |angle| is the ratio between the angle\'s |opposite_side| and the |hypotenuse|.',
+        'In a |right angle triangle|, the |sine_function| of an |angle| is the ratio of the angle\'s |opposite_side| and the |hypotenuse|.',
       ],
       modifiers: {
         sine_function: click(() => {

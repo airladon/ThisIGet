@@ -1,15 +1,14 @@
-Consider a right angle triangle with known angle $$\theta$$ and hypotenuse 1.
+Consider a right angle triangle with known angle $$\theta$$ and a hypotenuse of length 1.
 
 ![](./initial.png)
 
-These three properties satisfy the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) condition for congruent triangles, thus there can only be one possible dimension for the side A, the side opposite the angle $$\theta$$. 
+These three properties satisfy the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) condition for congruent triangles, thus there can only be one possible dimension for side A, the side opposite the angle $$\theta$$. 
 
 **(1) Therefore for any angle $$\theta$$, there can only be one possible opposite side length for a fixed length hypotenuse in a right angle triangle.**
 
 As all angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)).
 
-* If one angle is 90º, then the other two must add to 90º
-* Therefore the other angles are always less than 90º
+* If one angle is 90º, then the other two must add to 90º, and therefore each be less than 90º
 * Thus sweeping theta between 0º and 90º covers all possible angle combinations of right angle triangles.
 
 **Therefore (1) holds for all right angle triangles**

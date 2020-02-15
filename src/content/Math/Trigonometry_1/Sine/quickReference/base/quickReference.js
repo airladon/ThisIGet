@@ -60,7 +60,7 @@ export default class QRMainPres extends PopupBoxCollection {
       }, [this], colors.lines),
     };
     this.setTitle('Sine Function');
-    this.setDescription('In a |right angle triangle|, the |sine_function| of an |angle| is the ratio between the angle\'s |opposite_side| and the |hypotenuse|.', modifiers);
+    this.setDescription('In a |right angle triangle|, the |sine_function| of an |angle| is the ratio of the angle\'s |opposite_side| and the |hypotenuse|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
