@@ -4,8 +4,6 @@
 
 ![](simintro.png)
 
-The symbol "~" denotes that the triangles are similar.
-
 If we look at the ratio of any two corresponding sides (for example $$A$$ and $$B$$), we see the ratio is the same:
 
 $$\frac{sA}{sB} = \frac{s}{s}\times \frac{A}{B} = 1 \times \frac{A}{B} = \frac{A}{B}$$
@@ -20,15 +18,11 @@ In other words, for all similar triangles, the ratio of corresponding sides is c
 
 ### Right angle triangles
 
-The angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)), so just two angles are needed to know all three. Therefore, any two **right angle triangles** will be **similar** if we know just one angle and the right angle.
-
-![](rightsim.png)
-
-Name the sides relative to this known angle $$\theta$$:
+The angles in a triangle [[add to 180º]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)), so just two angles are needed to know all three. Therefore, any two **right angle triangles** will be **similar** if we know just one angle and the right angle. We will call this known angle $$\theta$$  and name the sides relative to $$\theta$$:
 
 ![](names.png)
 
-We can now say for all right angle triangles with angle $$\theta$$
+All right angle triangles with the same angle $$\theta$$ are similar and therefore:
 
 * the ratio of the opposite side and the hypotenuse will be the same
 * the ratio of the adjacent side and the hypotenuse will be the same
