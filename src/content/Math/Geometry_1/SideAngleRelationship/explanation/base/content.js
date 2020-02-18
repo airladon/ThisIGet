@@ -410,7 +410,7 @@ class Content extends PresentationFormatContent {
 
     content = {
       setContent: [
-        'Now we make an assumption that |B| is |shorter| than |A|. If this assumption results in a |contradiction|, then we know the assumption is wrong.',
+        'Now we make an assumption that |B| is |not longer| than |A|. If this assumption results in a |contradiction|, then we know the assumption is wrong.',
       ],
       modifiers: {
         A: click(coll.pulseSideA, [coll], colors.sides),

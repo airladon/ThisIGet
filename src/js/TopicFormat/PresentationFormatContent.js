@@ -1103,8 +1103,6 @@ class PresentationFormatContent extends SimpleFormatContent {
         duration: options.duration,
         animate: options.animate,
       });
-      console.log(e)
-      console.log(newEqn)
       equations.push(newEqn);
     });
 

@@ -222,11 +222,11 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, {
       modifiers: {
-        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, true, null], colors.sides),
+        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, true, null, null], colors.sides),
       },
       transitionFromPrev: (done) => {
         rect._diagonal.showAll();
-        rect._diagonal.grow(0, 1, true, done);
+        rect._diagonal.grow(0, 1, true, done, null);
       },
       setSteadyState: () => {
         rect._diagonal.showAll();
