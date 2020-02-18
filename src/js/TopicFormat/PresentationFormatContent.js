@@ -1093,8 +1093,8 @@ class PresentationFormatContent extends SimpleFormatContent {
         to = from;
       }
       const newEqn = joinObjects({
-        eqn: e.table != null ? eqn.eqn : eqn,
-        nav: e.table != null ? eqn : null,
+        eqn: eqn.table != null ? eqn.eqn : eqn,
+        nav: eqn.table != null ? eqn : null,
         from,
         to,
         animate,
@@ -1103,6 +1103,8 @@ class PresentationFormatContent extends SimpleFormatContent {
         duration: options.duration,
         animate: options.animate,
       });
+      console.log(e)
+      console.log(newEqn)
       equations.push(newEqn);
     });
 
