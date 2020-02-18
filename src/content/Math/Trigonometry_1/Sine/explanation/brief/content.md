@@ -14,7 +14,7 @@ $$\frac{sA}{sC} = \frac{A}{C}$$
 
 $$\frac{sB}{sC} = \frac{B}{C}$$
 
-In other words, for all similar triangles, the ratio of corresponding sides is constant.
+In other words, for all similar triangles the corresponding ratio of sides is constant.
 
 ### Right angle triangles
 

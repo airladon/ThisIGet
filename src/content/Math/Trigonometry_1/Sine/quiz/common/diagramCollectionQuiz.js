@@ -137,7 +137,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addIfDifferent(right, angle0 * Math.PI / 180 * hypotenuse, wrong);
     this.addIfDifferent(right, angle0 * hypotenuse, wrong);
     this.addIfDifferent(right, (1 - sine0) * hypotenuse, wrong);
-    this.answer = this.fillSelection(right, wrong);
+    this.answer = this.fillMultiChoice(right, wrong);
   }
 
   scenarioUnknownCosine() {
@@ -161,7 +161,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addIfDifferent(right, (1 - sine1) * hypotenuse, wrong);
     this.addIfDifferent(right, sine0 * hypotenuse / 2, wrong);
     // this.addIfDifferent(right, sine0 * hypotenuse + randSign() * rand(0.1, 0.5), wrong);
-    this.answer = this.fillSelection(right, wrong);
+    this.answer = this.fillMultiChoice(right, wrong);
   }
 
   scenarioUnknownHypotenuse() {
@@ -183,7 +183,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addIfDifferent(right, opposite / (1 - sine0), wrong);
     this.addIfDifferent(right, opposite / (angle0 * Math.PI / 180), wrong);
     this.addIfDifferent(right, opposite / (1 / angle0), wrong);
-    this.answer = this.fillSelection(right, wrong);
+    this.answer = this.fillMultiChoice(right, wrong);
   }
 
   scenarioUnknownAngle() {
