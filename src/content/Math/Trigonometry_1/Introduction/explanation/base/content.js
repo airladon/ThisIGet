@@ -103,11 +103,11 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         horizontal: click(
-          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null],
+          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null, null],
           colors.components,
         ),
         vertical: click(
-          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null],
+          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null, null],
           colors.components,
         ),
       },
@@ -170,10 +170,10 @@ class Content extends PresentationFormatContent {
         rafter: coll.bindAccent(coll._line._line),
         length: coll.bindAccent(coll._line._line),
         horizontal_span: click(
-          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null], colors.components,
+          coll._line._h.grow, [coll._line._h, 0.05, 1, true, null, null], colors.components,
         ),
         vertical_span: click(
-          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null], colors.components,
+          coll._line._v.grow, [coll._line._v, 0.05, 1, true, null, null], colors.components,
         ),
       },
       show: [coll._line, coll._house],
@@ -199,11 +199,11 @@ class Content extends PresentationFormatContent {
       title: 'Direction',
       modifiers: {
         direction_: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null],
           colors.line,
         ),
         direction: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null],
           colors.line,
         ),
       },
@@ -241,7 +241,7 @@ class Content extends PresentationFormatContent {
         distance_to_the_runway: this.bindNext(colors.components, 'distance'),
         time: this.bindNext(colors.line, 'time'),
         direct: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null],
           colors.line,
         ),
       },
@@ -254,17 +254,17 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         distance_to_the_runway: click(
-          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null, null], colors.components,
         ),
         height_above_ground: click(
-          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null, null], colors.components,
         ),
         time: click(() => {
           coll._arrow._h.grow(0.05, 1, true, null);
           coll._arrow._v.grow(0.05, 1, true, null);
         }, [this], colors.line),
         direct: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null],
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null],
           colors.line,
         ),
       },
@@ -316,7 +316,7 @@ class Content extends PresentationFormatContent {
       title: 'Phenomenon',
       modifiers: {
         force: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null], colors.line,
         ),
       },
       transitionFromPrev: (done) => {
@@ -343,7 +343,7 @@ class Content extends PresentationFormatContent {
       setContent: 'This |force| is made up of a |horizontal| and |vertical| force.',
       modifiers: {
         force: click(
-          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null], colors.line,
+          coll._arrow._line.grow, [coll._arrow._line, 0.05, 1, true, null, null], colors.line,
         ),
       },
     };
@@ -358,10 +358,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         horizontal: click(
-          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null, null], colors.components,
         ),
         vertical: click(
-          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null, null], colors.components,
         ),
       },
       show: [coll._cart, coll._arrow._line],
@@ -398,10 +398,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         horizontal: click(
-          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null], colors.components,
+          coll._arrow._h.grow, [coll._arrow._h, 0.05, 1, true, null, null], colors.components,
         ),
         vertical: click(
-          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null], colors.components,
+          coll._arrow._v.grow, [coll._arrow._v, 0.05, 1, true, null, null], colors.components,
         ),
       },
       show: [coll._cart, coll._arrow],

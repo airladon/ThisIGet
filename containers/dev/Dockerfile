@@ -4,7 +4,7 @@
 #   - JS Building
 #   - Flask debugging
 
-FROM airladon/pynode:python3.7.4-node12.10.0-npm6.11.3-docker19.03.2-heroku7.30.1
+FROM airladon/pynode:python3.8.1-node12.16.0-npm6.13.7-docker19.03.2-heroku7.30.1
 
 # ## General ##
 WORKDIR /opt/app
@@ -15,6 +15,7 @@ ADD package-lock.json .
 RUN npm install
 
 # Install Python packages
+RUN apt-get install -y libpq-dev
 ADD requirements.txt .
 RUN pip install --no-cache-dir -q -r requirements.txt
 

@@ -563,7 +563,12 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       }
     }
     if (style.includes('pulse')) {
-      parent.pulse([...group], done);
+      // parent.pulse([...group], done);
+      parent.pulse({
+        elements: [...group],
+        // scale: 2,
+        done,
+      });
     }
     this.currentToggleIndex[indexToUse] = (index + 1) % numGroups;
     this.diagram.animateNextFrame();

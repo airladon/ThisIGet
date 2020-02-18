@@ -115,7 +115,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         splitting: click(
-          coll._equil._split.grow, [coll, 0.05, 1, true, null], colors.sides,
+          coll._equil._split.grow, [coll, 0.05, 1, true, null, null], colors.sides,
         ),
       },
       show: [

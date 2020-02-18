@@ -89,6 +89,11 @@ export default function diagramLayout() {
       position,
       pulse: 2.5,
     },
+    // mods: {
+    //   pulseDefault: {
+    //     scale: 3,
+    //   },
+    // },
   });
 
   const lMarks = (name, position, num, rotation) => ({

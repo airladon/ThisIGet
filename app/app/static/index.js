@@ -28715,6 +28715,18 @@ function (_DiagramElement2) {
         var _options2 = options;
         elements = _options2.elements;
         doneToUse = options.done;
+
+        if (optionsOrElementsOrDone.scale == null) {
+          options.scale = undefined;
+        }
+
+        if (optionsOrElementsOrDone.frequency == null) {
+          options.frequency = undefined;
+        }
+
+        if (optionsOrElementsOrDone.time == null) {
+          options.time = undefined;
+        }
       }
 
       options.elements = null;

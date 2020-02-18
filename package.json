@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack --env.mode=prod",
     "webpack": "webpack",
-    "watchWithMoreMemory": "node --max_old_space_size=2048 ./node_modules/webpack/bin/webpack.js --watch --progress",
+    "watchWithMoreMemory": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --watch --progress",
     "watch": "webpack --watch --progress",
     "flow": "flow",
     "jest": "jest",
@@ -66,7 +66,7 @@
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "postcss": "^7.0.26",
+    "postcss": "^7.0.27",
     "postcss-loader": "^3.0.0",
     "react-test-renderer": "^16.12.0",
     "regenerator-runtime": "^0.13.3",
@@ -76,7 +76,7 @@
     "stylelint-config-standard": "^18.3.0",
     "stylelint-scss": "^3.14.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9"
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
