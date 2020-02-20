@@ -213,6 +213,11 @@ export default function diagramLayout() {
       close: true,
       width: 0.02,
     },
+    mods: {
+      pulseDefault: {
+        scale: 1.15,
+      },
+    },
   };
 
   const aGreyTri = {
@@ -279,6 +284,11 @@ export default function diagramLayout() {
       color: colors.highlight,
       close: true,
       width: 0.02,
+    },
+    mods: {
+      pulseDefault: {
+        scale: 1.2,
+      },
     },
   };
 
@@ -1248,7 +1258,7 @@ export default function diagramLayout() {
 
   const f4Split = [
     new Point(-0.38, -0.3),
-    new Point(1.14, -0.3),
+    new Point(1.133, -0.3),
   ];
 
   const fig4Eqn = (name, y) => ({
@@ -1363,7 +1373,7 @@ export default function diagramLayout() {
       dot('pointF', f4Split[1]),
       line('AD', f4Points[1], f4Split[0]),
       line('AB', f4Points[0], f4Points[1]),
-      line('AE', f4Points[1], f4Split[1].add(-0.06, 0.15)),
+      line('AE', f4Points[1], f4Split[1].add(-0.05, 0.15)),
       line('AF', f4Points[1], f4Split[1]),
       line('AC', f4Points[1], f4Points[2]),
       line('BC', f4Points[0], f4Points[2]),

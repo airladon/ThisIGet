@@ -509,8 +509,10 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: 'We want to find the relationship between the side lengths of the |original_triangle|, and the |split_triangle|.',
       modifiers: {
-        original_triangle: click(coll.toggleOriginalTriangle, [coll], colors.sides),
-        split_triangle: click(coll.toggleSplitTriangle, [coll], colors.highlight),
+        // original_triangle: click(coll.toggleOriginalTriangle, [coll], colors.sides),
+        original_triangle: coll.bindAccent(fig2._tri),
+        split_triangle: coll.bindAccent(fig2._topTri),
+        // split_triangle: click(coll.toggleSplitTriangle, [coll], colors.highlight),
       },
       show: [
         fig2._tri, fig2._hSplit,
