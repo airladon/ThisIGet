@@ -107,12 +107,13 @@ export default function diagramLayout() {
       num,
       rotation,
       position,
+      pulse: 2,
     },
-    mods: {
-      pulseDefault: {
-        scale: 3,
-      },
-    },
+    // mods: {
+    //   pulseDefault: {
+    //     scale: 3,
+    //   },
+    // },
   });
 
   const dashed = (name, p1, p2) => ({
