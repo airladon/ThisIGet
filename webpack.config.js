@@ -43,7 +43,7 @@ const envConfig = {
     shortName: 'dev',
     uglify: false,
     webpackMode: 'development',
-    devtool: 'source-map',
+    devtool: 'cheap-eval-source-map',
     uglifySourceMap: false,
     reactDevMode: true,
     outputFilename: '[name].js',
@@ -195,8 +195,12 @@ module.exports = (env) => {
       'figureone': 'Fig',
     };
   }
+  // const p = entryPoints.entryPoints(e.name, 'Math/Trigonometry_1')
+  // console.log(Object.keys(p).length)
+  // console.log(p)
+
   return {
-    entry: entryPoints.entryPoints(e.name),
+    entry: entryPoints.entryPoints(e.name, ''),
     output: {
       path: buildPath,
       filename: e.outputFilename,
