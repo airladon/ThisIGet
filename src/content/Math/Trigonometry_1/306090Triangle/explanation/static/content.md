@@ -29,14 +29,3 @@ To remove the fractions, we can multiply all sides by 2. Also, people often show
 ![](final.png)
 
 Any time you come accross a right angle triangle with a 30º or 60º angle, you will know the proportion of the sides is $$1$$, $$\sqrt3$$ and $$2$$.
-
-<!-- 
-### Example Equation:
-
-$$\definecolor{g}{RGB}{29,177,0}\definecolor{b}{RGB}{0,118,186}\definecolor{r}{RGB}{238,34,12}\definecolor{v}{RGB}{203,41,123}\defineColor{gr}{100,100,100}$$
-
-### Example Image
-![](./test-image.png)
-
-### Example QR
-[[here]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) -->
