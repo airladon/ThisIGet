@@ -78,9 +78,19 @@ export default function diagramLayout() {
     },
   });
 
+  const eqnDCont = (content) => ({
+    container: {
+      content,
+      width: 0.1,
+      ascent: 0.05,
+      descent: 0.05,
+      xAlign: 'left',
+    },
+  });
+
   const eqnD = ({
     elements: {
-      D: { text: 'D', color: colors.sides },
+      D: { text: 'Da', color: colors.sides },
       equals: ' = ',
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
@@ -88,25 +98,28 @@ export default function diagramLayout() {
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
       s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      box: {symbol: 'box'}
     },
     forms: {
       '0': {
-        content: ['D'],
+        content: eqnDCont(['D']),
         scale: 1,
-        alignment: { fixTo: 'D' },
+        alignment: { alignH: '0.1o' },
       },
       '1': {
-        content: ['D', 'equals', { root: ['r', '_2'] }, 'A'],
+        content: eqnDCont(['D', 'equals', { root: ['r', '_2'] }, 'A']),
         scale: 1,
-        alignment: { fixTo: 'D' },
+        // alignment: { fixTo: 'D' },
+        alignment: { alignH: '0.1o' },
       },
       '2': {
-        content: [{ root: ['r', '_2'] }, 'A'],
+        content: eqnDCont([{ root: ['r', '_2'] }, 'A']),
         scale: 1,
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o' },
       },
       '3': {
-        content: [{ root: ['r', '_2'] }, {
+        content: eqnDCont([{ root: ['r', '_2'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
             annotation: {
@@ -119,13 +132,15 @@ export default function diagramLayout() {
             },
             inSize: false,
           },
-        }],
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        }]),
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o'},
         scale: 1,
       },
       '4': {
-        content: { root: ['r', '_2'] },
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        content: eqnDCont({ root: ['r', '_2'] }),
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o'},
         scale: 1,
       },
     },

@@ -58,7 +58,7 @@ export default function diagramLayout() {
       '3': {
         content: ['_2', 'A'],
         scale: 1,
-        alignment: { alignH: 0.15 },
+        alignment: { fixTo: 'A' },
       },
       '4': {
         content: ['_2', {
@@ -75,7 +75,7 @@ export default function diagramLayout() {
           },
         }],
         scale: 1,
-        alignment: { alignH: 0.15 },
+        alignment: { fixTo: 'A' },
       },
       '5': {
         content: ['_2'],
@@ -85,6 +85,7 @@ export default function diagramLayout() {
     },
   });
 
+  const Aon2Align = '0.1o';
   const Aon2 = ({
     elements: {
       A: { text: 'A', color: colors.sides },
@@ -100,13 +101,13 @@ export default function diagramLayout() {
     forms: {
       '0': {
         content: { frac: ['A', 'v', '_2', 0.7] },
-        alignment: { alignV: 0.03 },
+        alignment: { alignV: Aon2Align },
         scale: 1,
       },
       '1': {
         content: [{ frac: ['A', 'v', '_2', 0.7] }, 'times', '_2_'],
         scale: 1,
-        alignment: { alignV: 0.03 },
+        alignment: { alignV: Aon2Align },
       },
       '2': {
         content: [
@@ -114,12 +115,12 @@ export default function diagramLayout() {
           'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
-        alignment: { alignV: 0.03 },
+        alignment: { alignV: Aon2Align },
       },
       '3': {
         content: 'A',
         scale: 1,
-        alignment: { alignV: 0.1 },
+        alignment: { alignV: Aon2Align },
       },
       '4': {
         content: {
@@ -136,16 +137,17 @@ export default function diagramLayout() {
           },
         },
         scale: 1,
-        alignment: { alignV: 0.1 },
+        alignment: { alignV: Aon2Align },
       },
       '5': {
         content: ['_1'],
         scale: 1,
-        alignment: { alignV: 0.1 },
+        alignment: { alignV: Aon2Align },
       },
     },
   });
 
+  const root3Aon2Align = '-0.1o';
   const root3Aon2 = ({
     elements: {
       A: { text: 'A', color: colors.sides },
@@ -163,12 +165,12 @@ export default function diagramLayout() {
       '0': {
         content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A'],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: 0.1 },
       },
       '1': {
         content: [{ frac: [{ root: ['r', '_3'] }, 'v', '_2', 0.7] }, 'A', 'times', '_2_'],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: 0.1 },
       },
       '2': {
         content: [
@@ -176,11 +178,11 @@ export default function diagramLayout() {
           'A', 'times', { strike: ['_2_', 's2'] },
         ],
         scale: 1,
-        alignment: { alignV: -0.05 },
+        alignment: { alignV: 0.1 },
       },
       '3': {
         content: [{ root: ['r', '_3'] }, 'A'],
-        alignment: { alignV: -0.1 },
+        alignment: { alignV: root3Aon2Align },
         scale: 1,
       },
       '4': {
@@ -197,12 +199,12 @@ export default function diagramLayout() {
             },
           },
         }],
-        alignment: { alignV: -0.1 },
+        alignment: { alignV: root3Aon2Align },
         scale: 1,
       },
       '5': {
         content: { root: ['r', '_3'] },
-        alignment: { alignV: -0.1 },
+        alignment: { alignV: root3Aon2Align },
         scale: 1,
       },
     },
