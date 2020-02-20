@@ -141,7 +141,7 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        bottom: { position: new Point(0.1, -1.5) },
+        bottom: { position: new Point(0.1, -1.45) },
       },
     },
     scenario: 'bottom',
