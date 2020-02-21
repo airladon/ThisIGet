@@ -137,9 +137,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           await page.setViewport({ width, height: 1000 });
           const pageBox = await (await page.$('body'))
             .boundingBox();
-          console.log(pageBox)
           const bb = await (await page.$('#topic__content')).boundingBox();
-          console.log(bb)
           await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
           await page.setViewport({ width, height: viewHeight });
