@@ -14,12 +14,12 @@ const thresholds = {
     52: { next: 50, prev: 50 },
     54: { goto: 50, next: 50, prev: 50 },
     55: { goto: 50, next: 50, prev: 50 },
-    58: { goto: 50, next: 50, prev: 50 },
-    59: { goto: 50, next: 50, prev: 50 },
-    60: { goto: 50, next: 50, prev: 2000 },
-    61: { goto: 50, next: 50, prev: 2000 },
-    62: { goto: 50, next: 50, prev: 50 },
-    63: { goto: 50, next: 50, prev: 50 },
+    58: { goto: 70, next: 70, prev: 70 },
+    59: { goto: 70, next: 70, prev: 70 },
+    60: { goto: 70, next: 70, prev: 2000 },
+    61: { goto: 70, next: 70, prev: 2000 },
+    62: { goto: 70, next: 70, prev: 70 },
+    63: { goto: 70, next: 70, prev: 70 },
   },
 };
 

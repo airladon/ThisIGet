@@ -1,6 +1,6 @@
 const thresholds = {
   pages: {
-    1: 500,
+    1: 600,
   },
 };
 

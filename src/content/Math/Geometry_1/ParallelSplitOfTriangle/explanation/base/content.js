@@ -932,6 +932,9 @@ class Content extends PresentationFormatContent {
         same_ratio: this.bindNext(colors.sides),
       },
       show: [fig4._tri, fig4._A, fig4._B, fig4._C],
+      setSteadyState: () => {
+        fig4.setScenarios('default');
+      },
     });
 
     let fig4Base = [

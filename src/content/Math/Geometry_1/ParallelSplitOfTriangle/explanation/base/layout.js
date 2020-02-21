@@ -1389,6 +1389,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         default: { position: [-1.5, -0.5] },
+        // center: { position: [0, -0.5] },
       },
     },
   };
