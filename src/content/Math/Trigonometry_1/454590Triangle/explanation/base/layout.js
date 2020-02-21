@@ -90,7 +90,7 @@ export default function diagramLayout() {
 
   const eqnD = ({
     elements: {
-      D: { text: 'Da', color: colors.sides },
+      D: { text: 'D', color: colors.sides },
       equals: ' = ',
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
