@@ -66,7 +66,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       setContent: [
-        'As it is a quadrangle, the rectangle also has properties of |four_side_lengths| and |four_angles|.',
+        'As it is a quadrangle, the rectangle has properties of |four_side_lengths| and |four_angles|.',
       ],
       modifiers: {
         four_side_lengths: click(coll.pulseSides, [coll], colors.sides),
