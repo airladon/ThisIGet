@@ -78,7 +78,7 @@ export default function diagramLayout() {
     },
   });
 
-  const eqnDCont = (content) => ({
+  const eqnDCont = content => ({
     container: {
       content,
       width: 0.1,
@@ -98,7 +98,7 @@ export default function diagramLayout() {
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
       s1: { symbol: 'strike', style: 'cross', color: colors.working },
-      box: {symbol: 'box'}
+      box: { symbol: 'box' },
     },
     forms: {
       '0': {
@@ -134,13 +134,13 @@ export default function diagramLayout() {
           },
         }]),
         // alignment: { alignV: -0.01, alignH: 0.2 },
-        alignment: { alignH: '0.1o'},
+        alignment: { alignH: '0.1o' },
         scale: 1,
       },
       '4': {
         content: eqnDCont({ root: ['r', '_2'] }),
         // alignment: { alignV: -0.01, alignH: 0.2 },
-        alignment: { alignH: '0.1o'},
+        alignment: { alignH: '0.1o' },
         scale: 1,
       },
     },

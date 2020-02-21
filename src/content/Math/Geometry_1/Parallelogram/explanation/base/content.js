@@ -415,7 +415,11 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null, null], colors.sides),
+        diagonal_line: click(
+          pgram._diag1.grow,
+          [pgram._diag1, 0.05, 1, true, null, null],
+          colors.sides,
+        ),
       },
       show: [
         pgram._line,
@@ -593,7 +597,9 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null, null], colors.sides),
+        diagonal_line: click(
+          pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null, null], colors.sides,
+        ),
         two_triangles: coll.bindToggleGroups(
           pgram,
           [['labelA1', 'labelB1', 'diag1'], ['labelA2', 'labelB2', 'diag1']],

@@ -1057,7 +1057,7 @@ class Content extends PresentationFormatContent {
         const r = ssa._constructionLine.getRotation();
         ssa._constructionLine.setLength(1.7 / Math.sin(r) * 1);
         ssa._constructionCircle.angleToDraw = 1 * Math.PI * 2;
-      }
+      },
     });
 
     this.addSection({

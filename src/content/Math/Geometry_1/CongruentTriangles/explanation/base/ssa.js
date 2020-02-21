@@ -130,7 +130,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
       this._constructionCircle.angleToDraw = percent * Math.PI * 2;
       this._opposite.setRotation(percent * Math.PI * 2 + rr);
     };
-    this.animations.cancelAll(true);
+    this.animations.cancelAll();
     this._constructionLine.setLength(0);
     if (which === 'both') {
       this.animations.new()
