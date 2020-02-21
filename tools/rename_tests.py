@@ -32,7 +32,14 @@ for r, d, f in os.walk('./src/content'):
 for value in versions.values():
   if 'tests' in value:
     print(value['version'])
-    print(value['tests'])
+    for test_file in value['tests']:
+      name = test_file.name
+      stage = re.sub("\..*", "", name)
+      print(test_file.parent, stage, test_file.name, test_file.suffix)
+      print(test_file.parent / f"{stage}.{value['version']}.btest.js")
+      target = test_file.parent / f"{stage}.{value['version']}.btest.js"
+      test_file.rename(target)
+    # print(value['tests'])
     print('\n')
 # errors = []
 # for p, f in files:
