@@ -1,4 +1,4 @@
-import re # noqa: E902
+import re  # noqa: E902
 import os
 import pathlib
 
