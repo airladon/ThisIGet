@@ -9,6 +9,11 @@ const { parsePoint } = Fig.tools.g2;
 
 const { joinObjects } = Fig.tools.misc;
 
+const {
+  removeRandElement,
+  round,
+} = Fig.tools.math;
+
 export type TypeMessages = {
   _correct: DiagramElementPrimitive;
   _incorrect: DiagramElementPrimitive;
@@ -52,6 +57,63 @@ const CommonQuizMixin = superclass => class extends superclass {
 
   // eslint-disable-next-line class-methods-use-this
   setupNewProblem() {}
+
+  // eslint-disable-next-line class-methods-use-this
+  fillMultiChoice(
+    correct: ?(number | string),
+    incorrect: Array<number | string>,
+    precision: number = 1,
+  ) {
+    const possibleAnswers = [];
+    if (correct != null) {
+      possibleAnswers.push([correct, true]);
+    }
+    const numIncorrect =
+      Math.min(4, incorrect.length + possibleAnswers.length) - possibleAnswers.length;
+    for (let i = 0; i < numIncorrect; i += 1) {
+      possibleAnswers.push([removeRandElement(incorrect), false]);
+    }
+    let trueAnswer;
+    const totalAnswers = possibleAnswers.length;
+    for (let i = 0; i < totalAnswers; i += 1) {
+      const choiceIndex = 4 - 1 - i;
+      const choiceElement = document.getElementById(
+        `id_approach__quiz_multiple_choice_box_answer__tri_${choiceIndex}`,
+      );
+      if (choiceElement != null) {
+        if (choiceElement.parentElement != null
+          && choiceElement.parentElement.parentElement != null
+        ) {
+          choiceElement.parentElement.parentElement.classList.remove('invisible');
+        }
+        // choiceElement.classList.remove('invisible');
+        const answer = removeRandElement(possibleAnswers);
+        if (answer[1]) {
+          trueAnswer = choiceIndex;
+        }
+        // eslint-disable-next-line prefer-destructuring
+        if (typeof answer[0] === 'number') {
+          choiceElement.innerHTML = `${round(answer[0], precision)}`;
+        } else {
+          // eslint-disable-next-line prefer-destructuring
+          choiceElement.innerHTML = answer[0];
+        }
+      }
+    }
+    for (let i = totalAnswers; i < 4; i += 1) {
+      const index = 4 - 1 - i;
+      const answerElement = document.getElementById(
+        `id_approach__quiz_multiple_choice_box_answer__tri_${index}`,
+      );
+      if (answerElement != null
+        && answerElement.parentElement != null
+        && answerElement.parentElement.parentElement != null
+      ) {
+        answerElement.parentElement.parentElement.classList.add('invisible');
+      }
+    }
+    return trueAnswer;
+  }
 
   newProblem() {
     if (this._question) {

@@ -66,7 +66,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       setContent: [
-        'As it is a quadrangle, the rectangle also has properties of |four_side_lengths| and |four_angles|.',
+        'As it is a quadrangle, the rectangle has properties of |four_side_lengths| and |four_angles|.',
       ],
       modifiers: {
         four_side_lengths: click(coll.pulseSides, [coll], colors.sides),
@@ -222,11 +222,11 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, {
       modifiers: {
-        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, true, null], colors.sides),
+        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, true, null, null], colors.sides),
       },
       transitionFromPrev: (done) => {
         rect._diagonal.showAll();
-        rect._diagonal.grow(0, 1, true, done);
+        rect._diagonal.grow(0, 1, true, done, null);
       },
       setSteadyState: () => {
         rect._diagonal.showAll();

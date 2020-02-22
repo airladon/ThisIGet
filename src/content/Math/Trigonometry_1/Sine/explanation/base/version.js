@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Descriptive & Interactive',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Sine Function Concept',
+  htmlDescription: 'Definition and derivation for the sine function concept',
   fullTopic: true,
   type: 'presentation',
 };

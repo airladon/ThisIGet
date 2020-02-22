@@ -438,7 +438,7 @@ class Color {
     return this;
   }
 
-  _dup() {
+  _dup() {  // $FlowFixMe
     return new Color(this.rgb, this.shadePresets);
   }
 
@@ -1070,6 +1070,7 @@ class Colors {
       this.setCssVar('diagram', 'disabled', 'dark');
       this.setCssVar('diagram', 'disabled', 'darker');
       this.setCssVar('diagram', 'disabled', 'darkest');
+      // this.setCssVar('diagram', 'text');
       this.setCssVar('diagram', 'text', 'keyword');
       this.setCssVar('diagram', 'text', 'keyword2');
       this.setCssVar('diagram', 'text', 'sanskrit');

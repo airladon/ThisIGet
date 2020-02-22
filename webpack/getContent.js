@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
-function entryPoints(buildMode) {
+function entryPoints(buildMode, pathToWatch = '') {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
     home: ['whatwg-fetch', path.join(__dirname, '../src/js/views/home/home.js')],
@@ -27,12 +27,19 @@ function entryPoints(buildMode) {
     topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
   };
 
-  const topics = pathTools.getAllPaths(
-    path.join(__dirname, '../src/content'),
-    ['entry.js', 'quickReference.js'],
+  let topics = pathTools.getAllPaths(
+    path.join(__dirname, '../src/content/', pathToWatch),
+    ['entry.js'],
     ['entry-dev.js'],
     buildMode,
   );
+  const quickReferences = pathTools.getAllPaths(
+    path.join(__dirname, '../src/content/'),
+    ['quickReference.js'],
+    [],
+    buildMode,
+  );
+  topics = [...topics, ...quickReferences];
   topics.forEach((topic) => {
     const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);

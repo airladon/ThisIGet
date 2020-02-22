@@ -129,7 +129,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
   const { endpoint } = optionsToUse;
 
-  // Tests
+  // eslint-disable-next-line jest/valid-describe
   describe(`${endpoint}`, () => {
     test.each(allTests)(
       'From: %i, to: %s',

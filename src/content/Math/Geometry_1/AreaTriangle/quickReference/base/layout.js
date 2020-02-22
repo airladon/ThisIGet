@@ -61,7 +61,7 @@ export default function diagramLayout() {
   const temp = tri1.map(p => p.transformBy(t.m()));
   const tri2 = [temp[2], temp[0], temp[1]];
 
-  const half = { frac: ['_1', '_2', 'v', 0.6] };
+  const half = { frac: ['_1', 'v', '_2', 0.6] };
 
   const eqn = {
     name: 'eqn',

@@ -39,7 +39,7 @@ export default function diagramLayout() {
       A: { text: 'A', color: colors.sides },
       _2: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
     },
     forms: {
       '0': {
@@ -58,16 +58,33 @@ export default function diagramLayout() {
         content: [{
           annotate: {
             content: { strike: ['A', 's1', false] },
-            withAnnotations: ['_1'],
-            includeAnnotationInSize: false,
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
+            inSize: false,
           },
         }],
         scale: 1,
       },
       '4': {
-        content: ['_1'],
+        content: '_1',
         scale: 1,
       },
+    },
+  });
+
+  const eqnDCont = content => ({
+    container: {
+      content,
+      width: 0.1,
+      ascent: 0.05,
+      descent: 0.05,
+      xAlign: 'left',
     },
   });
 
@@ -80,38 +97,50 @@ export default function diagramLayout() {
       r: { symbol: 'radical', color: colors.sides },
       _2_: { text: '2', color: colors.sides },
       _1: { text: '1', color: colors.sides },
-      s1: { symbol: 'xStrike', color: colors.working },
+      s1: { symbol: 'strike', style: 'cross', color: colors.working },
+      box: { symbol: 'box' },
     },
     forms: {
       '0': {
-        content: ['D'],
+        content: eqnDCont(['D']),
         scale: 1,
-        alignment: { fixTo: 'D' },
+        alignment: { alignH: '0.1o' },
       },
       '1': {
-        content: ['D', 'equals', { root: ['_2', 'r'] }, 'A'],
+        content: eqnDCont(['D', 'equals', { root: ['r', '_2'] }, 'A']),
         scale: 1,
-        alignment: { fixTo: 'D' },
+        // alignment: { fixTo: 'D' },
+        alignment: { alignH: '0.1o' },
       },
       '2': {
-        content: [{ root: ['_2', 'r'] }, 'A'],
+        content: eqnDCont([{ root: ['r', '_2'] }, 'A']),
         scale: 1,
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o' },
       },
       '3': {
-        content: [{ root: ['_2', 'r'] }, {
+        content: eqnDCont([{ root: ['r', '_2'] }, {
           annotate: {
             content: { strike: ['A', 's1'] },
-            withAnnotations: ['_1'],
-            includeAnnotationInSize: false,
+            annotation: {
+              content: '_1',
+              xPosition: 'right',
+              yPosition: 'top',
+              xAlign: 'left',
+              yAlign: 'bottom',
+              scale: 0.5,
+            },
+            inSize: false,
           },
-        }],
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        }]),
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o' },
         scale: 1,
       },
       '4': {
-        content: { root: ['_2', 'r'] },
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        content: eqnDCont({ root: ['r', '_2'] }),
+        // alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { alignH: '0.1o' },
         scale: 1,
       },
     },
@@ -260,16 +289,12 @@ export default function diagramLayout() {
   //   frac: [num, den, v, scale],
   // });
 
-  // const brac = (content, lb, rb) => ({
-  //   brac: [content, lb, rb],
-  // });
-
   // const strike = (content, strike) => ({
   //   strike: [content, strike],
   // });
 
   const root = (content, radical) => ({
-    root: [content, radical],
+    root: [radical, content],
   });
 
   const eqn = {
@@ -297,15 +322,23 @@ export default function diagramLayout() {
         _27: '2',
         plus: ' + ',
         brace1: {
-          symbol: 'brace', side: 'top', numLines: 2, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         brace2: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.working,
+          symbol: 'brace',
+          side: 'top',
+          color: colors.working,
+          width: 0.05,
+          lineWidth: 0.012,
         },
         // lb: { symbol: 'bracket', side: 'left', numLines: 2 },
         // rb: { symbol: 'bracket', side: 'right', numLines: 2 },
-        strike1: { symbol: 'xStrike', color: colors.working },
-        strike2: { symbol: 'xStrike', color: colors.working },
+        strike1: { symbol: 'strike', style: 'cross', color: colors.working },
+        strike2: { symbol: 'strike', style: 'cross', color: colors.working },
         r1: { symbol: 'radical' },
         r2: { symbol: 'radical' },
         r3: { symbol: 'radical' },

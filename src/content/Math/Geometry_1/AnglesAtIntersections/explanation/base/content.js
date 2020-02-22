@@ -629,12 +629,12 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle2, 'e');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle2, 'g');
-        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('A2', colors.angle3, 'e');
+        three.setAngle('B1', colors.angle2, 'b');
+        three.setAngle('B2', colors.angle4, 'f');
+        three.setAngle('C1', colors.angle3, 'c');
+        three.setAngle('C2', colors.angle1, 'g');
+        three.setAngle('D1', colors.angle4, 'd');
         three.setAngle('D2', colors.angle2, 'h');
         three._fig._angleA1.showAll();
         three._fig._angleC2.showAll();
@@ -661,12 +661,12 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle2, 'e');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle2, 'g');
-        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('A2', colors.angle3, 'e');
+        three.setAngle('B1', colors.angle2, 'b');
+        three.setAngle('B2', colors.angle4, 'f');
+        three.setAngle('C1', colors.angle3, 'c');
+        three.setAngle('C2', colors.angle1, 'g');
+        three.setAngle('D1', colors.angle4, 'd');
         three.setAngle('D2', colors.angle2, 'h');
         three._fig._angleA1.showAll();
         three._fig._angleC2.showAll();
@@ -765,13 +765,13 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle1, 'c');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle1, 'd');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('A2', colors.angle3, 'c');
+        three.setAngle('B1', colors.angle2, 'b');
+        three.setAngle('B2', colors.angle4, 'd');
+        three.setAngle('C1', colors.angle3, 'c');
         three.setAngle('C2', colors.angle1, 'a');
-        three.setAngle('D1', colors.angle1, 'b');
-        three.setAngle('D2', colors.angle1, 'd');
+        three.setAngle('D1', colors.angle4, 'b');
+        three.setAngle('D2', colors.angle2, 'd');
         three._fig._angleA1.showAll();
         three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
@@ -798,13 +798,13 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle1, 'c');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle1, 'd');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('A2', colors.angle3, 'c');
+        three.setAngle('B1', colors.angle2, 'b');
+        three.setAngle('B2', colors.angle4, 'd');
+        three.setAngle('C1', colors.angle3, 'c');
         three.setAngle('C2', colors.angle1, 'a');
-        three.setAngle('D1', colors.angle1, 'b');
-        three.setAngle('D2', colors.angle1, 'd');
+        three.setAngle('D1', colors.angle4, 'b');
+        three.setAngle('D2', colors.angle2, 'd');
         three._fig._angleA1.showAll();
         three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
@@ -964,8 +964,8 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A2', colors.angle1, '180º – d');
-        three.setAngle('B2', colors.angle1, '180º – c');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('B2', colors.angle2, '180º – c');
+        three.setAngle('C1', colors.angle2, 'c');
         three.setAngle('D1', colors.angle1, 'd');
         three._fig._angleA2.showAll();
         three._fig._angleD1.showAll();
@@ -992,8 +992,8 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         three.setAngle('A2', colors.angle1, '180º – d');
-        three.setAngle('B2', colors.angle1, '180º – c');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('B2', colors.angle2, '180º – c');
+        three.setAngle('C1', colors.angle2, 'c');
         three.setAngle('D1', colors.angle1, 'd');
         three._fig._angleA2.showAll();
         three._fig._angleD1.showAll();

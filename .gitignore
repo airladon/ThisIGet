@@ -4,6 +4,7 @@ __pycache__
 build_flask_gen/
 app/app/static/build
 app/app/static/dist
+app/app/static/index.js.map
 node_modules/
 reports
 src/figureone

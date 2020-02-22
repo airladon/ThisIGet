@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'base',
+  uid: 'variousGeometries',
   topic: 'examples',
   title: 'Various Geometries',
   description: '',

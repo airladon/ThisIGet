@@ -71,7 +71,7 @@ else
     ./browser_test.sh test $JEST_OPTIONS
     check_status
 fi
-# ./browser_test.sh test stage.btest.js
+# ./browser_test.sh test stage.*btest.js
 # check_status
 
 ###########################################################################
@@ -92,7 +92,7 @@ title "Browser Tests - General: thisiget-test"
 check_status
 
 title "Browser Tests: thisiget-beta"
-./browser_test.sh beta prod.btest.js
+./browser_test.sh beta prod.*btest.js
 check_status
 
 ##########################################################################
@@ -110,7 +110,7 @@ title "Ratings Test: thisiget"
 check_status
 
 title "Browser Tests: thisiget"
-./browser_test.sh prod prod.btest.js
+./browser_test.sh prod prod.*btest.js
 check_status
 
 if [ $? != 0 ];

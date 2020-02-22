@@ -99,7 +99,7 @@ for file_name in current.keys():
         paths.add(jest_string)
 
 if test_all:
-    print('stage.btest.js')
+    print('stage.*btest.js')
     exit(1)
 
 print(' '.join(paths))

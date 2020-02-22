@@ -453,7 +453,7 @@ def login(username=''):
 
 
 @app.route('/account', methods=['GET', 'POST'])  # noqa
-def account_settings():
+def account_settings():  # noqa C901
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
 

@@ -15,3 +15,10 @@ module.name_mapper.extension='md' -> 'empty/object'
 <PROJECT_ROOT>/migrations/.*
 <PROJECT_ROOT>/containers/.*
 <PROJECT_ROOT>/app/.*
+<PROJECT_ROOT>/.git/.*
+<PROJECT_ROOT>/assets/.*
+<PROJECT_ROOT>/containers/.*
+<PROJECT_ROOT>/migrations/.*
+<PROJECT_ROOT>/reports/.*
+<PROJECT_ROOT>/tools/.*
+<PROJECT_ROOT>/webpack/.*

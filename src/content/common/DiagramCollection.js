@@ -34,6 +34,7 @@ type TypeAccentOptions = {
   children?: ?Array<DiagramElement | string>,
   style?: TypeAccent,
   done?: ?() => void,
+  centerOn?: DiagramElement | string | Point | null,
 }
 
 function getColor(
@@ -67,14 +68,23 @@ function mergeAccentOptions(
 ): {
   element: ?Array<DiagramElement>,
   children: ?Array<DiagramElement | string>,
+  elements: ?Array<DiagramElement | string>,
   style: TypeAccent,
   done: ?() => void,
+  x: 'center' | 'left' | 'right' | 'origin' | number,
+  y: 'middle' | 'top' | 'bottom' | 'origin' | number,
+  centerOn: DiagramElement | string | Point | null,
+  color?: Array<number>,
 } {
   const defaultOptions: TypeAccentOptions = {
     element: null,
+    elements: null,
     children: null,
     style: 'pulse',
     done: null,
+    centerOn: null,
+    x: 'center',
+    y: 'middle',
   };
   let options;
   if (typeof childrenOrDoneOrColor === 'function') {
@@ -98,6 +108,11 @@ function mergeAccentOptions(
     options = joinObjects({}, defaultOptions, elementOrOptions);
   }
 
+  // $FlowFixMe
+  if (options.elements != null) {
+    options.element = options.elements;
+  }
+
   if (options.element instanceof DiagramElement) {
     options.element = [options.element];
   }
@@ -112,6 +127,13 @@ function mergeAccentOptions(
     style = styleIn;
   }
   options.style = style;
+
+  if (typeof options.centerOn === 'string' && options.element != null) {
+    const centerOn = options.element[0].getElement(options.centerOn);
+    if (centerOn != null) {
+      options.centerOn = centerOn;
+    }
+  }
   // $FlowFixMe
   return options;
 }
@@ -289,7 +311,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
           element.highlight();
         }
         if (style.includes('pulse')) {
-          element.pulse(doneToUse);
+          element.pulse(options);
           doneToUse = null;
         }
       } else {
@@ -300,7 +322,10 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
           element.highlight(children);
         }
         if (style.includes('pulse')) {
-          element.pulse(children, doneToUse);
+          options.elements = children;
+          // console.log(options)
+          // console.log(element)
+          element.pulse(options);
           doneToUse = null;
         }
       }
@@ -338,7 +363,9 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     if (allElements.length > 0) {
       colorToUse = allElements[0].color.slice();
     }
-
+    if (options.color != null) {
+      colorToUse = options.color;
+    }
     if (Array.isArray(childrenOrColor)
       && childrenOrColor.length > 0
       && typeof childrenOrColor[0] === 'number'
@@ -376,8 +403,16 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     } else {
       childrenToUse = [children];
     }
-    box.custom.setSize(eqn, childrenToUse, space);
+    // $FlowFixMe
+    box.surround(eqn, childrenToUse, space);
     box.showAll();
+    box.pulseSettings.transformMethod = (s) => {
+      const bounds = box.getBoundingRect('vertex');
+      return new Transform()
+        .translate(-bounds.left - bounds.width / 2, -bounds.bottom - bounds.height / 2)
+        .scale(s, s)
+        .translate(bounds.width / 2 + bounds.left, bounds.height / 2 + bounds.bottom);
+    };
     this.accent(box, done);
   }
 
@@ -528,7 +563,12 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       }
     }
     if (style.includes('pulse')) {
-      parent.pulse([...group], done);
+      // parent.pulse([...group], done);
+      parent.pulse({
+        elements: [...group],
+        // scale: 2,
+        done,
+      });
     }
     this.currentToggleIndex[indexToUse] = (index + 1) % numGroups;
     this.diagram.animateNextFrame();

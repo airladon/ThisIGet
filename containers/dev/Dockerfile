@@ -4,7 +4,7 @@
 #   - JS Building
 #   - Flask debugging
 
-FROM airladon/pynode:python3.7.4-node12.10.0-npm6.11.3-docker19.03.2-heroku7.30.1
+FROM airladon/pynode:python3.8.1-node12.16.0-npm6.13.7-docker19.03.2-heroku7.30.1
 
 # ## General ##
 WORKDIR /opt/app
@@ -15,6 +15,7 @@ ADD package-lock.json .
 RUN npm install
 
 # Install Python packages
+RUN apt-get install -y libpq-dev
 ADD requirements.txt .
 RUN pip install --no-cache-dir -q -r requirements.txt
 
@@ -31,7 +32,7 @@ ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 ENV FLASK_APP app/my_app.py
 ENV FLASK_DEBUG 1
 
-RUN npm install figureone@0.1.3
+RUN npm install figureone@0.1.7
 
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]

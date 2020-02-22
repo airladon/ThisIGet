@@ -99,6 +99,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     ]);
   });
 
+  // eslint-disable-next-line jest/valid-describe
   describe(`${fullPath}`, () => {
     test.each(allTests)(
       'width: %i height: %p, viewHeight: %p, QRs: %p, endpoint: %s',
@@ -126,11 +127,17 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
         // const contentBox = await (await page.$('#topic__content'))
         //   .boundingBox();
-        const pageBox = await (await page.$('body'))
-          .boundingBox();
+        // const pageBox = await (await page.$('body'))
+        //   .boundingBox();
+        // console.log(pageBox)
+        // const bb = await (await page.$('#topic__content')).boundingBox();
+        // console.log(bb)
 
         if (viewHeight === 'auto') {
           await page.setViewport({ width, height: 1000 });
+          const pageBox = await (await page.$('body'))
+            .boundingBox();
+          // const bb = await (await page.$('#topic__content')).boundingBox();
           await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
           await page.setViewport({ width, height: viewHeight });

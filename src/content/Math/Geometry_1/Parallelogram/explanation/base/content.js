@@ -73,6 +73,7 @@ class Content extends PresentationFormatContent {
           [['pMarkLeft', 'pMarkRight'], ['pMarkTop', 'pMarkBottom']],
           colors.sides,
         ),
+        // opposite_sides: coll.bindAccent(pgram._pMarkLeft),
       },
       show: [
         pgram._line,
@@ -235,9 +236,9 @@ class Content extends PresentationFormatContent {
         equal_opposite_angles: coll.bindToggleGroups(
           pgram, [['a1', 'a2'], ['b11', 'b21']], colors.angles,
         ),
-        test: coll.bindToggleGroups(
-          pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles,
-        ),
+        // test: coll.bindToggleGroups(
+        //   pgram, ['a1', 'b11', 'a2', 'b21'], colors.angles,
+        // ),
       },
       show: [
         pgram._line,
@@ -414,7 +415,11 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null], colors.sides),
+        diagonal_line: click(
+          pgram._diag1.grow,
+          [pgram._diag1, 0.05, 1, true, null, null],
+          colors.sides,
+        ),
       },
       show: [
         pgram._line,
@@ -592,7 +597,9 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, commonContent, {
       modifiers: {
-        diagonal_line: click(pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null], colors.sides),
+        diagonal_line: click(
+          pgram._diag1.grow, [pgram._diag1, 0.05, 1, true, null, null], colors.sides,
+        ),
         two_triangles: coll.bindToggleGroups(
           pgram,
           [['labelA1', 'labelB1', 'diag1'], ['labelA2', 'labelB2', 'diag1']],
@@ -725,7 +732,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonContent, {
       modifiers: {
         second_diagonal: click(
-          pgram._diag2.grow, [pgram._diag2, 0.05, 1, true, null], colors.sides,
+          pgram._diag2.grow, [pgram._diag2, 0.05, 1, true, null, null], colors.sides,
         ),
       },
       show: [
@@ -853,7 +860,12 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, commonContent, {
       modifiers: {
-        equal: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        // equal: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        equal: coll.bindToggleGroups(
+          pgram,
+          [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']],
+          colors.sides,
+        ),
       },
       show: [
         pgram._diag1, pgram._diag2,
@@ -877,7 +889,12 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: 'Each |diagonal| line is |split_in_half| by the other.',
       modifiers: {
-        split_in_half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        // split_in_half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        split_in_half: coll.bindToggleGroups(
+          pgram,
+          [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']],
+          colors.sides,
+        ),
       },
     };
     this.addSection(common, commonContent, {
@@ -1440,7 +1457,12 @@ class Content extends PresentationFormatContent {
       modifiers: {
         Opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
         Opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
-        half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        // half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        half: coll.bindToggleGroups(
+          pgram,
+          [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']],
+          colors.sides,
+        ),
         A: coll.bindAccent(pgram, ['labelA1']),
         H: coll.bindAccent(pgram, ['h']),
         Diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
@@ -1483,7 +1505,12 @@ class Content extends PresentationFormatContent {
       modifiers: {
         equal_opposite_angles: click(coll.toggleOppositeAngles, [coll, null], colors.angles),
         equal_opposite_sides: click(coll.toggleEqualSides, [coll, null], colors.sides),
-        half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        // half: click(coll.toggleEqualHalves, [coll, null], colors.sides),
+        half: coll.bindToggleGroups(
+          pgram,
+          [['lMarkUp1', 'lMarkUp2'], ['lMark21', 'lMark22']],
+          colors.sides,
+        ),
         diagonals: coll.bindAccent(pgram, ['diag1', 'diag2']),
       },
     };

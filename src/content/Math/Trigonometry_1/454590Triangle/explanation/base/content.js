@@ -107,7 +107,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         split: click(
           coll._square._split.grow,
-          [coll._square._split, 0.05, 1, true, null],
+          [coll._square._split, 0.05, 1, true, null, null],
           colors.sides,
         ),
       },
@@ -247,7 +247,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll.setTriEqnForms('0');
       },
-      beforeTransitionFromPrev: () => {
+      setEqnForms: () => {
         coll.setTriEqnForms('0');
       },
     };

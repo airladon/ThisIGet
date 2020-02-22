@@ -2901,21 +2901,21 @@
         }
       },
       "examples": {
-        "base": {
-          "type": "singlePage",
-          "title": "Various Geometries",
-          "description": "",
-          "htmlTitle": "30-60-90 triangle examples",
-          "htmlDescription": "Example geometries where the 30-60-90 triangle can be used for a solution",
-          "fullTopic": true,
-          "links": ""
-        },
         "simpleGeometries": {
           "type": "singlePage",
           "title": "Simple Geometries",
           "description": "",
           "htmlTitle": "30-60-90 triangle basic usage",
           "htmlDescription": "Simple geometries where the 30-60-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        },
+        "variousGeometries": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "htmlTitle": "30-60-90 triangle examples",
+          "htmlDescription": "Example geometries where the 30-60-90 triangle can be used for a solution",
           "fullTopic": true,
           "links": ""
         }
@@ -3038,21 +3038,21 @@
         }
       },
       "examples": {
-        "base": {
-          "type": "singlePage",
-          "title": "Various Geometries",
-          "description": "",
-          "htmlTitle": "45-45-90 triangle examples",
-          "htmlDescription": "Example geometries where the 45-45-90 triangle can be used for a solution",
-          "fullTopic": true,
-          "links": ""
-        },
         "simpleGeometries": {
           "type": "singlePage",
           "title": "Simple Geometries",
           "description": "",
           "htmlTitle": "45-45-90 triangle basic usage",
           "htmlDescription": "Simple geometries where the 45-45-90 triangle can be used for a solution",
+          "fullTopic": true,
+          "links": ""
+        },
+        "variousGeometries": {
+          "type": "singlePage",
+          "title": "Various Geometries",
+          "description": "",
+          "htmlTitle": "45-45-90 triangle examples",
+          "htmlDescription": "Example geometries where the 45-45-90 triangle can be used for a solution",
           "fullTopic": true,
           "links": ""
         }
@@ -3342,22 +3342,152 @@
   "Math/Trigonometry_1/Sine": {
     "title": "Sine",
     "approaches": {
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Various Geometries ",
+          "description": "",
+          "htmlTitle": "Sine function examples",
+          "htmlDescription": "Example geometries where using the sine function can help find unknown properties",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Descriptive & Interactive",
           "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
+          "htmlTitle": "Sine Function Concept",
+          "htmlDescription": "Definition and derivation for the sine function concept",
+          "fullTopic": true,
+          "links": ""
+        },
+        "brief": {
+          "type": "singlePage",
+          "title": "Brief",
+          "description": "",
+          "htmlTitle": "Sine function concept in brief",
+          "htmlDescription": "Succinct definition and derivation for the Sine Function",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for the sine function>",
+          "htmlTitle": "Sine function introduction Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about the sine function>",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "https://www.mathopenref.com/sine.html",
+              "hash": "c916b02cea40fc5cc0e22a381da4ebfe",
+              "publisher": "Math Open Reference",
+              "type": "generic",
+              "description": "Sine definition and examples"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Sine",
+              "hash": "053d0ba79c2f314cc6238fbed018aacc",
+              "publisher": "Wikipedia",
+              "type": "generic",
+              "description": "Sine definition and extensions"
+            },
+            {
+              "url": "https://www.mathsisfun.com/sine-cosine-tangent.html",
+              "hash": "e028cd014556da746a5c5d37c5e76f0b",
+              "publisher": "Math is Fun",
+              "type": "generic",
+              "description": "Introduction to Sine, Cosine and Tangent"
+            },
+            {
+              "url": "https://www.researchgate.net/publication/304168681_ELEMENTARY_DERIVATION_OF_SINE_AND_COSINE_SERIES",
+              "hash": "d50d4dbd82992f1c29c7b6c3e8543dde",
+              "author": "David Bhatt",
+              "type": "generic",
+              "description": "Derivation of the sine function"
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Find Property",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn opposite side, adjacent side, hypotenuse or angle using the sine function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findAdjacent": {
+          "type": "presentation",
+          "title": "Find Adjacent",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn adjacent side using the sine function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findAngle": {
+          "type": "presentation",
+          "title": "Find Angle",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn angle using the sine function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findHypotenuse": {
+          "type": "presentation",
+          "title": "Find Hypotenuse",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn hypotenuse using the sine function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "findOpposite": {
+          "type": "presentation",
+          "title": "Find Opposite",
+          "description": "",
+          "htmlTitle": "Quiz - Find the unknown property using the sine function",
+          "htmlDescription": "Find the unknonwn opposite side using the sine function",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Definition",
+          "description": "",
+          "htmlTitle": "Definition of Sine Function",
+          "htmlDescription": "Summary definition of sine function and its relationship with the opposite side and hypotenuse",
           "fullTopic": true,
           "links": ""
         }
       }
     },
     "dependencies": [
-      "UnitCircle"
+      "Introduction"
     ],
-    "enabled": false
+    "enabled": true
   },
   "Math/Trigonometry_1/Tangent": {
     "title": "Tangent",

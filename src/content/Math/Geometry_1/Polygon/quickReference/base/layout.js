@@ -94,10 +94,10 @@ export default function diagramLayout() {
         _2: '2',
         minus: '  -  ',
         lb: {
-          symbol: 'bracket', side: 'left', numLines: 1,
+          symbol: 'bracket', side: 'left',
         },
         rb: {
-          symbol: 'bracket', side: 'right', numLines: 1,
+          symbol: 'bracket', side: 'right',
         },
         v: { symbol: 'vinculum' },
       },
@@ -108,10 +108,10 @@ export default function diagramLayout() {
       },
       forms: {
         '0': ['tot1', 'equals', {
-          brac: [['n', 'minus', '_2'], 'lb', 'rb'],
+          brac: ['lb', ['n', 'minus', '_2'], 'rb'],
         }, 'times', '_180'],
         '1': [
-          'angle', 'equals', '_180', 'minus', { frac: ['_360', 'n', 'v'] },
+          'angle', 'equals', '_180', 'minus', { frac: ['_360', 'v', 'n'] },
         ],
       },
     },

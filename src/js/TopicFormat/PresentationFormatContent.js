@@ -114,8 +114,10 @@ class Section {
   hideOnly: Array<DiagramElementPrimitive | DiagramElementCollection>
            | () => {};
 
-  show: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
-  hide: Array<DiagramElementPrimitive | DiagramElementCollection> | () => {};
+  show: Array<DiagramElementPrimitive | DiagramElementCollection | () => void> | () => void;
+  hide: Array<DiagramElementPrimitive | DiagramElementCollection | () => void> | () => void;
+  setEqnForms: Array<[Equation, string] | () => void> | () => void;
+  afterShow: ?() => void;
   initialPositions: Object | () => {};
   blankTransition: {
     toNext: boolean;
@@ -142,6 +144,8 @@ class Section {
     this.infoModifiers = {};
     this.showOnly = [];
     this.blank = [];
+    this.afterShow = null;
+    this.setEqnForms = [];
     this.infoElements = [];
     this.fadeInFromPrev = true;
     this.blankTransition = {
@@ -550,8 +554,10 @@ class Section {
         elementsOrMethod.forEach((element) => {
           if (element instanceof DiagramElementCollection) {
             element.showAll();
-          } else {
+          } else if (element instanceof DiagramElementPrimitive) {
             element.show();
+          } else {
+            element();
           }
         });
       } else {
@@ -564,13 +570,35 @@ class Section {
         elementsOrMethod.forEach((element) => {
           if (element instanceof DiagramElementCollection) {
             element.hideAll();
-          } else {
+          } else if (element instanceof DiagramElementPrimitive) {
             element.hide();
+          } else {
+            element();
           }
         });
       } else {
         elementsOrMethod();
       }
+    }
+
+    if ('setEqnForms' in this) {
+      const eqnPairsOrMethod = this.setEqnForms;
+      if (Array.isArray(eqnPairsOrMethod)) {
+        eqnPairsOrMethod.forEach((eqnPairOrMethod) => {
+          if (typeof eqnPairOrMethod === 'function') {
+            eqnPairOrMethod();
+          } else {
+            const [eqn, form] = eqnPairOrMethod;
+            eqn.showForm(form);
+          }
+        });
+      } else if (eqnPairsOrMethod != null) {
+        eqnPairsOrMethod();
+      }
+    }
+    // this.executeSetEqnForms();
+    if ('afterShow' in this && this.afterShow != null) {
+      this.afterShow();
     }
   }
 
@@ -599,6 +627,16 @@ class Section {
   }
 
   transitionToAny(done: () => void = function temp() {}): void {
+    done();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  transitionReset(done: () => void = function temp() {}): void {
+    done();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  transitionEqnForms(done: () => void = function temp() {}): void {
     done();
   }
   /* eslint-enable no-unused-vars */
@@ -1006,9 +1044,17 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   addSectionEqnStep(
     optionsIn: {
-      eqn: { eqn: Equation } & Equation,  // or navigator
-      from: string,                       // From form
-      to: string,                         // To Form
+      eqn?: { eqn: Equation } & Equation,  // or navigator
+      from?: string,                       // From form
+      to?: string,                         // To Form
+      eqns?: Array<{
+          eqn: { eqn: Equation } & Equation,  // or navigator
+          from: string,                       // From form
+          to: string,                         // To Form
+          duration?: number,
+          animate?: 'dissolve' | 'move',
+        } |
+        Array<{ eqn: Equation } & Equation | string | 'dissolve' | 'move' | number>>,
       duration?: number,                   // duration
       animate?: 'dissolve' | 'move',
     },
@@ -1020,47 +1066,98 @@ class PresentationFormatContent extends SimpleFormatContent {
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
     const userSections = Object.assign({}, ...sectionObjects);
+    let { eqns } = options;
     let { eqn } = options;
-    const { animate, duration } = options;
-    let nav = null;
-    if (eqn.table != null) {
-      nav = eqn;
-      ({ eqn } = nav);
+    if (eqns == null) {
+      const {
+        from, to, duration, animate,
+      } = options;
+      eqns = [{
+        eqn, from, to, duration, animate,
+      }];
     }
-    const fromForm = options.from;
-    const toForm = options.to;
+    const equations = [];
+    eqns.forEach((e) => {
+      let to;
+      let from;
+      let animate;
+      let duration;
+      if (Array.isArray(e)) {
+        [eqn, from, to, duration, animate] = e;
+      } else {
+        ({
+          eqn, from, to, duration, animate,
+        } = e);
+      }
+      if (to == null) {
+        to = from;
+      }
+      const newEqn = joinObjects({
+        eqn: eqn.table != null ? eqn.eqn : eqn,
+        nav: eqn.table != null ? eqn : null,
+        from,
+        to,
+        animate,
+        duration,
+      }, {
+        duration: options.duration,
+        animate: options.animate,
+      });
+      equations.push(newEqn);
+    });
+
+    let setEqnForms = [() => {
+      equations.forEach(e => e.eqn.showForm(e.from));
+    }];
+    if (Array.isArray(userSections.setEqnForms)) {
+      setEqnForms = [...setEqnForms, ...userSections.setEqnForms];
+    } else if (typeof userSections.setEqnForms === 'function') {
+      setEqnForms.push(userSections.setEqnForms);
+    }
     const eqnSection = {
-      transitionFromPrev: (done) => {
+      setEqnForms,
+      transitionEqnForms: (done) => {
         let callback = done;
-        // beforeTransitionFromPrev is only used for section eqn steps
-        if (userSections.beforeTransitionFromPrev != null) {
-          userSections.beforeTransitionFromPrev();
+        if (userSections.transitionEqnForms != null) {
+          callback = userSections.transitionEqnForms.bind(userSections, done);
         }
-        if (userSections.transitionFromPrev != null) {
-          callback = userSections.transitionFromPrev.bind(userSections, done);
-        }
-        eqn.showForm(fromForm);
-        if (fromForm === toForm) {
+        if (this.comingFrom !== 'prev' || equations.length === 0) {
           callback();
           return;
         }
-        eqn.goToForm({
-          name: toForm,
-          duration,
-          callback,
-          animate,
+        let count = 0;
+        const callBackSet = () => {
+          count += 1;
+          if (count === equations.length) {
+            callback();
+          }
+        };
+        equations.forEach((e) => {
+          if (e.from === e.to) {
+            callBackSet();
+            return;
+          }
+          e.eqn.showForm(e.from);
+          e.eqn.goToForm({
+            name: e.to,
+            duration: e.duration,
+            callback: callBackSet,
+            animate: e.animate,
+          });
+          if (e.nav != null) {
+            e.nav.updateButtons();
+          }
         });
-        if (nav != null) {
-          nav.updateButtons();
-        }
       },
       setSteadyState: () => {
+        equations.forEach((e) => {
+          e.eqn.showForm(e.to);
+          if (e.nav != null) {
+            e.nav.updateButtons();
+          }
+        });
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
-        }
-        eqn.showForm(toForm);
-        if (nav != null) {
-          nav.updateButtons();
         }
       },
     };
@@ -1096,12 +1193,17 @@ class PresentationFormatContent extends SimpleFormatContent {
     };
     const userSections = Object.assign({}, ...sectionObjects);
     const setFirstTransform = () => { this.diagram.setFirstTransform(); };
+
     const eqnSection = {
-      transitionFromPrev: (done) => {
+      transitionEqnForms: (done) => {
+        if (this.comingFrom !== 'prev') {
+          done();
+          return;
+        }
         setFirstTransform();
         let callback = done;
-        if (userSections.transitionFromPrev != null) {
-          callback = userSections.transitionFromPrev.bind(userSections, done);
+        if (userSections.transitionEqnForms != null) {
+          callback = userSections.transitionEqnForms.bind(userSections, done);
         }
         let counter = 0;
         const countUp = () => {
@@ -1241,9 +1343,6 @@ class PresentationFormatContent extends SimpleFormatContent {
         });
       },
       setSteadyState: () => {
-        if (userSections.setSteadyState != null) {
-          userSections.setSteadyState();
-        }
         equations.forEach((eqOptions, i) => {
           if (eqOptions.nav == null && eqOptions.eqn == null) {
             return;
@@ -1274,6 +1373,9 @@ class PresentationFormatContent extends SimpleFormatContent {
             nav.setOpacity(opacity);
           }
         });
+        if (userSections.setSteadyState != null) {
+          userSections.setSteadyState();
+        }
       },
     };
     const section = Object.assign({}, ...sectionObjects, eqnSection);

@@ -205,12 +205,43 @@ $height_limited_landscape_aspect_ratio: "408/200";
   font-size: 0;
 }
 
+@-webkit-keyframes text-scaler {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@-moz-keyframes text-scaler {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@-o-keyframes text-scaler {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes text-scaler {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 .topic__diagram_text_fade_in {
   // opacity: 1;
   -webkit-animation: fadein 0.3s linear;
   -moz-animation: fadein 0.3s linear;
   animation: fadein 0.3s linear;
   -o-animation: fadein 0.3s linear;
+}
+
+.topic__diagram_text_pulse {
+  -webkit-animation: text-scaler 1s ease-in-out;
+  -moz-animation: text-scaler 1s ease-in-out;
+  -o-animation: text-scaler 1s ease-in-out;
+  animation: text-scaler 1s ease-in-out;
 }
 
 .topic__diagram_text {

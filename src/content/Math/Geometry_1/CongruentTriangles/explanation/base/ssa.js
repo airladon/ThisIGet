@@ -139,11 +139,13 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
         .whenFinished(callback)
         .start();
     } else if (which === 'line') {
+      this._constructionCircle.angleToDraw = 1 * Math.PI * 2;
       this.animations.new()
         .custom({ callback: growLine.bind(this), duration: 1 })
         .whenFinished(callback)
         .start();
     } else {
+      this._constructionLine.setLength(1.7 / Math.sin(r) * 1);
       this.animations.new()
         .custom({ callback: createCircle.bind(this), duration: 2 })
         .whenFinished(callback)

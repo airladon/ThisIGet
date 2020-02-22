@@ -29,10 +29,14 @@ function hideInteractiveHighlightButton() {
 //    - hideOnly                    Guaranteed
 //    - show                        Guaranteed
 //    - hide                        Guaranteed
-//    - transitionFromPrev/Next     Can be cancelled
+//    - setEqnForms                 Guaranteed
+//    - afterShow...................Guaranteed
+//    - transitionReset             Can be cancelled / skipped
+//    - transitionFromPrev/Next     Can be cancelled / skipped
+//    - transitionEqnForms          Can be cancelled / skipped
 //    - transitionFromAny           Can be cancelled / skipped
 //    - setPlannedPositions?        Can be cancelled / skipped
-//    - setSteadyState              Can be skipped
+//    - setSteadyState              Guaranteed
 //
 //  Go to next, prev or goTo
 //    - transitionToPrev/Next       Can be cancelled / skipped
@@ -216,6 +220,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   transitionStart(direction: 'next' | 'prev' | 'goto' | '' = '') {
+    this.transitionCancelled = false;
     this.inTransition = true;
     this.comingFrom = direction;
     if (direction === 'prev') {
@@ -234,8 +239,8 @@ class PresentationFormat extends SimpleFormat {
     }
   }
 
-  finishTransToNextOrPrev(flag: boolean = true) {
-    if (flag === false) {
+  finishTransToNextOrPrev() {
+    if (this.transitionCancelled) {
       this.finishTransToAny();
     } else {
       this.currentSection().transitionToAny(this.finishTransToAny.bind(this));
@@ -303,19 +308,48 @@ class PresentationFormat extends SimpleFormat {
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
       }
+      if (this.comingFrom === 'prev') {
+        this.fadeInTextFromPrev();
+      }
+      section.transitionReset(this.finishTransitionReset.bind(this));
+      // if (this.comingFrom === 'next') {
+      //   section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
+      // } else if (this.comingFrom === 'prev') {
+      //   this.fadeInTextFromPrev();
+      //   section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
+      // } else {
+      //   section.transitionFromAny(this.finishTransitionFromAny.bind(this));
+      // }
+    }
+  }
+
+  finishTransitionReset() {
+    if (this.transitionCancelled) {
+      this.finishTransitionFromAny();
+    } else {
+      const section = this.content.sections[this.currentSectionIndex];
       if (this.comingFrom === 'next') {
         section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
       } else if (this.comingFrom === 'prev') {
-        this.fadeInTextFromPrev();
+        // this.fadeInTextFromPrev();
         section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
       } else {
-        section.transitionFromAny(this.finishTransitionFromAny.bind(this));
+        section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
       }
     }
   }
 
-  finishTransFromNextOrPrev(flag: boolean = true) {
-    if (flag === false) {
+  finishTransFromNextOrPrev() {
+    if (this.transitionCancelled) {
+      this.finishTransitionFromAny();
+    } else {
+      const section = this.content.sections[this.currentSectionIndex];
+      section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
+    }
+  }
+
+  finishTransitionEqnForms() {
+    if (this.transitionCancelled) {
       this.finishTransitionFromAny();
     } else {
       const section = this.content.sections[this.currentSectionIndex];
