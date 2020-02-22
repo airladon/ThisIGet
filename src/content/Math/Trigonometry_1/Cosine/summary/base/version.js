@@ -3,8 +3,8 @@
 // eslint-disable-next-line no-var
 var version = {
   uid: 'base',
-  topic: 'explanation',
-  title: 'Descriptive',
+  topic: 'summary',
+  title: 'External angle summary',
   description: '',
   htmlTitle: '',
   htmlDescription: '',

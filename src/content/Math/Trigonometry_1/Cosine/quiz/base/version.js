@@ -3,10 +3,10 @@
 // eslint-disable-next-line no-var
 var version = {
   uid: 'base',
-  topic: 'explanation',
-  title: 'Descriptive',
+  topic: 'quiz',
+  title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Quiz - find the ',
   htmlDescription: '',
   fullTopic: true,
   type: 'presentation',

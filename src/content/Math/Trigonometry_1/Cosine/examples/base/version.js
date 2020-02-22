@@ -3,13 +3,13 @@
 // eslint-disable-next-line no-var
 var version = {
   uid: 'base',
-  topic: 'explanation',
-  title: 'Descriptive',
+  topic: 'examples',
+  title: 'Examples of ',
   description: '',
-  htmlTitle: '',
+  htmlTitle: '... examples',
   htmlDescription: '',
   fullTopic: true,
-  type: 'presentation',
+  type: 'singlePage',
 };
 
 module.exports = version;
