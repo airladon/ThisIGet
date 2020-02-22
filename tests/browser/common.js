@@ -28,7 +28,7 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
  */
 async function snap(
   fileNamePrefix = '', snapshots = null, startIndex = null,
-  threshold = 0, screenshotOptions = {},
+  threshold = 3, screenshotOptions = {},
 ) {
   let index = 0;
   // Calculate index
