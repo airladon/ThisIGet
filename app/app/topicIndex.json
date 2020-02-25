@@ -3447,6 +3447,15 @@
           "fullTopic": true,
           "links": ""
         },
+        "base1": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "htmlTitle": "Sine Function Concept",
+          "htmlDescription": "Definition and derivation for the sine function concept",
+          "fullTopic": true,
+          "links": ""
+        },
         "brief": {
           "type": "singlePage",
           "title": "Brief",

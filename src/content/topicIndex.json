@@ -2165,6 +2165,12 @@
           "description": "",
           "fullTopic": true
         },
+        "base1": {
+          "type": "presentation",
+          "title": "Descriptive & Interactive",
+          "description": "",
+          "fullTopic": true
+        },
         "brief": {
           "type": "singlePage",
           "title": "Brief",

@@ -42,10 +42,20 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
-    const fig = coll._fig;
+    // const fig = coll._fig;
     // const eqn = coll._eqn;
 
     this.addSection({
+      setContent: [
+        'In the sine function topic, we showed that the ratio of any two sides of a right angle triangle is the same for all right angle triangles with the same angle $$\theta$$.',
+      ],
+      show: [
+        coll._tri, coll._eqn,
+      ],
+      hide: [coll._tri._complement, coll._tri._adj],
+      setSteadyState: () => {
+        coll._eqn.showForm('sine');
+      },
     });
   }
 
