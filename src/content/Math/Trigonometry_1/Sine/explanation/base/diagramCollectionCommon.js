@@ -53,6 +53,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
     this.custom.counter = 0;
     this.custom.constantCounter = 2;
+    this._rotator._line.move.maxTransform.updateRotation(60 * Math.PI / 180);
+    this._rotator._line.move.minTransform.updateRotation(10 * Math.PI / 180);
+    this._rotator._line.setTransformCallback = this.updateRotation.bind(this, null);
   }
 
   toggleSides() {
@@ -107,6 +110,62 @@ export default class CommonCollection extends CommonDiagramCollection {
         'A_12', 'B_12', 'C_12',
       ],
     );
+    this.diagram.animateNextFrame();
+  }
+
+  goToRotation(angle: ?number = null) {
+    let r = angle;
+    if (r == null) {
+      const delta = rand(10, 25) * Math.PI / 180;
+      const currentR = this._rotator._line.getRotation();
+      if (currentR > 35 * Math.PI / 180) {
+        r = currentR - delta;
+      } else {
+        r = currentR + delta;
+      }
+    }
+    this._rotator._line.animations.new()
+      .rotation({ target: r, velocity: 0.3 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  updateRotation(setAngle: ?number = null) {
+    let r = this._rotator._line.getRotation();
+    if (setAngle != null) {
+      r = setAngle;
+    }
+    const len = this._rotator._line.getLength();
+    const points = [
+      new Point(0, 0),
+      new Point(len * Math.cos(r), 0),
+      new Point(len * Math.cos(r), len * Math.sin(r)),
+    ];
+    this._tri._line.updatePoints(points);
+    this._tri._theta.setAngle({
+      p1: points[1],
+      p2: points[0],
+      p3: points[2],
+    });
+    const theta = parseFloat(this._tri._theta.getLabel()) * Math.PI / 180;
+    this._tri._right.setAngle({
+      p1: points[2],
+      p2: points[1],
+      p3: points[0],
+    });
+    this._tri._hyp.setEndPoints(points[0], points[2]);
+    this._tri._opp.setEndPoints(points[2], points[1]);
+    this._tri._adj.setEndPoints(points[0], points[1]);
+    const adj = round(Math.cos(theta), 2);
+    const opp = round(Math.sin(theta), 2);
+    // const hyp = round(r * Math.tan(theta), 2);
+    const hyp = 1;
+    this._tri._hyp.setLabel(`${1}`);
+    this._tri._opp.setLabel(`${opp}`);
+    this._tri._adj.setLabel(`${adj}`);
+    this._eqnSin._const.drawingObject.setText(`${round(opp / hyp, 2)}`);
+    this._eqnCos._const.drawingObject.setText(`${round(adj / hyp, 2)}`);
+    this._eqnTan._const.drawingObject.setText(`${round(opp / adj, 2)}`);
     this.diagram.animateNextFrame();
   }
 

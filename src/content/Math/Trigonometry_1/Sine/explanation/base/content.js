@@ -228,12 +228,16 @@ class Content extends PresentationFormatContent {
       },
     };
 
-    this.addSection(common, commonShow, commonContent, {
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement],
       setEqnForms: [
         [coll._eqnCos, '0'],
         [coll._eqnTan, '0'],
         [coll._eqnSin, '0'],
       ],
+    };
+    this.addSection(common, commonShow, commonContent, {
       transitionFromPrev: (done) => {
         coll._eqnCos.hide();
         coll._eqnTan.hide();
@@ -253,6 +257,46 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         coll._tri.setScenario('right');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'As the |angle_theta| |changes|, these ratios change. In other words, these ratios are a |function of theta|.',
+      modifiers: {
+        angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
+        // ratio: click(coll.toggleConstant, [coll], colors.lines),
+        changes: click(coll.goToRotation, [coll, null], colors.diagram.action),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+      },
+    });
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._tri._theta.setLabelToRealAngle();
+        coll._rotator.showAll();
+        coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+        coll._rotator._line.setMovable(true, 'rotation');
+        coll.updateRotation();
+      },
+      setLeaveState: () => {
+        console.log(layout.points[2]);
+        coll.updateRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+        coll._tri._hyp.setLabel('hypotenuse');
+        coll._tri._opp.setLabel('opposite');
+        coll._tri._adj.setLabel('adjacent');
+        coll._tri._theta.setLabel('\u03b8');
+        coll._eqnSin._const.drawingObject.setText('constant');
+        coll._eqnCos._const.drawingObject.setText('constant');
+        coll._eqnTan._const.drawingObject.setText('constant');
+        
       },
     });
   }

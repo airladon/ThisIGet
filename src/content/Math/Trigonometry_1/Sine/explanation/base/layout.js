@@ -33,9 +33,10 @@ export default function diagramLayout() {
 
   const points = [
     new Point(0, 0),
-    new Point(2.7, 0),
-    new Point(2.7, 1.6),
+    new Point(2.3, 0),
+    new Point(2.3, 1.6),
   ];
+  layout.points = points;
 
   const simX2 = 1;
   const simX3 = 1.3;
@@ -156,6 +157,25 @@ export default function diagramLayout() {
           },
         },
       ],
+    },
+    {
+      name: 'rotator',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'line',
+          method: 'line',
+          options: {
+            p1: points[0],
+            p2: points[2],
+            color: [1, 0, 0, 0.001],
+            width: 0.2,
+          },
+        },
+      ],
+      options: {
+        position: [-0.6, -1],
+      },
     },
     {
       name: 'tri',
