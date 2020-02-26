@@ -85,14 +85,16 @@ export default class CommonCollection extends CommonDiagramCollection {
   toggleConstant() {
     this.custom.constantCounter = (this.custom.constantCounter + 1) % 3;
     const options = [
-      'eqnSin', 'eqnCos', 'eqnTan',
+      ['eqnSin', 'tri.opp', 'tri.hyp'],
+      ['eqnCos', 'tri.adj', 'tri.hyp'],
+      ['eqnTan', 'tri.opp', 'tri.adj'],
     ];
     const option = options[this.custom.constantCounter];
     // console.log(option)
     // this.accent(this, [option]);
     this.exec(
-      ['pulse', { time: 1, scale: 1.5 }],
-      [option],
+      ['pulse', { time: 1, scale: 1.4 }],
+      [...option],
     );
     this.diagram.animateNextFrame();
   }

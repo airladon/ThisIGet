@@ -171,7 +171,7 @@ class Content extends PresentationFormatContent {
       setContent: 'Now consider a |right_angle_triangle| with its |sides| named relative to an |angle_theta|.',
       modifiers: {
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        sides: coll.bindAccent(tri, ['hyp', 'opp', 'adj']),
+        sides: coll.bindToggleGroups(tri, [['hyp'], ['opp'], ['adj']], colors.lines),
         right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
       },
     };
