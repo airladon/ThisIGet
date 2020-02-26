@@ -29,12 +29,12 @@ export default function diagramLayout() {
   colors.get('red').toCssVar('--color-angles');
   colors.get('green').toCssVar('--color-components');
   colors.get('blue').toCssVar('--color-lines');
-  colors.working = colors.get('grey', 'dark').rgb;
+  colors.working = colors.get('grey', 'light').rgb;
 
   const points = [
     new Point(0, 0),
-    new Point(3, 0),
-    new Point(3, 1.5),
+    new Point(2.7, 0),
+    new Point(2.7, 1.6),
   ];
 
   const simX2 = 1;
@@ -162,7 +162,7 @@ export default function diagramLayout() {
       method: 'collection',
       addElements: [
         {
-          name: 'tri',
+          name: 'line',
           method: 'polyLine',
           options: {
             points,
@@ -172,7 +172,7 @@ export default function diagramLayout() {
           },
         },
         {
-          name: 'angle',
+          name: 'theta',
           method: 'angle',
           options: {
             p1: points[1],
@@ -273,8 +273,91 @@ export default function diagramLayout() {
           },
         },
       ],
+      // options: {
+      //   position: [-1.5, -0.8],
+      // },
+      mods: {
+        scenarios: {
+          default: { position: [-1.5, -1] },
+          right: { position: [-0.6, -1] },
+        },
+      },
+    },
+    {
+      name: 'eqnCos',
+      method: 'addEquation',
       options: {
-        position: [-1.5, -0.8],
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          equals: ' = ',
+          const: 'constant',
+          v: { symbol: 'vinculum', color: colors.lines },
+        },
+        defaultFormAlignment: {
+          fixTo: 'equals',
+        },
+        forms: {
+          '0': [
+            { frac: ['adj', 'v', 'hyp'] },
+            'equals', 'const',
+          ],
+        },
+        position: [-1.8, -0.4],
+      },
+    },
+    {
+      name: 'eqnTan',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          // hyp: { text: 'hypotenuse', color: colors.lines },
+          equals: ' = ',
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          const: 'constant',
+          v: { symbol: 'vinculum', color: colors.lines },
+        },
+        defaultFormAlignment: {
+          fixTo: 'equals',
+        },
+        forms: {
+          '0': [
+            { frac: ['opp', 'v', 'adj'] },
+            'equals', 'const',
+          ],
+        },
+        position: [-1.8, -1.1],
+      },
+    },
+    {
+      name: 'eqnSin',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          equals: ' = ',
+          // adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          const: 'constant',
+          v: { symbol: 'vinculum', color: colors.lines },
+        },
+        defaultFormAlignment: {
+          fixTo: 'equals',
+        },
+        forms: {
+          '0': [
+            { frac: ['opp', 'v', 'hyp'] },
+            'equals', 'const',
+          ],
+        },
+        position: [-1.8, 0.3],
       },
     },
     {
@@ -284,37 +367,42 @@ export default function diagramLayout() {
         color: colors.diagram.text.base,
         scale: 0.9,
         elements: {
-          opposite: { color: colors.lines },
-          hypotenuse: { color: colors.lines },
-          adjacent: { color: colors.lines },
-          angle: { color: colors.angles },
-          theta: { text: '\u03b8', color: colors.angles },
-          sin: { style: 'normal' },
-          lb: { symbol: 'bracket', side: 'left' },
-          rb: { symbol: 'bracket', side: 'right' },
-          v1: { symbol: 'vinculum' },
-          v2: { symbol: 'vinculum' },
-          v3: { symbol: 'vinculum' },
-          v4: { symbol: 'vinculum' },
-          times: ' \u00D7 ',
+          v_11: { symbol: 'vinculum' },
+          v_12: { symbol: 'vinculum' },
+          v_21: { symbol: 'vinculum', color: colors.working },
+          v_31: { symbol: 'vinculum', color: colors.working },
+          v_32: { symbol: 'vinculum', color: colors.working },
+          v_41: { symbol: 'vinculum', color: colors.working },
           equals: '  =  ',
-          equals2: '  =  ',
-          A_1: { color: colors.lines },
-          B_1: { color: colors.lines },
-          A_2: { color: colors.lines },
-          B_2: { color: colors.lines },
-          A_3: { color: colors.lines },
-          B_3: { color: colors.lines },
-          times1: { text: ' \u00D7 ', color: colors.lines },
-          times2: { text: ' \u00D7 ', color: colors.lines },
-          times3: { text: ' \u00D7 ', color: colors.lines },
-          s_1: { color: colors.components },
-          s_2: { color: colors.components },
-          s_3: { color: colors.components },
-          s_4: { color: colors.components },
-          brace: { symbol: 'brace', side: 'top', lineWidth: 0.01 },
-          box: { symbol: 'box', lineWidth: 0.01, color: colors.working },
-          strike: { symbol: 'strike', style: 'cross', color: colors.working },
+          equals2: { text: '  =  ', color: colors.working },
+          equals3: { text: '  =  ', color: colors.working },
+          A_11: { color: colors.lines },
+          A_12: { color: colors.lines },
+          A_21: { color: colors.working },
+          A_31: { color: colors.working },
+          A_41: { color: colors.working },
+          B_11: { color: colors.lines },
+          B_12: { color: colors.lines },
+          B_21: { color: colors.working },
+          B_31: { color: colors.working },
+          B_41: { color: colors.working },
+          C_11: { color: colors.lines },
+          C_12: { color: colors.lines },
+          C_21: { color: colors.working },
+          C_31: { color: colors.working },
+          C_41: { color: colors.working },
+          times_11: { text: ' \u00D7 ', color: colors.lines },
+          times_12: { text: ' \u00D7 ', color: colors.lines },
+          times_21: { text: ' \u00D7 ', color: colors.working },
+          times_22: { text: ' \u00D7 ', color: colors.working },
+          times_31: { text: ' \u00D7 ', color: colors.working },
+          times_41: { text: ' \u00D7 ', color: colors.working },
+          s_11: { color: colors.components },
+          s_12: { color: colors.components },
+          s_21: { color: colors.working },
+          s_22: { color: colors.working },
+          s_31: { color: colors.working },
+          s_32: { color: colors.working },
         },
         defaultFormAlignment: {
           fixTo: 'equals',    // Points can also be defined as objects
@@ -322,100 +410,44 @@ export default function diagramLayout() {
           alignV: 'baseline',
         },
         forms: {
-          sine: [
-            // 'sin', { brac: ['lb', 'theta', 'rb'] },
-            'sin', ' ', 'theta',
+          // sine: [
+          //   // 'sin', { brac: ['lb', 'theta', 'rb'] },
+          //   'sin', ' ', 'theta',
+          //   'equals',
+          //   { frac: ['opposite', 'v1', 'hypotenuse'] },
+          // ],
+          BonA: [
+            { frac: [['s_11', 'times_11', 'B_11'], 'v_11', ['s_12', 'times_12', 'A_11']] },
             'equals',
-            { frac: ['opposite', 'v1', 'hypotenuse'] },
+            { frac: ['B_12', 'v_12', 'A_12'] },
+          ],
+          ConA: [
+            { frac: [['s_11', 'times_11', 'C_11'], 'v_11', ['s_12', 'times_12', 'A_11']] },
+            'equals',
+            { frac: ['C_12', 'v_12', 'A_12'] },
           ],
           AonB: [
-            { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
+            { frac: [['s_11', 'times_11', 'A_11'], 'v_11', ['s_12', 'times_12', 'B_11']] },
             'equals',
-            {
-              sup: {
-                content: {
-                  strike: {
-                    content: { frac: ['s_3', 'v2', 's_4'] },
-                    symbol: 'strike',
-                  },
-                },
-                superscript: '1',
-                offset: [0.03, 0.07],
-              },
-            },
-            'times3', { frac: ['A_2', 'v3', 'B_2'] },
-            'equals2',
-            { frac: ['A_3', 'v4', 'B_3'] },
+            { frac: ['A_12', 'v_12', 'B_12'] },
           ],
-          AonB1: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
-          AonB2: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-              'equals',
-              { frac: ['s_3', 'v2', 's_4'] },
-              'times3', { frac: ['A_2', 'v3', 'B_2'] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
-          AonB3: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-              'equals',
-              {
-                sup: {
-                  content: {
-                    strike: {
-                      content: { frac: ['s_3', 'v2', 's_4'] },
-                      symbol: 'strike',
-                    },
-                  },
-                  superscript: '1',
-                  offset: [0.03, 0.07],
-                  inSize: false,
-                },
-              },
-              'times3', { frac: ['A_2', 'v3', 'B_2'] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
-          AonB4: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-              'equals',
-              '1',
-              'times3', { frac: ['A_2', 'v3', 'B_2'] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
-          AonB5: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-              'equals',
-              {
-                strike: {
-                  content: [ '1', 'times3'],
-                  symbol: 'strike',
-                },
-              },
-              { frac: ['A_2', 'v3', 'B_2'] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
-          AonB6: {
-            content: [
-              { frac: [['s_1', 'times1', 'A_1'], 'v1', ['s_2', 'times2', 'B_1']] },
-              'equals',
-              { frac: ['A_2', 'v3', 'B_2'] },
-            ],
-            alignment: { fixTo: 'v1' },
-          },
+          ConB: [
+            { frac: [['s_11', 'times_11', 'C_11'], 'v_11', ['s_12', 'times_12', 'B_11']] },
+            'equals',
+            { frac: ['C_12', 'v_12', 'B_12'] },
+          ],
+          AonC: [
+            { frac: [['s_11', 'times_11', 'A_11'], 'v_11', ['s_12', 'times_12', 'C_11']] },
+            'equals',
+            { frac: ['A_12', 'v_12', 'C_12'] },
+          ],
+          BonC: [
+            { frac: [['s_11', 'times_11', 'B_11'], 'v_11', ['s_12', 'times_12', 'C_11']] },
+            'equals',
+            { frac: ['B_12', 'v_12', 'C_12'] },
+          ],
         },
-        position: [-0.7, -1.7],
+        position: [-0.2, -1.7],
       },
     },
   ];
