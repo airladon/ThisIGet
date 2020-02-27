@@ -200,6 +200,7 @@ export default function diagramLayout() {
             color: [1, 0, 0, 0.0001],
             radius: 0.3,
             fill: true,
+            position: points[2],
           },
           mods: {
             move: {
@@ -349,10 +350,14 @@ export default function diagramLayout() {
           adj: { text: 'adjacent', color: colors.lines },
           opp: { text: 'opposite', color: colors.lines },
           v: { symbol: 'vinculum' },
-          equals: ' = ',
+          equals: '  =  ',
           const: 'is same for all right angle triangles with angle ',
           theta: { text: '\u03b8', color: colors.angles },
           value: '1',
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          func: { text: 'function', style: 'normal' },
+          sin: { text: 'sin', style: 'normal' },
         },
         defaultFormAlignment: {
           fixTo: 'v',
@@ -372,6 +377,20 @@ export default function diagramLayout() {
           },
           'ratioValue': {
             content: [{ frac: ['opp', 'v','hyp'] }, 'equals', 'value'],
+            alignment: { fixTo: 'equals' },
+          },
+          'function': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'func', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+          'sin': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+            ],
             alignment: { fixTo: 'equals' },
           },
         },

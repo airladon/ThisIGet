@@ -216,6 +216,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._rotator._v.setEndPoints(points[1], points[2]);
   }
 
+  resetTri(done: ?() => void) {
+    this._rotator._pad.stop();
+    this._rotator._pad.animations.new()
+      .position({ target: this.layout.points[2], velocity: 0.5 })
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   // updateV() {
   //   let r = this._rotator._line.getRotation();
   //   let x = this._rotator._v.getP1().x;
@@ -319,6 +328,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     if (points[2].y < 0.2) {
       curveOptions.curveOffset = -(0.2 - points[2].y);
+    }
+    if (points[2].y >= 0.2 && curveOptions.curveOffset !== 0) {
+      curveOptions.curveOffset = 0;
     }
     if (curveOptions.radius != null
       || curveOptions.curveRadius != null

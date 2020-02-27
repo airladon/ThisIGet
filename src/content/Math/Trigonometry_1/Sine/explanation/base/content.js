@@ -273,19 +273,19 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'While this |ratio| is the same for |all| right angle triangles with the |same_angle_theta|, if this angle |changes|, then the ratio also changes.',
+      setContent: 'This |ratio| is the same for |all| right angle triangles with the |same_angle_theta|. If this angle |changes|, then the ratio also changes.',
       // 'As the |angle_is_changed|, these ratios change. In other words, these ratios are a |function of| |theta|.',
-      modifiers: {
-        ratio: coll.bindAccent({
-          element: coll._eqnSame,
-          children: ['v', 'opp', 'hyp'],
-          centerOn: 'v',
-          time: 1,
-          scale: 1.5,
-        }, colors.lines),
-        angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        changes: this.bindNext(colors.angles, 'fromChanged'),
-      },
+      // modifiers: {
+      //   ratio: coll.bindAccent({
+      //     element: coll._eqnSame,
+      //     children: ['v', 'opp', 'hyp'],
+      //     centerOn: 'v',
+      //     time: 1,
+      //     scale: 1.5,
+      //   }, colors.lines),
+      //   angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
+      //   changes: this.bindNext(colors.angles, 'fromChanged'),
+      // },
     };
 
     // this.addSection(common, commonShow, commonContent, {
@@ -300,7 +300,10 @@ class Content extends PresentationFormatContent {
       coll._tri._theta.setLabelToRealAngle();
       coll._rotator.showAll();
       coll._rotator._pad.show();
-      coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+      // coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+      // coll._rotator._line.setRotation(Math.atan2(coll._rotator._pad..y, layout.points[2].x));
+      const padPos = coll._rotator._pad.getPosition();
+      coll._rotator._line.setRotation(Math.atan2(padPos.y, padPos.x));
       coll._rotator._line.setMovable(true, 'rotation');
       coll._rotator._pad.setMovable(true, 'translation');
       // coll._rotator._v.setMovable(true, 'translation');
@@ -311,6 +314,7 @@ class Content extends PresentationFormatContent {
         ratio: coll.bindAccent({ element: coll._eqnSame, scale: 1.5 }, colors.lines),
         changes: click(coll.goToRotation, [coll, null, null], colors.angles),
         same_angle_theta: click(coll.goToLength, [coll], colors.angles),
+        angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
       },
       transitionFromPrev: (done) => {
         initRotator();
@@ -336,24 +340,161 @@ class Content extends PresentationFormatContent {
           .start();
       },
       setSteadyState: () => {
-        if (this.message == null) {
-          initRotator();
-        }
+        initRotator();
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
       },
       setLeaveState: () => {
-        coll._rotator._pad.setPosition(layout.points[2]);
-        // coll.updateRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+        if (this.goingTo !== 'next') {
+          coll._rotator._pad.setPosition(layout.points[2]);
+        }
         coll._tri._hyp.setLabel('hypotenuse');
         coll._tri._opp.setLabel('opposite');
         coll._tri._adj.setLabel('adjacent');
         coll._tri._theta.setLabel('\u03b8');
-        // coll._eqnSin._const.drawingObject.setText('constant');
-        // coll._eqnCos._const.drawingObject.setText('constant');
-        // coll._eqnTan._const.drawingObject.setText('constant');
+        coll._rotator._pad.setMovable(false);
+        coll._rotator._line.setMovable(false)
       },
     });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'In other words, the ratio is a |function| of the |angle_theta|.',
+      modifiers: {
+        angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
+      },
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        initRotator();
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll.resetTri(done);
+      },
+      setSteadyState: () => {
+        initRotator();
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+      },
+      setLeaveState: () => {
+        if (this.goingTo !== 'next') {
+          coll._rotator._pad.setPosition(layout.points[2]);
+        }
+        coll._tri._hyp.setLabel('hypotenuse');
+        coll._tri._opp.setLabel('opposite');
+        coll._tri._adj.setLabel('adjacent');
+        coll._tri._theta.setLabel('\u03b8');
+        coll._rotator._pad.setMovable(false);
+        coll._rotator._line.setMovable(false)
+      },
+    });
+
+    this.addSection(common, commonShow, commonContent, {
+      transitionFromPrev: (done) => {
+        initRotator();
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.goToForm({
+          name: 'function',
+          animate: 'move',
+          dissolveOutTime: 0.5,
+          dissolveInTime: 0.5,
+        });
+        coll.resetTri(() => {
+          coll.animations.new()
+            .inParallel([
+              coll._tri._hyp.anim.dissolveOut({ duration: 0.5 }),
+              coll._tri._opp.anim.dissolveOut({ duration: 0.5 }),
+              coll._tri._theta._label.anim.dissolveOut({ duration: 0.5 }),
+            ])
+            .trigger({ callback: () => {
+              coll._tri._hyp.setLabel('hypotenuse');
+              coll._tri._opp.setLabel('opposite');
+              coll._tri._theta.setLabel('\u03b8');
+            }})
+            .inParallel([
+              coll._tri._hyp.anim.dissolveIn({ duration: 0.5 }),
+              coll._tri._opp.anim.dissolveIn({ duration: 0.5 }),
+              coll._tri._theta._label.anim.dissolveIn({ duration: 0.5 }),
+            ])
+            .whenFinished(done)
+            .start();
+        });
+      },
+      setSteadyState: () => {
+        coll._rotator._pad.setPosition(layout.points[2]);
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._tri._hyp.setLabel('hypotenuse');
+        coll._tri._opp.setLabel('opposite');
+        coll._tri._theta.setLabel('\u03b8');
+        coll._rotator._pad.setMovable(false);
+        coll._rotator._line.setMovable(false);
+        coll._eqnSame.showForm('function');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'This function has been studied for millennia, and is now called the |sine_function|, often abbreviated to |sin|.',
+    };
+
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement, tri._adj],
+      setEqnForms: [
+        [coll._eqnSame, 'function'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        sine_function: this.bindNext(colors.diagram.action),
+        sin: this.bindNext(colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+      },
+    });
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        sine_function: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['sin', 'lb', 'theta', 'rb'],
+          centerOn: 'sin',
+          scale: 2,
+        }, colors.diagram.action),
+        sin: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['sin', 'lb', 'theta', 'rb'],
+          centerOn: 'sin',
+          scale: 2,
+        }, colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.goToForm({
+          name: 'sin',
+          animate: 'move',
+          duration: 1.5,
+          callback: done,
+        });
+      },
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.showForm('sin');
+      },
+    });
+
 
     // **********************************************************************
     // **********************************************************************
