@@ -168,13 +168,48 @@ export default function diagramLayout() {
           options: {
             p1: points[0],
             p2: points[2],
-            color: [1, 0, 0, 0.001],
-            width: 0.2,
+            color: [1, 0, 0, 0.0001],
+            width: 0.1,
+          },
+          mods: {
+            move: {
+              canBeMovedAfterLosingTouch: true,
+            },
+          },
+        },
+        // {
+        //   name: 'v',
+        //   method: 'line',
+        //   options: {
+        //     p1: points[1],
+        //     p2: points[2],
+        //     color: [1, 0, 0, 1],
+        //     width: 0.1,
+        //   },
+        //   mods: {
+        //     move: {
+        //       canBeMovedAfterLosingTouch: true,
+        //     },
+        //   },
+        // },
+        {
+          name: 'pad',
+          method: 'polygon',
+          options: {
+            sides: 10,
+            color: [1, 0, 0, 0.0001],
+            radius: 0.3,
+            fill: true,
+          },
+          mods: {
+            move: {
+              canBeMovedAfterLosingTouch: true,
+            },
           },
         },
       ],
       options: {
-        position: [-0.6, -1],
+        position: [-1.5, -1],
       },
     },
     {
@@ -304,6 +339,50 @@ export default function diagramLayout() {
       },
     },
     {
+      name: 'eqnSame',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: ' = ',
+          const: 'is same for all right angle triangles with angle ',
+          theta: { text: '\u03b8', color: colors.angles },
+          value: '1',
+        },
+        defaultFormAlignment: {
+          fixTo: 'equals',
+        },
+        forms: {
+          'oppOnHyp': {
+            content: [{ frac: ['opp', 'v','hyp'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'adjOnHyp': {
+            content: [{ frac: ['adj', 'v','hyp'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'oppOnAdj': {
+            content: [{ frac: ['opp', 'v','adj'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'ratioValue': {
+            content: [{ frac: ['opp', 'v','hyp'] }, 'equals', 'value'],
+            alignment: { fixTo: 'const' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-1.2, -1.7] },
+        },
+      },
+    },
+    {
       name: 'eqnCos',
       method: 'addEquation',
       options: {
@@ -315,6 +394,10 @@ export default function diagramLayout() {
           equals: ' = ',
           const: 'constant',
           v: { symbol: 'vinculum', color: colors.lines },
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          theta: { text: '\u03b8', color: colors.angles },
+          cos: { style: 'normal' },
         },
         defaultFormAlignment: {
           fixTo: 'equals',
@@ -323,6 +406,10 @@ export default function diagramLayout() {
           '0': [
             { frac: ['adj', 'v', 'hyp'] },
             'equals', 'const',
+          ],
+          'function': [
+            { frac: ['adj', 'v', 'hyp'] },
+            'equals', 'cos', { brac: ['lb', 'theta', 'rb'] },
           ],
         },
         position: [-1.8, -0.4],
@@ -341,6 +428,10 @@ export default function diagramLayout() {
           opp: { text: 'opposite', color: colors.lines },
           const: 'constant',
           v: { symbol: 'vinculum', color: colors.lines },
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          theta: { text: '\u03b8', color: colors.angles },
+          tan: { style: 'normal' },
         },
         defaultFormAlignment: {
           fixTo: 'equals',
@@ -349,6 +440,10 @@ export default function diagramLayout() {
           '0': [
             { frac: ['opp', 'v', 'adj'] },
             'equals', 'const',
+          ],
+          'function': [
+            { frac: ['opp', 'v', 'adj'] },
+            'equals', 'tan', { brac: ['lb', 'theta', 'rb'] },
           ],
         },
         position: [-1.8, -1.1],
@@ -367,6 +462,10 @@ export default function diagramLayout() {
           opp: { text: 'opposite', color: colors.lines },
           const: 'constant',
           v: { symbol: 'vinculum', color: colors.lines },
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          theta: { text: '\u03b8', color: colors.angles },
+          sin: { style: 'normal' },
         },
         defaultFormAlignment: {
           fixTo: 'equals',
@@ -375,6 +474,10 @@ export default function diagramLayout() {
           '0': [
             { frac: ['opp', 'v', 'hyp'] },
             'equals', 'const',
+          ],
+          'function': [
+            { frac: ['opp', 'v', 'hyp'] },
+            'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
           ],
         },
         position: [-1.8, 0.3],

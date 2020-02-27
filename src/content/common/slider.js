@@ -68,7 +68,7 @@ export default function makeSlider(
   circle.move.minTransform.updateTranslation(start, 0);
   circle.move.maxTransform.updateTranslation(start + travel, 0);
   circle.move.bounce = false;
-  circle.move.canBeMovedAfterLoosingTouch = true;
+  circle.move.canBeMovedAfterLosingTouch = true;
   slider.hasTouchableElements = true;
 
   slider.add('value', value);

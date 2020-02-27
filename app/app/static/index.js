@@ -4410,7 +4410,7 @@ function () {
         var element = this.beingMovedElements[i];
 
         if (element !== this.elements) {
-          if (element.isBeingTouched(previousGLPoint) || element.move.canBeMovedAfterLoosingTouch) {
+          if (element.isBeingTouched(previousGLPoint) || element.move.canBeMovedAfterLosingTouch) {
             var elementToMove = element.move.element == null ? element : element.move.element;
 
             if (elementToMove.state.isBeingMoved === false) {
@@ -16860,13 +16860,14 @@ function (_EquationLabel) {
     var _this;
 
     var curvePosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.5;
-    var showRealAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-    var units = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'degrees';
-    var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
-    var autoHideMax = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
-    var orientation = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 'horizontal';
-    var scale = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 0.7;
+    var curveOffset = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+    var showRealAngle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
+    var units = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'degrees';
+    var precision = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0;
+    var autoHide = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+    var autoHideMax = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
+    var orientation = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 'horizontal';
+    var scale = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : 0.7;
 
     _classCallCheck(this, AngleLabel);
 
@@ -16877,6 +16878,7 @@ function (_EquationLabel) {
     }));
     _this.radius = radius;
     _this.curvePosition = curvePosition;
+    _this.curveOffset = curveOffset;
     _this.showRealAngle = showRealAngle;
     _this.units = units;
     _this.orientation = orientation;
@@ -17243,6 +17245,7 @@ function (_DiagramElementCollec) {
         text: null,
         radius: 0.4,
         curvePosition: 0.5,
+        curveOffset: 0,
         showRealAngle: false,
         units: 'degrees',
         precision: 0,
@@ -17264,7 +17267,7 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.autoHideMax, optionsToUse.orientation, optionsToUse.scale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.curveOffset, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.autoHideMax, optionsToUse.orientation, optionsToUse.scale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn);
@@ -17314,6 +17317,38 @@ function (_DiagramElementCollec) {
         right.add('line2', this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, rightLength), rightLength - optionsToUse.width / 2, optionsToUse.width, 0, this.color));
         this.add('curveRight', right);
       }
+    }
+  }, {
+    key: "change",
+    value: function change(options) {
+      if (this._curve != null && options.radius != null) {
+        this._curve.drawingObject.update({
+          radius: options.radius
+        });
+      }
+
+      if (this.label != null) {
+        if (options.curveRadius != null) {
+          this.label.radius = options.curveRadius;
+        }
+
+        if (options.curvePosition != null) {
+          this.label.curvePosition = options.curvePosition;
+        }
+
+        if (options.curveOffset != null) {
+          this.label.curveOffset = options.curveOffset;
+        }
+      } // // this._curve.drawingObject.radius = radius;
+      // // this._curve.drawingObject.makePolygon();
+      // // this._curve.drawingObject.change();
+      // if (curveRadius != null && this.label != null) {
+      //   this.label.radius = curveRadius;
+      // }
+      // if (curvePosition != null && this.label != null) {
+      //   this.label.curvePosition = curvePosition;
+      // }
+
     } // pulseWidth() {
     //   const line = this._line;
     //   if (line != null) {
@@ -17748,14 +17783,14 @@ function (_DiagramElementCollec) {
             // label.eqn.reArrangeCurrentForm();
           }
 
-          var labelPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(label.radius, this.angle * label.curvePosition);
+          var labelPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(label.radius, this.angle * label.curvePosition + label.curveOffset);
 
           if (label.orientation === 'horizontal') {
-            label.updateRotation(-this.getRotation() - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition);
+            label.updateRotation(-this.getRotation() - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition + label.curveOffset);
           }
 
           if (label.orientation === 'tangent') {
-            label.updateRotation(this.angle * label.curvePosition - Math.PI / 2, labelPosition, label.radius / 50, this.angle * label.curvePosition);
+            label.updateRotation(this.angle * label.curvePosition + label.curveOffset - Math.PI / 2, labelPosition, label.radius / 50, this.angle * label.curvePosition + label.curveOffset);
           }
         }
       }
@@ -19351,7 +19386,7 @@ function (_DiagramElementCollec) {
       midLine.move.type = 'translation';
       midLine.move.element = this;
       midLine.isMovable = true;
-      midLine.move.canBeMovedAfterLoosingTouch = true;
+      midLine.move.canBeMovedAfterLosingTouch = true;
       this.add('midLine', midLine);
 
       if (this._line) {
@@ -19359,7 +19394,7 @@ function (_DiagramElementCollec) {
         this._line.move.type = 'rotation';
         this._line.move.element = this;
         this._line.isMovable = true;
-        this._line.move.canBeMovedAfterLoosingTouch = true;
+        this._line.move.canBeMovedAfterLosingTouch = true;
       }
 
       this.hasTouchableElements = true;
@@ -22107,7 +22142,11 @@ function () {
 
   }, {
     key: "setText",
-    value: function setText(text) {}
+    value: function setText(text) {} // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "update",
+    value: function update(options) {}
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries(lastDrawTransformMatrix) {
@@ -24664,6 +24703,12 @@ function (_DrawingObject) {
     key: "change",
     value: function change(coords) {
       this.resetBuffer();
+    } // eslint-disable-next-line no-unused-vars
+
+  }, {
+    key: "update",
+    value: function update(options) {
+      this.resetBuffer();
     }
   }, {
     key: "changeVertices",
@@ -25082,6 +25127,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25104,17 +25150,15 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var VertexPolygon =
 /*#__PURE__*/
 function (_VertexObject) {
   _inherits(VertexPolygon, _VertexObject);
 
-  // radius from center to outside of polygon
   // WebGL primitive used
   // outRad: number;       // radius from center to polygon vertex + 1/2 linewidth
   // inRad: number;        // radius from center to polygon vertex - 1/2 linewidth
-  // center point
-  // angle between adjacent verteces to center lines
   function VertexPolygon(webgl, numSides, // Must be 3 or greater (def: 3 if smaller)
   radius, lineWidth) {
     var _this;
@@ -25134,7 +25178,8 @@ function (_VertexObject) {
       _this.glPrimitive = webgl[0].gl.TRIANGLES;
     } else {
       _this.glPrimitive = webgl[0].gl.TRIANGLE_STRIP;
-    } // Check potential errors in constructor input
+    } // this.triangles = triangles;
+    // Check potential errors in constructor input
 
 
     var sides = numSides;
@@ -25151,75 +25196,25 @@ function (_VertexObject) {
     } // setup shape geometry
 
 
-    _this.radius = radius;
-    var inRad = radius - lineWidth; // const outRad = radius + lineWidth / 2.0;
-    // this.outRad = outRad;
-    // this.inRad = inRad;
+    _this.options = {
+      triangles: triangles,
+      radius: radius,
+      center: center,
+      lineWidth: lineWidth,
+      sides: sides,
+      sidesToDraw: sidesToDraw,
+      rotation: rotation,
+      direction: direction
+    }; // this.radius = radius;
+    // this.center = center;
+    // this.lineWidth = lineWidth;
+    // this.sides = sides;
+    // this.sidesToDraw = sidesToDraw;
+    // // this.dAngle = Math.PI * 2.0 / sides;
+    // this.rotation = rotation;
+    // this.direction = direction;
 
-    _this.center = center;
-    _this.dAngle = Math.PI * 2.0 / sides; // Setup shape primative vertices
-
-    var i;
-    var j = 0;
-
-    for (i = 0; i <= sidesToDraw; i += 1) {
-      var angle = i * _this.dAngle * direction + rotation * direction;
-      var lastAngle = (i - 1) * _this.dAngle * direction + rotation * direction;
-      var inPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(angle), inRad * Math.sin(angle)).add(center);
-      var outPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(angle), radius * Math.sin(angle)).add(center);
-      var lastInPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(lastAngle), inRad * Math.sin(lastAngle)).add(center);
-      var lastOutPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(lastAngle), radius * Math.sin(lastAngle)).add(center);
-
-      if (triangles) {
-        if (i > 0) {
-          _this.points[j] = lastInPoint.x;
-          _this.points[j + 1] = lastInPoint.y;
-          _this.points[j + 2] = lastOutPoint.x;
-          _this.points[j + 3] = lastOutPoint.y;
-          _this.points[j + 4] = outPoint.x;
-          _this.points[j + 5] = outPoint.y;
-          _this.points[j + 6] = outPoint.x;
-          _this.points[j + 7] = outPoint.y;
-          _this.points[j + 8] = lastInPoint.x;
-          _this.points[j + 9] = lastInPoint.y;
-          _this.points[j + 10] = inPoint.x;
-          _this.points[j + 11] = inPoint.y;
-          j += 12;
-        }
-      } else {
-        // this.points[j] =
-        //   center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
-        // this.points[j + 1] =
-        //   center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
-        // this.points[j + 2] =
-        //   center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
-        // this.points[j + 3] =
-        //   center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
-        // j += 4;
-        _this.points[j] = inPoint.x;
-        _this.points[j + 1] = inPoint.y;
-        _this.points[j + 2] = outPoint.x;
-        _this.points[j + 3] = outPoint.y;
-        j += 4;
-      }
-    } // Make the encapsulating border
-
-
-    if (sidesToDraw < sides) {
-      for (i = 0; i <= sidesToDraw; i += 1) {
-        _this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * _this.dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * _this.dAngle * direction + rotation * direction)));
-      }
-
-      for (i = sidesToDraw; i >= 0; i -= 1) {
-        _this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + inRad * Math.cos(i * _this.dAngle * direction + rotation * direction), center.y + inRad * Math.sin(i * _this.dAngle * direction + rotation * direction)));
-      }
-
-      _this.border[0].push(_this.border[0][0]._dup());
-    } else {
-      for (i = 0; i <= sidesToDraw; i += 1) {
-        _this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * _this.dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * _this.dAngle * direction + rotation * direction)));
-      }
-    }
+    _this.makePolygon();
 
     _this.setupBuffer(); // console.log(this.numPoints);
 
@@ -25228,9 +25223,94 @@ function (_VertexObject) {
   }
 
   _createClass(VertexPolygon, [{
+    key: "update",
+    value: function update(options) {
+      this.options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, this.options, options);
+      this.makePolygon();
+      this.resetBuffer();
+    }
+  }, {
+    key: "makePolygon",
+    value: function makePolygon() {
+      var _this$options = this.options,
+          radius = _this$options.radius,
+          direction = _this$options.direction,
+          rotation = _this$options.rotation,
+          lineWidth = _this$options.lineWidth,
+          center = _this$options.center,
+          sides = _this$options.sides,
+          sidesToDraw = _this$options.sidesToDraw,
+          triangles = _this$options.triangles;
+      var inRad = radius - lineWidth;
+      var dAngle = Math.PI * 2.0 / sides; // Setup shape primative vertices
+
+      var i;
+      var j = 0;
+
+      for (i = 0; i <= sidesToDraw; i += 1) {
+        var angle = i * dAngle * direction + rotation * direction;
+        var lastAngle = (i - 1) * dAngle * direction + rotation * direction;
+        var inPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(angle), inRad * Math.sin(angle)).add(center);
+        var outPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(angle), radius * Math.sin(angle)).add(center);
+        var lastInPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(lastAngle), inRad * Math.sin(lastAngle)).add(center);
+        var lastOutPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(lastAngle), radius * Math.sin(lastAngle)).add(center);
+
+        if (triangles) {
+          if (i > 0) {
+            this.points[j] = lastInPoint.x;
+            this.points[j + 1] = lastInPoint.y;
+            this.points[j + 2] = lastOutPoint.x;
+            this.points[j + 3] = lastOutPoint.y;
+            this.points[j + 4] = outPoint.x;
+            this.points[j + 5] = outPoint.y;
+            this.points[j + 6] = outPoint.x;
+            this.points[j + 7] = outPoint.y;
+            this.points[j + 8] = lastInPoint.x;
+            this.points[j + 9] = lastInPoint.y;
+            this.points[j + 10] = inPoint.x;
+            this.points[j + 11] = inPoint.y;
+            j += 12;
+          }
+        } else {
+          // this.points[j] =
+          //   center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
+          // this.points[j + 1] =
+          //   center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
+          // this.points[j + 2] =
+          //   center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
+          // this.points[j + 3] =
+          //   center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
+          // j += 4;
+          this.points[j] = inPoint.x;
+          this.points[j + 1] = inPoint.y;
+          this.points[j + 2] = outPoint.x;
+          this.points[j + 3] = outPoint.y;
+          j += 4;
+        }
+      } // Make the encapsulating border
+
+
+      if (sidesToDraw < sides) {
+        for (i = 0; i <= sidesToDraw; i += 1) {
+          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * dAngle * direction + rotation * direction)));
+        }
+
+        for (i = sidesToDraw; i >= 0; i -= 1) {
+          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + inRad * Math.cos(i * dAngle * direction + rotation * direction), center.y + inRad * Math.sin(i * dAngle * direction + rotation * direction)));
+        }
+
+        this.border[0].push(this.border[0][0]._dup());
+      } else {
+        for (i = 0; i <= sidesToDraw; i += 1) {
+          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * dAngle * direction + rotation * direction)));
+        }
+      }
+    }
+  }, {
     key: "drawToAngle",
     value: function drawToAngle(offset, rotate, scale, drawAngle, color) {
-      var count = Math.floor(drawAngle / this.dAngle) * 2.0 + 2;
+      var dAngle = Math.PI * 2.0 / this.options.sides;
+      var count = Math.floor(drawAngle / dAngle) * 2.0 + 2;
 
       if (drawAngle >= Math.PI * 2.0) {
         count = this.numPoints;
@@ -25242,7 +25322,8 @@ function (_VertexObject) {
     key: "getPointCountForAngle",
     value: function getPointCountForAngle() {
       var drawAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.PI * 2;
-      var count = Math.floor(drawAngle / this.dAngle) * 2.0 + 2;
+      var dAngle = Math.PI * 2.0 / this.options.sides;
+      var count = Math.floor(drawAngle / dAngle) * 2.0 + 2;
 
       if (drawAngle >= Math.PI * 2.0) {
         count = this.numPoints;
@@ -26595,10 +26676,11 @@ function () {
         callback: null
       },
       bounce: true,
-      canBeMovedAfterLoosingTouch: false,
+      canBeMovedAfterLosingTouch: false,
       type: 'translation',
       element: null,
-      limitLine: null
+      limitLine: null,
+      transformClip: null
     };
     this.scenarios = {};
     this.pulseSettings = {
@@ -26950,7 +27032,11 @@ function () {
   }, {
     key: "setTransform",
     value: function setTransform(transform) {
-      this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
+      if (this.move.transformClip != null) {
+        this.transform = this.move.transformClip(transform);
+      } else {
+        this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
+      }
 
       if (this.internalSetTransformCallback) {
         this.internalSetTransformCallback(this.transform);

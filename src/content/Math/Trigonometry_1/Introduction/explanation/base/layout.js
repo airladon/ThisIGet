@@ -309,7 +309,7 @@ export default function diagramLayout() {
         },
         mods: {
           interactiveLocation: [r / 2, 0],
-          move: { canBeMovedAfterLoosingTouch: true },
+          move: { canBeMovedAfterLosingTouch: true },
         },
       },
       {

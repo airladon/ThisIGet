@@ -55,7 +55,7 @@ function createDiagram(htmlId) {
   //     properties: {
   //       move: {
   //         boundary: 'diagram',
-  //         canBeMovedAfterLoosingTouch: true,
+  //         canBeMovedAfterLosingTouch: true,
   //         maxVelocity: new TransformLimit(10, 10, 10),
   //       },
   //     },
@@ -83,7 +83,7 @@ function createDiagram(htmlId) {
       mods: {
         move: {
           boundary: 'diagram',
-          canBeMovedAfterLoosingTouch: true,
+          canBeMovedAfterLosingTouch: true,
           maxVelocity: new TransformLimit(10, 10, 10),
         },
       },

@@ -168,11 +168,12 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       title: 'Right Angle Triangles',
-      setContent: 'Now consider a |right_angle_triangle| with its |sides| named relative to an |angle_theta|.',
+      setContent: 'Now consider a |right_angle_triangle| with a |hypotenuse| and |sides| named relative to an |angle_theta|.',
       modifiers: {
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        sides: coll.bindToggleGroups(tri, [['hyp'], ['opp'], ['adj']], colors.lines),
+        sides: coll.bindToggleGroups(tri, [['opp'], ['adj']], colors.lines),
         right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
+        hypotenuse: coll.bindAccent(tri._hyp),
       },
     };
 
@@ -207,87 +208,131 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'Therefore, |all| right angle triangles with the |same_angle_theta| must be |similar|.',
+      setContent: 'Therefore, |all| right angle triangles with the |same_angle_theta| are |similar| and have the |same_ratios| between |corresponding sides|.',
       modifiers: {
         similar: this.qr('Math/Geometry_1/SimilarTriangles/base/SimilarPres'),
         same_angle_theta: clickW('same angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
+        same_ratios: this.bindNext(colors.lines),
+        // same_ratios: this.bindNext(colors.lines),
       },
     };
 
     this.addSection(common, commonShow, commonContent, {
     });
 
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        same_ratios: click(coll.toggleConstancePhrase, [coll], colors.lines),
+        // same_ratios: coll.bindAccent({
+        //   element: coll._eqnSame,
+        //   children: ['v', 'opp', 'hyp', 'adj'],
+        //   centerOn: 'v',
+        //   time: 1,
+        //   scale: 1.5,
+        // }, colors.lines),
+      },
+      transitionFromPrev: (done) => {
+        coll._eqnSame.showForm('oppOnHyp');
+        coll._eqnSame.pulse({ scale: 1.3, time: 1, done });
+      },
+      setSteadyState: () => {
+        coll._eqnSame.showForm('oppOnHyp');
+      },
+    });
+
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'And so the |ratio| of any two sides will be |constant| for |all| right angle triangles with |angle_theta|.',
+      setContent: 'In this topic we will focus on the |ratio| between the |opposite_side| and the |hypotenuse|.',
       modifiers: {
-        angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        ratio: click(coll.toggleConstant, [coll], colors.lines),
+        ratio: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['v', 'opp', 'hyp'],
+          centerOn: 'v',
+          time: 1,
+          scale: 1.5,
+        }, colors.lines),
+        opposite_side: coll.bindAccent(coll._tri._opp),
+        hypotenuse: coll.bindAccent(coll._tri._hyp),
       },
     };
 
     commonShow = {
       show: [tri],
-      hide: [tri._complement],
+      hide: [tri._complement, tri._adj],
       setEqnForms: [
-        [coll._eqnCos, '0'],
-        [coll._eqnTan, '0'],
-        [coll._eqnSin, '0'],
+        [coll._eqnSame, 'oppOnHyp'],
       ],
     };
+
     this.addSection(common, commonShow, commonContent, {
-      transitionFromPrev: (done) => {
-        coll._eqnCos.hide();
-        coll._eqnTan.hide();
-        coll._eqnSin.hide();
-        coll._tri.animations.new()
-          .scenario({ target: 'right', duration: 1 })
-          .trigger({
-            duration: 0,
-            callback: () => {
-              coll._eqnCos.showForm('0');
-              coll._eqnSin.showForm('0');
-              coll._eqnTan.showForm('0');
-            }
-          })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        coll._tri.setScenario('right');
-      },
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'As the |angle_theta| |changes|, these ratios change. In other words, these ratios are a |function of theta|.',
+      setContent: 'While this |ratio| is the same for |all| right angle triangles with |angle_theta|, if this angle |changes|, then the ratio also changes.',
+      // 'As the |angle_is_changed|, these ratios change. In other words, these ratios are a |function of| |theta|.',
       modifiers: {
+        ratio: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['v', 'opp', 'hyp'],
+          centerOn: 'v',
+          time: 1,
+          scale: 1.5,
+        }, colors.lines),
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        // ratio: click(coll.toggleConstant, [coll], colors.lines),
-        changes: click(coll.goToRotation, [coll, null], colors.diagram.action),
+        changes: this.bindNext(colors.angles, 'fromChanged'),
       },
     };
 
     this.addSection(common, commonShow, commonContent, {
       setSteadyState: () => {
-        coll._tri.setScenario('right');
+        // coll._tri.setScenario('right');
       },
     });
+
+    const initRotator = () => {
+      // coll._tri.setScenario('right');
+      coll._eqnSame.showForm('ratioValue');
+      coll._tri._theta.setLabelToRealAngle();
+      coll._rotator.showAll();
+      coll._rotator._pad.show();
+      coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+      coll._rotator._line.setMovable(true, 'rotation');
+      coll._rotator._pad.setMovable(true, 'translation');
+      // coll._rotator._v.setMovable(true, 'translation');
+      coll.updateRotation();
+      console.log(coll._tri._theta)
+    };
     this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        changes: click(coll.goToRotation, [coll, null, null], colors.angles),
+      },
+      transitionFromPrev: (done) => {
+        initRotator();
+        coll._eqnSame.showForm('oppOnHyp');
+        coll._eqnSame.goToForm({
+          name: 'ratioValue',
+          animate: 'move',
+          duration: 2,
+          callback: () => {
+            if (this.message === 'fromChanged') {
+              coll.goToRotation(null, done);
+            } else {
+              done();
+            }
+          },
+        });
+      },
       setSteadyState: () => {
-        coll._tri.setScenario('right');
-        coll._tri._theta.setLabelToRealAngle();
-        coll._rotator.showAll();
-        coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
-        coll._rotator._line.setMovable(true, 'rotation');
-        coll.updateRotation();
+        if (this.message == null) {
+          initRotator();
+        }
       },
       setLeaveState: () => {
-        console.log(layout.points[2]);
         coll.updateRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
         coll._tri._hyp.setLabel('hypotenuse');
         coll._tri._opp.setLabel('opposite');
@@ -296,7 +341,76 @@ class Content extends PresentationFormatContent {
         coll._eqnSin._const.drawingObject.setText('constant');
         coll._eqnCos._const.drawingObject.setText('constant');
         coll._eqnTan._const.drawingObject.setText('constant');
-        
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'We call these functions the |sine|, |cosine| and |tangent| functions - often abreviated to |sin|, |cos| and |tan|.',
+      modifiers: {
+        // theta: clickW('\u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
+        // angle_is_changed: this.bindNext(colors.angles, 'fromChanged'),
+      },
+    };
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement],
+      setEqnForms: [
+        [coll._eqnCos, 'function'],
+        [coll._eqnTan, 'function'],
+        [coll._eqnSin, 'function'],
+      ],
+    };
+
+    const pulseSine = () => {
+      coll.accent({
+        element: coll._eqnSin,
+        centerOn: 'sin',
+        x: 'center',
+        children: ['lb', 'rb', 'theta', 'sin'],
+        scale: 1.5,
+      });
+    };
+    const pulseTangent = () => {
+      coll.accent({
+        element: coll._eqnTan,
+        centerOn: 'tan',
+        x: 'center',
+        children: ['lb', 'rb', 'theta', 'tan'],
+        scale: 1.5,
+      });
+    };
+    const pulseCosine = (done) => {
+      coll.accent({
+        element: coll._eqnCos,
+        centerOn: 'cos',
+        x: 'center',
+        children: ['lb', 'rb', 'theta', 'cos'],
+        scale: 1.5,
+        done,
+      });
+    };
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        angle_is_changed: click(coll.goToRotation, [coll, null, null], colors.angles),
+        sine: click(pulseSine, [this], colors.lines),
+        tangent: click(pulseTangent, [this], colors.lines),
+        cosine: click(pulseCosine, [this, null], colors.lines),
+        sin: click(pulseSine, [this], colors.lines),
+        tan: click(pulseTangent, [this], colors.lines),
+        cos: click(pulseCosine, [this, null], colors.lines),
+      },
+      transitionFromPrev: (done) => {
+        coll._tri.setScenario('right');
+        this.diagram.setFirstTransform();
+        pulseCosine(done);
+        pulseSine();
+        pulseTangent();
+      },
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
       },
     });
   }
