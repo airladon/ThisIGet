@@ -273,7 +273,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'While this |ratio| is the same for |all| right angle triangles with |angle_theta|, if this angle |changes|, then the ratio also changes.',
+      setContent: 'While this |ratio| is the same for |all| right angle triangles with the |same_angle_theta|, if this angle |changes|, then the ratio also changes.',
       // 'As the |angle_is_changed|, these ratios change. In other words, these ratios are a |function of| |theta|.',
       modifiers: {
         ratio: coll.bindAccent({
@@ -288,11 +288,11 @@ class Content extends PresentationFormatContent {
       },
     };
 
-    this.addSection(common, commonShow, commonContent, {
-      setSteadyState: () => {
-        // coll._tri.setScenario('right');
-      },
-    });
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     // coll._tri.setScenario('right');
+    //   },
+    // });
 
     const initRotator = () => {
       // coll._tri.setScenario('right');
@@ -305,11 +305,12 @@ class Content extends PresentationFormatContent {
       coll._rotator._pad.setMovable(true, 'translation');
       // coll._rotator._v.setMovable(true, 'translation');
       coll.updateRotation();
-      console.log(coll._tri._theta)
     };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
+        ratio: coll.bindAccent({ element: coll._eqnSame, scale: 1.5 }, colors.lines),
         changes: click(coll.goToRotation, [coll, null, null], colors.angles),
+        same_angle_theta: click(coll.goToLength, [coll], colors.angles),
       },
       transitionFromPrev: (done) => {
         initRotator();
@@ -318,29 +319,39 @@ class Content extends PresentationFormatContent {
           name: 'ratioValue',
           animate: 'move',
           duration: 2,
-          callback: () => {
-            if (this.message === 'fromChanged') {
-              coll.goToRotation(null, done);
-            } else {
-              done();
-            }
-          },
+          callback: done,
+          // callback: () => {
+          //   if (this.message === 'fromChanged') {
+          //     coll.goToRotation(null, done);
+          //   } else {
+          //     done();
+          //   }
+          // },
         });
+        coll._tri.animations.new()
+          .inParallel([
+            coll._tri.anim.scenario({ target: 'right', duration: 2 }),
+            coll._eqnSame.anim.scenario({ target: 'left', duration: 2}),
+          ])
+          .start();
       },
       setSteadyState: () => {
         if (this.message == null) {
           initRotator();
         }
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
       },
       setLeaveState: () => {
-        coll.updateRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
+        coll._rotator._pad.setPosition(layout.points[2]);
+        // coll.updateRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
         coll._tri._hyp.setLabel('hypotenuse');
         coll._tri._opp.setLabel('opposite');
         coll._tri._adj.setLabel('adjacent');
         coll._tri._theta.setLabel('\u03b8');
-        coll._eqnSin._const.drawingObject.setText('constant');
-        coll._eqnCos._const.drawingObject.setText('constant');
-        coll._eqnTan._const.drawingObject.setText('constant');
+        // coll._eqnSin._const.drawingObject.setText('constant');
+        // coll._eqnCos._const.drawingObject.setText('constant');
+        // coll._eqnTan._const.drawingObject.setText('constant');
       },
     });
 

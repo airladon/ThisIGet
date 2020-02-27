@@ -209,7 +209,7 @@ export default function diagramLayout() {
         },
       ],
       options: {
-        position: [-1.5, -1],
+        position: [-0.6, -1.3],
       },
     },
     {
@@ -334,7 +334,7 @@ export default function diagramLayout() {
       mods: {
         scenarios: {
           default: { position: [-1.5, -1] },
-          right: { position: [-0.6, -1] },
+          right: { position: [-0.6, -1.3] },
         },
       },
     },
@@ -355,7 +355,7 @@ export default function diagramLayout() {
           value: '1',
         },
         defaultFormAlignment: {
-          fixTo: 'equals',
+          fixTo: 'v',
         },
         forms: {
           'oppOnHyp': {
@@ -372,13 +372,14 @@ export default function diagramLayout() {
           },
           'ratioValue': {
             content: [{ frac: ['opp', 'v','hyp'] }, 'equals', 'value'],
-            alignment: { fixTo: 'const' },
+            alignment: { fixTo: 'equals' },
           },
         },
       },
       mods: {
         scenarios: {
           default: { position: [-1.2, -1.7] },
+          left: { position: [-1.7, -0.5] },
         },
       },
     },

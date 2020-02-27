@@ -58,12 +58,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.custom.minRotation = 0 * Math.PI / 180;
     this.custom.minLineLength = 1.2;
     this.custom.maxLineLength = 3;
+    this.custom.maxHeight = 2;
     this._rotator._line.move.maxTransform.updateRotation(this.custom.maxRotation);
     this._rotator._line.move.minTransform.updateRotation(this.custom.minRotation);
     this._rotator._line.setTransformCallback = this.updateRotation.bind(this, null);
     this._rotator._pad.setTransformCallback = this.updatePad.bind(this, null);
     // this._rotator._v.setTransformCallback = this.updateV.bind(this);
     this._rotator._pad.move.transformClip = this.limitPadMovement.bind(this);
+    this._rotator._line.interactiveLocation = new Point(this.custom.maxLineLength / 2, 0);
     // this._rotator._v.move.canBeMovedAfterLosingTouch = true;
   }
 
@@ -178,8 +180,8 @@ export default class CommonCollection extends CommonDiagramCollection {
         position.y = 0.001;
         line = new Line(new Point(0, 0), position);
       }
-      if (position.y > 2) {
-        position.y = 2;
+      if (position.y > this.custom.maxHeight) {
+        position.y = this.custom.maxHeight;
         clipped.updateTranslation(position.x, position.y);
         line = new Line(new Point(0, 0), position);
       }
@@ -231,6 +233,35 @@ export default class CommonCollection extends CommonDiagramCollection {
   //   this._rotator._pad.transform.updateTranslation(points[2]);
   // }
 
+  goToLength() {
+    let line = new Line(new Point(0, 0), this._tri._line.points[2]);
+    const ceiling = new Line(
+      new Point(0, this.custom.maxHeight),
+      new Point(5, this.custom.maxHeight),
+    );
+    const intercept = line.intersectsWith(ceiling);
+    if (intercept.intersect == null) {
+      return;
+    }
+    const maxLine = new Line(new Point(0, 0), intercept.intersect);
+    const maxLen = Math.min(this.custom.maxLineLength, maxLine.length());
+    const lenRange = maxLen - this.custom.minLineLength;
+    const halfLen = maxLen - lenRange / 2;
+    const lenDelta = rand(lenRange / 4, lenRange / 2);
+    let newLen = line.length() - lenDelta;
+    if (line.length() < halfLen) {
+      newLen = line.length() + lenDelta;
+    }
+    const target = new Point(
+      newLen * Math.cos(line.angle()),
+      newLen * Math.sin(line.angle()),
+    );
+    this._rotator._pad.animations.new()
+      .position({ target, velocity: 0.5 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   updateRotation(setAngle: ?number = null) {
     let r = this._rotator._line.getRotation();
     if (setAngle != null) {
@@ -246,15 +277,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._rotator._v.setEndPoints(points[1], points[2]);
     this._rotator._pad.transform.updateTranslation(points[2]);
     this._rotator._line.setEndPoints(new Point(0, 0), points[2]);
-    // const rotLine = new Line(
-    //   new Point(1.5 * Math.cos(r), 1.5 * Math.sin(r)),
-    //   new Point(3 * Math.cos(r), 3 * Math.sin(r)),
-    // );
-    // this._rotator._pad.move.limitLine = rotLine;
-    // this._rotator._v.move.limitLine = new Line(
-    //   new Point(Math.max(1.5 * Math.cos(r), 0.001), 0),
-    //   new Point(Math.max(3 * Math.cos(r), 0.001), 0),
-    // );
     this.updateTri();
   }
 
@@ -273,22 +295,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     });
     this._tri._hyp.setEndPoints(points[0], points[2]);
     this._tri._opp.setEndPoints(points[2], points[1]);
-    // this._tri._adj.setEndPoints(points[0], points[1]);
-    // const adj = round(Math.cos(theta), 2);
-    // const hyp = round(r * Math.tan(theta), 2);
     const len = new Line(new Point(0, 0), points[2]).length()
     const hyp = round((len - 0.5) ** 3, 4);
     const opp = round(hyp * Math.sin(theta), 4);
-    this._tri._hyp.setLabel(`${hyp}`);
-    this._tri._opp.setLabel(`${opp}`);
-    // this._tri._adj.setLabel(`${adj}`);
-    // this._eqnSame._value.drawingObject.setText(`${round(opp / hyp, 4)}`);
-    this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4)}`);
-    // this._eqnSin._const.drawingObject.setText(`${round(opp / hyp, 2)}`);
-    // this._eqnCos._const.drawingObject.setText(`${round(adj / hyp, 2)}`);
-    // this._eqnTan._const.drawingObject.setText(`${round(opp / adj, 2)}`);
+    this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
+    this._tri._opp.setLabel(`${opp.toFixed(4)}`);
+    this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
     const r = this._rotator._line.getRotation();
-    // console.log(points[1].x)
     if (points[1].x < 1.3 || points[2].y < 0.35) {
       this._tri._right.hide();
     } else {
@@ -305,10 +318,6 @@ export default class CommonCollection extends CommonDiagramCollection {
       curveOptions.curveRadius = radius;
     }
     if (points[2].y < 0.2) {
-      // this._tri._theta.change({
-      //   // curvePosition: Math.min(-points[2].y, points[2].x),
-      //   curveOffset: -(0.2 - r),
-      // });
       curveOptions.curveOffset = -(0.2 - points[2].y);
     }
     if (curveOptions.radius != null
@@ -319,125 +328,4 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     this.diagram.animateNextFrame();
   }
-
-  // makeAOnB() {
-  //   const eqn = this._eqn;
-  //   eqn.showForm('AonB1');
-  //   const s1Position = eqn._s_1.getPosition();
-  //   const times1Position = eqn._times1.getPosition();
-  //   const APosition = eqn._A_1.getPosition();
-  //   eqn._s_1.setDiagramPositionToElement(this._similar._tri2._side12._label._s)
-  //   eqn._times1.setDiagramPositionToElement(this._similar._tri2._side12._label._times);
-  //   eqn._A_1.setDiagramPositionToElement(this._similar._tri2._side12._label._value);
-
-  //   const s2Position = eqn._s_2.getPosition();
-  //   const times2Position = eqn._times2.getPosition();
-  //   const BPosition = eqn._B_1.getPosition();
-  //   eqn._s_2.setDiagramPositionToElement(this._similar._tri2._side20._label._s)
-  //   eqn._times2.setDiagramPositionToElement(this._similar._tri2._side20._label._times);
-  //   eqn._B_1.setDiagramPositionToElement(this._similar._tri2._side20._label._value);
-  //   eqn.hideAll();
-  //   this._similar.stop();
-  //   this._eqn.stop();
-  //   this._similar.animations.new()
-  //     .trigger({
-  //       duration: 1,
-  //       callback: () => { this.accent(this._similar, ['tri2.side20.label', 'tri2.side12.label']); },
-  //     })
-  //     .trigger({
-  //       duration: 0,
-  //       callback: () => {
-  //         eqn._s_1.show();
-  //         eqn._times1.show();
-  //         eqn._A_1.show();
-  //         eqn._s_2.show();
-  //         eqn._times2.show();
-  //         eqn._B_1.show();
-  //       },
-  //     })
-  //     .inParallel([
-  //       eqn._s_1.anim.position({ target: s1Position, duration: 1 }),
-  //       eqn._times1.anim.position({ target: times1Position, duration: 1 }),
-  //       eqn._A_1.anim.position({ target: APosition, duration: 1 }),
-  //       eqn._s_2.anim.position({ target: s2Position, duration: 1 }),
-  //       eqn._times2.anim.position({ target: times2Position, duration: 1 }),
-  //       eqn._B_1.anim.position({ target: BPosition, duration: 1 }),
-  //     ])
-  //     .inParallel([
-  //       eqn._v1.anim.dissolveIn(0.8),
-  //     ])
-  //     .trigger({
-  //       duration: 1.5,
-  //       callback: () => {
-  //         eqn.goToForm({ name: 'AonB2', animate: 'move', duration: 1 });
-  //       },
-  //     })
-  //     .trigger({
-  //       duration: 1.5,
-  //       callback: () => {
-  //         eqn.goToForm({ name: 'AonB3', animate: 'move', duration: 1 });
-  //       },
-  //     })
-  //     .trigger({
-  //       duration: 1.5,
-  //       callback: () => {
-  //         eqn.goToForm({ name: 'AonB4', animate: 'move', duration: 1 });
-  //       },
-  //     })
-  //     .trigger({
-  //       duration: 1.5,
-  //       callback: () => {
-  //         eqn.goToForm({ name: 'AonB5', animate: 'move', duration: 1 });
-  //       },
-  //     })
-  //     .trigger({
-  //       duration: 1.5,
-  //       callback: () => {
-  //         eqn.goToForm({ name: 'AonB6', animate: 'move', duration: 1 });
-  //       },
-  //     })
-  //     // .inParallel([
-  //     //   eqn._equals.anim.dissolveIn(0.8),
-  //     //   eqn._s_3.anim.dissolveIn(0.8),
-  //     //   eqn._v2.anim.dissolveIn(0.8),
-  //     //   eqn._s_4.anim.dissolveIn(0.8),
-  //     //   eqn._strike.anim.dissolveIn(0.8),
-  //     //   eqn._1.anim.dissolveIn(0.8),
-  //     //   eqn._times3.anim.dissolveIn(0.8),
-  //     //   eqn._A_2.anim.dissolveIn(0.8),
-  //     //   eqn._v3.anim.dissolveIn(0.8),
-  //     //   eqn._B_2.anim.dissolveIn(0.8),
-  //     // ])
-  //     // .inParallel([
-  //     //   eqn._equals2.anim.dissolveIn(0.8),
-  //     //   eqn._A_3.anim.dissolveIn(0.8),
-  //     //   eqn._v4.anim.dissolveIn(0.8),
-  //     //   eqn._B_3.anim.dissolveIn(0.8),
-  //     // ])
-  //     .trigger({
-  //       duration: 1,
-  //       callback: () => {
-  //         // eqn._A_2.pulse({ centerOn: eqn._v4, times: 1 });
-  //         // eqn._B_2.pulse({ centerOn: eqn._v4, times: 1 });
-  //         // eqn._v3.pulse({ centerOn: eqn._v4, times: 1 });
-  //         // eqn._A_1.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._B_1.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._v1.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._s_1.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._s_2.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._times1.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn._times2.pulse({ centerOn: eqn._v1, times: 1 });
-  //         // eqn.pulse
-  //         eqn.pulse({ centerOn: eqn._equals, time: 1 });
-  //         this.accent(this._similar, [
-  //           'tri1.side12', 'tri1.side20',
-  //           'tri2.side12', 'tri2.side20',
-  //         ]);
-  //         // this._similar._tri1._side12._label.pulse({ centerOn: eqn._equals, time: 1 });
-  //       },
-  //     })
-  //     // .pulse({ element: eqn, duration: 1 })
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
 }
