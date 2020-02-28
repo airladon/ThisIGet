@@ -291,7 +291,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
         ratio: coll.bindAccent({ element: coll._eqnSame, scale: 1.5 }, colors.lines),
-        changes: click(coll.goToRotation, [coll, null, null], colors.angles),
+        changes: click(coll.goToRotation, [coll, null, null, null], colors.angles),
         same_angle_theta: click(coll.goToLength, [coll], colors.angles),
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
       },
@@ -473,6 +473,9 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: 'The word |sine| originates from the word for |bowstring|.',
+      modifiers: {
+        bowstring: this.bindNext(colors.lines),
+      },
     };
 
     commonShow = {
@@ -489,84 +492,110 @@ class Content extends PresentationFormatContent {
         coll._eqnSame.setScenario('left');
         coll._eqnSame.showForm('sin');
       },
-      // transitionToNext: (done) => {
-      //   coll.animations.new()
-      //     .inParallel([
-      //       coll._tri.anim.dissolveOut({ duration: 0.2 }),
-      //       coll._eqnSame.anim.dissolveOut({ duration: 0.2 }),
-      //     ])
-      //     .whenFinished(done)
-      //     .start();
-      // },
     });
 
-    const pulseBowString = () => {
-      coll._history._arc.pulseThickNow(1, 1.02, 8);
+    const pulseBow = () => {
+      coll._history._arc.pulseThickNow(1, 1.04, 8);
       coll.accent({
         element: coll._history, children: ['arc', 'bowString'], style: ['highlight'],
       });
       coll.accent({
         element: coll._history, children: ['bowString'], style: ['pulse'],
       });
-      coll._history.toFront(['bowString', 'arc']);
+      coll._history.toFront(['arc', 'bowString']);
     };
 
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        // Ancient_Greeks: highlight(colors.diagram.text.greek),
-        // Sanskrit: highlight(colors.diagram.text.sanskrit),
-        // Arabic: highlight(colors.diagram.text.arabic),
-        // Latin: highlight(colors.diagram.text.latin),
-        // 'khordḗ': click(pulseChord, [this], colors.lines),
-        // 'right_angle_triangle': click(pulseRightAngle, [this], colors.lines),
-        // sine_function: click(pulseSineLine, [this], colors.lines),
-        bow: click(pulseBowString, [this], colors.lines),
-        // right_angle_triangle: coll.bindAccent({
-        //   element: coll._history._tri,
-        //   centerOn: coll._history._tri,
-        //   x: 0.7,
-        //   y: 0.3,
-        //   scale: 1.3,
-        // }),
-        // circle: click(pulseCircle, [this], colors.angles),
+        bowstring: click(pulseBow, [this], colors.lines),
       },
-      show: [coll._history],
+      // show: [coll._history],
       transitionFromPrev: (done) => {
-        coll.accent({
-          element: coll._history,
-          children: ['arc', 'bowString'],
-          style: 'highlight',
-        });
-        coll._history.animations.new()
-          .dissolveIn({ duration: 0.2 })
+        coll._rotator.showAll();
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.showForm('sin');
+        coll.animations.new()
+          .inParallel([
+            coll._tri._theta.anim.dissolveOut({ duration: 0.8 }),
+            coll._tri._opp.anim.dissolveOut({ duration: 0.8 }),
+            coll._tri._hyp.anim.dissolveOut({ duration: 0.8 }),
+            coll._eqnSame.anim.dissolveOut({ duration: 0.8 }),
+          ])
+          .inParallel([
+            coll._tri.anim.trigger({
+              callback: () => {
+                coll.goToRotation(layout.historyAngle, 2, null);
+              },
+              duration: 1,
+            }),
+            coll._tri.anim.position({ target: coll._history.getPosition(), duration: 2 }),
+            coll._tri.anim.scale({ target: layout.historyRadius / layout.triLen, duration: 2 }),
+          ])
+          
+          .inParallel([
+            coll._history.anim.dissolveIn({ duration: 1 }),
+            coll._tri.anim.dissolveOut({ duration: 1 }),
+            coll.anim.trigger({
+              duration: 0,
+              callback: () => {
+                coll.accent({
+                  element: coll._history,
+                  children: ['bowString', 'arc'],
+                  style: 'highlight',
+                });
+                coll._history.toFront(['arc', 'bowString']);
+              },
+            }),
+          ])
+          .trigger({
+            duration: 1,
+            callback: () => {
+              coll._history.showAll();
+              pulseBow();
+            },
+          })
           .whenFinished(done)
           .start();
       },
       setSteadyState: () => {
+        coll._tri.showAll();
+        coll._rotator.showAll();
+        coll._tri.setScale(1, 1);
+        coll._rotator._pad.setPosition(layout.points[2]);
+        coll.updatePad();
+        coll._tri._hyp.setLabel('hypotenuse');
+        coll._tri._opp.setLabel('opposite');
+        coll._tri._theta.setLabel('\u03b8');
+        coll._rotator._pad.setMovable(false);
+        coll._rotator._line.setMovable(false);
+
+        coll._eqnSame.hide();
+        coll._tri.hide();
+        coll._history.showAll();
         coll.accent({
           element: coll._history,
           children: ['arc', 'bowString'],
           style: 'highlight',
         });
-        // coll._eqnSame.setScenario('left');
-        // coll._eqnSame.showForm('sin');
+        coll._history.toFront(['arc', 'bowString']);
+      },
+      setLeaveState: () => {
+        coll._rotator._pad.setPosition(layout.points[2]);
+        coll._tri._hyp.setLabel('hypotenuse');
+        coll._tri._opp.setLabel('opposite');
+        coll._tri._adj.setLabel('adjacent');
+        coll._tri._theta.setLabel('\u03b8');
+        coll._rotator._pad.setMovable(false);
+        coll._rotator._line.setMovable(false)
       },
     });
-    // this.addSection(common, commonShow, commonContent, {
-    //   show: [coll._history],
-    //   setSteadyState: () => {
-    //     // coll._eqnSame.setScenario('left');
-    //     // coll._eqnSame.showForm('sin');
-    //   },
-    // });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     
     const pulseChord = () => {
-      // fig._h.hide();
-      // fig._right.hide();
       coll.accent({
         element: coll._history, children: ['bowString'], style: ['highlight', 'pulse'],
       });
@@ -577,7 +606,7 @@ class Content extends PresentationFormatContent {
       coll.accent({
         element: coll._history, children: ['tri'], style: ['highlight'],
       });
-      coll._history._tri._line.pulseSettings.delta = [0.4, 0.2];
+      coll._history._tri._line.pulseSettings.delta = [0.5, 0.2];
       coll._history._tri._line.pulseThickNow(1, 1.1, 8);
       coll._history.toFront(['tri']);
     };
@@ -589,7 +618,7 @@ class Content extends PresentationFormatContent {
       coll._history.toFront(['sin']);
     };
     commonContent = {
-      setContent: '|Ancient_Greeks| called the line between two points on a |circle| a |khordḗ| (chord or string of a |bow|). A |right_angle_triangle| splits this chord in two. The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).',
+      setContent: '|Ancient_Greeks| called the |line| between two points on a |circle| a |khordḗ| (chord or string of a |bow|). A |right_angle_triangle| splits this chord in two and is used to analyse its properties. The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).',
     };
 
     const pulseCircle = () => {
@@ -599,12 +628,6 @@ class Content extends PresentationFormatContent {
       });
       coll._history.toFront(['circle']);
     };
-    // this.addSection(common, commonShow, commonContent, {
-    //   setSteadyState: () => {
-    //     coll._tri.setScenario('right');
-    //     coll._eqnSame.setScenario('left');
-    //   },
-    // });
 
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
@@ -615,36 +638,17 @@ class Content extends PresentationFormatContent {
         'khordḗ': click(pulseChord, [this], colors.lines),
         'right_angle_triangle': click(pulseRightAngle, [this], colors.lines),
         sine_function: click(pulseSineLine, [this], colors.lines),
-        bow: click(pulseBowString, [this], colors.lines),
-        // right_angle_triangle: coll.bindAccent({
-        //   element: coll._history._tri,
-        //   centerOn: coll._history._tri,
-        //   x: 0.7,
-        //   y: 0.3,
-        //   scale: 1.3,
-        // }),
+        bow: click(pulseBow, [this], colors.lines),
+        line: click(pulseChord, [this], colors.lines),
         circle: click(pulseCircle, [this], colors.angles),
       },
       show: [coll._history],
-      // transitionFromPrev: (done) => {
-      //   coll.accent({
-      //     element: coll._history,
-      //     children: ['arc', 'bowString'],
-      //     style: 'highlight',
-      //   });
-      //   coll._history.animations.new()
-      //     .dissolveIn({ duration: 0.2 })
-      //     .whenFinished(done)
-      //     .start();
-      // },
       setSteadyState: () => {
         coll.accent({
           element: coll._history,
           children: ['arc', 'bowString'],
           style: 'highlight',
         });
-        // coll._eqnSame.setScenario('left');
-        // coll._eqnSame.showForm('sin');
       },
     });
 
@@ -654,7 +658,11 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonShow, commonContent, {
       show: [coll._history],
       setSteadyState: () => {
-        console.log(coll);
+        coll.accent({
+          element: coll._history,
+          children: ['sin'],
+          style: 'highlight',
+        });
         // coll._eqnSame.setScenario('left');
         // coll._eqnSame.showForm('sin');
       },
@@ -711,7 +719,7 @@ class Content extends PresentationFormatContent {
     };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        angle_is_changed: click(coll.goToRotation, [coll, null, null], colors.angles),
+        angle_is_changed: click(coll.goToRotation, [coll, null, null, null], colors.angles),
         sine: click(pulseSine, [this], colors.lines),
         tangent: click(pulseTangent, [this], colors.lines),
         cosine: click(pulseCosine, [this, null], colors.lines),

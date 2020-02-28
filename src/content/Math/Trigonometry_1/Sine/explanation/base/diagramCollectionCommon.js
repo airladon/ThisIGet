@@ -144,7 +144,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  goToRotation(angle: ?number = null, done: ?() => void = null) {
+  goToRotation(angle: ?number = null, duration: ?number = null, done: ?() => void = null) {
     let r = angle;
     if (r == null) {
       const rotationSweep = this.custom.maxRotation - this.custom.minRotation;
@@ -157,10 +157,17 @@ export default class CommonCollection extends CommonDiagramCollection {
         r = currentR + delta;
       }
     }
-    this._rotator._line.animations.new()
-      .rotation({ target: r, velocity: 0.3 })
-      .whenFinished(done)
-      .start();
+    if (duration == null) {
+      this._rotator._line.animations.new()
+        .rotation({ target: r, velocity: 0.3 })
+        .whenFinished(done)
+        .start();
+    } else {
+      this._rotator._line.animations.new()
+        .rotation({ target: r, duration })
+        .whenFinished(done)
+        .start();
+    }
     this.diagram.animateNextFrame();
   }
 
@@ -242,7 +249,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   //   this._rotator._pad.transform.updateTranslation(points[2]);
   // }
 
-  goToLength() {
+  goToLength(toLength: ?number = null) {
     let line = new Line(new Point(0, 0), this._tri._line.points[2]);
     const ceiling = new Line(
       new Point(0, this.custom.maxHeight),
@@ -260,6 +267,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     let newLen = line.length() - lenDelta;
     if (line.length() < halfLen) {
       newLen = line.length() + lenDelta;
+    }
+    if (toLength != null) {
+      newLen = toLength;
     }
     const target = new Point(
       newLen * Math.cos(line.angle()),
@@ -291,12 +301,6 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   updateTri() {
     const points = this._tri._line.points;
-    this._tri._theta.setAngle({
-      p1: points[1],
-      p2: points[0],
-      p3: points[2],
-    });
-    const theta = parseFloat(this._tri._theta.getLabel()) * Math.PI / 180;
     this._tri._right.setAngle({
       p1: points[2],
       p2: points[1],
@@ -304,39 +308,47 @@ export default class CommonCollection extends CommonDiagramCollection {
     });
     this._tri._hyp.setEndPoints(points[0], points[2]);
     this._tri._opp.setEndPoints(points[2], points[1]);
-    const len = new Line(new Point(0, 0), points[2]).length()
-    const hyp = round((len - 0.5) ** 3, 4);
-    const opp = round(hyp * Math.sin(theta), 4);
-    this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
-    this._tri._opp.setLabel(`${opp.toFixed(4)}`);
-    this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
-    const r = this._rotator._line.getRotation();
-    if (points[1].x < 1.3 || points[2].y < 0.35) {
-      this._tri._right.hide();
-    } else {
-      this._tri._right.showAll();
-    }
-    const curveOptions = {
-      radius: undefined,
-      curveRadius: undefined,
-      curveOffset: undefined,
-    };
-    if (points[1].x < 0.85) {
-      const radius = Math.max(points[1].x - 0.25, 0.01);
-      curveOptions.radius = radius;
-      curveOptions.curveRadius = radius;
-    }
-    if (points[2].y < 0.2) {
-      curveOptions.curveOffset = -(0.2 - points[2].y);
-    }
-    if (points[2].y >= 0.2 && curveOptions.curveOffset !== 0) {
-      curveOptions.curveOffset = 0;
-    }
-    if (curveOptions.radius != null
-      || curveOptions.curveRadius != null
-      || curveOptions.curveOffset != null
-    ) {
-      this._tri._theta.change(curveOptions);
+    if (this._tri._hyp.isShown) {
+      this._tri._theta.setAngle({
+        p1: points[1],
+        p2: points[0],
+        p3: points[2],
+      });
+      const theta = parseFloat(this._tri._theta.getLabel()) * Math.PI / 180;
+      const len = new Line(new Point(0, 0), points[2]).length()
+      const hyp = round((len - 0.5) ** 3, 4);
+      const opp = round(hyp * Math.sin(theta), 4);
+      this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
+      this._tri._opp.setLabel(`${opp.toFixed(4)}`);
+      this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
+      const r = this._rotator._line.getRotation();
+      if (points[1].x < 1.3 || points[2].y < 0.35) {
+        this._tri._right.hide();
+      } else {
+        this._tri._right.showAll();
+      }
+      const curveOptions = {
+        radius: undefined,
+        curveRadius: undefined,
+        curveOffset: undefined,
+      };
+      if (points[1].x < 0.85) {
+        const radius = Math.max(points[1].x - 0.25, 0.01);
+        curveOptions.radius = radius;
+        curveOptions.curveRadius = radius;
+      }
+      if (points[2].y < 0.2) {
+        curveOptions.curveOffset = -(0.2 - points[2].y);
+      }
+      if (points[2].y >= 0.2 && curveOptions.curveOffset !== 0) {
+        curveOptions.curveOffset = 0;
+      }
+      if (curveOptions.radius != null
+        || curveOptions.curveRadius != null
+        || curveOptions.curveOffset != null
+      ) {
+        this._tri._theta.change(curveOptions);
+      }
     }
     this.diagram.animateNextFrame();
   }

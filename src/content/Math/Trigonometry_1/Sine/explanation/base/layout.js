@@ -12,7 +12,7 @@ import baseLayout from '../../../../../common/layout';
 const {
   Point,
   // Transform,
-  // Line,
+  Line,
 } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
@@ -37,14 +37,17 @@ export default function diagramLayout() {
     new Point(2.3, 1.6),
   ];
   layout.points = points;
-
+  layout.triLen = new Line(points[0], points[2]).length();
   const historyRadius = 1;
-  const historyAngle = Math.atan2(points[2].y, points[2].x) * 1.5;
+  layout.historyRadius = historyRadius;
+  const historyAngle = Math.atan2(points[2].y, points[2].x) * 1.2;
+  layout.historyAngle = historyAngle;
   const historyPoints = [
     new Point(0, 0),
     new Point(historyRadius * Math.cos(historyAngle), 0),
     new Point(historyRadius * Math.cos(historyAngle), historyRadius * Math.sin(historyAngle)),
   ];
+  layout.historyPoints = historyPoints;
 
   const simX2 = 1;
   const simX3 = 1.3;
@@ -395,9 +398,9 @@ export default function diagramLayout() {
                 p2: historyPoints[1],
                 p3: historyPoints[0],
                 curve: {
-                  radius: 0.1,
+                  radius: 0.15,
                   sides: 20,
-                  width: 0.015,
+                  width: 0.01,
                 },
                 color: colors.angles,
                 autoRightAngle: true,
