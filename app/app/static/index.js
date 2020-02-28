@@ -21355,7 +21355,8 @@ function () {
         position: null,
         center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         trianglePrimitives: false,
-        linePrimitives: false
+        linePrimitives: false,
+        angleToDraw: null
       };
 
       for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
@@ -21379,6 +21380,10 @@ function () {
 
       if (options.sidesToDraw == null) {
         options.sidesToDraw = options.sides;
+      }
+
+      if (options.angleToDraw != null) {
+        options.sidesToDraw = Math.max(0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides));
       }
 
       var direction = 1;
@@ -28603,6 +28608,44 @@ function (_DiagramElement2) {
       }
 
       return collection;
+    }
+  }, {
+    key: "toFront",
+    value: function toFront(elements) {
+      var names = [];
+      elements.forEach(function (element) {
+        if (typeof element === 'string') {
+          names.push(element);
+        } else {
+          names.push(element.name);
+        }
+      });
+      var newOrder = [];
+      this.drawOrder.forEach(function (element) {
+        if (names.indexOf(element) === -1) {
+          newOrder.push(element);
+        }
+      });
+      this.drawOrder = [].concat(newOrder, names);
+    }
+  }, {
+    key: "toBack",
+    value: function toBack(elements) {
+      var names = [];
+      elements.forEach(function (element) {
+        if (typeof element === 'string') {
+          names.push(element);
+        } else {
+          names.push(element.name);
+        }
+      });
+      var newOrder = [];
+      this.drawOrder.forEach(function (element) {
+        if (names.indexOf(element) === -1) {
+          newOrder.push(element);
+        }
+      });
+      this.drawOrder = [].concat(_toConsumableArray(names.reverse()), newOrder);
     }
   }, {
     key: "isMoving",

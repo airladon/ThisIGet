@@ -168,10 +168,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       title: 'Right Angle Triangles',
-      setContent: 'Now consider a |right_angle_triangle| with a |hypotenuse| and |sides| named relative to an |angle_theta|.',
+      setContent: 'Now consider a |right_angle_triangle| with a labelled |hypotenuse| and |sides_relative| to an |angle_theta|.',
       modifiers: {
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        sides: coll.bindToggleGroups(tri, [['opp'], ['adj']], colors.lines),
+        sides_relative: coll.bindToggleGroups(tri, [['opp'], ['adj']], colors.lines),
         right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
         hypotenuse: coll.bindAccent(tri._hyp),
       },
@@ -274,39 +274,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: 'This |ratio| is the same for |all| right angle triangles with the |same_angle_theta|. If this angle |changes|, then the ratio also changes.',
-      // 'As the |angle_is_changed|, these ratios change. In other words, these ratios are a |function of| |theta|.',
-      // modifiers: {
-      //   ratio: coll.bindAccent({
-      //     element: coll._eqnSame,
-      //     children: ['v', 'opp', 'hyp'],
-      //     centerOn: 'v',
-      //     time: 1,
-      //     scale: 1.5,
-      //   }, colors.lines),
-      //   angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-      //   changes: this.bindNext(colors.angles, 'fromChanged'),
-      // },
     };
 
-    // this.addSection(common, commonShow, commonContent, {
-    //   setSteadyState: () => {
-    //     // coll._tri.setScenario('right');
-    //   },
-    // });
 
     const initRotator = () => {
-      // coll._tri.setScenario('right');
       coll._eqnSame.showForm('ratioValue');
       coll._tri._theta.setLabelToRealAngle();
       coll._rotator.showAll();
       coll._rotator._pad.show();
-      // coll._rotator._line.setRotation(Math.atan2(layout.points[2].y, layout.points[2].x));
-      // coll._rotator._line.setRotation(Math.atan2(coll._rotator._pad..y, layout.points[2].x));
       const padPos = coll._rotator._pad.getPosition();
       coll._rotator._line.setRotation(Math.atan2(padPos.y, padPos.x));
       coll._rotator._line.setMovable(true, 'rotation');
       coll._rotator._pad.setMovable(true, 'translation');
-      // coll._rotator._v.setMovable(true, 'translation');
       coll.updateRotation();
     };
     this.addSection(common, commonShow, commonContent, {
@@ -324,13 +303,6 @@ class Content extends PresentationFormatContent {
           animate: 'move',
           duration: 2,
           callback: done,
-          // callback: () => {
-          //   if (this.message === 'fromChanged') {
-          //     coll.goToRotation(null, done);
-          //   } else {
-          //     done();
-          //   }
-          // },
         });
         coll._tri.animations.new()
           .inParallel([
@@ -441,7 +413,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'This function has been studied for millennia, and is now called the |sine_function|, often abbreviated to |sin|.',
+      setContent: 'This function has been studied for |millennia|, and is now called the |sine_function|, often abbreviated to |sin|.',
     };
 
     commonShow = {
@@ -453,6 +425,7 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonShow, commonContent, {
+      title: 'Name',
       modifiers: {
         sine_function: this.bindNext(colors.diagram.action),
         sin: this.bindNext(colors.diagram.action),
@@ -492,6 +465,198 @@ class Content extends PresentationFormatContent {
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
         coll._eqnSame.showForm('sin');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: 'The word |sine| originates from the word for |bowstring|.',
+    };
+
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement, tri._adj],
+      // setEqnForms: [
+      //   [coll._eqnSame, 'sin'],
+      // ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.showForm('sin');
+      },
+      // transitionToNext: (done) => {
+      //   coll.animations.new()
+      //     .inParallel([
+      //       coll._tri.anim.dissolveOut({ duration: 0.2 }),
+      //       coll._eqnSame.anim.dissolveOut({ duration: 0.2 }),
+      //     ])
+      //     .whenFinished(done)
+      //     .start();
+      // },
+    });
+
+    const pulseBowString = () => {
+      coll._history._arc.pulseThickNow(1, 1.02, 8);
+      coll.accent({
+        element: coll._history, children: ['arc', 'bowString'], style: ['highlight'],
+      });
+      coll.accent({
+        element: coll._history, children: ['bowString'], style: ['pulse'],
+      });
+      coll._history.toFront(['bowString', 'arc']);
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        // Ancient_Greeks: highlight(colors.diagram.text.greek),
+        // Sanskrit: highlight(colors.diagram.text.sanskrit),
+        // Arabic: highlight(colors.diagram.text.arabic),
+        // Latin: highlight(colors.diagram.text.latin),
+        // 'khordḗ': click(pulseChord, [this], colors.lines),
+        // 'right_angle_triangle': click(pulseRightAngle, [this], colors.lines),
+        // sine_function: click(pulseSineLine, [this], colors.lines),
+        bow: click(pulseBowString, [this], colors.lines),
+        // right_angle_triangle: coll.bindAccent({
+        //   element: coll._history._tri,
+        //   centerOn: coll._history._tri,
+        //   x: 0.7,
+        //   y: 0.3,
+        //   scale: 1.3,
+        // }),
+        // circle: click(pulseCircle, [this], colors.angles),
+      },
+      show: [coll._history],
+      transitionFromPrev: (done) => {
+        coll.accent({
+          element: coll._history,
+          children: ['arc', 'bowString'],
+          style: 'highlight',
+        });
+        coll._history.animations.new()
+          .dissolveIn({ duration: 0.2 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.accent({
+          element: coll._history,
+          children: ['arc', 'bowString'],
+          style: 'highlight',
+        });
+        // coll._eqnSame.setScenario('left');
+        // coll._eqnSame.showForm('sin');
+      },
+    });
+    // this.addSection(common, commonShow, commonContent, {
+    //   show: [coll._history],
+    //   setSteadyState: () => {
+    //     // coll._eqnSame.setScenario('left');
+    //     // coll._eqnSame.showForm('sin');
+    //   },
+    // });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    
+    const pulseChord = () => {
+      // fig._h.hide();
+      // fig._right.hide();
+      coll.accent({
+        element: coll._history, children: ['bowString'], style: ['highlight', 'pulse'],
+      });
+      coll._history.toFront(['bowString']);
+    };
+
+    const pulseRightAngle = () => {
+      coll.accent({
+        element: coll._history, children: ['tri'], style: ['highlight'],
+      });
+      coll._history._tri._line.pulseSettings.delta = [0.4, 0.2];
+      coll._history._tri._line.pulseThickNow(1, 1.1, 8);
+      coll._history.toFront(['tri']);
+    };
+
+    const pulseSineLine = () => {
+      coll.accent({
+        element: coll._history, children: ['sin'], style: ['highlight', 'pulse'],
+      });
+      coll._history.toFront(['sin']);
+    };
+    commonContent = {
+      setContent: '|Ancient_Greeks| called the line between two points on a |circle| a |khordḗ| (chord or string of a |bow|). A |right_angle_triangle| splits this chord in two. The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord).',
+    };
+
+    const pulseCircle = () => {
+      coll._history._circle.pulseThickNow(1, 1.02, 8);
+      coll.accent({
+        element: coll._history, children: ['circle'], style: ['highlight'],
+      });
+      coll._history.toFront(['circle']);
+    };
+    // this.addSection(common, commonShow, commonContent, {
+    //   setSteadyState: () => {
+    //     coll._tri.setScenario('right');
+    //     coll._eqnSame.setScenario('left');
+    //   },
+    // });
+
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        Ancient_Greeks: highlight(colors.diagram.text.greek),
+        Sanskrit: highlight(colors.diagram.text.sanskrit),
+        Arabic: highlight(colors.diagram.text.arabic),
+        Latin: highlight(colors.diagram.text.latin),
+        'khordḗ': click(pulseChord, [this], colors.lines),
+        'right_angle_triangle': click(pulseRightAngle, [this], colors.lines),
+        sine_function: click(pulseSineLine, [this], colors.lines),
+        bow: click(pulseBowString, [this], colors.lines),
+        // right_angle_triangle: coll.bindAccent({
+        //   element: coll._history._tri,
+        //   centerOn: coll._history._tri,
+        //   x: 0.7,
+        //   y: 0.3,
+        //   scale: 1.3,
+        // }),
+        circle: click(pulseCircle, [this], colors.angles),
+      },
+      show: [coll._history],
+      // transitionFromPrev: (done) => {
+      //   coll.accent({
+      //     element: coll._history,
+      //     children: ['arc', 'bowString'],
+      //     style: 'highlight',
+      //   });
+      //   coll._history.animations.new()
+      //     .dissolveIn({ duration: 0.2 })
+      //     .whenFinished(done)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        coll.accent({
+          element: coll._history,
+          children: ['arc', 'bowString'],
+          style: 'highlight',
+        });
+        // coll._eqnSame.setScenario('left');
+        // coll._eqnSame.showForm('sin');
+      },
+    });
+
+    commonContent = {
+      setContent: 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.',
+    };
+    this.addSection(common, commonShow, commonContent, {
+      show: [coll._history],
+      setSteadyState: () => {
+        console.log(coll);
+        // coll._eqnSame.setScenario('left');
+        // coll._eqnSame.showForm('sin');
       },
     });
 

@@ -943,7 +943,7 @@ class Content extends PresentationFormatContent {
     commonContent = {
       setContent: [
         style({}, 'The word |sine| originates from the word for |bowstring|.'),
-        note({ top: 62, size: 0.9 }, 'A |right_angle_triangle| and cirlce are closely related. |Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|). The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord). This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
+        note({ top: 62, size: 0.9 }, 'A |right_angle_triangle| and circle are closely related. |Ancient_Greeks| called the line between two points on a circle a |khordḗ| (chord or string of a |bow|). The |sine_function| was first named in |Sanskrit| as |ardha-jya| (half chord) or |jya| (chord). This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.'),
       ],
       modifiers: {
         'khordḗ': click(pulseChord, [this], colors.components),

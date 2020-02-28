@@ -38,6 +38,14 @@ export default function diagramLayout() {
   ];
   layout.points = points;
 
+  const historyRadius = 1;
+  const historyAngle = Math.atan2(points[2].y, points[2].x) * 1.5;
+  const historyPoints = [
+    new Point(0, 0),
+    new Point(historyRadius * Math.cos(historyAngle), 0),
+    new Point(historyRadius * Math.cos(historyAngle), historyRadius * Math.sin(historyAngle)),
+  ];
+
   const simX2 = 1;
   const simX3 = 1.3;
   const simY2 = 1.3;
@@ -337,6 +345,113 @@ export default function diagramLayout() {
           default: { position: [-1.5, -1] },
           right: { position: [-0.6, -1.3] },
         },
+      },
+    },
+    {
+      name: 'history',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'circle',
+          method: 'polygon',
+          options: {
+            sides: 100,
+            width: 0.015,
+            radius: 1,
+            color: colors.angles,
+          },
+        },
+        {
+          name: 'arc',
+          method: 'polygon',
+          options: {
+            radius: historyRadius,
+            width: 0.015,
+            rotation: -historyAngle,
+            angleToDraw: historyAngle * 2,
+            sides: 200,
+            color: colors.angles,
+          },
+        },
+        {
+          name: 'axis',
+          method: 'line',
+          options: {
+            p1: historyPoints[0],
+            p2: [historyRadius, 0],
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'tri',
+          method: 'collection',
+          addElements: [
+            {
+              name: 'right',
+              method: 'angle',
+              options: {
+                p1: historyPoints[2],
+                p2: historyPoints[1],
+                p3: historyPoints[0],
+                curve: {
+                  radius: 0.1,
+                  sides: 20,
+                  width: 0.015,
+                },
+                color: colors.angles,
+                autoRightAngle: true,
+              },
+            },
+            {
+              name: 'line',
+              method: 'polyLine',
+              options: {
+                points: [
+                  historyPoints[0],
+                  historyPoints[1],
+                  historyPoints[2].sub(0, 0.015),
+                ],
+                color: colors.lines,
+                width: 0.015,
+                close: true,
+              },
+            },
+          ],
+        },
+        {
+          name: 'sin',
+          method: 'line',
+          options: {
+            p1: historyPoints[1],
+            p2: historyPoints[2],
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'bowString',
+          method: 'line',
+          options: {
+            p1: historyPoints[2],
+            p2: new Point(historyPoints[2].x, -historyPoints[2].y),
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'mirrorString',
+          method: 'line',
+          options: {
+            p1: historyPoints[0],
+            p2: new Point(historyPoints[2].x, -historyPoints[2].y),
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+      ],
+      options: {
+        position: [0, -0.5],
       },
     },
     {
