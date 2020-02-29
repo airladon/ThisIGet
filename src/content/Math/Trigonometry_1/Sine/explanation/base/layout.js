@@ -16,7 +16,7 @@ const {
 } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
-// const { round } = Fig.tools.math;
+const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
@@ -188,21 +188,6 @@ export default function diagramLayout() {
             },
           },
         },
-        // {
-        //   name: 'v',
-        //   method: 'line',
-        //   options: {
-        //     p1: points[1],
-        //     p2: points[2],
-        //     color: [1, 0, 0, 1],
-        //     width: 0.1,
-        //   },
-        //   mods: {
-        //     move: {
-        //       canBeMovedAfterLosingTouch: true,
-        //     },
-        //   },
-        // },
         {
           name: 'pad',
           method: 'polygon',
@@ -458,6 +443,25 @@ export default function diagramLayout() {
       },
     },
     {
+      name: 'eqnSine',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          sin: { style: 'normal' },
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          theta: { text: '\u03b8', color: colors.angles },
+          question: { text: '?' },
+          equals: '  =  ',
+        },
+        forms: {
+          
+        },
+      },
+    },
+    {
       name: 'eqnSame',
       method: 'addEquation',
       options: {
@@ -518,107 +522,6 @@ export default function diagramLayout() {
           default: { position: [-1.2, -1.7] },
           left: { position: [-1.7, -0.5] },
         },
-      },
-    },
-    {
-      name: 'eqnCos',
-      method: 'addEquation',
-      options: {
-        color: colors.diagram.text.base,
-        scale: 0.8,
-        elements: {
-          hyp: { text: 'hypotenuse', color: colors.lines },
-          adj: { text: 'adjacent', color: colors.lines },
-          equals: ' = ',
-          const: 'constant',
-          v: { symbol: 'vinculum', color: colors.lines },
-          lb: { symbol: 'bracket', side: 'left' },
-          rb: { symbol: 'bracket', side: 'right' },
-          theta: { text: '\u03b8', color: colors.angles },
-          cos: { style: 'normal' },
-        },
-        defaultFormAlignment: {
-          fixTo: 'equals',
-        },
-        forms: {
-          '0': [
-            { frac: ['adj', 'v', 'hyp'] },
-            'equals', 'const',
-          ],
-          'function': [
-            { frac: ['adj', 'v', 'hyp'] },
-            'equals', 'cos', { brac: ['lb', 'theta', 'rb'] },
-          ],
-        },
-        position: [-1.8, -0.4],
-      },
-    },
-    {
-      name: 'eqnTan',
-      method: 'addEquation',
-      options: {
-        color: colors.diagram.text.base,
-        scale: 0.8,
-        elements: {
-          // hyp: { text: 'hypotenuse', color: colors.lines },
-          equals: ' = ',
-          adj: { text: 'adjacent', color: colors.lines },
-          opp: { text: 'opposite', color: colors.lines },
-          const: 'constant',
-          v: { symbol: 'vinculum', color: colors.lines },
-          lb: { symbol: 'bracket', side: 'left' },
-          rb: { symbol: 'bracket', side: 'right' },
-          theta: { text: '\u03b8', color: colors.angles },
-          tan: { style: 'normal' },
-        },
-        defaultFormAlignment: {
-          fixTo: 'equals',
-        },
-        forms: {
-          '0': [
-            { frac: ['opp', 'v', 'adj'] },
-            'equals', 'const',
-          ],
-          'function': [
-            { frac: ['opp', 'v', 'adj'] },
-            'equals', 'tan', { brac: ['lb', 'theta', 'rb'] },
-          ],
-        },
-        position: [-1.8, -1.1],
-      },
-    },
-    {
-      name: 'eqnSin',
-      method: 'addEquation',
-      options: {
-        color: colors.diagram.text.base,
-        scale: 0.8,
-        elements: {
-          hyp: { text: 'hypotenuse', color: colors.lines },
-          equals: ' = ',
-          // adj: { text: 'adjacent', color: colors.lines },
-          opp: { text: 'opposite', color: colors.lines },
-          const: 'constant',
-          v: { symbol: 'vinculum', color: colors.lines },
-          lb: { symbol: 'bracket', side: 'left' },
-          rb: { symbol: 'bracket', side: 'right' },
-          theta: { text: '\u03b8', color: colors.angles },
-          sin: { style: 'normal' },
-        },
-        defaultFormAlignment: {
-          fixTo: 'equals',
-        },
-        forms: {
-          '0': [
-            { frac: ['opp', 'v', 'hyp'] },
-            'equals', 'const',
-          ],
-          'function': [
-            { frac: ['opp', 'v', 'hyp'] },
-            'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
-          ],
-        },
-        position: [-1.8, 0.3],
       },
     },
     {
@@ -712,5 +615,202 @@ export default function diagramLayout() {
       },
     },
   ];
+
+  const cell = (name, text, x, y, color) => ({
+    name,
+    method: 'text',
+    options: {
+      text,
+      hAlign: 'center',
+      vAlign: 'baseline',
+      color,
+      position: [x, y],
+      size: 0.15,
+      style: 'normal',
+    },
+  });
+
+  const sineCell = (name, a, x, y) => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.7,
+      elements: {
+        value: { text: `${round(Math.sin(a * Math.PI / 180), 4)}`, color: colors.components },
+        r: { color: colors.lines },
+        times: { text: ' \u00D7 ', color: colors.lines },
+      },
+      defaultFormAlignment: {
+        fixTo: 'value',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        'base': ['value'],
+        'baseTimesR': ['value', 'times', 'r'],
+        'baseR': a === 0 ? ['value'] : ['value', ' ', 'r'],
+      },
+      position: [x, y],
+    },
+  });
+
+  const angleHeading = (x, y) => ({
+    name: 'angleHeading',
+    method: 'text',
+    options: {
+      text: '\u03B8',
+      hAlign: 'center',
+      vAlign: 'baseline',
+      color: colors.angles,
+      position: [x, y],
+      size: 0.2 * 0.9,
+      style: 'italic',
+    },
+  });
+
+  const sineHeading = (x, y) => ({
+    name: 'sineHeading',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        theta: { text: '\u03B8', color: colors.angles },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+        sin: { style: 'normal' },
+      },
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      forms: {
+        sin: {
+          content: ['sin', { brac: ['lb', 'theta', 'rb'] }],
+          scale: 0.9,
+        },
+      },
+      position: [x, y],
+    },
+  });
+
+  const createTableElements = (angles) => {
+    const elements = [];
+    const x = 1;
+    const y = 0.16;
+    elements.push(angleHeading(0, 0.25));
+    elements.push(sineHeading(x, 0.25));
+    elements.push({
+      name: 'line',
+      method: 'line',
+      options: {
+        p1: [-0.3, 0.16],
+        p2: [x + 0.6, 0.16],
+        lineWidth: 0.01,
+        color: colors.diagram.text.base,
+      },
+    });
+    angles.forEach((a, index) => {
+      if (typeof a === 'number') {
+        elements.push(cell(`${index}`, `${a}º`, 0, 0 - index * y, colors.angles));
+        elements.push(sineCell(`eqn_${index}`, a, x, 0 - index * y));
+      } else {
+        elements.push(cell(`${index}`, '\u22EE', 0, 0 - index * y, colors.angles));
+        elements.push(cell(`${index}_1`, '\u22EE', x, 0 - index * y, colors.components));
+      }
+    });
+    return elements;
+  };
+  const table = {
+    name: 'table',
+    method: 'collection',
+    addElements: [
+      // cell('0', '0º', 0),
+      // cell('1', '1º', -0.15),
+      // cell('2', '2º', -0.3),
+      // cell('d1', '\u22EE', -0.45),
+      // cell('43', '43º', -0.6),
+      // ...createTableElements([0, 1, 2, 'd', 39, 40, 41, 'd', 59, 60, 61, 'd', 
+      ...createTableElements([0, 1, 2, 3, 4, 5, 6, 7, 8, 'd', 87, 88, 89, 90]),
+    ],
+    options: {
+      position: [1, 0.5],
+    },
+    mods: {
+      pulseDefault: { scale: 1.15 },
+      scenarios: {
+        default: { position: [-0.5, 0.5] },
+      },
+    },
+  };
+
+  layout.addElements.push(table);
+
+  const frac = (num, v, dem) => ({
+    frac: [num, v, dem],
+  });
+
+  const sup = (num, pow) => ({
+    sup: {
+      content: num,
+      superscript: pow,
+      scale: 0.7,
+    },
+  });
+
+  const powerSeries = {
+    name: 'powerSeries',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.8,
+      elements: {
+        sin: { style: 'normal' },
+        a_0: { text: '\u03B8', color: colors.angles },
+        a_1: { text: '\u03B8', color: colors.angles },
+        a_3: { text: '\u03B8', color: colors.angles },
+        a_5: { text: '\u03B8', color: colors.angles },
+        a_7: { text: '\u03B8', color: colors.angles },
+        equals: '  =  ',
+        v_3: { symbol: 'vinculum' },
+        v_5: { symbol: 'vinculum' },
+        v_7: { symbol: 'vinculum' },
+        m_1: '  –  ',
+        m_2: '  –  ',
+        p_1: '  +  ',
+        dots: ' + ...',
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+      },
+      forms: {
+        base: {
+          content: [
+            'sin',
+            { brac: ['lb', 'a_0', 'rb'] },
+            'equals', 'a_1', 'm_1',
+            frac(sup('a_3', '3_a'), 'v_3', '3\u00D72\u00D71'),
+            'p_1',
+            frac(sup('a_5', '5_a'), 'v_5', '5\u00D74\u00D73\u00D72\u00D71'),
+            'm_2',
+            frac(sup('a_7', '7_a'), 'v_7', '7\u00D76\u00D75\u00D74\u00D73\u00D72\u00D71'),
+            'dots',
+          ],
+          alignment: {
+            alignH: 'center',
+          },
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, -0.5] },
+      },
+      pulseDefault: { scale: 1.1 },
+    },
+  };
+
+  layout.addElements.push(powerSeries);
+
   return layout;
 }

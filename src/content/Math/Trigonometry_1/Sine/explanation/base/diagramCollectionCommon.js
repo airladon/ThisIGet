@@ -352,4 +352,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     this.diagram.animateNextFrame();
   }
+
+  tableForm(fromForm: string, toForm: string, fromOnly: boolean = true) {
+    const elements = [];
+    Object.keys(this._table.elements).forEach((elementName) => {
+      if (elementName.slice(0, 4) === 'eqn_') {
+        const element = this._table.elements[elementName];
+        if (fromOnly) {
+          elements.push([element, fromForm]);
+        } else {
+          elements.push([element, fromForm, toForm]);
+        }
+      }
+    });
+    return elements;
+  }
 }

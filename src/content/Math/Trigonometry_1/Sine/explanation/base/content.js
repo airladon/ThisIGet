@@ -40,6 +40,7 @@ class Content extends PresentationFormatContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       // 'Math/Geometry_1/AngleTypes/base',
+      'Math/Trigonometry_1/Sine/base',
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/AngleGroups/base',
       'Math/Geometry_1/SimilarTriangles/base',
@@ -55,7 +56,7 @@ class Content extends PresentationFormatContent {
     const tri = coll._tri;
     const sim = coll._similar;
     const eqn = coll._eqn;
-    const eqn1 = coll._eqn1;
+    const tab = coll._table;
     // const tab = coll._table;
 
     let commonContent = {
@@ -425,7 +426,6 @@ class Content extends PresentationFormatContent {
     };
 
     this.addSection(common, commonShow, commonContent, {
-      title: 'Name',
       modifiers: {
         sine_function: this.bindNext(colors.diagram.action),
         sin: this.bindNext(colors.diagram.action),
@@ -437,6 +437,7 @@ class Content extends PresentationFormatContent {
     });
 
     this.addSection(common, commonShow, commonContent, {
+      title: 'Sine',
       modifiers: {
         sine_function: coll.bindAccent({
           element: coll._eqnSame,
@@ -573,12 +574,12 @@ class Content extends PresentationFormatContent {
         coll._eqnSame.hide();
         coll._tri.hide();
         coll._history.showAll();
+        coll._history.toFront(['arc', 'bowString']);
         coll.accent({
           element: coll._history,
           children: ['arc', 'bowString'],
           style: 'highlight',
         });
-        coll._history.toFront(['arc', 'bowString']);
       },
       setLeaveState: () => {
         coll._rotator._pad.setPosition(layout.points[2]);
@@ -652,91 +653,126 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     commonContent = {
-      setContent: 'This was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom). Our term |sine| comes from |sinus|.',
+      setContent: style({ centerV: true }, [
+        '|Jya| was translated into |Arabic| as |jiba|, which was then confused with |jaib| (meaning bay or bossom) when it was translated into |Latin| as |sinus| (bay or bossom).',
+        'Our term |sine| comes from |sinus|.',
+      ]),
     };
-    this.addSection(common, commonShow, commonContent, {
-      show: [coll._history],
-      setSteadyState: () => {
-        coll.accent({
-          element: coll._history,
-          children: ['sin'],
-          style: 'highlight',
-        });
-        // coll._eqnSame.setScenario('left');
-        // coll._eqnSame.showForm('sin');
-      },
-    });
-
+    this.addSection(common, commonContent);
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
-      setContent: 'We call these functions the |sine|, |cosine| and |tangent| functions - often abreviated to |sin|, |cos| and |tan|.',
+      setContent: style({ centerV: true }, [
+        'Now, what is the |value| of the sine function at |different angles|?',
+      ]),
       modifiers: {
-        // theta: clickW('\u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        // angle_is_changed: this.bindNext(colors.angles, 'fromChanged'),
+        angle_theta: highlightWord('\u03b8', colors.angles),
+      },
+      title: 'Sine Value',
+    };
+    this.addSection(common, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'In the |first century| CE, |geometry| was used to find the sines of specific angles. A |table_of_sine_values| was then published that could then be referenced.',
+      ]),
+      modifiers: {
+        angle_theta: highlightWord('\u03b8', colors.angles),
+        table_of_sine_values: coll.bindAccent(tab, colors.diagram.action),
       },
     };
     commonShow = {
-      show: [tri],
-      hide: [tri._complement],
+      show: [
+        tab,
+      ],
       setEqnForms: [
-        [coll._eqnCos, 'function'],
-        [coll._eqnTan, 'function'],
-        [coll._eqnSin, 'function'],
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'opp'],
       ],
     };
+    this.addSection(common, commonShow, commonContent);
 
-    const pulseSine = () => {
-      coll.accent({
-        element: coll._eqnSin,
-        centerOn: 'sin',
-        x: 'center',
-        children: ['lb', 'rb', 'theta', 'sin'],
-        scale: 1.5,
-      });
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'It was not until |1400| CE, that a |formula| was found that |precisely calculates| the sine of any angle.',
+      ]),
+      modifiers: {
+        angle_theta: highlightWord('\u03b8', colors.angles),
+        table_of_sine_values: coll.bindAccent(tab, colors.diagram.action),
+        formula: this.bindNext(colors.diagram.action),
+      },
     };
-    const pulseTangent = () => {
-      coll.accent({
-        element: coll._eqnTan,
-        centerOn: 'tan',
-        x: 'center',
-        children: ['lb', 'rb', 'theta', 'tan'],
-        scale: 1.5,
-      });
+    commonShow = {
+      show: [
+        tab,
+      ],
+      setEqnForms: [
+        ...coll.tableForm('base'),
+        [tab._sineHeading, 'opp'],
+      ],
     };
-    const pulseCosine = (done) => {
-      coll.accent({
-        element: coll._eqnCos,
-        centerOn: 'cos',
-        x: 'center',
-        children: ['lb', 'rb', 'theta', 'cos'],
-        scale: 1.5,
-        done,
-      });
+    this.addSection(common, commonShow, commonContent);
+
+    commonShow = {
+      // show: [
+      //   tab,
+      // ],
+      setEqnForms: [
+        // ...coll.tableForm('base'),
+        // [tab._sineHeading, 'opp'],
+        [coll._powerSeries, 'base'],
+      ],
     };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
-        angle_is_changed: click(coll.goToRotation, [coll, null, null, null], colors.angles),
-        sine: click(pulseSine, [this], colors.lines),
-        tangent: click(pulseTangent, [this], colors.lines),
-        cosine: click(pulseCosine, [this, null], colors.lines),
-        sin: click(pulseSine, [this], colors.lines),
-        tan: click(pulseTangent, [this], colors.lines),
-        cos: click(pulseCosine, [this, null], colors.lines),
+        formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
       },
       transitionFromPrev: (done) => {
-        coll._tri.setScenario('right');
-        this.diagram.setFirstTransform();
-        pulseCosine(done);
-        pulseSine();
-        pulseTangent();
+        coll.accent(coll._powerSeries, done);
       },
-      setSteadyState: () => {
-        coll._tri.setScenario('right');
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'But this |calculation| is |long and difficult| without a calculator, so |tables| were still primarily used up until the |late 20th century| when they were finally replaced with |calculators| and |computers|.',
+      ]),
+    };
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {
+        calculation: coll.bindAccent(coll._powerSeries, colors.diagram.action),
       },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({ centerV: true }, [
+        'So if you want to find the |sine value| of some angle, you can use the |sin| button or command on a calculator or computer, or reference a |table_of_sines|.',
+      ]),
+      modifiers: {
+        table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+      },
+    };
+    this.addSection(common, commonContent, {
+      // modifiers: {
+      //   calculation: coll.bindAccent(coll._powerSeries, colors.diagram.action),
+      // },
     });
   }
 }
