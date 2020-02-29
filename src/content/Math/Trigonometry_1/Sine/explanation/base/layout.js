@@ -443,25 +443,6 @@ export default function diagramLayout() {
       },
     },
     {
-      name: 'eqnSine',
-      method: 'addEquation',
-      options: {
-        color: colors.diagram.text.base,
-        scale: 0.8,
-        elements: {
-          sin: { style: 'normal' },
-          lb: { symbol: 'bracket', side: 'left' },
-          rb: { symbol: 'bracket', side: 'right' },
-          theta: { text: '\u03b8', color: colors.angles },
-          question: { text: '?' },
-          equals: '  =  ',
-        },
-        forms: {
-          
-        },
-      },
-    },
-    {
       name: 'eqnSame',
       method: 'addEquation',
       options: {
@@ -480,6 +461,7 @@ export default function diagramLayout() {
           rb: { symbol: 'bracket', side: 'right' },
           func: { text: 'function', style: 'normal' },
           sin: { text: 'sin', style: 'normal' },
+          times: { text: ' \u00D7 ', color: colors.lines },
         },
         defaultFormAlignment: {
           fixTo: 'v',
@@ -514,6 +496,28 @@ export default function diagramLayout() {
               'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
             ],
             alignment: { fixTo: 'equals' },
+          },
+          'opp': {
+            content: [
+              'opp',
+              'equals', 'sin', { brac: ['lb', 'theta', 'rb'] }, 'times', 'hyp',
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'hyp': {
+            content: [
+              'hyp',
+              'equals', { frac: ['opp', 'v', ['sin', { brac: ['lb', 'theta', 'rb'] }]] },
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
           },
         },
       },

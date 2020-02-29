@@ -54,6 +54,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
     this.custom.counter = 0;
     this.custom.constantCounter = 2;
+    this.custom.eqnCounter = 1;
     this.custom.maxRotation = 90 * Math.PI / 180;
     this.custom.minRotation = 0 * Math.PI / 180;
     this.custom.minLineLength = 1.2;
@@ -366,5 +367,17 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     });
     return elements;
+  }
+
+  toggleEqn() {
+    this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
+    const options = ['opp', 'hyp'];
+    const option = options[this.custom.eqnCounter];
+    this._eqnSame.goToForm({
+      name: option,
+      animate: 'move',
+      duration: 2,
+    });
+    this.diagram.animateNextFrame();
   }
 }

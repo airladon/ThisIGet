@@ -774,6 +774,74 @@ class Content extends PresentationFormatContent {
       //   calculation: coll.bindAccent(coll._powerSeries, colors.diagram.action),
       // },
     });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'The |relationship| between |angle|, |opposite_side| and |hypotenuse| can be rearranged and used to find unknown properties.',
+      ]),
+      modifiers: {
+        // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+        relationship: coll.bindAccent(coll._eqnSame, colors.diagram.action),
+        angle: coll.bindAccent(tri._theta),
+        opposite_side: coll.bindAccent(tri._opp),
+        hypotenuse: coll.bindAccent(tri._hyp),
+      },
+    };
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement, tri._adj],
+      setEqnForms: [
+        [coll._eqnSame, 'sin'],
+      ],
+    };
+    common = {
+      setEnterState: () => {
+        tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+      },
+    };
+    this.addSection(common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'If the |two sides are known|, then their |ratio| (which is the sine of the angle) can looked up in a |table_of_sines| to see which angle is associated with it.',
+      ]),
+      modifiers: {
+        table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+        ratio: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['opp', 'hyp', 'v'],
+          centerOn: 'v',
+          scale: 1.5,
+        }),
+      },
+    };
+    this.addSection(common, commonShow, commonContent);
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'If the angle and one side are |known|, then the relationship can be |rearranged| to find the unknown side.',
+      ]),
+      modifiers: {
+        // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+        rearranged: click(coll.toggleEqn, [coll], colors.lines),
+        // angle: coll.bindAccent(tri._theta),
+        // opposite_side: coll.bindAccent(tri._opp),
+        // hypotenuse: coll.bindAccent(tri._hyp),
+      },
+    };
+    this.addSection(common, commonShow, commonContent);
+
+    
   }
 }
 
