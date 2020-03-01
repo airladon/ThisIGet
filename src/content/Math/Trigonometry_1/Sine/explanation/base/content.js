@@ -674,7 +674,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         angle_theta: highlightWord('\u03b8', colors.angles),
       },
-      title: 'Sine Value',
+      title: 'Value',
     };
     this.addSection(common, commonContent);
 
@@ -780,14 +780,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({}, [
-        'The |relationship| between |angle|, |opposite_side| and |hypotenuse| can be rearranged and used to find unknown properties.',
+        'The |relationship| between |angle|, |opposite_side| and |hypotenuse| can be |used| to find |unknown properties|.',
       ]),
       modifiers: {
         // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
-        relationship: coll.bindAccent(coll._eqnSame, colors.diagram.action),
-        angle: coll.bindAccent(tri._theta),
-        opposite_side: coll.bindAccent(tri._opp),
-        hypotenuse: coll.bindAccent(tri._hyp),
+        relationship: coll.bindAccent({
+          element: coll._eqnSame,
+          color: colors.diagram.action,
+          scale: 1.5,
+        }),
+        angle: coll.bindAccent({ element: tri._theta, scale: 1.5 }),
+        opposite_side: coll.bindAccent({ element: tri._opp, scale: 1.5 }),
+        hypotenuse: coll.bindAccent({ element: tri._hyp, scale: 1.5 }),
       },
     };
     commonShow = {
@@ -803,21 +807,30 @@ class Content extends PresentationFormatContent {
         coll._eqnSame.setScenario('left');
       },
     };
-    this.addSection(common, commonShow, commonContent);
+    this.addSection(common, commonShow, commonContent, {
+      title: 'Use',
+    });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
     commonContent = {
       setContent: style({}, [
-        'If the |two sides are known|, then their |ratio| (which is the sine of the angle) can looked up in a |table_of_sines| to see which angle is associated with it.',
+        'If |two_sides_are_known|, then their |ratio| (the sine) can be calculated and found in a |table_of_sines| to see which |angle| is associated with it.',
       ]),
       modifiers: {
         table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+        angle: coll.bindAccent(coll._tri._theta),
         ratio: coll.bindAccent({
           element: coll._eqnSame,
           children: ['opp', 'hyp', 'v'],
           centerOn: 'v',
+          x: 0.7,
+          scale: 1.5,
+        }),
+        two_sides_are_known: coll.bindAccent({
+          element: coll._tri,
+          children: ['opp', 'hyp'],
           scale: 1.5,
         }),
       },
@@ -829,17 +842,50 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({}, [
-        'If the angle and one side are |known|, then the relationship can be |rearranged| to find the unknown side.',
+        'If the |angle| and |one side| are |known|, then the relationship can be |rearranged| to find the unknown side.',
       ]),
       modifiers: {
         // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
         rearranged: click(coll.toggleEqn, [coll], colors.lines),
+        angle: coll.bindAccent(coll._tri._theta),
         // angle: coll.bindAccent(tri._theta),
         // opposite_side: coll.bindAccent(tri._opp),
         // hypotenuse: coll.bindAccent(tri._hyp),
       },
     };
-    this.addSection(common, commonShow, commonContent);
+    this.addSection(common, commonShow, commonContent, {
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'And just knowing the |ratio| is |constant| for all triangles with the same |theta| is very |useful|. This leads to many other |relationships between properties| in triangles and circles and forms the basis of |trigonometry|.',
+      ]),
+      modifiers: {
+        // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
+        ratio: coll.bindAccent(coll._eqnSame, colors.diagram.action),
+        constant: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['sin', 'theta', 'lb', 'rb'],
+          centerOn: 'lb',
+          scale: 1.5,
+          color: colors.diagram.action,
+        }),
+        theta: coll.bindAccent(coll, ['tri.theta', 'eqnSame.theta']),
+        // rearranged: click(coll.toggleEqn, [coll], colors.lines),
+        // angle: coll.bindAccent(tri._theta),
+        // opposite_side: coll.bindAccent(tri._opp),
+        // hypotenuse: coll.bindAccent(tri._hyp),
+      },
+      
+    };
+    this.addSection(common, commonShow, commonContent, {
+      // transitionFromPrev: (done) => {
+        
+      // },
+    });
 
     
   }
