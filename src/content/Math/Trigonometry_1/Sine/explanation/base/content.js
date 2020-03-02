@@ -473,6 +473,79 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     commonContent = {
+      setContent: 'The |sine_function| is also sometimes written without the |brackets| for convenience or a clean look.',
+      modifiers: {
+        sine_function: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['sin', 'lb', 'theta', 'rb'],
+          centerOn: 'sin',
+          scale: 2,
+        }, colors.diagram.action),
+        brackets: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['lb', 'rb'],
+          // centerOn: 'theta',
+          // scale: 2,
+        }, colors.diagram.action),
+      },
+    };
+
+    commonShow = {
+      show: [tri],
+      hide: [tri._complement, tri._adj],
+      setEqnForms: [
+        [coll._eqnSame, 'sin'],
+      ],
+    };
+
+    this.addSection(common, commonShow, commonContent, {
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+      },
+    });
+
+    const dissolveBrackets = (done: ?() => void) => {
+      coll._eqnSame.showForm('sin');
+      coll.accent({
+        element: coll._eqnSame,
+        children: ['lb', 'rb'],
+        done: () => {
+          coll._eqnSame.goToForm({
+            name: 'sinNoBracket',
+            animate: 'move',
+            duration: 0.5,
+            callback: done,
+          });
+        },
+      });
+    };
+    this.addSection(common, commonShow, commonContent, {
+      modifiers: {    
+        brackets: click(dissolveBrackets, [this, null], colors.diagram.action),
+        // sin: coll.bindAccent({
+        //   element: coll._eqnSame,
+        //   children: ['sin', 'lb', 'theta', 'rb'],
+        //   centerOn: 'sin',
+        //   scale: 2,
+        // }, colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        dissolveBrackets(done);
+      },
+      setSteadyState: () => {
+        coll._tri.setScenario('right');
+        coll._eqnSame.setScenario('left');
+        coll._eqnSame.showForm('sinNoBracket');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
       setContent: 'The word |sine| originates from the word for |bowstring|.',
       modifiers: {
         bowstring: this.bindNext(colors.lines),
@@ -491,7 +564,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
-        coll._eqnSame.showForm('sin');
+        coll._eqnSame.showForm('sinNoBracket');
       },
     });
 
@@ -515,7 +588,7 @@ class Content extends PresentationFormatContent {
         coll._rotator.showAll();
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
-        coll._eqnSame.showForm('sin');
+        coll._eqnSame.showForm('sinNoBracket');
         coll.animations.new()
           .inParallel([
             coll._tri._theta.anim.dissolveOut({ duration: 0.8 }),
@@ -560,19 +633,18 @@ class Content extends PresentationFormatContent {
           .start();
       },
       setSteadyState: () => {
-        coll._tri.showAll();
-        coll._rotator.showAll();
-        coll._tri.setScale(1, 1);
-        coll._rotator._pad.setPosition(layout.points[2]);
-        coll.updatePad();
-        coll._tri._hyp.setLabel('hypotenuse');
-        coll._tri._opp.setLabel('opposite');
-        coll._tri._theta.setLabel('\u03b8');
-        coll._rotator._pad.setMovable(false);
-        coll._rotator._line.setMovable(false);
+        // coll._tri.showAll();
+        // coll._rotator.showAll();
+        // coll._tri.setScale(1, 1);
+        // coll._rotator._pad.setPosition(layout.points[2]);
+        // coll.updatePad();
+        // coll._tri._hyp.setLabel('hypotenuse');
+        // coll._tri._opp.setLabel('opposite');
+        // coll._tri._theta.setLabel('\u03b8');
+        // coll._rotator._pad.setMovable(false);
+        // coll._rotator._line.setMovable(false);
 
         coll._eqnSame.hide();
-        coll._tri.hide();
         coll._history.showAll();
         coll._history.toFront(['arc', 'bowString']);
         coll.accent({
@@ -580,8 +652,12 @@ class Content extends PresentationFormatContent {
           children: ['arc', 'bowString'],
           style: 'highlight',
         });
+        coll._rotator.hideAll();
+        coll._tri.hideAll();
+        coll._tri._right.hideAll();
       },
       setLeaveState: () => {
+        coll._tri.setScale(1, 1);
         coll._rotator._pad.setPosition(layout.points[2]);
         coll._tri._hyp.setLabel('hypotenuse');
         coll._tri._opp.setLabel('opposite');
@@ -842,7 +918,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       setContent: style({}, [
-        'If the |angle| and |one side| are |known|, then the relationship can be |rearranged| to find the unknown side.',
+        'Alternately, if the |angle| and |one side| are |known|, then the relationship can be |rearranged| to find the unknown side.',
       ]),
       modifiers: {
         // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
@@ -869,7 +945,7 @@ class Content extends PresentationFormatContent {
         constant: coll.bindAccent({
           element: coll._eqnSame,
           children: ['sin', 'theta', 'lb', 'rb'],
-          centerOn: 'lb',
+          centerOn: 'sin',
           scale: 1.5,
           color: colors.diagram.action,
         }),
@@ -879,15 +955,75 @@ class Content extends PresentationFormatContent {
         // opposite_side: coll.bindAccent(tri._opp),
         // hypotenuse: coll.bindAccent(tri._hyp),
       },
-      
+
     };
     this.addSection(common, commonShow, commonContent, {
-      // transitionFromPrev: (done) => {
-        
-      // },
     });
 
-    
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'This topic focused on the ratio between the |opposite side| and |hypotenuse|.',
+      ]),
+    };
+    this.addSection(common, commonContent, {
+      title: 'Other Ratios',
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      setEqnForms: [
+        [coll._eqnSin, 'base'],
+      ],
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    commonContent = {
+      setContent: style({}, [
+        'The |other ratios| are |constant| and have |functions| that describe them with names |cosine| and |tangent|, which are abbreviated to |cos| and |tan|.',
+      ]),
+    };
+    this.addSection(common, commonContent, {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      setEqnForms: [
+        [coll._eqnSin, 'base'],
+      ],
+    });
+    this.addSection(common, commonContent, {
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      setEqnForms: [
+        [coll._eqnSin, 'base'],
+      ],
+      transitionFromPrev: (done) => {
+        coll._eqnSin.setScenario('default');
+        coll._eqnSin.animations.new()
+          .scenario({ target: 'top', duration: 1 })
+          .inParallel([
+            coll._eqnCos.anim.dissolveIn({ duration: 1 }),
+            coll._eqnTan.anim.dissolveIn({ duration: 1 }),
+            coll.anim.trigger({
+              callback: () => {
+                coll._eqnCos.showForm('base');
+                coll._eqnTan.showForm('base');
+              },
+            }),
+          ])
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._eqnSin.setScenario('top');
+        coll._eqnCos.showForm('base');
+        coll._eqnTan.showForm('base');
+      },
+    });
   }
 }
 

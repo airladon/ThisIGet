@@ -496,6 +496,21 @@ export default function diagramLayout() {
               'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
             ],
             alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'sinNoBracket': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'sin', ' ', 'theta',
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
           },
           'opp': {
             content: [
@@ -518,6 +533,20 @@ export default function diagramLayout() {
               'opp': ['curved', 'up', 0.45],
               'hyp': ['curved', 'down', 0.45],
             },
+          },
+          'cos': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'cos', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+          'tan': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'tan', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
           },
         },
       },
@@ -616,6 +645,120 @@ export default function diagramLayout() {
           ],
         },
         position: [-0.2, -1.7],
+      },
+    },
+    {
+      name: 'eqnSin',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          sin: { style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'sin', ' ', 'theta', 'equals',
+              { frac: ['opp', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          top: { position: [-0.6, 0.3] },
+          default: { position: [-0.6, -0.2] },
+        },
+      },
+    },
+    {
+      name: 'eqnCos',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          cos: { style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'cos', ' ', 'theta', 'equals',
+              { frac: ['adj', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+              // 'equals',
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-0.6, -0.5] },
+        },
+      },
+    },
+    {
+      name: 'eqnTan',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          tan: { text: 'tan', style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'tan', ' ', 'theta', 'equals',
+              { frac: ['opp', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+              // 'equals',
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-0.6, -1.3] },
+        },
       },
     },
   ];
