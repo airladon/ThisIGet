@@ -15,9 +15,9 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 
 const {
   // style,
-  click,
+  // click,
   // clickW,
-  highlight,
+  // highlight,
   highlightWord,
   // centerV,
 } = Fig.tools.html;
@@ -66,14 +66,6 @@ class Content extends PresentationFormatContent {
   }
 
   // this.addSectionEqnStep({ eqn: eqn, from: '0', to: '1' }, common, commonContent);
-
-  // this.addSection({
-  //   setContent: [
-  //     note({ label: 'Note:' }, 'Move the |top_point| of the triangle to change the triangle'),
-  //     `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html()}`,
-  //   ]
-  //   fadeInFromPrev: false,
-  // })
 }
 
 export default Content;

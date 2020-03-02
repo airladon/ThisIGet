@@ -3301,7 +3301,7 @@
     "dependencies": [
       "Sine"
     ],
-    "enabled": true
+    "enabled": false
   },
   "Math/Trigonometry_1/Cotangent": {
     "title": "Cotangent",
@@ -3319,7 +3319,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Secant"
     ],
     "enabled": false
   },
@@ -3359,7 +3359,7 @@
       }
     },
     "dependencies": [
-      "LawOfSines"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -3379,7 +3379,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Sine"
     ],
     "enabled": false
   },
@@ -3399,7 +3399,7 @@
       }
     },
     "dependencies": [
-      "Tangent"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -3447,21 +3447,21 @@
           "fullTopic": true,
           "links": ""
         },
-        "base1": {
-          "type": "presentation",
-          "title": "From a Right Angle Triangle",
-          "description": "",
-          "htmlTitle": "Sine Function Concept",
-          "htmlDescription": "Definition and derivation for the sine function concept",
-          "fullTopic": true,
-          "links": ""
-        },
         "brief": {
           "type": "singlePage",
           "title": "Brief",
           "description": "",
           "htmlTitle": "Sine function concept in brief",
           "htmlDescription": "Succinct definition and derivation for the Sine Function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "fromRightAngleTriangle": {
+          "type": "presentation",
+          "title": "From a Right Angle Triangle",
+          "description": "",
+          "htmlTitle": "Sine Function Concept from a Right Angle Triangle",
+          "htmlDescription": "Definition and derivation for the sine function concept",
           "fullTopic": true,
           "links": ""
         }
@@ -3618,7 +3618,7 @@
       }
     },
     "dependencies": [
-      "Introduction"
+      "Tangent"
     ],
     "enabled": false
   }

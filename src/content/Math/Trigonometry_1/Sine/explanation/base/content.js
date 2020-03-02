@@ -169,10 +169,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       title: 'Right Angle Triangles',
-      setContent: 'Now consider a |right_angle_triangle| with a labelled |hypotenuse| and |sides_relative| to an |angle_theta|.',
+      setContent: 'Now consider a |right_angle_triangle| with a |hypotenuse| and |sides| labeled |relative| to an |angle_theta|.',
       modifiers: {
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
-        sides_relative: coll.bindToggleGroups(tri, [['opp'], ['adj']], colors.lines),
+        sides: coll.bindAccent(tri, ['opp', 'adj'], colors.lines),
         right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
         hypotenuse: coll.bindAccent(tri._hyp),
       },
@@ -293,7 +293,7 @@ class Content extends PresentationFormatContent {
       modifiers: {
         ratio: coll.bindAccent({ element: coll._eqnSame, scale: 1.5 }, colors.lines),
         changes: click(coll.goToRotation, [coll, null, null, null], colors.angles),
-        same_angle_theta: click(coll.goToLength, [coll], colors.angles),
+        same_angle_theta: click(coll.goToLength, [coll, null], colors.angles),
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
       },
       transitionFromPrev: (done) => {

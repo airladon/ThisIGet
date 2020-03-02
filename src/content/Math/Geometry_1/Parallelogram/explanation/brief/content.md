@@ -104,7 +104,7 @@ So we can see the diagonals are each split in half.
 
 ### Diagonal Intersection - Converse <a name="diagonals-converse"></a>
 
-Consider a quadrangle with diagnols that intersect at their midpoints. At the intersection, there are two pair of [[equal opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), labled $$\color{r}e$$ and $$\color{r}f$$.
+Consider a quadrangle with diagnols that intersect at their midpoints. At the intersection, there are two pair of [[equal opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), labeled $$\color{r}e$$ and $$\color{r}f$$.
 
 ![](pgram_diag3.png)
 

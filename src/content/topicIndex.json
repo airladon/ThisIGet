@@ -2043,7 +2043,7 @@
     "dependencies": [
       "Sine"
     ],
-    "enabled": true
+    "enabled": false
   },
   "Math/Trigonometry_1/Cotangent": {
     "title": "Cotangent",
@@ -2058,7 +2058,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Secant"
     ],
     "enabled": false
   },
@@ -2092,7 +2092,7 @@
       }
     },
     "dependencies": [
-      "LawOfSines"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -2109,7 +2109,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Sine"
     ],
     "enabled": false
   },
@@ -2126,7 +2126,7 @@
       }
     },
     "dependencies": [
-      "Tangent"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -2165,15 +2165,15 @@
           "description": "",
           "fullTopic": true
         },
-        "base1": {
-          "type": "presentation",
-          "title": "From a Right Angle Triangle",
-          "description": "",
-          "fullTopic": true
-        },
         "brief": {
           "type": "singlePage",
           "title": "Brief",
+          "description": "",
+          "fullTopic": true
+        },
+        "fromRightAngleTriangle": {
+          "type": "presentation",
+          "title": "From a Right Angle Triangle",
           "description": "",
           "fullTopic": true
         }
@@ -2274,7 +2274,7 @@
       }
     },
     "dependencies": [
-      "Introduction"
+      "Tangent"
     ],
     "enabled": false
   }
