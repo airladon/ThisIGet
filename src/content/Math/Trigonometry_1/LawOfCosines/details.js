@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Law of Cosines',
   dependencies: [
-    'LawOfSines',
+    'Cosine',
   ],
   enabled: false,
   path: 'Math/Trigonometry_1',

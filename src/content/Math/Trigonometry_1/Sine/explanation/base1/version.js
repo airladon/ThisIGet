@@ -4,7 +4,7 @@
 var version = {
   uid: 'base1',
   topic: 'explanation',
-  title: 'Descriptive & Interactive',
+  title: 'From a Right Angle Triangle',
   description: '',
   htmlTitle: 'Sine Function Concept',
   htmlDescription: 'Definition and derivation for the sine function concept',

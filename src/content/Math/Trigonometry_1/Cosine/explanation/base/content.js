@@ -18,6 +18,7 @@ const {
   click,
   // clickW,
   highlight,
+  highlightWord,
   // centerV,
 } = Fig.tools.html;
 
@@ -36,6 +37,7 @@ class Content extends PresentationFormatContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       // 'Math/Geometry_1/Triangles/base',
+      'Math/Trigonometry_1/Sine/base',
     ]);
   }
 
@@ -47,8 +49,12 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        'In the sine function topic, we showed that the ratio of any two sides of a right angle triangle is the same for all right angle triangles with the same angle $$\theta$$.',
+        'In the |sine_function| topic, we showed that the ratio of any two sides of a right angle triangle is the same for all right angle triangles with the same angle |theta|.',
       ],
+      modifiers: {
+        sine_function: this.qr('Math/Trigonometry_1/Sine/base/MainPres'),
+        theta: highlightWord('\u03b8', colors.angles),
+      },
       show: [
         coll._tri, coll._eqn,
       ],

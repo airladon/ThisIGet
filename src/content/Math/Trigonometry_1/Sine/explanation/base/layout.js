@@ -873,12 +873,6 @@ export default function diagramLayout() {
     name: 'table',
     method: 'collection',
     addElements: [
-      // cell('0', '0º', 0),
-      // cell('1', '1º', -0.15),
-      // cell('2', '2º', -0.3),
-      // cell('d1', '\u22EE', -0.45),
-      // cell('43', '43º', -0.6),
-      // ...createTableElements([0, 1, 2, 'd', 39, 40, 41, 'd', 59, 60, 61, 'd', 
       ...createTableElements([0, 1, 2, 3, 4, 5, 6, 7, 8, 'd', 87, 88, 89, 90]),
     ],
     options: {

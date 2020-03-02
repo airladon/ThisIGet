@@ -5,7 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
-import { note } from '../../../../../common/tools/note';
+// import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -308,7 +308,7 @@ class Content extends PresentationFormatContent {
         coll._tri.animations.new()
           .inParallel([
             coll._tri.anim.scenario({ target: 'right', duration: 2 }),
-            coll._eqnSame.anim.scenario({ target: 'left', duration: 2}),
+            coll._eqnSame.anim.scenario({ target: 'left', duration: 2 }),
           ])
           .start();
       },
@@ -326,7 +326,7 @@ class Content extends PresentationFormatContent {
         coll._tri._adj.setLabel('adjacent');
         coll._tri._theta.setLabel('\u03b8');
         coll._rotator._pad.setMovable(false);
-        coll._rotator._line.setMovable(false)
+        coll._rotator._line.setMovable(false);
       },
     });
 
@@ -361,7 +361,7 @@ class Content extends PresentationFormatContent {
         coll._tri._adj.setLabel('adjacent');
         coll._tri._theta.setLabel('\u03b8');
         coll._rotator._pad.setMovable(false);
-        coll._rotator._line.setMovable(false)
+        coll._rotator._line.setMovable(false);
       },
     });
 
@@ -383,11 +383,13 @@ class Content extends PresentationFormatContent {
               coll._tri._opp.anim.dissolveOut({ duration: 0.5 }),
               coll._tri._theta._label.anim.dissolveOut({ duration: 0.5 }),
             ])
-            .trigger({ callback: () => {
-              coll._tri._hyp.setLabel('hypotenuse');
-              coll._tri._opp.setLabel('opposite');
-              coll._tri._theta.setLabel('\u03b8');
-            }})
+            .trigger({
+              callback: () => {
+                coll._tri._hyp.setLabel('hypotenuse');
+                coll._tri._opp.setLabel('opposite');
+                coll._tri._theta.setLabel('\u03b8');
+              },
+            })
             .inParallel([
               coll._tri._hyp.anim.dissolveIn({ duration: 0.5 }),
               coll._tri._opp.anim.dissolveIn({ duration: 0.5 }),
@@ -521,7 +523,7 @@ class Content extends PresentationFormatContent {
       });
     };
     this.addSection(common, commonShow, commonContent, {
-      modifiers: {    
+      modifiers: {
         brackets: click(dissolveBrackets, [this, null], colors.diagram.action),
         // sin: coll.bindAccent({
         //   element: coll._eqnSame,
@@ -606,7 +608,7 @@ class Content extends PresentationFormatContent {
             coll._tri.anim.position({ target: coll._history.getPosition(), duration: 2 }),
             coll._tri.anim.scale({ target: layout.historyRadius / layout.triLen, duration: 2 }),
           ])
-          
+
           .inParallel([
             coll._history.anim.dissolveIn({ duration: 1 }),
             coll._tri.anim.dissolveOut({ duration: 1 }),
@@ -664,14 +666,13 @@ class Content extends PresentationFormatContent {
         coll._tri._adj.setLabel('adjacent');
         coll._tri._theta.setLabel('\u03b8');
         coll._rotator._pad.setMovable(false);
-        coll._rotator._line.setMovable(false)
+        coll._rotator._line.setMovable(false);
       },
     });
 
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    
     const pulseChord = () => {
       coll.accent({
         element: coll._history, children: ['bowString'], style: ['highlight', 'pulse'],

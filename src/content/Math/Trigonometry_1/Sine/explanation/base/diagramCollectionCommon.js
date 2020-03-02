@@ -8,7 +8,7 @@ const {
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramObjectPolyLine,
   Equation,
   Transform,
   Point,
@@ -18,30 +18,56 @@ const {
 const { rand, round } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
-  // _fig: {
-  //   _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
-  //   _h: DiagramObjectLine;
-  //   _v: DiagramObjectLine;
-  //   _mirrorLine: DiagramObjectLine;
-  //   _hypotenuse: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
-  //   _theta: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectAngle;
-  //   _right: DiagramObjectAngle;
-  //   _complement: DiagramObjectAngle;
-  //   _opp: DiagramObjectLine;
-  //   _oppLabel: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
-  //   _mirrorV: DiagramObjectLine;
-  //   _mirrorArc: DiagramElementPrimitive;
-  //   // _real: DiagramObjectAngle;
-  //   // _sine: DiagramObjectLine;
-  //   // _sineTheta: { _label: Equation } & DiagramObjectLine;
-  //   _opposite: { _label: Equation } & DiagramObjectLine;
-  //   _arc: DiagramElementPrimitive;
-  // } & DiagramElementCollection;
+  _tri: {
+    _theta: DiagramObjectAngle;
+    _line: DiagramObjectPolyLine;
+    _complemenet: DiagramObjectAngle;
+    _right: DiagramObjectAngle;
+    _hyp: { _label: Equation } & DiagramObjectLine;
+    _opp: { _label: Equation } & DiagramObjectLine;
+    _adj: { _label: Equation } & DiagramObjectLine;
+  } & DiagramElementCollection;
 
-  // _table: {
-  //   _sineHeading: Equation;
-  //   _angleHeading: Equation;
-  // } & DiagramElementCollection;
+  _history: {
+    _circle: DiagramElementPrimitive;
+    _arc: DiagramElementPrimitive;
+    _axis: DiagramObjectLine;
+    _sin: DiagramObjectLine;
+    _bowString: DiagramObjectLine;
+    _mirrorString: DiagramObjectLine;
+    _tri: {
+      _line: DiagramObjectPolyLine;
+      _right: DiagramObjectAngle;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
+
+  _rotator: {
+    _line: DiagramObjectLine;
+    _pad: DiagramElementPrimitive;
+  } & DiagramElementCollection;
+
+  _similar: {
+    _tri1: DiagramObjectPolyLine;
+    _tri2: DiagramObjectPolyLine;
+  } & DiagramElementCollection;
+
+  _table: {
+    _sineHeading: Equation;
+    _angleHeading: Equation;
+  } & DiagramElementCollection;
+
+  _eqnSame: {
+    _value: DiagramElementPrimitive;
+  } & Equation;
+
+  _eqn: {
+    _equals: DiagramElementPrimitive;
+  } & Equation;
+
+  _eqnCos: Equation;
+  _eqnSin: Equation;
+  _eqnTan: Equation;
+  _powerSeries: Equation;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -172,7 +198,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  limitPadMovement(transform: Transform) {    
+  limitPadMovement(transform: Transform) {
     const clipped = transform._dup();
     const position = transform.t();
     // console.log(position)
@@ -251,7 +277,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   // }
 
   goToLength(toLength: ?number = null) {
-    let line = new Line(new Point(0, 0), this._tri._line.points[2]);
+    const line = new Line(new Point(0, 0), this._tri._line.points[2]);
     const ceiling = new Line(
       new Point(0, this.custom.maxHeight),
       new Point(5, this.custom.maxHeight),
@@ -301,7 +327,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   updateTri() {
-    const points = this._tri._line.points;
+    const { points } = this._tri._line;
     this._tri._right.setAngle({
       p1: points[2],
       p2: points[1],
@@ -322,7 +348,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
       this._tri._opp.setLabel(`${opp.toFixed(4)}`);
       this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
-      const r = this._rotator._line.getRotation();
+      // const r = this._rotator._line.getRotation();
       if (points[1].x < 1.3 || points[2].y < 0.35) {
         this._tri._right.hide();
       } else {

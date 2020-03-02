@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Law of Sines',
   dependencies: [
-    'Pythagoras',
+    'Sine',
   ],
   enabled: false,
   path: 'Math/Trigonometry_1',
