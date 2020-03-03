@@ -214,16 +214,6 @@ export default function diagramLayout() {
       method: 'collection',
       addElements: [
         {
-          name: 'line',
-          method: 'polyLine',
-          options: {
-            points,
-            color: colors.lines,
-            width: 0.02,
-            close: true,
-          },
-        },
-        {
           name: 'theta',
           method: 'angle',
           options: {
@@ -232,7 +222,7 @@ export default function diagramLayout() {
             p3: points[2],
             curve: {
               radius: 0.6,
-              sides: 100,
+              sides: 200,
             },
             color: colors.angles,
             label: {
@@ -259,6 +249,7 @@ export default function diagramLayout() {
               scale: 0.9,
               radius: 0.6,
             },
+            pulse: 1.4,
           },
         },
         {
@@ -274,6 +265,16 @@ export default function diagramLayout() {
             },
             color: colors.angles,
             autoRightAngle: true,
+          },
+        },
+        {
+          name: 'line',
+          method: 'polyLine',
+          options: {
+            points,
+            color: colors.lines,
+            width: 0.02,
+            close: true,
           },
         },
         {

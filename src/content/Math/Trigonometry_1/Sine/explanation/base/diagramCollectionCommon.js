@@ -137,9 +137,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.accent(this, [option]);
     this.exec(
       ['pulse', { time: 1, scale: 1.4 }],
-      [...option.slice(1, 3)],
+      [...option.slice(1)],
     );
-    this._eqnSame.pulse({ centeredOn: this._eqnSame, scale: 1.3, time: 1 });
+    this.accent({
+      element: this._eqnSame,
+      children: ['v', 'opp', 'adj', 'hyp'],
+      centerOn: 'v',
+      scale: 1.3,
+      time: 1,
+      // x: 0.7,
+    });
     this.diagram.animateNextFrame();
   }
 
@@ -187,6 +194,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (duration == null) {
       this._rotator._line.animations.new()
         .rotation({ target: r, velocity: 0.3 })
+        .pulse({ element: this._eqnSame._value, duration: 1 })
         .whenFinished(done)
         .start();
     } else {
@@ -304,6 +312,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     );
     this._rotator._pad.animations.new()
       .position({ target, velocity: 0.5 })
+      .pulse({ element: this._eqnSame._value, duration: 1 })
       .start();
     this.diagram.animateNextFrame();
   }
@@ -399,11 +408,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
     const options = ['opp', 'hyp'];
     const option = options[this.custom.eqnCounter];
+    if (this._eqnSame.eqn.isAnimating) {
+      this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
+    }
     this._eqnSame.goToForm({
       name: option,
       animate: 'move',
       duration: 2,
+      ifAnimating: {
+        cancelGoTo: true,
+        skipToTarget: true,
+      },
     });
+
     this.diagram.animateNextFrame();
   }
 }

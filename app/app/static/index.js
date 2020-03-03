@@ -8412,7 +8412,11 @@ function (_DiagramElementCollec) {
           if (options.animate === 'move') {
             // console.log('move', duration, options, subForm.duration)
             // console.log('******************* animate')
-            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
+            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, false);
+          } else if (options.animate === 'dissolveInThenMove') {
+            // console.log('move', duration, options, subForm.duration)
+            // console.log('******************* animate')
+            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, true);
           } else if (options.animate === 'moveFrom' && this.eqn.formRestart != null && this.eqn.formRestart.moveFrom != null) {
             var moveFrom = this.eqn.formRestart.moveFrom;
             var target = this.getPosition();
@@ -9164,6 +9168,7 @@ function (_Elements) {
     value: function animatePositionsTo(delay, dissolveOutTime, moveTime, dissolveInTime) {
       var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var fromWhere = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var dissolveInBeforeMove = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
       var allElements = this.collectionMethods.getAllElements();
       this.collectionMethods.stop();
       var elementsShownTarget = this.getAllElements();
@@ -9218,7 +9223,15 @@ function (_Elements) {
       var dissolveInCallback = null;
       var dissolveOutCallback = null;
 
-      if (elementsToMove.length === 0 && elementsToShow.length === 0) {
+      if (dissolveInBeforeMove) {
+        if (elementsToMove.length === 0 && elementsToShow.length === 0) {
+          dissolveOutCallback = callback;
+        } else if (elementsToMove.length === 0) {
+          dissolveInCallback = callback;
+        } else {
+          moveCallback = callback;
+        }
+      } else if (elementsToMove.length === 0 && elementsToShow.length === 0) {
         dissolveOutCallback = callback;
       } else if (elementsToShow.length === 0) {
         moveCallback = callback;
@@ -9265,15 +9278,29 @@ function (_Elements) {
           }
         }
       });
+
+      if (dissolveInBeforeMove) {
+        if (elementsToShow.length > 0) {
+          this.dissolveElements(elementsToShow, 'in', cumTime, dissolveInTime, dissolveInCallback);
+          cumTime += dissolveInTime + 0.001;
+        }
+      }
+
       var t = this.collectionMethods.animateToTransforms(animateToTransforms, moveTimeToUse, cumTime, 0, moveCallback);
 
       if (t > 0) {
         cumTime = t;
-      }
+      } // if (elementsToShow.length > 0) {
+      //   this.dissolveElements(elementsToShow, 'in', cumTime, dissolveInTime, dissolveInCallback);
+      //   cumTime += dissolveInTime + 0.001;
+      // }
 
-      if (elementsToShow.length > 0) {
-        this.dissolveElements(elementsToShow, 'in', cumTime, dissolveInTime, dissolveInCallback);
-        cumTime += dissolveInTime + 0.001;
+
+      if (!dissolveInBeforeMove) {
+        if (elementsToShow.length > 0) {
+          this.dissolveElements(elementsToShow, 'in', cumTime, dissolveInTime, dissolveInCallback);
+          cumTime += dissolveInTime + 0.001;
+        }
       }
 
       return cumTime;
@@ -17091,15 +17118,26 @@ function (_DiagramElementCollec) {
       _this2.addSide(2, _sideOptions2.length, _sideOptions2.width, _sideOptions2.color);
     }
 
-    _this2.pulseDefaultSettings = {
-      curve: optionsToUse.pulse.curve || 1,
-      label: optionsToUse.pulse.label || 1,
-      arrow: optionsToUse.pulse.arrow || 1,
-      side: optionsToUse.pulse.side || 1,
-      collection: optionsToUse.pulse.collection || 1
-    }; // this.pulseDefault = (done) => {
+    if (typeof optionsToUse.pulse === 'number') {
+      _this2.pulseDefaultSettings = {
+        curve: defaultOptions.pulse.curve,
+        label: defaultOptions.pulse.label,
+        arrow: defaultOptions.pulse.arrow,
+        side: defaultOptions.pulse.side,
+        collection: optionsToUse.pulse
+      };
+    } else {
+      _this2.pulseDefaultSettings = {
+        curve: optionsToUse.pulse.curve || 1,
+        label: optionsToUse.pulse.label || 1,
+        arrow: optionsToUse.pulse.arrow || 1,
+        side: optionsToUse.pulse.side || 1,
+        collection: optionsToUse.pulse.collection || 1
+      };
+    } // this.pulseDefault = (done) => {
     //   this.pulseScaleNow(1, 1.7, 0, done);
     // };
+
 
     _this2.pulseDefault = function (done) {
       var doneToUse = done;
@@ -26346,6 +26384,7 @@ function () {
   // Transform of diagram element
   // presetTransforms: Object;       // Convenience dict of transform presets
   // Transform matrix used in last draw
+  // Transform matrix used in last draw
   // lastDrawParentTransform: Transform;
   // lastDrawElementTransform: Transform;
   // lastDrawPulseTransform: Transform;
@@ -26424,6 +26463,7 @@ function () {
     this.internalSetTransformCallback = function () {};
 
     this.lastDrawTransform = this.transform._dup();
+    this.lastDrawPulseTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
       parentCount: 0,
@@ -28390,9 +28430,11 @@ function (_DiagramElement) {
           elementCount: this.transform.order.length
         };
         var newTransform = parentTransform.transform(this.getTransform());
+        this.lastDrawTransform = newTransform._dup();
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawTransform = pulseTransforms[0];
+        this.lastDrawPulseTransform = pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+
         var pointCount = -1;
 
         if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
@@ -28738,9 +28780,11 @@ function (_DiagramElement2) {
           elementCount: this.transform.order.length
         };
         var newTransform = parentTransform.transform(this.getTransform());
+        this.lastDrawTransform = newTransform._dup();
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawTransform = pulseTransforms[0]; // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
+        this.lastDrawPulseTransform = pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
 
         for (var k = 0; k < pulseTransforms.length; k += 1) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
@@ -32219,6 +32263,25 @@ function () {
       }
 
       return new Transform(order, this.name);
+    }
+  }, {
+    key: "remove",
+    value: function remove(transformNames) {
+      var newOrder = [];
+      var names;
+
+      if (typeof transformNames === 'string') {
+        names = [transformNames];
+      } else {
+        names = transformNames;
+      }
+
+      this.order.forEach(function (transformElement) {
+        if (names.indexOf(transformElement.name) === -1) {
+          newOrder.push(transformElement._dup());
+        }
+      });
+      return new Transform(newOrder, this.name);
     }
   }, {
     key: "calcMatrix",

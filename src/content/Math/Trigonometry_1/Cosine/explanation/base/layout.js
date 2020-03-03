@@ -64,16 +64,6 @@ export default function diagramLayout() {
       method: 'collection',
       addElements: [
         {
-          name: 'tri',
-          method: 'polyLine',
-          options: {
-            points,
-            color: colors.lines,
-            width: 0.02,
-            close: true,
-          },
-        },
-        {
           name: 'angle',
           method: 'angle',
           options: {
@@ -82,7 +72,7 @@ export default function diagramLayout() {
             p3: points[2],
             curve: {
               radius: 0.6,
-              sides: 100,
+              sides: 200,
             },
             color: colors.angles,
             label: {
@@ -90,6 +80,31 @@ export default function diagramLayout() {
               scale: 0.9,
               radius: 0.6,
             },
+          },
+        },
+        {
+          name: 'right',
+          method: 'angle',
+          options: {
+            p1: points[2],
+            p2: points[1],
+            p3: points[0],
+            curve: {
+              radius: 0.4,
+              sides: 100,
+            },
+            color: colors.angles,
+            autoRightAngle: true,
+          },
+        },
+        {
+          name: 'tri',
+          method: 'polyLine',
+          options: {
+            points,
+            color: colors.lines,
+            width: 0.02,
+            close: true,
           },
         },
         {
@@ -109,21 +124,6 @@ export default function diagramLayout() {
               scale: 0.9,
               radius: 0.6,
             },
-          },
-        },
-        {
-          name: 'right',
-          method: 'angle',
-          options: {
-            p1: points[2],
-            p2: points[1],
-            p3: points[0],
-            curve: {
-              radius: 0.4,
-              sides: 100,
-            },
-            color: colors.angles,
-            autoRightAngle: true,
           },
         },
         {

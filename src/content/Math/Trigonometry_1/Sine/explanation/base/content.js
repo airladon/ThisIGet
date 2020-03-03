@@ -169,7 +169,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     commonContent = {
       title: 'Right Angle Triangles',
-      setContent: 'Now consider a |right_angle_triangle| with a |hypotenuse| and |sides| labeled |relative| to an |angle_theta|.',
+      setContent: 'Now consider a |right_angle_triangle| with |sides| that are labeled |relative| to an |angle_theta|.',
       modifiers: {
         angle_theta: clickW('angle \u03b8', coll.accent, [coll, tri, ['theta'], null], colors.angles),
         sides: coll.bindAccent(tri, ['opp', 'adj'], colors.lines),
@@ -195,8 +195,8 @@ class Content extends PresentationFormatContent {
         add_to_180º: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
         two_angles: coll.bindAccent(tri, ['theta', 'right']),
         all_three: coll.bindAccent({
-          element: tri,
-          children: ['complement'],
+          element: tri._complement,
+          // children: ['complement'],
           style: ['pulse', 'show'],
         }),
       },
@@ -459,7 +459,7 @@ class Content extends PresentationFormatContent {
         coll._eqnSame.setScenario('left');
         coll._eqnSame.goToForm({
           name: 'sin',
-          animate: 'move',
+          animate: 'dissolveInThenMove',
           duration: 1.5,
           callback: done,
         });
@@ -483,12 +483,13 @@ class Content extends PresentationFormatContent {
           centerOn: 'sin',
           scale: 2,
         }, colors.diagram.action),
-        brackets: coll.bindAccent({
-          element: coll._eqnSame,
-          children: ['lb', 'rb'],
-          // centerOn: 'theta',
-          // scale: 2,
-        }, colors.diagram.action),
+        // brackets: coll.bindAccent({
+        //   element: coll._eqnSame,
+        //   children: ['lb', 'rb'],
+        //   // centerOn: 'theta',
+        //   // scale: 2,
+        // }, colors.diagram.action),
+        brackets: this.bindNext(),
       },
     };
 
