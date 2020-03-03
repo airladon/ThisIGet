@@ -1,13 +1,13 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 import './style.scss';
 
-const {
-  Point,
-  // Transform,
-  // Line,
-} = Fig.tools.g2;
+// const {
+//   // Point,
+//   // Transform,
+//   // Line,
+// } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
@@ -18,7 +18,7 @@ export default function diagramLayout() {
   const { colors } = layout;
   colors.sides = colors.get('blue').rgb;
 
-  layout.addElements = [    
+  layout.addElements = [
   ];
   return layout;
 }

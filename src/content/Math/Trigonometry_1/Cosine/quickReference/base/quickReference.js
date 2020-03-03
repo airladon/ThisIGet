@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import React from 'react';
+// import React from 'react';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
@@ -8,17 +8,17 @@ import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
-import StaticQR from '../../../../../../js/components/staticQR';
+// import StaticQR from '../../../../../../js/components/staticQR';
 // import external from './external.md';
 
 const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
-const {
-  click,
-//   highlight,
-} = Fig.tools.html;
+// const {
+//   click,
+// //   highlight,
+// } = Fig.tools.html;
 
 export default class QRMainPres extends PopupBoxCollection {
   _collection: CommonCollection;
@@ -29,8 +29,8 @@ export default class QRMainPres extends PopupBoxCollection {
   ) {
     super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
-    const coll = this._collection;
-    const { colors } = this.layout;
+    // const coll = this._collection;
+    // const { colors } = this.layout;
     const modifiers = {};
     this.setTitle('');
     this.setDescription('', modifiers);
@@ -38,7 +38,6 @@ export default class QRMainPres extends PopupBoxCollection {
   }
 
   show() {
-    
     super.show();
     const coll = this._collection;
     this.setDiagramSpace({ location: 'top', size: 0.6 });

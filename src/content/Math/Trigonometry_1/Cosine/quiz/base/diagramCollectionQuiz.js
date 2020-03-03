@@ -3,7 +3,7 @@ import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
+// import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
@@ -15,15 +15,14 @@ const {
   // EquationLabel,
 } = Fig;
 
-const {
-  // removeRandElement,
-  // randElement,
-  // round,
-  // rand,
-} = Fig.tools.math;
+// const {
+//   // removeRandElement,
+//   // randElement,
+//   // round,
+//   // rand,
+// } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-
   constructor(
     diagram: CommonTopicDiagram,
     layout: Object,
@@ -55,13 +54,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this.answer = ;
   }
 
-  findAnswer() {
-    // if (parseFloat(this._input.getValue()) === this.answer) {
-    //   return 'correct';
-    // }
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    return 'incorrect';
-  }
+  // findAnswer() {
+  //   // if (parseFloat(this._input.getValue()) === this.answer) {
+  //   //   return 'correct';
+  //   // }
+  //   // if (this._input.getValue() === this.answer.toString()) {
+  //   //   return 'correct';
+  //   // }
+  //   return 'incorrect';
+  // }
 }

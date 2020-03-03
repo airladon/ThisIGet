@@ -14,7 +14,6 @@ const {
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
-
   constructor(
     diagram: CommonTopicDiagram,
     layout: Object,

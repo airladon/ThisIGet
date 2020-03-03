@@ -6,14 +6,14 @@
 
 //   return layout;
 // }
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 
-const {
-  Point,
-  // Transform,
-  // Line,
-} = Fig.tools.g2;
+// const {
+//   Point,
+//   // Transform,
+//   // Line,
+// } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
 // const { round } = Fig.tools.math;
@@ -23,9 +23,7 @@ export default function diagramLayout() {
   const layout: Object = baseLayout();
   const { colors } = layout;
   colors.sides = colors.get('blue').rgb;
-  
   layout.addElements = [
-    
   ];
   return layout;
 }

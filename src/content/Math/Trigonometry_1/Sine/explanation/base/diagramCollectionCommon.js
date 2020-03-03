@@ -352,7 +352,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         p3: points[2],
       });
       const theta = parseFloat(this._tri._theta.getLabel()) * Math.PI / 180;
-      const len = new Line(new Point(0, 0), points[2]).length()
+      const len = new Line(new Point(0, 0), points[2]).length();
       const hyp = round((len - 0.5) ** 3, 4);
       const opp = round(hyp * Math.sin(theta), 4);
       this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);

@@ -15,7 +15,7 @@ import commonLayout from '../../explanation/base/layout';
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
   const layout: Object = commonLayout();
-  const { colors } = layout;
+  // const { colors } = layout;
   layout.addElementsQuiz = [
   ];
 
