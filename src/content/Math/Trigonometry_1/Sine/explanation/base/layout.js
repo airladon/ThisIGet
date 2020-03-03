@@ -960,7 +960,7 @@ export default function diagramLayout() {
       scale: 0.7,
       elements: {
         for: { style: 'normal' },
-        theta: { text: '\u03b8', color: colors.angles},
+        theta: { text: '\u03b8', color: colors.angles },
         inRad: { text: 'in radians', style: 'normal' },
       },
       forms: {
@@ -969,7 +969,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [2, -1 ] },
+        default: { position: [2, -1] },
       },
     },
   };
