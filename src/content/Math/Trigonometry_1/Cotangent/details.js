@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Cotangent',
   dependencies: [
-    'Pythagoras',
+    'Secant',
   ],
   enabled: false,
   path: 'Math/Trigonometry_1',

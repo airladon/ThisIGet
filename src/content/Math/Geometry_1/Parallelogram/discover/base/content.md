@@ -171,7 +171,7 @@ Consider any quadrangle with two diagonals that have a relationship of a paralle
 <hint>We've already seen above that any quadrangles with equal opposite angles, or equal opposite sides is a parallelogram.</hint>
 
 <hintLow>[Answer]
-Consider a quadrangle with diagnols that intersect at their midpoints. At the intersection, there are two pair of [[equal opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), labled $$\color{r}e$$ and $$\color{r}f$$.
+Consider a quadrangle with diagnols that intersect at their midpoints. At the intersection, there are two pair of [[equal opposite angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Opposite',#00756F)), labeled $$\color{r}e$$ and $$\color{r}f$$.
 
 ![](pgram_diag3.png)
 

@@ -1,18 +1,22 @@
 // @flow
+// import commonLayout from '../../explanation/base/layout';
+
+// export default function diagramLayout() {
+//   const layout: Object = commonLayout();
+
+//   return layout;
+// }
 import Fig from 'figureone';
 import baseLayout from '../../../../../common/layout';
 
 const {
-  // Point,
-  Transform,
-  // Line,
+  Point,
+  // Transform,
+  Line,
 } = Fig.tools.g2;
 
-const { round } = Fig.tools.math;
-
-// const { DiagramFont } = Fig;
 // const { joinObjects } = Fig.tools.misc;
-// const { round } = Fig.tools.math;
+const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function diagramLayout() {
@@ -25,1225 +29,740 @@ export default function diagramLayout() {
   colors.get('red').toCssVar('--color-angles');
   colors.get('green').toCssVar('--color-components');
   colors.get('blue').toCssVar('--color-lines');
-  colors.working = colors.get('grey', 'dark').rgb;
+  colors.working = colors.get('grey', 'light').rgb;
 
-  const eqnOpp = ({
-    elements: {
-      value: { text: '0.000', color: colors.components },
-      r: { text: 'r', color: colors.lines },
-      times: { text: ' \u00D7 ', color: colors.lines },
-      opposite: { color: colors.components },
-      brace: {
-        symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top',
-      },
-      hypotenuse: { color: colors.lines },
-    },
-    forms: {
-      'real': {
-        content: {
-          container: {
-            content: 'value',
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'realTimesR': {
-        content: {
-          container: {
-            content: ['value', ' ', 'times', '  ', 'r', '  '],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'realR': {
-        content: {
-          container: {
-            content: ['value', ' ', '  ', 'r', '  '],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'realRToOpposite': {
-        content: {
-          container: {
-            content: {
-              topComment: {
-                content: ['value', ' ', 'times', '  ', 'r', '  '],
-                comment: 'opposite',
-                symbol: 'brace',
-                inSize: false,
-              },
-            },
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'realRToHypotenuse': {
-        content: {
-          container: {
-            content: [
-              'value', ' ', 'times',
-              {
-                topComment: {
-                  content: ['  ', 'r', '  '],
-                  comment: 'hypotenuse',
-                  symbol: 'brace',
-                  inSize: false,
-                },
-              },
-            ],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'realRHypotenuse': {
-        content: {
-          container: {
-            content: ['value', 'times', 'hypotenuse'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'opposite': {
-        content: {
-          container: {
-            content: ['opposite'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'oppositeTimesR': {
-        content: {
-          container: {
-            content: ['opposite', 'times', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-      'oppositeR': {
-        content: {
-          container: {
-            content: ['opposite', 'r'],
-            width: 0.7,
-            ascent: 0.13,
-            descent: 0.05,
-            xAlign: 'left',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
-      },
-    },
-  });
+  const points = [
+    new Point(0, 0),
+    new Point(2.3, 0),
+    new Point(2.3, 1.6),
+  ];
+  layout.points = points;
+  layout.triLen = new Line(points[0], points[2]).length();
+  const historyRadius = 1;
+  layout.historyRadius = historyRadius;
+  const historyAngle = Math.atan2(points[2].y, points[2].x) * 1.2;
+  layout.historyAngle = historyAngle;
+  const historyPoints = [
+    new Point(0, 0),
+    new Point(historyRadius * Math.cos(historyAngle), 0),
+    new Point(historyRadius * Math.cos(historyAngle), historyRadius * Math.sin(historyAngle)),
+  ];
+  layout.historyPoints = historyPoints;
 
-  const eqnAngle = ({
-    elements: {
-      angle: { color: colors.angles },
-      theta: { text: '\u03B8', color: colors.angles },
-      brace: {
-        symbol: 'brace', lineWidth: 0.012, width: 0.05, side: 'top', color: colors.working,
-      },
-      box: { symbol: 'box', color: [0, 0, 0, 0] },
-      value: { text: '40º', color: colors.angles },
-    },
-    forms: {
-      'real': {
-        content: {
-          container: {
-            content: ['value'],
-            width: 0.5,
-            descent: 0.04,
-            ascent: 0.13,
-            xAlign: 0.1,
-            yAlign: 'bottom',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
-      },
-      'angle': {
-        content: {
-          container: {
-            content: ['angle'],
-            width: 0.5,
-            descent: 0.04,
-            ascent: 0.13,
-            xAlign: 0.1,
-            yAlign: 'bottom',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
-      },
-      'angleToTheta': {
-        content: {
-          container: {
-            content: {
-              topComment: {
-                content: 'angle', comment: 'theta', symbol: 'brace', inSize: false,
-              },
-            },
-            width: 0.5,
-            descent: 0.04,
-            ascent: 0.13,
-            xAlign: 0.1,
-            yAlign: 'bottom',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
-      },
-      'theta': {
-        content: {
-          container: {
-            content: ['theta'],
-            width: 0.5,
-            descent: 0.04,
-            ascent: 0.13,
-            xAlign: 0.1,
-            yAlign: 'bottom',
-          },
-        },
-        scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
-      },
-    },
-  });
+  const simX2 = 1;
+  const simX3 = 1.3;
+  const simY2 = 1.3;
+  const simPoints1 = [
+    new Point(0, 0),
+    new Point(simX2, simY2),
+    new Point(simX3, 0),
+  ];
+  const simScale = 1.4;
+  const simPoints2 = [
+    new Point(0, 0),
+    new Point(simX2 * simScale, simY2 * simScale),
+    new Point(simX3 * simScale, 0),
+  ];
 
-  const eqnR = ({
-    elements: {
-      r: { text: 'r', color: colors.lines },
-      times: { text: ' \u00D7 ', color: colors.lines },
-      _1: { text: '1', color: colors.lines },
-      s: { symbol: 'strike', style: 'cross', color: colors.working },
-      value: { text: '1.', color: colors.line },
-      hyp: { text: 'hypotenuse', color: colors.line },
-      brace: {
-        symbol: 'brace', width: 0.05, lineWidth: 0.012, color: colors.working, side: 'top',
-      },
+  const simAngle = label => ({
+    color: colors.angles,
+    curve: {
+      radius: 0.3,
+      width: 0.02,
+      sides: 200,
     },
-    forms: {
-      real: {
-        content: {
-          container: {
-            content: 'value',
-            width: 0.07,
-            ascent: 0.05,
-            descent: 0.05,
-            xAlign: 'right',
-            vAlign: '0o',
-          },
-        },
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      realTimesR: {
-        content: {
-          container: {
-            content: ['r', 'times', 'value'],
-            width: 0.07,
-            ascent: 0.05,
-            descent: 0.05,
-            xAlign: 'right',
-            vAlign: '0o',
-          },
-        },
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      r: {
-        content: {
-          container: {
-            content: ['  ', 'r', '  '],
-            width: 0.07,
-            ascent: 0.05,
-            descent: 0.05,
-            xAlign: 'right',
-            vAlign: '0o',
-          },
-        },
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      rToHyp: {
-        content: {
-          container: {
-            content: {
-              topComment: {
-                content: ['  ', 'r', '  '],
-                comment: 'hyp',
-                symbol: 'brace',
-                inSize: false,
-              },
-            },
-            width: 0.07,
-            ascent: 0.05,
-            descent: 0.05,
-            xAlign: 'right',
-            vAlign: '0o',
-          },
-        },
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      hyp: {
-        content: {
-          container: {
-            content: 'hyp',
-            width: 0.07,
-            ascent: 0.05,
-            descent: 0.05,
-            xAlign: 'right',
-            vAlign: '0o',
-          },
-        },
-        scale: 1,
-        alignment: { alignH: 'center' },
-      },
-      '0': {
-        content: {
-          container: {
-            content: '_1',
-            width: 0.07,
-            xAlign: 'right',
-          },
-        },
-        scale: 1,
-        // alignment: { alignH: 'center' },
-      },
-      '1': {
-        content: {
-          container: {
-            content: ['r', 'times', '_1'],
-            width: 0.07,
-            xAlign: 'right',
-          },
-        },
-        scale: 1,
-      },
-      '1a': {
-        content: {
-          container: {
-            content: [
-              'r',
-              'times',
-              { strike: ['_1', 's'] },
-            ],
-            width: 0.07,
-            xAlign: 'right',
-          },
-        },
-        scale: 1,
-      },
-      '2': {
-        content: {
-          container: {
-            content: 'r',
-            width: 0.07,
-            xAlign: 'right',
-          },
-        },
-        scale: 1,
-      },
-    },
-  });
-
-  const r = 2;
-  layout.r = r;
-  const line = (name, min, max) => ({
-    name,
-    method: 'line',
-    options: {
-      length: r,
-      rotation: 0,
-      width: 0.03,
-      move: { type: 'rotation' },
-      color: colors.lines,
-    },
-    mods: {
-      interactiveLocation: [r / 2, 0],
-      move: {
-        canBeMovedAfterLoosingTouch: true,
-        maxTransform: new Transform().scale(1, 1).rotate(max).translate(1000, 1000),
-        minTransform: new Transform().scale(1, 1).rotate(min).translate(-1000, -1000),
-      },
-    },
-  });
-  const component = (name, color) => ({
-    name,
-    method: 'line',
-    options: {
-      p1: [0, 0],
-      p2: [1, 0],
-      color,
-      width: 0.015,
-    },
-  });
-  const axis = (name, p1, p2) => ({
-    name,
-    method: 'line',
-    options: {
-      p1,
-      p2,
-      color: colors.axes,
-      width: 0.008,
-      dashStyle: {
-        style: [0.1, 0.05],
-      },
-    },
-  });
-  const angle = (name, text, radius = 0.3, p1 = [1, 0], p2 = [0, 0], p3 = [0, 1]) => ({
-    name,
-    method: 'angle',
-    options: {
-      color: colors.angles,
-      p1,
-      p2,
-      p3,
-      curve: {
-        radius,
-        width: 0.015,
-        sides: 200,
-      },
-      label: {
-        text,
-        radius,
-      },
-      autoRightAngle: true,
-    },
-  });
-
-  const circle = {
-    name: 'circle',
-    method: 'polygon',
-    options: {
-      sides: 400,
-      lineWidth: 0.008,
-      radius: r,
-      color: colors.working,
-    },
-  };
-
-  const lineLabel = (name, text, color, location, subLocation, p1 = [0, 0], p2 = [1, 0]) => ({
-    name,
-    method: 'line',
-    options: {
-      p1,
-      p2,
-      showLine: false,
-      label: {
-        text,
-        offset: 0.1,
-        location,
-        subLocation,
-        scale: 0.9,
-      },
-      color,
-    },
-  });
-
-  const fig = {
-    name: 'fig',
-    method: 'collection',
-    addElements: [
-      axis('x', [0, 0], [r * 1, 0]),
-      // axis('y', [0, 0], [0, r * 1.2]),
-      // {
-      //   name: 'arc1',
-      //   method: 'polygon',
-      //   options: {
-      //     sides: 600,
-      //     width: 0.015,
-      //     radius: r,
-      //     color: colors.angles,
-      //   },
-      // },
-      circle,
-      {
-        name: 'arc',
-        method: 'polygon',
-        options: {
-          sides: 400,
-          width: 0.015,
-          radius: r,
-          color: colors.angles,
-        },
-      },
-      {
-        name: 'mirrorArc',
-        method: 'polygon',
-        options: {
-          sides: 400,
-          width: 0.015,
-          radius: r,
-          color: colors.angles,
-          clockwise: true,
-        },
-      },
-      // angle('real', null),
-      angle('theta', eqnAngle),
-      // angle('theta', eqnAngle),
-      angle('right', ''),
-      angle('complement', null),
-      // lineLabel('sineTheta', eqnSine, colors.components, 'right'),
-      // lineLabel('sine', null, colors.components, 'right'),
-      // lineLabel('opposite', 'opposite', colors.components, 'right'),
-      lineLabel('hypotenuse', eqnR, colors.lines, 'top', 'left'),
-      // lineLabel('realHyp', null, colors.lines, 'top', 'left'),
-      lineLabel('oppLabel', eqnOpp, colors.components, 'right'),
-      component('h', colors.lines),
-      component('v', colors.lines),
-      component('opp', colors.components),
-      component('mirrorV', colors.components),
-      // angle('arc', )
-      line('mirrorLine', -Math.PI / 2, 0),
-      line('line', 0, Math.PI / 2),
-    ],
-    mods: {
-      scenarios: {
-        default: { position: [-r / 2, -1], scale: 1 },
-        left: { position: [-2.3, -1], scale: 1 },
-        small: { position: [0, 0.48], scale: 0.43 },
-      },
-    },
-  };
-
-  // const triPoints = [[-2, -1], [1, 1], [2, -1]];
-  // const basePoint = [triPoints[1][0], triPoints[0][1]];
-  // const triangle = {
-  //   name: 'tri',
-  //   method: 'collection',
-  //   addElements: [
-  //     angle('right', '', 0.3, triPoints[1], basePoint, triPoints[0]),
-  //     angle('leftAngle', 'b', 0.3, triPoints[2], triPoints[0], triPoints[1]),
-  //     angle('rightAngle', 'a', 0.3, triPoints[1], triPoints[2], triPoints[0]),
-  //     {
-  //       name: 'line',
-  //       method: 'polyLine',
-  //       options: {
-  //         points: triPoints,
-  //         close: true,
-  //         width: 0.03,
-  //         color: colors.lines,
-  //       },
-  //     },
-  //     {
-  //       name: 'height',
-  //       method: 'line',
-  //       options: {
-  //         p1: [1, -1],
-  //         p2: [1, 1],
-  //         color: colors.lines,
-  //         dashStyle: {
-  //           style: [0.1, 0.05],
-  //         },
-  //         width: 0.01,
-  //         label: {
-  //           text: 'H',
-  //           offset: 0.1,
-  //         },
-  //       },
-  //     },
-  //     lineLabel('leftSide', 'A', colors.lines, 'top', 'left', triPoints[0], triPoints[1]),
-  //     lineLabel('rightSide', 'B', colors.lines, 'top', 'right', triPoints[2], triPoints[1]),
-  //   ],
-  //   mods: {
-  //     scenarios: {
-  //       default: { position: [0, -0.5] },
-  //     },
-  //   },
-  // };
-
-  const eqn = {
-    name: 'eqn',
-    method: 'addEquation',
-    options: {
-      color: colors.diagram.text.base,
+    label: {
+      text: label,
+      radius: 0.3,
       scale: 0.9,
-      elements: {
-        equals: '  =  ',
-        equals1: '  =  ',
-        equals2: '  =  ',
-        approx: '  \u2248  ',
-        func: 'function',
-        vert: { text: 'vertical', color: colors.components },
-        theta: { text: '\u03B8', color: colors.angles },
-        theta1: { text: '\u03B8', color: colors.angles },
-        theta2: { text: '\u03B8', color: colors.angles },
-        theta3: { text: '\u03B8', color: colors.angles },
-        theta4: { text: '\u03B8', color: colors.angles },
-        hyp1: { text: 'hypotenuse = 1', color: colors.components },
-        hyp: { text: 'hypotenuse', color: colors.lines },
-        hyp1_1: { text: 'hypotenuse = 1' },
-        hypr: { text: 'hypotenuse = r', color: colors.components },
-        r: { color: colors.lines },
-        r_1: { color: colors.lines },
-        times: ' \u00D7 ',
-        times1: ' \u00D7 ',
-        pi1: 'π',
-        pi2: 'π',
-        pi3: 'π',
-        pi4: 'π',
-        '16': '16',
-        '5': '5 and here it is',
-        '5f': '5!',
-        '4': '4',
-        '2': '2',
-        '3': '3',
-        '3f': '3!',
-        '7': '7',
-        '7f': '7!',
-        'a': 'a',
-        'minus1': '  –  ',
-        'minus2': '  –  ',
-        'minus3': '  –  ',
-        'dots': '...',
-        'plus1': '  +  ',
-        'plus2': '  +  ',
-        'sine': { text: 'sine', style: 'normal' },
-        'sin': { text: 'sin', style: 'normal' },
-        'AB': { text: 'AB', weight: 'normal', size: 0.3 },
-        'sin1': { text: 'sin', style: 'normal' },
-        'sin2': { text: 'sin', style: 'normal' },
-        lb: {
-          symbol: 'bracket',
-          side: 'left',
-          // side: 'top',
-          // staticHeight: 'first',
-          // staticHeight: 1,
-          // draw: 'static',
-          // radius: 0.1,
-          // width: 0.05,
-          // tipWidth: 0.01,
-          // height: 0.4,
-          // lineWidth: 0.015,
-        },
-        rb: { symbol: 'bracket', side: 'right' },
-        lb1: { symbol: 'squareBracket', side: 'left' },
-        rb1: { symbol: 'squareBracket', side: 'right' },
-        sym: {
-          symbol: 'int',
-          draw: 'dynamic',
-          sides: 20,
-          // staticHeight: 'first',
-          // width: 1.6,
-          // lineWidth: 0.05,
-          // percentage: 0.99999999999,
-          // tipWidth: 0.06,
-          // lineWidth: 0.17,
-          num: 3,
-          serif: true,
-          type: 'line',
-          lineIntegralSides: 50,
-        },
-        arrow: { symbol: 'arrow' },
-        v: { symbol: 'vinculum' },
-        v1: { symbol: 'vinculum' },
-        v2: { symbol: 'vinculum' },
-        opp: { text: 'opposite', color: colors.components },
-        opp1: { text: 'opposite', color: colors.components },
-        angle: { text: 'angle', color: colors.angles },
-        brace: {
-          symbol: 'brace', side: 'top', color: colors.working, width: 0.05, lineWidth: 0.012,
-        },
-        brace1: {
-          symbol: 'brace', side: 'top', width: 0.05, lineWidth: 0.012,  color: colors.working,
-        },
-        box: {
-          symbol: 'box',
-          color: [0, 0.9, 0, 1],
-          lineWidth: 0.05,
-          draw: 'static',
-          staticHeight: 'first',
-          staticWidth: 'first',
-          // fill: true,
-        },
-        l1: {
-          symbol: 'brace',
-          side: 'left',
-        },
-        // r1: {
-        //   symbol: 'brace',
-        //   side: 'right',
-        //   lineWidth: 0.02,
-        //   width: 0.1,
-        // },
-        box1: { symbol: 'box', color: [0, 0.9, 0, 1], lineWidth: 0.005 },
-        // v: { symbol: 'vinculum' },
-        s1: { symbol: 'strike', style: 'horizontal', lineWidth: 0.05 },
-        rad: { symbol: 'radical', draw: 'dynamic' },
-        // strike: { symbol: 'xStrike', color: colors.working },
-        // r: { symbol: 'radical', color: colors.sides },
-      },
-      defaultFormAlignment: {
-        fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
-      },
-      forms: {
-        'base': {
-          content: [
-            // {
-            //   bottomComment: {
-            //     content: 'opp',
-            //     comment: 'hyp1',
-            //     inSize: false,
-            //     scale: 0.5,
-            //   },
-            // },
-            'opp',
-            'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        'baseTimesR': {
-          content: [
-            '  ', 'r', '  ', 'times', '  ',
-            {
-              bottomComment: {
-                content: 'opp',
-                comment: 'hyp1',
-                inSize: false,
-                scale: 0.5,
-              },
-            },
-            'equals',
-            ['  ', 'r_1', '  '], 'times1', '  ',
-            'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        'baseTimesRToHypR': {
-          content: [
-            {
-              topComment: {
-                content: [
-                  '  ', 'r', '  ', 'times', '  ',
-                  {
-                    bottomComment: {
-                      content: 'opp',
-                      comment: 'hyp1',
-                      inSize: false,
-                      scale: 0.5,
-                    },
-                  },
-                ],
-                comment: {
-                  bottomComment: {
-                    content: 'opp1',
-                    comment: 'hypr',
-                    scale: 0.7,
-                    insize: false,
-                  },
-                },
-                symbol: 'brace1',
-                inSize: false,
-              },
-            },
-            'equals',
-            ['  ', 'r_1', '  '], 'times1', '  ',
-            'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        'hypR': {
-          content: [
-            {
-              bottomComment: {
-                content: 'opp1',
-                comment: 'hypr',
-                scale: 0.5,
-                insize: false,
-              },
-            },
-            'equals',
-            ['  ', 'r_1', '  '], 'times1', '  ',
-            'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        'hypRToGeneral': {
-          content: [
-            {
-              topComment: {
-                content: {
-                  bottomComment: {
-                    content: 'opp1',
-                    comment: 'hypr',
-                    scale: 0.6,
-                    insize: false,
-                  },
-                },
-                comment: 'opp',
-                symbol: 'brace',
-                inSize: false,
-              },
-            },
-            'equals',
-            {
-              topComment: {
-                content: ['  ', 'r_1', '  '],
-                comment: 'hyp',
-                symbol: 'brace1',
-                inSize: false,
-                contentSpace: 0.08,
-              },
-            },
-            'times1', '  ',
-            'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        'general': {
-          content: [
-            'opp',
-            'equals',
-            'hyp',
-            '  ', 'times1', '  ',
-            'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 2.2,
-          },
-        },
-        'generalToSin': {
-          content: [
-            'opp',
-            'equals',
-            'hyp',
-            '  ', 'times1', '  ',
-            {
-              topComment: {
-                content: 'func',
-                comment: 'sin',
-                symbol: 'brace',
-                inSize: false,
-              },
-            },
-            { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 2.2,
-          },
-        },
-        'sin': {
-          content: [
-            'opp',
-            'equals',
-            'hyp',
-            '  ', 'times1', '  ',
-            'sin', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 2.2,
-          },
-        },
-        'sinLeft': {
-          content: [
-            'sin', { brac: ['lb', 'angle', 'rb'] },
-            'equals',
-            { frac: ['opp', 'v', 'hyp'] },
-            // 'hyp',
-            // '  ', 'times1', '  ',
-            // ,
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 0,
-          },
-          translation: {
-            'opp': ['curved', 'up', 0.45],
-            'hyp': ['linear'],
-            'sin': ['curved', 'down', 0.4],
-            'lb': ['curved', 'down', 0.4],
-            'rb': ['curved', 'down', 0.4],
-            'angle': ['curved', 'down', 0.4],
-          },
-        },
-        '0': {
-          content: ['opp', 'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '0sine1': {
-          content: [
-            'vert',
-            'equals',
-            {
-              topComment: {
-                content: 'func',
-                comment: 'sin',
-                symbol: 'brace',
-              },
-            },
-            {
-              brac: ['lb', 'angle', 'rb'],
-            },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '0sine2': {
-          content: [
-            'vert',
-            'equals',
-            'sin',
-            {
-              brac: ['lb', 'angle', 'rb'],
-            },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '1': {
-          content: [{
-            topComment: {
-              content: 'vert',
-              comment: 'opp',
-              symbol: 'brace',
-            },
-          }, 'equals', 'func', {
-            brac: ['lb', {
-              topComment: {
-                content: 'angle',
-                comment: 'theta',
-                symbol: 'brace1',
-                inSize: false,
-              },
-            }, 'rb'],
-          },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2': {
-          content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2a0': {
-          content: [
-            {
-              bottomComment: {
-                content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
-              },
-            },
-            'equals',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2a': {
-          content: [
-            'r', 'times',
-            {
-              bottomComment: {
-                content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
-              },
-            },
-            'equals',
-            'r_1', 'times1',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2b': {
-          content: [
-            {
-              topComment: {
-                content: [
-                  'r', 'times',
-                  {
-                    bottomComment: {
-                      content: 'opp', comment: 'hyp1', inSize: false, scale: 0.5,
-                    },
-                  },
-                ],
-                comment: {
-                  bottomComment: {
-                    content: 'opp1', comment: 'hypr', inSize: true, scale: 0.7,
-                  },
-                },
-                symbol: 'brace',
-              },
-            },
-            'equals',
-            'r_1', 'times1',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2c': {
-          content: [
-            {
-              bottomComment: {
-                content: 'opp1', comment: 'hypr', inSize: false, scale: 0.5,
-              },
-            },
-            'equals',
-            'r_1', 'times1',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2d': {
-          content: [
-            'opp1',
-            'equals',
-            'r_1', 'times1',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2e': {
-          content: [
-            'opp1',
-            'equals',
-            {
-              bottomComment: {
-                content: 'func', comment: 'hyp1_1', inSize: false, commentSpace: 0.07, scale: 0.5,
-              },
-            },
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2f': {
-          content: [
-            'opp1',
-            'equals',
-            'sine',
-            { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2b2': {
-          content: [
-            { bottomComment: { content: 'opp', comment: 'hypr', inSize: false } },
-            'equals',
-            'r_1', 'times1',
-            'func', { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '2c2': {
-          content: [
-            'opp',
-            'equals',
-            'r_1', 'times1',
-            'func', { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'equals',
-            alignH: 'right',
-          },
-        },
-        '0b': {
-          content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
-        '0a': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
-          },
-        },
-        // '0b': {
-        //   content: [
-        //     'opp', 'equals', 'sine', { brac: ['theta', 'lb', 'rb'] },
-        //     'equals1', 'sin1', { brac: ['theta1', 'lb1', 'rb1'] },
-        //   ],
-        //   alignment: {
-        //     fixTo: 'opp',
-        //     alignH: 'right',
+    },
+  });
+  const simSide = label => ({
+    label: {
+      text: label,
+      scale: 0.9,
+      // offset: 0.2,
+      offset: 0.1,
+      location: 'outside',
+    },
+  });
+  const scaleEqn = label => ({
+    elements: {
+      value: { text: label, color: colors.lines },
+      times: { text: ' \u00D7 ', color: colors.lines },
+      s: { color: colors.components, mods: { pulseDefault: { scale: 3 } } },
+    },
+    forms: {
+      '0': {
+        content: ['s', 'times', 'value'],
+        // content: {
+        //   container: {
+        //     content: ['s', 'value'],
+        //     width: 0.2,
+        //     ascent: 0.13,
+        //     descent: 0.05,
+        //     xAlign: 'left',
         //   },
         // },
-        '0c': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
-            'equals1', 'sin1', ' ' , 'theta1',
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
+        scale: 0.9,
+        alignment: { alignH: 'center', alignV: 'middle' },
+      },
+    },
+  });
+
+  layout.addElements = [
+    {
+      name: 'similar',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'tri1',
+          method: 'polyLine',
+          options: {
+            points: simPoints1,
+            color: colors.lines,
+            width: 0.02,
+            close: true,
+            angle: [
+              simAngle('a'),
+              simAngle('b'),
+              simAngle('c'),
+            ],
+            side: [
+              simSide('C'),
+              simSide('A'),
+              simSide('B'),
+            ],
+          },
+          mods: {
+            scenarios: {
+              default: { position: [-2, -0.7] },
+            },
+            pulseDefault: { scale: 1.2 },
           },
         },
-        '0d': {
-          content: [
-            'opp', 'equals', 'sine', { brac: ['lb', 'theta', 'rb'] },
-            'equals1', 'sin1', { brac: ['lb1', 'theta1', 'rb1'] },
-            'equals2', 'sin2', ' ', 'theta2',
-          ],
-          alignment: {
-            fixTo: 'opp',
-            alignH: 'right',
+        {
+          name: 'tri2',
+          method: 'polyLine',
+          options: {
+            points: simPoints2,
+            color: colors.lines,
+            width: 0.02,
+            close: true,
+            angle: [
+              simAngle('a'),
+              simAngle('b'),
+              simAngle('c'),
+            ],
+            side: [
+              simSide(scaleEqn('C')),
+              simSide(scaleEqn('A')),
+              simSide(scaleEqn('B')),
+            ],
+          },
+          mods: {
+            scenarios: {
+              default: { position: [0, -1] },
+            },
+            pulseDefault: { scale: 1.2 },
           },
         },
-        '5': {
-          content: [
-            'opp', 'approx', {
-              frac: [
-                ['16', 'theta', { brac: ['lb', ['pi1', 'minus1', 'theta1'], 'rb'] }],
-                'v',
-                ['5', { sup: ['pi2', '2'] }, 'minus2', '4', 'theta3', {
-                  brac: ['lb1', ['pi3', 'minus3', 'theta4'], 'rb1'],
-                }],
-              ],
+      ],
+    },
+    {
+      name: 'rotator',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'line',
+          method: 'line',
+          options: {
+            p1: points[0],
+            p2: points[2],
+            color: [1, 0, 0, 0.0001],
+            width: 0.1,
+          },
+          mods: {
+            move: {
+              canBeMovedAfterLosingTouch: true,
+            },
+          },
+        },
+        {
+          name: 'pad',
+          method: 'polygon',
+          options: {
+            sides: 10,
+            color: [1, 0, 0, 0.0001],
+            radius: 0.3,
+            fill: true,
+            position: points[2],
+          },
+          mods: {
+            move: {
+              canBeMovedAfterLosingTouch: true,
+            },
+          },
+        },
+      ],
+      options: {
+        position: [-0.6, -1.3],
+      },
+    },
+    {
+      name: 'tri',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'theta',
+          method: 'angle',
+          options: {
+            p1: points[1],
+            p2: points[0],
+            p3: points[2],
+            curve: {
+              radius: 0.6,
+              sides: 200,
+            },
+            color: colors.angles,
+            label: {
+              text: '\u03b8',
+              scale: 0.9,
+              radius: 0.6,
+            },
+          },
+        },
+        {
+          name: 'complement',
+          method: 'angle',
+          options: {
+            p1: points[0],
+            p2: points[2],
+            p3: points[1],
+            curve: {
+              radius: 0.6,
+              sides: 100,
+            },
+            color: colors.angles,
+            label: {
+              text: '90º–\u03b8',
+              scale: 0.9,
+              radius: 0.6,
+            },
+            pulse: 1.4,
+          },
+        },
+        {
+          name: 'right',
+          method: 'angle',
+          options: {
+            p1: points[2],
+            p2: points[1],
+            p3: points[0],
+            curve: {
+              radius: 0.4,
+              sides: 100,
+            },
+            color: colors.angles,
+            autoRightAngle: true,
+          },
+        },
+        {
+          name: 'line',
+          method: 'polyLine',
+          options: {
+            points,
+            color: colors.lines,
+            width: 0.02,
+            close: true,
+          },
+        },
+        {
+          name: 'hyp',
+          method: 'line',
+          options: {
+            p1: points[0],
+            p2: points[2],
+            showLine: false,
+            label: {
+              text: 'hypotenuse',
+              offset: 0.2,
+              location: 'top',
+              scale: 0.9,
+            },
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'opp',
+          method: 'line',
+          options: {
+            p1: points[2],
+            p2: points[1],
+            showLine: false,
+            label: {
+              text: 'opposite',
+              offset: 0.1,
+              location: 'right',
+              scale: 0.9,
+            },
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'adj',
+          method: 'line',
+          options: {
+            p1: points[0],
+            p2: points[1],
+            showLine: false,
+            label: {
+              text: 'adjacent',
+              offset: 0.1,
+              location: 'bottom',
+              scale: 0.9,
+            },
+            color: colors.lines,
+          },
+        },
+      ],
+      // options: {
+      //   position: [-1.5, -0.8],
+      // },
+      mods: {
+        scenarios: {
+          default: { position: [-1.5, -1] },
+          right: { position: [-0.6, -1.3] },
+        },
+      },
+    },
+    {
+      name: 'history',
+      method: 'collection',
+      addElements: [
+        {
+          name: 'circle',
+          method: 'polygon',
+          options: {
+            sides: 100,
+            width: 0.015,
+            radius: 1,
+            color: colors.angles,
+          },
+        },
+        {
+          name: 'arc',
+          method: 'polygon',
+          options: {
+            radius: historyRadius,
+            width: 0.015,
+            rotation: -historyAngle,
+            angleToDraw: historyAngle * 2,
+            sides: 200,
+            color: colors.angles,
+          },
+        },
+        {
+          name: 'axis',
+          method: 'line',
+          options: {
+            p1: historyPoints[0],
+            p2: [historyRadius, 0],
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'tri',
+          method: 'collection',
+          addElements: [
+            {
+              name: 'right',
+              method: 'angle',
+              options: {
+                p1: historyPoints[2],
+                p2: historyPoints[1],
+                p3: historyPoints[0],
+                curve: {
+                  radius: 0.15,
+                  sides: 20,
+                  width: 0.01,
+                },
+                color: colors.angles,
+                autoRightAngle: true,
+              },
+            },
+            {
+              name: 'line',
+              method: 'polyLine',
+              options: {
+                points: [
+                  historyPoints[0],
+                  historyPoints[1],
+                  historyPoints[2].sub(0, 0.015),
+                ],
+                color: colors.lines,
+                width: 0.015,
+                close: true,
+              },
             },
           ],
-          alignment: {
-            alignH: 0.8,
+        },
+        {
+          name: 'sin',
+          method: 'line',
+          options: {
+            p1: historyPoints[1],
+            p2: historyPoints[2],
+            width: 0.015,
+            color: colors.lines,
           },
         },
-        '6': {
-          content: [
-            'opp', 'equals', 'theta', 'minus1',
-            { frac: [{ sup: ['theta1', '2', 0.6, 0.02] }, 'v', '3f'] },
-            'plus1',
-            { frac: [{ sup: ['theta2', '3', 0.6, 0.02] }, 'v1', '5f'] },
-            'minus2',
-            { frac: [{ sup: ['theta3', '7', 0.6, 0.02] }, 'v2', '7f'] },
-            'plus2', 'dots',
+        {
+          name: 'bowString',
+          method: 'line',
+          options: {
+            p1: historyPoints[2],
+            p2: new Point(historyPoints[2].x, -historyPoints[2].y),
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+        {
+          name: 'mirrorString',
+          method: 'line',
+          options: {
+            p1: historyPoints[0],
+            p2: new Point(historyPoints[2].x, -historyPoints[2].y),
+            width: 0.015,
+            color: colors.lines,
+          },
+        },
+      ],
+      options: {
+        position: [0, -0.5],
+      },
+    },
+    {
+      name: 'eqnSame',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.8,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          const: 'is same for all right angle triangles with angle ',
+          theta: { text: '\u03b8', color: colors.angles },
+          value: '1',
+          lb: { symbol: 'bracket', side: 'left' },
+          rb: { symbol: 'bracket', side: 'right' },
+          func: { text: 'function', style: 'normal' },
+          sin: { text: 'sin', style: 'normal' },
+          times: { text: ' \u00D7 ', color: colors.lines },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'oppOnHyp': {
+            content: [{ frac: ['opp', 'v','hyp'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'adjOnHyp': {
+            content: [{ frac: ['adj', 'v','hyp'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'oppOnAdj': {
+            content: [{ frac: ['opp', 'v','adj'] }, '   ', 'const', 'theta'],
+            alignment: { fixTo: 'const' },
+          },
+          'ratioValue': {
+            content: [{ frac: ['opp', 'v','hyp'] }, 'equals', 'value'],
+            alignment: { fixTo: 'equals' },
+          },
+          'function': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'func', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+          'sin': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'sinNoBracket': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'sin', ' ', 'theta',
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'opp': {
+            content: [
+              'opp',
+              'equals', 'sin', { brac: ['lb', 'theta', 'rb'] }, 'times', 'hyp',
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'hyp': {
+            content: [
+              'hyp',
+              'equals', { frac: ['opp', 'v', ['sin', { brac: ['lb', 'theta', 'rb'] }]] },
+            ],
+            alignment: { fixTo: 'equals' },
+            translation: {
+              'opp': ['curved', 'up', 0.45],
+              'hyp': ['curved', 'down', 0.45],
+            },
+          },
+          'cos': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'cos', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+          'tan': {
+            content: [
+              { frac: ['opp', 'v','hyp'] },
+              'equals', 'tan', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-1.2, -1.7] },
+          left: { position: [-1.7, -0.5] },
+        },
+      },
+    },
+    {
+      name: 'eqn',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 0.9,
+        elements: {
+          v_11: { symbol: 'vinculum' },
+          v_12: { symbol: 'vinculum' },
+          v_21: { symbol: 'vinculum', color: colors.working },
+          v_31: { symbol: 'vinculum', color: colors.working },
+          v_32: { symbol: 'vinculum', color: colors.working },
+          v_41: { symbol: 'vinculum', color: colors.working },
+          equals: '  =  ',
+          equals2: { text: '  =  ', color: colors.working },
+          equals3: { text: '  =  ', color: colors.working },
+          A_11: { color: colors.lines },
+          A_12: { color: colors.lines },
+          A_21: { color: colors.working },
+          A_31: { color: colors.working },
+          A_41: { color: colors.working },
+          B_11: { color: colors.lines },
+          B_12: { color: colors.lines },
+          B_21: { color: colors.working },
+          B_31: { color: colors.working },
+          B_41: { color: colors.working },
+          C_11: { color: colors.lines },
+          C_12: { color: colors.lines },
+          C_21: { color: colors.working },
+          C_31: { color: colors.working },
+          C_41: { color: colors.working },
+          times_11: { text: ' \u00D7 ', color: colors.lines },
+          times_12: { text: ' \u00D7 ', color: colors.lines },
+          times_21: { text: ' \u00D7 ', color: colors.working },
+          times_22: { text: ' \u00D7 ', color: colors.working },
+          times_31: { text: ' \u00D7 ', color: colors.working },
+          times_41: { text: ' \u00D7 ', color: colors.working },
+          s_11: { color: colors.components },
+          s_12: { color: colors.components },
+          s_21: { color: colors.working },
+          s_22: { color: colors.working },
+          s_31: { color: colors.working },
+          s_32: { color: colors.working },
+        },
+        defaultFormAlignment: {
+          fixTo: 'equals',    // Points can also be defined as objects
+          alignH: 'left',
+          alignV: 'baseline',
+        },
+        forms: {
+          // sine: [
+          //   // 'sin', { brac: ['lb', 'theta', 'rb'] },
+          //   'sin', ' ', 'theta',
+          //   'equals',
+          //   { frac: ['opposite', 'v1', 'hypotenuse'] },
+          // ],
+          BonA: [
+            { frac: [['s_11', 'times_11', 'B_11'], 'v_11', ['s_12', 'times_12', 'A_11']] },
+            'equals',
+            { frac: ['B_12', 'v_12', 'A_12'] },
           ],
-          alignment: {
-            alignH: 0.4,
+          ConA: [
+            { frac: [['s_11', 'times_11', 'C_11'], 'v_11', ['s_12', 'times_12', 'A_11']] },
+            'equals',
+            { frac: ['C_12', 'v_12', 'A_12'] },
+          ],
+          AonB: [
+            { frac: [['s_11', 'times_11', 'A_11'], 'v_11', ['s_12', 'times_12', 'B_11']] },
+            'equals',
+            { frac: ['A_12', 'v_12', 'B_12'] },
+          ],
+          ConB: [
+            { frac: [['s_11', 'times_11', 'C_11'], 'v_11', ['s_12', 'times_12', 'B_11']] },
+            'equals',
+            { frac: ['C_12', 'v_12', 'B_12'] },
+          ],
+          AonC: [
+            { frac: [['s_11', 'times_11', 'A_11'], 'v_11', ['s_12', 'times_12', 'C_11']] },
+            'equals',
+            { frac: ['A_12', 'v_12', 'C_12'] },
+          ],
+          BonC: [
+            { frac: [['s_11', 'times_11', 'B_11'], 'v_11', ['s_12', 'times_12', 'C_11']] },
+            'equals',
+            { frac: ['B_12', 'v_12', 'C_12'] },
+          ],
+        },
+        position: [-0.2, -1.7],
+      },
+    },
+    {
+      name: 'eqnSin',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          sin: { style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'sin', ' ', 'theta', 'equals',
+              { frac: ['opp', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+            ],
+            alignment: { fixTo: 'equals' },
           },
         },
       },
-    },
-    mods: {
-      scenarios: {
-        left: { position: [-1.5, -1.6] },
-        // left: { position: [-1.3, -1.6] },
-        default: { position: [-0.3, -1.6] },
+      mods: {
+        scenarios: {
+          top: { position: [-0.6, 0.3] },
+          default: { position: [-0.6, -0.2] },
+        },
       },
-      pulseDefault: { scale: 1.4 },
     },
-  };
+    {
+      name: 'eqnCos',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          cos: { style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'cos', ' ', 'theta', 'equals',
+              { frac: ['adj', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+              // 'equals',
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-0.6, -0.5] },
+        },
+      },
+    },
+    {
+      name: 'eqnTan',
+      method: 'addEquation',
+      options: {
+        color: colors.diagram.text.base,
+        scale: 1,
+        elements: {
+          hyp: { text: 'hypotenuse', color: colors.lines },
+          adj: { text: 'adjacent', color: colors.lines },
+          opp: { text: 'opposite', color: colors.lines },
+          v: { symbol: 'vinculum' },
+          equals: '  =  ',
+          theta: { text: '\u03b8', color: colors.angles },
+          // lb: { symbol: 'bracket', side: 'left' },
+          // rb: { symbol: 'bracket', side: 'right' },
+          tan: { text: 'tan', style: 'normal' },
+        },
+        defaultFormAlignment: {
+          fixTo: 'v',
+        },
+        forms: {
+          'base': {
+            content: [
+              'tan', ' ', 'theta', 'equals',
+              { frac: ['opp', 'v','hyp'] },
+              // 'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
+              // 'equals',
+            ],
+            alignment: { fixTo: 'equals' },
+          },
+        },
+      },
+      mods: {
+        scenarios: {
+          default: { position: [-0.6, -1.3] },
+        },
+      },
+    },
+  ];
 
   const cell = (name, text, x, y, color) => ({
     name,
@@ -1266,7 +785,7 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       scale: 0.7,
       elements: {
-        value: { text: `${round(Math.sin(a * Math.PI / 180), 3)}`, color: colors.components },
+        value: { text: `${round(Math.sin(a * Math.PI / 180), 4)}`, color: colors.components },
         r: { color: colors.lines },
         times: { text: ' \u00D7 ', color: colors.lines },
       },
@@ -1286,33 +805,15 @@ export default function diagramLayout() {
 
   const angleHeading = (x, y) => ({
     name: 'angleHeading',
-    method: 'addEquation',
+    method: 'text',
     options: {
-      color: colors.diagram.text.base,
-      scale: 0.9,
-      elements: {
-        angle: { color: colors.angles },
-        brace: {
-          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.working,
-        },
-        theta: { text: '\u03B8', color: colors.angles },
-      },
-      defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'baseline',
-      },
-      forms: {
-        angle: 'angle',
-        angleToTheta: {
-          topComment: {
-            content: 'angle',
-            comment: 'theta',
-            symbol: 'brace',
-          },
-        },
-        theta: 'theta',
-      },
+      text: '\u03B8',
+      hAlign: 'center',
+      vAlign: 'baseline',
+      color: colors.angles,
       position: [x, y],
+      size: 0.2 * 0.9,
+      style: 'italic',
     },
   });
 
@@ -1323,15 +824,7 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       scale: 0.9,
       elements: {
-        opp: { text: 'opposite', color: colors.components },
-        hyp1: { text: 'hypotenuse = 1', color: colors.components },
-        hypR: { text: 'hypotenuse = r', color: colors.components },
-        brace: {
-          symbol: 'brace', width: 0.05, lineWidth: 0.012, side: 'top', color: colors.working,
-        },
-        func: { text: 'function' },
         theta: { text: '\u03B8', color: colors.angles },
-        angle: { color: colors.angles },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
         sin: { style: 'normal' },
@@ -1341,98 +834,12 @@ export default function diagramLayout() {
         alignV: 'baseline',
       },
       forms: {
-        opp: 'opp',
-        oppHyp1: {
-          content: {
-            bottomComment: {
-              content: 'opp',
-              comment: 'hyp1',
-              scale: 0.5,
-            },
-          },
-          alignment: {
-            alignV: 0.1,
-          },
-        },
-        oppHypR: {
-          content: {
-            bottomComment: {
-              content: 'opp',
-              comment: 'hypR',
-              scale: 0.5,
-            },
-          },
-          alignment: {
-            alignV: 0.1,
-          },
-        },
-        oppHyp1ToFunc: {
-          content: {
-            topComment: {
-              content: {
-                bottomComment: {
-                  content: 'opp',
-                  comment: 'hyp1',
-                  scale: 0.5,
-                },
-              },
-              comment: ['func', { brac: ['lb', 'angle', 'rb'] }],
-              symbol: 'brace',
-              inSize: false,
-            },
-          },
-          alignment: {
-            alignV: 0.1,
-          },
-        },
-        oppToFunc: {
-          content: {
-            topComment: {
-              content: 'opp',
-              comment: ['func', { brac: ['lb', 'angle', 'rb'] }],
-              symbol: 'brace',
-              inSize: false,
-            },
-          },
-          // alignment: {
-          //   alignV: 0.1,
-          // },
-        },
-        func: {
-          content: ['func', { brac: ['lb', 'angle', 'rb'] }],
-          scale: 0.9,
-        },
-        funcToSin: {
-          content: [
-            {
-              topComment: {
-                content: 'func',
-                comment: 'sin',
-                symbol: 'brace',
-                inSize: false,
-              },
-            },
-            { brac: ['lb', 'angle', 'rb'] }],
-          scale: 0.9,
-        },
         sin: {
-          content: ['sin', { brac: ['lb', 'angle', 'rb'] }],
+          content: ['sin', { brac: ['lb', 'theta', 'rb'] }],
           scale: 0.9,
         },
       },
       position: [x, y],
-    },
-  });
-
-  const box = name => ({
-    name,
-    method: 'box',
-    options: {
-      lineWidth: 0.01,
-      color: colors.diagram.action,
-    },
-    mods: {
-      pulseDefault: { scale: 1.2 },
     },
   });
 
@@ -1467,12 +874,7 @@ export default function diagramLayout() {
     name: 'table',
     method: 'collection',
     addElements: [
-      // cell('0', '0º', 0),
-      // cell('1', '1º', -0.15),
-      // cell('2', '2º', -0.3),
-      // cell('d1', '\u22EE', -0.45),
-      // cell('43', '43º', -0.6),
-      ...createTableElements([0, 1, 2, 'd', 39, 40, 41, 'd', 59, 60, 61, 'd', 90]),
+      ...createTableElements([0, 1, 2, 3, 4, 5, 6, 7, 8, 'd', 87, 88, 89, 90]),
     ],
     options: {
       position: [1, 0.5],
@@ -1480,12 +882,12 @@ export default function diagramLayout() {
     mods: {
       pulseDefault: { scale: 1.15 },
       scenarios: {
-        default: { position: [1, 0.5] },
-        center: { position: [-0.5, 0.5] },
-        high: { position: [-0.5, 0.65] },
+        default: { position: [-0.5, 0.5] },
       },
     },
   };
+
+  layout.addElements.push(table);
 
   const frac = (num, v, dem) => ({
     frac: [num, v, dem],
@@ -1507,11 +909,11 @@ export default function diagramLayout() {
       scale: 0.8,
       elements: {
         sin: { style: 'normal' },
-        a_0: { text: 'angle', color: colors.angles },
-        a_1: { text: 'angle', color: colors.angles },
-        a_3: { text: 'angle', color: colors.angles },
-        a_5: { text: 'angle', color: colors.angles },
-        a_7: { text: 'angle', color: colors.angles },
+        a_0: { text: '\u03B8', color: colors.angles },
+        a_1: { text: '\u03B8', color: colors.angles },
+        a_3: { text: '\u03B8', color: colors.angles },
+        a_5: { text: '\u03B8', color: colors.angles },
+        a_7: { text: '\u03B8', color: colors.angles },
         equals: '  =  ',
         v_3: { symbol: 'vinculum' },
         v_5: { symbol: 'vinculum' },
@@ -1550,14 +952,7 @@ export default function diagramLayout() {
     },
   };
 
-  layout.addElements = [
-    fig,
-    // triangle,
-    eqn,
-    table,
-    box('box1'),
-    box('box2'),
-    powerSeries,
-  ];
+  layout.addElements.push(powerSeries);
+
   return layout;
 }

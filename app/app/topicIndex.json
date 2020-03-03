@@ -3202,10 +3202,94 @@
   "Math/Trigonometry_1/Cosine": {
     "title": "Cosine",
     "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "htmlTitle": "Self discover why ...",
+          "htmlDescription": "Figure out why ...",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "htmlTitle": "... examples",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "htmlTitle": "",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        },
+        "markdown": {
+          "type": "singlePage",
+          "title": "Derivation of Pythagorean Theorem",
+          "description": "Derivation using area of four right angle triangles",
+          "htmlTitle": "Pythagorean Theorem Derivation",
+          "htmlDescription": "Derivation using area of four right angle triangles",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for <TOPIC>",
+          "htmlTitle": "<TOPIC> Links",
+          "htmlDescription": "Explanations, proofs, examples and questions about <TOPIC>",
+          "fullTopic": false,
+          "links": [
+            {
+              "url": "",
+              "hash": "d41d8cd98f00b204e9800998ecf8427e",
+              "publisher": "",
+              "type": "generic",
+              "description": ""
+            }
+          ]
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
           "title": "Base",
+          "description": "",
+          "htmlTitle": "Quiz - find the ",
+          "htmlDescription": "",
+          "fullTopic": true,
+          "links": ""
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
           "description": "",
           "htmlTitle": "",
           "htmlDescription": "",
@@ -3235,7 +3319,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Secant"
     ],
     "enabled": false
   },
@@ -3275,7 +3359,7 @@
       }
     },
     "dependencies": [
-      "LawOfSines"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -3295,7 +3379,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Sine"
     ],
     "enabled": false
   },
@@ -3315,7 +3399,7 @@
       }
     },
     "dependencies": [
-      "Tangent"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -3369,6 +3453,15 @@
           "description": "",
           "htmlTitle": "Sine function concept in brief",
           "htmlDescription": "Succinct definition and derivation for the Sine Function",
+          "fullTopic": true,
+          "links": ""
+        },
+        "fromRightAngleTriangle": {
+          "type": "presentation",
+          "title": "From a Right Angle Triangle",
+          "description": "",
+          "htmlTitle": "Sine Function Concept from a Right Angle Triangle",
+          "htmlDescription": "Definition and derivation for the sine function concept",
           "fullTopic": true,
           "links": ""
         }
@@ -3525,7 +3618,7 @@
       }
     },
     "dependencies": [
-      "Introduction"
+      "Tangent"
     ],
     "enabled": false
   }

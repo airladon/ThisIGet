@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Descriptive',
   description: '',
   htmlTitle: '',
   htmlDescription: '',

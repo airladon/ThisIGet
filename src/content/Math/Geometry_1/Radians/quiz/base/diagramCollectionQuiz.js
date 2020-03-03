@@ -38,7 +38,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.addElements(this, this.layout.addElements);
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
-    this._circle._line1.move.canBeMovedAfterLoosingTouch = true;
+    this._circle._line1.move.canBeMovedAfterLosingTouch = true;
     this.multiplier = 1;
     this.radius = 1;
     this.units = 'radians';

@@ -604,7 +604,7 @@ export default function diagramLayout() {
     },
     mods: {
       move: {
-        canBeMovedAfterLoosingTouch: true,
+        canBeMovedAfterLosingTouch: true,
       },
     },
   });

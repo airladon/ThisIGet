@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Pythagorean Identity',
   dependencies: [
-    'Tangent',
+    'Cosine',
   ],
   enabled: false,
   path: 'Math/Trigonometry_1',

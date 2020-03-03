@@ -4,7 +4,7 @@
 var topicDetails = {
   title: 'Unit Circle',
   dependencies: [
-    'Introduction',
+    'Tangent',
   ],
   enabled: false,
   path: 'Math/Trigonometry_1',

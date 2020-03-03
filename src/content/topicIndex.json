@@ -1973,10 +1973,68 @@
   "Math/Trigonometry_1/Cosine": {
     "title": "Cosine",
     "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "fullTopic": true
+        }
+      },
       "explanation": {
         "base": {
           "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "fullTopic": true
+        },
+        "markdown": {
+          "type": "singlePage",
+          "title": "Derivation of Pythagorean Theorem",
+          "description": "Derivation using area of four right angle triangles",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for <TOPIC>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "base": {
+          "title": "base",
+          "description": "",
+          "fullTopic": false
+        },
+        "staticTest": {
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
           "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
           "description": "",
           "fullTopic": true
         }
@@ -2000,7 +2058,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Secant"
     ],
     "enabled": false
   },
@@ -2034,7 +2092,7 @@
       }
     },
     "dependencies": [
-      "LawOfSines"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -2051,7 +2109,7 @@
       }
     },
     "dependencies": [
-      "Pythagoras"
+      "Sine"
     ],
     "enabled": false
   },
@@ -2068,7 +2126,7 @@
       }
     },
     "dependencies": [
-      "Tangent"
+      "Cosine"
     ],
     "enabled": false
   },
@@ -2110,6 +2168,12 @@
         "brief": {
           "type": "singlePage",
           "title": "Brief",
+          "description": "",
+          "fullTopic": true
+        },
+        "fromRightAngleTriangle": {
+          "type": "presentation",
+          "title": "From a Right Angle Triangle",
           "description": "",
           "fullTopic": true
         }
@@ -2210,7 +2274,7 @@
       }
     },
     "dependencies": [
-      "Introduction"
+      "Tangent"
     ],
     "enabled": false
   }

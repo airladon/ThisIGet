@@ -32,7 +32,7 @@ ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 ENV FLASK_APP app/my_app.py
 ENV FLASK_DEBUG 1
 
-RUN npm install figureone@0.1.8
+RUN npm install figureone@0.1.12
 
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]

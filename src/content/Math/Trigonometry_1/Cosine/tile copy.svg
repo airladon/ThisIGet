@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <polyline style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" points="476.61 311.291"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 175.815 375.142"/>
+  <polyline style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" points="420.611 272.748"/>
+  <path style="fill: none; stroke: rgb(102, 102, 102); stroke-width: 21.96px; stroke-dasharray: 80, 30;" transform="matrix(0.409836, 0, 0, 0.409836, -24.590164, 18.229509)" d="M 186.63 36.242 A 1028.33 1028.33 0 0 1 1211.41 1062.807 L 183.082 1064.566 Z" bx:shape="pie 183.082 1064.566 0 1028.33 0.198 89.902 1@643ae9cc"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="365.3129971172515" y1="140.77707566407682" x2="365.3129971172515" y2="140.77707566407682"/>
+  <line style="stroke-width: 18px; stroke: rgb(102, 102, 102);" x1="365.243" y1="178.435" x2="365.243" y2="451.113"/>
+  <line style="stroke: rgb(102, 102, 102); stroke-width: 9px; stroke-dasharray: 30, 10;" x1="49.528623319812056" y1="453.63476385744923" x2="366.51368864712504" y2="178.79146978801188"/>
+  <polyline style="fill: none; stroke-width: 14px; stroke: rgb(102, 102, 102);" points="299.858 450.756 299.858 386.474 365.499 386.474"/>
+</svg>

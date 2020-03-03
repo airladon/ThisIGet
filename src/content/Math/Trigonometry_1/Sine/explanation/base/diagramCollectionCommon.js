@@ -8,39 +8,67 @@ const {
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
-  // DiagramObjectPolyLine,
+  DiagramObjectPolyLine,
   Equation,
   Transform,
   Point,
+  Line,
 } = Fig;
 
 const { rand, round } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
-  _fig: {
-    _line: { _line: DiagramElementPrimitive } & DiagramObjectLine;
-    _h: DiagramObjectLine;
-    _v: DiagramObjectLine;
-    _mirrorLine: DiagramObjectLine;
-    _hypotenuse: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
-    _theta: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectAngle;
+  _tri: {
+    _theta: DiagramObjectAngle;
+    _line: DiagramObjectPolyLine;
+    _complemenet: DiagramObjectAngle;
     _right: DiagramObjectAngle;
-    _complement: DiagramObjectAngle;
-    _opp: DiagramObjectLine;
-    _oppLabel: { _label: { _value: DiagramElementPrimitive } & Equation } & DiagramObjectLine;
-    _mirrorV: DiagramObjectLine;
-    _mirrorArc: DiagramElementPrimitive;
-    // _real: DiagramObjectAngle;
-    // _sine: DiagramObjectLine;
-    // _sineTheta: { _label: Equation } & DiagramObjectLine;
-    _opposite: { _label: Equation } & DiagramObjectLine;
+    _hyp: { _label: Equation } & DiagramObjectLine;
+    _opp: { _label: Equation } & DiagramObjectLine;
+    _adj: { _label: Equation } & DiagramObjectLine;
+  } & DiagramElementCollection;
+
+  _history: {
+    _circle: DiagramElementPrimitive;
     _arc: DiagramElementPrimitive;
+    _axis: DiagramObjectLine;
+    _sin: DiagramObjectLine;
+    _bowString: DiagramObjectLine;
+    _mirrorString: DiagramObjectLine;
+    _tri: {
+      _line: DiagramObjectPolyLine;
+      _right: DiagramObjectAngle;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
+
+  _rotator: {
+    _line: DiagramObjectLine;
+    _pad: DiagramElementPrimitive;
+  } & DiagramElementCollection;
+
+  _similar: {
+    _tri1: DiagramObjectPolyLine;
+    _tri2: DiagramObjectPolyLine;
   } & DiagramElementCollection;
 
   _table: {
     _sineHeading: Equation;
     _angleHeading: Equation;
   } & DiagramElementCollection;
+
+  _eqnSame: {
+    _value: DiagramElementPrimitive;
+  } & Equation;
+
+  _eqn: {
+    _equals: DiagramElementPrimitive;
+    _v_12: DiagramElementPrimitive;
+  } & Equation;
+
+  _eqnCos: Equation;
+  _eqnSin: Equation;
+  _eqnTan: Equation;
+  _powerSeries: Equation;
 
   constructor(
     diagram: CommonTopicDiagram,
@@ -50,437 +78,316 @@ export default class CommonCollection extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
-    this.hasTouchableElements = true;
-    this._fig._line.setMovable(true);
-    this._fig._line._line.increaseBorderSize();
-    this._fig._line.setTransformCallback = this.updateRotation.bind(this);
-    this._fig._mirrorLine.setMovable(false);
-    // this._fig.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
+    this.custom.counter = 0;
+    this.custom.constantCounter = 2;
+    this.custom.eqnCounter = 1;
+    this.custom.maxRotation = 90 * Math.PI / 180;
+    this.custom.minRotation = 0 * Math.PI / 180;
+    this.custom.minLineLength = 1.2;
+    this.custom.maxLineLength = 3;
+    this.custom.maxHeight = 2;
+    this._rotator._line.move.maxTransform.updateRotation(this.custom.maxRotation);
+    this._rotator._line.move.minTransform.updateRotation(this.custom.minRotation);
+    this._rotator._line.setTransformCallback = this.updateRotation.bind(this, null);
+    this._rotator._pad.setTransformCallback = this.updatePad.bind(this, null);
+    // this._rotator._v.setTransformCallback = this.updateV.bind(this);
+    this._rotator._pad.move.transformClip = this.limitPadMovement.bind(this);
+    this._rotator._line.interactiveLocation = new Point(this.custom.maxLineLength / 2, 0);
+    // this._rotator._v.move.canBeMovedAfterLosingTouch = true;
   }
 
-  // labelForm(form: string) {
-  //   if (this._fig._sineTheta.isShown) {
-  //     this._fig._sineTheta._label.showForm(form);
-  //   }
-  //   if (this._fig._hypotenuse.isShown) {
-  //     this._fig._hypotenuse._label.showForm(form);
-  //   }
-  // }
-
-  gotoSmallAngle() {
-    this.gotoRotation(rand(0.1, 0.3), 0.8, null);
-  }
-
-  gotoLargeAngle() {
-    this.gotoRotation(rand(Math.PI / 2 - 0.3, Math.PI / 2 - 0.1), 0.8, null);
-  }
-
-  rotateFrom0To90() {
-    this._fig._line.stop();
-    this._fig._line.animations.new()
-      .rotation({ target: 1 * Math.PI / 180, velocity: 0.5 })
-      .rotation({ target: 89 * Math.PI / 180, duration: 10 })
-      .delay(0.5)
-      .rotation({ target: Math.PI / 3, duration: 1 })
-      .start();
+  toggleSides() {
+    const options = [
+      ['AonB', 'side12', 'side20'],
+      ['AonC', 'side12', 'side01'],
+      ['BonC', 'side20', 'side01'],
+      ['BonA', 'side12', 'side20'],
+      ['ConA', 'side12', 'side01'],
+      ['ConB', 'side20', 'side01'],
+    ];
+    this.custom.counter = (this.custom.counter + 1) % 6;
+    const option = options[this.custom.counter];
+    this._eqn.showForm(option[0]);
+    this.accent(this._similar._tri2, [option[1], option[2]]);
+    // this._eqn.pulseScaleNow(1, 1.2);
+    this._eqn.exec(
+      ['pulse', { centerOn: this._eqn._equals, time: 1, scale: 1.5 }],
+      [
+        's_11', 'times_11', 's_12', 'times_12',
+        'equals', 'v_11',
+        'v_12',
+        'A_11', 'B_11', 'C_11',
+        'A_12', 'B_12', 'C_12',
+      ],
+    );
     this.diagram.animateNextFrame();
   }
 
-  sweep() {
-    this._fig._line.animations.new()
-      .rotation({ target: 0, velocity: 1 })
-      .rotation({ target: Math.PI / 2, velocity: 0.25 })
-      .rotation({ target: Math.PI / 18 * 4, velocity: 1 })
-      .start();
+  toggleConstancePhrase() {
+    this.custom.constantCounter = (this.custom.constantCounter + 1) % 3;
+    const options = [
+      ['oppOnHyp', 'tri.opp', 'tri.hyp'], // , 'eqnSame.opp', 'eqnSame.hyp'],
+      ['adjOnHyp', 'tri.adj', 'tri.hyp'], // , 'eqnSame.adj', 'eqnSame.hyp'],
+      ['oppOnAdj', 'tri.opp', 'tri.adj'], // , 'eqnSame.opp', 'eqnSame.adj'],
+    ];
+    const option = options[this.custom.constantCounter];
+    this._eqnSame.showForm(option[0]);
+    this.diagram.setFirstTransform();
+    // console.log(option)
+    // this.accent(this, [option]);
+    this.exec(
+      ['pulse', { time: 1, scale: 1.4 }],
+      [...option.slice(1)],
+    );
+    this.accent({
+      element: this._eqnSame,
+      children: ['v', 'opp', 'adj', 'hyp'],
+      centerOn: 'v',
+      scale: 1.3,
+      time: 1,
+      // x: 0.7,
+    });
     this.diagram.animateNextFrame();
   }
 
-  gotoRotation(angle: ?number = null, duration: ?number = 0, done: ?() => void = null) {
-    let r = 0;
-    if (angle != null) {
-      r = angle;
-    } else {
-      const currentR = this._fig._line.getRotation();
-      let direction = 1;
-      if (currentR > Math.PI / 4) {
-        direction = -1;
+  toggleConstant() {
+    this.custom.constantCounter = (this.custom.constantCounter + 1) % 3;
+    const options = [
+      ['eqnSin', 'tri.opp', 'tri.hyp'],
+      ['eqnCos', 'tri.adj', 'tri.hyp'],
+      ['eqnTan', 'tri.opp', 'tri.adj'],
+    ];
+    const option = options[this.custom.constantCounter];
+    // console.log(option)
+    // this.accent(this, [option]);
+    this.exec(
+      ['pulse', { time: 1, scale: 1.4 }],
+      [...option],
+    );
+    this.diagram.animateNextFrame();
+  }
+
+  pulseConstant() {
+    this._eqn.exec(
+      ['pulse', { centerOn: this._eqn._v_12, time: 1, scale: 2 }],
+      [
+        'v_12',
+        'A_12', 'B_12', 'C_12',
+      ],
+    );
+    this.diagram.animateNextFrame();
+  }
+
+  goToRotation(angle: ?number = null, duration: ?number = null, done: ?() => void = null) {
+    let r = angle;
+    if (r == null) {
+      const rotationSweep = this.custom.maxRotation - this.custom.minRotation;
+      const halfRotation = rotationSweep / 2 + this.custom.minRotation;
+      const delta = rand(rotationSweep / 4, rotationSweep / 2);
+      const currentR = this._rotator._line.getRotation();
+      if (currentR > halfRotation) {
+        r = currentR - delta;
+      } else {
+        r = currentR + delta;
       }
-      r = currentR + direction * rand(Math.PI / 8, Math.PI / 4 * 0.9);
     }
-    if (duration === 0) {
-      this._fig._line.setRotation(r);
-      if (done != null) {
-        done();
-      }
+    if (duration == null) {
+      this._rotator._line.animations.new()
+        .rotation({ target: r, velocity: 0.3 })
+        .pulse({ element: this._eqnSame._value, duration: 1 })
+        .whenFinished(done)
+        .start();
     } else {
-      this._fig._line.stop();
-      let rotationOptions = { target: r, duration };
-      if (duration === null) {
-        rotationOptions = { target: r, velocity: 2 };
-      }
-      this._fig._line.animations.new()
-        .rotation(rotationOptions)
+      this._rotator._line.animations.new()
+        .rotation({ target: r, duration })
         .whenFinished(done)
         .start();
     }
     this.diagram.animateNextFrame();
   }
 
-  sweepRotation(done: ?() => void) {
-    this.gotoRotation(Math.PI / 180 * 1, 0.5, () => {
-      this.gotoRotation(Math.PI / 2, 3, () => {
-        this.gotoRotation(Math.PI / 18 * 4, 1, done);
-      });
-    });
+  limitPadMovement(transform: Transform) {
+    const clipped = transform._dup();
+    const position = transform.t();
+    // console.log(position)
+    if (position != null) {
+      let line = new Line(new Point(0, 0), position);
+      if (line.angle() > Math.PI / 2) {
+        clipped.updateTranslation(0.001, position.y);
+        position.x = 0.001;
+        line = new Line(new Point(0, 0), position);
+      }
+      if (line.angle() < 0) {
+        clipped.updateTranslation(position.x, 0.001);
+        position.y = 0.001;
+        line = new Line(new Point(0, 0), position);
+      }
+      if (position.y > this.custom.maxHeight) {
+        position.y = this.custom.maxHeight;
+        clipped.updateTranslation(position.x, position.y);
+        line = new Line(new Point(0, 0), position);
+      }
+      if (line.length() < this.custom.minLineLength) {
+        clipped.updateTranslation(
+          line.pointAtPercent(this.custom.minLineLength / line.length()),
+        );
+      }
+      if (line.length() > this.custom.maxLineLength) {
+        clipped.updateTranslation(
+          line.pointAtPercent(this.custom.maxLineLength / line.length()),
+        );
+      }
+      return clipped;
+    }
+    return transform;
   }
 
-  resetRotation(done: ?() => void = null, duration: number = 0) {
-    if (duration === 0) {
-      this._fig._line.setLength(this.layout.r);
-      this._fig._line.setRotation(Math.PI / 18 * 4);
-      if (done != null) {
-        done();
-      }
-    } else {
-      const r = this._fig._line.getRotation();
-      const l = this._fig._line.getLength();
-      const callback = () => {
-        if (done != null) {
-          done();
-        }
-      };
-      let callback2 = () => {
-        if (done != null) {
-          done();
-        }
-      };
-      let callback3 = () => {
-        if (done != null) {
-          done();
-        }
-      };
-      if (r < 0.3 || r > Math.PI / 2 - 0.3) {
-        this.gotoRotation(Math.PI / 4, 1, callback);
-        callback2 = null;
-        callback3 = null;
-      }
-      if (l !== this.layout.r) {
-        this.setLineLength(this.layout.r, true, callback2, false);
-        callback3 = null;
-      }
-
-      if (callback3 != null) {
-        callback3();
-      }
-    }
+  updatePad() {
+    // let r = this._rotator._line.getRotation();
+    // const len = new Line(new Point(0, 0), this._rotator._pad.getPosition()).length();
+    const p = this._rotator._pad.getPosition();
+    const points = [
+      new Point(0, 0),
+      new Point(p.x, 0),
+      new Point(p.x, p.y),
+    ];
+    this._tri._line.updatePoints(points);
+    // this.updateRotation(null);
+    this.updateTri();
+    this._rotator._line.setEndPoints(new Point(0, 0), points[2]);
+    // this._rotator._v.setEndPoints(points[1], points[2]);
   }
 
-  setLineLength(
-    length: ?number,
-    animate: boolean = false,
-    done: ?() => void = null,
-    stop: ?boolean = true,
-  ) {
-    const currentLength = this._fig._line.getLength();
-    let newLength;
-    if (length == null) {
-      const delta = rand(this.layout.r * 0.2, this.layout.r * 0.3);
-      newLength = currentLength;
-      if (currentLength > this.layout.r * 1.2) {
-        newLength -= delta;
-      } else {
-        newLength += delta;
-      }
-    } else {
-      newLength = length;
-    }
-    if (newLength === currentLength) {
-      this.accent(this._fig._line, done);
-      return;
-    }
-    if (animate === false) {
-      this._fig._line.setLength(newLength);
-      this.diagram.animateNextFrame();
-      if (done != null) {
-        done();
-      }
-      return;
-    }
-    this._fig._line.animateLengthTo(
-      newLength, 1, true, done, this.updateRotation.bind(this), stop,
+  resetTri(done: ?() => void) {
+    this._rotator._pad.stop();
+    this._rotator._pad.animations.new()
+      .position({ target: this.layout.points[2], velocity: 0.5 })
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  // updateV() {
+  //   let r = this._rotator._line.getRotation();
+  //   let x = this._rotator._v.getP1().x;
+  //   const len = Math.min(x / Math.cos(r), this.custom.maxLineLength);
+  //   const points = [
+  //     new Point(0, 0),
+  //     new Point(len * Math.cos(r), 0),
+  //     new Point(len * Math.cos(r), len * Math.sin(r)),
+  //   ];
+  //   this._tri._line.updatePoints(points);
+  //   // this.updateRotation(null);
+  //   this.updateTri();
+  //   this._rotator._line.setEndPoints(new Point(0, 0), points[2]);
+  //   this._rotator._v.setEndPoints(points[1], points[2]);
+  //   this._rotator._pad.transform.updateTranslation(points[2]);
+  // }
+
+  goToLength(toLength: ?number = null) {
+    const line = new Line(new Point(0, 0), this._tri._line.points[2]);
+    const ceiling = new Line(
+      new Point(0, this.custom.maxHeight),
+      new Point(5, this.custom.maxHeight),
     );
-    this.diagram.animateNextFrame();
-    // this.updateRotation();
-  }
-
-  updateRotation() {
-    // console.log('asdfasdf');
-    const theta = this._fig._theta;
-    // const angle = this._fig._angle;
-    const right = this._fig._right;
-    // const real = this._fig._real;
-    const complement = this._fig._complement;
-    const opp = this._fig._opp;
-    // const sineTheta = this._fig._sineTheta;
-    // const sine = this._fig._sine;
-    const h = this._fig._h;
-    const v = this._fig._v;
-    const hypotenuse = this._fig._hypotenuse;
-    // const opposite = this._fig._opposite;
-    const r = this._fig._line.getRotation();
-    const deg = round(r * 180 / Math.PI, 0);
-    const length = this._fig._line.getLength();
-    const oppLabel = this._fig._oppLabel;
-    const p2 = new Point(length * Math.cos(r), length * Math.sin(r));
-    if (h.isShown) {
-      h.setEndPoints([0, 0], [p2.x, 0]);
+    const intercept = line.intersectsWith(ceiling);
+    if (intercept.intersect == null) {
+      return;
     }
-    if (v.isShown) {
-      v.setEndPoints([p2.x, 0], [p2.x, p2.y]);
+    const maxLine = new Line(new Point(0, 0), intercept.intersect);
+    const maxLen = Math.min(this.custom.maxLineLength, maxLine.length());
+    const lenRange = maxLen - this.custom.minLineLength;
+    const halfLen = maxLen - lenRange / 2;
+    const lenDelta = rand(lenRange / 4, lenRange / 2);
+    let newLen = line.length() - lenDelta;
+    if (line.length() < halfLen) {
+      newLen = line.length() + lenDelta;
     }
-    if (opp.isShown) {
-      opp.setEndPoints([p2.x, 0], [p2.x, p2.y]);
+    if (toLength != null) {
+      newLen = toLength;
     }
-    if (this._fig._mirrorV) {
-      this._fig._mirrorV.setEndPoints([p2.x, 0], [p2.x, -p2.y]);
-    }
-
-    const opacity = {
-      right: 1,
-      theta: 1,
-      // real: 1,
-      // sine: 1,
-      // sineTheta: 1,
-      // angle: 1,
-      opposite: 1,
-      complement: 1,
-      oppLabel: 1,
-    };
-
-    if (p2.y < 0.28 && r >= 0.12) {
-      opacity.right = 0;
-      opacity.complement = 0;
-    } else if (r < 0.12 && r >= 0.05) {
-      opacity.right = 0;
-      opacity.theta = 0;
-      // opacity.real = 0;
-      // opacity.sineTheta = 0;
-      // opacity.angle = 0;
-      opacity.oppLabel = 0;
-      opacity.opposite = 0;
-      opacity.complement = 0;
-    } else if (r < 0.05) {
-      // opacity.sine = 0;
-      opacity.right = 0;
-      opacity.theta = 0;
-      // opacity.real = 0;
-      // opacity.sineTheta = 0;
-      // opacity.angle = 0;
-      opacity.oppLabel = 0;
-      opacity.opposite = 0;
-      opacity.complement = 0;
-    } else if (r > Math.PI / 2 * 0.8 && r < Math.PI / 2 * 0.88) {
-      opacity.right = 0;
-      opacity.complement = 0;
-    } else if (r > Math.PI / 2 * 0.88) {
-      opacity.right = 0;
-      opacity.complement = 0;
-      // opacity.real = 0;
-      opacity.theta = 0;
-      // opacity.angle = 0;
-    }
-    if (right.isShown) {
-      right.setAngle({
-        p1: [p2.x, p2.y],
-        p2: [p2.x, 0],
-        p3: [0, 0],
-      });
-      right.setOpacity(opacity.right);
-    }
-    if (this._fig._mirrorLine.isShown) {
-      this._fig._mirrorLine.setRotation(-r);
-    }
-
-    if (theta.isShown) {
-      theta.setAngle({
-        p1: [p2.x, 0],
-        p2: [0, 0],
-        p3: p2,
-      });
-      theta.setOpacity(opacity.theta);
-      theta._label._value.drawingObject.setText(`${deg}º`);
-    }
-    // if (real.isShown) {
-    //   real.setAngle({
-    //     p1: [p2.x, 0],
-    //     p2: [0, 0],
-    //     p3: p2,
-    //   });
-    //   real.setOpacity(opacity.real);
-    // }
-    if (complement.isShown) {
-      complement.setAngle({
-        p1: [0, 0],
-        p2,
-        p3: [p2.x, 0],
-      });
-      complement.setOpacity(opacity.complement);
-    }
-    // if (sineTheta.isShown) {
-    //   sineTheta.setEndPoints([p2.x, 0], [p2.x, p2.y]);
-    //   sineTheta.setOpacity(opacity.sineTheta);
-    // }
-    // if (sine.isShown) {
-    //   const angle = parseFloat(real.getLabel());
-    //   sine.setLabel(`${round(Math.sin(angle / 180 * Math.PI), 3)}`);
-    //   sine.setEndPoints([p2.x, 0], [p2.x, p2.y]);
-    //   sine.setOpacity(opacity.sine);
-    // }
-    if (oppLabel.isShown) {
-      oppLabel._label._value.drawingObject.setText(`${round(length / this.layout.r * Math.sin(deg / 180 * Math.PI), 3)}`);
-      oppLabel.setEndPoints([p2.x, 0], [p2.x, p2.y]);
-      oppLabel.setOpacity(opacity.oppLabel);
-    }
-    // if (opposite.isShown) {
-    //   opposite.setEndPoints([p2.x, 0], [p2.x, p2.y]);
-    //   opposite.setOpacity(opacity.opposite);
-    // }
-    if (hypotenuse.isShown) {
-      hypotenuse.setEndPoints([0, 0], p2);
-      hypotenuse._label._value.drawingObject.setText(`${round(length / this.layout.r, 2)}`);
-    }
-
-    if (this._fig._arc.isShown) {
-      let arcAngle = r;
-      while (arcAngle > Math.PI * 2) {
-        arcAngle -= Math.PI * 2;
-      }
-      while (arcAngle < 0) {
-        arcAngle += Math.PI * 2;
-      }
-      // console.log(arcAngle * 180 / Math.PI)
-      this._fig._arc.setAngleToDraw(arcAngle + 0.005);
-    }
-    if (this._fig._mirrorArc.isShown) {
-      let arcAngle = r;
-      while (arcAngle > Math.PI * 2) {
-        arcAngle -= Math.PI * 2;
-      }
-      while (arcAngle < 0) {
-        arcAngle += Math.PI * 2;
-      }
-      // console.log(arcAngle * 180 / Math.PI)
-      this._fig._mirrorArc.setAngleToDraw(arcAngle + 0.005);
-    }
-    // if (length !== this.layout.r) {
-    //   hypotenuse._label.setOpacity(0);
-    //   sineTheta._label.setOpacity(0);
-    //   complement._label.setOpacity(0);
-    // } else {
-    //   hypotenuse._label.setOpacity(1);
-    //   sineTheta._label.setOpacity(opacity.sineTheta);
-    //   complement._label.setOpacity(opacity.complement);
-    // }
+    const target = new Point(
+      newLen * Math.cos(line.angle()),
+      newLen * Math.sin(line.angle()),
+    );
+    this._rotator._pad.animations.new()
+      .position({ target, velocity: 0.5 })
+      .pulse({ element: this._eqnSame._value, duration: 1 })
+      .start();
     this.diagram.animateNextFrame();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  showTable(index: number, fadeIn: boolean = true) {
-    for (let i = 0; i < index; i += 1) {
-      const row = document.getElementById(`id_row${i}`);
-      if (row != null) {
-        row.classList.remove('angle_table_hide');
-      }
+  updateRotation(setAngle: ?number = null) {
+    let r = this._rotator._line.getRotation();
+    if (setAngle != null) {
+      r = setAngle;
     }
-    const row = document.getElementById(`id_row${index}`);
-    if (row != null) {
-      row.classList.remove('angle_table_hide');
-      if (fadeIn) {
-        row.classList.add('topic__diagram_text_fade_in');
-      }
-    }
+    const len = new Line(new Point(0, 0), this._tri._line.points[2]).length();
+    const points = [
+      new Point(0, 0),
+      new Point(len * Math.cos(r), 0),
+      new Point(len * Math.cos(r), Math.min(len * Math.sin(r), 2)),
+    ];
+    this._tri._line.updatePoints(points);
+    // this._rotator._v.setEndPoints(points[1], points[2]);
+    this._rotator._pad.transform.updateTranslation(points[2]);
+    this._rotator._line.setEndPoints(new Point(0, 0), points[2]);
+    this.updateTri();
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  pulseTable() {
-    const angleTable = document.getElementById('angle_table');
-    if (angleTable != null) {
-      angleTable.classList.remove('topic__diagram_text_pulse');
-      // eslint-disable-next-line
-      void angleTable.offsetWidth;
-      angleTable.classList.add('topic__diagram_text_pulse');
-    }
-  }
-  // measureOpp(angle: number, index: number, done: ?() => void) {
-  //   this._fig._line.stop();
-  //   this._fig._line.animations.new()
-  //     .rotation({ target: angle, duration: 0.5 })
-  //     .trigger({
-  //       callback: () => {
-  //         this.accent(this._fig._sine, null, null);
-  //         this.accent(this._fig._real, null, null);
-  //         this.diagram.animateNextFrame();
-  //       },
-  //       duration: 1,
-  //     })
-  //     .trigger({
-  //       callback: this.showTable.bind(this, index, true),
-  //       duration: 0.5,
-  //     })
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // growTable(done: ?() => void) {
-  //   const rows = document.querySelectorAll('.angle_row');
-  //   rows.forEach((row) => {
-  //     row.classList.add('angle_table_hide');
-  //   });
-  //   this._fig.stop();
-  //   this._fig.animations.new()
-  //     // .trigger({
-  //     //   callback: this.measureOpp.bind(this, Math.PI / 180 * 0, 0, null),
-  //     //   duration: 3,
-  //     // })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 10, 0, null),
-  //       duration: 2,
-  //     })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 20, 1, null),
-  //       duration: 2,
-  //     })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 30, 2, null),
-  //       duration: 2,
-  //     })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 40, 3, null),
-  //       duration: 2,
-  //     })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 50, 4, null),
-  //       duration: 2,
-  //     })
-  //     .trigger({
-  //       callback: this.measureOpp.bind(this, Math.PI / 180 * 60, 5, null),
-  //       duration: 2,
-  //     })
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
-
-  measureAngles(done: ?() => void = null) {
-    // const angles = [0, 1, 2, 3, 43, 44, 45, 46, 47, 90].map(a => round(a * Math.PI / 180, 3));
-    // const r = round(this._fig._line.getRotation(), 3);
-    // const index = angles.indexOf(r);
-    // const newIndex = (index + 1) % 10;
-    // this.gotoRotation(angles[newIndex], 1, done);
-    this.gotoRotation(null, 1, () => {
-      this.accent(this._fig._oppLabel, done);
+  updateTri() {
+    const { points } = this._tri._line;
+    this._tri._right.setAngle({
+      p1: points[2],
+      p2: points[1],
+      p3: points[0],
     });
+    this._tri._hyp.setEndPoints(points[0], points[2]);
+    this._tri._opp.setEndPoints(points[2], points[1]);
+    if (this._tri._hyp.isShown) {
+      this._tri._theta.setAngle({
+        p1: points[1],
+        p2: points[0],
+        p3: points[2],
+      });
+      const theta = parseFloat(this._tri._theta.getLabel()) * Math.PI / 180;
+      const len = new Line(new Point(0, 0), points[2]).length();
+      const hyp = round((len - 0.5) ** 3, 4);
+      const opp = round(hyp * Math.sin(theta), 4);
+      this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
+      this._tri._opp.setLabel(`${opp.toFixed(4)}`);
+      this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
+      // const r = this._rotator._line.getRotation();
+      if (points[1].x < 1.3 || points[2].y < 0.35) {
+        this._tri._right.hide();
+      } else {
+        this._tri._right.showAll();
+      }
+      const curveOptions = {
+        radius: undefined,
+        curveRadius: undefined,
+        curveOffset: undefined,
+      };
+      if (points[1].x < 0.85) {
+        const radius = Math.max(points[1].x - 0.25, 0.01);
+        curveOptions.radius = radius;
+        curveOptions.curveRadius = radius;
+      }
+      if (points[2].y < 0.2) {
+        curveOptions.curveOffset = -(0.2 - points[2].y);
+      }
+      if (points[2].y >= 0.2 && curveOptions.curveOffset !== 0) {
+        curveOptions.curveOffset = 0;
+      }
+      if (curveOptions.radius != null
+        || curveOptions.curveRadius != null
+        || curveOptions.curveOffset != null
+      ) {
+        this._tri._theta.change(curveOptions);
+      }
+    }
+    this.diagram.animateNextFrame();
   }
 
   tableForm(fromForm: string, toForm: string, fromOnly: boolean = true) {
@@ -498,14 +405,23 @@ export default class CommonCollection extends CommonDiagramCollection {
     return elements;
   }
 
-  showTableForms(angleForm: string, sineForm: string, valuesForm: string) {
-    Object.keys(this._table.elements).forEach((elementName) => {
-      if (elementName.slice(0, 4) === 'eqn_') {
-        const element = this._table.elements[elementName];
-        element.showForm(valuesForm);
-      }
+  toggleEqn() {
+    this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
+    const options = ['opp', 'hyp'];
+    const option = options[this.custom.eqnCounter];
+    if (this._eqnSame.eqn.isAnimating) {
+      this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
+    }
+    this._eqnSame.goToForm({
+      name: option,
+      animate: 'move',
+      duration: 2,
+      ifAnimating: {
+        cancelGoTo: true,
+        skipToTarget: true,
+      },
     });
-    this._table._angleHeading.showForm(angleForm);
-    this._table._sineHeading.showForm(sineForm);
+
+    this.diagram.animateNextFrame();
   }
 }
