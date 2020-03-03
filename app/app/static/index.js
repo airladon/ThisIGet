@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("Fig", [], factory);
-	else if(typeof exports === 'object')
-		exports["Fig"] = factory();
-	else
-		root["Fig"] = factory();
-})(window, function() {
-return /******/ (function(modules) { // webpackBootstrap
+var Fig =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -9204,6 +9195,10 @@ function (_Elements) {
           toMoveStartTransforms.push(currentT);
           toMoveStopTransforms.push(nextT);
         }
+      });
+      var toShowTransforms = {};
+      elementsToShow.forEach(function (element) {
+        toShowTransforms[element.name] = element.transform._dup();
       }); // Find move time to use. If moveTime is null, then a velocity is used.
 
       var moveTimeToUse;
@@ -9218,6 +9213,7 @@ function (_Elements) {
       }
 
       this.collectionMethods.setElementTransforms(currentTransforms);
+      this.collectionMethods.setElementTransforms(toShowTransforms);
       var cumTime = delay;
       var moveCallback = null;
       var dissolveInCallback = null;
@@ -28036,6 +28032,9 @@ function () {
       min.y = boundary.bottom - minPoint.y * scale.y;
       max.x = boundary.right - maxPoint.x * scale.x;
       max.y = boundary.top - maxPoint.y * scale.y;
+      console.log(rect);
+      console.log(glToDiagramScaleMatrix);
+      console.log(this.name, boundary, minPoint.x, scale.x, min, max);
       this.move.maxTransform.updateTranslation(max.x, max.y);
       this.move.minTransform.updateTranslation(min.x, min.y);
     }
@@ -34806,6 +34805,5 @@ function generateRandomString() {
 
 /***/ })
 
-/******/ });
-});
+/******/ })["default"];
 //# sourceMappingURL=index.js.map
