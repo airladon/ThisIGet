@@ -62,6 +62,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _eqn: {
     _equals: DiagramElementPrimitive;
+    _v_12: DiagramElementPrimitive;
   } & Equation;
 
   _eqnCos: Equation;
