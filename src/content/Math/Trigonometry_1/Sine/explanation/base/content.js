@@ -5,7 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
-import { note } from '../../../../../common/tools/note';
+// import { note } from '../../../../../common/tools/note';
 import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
