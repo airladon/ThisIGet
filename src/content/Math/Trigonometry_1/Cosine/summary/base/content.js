@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationFormatContent,
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
@@ -11,16 +11,16 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import DiagramCollection from './diagramCollection';
 // import Definition from '../../../../../common/tools/definition';
 
-const {
-//   style,
-  click,
-//   clickW,
-//   highlight,
-//   centerV,
-} = Fig.tools.html;
+// const {
+// //   style,
+//   click,
+// //   clickW,
+// //   highlight,
+// //   centerV,
+// } = Fig.tools.html;
 
 const layout = diagramLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationFormatContent {
   setTitle() {
@@ -35,7 +35,7 @@ class Content extends PresentationFormatContent {
   }
 
   addSections() {
-    const coll = this.diagram.elements;
+    // const coll = this.diagram.elements;
 
     this.addSection({
       setContent: [
