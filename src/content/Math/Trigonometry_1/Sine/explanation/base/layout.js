@@ -952,7 +952,30 @@ export default function diagramLayout() {
     },
   };
 
+  const eqnNote = {
+    name: 'powerSeriesNote',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.7,
+      elements: {
+        for: { style: 'normal' },
+        theta: { text: '\u03b8', color: colors.angles },
+        inRad: { text: 'in radians', style: 'normal' },
+      },
+      forms: {
+        'base': ['for', ' ', 'theta', ' ', 'inRad'],
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [2, -1] },
+      },
+    },
+  };
+
   layout.addElements.push(powerSeries);
+  layout.addElements.push(eqnNote);
 
   return layout;
 }

@@ -3783,9 +3783,27 @@ function () {
             this.textCanvasOffscreen = child;
           }
 
-          if (child.classList.contains('diagram__html')) {
+          if (child.classList.contains('figureone__html')) {
             this.htmlCanvas = child;
           }
+        }
+
+        if (this.canvasLow == null) {
+          this.canvasLow = document.createElement('canvas');
+          this.canvasLow.classList.add('diagram__gl', 'diagram__canvas');
+          container.appendChild(this.canvasLow);
+        }
+
+        if (this.textCanvasLow == null) {
+          this.textCanvasLow = document.createElement('canvas');
+          this.textCanvasLow.classList.add('diagram__text', 'diagram__canvas');
+          container.appendChild(this.textCanvasLow);
+        }
+
+        if (this.htmlCanvas == null) {
+          this.htmlCanvas = document.createElement('div');
+          this.htmlCanvas.classList.add('figureone__html', 'diagram__canvas');
+          container.appendChild(this.htmlCanvas);
         }
 
         this.backgroundColor = backgroundColor;
@@ -9204,6 +9222,10 @@ function (_Elements) {
           toMoveStartTransforms.push(currentT);
           toMoveStopTransforms.push(nextT);
         }
+      });
+      var toShowTransforms = {};
+      elementsToShow.forEach(function (element) {
+        toShowTransforms[element.name] = element.transform._dup();
       }); // Find move time to use. If moveTime is null, then a velocity is used.
 
       var moveTimeToUse;
@@ -9218,6 +9240,7 @@ function (_Elements) {
       }
 
       this.collectionMethods.setElementTransforms(currentTransforms);
+      this.collectionMethods.setElementTransforms(toShowTransforms);
       var cumTime = delay;
       var moveCallback = null;
       var dissolveInCallback = null;
@@ -27803,8 +27826,7 @@ function () {
           height: this.diagramLimits.height
         }
       };
-      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace); // console.log(location, glToDiagramSpace)
-
+      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace);
       return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {

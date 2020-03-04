@@ -21,6 +21,21 @@ function hideInteractiveHighlightButton() {
   }
 }
 
+function closeQRs() {
+  const presQR = document.getElementById('id_topic__qr__pres_container');
+  if (presQR != null) {
+    presQR.classList.add('topic__hide');
+  }
+  const overlay = document.getElementById('presentation_topic__qr__overlay');
+  if (overlay != null) {
+    overlay.style.zIndex = '-1';
+  }
+  const staticQR = document.getElementById('id_topic__qr__static_container');
+  if (staticQR != null) {
+    staticQR.classList.add('topic__hide');
+  }
+}
+
 // Flow:
 //
 //  Coming from any section
@@ -115,6 +130,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   nextSection(message: ?string = null) {
+    closeQRs();
     if (typeof message === 'string') {
       this.content.message = message;
     }
@@ -148,6 +164,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   prevSection(message: ?string = null) {
+    closeQRs();
     if (typeof message === 'string') {
       this.content.message = message;
     }
@@ -184,6 +201,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   goToSection(sectionId: number | string) {
+    closeQRs();
     window.presentationFormatTransitionStatus = 'notSteady';
     // console.log('goToSection')
     let sectionIndex = 0;

@@ -32,11 +32,11 @@
 //   margin-bottom: 20px;
 // }
 
-// #id_diagram__text__low {
+// #id_figureone__text__low {
 //   z-index: 1;
 // }
 
-.diagram__gl__offscreen {
+.figureone__gl__offscreen {
   position: absolute;
   top: -10000px;
   left: -10000px;
@@ -46,7 +46,7 @@
   height: 500px;
 }
 
-.diagram__text__offscreen {
+.figureone__text__offscreen {
   position: absolute;
   top: -10000px;
   left: -10000px;

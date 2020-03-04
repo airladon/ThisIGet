@@ -89,9 +89,9 @@ function diagramCanvas(
 ): Object {
   return {
     replacementText: () => `<div id="${id}" class="canvas_container ${classes}">
-        <canvas class="diagram__gl"></canvas>
-        <div class="diagram__html"></div>
-        <canvas class="diagram__text"></canvas>
+        <canvas class="figureone__gl"></canvas>
+        <div class="figureone__html"></div>
+        <canvas class="figureone__text"></canvas>
       </div>`,
     type: 'diagram',
     DiagramClass,
@@ -743,24 +743,24 @@ class PresentationFormatContent extends SimpleFormatContent {
     if (overlay != null) {
       overlay.style.zIndex = '10';
     }
-    const next = document.getElementById('topic__button-next');
-    if (next) {
-      next.classList.add('topic__button-next-disabled');
-    }
-    const prev = document.getElementById('topic__button-previous');
-    if (prev) {
-      prev.classList.add('topic__button-prev-disabled');
-    }
-    const gotoButton =
-      document.getElementById('id__topic__button-goto_container');
-    if (gotoButton) {
-      gotoButton.classList.add('topic__button-goto_container-disabled');
-    }
-    const interactive =
-      document.getElementById('id_topic__interactive_element_button');
-    if (interactive) {
-      interactive.classList.add('topic__interactive_element_button__disable');
-    }
+    // const next = document.getElementById('topic__button-next');
+    // if (next) {
+    //   next.classList.add('topic__button-next-disabled');
+    // }
+    // const prev = document.getElementById('topic__button-previous');
+    // if (prev) {
+    //   prev.classList.add('topic__button-prev-disabled');
+    // }
+    // const gotoButton =
+    //   document.getElementById('id__topic__button-goto_container');
+    // if (gotoButton) {
+    //   gotoButton.classList.add('topic__button-goto_container-disabled');
+    // }
+    // const interactive =
+    //   document.getElementById('id_topic__interactive_element_button');
+    // if (interactive) {
+    //   interactive.classList.add('topic__interactive_element_button__disable');
+    // }
   }
 
   // eslint-disable-next-line class-methods-use-this

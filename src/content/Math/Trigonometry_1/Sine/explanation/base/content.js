@@ -811,11 +811,13 @@ class Content extends PresentationFormatContent {
         // ...coll.tableForm('base'),
         // [tab._sineHeading, 'opp'],
         [coll._powerSeries, 'base'],
+        [coll._powerSeriesNote, 'base'],
       ],
     };
     this.addSection(common, commonShow, commonContent, {
       modifiers: {
         formula: coll.bindAccent(coll._powerSeries, colors.diagram.action),
+        theta: highlightWord('\u03b8', colors.angles),
       },
       transitionFromPrev: (done) => {
         coll.accent(coll._powerSeries, done);

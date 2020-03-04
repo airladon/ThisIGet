@@ -145,7 +145,7 @@ export default class PresentationFormatComponent extends React.Component
       }
     }
 
-    const diagramHTML = document.getElementById('id_diagram__html');
+    const diagramHTML = document.getElementById('id_figureone__html');
     const element = document.getElementById(elementId);
     if (diagramHTML != null && element != null) {
       const diagramFontSize = parseFloat(diagramHTML.style.fontSize);
@@ -413,13 +413,13 @@ export default class PresentationFormatComponent extends React.Component
         <div id="topic__container_name" className="topic__container">
               {this.addPrevButton()}
               <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram">
-                <canvas id="id_diagram__gl__low" className='diagram__gl'>
+                <canvas id="id_figureone__gl__low" className='figureone__gl'>
                 </canvas>
-                <canvas id="id_diagram__text__low" className='diagram__text'>
+                <canvas id="id_figureone__text__low" className='figureone__text'>
                 </canvas>
-                <div id="id_diagram__html" className='diagram__html'>
+                <div id="id_figureone__html" className='figureone__html'>
                   {this.renderContent(this.state.htmlText)}
-                  <div className="diagram__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
+                  <div className="figureone__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
