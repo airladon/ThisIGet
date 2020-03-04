@@ -209,6 +209,7 @@ else
     -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
+    -v $PROJECT_PATH/jest-setup.js:/opt/app/jest-setup.js \
     -v $PROJECT_PATH/jest.index.config.js:/opt/app/jest.index.config.js \
     -v $PROJECT_PATH/LICENSE.txt:/opt/app/LICENSE.txt \
     -v $PROJECT_PATH/package-lock.json:/opt/app/package-lock.json \
