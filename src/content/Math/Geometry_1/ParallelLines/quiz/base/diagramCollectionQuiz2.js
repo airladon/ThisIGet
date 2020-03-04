@@ -53,7 +53,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       transform,
     );
     this.addCheck();
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
 
     const setupLines = (lineNumber: number) => {
       const line = this[`_line${lineNumber}`];

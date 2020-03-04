@@ -40,7 +40,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     transform: Transform = new Transform('Opposite').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsThreeLines);
+    this.diagram.addElements(this.layout.addElementsThreeLines, this);
     this._fig._line1.makeTouchable();
     this._fig._line2.makeTouchable();
     this._fig._line3.makeTouchable();

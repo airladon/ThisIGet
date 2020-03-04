@@ -40,7 +40,7 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsASA);
+    this.diagram.addElements(this.layout.addElementsASA, this);
     this.hasTouchableElements = true;
     this.resetTri();
     this._fig._pad0.color = this.layout.colors.diagram.background;

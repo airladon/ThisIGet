@@ -75,7 +75,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     this._rotator._line._line.setMovable(true);
     this._rotator._line._line.increaseBorderSize();
     this._rotator._record.makeTouchable();

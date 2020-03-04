@@ -54,7 +54,7 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsOnePro);
+    this.diagram.addElements(this.layout.addElementsOnePro, this);
     this.hasTouchableElements = true;
     this.resetTri();
   }

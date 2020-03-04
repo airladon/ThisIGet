@@ -71,7 +71,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     this.hasTouchableElements = true;
     this._left._angleTop = this._left._angle1;
     this._left._angleEqual = this._left._angle0;

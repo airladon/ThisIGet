@@ -29,7 +29,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     );
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
-    this.diagram.addElements(this, this.layout.addQuizElements);
+    this.diagram.addElements(this.layout.addQuizElements, this);
     this.hasTouchableElements = true;
     this._circle1.onClick = this.selectAnswer.bind(this, 1);
     this._circle2.onClick = this.selectAnswer.bind(this, 2);

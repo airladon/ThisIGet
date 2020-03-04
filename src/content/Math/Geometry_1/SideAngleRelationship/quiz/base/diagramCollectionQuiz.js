@@ -66,7 +66,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
     this.addMultipleChoice('side_angle_relationship_choice', ['x', 'y', 'z']);
-    this.diagram.addElements(this, this.layout.addElementsQuiz);
+    this.diagram.addElements(this.layout.addElementsQuiz, this);
     // this.add('main', new CommonCollection(diagram, this.layout));
     this.triangle = this._fig._tri;
     this.hasTouchableElements = true;

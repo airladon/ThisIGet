@@ -71,7 +71,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
-    this.diagram.addElements(this, this.layout.addCircleElements);
+    this.diagram.addElements(this.layout.addCircleElements, this);
     this.hasTouchableElements = true;
     this.scenarios = layout.circleScenarios;
     this.setScenario('center');

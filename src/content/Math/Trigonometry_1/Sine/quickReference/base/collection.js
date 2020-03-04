@@ -42,7 +42,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     // const layout = diagramLayout();
     super(diagram, layout, transform);
 
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     // this.hasTouchableElements = true;
   }
 

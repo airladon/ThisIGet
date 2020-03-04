@@ -49,7 +49,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
     this.addMultipleChoice('tri', ['-', '-', '-', 'No']);
-    this.diagram.addElements(this, this.layout.addElementsQuiz);
+    this.diagram.addElements(this.layout.addElementsQuiz, this);
     this.hasTouchableElements = true;
     this.scalingFactor = 1;
   }

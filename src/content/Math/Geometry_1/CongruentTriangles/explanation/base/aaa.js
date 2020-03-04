@@ -38,7 +38,7 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsAAA);
+    this.diagram.addElements(this.layout.addElementsAAA, this);
     this.hasTouchableElements = true;
     this.resetTri();
   }

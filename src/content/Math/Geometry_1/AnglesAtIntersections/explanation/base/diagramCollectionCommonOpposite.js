@@ -30,7 +30,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     transform: Transform = new Transform('Opposite').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     this._fig._line1.makeTouchable();
     this._fig._line2.makeTouchable();
     this._fig._line1.setTransformCallback = (t: Transform) => {

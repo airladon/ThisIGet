@@ -63,7 +63,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsSAS);
+    this.diagram.addElements(this.layout.addElementsSAS, this);
     this.hasTouchableElements = true;
     const fig = this._fig;
     fig.updatePointsCallback = () => {

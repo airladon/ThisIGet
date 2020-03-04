@@ -70,7 +70,7 @@ function createDiagram(htmlId) {
   // diagram.addElements(collection, )
   // const collection = new DiagramElementCollection(new Transform(), diagram.limits);
   // diagram.elements = collection;
-  diagram.addElements(collection, [
+  diagram.addElements([
     {
       name: 'ball',
       method: 'polygon',
@@ -88,7 +88,7 @@ function createDiagram(htmlId) {
         },
       },
     },
-  ]);
+  ], collection);
   collection._ball.setMovable(true);
   diagram.setFirstTransform();
 }
