@@ -354,15 +354,15 @@ export default class SinglePageFormatComponent extends React.Component
         {this.renderContent()}
         <canvas id="hidden_offscreen"></canvas>
         <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram single_page_topic__diagram_container">
-          <canvas id="id_diagram__gl__offscreen" className="diagram__gl__offscreen">
+          <canvas id="id_figureone__gl__offscreen" className="figureone__gl__offscreen">
           </canvas>
-          <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">
+          <canvas id="id_figureone__text__offscreen" className="figureone__text__offscreen">
           </canvas>
-          <canvas id="id_diagram__gl__low" className='diagram__gl'>
+          <canvas id="id_figureone__gl__low" className='figureone__gl'>
           </canvas>
-          <canvas id="id_diagram__text__low" className='diagram__text'>
+          <canvas id="id_figureone__text__low" className='figureone__text'>
           </canvas>
-          <div id="id_diagram__html" className='diagram__html'>
+          <div id="id_figureone__html" className='figureone__html'>
           </div>
         </div>
       </div>

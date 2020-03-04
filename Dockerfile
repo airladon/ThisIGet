@@ -37,9 +37,9 @@ RUN npm install figureone@0.1.16
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
-RUN useradd -m -u HOST_USER_ID -o myuser
-RUN groupadd -g DOCKER_GROUP_ID -o host-docker
-RUN usermod -aG DOCKER_GROUP_ID,HOST_USER_GROUP_ID myuser
+RUN useradd -m -u 501 -o myuser
+RUN groupadd -g 0 -o host-docker
+RUN usermod -aG 0,20 myuser
 RUN chown myuser /opt/app
 # RUN chown -R myuser /opt/app
 # RUN chown -R myuser repo

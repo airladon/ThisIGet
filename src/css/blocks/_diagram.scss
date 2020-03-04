@@ -17,7 +17,7 @@
   pointer-events: none;
 }
 
-.diagram__gl {
+.figureone__gl {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -28,7 +28,7 @@
   pointer-events: none;
 }
 
-.diagram__html {
+.figureone__html {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -47,7 +47,7 @@
   pointer-events: auto;
 }
 
-.diagram__text {
+.figureone__text {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -64,7 +64,7 @@
   top: 0;
 }
 
-.diagram__text_measure {
+.figureone__text_measure {
   position: absolute;
   visibility: hidden;
   height: auto;
@@ -73,12 +73,12 @@
   bottom: 0;
 }
 
-// #id_diagram__text__high {
+// #id_figureone__text__high {
 //   pointer-events: none;
 //   z-index: 2;
 // }
 
-// #id_diagram__gl__high {
+// #id_figureone__gl__high {
 //   pointer-events: none;
 //   z-index: 2;
 // }

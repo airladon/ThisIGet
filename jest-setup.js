@@ -1,2 +1,0 @@
-global.Fig = require('figureone');
-

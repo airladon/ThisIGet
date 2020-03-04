@@ -14,11 +14,11 @@ export default class PresentationQR extends React.Component
   renderContent() {
     return <div id={this.props.id} className="topic__presentation_qr__container">
         <div id="id_qr_diagram" className="diagram__container topic__diagram">
-          <canvas id="id_qr_diagram__text" className='diagram__text'>
+          <canvas id="id_qr_figureone__text" className='figureone__text'>
           </canvas>
-          <canvas id="id_qr_diagram__gl" className='diagram__gl'>
+          <canvas id="id_qr_figureone__gl" className='figureone__gl'>
           </canvas>
-          <div id="id_qr_diagram__html" className='diagram__html'>
+          <div id="id_qr_figureone__html" className='figureone__html'>
             <div id="id_topic__qr_diagram_container">
             </div>
             <div id="id_topic__qr_description_container" className="topic__qr_description_container">
@@ -29,7 +29,7 @@ export default class PresentationQR extends React.Component
                 </div>
               </div>
             </div>
-            <div className="diagram__text_measure" id={`${this.props.id}_measure`}>
+            <div className="figureone__text_measure" id={`${this.props.id}_measure`}>
               {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
             </div>
           </div>

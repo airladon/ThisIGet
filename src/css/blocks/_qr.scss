@@ -39,20 +39,20 @@ $qrHeight: 0.8;
   height: 100%;
 }
 
-.topic__qr__overlay .diagram__html {
+.topic__qr__overlay .figureone__html {
   pointer-events: auto;
   width: 100%;
   height: 100%;
   z-index: 0;
 }
 
-.topic__qr__overlay .diagram__gl {
+.topic__qr__overlay .figureone__gl {
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 
-.topic__qr__overlay .diagram__text {
+.topic__qr__overlay .figureone__text {
   width: 100%;
   height: 100%;
   z-index: 2;

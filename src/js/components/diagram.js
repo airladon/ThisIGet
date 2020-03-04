@@ -30,12 +30,12 @@ export default class DiagramContainer extends React.Component
 
   render() {
     return <div id={this.props.id} className="diagram__container topic__diagram">
-      <canvas id="id_qr_diagram__text" className='diagram__text'>
+      <canvas id="id_qr_figureone__text" className='figureone__text'>
       </canvas>
-      <canvas id="id_qr_diagram__gl" className='diagram__gl'>
+      <canvas id="id_qr_figureone__gl" className='figureone__gl'>
       </canvas>
-      <div id="id_qr_diagram__html" className='diagram__html'>
-        <div className="diagram__text_measure" id={`${this.props.id}_measure`}>
+      <div id="id_qr_figureone__html" className='figureone__html'>
+        <div className="figureone__text_measure" id={`${this.props.id}_measure`}>
           {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
         </div>
       </div>

@@ -7,5 +7,4 @@ module.exports = {
   },
   testPathIgnorePatterns: ['/node_modules/', '\\.snap$', 'boilerplate'],
   coverageDirectory: './reports',
-  setupFiles: ['./jest-setup.js'],
 };

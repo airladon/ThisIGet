@@ -89,9 +89,9 @@ function diagramCanvas(
 ): Object {
   return {
     replacementText: () => `<div id="${id}" class="canvas_container ${classes}">
-        <canvas class="diagram__gl"></canvas>
-        <div class="diagram__html"></div>
-        <canvas class="diagram__text"></canvas>
+        <canvas class="figureone__gl"></canvas>
+        <div class="figureone__html"></div>
+        <canvas class="figureone__text"></canvas>
       </div>`,
     type: 'diagram',
     DiagramClass,

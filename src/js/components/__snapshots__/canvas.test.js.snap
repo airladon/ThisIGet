@@ -6,13 +6,13 @@ exports[`Canvas Component No props 1`] = `
   id=""
 >
   <canvas
-    className="diagram__text"
+    className="figureone__text"
   />
   <canvas
-    className="diagram__gl"
+    className="figureone__gl"
   />
   <div
-    className="diagram__html"
+    className="figureone__html"
   />
 </div>
 `;
@@ -23,13 +23,13 @@ exports[`Canvas Component With id 1`] = `
   id="test_id"
 >
   <canvas
-    className="diagram__text"
+    className="figureone__text"
   />
   <canvas
-    className="diagram__gl"
+    className="figureone__gl"
   />
   <div
-    className="diagram__html"
+    className="figureone__html"
   />
 </div>
 `;
@@ -40,13 +40,13 @@ exports[`Canvas Component function is called after render 1`] = `
   id="test_id"
 >
   <canvas
-    className="diagram__text"
+    className="figureone__text"
   />
   <canvas
-    className="diagram__gl"
+    className="figureone__gl"
   />
   <div
-    className="diagram__html"
+    className="figureone__html"
   />
 </div>
 `;

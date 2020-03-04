@@ -3783,7 +3783,7 @@ function () {
             this.textCanvasOffscreen = child;
           }
 
-          if (child.classList.contains('diagram__html')) {
+          if (child.classList.contains('figureone__html')) {
             this.htmlCanvas = child;
           }
         }
@@ -3802,7 +3802,7 @@ function () {
 
         if (this.htmlCanvas == null) {
           this.htmlCanvas = document.createElement('div');
-          this.htmlCanvas.classList.add('diagram__html', 'diagram__canvas');
+          this.htmlCanvas.classList.add('figureone__html', 'diagram__canvas');
           container.appendChild(this.htmlCanvas);
         }
 
