@@ -60,7 +60,7 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.sssPosition);
-    this.diagram.addElements(this, this.layout.addElementsSSS);
+    this.diagram.addElements(this.layout.addElementsSSS, this);
     this.hasTouchableElements = true;
     // this._left.makeTouchable();
     // this._right.makeTouchable();

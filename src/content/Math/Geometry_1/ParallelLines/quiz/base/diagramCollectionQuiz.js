@@ -43,7 +43,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       transform,
     );
     this.addCheck();
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     this._line1.setTransformCallback = (t: Transform) => {
       this._line1.updateMoveTransform(t);
       this.normalizeAngle(this._line1);

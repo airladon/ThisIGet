@@ -50,7 +50,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElements);
+    this.diagram.addElements(this.layout.addElements, this);
     this.hasTouchableElements = true;
     this.sideCounter = 0;
   }

@@ -77,7 +77,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this.addInput('input', '?', 3, 0);
     this.addMultipleChoice('congruent_tri_1', ['Yes', 'No']);
     // this.add('main', new CommonCollection(diagram, this.layout));
-    this.diagram.addElements(this, this.layout.addElementsQuiz);
+    this.diagram.addElements(this.layout.addElementsQuiz, this);
     this.hasTouchableElements = true;
   }
 

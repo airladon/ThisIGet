@@ -41,7 +41,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.diagram.addElements(this, this.layout.addElementsSSA);
+    this.diagram.addElements(this.layout.addElementsSSA, this);
     this.hasTouchableElements = true;
     this.scenarios = this.layout.ssaScenarios;
     this._adjacentMovePad.makeTouchable();

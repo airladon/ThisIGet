@@ -42,7 +42,7 @@ export default class QRCollectionOpposite extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
-    this.diagram.addElements(this, this.layout.addElementsThreeLines);
+    this.diagram.addElements(this.layout.addElementsThreeLines, this);
 
     this._fig._line1.makeTouchable();
     this._fig._line2.makeTouchable();
