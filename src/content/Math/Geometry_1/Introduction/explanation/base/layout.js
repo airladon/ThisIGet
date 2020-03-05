@@ -10,7 +10,7 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-// const { joinObjects } = Fig.tools.misc;
+const { joinObjects } = Fig.tools.misc;
 
 // const cssColorNames = [
 //   'circle',
@@ -84,10 +84,30 @@ export default function diagramLayout() {
   const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
   const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
   const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
-  layout.wheel = ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods];
-  layout.clock = ['', 'clock', 'polygon', [filledCircle, clockTex], mods];
-  layout.ball = ['', 'ball', 'polygon', [filledCircle, ballTex], mods];
-  layout.earth = ['', 'earth', 'polygon', [filledCircle, earthTex], mods];
+  layout.wheel = {
+    name: 'wheel',
+    method: 'polygon',
+    options: joinObjects([filledCircle, wheelTex]),
+    mods,
+  };
+  layout.clock = {
+    name: 'clock',
+    method: 'polygon',
+    options: joinObjects([filledCircle, clockTex]),
+    mods,
+  };
+  layout.ball = {
+    name: 'ball',
+    method: 'polygon',
+    options: joinObjects([filledCircle, ballTex]),
+    mods,
+  };
+  layout.earth = {
+    name: 'earth',
+    method: 'polygon',
+    options: joinObjects([filledCircle, earthTex]),
+    mods,
+  };
 
   layout.textD = {
     name: 'd',
