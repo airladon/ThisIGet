@@ -68,10 +68,34 @@ export default function diagramLayout() {
   const wheelTex = { textureCoords: new Rect(0.3333, 0, 0.2222, 0.2222) };
   const ballTex = { textureCoords: new Rect(0.5555, 0, 0.1667, 0.1667) };
   const ringTex = { textureCoords: new Rect(0.7222, 0.1481, 0.1481, 0.1481) };
-  layout.moon = ['', 'moon', 'polygon', [filledCircle, moonTex], mods, [], 'moreLeft'];
-  layout.wheel = ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods, [], 'left'];
-  layout.ball = ['', 'ball', 'polygon', [filledCircle, ballTex], mods, [], 'center'];
-  layout.ring = ['', 'ring', 'polygon', [filledCircle, ringTex], mods, [], 'right'];
+  layout.moon = {
+    name: 'moon',
+    method: 'polygon',
+    options: joinObjects(filledCircle, moonTex),
+    mods,
+    scenario: 'moreLeft',
+  };
+  layout.wheel = {
+    name: 'wheel',
+    method: 'polygon',
+    options: joinObjects(filledCircle, wheelTex),
+    mods,
+    scenario: 'left',
+  };
+  layout.ball = {
+    name: 'ball',
+    method: 'polygon',
+    options: joinObjects(filledCircle, ballTex),
+    mods,
+    scenario: 'center',
+  };
+  layout.ring = {
+    name: 'ring',
+    method: 'polygon',
+    options: joinObjects(filledCircle, ringTex),
+    mods,
+    scenario: 'right',
+  };
 
   layout.circle = {
     name: 'circle',

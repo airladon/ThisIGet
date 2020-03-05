@@ -3743,7 +3743,7 @@ function () {
     _classCallCheck(this, Diagram);
 
     var defaultOptions = {
-      htmlId: 'id_figureone_canvases',
+      htmlId: 'figureOneContainer',
       limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
       fontScale: 1 // updateFontSize: '',
@@ -3767,19 +3767,19 @@ function () {
         for (var i = 0; i < children.length; i += 1) {
           var child = children[i];
 
-          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl')) {
+          if (child instanceof HTMLCanvasElement && child.classList.contains('figureone__gl')) {
             this.canvasLow = child;
           }
 
-          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl__offscreen')) {
+          if (child instanceof HTMLCanvasElement && child.classList.contains('figureone__gl__offscreen')) {
             this.canvasOffscreen = child;
           }
 
-          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text')) {
+          if (child instanceof HTMLCanvasElement && child.classList.contains('figureone__text')) {
             this.textCanvasLow = child;
           }
 
-          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text__offscreen')) {
+          if (child instanceof HTMLCanvasElement && child.classList.contains('figureone__text__offscreen')) {
             this.textCanvasOffscreen = child;
           }
 
@@ -3790,22 +3790,27 @@ function () {
 
         if (this.canvasLow == null) {
           this.canvasLow = document.createElement('canvas');
-          this.canvasLow.classList.add('diagram__gl', 'diagram__canvas');
+          this.canvasLow.classList.add('figureone__gl', 'figureone__canvas');
           container.appendChild(this.canvasLow);
         }
 
         if (this.textCanvasLow == null) {
           this.textCanvasLow = document.createElement('canvas');
-          this.textCanvasLow.classList.add('diagram__text', 'diagram__canvas');
+          this.textCanvasLow.classList.add('figureone__text', 'figureone__canvas');
           container.appendChild(this.textCanvasLow);
         }
 
         if (this.htmlCanvas == null) {
           this.htmlCanvas = document.createElement('div');
-          this.htmlCanvas.classList.add('figureone__html', 'diagram__canvas');
+          this.htmlCanvas.classList.add('figureone__html', 'figureone__canvas');
           container.appendChild(this.htmlCanvas);
         }
 
+        var canvasStyle = document.createElement('style');
+        canvasStyle.type = 'text/css';
+        container.classList.add('figureone__container');
+        canvasStyle.innerHTML = "\n          .figureone__container {\n            position: relative;\n            pointer-events: none;\n          }\n          .figureone__canvas {\n            width: 100%;\n            height: 100%;\n            position: absolute;\n          }\n          .figureone__html {\n            pointer-events: auto;\n          }\n        ";
+        document.getElementsByTagName('head')[0].appendChild(canvasStyle);
         this.backgroundColor = backgroundColor;
         var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
         this.webglLow = webglLow;
@@ -3905,10 +3910,30 @@ function () {
     }
   }, {
     key: "addElements",
-    value: function addElements(rootCollection, layout) {
+    value: function addElements(layout) {
+      var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
       Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
+    }
+  }, {
+    key: "addElement",
+    value: function addElement(layout) {
+      var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
+      var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
+
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
+    }
+  }, {
+    key: "setTouchable",
+    value: function setTouchable() {
+      var touchable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (touchable) {
+        this.elements.hasTouchableElements = true;
+      } else {
+        this.elements.hasTouchableElements = false;
+      }
     }
   }, {
     key: "getShapes",
@@ -4036,8 +4061,8 @@ function () {
   }, {
     key: "initialize",
     value: function initialize() {
-      // this.setSpaceTransforms();
       this.setFirstTransform();
+      this.animateNextFrame();
     }
   }, {
     key: "setFirstTransform",
@@ -34408,7 +34433,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString */
+/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -34432,6 +34457,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteKeys", function() { return deleteKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyKeysFromTo", function() { return copyKeysFromTo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateRandomString", function() { return generateRandomString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicate", function() { return duplicate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assignObjectFromTo", function() { return assignObjectFromTo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinObjectsWithOptions", function() { return joinObjectsWithOptions; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34582,89 +34610,203 @@ function addToObject(obj, nameToAdd, valueToAdd) {
 
     currentLevel = currentLevel[level];
   });
+} // function duplicateFromTo(
+//   fromObject: Object,
+//   toObject: Object,
+//   exceptKeys: Array<string> = [],
+// ) {
+//   const copyValue = (value) => {
+//     if (typeof value === 'number'
+//         || typeof value === 'boolean'
+//         || typeof value === 'string'
+//         || value == null
+//         || typeof value === 'function') {
+//       return value;
+//     }
+//     if (typeof value._dup === 'function') {
+//       return value._dup();
+//     }
+//     if (Array.isArray(value)) {
+//       const arrayCopy = [];
+//       value.forEach(arrayElement => arrayCopy.push(copyValue(arrayElement)));
+//       return arrayCopy;
+//     }
+//     if (typeof value === 'object') {
+//       const objectCopy = {};
+//       Object.keys(value).forEach((key) => {
+//         const v = copyValue(value[key]);
+//         objectCopy[key] = v;
+//       });
+//       return objectCopy;
+//     }
+//     return value;
+//   };
+//   Object.keys(fromObject).forEach((key) => {
+//     if (exceptKeys.indexOf(key) === -1) {
+//       // eslint-disable-next-line no-param-reassign
+//       toObject[key] = copyValue(fromObject[key]);
+//     }
+//   });
+// }
+
+
+function duplicate(value) {
+  if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || typeof value === 'function') {
+    return value;
+  }
+
+  if (typeof value._dup === 'function') {
+    return value._dup();
+  }
+
+  if (Array.isArray(value)) {
+    var arrayDup = [];
+    value.forEach(function (arrayElement) {
+      return arrayDup.push(duplicate(arrayElement));
+    });
+    return arrayDup;
+  }
+
+  if (_typeof(value) === 'object') {
+    var objectDup = {};
+    Object.keys(value).forEach(function (key) {
+      var v = duplicate(value[key]);
+      objectDup[key] = v;
+    });
+    return objectDup;
+  }
+
+  return value;
 }
 
-function duplicateFromTo(fromObject, toObject) {
-  var exceptKeys = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-
-  var copyValue = function copyValue(value) {
-    if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || typeof value === 'function') {
-      return value;
-    }
-
-    if (typeof value._dup === 'function') {
-      return value._dup();
-    }
-
-    if (Array.isArray(value)) {
-      var arrayCopy = [];
-      value.forEach(function (arrayElement) {
-        return arrayCopy.push(copyValue(arrayElement));
-      });
-      return arrayCopy;
-    }
-
-    if (_typeof(value) === 'object') {
-      var objectCopy = {};
-      Object.keys(value).forEach(function (key) {
-        var v = copyValue(value[key]);
-        objectCopy[key] = v;
-      });
-      return objectCopy;
-    }
-
-    return value;
-  };
-
+function assignObjectFromTo(fromObject, toObject) {
+  var exceptIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  var duplicateValues = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var parentPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var except = typeof exceptIn === 'string' ? [exceptIn] : exceptIn;
   Object.keys(fromObject).forEach(function (key) {
-    if (exceptKeys.indexOf(key) === -1) {
-      // eslint-disable-next-line no-param-reassign
-      toObject[key] = copyValue(fromObject[key]);
+    var keyPath = parentPath !== '' ? "".concat(parentPath, ".").concat(key) : key;
+
+    if (except.indexOf(keyPath) !== -1) {
+      return;
+    }
+
+    var value = fromObject[key];
+
+    if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || typeof value === 'function' || typeof value._dup === 'function' || Array.isArray(value)) {
+      // Only assign the value if:
+      //    * Value is not undefined OR
+      //    * Value is undefined and toObject[key] is undefined
+      if (value !== undefined || toObject[key] === undefined) {
+        if (duplicateValues) {
+          // eslint-disable-next-line no-param-reassign
+          toObject[key] = duplicate(value);
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          toObject[key] = value;
+        }
+      }
+    } else {
+      // If the fromObject[key] value is an object, but the toObject[key] value
+      // is not an object, but then make toObject[key] an empty object
+      var toValue = toObject[key];
+
+      if (typeof toValue === 'number' || typeof toValue === 'boolean' || typeof toValue === 'string' || toValue == null || typeof toValue === 'function' || Array.isArray(toValue)) {
+        // eslint-disable-next-line no-param-reassign
+        toObject[key] = {};
+      }
+
+      assignObjectFromTo(value, toObject[key], except, duplicateValues, keyPath);
     }
   });
+}
+
+function joinObjectsWithOptions(options) {
+  var except = options.except;
+  var dup = options.duplicate;
+
+  if (except == null) {
+    except = [];
+  }
+
+  if (dup == null) {
+    dup = false;
+  }
+
+  var num = arguments.length <= 1 ? 0 : arguments.length - 1;
+  var out = arguments.length <= 1 ? undefined : arguments[1];
+
+  for (var i = 1; i < num; i += 1) {
+    var o = i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1];
+
+    if (o != null) {
+      assignObjectFromTo(o, out, except, dup, '');
+    }
+  }
+
+  return out;
 } // joins objects like object.assign but goes as many levels deep as the object
 // is. Objects later in the arrawy overwrite objects earlier.
 
 
 function joinObjects() {
+  for (var _len2 = arguments.length, objects = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    objects[_key2] = arguments[_key2];
+  }
+
   // if (typeof objects === 'object') {
   //   return objects;
   // }
-  var assignObjectFromTo = function assignObjectFromTo(fromObject, toObject) {
-    Object.keys(fromObject).forEach(function (key) {
-      var value = fromObject[key];
+  // const assignObjectFromTo1 = (fromObject: Object, toObject: Object) => {
+  //   Object.keys(fromObject).forEach((key) => {
+  //     const value = fromObject[key];
+  //     if (typeof value === 'number'
+  //       || typeof value === 'boolean'
+  //       || typeof value === 'string'
+  //       || value == null
+  //       || typeof value === 'function'
+  //       || typeof value._dup === 'function'
+  //       || Array.isArray(value)
+  //     ) {
+  //       // console.log(value, toObject[key])
+  //       if (value !== undefined || toObject[key] === undefined) {
+  //         // eslint-disable-next-line no-param-reassign
+  //         toObject[key] = value;
+  //       }
+  //     } else {
+  //       const toValue = toObject[key];
+  //       if (typeof toValue === 'number'
+  //         || typeof toValue === 'boolean'
+  //         || typeof toValue === 'string'
+  //         || toValue == null
+  //         || typeof toValue === 'function'
+  //         || Array.isArray(toValue)
+  //       ) {
+  //         // eslint-disable-next-line no-param-reassign
+  //         toObject[key] = {};
+  //       }
+  //       assignObjectFromTo1(value, toObject[key]);
+  //     }
+  //   });
+  // };
+  // const num = objects.length;
+  // const out = objects[0];
+  // for (let i = 1; i < num; i += 1) {
+  //   const o = objects[i];
+  //   if (o != null) {
+  //     assignObjectFromTo1(o, out);
+  //   }
+  // }
+  // return out;
+  return joinObjectsWithOptions.apply(void 0, [{}].concat(objects));
+}
 
-      if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || typeof value === 'function' || typeof value._dup === 'function' || Array.isArray(value)) {
-        // console.log(value, toObject[key])
-        if (value !== undefined || toObject[key] === undefined) {
-          // eslint-disable-next-line no-param-reassign
-          toObject[key] = value;
-        }
-      } else {
-        var toValue = toObject[key];
-
-        if (typeof toValue === 'number' || typeof toValue === 'boolean' || typeof toValue === 'string' || toValue == null || typeof toValue === 'function' || Array.isArray(toValue)) {
-          // eslint-disable-next-line no-param-reassign
-          toObject[key] = {};
-        }
-
-        assignObjectFromTo(value, toObject[key]);
-      }
-    });
-  };
-
-  var num = arguments.length;
-  var out = arguments.length <= 0 ? undefined : arguments[0];
-
-  for (var i = 1; i < num; i += 1) {
-    var o = i < 0 || arguments.length <= i ? undefined : arguments[i];
-
-    if (o != null) {
-      assignObjectFromTo(o, out);
-    }
-  }
-
-  return out;
+function duplicateFromTo(fromObject, toObject) {
+  var exceptKeys = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  joinObjectsWithOptions({
+    except: exceptKeys,
+    duplicate: true
+  }, toObject, fromObject);
 }
 
 function generateUniqueId() {
@@ -34828,6 +34970,6 @@ function generateRandomString() {
 
 /***/ })
 
-/******/ });
+/******/ })["default"];
 });
 //# sourceMappingURL=index.js.map
