@@ -180,7 +180,7 @@ export default function diagramLayout() {
       color: layout.colors.dimensions,
       scale: 1,
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
       elements: {
         c: 'c',

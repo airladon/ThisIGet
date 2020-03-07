@@ -39,7 +39,7 @@ export default function diagramLayout() {
       '0': {
         content: [{ root: ['r', '_2'] }, 'A'],
         scale: 1,
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { yAlign: -0.01, xAlign: 0.2 },
       },
     },
   });
@@ -53,7 +53,7 @@ export default function diagramLayout() {
       '0': {
         content: [{ root: ['r', '_2'] }],
         scale: 1,
-        alignment: { alignV: -0.01, alignH: 0.2 },
+        alignment: { yAlign: -0.01, xAlign: 0.2 },
       },
     },
   });

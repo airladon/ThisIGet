@@ -153,8 +153,8 @@ export default function diagramLayout() {
   };
   const defaultFormAlignment = {
     fixTo: 'equals',
-    alignH: 'right',
-    alignV: 'top',
+    xAlign: 'right',
+    yAlign: 'top',
   };
 
   const eqn = (name, form, scenariosObject) => ({
@@ -247,7 +247,7 @@ export default function diagramLayout() {
         _2: '2 ',
         equals: '  =  ',
       },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
       forms: {
         radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
         short: ['circumference', 'equals', 'pi', 'diameter'],

@@ -137,7 +137,7 @@ export default function diagramLayout() {
     options: {
       text: `Area = ${value}m<sup>2</sup>`,
       classes: 'area__label',
-      alignH: 'center',
+      xAlign: 'center',
       position,
     },
   });
@@ -147,7 +147,7 @@ export default function diagramLayout() {
   //   options: {
   //     text: 'Area = m<sup>2</sup>',
   //     classes: 'area__label',
-  //     alignH: 'center',
+  //     xAlign: 'center',
   //     color: colors.sides,
   //     position: [0, -1.45],
   //   },
@@ -747,7 +747,7 @@ export default function diagramLayout() {
         ],
       },
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
     },
     mods: {
@@ -768,7 +768,7 @@ export default function diagramLayout() {
     options: {
       equation: eqn,
       navType: 'description',
-      alignH: 'left',
+      xAlign: 'left',
     },
     mods: {
       scenarios: {

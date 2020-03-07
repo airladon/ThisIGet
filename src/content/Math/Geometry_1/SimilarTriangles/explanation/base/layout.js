@@ -346,8 +346,8 @@ export default function diagramLayout() {
       elements,
       scale: 1,
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'middle',
+        xAlign: 'center',
+        yAlign: 'middle',
       },
       color: colors.diagram.text.base,
       forms: {

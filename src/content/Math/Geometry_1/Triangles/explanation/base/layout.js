@@ -344,8 +344,8 @@ export default function diagramLayout() {
       // color: colors.diagram.text.base,
       id: 'triangle_type_definition',
       text: 'test',
-      alignV: 'top',
-      alignH: 'center',
+      yAlign: 'top',
+      xAlign: 'center',
       position: [1.3, -0.8],
     },
   };

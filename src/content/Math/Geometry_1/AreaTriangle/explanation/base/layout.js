@@ -614,7 +614,7 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text: 'Area',
-      alignH: 'center',
+      xAlign: 'center',
       position: [0, -1.8],
       color: colors.sides,
       size: 0.15,

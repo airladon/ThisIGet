@@ -261,7 +261,7 @@ export default function diagramLayout() {
         summarySquare: ['_Area', 'equals', { sup: ['__B', '__2'] }],
       },
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
     },
     mods: {
@@ -293,7 +293,7 @@ export default function diagramLayout() {
         '0': ['_Area', 'equals', 'value', ' ', { sup: ['m', '_2'] }],
       },
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
     },
     mods: {

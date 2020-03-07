@@ -341,8 +341,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         '0': [
@@ -431,8 +431,8 @@ export default function diagramLayout() {
       navType: '1Button',
       equation: eqn,
       // interactive,
-      alignV: 'middle',
-      alignH: 'left',
+      yAlign: 'middle',
+      xAlign: 'left',
     },
     mods: {
       scenarios: {
@@ -473,8 +473,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         '0': ['_360', 'equals', '_21', 'a', 'plus', '_22', 'b'],

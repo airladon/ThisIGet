@@ -195,7 +195,7 @@ export default function diagramLayout() {
       color: layout.colors.dimension,
       scale: 1,
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
       elements: {
         c: 'c',

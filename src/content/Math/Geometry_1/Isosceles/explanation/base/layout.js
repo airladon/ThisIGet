@@ -58,7 +58,7 @@ export default function diagramLayout() {
     },
     scale: 0.6,
     defaultFormAlignment: {
-      alignH: 'center',
+      xAlign: 'center',
     },
   });
 
@@ -200,7 +200,7 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         // fixTo: 'equals',
-        alignH: 'center',
+        xAlign: 'center',
       },
     },
     mods: {

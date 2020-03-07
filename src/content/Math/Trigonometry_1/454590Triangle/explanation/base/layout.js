@@ -104,19 +104,19 @@ export default function diagramLayout() {
       '0': {
         content: eqnDCont(['D']),
         scale: 1,
-        alignment: { alignH: '0.1o' },
+        alignment: { xAlign: '0.1o' },
       },
       '1': {
         content: eqnDCont(['D', 'equals', { root: ['r', '_2'] }, 'A']),
         scale: 1,
         // alignment: { fixTo: 'D' },
-        alignment: { alignH: '0.1o' },
+        alignment: { xAlign: '0.1o' },
       },
       '2': {
         content: eqnDCont([{ root: ['r', '_2'] }, 'A']),
         scale: 1,
-        // alignment: { alignV: -0.01, alignH: 0.2 },
-        alignment: { alignH: '0.1o' },
+        // alignment: { yAlign: -0.01, xAlign: 0.2 },
+        alignment: { xAlign: '0.1o' },
       },
       '3': {
         content: eqnDCont([{ root: ['r', '_2'] }, {
@@ -133,14 +133,14 @@ export default function diagramLayout() {
             inSize: false,
           },
         }]),
-        // alignment: { alignV: -0.01, alignH: 0.2 },
-        alignment: { alignH: '0.1o' },
+        // alignment: { yAlign: -0.01, xAlign: 0.2 },
+        alignment: { xAlign: '0.1o' },
         scale: 1,
       },
       '4': {
         content: eqnDCont({ root: ['r', '_2'] }),
-        // alignment: { alignV: -0.01, alignH: 0.2 },
-        alignment: { alignH: '0.1o' },
+        // alignment: { yAlign: -0.01, xAlign: 0.2 },
+        alignment: { xAlign: '0.1o' },
         scale: 1,
       },
     },
@@ -348,8 +348,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         '0': [
