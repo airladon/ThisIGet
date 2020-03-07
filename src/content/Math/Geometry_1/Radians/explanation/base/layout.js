@@ -172,7 +172,7 @@ export default function diagramLayout() {
           weight: 700,
           family: 'Helvetica',
           position: [-0.1, 0],
-          hAlign: 'right',
+          xAlign: 'right',
           size: 0.14,
         },
         mods: {
@@ -186,7 +186,7 @@ export default function diagramLayout() {
           color: colors.angles,
           weight: 500,
           family: 'Helvetica',
-          hAlign: 'left',
+          xAlign: 'left',
           size: 0.14,
         },
       },

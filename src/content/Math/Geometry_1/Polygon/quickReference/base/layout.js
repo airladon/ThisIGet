@@ -131,7 +131,7 @@ export default function diagramLayout() {
   //     position,
   //     text,
   //     color,
-  //     hAlign: 'left',
+  //     xAlign: 'left',
   //   },
   // });
 

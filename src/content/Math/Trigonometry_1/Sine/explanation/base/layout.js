@@ -769,8 +769,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text,
-      hAlign: 'center',
-      vAlign: 'baseline',
+      xAlign: 'center',
+      yAlign: 'baseline',
       color,
       position: [x, y],
       size: 0.15,
@@ -808,8 +808,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text: '\u03B8',
-      hAlign: 'center',
-      vAlign: 'baseline',
+      xAlign: 'center',
+      yAlign: 'baseline',
       color: colors.angles,
       position: [x, y],
       size: 0.2 * 0.9,

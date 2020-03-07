@@ -18,7 +18,7 @@ function note(
     id?: string,
     label?: string,
     hint?: boolean,
-    hAlign?: 'left' | 'center' | 'right',
+    xAlign?: 'left' | 'center' | 'right',
   } = '',
   contentIn: string = '',
 ) {
@@ -34,7 +34,7 @@ function note(
   let id = '';
   let classNames = 'presentation__note';
   let label = '';
-  let hAlign = '';
+  let xAlign = '';
   // let hint = false;
 
   if (typeof options === 'string') {
@@ -68,8 +68,8 @@ function note(
     if (options.id != null) {
       id = ` id="${options.id}"`;
     }
-    if (options.hAlign != null) {
-      hAlign = `text-align:${options.hAlign};`;
+    if (options.xAlign != null) {
+      xAlign = `text-align:${options.xAlign};`;
     }
     if (options.hint != null && options.hint === true) {
       label = 'Hint: ';
@@ -88,7 +88,7 @@ function note(
     }
   }
 
-  const inlineStyle = ` style="${top}${marginLeft}${marginRight}${fontSize}${color}${hAlign}${left}${right}"`;
+  const inlineStyle = ` style="${top}${marginLeft}${marginRight}${fontSize}${color}${xAlign}${left}${right}"`;
   return `<div class="${classNames}"${id}${inlineStyle}>${content}</div>`;
 }
 
@@ -102,7 +102,7 @@ function hint(
     className?: string,
     id?: string,
     label?: string,
-    hAlign?: 'left' | 'center' | 'right',
+    xAlign?: 'left' | 'center' | 'right',
   } = '',
   contentIn: string = '',
 ) {

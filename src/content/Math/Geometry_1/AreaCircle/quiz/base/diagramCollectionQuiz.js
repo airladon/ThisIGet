@@ -58,7 +58,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    this.addQuestion({ size: 0.16, position: [0, 1.7], hAlign: 'center' });
+    this.addQuestion({ size: 0.16, position: [0, 1.7], xAlign: 'center' });
     this.addCheck();
     this.addInput('input', '?', 5, 2);
     this.diagram.addElements(this.layout.addElementsQuiz, this);

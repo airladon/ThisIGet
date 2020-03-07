@@ -107,7 +107,7 @@ export default function diagramLayout() {
     options: {
       position: [-1.2, -1.7],
       // alignH: 'left',
-      hAlign: 'left',
+      xAlign: 'left',
       size: 0.17,
       color: colors.angles,
       text: 'Total Angle = ',

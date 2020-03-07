@@ -120,8 +120,8 @@ export default function diagramLayout() {
 
 
   const text = {
-    vAlign: 'baseline',
-    hAlign: 'left',
+    yAlign: 'baseline',
+    xAlign: 'left',
     color: colors.dimensions,
   };
 

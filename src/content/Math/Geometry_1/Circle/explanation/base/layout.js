@@ -246,7 +246,7 @@ export default function diagramLayout() {
     options: {
       size: 0.12,
       family: 'helvetica',
-      hAlign: 'left',
+      xAlign: 'left',
       style: 'normal',
       weight: 500,
     },
