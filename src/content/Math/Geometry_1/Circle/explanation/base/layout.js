@@ -71,28 +71,28 @@ export default function diagramLayout() {
   layout.moon = {
     name: 'moon',
     method: 'polygon',
-    options: joinObjects(filledCircle, moonTex),
+    options: joinObjects([filledCircle, moonTex]),
     mods,
     scenario: 'moreLeft',
   };
   layout.wheel = {
     name: 'wheel',
     method: 'polygon',
-    options: joinObjects(filledCircle, wheelTex),
+    options: joinObjects([filledCircle, wheelTex]),
     mods,
     scenario: 'left',
   };
   layout.ball = {
     name: 'ball',
     method: 'polygon',
-    options: joinObjects(filledCircle, ballTex),
+    options: joinObjects([filledCircle, ballTex]),
     mods,
     scenario: 'center',
   };
   layout.ring = {
     name: 'ring',
     method: 'polygon',
-    options: joinObjects(filledCircle, ringTex),
+    options: joinObjects([filledCircle, ringTex]),
     mods,
     scenario: 'right',
   };
