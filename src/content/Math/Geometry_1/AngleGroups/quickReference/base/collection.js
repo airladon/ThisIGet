@@ -68,7 +68,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       elems.forEach((elem) => {
         const element = eqn[`_${elem}`];
         element.makeTouchable();
-        element.onClick = () => {
+        element.onClick = () => { // $FlowFixMe
           if (eqn.getCurrentForm().name !== formName) {
             eqn.goToForm({
               name: formName,

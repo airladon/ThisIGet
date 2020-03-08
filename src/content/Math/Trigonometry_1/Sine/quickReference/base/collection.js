@@ -50,7 +50,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const eqn = this._eqn;
     eqn._oppContainer.makeTouchable();
     // eqn._oppContainer.interactiveLocation = new Point(0.3, 0.15);
-    eqn._oppContainer.onClick = () => {
+    eqn._oppContainer.onClick = () => { // $FlowFixMe
       const form = eqn.getCurrentForm().name;
       let name = 'oppFromSine';
       if (form.slice(0, 3) === 'hyp') {
@@ -62,7 +62,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.diagram.animateNextFrame();
     };
     eqn._hypContainer.makeTouchable();
-    eqn._hypContainer.onClick = () => {
+    eqn._hypContainer.onClick = () => { // $FlowFixMe
       const form = eqn.getCurrentForm().name;
       let name = 'hypFromSine';
       if (form.slice(0, 3) === 'opp') {
@@ -74,7 +74,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.diagram.animateNextFrame();
     };
     eqn._sinContainer.makeTouchable();
-    eqn._sinContainer.onClick = () => {
+    eqn._sinContainer.onClick = () => { // $FlowFixMe
       const form = eqn.getCurrentForm().name;
       let name = 'sineFromOpp';
       if (form.slice(0, 3) === 'hyp') {
