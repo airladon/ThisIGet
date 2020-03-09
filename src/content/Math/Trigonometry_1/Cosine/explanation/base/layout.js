@@ -218,8 +218,8 @@ export default function diagramLayout() {
         },
         defaultFormAlignment: {
           fixTo: 'equals',    // Points can also be defined as objects
-          alignH: 'center',
-          alignV: 'baseline',
+          xAlign: 'center',
+          yAlign: 'baseline',
         },
         forms: {
           sine: [

@@ -143,8 +143,8 @@ export default function diagramLayout() {
         options: {
           text: 'Circumference = ?',
           color: layout.colors.radius,
-          hAlign: 'left',
-          vAlign: 'bottom',
+          xAlign: 'left',
+          yAlign: 'bottom',
           size: 0.18,
           position: polarToRect(rad * 1.3, 1),
         },

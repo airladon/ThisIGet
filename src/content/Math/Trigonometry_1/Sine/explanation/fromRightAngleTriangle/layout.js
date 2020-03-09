@@ -50,7 +50,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'realTimesR': {
         content: {
@@ -63,7 +63,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'realR': {
         content: {
@@ -76,7 +76,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'realRToOpposite': {
         content: {
@@ -96,7 +96,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'realRToHypotenuse': {
         content: {
@@ -119,7 +119,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'realRHypotenuse': {
         content: {
@@ -132,7 +132,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'opposite': {
         content: {
@@ -145,7 +145,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'oppositeTimesR': {
         content: {
@@ -158,7 +158,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
       'oppositeR': {
         content: {
@@ -171,7 +171,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
     },
   });
@@ -199,7 +199,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
+        alignment: { xAlign: 'center', yAlign: 0.7 },
       },
       'angle': {
         content: {
@@ -213,7 +213,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
+        alignment: { xAlign: 'center', yAlign: 0.7 },
       },
       'angleToTheta': {
         content: {
@@ -231,7 +231,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
+        alignment: { xAlign: 'center', yAlign: 0.7 },
       },
       'theta': {
         content: {
@@ -245,7 +245,7 @@ export default function diagramLayout() {
           },
         },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 0.7 },
+        alignment: { xAlign: 'center', yAlign: 0.7 },
       },
     },
   });
@@ -271,11 +271,11 @@ export default function diagramLayout() {
             ascent: 0.05,
             descent: 0.05,
             xAlign: 'right',
-            vAlign: '0o',
+            yAlign: '0o',
           },
         },
         scale: 1,
-        alignment: { alignH: 'center' },
+        alignment: { xAlign: 'center' },
       },
       realTimesR: {
         content: {
@@ -285,11 +285,11 @@ export default function diagramLayout() {
             ascent: 0.05,
             descent: 0.05,
             xAlign: 'right',
-            vAlign: '0o',
+            yAlign: '0o',
           },
         },
         scale: 1,
-        alignment: { alignH: 'center' },
+        alignment: { xAlign: 'center' },
       },
       r: {
         content: {
@@ -299,11 +299,11 @@ export default function diagramLayout() {
             ascent: 0.05,
             descent: 0.05,
             xAlign: 'right',
-            vAlign: '0o',
+            yAlign: '0o',
           },
         },
         scale: 1,
-        alignment: { alignH: 'center' },
+        alignment: { xAlign: 'center' },
       },
       rToHyp: {
         content: {
@@ -320,11 +320,11 @@ export default function diagramLayout() {
             ascent: 0.05,
             descent: 0.05,
             xAlign: 'right',
-            vAlign: '0o',
+            yAlign: '0o',
           },
         },
         scale: 1,
-        alignment: { alignH: 'center' },
+        alignment: { xAlign: 'center' },
       },
       hyp: {
         content: {
@@ -334,11 +334,11 @@ export default function diagramLayout() {
             ascent: 0.05,
             descent: 0.05,
             xAlign: 'right',
-            vAlign: '0o',
+            yAlign: '0o',
           },
         },
         scale: 1,
-        alignment: { alignH: 'center' },
+        alignment: { xAlign: 'center' },
       },
       '0': {
         content: {
@@ -349,7 +349,7 @@ export default function diagramLayout() {
           },
         },
         scale: 1,
-        // alignment: { alignH: 'center' },
+        // alignment: { xAlign: 'center' },
       },
       '1': {
         content: {
@@ -717,8 +717,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         'base': {
@@ -736,7 +736,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         'baseTimesR': {
@@ -756,7 +756,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         'baseTimesRToHypR': {
@@ -792,7 +792,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         'hypR': {
@@ -811,7 +811,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         'hypRToGeneral': {
@@ -846,7 +846,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         'general': {
@@ -859,7 +859,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 2.2,
+            xAlign: 2.2,
           },
         },
         'generalToSin': {
@@ -880,7 +880,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 2.2,
+            xAlign: 2.2,
           },
         },
         'sin': {
@@ -893,7 +893,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 2.2,
+            xAlign: 2.2,
           },
         },
         'sinLeft': {
@@ -907,7 +907,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 0,
+            xAlign: 0,
           },
           translation: {
             'opp': ['curved', 'up', 0.45],
@@ -923,7 +923,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '0sine1': {
@@ -943,7 +943,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '0sine2': {
@@ -957,7 +957,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '1': {
@@ -980,14 +980,14 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2a0': {
@@ -1007,7 +1007,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2a': {
@@ -1029,7 +1029,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2b': {
@@ -1063,7 +1063,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2c': {
@@ -1084,7 +1084,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2d': {
@@ -1101,7 +1101,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2e': {
@@ -1117,7 +1117,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2f': {
@@ -1129,7 +1129,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2b2': {
@@ -1141,7 +1141,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '2c2': {
@@ -1153,14 +1153,14 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'equals',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '0b': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'theta', 'rb'] }],
           alignment: {
             fixTo: 'opp',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '0a': {
@@ -1169,7 +1169,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'opp',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         // '0b': {
@@ -1179,7 +1179,7 @@ export default function diagramLayout() {
         //   ],
         //   alignment: {
         //     fixTo: 'opp',
-        //     alignH: 'right',
+        //     xAlign: 'right',
         //   },
         // },
         '0c': {
@@ -1189,7 +1189,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'opp',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '0d': {
@@ -1200,7 +1200,7 @@ export default function diagramLayout() {
           ],
           alignment: {
             fixTo: 'opp',
-            alignH: 'right',
+            xAlign: 'right',
           },
         },
         '5': {
@@ -1216,7 +1216,7 @@ export default function diagramLayout() {
             },
           ],
           alignment: {
-            alignH: 0.8,
+            xAlign: 0.8,
           },
         },
         '6': {
@@ -1230,7 +1230,7 @@ export default function diagramLayout() {
             'plus2', 'dots',
           ],
           alignment: {
-            alignH: 0.4,
+            xAlign: 0.4,
           },
         },
       },
@@ -1250,8 +1250,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text,
-      hAlign: 'center',
-      vAlign: 'baseline',
+      xAlign: 'center',
+      yAlign: 'baseline',
       color,
       position: [x, y],
       size: 0.15,
@@ -1272,8 +1272,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'value',
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         'base': ['value'],
@@ -1298,8 +1298,8 @@ export default function diagramLayout() {
         theta: { text: '\u03B8', color: colors.angles },
       },
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         angle: 'angle',
@@ -1337,8 +1337,8 @@ export default function diagramLayout() {
         sin: { style: 'normal' },
       },
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         opp: 'opp',
@@ -1351,7 +1351,7 @@ export default function diagramLayout() {
             },
           },
           alignment: {
-            alignV: 0.1,
+            yAlign: 0.1,
           },
         },
         oppHypR: {
@@ -1363,7 +1363,7 @@ export default function diagramLayout() {
             },
           },
           alignment: {
-            alignV: 0.1,
+            yAlign: 0.1,
           },
         },
         oppHyp1ToFunc: {
@@ -1382,7 +1382,7 @@ export default function diagramLayout() {
             },
           },
           alignment: {
-            alignV: 0.1,
+            yAlign: 0.1,
           },
         },
         oppToFunc: {
@@ -1395,7 +1395,7 @@ export default function diagramLayout() {
             },
           },
           // alignment: {
-          //   alignV: 0.1,
+          //   yAlign: 0.1,
           // },
         },
         func: {
@@ -1537,7 +1537,7 @@ export default function diagramLayout() {
             'dots',
           ],
           alignment: {
-            alignH: 'center',
+            xAlign: 'center',
           },
         },
       },

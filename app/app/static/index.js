@@ -149,6 +149,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/** Tools object that is so great
+* @namespace tools
+* @memberof module:Fig
+* @property {object} math   - Math tools
+* @property {object} g2     - 2D geometry tools
+* @property {object} color  - Color tools
+* @property {object} css    - CSS tools
+*/
 var tools = {
   math: _js_tools_math__WEBPACK_IMPORTED_MODULE_1__,
   g2: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__,
@@ -157,7 +166,15 @@ var tools = {
   html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__,
   misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__
 };
-var FigureOne = {
+/**
+ * FigureOne entry point
+ * @type {object}
+ * @module Fig
+ * @global
+ * @property {class} {@link Diagram}      - Diagram Class
+ */
+
+var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
   //
@@ -181,7 +198,7 @@ var FigureOne = {
   EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__["default"],
   //
   EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__["EquationNew"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__["Equation"],
   //
   HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__["default"],
   //
@@ -195,7 +212,7 @@ var FigureOne = {
   Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"],
   parsePoint: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"]
 };
-/* harmony default export */ __webpack_exports__["default"] = (FigureOne);
+/* harmony default export */ __webpack_exports__["default"] = (Fig);
 
 /***/ }),
 
@@ -3724,9 +3741,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // Then the process is:
 //    - html element size in pixels and aspect ratio found
 //    - html element size in gl coordinates found
+//  /**
+//   * @typedef DiagramOptions
+//   * @type {object}
+//   * @property {string} [htmlId = 'figureOneContainer'] - div id of diagram container.
+//   * @property {Rect} [limits = Rect(-1, -1, 2, 2)] - limits of diagram.
+//   */
+
+/**
+  * Diagram Class
+  * @param {TypeDiagramOptions} options
+ */
 var Diagram =
 /*#__PURE__*/
 function () {
+  /** id of DIV that diagram is tied to */
   // canvasHigh: HTMLCanvasElement;
   // textCanvasHigh: HTMLCanvasElement;
   // draw2DHigh: DrawContext2D;
@@ -3745,7 +3774,7 @@ function () {
     var defaultOptions = {
       htmlId: 'figureOneContainer',
       limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
-      backgroundColor: [1, 1, 1, 1],
+      // backgroundColor: [1, 1, 1, 1],
       fontScale: 1 // updateFontSize: '',
 
     };
@@ -3753,7 +3782,6 @@ function () {
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
-        backgroundColor = optionsToUse.backgroundColor,
         limits = optionsToUse.limits;
     this.htmlId = htmlId; // this.layout = layout;
 
@@ -3811,7 +3839,7 @@ function () {
         container.classList.add('figureone__container');
         canvasStyle.innerHTML = "\n          .figureone__container {\n            position: relative;\n            pointer-events: none;\n          }\n          .figureone__canvas {\n            width: 100%;\n            height: 100%;\n            position: absolute;\n          }\n          .figureone__html {\n            pointer-events: auto;\n          }\n        ";
         document.getElementsByTagName('head')[0].appendChild(canvasStyle);
-        this.backgroundColor = backgroundColor;
+        this.backgroundColor = [1, 1, 1, 1];
         var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
         this.webglLow = webglLow;
 
@@ -3908,13 +3936,27 @@ function () {
     value: function disableScrolling() {
       document.removeEventListener('scroll', this.scrollEvent.bind(this), false);
     }
+    /**
+     * Add elements to diagram
+     * @param {Array<TypeAddElementObject>} elementsToAdd - array of element definitions
+     * @param {DiagramElementCollection} [collection = this.elements] - the
+     * collection to add elements to
+     * @param {string} [addElementsKey = 'addElements'] - key to add elements
+     *
+     * @example
+     * diagram.addElements([
+     *   { name: 'shape1', method: 'polygon', options: { position: [0, 0] } },
+     *   { name: 'shape2', method: 'polygon', options: { position: [1, 1] } },
+     * ]);
+     */
+
   }, {
     key: "addElements",
-    value: function addElements(layout) {
-      var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
+    value: function addElements(elementsToAdd) {
+      var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
     }
   }, {
     key: "addElement",
@@ -3923,6 +3965,11 @@ function () {
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
       Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
+    }
+  }, {
+    key: "getElement",
+    value: function getElement(elementName) {
+      return this.elements.getElement(elementName);
     }
   }, {
     key: "setTouchable",
@@ -4708,14 +4755,6 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -4761,6 +4800,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       angle: objects.angle.bind(objects),
       //
       addEquation: equation.addEquation.bind(equation),
+      equation: equation.equation.bind(equation),
       addNavigator: equation.addNavigator.bind(equation)
     };
 
@@ -4773,7 +4813,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       objects: objects,
       equation: equation
     };
-    var splitMethod = method.split('/');
+    var splitMethod = method.split('.');
     var methodToUse = getPath(diagram, splitMethod);
 
     if (methodToUse == null) {
@@ -4787,58 +4827,42 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
 
   if (Array.isArray(layout)) {
     layout.forEach(function (elementDefinition, index) {
-      var methodPathToUse;
-      var nameToUse;
-      var pathToUse;
-      var optionsToUse;
-      var elementModsToUse;
-      var addElementsToUse;
-      var firstScenario; // Extract the parameters from the layout object
-
-      if (Array.isArray(elementDefinition)) {
-        var _elementDefinition = _slicedToArray(elementDefinition, 7);
-
-        pathToUse = _elementDefinition[0];
-        nameToUse = _elementDefinition[1];
-        methodPathToUse = _elementDefinition[2];
-        optionsToUse = _elementDefinition[3];
-        elementModsToUse = _elementDefinition[4];
-        addElementsToUse = _elementDefinition[5];
-        firstScenario = _elementDefinition[6];
-      } else {
-        if (elementDefinition == null) {
-          throw Error("Add elements index ".concat(index, " does not exist in layout"));
-        }
-
-        nameToUse = elementDefinition.name;
-        pathToUse = elementDefinition.path;
-        optionsToUse = elementDefinition.options;
-        addElementsToUse = elementDefinition[addElementsKey];
-        methodPathToUse = elementDefinition.method;
-        elementModsToUse = elementDefinition.mods;
-        firstScenario = elementDefinition.scenario;
+      // Extract the parameters from the layout object
+      if (elementDefinition == null) {
+        throw Error("Add elements index ".concat(index, " does not exist in layout"));
       }
 
+      var nameToUse = elementDefinition.name;
+      var pathToUse = elementDefinition.path;
+      var optionsToUse = elementDefinition.options;
+      var addElementsToUse = elementDefinition[addElementsKey];
+      var methodPathToUse = elementDefinition.method;
+      var elementModsToUse = elementDefinition.mods;
+      var firstScenario = elementDefinition.scenario;
       var collectionPath;
 
       if (pathToUse == null || pathToUse === '') {
         collectionPath = rootCollection;
       } else {
-        var path = pathToUse.split('/');
-        collectionPath = getPath(rootCollection, path);
+        // const path = pathToUse.split('/');
+        // collectionPath = getPath(rootCollection, path);
+        collectionPath = rootCollection.getElement(pathToUse);
       } // Check for critical errors
 
 
       if (nameToUse == null || nameToUse === '') {
-        throw new Error("Diagram addElement ERROR  at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing name property"));
+        // $FlowFixMe
+        throw new Error("Diagram addElement ERROR  at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing name property in ").concat(elementDefinition));
       }
 
       if (methodPathToUse == null || methodPathToUse === '') {
-        throw new Error("Diagram addElement ERROR  at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing method property"));
+        // $FlowFixMe
+        throw new Error("Diagram addElement ERROR  at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing method property in ").concat(elementDefinition));
       }
 
       if (!(collectionPath instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"])) {
-        throw new Error("Diagram addElement ERROR at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing or incorrect path property"));
+        // $FlowFixMe
+        throw new Error("Diagram addElement ERROR at index ".concat(index, " in collection ").concat(rootCollection.name, ": missing or incorrect path property in ").concat(elementDefinition));
       }
 
       var methodPath = methodPathToUse.split('/');
@@ -4852,44 +4876,39 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         throw new Error("Layout addElement at index ".concat(index, " in collection ").concat(rootCollection.name, ": incorrect method property"));
       }
 
+      var element;
+
       if (methodPath.slice(-1)[0].startsWith('add')) {
-        var element = method(collectionPath, nameToUse, optionsToUse);
+        element = method(collectionPath, nameToUse, optionsToUse);
 
-        if (elementModsToUse != null && elementModsToUse !== {}) {
-          element.setProperties(elementModsToUse); // if (methodPath.slice(-1)[0] === 'addNavigator') {
-          //   element.eqn.setProperties(elementModsToUse);
-          // }
-        }
-
-        if (firstScenario != null && firstScenario in element.scenarios) {
-          element.setScenario(firstScenario); // if (methodPath.slice(-1)[0] === 'addNavigator') {
-          //   element.eqn.setScenario(firstScenario);
-          // }
+        if (element == null) {
+          return;
         }
       } else {
-        var _element;
-
         if (Array.isArray(optionsToUse)) {
-          _element = method.apply(void 0, _toConsumableArray(optionsToUse));
+          element = method.apply(void 0, _toConsumableArray(optionsToUse));
         } else {
-          _element = method(optionsToUse);
+          element = method(optionsToUse);
         }
 
-        if (_element == null) {
+        if (element == null) {
           return;
         }
 
-        if (elementModsToUse != null && elementModsToUse !== {}) {
-          _element.setProperties(elementModsToUse);
-        }
-
         if (collectionPath instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"]) {
-          collectionPath.add(nameToUse, _element);
+          collectionPath.add(nameToUse, element);
         }
+      }
 
-        if (firstScenario != null && firstScenario in _element.scenarios) {
-          _element.setScenario(firstScenario);
-        }
+      if (elementModsToUse != null && elementModsToUse !== {}) {
+        element.setProperties(elementModsToUse);
+      } // element.setProperties(elementDefinition, [
+      //   'mods', 'name', 'method', 'scenario', 'addElementsKey', 'options', 'path',
+      // ]);
+
+
+      if (firstScenario != null && firstScenario in element.scenarios) {
+        element.setScenario(firstScenario);
       }
 
       if ("_".concat(nameToUse) in rootCollection && addElementsToUse != null && addElementsToUse !== {}) {
@@ -7145,7 +7164,7 @@ function (_BaseEquationFunction) {
           fit = _this$options.fit,
           space = _this$options.space,
           contentScale = _this$options.contentScale,
-          vAlign = _this$options.vAlign,
+          yAlign = _this$options.yAlign,
           fullContentBounds = _this$options.fullContentBounds;
 
       var _order = _slicedToArray(order, 2),
@@ -7220,7 +7239,7 @@ function (_BaseEquationFunction) {
           var x = cumWidth + colWidths[_col2] / 2 - bound.width / 2;
           var y = cumHeight + rowBounds.heights[_row2] / 2 - (bound.ascent - bound.descent) / 2;
 
-          if (vAlign === 'baseline') {
+          if (yAlign === 'baseline') {
             y = cumHeight + rowBounds.descents[_row2];
           }
 
@@ -7228,7 +7247,7 @@ function (_BaseEquationFunction) {
           locs[_row2][_col2] = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
         }
 
-        if (vAlign === 'baseline') {
+        if (yAlign === 'baseline') {
           cumHeight += rowBounds.descents[_row2] + rowBounds.ascents[_row2] + space.y * scale;
         } else {
           cumHeight += rowBounds.heights[_row2] + space.y * scale;
@@ -7380,13 +7399,12 @@ function (_BaseEquationFunction) {
 /*!*************************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Equation/Equation.js ***!
   \*************************************************************/
-/*! exports provided: foo, EquationNew */
+/*! exports provided: Equation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "foo", function() { return foo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EquationNew", function() { return EquationNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Equation", function() { return Equation; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
@@ -7439,24 +7457,61 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var foo = function foo() {}; // An Equation is a collection of elements that can be arranged into different
+// export const foo = () => {};
+// An Equation is a collection of elements that can be arranged into different
 // forms.
 // Equation allows setting of forms, and navigating through form series
 // Eqn manages different forms of the
 
-var EquationNew =
+/**
+ * An Equation is a collection of elements that can be arranged into different
+ * forms.
+ * @param {TypeEquationOptions} options
+ * @example
+ * // Create with options object
+ * eqn = new Equation({
+ *    elements: {
+ *      a: 'a',
+ *      b: 'b',
+ *      c: 'c',
+ *      equals: ' = ',
+ *      plus: ' + ',
+ *    },
+ *    forms: {
+ *      base: ['a', 'equals', 'b', 'plus', 'c'],
+ *    },
+ * );
+ * @example
+ * // Create with methods
+ * eqn = new Equation();
+ * eqn.addElements({
+ *    a: 'a',
+ *    b: 'b',
+ *    c: 'c',
+ *    equals: ' = ',
+ *    plus: ' + ',
+ *  });
+ *  eqn.addForms({
+ *    base: ['a', 'equals', 'b', 'plus', 'c'],
+ *  });
+ */
+var Equation =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
-  _inherits(EquationNew, _DiagramElementCollec);
+  _inherits(Equation, _DiagramElementCollec);
 
+  /**
+   * Equation parameters and functions
+   * @property {EquationFunctions} functions - equation functions
+   */
   // isTouchDevice: boolean;
   // animateNextFrame: void => void;
-  function EquationNew(shapes) {
+  function Equation(shapes) {
     var _this;
 
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-    _classCallCheck(this, EquationNew);
+    _classCallCheck(this, Equation);
 
     var color = options.color;
 
@@ -7467,27 +7522,12 @@ function (_DiagramElementCollec) {
     var defaultOptions = {
       color: color,
       fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
-      // fontText: new DiagramFont(
-      //   'Times New Roman',
-      //   'italic',
-      //   0.2, '200', 'left', 'alphabetic', color,
-      // ),
-      // fontMathBold: new DiagramFont(
-      //   'Times New Roman',
-      //   'normal',
-      //   0.7, '200', 'left', 'alphabetic', color,
-      // ),
-      // fontTextBold: new DiagramFont(
-      //   'Times New Roman',
-      //   'italic',
-      //   0.7, '200', 'left', 'alphabetic', color,
-      // ),
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       scale: 0.7,
       defaultFormAlignment: {
         fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        alignH: 'left',
-        alignV: 'baseline'
+        xAlign: 'left',
+        yAlign: 'baseline'
       },
       elements: {},
       forms: {},
@@ -7505,7 +7545,7 @@ function (_DiagramElementCollec) {
       }, optionsToUse.formRestart.pulse);
     }
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNew).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Equation).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
     _this.shapes = shapes;
 
     _this.setColor(optionsToUse.color); // this.isTouchDevice = isTouchDevice;
@@ -7565,8 +7605,12 @@ function (_DiagramElementCollec) {
 
     return _this;
   }
+  /**
+    * Set the current form series to 'name'
+   */
 
-  _createClass(EquationNew, [{
+
+  _createClass(Equation, [{
     key: "setFormSeries",
     value: function setFormSeries(name) {
       if (this.eqn.formSeries[name] != null) {
@@ -7574,6 +7618,10 @@ function (_DiagramElementCollec) {
         this.eqn.currentFormSeriesName = name;
       }
     }
+    /**
+      * Get the current form series name
+     */
+
   }, {
     key: "getFormSeries",
     value: function getFormSeries() {
@@ -7745,6 +7793,10 @@ function (_DiagramElementCollec) {
 
       return symbol;
     }
+    /**
+     * Add elements to equation.
+     */
+
   }, {
     key: "addElements",
     value: function addElements(elems) {
@@ -7814,7 +7866,7 @@ function (_DiagramElementCollec) {
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      _get(_getPrototypeOf(EquationNew.prototype), "setPosition", this).call(this, pointOrX, y);
+      _get(_getPrototypeOf(Equation.prototype), "setPosition", this).call(this, pointOrX, y);
 
       var position = this.getPosition('diagram'); // console.log(this.eqn, this.eqn.descriptionElement)
 
@@ -7827,8 +7879,8 @@ function (_DiagramElementCollec) {
     //     if (subForm in this.eqn.forms[name]) {
     //       this.eqn.forms[name][subForm].arrange(
     //         scale,
-    //         this.eqn.formAlignment.hAlign,
-    //         this.eqn.formAlignment.vAlign,
+    //         this.eqn.formAlignment.xAlign,
+    //         this.eqn.formAlignment.yAlign,
     //         this.eqn.formAlignment.fixTo,
     //       );
     //     }
@@ -7854,6 +7906,10 @@ function (_DiagramElementCollec) {
         _this3.eqn.functions.phrases[phraseName] = phrase;
       });
     }
+    /**
+     * Add forms to equation.
+     */
+
   }, {
     key: "addForms",
     value: function addForms(forms) {
@@ -8183,7 +8239,7 @@ function (_DiagramElementCollec) {
 
       optionsToUse.alignment.fixTo = this.checkFixTo(optionsToUse.alignment.fixTo);
       form[subForm].content = content;
-      form[subForm].arrange(optionsToUse.scale, optionsToUse.alignment.alignH, optionsToUse.alignment.alignV, optionsToUse.alignment.fixTo); // const { addToSeries } = optionsToUse;
+      form[subForm].arrange(optionsToUse.scale, optionsToUse.alignment.xAlign, optionsToUse.alignment.yAlign, optionsToUse.alignment.fixTo); // const { addToSeries } = optionsToUse;
       // console.log(addToSeries)
       // if (addToSeries != null && addToSeries !== '' && typeof addToSeries === 'string') {
       //   if (this.eqn.formSeries[addToSeries] == null) {
@@ -8208,6 +8264,10 @@ function (_DiagramElementCollec) {
         this.eqn.currentSubForm = 'base';
       }
     }
+    /**
+     * Get the current equation form
+     */
+
   }, {
     key: "getCurrentForm",
     value: function getCurrentForm() {
@@ -8235,6 +8295,10 @@ function (_DiagramElementCollec) {
         form.applyElementMods(); // this.updateDescription();
       }
     }
+    /**
+     * Set current equation form - Note, this does not show the form.
+     */
+
   }, {
     key: "setCurrentForm",
     value: function setCurrentForm(formOrName) {
@@ -8256,6 +8320,10 @@ function (_DiagramElementCollec) {
         this.eqn.currentSubForm = formOrName.subForm;
       }
     }
+    /**
+     * Show equation form
+     */
+
   }, {
     key: "showForm",
     value: function showForm(formOrName) {
@@ -8273,6 +8341,10 @@ function (_DiagramElementCollec) {
         this.render(animationStop);
       }
     }
+    /**
+     * Get an equation form object from a form name
+     */
+
   }, {
     key: "getForm",
     value: function getForm(formOrName, subForm) {
@@ -8303,7 +8375,10 @@ function (_DiagramElementCollec) {
       }
 
       return null;
-    } // This animates to a form
+    }
+    /**
+     Start an animation to an equation form
+     */
 
   }, {
     key: "goToForm",
@@ -8465,7 +8540,7 @@ function (_DiagramElementCollec) {
             var target = this.getPosition();
             var start = this.getPosition();
 
-            if (moveFrom instanceof EquationNew) {
+            if (moveFrom instanceof Equation) {
               moveFrom.showForm(subForm.name);
             }
 
@@ -8497,7 +8572,7 @@ function (_DiagramElementCollec) {
             var newEnd = function newEnd() {
               _this7.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
 
-              if (pulse.element != null && pulse.element instanceof EquationNew // $FlowFixMe
+              if (pulse.element != null && pulse.element instanceof Equation // $FlowFixMe
               && pulse.element.getCurrentForm().name === subForm.name) {
                 pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
               }
@@ -8526,10 +8601,14 @@ function (_DiagramElementCollec) {
 
       return index;
     }
+    /**
+     * Animate to previous form in the current form series
+     */
+
   }, {
     key: "prevForm",
     value: function prevForm() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var duration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var currentForm = this.getCurrentForm();
 
@@ -8548,16 +8627,20 @@ function (_DiagramElementCollec) {
 
         this.goToForm({
           index: index,
-          duration: time,
+          duration: duration,
           delay: delay,
           fromWhere: 'fromNext'
         });
       }
     }
+    /**
+     * Animate to next form in the current form series
+     */
+
   }, {
     key: "nextForm",
     value: function nextForm() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var duration = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var animate = 'move';
       var currentForm = this.getCurrentForm();
@@ -8586,16 +8669,20 @@ function (_DiagramElementCollec) {
 
         this.goToForm({
           index: index,
-          duration: time,
+          duration: duration,
           delay: delay,
           fromWhere: 'fromPrev',
           animate: animate
         });
       }
     }
+    /**
+     * Start from previous form and animate to current form
+     */
+
   }, {
     key: "replayCurrentForm",
-    value: function replayCurrentForm(time) {
+    value: function replayCurrentForm(duration) {
       if (this.eqn.isAnimating) {
         // this.stop(true, true);
         this.stop(true, true); // this.animations.cancel('complete');
@@ -8617,12 +8704,12 @@ function (_DiagramElementCollec) {
       this.stop();
       this.eqn.isAnimating = false;
       this.prevForm(0);
-      this.nextForm(time, 0.5);
+      this.nextForm(duration, 0.5);
     }
   }, {
     key: "animateToForm",
     value: function animateToForm(name) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       // this.stopAnimatingColor(true, true);
@@ -8634,7 +8721,7 @@ function (_DiagramElementCollec) {
       var form = this.getForm(name);
 
       if (form != null) {
-        form.animatePositionsTo(delay, 0.4, time, 0.4, callback);
+        form.animatePositionsTo(delay, 0.4, duration, 0.4, callback);
       }
 
       this.setCurrentForm(name);
@@ -8700,7 +8787,7 @@ function (_DiagramElementCollec) {
 
   }]);
 
-  return EquationNew;
+  return Equation;
 }(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);
 
 /***/ }),
@@ -8844,7 +8931,7 @@ function (_Elements) {
     // property.
     //
     // The elements are positioned relative to 0,0 in vertex space based on the
-    // fixTo, alignH and alignV parameters.
+    // fixTo, xAlign and yAlign parameters.
     //
     // fixTo can only be a point in the equation's vertex space, or a
     // DiagramElement in the equation.
@@ -8855,11 +8942,11 @@ function (_Elements) {
     //    - The equation collection setPosition (or translation transform) can
     //      then be used to position the equation in the diagram (or relative
     //      collection space)
-    //    - if alignH is:
+    //    - if xAlign is:
     //        - 'center': the fixTo element is centered in x around (0, 0)
     //        - 'right': the fixTo element right most point is at x = 0
     //        - 'left': default - the fixTo element x position at 0
-    //    - if alignV is:
+    //    - if yAlign is:
     //        - 'middle': the fixTo element is centered in y around (0, 0)
     //        - 'bottom': the fixTo element bottom most point is at y = 0
     //        - 'top': the fixTo element top most point is at y = 0
@@ -8867,13 +8954,13 @@ function (_Elements) {
     //
     // If fixTo is a Point, the equation is positioned at that point in the
     // equation's vertex space.
-    //  - alignH:
+    //  - xAlign:
     //    - 'left': The equation's left most element's left most point is at
     //              Point.x
     //    - 'right': The equation's right most element's right most point is at
     //              Point.x
     //    - 'center': The equation is centered horizontally around Point.x
-    //  - alignV:
+    //  - yAlign:
     //    - 'baseline': The equation's baseline is at Point.y
     //    - 'top': The equation's top most element's top most point is at Point.y
     //    - 'bottom': The equation's top most element's top most point is at
@@ -8885,8 +8972,8 @@ function (_Elements) {
     key: "arrange",
     value: function arrange() {
       var scale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var alignH = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'left';
-      var alignV = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'baseline';
+      var xAlign = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'left';
+      var yAlign = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'baseline';
       var fixTo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       var elementsInCollection = this.collectionMethods.getAllElements();
       var elementsCurrentlyShowing = elementsInCollection.filter(function (e) {
@@ -8931,27 +9018,27 @@ function (_Elements) {
         }
       }
 
-      if (alignH === 'right') {
+      if (xAlign === 'right') {
         fixPoint.x += w;
-      } else if (alignH === 'center') {
+      } else if (xAlign === 'center') {
         fixPoint.x += w / 2;
-      } else if (typeof alignH === 'number') {
-        fixPoint.x += alignH * w;
-      } else if (alignH != null && alignH.slice(-1)[0] === 'o') {
-        var offset = parseFloat(alignH);
+      } else if (typeof xAlign === 'number') {
+        fixPoint.x += xAlign * w;
+      } else if (xAlign != null && xAlign.slice(-1)[0] === 'o') {
+        var offset = parseFloat(xAlign);
         fixPoint.x += offset;
       }
 
-      if (alignV === 'top') {
+      if (yAlign === 'top') {
         fixPoint.y += p.y + a;
-      } else if (alignV === 'bottom') {
+      } else if (yAlign === 'bottom') {
         fixPoint.y += p.y - d;
-      } else if (alignV === 'middle') {
+      } else if (yAlign === 'middle') {
         fixPoint.y += p.y - d + h / 2;
-      } else if (typeof alignV === 'number') {
-        fixPoint.y += p.y - d + alignV * h;
-      } else if (alignV != null && alignV.slice(-1)[0] === 'o') {
-        var _offset = parseFloat(alignV);
+      } else if (typeof yAlign === 'number') {
+        fixPoint.y += p.y - d + yAlign * h;
+      } else if (yAlign != null && yAlign.slice(-1)[0] === 'o') {
+        var _offset = parseFloat(yAlign);
 
         fixPoint.y += p.y + _offset;
       }
@@ -9438,6 +9525,30 @@ function getDiagramElement(elementsObject, name) {
 }
 /* eslint-disable no-use-before-define */
 
+/**
+ * An equation phrase is used to define an equation form. An equation phrase
+ * can either be the entirety of the form definition, or a series of nested
+ * phrases.
+ *
+ *  * An object or array definition (e.g. {@link TypeEquationFunctionFraction})
+ *  * A string that represents an equation element
+ *  * An array of {@link TypeEquationPhrase}
+ *
+ * @example:
+ * forms: {
+ *   form1: 'a'
+ *   form2: ['a', 'equals', 'b']
+ *   form3: [{
+ *     frac: {
+ *       numerator: 'a',
+ *       symbol: 'v',
+ *       denominator: '1'
+ *     },
+ *   }, 'equals', 'b'],
+ *   form4: [{ frac: ['a', 'v', '1'], 'equals', 'b'}],
+ * },
+ */
+
 // There are lots of FlowFixMes in this file. This is not perfect, but
 // haven't been able to come up with a quick work around. The problem statement
 // is each function can accept as arguements either a full object definition
@@ -9445,6 +9556,10 @@ function getDiagramElement(elementsObject, name) {
 // The problem is then the first arguement can be so many types, some of which
 // are subsets of the other, then when its parameters are extracted, their type
 // is all confused.
+
+/**
+ * Functions used in making equation forms
+ */
 var EquationFunctions =
 /*#__PURE__*/
 function () {
@@ -9695,6 +9810,19 @@ function () {
 
       return null;
     }
+    /**
+     * Equation container function
+     * @example
+     * e = new Equation();
+     * e.addElements({
+     *   v: { symbol: 'vinculum' },
+     * });
+     * frac = e.eqn.functions.frac;
+     * eqn.addForms({
+     *   base: ['a', 'equals', frac(['b', 'v', 'c'])],
+     * });
+     */
+
   }, {
     key: "container",
     value: function container(optionsOrArray) {
@@ -10161,10 +10289,10 @@ function () {
     value: function scale(optionsOrArray) {
       var content;
       var scale;
-      var useFullContent;
+      var fullContentBounds;
       var defaultOptions = {
         scaleModifier: 1,
-        useFullContent: false
+        fullContentBounds: false
       };
 
       if (Array.isArray(optionsOrArray)) {
@@ -10172,20 +10300,33 @@ function () {
 
         content = _optionsOrArray4[0];
         scale = _optionsOrArray4[1];
-        useFullContent = _optionsOrArray4[2];
+        fullContentBounds = _optionsOrArray4[2];
       } else {
         content = optionsOrArray.content;
         scale = optionsOrArray.scale;
-        useFullContent = optionsOrArray.useFullContent;
+        fullContentBounds = optionsOrArray.fullContentBounds;
       }
 
       var optionsIn = {
         scaleModifier: scale,
-        useFullContent: useFullContent
+        fullContentBounds: fullContentBounds
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       return new _Elements_Scale__WEBPACK_IMPORTED_MODULE_7__["default"]([this.contentToElement(content)], [], options);
     }
+    /**
+     * Equation fraction function
+     * @example
+     * e = new Equation();
+     * e.addElements({
+     *   v: { symbol: 'vinculum' },
+     * });
+     * frac = e.eqn.functions.frac;
+     * eqn.addForms({
+     *   base: ['a', 'equals', frac(['b', 'v', 'c'])],
+     * });
+     */
+
   }, {
     key: "frac",
     value: function frac(optionsOrArray) {
@@ -10668,7 +10809,7 @@ function () {
       var fit;
       var space;
       var scale;
-      var vAlign;
+      var yAlign;
       var brac;
       var fullContentBounds;
       var defaultOptions = {
@@ -10676,7 +10817,7 @@ function () {
         fit: 'min',
         contentScale: 0.7,
         brac: {},
-        vAlign: 'baseline',
+        yAlign: 'baseline',
         fullContentBounds: false
       };
 
@@ -10690,7 +10831,7 @@ function () {
         scale = _optionsOrArray11[4];
         fit = _optionsOrArray11[5];
         space = _optionsOrArray11[6];
-        vAlign = _optionsOrArray11[7];
+        yAlign = _optionsOrArray11[7];
         brac = _optionsOrArray11[8];
         fullContentBounds = _optionsOrArray11[9];
       } else {
@@ -10701,7 +10842,7 @@ function () {
         scale = optionsOrArray.scale;
         fit = optionsOrArray.fit;
         space = optionsOrArray.space;
-        vAlign = optionsOrArray.vAlign;
+        yAlign = optionsOrArray.yAlign;
         brac = optionsOrArray.brac;
         fullContentBounds = optionsOrArray.fullContentBounds;
       }
@@ -10712,7 +10853,7 @@ function () {
         order: order,
         contentScale: scale,
         brac: brac,
-        vAlign: vAlign,
+        yAlign: yAlign,
         fullContentBounds: fullContentBounds
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
@@ -16046,11 +16187,11 @@ function (_DiagramElementCollec) {
         labelGenerator();
       }
 
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](ticks.fontFamily, 'normal', ticks.fontSize, ticks.fontWeight, ticks.labelsHAlign, ticks.labelsVAlign, ticks.fontColor);
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](ticks.fontFamily, 'normal', ticks.fontSize, ticks.fontWeight, ticks.labelsHAlign, ticks.labelsyAlign, ticks.fontColor);
 
       if (this.props.rotation > Math.PI / 2 * 0.95) {
-        font.alignV = 'middle';
-        font.alignH = 'right';
+        font.yAlign = 'middle';
+        font.xAlign = 'right';
       }
 
       var dText = [];
@@ -16067,7 +16208,7 @@ function (_DiagramElementCollec) {
       //     this.valueToClip(ticks.start + i * ticks.step),
       //     0,
       //   ).transformBy(new Transform().rotate(this.props.rotation).matrix()),
-      //   [ticks.labelsHAlign, ticks.labelsVAlign],
+      //   [ticks.labelsHAlign, ticks.labelsyAlign],
       //   ticks.labelOffset,
       // );
       // label.fontSize = ticks.fontSize;
@@ -16161,7 +16302,7 @@ function (_GridProperties) {
     _this.labels = [];
     _this.labelMode = 'auto';
     _this.labelsHAlign = 'center';
-    _this.labelsVAlign = 'middle';
+    _this.labelsyAlign = 'middle';
     _this.mode = 'on';
     _this.fontFamily = 'Helvetica Neue';
     _this.fontWeight = '400';
@@ -16650,8 +16791,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function RectangleFilled(webgl, alignH, alignV, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
-  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, alignH, alignV, width, height, cornerRadius, cornerSides);
+function RectangleFilled(webgl, xAlign, yAlign, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
+  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, xAlign, yAlign, width, height, cornerRadius, cornerSides);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -16779,7 +16920,7 @@ function () {
   _createClass(DiagramEquation, [{
     key: "equation",
     value: function equation(options) {
-      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"](this.shapes, options);
+      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["Equation"](this.shapes, options);
       return equation;
     }
   }, {
@@ -16787,7 +16928,7 @@ function () {
     value: function addEquation(parent, name) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       // $FlowFixMe
-      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"](this.shapes, options);
+      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["Equation"](this.shapes, options);
       parent.add(name, equation);
       return equation;
     }
@@ -16802,7 +16943,7 @@ function () {
         var equation = this.addEquation(parent, "".concat(name, "Eqn"), options);
         optionsToUse.equation = equation;
         navNameToUse = "".concat(name, "Nav");
-      } else if (!(optionsToUse.equation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"])) {
+      } else if (!(optionsToUse.equation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["Equation"])) {
         // let methodPathToUse;
         var nameToUse; // let pathToUse;
 
@@ -18463,7 +18604,7 @@ function (_DiagramElementCollec) {
   _inherits(EqnNavigator, _DiagramElementCollec);
 
   // setEquation: (Equation) => void;
-  function EqnNavigator(shapes, // eqn: EquationNew,
+  function EqnNavigator(shapes, // eqn: Equation,
   animateNextFrame) {
     var _this;
 
@@ -18493,8 +18634,8 @@ function (_DiagramElementCollec) {
         forceTwoLines: false,
         arrows: false
       },
-      alignH: 'center',
-      alignV: 'middle',
+      xAlign: 'center',
+      yAlign: 'middle',
       interactive: true,
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_figureone__equation_navigator_')
     };
@@ -18539,7 +18680,7 @@ function (_DiagramElementCollec) {
       var offsetToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.offset, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
       Object.assign(_assertThisInitialized(_this), navigatorHTMLElement);
 
-      var table = _this.shapes.htmlElement(navigatorHTMLElement.table, "".concat(optionsToUse.id, "_table"), '', offsetToUse, optionsToUse.alignV, optionsToUse.alignH);
+      var table = _this.shapes.htmlElement(navigatorHTMLElement.table, "".concat(optionsToUse.id, "_table"), '', offsetToUse, optionsToUse.yAlign, optionsToUse.xAlign);
 
       _this.add('table', table);
     }
@@ -18683,8 +18824,8 @@ function () {
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       form: '0',
       formType: 'base',
-      alignH: 'center',
-      alignV: 'middle'
+      xAlign: 'center',
+      yAlign: 'middle'
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var labelTextOrEquation = optionsToUse.label;
@@ -18693,8 +18834,8 @@ function () {
         position = optionsToUse.position;
     var form = optionsToUse.form,
         formType = optionsToUse.formType;
-    var alignV = optionsToUse.alignV,
-        alignH = optionsToUse.alignH;
+    var yAlign = optionsToUse.yAlign,
+        xAlign = optionsToUse.xAlign;
     var eqn;
 
     if (typeof labelTextOrEquation === 'string') {
@@ -18705,8 +18846,8 @@ function () {
         color: color,
         defaultFormAlignment: {
           fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          alignH: alignH,
-          alignV: alignV
+          xAlign: xAlign,
+          yAlign: yAlign
         },
         scale: scale,
         forms: {
@@ -18715,7 +18856,7 @@ function () {
         position: position
       });
       eqn.setCurrentForm('base');
-    } else if (labelTextOrEquation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_1__["EquationNew"]) {
+    } else if (labelTextOrEquation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_1__["Equation"]) {
       eqn = labelTextOrEquation;
     } else if (Array.isArray(labelTextOrEquation)) {
       var elements = {};
@@ -18731,8 +18872,8 @@ function () {
         position: position,
         defaultFormAlignment: {
           fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          alignH: alignH,
-          alignV: alignV
+          xAlign: xAlign,
+          yAlign: yAlign
         },
         scale: scale
       });
@@ -18766,7 +18907,7 @@ function () {
           textObject.setText(text);
         }
 
-        form.arrange(this.eqn.eqn.scale, this.eqn.eqn.defaultFormAlignment.alignH, this.eqn.eqn.defaultFormAlignment.alignV, this.eqn.eqn.defaultFormAlignment.fixTo);
+        form.arrange(this.eqn.eqn.scale, this.eqn.eqn.defaultFormAlignment.xAlign, this.eqn.eqn.defaultFormAlignment.yAlign, this.eqn.eqn.defaultFormAlignment.fixTo);
       }
     }
   }, {
@@ -21094,8 +21235,8 @@ function () {
         style: 'italic',
         size: 0.2,
         weight: '200',
-        hAlign: 'center',
-        vAlign: 'middle',
+        xAlign: 'center',
+        yAlign: 'middle',
         offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         // vertex space offset
         color: [1, 0, 0, 1],
@@ -21126,7 +21267,7 @@ function () {
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramFont"](o.family, o.style, o.size, o.weight, o.xAlign, o.yAlign, o.color);
       }
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
@@ -21232,8 +21373,8 @@ function () {
       var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "id__temp_".concat(Math.round(Math.random() * 10000));
       var classes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
       var location = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var alignV = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'middle';
-      var alignH = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'left';
+      var yAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'middle';
+      var xAlign = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'left';
       var element = document.createElement('div');
 
       if (classes && element) {
@@ -21254,7 +21395,7 @@ function () {
       element.style.position = 'absolute';
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
       var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
@@ -21264,13 +21405,13 @@ function () {
     //   id: string = generateUniqueId('id__html_text_'),
     //   classes: string = '',
     //   location: Point = new Point(0, 0),
-    //   alignV: 'top' | 'bottom' | 'middle' = 'middle',
-    //   alignH: 'left' | 'right' | 'center' = 'left',
+    //   yAlign: 'top' | 'bottom' | 'middle' = 'middle',
+    //   xAlign: 'left' | 'right' | 'center' = 'left',
     // ) {
     //   // const inside = document.createTextNode(textInput);
     //   const inside = document.createElement('div');
     //   inside.innerHTML = textInput;
-    //   return this.htmlElement(inside, id, classes, location, alignV, alignH);
+    //   return this.htmlElement(inside, id, classes, location, yAlign, xAlign);
     // }
 
   }, {
@@ -21280,8 +21421,8 @@ function () {
         id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["generateUniqueId"])('id__html_image_'),
         classes: '',
         position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        alignV: 'middle',
-        alignH: 'left',
+        yAlign: 'middle',
+        xAlign: 'left',
         src: '' // color: [1, 0, 0, 1],
 
       };
@@ -21297,9 +21438,9 @@ function () {
       var id = options.id,
           classes = options.classes,
           position = options.position,
-          alignV = options.alignV,
-          alignH = options.alignH;
-      var element = this.htmlElement(image, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+          yAlign = options.yAlign,
+          xAlign = options.xAlign;
+      var element = this.htmlElement(image, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), yAlign, xAlign);
 
       if (options.color != null) {
         element.setColor(options.color);
@@ -21321,8 +21462,8 @@ function () {
         id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["generateUniqueId"])('id__html_text_'),
         classes: '',
         position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        alignV: 'middle',
-        alignH: 'left' // color: [1, 0, 0, 1],
+        yAlign: 'middle',
+        xAlign: 'left' // color: [1, 0, 0, 1],
 
       };
 
@@ -21338,9 +21479,9 @@ function () {
       var id = options.id,
           classes = options.classes,
           position = options.position,
-          alignV = options.alignV,
-          alignH = options.alignH;
-      var element = this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+          yAlign = options.yAlign,
+          xAlign = options.xAlign;
+      var element = this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), yAlign, xAlign);
 
       if (options.color != null) {
         element.setColor(options.color);
@@ -21560,8 +21701,8 @@ function () {
     key: "rectangle",
     value: function rectangle() {
       var defaultOptions = {
-        alignV: 'middle',
-        alignH: 'center',
+        yAlign: 'middle',
+        xAlign: 'center',
         width: 1,
         height: 1,
         corner: {
@@ -21588,7 +21729,7 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      var element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -21913,7 +22054,7 @@ function () {
 
       xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
       xProps.majorTicks.labelsHAlign = 'center';
-      xProps.majorTicks.labelsVAlign = 'top';
+      xProps.majorTicks.labelsyAlign = 'top';
       xProps.majorTicks.fontColor = fontColor.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
@@ -21950,7 +22091,7 @@ function () {
 
       yProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](yProps.majorTicks.offset - fontSize * 0.2, 0);
       yProps.majorTicks.labelsHAlign = 'right';
-      yProps.majorTicks.labelsVAlign = 'middle';
+      yProps.majorTicks.labelsyAlign = 'middle';
       yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
       yProps.majorTicks.fontSize = fontSize;
       yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
@@ -22385,8 +22526,8 @@ function (_DrawingObject) {
   function HTMLObject(parentDiv, id, location) {
     var _this;
 
-    var alignV = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'middle';
-    var alignH = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'center';
+    var yAlign = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'middle';
+    var xAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'center';
 
     _classCallCheck(this, HTMLObject);
 
@@ -22399,8 +22540,8 @@ function (_DrawingObject) {
 
     _this.id = id;
     _this.location = location;
-    _this.alignV = alignV;
-    _this.alignH = alignH;
+    _this.yAlign = yAlign;
+    _this.xAlign = xAlign;
     _this.parentDiv = parentDiv;
     _this.show = true;
 
@@ -22412,7 +22553,7 @@ function (_DrawingObject) {
   _createClass(HTMLObject, [{
     key: "_dup",
     value: function _dup() {
-      var c = new HTMLObject(this.parentDiv, this.id, this.location._dup(), this.alignV, this.alignH);
+      var c = new HTMLObject(this.parentDiv, this.id, this.location._dup(), this.yAlign, this.xAlign);
       c.show = this.show;
       c.border = this.border.map(function (b) {
         return b.map(function (p) {
@@ -22513,15 +22654,15 @@ function (_DrawingObject) {
         var left = 0;
         var top = 0;
 
-        if (this.alignH === 'center') {
+        if (this.xAlign === 'center') {
           left = -w / 2;
-        } else if (this.alignH === 'right') {
+        } else if (this.xAlign === 'right') {
           left = -w;
         }
 
-        if (this.alignV === 'middle') {
+        if (this.yAlign === 'middle') {
           top = -h / 2;
-        } else if (this.alignV === 'bottom') {
+        } else if (this.yAlign === 'bottom') {
           top = -h;
         }
 
@@ -22616,8 +22757,8 @@ function () {
     var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
     var weight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '200';
-    var alignH = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'center';
-    var alignV = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'middle';
+    var xAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'center';
+    var yAlign = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'middle';
     var color = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
 
     _classCallCheck(this, DiagramFont);
@@ -22626,8 +22767,8 @@ function () {
     this.style = style;
     this.size = size;
     this.weight = weight;
-    this.alignH = alignH;
-    this.alignV = alignV;
+    this.xAlign = xAlign;
+    this.yAlign = yAlign;
     this.opacity = 1;
     this.setColor(color); // if (Array.isArray(color)) {
     //   this.color = colorArrayToString(color);
@@ -22652,13 +22793,13 @@ function () {
     value: function set(ctx) {
       var scalingFactor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(this.size * scalingFactor, "px ").concat(this.family);
-      ctx.textAlign = this.alignH;
-      ctx.textBaseline = this.alignV;
+      ctx.textAlign = this.xAlign;
+      ctx.textBaseline = this.yAlign;
     }
   }, {
     key: "_dup",
     value: function _dup() {
-      return new DiagramFont(this.family, this.style, this.size, this.weight, this.alignH, this.alignV, this.color);
+      return new DiagramFont(this.family, this.style, this.size, this.weight, this.xAlign, this.yAlign, this.color);
     }
   }]);
 
@@ -22902,17 +23043,17 @@ function (_DrawingObject) {
       var bottom = y + height * 0.1;
       var left = x - width * 0.1;
 
-      if (diagramText.font.alignV === 'baseline') {
+      if (diagramText.font.yAlign === 'baseline') {
         bottom = y + height * 0.2;
-      } else if (diagramText.font.alignV === 'top') {
+      } else if (diagramText.font.yAlign === 'top') {
         bottom = y + height;
-      } else if (diagramText.font.alignV === 'middle') {
+      } else if (diagramText.font.yAlign === 'middle') {
         bottom = y + height / 2;
       }
 
-      if (diagramText.font.alignH === 'center') {
+      if (diagramText.font.xAlign === 'center') {
         left -= width / 2;
-      } else if (diagramText.font.alignH === 'right') {
+      } else if (diagramText.font.xAlign === 'right') {
         left -= width;
       }
 
@@ -23029,35 +23170,35 @@ function (_DrawingObject) {
       var left = 0;
       var right = 0;
 
-      if (text.font.alignH === 'left') {
+      if (text.font.xAlign === 'left') {
         right = width;
       }
 
-      if (text.font.alignH === 'center') {
+      if (text.font.xAlign === 'center') {
         left = width / 2;
         right = width / 2;
       }
 
-      if (text.font.alignH === 'right') {
+      if (text.font.xAlign === 'right') {
         left = width;
       }
 
-      if (text.font.alignV === 'alphabetic' || text.font.alignV === 'baseline') {
+      if (text.font.yAlign === 'alphabetic' || text.font.yAlign === 'baseline') {
         asc = ascent;
         des = descent;
       }
 
-      if (text.font.alignV === 'top') {
+      if (text.font.yAlign === 'top') {
         asc = 0;
         des = height;
       }
 
-      if (text.font.alignV === 'bottom') {
+      if (text.font.yAlign === 'bottom') {
         asc = height;
         des = 0;
       }
 
-      if (text.font.alignV === 'middle') {
+      if (text.font.yAlign === 'middle') {
         asc = height / 2;
         des = height / 2;
       }
@@ -25943,7 +26084,7 @@ var VertexRectangleFilled =
 function (_VertexObject) {
   _inherits(VertexRectangleFilled, _VertexObject);
 
-  function VertexRectangleFilled(webgl, alignH, alignV) {
+  function VertexRectangleFilled(webgl, xAlign, yAlign) {
     var _this;
 
     var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
@@ -25986,39 +26127,39 @@ function (_VertexObject) {
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, -height / 2 + rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2 * 3, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, -height / 2 + rad))));
 
-    if (alignV === 'top') {
+    if (yAlign === 'top') {
       points = points.map(function (p) {
         return p.add(0, -height / 2);
       });
-    } else if (alignV === 'bottom') {
+    } else if (yAlign === 'bottom') {
       points = points.map(function (p) {
         return p.add(0, height / 2);
       });
-    } else if (alignV === 'middle') {
+    } else if (yAlign === 'middle') {
       points = points.map(function (p) {
         return p.add(0, 0);
       });
     } else {
       points = points.map(function (p) {
-        return p.add(0, alignV);
+        return p.add(0, yAlign);
       });
     }
 
-    if (alignH === 'left') {
+    if (xAlign === 'left') {
       points = points.map(function (p) {
         return p.add(width / 2, 0);
       });
-    } else if (alignH === 'right') {
+    } else if (xAlign === 'right') {
       points = points.map(function (p) {
         return p.add(-width / 2, 0);
       });
-    } else if (alignH === 'center') {
+    } else if (xAlign === 'center') {
       points = points.map(function (p) {
         return p.add(0, 0);
       });
     } else {
       points = points.map(function (p) {
-        return p.add(alignH, alignH);
+        return p.add(xAlign, xAlign);
       });
     }
 
@@ -26090,8 +26231,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 //   family: string;
 //   weight: number;
 //   style: 'normal' | 'italic',
-//   alignH: 'left' | 'center' | 'right',
-//   alignV: 'top' | 'bottom' | 'middle' | 'baseline',
+//   xAlign: 'left' | 'center' | 'right',
+//   yAlign: 'top' | 'bottom' | 'middle' | 'baseline',
 // };
 var VertexText =
 /*#__PURE__*/
@@ -26116,16 +26257,16 @@ function (_VertexObject) {
       family: 'Helvetica',
       style: 'normal',
       weight: 400,
-      alignH: 'center',
-      alignV: 'alphabetic',
+      xAlign: 'center',
+      yAlign: 'alphabetic',
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["generateUniqueId"])('vertexText')
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultTextOptions, textOptions);
     _this.size = options.size;
     _this.text = options.text;
     _this.family = options.family;
-    _this.alignH = options.alignH;
-    _this.alignV = options.alignV;
+    _this.xAlign = options.xAlign;
+    _this.yAlign = options.yAlign;
     _this.style = options.style;
     _this.weight = options.weight;
     _this.canvas = document.createElement('canvas');
@@ -26156,17 +26297,17 @@ function (_VertexObject) {
       var height = this.canvas.height * pixelToVertexSpaceScale.y;
       var start = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
 
-      if (this.alignH === 'center') {
+      if (this.xAlign === 'center') {
         start.x = -width / 2;
-      } else if (this.alignH === 'right') {
+      } else if (this.xAlign === 'right') {
         start.x = -width;
       }
 
-      if (this.alignV === 'baseline') {
+      if (this.yAlign === 'baseline') {
         start.y = -height * 0.25;
-      } else if (this.alignV === 'top') {
+      } else if (this.yAlign === 'top') {
         start.y = -height;
-      } else if (this.alignV === 'middle') {
+      } else if (this.yAlign === 'middle') {
         start.y = -height / 2;
       }
 
@@ -26823,7 +26964,10 @@ function () {
   _createClass(DiagramElement, [{
     key: "setProperties",
     value: function setProperties(properties) {
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])(this, properties);
+      var except = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjectsWithOptions"])({
+        except: except
+      }, this, properties);
     } // Space definition:
     //   * Pixel space: css pixels
     //   * GL Space: x,y = -1 to 1
@@ -31010,10 +31154,23 @@ function clipAngle(angleToClip, clipTo) {
 
   return angle;
 }
+/**
+ * Rect
+ * @class
+ */
+
 
 var Rect =
 /*#__PURE__*/
 function () {
+  /**
+   * Constructor
+   * @constructor
+   * @param {number} left - left location
+   * @param {number} bottom - bottom location
+   * @param {number} width - rectangle width
+   * @param {number} bottom - rectangle height
+   */
   function Rect(left, bottom, width, height) {
     _classCallCheck(this, Rect);
 
@@ -31036,20 +31193,46 @@ function () {
 }();
 /* eslint-disable comma-dangle */
 
+/**
+ * Point class
+ *
+ */
+
 
 var Point =
 /*#__PURE__*/
 function () {
   _createClass(Point, null, [{
     key: "zero",
+
+    /**
+     * x value of point
+    */
+
+    /** y value of point */
+
+    /**
+     * Return a point at (0, 0)
+     */
     value: function zero() {
       return new Point(0, 0);
     }
+    /**
+     * Return a point at (1, 1)
+     */
+
   }, {
     key: "Unity",
     value: function Unity() {
       return new Point(1, 1);
     }
+    /**
+     * Constructor
+     * @constructor
+     * @param x x coordinate of point
+     * @param y y coordinate of point
+     */
+
   }]);
 
   function Point(x, y) {
@@ -31059,50 +31242,125 @@ function () {
     this.y = y;
     this._type = 'point';
   }
+  /**
+   * Return a duplicate of the {@link Point} object
+   */
+
 
   _createClass(Point, [{
     key: "_dup",
     value: function _dup() {
       return new Point(this.x, this.y);
     }
+    /**
+     * Scale x and y values of point by scalar
+     * @example
+     * p = new Point(1, 1);
+     * s = p.scale(3);
+     * // s = Point{x: 3, y: 3};
+     */
+
   }, {
     key: "scale",
     value: function scale(scalar) {
       return new Point(this.x * scalar, this.y * scalar);
     }
+    /**
+     * Subtract (x, y) values or a {@link Point} and return the difference as a new {@link Point}
+     * @example
+     * p = new Point(3, 3);
+     * d = p.sub(1, 1)
+     * // d = Point{x: 2, y: 2}
+     *
+     * p = new Point(3, 3);
+     * q = new Point(1, 1);
+     * d = p.sub(q)
+     * // d = Point{x: 2, y: 2}
+     */
+
   }, {
     key: "sub",
-    value: function sub(qOrX) {
+    value: function sub(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (qOrX instanceof Point) {
-        return new Point(this.x - qOrX.x, this.y - qOrX.y);
+      if (pointOrX instanceof Point) {
+        return new Point(this.x - pointOrX.x, this.y - pointOrX.y);
       }
 
-      return new Point(this.x - qOrX, this.y - y);
+      return new Point(this.x - pointOrX, this.y - y);
     }
+    /**
+     * Add (x, y) values or a {@link Point} and return the sum as a new {@link Point}
+     * @example
+     * p = new Point(3, 3);
+     * d = p.add(1, 1)
+     * // d = Point{x: 4, y: 4}
+     *
+     * p = new Point(3, 3);
+     * q = new Point(1, 1);
+     * d = p.add(q)
+     * // d = Point{x: 4, y: 4}
+     */
+
   }, {
     key: "add",
-    value: function add(qOrX) {
+    value: function add(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (qOrX instanceof Point) {
-        return new Point(this.x + qOrX.x, this.y + qOrX.y);
+      if (pointOrX instanceof Point) {
+        return new Point(this.x + pointOrX.x, this.y + pointOrX.y);
       }
 
-      return new Point(this.x + qOrX, this.y + y);
+      return new Point(this.x + pointOrX, this.y + y);
     }
+    /**
+     * Return the distance between the point and the origin
+     * @example
+     * p = new Point(1, 1);
+     * d = p.distance();
+     * // d = 1.4142135623730951
+     */
+
   }, {
     key: "distance",
     value: function distance() {
       return Math.sqrt(this.x * this.x + this.y * this.y);
     }
+    /**
+     * Return a new point with (x, y) values rounded to some precision
+     * @example
+     * p = new Point(1.234, 1.234);
+     * q = p.round(2);
+     * // q = Point{x: 1.23, y: 1.23}
+     */
+
   }, {
     key: "round",
     value: function round() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
       return new Point(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision));
     }
+    /**
+     * Return a new point that is clipped to min and max values from the origin.
+     *
+     * Use a point as a parameter to define different (x, y) min/max values,
+     * a number to define the same (x, y) min/max values, or null to have no
+     * min/max values.
+     * @example
+     * p = new Point(2, 2);
+     * q = p.clip(1, 1);
+     * // q = Point{x: 1, y: 1}
+     *
+     * p = new Point(2, 2);
+     * q = p.clip(1, null);
+     * // q = Point{x: 1, y: 2}
+     *
+     * p = new Point(-2, -2);
+     * minClip = new Point(-1, -1.5);
+     * q = p.clip(minClip, null);
+     * // q = Point{x: -1, y: -1.5}
+     */
+
   }, {
     key: "clip",
     value: function clip(min, max) {
@@ -31131,6 +31389,17 @@ function () {
       var y = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(this.y, minY, maxY);
       return new Point(x, y);
     }
+    /**
+     * Transform the point with a 3x3 matrix (2 dimensional transform)
+     * @example
+     * // Transform a point with a (2, 2) translation then 90º rotation
+     * p = new Point(1, 1);
+     * m = new Transform().translate(2, 2).rotate(Math.PI / 2).matrix();
+     * // m = [0, -1, -2, 1, 0, 2, 0, 0, 1]
+     * q = p.transformBy(m)
+     * // q = Point{x: -3, y: 3}
+     */
+
   }, {
     key: "transformBy",
     value: function transformBy(matrix) {
@@ -31146,24 +31415,53 @@ function () {
 
       return new Point(bx, by);
     }
+    /**
+     * Rotate a point some angle around a center point
+     * @param angle - in radians
+     * @example
+     * // Rotate a point around the origin
+     * p = new Point(1, 0);
+     * q = p.rotate(Math.PI)
+     * // q = Point{x: -1, y: 0}
+     *
+     * // Rotate a point around (1, 1)
+     * p = new Point(2, 1);
+     * q = p.rotate(Math.PI, new Point(1, 1))
+     * // q = Point{x: 0, y: 1}
+     */
+
   }, {
     key: "rotate",
-    value: function rotate(angle, center) {
+    value: function rotate(angle) {
+      var center = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Point(0, 0);
       var c = Math.cos(angle);
       var s = Math.sin(angle);
       var matrix = [c, -s, s, c]; // eslint-disable-line indent
 
-      var centerPoint = center || new Point(0, 0);
+      var centerPoint = center;
       var pt = this.sub(centerPoint);
       return new Point(matrix[0] * pt.x + matrix[1] * pt.y + centerPoint.x, matrix[2] * pt.x + matrix[3] * pt.y + centerPoint.y);
     }
     /* eslint-enable comma-dangle */
 
+    /**
+     * Compare two points for equality to some precision
+     * @example
+     * p = new Point(1.123, 1.123);
+     * q = new Point(1.124, 1.124);
+     * p.isEqualTo(q)
+     * // false
+     *
+     * p.isEqualTo(q, 2)
+     * // true
+     */
+
   }, {
     key: "isEqualTo",
-    value: function isEqualTo(q, precision) {
+    value: function isEqualTo(p) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
       var pr = this;
-      var qr = q;
+      var qr = p;
 
       if (typeof precision === 'number') {
         pr = this.round(precision);
@@ -31176,10 +31474,22 @@ function () {
 
       return false;
     }
+    /**
+     * Compare two points for unequality to some precision
+     * @example
+     * p = new Point(1.123, 1.123);
+     * q = new Point(1.124, 1.124);
+     * p.isNotEqualTo(q)
+     * // true
+     *
+     * p.isNotEqualTo(q, 2)
+     * // false
+     */
+
   }, {
     key: "isNotEqualTo",
-    value: function isNotEqualTo(q, precision) {
-      return !this.isEqualTo(q, precision);
+    value: function isNotEqualTo(p, precision) {
+      return !this.isEqualTo(p, precision);
     }
     /* eslint-disable no-use-before-define */
 
@@ -34062,6 +34372,14 @@ var roundNum = function roundNum(value) {
 
   return result;
 };
+/**
+ * Rounds a number or numbers in an array
+ * @method
+ * @param {number | Array<number>} arrayOrValue - Value or array of values to be rounded
+ * @param {number} precision - Number of decimal places to round to
+ * @returns {number | Array<number>} Rounded value or array of values
+ */
+
 
 function round(arrayOrValue) {
   var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
@@ -34316,6 +34634,16 @@ function sinusoid() {
 //         animationStyle: animationStyle,
 //     }
 // }
+
+/**
+ * Creates an array with a range of number
+ * @method
+ * @memberof tools
+ * @param start - Range start
+ * @param stop - Range stop
+ * @param step - Range step
+ * @returns {Array<number>} Range of numbers in an array
+ */
 
 
 function range(start, stop) {

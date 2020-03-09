@@ -116,8 +116,8 @@ export default function diagramLayout() {
         _180: { text: '180º' },
       },
       defaultFormAlignment: {
-        alignV: 'baseline',
-        alignH: 'center',
+        yAlign: 'baseline',
+        xAlign: 'center',
         fixTo: 'equals',
       },
       scale: 1.1,

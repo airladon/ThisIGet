@@ -71,28 +71,28 @@ export default function diagramLayout() {
   layout.moon = {
     name: 'moon',
     method: 'polygon',
-    options: joinObjects(filledCircle, moonTex),
+    options: joinObjects([filledCircle, moonTex]),
     mods,
     scenario: 'moreLeft',
   };
   layout.wheel = {
     name: 'wheel',
     method: 'polygon',
-    options: joinObjects(filledCircle, wheelTex),
+    options: joinObjects([filledCircle, wheelTex]),
     mods,
     scenario: 'left',
   };
   layout.ball = {
     name: 'ball',
     method: 'polygon',
-    options: joinObjects(filledCircle, ballTex),
+    options: joinObjects([filledCircle, ballTex]),
     mods,
     scenario: 'center',
   };
   layout.ring = {
     name: 'ring',
     method: 'polygon',
-    options: joinObjects(filledCircle, ringTex),
+    options: joinObjects([filledCircle, ringTex]),
     mods,
     scenario: 'right',
   };
@@ -246,7 +246,7 @@ export default function diagramLayout() {
     options: {
       size: 0.12,
       family: 'helvetica',
-      hAlign: 'left',
+      xAlign: 'left',
       style: 'normal',
       weight: 500,
     },
@@ -451,8 +451,8 @@ export default function diagramLayout() {
   };
   const defaultFormAlignment = {
     fixTo: 'equals',
-    alignH: 'right',
-    alignV: 'top',
+    xAlign: 'right',
+    yAlign: 'top',
   };
 
   const eqn = (name, form, scenariosObject) => ({
@@ -565,7 +565,7 @@ export default function diagramLayout() {
   //       _2: '2 ',
   //       equals: '  =  ',
   //     },
-  //     defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+  //     defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
   //     forms: {
   //       diameter: ['circumference', 'equals', 'pi', 'x', 'diameter'],
   //       short: ['circumference', 'equals', 'pi', 'diameter'],
@@ -595,7 +595,7 @@ export default function diagramLayout() {
         _2: '2 ',
         equals: '  =  ',
       },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
       forms: {
         radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
         short: ['circumference', 'equals', 'pi', 'diameter'],
@@ -628,7 +628,7 @@ export default function diagramLayout() {
         v: { symbol: 'vinculum' },
         brace: { symbol: 'brace', side: 'top', numLines: 3 },
       },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
       forms: {
         '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
         '1': ['circumference', 'equals', 'pi', 'diameter'],

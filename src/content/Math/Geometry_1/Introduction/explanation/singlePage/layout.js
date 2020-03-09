@@ -120,8 +120,8 @@ export default function diagramLayout() {
 
 
   const text = {
-    vAlign: 'baseline',
-    hAlign: 'left',
+    yAlign: 'baseline',
+    xAlign: 'left',
     color: colors.dimensions,
   };
 
@@ -180,7 +180,7 @@ export default function diagramLayout() {
       color: layout.colors.dimensions,
       scale: 1,
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
       elements: {
         c: 'c',

@@ -332,8 +332,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         '0': [newTot, 'equals', oldTot, '   ', 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'p1', '   ', '_360', '   ', 'm3', '   ', 'c1'],

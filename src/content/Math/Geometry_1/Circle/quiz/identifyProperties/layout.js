@@ -110,8 +110,8 @@ export default function diagramLayout() {
       size: 0.2,
       style: 'normal',
       family: 'helvetica',
-      hAlign: 'left',
-      vAlign: 'baseline',
+      xAlign: 'left',
+      yAlign: 'baseline',
     },
   };
 

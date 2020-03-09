@@ -114,8 +114,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text: 'd',
-      vAlign: 'baseline',
-      hAlign: 'left',
+      yAlign: 'baseline',
+      xAlign: 'left',
       position: new Point(-0.05, 0.1),
       color: colors.dimension,
     },
@@ -126,8 +126,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text: 'c',
-      vAlign: 'baseline',
-      hAlign: 'left',
+      yAlign: 'baseline',
+      xAlign: 'left',
       position: new Point(-0.05, wheelSize * 1.2 + 0.1),
       color: colors.dimension,
     },
@@ -195,7 +195,7 @@ export default function diagramLayout() {
       color: layout.colors.dimension,
       scale: 1,
       defaultFormAlignment: {
-        alignH: 'center',
+        xAlign: 'center',
       },
       elements: {
         c: 'c',

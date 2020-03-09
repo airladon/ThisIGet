@@ -172,7 +172,7 @@ export default function diagramLayout() {
           weight: 700,
           family: 'Helvetica',
           position: [-0.1, 0],
-          hAlign: 'right',
+          xAlign: 'right',
           size: 0.14,
         },
         mods: {
@@ -186,7 +186,7 @@ export default function diagramLayout() {
           color: colors.angles,
           weight: 500,
           family: 'Helvetica',
-          hAlign: 'left',
+          xAlign: 'left',
           size: 0.14,
         },
       },
@@ -295,8 +295,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'right',
-        alignV: 'top',
+        xAlign: 'right',
+        yAlign: 'top',
       },
       forms: {
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
@@ -355,8 +355,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'right',
-        alignV: 'top',
+        xAlign: 'right',
+        yAlign: 'top',
       },
       forms: {
         '0': ['circumference', 'equals', '_2pi', 'x', 'radius'],
@@ -388,8 +388,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'right',
-        alignV: 'top',
+        xAlign: 'right',
+        yAlign: 'top',
       },
       forms: {
         '0': ['arc', 'equals', 'angle', 'x', 'radius'],
@@ -507,8 +507,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'right',
-        alignV: 'baseline',
+        xAlign: 'right',
+        yAlign: 'baseline',
       },
       forms: {
         '0': [
@@ -639,8 +639,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'right',
-        alignV: 'baseline',
+        xAlign: 'right',
+        yAlign: 'baseline',
       },
       forms: {
         '0': [

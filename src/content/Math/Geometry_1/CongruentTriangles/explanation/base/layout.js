@@ -1048,8 +1048,8 @@ export default function diagramLayout() {
     name: 'adjacentMovePad',
     method: 'rectangle',
     options: {
-      alignV: 'middle',
-      alignH: 'left',
+      yAlign: 'middle',
+      xAlign: 'left',
       width: 1,
       height: 0.3,
       corner: {

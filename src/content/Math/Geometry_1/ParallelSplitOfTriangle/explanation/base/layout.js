@@ -641,8 +641,8 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       scale: 0.8,
       elements,
@@ -1143,8 +1143,8 @@ export default function diagramLayout() {
       // },
       equation: eqn(`${name}Eqn`, y, defaultFormSeries),
       interactive,
-      alignV: 'middle',
-      alignH: 'left',
+      yAlign: 'middle',
+      xAlign: 'left',
     },
     mods: {
       scenarios: {
@@ -1197,8 +1197,8 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       scale: 0.8,
       elements: elementsFig2,
@@ -1268,8 +1268,8 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       scale: 0.8,
       elements: {
@@ -1318,8 +1318,8 @@ export default function diagramLayout() {
       navType: 'description',
       equation: fig4Eqn(`${name}Eqn`, y),
       interactive: false,
-      alignV: 'middle',
-      alignH: 'left',
+      yAlign: 'middle',
+      xAlign: 'left',
     },
     mods: {
       scenarios: {

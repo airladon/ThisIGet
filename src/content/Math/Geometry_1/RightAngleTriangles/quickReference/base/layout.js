@@ -113,8 +113,8 @@ export default function diagramLayout() {
     options: {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       scale: 1.5,
       elements,

@@ -318,8 +318,8 @@ export function addSelectorHTML(
   onclick: (string) => void,
   style: 'horizontal' | 'vertical' = 'horizontal',
   separator: string = '',
-  vAlign: 'top' | 'bottom' | 'middle' = 'middle',
-  hAlign: 'left' | 'right' | 'center' = 'center',
+  yAlign: 'top' | 'bottom' | 'middle' = 'middle',
+  xAlign: 'left' | 'right' | 'center' = 'center',
 ) {
   let selector;
   if (style === 'vertical') {
@@ -339,8 +339,8 @@ export function addSelectorHTML(
     `${uniqueString}`,
     'diagram__selector_container',
     new Point(0, 0),
-    vAlign,
-    hAlign,
+    yAlign,
+    xAlign,
   );
   element.selector = selector;
   collection.add(elementName, element);

@@ -105,7 +105,7 @@ export default function diagramLayout() {
         //   },
         // },
         scale: 0.9,
-        alignment: { alignH: 'center', alignV: 'middle' },
+        alignment: { xAlign: 'center', yAlign: 'middle' },
       },
     },
   });
@@ -604,8 +604,8 @@ export default function diagramLayout() {
         },
         defaultFormAlignment: {
           fixTo: 'equals',    // Points can also be defined as objects
-          alignH: 'left',
-          alignV: 'baseline',
+          xAlign: 'left',
+          yAlign: 'baseline',
         },
         forms: {
           // sine: [
@@ -769,8 +769,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text,
-      hAlign: 'center',
-      vAlign: 'baseline',
+      xAlign: 'center',
+      yAlign: 'baseline',
       color,
       position: [x, y],
       size: 0.15,
@@ -791,8 +791,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'value',
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         'base': ['value'],
@@ -808,8 +808,8 @@ export default function diagramLayout() {
     method: 'text',
     options: {
       text: '\u03B8',
-      hAlign: 'center',
-      vAlign: 'baseline',
+      xAlign: 'center',
+      yAlign: 'baseline',
       color: colors.angles,
       position: [x, y],
       size: 0.2 * 0.9,
@@ -830,8 +830,8 @@ export default function diagramLayout() {
         sin: { style: 'normal' },
       },
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         sin: {
@@ -939,7 +939,7 @@ export default function diagramLayout() {
             'dots',
           ],
           alignment: {
-            alignH: 'center',
+            xAlign: 'center',
           },
         },
       },

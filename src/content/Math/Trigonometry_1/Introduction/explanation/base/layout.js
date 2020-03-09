@@ -181,8 +181,8 @@ export default function diagramLayout() {
     options: {
       src: planeSrc,
       id: 'id_aeroplane',
-      alignV: 'middle',
-      alignH: 'center',
+      yAlign: 'middle',
+      xAlign: 'center',
     },
     mods: {
       scenarios: {
@@ -201,8 +201,8 @@ export default function diagramLayout() {
         options: {
           src: cartSrc,
           id: 'id_cart',
-          alignV: 'middle',
-          alignH: 'center',
+          yAlign: 'middle',
+          xAlign: 'center',
           position: [-1, 0],
         },
       },

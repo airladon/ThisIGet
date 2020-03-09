@@ -195,8 +195,8 @@ export default function diagramLayout() {
       navType: 'description',
       color: colors.diagram.text.base,
       defaultFormAlignment: {
-        alignH: 'center',
-        alignV: 'middle',
+        xAlign: 'center',
+        yAlign: 'middle',
       },
       scale: 0.9,
       elements,

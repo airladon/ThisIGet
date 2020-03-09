@@ -103,8 +103,8 @@ export default function diagramLayout() {
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
-        alignH: 'center',
-        alignV: 'baseline',
+        xAlign: 'center',
+        yAlign: 'baseline',
       },
       forms: {
         '0': ['tot1', 'equals', {
@@ -131,7 +131,7 @@ export default function diagramLayout() {
   //     position,
   //     text,
   //     color,
-  //     hAlign: 'left',
+  //     xAlign: 'left',
   //   },
   // });
 

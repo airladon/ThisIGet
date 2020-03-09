@@ -58,7 +58,7 @@ export default function diagramLayout() {
     },
     scale: 0.6,
     defaultFormAlignment: {
-      alignH: 'center',
+      xAlign: 'center',
     },
   });
 
