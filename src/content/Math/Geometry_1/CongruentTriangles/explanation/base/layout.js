@@ -349,7 +349,9 @@ export default function diagramLayout() {
       ],
       width: layout.width,
       color: colors.sides,
-      borderToPoint: 'always',
+      pointsAt: 'mid',
+      cornerStyle: 'radius',
+      cornerSize: 0.005,
     },
     mods: {
       scenarios: {
