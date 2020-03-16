@@ -23379,6 +23379,70 @@ function makeLineSegments(points, insideWidth, outsideWidth, close) {
   return lineSegments;
 }
 
+function makeLineSegmentsOutside(points, offset, close) {
+  var mainLines = [];
+
+  var makeLine = function makeLine(p1, p2) {
+    return new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Line"](p1, p2);
+  };
+
+  for (var i = 0; i < points.length - 1; i += 1) {
+    mainLines.push(makeLine(points[i], points[i + 1]));
+  }
+
+  if (close) {
+    mainLines.push(makeLine(points[points.length - 1], points[0]));
+  }
+
+  var lineSegments = [];
+
+  var makeOutsideLine = function makeOutsideLine(prev, current, next) {
+    var minOffset = offset;
+
+    if (prev != null) {
+      var prevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(prev.p1, current.p1, current.p2);
+      var minPrevOffset = current.distanceToPoint(prev.p1);
+
+      if (prevAngle < Math.PI / 2) {
+        minOffset = Math.min(minOffset, minPrevOffset, Math.tan(prevAngle) * current.length());
+      } // console.log(minOffset, minPrevOffset, current.p1, current.p2)
+
+    }
+
+    if (next != null) {
+      var nextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(current.p1, current.p2, next.p2);
+      var minNextOffset = current.distanceToPoint(next.p2);
+
+      if (nextAngle < Math.PI / 2) {
+        minOffset = Math.min(minOffset, minNextOffset, Math.tan(nextAngle) * current.length());
+      } // console.log(minOffset, minNextOffset, current.p1, current.p2)
+
+    }
+
+    var outsideLine = current.offset('outside', minOffset);
+    lineSegments.push([current, current, outsideLine]);
+  };
+
+  for (var _i = 0; _i < mainLines.length; _i += 1) {
+    var prev = _i > 0 ? mainLines[_i - 1] : null;
+    var current = mainLines[_i];
+    var next = _i < mainLines.length - 1 ? mainLines[_i + 1] : null;
+
+    if (close && _i === 0) {
+      prev = mainLines[mainLines.length - 1];
+    }
+
+    if (close && _i === mainLines.length - 1) {
+      // eslint-disable-next-line prefer-destructuring
+      next = mainLines[0];
+    }
+
+    makeOutsideLine(prev, current, next);
+  }
+
+  return lineSegments;
+}
+
 function makeThickLineMid(points) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
@@ -23475,7 +23539,14 @@ function makeThickLineInsideOutside(points) {
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var corner = arguments.length > 3 ? arguments[3] : undefined;
   var minAngleIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Math.PI / 7;
-  var lineSegments = makeLineSegments(points, width, width, close);
+  var lineSegments;
+
+  if (corner === 'none') {
+    lineSegments = makeLineSegments(points, width, width, close);
+  } else {
+    lineSegments = makeLineSegmentsOutside(points, width, close);
+  }
+
   var minAngle = minAngleIn == null ? 0 : minAngleIn;
 
   var joinLineSegments = function joinLineSegments(current, next) {
@@ -23489,17 +23560,29 @@ function makeThickLineInsideOutside(points) {
 
     var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(inside.p1, inside.p2, insideNext.p2); // If angle is 0 to 180, then it is an inside angle
 
-    if (0 < angle && angle < Math.PI) {
+    if (0 < angle && angle < Math.PI / 2) {
       var intercept = outside.intersectsWith(insideNext);
 
-      if (intercept.intersect != null && intercept.intersect.isOnLine(insideNext, 8)) {
+      if (intercept.intersect != null) {
         outside.setP2(intercept.intersect);
       }
 
       intercept = outsideNext.intersectsWith(inside);
 
-      if (intercept.intersect != null && intercept.intersect.isOnLine(inside, 8)) {
+      if (intercept.intersect != null) {
         outsideNext.setP1(intercept.intersect);
+      }
+    } else if (Math.PI / 2 <= angle && angle <= Math.PI) {
+      var _intercept = outside.intersectsWith(insideNext);
+
+      if (_intercept.intersect != null && _intercept.intersect.isOnLine(insideNext, 8)) {
+        outside.setP2(_intercept.intersect);
+      }
+
+      _intercept = outsideNext.intersectsWith(inside);
+
+      if (_intercept.intersect != null && _intercept.intersect.isOnLine(inside, 8)) {
+        outsideNext.setP1(_intercept.intersect);
       } // otherwise its an outside angle
 
     } else if (corner === 'auto' && Math.PI < angle && angle < Math.PI * 2 - minAngle) {
@@ -23525,7 +23608,7 @@ function makeThickLineInsideOutside(points) {
     cornerFills.push(outsideNext.p1._dup());
   };
 
-  if (corner != 'none') {
+  if (corner !== 'none') {
     for (var i = 0; i < lineSegments.length - 1; i += 1) {
       joinLineSegments(i, i + 1);
 
@@ -23556,6 +23639,66 @@ function makeThickLineInsideOutside(points) {
   return [[].concat(_toConsumableArray(tris), cornerFills), border, hole]; // return [...lineSegmentsToPoints(lineSegments, 1, 2), ...cornerFills];
 }
 
+function setPointOrder(points, close, pointsAre) {
+  var reversePoints = function reversePoints() {
+    var reversedCopy = [];
+
+    for (var i = points.length - 1; i >= 0; i -= 1) {
+      reversedCopy.push(points[i]._dup());
+    }
+
+    return reversedCopy;
+  };
+
+  if (pointsAre === 'outside' || pointsAre === 'mid') {
+    return points;
+  }
+
+  if (pointsAre === 'inside') {
+    return reversePoints();
+  }
+
+  var numInsideAngles = 0;
+  var totAngles = close ? points.length : points.length - 2;
+
+  var testAngle = function testAngle(p2, p1, p3) {
+    var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(p2, p1, p3);
+
+    if (angle < Math.PI) {
+      numInsideAngles += 1;
+    }
+
+    if (angle === Math.PI) {
+      totAngles -= 1;
+    }
+  };
+
+  for (var i = 1; i < points.length - 1; i += 1) {
+    testAngle(points[i - 1], points[i], points[i + 1]);
+  }
+
+  if (close) {
+    testAngle(points[points.length - 1], points[0], points[1]);
+    testAngle(points[points.length - 2], points[points.length - 1], points[0]);
+  }
+
+  if (pointsAre === 'autoOutside') {
+    if (numInsideAngles <= totAngles / 2) {
+      return points;
+    }
+
+    return reversePoints();
+  }
+
+  if (pointsAre === 'autoInside') {
+    if (numInsideAngles <= totAngles / 2) {
+      return reversePoints();
+    }
+  }
+
+  return points;
+}
+
 function makeThickLine(points) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
   var pointsAre = arguments.length > 2 ? arguments[2] : undefined;
@@ -23567,17 +23710,7 @@ function makeThickLine(points) {
     return makeThickLineMid(points, width, close, corner, minAngle);
   }
 
-  if (pointsAre === 'outside') {
-    return makeThickLineInsideOutside(points, width, close, corner, minAngle);
-  }
-
-  var reversedCopy = [];
-
-  for (var i = points.length - 1; i >= 0; i -= 1) {
-    reversedCopy.push(points[i]._dup());
-  }
-
-  return makeThickLineInsideOutside(reversedCopy, width, close, corner, minAngle);
+  return makeThickLineInsideOutside(points, width, close, corner, minAngle);
 }
 
 function makePolyLine(pointsIn) {
@@ -23590,32 +23723,28 @@ function makePolyLine(pointsIn) {
   var minAutoCornerAngle = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : Math.PI / 7;
   var dash = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : [];
   var points = [];
-  var cornerStyleToUse = cornerStyle;
-  var pointsAreToUse = pointsAre; // if (pointsAre === 'outside') {
-  //   pointsAreToUse = 'inside';
-  // } else if (pointsAre === 'inside') {
-  //   pointsAreToUse = 'outside';
-  // }
-  // Convert line to line with corners
+  var cornerStyleToUse;
+  var orderedPoints = setPointOrder(pointsIn, close, pointsAre); // Convert line to line with corners
 
   if (cornerStyle === 'auto') {
-    points = pointsIn.map(function (p) {
+    points = orderedPoints.map(function (p) {
       return p._dup();
     });
+    cornerStyleToUse = 'auto';
   } else if (cornerStyle === 'radius') {
-    points = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["cornerLine"])(pointsIn, close, 'fromVertex', cornerSides, cornerSize);
+    points = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["cornerLine"])(orderedPoints, close, 'fromVertex', cornerSides, cornerSize);
     cornerStyleToUse = 'fill';
   } else {
     // autoCorners = 'none';
-    points = pointsIn.map(function (p) {
+    cornerStyleToUse = cornerStyle;
+    points = orderedPoints.map(function (p) {
       return p._dup();
     });
   } // Convert line to dashed line
 
 
   if (dash.length > 1) {
-    var dashes;
-    dashes = Object(_dashes__WEBPACK_IMPORTED_MODULE_1__["lineToDash"])(points, dash, close, 0);
+    var dashes = Object(_dashes__WEBPACK_IMPORTED_MODULE_1__["lineToDash"])(points, dash, close, 0);
     var closeDashes = false;
 
     if (dashes.length === 1) {
@@ -23626,7 +23755,7 @@ function makePolyLine(pointsIn) {
     var dashedBorder = [[]];
     var dashedHole = [[]];
     dashes.forEach(function (d) {
-      var _makeThickLine = makeThickLine(d, width, pointsAreToUse, closeDashes, cornerStyleToUse, minAutoCornerAngle),
+      var _makeThickLine = makeThickLine(d, width, pointsAre, closeDashes, cornerStyleToUse, minAutoCornerAngle),
           _makeThickLine2 = _slicedToArray(_makeThickLine, 3),
           tris = _makeThickLine2[0],
           border = _makeThickLine2[1],
@@ -23639,7 +23768,7 @@ function makePolyLine(pointsIn) {
     return [dashedTris, dashedBorder, dashedHole];
   }
 
-  return makeThickLine(points, width, pointsAreToUse, close, cornerStyleToUse, minAutoCornerAngle);
+  return makeThickLine(points, width, pointsAre, close, cornerStyleToUse, minAutoCornerAngle);
 }
 
 function makePolyLineCorners(pointsIn) {
@@ -23666,7 +23795,7 @@ function makePolyLineCorners(pointsIn) {
 
     tris = [].concat(_toConsumableArray(tris), _toConsumableArray(t));
     borders = [].concat(_toConsumableArray(borders), _toConsumableArray(b));
-    holes = [].concat(_toConsumableArray(holes), _toConsumableArray(h)); // tris = [...tris, ...makePolyLine(corner, width, false, pointsAre, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle)];
+    holes = [].concat(_toConsumableArray(holes), _toConsumableArray(h));
   });
   return [tris, borders, holes];
 }
@@ -25721,7 +25850,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
+ // export type TypeVertexPolyLineBorderToPoint = TypeBorderToPoint;
 
 var VertexGeneric =
 /*#__PURE__*/

@@ -97,6 +97,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      pointsAt: 'autoInside',
       pad: {
         color: colors.pads,
         radius: 0.2,
