@@ -63,7 +63,7 @@ export default function diagramLayout() {
 
     let outObj = {
       name,
-      method: 'polyLine',
+      method: 'polyline',
       options: {
         points: pointsToUse,
         width,

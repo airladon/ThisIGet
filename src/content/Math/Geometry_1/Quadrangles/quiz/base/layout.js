@@ -15,7 +15,7 @@ export default function diagramLayout() {
   const { colors } = layout;
   layout.quizQuad = {
     name: 'quad',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [[-1, -1], [-1, 1], [1, 1], [1, -1]],
       close: true,

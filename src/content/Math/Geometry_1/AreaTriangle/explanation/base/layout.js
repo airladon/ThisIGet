@@ -157,7 +157,7 @@ export default function diagramLayout() {
   ];
   const tri = (name, points) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       width: lineWidth,
@@ -167,7 +167,7 @@ export default function diagramLayout() {
   });
   const rect = (name, points, color, text1, text2, text3, text4) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       // borderToPoint: 'alwaysOn',
       width: lineWidth / 2,
@@ -575,7 +575,7 @@ export default function diagramLayout() {
 
   const implicationsTri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       // borderToPoint: 'alwaysOn',
       color: colors.sides,

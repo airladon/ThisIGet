@@ -4781,8 +4781,8 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
   var getMethod = function getMethod(method) {
     var methods = {
       collection: shapes.collection.bind(shapes),
-      polyLine: objects.polyLine.bind(objects),
-      polyLineCorners: shapes.polyLineCorners.bind(shapes),
+      polyline: objects.polyline.bind(objects),
+      polylineCorners: shapes.polylineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       fan: shapes.fan.bind(shapes),
@@ -18209,8 +18209,8 @@ function () {
       return new _EquationLabel__WEBPACK_IMPORTED_MODULE_7__["default"](this.equation, optionsToUse);
     }
   }, {
-    key: "polyLine",
-    value: function polyLine() {
+    key: "polyline",
+    value: function polyline() {
       for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
         options[_key4] = arguments[_key4];
       }
@@ -20175,6 +20175,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
 
+ // import type {
+//   TypePolyLineBorderToPoint,
+// } from '../DiagramElements/PolyLine';
 
  // eslint-disable-next-line import/no-cycle
 
@@ -20491,7 +20494,7 @@ function (_DiagramElementCollec) {
 
 
     if (optionsToUse.showLine) {
-      var line = _this.shapes.polyLine({
+      var line = _this.shapes.polyline({
         points: _this.points,
         // color: optionsToUse.color,
         // close: optionsToUse.close,
@@ -21239,11 +21242,13 @@ function parsePoints(options, keysToParsePointsOrPointArrays) {
     }
 
     if (Array.isArray(value) && !(typeof value[0] === 'number')) {
+      // eslint-disable-next-line no-param-reassign
       options[key] = value.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       });
     } else {
-      options[key] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      // eslint-disable-next-line no-param-reassign
+      options[key] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(value);
     }
   };
 
@@ -21264,13 +21269,13 @@ function processOptions() {
   var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
 
   if (options.position != null) {
-    var _p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+    var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
 
     if (options.transform == null) {
-      options.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('processOptions').translate();
+      options.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('processOptions').translate(0, 0);
     }
 
-    options.transform.updateTranslation(_p);
+    options.transform.updateTranslation(p);
   }
 
   return options;
@@ -21300,7 +21305,7 @@ function () {
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
     this.spaceTransforms = spaceTransforms; // this.draw2DFigures = draw2DFigures;
-  } // polyLineLegacy(
+  } // polylineLegacy(
   //   points: Array<Point>,
   //   close: boolean,
   //   lineWidth: number,
@@ -21313,7 +21318,7 @@ function () {
   //     color, borderToPoint, transform, this.limits,
   //   );
   // }
-  // polyLineCornersLegacy(
+  // polylineCornersLegacy(
   //   points: Array<Point>,
   //   close: boolean,
   //   cornerLength: number,
@@ -21329,14 +21334,14 @@ function () {
 
 
   _createClass(DiagramPrimitives, [{
-    key: "polyLineCorners",
-    value: function polyLineCorners() {
+    key: "polylineCorners",
+    value: function polylineCorners() {
       var defaultOptions = {
         color: [1, 0, 0, 1],
         close: true,
         width: 0.01,
         cornerLength: 0.1,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLineCorners').standard()
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polylineCorners').standard()
       };
 
       for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -21346,9 +21351,8 @@ function () {
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
-        var _p2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p2);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var points = [];
@@ -21374,8 +21378,8 @@ function () {
       return element;
     }
   }, {
-    key: "polyLine",
-    value: function polyLine() {
+    key: "polyline",
+    value: function polyline() {
       var defaultOptions = {
         width: 0.01,
         color: [1, 0, 0, 1],
@@ -21386,7 +21390,7 @@ function () {
         cornerSides: 10,
         minAutoCornerAngle: Math.PI / 7,
         dash: [],
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine').standard()
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
       };
 
       for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -21420,18 +21424,18 @@ function () {
         }
       }
 
-      return element; // const element = 
+      return element;
     } // borderToPoint options: 'alwaysOn' | 'onSharpAnglesOnly' | 'never'
 
   }, {
-    key: "polyLineLegacy",
-    value: function polyLineLegacy() {
+    key: "polylineLegacy",
+    value: function polylineLegacy() {
       var defaultOptions = {
         color: [1, 0, 0, 1],
         close: true,
         width: 0.01,
         borderToPoint: 'never',
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine').standard()
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
       };
 
       for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -21441,9 +21445,8 @@ function () {
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
-        var _p3 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p3);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var points = [];
@@ -21511,9 +21514,8 @@ function () {
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
-        var _p4 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p4);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var parsedPoints = options.points.map(function (p) {
@@ -21566,9 +21568,8 @@ function () {
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
-        var _p5 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p5);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
@@ -21626,9 +21627,8 @@ function () {
       }
 
       if (options.position != null) {
-        var _p6 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p6);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var o = options;
@@ -21676,9 +21676,8 @@ function () {
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
-        var _p7 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-
-        options.transform.updateTranslation(_p7);
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
       var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_19__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
@@ -22223,8 +22222,8 @@ function () {
 
         for (var x = 0; x < xNum; x += 1) {
           for (var y = 0; y < yNum; y += 1) {
-            for (var _p8 = 0; _p8 < points.length; _p8 += 2) {
-              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[_p8] + x * xStep, points[_p8 + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
+            for (var p = 0; p < points.length; p += 2) {
+              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[p] + x * xStep, points[p + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
             }
           }
         } // console.log(newPoints)
@@ -22340,8 +22339,8 @@ function () {
 
         for (var x = 0; x < xNum; x += 1) {
           for (var y = 0; y < yNum; y += 1) {
-            for (var _p9 = 0; _p9 < points.length; _p9 += 2) {
-              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[_p9] + x * xStep, points[_p9 + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
+            for (var p = 0; p < points.length; p += 2) {
+              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[p] + x * xStep, points[p + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
             }
           }
         } // console.log(newPoints)
@@ -23800,7 +23799,75 @@ function makePolyLineCorners(pointsIn) {
   return [tris, borders, holes];
 }
 
-
+ // TODO
+// inside and dash
+// inside and radius
+// Inside and radius
+// const diagram = new Fig.Diagram();
+// const { Point } = Fig;
+// const line = [
+//     new Point(0.5, 0),
+//     new Point(0, 0.024286),
+//     new Point(-0.5, 0),
+//     // new Point(0, 1),
+// ];
+// diagram.addElements([
+//   {
+//     name: 'pad',
+//     method: 'polygon',
+//     options: {
+//       radius: 0.2,
+//       color: [0.5, 0.5, 0.5, 0.5],
+//       sides: 100,
+//       fill: true,
+//     },
+//   },
+//   {
+//     name: 'r',
+//     method: 'polyline',
+//     options: {
+//       points: line,
+//       width: 0.03,
+//       close: true,
+//       pointsAt: 'inside',
+//       cornerStyle: 'radius',
+//       cornerSize: 0.05,
+//       cornerSides: 10,
+//     },
+//   },
+//   {
+//     name: 'x2',
+//     method: 'line',
+//     options: {
+//       p1: [-1, 0],
+//       p2: [1, 0],
+//       width: 0.005,
+//       color: [0.5, 0.5, 0.5, 0.5],
+//     }
+//   },
+// ]);
+// const pad = diagram.getElement('pad');
+// pad.setMovable();
+// pad.setTransformCallback = () => {
+//   line[1] = pad.getPosition();
+//   const r = diagram.getElement('r');
+//   r.updatePoints(line);
+//   diagram.animateNextFrame();
+// }
+// diagram.initialize();
+// pad.setPosition(0, 0.1);
+// Inside and dash
+// {
+//   name: 'r',
+//   method: 'polyline',
+//   options: {
+//     points: line,
+//     width: 0.03,
+//     close: true,
+//     pointsAt: 'inside',
+//     dash: [0.1, 0.03],
+//   },
+// },
 
 /***/ }),
 
@@ -24615,7 +24682,7 @@ function simpleIntersect(p1, p2, q1, q2) {
 //   * coords: an array of points that will define the center of the line
 
 
-function polyLineTriangles(coords, close, width) {
+function polylineTriangles(coords, close, width) {
   var points = [];
   var innerBorder = [];
   var outerBorder = [];
@@ -24759,7 +24826,7 @@ function polyLineTriangles(coords, close, width) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (polyLineTriangles);
+/* harmony default export */ __webpack_exports__["default"] = (polylineTriangles);
 
 /***/ }),
 
@@ -24772,7 +24839,7 @@ function polyLineTriangles(coords, close, width) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return polyLineTriangles3; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return polylineTriangles3; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
  // function simpleIntersect(p1: Point, p2: Point, q1: Point, q2: Point) {
 //   const lineP = new Line(p1, p2);
@@ -24783,7 +24850,7 @@ __webpack_require__.r(__webpack_exports__);
 // Generate a thick line assuming gl.TRIANGLES where corners are sharp.
 // Input:
 //   * coords: an array of points that will define the center of the line
-function polyLineTriangles3(coords, close, width, borderToPoint) {
+function polylineTriangles3(coords, close, width, borderToPoint) {
   var points = [];
   var border1 = []; // outside (vertex) when anticlockwise
 
@@ -25284,7 +25351,7 @@ function polyLineTriangles3(coords, close, width, borderToPoint) {
     border: border,
     holeBorder: holeBorder
   };
-} // export default polyLineTriangles;
+} // export default polylineTriangles;
 
 /***/ }),
 
@@ -35093,707 +35160,7 @@ function quadBezierPoints(p0, p1, p2, sides) {
   }
 
   return points;
-} // //
-// // Make a circular corner between points - P2 and p3 must be the same
-// // distance from p1
-// //
-// //               .....................................
-// //          p3  0                                     0 center
-// //              0                                  0  .
-// //              0                               0   b .
-// //              0                            0        .
-// //              0                         0           .
-// //              0                C     0              .
-// //              0                   0                 .
-// //              0                0                    .  A
-// //              0             0                       .
-// //              0          0                          .
-// //              0       0                             .
-// //              0    0                                .
-// //              0 0  a                              c .
-// //              000000000000000000000000000000000000000
-// //          p1                     B                    p2
-// //
-// //
-// function circleCorner(p2in: Point, p1: Point, p3in: Point, sides: number): Array<Point> {
-//   // If sides is 0 or negative, then return the original points
-//   if (sides < 1) {
-//     return [p2in._dup(), p1._dup(), p3in._dup()];
-//   }
-//   // If sides is 1, then return the chamfer
-//   if (sides === 1) {
-//     return [p2in._dup(), p3in._dup()];
-//   }
-//   const p2 = p2in._dup();
-//   const p3 = p3in._dup();
-//   const points: Array<Point> = [];
-//   const _2a = threePointAngleMin(p2, p1, p3);
-//   if (_2a === Math.PI || _2a === 0) {
-//     points.push(p2in._dup());
-//     for (let i = 0; i < sides - 2; i += 1) {
-//       points.push(p1._dup());
-//     }
-//     points.push(p3in._dup());
-//     return points;
-//   }
-//   const direction = _2a / Math.abs(_2a);
-//   const line12 = new Line(p1, p2);
-//   const a = Math.abs(_2a / 2);
-//   const c = Math.PI / 2;
-//   const b = Math.PI - a - c;
-//   const B = line12.length();
-//   const C = Math.sin(c) / Math.sin(b) * B;
-//   // const C = B / Math.cos(a);
-//   const center = new Point(
-//     p1.x + C * Math.cos(a * direction + line12.angle()),
-//     p1.y + C * Math.sin(a * direction + line12.angle()),
-//   );
-//   const _2b = b * 2;
-//   const delta = _2b / sides * direction * -1;
-//   const lineC2 = new Line(center, p2);
-//   const angleC2 = lineC2.angle();
-//   const magC2 = lineC2.length();
-//   points.push(p2);
-//   for (let i = 0; i < sides - 1; i += 1) {
-//     const angle = angleC2 + (i + 1) * delta;
-//     points.push(new Point(
-//       center.x + magC2 * Math.cos(angle),
-//       center.y + magC2 * Math.sin(angle),
-//     ));
-//   }
-//   points.push(p3);
-//   // if (reverse) {
-//   //   return points.reverse();
-//   // }
-//   return points;
-// }
-// function cutCorner(
-//   p2: Point, p1: Point, p3: Point,
-//   sides: number, style: 'radius' | 'fromVertex' | 'max', value: number,
-// ): Array<Point> {
-//   const line12 = new Line(p1, p2);
-//   const line13 = new Line(p1, p3);
-//   let cut;
-//   if (style === 'fromVertex') {
-//     cut = value;
-//     cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
-//   } else if (style === 'radius') {
-//     const angle = Math.abs(threePointAngleMin(p2, p1, p3)) / 2;
-//     cut = value / Math.tan(angle);
-//     cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
-//   } else if (style === 'max') {
-//     cut = Math.min(line12.length(), line13.length());
-//   }
-//   // cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
-//   const p2Max = line12.pointAtPercent(cut / line12.length());
-//   const p3Max = line13.pointAtPercent(cut / line13.length());
-//   return circleCorner(p2Max, p1, p3Max, sides);
-// }
-// // function makeThickLine(
-// //   points: Array<Point>,
-// //   width: number = 0.01,
-// //   close: boolean = false,
-// //   style: 'inside' | 'outside' | 'mid' = 'mid',
-// // ) {
-// //   const out = [];
-// //   const makeLineSegment = (p1, p2) => {
-// //     const lineSegment = new Line(p1, p2);
-// //     let outsideOffset;
-// //     let insideOffset;
-// //     if (style === 'mid') {
-// //       outsideOffset = lineSegment.offset('outside', width / 2);
-// //       insideOffset = lineSegment.offset('inside', width / 2);
-// //     } else if (style === 'inside') {
-// //       outsideOffset = lineSegment;
-// //       insideOffset = lineSegment.offset('inside', width);
-// //     } else if (style === 'outside') {
-// //       outsideOffset = lineSegment.offset('outside', width);
-// //       insideOffset = lineSegment;
-// //     }
-// //     out.push(outsideOffset.p1._dup());
-// //     out.push(insideOffset.p1._dup());
-// //     out.push(outsideOffset.p2._dup());
-// //     out.push(insideOffset.p1._dup());
-// //     out.push(insideOffset.p2._dup());
-// //     out.push(outsideOffset.p2._dup());
-// //   }
-// //   for (let i = 0; i < points.length - 1; i += 1) {
-// //     makeLineSegment(points[i], points[i + 1]);
-// //   }
-// //   if (close) {
-// //     makeLineSegment(points[points.length - 1], points[0]);
-// //   }
-// //   return out;
-// // }
-// function joinLinesInPoint(line1: Line, lineNext: Line) {
-//   const intersect = line1.intersectsWith(lineNext);
-//   if (intersect.intersect != null) {
-//     line1.setP2(intersect.intersect._dup());
-//     lineNext.setP1(intersect.intersect._dup());
-//   }
-// }
-// function lineSegmentsToPoints(lineSegments: Array<[Line, Line, Line]>) {
-//   const out = [];
-//   lineSegments.forEach((lineSegment) => {
-//     const [inside, outside] = lineSegment;
-//     out.push(inside.p1._dup());
-//     out.push(outside.p1._dup());
-//     out.push(inside.p2._dup());
-//     out.push(outside.p1._dup());
-//     out.push(inside.p2._dup());
-//     out.push(outside.p2._dup());
-//   });
-//   return out;
-// }
-// function joinLinesInTangent(
-//   inside: Line,
-//   insideNext: Line,
-//   mid: Line,
-//   midNext: Line,
-//   outside: Line,
-//   outsideNext: Line,
-// ) {
-//   const angle = threePointAngleMin(mid.p1, mid.p2, midNext.p2);
-//   const tangent = new Line(mid.p2, 1, mid.angle() + angle / 2 + Math.PI / 2);
-//   let intercept = tangent.intersectsWith(outside);
-//   if (intercept.intersect != null) {
-//     outside.setP2(intercept.intersect);
-//   }
-//   intercept = tangent.intersectsWith(inside);
-//   if (intercept.intersect != null) {
-//     inside.setP2(intercept.intersect);
-//   }
-//   intercept = tangent.intersectsWith(outsideNext);
-//   if (intercept.intersect != null) {
-//     outsideNext.setP1(intercept.intersect);
-//   }
-//   intercept = tangent.intersectsWith(insideNext);
-//   if (intercept.intersect != null) {
-//     insideNext.setP1(intercept.intersect);
-//   }
-// }
-// /* eslint-disable yoda */
-// function makeThickLineMid(
-//   points: Array<Point>,
-//   width: number = 0.01,
-//   close: boolean = false,
-//   makeCorner: boolean = true,
-//   cornerStyle: 'autoPoint' | 'fill',
-//   minAngleIn: ?number = Math.PI / 7,
-// ) {
-//   const lineSegments = [];
-//   const makeLineSegment = (p1, p2) => {
-//     const lineSegment = new Line(p1, p2);
-//     const outsideOffset = lineSegment.offset('outside', width / 2);
-//     const insideOffset = lineSegment.offset('inside', width / 2);
-//     lineSegments.push([insideOffset, outsideOffset, lineSegment]);
-//   };
-//   for (let i = 0; i < points.length - 1; i += 1) {
-//     makeLineSegment(points[i], points[i + 1]);
-//   }
-//   if (close) {
-//     makeLineSegment(points[points.length - 1], points[0]);
-//   }
-//   const minAngle = minAngleIn == null ? 0 : minAngleIn;
-//   const joinLineSegments = (current, next) => {
-//     const [inside, outside, mid] = lineSegments[current];
-//     const [insideNext, outsideNext, midNext] = lineSegments[next];
-//     const angle = threePointAngle(mid.p1, mid.p2, midNext.p2);
-//     if (0 < angle && angle < minAngle) {
-//       joinLinesInTangent(outside, outsideNext, mid, midNext, inside, insideNext);
-//     } else if (minAngle < angle && angle < Math.PI) {
-//       joinLinesInPoint(inside, insideNext);
-//     } else if (Math.PI < angle && angle < Math.PI * 2 - minAngle) {
-//       joinLinesInPoint(outside, outsideNext);
-//     } else if (Math.PI * 2 - minAngle < angle && angle < Math.PI * 2) {
-//       joinLinesInTangent(inside, insideNext, mid, midNext, outside, outsideNext);
-//     }
-//   };
-//   const cornerFills = [];
-//   const createFill = (current, next) => {
-//     const [inside, outside, mid] = lineSegments[current];
-//     const [insideNext, outsideNext] = lineSegments[next];
-//     cornerFills.push(outside.p2._dup());
-//     cornerFills.push(mid.p2._dup());
-//     cornerFills.push(outsideNext.p1._dup());
-//     cornerFills.push(inside.p2._dup());
-//     cornerFills.push(mid.p2._dup());
-//     cornerFills.push(insideNext.p1._dup());
-//   };
-//   if (makeCorner) {
-//     for (let i = 0; i < lineSegments.length - 1; i += 1) {
-//       if (cornerStyle === 'autoPoint') {
-//         joinLineSegments(i, i + 1);
-//       } else {
-//         createFill(i, i + 1)
-//       }
-//     }
-//     if (close) {
-//       if (cornerStyle === 'autoPoint') {
-//         joinLineSegments(lineSegments.length - 1, 0);
-//       } else {
-//         createFill(lineSegments.length - 1, 0);
-//       }
-//     }
-//   }
-//   return [...lineSegmentsToPoints(lineSegments), ...cornerFills];
-// }
-// // function makeThickLineInside(
-// //   points: Array<Point>,
-// //   width: number = 0.01,
-// //   close: boolean = false,
-// //   makeCorner: boolean = true,
-// // ) {
-// //   const lineSegments = [];
-// //   const makeLineSegment = (p1, p2) => {
-// //     const lineSegment = new Line(p1, p2);
-// //     const insideOffset = lineSegment.offset('inside', width);
-// //     lineSegments.push([insideOffset, lineSegment]);
-// //   };
-// //   for (let i = 0; i < points.length - 1; i += 1) {
-// //     makeLineSegment(points[i], points[i + 1]);
-// //   }
-// //   if (close) {
-// //     makeLineSegment(points[points.length - 1], points[0]);
-// //   }
-// //   // const minAngle = minAngleIn == null ? 0 : minAngleIn;
-// //   const joinLineSegments = (current, next) => {
-// //     const [inside, outside] = lineSegments[current];
-// //     const [insideNext, outsideNext] = lineSegments[next];
-// //     let intercept = inside.intersectsWith(outsideNext);
-// //     if (intercept.intersect != null && intercept.intersect.isOnLine(outsideNext, 8)) {
-// //       inside.setP2(intercept.intersect);
-// //     }
-// //     intercept = insideNext.intersectsWith(outside);
-// //     if (intercept.intersect != null && intercept.intersect.isOnLine(outside, 8)) {
-// //       insideNext.setP1(intercept.intersect);
-// //     }
-// //   };
-// //   if (makeCorner) {
-// //     for (let i = 0; i < lineSegments.length - 1; i += 1) {
-// //       joinLineSegments(i, i + 1);
-// //     }
-// //     if (close) {
-// //       joinLineSegments(lineSegments.length - 1, 0);
-// //     }
-// //   }
-// //   return lineSegmentsToPoints(lineSegments);
-// // }
-// function makeThickLineInsideOutside(
-//   points: Array<Point>,
-//   width: number = 0.01,
-//   close: boolean = false,
-//   makeCorner: boolean = true,
-//   minAngleIn: ?number = Math.PI / 7,
-// ) {
-//   // const out = [];
-//   const lineSegments = [];
-//   const makeLineSegment = (p1, p2) => {
-//     const lineSegment = new Line(p1, p2);
-//     const outsideOffset = lineSegment.offset('outside', width);
-//     lineSegments.push([lineSegment, outsideOffset]);
-//   };
-//   for (let i = 0; i < points.length - 1; i += 1) {
-//     makeLineSegment(points[i], points[i + 1]);
-//   }
-//   if (close) {
-//     makeLineSegment(points[points.length - 1], points[0]);
-//   }
-//   const minAngle = minAngleIn == null ? 0 : minAngleIn;
-//   const joinLineSegments = (current, next) => {
-//     const [inside, outside] = lineSegments[current];
-//     const [insideNext, outsideNext] = lineSegments[next];
-//     const angle = threePointAngle(inside.p1, inside.p2, insideNext.p2);
-//     // If angle is 0 to 180, then it is an inside angle
-//     if (0 < angle && angle < Math.PI) {
-//       let intercept = outside.intersectsWith(insideNext);
-//       if (intercept.intersect != null && intercept.intersect.isOnLine(insideNext, 8)) {
-//         outside.setP2(intercept.intersect);
-//       }
-//       intercept = outsideNext.intersectsWith(inside);
-//       if (intercept.intersect != null && intercept.intersect.isOnLine(inside, 8)) {
-//         outsideNext.setP1(intercept.intersect);
-//       }
-//     // otherwise its an outside angle
-//     } else if (Math.PI < angle && angle < Math.PI * 2 - minAngle) {
-//       joinLinesInPoint(outside, outsideNext);
-//     } else if (Math.PI * 2 - minAngle < angle && angle < Math.PI * 2) {
-//       joinLinesInTangent(inside, insideNext, inside, insideNext, outside, outsideNext);
-//     }
-//   };
-//   if (makeCorner) {
-//     for (let i = 0; i < lineSegments.length - 1; i += 1) {
-//       joinLineSegments(i, i + 1);
-//     }
-//     if (close) {
-//       joinLineSegments(lineSegments.length - 1, 0);
-//     }
-//   }
-//   return lineSegmentsToPoints(lineSegments);
-// }
-// // function makeThickLineOutside(
-// //   points: Array<Point>,
-// //   width: number = 0.01,
-// //   close: boolean = false,
-// //   makeCorner: boolean = true,
-// //   minAngleIn: ?number = Math.PI / 7,
-// // ) {
-// //   // const out = [];
-// //   const lineSegments = [];
-// //   const makeLineSegment = (p1, p2) => {
-// //     const lineSegment = new Line(p1, p2);
-// //     const outsideOffset = lineSegment.offset('outside', width);
-// //     lineSegments.push([lineSegment, outsideOffset]);
-// //   };
-// //   for (let i = 0; i < points.length - 1; i += 1) {
-// //     makeLineSegment(points[i], points[i + 1]);
-// //   }
-// //   if (close) {
-// //     makeLineSegment(points[points.length - 1], points[0]);
-// //   }
-// //   const minAngle = minAngleIn == null ? 0 : minAngleIn;
-// //   const joinLineSegments = (current, next) => {
-// //     const [inside, outside] = lineSegments[current];
-// //     const [insideNext, outsideNext] = lineSegments[next];
-// //     const angle = threePointAngle(inside.p1, inside.p2, insideNext.p2);
-// //     if (0 < angle && angle < minAngle) {
-// //       joinLinesInTangent(inside, insideNext, inside, insideNext, outside, outsideNext);
-// //     } else if (minAngle < angle && angle < Math.PI) {
-// //       joinLinesInPoint(outside, outsideNext);
-// //     } else if (Math.PI < angle && angle < Math.PI * 2 - minAngle) {
-// //       joinLinesInPoint(outside, outsideNext);
-// //     } else if (Math.PI * 2 - minAngle < angle && angle < Math.PI * 2) {
-// //       joinLinesInTangent(inside, insideNext, inside, insideNext, outside, outsideNext);
-// //     }
-// //   };
-// //   if (makeCorner) {
-// //     for (let i = 0; i < lineSegments.length - 1; i += 1) {
-// //       joinLineSegments(i, i + 1);
-// //     }
-// //     if (close) {
-// //       joinLineSegments(lineSegments.length - 1, 0);
-// //     }
-// //   }
-// //   return lineSegmentsToPoints(lineSegments);
-// // }
-// function cornerLine(
-//   pointsIn: Array<Point>,
-//   close: boolean,
-//   type: 'fromVertex' | 'radius',
-//   sides: number,
-//   size: number,
-// ) {
-//   let points = [];
-//   if (close) {
-//     points = cutCorner(
-//       pointsIn[pointsIn.length - 1], pointsIn[0], pointsIn[1],
-//       sides, type, size,
-//     );
-//   } else {
-//     points.push(pointsIn[0]);
-//   }
-//   for (let i = 1; i < pointsIn.length - 1; i += 1) {
-//     const corner = cutCorner(
-//       pointsIn[i - 1], pointsIn[i], pointsIn[i + 1],
-//       sides, type, size,
-//     );
-//     points = [...points, ...corner];
-//   }
-//   if (close) {
-//     points = [...points, ...cutCorner(
-//       pointsIn[pointsIn.length - 2], pointsIn[pointsIn.length - 1], pointsIn[0],
-//       sides, type, size,
-//     )];
-//   } else {
-//     points.push(pointsIn[pointsIn.length - 1]._dup());
-//   }
-//   return points;
-// }
-// function makePolyLine(
-//   pointsIn: Array<Point>,
-//   width: number = 0.01,
-//   close: boolean = false,
-//   pointsAre: 'mid' | 'outside' | 'inside' = 'mid',
-//   corners: 'auto' | 'none' | 'radius' | 'chamfer',
-//   cornerSize: number,
-//   cornerSides: number,
-//   minAutoCornerAngle: number = Math.PI / 7,
-//   dash: Array<number> = [],
-// ) {
-//   let points = [];
-//   let autoCorners = true;
-//   let pointStyle = 'fill';
-//   // Convert line to line with corners
-//   if (corners === 'auto') {
-//     points = pointsIn.map(p => p._dup());
-//     pointStyle = 'autoPoint';
-//   } else if (corners === 'chamfer') {
-//     points = cornerLine(pointsIn, close, 'fromVertex', 1, cornerSize);
-//   } else if (corners === 'radius') {
-//     points = cornerLine(pointsIn, close, 'fromVertex', cornerSides, cornerSize);
-//     autoCorners = true;
-//   } else {
-//     autoCorners = false;
-//     points = pointsIn.map(p => p._dup());
-//   }
-//   // Convert line to dashed line
-//   let dashes;
-//   if (dash.length > 1) {
-//     dashes = lineToDash(points, dash, close, 0);
-//     let closeDashes = false;
-//     if (dashes.length === 1) {
-//       closeDashes = close;
-//     }
-//     let dashedTris = [];
-//     dashes.forEach((d) => {
-//       dashedTris = [...dashedTris, ...makeThickLineMid(
-//         d, width, closeDashes, autoCorners, pointStyle, minAutoCornerAngle,
-//       )];
-//     });
-//     return dashedTris;
-//   }
-//   if (pointsAre === 'mid') {
-//     return makeThickLineMid(
-//       points, width, close, autoCorners, pointStyle, minAutoCornerAngle,
-//     );
-//   }
-//   if (pointsAre === 'outside') {
-//     return makeThickLineInsideOutside(points, width, close, autoCorners, minAutoCornerAngle);
-//   }
-//   return makeThickLineInside(points, width, close, autoCorners);
-// }
-// // function thickenCorner(
-// //   p2: Point, p1: Point, p3: Point,
-// //   width: number = 0.01, minAngle: number = Math.PI / 7,
-// //   close: boolean: true,
-// // )
-// // function thickenCorner(
-// //   p2: Point, p1: Point, p3: Point,
-// //   width: number = 0.01, minAngle: number = Math.PI / 7,
-// //   close: boolean = false,
-// // ) {
-// //   const line21 = new Line(p2, p1);
-// //   const offset21 = line21.offset('outside', width);
-// //   const line13 = new Line(p1, p3);
-// //   const offset13 = line13.offset('outside', width);
-// //   const angle = threePointAngleMin(p2, p1, p3);
-// //   if (angle === Math.PI) {
-// //     return [p1, offset13.p1];
-// //   }
-// //   const angleMag = Math.abs(angle);
-// //   let position = 'outside';
-// //   if (angleMag / angle > 0) {
-// //     position = 'inside';
-// //   }
-// //   if (angleMag > minAngle) {
-// //     const p = offset21.intersectsWith(offset13).intersect;
-// //     if (p == null) {
-// //       return [p1, offset13.p1];
-// //     }
-// //     return [p1._dup(), p];
-// //   }
-// //   // make a tangent line to the corner
-// //   const tangent = new Line(p1, 1, line13.angle() - angle / 2 + Math.PI / 2);
-// //   // if angle is -ve, then the thicken line is outside an angle
-// //   // if angle is +ve, then the thicken line is inside an angle
-// //   if (position === 'outside') {
-// //     const out2 = offset21.intersectsWith(tangent).intersect;
-// //     const out3 = offset13.intersectsWith(tangent).intersect;
-// //     return [p1._dup(), out2, p1._dup(), out3];
-// //   }
-// //   // otherwise position is on the inside
-// //   // When on the inside, there are several possibilities:
-// //   //
-// //   //
-// //   // Easy case
-// //   //    out 2     0  3
-// //   //      \     0
-// //   //       \  0
-// //   //    o o 0 o o o o o o o o offset21
-// //   //      0
-// //   //    000000000000000000000
-// //   //   1                     2
-// //   //
-// //   let out2 = offset21.intersectsWith(line13).intersect;
-// //   //
-// //   // A. Intersect is not on offset21 (as line13 angle is too shallow)
-// //   //                                       0 3
-// //   //    o o o o o o o o o o o . . . . 0 . . . .
-// //   //                            0    \
-// //   //                      0           \
-// //   //                0                 out2
-// //   //          0
-// //   //    000000000000000000000
-// //   //   1                     2
-// //   //
-// //   // Wanted:
-// //   //   For closed line: want out2 to be (1, intersect of perp2 and line13)
-// //   //   For open line: want out2 to be (1, offset perp from 1)
-// //   //
-// //   // B. Intersect is not on line13 (as line13 is too short)
-// //   //                .
-// //   //    o o o o o o o o o o o
-// //   //            .  \
-// //   //          0     \
-// //   //        0  3     out2
-// //   //      0
-// //   //    000000000000000000000
-// //   //   1                     2
-// //   //
-// //   // Wanted:
-// //   //   For closed line: want out2 to be (1, 3)
-// //   //   For open line: want out2 to be (1, offset perp from 1)
-// //   //
-// //   // C. Intersect is not on either offset21 or line13 (angle too shallow and
-// //   // line13 too short)
-// //   //                                       .
-// //   //    o o o o o o o o o o o . . . . . . . . .
-// //   //                            .    \
-// //   //              3       .           \
-// //   //                0                 out2
-// //   //          0
-// //   //    000000000000000000000
-// //   //   1                     2
-// //   //
-// //   // Wanted:
-// //   //   For closed line: want out2 to be (1, 3)
-// //   //   For open line: want out2 to be (1, offset perp from 1)
-// //   //
-// //   // console.log(out2, offset21, line13)
-// //   if (out2 == null) {
-// //     out2 = p2._dup();
-// //   } else if (!out2.isOnLine(offset21, 8) || !out2.isOnLine(line13, 8)) {
-// //     const perpendicular1 = new Line(p1, width, line21.angle() - Math.PI / 2);
-// //     if (close === false) {
-// //       out2 = perpendicular1.p2;
-// //     } else if (out2.isOnLine(line13, 8)) {
-// //       const perpendicular2 = new Line(p2, 1, line21.angle() - Math.PI / 2);
-// //       const perpIntersect = perpendicular2.intersectsWith(line13).intersect;
-// //       out2 = perpIntersect;
-// //     } else {
-// //       out2 = p3._dup();
-// //     }
-// //   }
-// //   let out3 = offset13.intersectsWith(line21).intersect;
-// //   if (out3 == null) {
-// //     out3 = p1._dup();
-// //   } else if (!out3.isOnLine(offset13, 8) || !out3.isOnLine(line21, 8)) {
-// //     const perpendicular1 = new Line(p1, width, line13.angle() - Math.PI / 2);
-// //     if (close === false) {
-// //       out3 = perpendicular1.p2;
-// //     } else if (out3.isOnLine(line21, 8)) {
-// //       const perpendicular3 = new Line(p3, 1, line13.angle() - Math.PI / 2);
-// //       const perpIntersect = perpendicular3.intersectsWith(line21).intersect;
-// //       out3 = perpIntersect;
-// //     } else {
-// //       out3 = p2._dup();
-// //     }
-// //   }
-// //   return [p1._dup(), out2, p1._dup(), out3];
-// // }
-// // function makeThickCorner(
-// //   p2: Point,
-// //   p1: Point,
-// //   p3: Point,
-// //   widthIn: number,
-// //   type: 'outside' | 'inside' | 'mid',
-// //   openLine: boolean,
-// // ) {
-// //   let width = widthIn;
-// //   if (type === 'mid') {
-// //     width /= 2;
-// //   }
-// //   const outside = thickenCorner(p2, p1, p3, width, openLine);
-// //   if (type === 'outside') {
-// //     return outside;
-// //   }
-// //   const inside = thickenCorner(p3, p1, p2, width, openLine);
-// //   if (type === 'inside') {
-// //     return inside.reverse();
-// //   }
-// //   const mid = [];
-// //   for (let i = 1; i < outside.length; i += 2) {
-// //     mid.push(inside[outside.length - i]);
-// //     mid.push(outside[i]);
-// //   }
-// //   return mid;
-// // }
-// // function makeEnd(
-// //   p1: Point,
-// //   p2: Point,
-// //   fromPoint: Point,
-// //   widthIn: number,
-// //   type: 'outside' | 'inside' | 'mid',
-// // ) {
-// //   let width = widthIn;
-// //   if (type === 'mid') {
-// //     width /= 2;
-// //   }
-// //   const lineAngle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-// //   const outside = polarToRect(width, lineAngle - Math.PI / 2).add(fromPoint);
-// //   if (type === 'outside') {
-// //     return [fromPoint, outside];
-// //   }
-// //   const inside = polarToRect(width, lineAngle + Math.PI / 2).add(fromPoint);
-// //   if (type === 'inside') {
-// //     return [fromPoint, inside];
-// //   }
-// //   return [inside, outside];
-// // }
-// // function thickenLine(
-// //   points: Array<Point>,
-// //   width: number = 0.01,
-// //   close: boolean = false,
-// //   type: 'outside' | 'inside' | 'mid' = 'outside',
-// // ) {
-// //   const out = [];
-// //   if (close === false) {
-// //     out.push(...makeEnd(points[0], points[1], points[0], width, type));
-// //   } else {
-// //     out.push(...makeThickCorner(
-// //       points[points.length - 1], points[0], points[1], width, type, close,
-// //     ));
-// //   }
-// //   for (let i = 0; i < points.length - 2; i += 1) {
-// //     out.push(...makeThickCorner(
-// //       points[i], points[i + 1], points[i + 2], width, type, close,
-// //     ));
-// //   }
-// //   if (close === false) {
-// //     out.push(...makeEnd(
-// //       points[points.length - 2], points[points.length - 1], points[points.length - 1], width, type,
-// //     ));
-// //   } else {
-// //     out.push(...makeThickCorner(
-// //       points[points.length - 2], points[points.length - 1], points[0], width, type, close,
-// //     ));
-// //     out.push(...makeThickCorner(
-// //       points[points.length - 1], points[0], points[1], width, type, close,
-// //     ));
-// //   }
-// //   // if (close === false) {
-// //   //   const startLine = new Line(points[0], points[1]);
-// //   //   const offsetStart = polarToRect(width, startLine.angle() - Math.PI / 2).add(points[0]);
-// //   //   out.push(points[0]._dup());
-// //   //   out.push(offsetStart);
-// //   // } else {
-// //   //   out.push(...thickenCorner(points[points.length - 1], points[0], points[1], width));
-// //   // }
-// //   // for (let i = 0; i < points.length - 2; i += 1) {
-// //   //   out.push(...thickenCorner(points[i], points[i + 1], points[i + 2], width));
-// //   // }
-// //   // if (close === false) {
-// //   //   const endLine = new Line(points[points.length - 2], points[points.length - 1]);
-// //   //   const offsetEnd = polarToRect(width, endLine.angle() - Math.PI / 2).add(points[points.length - 1]);
-// //   //   out.push(points[points.length - 1]._dup());
-// //   //   out.push(offsetEnd);
-// //   // } else {
-// //   //   out.push(...thickenCorner(points[points.length - 2], points[points.length - 1], points[0], width));
-// //   //   out.push(...thickenCorner(points[points.length - 1], points[0], points[1], width));
-// //   // }
-// //   return out;
-// // }
-
+}
 
 
 
@@ -36704,7 +36071,7 @@ function round(arrayOrValue) {
   var result = 0;
 
   if (Array.isArray(arrayOrValue)) {
-    result = arrayOrValue.map(function (elem) {
+    return arrayOrValue.map(function (elem) {
       return round(elem, precision);
     });
   }

@@ -130,7 +130,7 @@ export default function diagramLayout() {
 
   const aTri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       color: colors.qrParallelSplitOfTriangleSides,

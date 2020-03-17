@@ -45,7 +45,7 @@ export default function diagramLayout() {
   });
 
   const triangle = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0.7, 0.8],

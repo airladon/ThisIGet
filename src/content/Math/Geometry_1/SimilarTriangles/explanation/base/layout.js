@@ -49,7 +49,7 @@ export default function diagramLayout() {
 
   const makeTri = name => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-1, -0.8],
@@ -71,7 +71,7 @@ export default function diagramLayout() {
 
   const makeQuad = name => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-1, -0.8],
@@ -152,7 +152,7 @@ export default function diagramLayout() {
 
   const tri = (name, p, a, b, c) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: p,
       color: colors.sides,

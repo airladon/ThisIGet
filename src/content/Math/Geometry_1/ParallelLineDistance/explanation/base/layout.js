@@ -102,7 +102,7 @@ export default function diagramLayout() {
 
   const rectangle = {
     name: 'rectangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [leftX, bottomY],

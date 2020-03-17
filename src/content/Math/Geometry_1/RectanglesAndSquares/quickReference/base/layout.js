@@ -96,7 +96,7 @@ export default function diagramLayout() {
 
   const square = {
     name: 'square',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [[-h / 2, -h / 2], [-h / 2, h / 2], [h / 2, h / 2], [h / 2, -h / 2]],
       close: true,

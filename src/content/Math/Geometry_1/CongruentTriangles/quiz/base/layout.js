@@ -15,7 +15,7 @@ export default function diagramLayout() {
   const layout: Object = commonLayout();
   const { colors } = layout;
   const quizTri = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0, 0],

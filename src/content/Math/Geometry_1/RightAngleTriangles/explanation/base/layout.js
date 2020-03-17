@@ -66,7 +66,7 @@ export default function diagramLayout() {
   // eslint-disable-next-line max-len
   const tri = (name, points = triPoints, position = [0, 0], rotation = 0, scale = 1, textScale = 1) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       color: colors.sides,
       close: true,

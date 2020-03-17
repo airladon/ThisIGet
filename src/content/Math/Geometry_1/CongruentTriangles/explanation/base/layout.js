@@ -47,7 +47,7 @@ export default function diagramLayout() {
   });
 
   const triangle = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0.7, 0.8],
@@ -142,7 +142,7 @@ export default function diagramLayout() {
 
   layout.aaaTri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
@@ -336,7 +336,7 @@ export default function diagramLayout() {
 
   const tri = (name, scale) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       close: true,
       points: [
@@ -836,7 +836,7 @@ export default function diagramLayout() {
   };
   layout.sas = {
     name: 'fig',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       position: [0, 0],
       points: [
@@ -893,7 +893,7 @@ export default function diagramLayout() {
   // /////////////////////////////////////////////////////////////////
   layout.asa = {
     name: 'fig',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],

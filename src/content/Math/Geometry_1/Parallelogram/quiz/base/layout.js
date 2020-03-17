@@ -82,7 +82,7 @@ export default function diagramLayout() {
   const width = 0.015;
   const pgram = {
     name: 'pgram',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0, 0],

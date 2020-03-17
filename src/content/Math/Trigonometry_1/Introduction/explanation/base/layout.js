@@ -62,7 +62,7 @@ export default function diagramLayout() {
       },
       {
         name: 'tri',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points,
           width: 0.03,
@@ -266,7 +266,7 @@ export default function diagramLayout() {
   ));
   const sineExample = {
     name: 'sineExample',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: sinePoints,
       color: colors.components,
@@ -314,7 +314,7 @@ export default function diagramLayout() {
       },
       {
         name: 'sine',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: sinePoints0,
           color: colors.components,

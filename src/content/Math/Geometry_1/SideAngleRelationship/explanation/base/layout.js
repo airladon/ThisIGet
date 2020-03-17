@@ -69,7 +69,7 @@ export default function diagramLayout() {
 
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       color: colors.sides,
       width,
@@ -90,7 +90,7 @@ export default function diagramLayout() {
 
   const isosceles = {
     name: 'isosceles',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       color: colors.isosceles,
       width: width / 3,
@@ -272,7 +272,7 @@ export default function diagramLayout() {
 
   const longestSideExample = {
     name: 'longestExample',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width: width * 0.7,
       close: true,
@@ -298,7 +298,7 @@ export default function diagramLayout() {
 
   const shortestSideExample = {
     name: 'shortestExample',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width: width * 0.7,
       close: true,

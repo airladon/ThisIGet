@@ -247,7 +247,7 @@ export default function diagramLayout() {
   const measureAngleRadius = 2.2;
   const measureAngleAngle = {
     name: 'angle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [measureAngleRadius, 0],
@@ -408,7 +408,7 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'mmSquare',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: [[-d, -d], [-d, d], [d, d], [d, -d]],
           close: true,
@@ -489,7 +489,7 @@ export default function diagramLayout() {
   const rectGrid = 0.25;
   const rect = {
     name: 'line',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-rectWidth / 2, -rectHeight / 2],
@@ -571,7 +571,7 @@ export default function diagramLayout() {
 
   const squareLine = {
     name: 'line',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-rectHeight / 2, -rectHeight / 2],

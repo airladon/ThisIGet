@@ -31,7 +31,7 @@ export default function diagramLayout() {
   colors.angles = colors.get('red').rgb;
   const width = 0.015;
   const quizTri = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0, 0],

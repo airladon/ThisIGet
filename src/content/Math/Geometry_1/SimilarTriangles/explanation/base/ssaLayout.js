@@ -99,7 +99,7 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'ss',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: p,
           color: colors.sides,

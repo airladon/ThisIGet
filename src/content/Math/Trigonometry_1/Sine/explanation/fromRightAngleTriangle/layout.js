@@ -559,7 +559,7 @@ export default function diagramLayout() {
   //     angle('rightAngle', 'a', 0.3, triPoints[1], triPoints[2], triPoints[0]),
   //     {
   //       name: 'line',
-  //       method: 'polyLine',
+  //       method: 'polyline',
   //       options: {
   //         points: triPoints,
   //         close: true,

@@ -58,7 +58,7 @@ export default function diagramLayout() {
 
   const tri = (name, p, a, b, c, defaultPos) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: p,
       color: colors.sides,

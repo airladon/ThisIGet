@@ -64,7 +64,7 @@ export default function diagramLayout() {
 
   layout.left = {
     name: 'left',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       points: [points[0], points[1], midPoint],
@@ -84,7 +84,7 @@ export default function diagramLayout() {
 
   layout.right = {
     name: 'right',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       points: [points[2], midPoint, points[1]],
@@ -103,7 +103,7 @@ export default function diagramLayout() {
   };
   layout.triangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       points,
@@ -153,7 +153,7 @@ export default function diagramLayout() {
   const sinar = Math.sin(Math.PI - a);
   layout.correction = {
     name: 'correction',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [points[0][0] + w2 * cosa, points[0][1] + w2 * sina],

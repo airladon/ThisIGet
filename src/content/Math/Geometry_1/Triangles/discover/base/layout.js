@@ -28,7 +28,7 @@ export default function diagramLayout() {
   ];
   layout.triangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,
@@ -80,7 +80,7 @@ export default function diagramLayout() {
 
   layout.fixed = {
     name: 'fixed',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,

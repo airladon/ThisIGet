@@ -98,9 +98,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       sideLength, lay.waveMag,
       lay.segments, new Point(-length / 2, -height / 2 - lay.waveMag),
     );
-    const hSegment = this.diagram.shapes.polyLineLegacy(
-      hPoints, false, lay.width, this.layout.colors.grid,
-      'never',
+    const hSegment = this.diagram.shapes.polyline(
+      {
+        points: hPoints,
+        close: false,
+        width: lay.width,
+        color: this.layout.colors.grid,
+        pointsAt: 'mid',
+      },
     );
     const hLines = this.diagram.shapes.repeatPatternVertex({
       element: hSegment,
@@ -114,9 +119,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       sideLength, lay.waveMag,
       lay.segments, new Point(-length / 2 + lay.waveMag, -height / 2), Math.PI / 2,
     );
-    const vSegment = this.diagram.shapes.polyLineLegacy(
-      vPoints, false, lay.width, this.layout.colors.grid,
-      'never',
+    const vSegment = this.diagram.shapes.polyline(
+      {
+        points: vPoints,
+        close: false,
+        width: lay.width,
+        color: this.layout.colors.grid,
+        pointsAt: 'mid',
+      },
     );
     const vLines = this.diagram.shapes.repeatPatternVertex({
       element: vSegment,

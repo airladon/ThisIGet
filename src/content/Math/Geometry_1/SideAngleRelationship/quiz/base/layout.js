@@ -23,7 +23,7 @@ export default function diagramLayout() {
       addElements: [
         {
           name: 'tri',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             width: 0.03,
             color: colors.sides,

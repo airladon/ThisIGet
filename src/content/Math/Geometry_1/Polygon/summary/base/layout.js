@@ -59,7 +59,7 @@ export default function diagramLayout() {
 
     const outObj = {
       name,
-      method: 'polyLine',
+      method: 'polyline',
       options: {
         points: pointsToUse,
         width,
@@ -167,7 +167,7 @@ export default function diagramLayout() {
       addElements: [
         {
           name: 'poly',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             width: 0.03,
             close: true,

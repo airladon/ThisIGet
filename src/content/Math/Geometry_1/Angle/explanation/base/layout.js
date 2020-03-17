@@ -81,21 +81,21 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: square, color: colors.lines, width, close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'polylineCorners',
         options: {
           points: square, color: colors.lines, width: width * 3, cornerLength,
         },
       },
       {
         name: 'lessSharpCorners',
-        method: 'polyLineCorners',
+        method: 'polylineCorners',
         options: {
           points: square, color: colors.lessSharp, width: width * 3, cornerLength,
         },
@@ -111,21 +111,21 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: tri, color: colors.lines, width, close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'polylineCorners',
         options: {
           points: tri, color: colors.lines, width: width * 3, cornerLength,
         },
       },
       {
         name: 'moreSharpCorners',
-        method: 'polyLineCorners',
+        method: 'polylineCorners',
         options: {
           points: tri, color: colors.moreSharp, width: width * 3, cornerLength,
         },
@@ -137,7 +137,7 @@ export default function diagramLayout() {
 
   const corner = (index, color, p1, p2, p3) => ({
     name: `corner${index}`,
-    method: 'polyLineCorners',
+    method: 'polylineCorners',
     options: {
       points: [p1, p2, p3],
       color,
@@ -153,14 +153,14 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: pent, color: colors.lines, width, close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'polylineCorners',
         options: {
           points: pent, color: colors.lines, width: width * 3, cornerLength,
         },
@@ -301,7 +301,7 @@ export default function diagramLayout() {
 
   const shape = {
     name: 'shape',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       width,
@@ -370,7 +370,7 @@ export default function diagramLayout() {
 
   const triangle = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: triPoints,
       width,

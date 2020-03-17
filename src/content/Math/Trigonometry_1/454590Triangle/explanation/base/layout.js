@@ -186,7 +186,7 @@ export default function diagramLayout() {
   });
   const equil = {
     name: 'equil',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: equilPoints,
       close: true,
@@ -232,7 +232,7 @@ export default function diagramLayout() {
       angle('right', '', squarePoints[1], squarePoints[2], squarePoints[3], 0.3),
       {
         name: 'square',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: squarePoints,
           width: 0.03,
@@ -263,7 +263,7 @@ export default function diagramLayout() {
       },
       {
         name: 'tri',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: [squarePoints[1], squarePoints[2], squarePoints[3]],
           width: 0.03,

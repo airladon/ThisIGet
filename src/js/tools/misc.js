@@ -168,7 +168,7 @@ function activator(
 
   return {
     name: 'activator',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       color: options.color,
