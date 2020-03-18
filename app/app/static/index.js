@@ -4782,7 +4782,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
     var methods = {
       collection: shapes.collection.bind(shapes),
       polyline: objects.polyline.bind(objects),
-      polylineCorners: shapes.polylineCorners.bind(shapes),
+      // polylineCorners: shapes.polylineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       fan: shapes.fan.bind(shapes),
@@ -16653,58 +16653,6 @@ function (_VertexObject) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DiagramElements/PolyLine.js":
-/*!****************************************************!*\
-  !*** ./src/js/diagram/DiagramElements/PolyLine.js ***!
-  \****************************************************/
-/*! exports provided: PolyLine, PolyLineCorners */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolyLine", function() { return PolyLine; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolyLineCorners", function() { return PolyLineCorners; });
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolyLine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolyLine */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolyLineCorners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolyLineCorners */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-
-
-
-
-
-
-function PolyLine(webgl, points, close, lineWidth, color, borderToPoint, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolyLine__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, points, close, lineWidth, borderToPoint);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
-}
-
-function PolyLineCorners(webgl, points, close, cornerLength, lineWidth, color, transformOrLocation, diagramLimits) {
-  var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolyLineCorners__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, points, close, cornerLength, lineWidth);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLineCorners, transform, color, diagramLimits);
-}
-
-
-
-/***/ }),
-
 /***/ "./src/js/diagram/DiagramElements/Polygon.js":
 /*!***************************************************!*\
   !*** ./src/js/diagram/DiagramElements/Polygon.js ***!
@@ -21105,24 +21053,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
-/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
-/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
-/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
-/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
-/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
-/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
-/* harmony import */ var _DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Rectangle */ "./src/js/diagram/DiagramElements/Rectangle.js");
-/* harmony import */ var _DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Generic */ "./src/js/diagram/DiagramElements/Generic.js");
-/* harmony import */ var _DiagramElements_Box__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Box */ "./src/js/diagram/DiagramElements/Box.js");
-/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
-/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
-/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
-/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
-/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
+/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
+/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
+/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
+/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
+/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
+/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
+/* harmony import */ var _DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/Rectangle */ "./src/js/diagram/DiagramElements/Rectangle.js");
+/* harmony import */ var _DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Generic */ "./src/js/diagram/DiagramElements/Generic.js");
+/* harmony import */ var _DiagramElements_Box__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Box */ "./src/js/diagram/DiagramElements/Box.js");
+/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
+/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
+/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
+/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
+/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -21152,7 +21099,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-
+ // import {
+//   PolyLine, PolyLineCorners,
+// } from '../DiagramElements/PolyLine';
 
 
 
@@ -21331,53 +21280,50 @@ function () {
   //     cornerLength, lineWidth, color, transform, this.limits,
   //   );
   // }
+  // polylineCorners(...optionsIn: Array<{
+  //   points: Array<Point>,
+  //   color?: Array<number>,
+  //   close?: boolean,
+  //   cornerLength?: number,
+  //   width?: number,
+  //   pulse?: number,
+  //   transform?: Transform,
+  //   position?: Point,
+  //   }>) {
+  //   const defaultOptions = {
+  //     color: [1, 0, 0, 1],
+  //     close: true,
+  //     width: 0.01,
+  //     cornerLength: 0.1,
+  //     transform: new Transform('polylineCorners').standard(),
+  //   };
+  //   const options = Object.assign({}, defaultOptions, ...optionsIn);
+  //   if (options.position != null) {
+  //     const p = getPoint(options.position);
+  //     options.transform.updateTranslation(p);
+  //   }
+  //   let points = [];
+  //   if (options.points) {
+  //     points = options.points.map(p => getPoint(p));
+  //   }
+  //   const element = PolyLineCorners(
+  //     this.webgl, points, options.close,
+  //     options.cornerLength, options.width,
+  //     options.color, options.transform, this.limits,
+  //   );
+  //   if (options.pulse != null) {
+  //     if (typeof element.pulseDefault !== 'function') {
+  //       element.pulseDefault.scale = options.pulse;
+  //     }
+  //   }
+  //   if (options.mods != null && options.mods !== {}) {
+  //     element.setProperties(options.mods);
+  //   }
+  //   return element;
+  // }
 
 
   _createClass(DiagramPrimitives, [{
-    key: "polylineCorners",
-    value: function polylineCorners() {
-      var defaultOptions = {
-        color: [1, 0, 0, 1],
-        close: true,
-        width: 0.01,
-        cornerLength: 0.1,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polylineCorners').standard()
-      };
-
-      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        optionsIn[_key2] = arguments[_key2];
-      }
-
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.position != null) {
-        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(p);
-      }
-
-      var points = [];
-
-      if (options.points) {
-        points = options.points.map(function (p) {
-          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
-        });
-      }
-
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
-
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
-
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
-      }
-
-      return element;
-    }
-  }, {
     key: "polyline",
     value: function polyline() {
       var defaultOptions = {
@@ -21388,21 +21334,32 @@ function () {
         cornerStyle: 'auto',
         cornerSize: 0.01,
         cornerSides: 10,
+        cornersOnly: false,
+        cornerLength: 0.1,
+        // forceCornerLength: false,
         minAutoCornerAngle: Math.PI / 7,
         dash: [],
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
       };
 
-      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        optionsIn[_key3] = arguments[_key3];
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
       }
 
       var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
       parsePoints(options, ['points']);
+      var getTris;
 
-      var getTris = function getTris(points) {
-        return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_25__["makePolyLine"])(points, options.width, options.close, options.pointsAt, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash);
-      };
+      if (options.cornersOnly) {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLineCorners"])(points, options.width, options.close, options.cornerLength, // options.forceCornerLength,
+          options.pointsAt, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle);
+        };
+      } else {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLine"])(points, options.width, options.close, options.pointsAt, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash);
+        };
+      }
 
       var _getTris = getTris(options.points),
           _getTris2 = _slicedToArray(_getTris, 3),
@@ -21410,7 +21367,7 @@ function () {
           borders = _getTris2[1],
           holes = _getTris2[2];
 
-      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, triangles, borders, holes, 'triangles', options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, triangles, borders, holes, 'triangles', options.color, options.transform, this.limits);
 
       element.custom.updatePoints = function (points) {
         var _element$drawingObjec;
@@ -21425,75 +21382,7 @@ function () {
       }
 
       return element;
-    } // borderToPoint options: 'alwaysOn' | 'onSharpAnglesOnly' | 'never'
-
-  }, {
-    key: "polylineLegacy",
-    value: function polylineLegacy() {
-      var defaultOptions = {
-        color: [1, 0, 0, 1],
-        close: true,
-        width: 0.01,
-        borderToPoint: 'never',
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
-      };
-
-      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        optionsIn[_key4] = arguments[_key4];
-      }
-
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.position != null) {
-        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(p);
-      }
-
-      var points = [];
-
-      if (options.points) {
-        points = options.points.map(function (p) {
-          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
-        });
-      }
-
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
-
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
-
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
-      }
-
-      return element;
-    } // general(...optionsIn: Array<{
-    //   points: Array<Point>,
-    //   lineWidth?: number,
-    //   dash?: Array<number>, // [0.01, 0.01]
-    //   cornerRadius?: number,  // 0
-    //   cornerSides?: number, // 1
-    //   pointsPosition?: 'center' | 'outside' | 'inside',
-    //   maxCornerExtension?: number,
-    //   maxCornerClip?: 'straight' | { radius: number, sides: number} | 'radius',
-    //   color?: Array<number>
-    // }>) {
-    //   const defaultOptions = {
-    //     points: [],
-    //     color: [1, 0, 0, 1],
-    //     lineWidth: 0.01,
-    //     dash: [1],
-    //     cornerRadius: 0,
-    //     cornerSides: 1,
-    //     pointsPosition: 'center',
-    //     maxCornerWidth: null,
-    //     cornerClip?: 'straight',
-    //   }
-    // }
-
+    }
   }, {
     key: "generic",
     value: function generic() {
@@ -21507,8 +21396,8 @@ function () {
         position: null
       };
 
-      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        optionsIn[_key5] = arguments[_key5];
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [defaultOptions].concat(optionsIn));
@@ -21541,7 +21430,7 @@ function () {
       var parsedBorder = parseBorder(options.border);
       var parsedBorderHoles = parseBorder(options.borderHoles); // console.log(parsedPoints)
 
-      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21561,8 +21450,8 @@ function () {
         position: null
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        optionsIn[_key4] = arguments[_key4];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21572,7 +21461,7 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
+      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__["default"])(this.webgl, options.points.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       }), options.color, options.transform, this.limits);
 
@@ -21591,7 +21480,7 @@ function () {
   }, {
     key: "textGL",
     value: function textGL(options) {
-      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_22__["default"])(this.webgl, this.limits, options);
+      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_21__["default"])(this.webgl, this.limits, options);
     }
   }, {
     key: "text",
@@ -21614,8 +21503,8 @@ function () {
       };
       var options;
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-        optionsIn[_key7 - 1] = arguments[_key7];
+      for (var _len5 = arguments.length, optionsIn = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+        optionsIn[_key5 - 1] = arguments[_key5];
       }
 
       if (typeof textOrOptions === 'string') {
@@ -21636,11 +21525,11 @@ function () {
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_23__["DiagramFont"](o.family, o.style, o.size, o.weight, o.xAlign, o.yAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_22__["DiagramFont"](o.family, o.style, o.size, o.weight, o.xAlign, o.yAlign, o.color);
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_23__["DiagramText"](o.offset, text, fontToUse);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_23__["TextObject"](this.draw2D, [dT]);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_22__["DiagramText"](o.offset, text, fontToUse);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_22__["TextObject"](this.draw2D, [dT]);
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
       if (options.pulse != null) {
@@ -21669,8 +21558,8 @@ function () {
         rotation: 0
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21680,7 +21569,7 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_19__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21764,7 +21653,7 @@ function () {
       element.style.position = 'absolute';
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_24__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_23__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
       var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
@@ -21796,8 +21685,8 @@ function () {
 
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21836,8 +21725,8 @@ function () {
 
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21870,7 +21759,7 @@ function () {
       var numLinesThick = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var color = arguments.length > 2 ? arguments[2] : undefined;
       var transform = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
+      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_17__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
     }
   }, {
     key: "grid",
@@ -21887,8 +21776,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21955,8 +21844,8 @@ function () {
         angleToDraw: null
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
@@ -21991,11 +21880,11 @@ function () {
       var element;
 
       if (options.linePrimitives) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
       } else if (options.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
@@ -22013,13 +21902,13 @@ function () {
     value: function polygonLine(numSides, radius, rotation, direction, numSidesToDraw, numLines, // equivalent to thickness - integer
     color) {
       var transform = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
+      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
     }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
+      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
     }
   }, {
     key: "dashedLine",
@@ -22034,8 +21923,8 @@ function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22044,7 +21933,7 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -22085,8 +21974,8 @@ function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22102,9 +21991,9 @@ function () {
       var element;
 
       if (options.fill) {
-        element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+        element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
       } else {
-        element = Object(_DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.lineWidth, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+        element = Object(_DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.lineWidth, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
       }
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
@@ -22126,8 +22015,8 @@ function () {
         position: null
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22140,7 +22029,7 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      var element = Object(_DiagramElements_Box__WEBPACK_IMPORTED_MODULE_17__["default"])(this.webgl, options.width, options.height, options.lineWidth, options.fill, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Box__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, options.width, options.height, options.lineWidth, options.fill, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -22160,8 +22049,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22170,7 +22059,7 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -22190,8 +22079,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22251,8 +22140,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-          moreOptions[_key18 - 1] = arguments[_key18];
+        for (var _len16 = arguments.length, moreOptions = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+          moreOptions[_key16 - 1] = arguments[_key16];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -22370,8 +22259,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        optionsIn[_key17] = arguments[_key17];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22399,7 +22288,7 @@ function () {
           showGrid = options.showGrid,
           gridColor = options.gridColor,
           fontColor = options.fontColor;
-      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_20__["AxisProperties"]('x', 0);
+      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_19__["AxisProperties"]('x', 0);
       xProps.minorTicks.mode = 'off';
       xProps.minorGrid.mode = 'off';
       xProps.majorGrid.mode = 'off';
@@ -22434,8 +22323,8 @@ function () {
       xProps.majorTicks.fontColor = fontColor.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
-      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_21__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
-      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_20__["AxisProperties"]('x', 0);
+      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_20__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
+      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_19__["AxisProperties"]('x', 0);
       yProps.minorTicks.mode = 'off';
       yProps.minorGrid.mode = 'off';
       yProps.majorGrid.mode = 'off';
@@ -22471,7 +22360,7 @@ function () {
       yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
       yProps.majorTicks.fontSize = fontSize;
       yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
-      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_21__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
+      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_20__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
 
       if (location instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
@@ -22520,8 +22409,8 @@ function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22577,8 +22466,8 @@ function () {
         position: null
       };
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
-        optionsIn[_key21] = arguments[_key21];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22986,7 +22875,8 @@ function cutCorner(p2, p1, p3, sides, style, value) {
     var angle = Math.abs(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngleMin"])(p2, p1, p3)) / 2;
     cut = value / Math.tan(angle);
     cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
-  } else if (style === 'max') {
+  } else {
+    // if (style === 'max')
     cut = Math.min(line12.length(), line13.length());
   } // cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
 
@@ -23774,14 +23664,13 @@ function makePolyLineCorners(pointsIn) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var cornerLength = arguments.length > 3 ? arguments[3] : undefined;
-  var forceCornerLength = arguments.length > 4 ? arguments[4] : undefined;
-  var pointsAre = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'mid';
-  var cornerStyle = arguments.length > 6 ? arguments[6] : undefined;
-  var cornerSize = arguments.length > 7 ? arguments[7] : undefined;
-  var cornerSides = arguments.length > 8 ? arguments[8] : undefined;
-  var minAutoCornerAngle = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : Math.PI / 7;
+  var pointsAre = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'mid';
+  var cornerStyle = arguments.length > 5 ? arguments[5] : undefined;
+  var cornerSize = arguments.length > 6 ? arguments[6] : undefined;
+  var cornerSides = arguments.length > 7 ? arguments[7] : undefined;
+  var minAutoCornerAngle = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : Math.PI / 7;
   // split line into corners
-  var corners = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["lineToCorners"])(pointsIn, close, cornerLength, forceCornerLength);
+  var corners = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["lineToCorners"])(pointsIn, close, cornerLength, false);
   var tris = [];
   var borders = [];
   var holes = [];
@@ -24658,700 +24547,6 @@ function (_DrawingObject) {
 }(_DrawingObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js":
-/*!*************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-
-
-function simpleIntersect(p1, p2, q1, q2) {
-  var lineP = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
-  var lineQ = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](q1, q2);
-  return lineP.intersectsWith(lineQ).intersect;
-} // Generate a thick line assuming gl.TRIANGLES where corners are sharp.
-// Input:
-//   * coords: an array of points that will define the center of the line
-
-
-function polylineTriangles(coords, close, width) {
-  var points = [];
-  var innerBorder = [];
-  var outerBorder = [];
-  var line1Pairs = [];
-  var line2Pairs = [];
-  var halfWidth = width / 2;
-  var p;
-  var q;
-
-  if (close) {
-    coords.push(coords[0]);
-  } // got through the points that define the center of the line, and generate
-  // offset lines on either side of them (named Line1 and Line2).
-
-
-  for (var i = 1; i < coords.length; i += 1) {
-    p = coords[i - 1]; // center line point 1
-
-    q = coords[i]; // center line point 2
-
-    var angle = Math.atan2(q.y - p.y, q.x - p.x);
-    var offset1 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](halfWidth * Math.cos(angle + Math.PI / 2), halfWidth * Math.sin(angle + Math.PI / 2));
-    var offset2 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](halfWidth * Math.cos(angle - Math.PI / 2), halfWidth * Math.sin(angle - Math.PI / 2));
-    line1Pairs.push([p.add(offset1), q.add(offset1)]); // Offset line 1
-
-    line2Pairs.push([p.add(offset2), q.add(offset2)]); // Offset line 2
-  } // If the line closes on itself, then find the intersection point of
-  // the first and last offset lines.
-  // p and q will represent the first points of offset lines 1 and 2.
-
-
-  if (close) {
-    // intersection point of first and last offset 1 lines
-    p = simpleIntersect(line1Pairs[0][0], line1Pairs[0][1], line1Pairs[line1Pairs.length - 1][0], line1Pairs[line1Pairs.length - 1][1]); // intersection point of first and last offset 2 lines
-
-    q = simpleIntersect(line2Pairs[0][0], line2Pairs[0][1], line2Pairs[line1Pairs.length - 1][0], line2Pairs[line2Pairs.length - 1][1]);
-  } else {
-    // if not closing on itself, then the first point is simply the first
-    // point of the offset lines.
-    p = line1Pairs[0][0]; // eslint-disable-line prefer-destructuring
-
-    q = line2Pairs[0][0]; // eslint-disable-line prefer-destructuring
-  } // The line effectively has two borders (named an inside and outside border)
-  // but the inner border isn't necessarily the INSIDE border, it is just a
-  // name.
-  // p and q are the first points of the borders.
-
-
-  innerBorder.push(p._dup());
-  outerBorder.push(q._dup()); // Go through all offset lines, calculate their intersection points
-  // and from them calculate the triangle and border points.
-
-  for (var _i = 1; _i < line1Pairs.length; _i += 1) {
-    // First two points of the Triangle 1 are the two ending points
-    // of the last line segment
-    points.push(p.x);
-    points.push(p.y);
-    points.push(q.x);
-    points.push(q.y); // Next points are the intersection between the first line and the second line
-
-    p = simpleIntersect(line1Pairs[_i - 1][0], line1Pairs[_i - 1][1], line1Pairs[_i][0], line1Pairs[_i][1]);
-    q = simpleIntersect(line2Pairs[_i - 1][0], line2Pairs[_i - 1][1], line2Pairs[_i][0], line2Pairs[_i][1]); // Push the next points to the border
-
-    innerBorder.push(p._dup());
-    outerBorder.push(q._dup()); // Finish triangle 1
-
-    points.push(q.x);
-    points.push(q.y); // Make triangle 2
-
-    points.push(points[points.length - 6]);
-    points.push(points[points.length - 6]);
-    points.push(q.x);
-    points.push(q.y);
-    points.push(p.x);
-    points.push(p.y);
-  } // Calculate the last end points
-
-
-  var endp;
-  var endq; // In not closing the polyline, the end points are just the last offset
-  // line points
-
-  if (!close) {
-    endp = line1Pairs[line1Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-
-    endq = line2Pairs[line2Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-    // If closing the polyline, then the end points are the start points
-  } else {
-    endp = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[0], points[1]);
-    endq = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[2], points[3]);
-  } // Close out the last two triangles
-
-
-  points.push(p.x); // Last two points of last line segment
-
-  points.push(p.y);
-  points.push(q.x);
-  points.push(q.y);
-  points.push(endq.x);
-  points.push(endq.y);
-  points.push(p.x); // Last triangle
-
-  points.push(p.y);
-  points.push(endq.x);
-  points.push(endq.y);
-  points.push(endp.x);
-  points.push(endp.y);
-  innerBorder.push(endp._dup());
-  outerBorder.push(endq._dup()); // If closing, then remove the last duplicate coord as it was added by this
-  // function
-
-  if (close) {
-    coords.pop();
-  } // Form the border array
-
-
-  var border = []; // If the poly line is closed, only one of the offset lines is the outside
-  // border. If open, then both are the border.
-
-  if (close) {
-    if (innerBorder[0].isInPolygon(outerBorder)) {
-      border = outerBorder;
-    } else {
-      border = innerBorder;
-    }
-  } else {
-    border.push(innerBorder[0]);
-
-    for (var _i2 = 0; _i2 < outerBorder.length; _i2 += 1) {
-      border.push(outerBorder[_i2]);
-    }
-
-    for (var _i3 = innerBorder.length - 1; _i3 >= 0; _i3 -= 1) {
-      border.push(innerBorder[_i3]);
-    }
-  }
-
-  return {
-    points: points,
-    border: border
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (polylineTriangles);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js":
-/*!**************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return polylineTriangles3; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
- // function simpleIntersect(p1: Point, p2: Point, q1: Point, q2: Point) {
-//   const lineP = new Line(p1, p2);
-//   const lineQ = new Line(q1, q2);
-//   return lineP.intersectsWith(lineQ).intersect;
-// }
-
-// Generate a thick line assuming gl.TRIANGLES where corners are sharp.
-// Input:
-//   * coords: an array of points that will define the center of the line
-function polylineTriangles3(coords, close, width, borderToPoint) {
-  var points = [];
-  var border1 = []; // outside (vertex) when anticlockwise
-
-  var border2 = []; // outside (vertex) when clockwise
-  // const angleDir = [];    // -1 is anti-clockwise, +1 clockwise
-  // const vertices = [];
-  // class Vertex {
-  //   point: Point;
-  //   pre: ?Vertex;
-  //   post: ?Vertex;
-  //   dir: number;
-  //   preAngle: ?number;
-  //   postAngle: ?number;
-  //   preLength: ?number;
-  //   postLength: ?number;
-  //   innerAngle: ?number
-  //   constructor(point) {
-  //     this.point = point;
-  //     this.pre = null;
-  //     this.post = null;
-  //     this.dir = 0;
-  //     this.preAngle = null;
-  //     this.postAngle = null;
-  //     this.preLength = null;
-  //     this.postLength = null;
-  //     this.minAngle = null;
-  //   }
-  // }
-  // function calcAngleDir(
-  //   pre: Point,
-  //   mid: Point,
-  //   post: Point,
-  // ) {
-  //   const midPost = post.sub(mid).toPolar();
-  //   const midPre = pre.sub(mid).toPolar();
-  //   const midPostUnit = polarToRect(1, midPost.angle);
-  //   const midPreUnit = polarToRect(1, midPre.angle);
-  //   const minAngle = minAngleDiff(midPost.angle, midPre.angle);
-  //   let direction = Math.sin(minAngle);
-  //   if (direction < 0) {
-  //     direction = -1;
-  //   } else if (direction > 0) {
-  //     direction = 1;
-  //   }
-  //   const vertex = new Vertex(mid);
-  //   vertex.dir = direction;
-  //   vertex.preAngle = midPre.angle;
-  //   vertex.postAngle = midPost.angle;
-  //   vertex.preLength = midPre.mag;
-  //   vertex.postLength = midPost.mag;
-  //   vertex.minAngle = minAngle;
-  //   vertices.push(vertex);
-  // }
-  // if (close) {
-  //   calcAngleDir(coords[coords.length - 1], coords[0], coords[1]);
-  // } else {
-  //   angleDir.push(0);
-  // }
-  // for (let i = 1; i < coords.length - 1; i += 1) {
-  //   calcAngleDir(coords[i - 1], coords[i], coords[i + 1]);
-  // }
-  // if (close) {
-  //   calcAngleDir(coords[coords.length - 2], coords[coords.length - 1], coords[0]);
-  // } else {
-  //   angleDir.push(0);
-  // }
-  // console.log("Direction", vertices.map(v => v.dir))
-  // console.log("PreLine Angle", vertices.map(v => v.preAngle).map(a => a * 180 / Math.PI))
-  // console.log("PostLine Angle", vertices.map(v => v.postAngle).map(a => a * 180 / Math.PI))
-  // console.log("InnerAngle", cornerAngle.map(a => a * 180 / Math.PI))
-  // console.log(preLineLength)
-  // got through the points that define the outside border of the line, and generate
-  // offset lines on one side of them (named Line1 and Line2).
-  // function findBorderAnglesConstantCornerWidth(
-  //   preIndex: Point | null,
-  //   midIndex: Point,
-  //   postIndex: Point | null,
-  // ) {
-  //   const post = coords[postIndex];
-  //   const mid = coords[midIndex];
-  //   const pre = coords[preIndex];
-  //   let innerAngle = 0;
-  //   let direction = 0;
-  //   if (pre != null && post != null) {
-  //     const midPost = post.sub(mid).toPolar();
-  //     const midPre = pre.sub(mid).toPolar();
-  //     const midPostUnit = polarToRect(1, midPost.angle);
-  //     const midPreUnit = polarToRect(1, midPre.angle);
-  //     innerAngle = midPostUnit.add(midPreUnit).toPolar().angle || 0.00001;
-  //     direction = Math.sin(midPost.angle - midPre.angle);
-  //   } else if (pre == null && post != null) {
-  //     const midPost = post.sub(mid).toPolar();
-  //     innerAngle = midPost.angle - Math.PI / 2;
-  //     direction = -1;
-  //   } else if (post == null && pre != null) {
-  //     const midPre = pre.sub(mid).toPolar();
-  //     innerAngle = midPre.angle - Math.PI / 2;
-  //     direction = 1;
-  //   }
-  //   let corner1 = polarToRect(width / 2, innerAngle).add(mid);
-  //   let corner2 = polarToRect(width / 2, innerAngle + Math.PI).add(mid);
-  //   if (direction < 0) {
-  //     corner2 = polarToRect(width / 2, innerAngle).add(mid);
-  //     corner1 = polarToRect(width / 2, innerAngle + Math.PI).add(mid);
-  //   }
-  //   border1.push(corner1);
-  //   border2.push(corner2);
-  // }
-
-  function findBorderAngles(preIndex, midIndex, postIndex) {
-    var post = postIndex == null ? null : coords[postIndex];
-    var mid = coords[midIndex];
-    var pre = preIndex == null ? null : coords[preIndex];
-    var innerAngle = 0;
-    var cornerR = width / 2;
-    var direction = 0;
-    var minAngle = 0;
-
-    if (pre != null && post != null) {
-      var midPost = post.sub(mid).toPolar();
-      var midPre = pre.sub(mid).toPolar();
-      var midPostUnit = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(1, midPost.angle);
-      var midPreUnit = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(1, midPre.angle);
-      innerAngle = midPostUnit.add(midPreUnit).toPolar().angle || 0.00001;
-      minAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["minAngleDiff"])(midPostUnit.toPolar().angle, midPreUnit.toPolar().angle);
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - midPost.angle));
-      direction = Math.sin(midPost.angle - midPre.angle);
-    } else if (pre == null && post != null) {
-      var _midPost = post.sub(mid).toPolar();
-
-      innerAngle = _midPost.angle - Math.PI / 2;
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - _midPost.angle));
-      direction = 1;
-    } else if (post == null && pre != null) {
-      var _midPre = pre.sub(mid).toPolar();
-
-      innerAngle = _midPre.angle - Math.PI / 2 + Math.PI;
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - _midPre.angle));
-      direction = 1;
-    } // cornerR = Math.min(cornerR, width * 2)
-
-
-    var innerRadius = Math.min(cornerR, width * 6);
-    var outerRadius = Math.min(cornerR, width * 2);
-    var finalInnerRadius = innerRadius;
-    var finalOuterRadius = outerRadius;
-
-    if (borderToPoint === 'alwaysOn') {
-      finalInnerRadius = innerRadius + outerRadius;
-      finalOuterRadius = 0;
-    }
-
-    if (borderToPoint === 'onSharpAnglesOnly') {
-      finalInnerRadius = innerRadius + outerRadius;
-      finalOuterRadius = 0; // const minAngle = minAngleDiff(midPostUnit.angle, midPreUnit.angle);
-
-      var sharpAngleThreshold = Math.PI * 0.9;
-
-      if (Math.abs(minAngle) > sharpAngleThreshold) {
-        var percent = Math.sin(Math.abs(minAngle)) / Math.sin(sharpAngleThreshold);
-        finalInnerRadius = innerRadius + outerRadius * percent;
-        finalOuterRadius = outerRadius * (1 - percent);
-      }
-    }
-
-    var corner1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalInnerRadius, innerAngle).add(mid);
-    var corner2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalOuterRadius, innerAngle + Math.PI).add(mid); // const delta = corner2.sub(mid);
-    // // console.log(delta);
-    // corner2 = corner2.sub(delta);
-    // corner1 = corner1.sub(delta);
-
-    if (direction < 0) {
-      corner2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalInnerRadius, innerAngle).add(mid);
-      corner1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalOuterRadius, innerAngle + Math.PI).add(mid);
-    }
-
-    border1.push(corner1);
-    border2.push(corner2);
-  } // function findBorderAnglesOutsideVertexFixed(
-  //   preIndex: number | null,
-  //   midIndex: number,
-  //   postIndex: number | null,
-  // ) {
-  //   if (preIndex != null && postIndex != null) {
-  //     const v = vertices[midIndex];
-  //     v.pre = vertices[preIndex];
-  //     v.post = vertices[postIndex];
-  //     const { dir } = v;
-  //     let vertex = v.point;
-  //     const preDir = vertices[preIndex].dir;
-  //     const postDir = vertices[postIndex].dir;
-  //     let preBorderAngle = v.preAngle || 0;
-  //     let postBorderAngle = v.postAngle || 0;
-  //     if (preDir !== dir) {
-  //       const midToBorderAngleDelta = Math.asin(width / v.preLength);
-  //       preBorderAngle -= dir * midToBorderAngleDelta;
-  //     }
-  //     if (postDir !== dir) {
-  //       const midToBorderAngleDelta = Math.asin(width / v.postLength);
-  //       postBorderAngle += dir * midToBorderAngleDelta;
-  //     }
-  //     let angleDelta = Math.PI / 2;
-  //     if (dir === -1) {
-  //       angleDelta = -Math.PI / 2;
-  //     }
-  //     const pointOnPreInnerLine
-  //       = vertex.add(polarToRect(width, preBorderAngle + angleDelta));
-  //     const preInnerBorderLine = new Line(pointOnPreInnerLine, 1, preBorderAngle);
-  //     const pointOnPostInnerLine
-  //       = vertex.add(polarToRect(width, postBorderAngle - angleDelta));
-  //     const postInnerBorderLine = new Line(pointOnPostInnerLine, 1, postBorderAngle);
-  //     const intersection = postInnerBorderLine.intersectsWith(preInnerBorderLine);
-  //     const intersectVector = intersection.intersect.sub(vertex).toPolar();
-  //     const intersectMag = Math.min(intersectVector.mag, v.preLength, v.postLength);
-  //     let innerCoord = vertex.add(polarToRect(intersectMag, intersectVector.angle));
-  //     if (Math.abs(v.minAngle) > Math.PI / 2) {
-  //       const offset = width / 2 * Math.cos(v.minAngle);
-  //       vertex = vertex.add(polarToRect(offset, intersectVector.angle));
-  //       innerCoord = innerCoord.add(polarToRect(offset, intersectVector.angle));
-  //     }
-  //     if (intersectMag < intersectVector.mag) {
-  //       if (intersectMag === v.postLength) {
-  //         const postBorderLine = new Line(vertex, 1, postBorderAngle);
-  //         innerCoord = preInnerBorderLine.intersectsWith(postBorderLine).intersect;
-  //       } else {
-  //         const preBorderLine = new Line(vertex, 1, preBorderAngle);
-  //         innerCoord = postInnerBorderLine.intersectsWith(preBorderLine).intersect;
-  //       }
-  //     }
-  //     if (dir === -1) {
-  //       border1.push(vertex);
-  //       border2.push(innerCoord);
-  //     } else {
-  //       border1.push(innerCoord);
-  //       border2.push(vertex);
-  //     }
-  //   }
-  // }
-
-
-  if (close) {
-    findBorderAngles(coords.length - 1, 0, 1);
-  } else {
-    findBorderAngles(null, 0, 1);
-  }
-
-  for (var i = 1; i < coords.length - 1; i += 1) {
-    findBorderAngles(i - 1, i, i + 1);
-  }
-
-  if (close) {
-    findBorderAngles(coords.length - 2, coords.length - 1, 0);
-  } else {
-    findBorderAngles(coords.length - 2, coords.length - 1, null);
-  } // for (let i = 0; i < vertices.length; i += 1) {
-  //   findCornerPoints(i);
-  // }
-
-
-  var addTriangles = function addTriangles(i1, i2) {
-    points.push(border1[i1].x);
-    points.push(border1[i1].y);
-    points.push(border2[i1].x);
-    points.push(border2[i1].y);
-    points.push(border2[i2].x);
-    points.push(border2[i2].y);
-    points.push(border1[i1].x);
-    points.push(border1[i1].y);
-    points.push(border2[i2].x);
-    points.push(border2[i2].y);
-    points.push(border1[i2].x);
-    points.push(border1[i2].y);
-  };
-
-  for (var _i = 0; _i < coords.length - 1; _i += 1) {
-    addTriangles(_i, _i + 1);
-  }
-
-  if (close) {
-    addTriangles(coords.length - 1, 0);
-  } // // If the line closes on itself, then find the intersection point of
-  // // the first and last offset lines.
-  // // p and q will represent the first points of offset lines 1 and 2.
-  // if (close) {
-  //   // intersection point of first and last offset 1 lines
-  //   p = simpleIntersect(
-  //     line1Pairs[0][0],
-  //     line1Pairs[0][1],
-  //     line1Pairs[line1Pairs.length - 1][0],
-  //     line1Pairs[line1Pairs.length - 1][1],
-  //   );
-  //   // intersection point of first and last offset 2 lines
-  //   q = simpleIntersect(
-  //     line2Pairs[0][0],
-  //     line2Pairs[0][1],
-  //     line2Pairs[line1Pairs.length - 1][0],
-  //     line2Pairs[line2Pairs.length - 1][1],
-  //   );
-  // } else {
-  //   // if not closing on itself, then the first point is simply the first
-  //   // point of the offset lines.
-  //   p = line1Pairs[0][0];   // eslint-disable-line prefer-destructuring
-  //   q = line2Pairs[0][0];   // eslint-disable-line prefer-destructuring
-  // }
-  // // The line effectively has two borders (named an inside and outside border)
-  // // but the inner border isn't necessarily the INSIDE border, it is just a
-  // // name.
-  // // p and q are the first points of the borders.
-  // innerBorder.push(p._dup());
-  // outerBorder.push(q._dup());
-  // // Go through all offset lines, calculate their intersection points
-  // // and from them calculate the triangle and border points.
-  // for (let i = 1; i < line1Pairs.length; i += 1) {
-  //   // First two points of the Triangle 1 are the two ending points
-  //   // of the last line segment
-  //   points.push(p.x);
-  //   points.push(p.y);
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   // Next points are the intersection between the first line and the second line
-  //   p = simpleIntersect(
-  //     line1Pairs[i - 1][0],
-  //     line1Pairs[i - 1][1],
-  //     line1Pairs[i][0],
-  //     line1Pairs[i][1],
-  //   );
-  //   q = simpleIntersect(
-  //     line2Pairs[i - 1][0],
-  //     line2Pairs[i - 1][1],
-  //     line2Pairs[i][0],
-  //     line2Pairs[i][1],
-  //   );
-  //   // Push the next points to the border
-  //   innerBorder.push(p._dup());
-  //   outerBorder.push(q._dup());
-  //   // Finish triangle 1
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   // Make triangle 2
-  //   points.push(points[points.length - 6]);
-  //   points.push(points[points.length - 6]);
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   points.push(p.x);
-  //   points.push(p.y);
-  // }
-  // // Calculate the last end points
-  // let endp;
-  // let endq;
-  // // In not closing the polyline, the end points are just the last offset
-  // // line points
-  // if (!close) {
-  //   endp = line1Pairs[line1Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-  //   endq = line2Pairs[line2Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-  // // If closing the polyline, then the end points are the start points
-  // } else {
-  //   endp = new Point(points[0], points[1]);
-  //   endq = new Point(points[2], points[3]);
-  // }
-  // // Close out the last two triangles
-  // points.push(p.x);             // Last two points of last line segment
-  // points.push(p.y);
-  // points.push(q.x);
-  // points.push(q.y);
-  // points.push(endq.x);
-  // points.push(endq.y);
-  // points.push(p.x);             // Last triangle
-  // points.push(p.y);
-  // points.push(endq.x);
-  // points.push(endq.y);
-  // points.push(endp.x);
-  // points.push(endp.y);
-  // innerBorder.push(endp._dup());
-  // outerBorder.push(endq._dup());
-  // // If closing, then remove the last duplicate coord as it was added by this
-  // // function
-  // if (close) {
-  //   coords.pop();
-  // }
-  // function makeOuter(
-  //   midPre: Point,
-  //   mid: Point,
-  //   midPost: Point,
-  //   midIndex: number,
-  // ) {
-  //   const i = midIndex;
-  //   const n = i * 12;
-  //   const midAngle = threePointAngle(midPre, mid, midPost);
-  //   const innerAngle = threePointAngle(midPre, innerBorder[i], midPost);
-  //   const outerAngle = threePointAngle(midPre, outerBorder[i], midPost);
-  //   const replace = (index, replacementPoint) => {
-  //     let normIndex = index;
-  //     if (index < 0) {
-  //       normIndex += points.length;
-  //     }
-  //     if (index > points.length - 1) {
-  //       normIndex -= points.length;
-  //     }
-  //     points[normIndex] = replacementPoint.x;
-  //     points[normIndex + 1] = replacementPoint.y;
-  //   };
-  //   const minDistance = Math.min(distance(midPre, mid), distance(midPost, mid));
-  //   let newInnerBorder;
-  //   let newOuterBorder;
-  //   if (innerAngle < midAngle || innerAngle === midAngle) {
-  //     newInnerBorder = mid;
-  //   }
-  //   if (outerAngle < midAngle || outerAngle === midAngle) {
-  //     newOuterBorder = mid;
-  //   }
-  //   if (newOuterBorder) {
-  //     replace(n - 4 * 2, newOuterBorder);
-  //     replace(n - 2 * 2, newOuterBorder);
-  //     replace(n + 1 * 2, newOuterBorder);
-  //     outerBorder[i] = newOuterBorder;
-  //   }
-  //   if (newInnerBorder) {
-  //     replace(n - 1 * 2, newInnerBorder);
-  //     replace(n, newInnerBorder);
-  //     replace(n + 3 * 2, newInnerBorder);
-  //     innerBorder[i] = newInnerBorder;
-  //   }
-  //   let midToBorderVector = innerBorder[i].sub(mid).toPolar();
-  //   if (midToBorderVector.mag > minDistance) {
-  //     newInnerBorder = mid.add(new Point(
-  //       minDistance * Math.cos(midToBorderVector.angle),
-  //       minDistance * Math.sin(midToBorderVector.angle),
-  //     ));
-  //   }
-  //   midToBorderVector = outerBorder[i].sub(mid).toPolar();
-  //   if (midToBorderVector.mag > minDistance) {
-  //     newOuterBorder = mid.add(new Point(
-  //       minDistance * Math.cos(midToBorderVector.angle),
-  //       minDistance * Math.sin(midToBorderVector.angle),
-  //     ));
-  //   }
-  //   if (newOuterBorder) {
-  //     replace(n - 4 * 2, newOuterBorder);
-  //     replace(n - 2 * 2, newOuterBorder);
-  //     replace(n + 1 * 2, newOuterBorder);
-  //     outerBorder[i] = newOuterBorder;
-  //   }
-  //   if (newInnerBorder) {
-  //     replace(n - 1 * 2, newInnerBorder);
-  //     replace(n, newInnerBorder);
-  //     replace(n + 3 * 2, newInnerBorder);
-  //     innerBorder[i] = newInnerBorder;
-  //   }
-  // }
-  // for (let i = 1; i < coords.length - 1; i += 1) {
-  //   makeOuter(coords[i - 1], coords[i], coords[i + 1], i);
-  // }
-  // if (close) {
-  //   makeOuter(
-  //     coords[line1Pairs.length - 2],
-  //     coords[line1Pairs.length - 1],
-  //     coords[0],
-  //     line1Pairs.length - 1,
-  //   );
-  //   makeOuter(
-  //     coords[line1Pairs.length - 1],
-  //     coords[0],
-  //     coords[1],
-  //     0,
-  //   );
-  // }
-  // // Form the border array
-
-
-  var border = [];
-  var holeBorder = []; // console.log(innerBorder)
-  // console.log(outerBorder)
-  // If the poly line is closed, only one of the offset lines is the outside
-  // border. If open, then both are the border.
-
-  if (close) {
-    if (border1[0].isInPolygon(border2)) {
-      border = border2;
-      holeBorder = border1;
-    } else {
-      border = border1;
-      holeBorder = border2;
-    }
-  } else {
-    border.push(border1[0]);
-
-    for (var _i2 = 0; _i2 < border2.length; _i2 += 1) {
-      border.push(border2[_i2]);
-    }
-
-    for (var _i3 = border1.length - 1; _i3 >= 0; _i3 -= 1) {
-      border.push(border1[_i3]);
-    }
-  }
-
-  return {
-    points: points,
-    border: border,
-    holeBorder: holeBorder
-  };
-} // export default polylineTriangles;
 
 /***/ }),
 
@@ -26648,189 +25843,6 @@ function (_DrawingObject) {
 }(_DrawingObject__WEBPACK_IMPORTED_MODULE_3__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (VertexObject);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js":
-/*!**********************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PolyLineTriangles3 */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-var VertexPolyLine =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(VertexPolyLine, _VertexObject);
-
-  function VertexPolyLine(webgl, coords, close, width) {
-    var _this;
-
-    var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
-
-    _classCallCheck(this, VertexPolyLine);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolyLine).call(this, webgl));
-    _this.width = width;
-    _this.close = close;
-    _this.borderToPoint = borderToPoint;
-
-    _this.setupPoints(coords);
-
-    _this.setupBuffer();
-
-    return _this;
-  }
-
-  _createClass(VertexPolyLine, [{
-    key: "change",
-    value: function change(coords) {
-      this.setupPoints(coords);
-      this.resetBuffer();
-    }
-  }, {
-    key: "setupPoints",
-    value: function setupPoints(coords) {
-      var lineTriangles = Object(_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_3__["default"])(coords, this.close, this.width, this.borderToPoint);
-      this.points = lineTriangles.points;
-      this.border[0] = lineTriangles.border;
-      this.holeBorder[0] = lineTriangles.holeBorder;
-    }
-  }]);
-
-  return VertexPolyLine;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (VertexPolyLine);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _PolyLineTriangles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PolyLineTriangles */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-function cornerLength(coords, length) {
-  var forceLength = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var center = coords[1];
-  var ends = [coords[0], coords[2]];
-  var points = [];
-
-  for (var i = 0; i < 2; i += 1) {
-    var delta = ends[i].sub(center);
-    var angle = Math.atan2(delta.y, delta.x);
-    var endLength = Math.sqrt(delta.x * delta.x + delta.y * delta.y);
-
-    if (length < endLength || forceLength) {
-      endLength = length;
-    }
-
-    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](endLength * Math.cos(angle) + center.x, endLength * Math.sin(angle) + center.y));
-  }
-
-  points.push(points[1]._dup());
-  points[1] = center._dup();
-  return points;
-}
-
-var PolyLineCorners =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(PolyLineCorners, _VertexObject);
-
-  function PolyLineCorners(webgl, coords, close, length, width) {
-    var _this;
-
-    _classCallCheck(this, PolyLineCorners);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PolyLineCorners).call(this, webgl));
-    var newCoords = coords.slice();
-
-    if (close) {
-      newCoords.push(coords[0]);
-      newCoords.push(coords[1]);
-    }
-
-    for (var i = 1, j = newCoords.length - 1; i < j; i += 1) {
-      var cornerPoints = cornerLength([newCoords[i - 1], newCoords[i], newCoords[i + 1]], length, true);
-      var cornerTriangles = Object(_PolyLineTriangles__WEBPACK_IMPORTED_MODULE_3__["default"])(cornerPoints, false, width);
-
-      for (var k = 0, m = cornerTriangles.points.length; k < m; k += 1) {
-        _this.points.push(cornerTriangles.points[k]);
-      }
-
-      _this.border[i - 1] = [];
-
-      for (var _k = 0, _m = cornerTriangles.border.length; _k < _m; _k += 1) {
-        _this.border[i - 1].push(cornerTriangles.border[_k]);
-      }
-    }
-
-    _this.setupBuffer();
-
-    return _this;
-  }
-
-  return PolyLineCorners;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (PolyLineCorners);
 
 /***/ }),
 

@@ -83,21 +83,34 @@ export default function diagramLayout() {
         name: 'line',
         method: 'polyline',
         options: {
-          points: square, color: colors.lines, width, close: true,
+          points: square,
+          color: colors.lines,
+          width,
+          close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polylineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: square, color: colors.lines, width: width * 3, cornerLength,
+          points: square,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
         name: 'lessSharpCorners',
-        method: 'polylineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: square, color: colors.lessSharp, width: width * 3, cornerLength,
+          points: square,
+          color: colors.lessSharp,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
     ],
@@ -118,16 +131,26 @@ export default function diagramLayout() {
       },
       {
         name: 'corners',
-        method: 'polylineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: tri, color: colors.lines, width: width * 3, cornerLength,
+          points: tri,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
         name: 'moreSharpCorners',
-        method: 'polylineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: tri, color: colors.moreSharp, width: width * 3, cornerLength,
+          points: tri,
+          color: colors.moreSharp,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
     ],
@@ -137,13 +160,14 @@ export default function diagramLayout() {
 
   const corner = (index, color, p1, p2, p3) => ({
     name: `corner${index}`,
-    method: 'polylineCorners',
+    method: 'shapes.polyline',
     options: {
       points: [p1, p2, p3],
       color,
       width: width * 3,
       cornerLength,
       close: false,
+      cornersOnly: true,
     },
   });
 
@@ -160,9 +184,14 @@ export default function diagramLayout() {
       },
       {
         name: 'corners',
-        method: 'polylineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: pent, color: colors.lines, width: width * 3, cornerLength,
+          points: pent,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
