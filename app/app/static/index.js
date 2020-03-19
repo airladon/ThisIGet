@@ -16009,7 +16009,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Generic(webgl, vertices, border, holeBorder, drawType, color, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, vertices, border, holeBorder, drawType);
+  var textureLocation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
+  var textureVertexSpace = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2);
+  var textureCoords = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](0, 0, 1, 1);
+  var textureRepeat = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : false;
+  var onLoad = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : null;
+  var generic = new _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, vertices, border, holeBorder, drawType, textureLocation, textureVertexSpace, textureCoords, textureRepeat);
+
+  if (textureLocation) {
+    generic.onLoad = onLoad;
+  }
+
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -16018,7 +16028,7 @@ function Generic(webgl, vertices, border, holeBorder, drawType, color, transform
     transform = transformOrLocation._dup();
   }
 
-  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](generic, transform, color, diagramLimits);
 }
 
 /***/ }),
@@ -20450,7 +20460,7 @@ function (_DiagramElementCollec) {
         // width: optionsToUse.width,
         width: options.width,
         close: options.close,
-        pointsAt: options.pointsAt,
+        widthIs: options.widthIs,
         cornerStyle: options.cornerStyle,
         cornerSize: options.cornerSize,
         cornerSides: options.cornerSides,
@@ -21254,136 +21264,9 @@ function () {
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
     this.spaceTransforms = spaceTransforms; // this.draw2DFigures = draw2DFigures;
-  } // polylineLegacy(
-  //   points: Array<Point>,
-  //   close: boolean,
-  //   lineWidth: number,
-  //   color: Array<number>,
-  //   borderToPoint: TypePolyLineBorderToPoint = 'never',
-  //   transform: Transform | Point = new Transform(),
-  // ) {
-  //   return PolyLine(
-  //     this.webgl, points, close, lineWidth,
-  //     color, borderToPoint, transform, this.limits,
-  //   );
-  // }
-  // polylineCornersLegacy(
-  //   points: Array<Point>,
-  //   close: boolean,
-  //   cornerLength: number,
-  //   lineWidth: number,
-  //   color: Array<number>,
-  //   transform: Transform | Point = new Transform(),
-  // ) {
-  //   return PolyLineCorners(
-  //     this.webgl, points, close,
-  //     cornerLength, lineWidth, color, transform, this.limits,
-  //   );
-  // }
-  // polylineCorners(...optionsIn: Array<{
-  //   points: Array<Point>,
-  //   color?: Array<number>,
-  //   close?: boolean,
-  //   cornerLength?: number,
-  //   width?: number,
-  //   pulse?: number,
-  //   transform?: Transform,
-  //   position?: Point,
-  //   }>) {
-  //   const defaultOptions = {
-  //     color: [1, 0, 0, 1],
-  //     close: true,
-  //     width: 0.01,
-  //     cornerLength: 0.1,
-  //     transform: new Transform('polylineCorners').standard(),
-  //   };
-  //   const options = Object.assign({}, defaultOptions, ...optionsIn);
-  //   if (options.position != null) {
-  //     const p = getPoint(options.position);
-  //     options.transform.updateTranslation(p);
-  //   }
-  //   let points = [];
-  //   if (options.points) {
-  //     points = options.points.map(p => getPoint(p));
-  //   }
-  //   const element = PolyLineCorners(
-  //     this.webgl, points, options.close,
-  //     options.cornerLength, options.width,
-  //     options.color, options.transform, this.limits,
-  //   );
-  //   if (options.pulse != null) {
-  //     if (typeof element.pulseDefault !== 'function') {
-  //       element.pulseDefault.scale = options.pulse;
-  //     }
-  //   }
-  //   if (options.mods != null && options.mods !== {}) {
-  //     element.setProperties(options.mods);
-  //   }
-  //   return element;
-  // }
-
+  }
 
   _createClass(DiagramPrimitives, [{
-    key: "polyline",
-    value: function polyline() {
-      var defaultOptions = {
-        width: 0.01,
-        color: [1, 0, 0, 1],
-        close: false,
-        pointsAt: 'mid',
-        cornerStyle: 'auto',
-        cornerSize: 0.01,
-        cornerSides: 10,
-        cornersOnly: false,
-        cornerLength: 0.1,
-        // forceCornerLength: false,
-        minAutoCornerAngle: Math.PI / 7,
-        dash: [],
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
-      };
-
-      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        optionsIn[_key2] = arguments[_key2];
-      }
-
-      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
-      parsePoints(options, ['points']);
-      var getTris;
-
-      if (options.cornersOnly) {
-        getTris = function getTris(points) {
-          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLineCorners"])(points, options.width, options.close, options.cornerLength, // options.forceCornerLength,
-          options.pointsAt, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle);
-        };
-      } else {
-        getTris = function getTris(points) {
-          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLine"])(points, options.width, options.close, options.pointsAt, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash);
-        };
-      }
-
-      var _getTris = getTris(options.points),
-          _getTris2 = _slicedToArray(_getTris, 3),
-          triangles = _getTris2[0],
-          borders = _getTris2[1],
-          holes = _getTris2[2];
-
-      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, triangles, borders, holes, 'triangles', options.color, options.transform, this.limits);
-
-      element.custom.updatePoints = function (points) {
-        var _element$drawingObjec;
-
-        (_element$drawingObjec = element.drawingObject).change.apply(_element$drawingObjec, _toConsumableArray(getTris(points)));
-      };
-
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
-
-      return element;
-    }
-  }, {
     key: "generic",
     value: function generic() {
       var defaultOptions = {
@@ -21393,11 +21276,18 @@ function () {
         drawType: 'triangles',
         color: [1, 0, 0, 1],
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('generic').standard(),
-        position: null
+        position: null,
+        texture: {
+          src: '',
+          mapTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+          mapFrom: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
+          repeat: false,
+          onLoad: this.animateNextFrame
+        }
       };
 
-      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        optionsIn[_key3] = arguments[_key3];
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [defaultOptions].concat(optionsIn));
@@ -21430,7 +21320,85 @@ function () {
       var parsedBorder = parseBorder(options.border);
       var parsedBorderHoles = parseBorder(options.borderHoles); // console.log(parsedPoints)
 
-      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad);
+
+      if (options.pulse != null) {
+        if (typeof element.pulseDefault !== 'function') {
+          element.pulseDefault.scale = options.pulse;
+        }
+      }
+
+      return element;
+    }
+  }, {
+    key: "polyline",
+    value: function polyline() {
+      var defaultOptions = {
+        width: 0.01,
+        color: [1, 0, 0, 1],
+        close: false,
+        widthIs: 'mid',
+        cornerStyle: 'auto',
+        cornerSize: 0.01,
+        cornerSides: 10,
+        cornersOnly: false,
+        cornerLength: 0.1,
+        // forceCornerLength: false,
+        minAutoCornerAngle: Math.PI / 7,
+        dash: [],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
+      };
+
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
+      }
+
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
+      parsePoints(options, ['points']);
+      var getTris;
+
+      if (options.cornersOnly) {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLineCorners"])(points, options.width, options.close, options.cornerLength, // options.forceCornerLength,
+          options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle);
+        };
+      } else {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLine"])(points, options.width, options.close, options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash);
+        };
+      }
+
+      var _getTris = getTris(options.points),
+          _getTris2 = _slicedToArray(_getTris, 3),
+          triangles = _getTris2[0],
+          borders = _getTris2[1],
+          holes = _getTris2[2]; // const element = Generic(
+      //   this.webgl,
+      //   triangles,
+      //   borders,
+      //   holes,
+      //   'triangles',
+      //   options.color,
+      //   options.transform,
+      //   this.limits,
+      //   options.textureLocation,
+      //   options.textureVertexSpace,
+      //   options.textureCoords,
+      // );
+
+
+      var element = this.generic(options, {
+        drawType: 'triangles',
+        points: triangles,
+        border: borders,
+        holeBorder: holes
+      });
+
+      element.custom.updatePoints = function (points) {
+        var _element$drawingObjec;
+
+        (_element$drawingObjec = element.drawingObject).change.apply(_element$drawingObjec, _toConsumableArray(getTris(points)));
+      };
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -23251,8 +23219,8 @@ function makeLineSegments(points, insideWidth, outsideWidth, close) {
 
   var makeLineSegment = function makeLineSegment(p1, p2) {
     var lineSegment = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Line"](p1, p2);
-    var insideOffset = lineSegment.offset('inside', insideWidth);
-    var outsideOffset = lineSegment.offset('outside', outsideWidth);
+    var insideOffset = lineSegment.offset('positive', insideWidth);
+    var outsideOffset = lineSegment.offset('negative', outsideWidth);
     lineSegments.push([insideOffset, lineSegment, outsideOffset]);
   }; // Go through all points, and generate inside, mid and outside line segments
 
@@ -23268,7 +23236,7 @@ function makeLineSegments(points, insideWidth, outsideWidth, close) {
   return lineSegments;
 }
 
-function makeLineSegmentsOutside(points, offset, close) {
+function makeLineSegmentsNegative(points, offset, close) {
   var mainLines = [];
 
   var makeLine = function makeLine(p1, p2) {
@@ -23308,7 +23276,7 @@ function makeLineSegmentsOutside(points, offset, close) {
 
     }
 
-    var outsideLine = current.offset('outside', minOffset);
+    var outsideLine = current.offset('negative', minOffset);
     lineSegments.push([current, current, outsideLine]);
   };
 
@@ -23433,7 +23401,7 @@ function makeThickLineInsideOutside(points) {
   if (corner === 'none') {
     lineSegments = makeLineSegments(points, width, width, close);
   } else {
-    lineSegments = makeLineSegmentsOutside(points, width, close);
+    lineSegments = makeLineSegmentsNegative(points, width, close);
   }
 
   var minAngle = minAngleIn == null ? 0 : minAngleIn;
@@ -23528,7 +23496,7 @@ function makeThickLineInsideOutside(points) {
   return [[].concat(_toConsumableArray(tris), cornerFills), border, hole]; // return [...lineSegmentsToPoints(lineSegments, 1, 2), ...cornerFills];
 }
 
-function setPointOrder(points, close, pointsAre) {
+function setPointOrder(points, close, widthIs) {
   var reversePoints = function reversePoints() {
     var reversedCopy = [];
 
@@ -23539,11 +23507,11 @@ function setPointOrder(points, close, pointsAre) {
     return reversedCopy;
   };
 
-  if (pointsAre === 'outside' || pointsAre === 'mid') {
+  if (widthIs === 'negative' || widthIs === 'mid') {
     return points;
   }
 
-  if (pointsAre === 'inside') {
+  if (widthIs === 'positive') {
     return reversePoints();
   }
 
@@ -23571,7 +23539,7 @@ function setPointOrder(points, close, pointsAre) {
     testAngle(points[points.length - 2], points[points.length - 1], points[0]);
   }
 
-  if (pointsAre === 'autoOutside') {
+  if (widthIs === 'outside') {
     if (numInsideAngles <= totAngles / 2) {
       return points;
     }
@@ -23579,7 +23547,7 @@ function setPointOrder(points, close, pointsAre) {
     return reversePoints();
   }
 
-  if (pointsAre === 'autoInside') {
+  if (widthIs === 'inside') {
     if (numInsideAngles <= totAngles / 2) {
       return reversePoints();
     }
@@ -23590,12 +23558,12 @@ function setPointOrder(points, close, pointsAre) {
 
 function makeThickLine(points) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
-  var pointsAre = arguments.length > 2 ? arguments[2] : undefined;
+  var widthIs = arguments.length > 2 ? arguments[2] : undefined;
   var close = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var corner = arguments.length > 4 ? arguments[4] : undefined;
   var minAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Math.PI / 7;
 
-  if (pointsAre === 'mid') {
+  if (widthIs === 'mid') {
     return makeThickLineMid(points, width, close, corner, minAngle);
   }
 
@@ -23605,7 +23573,7 @@ function makeThickLine(points) {
 function makePolyLine(pointsIn) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  var pointsAre = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'mid';
+  var widthIs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'mid';
   var cornerStyle = arguments.length > 4 ? arguments[4] : undefined;
   var cornerSize = arguments.length > 5 ? arguments[5] : undefined;
   var cornerSides = arguments.length > 6 ? arguments[6] : undefined;
@@ -23613,7 +23581,7 @@ function makePolyLine(pointsIn) {
   var dash = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : [];
   var points = [];
   var cornerStyleToUse;
-  var orderedPoints = setPointOrder(pointsIn, close, pointsAre); // Convert line to line with corners
+  var orderedPoints = setPointOrder(pointsIn, close, widthIs); // Convert line to line with corners
 
   if (cornerStyle === 'auto') {
     points = orderedPoints.map(function (p) {
@@ -23644,7 +23612,7 @@ function makePolyLine(pointsIn) {
     var dashedBorder = [[]];
     var dashedHole = [[]];
     dashes.forEach(function (d) {
-      var _makeThickLine = makeThickLine(d, width, pointsAre, closeDashes, cornerStyleToUse, minAutoCornerAngle),
+      var _makeThickLine = makeThickLine(d, width, widthIs, closeDashes, cornerStyleToUse, minAutoCornerAngle),
           _makeThickLine2 = _slicedToArray(_makeThickLine, 3),
           tris = _makeThickLine2[0],
           border = _makeThickLine2[1],
@@ -23657,14 +23625,14 @@ function makePolyLine(pointsIn) {
     return [dashedTris, dashedBorder, dashedHole];
   }
 
-  return makeThickLine(points, width, pointsAre, close, cornerStyleToUse, minAutoCornerAngle);
+  return makeThickLine(points, width, widthIs, close, cornerStyleToUse, minAutoCornerAngle);
 }
 
 function makePolyLineCorners(pointsIn) {
   var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var cornerLength = arguments.length > 3 ? arguments[3] : undefined;
-  var pointsAre = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'mid';
+  var widthIs = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'mid';
   var cornerStyle = arguments.length > 5 ? arguments[5] : undefined;
   var cornerSize = arguments.length > 6 ? arguments[6] : undefined;
   var cornerSides = arguments.length > 7 ? arguments[7] : undefined;
@@ -23675,7 +23643,7 @@ function makePolyLineCorners(pointsIn) {
   var borders = [];
   var holes = [];
   corners.forEach(function (corner) {
-    var _makePolyLine = makePolyLine(corner, width, false, pointsAre, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle),
+    var _makePolyLine = makePolyLine(corner, width, false, widthIs, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle),
         _makePolyLine2 = _slicedToArray(_makePolyLine, 3),
         t = _makePolyLine2[0],
         b = _makePolyLine2[1],
@@ -23718,7 +23686,7 @@ function makePolyLineCorners(pointsIn) {
 //       points: line,
 //       width: 0.03,
 //       close: true,
-//       pointsAt: 'inside',
+//       widthIs: 'inside',
 //       cornerStyle: 'radius',
 //       cornerSize: 0.05,
 //       cornerSides: 10,
@@ -23753,7 +23721,7 @@ function makePolyLineCorners(pointsIn) {
 //     points: line,
 //     width: 0.03,
 //     close: true,
-//     pointsAt: 'inside',
+//     widthIs: 'inside',
 //     dash: [0.1, 0.03],
 //   },
 // },
@@ -25123,9 +25091,19 @@ function (_VertexObject) {
   function VertexGeneric(webgl, vertices, border, holeBorder, drawType) {
     var _this;
 
+    var textureLocation = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
+    var textureVertexSpace = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var textureCoords = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    var textureRepeat = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
+
     _classCallCheck(this, VertexGeneric);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexGeneric).call(this, webgl));
+    if (textureLocation !== '') {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexGeneric).call(this, webgl, 'withTexture', 'withTexture'));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexGeneric).call(this, webgl));
+    } // super(webgl);
+
 
     if (drawType === 'lines') {
       _this.glPrimitive = _this.gl[0].LINES;
@@ -25137,9 +25115,11 @@ function (_VertexObject) {
 
     _this.setupPoints(vertices, border, holeBorder);
 
+    _this.setupTexture(textureLocation, textureVertexSpace, textureCoords, textureRepeat);
+
     _this.setupBuffer();
 
-    return _this;
+    return _possibleConstructorReturn(_this);
   }
 
   _createClass(VertexGeneric, [{
@@ -25147,6 +25127,25 @@ function (_VertexObject) {
     value: function change(vertices, border, holeBorder) {
       this.setupPoints(vertices, border, holeBorder);
       this.resetBuffer();
+    }
+  }, {
+    key: "setupTexture",
+    value: function setupTexture() {
+      var textureLocation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var textureVertexSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+      var textureCoords = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+      var textureRepeat = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+      if (textureLocation) {
+        this.texture = {
+          id: textureLocation,
+          src: textureLocation,
+          type: 'image',
+          points: [],
+          repeat: textureRepeat
+        };
+        this.createTextureMap(textureVertexSpace.left, textureVertexSpace.right, textureVertexSpace.bottom, textureVertexSpace.top, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+      }
     }
   }, {
     key: "setupPoints",
@@ -25448,8 +25447,8 @@ function (_DrawingObject) {
 
   _createClass(VertexObject, [{
     key: "addTextureToBuffer",
-    value: function addTextureToBuffer(glIndex, glTexture, image) // image data
-    {
+    value: function addTextureToBuffer(glIndex, glTexture, image, // image data
+    repeat) {
       function isPowerOf2(value) {
         // eslint-disable-next-line no-bitwise
         return (value & value - 1) === 0;
@@ -25469,11 +25468,19 @@ function (_DrawingObject) {
         if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
           // Yes, it's a power of 2. Generate mips.
           gl.generateMipmap(gl.TEXTURE_2D);
+
+          if (repeat != null && repeat === true) {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+          } else {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          }
         } else {
           // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         }
       }
     }
@@ -25543,7 +25550,7 @@ function (_DrawingObject) {
                 // Now that the image has loaded make copy it to the texture.
                 texture.data = image;
 
-                _this2.addTextureToBuffer(glIndex, glTexture, texture.data); // if (this.onLoad != null) {
+                _this2.addTextureToBuffer(glIndex, glTexture, texture.data, texture.repeat); // if (this.onLoad != null) {
 
 
                 webgl.onLoad(texture.id); // this.onLoad();
@@ -25553,7 +25560,7 @@ function (_DrawingObject) {
                 webgl.textures[texture.id].state = 'loaded';
               });
             } else if (texture.data != null) {
-              _this2.addTextureToBuffer(glIndex, glTexture, texture.data);
+              _this2.addTextureToBuffer(glIndex, glTexture, texture.data, texture.repeat);
             }
           } else if (texture.id in webgl.textures) {
             if (webgl.textures[texture.id].state === 'loading') {
@@ -32837,9 +32844,9 @@ function () {
 
       var offsetAngle = normalizedAngle - Math.PI / 2;
 
-      if (direction === 'inside') {
+      if (direction === 'positive') {
         offsetAngle = clipAngle(this.ang, '0to360') + Math.PI / 2;
-      } else if (direction === 'outside') {
+      } else if (direction === 'negative') {
         offsetAngle = clipAngle(this.ang, '0to360') - Math.PI / 2;
       } else if (normalizedAngle < Math.PI / 2) {
         if (direction === 'left' || direction === 'top') {

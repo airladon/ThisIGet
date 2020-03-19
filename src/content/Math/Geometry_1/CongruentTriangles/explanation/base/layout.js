@@ -349,7 +349,7 @@ export default function diagramLayout() {
       ],
       width: layout.width,
       color: colors.sides,
-      pointsAt: 'mid',
+      widthIs: 'mid',
       cornerStyle: 'radius',
       cornerSize: 0.005,
     },

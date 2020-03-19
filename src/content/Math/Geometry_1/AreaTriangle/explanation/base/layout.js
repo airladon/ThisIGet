@@ -582,7 +582,7 @@ export default function diagramLayout() {
       points: [[-1, -1], [0, 0.8], [1, -1]],
       close: true,
       width: 0.03,
-      pointsAt: 'autoInside',
+      widthIs: 'inside',
       // pad: {
       //   color: [1, 0, 0, 0.4],
       //   radius: 0.1,

@@ -104,7 +104,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         close: false,
         width: lay.width,
         color: this.layout.colors.grid,
-        pointsAt: 'mid',
+        widthIs: 'mid',
       },
     );
     const hLines = this.diagram.shapes.repeatPatternVertex({
@@ -125,7 +125,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         close: false,
         width: lay.width,
         color: this.layout.colors.grid,
-        pointsAt: 'mid',
+        widthIs: 'mid',
       },
     );
     const vLines = this.diagram.shapes.repeatPatternVertex({
