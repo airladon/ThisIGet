@@ -29390,6 +29390,8 @@ function (_DiagramElement) {
           if (this.pointsToDraw !== -1) {
             pointCount = this.pointsToDraw;
           }
+        } else {
+          pointCount = 1;
         }
 
         var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);

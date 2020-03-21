@@ -131,10 +131,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       modifiers: {
         shape: click(circ.pulseCircle, [circ], colors.circle),
-        Properties: click(circ.growDimensions, [circ, null, 4], colors.dimension),
+        Properties: click(circ.growDimensionsWithoutDarkCircle, [circ, null, 4], colors.dimension),
       },
       transitionFromAny: (done) => {
-        circ.growDimensions(done);
+        circ.growDimensionsWithoutDarkCircle(done);
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
@@ -160,10 +160,6 @@ class Content extends PresentationFormatContent {
       },
       show: [circ._circle, circ._properties],
       hide: [circ._properties._eqn],
-      setSteadyState: () => {
-        console.log(circ._properties)
-        circ._properties._eqn.showForm('base');
-      }
     });
     this.addSection(common, {
       modifiers: {

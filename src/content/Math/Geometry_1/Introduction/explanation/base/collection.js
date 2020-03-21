@@ -124,6 +124,27 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  growDimensionsWithoutDarkCircle(done: ?() => void = null, time: number = 3) {
+    this._properties.animations.cancelAll('complete');
+    const c = this._properties._c;
+    const d = this._properties._d;
+    const darkCircle = this._properties._darkCircle;
+    const diameter = this._properties._diameter;
+    diameter.hide();
+    c.hide();
+    d.hide();
+    darkCircle.hide();
+    this._properties.animations.new()
+      .trigger({ callback: this.growCircumference.bind(this, null, time / 4), duration: time / 4 })
+      .dissolveIn({ element: c, duration: time / 4 })
+      .trigger(this.growDiameter.bind(this, null, time / 4))
+      // .dissolveIn({ element: darkCircle, duration: time / 4 })
+      .then(d.anim.dissolveIn(time / 4))
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   pulseCircle() {
     this._circle.pulseThickNow(1, 1.1, 5);
     this.diagram.animateNextFrame();
