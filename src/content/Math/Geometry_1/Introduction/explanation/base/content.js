@@ -160,6 +160,10 @@ class Content extends PresentationFormatContent {
       },
       show: [circ._circle, circ._properties],
       hide: [circ._properties._eqn],
+      setSteadyState: () => {
+        console.log(circ._properties)
+        circ._properties._eqn.showForm('base');
+      }
     });
     this.addSection(common, {
       modifiers: {

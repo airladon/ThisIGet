@@ -275,7 +275,7 @@ export default function diagramLayout() {
 
   const leftCircle = {
     name: 'leftCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width: layout.width / 2,
       color: colors.construction,
@@ -291,7 +291,7 @@ export default function diagramLayout() {
   };
   const rightCircle = {
     name: 'rightCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width: layout.width / 2,
       color: colors.construction,
@@ -1119,7 +1119,7 @@ export default function diagramLayout() {
 
   const constructionCircle = {
     name: 'constructionCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       color: colors.construction,
       width: layout.width / 2,

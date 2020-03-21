@@ -144,14 +144,14 @@ export default function diagramLayout() {
       },
       {
         name: 'arc',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           width: width / 2,
           radius: radius + width,
           sides: 314 * 4,
           sidesToDraw: 50 * 4,
           rotation: 3 * Math.PI / 2,
-          center: [0, radius + width - width / 2],
+          offset: [0, radius + width - width / 2],
           color: colors.radianLines,
         },
       },

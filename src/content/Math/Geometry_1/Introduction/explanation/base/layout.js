@@ -52,7 +52,9 @@ export default function diagramLayout() {
     radius: wheelSize,
     color: [1, 1, 0, 1],
     transform: new Transform('filledCircle').translate(0, 0),
-    textureLocation: textureFile,
+    texture: {
+      src: textureFile,
+    },
   };
 
   layout.circle = {
@@ -74,16 +76,16 @@ export default function diagramLayout() {
     method: 'polygon',
     options: [filledCircle, {
       color: [0, 0, 0, 0.7],
-      textureLocation: '',
+      texture: { src: '' },
     }],
     mods: { scenarios },
   };
 
   const mods = { scenarios };
-  const wheelTex = { textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333) };
-  const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
-  const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
-  const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
+  const wheelTex = { texture: { mapFrom: new Rect(0.3333, 0.3333, 0.3333, 0.3333) } };
+  const clockTex = { texture: { mapFrom: new Rect(0, 0.3333, 0.3333, 0.3333) } };
+  const ballTex = { texture: { mapFrom: new Rect(0.3333, 0.6666, 0.3333, 0.3333) } };
+  const earthTex = { texture: { mapFrom: new Rect(0, 0.6666, 0.3333, 0.3333) } };
   layout.wheel = {
     name: 'wheel',
     method: 'polygon',
@@ -161,14 +163,14 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           fill: false,
           radius: layout.circumferenceRadius,
           width: layout.circumferenceLineWidth,
           sides: 300,
           color: colors.dimension,
-          clockwise: true,
+          direction: -1,
           transform: new Transform('Circle').scale(1, 1).translate(0, 0),
         },
       },
