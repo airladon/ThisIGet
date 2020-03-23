@@ -267,7 +267,7 @@ export default function diagramLayout() {
           radius: angleRadius,
           fill: true,
           color: colors.angles,
-          sides: 200,
+          sides: 400,
         },
       },
       {

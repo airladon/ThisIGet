@@ -44,7 +44,7 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'fill',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           radius: angleRadius,
           fill: true,
