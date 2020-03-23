@@ -119,15 +119,20 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   goToRadiusForm() {
-    this._equation.goToForm({
-      name: 'radius',
-      duration: 2,
-      animate: 'move',
-      ifAnimating: {
-        cancelGoTo: false,
-        skipToTarget: false,
-      },
-    });
+    // $FlowFixMe
+    if (this._equation.getCurrentForm().name === 'radius') {
+      this.accent(this._equation.__radius);
+    } else {
+      this._equation.goToForm({
+        name: 'radius',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
     this.diagram.animateNextFrame();
   }
 
@@ -150,28 +155,38 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   goToArcForm() {
-    this._equation.goToForm({
-      name: 'arc',
-      duration: 2,
-      animate: 'move',
-      ifAnimating: {
-        cancelGoTo: false,
-        skipToTarget: false,
-      },
-    });
+    // $FlowFixMe
+    if (this._equation.getCurrentForm().name === 'arc') {
+      this.accent(this._equation.__arc);
+    } else {
+      this._equation.goToForm({
+        name: 'arc',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
     this.diagram.animateNextFrame();
   }
 
   goToAngleForm() {
-    this._equation.goToForm({
-      name: 'angle',
-      duration: 2,
-      animate: 'move',
-      ifAnimating: {
-        cancelGoTo: false,
-        skipToTarget: false,
-      },
-    });
+    // $FlowFixMe
+    if (this._equation.getCurrentForm().name === 'angle') {
+      this.accent(this._equation.__angle);
+    } else {
+      this._equation.goToForm({
+        name: 'angle',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
     this.diagram.animateNextFrame();
   }
 
@@ -261,7 +276,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   goToOneRadian() {
     const r = this._circle._line1.getRotation('0to360');
     if (r === 1) {
-      this._circle._angle.pulseScaleNow(1, 1.3);
+      this._circle._angle.pulseScaleNow(1, 1.5);
     } else {
       this.pushLine(1, 0, 1);
     }

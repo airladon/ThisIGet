@@ -530,18 +530,18 @@ export default function diagramLayout() {
           'equals',
           '_2pi', '  ', '_radians',
         ],
-        '1': ['question', 'x' , '_360', 'equals', '_2pi'],
+        '1': ['question', 'x' , '_360', '  ', 'equals', '_2pi'],
         '2': [
           {
             frac: ['question', 'v', '_180'],
-          }, 'x', '_360',
+          }, 'x', '_360', '  ',
           'equals',
           '_2pi',
         ],
         '3': [
           {
             frac: ['_pi', 'v', '_180'],
-          }, 'x', '_360',
+          }, 'x', '_360', '  ',
           'equals',
           '_2pi',
         ],
@@ -563,7 +563,7 @@ export default function diagramLayout() {
               inSize: false,
             },
           },
-          'equals',
+          '  ', 'equals',
           {
             annotate: {
               content: '_2pi',
