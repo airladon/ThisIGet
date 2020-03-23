@@ -70,6 +70,7 @@ export default function diagramLayout() {
       ],
       color: colors.sides,
       width: layout.width,
+      widthIs: 'inside',
       close: true,
       makeValid: {
         shape: 'triangle',

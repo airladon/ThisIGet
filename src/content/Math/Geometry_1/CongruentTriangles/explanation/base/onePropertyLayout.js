@@ -74,6 +74,7 @@ export default function diagramLayout() {
       color: colors.sides,
       width: layout.width,
       close: true,
+      widthIs: 'inside',
       angle: [
         onePropAngle(0.3, 0.3),
         onePropAngle(0.3, 0.3),

@@ -120,8 +120,9 @@ export default function diagramLayout() {
     curve: {
       radius: rc,
       width: layout.width,
+      sides: 200,
     },
-    sides: 200,
+    sides: { length: 0 },
     label: {
       text: null,
       showRealAngle: true,
@@ -151,6 +152,7 @@ export default function diagramLayout() {
       ],
       color: colors.sides,
       width: layout.width,
+      widthIs: 'inside',
       close: true,
       angle: [
         aaaAngle(0.3, 0.4),
@@ -1157,8 +1159,8 @@ export default function diagramLayout() {
     constructionCircle,
     constructionLine,
     ssaAdjacentMovePad,
-    ssaSideAdjacent,
     ssaAngle,
+    ssaSideAdjacent,
     ssaSideUnknown,
     ssaSideOpposite,
   ];
