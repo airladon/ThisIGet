@@ -64,7 +64,10 @@ export default function diagramLayout() {
 
   const filledCircle = joinObjects({}, circle, {
     fill: true,
-    texture: { src: textureFile },
+    texture: {
+      src: textureFile,
+      mapTo: new Rect(-radius, -radius, radius * 2, radius * 2),
+    },
   });
 
 
