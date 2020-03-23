@@ -133,7 +133,7 @@ class Content extends PresentationFormatContent {
       setContent: [
         'For example, it could be |_12| equal portions like a clock.',
       ],
-      modifiers: { _12: click(diag.pulseMarks, [diag, 12], colors.marks) },
+      modifiers: { _12: click(diag.pulseMarks, [diag, '12Long'], colors.marks) },
       show: [
         circle._line1, circle._line2, circle._angle, circle._marks12Long,
       ],
