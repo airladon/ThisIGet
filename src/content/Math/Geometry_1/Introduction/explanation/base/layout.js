@@ -54,6 +54,7 @@ export default function diagramLayout() {
     transform: new Transform('filledCircle').translate(0, 0),
     texture: {
       src: textureFile,
+      mapTo: new Rect(-wheelSize, -wheelSize, wheelSize * 2, wheelSize * 2),
     },
   };
 
