@@ -146,6 +146,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       pad: {
         color: colors.diagram.background,
         radius: 0.2,
@@ -179,6 +180,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
     },
   };
 

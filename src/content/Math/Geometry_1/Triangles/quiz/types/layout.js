@@ -33,6 +33,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       makeValid: {
         shape: 'triangle',
         hide: {

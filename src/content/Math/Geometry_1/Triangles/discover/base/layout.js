@@ -34,6 +34,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       makeValid: {
         shape: 'triangle',
         hide: {
@@ -86,6 +87,7 @@ export default function diagramLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       angle: {
         color: colors.angles,
         curve: {
@@ -118,8 +120,8 @@ export default function diagramLayout() {
     name: 'line',
     method: 'line',
     options: {
-      p1: [-2, layout.defaultTri[2][1] + 0.02],
-      p2: [2, layout.defaultTri[2][1] + 0.02],
+      p1: [-2, layout.defaultTri[2][1] + 0.01],
+      p2: [2, layout.defaultTri[2][1] + 0.01],
       color: colors.parallel,
       width: 0.015,
     },
