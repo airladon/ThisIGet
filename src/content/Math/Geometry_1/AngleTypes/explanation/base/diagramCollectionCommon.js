@@ -233,7 +233,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseAngle() {
-    this._fig._angle.pulseScaleNow(1, 1.2);
+    this._fig._angle.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
 }
