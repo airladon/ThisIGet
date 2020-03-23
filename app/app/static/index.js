@@ -16026,7 +16026,8 @@ function Generic(webgl, vertices, border, holeBorder, drawType, color, transform
     transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
   } else {
     transform = transformOrLocation._dup();
-  }
+  } // $FlowFixMe
+
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](generic, transform, color, diagramLimits);
 }
@@ -21145,11 +21146,27 @@ function parsePoints(options, keysToParsePointsOrPointArrays) {
       return;
     }
 
+    if (typeof value === 'string') {
+      return;
+    }
+
+    var processArray = function processArray(a) {
+      for (var i = 0; i < a.length; i += 1) {
+        if (Array.isArray(a[i]) && !(typeof a[i][0] === 'number')) {
+          // eslint-disable-next-line no-param-reassign
+          a[i] = processArray(a[i]);
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          a[i] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(a[i]);
+        }
+      }
+
+      return a;
+    };
+
     if (Array.isArray(value) && !(typeof value[0] === 'number')) {
       // eslint-disable-next-line no-param-reassign
-      options[key] = value.map(function (p) {
-        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
-      });
+      options[key] = processArray(value); // value.map(p => getPoint(p));
     } else {
       // eslint-disable-next-line no-param-reassign
       options[key] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(value);
@@ -21263,7 +21280,7 @@ function () {
       };
 
       var parsedBorder = parseBorder(options.border);
-      var parsedBorderHoles = parseBorder(options.borderHoles); // console.log(parsedPoints)
+      var parsedBorderHoles = parseBorder(options.holeBorder); // console.log(parsedPoints)
 
       var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad);
 
@@ -21291,7 +21308,11 @@ function () {
         // forceCornerLength: false,
         minAutoCornerAngle: Math.PI / 7,
         dash: [],
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard()
+        linePrimitives: false,
+        lineNum: 1,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard(),
+        border: 'line',
+        hole: 'none'
       };
 
       for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -21299,17 +21320,22 @@ function () {
       }
 
       var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
-      parsePoints(options, ['points']);
+      parsePoints(options, ['points', 'border', 'hole']);
+
+      if (options.linePrimitives === false) {
+        options.lineNum = 2;
+      }
+
       var getTris;
 
       if (options.cornersOnly) {
         getTris = function getTris(points) {
           return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLineCorners"])(points, options.width, options.close, options.cornerLength, // options.forceCornerLength,
-          options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle);
+          options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.linePrimitives, options.lineNum);
         };
       } else {
         getTris = function getTris(points) {
-          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLine"])(points, options.width, options.close, options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash);
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_24__["makePolyLine"])(points, options.width, options.close, options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash, options.linePrimitives, options.lineNum, options.border, options.hole);
         };
       }
 
@@ -21333,10 +21359,10 @@ function () {
 
 
       var element = this.generic(options, {
-        drawType: 'triangles',
+        drawType: options.linePrimitives ? 'lines' : 'triangles',
         points: triangles,
-        border: borders,
-        holeBorder: holes
+        border: Array.isArray(options.border) ? options.border : borders,
+        holeBorder: Array.isArray(options.hole) ? options.hole : holes
       });
 
       element.custom.updatePoints = function (points) {
@@ -21368,7 +21394,8 @@ function () {
         },
         // angle: Math.PI * 2,
         offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard()
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
+        touchableLineOnly: false
       };
 
       for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -21392,16 +21419,28 @@ function () {
         element = this.generic(options, {
           drawType: 'fan',
           points: fan,
-          border: [fan.slice(1)]
+          border: [_toConsumableArray(fan.slice(1, -1))]
         });
       } else {
-        var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_25__["getPolygonPoints"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction); // if (options.line.widthIs === 'inside') {
-        //   polygonPoints = [polygonPoints[0], ...polygonPoints.slice(1).reverse()];
-        // }
+        var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_25__["getPolygonPoints"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
+        var border = 'line';
+        var hole;
+
+        if (options.direction === 1) {
+          border = 'negative';
+          hole = 'positive';
+        }
+
+        if (options.direction === -1) {
+          border = 'positive';
+          hole = 'negative';
+        }
 
         element = this.polyline(options, options.line, {
           points: polygonPoints,
-          close: options.sides === options.sidesToDraw
+          close: options.sides === options.sidesToDraw,
+          border: border,
+          hole: hole
         });
       }
 
@@ -21413,7 +21452,11 @@ function () {
       var defaultOptions = {
         sides: 4,
         fill: false,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygonSweep').standard()
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygonSweep').standard(),
+        line: {
+          linePrimitives: false,
+          lineNum: 2
+        }
       };
       var forceOptions = {
         line: {
@@ -21428,13 +21471,17 @@ function () {
 
       var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn, [forceOptions])); // const options = joinObjects(defaultOptions, optionsIn);
 
-      var element = this.polygon(options);
+      var element = this.polygon(options); // $FlowFixMe
 
       element.drawingObject.getPointCountForAngle = function (angle) {
         var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
 
         if (options.fill) {
           return sidesToDraw + 2;
+        }
+
+        if (options.line && options.line.linePrimitives) {
+          return sidesToDraw * options.line.lineNum * 2;
         }
 
         return sidesToDraw * 6;
@@ -22830,7 +22877,10 @@ function circleCorner(p2in, p1, p3in, sides) {
   // unnoticable
 
 
+  var isZero = false; // let zeroMag = 0.0001;
+
   if (_2a === 0) {
+    isZero = true;
     _2a = 0.00001;
   }
 
@@ -22851,11 +22901,22 @@ function circleCorner(p2in, p1, p3in, sides) {
   var lineC2 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](center, p2);
   var angleC2 = lineC2.angle();
   var magC2 = lineC2.length();
-  points.push(p2);
+  points.push(p2); // If the angle is zero, then we want to draw a pho (very small) polyline
+  // that will simulate a radius at the end
 
-  for (var _i = 0; _i < sides - 1; _i += 1) {
-    var angle = angleC2 + (_i + 1) * delta;
-    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + magC2 * Math.cos(angle), center.y + magC2 * Math.sin(angle)));
+  if (isZero) {
+    var mag = 0.0001;
+    var ang12 = line12.angle() + Math.PI / 2;
+    var deltaZero = Math.PI / sides;
+
+    for (var _i = 0; _i <= sides; _i += 1) {
+      points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + mag * Math.cos(ang12 + deltaZero * _i), center.y + mag * Math.sin(ang12 + deltaZero * _i)));
+    }
+  } else {
+    for (var _i2 = 0; _i2 < sides - 1; _i2 += 1) {
+      var angle = angleC2 + (_i2 + 1) * delta;
+      points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + magC2 * Math.cos(angle), center.y + magC2 * Math.sin(angle)));
+    }
   }
 
   points.push(p3); // if (reverse) {
@@ -23167,25 +23228,62 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //                        inside
 //
 
-function lineSegmentsToPoints(lineSegments, insideIndex, outsideIndex) {
+function lineSegmentsToPoints(lineSegments, linePrimitives) {
+  var borderIs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'line';
+  var holeIs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'none';
   var tris = [];
   var border = [];
-  var hole = [];
+  var hole = [[]];
   lineSegments.forEach(function (lineSegment) {
-    var inside = lineSegment[insideIndex];
-    var outside = lineSegment[outsideIndex];
-    border.push(lineSegment[outsideIndex].p1._dup());
-    border.push(lineSegment[outsideIndex].p2._dup());
-    hole.push(lineSegment[insideIndex].p1._dup());
-    hole.push(lineSegment[insideIndex].p2._dup());
-    tris.push(inside.p1._dup());
-    tris.push(inside.p2._dup());
-    tris.push(outside.p1._dup());
-    tris.push(outside.p1._dup());
-    tris.push(inside.p2._dup());
-    tris.push(outside.p2._dup());
+    var negative = lineSegment[0];
+    var positive = lineSegment.slice(-1)[0];
+
+    if (linePrimitives) {
+      for (var l = 0; l < lineSegment.length; l += 1) {
+        tris.push(lineSegment[l].p1._dup());
+        tris.push(lineSegment[l].p2._dup());
+      }
+    } else {
+      tris.push(positive.p1._dup());
+      tris.push(positive.p2._dup());
+      tris.push(negative.p1._dup());
+      tris.push(negative.p1._dup());
+      tris.push(positive.p2._dup());
+      tris.push(negative.p2._dup());
+    }
+
+    if (borderIs === 'line') {
+      border.push([negative.p1._dup(), negative.p2._dup(), positive.p2._dup(), positive.p1._dup()]);
+    } else if (borderIs === 'negative') {
+      if (border.length === 0) {
+        border.push([]);
+      }
+
+      border[0].push(negative.p1._dup(), negative.p2._dup());
+    } else if (borderIs === 'positive') {
+      if (border.length === 0) {
+        border.push([]);
+      }
+
+      border[0].push(positive.p1._dup(), positive.p2._dup());
+    }
+
+    if (holeIs === 'positive') {
+      hole[0].push(positive.p1._dup(), positive.p2._dup());
+    } else if (holeIs === 'negative') {
+      hole[0].push(negative.p1._dup(), negative.p2._dup());
+    }
   });
-  return [tris, [border], [hole]];
+
+  if (Array.isArray(borderIs)) {
+    border = borderIs;
+  }
+
+  if (Array.isArray(holeIs)) {
+    hole = holeIs;
+  }
+
+  return [tris, border, hole];
 } // Extend two lines to their intersection point
 
 
@@ -23227,29 +23325,16 @@ mid, midNext, outside, outsideNext) {
 
   if (intercept.intersect != null) {
     outside.setP2(intercept.intersect);
-  } // intercept = tangent.intersectsWith(inside);
-  // if (intercept.intersect != null) {
-  //   inside.setP2(intercept.intersect);
-  // }
-
+  }
 
   intercept = tangent.intersectsWith(outsideNext);
 
   if (intercept.intersect != null) {
     outsideNext.setP1(intercept.intersect);
-  } // intercept = tangent.intersectsWith(insideNext);
-  // if (intercept.intersect != null) {
-  //   insideNext.setP1(intercept.intersect);
-  // }
-
+  }
 }
 
 function joinLinesAcuteInside(mid, midNext, inside, insideNext) {
-  // const intercept = inside.intersectsWith(insideNext);
-  // if (intercept.intersect != null) {
-  //   inside.setP2(intercept.intersect);
-  //   insideNext.setP1(intercept.intersect);
-  // }
   var intercept = inside.intersectsWith(midNext);
 
   if (intercept.intersect != null) {
@@ -23277,29 +23362,32 @@ function joinLinesObtuseInside(mid, midNext, inside, insideNext) {
   }
 }
 
-function makeLineSegments(points, offset, close, cornerStyle, widthIs) {
-  var mainLines = [];
+function makeLineSegments(points, width, close, cornerStyle, widthIs, isInside) {
+  var numLines = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 2;
+  var idealLines = [];
 
   var makeLine = function makeLine(p1, p2) {
     return new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Line"](p1, p2);
   };
 
   for (var i = 0; i < points.length - 1; i += 1) {
-    mainLines.push(makeLine(points[i], points[i + 1]));
+    idealLines.push(makeLine(points[i], points[i + 1]));
   }
 
   if (close) {
-    mainLines.push(makeLine(points[points.length - 1], points[0]));
-  }
+    idealLines.push(makeLine(points[points.length - 1], points[0]));
+  } // lineSegments should be more negative to more positive
+
 
   var lineSegments = [];
 
-  var makeOffsets = function makeOffsets(prev, current, next) {
+  var makeOffset = function makeOffset(prev, current, next, offset, index) {
     var minNegativeOffset = offset;
     var minPositiveOffset = offset;
+    var prevAngle = Math.PI;
 
     if (prev != null) {
-      var prevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(prev.p1, current.p1, current.p2);
+      prevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(prev.p1, current.p1, current.p2);
       var minPrevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngleMin"])(prev.p1, current.p1, current.p2);
       var minPrevOffset = current.distanceToPoint(prev.p1);
       var minOffset = Math.min(minPrevOffset, Math.tan(Math.abs(minPrevAngle)) * current.length()); // Negative side is inside angle
@@ -23311,8 +23399,10 @@ function makeLineSegments(points, offset, close, cornerStyle, widthIs) {
       }
     }
 
+    var nextAngle = Math.PI;
+
     if (next != null) {
-      var nextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(current.p1, current.p2, next.p2);
+      nextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(current.p1, current.p2, next.p2);
       var minNextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngleMin"])(current.p1, current.p2, next.p2);
       var minNextOffset = current.distanceToPoint(next.p2);
 
@@ -23323,40 +23413,83 @@ function makeLineSegments(points, offset, close, cornerStyle, widthIs) {
       } else if (nextAngle > Math.PI / 2 * 3) {
         minPositiveOffset = Math.min(minPositiveOffset, _minOffset);
       }
-    }
+    } // let negativeLine;
+    // let positiveLine;
 
-    var negativeLine;
-    var positiveLine;
 
-    if (cornerStyle === 'auto' && widthIs !== 'mid') {
-      negativeLine = current.offset('negative', minNegativeOffset);
-      positiveLine = current.offset('positive', minPositiveOffset);
+    var offsetLine; // console.log(widthIs)
+    // console.log(prevAngle, nextAngle)
+
+    if (widthIs === 'negative') {
+      if (cornerStyle === 'auto' && (isInside || prevAngle < Math.PI || nextAngle < Math.PI)) {
+        offsetLine = current.offset('negative', minNegativeOffset);
+      } else {
+        offsetLine = current.offset('negative', offset);
+      }
+    } else if (widthIs === 'positive') {
+      if (cornerStyle === 'auto' && (isInside || prevAngle > Math.PI || nextAngle > Math.PI)) {
+        // console.log('min')
+        offsetLine = current.offset('positive', minPositiveOffset);
+      } else {
+        offsetLine = current.offset('positive', offset);
+      } // otherwise widthIs === 'mid'
+
     } else {
-      negativeLine = current.offset('negative', offset);
-      positiveLine = current.offset('positive', offset);
-    }
+      offsetLine = current.offset('positive', offset);
+    } // if (cornerStyle === 'auto' && widthIs !== 'mid') {
+    //   negativeLine = current.offset('negative', minNegativeOffset);
+    //   positiveLine = current.offset('positive', minPositiveOffset);
+    // } else {
+    //   negativeLine = current.offset('negative', offset);
+    //   positiveLine = current.offset('positive', offset);
+    // }
 
-    lineSegments.push([positiveLine, current, negativeLine]);
+
+    lineSegments[index].push(offsetLine);
   };
 
-  for (var _i = 0; _i < mainLines.length; _i += 1) {
-    var prev = _i > 0 ? mainLines[_i - 1] : null;
-    var current = mainLines[_i];
-    var next = _i < mainLines.length - 1 ? mainLines[_i + 1] : null;
+  var step = width / (numLines - 1);
+
+  for (var _i = 0; _i < idealLines.length; _i += 1) {
+    var prev = _i > 0 ? idealLines[_i - 1] : null;
+    var current = idealLines[_i];
+    var next = _i < idealLines.length - 1 ? idealLines[_i + 1] : null;
 
     if (close && _i === 0) {
-      prev = mainLines[mainLines.length - 1];
+      prev = idealLines[idealLines.length - 1];
     }
 
-    if (close && _i === mainLines.length - 1) {
+    if (close && _i === idealLines.length - 1) {
       // eslint-disable-next-line prefer-destructuring
-      next = mainLines[0];
+      next = idealLines[0];
     }
 
-    makeOffsets(prev, current, next);
+    lineSegments.push([]);
+
+    if (widthIs === 'negative' || widthIs === 'positive') {
+      lineSegments[_i].push(current._dup());
+    } else if (numLines === 1) {
+      lineSegments[_i].push(current._dup());
+    } else {
+      var offsetLine = current.offset('negative', width / 2);
+
+      lineSegments[_i].push(offsetLine);
+    }
+
+    for (var l = 1; l < numLines; l += 1) {
+      if (widthIs === 'negative' || widthIs === 'positive') {
+        makeOffset(prev, current, next, l * step, _i);
+      } else {
+        makeOffset(prev, current, next, -width / 2 + l * step, _i);
+      }
+    }
+
+    if (widthIs === 'negative') {
+      lineSegments[_i].reverse();
+    }
   }
 
-  return lineSegments;
+  return [idealLines, lineSegments];
 }
 
 function getWidthIs(points, close, widthIs) {
@@ -23409,134 +23542,137 @@ function makeThickLine(points) {
   var close = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var corner = arguments.length > 4 ? arguments[4] : undefined;
   var minAngleIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Math.PI / 7;
-  var widthToUse = width;
+  var linePrimitives = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
+  var lineNum = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+  var borderIs = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'line';
+  var holeIs = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'none';
+  var widthToUse = width; // if (widthIsIn === 'mid') {
+  //   widthToUse = width / 2;
+  // }
 
-  if (widthIsIn === 'mid') {
-    widthToUse = width / 2;
-  }
+  var widthIs = getWidthIs(points, close, widthIsIn);
 
-  var lineSegments = makeLineSegments(points, widthToUse, close, corner, widthIsIn);
-  var widthIs = getWidthIs(points, close, widthIsIn); // Join line segments based on the angle between them
+  var _makeLineSegments = makeLineSegments(points, widthToUse, close, corner, widthIs, widthIsIn === 'inside', lineNum),
+      _makeLineSegments2 = _slicedToArray(_makeLineSegments, 2),
+      idealLines = _makeLineSegments2[0],
+      lineSegments = _makeLineSegments2[1]; // Join line segments based on the angle between them
+
 
   var minAngle = minAngleIn == null ? 0 : minAngleIn;
 
-  var joinLineSegments = function joinLineSegments(current, next) {
-    var _lineSegments$current = _slicedToArray(lineSegments[current], 3),
-        positive = _lineSegments$current[0],
-        mid = _lineSegments$current[1],
-        negative = _lineSegments$current[2];
-
-    var _lineSegments$next = _slicedToArray(lineSegments[next], 3),
-        positiveNext = _lineSegments$next[0],
-        midNext = _lineSegments$next[1],
-        negativeNext = _lineSegments$next[2];
+  var joinLineSegments = function joinLineSegments(currentIndex, nextIndex, lineIndex) {
+    var mid = idealLines[currentIndex];
+    var midNext = idealLines[nextIndex];
+    var lineSegment = lineSegments[currentIndex][lineIndex];
+    var lineSegmentNext = lineSegments[nextIndex][lineIndex]; // const [positive, mid, negative] = lineSegments[current];
+    // const [positiveNext, midNext, negativeNext] = lineSegments[next];
 
     var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(mid.p1, mid.p2, midNext.p2); // If the angle is less than 180, then the 'negative' line segments are
     // on the outside of the angle.
+    // console.log(currentIndex, lineIndex, angle)
 
     if (0 < angle && angle < minAngle) {
       if (widthIs === 'mid') {
-        joinLinesInTangent(mid, midNext, negative, negativeNext);
-        joinLinesInTangent(mid, midNext, positive, positiveNext);
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext); // joinLinesInTangent(mid, midNext, positive, positiveNext);
       } else if (widthIs === 'negative') {
-        joinLinesAcuteInside(mid, midNext, negative, negativeNext);
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesInTangent(mid, midNext, positive, positiveNext);
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
       }
     } else if (minAngle <= angle && angle <= Math.PI / 2) {
       if (widthIs === 'mid') {
-        joinLinesInPoint(negative, negativeNext);
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'negative') {
-        joinLinesAcuteInside(mid, midNext, negative, negativeNext);
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
       } // If the angle is greater than the minAngle, then the line segments can
       // be connected directly
 
     } else if (Math.PI / 2 <= angle && angle < Math.PI) {
       if (widthIs === 'mid') {
-        joinLinesInPoint(negative, negativeNext);
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'negative') {
-        joinLinesObtuseInside(mid, midNext, negative, negativeNext);
+        joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
       }
     } else if (angle === Math.PI) {
       if (widthIs === 'negative') {
         if (widthIsIn === 'inside') {
-          joinLinesObtuseInside(mid, midNext, negative, negativeNext);
+          joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
         } else {
-          joinLinesInPoint(negative, negativeNext);
+          joinLinesInPoint(lineSegment, lineSegmentNext);
         }
       } else if (widthIs === 'positive') {
         if (widthIsIn === 'inside') {
-          joinLinesObtuseInside(mid, midNext, positive, positiveNext);
+          joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
         } else {
-          joinLinesInPoint(positive, positiveNext);
+          joinLinesInPoint(lineSegment, lineSegmentNext);
         }
       } // If the angle is greater than 180, then the positive side is on the
       // inside of the angle
 
     } else if (Math.PI < angle && angle < Math.PI / 2 * 3) {
       if (widthIs === 'mid') {
-        joinLinesInPoint(negative, negativeNext);
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'negative') {
-        joinLinesInPoint(negative, negativeNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesObtuseInside(mid, midNext, positive, positiveNext);
+        joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
       } //
 
     } else if (Math.PI / 2 * 3 <= angle && angle <= Math.PI * 2 - minAngle) {
       if (widthIs === 'mid') {
-        joinLinesInPoint(negative, negativeNext);
-        joinLinesInPoint(positive, positiveNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'negative') {
-        joinLinesInPoint(negative, negativeNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesAcuteInside(mid, midNext, positive, positiveNext);
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
       } //
 
     } else if (Math.PI * 2 - minAngle < angle && angle < Math.PI * 2) {
       if (widthIs === 'mid') {
-        joinLinesInTangent(mid, midNext, negative, negativeNext);
-        joinLinesInTangent(mid, midNext, positive, positiveNext);
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext); // joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
       } else if (widthIs === 'negative') {
-        joinLinesInTangent(mid, midNext, negative, negativeNext);
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
       } else if (widthIs === 'positive') {
-        joinLinesAcuteInside(mid, midNext, positive, positiveNext);
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
       }
-    } else if (angle === Math.PI * 2 || angle === 0) {
-      if (widthIs === 'mid') {
-        joinLinesInPoint(negative, negativeNext);
-        joinLinesInPoint(positive, positiveNext);
-      } else if (widthIs === 'negative') {
-        joinLinesInPoint(negative, negativeNext);
-      } else if (widthIs === 'positive') {
-        joinLinesInPoint(positive, positiveNext);
-      }
-    }
+    } else if (angle === Math.PI * 2 || angle === 0) {} // do nothing
+    // if (widthIs === 'mid') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    //   // joinLinesInPoint(lineSegment, lineSegmentNext);
+    // } else if (widthIs === 'negative') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    // } else if (widthIs === 'positive') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    // }
+    // if (lineSegments.length >= 2) {
+    //   console.log(currentIndex, lineIndex, lineSegments[2][0]._dup())
+    // }
+
   }; // Create fill triangles between the positive & mid, and negative and mid lines
 
 
   var cornerFills = [];
 
-  var createFill = function createFill(current, next) {
-    var _lineSegments$current2 = _slicedToArray(lineSegments[current], 3),
-        positive = _lineSegments$current2[0],
-        mid = _lineSegments$current2[1],
-        negative = _lineSegments$current2[2];
-
-    var _lineSegments$next2 = _slicedToArray(lineSegments[next], 3),
-        positiveNext = _lineSegments$next2[0],
-        midNext = _lineSegments$next2[1],
-        negativeNext = _lineSegments$next2[2];
-
+  var createFill = function createFill(currentIndex, nextIndex) {
+    var mid = idealLines[currentIndex];
+    var midNext = idealLines[nextIndex];
+    var positive = lineSegments[currentIndex].slice(-1)[0];
+    var positiveNext = lineSegments[nextIndex].slice(-1)[0];
+    var negative = lineSegments[currentIndex][0];
+    var negativeNext = lineSegments[nextIndex][0];
     var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(mid.p1, mid.p2, midNext.p2);
 
-    if (angle < Math.PI) {
+    if (linePrimitives) {
+      for (var i = 0; i < lineSegments[currentIndex].length; i += 1) {
+        cornerFills.push(lineSegments[currentIndex][i].p2._dup());
+        cornerFills.push(lineSegments[nextIndex][i].p1._dup());
+      }
+    } else if (angle < Math.PI) {
       if (widthIsIn !== 'inside') {
         cornerFills.push(positive.p2._dup());
         cornerFills.push(mid.p2._dup());
@@ -23554,46 +23690,35 @@ function makeThickLine(points) {
 
 
   if (corner !== 'none') {
-    for (var i = 0; i < lineSegments.length - 1; i += 1) {
-      if (corner === 'auto') {
-        joinLineSegments(i, i + 1);
-      } else {
-        createFill(i, i + 1);
+    for (var l = 0; l < lineNum; l += 1) {
+      for (var i = 0; i < lineSegments.length - 1; i += 1) {
+        if (corner === 'auto') {
+          joinLineSegments(i, i + 1, l);
+        } else if (l === 0) {
+          createFill(i, i + 1);
+        }
+      }
+
+      if (close) {
+        if (corner === 'auto') {
+          joinLineSegments(lineSegments.length - 1, 0, l);
+        } else if (l === 0) {
+          createFill(lineSegments.length - 1, 0);
+        }
       }
     }
-
-    if (close) {
-      if (corner === 'auto') {
-        joinLineSegments(lineSegments.length - 1, 0);
-      } else {
-        createFill(lineSegments.length - 1, 0);
-      }
-    }
   }
 
-  var insideSegmentIndex = 0;
-  var outsideSegmentIndex = 2;
-
-  if (widthIs === 'negative') {
-    insideSegmentIndex = 1;
-  }
-
-  if (widthIs === 'positive') {
-    outsideSegmentIndex = 1;
-  }
-
-  var _lineSegmentsToPoints = lineSegmentsToPoints(lineSegments, insideSegmentIndex, outsideSegmentIndex),
+  var _lineSegmentsToPoints = lineSegmentsToPoints(lineSegments, linePrimitives, borderIs, holeIs),
       _lineSegmentsToPoints2 = _slicedToArray(_lineSegmentsToPoints, 3),
       tris = _lineSegmentsToPoints2[0],
       border = _lineSegmentsToPoints2[1],
-      hole = _lineSegmentsToPoints2[2]; // const [tris, border, hole] = lineSegmentsToPoints(lineSegments, 0, 2);
+      hole = _lineSegmentsToPoints2[2]; // if (close === false) {
+  //   return [[...tris, ...cornerFills], [[...border[0]], [...hole]];
+  // }
 
 
-  if (close === false) {
-    return [[].concat(_toConsumableArray(tris), cornerFills), [[].concat(_toConsumableArray(border[0]), _toConsumableArray(hole[0].reverse()))], [[]]];
-  }
-
-  return [[].concat(_toConsumableArray(tris), cornerFills), border, hole]; // return [...lineSegmentsToPoints(lineSegments, 0, 2), ...cornerFills];
+  return [[].concat(_toConsumableArray(tris), cornerFills), border, hole];
 }
 
 function makePolyLine(pointsIn) {
@@ -23605,6 +23730,10 @@ function makePolyLine(pointsIn) {
   var cornerSides = arguments.length > 6 ? arguments[6] : undefined;
   var minAutoCornerAngle = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : Math.PI / 7;
   var dash = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : [];
+  var linePrimitives = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
+  var lineNum = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 1;
+  var borderIs = arguments.length > 11 ? arguments[11] : undefined;
+  var holeIs = arguments.length > 12 ? arguments[12] : undefined;
   var points = [];
   var cornerStyleToUse;
   var orderedPoints = pointsIn; // const orderedPoints = setPointOrder(pointsIn, close, widthIs);
@@ -23639,7 +23768,7 @@ function makePolyLine(pointsIn) {
     var dashedBorder = [[]];
     var dashedHole = [[]];
     dashes.forEach(function (d) {
-      var _makeThickLine = makeThickLine(d, width, widthIs, closeDashes, cornerStyleToUse, minAutoCornerAngle),
+      var _makeThickLine = makeThickLine(d, width, widthIs, closeDashes, cornerStyleToUse, minAutoCornerAngle, linePrimitives, lineNum, borderIs, holeIs),
           _makeThickLine2 = _slicedToArray(_makeThickLine, 3),
           tris = _makeThickLine2[0],
           border = _makeThickLine2[1],
@@ -23652,7 +23781,7 @@ function makePolyLine(pointsIn) {
     return [dashedTris, dashedBorder, dashedHole];
   }
 
-  return makeThickLine(points, width, widthIs, close, cornerStyleToUse, minAutoCornerAngle);
+  return makeThickLine(points, width, widthIs, close, cornerStyleToUse, minAutoCornerAngle, linePrimitives, lineNum, borderIs, holeIs);
 }
 
 function makePolyLineCorners(pointsIn) {
@@ -23664,13 +23793,15 @@ function makePolyLineCorners(pointsIn) {
   var cornerSize = arguments.length > 6 ? arguments[6] : undefined;
   var cornerSides = arguments.length > 7 ? arguments[7] : undefined;
   var minAutoCornerAngle = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : Math.PI / 7;
+  var linePrimitives = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
+  var lineNum = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 1;
   // split line into corners
   var corners = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["lineToCorners"])(pointsIn, close, cornerLength, false);
   var tris = [];
   var borders = [];
   var holes = [];
   corners.forEach(function (corner) {
-    var _makePolyLine = makePolyLine(corner, width, false, widthIs, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle),
+    var _makePolyLine = makePolyLine(corner, width, false, widthIs, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle, [], linePrimitives, lineNum, 'line', 'none'),
         _makePolyLine2 = _slicedToArray(_makePolyLine, 3),
         t = _makePolyLine2[0],
         b = _makePolyLine2[1],
@@ -29167,9 +29298,11 @@ function (_DiagramElement) {
             for (var j = 0; j < holeBoundaries.length; j += 1) {
               var holeBoundary = holeBoundaries[j];
 
-              if (glLocation.isInPolygon(holeBoundary)) {
-                isTouched = false;
-                j = holeBoundaries.length;
+              if (Array.isArray(holeBoundary) && holeBoundary.length > 2) {
+                if (glLocation.isInPolygon(holeBoundary)) {
+                  isTouched = false;
+                  j = holeBoundaries.length;
+                }
               }
             }
           }
@@ -29540,9 +29673,13 @@ function (_DiagramElement) {
       }
 
       if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        for (var i = 0; i < this.drawingObject.border[0].length; i += 1) {
-          this.drawingObject.border[0][i].x *= xMulToUse;
-          this.drawingObject.border[0][i].y *= yMulToUse;
+        for (var b = 0; b < this.drawingObject.border.length; b += 1) {
+          var border = this.drawingObject.border[b];
+
+          for (var i = 0; i < border.length; i += 1) {
+            border[i].x *= xMulToUse;
+            border[i].y *= yMulToUse;
+          }
         }
       }
     }
