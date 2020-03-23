@@ -72,7 +72,7 @@ export default function diagramLayout() {
   };
   layout.arc = {
     name: 'arc',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width,
       radius,

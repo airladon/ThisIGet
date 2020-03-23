@@ -147,14 +147,15 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           fill: false,
           radius: layout.circumferenceRadius,
           width: layout.circumferenceLineWidth,
           sides: 300,
           color: colors.dimensions,
-          clockwise: true,
+          // clockwise: true,
+          direction: -1,
           transform: new Transform('Circle').scale(1, 1).translate(0, 0),
         },
       },
