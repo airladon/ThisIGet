@@ -108,7 +108,7 @@ export default function diagramLayout() {
     name: 'triangle',
     method: 'polygon',
     options: {
-      width: 0.05,
+      width: 0.03,
       color: colors.sides,
       sides: 3,
       radius: 0.84,
