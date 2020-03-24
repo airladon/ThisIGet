@@ -387,7 +387,7 @@ class Content extends PresentationFormatContent {
     content = {
       setContent: 'We can now calculate the area of the |large_square|.',
       modifiers: {
-        large_square: click(coll.pulseLargeSquare, [coll], colors.sides),
+        large_square: click(coll.pulseLargeSquare, [coll, null], colors.sides),
       },
     };
 
