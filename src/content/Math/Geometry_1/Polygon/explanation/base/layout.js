@@ -57,7 +57,7 @@ export default function diagramLayout() {
   ];
 
   // eslint-disable-next-line max-len
-  const poly = (name, points, pos = [0, 0], scale = 1, sideLabel = null, angleLabel = undefined) => {
+  const poly = (name, points, pos = [0, 0], scale = 1, sideLabel = null, angleLabel = undefined, widthIs: 'inside' | 'mid' = 'mid') => {
     const t = new Transform().scale(scale, scale);
     const pointsToUse = points.map(p => (new Point(p[0], p[1])).transformBy(t.matrix()));
 
@@ -69,6 +69,7 @@ export default function diagramLayout() {
         width,
         color: colors.sides,
         close: true,
+        widthIs,
       },
       mods: {
         scenarios: {
@@ -204,7 +205,7 @@ export default function diagramLayout() {
       curve: {
         radius,
         width: radius,
-        sides: 200,
+        sides: 300,
       },
       color: colors.angleFill,
     },
@@ -598,7 +599,7 @@ export default function diagramLayout() {
         options: {
           sides: 100,
           color: colors.split,
-          radius: 1.2,
+          radius: 1.21,
           width: 0.01,
         },
       },
@@ -635,7 +636,7 @@ export default function diagramLayout() {
       mark('r4', 4, null, 2, colors.split, 0.15),
       // mark('m4', 4, 5),
       // mark('m5', 5, 0),
-      poly('line', sPoints),
+      poly('line', sPoints, [0, 0], 1, null, undefined, 'mid'),
     ],
     options: {
       pulse: 1.2,

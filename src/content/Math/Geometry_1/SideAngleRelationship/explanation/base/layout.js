@@ -275,6 +275,7 @@ export default function diagramLayout() {
     method: 'polyline',
     options: {
       width: width * 0.7,
+      widthIs: 'inside',
       close: true,
       color: colors.sides,
       angle: [
@@ -301,6 +302,7 @@ export default function diagramLayout() {
     method: 'polyline',
     options: {
       width: width * 0.7,
+      widthIs: 'inside',
       close: true,
       color: colors.sides,
       angle: [
