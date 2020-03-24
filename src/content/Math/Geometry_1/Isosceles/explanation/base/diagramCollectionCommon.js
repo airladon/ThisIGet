@@ -137,9 +137,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setScenarios('separate');
     this._correction.hide();
     this.animations.new()
-      .scenarios({ target: 'combined', duration: 1 })
+      .inParallel([
+        this.anim.scenarios({ target: 'combined', duration: 1 }),
+        this.anim.trigger({
+          callback: () => { this._correction.showAll(); },
+          delay: 0.9,
+        }),
+      ])
       .whenFinished(() => {
-        this._correction.showAll();
+        // this._correction.showAll();
         if (done != null) {
           done();
         }

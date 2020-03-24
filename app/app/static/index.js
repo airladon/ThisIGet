@@ -1149,7 +1149,7 @@ function () {
   }, {
     key: "finishIfZeroDuration",
     value: function finishIfZeroDuration() {
-      if (this.duration === 0) {
+      if (this.duration === 0 && this.startDelay === 0) {
         this.finish();
       }
     } // eslint-disable-next-line class-methods-use-this, no-unused-vars
@@ -21234,7 +21234,7 @@ function () {
       var defaultOptions = {
         points: [],
         border: null,
-        holeBorder: null,
+        hole: null,
         drawType: 'triangles',
         color: [1, 0, 0, 1],
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('generic').standard(),
@@ -21264,7 +21264,7 @@ function () {
       });
 
       var parseBorder = function parseBorder(borders) {
-        if (borders == null) {
+        if (borders == null || !Array.isArray(borders)) {
           return null;
         }
 
@@ -21280,7 +21280,7 @@ function () {
       };
 
       var parsedBorder = parseBorder(options.border);
-      var parsedBorderHoles = parseBorder(options.holeBorder); // console.log(parsedPoints)
+      var parsedBorderHoles = parseBorder(options.hole); // console.log(parsedPoints)
 
       var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad);
 
@@ -21343,20 +21343,7 @@ function () {
           _getTris2 = _slicedToArray(_getTris, 3),
           triangles = _getTris2[0],
           borders = _getTris2[1],
-          holes = _getTris2[2]; // const element = Generic(
-      //   this.webgl,
-      //   triangles,
-      //   borders,
-      //   holes,
-      //   'triangles',
-      //   options.color,
-      //   options.transform,
-      //   this.limits,
-      //   options.textureLocation,
-      //   options.textureVertexSpace,
-      //   options.textureCoords,
-      // );
-
+          holes = _getTris2[2];
 
       var element = this.generic(options, {
         drawType: options.linePrimitives ? 'lines' : 'triangles',
@@ -21419,6 +21406,7 @@ function () {
         element = this.generic(options, {
           drawType: 'fan',
           points: fan,
+          // $FlowFixMe
           border: [_toConsumableArray(fan.slice(1, -1))]
         });
       } else {
@@ -21866,93 +21854,122 @@ function () {
       }
 
       return element;
-    }
-  }, {
-    key: "polygonLegacy",
-    value: function polygonLegacy() {
-      var defaultOptions = {
-        sides: 4,
-        radius: 1,
-        width: 0.01,
-        rotation: 0,
-        clockwise: false,
-        sidesToDraw: null,
-        color: [1, 0, 0, 1],
-        fill: false,
-        textureLocation: '',
-        // If including a texture, make sure to use
-        textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
-        // correct shader in diagram
-        onLoad: this.animateNextFrame,
-        mods: {},
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
-        position: null,
-        center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        trianglePrimitives: false,
-        linePrimitives: false,
-        angleToDraw: null
-      };
+    } // polygonLegacy(...optionsIn: Array<OBJ_Polygon>) {
+    //   const defaultOptions = {
+    //     sides: 4,
+    //     radius: 1,
+    //     width: 0.01,
+    //     rotation: 0,
+    //     clockwise: false,
+    //     sidesToDraw: null,
+    //     color: [1, 0, 0, 1],
+    //     fill: false,
+    //     textureLocation: '',        // If including a texture, make sure to use
+    //     textureCoords: new Rect(0, 0, 1, 1),  // correct shader in diagram
+    //     onLoad: this.animateNextFrame,
+    //     mods: {},
+    //     transform: new Transform('polygon').standard(),
+    //     position: null,
+    //     center: new Point(0, 0),
+    //     trianglePrimitives: false,
+    //     linePrimitives: false,
+    //     angleToDraw: null,
+    //   };
+    //   const options = Object.assign({}, defaultOptions, ...optionsIn);
+    //   // const o = optionsToUse;
+    //   // let { transform } = options;
+    //   // if (transform == null) {
+    //   //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
+    //   // }
+    //   if (options.position != null) {
+    //     const point = getPoint(options.position);
+    //     options.transform.updateTranslation(point);
+    //   }
+    //   if (options.center != null) {
+    //     options.center = getPoint(options.center);
+    //   }
+    //   if (options.sidesToDraw == null) {
+    //     options.sidesToDraw = options.sides;
+    //   }
+    //   if (options.angleToDraw != null) {
+    //     options.sidesToDraw = Math.max(
+    //       0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides),
+    //     );
+    //   }
+    //   let direction = 1;
+    //   if (options.clockwise) {
+    //     direction = -1;
+    //   }
+    //   let element;
+    //   if (options.linePrimitives) {
+    //     element = PolygonLine(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.width,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //     );
+    //   } else if (options.fill) {
+    //     element = PolygonFilled(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.center,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //       options.textureLocation,
+    //       options.textureCoords,
+    //       options.onLoad,
+    //     );
+    //   } else {
+    //     element = Polygon(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.width,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.center,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //       options.trianglePrimitives,
+    //     );
+    //   }
+    //   if (options.pulse != null && typeof element.pulseDefault !== 'function') {
+    //     element.pulseDefault.scale = options.pulse;
+    //   }
+    //   if (options.mods != null && options.mods !== {}) {
+    //     element.setProperties(options.mods);
+    //   }
+    //   return element;
+    // }
+    // polygonLine(
+    //   numSides: number,
+    //   radius: number,
+    //   rotation: number,
+    //   direction: -1 | 1,
+    //   numSidesToDraw: number,
+    //   numLines: number,     // equivalent to thickness - integer
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return PolygonLine(
+    //     this.webgl, numSides, radius,
+    //     rotation, direction, numSidesToDraw, numLines, color, transform, this.limits,
+    //   );
+    // }
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
-      }
-
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
-      // let { transform } = options;
-      // if (transform == null) {
-      //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
-      // }
-
-      if (options.position != null) {
-        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(point);
-      }
-
-      if (options.center != null) {
-        options.center = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.center);
-      }
-
-      if (options.sidesToDraw == null) {
-        options.sidesToDraw = options.sides;
-      }
-
-      if (options.angleToDraw != null) {
-        options.sidesToDraw = Math.max(0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides));
-      }
-
-      var direction = 1;
-
-      if (options.clockwise) {
-        direction = -1;
-      }
-
-      var element;
-
-      if (options.linePrimitives) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
-      } else if (options.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
-      } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
-      }
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
-      }
-
-      return element;
-    }
-  }, {
-    key: "polygonLine",
-    value: function polygonLine(numSides, radius, rotation, direction, numSidesToDraw, numLines, // equivalent to thickness - integer
-    color) {
-      var transform = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
-    }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
@@ -21972,8 +21989,8 @@ function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22023,8 +22040,8 @@ function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22064,8 +22081,8 @@ function () {
         position: null
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22098,8 +22115,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22128,8 +22145,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22189,8 +22206,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-          moreOptions[_key18 - 1] = arguments[_key18];
+        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+          moreOptions[_key17 - 1] = arguments[_key17];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -22308,8 +22325,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22458,8 +22475,8 @@ function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22515,8 +22532,8 @@ function () {
         position: null
       };
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
-        optionsIn[_key21] = arguments[_key21];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
