@@ -117,7 +117,7 @@ export default function diagramLayout() {
       addElements: [
         {
           name: 'tri1',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             points: simPoints1,
             color: colors.lines,
@@ -143,7 +143,7 @@ export default function diagramLayout() {
         },
         {
           name: 'tri2',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             points: simPoints2,
             color: colors.lines,
@@ -269,7 +269,7 @@ export default function diagramLayout() {
         },
         {
           name: 'line',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             points,
             color: colors.lines,
@@ -394,7 +394,7 @@ export default function diagramLayout() {
             },
             {
               name: 'line',
-              method: 'polyLine',
+              method: 'polyline',
               options: {
                 points: [
                   historyPoints[0],

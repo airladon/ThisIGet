@@ -147,9 +147,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseMarks(id: number) {
+  pulseMarks(id: number | string) {
     const element = this._circle[`_marks${id}`];
-    element.pulseScaleNow(1, 1.1);
+    element.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();
   }
 

@@ -112,21 +112,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
 /* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/styleSheets */ "./src/js/tools/styleSheets.js");
-/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
-/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
+/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+
 
 
 
@@ -164,7 +166,8 @@ var tools = {
   color: _js_tools_color__WEBPACK_IMPORTED_MODULE_3__,
   css: _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_6__,
   html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__,
-  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__
+  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__,
+  lines: _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_7__
 };
 /**
  * FigureOne entry point
@@ -178,29 +181,29 @@ var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
   //
-  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElement"],
-  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementCollection"],
-  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementPrimitive"],
-  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__["default"],
-  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__["default"],
+  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElement"],
+  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElementCollection"],
+  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElementPrimitive"],
+  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_9__["default"],
+  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_10__["default"],
   //
-  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__["default"],
-  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__["default"],
-  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["TextObject"],
-  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramText"],
-  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramFont"],
-  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__["default"],
+  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__["default"],
+  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__["default"],
+  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["TextObject"],
+  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramText"],
+  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramFont"],
+  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__["default"],
   //
-  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__["default"],
-  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__["default"],
-  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_17__["default"],
-  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__["default"],
-  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__["default"],
+  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__["default"],
+  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__["default"],
+  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_18__["default"],
+  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_19__["default"],
+  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_20__["default"],
   //
-  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__["Equation"],
+  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__["default"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__["Equation"],
   //
-  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__["default"],
+  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__["default"],
   //
   Point: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"],
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
@@ -1146,7 +1149,7 @@ function () {
   }, {
     key: "finishIfZeroDuration",
     value: function finishIfZeroDuration() {
-      if (this.duration === 0) {
+      if (this.duration === 0 && this.startDelay === 0) {
         this.finish();
       }
     } // eslint-disable-next-line class-methods-use-this, no-unused-vars
@@ -4778,8 +4781,8 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
   var getMethod = function getMethod(method) {
     var methods = {
       collection: shapes.collection.bind(shapes),
-      polyLine: objects.polyLine.bind(objects),
-      polyLineCorners: shapes.polyLineCorners.bind(shapes),
+      polyline: objects.polyline.bind(objects),
+      // polylineCorners: shapes.polylineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       fan: shapes.fan.bind(shapes),
@@ -5122,7 +5125,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
  // import BaseEquationFunction from './BaseEquationFunction';
 // import type { TypeParsablePoint } from '../../../../tools/g2';
-// import type {TypeAnnotation } from './Base'
+// import type {EQN_Annotation } from './Base'
 // import {
 //   DiagramElementPrimitive, DiagramElementCollection,
 // } from '../../../Element';
@@ -5130,14 +5133,15 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
  // import { Element, Elements } from './Element';
 
 // import Symbol from '../Symbols/Symbol';
+ // eslint-disable-next-line import/no-cycle
+// import type { TypeEquationPhrase } from '../EquationFunctions';
 
-
-// export type TypeGlyphsIn = {
+// export type EQN_GlyphsIn = {
 //   left?: TypeAnnotatedGlyph;
 //   right?: TypeAnnotatedGlyph;
 //   top?: TypeAnnotatedGlyph;
 //   bottom?: TypeAnnotatedGlyph;
-//   encompass?: TypeEncompassGlyphIn;
+//   encompass?: EQN_EncompassGlyphIn;
 // };
 function copyAnnotation(annotation, namedCollection) {
   return {
@@ -7220,11 +7224,11 @@ function (_BaseEquationFunction) {
         }
 
         for (var _row = 0; _row < numRows; _row += 1) {
-          rowBounds.heights[_row] = dim.x;
+          rowBounds.heights[_row] = dim.y;
         }
 
         for (var _col = 0; _col < numCols; _col += 1) {
-          colWidths[_col] = dim.y;
+          colWidths[_col] = dim.x;
         }
       }
 
@@ -7466,7 +7470,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 /**
  * An Equation is a collection of elements that can be arranged into different
  * forms.
- * @param {TypeEquationOptions} options
+ * @param {EQN_Equation} options
  * @example
  * // Create with options object
  * eqn = new Equation({
@@ -9502,6 +9506,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // eslint-disable-next-line import/no-cycle
+// import type {
+//   EQN_Annotation, EQN_EncompassGlyph, EQN_LeftRightGlyph, EQN_TopBottomGlyph,
+// } from './Elements/BaseAnnotationFunction';
 
 function getDiagramElement(elementsObject, name) {
   if (typeof name !== 'string') {
@@ -9530,7 +9538,7 @@ function getDiagramElement(elementsObject, name) {
  * can either be the entirety of the form definition, or a series of nested
  * phrases.
  *
- *  * An object or array definition (e.g. {@link TypeEquationFunctionFraction})
+ *  * An object or array definition (e.g. {@link EQN_Fraction})
  *  * A string that represents an equation element
  *  * An array of {@link TypeEquationPhrase}
  *
@@ -9556,10 +9564,6 @@ function getDiagramElement(elementsObject, name) {
 // The problem is then the first arguement can be so many types, some of which
 // are subsets of the other, then when its parameters are extracted, their type
 // is all confused.
-
-/**
- * Functions used in making equation forms
- */
 var EquationFunctions =
 /*#__PURE__*/
 function () {
@@ -10028,7 +10032,7 @@ function () {
       var fullContentBounds;
       var useFullBounds;
       var defaultOptions = {
-        side: 'top',
+        inSize: true,
         space: 0.03,
         overhang: 0,
         length: null,
@@ -10036,9 +10040,9 @@ function () {
         right: null,
         top: null,
         bottom: null,
-        inSize: true,
-        minContentDescent: null,
+        side: 'top',
         minContentHeight: null,
+        minContentDescent: null,
         minContentAscent: null,
         descent: null,
         fullContentBounds: false,
@@ -10263,9 +10267,9 @@ function () {
         glyphsToUse[side] = {};
         var glyphAnnotationsToProcess = glyphSide.annotations; // $FlowFixMe
 
-        if (glyphSide.annotate != null) {
+        if (glyphSide.annotation != null) {
           // $FlowFixMe
-          glyphAnnotationsToProcess = [glyphSide.annotate];
+          glyphAnnotationsToProcess = [glyphSide.annotation];
         }
 
         var glyphAnnotationsToUse = fillAnnotations(glyphAnnotationsToProcess);
@@ -10813,11 +10817,11 @@ function () {
       var brac;
       var fullContentBounds;
       var defaultOptions = {
-        space: [0.05, 0.05],
-        fit: 'min',
         contentScale: 0.7,
-        brac: {},
+        fit: 'min',
+        space: [0.05, 0.05],
         yAlign: 'baseline',
+        brac: {},
         fullContentBounds: false
       };
 
@@ -10919,17 +10923,15 @@ function () {
       var fullBoundsContent;
       var useFullBounds;
       var defaultOptions = {
+        inSize: true,
         space: 0.05,
         topSpace: 0.1,
         bottomSpace: 0.1,
         height: null,
         yOffset: 0,
-        inSize: true,
         contentScale: 1,
         fromScale: 0.5,
         toScale: 0.5,
-        // fromSpace: 0.01,
-        // toSpace: 0.01,
         fromOffset: [0, 0],
         toOffset: [0.04, 0],
         limitsPosition: 'side',
@@ -11146,12 +11148,12 @@ function () {
       var fullBoundsContent;
       var useFullBounds;
       var defaultOptions = {
+        inSize: true,
         space: 0.05,
         topSpace: 0.07,
         bottomSpace: 0.07,
         height: null,
         yOffset: 0,
-        inSize: true,
         contentScale: 1,
         fromScale: 0.5,
         toScale: 0.5,
@@ -11518,9 +11520,9 @@ function () {
       var content;
       var comment;
       var symbol;
-      var space;
+      var commentSpace;
       var scale;
-      var overhang;
+      var space;
       var inSize;
 
       if (Array.isArray(optionsOrContent)) {
@@ -11533,7 +11535,7 @@ function () {
         inSize = _optionsOrContent2[3];
         space = _optionsOrContent2[4];
         scale = _optionsOrContent2[5];
-        overhang = _optionsOrContent2[6];
+        commentSpace = _optionsOrContent2[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -11541,23 +11543,23 @@ function () {
         inSize = optionsOrContent.inSize;
         space = optionsOrContent.space;
         scale = optionsOrContent.scale;
-        overhang = optionsOrContent.overhang;
+        commentSpace = optionsOrContent.commentSpace;
       }
 
       var optionsIn = {
         inSize: inSize,
-        space: space,
+        commentSpace: commentSpace,
         scale: scale,
-        overhang: overhang
+        space: space
       };
       var defaultOptions = {
-        space: 0.1,
-        overhang: 0,
+        space: 0,
         scale: 0.5,
+        commentSpace: 0.1,
         inSize: true
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
-      return [content, symbol, comment, options.inSize, options.space, options.scale, options.overhang];
+      return [content, symbol, comment, options.inSize, options.commentSpace, options.scale, options.space];
     } // $FlowFixMe
 
   }, {
@@ -11569,9 +11571,9 @@ function () {
           symbol = _this$processStrike2[1],
           comment = _this$processStrike2[2],
           inSize = _this$processStrike2[3],
-          space = _this$processStrike2[4],
+          commentSpace = _this$processStrike2[4],
           scale = _this$processStrike2[5],
-          overhang = _this$processStrike2[6];
+          space = _this$processStrike2[6];
 
       var annotations = [{
         content: comment,
@@ -11579,7 +11581,7 @@ function () {
         yPosition: 'top',
         xAlign: 'center',
         yAlign: 'bottom',
-        offset: [0, space],
+        offset: [0, commentSpace],
         scale: scale
       }];
       return this.annotate({
@@ -11590,7 +11592,7 @@ function () {
           encompass: {
             // $FlowFixMe
             symbol: symbol,
-            space: overhang,
+            space: space,
             // $FlowFixMe
             annotations: annotations
           }
@@ -11607,9 +11609,9 @@ function () {
           symbol = _this$processStrike4[1],
           comment = _this$processStrike4[2],
           inSize = _this$processStrike4[3],
-          space = _this$processStrike4[4],
+          commentSpace = _this$processStrike4[4],
           scale = _this$processStrike4[5],
-          overhang = _this$processStrike4[6];
+          space = _this$processStrike4[6];
 
       var annotations = [{
         content: comment,
@@ -11617,7 +11619,7 @@ function () {
         yPosition: 'bottom',
         xAlign: 'center',
         yAlign: 'top',
-        offset: [0, -space],
+        offset: [0, -commentSpace],
         scale: scale
       }];
       return this.annotate({
@@ -11628,7 +11630,7 @@ function () {
           encompass: {
             // $FlowFixMe
             symbol: symbol,
-            space: overhang,
+            space: space,
             // $FlowFixMe
             annotations: annotations
           }
@@ -11699,6 +11701,58 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import BracketNew from './Symbols/BracketNew';
 // import BraceNew from './Symbols/BraceNew';
 // import { Annotation, AnnotationInformation } from './Elements/Annotation';
+// export type TypeSymbolOptions = {
+//   color?: Array<number>,
+//   numLines?: number,
+//   side?: 'left' | 'right' | 'bottom' | 'top',
+//   width?: number,
+//   fill?: boolean,
+//   staticSize?: ?(Point | [number, number] | number),
+//   startWidth?: number,
+//   lineWidth?: number,
+//   startHeight?: number,
+//   maxStartWidth?: ?number,
+//   maxStartHeight?: ?number,
+//   proportionalToHeight?: boolean,
+//   endLength?: number,
+//   sides?: number,
+//   tipWidth?: number,
+//   radius?: number,
+//   arrowWidth?: number,
+//   arrowHeight?: number,
+// }
+
+/**
+ * Vinculum equation symbol
+ *
+ * <pre>
+ *                          width
+ *       |<---------------------------------------->|
+ *       |                                          |
+ *       |                                          | ____
+ *       00000000000000000000000000000000000000000000   A
+ *       00000000000000000000000000000000000000000000   |  lineWidth
+ *       00000000000000000000000000000000000000000000 __V_
+ *
+ * </pre>
+ * @property {'vinculum'} symbol
+ * @property {Array<number>} [color] (equation color)
+ * @property {number} [lineWidth] (`0.01`)
+ * @property {'static' | 'dynamic'} [draw] `'dynamic'` updates vertices on
+ * resize, `'static'` only changes scale transform (`dynamic`)
+ * @property {number | 'first'} [staticWidth] used when `draw`=`static`.
+ * `number` sets width of static symbol - `'first'` calculates and sets width
+ * based on first use (`'first'`)
+ *
+ * @example
+ * eqn.addElements({
+ *   v: {
+ *     symbol: 'vinculum',
+ *     color: [1, 0, 0, 1],
+ *     lineWidth: 0.01,
+ *   },
+ * })
+ */
 
 var EquationSymbols =
 /*#__PURE__*/
@@ -11713,9 +11767,6 @@ function () {
   _createClass(EquationSymbols, [{
     key: "get",
     value: function get(name, options) {
-      // if (name === 'vinculumOld') {
-      //   return this.vinculum(options);
-      // }
       if (name === 'vinculum') {
         // $FlowFixMe
         return this.vinculum(options);
@@ -11724,10 +11775,6 @@ function () {
       if (name === 'strike') {
         // $FlowFixMe
         return this.strike(options);
-      }
-
-      if (name === 'xStrike') {
-        return this.xStrike(options);
       }
 
       if (name === 'bracket') {
@@ -11828,41 +11875,13 @@ function () {
       };
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       return new _Symbols_Box__WEBPACK_IMPORTED_MODULE_4__["default"](this.shapes.webgl, optionsToUse.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Box').scale(1, 1).translate(0, 0), this.shapes.limits, optionsToUse, 'strip');
-    } // simpleIntegral(optionsIn: {
-    //   color?: Array<number>,
-    //   lineWidth?: number,
-    //   staticSize?: ?(Point | [number, number]),
-    // }) {
-    //   const defaultOptions: {
-    //     color: this.defaultColor,
-    //     lineWidth: 0.01,
-    //   }
-    // }
-    // simpleIntegral(options: {
-    //   color?: Array<number>,
-    //   lineWidth?: number,
-    //   staticSize?: boolean,
-    // }) {
-    //   const defaultOptions = {
-    //     color: this.defaultColor,
-    //     lineWidth: 0.012,
-    //     staticSize: null,
-    //   };
-    //   const optionsToUse = joinObjects(defaultOptions, options);
-    //   return (new SimpleIntegral(
-    //     this.shapes.webgl,
-    //     optionsToUse.color,
-    //     new Transform('brace').scale(1, 1).translate(0, 0),
-    //     this.shapes.limits,
-    //     optionsToUse,
-    //   )).symbol;
-    // }
-
+    }
   }, {
     key: "arrow",
     value: function arrow(options) {
       var defaultOptions = {
         color: this.defaultColor,
+        direction: 'right',
         lineWidth: 0.01,
         arrowWidth: 0.03,
         arrowHeight: 0.04,
@@ -11919,10 +11938,10 @@ function () {
         lineWidth: null,
         width: null,
         tipWidth: null,
-        percentage: 0.95,
-        sides: 5,
+        // percentage: 0.95,
+        sides: 30,
         // staticSize: 'first',
-        radius: 0.03,
+        // radius: 0.03,
         serif: true,
         staticHeight: 'first',
         draw: 'static',
@@ -11987,27 +12006,26 @@ function () {
       //   color,
       //   new Transform('strike').scale(1, 1).rotate(0).translate(0, 0),
       // );
-    }
-  }, {
-    key: "xStrike",
-    value: function xStrike() {
-      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var color = options.color;
+    } // xStrike(options: { color?: Array<number> } = {}) {
+    //   let { color } = options;
+    //   if (color == null) {
+    //     color = this.defaultColor;
+    //   }
+    //   const cross = this.shapes.collection(new Transform('xStrike')
+    //     .scale(1, 1).rotate(0).translate(0, 0));
+    //   cross.color = color;
+    //   const strike1 = this.shapes.horizontalLine(
+    //     new Point(0, 0),
+    //     1, 1, 0,
+    //     color,
+    //     new Transform('strikeLine').scale(1, 1).rotate(0).translate(0, 0),
+    //   );
+    //   const strike2 = strike1._dup();
+    //   cross.add('s1', strike1);
+    //   cross.add('s2', strike2);
+    //   return cross;
+    // }
 
-      if (color == null) {
-        color = this.defaultColor;
-      }
-
-      var cross = this.shapes.collection(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('xStrike').scale(1, 1).rotate(0).translate(0, 0));
-      cross.color = color;
-      var strike1 = this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('strikeLine').scale(1, 1).rotate(0).translate(0, 0));
-
-      var strike2 = strike1._dup();
-
-      cross.add('s1', strike1);
-      cross.add('s2', strike2);
-      return cross;
-    }
   }, {
     key: "bracket",
     value: function bracket(options) {
@@ -15972,6 +15990,50 @@ function Fan(webgl, points, color, transformOrLocation, diagramLimits) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/DiagramElements/Generic.js":
+/*!***************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Generic.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Generic; });
+/* harmony import */ var _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexGeneric */ "./src/js/diagram/DrawingObjects/VertexObject/VertexGeneric.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+
+
+
+
+function Generic(webgl, vertices, border, holeBorder, drawType, color, transformOrLocation, diagramLimits) {
+  var textureLocation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
+  var textureVertexSpace = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2);
+  var textureCoords = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](0, 0, 1, 1);
+  var textureRepeat = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : false;
+  var onLoad = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : null;
+  var generic = new _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, vertices, border, holeBorder, drawType, textureLocation, textureVertexSpace, textureCoords, textureRepeat);
+
+  if (textureLocation) {
+    generic.onLoad = onLoad;
+  }
+
+  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
+
+  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
+    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
+  } else {
+    transform = transformOrLocation._dup();
+  } // $FlowFixMe
+
+
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](generic, transform, color, diagramLimits);
+}
+
+/***/ }),
+
 /***/ "./src/js/diagram/DiagramElements/HorizontalLine.js":
 /*!**********************************************************!*\
   !*** ./src/js/diagram/DiagramElements/HorizontalLine.js ***!
@@ -16187,7 +16249,7 @@ function (_DiagramElementCollec) {
         labelGenerator();
       }
 
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](ticks.fontFamily, 'normal', ticks.fontSize, ticks.fontWeight, ticks.labelsHAlign, ticks.labelsyAlign, ticks.fontColor);
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](ticks.fontFamily, 'normal', ticks.fontSize, ticks.fontWeight, ticks.labelsHAlign, ticks.labelsVAlign, ticks.fontColor);
 
       if (this.props.rotation > Math.PI / 2 * 0.95) {
         font.yAlign = 'middle';
@@ -16208,7 +16270,7 @@ function (_DiagramElementCollec) {
       //     this.valueToClip(ticks.start + i * ticks.step),
       //     0,
       //   ).transformBy(new Transform().rotate(this.props.rotation).matrix()),
-      //   [ticks.labelsHAlign, ticks.labelsyAlign],
+      //   [ticks.labelsHAlign, ticks.labelsVAlign],
       //   ticks.labelOffset,
       // );
       // label.fontSize = ticks.fontSize;
@@ -16302,7 +16364,7 @@ function (_GridProperties) {
     _this.labels = [];
     _this.labelMode = 'auto';
     _this.labelsHAlign = 'center';
-    _this.labelsyAlign = 'middle';
+    _this.labelsVAlign = 'middle';
     _this.mode = 'on';
     _this.fontFamily = 'Helvetica Neue';
     _this.fontWeight = '400';
@@ -16602,134 +16664,6 @@ function (_VertexObject) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DiagramElements/PolyLine.js":
-/*!****************************************************!*\
-  !*** ./src/js/diagram/DiagramElements/PolyLine.js ***!
-  \****************************************************/
-/*! exports provided: PolyLine, PolyLineCorners */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolyLine", function() { return PolyLine; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolyLineCorners", function() { return PolyLineCorners; });
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolyLine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolyLine */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolyLineCorners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolyLineCorners */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-
-
-
-
-
-
-function PolyLine(webgl, points, close, lineWidth, color, borderToPoint, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolyLine__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, points, close, lineWidth, borderToPoint);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
-}
-
-function PolyLineCorners(webgl, points, close, cornerLength, lineWidth, color, transformOrLocation, diagramLimits) {
-  var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolyLineCorners__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, points, close, cornerLength, lineWidth);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_3__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](vertexLineCorners, transform, color, diagramLimits);
-}
-
-
-
-/***/ }),
-
-/***/ "./src/js/diagram/DiagramElements/Polygon.js":
-/*!***************************************************!*\
-  !*** ./src/js/diagram/DiagramElements/Polygon.js ***!
-  \***************************************************/
-/*! exports provided: Polygon, PolygonFilled, PolygonLine */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Polygon", function() { return Polygon; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolygonFilled", function() { return PolygonFilled; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PolygonLine", function() { return PolygonLine; });
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolygon */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygon.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolygonFilled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolygonFilled */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonFilled.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexPolygonLine__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexPolygonLine */ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonLine.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-
-
-
-
-
-
-
-function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSidesToDraw, center, color, transformOrLocation, diagramLimits, triangles) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, numSides, radius, lineWidth, rotation, center, numSidesToDraw, direction, triangles);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
-}
-
-function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, center, color, transformOrLocation, diagramLimits) {
-  var textureLocation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : '';
-  var textureCoords = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Rect"](0, 0, 1, 1);
-  var onLoad = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : null;
-  var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolygonFilled__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, numSides, radius, rotation, center, numSidesToDraw, textureLocation, textureCoords);
-
-  if (textureLocation) {
-    vertexLineCorners.onLoad = onLoad;
-  }
-
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLineCorners, transform, color, diagramLimits);
-}
-
-function PolygonLine(webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygonLine__WEBPACK_IMPORTED_MODULE_2__["default"](webgl, numSides, radius, rotation, new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"](0, 0), numSidesToDraw, direction, numLines);
-  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
-
-  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
-    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
-  } else {
-    transform = transformOrLocation._dup();
-  }
-
-  return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](vertexLine, transform, color, diagramLimits);
-}
-
-
-
-/***/ }),
-
 /***/ "./src/js/diagram/DiagramElements/RadialLines.js":
 /*!*******************************************************!*\
   !*** ./src/js/diagram/DiagramElements/RadialLines.js ***!
@@ -16770,6 +16704,39 @@ function RadialLines(webgl) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (RadialLines);
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Rectangle.js":
+/*!*****************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Rectangle.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Rectangle; });
+/* harmony import */ var _DrawingObjects_VertexObject_VertexRectangle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexRectangle */ "./src/js/diagram/DrawingObjects/VertexObject/VertexRectangle.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+
+
+
+
+function Rectangle(webgl, xAlign, yAlign, width, height, lineWidth, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
+  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangle__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, xAlign, yAlign, width, height, lineWidth, cornerRadius, cornerSides);
+  var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
+
+  if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
+    transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
+  } else {
+    transform = transformOrLocation._dup();
+  }
+
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimitive"](vertexRectangle, transform, color, diagramLimits);
+}
 
 /***/ }),
 
@@ -17517,7 +17484,7 @@ function (_DiagramElementCollec) {
       var optionsToUse = Object.assign({}, defaultCurveOptions, curveOptions);
 
       for (var i = 0; i < optionsToUse.num; i += 1) {
-        var curve = this.shapes.polygon({
+        var curve = this.shapes.polygonSweep({
           sides: optionsToUse.sides,
           radius: optionsToUse.radius + i * optionsToUse.step,
           width: optionsToUse.width,
@@ -18125,8 +18092,8 @@ function () {
       return new _EquationLabel__WEBPACK_IMPORTED_MODULE_7__["default"](this.equation, optionsToUse);
     }
   }, {
-    key: "polyLine",
-    value: function polyLine() {
+    key: "polyline",
+    value: function polyline() {
       for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
         options[_key4] = arguments[_key4];
       }
@@ -20091,6 +20058,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
 
+ // import type {
+//   TypePolyLineBorderToPoint,
+// } from '../DiagramElements/PolyLine';
 
  // eslint-disable-next-line import/no-cycle
 
@@ -20181,7 +20151,7 @@ function (_DiagramElementCollec) {
       points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 1)],
       close: false,
       showLine: true,
-      borderToPoint: 'never',
+      // borderToPoint: 'never',
       width: 0.01,
       reverse: false,
       transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0),
@@ -20407,12 +20377,22 @@ function (_DiagramElementCollec) {
 
 
     if (optionsToUse.showLine) {
-      var line = _this.shapes.polyLine({
+      var line = _this.shapes.polyline({
         points: _this.points,
-        color: optionsToUse.color,
-        close: optionsToUse.close,
-        borderToPoint: optionsToUse.borderToPoint,
-        width: optionsToUse.width
+        // color: optionsToUse.color,
+        // close: optionsToUse.close,
+        // // borderToPoint: optionsToUse.borderToPoint,
+        // width: optionsToUse.width,
+        width: options.width,
+        close: options.close,
+        widthIs: options.widthIs,
+        cornerStyle: options.cornerStyle,
+        cornerSize: options.cornerSize,
+        cornerSides: options.cornerSides,
+        minAutoCornerAngle: options.minAutoCornerAngle,
+        dash: options.dash,
+        color: options.color,
+        pulse: options.pulse
       });
 
       _this.add('line', line);
@@ -20533,7 +20513,7 @@ function (_DiagramElementCollec) {
       });
 
       if (this._line != null) {
-        this._line.drawingObject.change(newPoints);
+        this._line.custom.updatePoints(newPoints);
       } // Add Pads
 
 
@@ -21008,13 +20988,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
-/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
-/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
-/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
-/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
-/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
-/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
+/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
+/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
+/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
+/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
+/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
+/* harmony import */ var _DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/Rectangle */ "./src/js/diagram/DiagramElements/Rectangle.js");
+/* harmony import */ var _DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/Generic */ "./src/js/diagram/DiagramElements/Generic.js");
 /* harmony import */ var _DiagramElements_Box__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Box */ "./src/js/diagram/DiagramElements/Box.js");
 /* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
 /* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
@@ -21023,6 +21003,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
+/* harmony import */ var _DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../DrawingObjects/Geometries/polygon/polygon */ "./src/js/diagram/DrawingObjects/Geometries/polygon/polygon.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -21036,7 +21034,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import {
+//   PolyLine, PolyLineCorners,
+// } from '../DiagramElements/PolyLine';
 
+ // import {
+//   Polygon, PolygonFilled, PolygonLine,
+// } from '../DiagramElements/Polygon';
 
 
 
@@ -21053,6 +21057,75 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
+
+/**
+  Curved Corner Definition
+ */
+
+function parsePoints(options, keysToParsePointsOrPointArrays) {
+  var parseKey = function parseKey(key) {
+    var value = options[key];
+
+    if (value == null) {
+      return;
+    }
+
+    if (typeof value === 'string') {
+      return;
+    }
+
+    var processArray = function processArray(a) {
+      for (var i = 0; i < a.length; i += 1) {
+        if (Array.isArray(a[i]) && !(typeof a[i][0] === 'number')) {
+          // eslint-disable-next-line no-param-reassign
+          a[i] = processArray(a[i]);
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          a[i] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(a[i]);
+        }
+      }
+
+      return a;
+    };
+
+    if (Array.isArray(value) && !(typeof value[0] === 'number')) {
+      // eslint-disable-next-line no-param-reassign
+      options[key] = processArray(value); // value.map(p => getPoint(p));
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      options[key] = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(value);
+    }
+  };
+
+  if (typeof keysToParsePointsOrPointArrays === 'string') {
+    parseKey(keysToParsePointsOrPointArrays);
+  } else {
+    keysToParsePointsOrPointArrays.forEach(function (key) {
+      return parseKey(key);
+    });
+  }
+}
+
+function processOptions() {
+  for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+    optionsIn[_key] = arguments[_key];
+  }
+
+  var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+
+  if (options.position != null) {
+    var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+
+    if (options.transform == null) {
+      options.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('processOptions').translate(0, 0);
+    }
+
+    options.transform.updateTranslation(p);
+  }
+
+  return options;
+}
 
 var DiagramPrimitives =
 /*#__PURE__*/
@@ -21081,94 +21154,60 @@ function () {
   }
 
   _createClass(DiagramPrimitives, [{
-    key: "polyLineLegacy",
-    value: function polyLineLegacy(points, close, lineWidth, color) {
-      var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, close, lineWidth, color, borderToPoint, transform, this.limits);
-    }
-  }, {
-    key: "polyLineCornersLegacy",
-    value: function polyLineCornersLegacy(points, close, cornerLength, lineWidth, color) {
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, close, cornerLength, lineWidth, color, transform, this.limits);
-    }
-  }, {
-    key: "polyLineCorners",
-    value: function polyLineCorners() {
+    key: "generic",
+    value: function generic() {
       var defaultOptions = {
+        points: [],
+        border: null,
+        hole: null,
+        drawType: 'triangles',
         color: [1, 0, 0, 1],
-        close: true,
-        width: 0.01,
-        cornerLength: 0.1,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLineCorners').standard()
-      };
-
-      for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
-        optionsIn[_key] = arguments[_key];
-      }
-
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.position != null) {
-        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(p);
-      }
-
-      var points = [];
-
-      if (options.points) {
-        points = options.points.map(function (p) {
-          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
-        });
-      }
-
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
-
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('generic').standard(),
+        position: null,
+        texture: {
+          src: '',
+          mapTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+          mapFrom: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
+          repeat: false,
+          onLoad: this.animateNextFrame
         }
-      }
-
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
-      }
-
-      return element;
-    } // borderToPoint options: 'alwaysOn' | 'onSharpAnglesOnly' | 'never'
-
-  }, {
-    key: "polyLine",
-    value: function polyLine() {
-      var defaultOptions = {
-        color: [1, 0, 0, 1],
-        close: true,
-        width: 0.01,
-        borderToPoint: 'never',
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine').standard()
       };
 
       for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
         optionsIn[_key2] = arguments[_key2];
       }
 
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
         var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
         options.transform.updateTranslation(p);
       }
 
-      var points = [];
+      var parsedPoints = options.points.map(function (p) {
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      });
 
-      if (options.points) {
-        points = options.points.map(function (p) {
-          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      var parseBorder = function parseBorder(borders) {
+        if (borders == null || !Array.isArray(borders)) {
+          return null;
+        }
+
+        var borderOut = [];
+        borders.forEach(function (b) {
+          if (Array.isArray(b)) {
+            borderOut.push(b.map(function (bElement) {
+              return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(bElement);
+            }));
+          }
         });
-      }
+        return borderOut;
+      };
 
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
+      var parsedBorder = parseBorder(options.border);
+      var parsedBorderHoles = parseBorder(options.hole); // console.log(parsedPoints)
+
+      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21176,9 +21215,190 @@ function () {
         }
       }
 
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
+      return element;
+    }
+  }, {
+    key: "polyline",
+    value: function polyline() {
+      var defaultOptions = {
+        width: 0.01,
+        color: [1, 0, 0, 1],
+        close: false,
+        widthIs: 'mid',
+        cornerStyle: 'auto',
+        cornerSize: 0.01,
+        cornerSides: 10,
+        cornersOnly: false,
+        cornerLength: 0.1,
+        // forceCornerLength: false,
+        minAutoCornerAngle: Math.PI / 7,
+        dash: [],
+        linePrimitives: false,
+        lineNum: 1,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard(),
+        border: 'line',
+        hole: 'none'
+      };
+
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
       }
+
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
+      parsePoints(options, ['points', 'border', 'hole']);
+
+      if (options.linePrimitives === false) {
+        options.lineNum = 2;
+      }
+
+      var getTris;
+
+      if (options.cornersOnly) {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_23__["makePolyLineCorners"])(points, options.width, options.close, options.cornerLength, // options.forceCornerLength,
+          options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.linePrimitives, options.lineNum);
+        };
+      } else {
+        getTris = function getTris(points) {
+          return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_23__["makePolyLine"])(points, options.width, options.close, options.widthIs, options.cornerStyle, options.cornerSize, options.cornerSides, options.minAutoCornerAngle, options.dash, options.linePrimitives, options.lineNum, options.border, options.hole);
+        };
+      }
+
+      var _getTris = getTris(options.points),
+          _getTris2 = _slicedToArray(_getTris, 3),
+          triangles = _getTris2[0],
+          borders = _getTris2[1],
+          holes = _getTris2[2];
+
+      var element = this.generic(options, {
+        drawType: options.linePrimitives ? 'lines' : 'triangles',
+        points: triangles,
+        border: Array.isArray(options.border) ? options.border : borders,
+        holeBorder: Array.isArray(options.hole) ? options.hole : holes
+      });
+
+      element.custom.updatePoints = function (points) {
+        var _element$drawingObjec;
+
+        (_element$drawingObjec = element.drawingObject).change.apply(_element$drawingObjec, _toConsumableArray(getTris(points)));
+      };
+
+      if (options.pulse != null) {
+        if (typeof element.pulseDefault !== 'function') {
+          element.pulseDefault.scale = options.pulse;
+        }
+      }
+
+      return element;
+    }
+  }, {
+    key: "polygon",
+    value: function polygon() {
+      var defaultOptions = {
+        radius: 1,
+        sides: 4,
+        direction: 1,
+        // sidesToDraw: 4,
+        rotation: 0,
+        width: 0.01,
+        line: {
+          widthIs: 'inside'
+        },
+        // angle: Math.PI * 2,
+        offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
+        touchableLineOnly: false
+      };
+
+      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        optionsIn[_key4] = arguments[_key4];
+      }
+
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
+      parsePoints(options, ['offset']);
+      var element;
+
+      if (options.angleToDraw != null) {
+        options.sidesToDraw = Math.floor(options.angleToDraw / (Math.PI * 2 / options.sides));
+      }
+
+      if (options.sidesToDraw == null) {
+        options.sidesToDraw = options.sides;
+      }
+
+      if (options.fill) {
+        var fan = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getFanTrisPolygon"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
+        element = this.generic(options, {
+          drawType: 'fan',
+          points: fan,
+          // $FlowFixMe
+          border: [_toConsumableArray(fan.slice(1, -1))]
+        });
+      } else {
+        var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
+        var border = 'line';
+        var hole;
+
+        if (options.direction === 1) {
+          border = 'negative';
+          hole = 'positive';
+        }
+
+        if (options.direction === -1) {
+          border = 'positive';
+          hole = 'negative';
+        }
+
+        element = this.polyline(options, options.line, {
+          points: polygonPoints,
+          close: options.sides === options.sidesToDraw,
+          border: border,
+          hole: hole
+        });
+      }
+
+      return element;
+    }
+  }, {
+    key: "polygonSweep",
+    value: function polygonSweep() {
+      var defaultOptions = {
+        sides: 4,
+        fill: false,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygonSweep').standard(),
+        line: {
+          linePrimitives: false,
+          lineNum: 2
+        }
+      };
+      var forceOptions = {
+        line: {
+          cornerStyle: 'auto',
+          cornersOnly: false
+        }
+      };
+
+      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        optionsIn[_key5] = arguments[_key5];
+      }
+
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn, [forceOptions])); // const options = joinObjects(defaultOptions, optionsIn);
+
+      var element = this.polygon(options); // $FlowFixMe
+
+      element.drawingObject.getPointCountForAngle = function (angle) {
+        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
+
+        if (options.fill) {
+          return sidesToDraw + 2;
+        }
+
+        if (options.line && options.line.linePrimitives) {
+          return sidesToDraw * options.line.lineNum * 2;
+        }
+
+        return sidesToDraw * 6;
+      };
 
       return element;
     }
@@ -21192,8 +21412,8 @@ function () {
         position: null
       };
 
-      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        optionsIn[_key3] = arguments[_key3];
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21203,7 +21423,7 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
+      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__["default"])(this.webgl, options.points.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       }), options.color, options.transform, this.limits);
 
@@ -21245,8 +21465,8 @@ function () {
       };
       var options;
 
-      for (var _len4 = arguments.length, optionsIn = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-        optionsIn[_key4 - 1] = arguments[_key4];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+        optionsIn[_key7 - 1] = arguments[_key7];
       }
 
       if (typeof textOrOptions === 'string') {
@@ -21300,8 +21520,8 @@ function () {
         rotation: 0
       };
 
-      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        optionsIn[_key5] = arguments[_key5];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21427,8 +21647,8 @@ function () {
 
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21467,8 +21687,8 @@ function () {
 
       };
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21518,8 +21738,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21559,98 +21779,127 @@ function () {
       }
 
       return element;
-    }
-  }, {
-    key: "polygon",
-    value: function polygon() {
-      var defaultOptions = {
-        sides: 4,
-        radius: 1,
-        width: 0.01,
-        rotation: 0,
-        clockwise: false,
-        sidesToDraw: null,
-        color: [1, 0, 0, 1],
-        fill: false,
-        textureLocation: '',
-        // If including a texture, make sure to use
-        textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
-        // correct shader in diagram
-        onLoad: this.animateNextFrame,
-        mods: {},
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
-        position: null,
-        center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        trianglePrimitives: false,
-        linePrimitives: false,
-        angleToDraw: null
-      };
+    } // polygonLegacy(...optionsIn: Array<OBJ_Polygon>) {
+    //   const defaultOptions = {
+    //     sides: 4,
+    //     radius: 1,
+    //     width: 0.01,
+    //     rotation: 0,
+    //     clockwise: false,
+    //     sidesToDraw: null,
+    //     color: [1, 0, 0, 1],
+    //     fill: false,
+    //     textureLocation: '',        // If including a texture, make sure to use
+    //     textureCoords: new Rect(0, 0, 1, 1),  // correct shader in diagram
+    //     onLoad: this.animateNextFrame,
+    //     mods: {},
+    //     transform: new Transform('polygon').standard(),
+    //     position: null,
+    //     center: new Point(0, 0),
+    //     trianglePrimitives: false,
+    //     linePrimitives: false,
+    //     angleToDraw: null,
+    //   };
+    //   const options = Object.assign({}, defaultOptions, ...optionsIn);
+    //   // const o = optionsToUse;
+    //   // let { transform } = options;
+    //   // if (transform == null) {
+    //   //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
+    //   // }
+    //   if (options.position != null) {
+    //     const point = getPoint(options.position);
+    //     options.transform.updateTranslation(point);
+    //   }
+    //   if (options.center != null) {
+    //     options.center = getPoint(options.center);
+    //   }
+    //   if (options.sidesToDraw == null) {
+    //     options.sidesToDraw = options.sides;
+    //   }
+    //   if (options.angleToDraw != null) {
+    //     options.sidesToDraw = Math.max(
+    //       0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides),
+    //     );
+    //   }
+    //   let direction = 1;
+    //   if (options.clockwise) {
+    //     direction = -1;
+    //   }
+    //   let element;
+    //   if (options.linePrimitives) {
+    //     element = PolygonLine(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.width,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //     );
+    //   } else if (options.fill) {
+    //     element = PolygonFilled(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.center,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //       options.textureLocation,
+    //       options.textureCoords,
+    //       options.onLoad,
+    //     );
+    //   } else {
+    //     element = Polygon(
+    //       this.webgl,
+    //       options.sides,
+    //       options.radius,
+    //       options.width,
+    //       options.rotation,
+    //       direction,
+    //       options.sidesToDraw,
+    //       options.center,
+    //       options.color,
+    //       options.transform,
+    //       this.limits,
+    //       options.trianglePrimitives,
+    //     );
+    //   }
+    //   if (options.pulse != null && typeof element.pulseDefault !== 'function') {
+    //     element.pulseDefault.scale = options.pulse;
+    //   }
+    //   if (options.mods != null && options.mods !== {}) {
+    //     element.setProperties(options.mods);
+    //   }
+    //   return element;
+    // }
+    // polygonLine(
+    //   numSides: number,
+    //   radius: number,
+    //   rotation: number,
+    //   direction: -1 | 1,
+    //   numSidesToDraw: number,
+    //   numLines: number,     // equivalent to thickness - integer
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return PolygonLine(
+    //     this.webgl, numSides, radius,
+    //     rotation, direction, numSidesToDraw, numLines, color, transform, this.limits,
+    //   );
+    // }
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
-      }
-
-      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
-      // let { transform } = options;
-      // if (transform == null) {
-      //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
-      // }
-
-      if (options.position != null) {
-        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(point);
-      }
-
-      if (options.center != null) {
-        options.center = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.center);
-      }
-
-      if (options.sidesToDraw == null) {
-        options.sidesToDraw = options.sides;
-      }
-
-      if (options.angleToDraw != null) {
-        options.sidesToDraw = Math.max(0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides));
-      }
-
-      var direction = 1;
-
-      if (options.clockwise) {
-        direction = -1;
-      }
-
-      var element;
-
-      if (options.linePrimitives) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
-      } else if (options.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
-      } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
-      }
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
-      if (options.mods != null && options.mods !== {}) {
-        element.setProperties(options.mods);
-      }
-
-      return element;
-    }
-  }, {
-    key: "polygonLine",
-    value: function polygonLine(numSides, radius, rotation, direction, numSidesToDraw, numLines, // equivalent to thickness - integer
-    color) {
-      var transform = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
-    }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
+      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
     }
   }, {
     key: "dashedLine",
@@ -21665,8 +21914,8 @@ function () {
         position: null
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21675,7 +21924,7 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -21705,18 +21954,19 @@ function () {
         xAlign: 'center',
         width: 1,
         height: 1,
+        lineWidth: 0.01,
         corner: {
           radius: 0,
           sides: 1
         },
         fill: false,
         color: [1, 0, 0, 1],
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('rectangle').scale(1, 1).rotate(0).translate(0, 0),
         position: null
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21729,7 +21979,13 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      var element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      var element;
+
+      if (options.fill) {
+        element = Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      } else {
+        element = Object(_DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.lineWidth, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      }
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -21750,8 +22006,8 @@ function () {
         position: null
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21784,8 +22040,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21794,7 +22050,7 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
 
       if (options.pulse != null && typeof element.pulseDefault !== 'function') {
         element.pulseDefault.scale = options.pulse;
@@ -21814,8 +22070,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21875,8 +22131,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len15 = arguments.length, moreOptions = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-          moreOptions[_key15 - 1] = arguments[_key15];
+        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+          moreOptions[_key17 - 1] = arguments[_key17];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -21994,8 +22250,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22054,7 +22310,7 @@ function () {
 
       xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
       xProps.majorTicks.labelsHAlign = 'center';
-      xProps.majorTicks.labelsyAlign = 'top';
+      xProps.majorTicks.labelsVAlign = 'top';
       xProps.majorTicks.fontColor = fontColor.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
@@ -22091,7 +22347,7 @@ function () {
 
       yProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](yProps.majorTicks.offset - fontSize * 0.2, 0);
       yProps.majorTicks.labelsHAlign = 'right';
-      yProps.majorTicks.labelsyAlign = 'middle';
+      yProps.majorTicks.labelsVAlign = 'middle';
       yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
       yProps.majorTicks.fontSize = fontSize;
       yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
@@ -22144,8 +22400,8 @@ function () {
         position: null
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22201,8 +22457,8 @@ function () {
         position: null
       };
 
-      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
-        optionsIn[_key18] = arguments[_key18];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22474,13 +22730,1158 @@ function () {
 
   }, {
     key: "change",
-    value: function change() {}
+    value: function change(drawingPrimitive, border, holes) {}
   }]);
 
   return DrawingObject;
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (DrawingObject);
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/Geometries/lines/corners.js":
+/*!*******************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/Geometries/lines/corners.js ***!
+  \*******************************************************************/
+/*! exports provided: circleCorner, cutCorner, cornerLine, makeCorner, lineToCorners */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "circleCorner", function() { return circleCorner; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cutCorner", function() { return cutCorner; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cornerLine", function() { return cornerLine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeCorner", function() { return makeCorner; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineToCorners", function() { return lineToCorners; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+ //
+// Make a circular corner between points - P2 and p3 must be the same
+// distance from p1
+//
+//               .....................................
+//          p3  0                                     0 center
+//              0                                  0  .
+//              0                               0   b .
+//              0                            0        .
+//              0                         0           .
+//              0                C     0              .
+//              0                   0                 .
+//              0                0                    .  A
+//              0             0                       .
+//              0          0                          .
+//              0       0                             .
+//              0    0                                .
+//              0 0  a                              c .
+//              000000000000000000000000000000000000000
+//          p1                     B                    p2
+//
+//
+
+function circleCorner(p2in, p1, p3in, sides) {
+  // If sides is 0 or negative, then return the original points
+  if (sides < 1) {
+    return [p2in._dup(), p1._dup(), p3in._dup()];
+  } // If sides is 1, then return the chamfer
+
+
+  if (sides === 1) {
+    return [p2in._dup(), p3in._dup()];
+  }
+
+  var p2 = p2in._dup();
+
+  var p3 = p3in._dup();
+
+  var points = [];
+
+  var _2a = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngleMin"])(p2, p1, p3);
+
+  if (_2a === Math.PI) {
+    points.push(p2in._dup());
+
+    for (var i = 0; i < sides - 2; i += 1) {
+      points.push(p1._dup());
+    }
+
+    points.push(p3in._dup());
+    return points;
+  } // if equal to 0, that means the lines are going back on top of each other
+  // in which case we still want a radius at the end, so make it small and
+  // unnoticable
+
+
+  var isZero = false; // let zeroMag = 0.0001;
+
+  if (_2a === 0) {
+    isZero = true;
+    _2a = 0.00001;
+  }
+
+  var direction = _2a / Math.abs(_2a);
+
+  var line12 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
+  var a = Math.abs(_2a / 2);
+  var c = Math.PI / 2;
+  var b = Math.PI - a - c;
+  var B = line12.length();
+  var C = Math.sin(c) / Math.sin(b) * B; // const C = B / Math.cos(a);
+
+  var center = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](p1.x + C * Math.cos(a * direction + line12.angle()), p1.y + C * Math.sin(a * direction + line12.angle()));
+
+  var _2b = b * 2;
+
+  var delta = _2b / sides * direction * -1;
+  var lineC2 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](center, p2);
+  var angleC2 = lineC2.angle();
+  var magC2 = lineC2.length();
+  points.push(p2); // If the angle is zero, then we want to draw a pho (very small) polyline
+  // that will simulate a radius at the end
+
+  if (isZero) {
+    var mag = 0.0001;
+    var ang12 = line12.angle() + Math.PI / 2;
+    var deltaZero = Math.PI / sides;
+
+    for (var _i = 0; _i <= sides; _i += 1) {
+      points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + mag * Math.cos(ang12 + deltaZero * _i), center.y + mag * Math.sin(ang12 + deltaZero * _i)));
+    }
+  } else {
+    for (var _i2 = 0; _i2 < sides - 1; _i2 += 1) {
+      var angle = angleC2 + (_i2 + 1) * delta;
+      points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + magC2 * Math.cos(angle), center.y + magC2 * Math.sin(angle)));
+    }
+  }
+
+  points.push(p3); // if (reverse) {
+  //   return points.reverse();
+  // }
+
+  return points;
+}
+
+function cutCorner(p2, p1, p3, sides, style, value) {
+  var line12 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
+  var line13 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p3);
+  var cut;
+
+  if (style === 'fromVertex') {
+    cut = value;
+    cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
+  } else if (style === 'radius') {
+    var angle = Math.abs(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngleMin"])(p2, p1, p3)) / 2;
+    cut = value / Math.tan(angle);
+    cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
+  } else {
+    // if (style === 'max')
+    cut = Math.min(line12.length(), line13.length());
+  } // cut = Math.min(cut, line12.length() / 2 * 0.99, line13.length() / 2 * 0.99);
+
+
+  var p2Max = line12.pointAtPercent(cut / line12.length());
+  var p3Max = line13.pointAtPercent(cut / line13.length());
+  return circleCorner(p2Max, p1, p3Max, sides);
+}
+
+function cornerLine(pointsIn, close, type, sides, size) {
+  var points = [];
+
+  if (close) {
+    points = cutCorner(pointsIn[pointsIn.length - 1], pointsIn[0], pointsIn[1], sides, type, size);
+  } else {
+    points.push(pointsIn[0]);
+  }
+
+  for (var i = 1; i < pointsIn.length - 1; i += 1) {
+    var corner = cutCorner(pointsIn[i - 1], pointsIn[i], pointsIn[i + 1], sides, type, size);
+    points = [].concat(_toConsumableArray(points), _toConsumableArray(corner));
+  }
+
+  if (close) {
+    points = [].concat(_toConsumableArray(points), _toConsumableArray(cutCorner(pointsIn[pointsIn.length - 2], pointsIn[pointsIn.length - 1], pointsIn[0], sides, type, size)));
+  } else {
+    points.push(pointsIn[pointsIn.length - 1]._dup());
+  }
+
+  return points;
+}
+
+function makeCorner(p2, p1, p3, length) {
+  var forceLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var line12 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
+  var line13 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p3);
+  var newP2 = line12.pointAtPercent(length / line12.length());
+  var newP3 = line13.pointAtPercent(length / line13.length());
+
+  if (forceLength === false) {
+    if (length > line12.length()) {
+      newP2 = p2._dup();
+    }
+
+    if (length > line13.length()) {
+      newP3 = p3._dup();
+    }
+  }
+
+  return [newP2, p1._dup(), newP3];
+}
+
+function lineToCorners(pointsIn, close, length) {
+  var forceLength = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var corners = [];
+
+  for (var i = 1; i < pointsIn.length - 1; i += 1) {
+    corners.push(makeCorner(pointsIn[i - 1], pointsIn[i], pointsIn[i + 1], length, forceLength));
+  }
+
+  if (close) {
+    corners.push(makeCorner(pointsIn[pointsIn.length - 2], pointsIn[pointsIn.length - 1], pointsIn[0], length, forceLength));
+    corners.push(makeCorner(pointsIn[pointsIn.length - 1], pointsIn[0], pointsIn[1], length, forceLength));
+  }
+
+  return corners;
+}
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/Geometries/lines/dashes.js":
+/*!******************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/Geometries/lines/dashes.js ***!
+  \******************************************************************/
+/*! exports provided: getDashElementAndRemainder, makeDashDefinition, makeDashes, lineToDash */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDashElementAndRemainder", function() { return getDashElementAndRemainder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeDashDefinition", function() { return makeDashDefinition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeDashes", function() { return makeDashes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineToDash", function() { return lineToDash; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function makeDashDefinition(dashes) {
+  var cum = [];
+  var cycleLength = dashes.reduce(function (p, sum) {
+    cum.push(p + sum);
+    return p + sum;
+  }, 0);
+  return {
+    definition: dashes,
+    sum: cycleLength,
+    cum: cum
+  };
+}
+
+function getDashElementAndRemainder(dash, offset) {
+  var singleCycleOffset;
+
+  if (offset > dash.sum) {
+    singleCycleOffset = offset % dash.sum;
+  } else {
+    singleCycleOffset = offset;
+  }
+
+  for (var i = 0; i < dash.definition.length; i += 1) {
+    if (singleCycleOffset <= dash.cum[i]) {
+      return [i, dash.cum[i] - singleCycleOffset];
+    }
+  }
+
+  return [0, 0];
+}
+
+function makeDashes(dash, p1, p2, offset) {
+  var points = [];
+  var cumDistance = 0; // eslint-disable-next-line prefer-const
+
+  var _getDashElementAndRem = getDashElementAndRemainder(dash, offset),
+      _getDashElementAndRem2 = _slicedToArray(_getDashElementAndRem, 2),
+      index = _getDashElementAndRem2[0],
+      remainder = _getDashElementAndRem2[1];
+
+  var line12 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
+  var totLength = line12.length();
+  var dashLength = remainder;
+  var lastIndex = index;
+
+  while (cumDistance < totLength) {
+    var isOnLine = index % 2 === 0;
+
+    if (isOnLine) {
+      var q1 = line12.pointAtPercent(cumDistance / totLength);
+      var q2 = void 0;
+
+      if (cumDistance + dashLength <= totLength) {
+        q2 = line12.pointAtPercent((cumDistance + dashLength) / totLength);
+        cumDistance += dashLength;
+      } else {
+        q2 = p2._dup();
+        cumDistance += dashLength;
+      }
+
+      points.push([q1, q2]);
+    } else {
+      cumDistance += dashLength;
+    }
+
+    lastIndex = index;
+    index = (index + 1) % dash.definition.length;
+    dashLength = dash.definition[index];
+  }
+
+  return {
+    points: points,
+    continues: cumDistance > totLength && lastIndex % 2 === 0
+  };
+}
+
+function lineToDash(points, dash) {
+  var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var offset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var out = [];
+  var dd = makeDashDefinition(dash);
+  var cumLength = offset;
+  var lastContinue = false;
+
+  var processLine = function processLine(p1, p2) {
+    var dashes = makeDashes(dd, p1, p2, cumLength);
+    var dashLines = dashes.points;
+    var dashContinues = dashes.continues;
+
+    if (lastContinue && dashLines[0] != null) {
+      out[out.length - 1] = [].concat(_toConsumableArray(out[out.length - 1]), _toConsumableArray(dashLines[0].slice(1)));
+      out = [].concat(_toConsumableArray(out), _toConsumableArray(dashLines.slice(1)));
+    } else {
+      out = [].concat(_toConsumableArray(out), _toConsumableArray(dashLines));
+    }
+
+    lastContinue = dashContinues;
+    cumLength += Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(p1, p2);
+  };
+
+  for (var i = 0; i < points.length - 1; i += 1) {
+    var p1 = points[i];
+    var p2 = points[i + 1];
+    processLine(p1, p2);
+  }
+
+  if (close) {
+    var _p = points[points.length - 1];
+    var _p2 = points[0];
+    processLine(_p, _p2);
+
+    var _getDashElementAndRem3 = getDashElementAndRemainder(dd, offset),
+        _getDashElementAndRem4 = _slicedToArray(_getDashElementAndRem3, 1),
+        startIndex = _getDashElementAndRem4[0]; // const startIsOnLine = startIndex % 2 === 0;
+
+
+    if (lastContinue && startIndex % 2 === 0 && out.length > 1) {
+      out[0] = [].concat(_toConsumableArray(out[out.length - 1]), _toConsumableArray(out[0].slice(1)));
+    }
+  }
+
+  return out;
+}
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/Geometries/lines/lines.js ***!
+  \*****************************************************************/
+/*! exports provided: joinLinesInPoint, lineSegmentsToPoints, joinLinesInTangent, makePolyLine, makePolyLineCorners */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinLinesInPoint", function() { return joinLinesInPoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineSegmentsToPoints", function() { return lineSegmentsToPoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinLinesInTangent", function() { return joinLinesInTangent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makePolyLine", function() { return makePolyLine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makePolyLineCorners", function() { return makePolyLineCorners; });
+/* harmony import */ var _corners__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./corners */ "./src/js/diagram/DrawingObjects/Geometries/lines/corners.js");
+/* harmony import */ var _dashes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dashes */ "./src/js/diagram/DrawingObjects/Geometries/lines/dashes.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+/* eslint-disable yoda */
+// A thick line is defined from:
+//  * A reference line
+//  * A width
+//  * Where the reference line is relative to the width
+//    ('mid', 'inside', 'outside')
+//  * How to deal with the corners in the line
+//
+// Convert line segments that define the outer boundaries of a line into
+// triangles for drawing in WebGL
+//
+//                        outside
+// p1    ----------------------------------------------   p2
+//       2, 4
+//
+//       1                                         3, 5
+// p1    ----------------------------------------------   p2
+//                        inside
+//
+
+function lineSegmentsToPoints(lineSegments, linePrimitives) {
+  var borderIs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'line';
+  var holeIs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'none';
+  var tris = [];
+  var border = [];
+  var hole = [[]];
+  lineSegments.forEach(function (lineSegment) {
+    var negative = lineSegment[0];
+    var positive = lineSegment.slice(-1)[0];
+
+    if (linePrimitives) {
+      for (var l = 0; l < lineSegment.length; l += 1) {
+        tris.push(lineSegment[l].p1._dup());
+        tris.push(lineSegment[l].p2._dup());
+      }
+    } else {
+      tris.push(positive.p1._dup());
+      tris.push(positive.p2._dup());
+      tris.push(negative.p1._dup());
+      tris.push(negative.p1._dup());
+      tris.push(positive.p2._dup());
+      tris.push(negative.p2._dup());
+    }
+
+    if (borderIs === 'line') {
+      border.push([negative.p1._dup(), negative.p2._dup(), positive.p2._dup(), positive.p1._dup()]);
+    } else if (borderIs === 'negative') {
+      if (border.length === 0) {
+        border.push([]);
+      }
+
+      border[0].push(negative.p1._dup(), negative.p2._dup());
+    } else if (borderIs === 'positive') {
+      if (border.length === 0) {
+        border.push([]);
+      }
+
+      border[0].push(positive.p1._dup(), positive.p2._dup());
+    }
+
+    if (holeIs === 'positive') {
+      hole[0].push(positive.p1._dup(), positive.p2._dup());
+    } else if (holeIs === 'negative') {
+      hole[0].push(negative.p1._dup(), negative.p2._dup());
+    }
+  });
+
+  if (Array.isArray(borderIs)) {
+    border = borderIs;
+  }
+
+  if (Array.isArray(holeIs)) {
+    hole = holeIs;
+  }
+
+  return [tris, border, hole];
+} // Extend two lines to their intersection point
+
+
+function joinLinesInPoint(line1, lineNext) {
+  var intersect = line1.intersectsWith(lineNext);
+
+  if (intersect.intersect != null) {
+    line1.setP2(intersect.intersect._dup());
+    lineNext.setP1(intersect.intersect._dup());
+  }
+} //                    2       2        2
+//                    N     o N        N
+//                       No      N        N
+//                      o   N       N        N
+//                    o        N       N        N
+//                   o            N       N        N
+//            angle o                N       N        N
+//                 o                    N       N        N        / Tangent
+//                 o                       N  1    N        N  1 /
+//                o                           N       N        N/
+//  in   000000000o000000000000000000000000000000        N  1  /
+//       1        o                            2            N /
+//  mid  0000000000000000000000000000000000000000000000000000/
+//       1                                                2 /
+//  out  00000000000000000000000000000000000000000000000000/
+//       1                                              2 /
+//                                                       /
+//
+// Note, for simplicity, both inside and outside can intercept with tangent
+// and geometry is valid.
+
+
+function joinLinesInTangent( // inside: Line,
+// insideNext: Line,
+mid, midNext, outside, outsideNext) {
+  var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngleMin"])(mid.p1, mid.p2, midNext.p2);
+  var tangent = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Line"](mid.p2, 1, mid.angle() + angle / 2 + Math.PI / 2);
+  var intercept = tangent.intersectsWith(outside);
+
+  if (intercept.intersect != null) {
+    outside.setP2(intercept.intersect);
+  }
+
+  intercept = tangent.intersectsWith(outsideNext);
+
+  if (intercept.intersect != null) {
+    outsideNext.setP1(intercept.intersect);
+  }
+}
+
+function joinLinesAcuteInside(mid, midNext, inside, insideNext) {
+  var intercept = inside.intersectsWith(midNext);
+
+  if (intercept.intersect != null) {
+    inside.setP2(intercept.intersect);
+  }
+
+  intercept = insideNext.intersectsWith(mid);
+
+  if (intercept.intersect != null) {
+    insideNext.setP1(intercept.intersect);
+  }
+}
+
+function joinLinesObtuseInside(mid, midNext, inside, insideNext) {
+  var intercept = inside.intersectsWith(midNext);
+
+  if (intercept.intersect != null && intercept.intersect.isOnLine(midNext, 8)) {
+    inside.setP2(intercept.intersect);
+  }
+
+  intercept = insideNext.intersectsWith(mid);
+
+  if (intercept.intersect != null && intercept.intersect.isOnLine(mid, 8)) {
+    insideNext.setP1(intercept.intersect);
+  }
+}
+
+function makeLineSegments(points, width, close, cornerStyle, widthIs, isInside) {
+  var numLines = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 2;
+  var idealLines = [];
+
+  var makeLine = function makeLine(p1, p2) {
+    return new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Line"](p1, p2);
+  };
+
+  for (var i = 0; i < points.length - 1; i += 1) {
+    idealLines.push(makeLine(points[i], points[i + 1]));
+  }
+
+  if (close) {
+    idealLines.push(makeLine(points[points.length - 1], points[0]));
+  } // lineSegments should be more negative to more positive
+
+
+  var lineSegments = [];
+
+  var makeOffset = function makeOffset(prev, current, next, offset, index) {
+    var minNegativeOffset = offset;
+    var minPositiveOffset = offset;
+    var prevAngle = Math.PI;
+
+    if (prev != null) {
+      prevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(prev.p1, current.p1, current.p2);
+      var minPrevAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngleMin"])(prev.p1, current.p1, current.p2);
+      var minPrevOffset = current.distanceToPoint(prev.p1);
+      var minOffset = Math.min(minPrevOffset, Math.tan(Math.abs(minPrevAngle)) * current.length()); // Negative side is inside angle
+
+      if (prevAngle < Math.PI / 2) {
+        minNegativeOffset = Math.min(minNegativeOffset, minOffset);
+      } else if (prevAngle > Math.PI / 2 * 3) {
+        minPositiveOffset = Math.min(minPositiveOffset, minOffset);
+      }
+    }
+
+    var nextAngle = Math.PI;
+
+    if (next != null) {
+      nextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(current.p1, current.p2, next.p2);
+      var minNextAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngleMin"])(current.p1, current.p2, next.p2);
+      var minNextOffset = current.distanceToPoint(next.p2);
+
+      var _minOffset = Math.min(minNextOffset, Math.tan(Math.abs(minNextAngle)) * current.length());
+
+      if (nextAngle < Math.PI / 2) {
+        minNegativeOffset = Math.min(minNegativeOffset, _minOffset);
+      } else if (nextAngle > Math.PI / 2 * 3) {
+        minPositiveOffset = Math.min(minPositiveOffset, _minOffset);
+      }
+    } // let negativeLine;
+    // let positiveLine;
+
+
+    var offsetLine; // console.log(widthIs)
+    // console.log(prevAngle, nextAngle)
+
+    if (widthIs === 'negative') {
+      if (cornerStyle === 'auto' && (isInside || prevAngle < Math.PI || nextAngle < Math.PI)) {
+        offsetLine = current.offset('negative', minNegativeOffset);
+      } else {
+        offsetLine = current.offset('negative', offset);
+      }
+    } else if (widthIs === 'positive') {
+      if (cornerStyle === 'auto' && (isInside || prevAngle > Math.PI || nextAngle > Math.PI)) {
+        // console.log('min')
+        offsetLine = current.offset('positive', minPositiveOffset);
+      } else {
+        offsetLine = current.offset('positive', offset);
+      } // otherwise widthIs === 'mid'
+
+    } else {
+      offsetLine = current.offset('positive', offset);
+    } // if (cornerStyle === 'auto' && widthIs !== 'mid') {
+    //   negativeLine = current.offset('negative', minNegativeOffset);
+    //   positiveLine = current.offset('positive', minPositiveOffset);
+    // } else {
+    //   negativeLine = current.offset('negative', offset);
+    //   positiveLine = current.offset('positive', offset);
+    // }
+
+
+    lineSegments[index].push(offsetLine);
+  };
+
+  var step = width / (numLines - 1);
+
+  for (var _i = 0; _i < idealLines.length; _i += 1) {
+    var prev = _i > 0 ? idealLines[_i - 1] : null;
+    var current = idealLines[_i];
+    var next = _i < idealLines.length - 1 ? idealLines[_i + 1] : null;
+
+    if (close && _i === 0) {
+      prev = idealLines[idealLines.length - 1];
+    }
+
+    if (close && _i === idealLines.length - 1) {
+      // eslint-disable-next-line prefer-destructuring
+      next = idealLines[0];
+    }
+
+    lineSegments.push([]);
+
+    if (widthIs === 'negative' || widthIs === 'positive') {
+      lineSegments[_i].push(current._dup());
+    } else if (numLines === 1) {
+      lineSegments[_i].push(current._dup());
+    } else {
+      var offsetLine = current.offset('negative', width / 2);
+
+      lineSegments[_i].push(offsetLine);
+    }
+
+    for (var l = 1; l < numLines; l += 1) {
+      if (widthIs === 'negative' || widthIs === 'positive') {
+        makeOffset(prev, current, next, l * step, _i);
+      } else {
+        makeOffset(prev, current, next, -width / 2 + l * step, _i);
+      }
+    }
+
+    if (widthIs === 'negative') {
+      lineSegments[_i].reverse();
+    }
+  }
+
+  return [idealLines, lineSegments];
+}
+
+function getWidthIs(points, close, widthIs) {
+  if (widthIs === 'mid' || widthIs === 'negative' || widthIs === 'positive') {
+    return widthIs;
+  }
+
+  var numInsideNegativeAngles = 0;
+  var totAngles = close ? points.length : points.length - 2;
+
+  var testAngle = function testAngle(p2, p1, p3) {
+    var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(p2, p1, p3);
+
+    if (angle < Math.PI) {
+      numInsideNegativeAngles += 1;
+    }
+
+    if (angle === Math.PI) {
+      totAngles -= 1;
+    }
+  };
+
+  for (var i = 1; i < points.length - 1; i += 1) {
+    testAngle(points[i - 1], points[i], points[i + 1]);
+  }
+
+  if (close) {
+    testAngle(points[points.length - 1], points[0], points[1]);
+    testAngle(points[points.length - 2], points[points.length - 1], points[0]);
+  }
+
+  if (numInsideNegativeAngles >= totAngles / 2) {
+    if (widthIs === 'inside') {
+      return 'negative';
+    }
+
+    return 'positive';
+  }
+
+  if (widthIs === 'inside') {
+    return 'positive';
+  }
+
+  return 'negative';
+}
+
+function makeThickLine(points) {
+  var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
+  var widthIsIn = arguments.length > 2 ? arguments[2] : undefined;
+  var close = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var corner = arguments.length > 4 ? arguments[4] : undefined;
+  var minAngleIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Math.PI / 7;
+  var linePrimitives = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : false;
+  var lineNum = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 2;
+  var borderIs = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'line';
+  var holeIs = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'none';
+  var widthToUse = width; // if (widthIsIn === 'mid') {
+  //   widthToUse = width / 2;
+  // }
+
+  var widthIs = getWidthIs(points, close, widthIsIn);
+
+  var _makeLineSegments = makeLineSegments(points, widthToUse, close, corner, widthIs, widthIsIn === 'inside', lineNum),
+      _makeLineSegments2 = _slicedToArray(_makeLineSegments, 2),
+      idealLines = _makeLineSegments2[0],
+      lineSegments = _makeLineSegments2[1]; // Join line segments based on the angle between them
+
+
+  var minAngle = minAngleIn == null ? 0 : minAngleIn;
+
+  var joinLineSegments = function joinLineSegments(currentIndex, nextIndex, lineIndex) {
+    var mid = idealLines[currentIndex];
+    var midNext = idealLines[nextIndex];
+    var lineSegment = lineSegments[currentIndex][lineIndex];
+    var lineSegmentNext = lineSegments[nextIndex][lineIndex]; // const [positive, mid, negative] = lineSegments[current];
+    // const [positiveNext, midNext, negativeNext] = lineSegments[next];
+
+    var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(mid.p1, mid.p2, midNext.p2); // If the angle is less than 180, then the 'negative' line segments are
+    // on the outside of the angle.
+    // console.log(currentIndex, lineIndex, angle)
+
+    if (0 < angle && angle < minAngle) {
+      if (widthIs === 'mid') {
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext); // joinLinesInTangent(mid, midNext, positive, positiveNext);
+      } else if (widthIs === 'negative') {
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
+      }
+    } else if (minAngle <= angle && angle <= Math.PI / 2) {
+      if (widthIs === 'mid') {
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'negative') {
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+      } // If the angle is greater than the minAngle, then the line segments can
+      // be connected directly
+
+    } else if (Math.PI / 2 <= angle && angle < Math.PI) {
+      if (widthIs === 'mid') {
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'negative') {
+        joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+      }
+    } else if (angle === Math.PI) {
+      if (widthIs === 'negative') {
+        if (widthIsIn === 'inside') {
+          joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
+        } else {
+          joinLinesInPoint(lineSegment, lineSegmentNext);
+        }
+      } else if (widthIs === 'positive') {
+        if (widthIsIn === 'inside') {
+          joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
+        } else {
+          joinLinesInPoint(lineSegment, lineSegmentNext);
+        }
+      } // If the angle is greater than 180, then the positive side is on the
+      // inside of the angle
+
+    } else if (Math.PI < angle && angle < Math.PI / 2 * 3) {
+      if (widthIs === 'mid') {
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'negative') {
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesObtuseInside(mid, midNext, lineSegment, lineSegmentNext);
+      } //
+
+    } else if (Math.PI / 2 * 3 <= angle && angle <= Math.PI * 2 - minAngle) {
+      if (widthIs === 'mid') {
+        joinLinesInPoint(lineSegment, lineSegmentNext); // joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'negative') {
+        joinLinesInPoint(lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
+      } //
+
+    } else if (Math.PI * 2 - minAngle < angle && angle < Math.PI * 2) {
+      if (widthIs === 'mid') {
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext); // joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
+      } else if (widthIs === 'negative') {
+        joinLinesInTangent(mid, midNext, lineSegment, lineSegmentNext);
+      } else if (widthIs === 'positive') {
+        joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
+      }
+    } else if (angle === Math.PI * 2 || angle === 0) {} // do nothing
+    // if (widthIs === 'mid') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    //   // joinLinesInPoint(lineSegment, lineSegmentNext);
+    // } else if (widthIs === 'negative') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    // } else if (widthIs === 'positive') {
+    //   joinLinesInPoint(lineSegment, lineSegmentNext);
+    // }
+    // if (lineSegments.length >= 2) {
+    //   console.log(currentIndex, lineIndex, lineSegments[2][0]._dup())
+    // }
+
+  }; // Create fill triangles between the positive & mid, and negative and mid lines
+
+
+  var cornerFills = [];
+
+  var createFill = function createFill(currentIndex, nextIndex) {
+    var mid = idealLines[currentIndex];
+    var midNext = idealLines[nextIndex];
+    var positive = lineSegments[currentIndex].slice(-1)[0];
+    var positiveNext = lineSegments[nextIndex].slice(-1)[0];
+    var negative = lineSegments[currentIndex][0];
+    var negativeNext = lineSegments[nextIndex][0];
+    var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["threePointAngle"])(mid.p1, mid.p2, midNext.p2);
+
+    if (linePrimitives) {
+      for (var i = 0; i < lineSegments[currentIndex].length; i += 1) {
+        cornerFills.push(lineSegments[currentIndex][i].p2._dup());
+        cornerFills.push(lineSegments[nextIndex][i].p1._dup());
+      }
+    } else if (angle < Math.PI) {
+      if (widthIsIn !== 'inside') {
+        cornerFills.push(positive.p2._dup());
+        cornerFills.push(mid.p2._dup());
+        cornerFills.push(positiveNext.p1._dup());
+      }
+    } else if (angle > Math.PI) {
+      if (widthIsIn !== 'inside') {
+        cornerFills.push(negative.p2._dup());
+        cornerFills.push(mid.p2._dup());
+        cornerFills.push(negativeNext.p1._dup());
+      }
+    }
+  }; // NB: this all assumes the GL primitive is TRIANGLES. Thus the order the
+  // triangles is drawn is not important, and so fills can happen in chunks.
+
+
+  if (corner !== 'none') {
+    for (var l = 0; l < lineNum; l += 1) {
+      for (var i = 0; i < lineSegments.length - 1; i += 1) {
+        if (corner === 'auto') {
+          joinLineSegments(i, i + 1, l);
+        } else if (l === 0) {
+          createFill(i, i + 1);
+        }
+      }
+
+      if (close) {
+        if (corner === 'auto') {
+          joinLineSegments(lineSegments.length - 1, 0, l);
+        } else if (l === 0) {
+          createFill(lineSegments.length - 1, 0);
+        }
+      }
+    }
+  }
+
+  var _lineSegmentsToPoints = lineSegmentsToPoints(lineSegments, linePrimitives, borderIs, holeIs),
+      _lineSegmentsToPoints2 = _slicedToArray(_lineSegmentsToPoints, 3),
+      tris = _lineSegmentsToPoints2[0],
+      border = _lineSegmentsToPoints2[1],
+      hole = _lineSegmentsToPoints2[2]; // if (close === false) {
+  //   return [[...tris, ...cornerFills], [[...border[0]], [...hole]];
+  // }
+
+
+  return [[].concat(_toConsumableArray(tris), cornerFills), border, hole];
+}
+
+function makePolyLine(pointsIn) {
+  var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
+  var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var widthIs = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'mid';
+  var cornerStyle = arguments.length > 4 ? arguments[4] : undefined;
+  var cornerSize = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.1;
+  var cornerSides = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 10;
+  var minAutoCornerAngle = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : Math.PI / 7;
+  var dash = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : [];
+  var linePrimitives = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
+  var lineNum = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 2;
+  var borderIs = arguments.length > 11 ? arguments[11] : undefined;
+  var holeIs = arguments.length > 12 ? arguments[12] : undefined;
+  var points = [];
+  var cornerStyleToUse;
+  var orderedPoints = pointsIn; // const orderedPoints = setPointOrder(pointsIn, close, widthIs);
+  // Convert line to line with corners
+
+  if (cornerStyle === 'auto') {
+    points = orderedPoints.map(function (p) {
+      return p._dup();
+    });
+    cornerStyleToUse = 'auto';
+  } else if (cornerStyle === 'radius') {
+    points = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["cornerLine"])(orderedPoints, close, 'fromVertex', cornerSides, cornerSize);
+    cornerStyleToUse = 'fill'; // console.log(points)
+  } else {
+    // autoCorners = 'none';
+    cornerStyleToUse = cornerStyle;
+    points = orderedPoints.map(function (p) {
+      return p._dup();
+    });
+  } // Convert line to dashed line
+
+
+  if (dash.length > 1) {
+    var dashes = Object(_dashes__WEBPACK_IMPORTED_MODULE_1__["lineToDash"])(points, dash, close, 0);
+    var closeDashes = false;
+
+    if (dashes.length === 1) {
+      closeDashes = close;
+    }
+
+    var dashedTris = [];
+    var dashedBorder = [[]];
+    var dashedHole = [[]];
+    dashes.forEach(function (d) {
+      var _makeThickLine = makeThickLine(d, width, widthIs, closeDashes, cornerStyleToUse, minAutoCornerAngle, linePrimitives, lineNum, borderIs, holeIs),
+          _makeThickLine2 = _slicedToArray(_makeThickLine, 3),
+          tris = _makeThickLine2[0],
+          border = _makeThickLine2[1],
+          hole = _makeThickLine2[2];
+
+      dashedTris = [].concat(_toConsumableArray(dashedTris), _toConsumableArray(tris));
+      dashedBorder = [[].concat(_toConsumableArray(dashedBorder[0]), _toConsumableArray(border[0]))];
+      dashedHole = [[].concat(_toConsumableArray(dashedHole[0]), _toConsumableArray(hole[0]))];
+    });
+    return [dashedTris, dashedBorder, dashedHole];
+  }
+
+  return makeThickLine(points, width, widthIs, close, cornerStyleToUse, minAutoCornerAngle, linePrimitives, lineNum, borderIs, holeIs);
+}
+
+function makePolyLineCorners(pointsIn) {
+  var width = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.01;
+  var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var cornerLength = arguments.length > 3 ? arguments[3] : undefined;
+  var widthIs = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'mid';
+  var cornerStyle = arguments.length > 5 ? arguments[5] : undefined;
+  var cornerSize = arguments.length > 6 ? arguments[6] : undefined;
+  var cornerSides = arguments.length > 7 ? arguments[7] : undefined;
+  var minAutoCornerAngle = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : Math.PI / 7;
+  var linePrimitives = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : false;
+  var lineNum = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 1;
+  // split line into corners
+  var corners = Object(_corners__WEBPACK_IMPORTED_MODULE_0__["lineToCorners"])(pointsIn, close, cornerLength, false);
+  var tris = [];
+  var borders = [];
+  var holes = [];
+  corners.forEach(function (corner) {
+    var _makePolyLine = makePolyLine(corner, width, false, widthIs, cornerStyle, cornerSize, cornerSides, minAutoCornerAngle, [], linePrimitives, lineNum, 'line', 'none'),
+        _makePolyLine2 = _slicedToArray(_makePolyLine, 3),
+        t = _makePolyLine2[0],
+        b = _makePolyLine2[1],
+        h = _makePolyLine2[2];
+
+    tris = [].concat(_toConsumableArray(tris), _toConsumableArray(t));
+    borders = [].concat(_toConsumableArray(borders), _toConsumableArray(b));
+    holes = [].concat(_toConsumableArray(holes), _toConsumableArray(h));
+  });
+  return [tris, borders, holes];
+}
+
+ // TODO
+// inside and dash
+// inside and radius
+// Inside and radius
+// const diagram = new Fig.Diagram();
+// const { Point } = Fig;
+// const line = [
+//     new Point(0.5, 0),
+//     new Point(0, 0.024286),
+//     new Point(-0.5, 0),
+//     // new Point(0, 1),
+// ];
+// diagram.addElements([
+//   {
+//     name: 'pad',
+//     method: 'polygon',
+//     options: {
+//       radius: 0.2,
+//       color: [0.5, 0.5, 0.5, 0.5],
+//       sides: 100,
+//       fill: true,
+//     },
+//   },
+//   {
+//     name: 'r',
+//     method: 'polyline',
+//     options: {
+//       points: line,
+//       width: 0.03,
+//       close: true,
+//       pointsAt: 'inside',
+//       cornerStyle: 'radius',
+//       cornerSize: 0.05,
+//       cornerSides: 10,
+//     },
+//   },
+//   {
+//     name: 'x2',
+//     method: 'line',
+//     options: {
+//       p1: [-1, 0],
+//       p2: [1, 0],
+//       width: 0.005,
+//       color: [0.5, 0.5, 0.5, 0.5],
+//     }
+//   },
+// ]);
+// const pad = diagram.getElement('pad');
+// pad.setMovable();
+// pad.setTransformCallback = () => {
+//   line[1] = pad.getPosition();
+//   const r = diagram.getElement('r');
+//   r.updatePoints(line);
+//   diagram.animateNextFrame();
+// }
+// diagram.initialize();
+// pad.setPosition(0, 0.1);
+// Inside and dash
+// {
+//   name: 'r',
+//   method: 'polyline',
+//   options: {
+//     points: line,
+//     width: 0.03,
+//     close: true,
+//     pointsAt: 'inside',
+//     dash: [0.1, 0.03],
+//   },
+// },
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/Geometries/polygon/polygon.js":
+/*!*********************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/Geometries/polygon/polygon.js ***!
+  \*********************************************************************/
+/*! exports provided: getPolygonPoints, getFanTrisPolygon */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPolygonPoints", function() { return getPolygonPoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFanTrisPolygon", function() { return getFanTrisPolygon; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+ // import {
+//   round,
+// } from '../../../../tools/math';
+
+function getPolygonPoints(radius, rotation, offset, sides, sidesToDraw, direction) {
+  var deltaAngle = Math.PI * 2 / sides;
+  var points = [];
+
+  if (sidesToDraw === 0) {
+    return [];
+  }
+
+  for (var i = 0; i < sidesToDraw; i += 1) {
+    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(deltaAngle * i * direction + rotation) + offset.x, radius * Math.sin(deltaAngle * i * direction + rotation) + offset.y));
+  }
+
+  if (sidesToDraw < sides) {
+    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(deltaAngle * sidesToDraw * direction + rotation) + offset.x, radius * Math.sin(deltaAngle * sidesToDraw * direction + rotation) + offset.y));
+  }
+
+  return points;
+}
+
+function getFanTrisPolygon(radius, rotation, offset, sides, sidesToDraw, direction) {
+  var fan = [offset._dup()].concat(_toConsumableArray(getPolygonPoints(radius, rotation, offset, sides, sidesToDraw, direction)));
+
+  if (sides === sidesToDraw) {
+    fan.push(fan[1]._dup());
+  }
+
+  return fan;
+}
+
+
 
 /***/ }),
 
@@ -23274,700 +24675,6 @@ function (_DrawingObject) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js":
-/*!*************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-
-
-function simpleIntersect(p1, p2, q1, q2) {
-  var lineP = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
-  var lineQ = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](q1, q2);
-  return lineP.intersectsWith(lineQ).intersect;
-} // Generate a thick line assuming gl.TRIANGLES where corners are sharp.
-// Input:
-//   * coords: an array of points that will define the center of the line
-
-
-function polyLineTriangles(coords, close, width) {
-  var points = [];
-  var innerBorder = [];
-  var outerBorder = [];
-  var line1Pairs = [];
-  var line2Pairs = [];
-  var halfWidth = width / 2;
-  var p;
-  var q;
-
-  if (close) {
-    coords.push(coords[0]);
-  } // got through the points that define the center of the line, and generate
-  // offset lines on either side of them (named Line1 and Line2).
-
-
-  for (var i = 1; i < coords.length; i += 1) {
-    p = coords[i - 1]; // center line point 1
-
-    q = coords[i]; // center line point 2
-
-    var angle = Math.atan2(q.y - p.y, q.x - p.x);
-    var offset1 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](halfWidth * Math.cos(angle + Math.PI / 2), halfWidth * Math.sin(angle + Math.PI / 2));
-    var offset2 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](halfWidth * Math.cos(angle - Math.PI / 2), halfWidth * Math.sin(angle - Math.PI / 2));
-    line1Pairs.push([p.add(offset1), q.add(offset1)]); // Offset line 1
-
-    line2Pairs.push([p.add(offset2), q.add(offset2)]); // Offset line 2
-  } // If the line closes on itself, then find the intersection point of
-  // the first and last offset lines.
-  // p and q will represent the first points of offset lines 1 and 2.
-
-
-  if (close) {
-    // intersection point of first and last offset 1 lines
-    p = simpleIntersect(line1Pairs[0][0], line1Pairs[0][1], line1Pairs[line1Pairs.length - 1][0], line1Pairs[line1Pairs.length - 1][1]); // intersection point of first and last offset 2 lines
-
-    q = simpleIntersect(line2Pairs[0][0], line2Pairs[0][1], line2Pairs[line1Pairs.length - 1][0], line2Pairs[line2Pairs.length - 1][1]);
-  } else {
-    // if not closing on itself, then the first point is simply the first
-    // point of the offset lines.
-    p = line1Pairs[0][0]; // eslint-disable-line prefer-destructuring
-
-    q = line2Pairs[0][0]; // eslint-disable-line prefer-destructuring
-  } // The line effectively has two borders (named an inside and outside border)
-  // but the inner border isn't necessarily the INSIDE border, it is just a
-  // name.
-  // p and q are the first points of the borders.
-
-
-  innerBorder.push(p._dup());
-  outerBorder.push(q._dup()); // Go through all offset lines, calculate their intersection points
-  // and from them calculate the triangle and border points.
-
-  for (var _i = 1; _i < line1Pairs.length; _i += 1) {
-    // First two points of the Triangle 1 are the two ending points
-    // of the last line segment
-    points.push(p.x);
-    points.push(p.y);
-    points.push(q.x);
-    points.push(q.y); // Next points are the intersection between the first line and the second line
-
-    p = simpleIntersect(line1Pairs[_i - 1][0], line1Pairs[_i - 1][1], line1Pairs[_i][0], line1Pairs[_i][1]);
-    q = simpleIntersect(line2Pairs[_i - 1][0], line2Pairs[_i - 1][1], line2Pairs[_i][0], line2Pairs[_i][1]); // Push the next points to the border
-
-    innerBorder.push(p._dup());
-    outerBorder.push(q._dup()); // Finish triangle 1
-
-    points.push(q.x);
-    points.push(q.y); // Make triangle 2
-
-    points.push(points[points.length - 6]);
-    points.push(points[points.length - 6]);
-    points.push(q.x);
-    points.push(q.y);
-    points.push(p.x);
-    points.push(p.y);
-  } // Calculate the last end points
-
-
-  var endp;
-  var endq; // In not closing the polyline, the end points are just the last offset
-  // line points
-
-  if (!close) {
-    endp = line1Pairs[line1Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-
-    endq = line2Pairs[line2Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-    // If closing the polyline, then the end points are the start points
-  } else {
-    endp = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[0], points[1]);
-    endq = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[2], points[3]);
-  } // Close out the last two triangles
-
-
-  points.push(p.x); // Last two points of last line segment
-
-  points.push(p.y);
-  points.push(q.x);
-  points.push(q.y);
-  points.push(endq.x);
-  points.push(endq.y);
-  points.push(p.x); // Last triangle
-
-  points.push(p.y);
-  points.push(endq.x);
-  points.push(endq.y);
-  points.push(endp.x);
-  points.push(endp.y);
-  innerBorder.push(endp._dup());
-  outerBorder.push(endq._dup()); // If closing, then remove the last duplicate coord as it was added by this
-  // function
-
-  if (close) {
-    coords.pop();
-  } // Form the border array
-
-
-  var border = []; // If the poly line is closed, only one of the offset lines is the outside
-  // border. If open, then both are the border.
-
-  if (close) {
-    if (innerBorder[0].isInPolygon(outerBorder)) {
-      border = outerBorder;
-    } else {
-      border = innerBorder;
-    }
-  } else {
-    border.push(innerBorder[0]);
-
-    for (var _i2 = 0; _i2 < outerBorder.length; _i2 += 1) {
-      border.push(outerBorder[_i2]);
-    }
-
-    for (var _i3 = innerBorder.length - 1; _i3 >= 0; _i3 -= 1) {
-      border.push(innerBorder[_i3]);
-    }
-  }
-
-  return {
-    points: points,
-    border: border
-  };
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (polyLineTriangles);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js":
-/*!**************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return polyLineTriangles3; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
- // function simpleIntersect(p1: Point, p2: Point, q1: Point, q2: Point) {
-//   const lineP = new Line(p1, p2);
-//   const lineQ = new Line(q1, q2);
-//   return lineP.intersectsWith(lineQ).intersect;
-// }
-
-// Generate a thick line assuming gl.TRIANGLES where corners are sharp.
-// Input:
-//   * coords: an array of points that will define the center of the line
-function polyLineTriangles3(coords, close, width, borderToPoint) {
-  var points = [];
-  var border1 = []; // outside (vertex) when anticlockwise
-
-  var border2 = []; // outside (vertex) when clockwise
-  // const angleDir = [];    // -1 is anti-clockwise, +1 clockwise
-  // const vertices = [];
-  // class Vertex {
-  //   point: Point;
-  //   pre: ?Vertex;
-  //   post: ?Vertex;
-  //   dir: number;
-  //   preAngle: ?number;
-  //   postAngle: ?number;
-  //   preLength: ?number;
-  //   postLength: ?number;
-  //   innerAngle: ?number
-  //   constructor(point) {
-  //     this.point = point;
-  //     this.pre = null;
-  //     this.post = null;
-  //     this.dir = 0;
-  //     this.preAngle = null;
-  //     this.postAngle = null;
-  //     this.preLength = null;
-  //     this.postLength = null;
-  //     this.minAngle = null;
-  //   }
-  // }
-  // function calcAngleDir(
-  //   pre: Point,
-  //   mid: Point,
-  //   post: Point,
-  // ) {
-  //   const midPost = post.sub(mid).toPolar();
-  //   const midPre = pre.sub(mid).toPolar();
-  //   const midPostUnit = polarToRect(1, midPost.angle);
-  //   const midPreUnit = polarToRect(1, midPre.angle);
-  //   const minAngle = minAngleDiff(midPost.angle, midPre.angle);
-  //   let direction = Math.sin(minAngle);
-  //   if (direction < 0) {
-  //     direction = -1;
-  //   } else if (direction > 0) {
-  //     direction = 1;
-  //   }
-  //   const vertex = new Vertex(mid);
-  //   vertex.dir = direction;
-  //   vertex.preAngle = midPre.angle;
-  //   vertex.postAngle = midPost.angle;
-  //   vertex.preLength = midPre.mag;
-  //   vertex.postLength = midPost.mag;
-  //   vertex.minAngle = minAngle;
-  //   vertices.push(vertex);
-  // }
-  // if (close) {
-  //   calcAngleDir(coords[coords.length - 1], coords[0], coords[1]);
-  // } else {
-  //   angleDir.push(0);
-  // }
-  // for (let i = 1; i < coords.length - 1; i += 1) {
-  //   calcAngleDir(coords[i - 1], coords[i], coords[i + 1]);
-  // }
-  // if (close) {
-  //   calcAngleDir(coords[coords.length - 2], coords[coords.length - 1], coords[0]);
-  // } else {
-  //   angleDir.push(0);
-  // }
-  // console.log("Direction", vertices.map(v => v.dir))
-  // console.log("PreLine Angle", vertices.map(v => v.preAngle).map(a => a * 180 / Math.PI))
-  // console.log("PostLine Angle", vertices.map(v => v.postAngle).map(a => a * 180 / Math.PI))
-  // console.log("InnerAngle", cornerAngle.map(a => a * 180 / Math.PI))
-  // console.log(preLineLength)
-  // got through the points that define the outside border of the line, and generate
-  // offset lines on one side of them (named Line1 and Line2).
-  // function findBorderAnglesConstantCornerWidth(
-  //   preIndex: Point | null,
-  //   midIndex: Point,
-  //   postIndex: Point | null,
-  // ) {
-  //   const post = coords[postIndex];
-  //   const mid = coords[midIndex];
-  //   const pre = coords[preIndex];
-  //   let innerAngle = 0;
-  //   let direction = 0;
-  //   if (pre != null && post != null) {
-  //     const midPost = post.sub(mid).toPolar();
-  //     const midPre = pre.sub(mid).toPolar();
-  //     const midPostUnit = polarToRect(1, midPost.angle);
-  //     const midPreUnit = polarToRect(1, midPre.angle);
-  //     innerAngle = midPostUnit.add(midPreUnit).toPolar().angle || 0.00001;
-  //     direction = Math.sin(midPost.angle - midPre.angle);
-  //   } else if (pre == null && post != null) {
-  //     const midPost = post.sub(mid).toPolar();
-  //     innerAngle = midPost.angle - Math.PI / 2;
-  //     direction = -1;
-  //   } else if (post == null && pre != null) {
-  //     const midPre = pre.sub(mid).toPolar();
-  //     innerAngle = midPre.angle - Math.PI / 2;
-  //     direction = 1;
-  //   }
-  //   let corner1 = polarToRect(width / 2, innerAngle).add(mid);
-  //   let corner2 = polarToRect(width / 2, innerAngle + Math.PI).add(mid);
-  //   if (direction < 0) {
-  //     corner2 = polarToRect(width / 2, innerAngle).add(mid);
-  //     corner1 = polarToRect(width / 2, innerAngle + Math.PI).add(mid);
-  //   }
-  //   border1.push(corner1);
-  //   border2.push(corner2);
-  // }
-
-  function findBorderAngles(preIndex, midIndex, postIndex) {
-    var post = postIndex == null ? null : coords[postIndex];
-    var mid = coords[midIndex];
-    var pre = preIndex == null ? null : coords[preIndex];
-    var innerAngle = 0;
-    var cornerR = width / 2;
-    var direction = 0;
-    var minAngle = 0;
-
-    if (pre != null && post != null) {
-      var midPost = post.sub(mid).toPolar();
-      var midPre = pre.sub(mid).toPolar();
-      var midPostUnit = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(1, midPost.angle);
-      var midPreUnit = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(1, midPre.angle);
-      innerAngle = midPostUnit.add(midPreUnit).toPolar().angle || 0.00001;
-      minAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["minAngleDiff"])(midPostUnit.toPolar().angle, midPreUnit.toPolar().angle);
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - midPost.angle));
-      direction = Math.sin(midPost.angle - midPre.angle);
-    } else if (pre == null && post != null) {
-      var _midPost = post.sub(mid).toPolar();
-
-      innerAngle = _midPost.angle - Math.PI / 2;
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - _midPost.angle));
-      direction = 1;
-    } else if (post == null && pre != null) {
-      var _midPre = pre.sub(mid).toPolar();
-
-      innerAngle = _midPre.angle - Math.PI / 2 + Math.PI;
-      cornerR = Math.abs(width / 2 / Math.sin(innerAngle - _midPre.angle));
-      direction = 1;
-    } // cornerR = Math.min(cornerR, width * 2)
-
-
-    var innerRadius = Math.min(cornerR, width * 6);
-    var outerRadius = Math.min(cornerR, width * 2);
-    var finalInnerRadius = innerRadius;
-    var finalOuterRadius = outerRadius;
-
-    if (borderToPoint === 'alwaysOn') {
-      finalInnerRadius = innerRadius + outerRadius;
-      finalOuterRadius = 0;
-    }
-
-    if (borderToPoint === 'onSharpAnglesOnly') {
-      finalInnerRadius = innerRadius + outerRadius;
-      finalOuterRadius = 0; // const minAngle = minAngleDiff(midPostUnit.angle, midPreUnit.angle);
-
-      var sharpAngleThreshold = Math.PI * 0.9;
-
-      if (Math.abs(minAngle) > sharpAngleThreshold) {
-        var percent = Math.sin(Math.abs(minAngle)) / Math.sin(sharpAngleThreshold);
-        finalInnerRadius = innerRadius + outerRadius * percent;
-        finalOuterRadius = outerRadius * (1 - percent);
-      }
-    }
-
-    var corner1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalInnerRadius, innerAngle).add(mid);
-    var corner2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalOuterRadius, innerAngle + Math.PI).add(mid); // const delta = corner2.sub(mid);
-    // // console.log(delta);
-    // corner2 = corner2.sub(delta);
-    // corner1 = corner1.sub(delta);
-
-    if (direction < 0) {
-      corner2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalInnerRadius, innerAngle).add(mid);
-      corner1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(finalOuterRadius, innerAngle + Math.PI).add(mid);
-    }
-
-    border1.push(corner1);
-    border2.push(corner2);
-  } // function findBorderAnglesOutsideVertexFixed(
-  //   preIndex: number | null,
-  //   midIndex: number,
-  //   postIndex: number | null,
-  // ) {
-  //   if (preIndex != null && postIndex != null) {
-  //     const v = vertices[midIndex];
-  //     v.pre = vertices[preIndex];
-  //     v.post = vertices[postIndex];
-  //     const { dir } = v;
-  //     let vertex = v.point;
-  //     const preDir = vertices[preIndex].dir;
-  //     const postDir = vertices[postIndex].dir;
-  //     let preBorderAngle = v.preAngle || 0;
-  //     let postBorderAngle = v.postAngle || 0;
-  //     if (preDir !== dir) {
-  //       const midToBorderAngleDelta = Math.asin(width / v.preLength);
-  //       preBorderAngle -= dir * midToBorderAngleDelta;
-  //     }
-  //     if (postDir !== dir) {
-  //       const midToBorderAngleDelta = Math.asin(width / v.postLength);
-  //       postBorderAngle += dir * midToBorderAngleDelta;
-  //     }
-  //     let angleDelta = Math.PI / 2;
-  //     if (dir === -1) {
-  //       angleDelta = -Math.PI / 2;
-  //     }
-  //     const pointOnPreInnerLine
-  //       = vertex.add(polarToRect(width, preBorderAngle + angleDelta));
-  //     const preInnerBorderLine = new Line(pointOnPreInnerLine, 1, preBorderAngle);
-  //     const pointOnPostInnerLine
-  //       = vertex.add(polarToRect(width, postBorderAngle - angleDelta));
-  //     const postInnerBorderLine = new Line(pointOnPostInnerLine, 1, postBorderAngle);
-  //     const intersection = postInnerBorderLine.intersectsWith(preInnerBorderLine);
-  //     const intersectVector = intersection.intersect.sub(vertex).toPolar();
-  //     const intersectMag = Math.min(intersectVector.mag, v.preLength, v.postLength);
-  //     let innerCoord = vertex.add(polarToRect(intersectMag, intersectVector.angle));
-  //     if (Math.abs(v.minAngle) > Math.PI / 2) {
-  //       const offset = width / 2 * Math.cos(v.minAngle);
-  //       vertex = vertex.add(polarToRect(offset, intersectVector.angle));
-  //       innerCoord = innerCoord.add(polarToRect(offset, intersectVector.angle));
-  //     }
-  //     if (intersectMag < intersectVector.mag) {
-  //       if (intersectMag === v.postLength) {
-  //         const postBorderLine = new Line(vertex, 1, postBorderAngle);
-  //         innerCoord = preInnerBorderLine.intersectsWith(postBorderLine).intersect;
-  //       } else {
-  //         const preBorderLine = new Line(vertex, 1, preBorderAngle);
-  //         innerCoord = postInnerBorderLine.intersectsWith(preBorderLine).intersect;
-  //       }
-  //     }
-  //     if (dir === -1) {
-  //       border1.push(vertex);
-  //       border2.push(innerCoord);
-  //     } else {
-  //       border1.push(innerCoord);
-  //       border2.push(vertex);
-  //     }
-  //   }
-  // }
-
-
-  if (close) {
-    findBorderAngles(coords.length - 1, 0, 1);
-  } else {
-    findBorderAngles(null, 0, 1);
-  }
-
-  for (var i = 1; i < coords.length - 1; i += 1) {
-    findBorderAngles(i - 1, i, i + 1);
-  }
-
-  if (close) {
-    findBorderAngles(coords.length - 2, coords.length - 1, 0);
-  } else {
-    findBorderAngles(coords.length - 2, coords.length - 1, null);
-  } // for (let i = 0; i < vertices.length; i += 1) {
-  //   findCornerPoints(i);
-  // }
-
-
-  var addTriangles = function addTriangles(i1, i2) {
-    points.push(border1[i1].x);
-    points.push(border1[i1].y);
-    points.push(border2[i1].x);
-    points.push(border2[i1].y);
-    points.push(border2[i2].x);
-    points.push(border2[i2].y);
-    points.push(border1[i1].x);
-    points.push(border1[i1].y);
-    points.push(border2[i2].x);
-    points.push(border2[i2].y);
-    points.push(border1[i2].x);
-    points.push(border1[i2].y);
-  };
-
-  for (var _i = 0; _i < coords.length - 1; _i += 1) {
-    addTriangles(_i, _i + 1);
-  }
-
-  if (close) {
-    addTriangles(coords.length - 1, 0);
-  } // // If the line closes on itself, then find the intersection point of
-  // // the first and last offset lines.
-  // // p and q will represent the first points of offset lines 1 and 2.
-  // if (close) {
-  //   // intersection point of first and last offset 1 lines
-  //   p = simpleIntersect(
-  //     line1Pairs[0][0],
-  //     line1Pairs[0][1],
-  //     line1Pairs[line1Pairs.length - 1][0],
-  //     line1Pairs[line1Pairs.length - 1][1],
-  //   );
-  //   // intersection point of first and last offset 2 lines
-  //   q = simpleIntersect(
-  //     line2Pairs[0][0],
-  //     line2Pairs[0][1],
-  //     line2Pairs[line1Pairs.length - 1][0],
-  //     line2Pairs[line2Pairs.length - 1][1],
-  //   );
-  // } else {
-  //   // if not closing on itself, then the first point is simply the first
-  //   // point of the offset lines.
-  //   p = line1Pairs[0][0];   // eslint-disable-line prefer-destructuring
-  //   q = line2Pairs[0][0];   // eslint-disable-line prefer-destructuring
-  // }
-  // // The line effectively has two borders (named an inside and outside border)
-  // // but the inner border isn't necessarily the INSIDE border, it is just a
-  // // name.
-  // // p and q are the first points of the borders.
-  // innerBorder.push(p._dup());
-  // outerBorder.push(q._dup());
-  // // Go through all offset lines, calculate their intersection points
-  // // and from them calculate the triangle and border points.
-  // for (let i = 1; i < line1Pairs.length; i += 1) {
-  //   // First two points of the Triangle 1 are the two ending points
-  //   // of the last line segment
-  //   points.push(p.x);
-  //   points.push(p.y);
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   // Next points are the intersection between the first line and the second line
-  //   p = simpleIntersect(
-  //     line1Pairs[i - 1][0],
-  //     line1Pairs[i - 1][1],
-  //     line1Pairs[i][0],
-  //     line1Pairs[i][1],
-  //   );
-  //   q = simpleIntersect(
-  //     line2Pairs[i - 1][0],
-  //     line2Pairs[i - 1][1],
-  //     line2Pairs[i][0],
-  //     line2Pairs[i][1],
-  //   );
-  //   // Push the next points to the border
-  //   innerBorder.push(p._dup());
-  //   outerBorder.push(q._dup());
-  //   // Finish triangle 1
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   // Make triangle 2
-  //   points.push(points[points.length - 6]);
-  //   points.push(points[points.length - 6]);
-  //   points.push(q.x);
-  //   points.push(q.y);
-  //   points.push(p.x);
-  //   points.push(p.y);
-  // }
-  // // Calculate the last end points
-  // let endp;
-  // let endq;
-  // // In not closing the polyline, the end points are just the last offset
-  // // line points
-  // if (!close) {
-  //   endp = line1Pairs[line1Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-  //   endq = line2Pairs[line2Pairs.length - 1][1]; // eslint-disable-line prefer-destructuring
-  // // If closing the polyline, then the end points are the start points
-  // } else {
-  //   endp = new Point(points[0], points[1]);
-  //   endq = new Point(points[2], points[3]);
-  // }
-  // // Close out the last two triangles
-  // points.push(p.x);             // Last two points of last line segment
-  // points.push(p.y);
-  // points.push(q.x);
-  // points.push(q.y);
-  // points.push(endq.x);
-  // points.push(endq.y);
-  // points.push(p.x);             // Last triangle
-  // points.push(p.y);
-  // points.push(endq.x);
-  // points.push(endq.y);
-  // points.push(endp.x);
-  // points.push(endp.y);
-  // innerBorder.push(endp._dup());
-  // outerBorder.push(endq._dup());
-  // // If closing, then remove the last duplicate coord as it was added by this
-  // // function
-  // if (close) {
-  //   coords.pop();
-  // }
-  // function makeOuter(
-  //   midPre: Point,
-  //   mid: Point,
-  //   midPost: Point,
-  //   midIndex: number,
-  // ) {
-  //   const i = midIndex;
-  //   const n = i * 12;
-  //   const midAngle = threePointAngle(midPre, mid, midPost);
-  //   const innerAngle = threePointAngle(midPre, innerBorder[i], midPost);
-  //   const outerAngle = threePointAngle(midPre, outerBorder[i], midPost);
-  //   const replace = (index, replacementPoint) => {
-  //     let normIndex = index;
-  //     if (index < 0) {
-  //       normIndex += points.length;
-  //     }
-  //     if (index > points.length - 1) {
-  //       normIndex -= points.length;
-  //     }
-  //     points[normIndex] = replacementPoint.x;
-  //     points[normIndex + 1] = replacementPoint.y;
-  //   };
-  //   const minDistance = Math.min(distance(midPre, mid), distance(midPost, mid));
-  //   let newInnerBorder;
-  //   let newOuterBorder;
-  //   if (innerAngle < midAngle || innerAngle === midAngle) {
-  //     newInnerBorder = mid;
-  //   }
-  //   if (outerAngle < midAngle || outerAngle === midAngle) {
-  //     newOuterBorder = mid;
-  //   }
-  //   if (newOuterBorder) {
-  //     replace(n - 4 * 2, newOuterBorder);
-  //     replace(n - 2 * 2, newOuterBorder);
-  //     replace(n + 1 * 2, newOuterBorder);
-  //     outerBorder[i] = newOuterBorder;
-  //   }
-  //   if (newInnerBorder) {
-  //     replace(n - 1 * 2, newInnerBorder);
-  //     replace(n, newInnerBorder);
-  //     replace(n + 3 * 2, newInnerBorder);
-  //     innerBorder[i] = newInnerBorder;
-  //   }
-  //   let midToBorderVector = innerBorder[i].sub(mid).toPolar();
-  //   if (midToBorderVector.mag > minDistance) {
-  //     newInnerBorder = mid.add(new Point(
-  //       minDistance * Math.cos(midToBorderVector.angle),
-  //       minDistance * Math.sin(midToBorderVector.angle),
-  //     ));
-  //   }
-  //   midToBorderVector = outerBorder[i].sub(mid).toPolar();
-  //   if (midToBorderVector.mag > minDistance) {
-  //     newOuterBorder = mid.add(new Point(
-  //       minDistance * Math.cos(midToBorderVector.angle),
-  //       minDistance * Math.sin(midToBorderVector.angle),
-  //     ));
-  //   }
-  //   if (newOuterBorder) {
-  //     replace(n - 4 * 2, newOuterBorder);
-  //     replace(n - 2 * 2, newOuterBorder);
-  //     replace(n + 1 * 2, newOuterBorder);
-  //     outerBorder[i] = newOuterBorder;
-  //   }
-  //   if (newInnerBorder) {
-  //     replace(n - 1 * 2, newInnerBorder);
-  //     replace(n, newInnerBorder);
-  //     replace(n + 3 * 2, newInnerBorder);
-  //     innerBorder[i] = newInnerBorder;
-  //   }
-  // }
-  // for (let i = 1; i < coords.length - 1; i += 1) {
-  //   makeOuter(coords[i - 1], coords[i], coords[i + 1], i);
-  // }
-  // if (close) {
-  //   makeOuter(
-  //     coords[line1Pairs.length - 2],
-  //     coords[line1Pairs.length - 1],
-  //     coords[0],
-  //     line1Pairs.length - 1,
-  //   );
-  //   makeOuter(
-  //     coords[line1Pairs.length - 1],
-  //     coords[0],
-  //     coords[1],
-  //     0,
-  //   );
-  // }
-  // // Form the border array
-
-
-  var border = [];
-  var holeBorder = []; // console.log(innerBorder)
-  // console.log(outerBorder)
-  // If the poly line is closed, only one of the offset lines is the outside
-  // border. If open, then both are the border.
-
-  if (close) {
-    if (border1[0].isInPolygon(border2)) {
-      border = border2;
-      holeBorder = border1;
-    } else {
-      border = border1;
-      holeBorder = border2;
-    }
-  } else {
-    border.push(border1[0]);
-
-    for (var _i2 = 0; _i2 < border2.length; _i2 += 1) {
-      border.push(border2[_i2]);
-    }
-
-    for (var _i3 = border1.length - 1; _i3 >= 0; _i3 -= 1) {
-      border.push(border1[_i3]);
-    }
-  }
-
-  return {
-    points: points,
-    border: border,
-    holeBorder: holeBorder
-  };
-} // export default polyLineTriangles;
-
-/***/ }),
-
 /***/ "./src/js/diagram/DrawingObjects/VertexObject/Triangles/TRIHoriztonalLine.js":
 /*!***********************************************************************************!*\
   !*** ./src/js/diagram/DrawingObjects/VertexObject/Triangles/TRIHoriztonalLine.js ***!
@@ -24498,6 +25205,137 @@ function (_VertexObject) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexGeneric.js":
+/*!*********************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexGeneric.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+ // export type TypeVertexPolyLineBorderToPoint = TypeBorderToPoint;
+
+var VertexGeneric =
+/*#__PURE__*/
+function (_VertexObject) {
+  _inherits(VertexGeneric, _VertexObject);
+
+  // borderToPoint: TypeBorderToPoint;
+  function VertexGeneric(webgl, vertices, border, holeBorder, drawType) {
+    var _this;
+
+    var textureLocation = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
+    var textureVertexSpace = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var textureCoords = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+    var textureRepeat = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
+
+    _classCallCheck(this, VertexGeneric);
+
+    if (textureLocation !== '') {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexGeneric).call(this, webgl, 'withTexture', 'withTexture'));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexGeneric).call(this, webgl));
+    } // super(webgl);
+
+
+    if (drawType === 'lines') {
+      _this.glPrimitive = _this.gl[0].LINES;
+    } else if (drawType === 'strip') {
+      _this.glPrimitive = _this.gl[0].TRIANGLE_STRIP;
+    } else if (drawType === 'fan') {
+      _this.glPrimitive = _this.gl[0].TRIANGLE_FAN;
+    }
+
+    _this.setupPoints(vertices, border, holeBorder);
+
+    _this.setupTexture(textureLocation, textureVertexSpace, textureCoords, textureRepeat);
+
+    _this.setupBuffer();
+
+    return _possibleConstructorReturn(_this);
+  }
+
+  _createClass(VertexGeneric, [{
+    key: "change",
+    value: function change(vertices, border, holeBorder) {
+      this.setupPoints(vertices, border, holeBorder);
+      this.resetBuffer();
+    }
+  }, {
+    key: "setupTexture",
+    value: function setupTexture() {
+      var textureLocation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var textureVertexSpace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+      var textureCoords = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
+      var textureRepeat = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+      if (textureLocation) {
+        this.texture = {
+          id: textureLocation,
+          src: textureLocation,
+          type: 'image',
+          points: [],
+          repeat: textureRepeat
+        };
+        this.createTextureMap(textureVertexSpace.left, textureVertexSpace.right, textureVertexSpace.bottom, textureVertexSpace.top, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+      }
+    }
+  }, {
+    key: "setupPoints",
+    value: function setupPoints(vertices, border, holeBorder) {
+      var _this2 = this;
+
+      this.points = [];
+      vertices.forEach(function (v) {
+        _this2.points.push(v.x);
+
+        _this2.points.push(v.y);
+      });
+
+      if (border == null) {
+        var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(vertices);
+        this.border[0] = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, bounds.bottom), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, bounds.bottom), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, bounds.top)];
+      } else {
+        this.border = border;
+      }
+
+      if (holeBorder != null) {
+        this.holeBorder = holeBorder;
+      }
+    }
+  }]);
+
+  return VertexGeneric;
+}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (VertexGeneric);
+
+/***/ }),
+
 /***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexHorizontalLine.js":
 /*!****************************************************************************!*\
   !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexHorizontalLine.js ***!
@@ -24766,8 +25604,8 @@ function (_DrawingObject) {
 
   _createClass(VertexObject, [{
     key: "addTextureToBuffer",
-    value: function addTextureToBuffer(glIndex, glTexture, image) // image data
-    {
+    value: function addTextureToBuffer(glIndex, glTexture, image, // image data
+    repeat) {
       function isPowerOf2(value) {
         // eslint-disable-next-line no-bitwise
         return (value & value - 1) === 0;
@@ -24787,11 +25625,19 @@ function (_DrawingObject) {
         if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
           // Yes, it's a power of 2. Generate mips.
           gl.generateMipmap(gl.TEXTURE_2D);
+
+          if (repeat != null && repeat === true) {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+          } else {
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          }
         } else {
           // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
           gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         }
       }
     }
@@ -24861,7 +25707,7 @@ function (_DrawingObject) {
                 // Now that the image has loaded make copy it to the texture.
                 texture.data = image;
 
-                _this2.addTextureToBuffer(glIndex, glTexture, texture.data); // if (this.onLoad != null) {
+                _this2.addTextureToBuffer(glIndex, glTexture, texture.data, texture.repeat); // if (this.onLoad != null) {
 
 
                 webgl.onLoad(texture.id); // this.onLoad();
@@ -24871,7 +25717,7 @@ function (_DrawingObject) {
                 webgl.textures[texture.id].state = 'loaded';
               });
             } else if (texture.data != null) {
-              _this2.addTextureToBuffer(glIndex, glTexture, texture.data);
+              _this2.addTextureToBuffer(glIndex, glTexture, texture.data, texture.repeat);
             }
           } else if (texture.id in webgl.textures) {
             if (webgl.textures[texture.id].state === 'loading') {
@@ -24933,7 +25779,7 @@ function (_DrawingObject) {
 
   }, {
     key: "change",
-    value: function change(coords) {
+    value: function change(coords, border, holes) {
       this.resetBuffer();
     } // eslint-disable-next-line no-unused-vars
 
@@ -24986,12 +25832,14 @@ function (_DrawingObject) {
 
       this.resetBuffer();
     } // Abstract method - should be reimplemented for any vertexObjects that
+    // eslint-disable-next-line no-unused-vars
 
   }, {
     key: "getPointCountForAngle",
     value: function getPointCountForAngle() {
       var drawAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.PI * 2;
-      return this.numPoints * drawAngle / (Math.PI * 2);
+      // return this.numPoints * drawAngle / (Math.PI * 2);
+      return this.numPoints;
     } // Abstract method - should be reimplemented for any vertexObjects that
     // eslint-disable-next-line no-unused-vars
 
@@ -25164,772 +26012,6 @@ function (_DrawingObject) {
 
 /***/ }),
 
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js":
-/*!**********************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLine.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PolyLineTriangles3 */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles3.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-var VertexPolyLine =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(VertexPolyLine, _VertexObject);
-
-  function VertexPolyLine(webgl, coords, close, width) {
-    var _this;
-
-    var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
-
-    _classCallCheck(this, VertexPolyLine);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolyLine).call(this, webgl));
-    _this.width = width;
-    _this.close = close;
-    _this.borderToPoint = borderToPoint;
-
-    _this.setupPoints(coords);
-
-    _this.setupBuffer();
-
-    return _this;
-  }
-
-  _createClass(VertexPolyLine, [{
-    key: "change",
-    value: function change(coords) {
-      this.setupPoints(coords);
-      this.resetBuffer();
-    }
-  }, {
-    key: "setupPoints",
-    value: function setupPoints(coords) {
-      var lineTriangles = Object(_PolyLineTriangles3__WEBPACK_IMPORTED_MODULE_3__["default"])(coords, this.close, this.width, this.borderToPoint);
-      this.points = lineTriangles.points;
-      this.border[0] = lineTriangles.border;
-      this.holeBorder[0] = lineTriangles.holeBorder;
-    }
-  }]);
-
-  return VertexPolyLine;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (VertexPolyLine);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolyLineCorners.js ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _PolyLineTriangles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PolyLineTriangles */ "./src/js/diagram/DrawingObjects/VertexObject/PolyLineTriangles.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-function cornerLength(coords, length) {
-  var forceLength = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var center = coords[1];
-  var ends = [coords[0], coords[2]];
-  var points = [];
-
-  for (var i = 0; i < 2; i += 1) {
-    var delta = ends[i].sub(center);
-    var angle = Math.atan2(delta.y, delta.x);
-    var endLength = Math.sqrt(delta.x * delta.x + delta.y * delta.y);
-
-    if (length < endLength || forceLength) {
-      endLength = length;
-    }
-
-    points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](endLength * Math.cos(angle) + center.x, endLength * Math.sin(angle) + center.y));
-  }
-
-  points.push(points[1]._dup());
-  points[1] = center._dup();
-  return points;
-}
-
-var PolyLineCorners =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(PolyLineCorners, _VertexObject);
-
-  function PolyLineCorners(webgl, coords, close, length, width) {
-    var _this;
-
-    _classCallCheck(this, PolyLineCorners);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PolyLineCorners).call(this, webgl));
-    var newCoords = coords.slice();
-
-    if (close) {
-      newCoords.push(coords[0]);
-      newCoords.push(coords[1]);
-    }
-
-    for (var i = 1, j = newCoords.length - 1; i < j; i += 1) {
-      var cornerPoints = cornerLength([newCoords[i - 1], newCoords[i], newCoords[i + 1]], length, true);
-      var cornerTriangles = Object(_PolyLineTriangles__WEBPACK_IMPORTED_MODULE_3__["default"])(cornerPoints, false, width);
-
-      for (var k = 0, m = cornerTriangles.points.length; k < m; k += 1) {
-        _this.points.push(cornerTriangles.points[k]);
-      }
-
-      _this.border[i - 1] = [];
-
-      for (var _k = 0, _m = cornerTriangles.border.length; _k < _m; _k += 1) {
-        _this.border[i - 1].push(cornerTriangles.border[_k]);
-      }
-    }
-
-    _this.setupBuffer();
-
-    return _this;
-  }
-
-  return PolyLineCorners;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (PolyLineCorners);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygon.js":
-/*!*********************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolygon.js ***!
-  \*********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-var VertexPolygon =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(VertexPolygon, _VertexObject);
-
-  // WebGL primitive used
-  // outRad: number;       // radius from center to polygon vertex + 1/2 linewidth
-  // inRad: number;        // radius from center to polygon vertex - 1/2 linewidth
-  function VertexPolygon(webgl, numSides, // Must be 3 or greater (def: 3 if smaller)
-  radius, lineWidth) {
-    var _this;
-
-    var rotation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-    var center = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    var numSidesToDraw = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : numSides;
-    var direction = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
-    var triangles = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
-
-    _classCallCheck(this, VertexPolygon);
-
-    // setup webgl stuff
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
-
-    if (triangles) {
-      _this.glPrimitive = webgl[0].gl.TRIANGLES;
-    } else {
-      _this.glPrimitive = webgl[0].gl.TRIANGLE_STRIP;
-    } // this.triangles = triangles;
-    // Check potential errors in constructor input
-
-
-    var sides = numSides;
-    var sidesToDraw = Math.floor(numSidesToDraw);
-
-    if (sides < 3) {
-      sides = 3;
-    }
-
-    if (sidesToDraw < 0) {
-      sidesToDraw = 0;
-    } else if (sidesToDraw > sides) {
-      sidesToDraw = sides;
-    } // setup shape geometry
-
-
-    _this.options = {
-      triangles: triangles,
-      radius: radius,
-      center: center,
-      lineWidth: lineWidth,
-      sides: sides,
-      sidesToDraw: sidesToDraw,
-      rotation: rotation,
-      direction: direction
-    }; // this.radius = radius;
-    // this.center = center;
-    // this.lineWidth = lineWidth;
-    // this.sides = sides;
-    // this.sidesToDraw = sidesToDraw;
-    // // this.dAngle = Math.PI * 2.0 / sides;
-    // this.rotation = rotation;
-    // this.direction = direction;
-
-    _this.makePolygon();
-
-    _this.setupBuffer(); // console.log(this.numPoints);
-
-
-    return _this;
-  }
-
-  _createClass(VertexPolygon, [{
-    key: "update",
-    value: function update(options) {
-      this.options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, this.options, options);
-      this.makePolygon();
-      this.resetBuffer();
-    }
-  }, {
-    key: "makePolygon",
-    value: function makePolygon() {
-      var _this$options = this.options,
-          radius = _this$options.radius,
-          direction = _this$options.direction,
-          rotation = _this$options.rotation,
-          lineWidth = _this$options.lineWidth,
-          center = _this$options.center,
-          sides = _this$options.sides,
-          sidesToDraw = _this$options.sidesToDraw,
-          triangles = _this$options.triangles;
-      var inRad = radius - lineWidth;
-      var dAngle = Math.PI * 2.0 / sides; // Setup shape primative vertices
-
-      var i;
-      var j = 0;
-
-      for (i = 0; i <= sidesToDraw; i += 1) {
-        var angle = i * dAngle * direction + rotation * direction;
-        var lastAngle = (i - 1) * dAngle * direction + rotation * direction;
-        var inPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(angle), inRad * Math.sin(angle)).add(center);
-        var outPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(angle), radius * Math.sin(angle)).add(center);
-        var lastInPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(lastAngle), inRad * Math.sin(lastAngle)).add(center);
-        var lastOutPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(lastAngle), radius * Math.sin(lastAngle)).add(center);
-
-        if (triangles) {
-          if (i > 0) {
-            this.points[j] = lastInPoint.x;
-            this.points[j + 1] = lastInPoint.y;
-            this.points[j + 2] = lastOutPoint.x;
-            this.points[j + 3] = lastOutPoint.y;
-            this.points[j + 4] = outPoint.x;
-            this.points[j + 5] = outPoint.y;
-            this.points[j + 6] = outPoint.x;
-            this.points[j + 7] = outPoint.y;
-            this.points[j + 8] = lastInPoint.x;
-            this.points[j + 9] = lastInPoint.y;
-            this.points[j + 10] = inPoint.x;
-            this.points[j + 11] = inPoint.y;
-            j += 12;
-          }
-        } else {
-          // this.points[j] =
-          //   center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
-          // this.points[j + 1] =
-          //   center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
-          // this.points[j + 2] =
-          //   center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
-          // this.points[j + 3] =
-          //   center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
-          // j += 4;
-          this.points[j] = inPoint.x;
-          this.points[j + 1] = inPoint.y;
-          this.points[j + 2] = outPoint.x;
-          this.points[j + 3] = outPoint.y;
-          j += 4;
-        }
-      } // Make the encapsulating border
-
-
-      if (sidesToDraw < sides) {
-        for (i = 0; i <= sidesToDraw; i += 1) {
-          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * dAngle * direction + rotation * direction)));
-        }
-
-        for (i = sidesToDraw; i >= 0; i -= 1) {
-          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + inRad * Math.cos(i * dAngle * direction + rotation * direction), center.y + inRad * Math.sin(i * dAngle * direction + rotation * direction)));
-        }
-
-        this.border[0].push(this.border[0][0]._dup());
-      } else {
-        for (i = 0; i <= sidesToDraw; i += 1) {
-          this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](center.x + radius * Math.cos(i * dAngle * direction + rotation * direction), center.y + radius * Math.sin(i * dAngle * direction + rotation * direction)));
-        }
-      }
-    }
-  }, {
-    key: "drawToAngle",
-    value: function drawToAngle(offset, rotate, scale, drawAngle, color) {
-      var dAngle = Math.PI * 2.0 / this.options.sides;
-      var count = Math.floor(drawAngle / dAngle) * 2.0 + 2;
-
-      if (drawAngle >= Math.PI * 2.0) {
-        count = this.numPoints;
-      }
-
-      this.draw(offset, rotate, scale, count, color);
-    }
-  }, {
-    key: "getPointCountForAngle",
-    value: function getPointCountForAngle() {
-      var drawAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.PI * 2;
-      var dAngle = Math.PI * 2.0 / this.options.sides;
-      var count = Math.floor(drawAngle / dAngle) * 2.0 + 2;
-
-      if (drawAngle >= Math.PI * 2.0) {
-        count = this.numPoints;
-      }
-
-      return count;
-    }
-  }]);
-
-  return VertexPolygon;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (VertexPolygon);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonFilled.js":
-/*!***************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonFilled.js ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var PolygonFilled =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(PolygonFilled, _VertexObject);
-
-  // WebGL primitive used
-  // radius from center to outside of polygon
-  // center point
-  // angle between adjacent verteces to center lines
-  function PolygonFilled(webgl, numSides, radius) {
-    var _this;
-
-    var rotation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var center = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    var numSidesToDraw = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : numSides;
-    var textureLocation = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
-    var textureCoords = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
-
-    _classCallCheck(this, PolygonFilled);
-
-    if (textureLocation !== '') {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl, 'withTexture', 'withTexture'));
-    } else {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
-    }
-
-    _this.glPrimitive = webgl[0].gl.TRIANGLE_FAN; // Check potential errors in constructor input
-
-    var sides = numSides;
-    var sidesToDraw = numSidesToDraw;
-
-    if (sides < 3) {
-      sides = 3;
-    }
-
-    if (numSidesToDraw < 0) {
-      sidesToDraw = 0;
-    } else if (numSidesToDraw > sides) {
-      sidesToDraw = sides;
-    }
-
-    _this.points = [center.x, center.y];
-    _this.dAngle = 0;
-    _this.radius = radius;
-    _this.center = center;
-    _this.dAngle = Math.PI * 2.0 / sides;
-    var i;
-    var j = 2; // let b = 0;
-    // Make the encapsulating border
-
-    if (sidesToDraw < sides) {
-      _this.border[0].push(center._dup()); // b = 1;
-
-    }
-
-    for (i = 0; i < sidesToDraw + 1; i += 1) {
-      _this.points[j] = center.x + radius * Math.cos(i * _this.dAngle + rotation);
-      _this.points[j + 1] = center.y + radius * Math.sin(i * _this.dAngle + rotation);
-
-      _this.border[0].push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_this.points[j], _this.points[j + 1])); // b += 1;
-
-
-      j += 2;
-    }
-
-    if (sidesToDraw < sides) {
-      _this.border[0].push(center._dup());
-    }
-
-    if (textureLocation) {
-      _this.texture = {
-        id: textureLocation,
-        src: textureLocation,
-        type: 'image',
-        points: []
-      };
-
-      _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
-    }
-
-    _this.setupBuffer();
-
-    return _possibleConstructorReturn(_this);
-  }
-
-  _createClass(PolygonFilled, [{
-    key: "drawToAngle",
-    value: function drawToAngle(offset, rotate, scale, drawAngle, color) {
-      var count = Math.floor(drawAngle / this.dAngle) * 2.0 + 2;
-
-      if (drawAngle >= Math.PI * 2.0) {
-        count = this.numPoints;
-      }
-
-      this.draw(offset, rotate, scale, count, color);
-    }
-  }, {
-    key: "getPointCountForAngle",
-    value: function getPointCountForAngle() {
-      var drawAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.PI * 2;
-      var count = Math.floor(drawAngle / this.dAngle) + 1;
-
-      if (drawAngle >= Math.PI * 2.0) {
-        count = this.numPoints;
-      }
-
-      return count;
-    }
-  }]);
-
-  return PolygonFilled;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (PolygonFilled);
-
-/***/ }),
-
-/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonLine.js":
-/*!*************************************************************************!*\
-  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexPolygonLine.js ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var VertexPolygonLine =
-/*#__PURE__*/
-function (_VertexObject) {
-  _inherits(VertexPolygonLine, _VertexObject);
-
-  // radius from center to outside of polygon
-  // WebGL primitive used
-  // center point
-  // angle between adjacent verteces to center lines
-  function VertexPolygonLine(webgl, numSides, // Must be 3 or greater (def: 3 if smaller)
-  radius) {
-    var _this;
-
-    var rotation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var center = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    var numSidesToDraw = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : numSides;
-    var direction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 1;
-    var thickness = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
-
-    _classCallCheck(this, VertexPolygonLine);
-
-    // setup webgl stuff
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygonLine).call(this, webgl));
-    _this.glPrimitive = webgl[0].gl.LINES; // Check potential errors in constructor input
-
-    var sides = numSides;
-    var sidesToDraw = Math.floor(numSidesToDraw);
-
-    if (sides < 3) {
-      sides = 3;
-    }
-
-    if (sidesToDraw < 0) {
-      sidesToDraw = 0;
-    } else if (sidesToDraw > sides) {
-      sidesToDraw = sides;
-    } // setup shape geometry
-
-
-    _this.radius = radius; // const inRad = radius - lineWidth;
-
-    _this.center = center;
-    _this.dAngle = Math.PI * 2.0 / sides; // const lines = [];
-
-    var points = [];
-    var thickPoints = [];
-
-    for (var j = 1; j < thickness; j += 1) {
-      thickPoints.push([]);
-    }
-
-    for (var i = 0; i <= sidesToDraw; i += 1) {
-      var angle = i * _this.dAngle * direction + rotation * direction;
-      points.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(radius, angle));
-
-      for (var _j = 1; _j < thickness; _j += 1) {
-        thickPoints[_j - 1].push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(radius * (1 - _j * 0.003), angle));
-      }
-    }
-
-    for (var _i = 1; _i <= sidesToDraw; _i += 1) {
-      // lines.push([points[i - 1], points[i]]);
-      _this.points.push(points[_i - 1].x);
-
-      _this.points.push(points[_i - 1].y);
-
-      _this.points.push(points[_i].x);
-
-      _this.points.push(points[_i].y);
-
-      for (var _j2 = 1; _j2 < thickness; _j2 += 1) {
-        _this.points.push(thickPoints[_j2 - 1][_i - 1].x);
-
-        _this.points.push(thickPoints[_j2 - 1][_i - 1].y);
-
-        _this.points.push(thickPoints[_j2 - 1][_i].x);
-
-        _this.points.push(thickPoints[_j2 - 1][_i].y);
-      }
-    }
-
-    _this.border[0] = points;
-
-    if (sidesToDraw < sides) {
-      _this.border[0].push(center);
-    } // for (let i = 1; i <= sidesToDraw; i += 1) {
-    //   const lastAngle = (i - 1) * angleStep;
-    //   const angle = i * angleStep;
-    //   lines.push([polarToRect(1, lastAngle), polarToRect(1, angle)]);
-    // }
-    // // Setup shape primative vertices
-    // let i;
-    // let j = 0;
-    // for (i = 0; i <= sidesToDraw; i += 1) {
-    //   this.points[j] = polarToRect
-    //   this.points[j] =
-    //     center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
-    //   this.points[j + 1] =
-    //     center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
-    //   this.points[j + 2] =
-    //     center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
-    //   this.points[j + 3] =
-    //     center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
-    //   j += 4;
-    // }
-    // // Make the encapsulating border
-    // if (sidesToDraw < sides) {
-    //   for (i = 0; i <= sidesToDraw; i += 1) {
-    //     this.border[0].push(new Point(
-    //       center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction),
-    //       center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction),
-    //     ));
-    //   }
-    //   for (i = sidesToDraw; i >= 0; i -= 1) {
-    //     this.border[0].push(new Point(
-    //       center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction),
-    //       center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction),
-    //     ));
-    //   }
-    //   this.border[0].push(this.border[0][0]._dup());
-    // } else {
-    //   for (i = 0; i <= sidesToDraw; i += 1) {
-    //     this.border[0].push(new Point(
-    //       center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction),
-    //       center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction),
-    //     ));
-    //   }
-    // }
-
-
-    _this.setupBuffer(); // console.log(this.numPoints);
-
-
-    return _this;
-  }
-
-  _createClass(VertexPolygonLine, [{
-    key: "drawToAngle",
-    value: function drawToAngle(offset, rotate, scale, drawAngle, color) {
-      var count = Math.floor(drawAngle / this.dAngle) * 2.0 + 2;
-
-      if (drawAngle >= Math.PI * 2.0) {
-        count = this.numPoints;
-      }
-
-      this.draw(offset, rotate, scale, count, color);
-    }
-  }, {
-    key: "getPointCountForAngle",
-    value: function getPointCountForAngle() {
-      var drawAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Math.PI * 2;
-      var numSidesToDraw = Math.floor(drawAngle / this.dAngle) * 2.0;
-      var pointCount = numSidesToDraw * 2;
-
-      if (pointCount > this.numPoints) {
-        pointCount = this.numPoints;
-      } // let count = Math.floor(drawAngle / this.dAngle) * 2.0;
-      // if (drawAngle >= Math.PI * 2.0) {
-      //   count = this.numPoints;
-      // }
-
-
-      return pointCount;
-    }
-  }]);
-
-  return VertexPolygonLine;
-}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (VertexPolygonLine);
-
-/***/ }),
-
 /***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexRadialLines.js":
 /*!*************************************************************************!*\
   !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexRadialLines.js ***!
@@ -26037,6 +26119,161 @@ function (_VertexObject) {
 }(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (VertexRadialLines);
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexRectangle.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexRectangle.js ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VertexRectangle; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var VertexRectangle =
+/*#__PURE__*/
+function (_VertexObject) {
+  _inherits(VertexRectangle, _VertexObject);
+
+  function VertexRectangle(webgl, xAlign, yAlign) {
+    var _this;
+
+    var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+    var height = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+    var lineWidth = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.01;
+    var cornerRadius = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+    var cornerSides = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 20;
+
+    _classCallCheck(this, VertexRectangle);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexRectangle).call(this, webgl));
+    _this.glPrimitive = _this.gl[0].TRIANGLE_STRIP;
+    var points = []; // points.push(new Point(0, 0));
+
+    var makeCorner = function makeCorner(radius, sides, rotation, offset) {
+      var cornerPoints = [];
+
+      if (radius === 0 || sides === 0) {
+        cornerPoints.push(offset);
+      } else {
+        var step = Math.PI / 2 / sides;
+
+        for (var i = 0; i < sides + 1; i += 1) {
+          cornerPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(i * step + rotation) + offset.x, radius * Math.sin(i * step + rotation) + offset.y));
+        }
+      }
+
+      return cornerPoints;
+    };
+
+    var rad = Math.min(cornerRadius, width / 2, height / 2);
+    var innerRad = Math.max(cornerRadius - lineWidth, 0.0001);
+    var sides = cornerSides;
+
+    if (sides === 0) {
+      rad = 0;
+      innerRad = 0;
+    }
+
+    var outsidePoints = [].concat(_toConsumableArray(makeCorner(rad, sides, 0, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, height / 2 - rad))), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, height / 2 - rad))), _toConsumableArray(makeCorner(rad, sides, Math.PI, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, -height / 2 + rad))), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2 * 3, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, -height / 2 + rad))));
+    var insidePoints = [].concat(_toConsumableArray(makeCorner(innerRad, sides, 0, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - innerRad - lineWidth, height / 2 - innerRad - lineWidth))), _toConsumableArray(makeCorner(innerRad, sides, Math.PI / 2, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + innerRad + lineWidth, height / 2 - innerRad - lineWidth))), _toConsumableArray(makeCorner(innerRad, sides, Math.PI, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + innerRad + lineWidth, -height / 2 + innerRad + lineWidth))), _toConsumableArray(makeCorner(innerRad, sides, Math.PI / 2 * 3, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - innerRad - lineWidth, -height / 2 + innerRad + lineWidth))));
+    outsidePoints.forEach(function (p, index) {
+      points.push(p);
+      points.push(insidePoints[index]);
+    });
+
+    if (yAlign === 'top') {
+      points = points.map(function (p) {
+        return p.add(0, -height / 2);
+      });
+    } else if (yAlign === 'bottom') {
+      points = points.map(function (p) {
+        return p.add(0, height / 2);
+      });
+    } else if (yAlign === 'middle') {
+      points = points.map(function (p) {
+        return p.add(0, 0);
+      });
+    } else {
+      points = points.map(function (p) {
+        return p.add(0, yAlign);
+      });
+    }
+
+    if (xAlign === 'left') {
+      points = points.map(function (p) {
+        return p.add(width / 2, 0);
+      });
+    } else if (xAlign === 'right') {
+      points = points.map(function (p) {
+        return p.add(-width / 2, 0);
+      });
+    } else if (xAlign === 'center') {
+      points = points.map(function (p) {
+        return p.add(0, 0);
+      });
+    } else {
+      points = points.map(function (p) {
+        return p.add(xAlign, xAlign);
+      });
+    }
+
+    points.forEach(function (p) {
+      _this.points.push(p.x);
+
+      _this.points.push(p.y);
+    });
+
+    _this.points.push(_this.points[0]);
+
+    _this.points.push(_this.points[1]);
+
+    _this.points.push(_this.points[2]);
+
+    _this.points.push(_this.points[3]);
+
+    _this.border[0] = points.slice(1);
+
+    _this.setupBuffer();
+
+    return _this;
+  }
+
+  return VertexRectangle;
+}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
 
 /***/ }),
 
@@ -28419,9 +28656,11 @@ function (_DiagramElement) {
             for (var j = 0; j < holeBoundaries.length; j += 1) {
               var holeBoundary = holeBoundaries[j];
 
-              if (glLocation.isInPolygon(holeBoundary)) {
-                isTouched = false;
-                j = holeBoundaries.length;
+              if (Array.isArray(holeBoundary) && holeBoundary.length > 2) {
+                if (glLocation.isInPolygon(holeBoundary)) {
+                  isTouched = false;
+                  j = holeBoundaries.length;
+                }
               }
             }
           }
@@ -28642,12 +28881,17 @@ function (_DiagramElement) {
           if (this.pointsToDraw !== -1) {
             pointCount = this.pointsToDraw;
           }
+        } else {
+          pointCount = 1;
         }
 
         var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
-        pulseTransforms.forEach(function (t) {
-          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
-        });
+
+        if (pointCount > 0) {
+          pulseTransforms.forEach(function (t) {
+            _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
+          });
+        }
 
         if (this.unrenderNextDraw) {
           this.clearRender();
@@ -28787,9 +29031,13 @@ function (_DiagramElement) {
       }
 
       if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        for (var i = 0; i < this.drawingObject.border[0].length; i += 1) {
-          this.drawingObject.border[0][i].x *= xMulToUse;
-          this.drawingObject.border[0][i].y *= yMulToUse;
+        for (var b = 0; b < this.drawingObject.border.length; b += 1) {
+          var border = this.drawingObject.border[b];
+
+          for (var i = 0; i < border.length; i += 1) {
+            border[i].x *= xMulToUse;
+            border[i].y *= yMulToUse;
+          }
         }
       }
     }
@@ -31905,18 +32153,41 @@ function () {
     } else {
       this.p2 = this.p1.add(p2OrMag * Math.cos(angle), p2OrMag * Math.sin(angle));
       this.ang = angle;
-    }
+    } // this.A = this.p2.y - this.p1.y;
+    // this.B = this.p1.x - this.p2.x;
+    // this.C = this.A * this.p1.x + this.B * this.p1.y;
+    // this.distance = distance(this.p1, this.p2);
 
-    this.A = this.p2.y - this.p1.y;
-    this.B = this.p1.x - this.p2.x;
-    this.C = this.A * this.p1.x + this.B * this.p1.y;
-    this.distance = distance(this.p1, this.p2);
+
+    this.setupLine();
   }
 
   _createClass(Line, [{
+    key: "setupLine",
+    value: function setupLine() {
+      this.A = this.p2.y - this.p1.y;
+      this.B = this.p1.x - this.p2.x;
+      this.C = this.A * this.p1.x + this.B * this.p1.y;
+      this.distance = distance(this.p1, this.p2);
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       return new Line(this.p1, this.p2);
+    }
+  }, {
+    key: "setP1",
+    value: function setP1(p1) {
+      this.p1 = getPoint(p1);
+      this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
+      this.setupLine();
+    }
+  }, {
+    key: "setP2",
+    value: function setP2(p2) {
+      this.p2 = getPoint(p2);
+      this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
+      this.setupLine();
     }
   }, {
     key: "getPoint",
@@ -32140,7 +32411,10 @@ function () {
       }
 
       return true;
-    }
+    } // left, right, top, bottom is relative to cartesian coordinates
+    // 'outside' is the outside of a polygon defined in the positive direction
+    // (CCW).
+
   }, {
     key: "offset",
     value: function offset(direction, space) {
@@ -32156,7 +32430,11 @@ function () {
 
       var offsetAngle = normalizedAngle - Math.PI / 2;
 
-      if (normalizedAngle < Math.PI / 2) {
+      if (direction === 'positive') {
+        offsetAngle = clipAngle(this.ang, '0to360') + Math.PI / 2;
+      } else if (direction === 'negative') {
+        offsetAngle = clipAngle(this.ang, '0to360') - Math.PI / 2;
+      } else if (normalizedAngle < Math.PI / 2) {
         if (direction === 'left' || direction === 'top') {
           offsetAngle = normalizedAngle + Math.PI / 2;
         }
@@ -33331,15 +33609,14 @@ function getBoundingRect(pointArrays) {
     firstPoint = false;
   });
   return new Rect(result.min.x, result.min.y, result.max.x - result.min.x, result.max.y - result.min.y);
-} // Finds the min angle between three points
-
-
-function threePointAngleMin(p2, p1, p3) {
-  var p12 = distance(p1, p2);
-  var p13 = distance(p1, p3);
-  var p23 = distance(p2, p3);
-  return Math.acos((Math.pow(p12, 2) + Math.pow(p13, 2) - Math.pow(p23, 2)) / (2 * p12 * p13));
-} // Finds the angle between three points for p12 to p13 in the positive
+} // // Finds the min angle between three points
+// function threePointAngleMin(p2: Point, p1: Point, p3: Point) {
+//   const p12 = distance(p1, p2);
+//   const p13 = distance(p1, p3);
+//   const p23 = distance(p2, p3);
+//   return Math.acos((p12 ** 2 + p13 ** 2 - p23 ** 2) / (2 * p12 * p13));
+// }
+// Finds the angle between three points for p12 to p13 in the positive
 // angle direction
 
 
@@ -33355,6 +33632,20 @@ function threePointAngle(p2, p1, p3) {
   angle13 -= angle12;
   angle12 = 0;
   return clipAngle(angle13, '0to360');
+}
+
+function threePointAngleMin(p2, p1, p3) {
+  var a12 = clipAngle(Math.atan2(p2.y - p1.y, p2.x - p1.x), '0to360');
+  var a13 = clipAngle(Math.atan2(p3.y - p1.y, p3.x - p1.x), '0to360');
+  var delta = a13 - a12;
+
+  if (delta > Math.PI) {
+    delta = -(Math.PI * 2 - delta);
+  } else if (delta < -Math.PI) {
+    delta = Math.PI * 2 + delta;
+  }
+
+  return delta;
 }
 
 function randomPoint(withinRect) {
@@ -34372,6 +34663,7 @@ var roundNum = function roundNum(value) {
 
   return result;
 };
+
 /**
  * Rounds a number or numbers in an array
  * @method
@@ -34379,20 +34671,20 @@ var roundNum = function roundNum(value) {
  * @param {number} precision - Number of decimal places to round to
  * @returns {number | Array<number>} Rounded value or array of values
  */
-
-
 function round(arrayOrValue) {
   var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
   var result = 0;
 
   if (Array.isArray(arrayOrValue)) {
-    result = arrayOrValue.map(function (elem) {
+    return arrayOrValue.map(function (elem) {
       return round(elem, precision);
     });
   }
 
   if (typeof arrayOrValue === 'number') {
     result = roundNum(arrayOrValue, precision);
+  } else if (arrayOrValue != null && arrayOrValue.round != null) {
+    result = arrayOrValue.round(precision);
   } // $FlowFixMe
 
 

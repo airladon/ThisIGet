@@ -46,7 +46,7 @@ export default function diagramLayout() {
     position: new Point(1.6, -0.2),
   };
   const quad = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       close: true,

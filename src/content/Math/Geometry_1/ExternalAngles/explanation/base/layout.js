@@ -38,7 +38,7 @@ export default function diagramLayout() {
   const points = [[-2, -1], [0, 0.6], [0.7, -1]];
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       width: 0.03,

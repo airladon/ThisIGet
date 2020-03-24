@@ -28,7 +28,7 @@ export default function diagramLayout() {
   const width = 0.02;
   const triangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       color: colors.sides,
@@ -51,7 +51,7 @@ export default function diagramLayout() {
   };
   const angle = {
     name: 'angle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       close: false,

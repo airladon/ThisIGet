@@ -66,7 +66,7 @@ export default function diagramLayout() {
   const size = 0.08;
   const marking = name => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [[-size, size], [0, 0], [-size, -size]],
       color: colors.lines,

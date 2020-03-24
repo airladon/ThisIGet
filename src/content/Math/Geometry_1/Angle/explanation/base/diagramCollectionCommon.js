@@ -68,7 +68,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   updateAngle() {
     const r = this._angle._line1.getRotation();
     const rotation = clipAngle(r, '0to360');
-    const extraRotation = clipAngle(r + 0.05, '0to360');
+    const extraRotation = clipAngle(r + 0.02, '0to360');
     this._angle._fill.setAngleToDraw(extraRotation);
     if (this._angle._arrow.isShown) {
       const angleToDisappear = 0.35;

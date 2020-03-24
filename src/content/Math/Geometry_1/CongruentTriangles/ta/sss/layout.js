@@ -49,11 +49,14 @@ export default function diagramLayout() {
         name: 'line',
         method: 'polygon',
         options: {
-          width: 3,
+          width: 0.01,
           color: colors.construction,
           sides: 200,
           radius: leftLen,
-          linePrimitives: true,
+          line: {
+            linePrimitives: true,
+            lineNum: 4,
+          },
         },
       },
       {

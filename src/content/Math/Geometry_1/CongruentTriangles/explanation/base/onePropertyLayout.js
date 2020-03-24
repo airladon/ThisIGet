@@ -64,7 +64,7 @@ export default function diagramLayout() {
 
   layout.sideTri = {
     name: 'sideTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
@@ -74,6 +74,7 @@ export default function diagramLayout() {
       color: colors.sides,
       width: layout.width,
       close: true,
+      widthIs: 'inside',
       angle: [
         onePropAngle(0.3, 0.3),
         onePropAngle(0.3, 0.3),
@@ -94,7 +95,7 @@ export default function diagramLayout() {
 
   layout.angleTri = {
     name: 'angleTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],

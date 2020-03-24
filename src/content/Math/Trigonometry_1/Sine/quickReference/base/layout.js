@@ -59,7 +59,7 @@ export default function diagramLayout() {
       addElements: [
         {
           name: 'tri',
-          method: 'polyLine',
+          method: 'polyline',
           options: {
             points,
             color: colors.lines,

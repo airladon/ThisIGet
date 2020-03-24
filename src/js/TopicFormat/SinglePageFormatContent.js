@@ -31,6 +31,10 @@ class SinglePageFormatContent extends SimpleFormatContent {
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
+    const container = document.getElementById('topic__content_diagram');
+    if (container != null) {
+      container.classList.remove('figureone__container');
+    }
     // this.diagram.resize();
     this.setElementContent();
     this.setContent();

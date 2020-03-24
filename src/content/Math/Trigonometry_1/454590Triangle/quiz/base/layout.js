@@ -36,7 +36,7 @@ export default function diagramLayout() {
   });
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0, 0],

@@ -47,7 +47,7 @@ export default function diagramLayout() {
   });
 
   const triangle = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [0.7, 0.8],
@@ -120,8 +120,9 @@ export default function diagramLayout() {
     curve: {
       radius: rc,
       width: layout.width,
+      sides: 200,
     },
-    sides: 200,
+    sides: { length: 0 },
     label: {
       text: null,
       showRealAngle: true,
@@ -142,7 +143,7 @@ export default function diagramLayout() {
 
   layout.aaaTri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
@@ -151,6 +152,7 @@ export default function diagramLayout() {
       ],
       color: colors.sides,
       width: layout.width,
+      widthIs: 'inside',
       close: true,
       angle: [
         aaaAngle(0.3, 0.4),
@@ -275,12 +277,13 @@ export default function diagramLayout() {
 
   const leftCircle = {
     name: 'leftCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width: layout.width / 2,
       color: colors.construction,
       sides: 200,
       radius: leftLen,
+      fill: false,
     },
     mods: {
       scenarios: {
@@ -291,7 +294,7 @@ export default function diagramLayout() {
   };
   const rightCircle = {
     name: 'rightCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width: layout.width / 2,
       color: colors.construction,
@@ -336,7 +339,7 @@ export default function diagramLayout() {
 
   const tri = (name, scale) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       close: true,
       points: [
@@ -349,7 +352,9 @@ export default function diagramLayout() {
       ],
       width: layout.width,
       color: colors.sides,
-      borderToPoint: 'always',
+      widthIs: 'mid',
+      cornerStyle: 'radius',
+      cornerSize: 0.005,
     },
     mods: {
       scenarios: {
@@ -376,11 +381,14 @@ export default function diagramLayout() {
         name: 'line',
         method: 'polygon',
         options: {
-          width: 3,
+          width: 0.01,
           color: colors.construction,
           sides: 200,
           radius: leftLen,
-          linePrimitives: true,
+          line: {
+            linePrimitives: true,
+            lineNum: 4,
+          },
         },
       },
       {
@@ -834,7 +842,7 @@ export default function diagramLayout() {
   };
   layout.sas = {
     name: 'fig',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       position: [0, 0],
       points: [
@@ -891,7 +899,7 @@ export default function diagramLayout() {
   // /////////////////////////////////////////////////////////////////
   layout.asa = {
     name: 'fig',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
@@ -1117,7 +1125,7 @@ export default function diagramLayout() {
 
   const constructionCircle = {
     name: 'constructionCircle',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       color: colors.construction,
       width: layout.width / 2,
@@ -1151,8 +1159,8 @@ export default function diagramLayout() {
     constructionCircle,
     constructionLine,
     ssaAdjacentMovePad,
-    ssaSideAdjacent,
     ssaAngle,
+    ssaSideAdjacent,
     ssaSideUnknown,
     ssaSideOpposite,
   ];

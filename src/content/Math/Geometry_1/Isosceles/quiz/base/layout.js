@@ -45,7 +45,7 @@ export default function diagramLayout() {
 
   layout.quizTriangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width,
       points,

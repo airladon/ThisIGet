@@ -81,23 +81,36 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
-          points: square, color: colors.lines, width, close: true,
+          points: square,
+          color: colors.lines,
+          width,
+          close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: square, color: colors.lines, width: width * 3, cornerLength,
+          points: square,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
         name: 'lessSharpCorners',
-        method: 'polyLineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: square, color: colors.lessSharp, width: width * 3, cornerLength,
+          points: square,
+          color: colors.lessSharp,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
     ],
@@ -111,23 +124,33 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: tri, color: colors.lines, width, close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: tri, color: colors.lines, width: width * 3, cornerLength,
+          points: tri,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
         name: 'moreSharpCorners',
-        method: 'polyLineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: tri, color: colors.moreSharp, width: width * 3, cornerLength,
+          points: tri,
+          color: colors.moreSharp,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
     ],
@@ -137,13 +160,14 @@ export default function diagramLayout() {
 
   const corner = (index, color, p1, p2, p3) => ({
     name: `corner${index}`,
-    method: 'polyLineCorners',
+    method: 'shapes.polyline',
     options: {
       points: [p1, p2, p3],
       color,
       width: width * 3,
       cornerLength,
       close: false,
+      cornersOnly: true,
     },
   });
 
@@ -153,16 +177,21 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: pent, color: colors.lines, width, close: true,
         },
       },
       {
         name: 'corners',
-        method: 'polyLineCorners',
+        method: 'shapes.polyline',
         options: {
-          points: pent, color: colors.lines, width: width * 3, cornerLength,
+          points: pent,
+          color: colors.lines,
+          width: width * 3,
+          cornerLength,
+          cornersOnly: true,
+          close: true,
         },
       },
       {
@@ -233,12 +262,12 @@ export default function diagramLayout() {
       },
       {
         name: 'fill',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           radius: angleRadius,
           fill: true,
           color: colors.angles,
-          sides: 200,
+          sides: 400,
         },
       },
       {
@@ -301,7 +330,7 @@ export default function diagramLayout() {
 
   const shape = {
     name: 'shape',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       width,
@@ -370,7 +399,7 @@ export default function diagramLayout() {
 
   const triangle = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: triPoints,
       width,

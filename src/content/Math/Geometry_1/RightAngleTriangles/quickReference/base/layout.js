@@ -58,7 +58,7 @@ export default function diagramLayout() {
   // eslint-disable-next-line max-len
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       color: colors.qrRightAngleTriangle_sides,
       close: true,

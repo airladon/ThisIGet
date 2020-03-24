@@ -71,7 +71,7 @@ export default function diagramLayout() {
   };
   layout.arc = {
     name: 'arc',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       width,
       radius,
@@ -144,14 +144,14 @@ export default function diagramLayout() {
       },
       {
         name: 'arc',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           width: width / 2,
           radius: radius + width,
           sides: 314 * 4,
           sidesToDraw: 50 * 4,
           rotation: 3 * Math.PI / 2,
-          center: [0, radius + width - width / 2],
+          offset: [0, radius + width - width / 2],
           color: colors.radianLines,
         },
       },
@@ -530,18 +530,18 @@ export default function diagramLayout() {
           'equals',
           '_2pi', '  ', '_radians',
         ],
-        '1': ['question', 'x' , '_360', 'equals', '_2pi'],
+        '1': ['question', 'x' , '_360', '  ', 'equals', '_2pi'],
         '2': [
           {
             frac: ['question', 'v', '_180'],
-          }, 'x', '_360',
+          }, 'x', '_360', '  ',
           'equals',
           '_2pi',
         ],
         '3': [
           {
             frac: ['_pi', 'v', '_180'],
-          }, 'x', '_360',
+          }, 'x', '_360', '  ',
           'equals',
           '_2pi',
         ],
@@ -563,7 +563,7 @@ export default function diagramLayout() {
               inSize: false,
             },
           },
-          'equals',
+          '  ', 'equals',
           {
             annotate: {
               content: '_2pi',

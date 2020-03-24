@@ -27,12 +27,13 @@ export default function diagramLayout() {
   ];
   layout.customTriangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       makeValid: {
         shape: 'triangle',
         hide: {

@@ -27,7 +27,7 @@ export default function diagramLayout() {
   colors.pads = colors.get('red', 'lighter').rgb;
   layout.width = 0.03;
   const exampleTri = {
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       width: layout.width,
       color: colors.lines,
@@ -91,12 +91,13 @@ export default function diagramLayout() {
   ];
   layout.customTriangle = {
     name: 'customTriangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       pad: {
         color: colors.pads,
         radius: 0.2,
@@ -139,12 +140,13 @@ export default function diagramLayout() {
 
   layout.triangle = {
     name: 'triangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
       pad: {
         color: colors.diagram.background,
         radius: 0.2,
@@ -172,12 +174,13 @@ export default function diagramLayout() {
 
   layout.fixedTriangle = {
     name: 'fixedTriangle',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
+      widthIs: 'inside',
     },
   };
 
@@ -296,7 +299,7 @@ export default function diagramLayout() {
   // ////////////////////////////////////////////////////////
   layout.triangleTypes = {
     name: 'triangleType',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: layout.defaultTri,
       close: true,

@@ -223,7 +223,7 @@ export default function diagramLayout() {
       // },
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points,
           width: w,

@@ -1052,6 +1052,7 @@ class Content extends PresentationFormatContent {
         ssa._adjacentMovePad.isTouchable = false;
         ssa._adjacentMovePad.isMovable = false;
         ssa.setDefault();
+        // ssa._constructionCircle.angleToDraw = Math.PI / 2;
       },
       setLeaveState: () => {
         const r = ssa._constructionLine.getRotation();

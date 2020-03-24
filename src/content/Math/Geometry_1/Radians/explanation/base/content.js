@@ -427,6 +427,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         circle._line1.setRotation(Math.PI * 1.999);
         circle._line1.isTouchable = false;
+        circle._line1.isInteractive = false;
         circle.setScenario('top');
         diag._circumferenceEqn.setScenario('bottom');
         diag._circumferenceEqn.showForm('0');
@@ -434,6 +435,7 @@ class Content extends PresentationFormatContent {
       },
       setLeaveState: () => {
         circle._line1.isTouchable = true;
+        circle._line1.isInteractive = true;
       },
     });
 

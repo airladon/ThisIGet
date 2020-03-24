@@ -42,7 +42,7 @@ export default function diagramLayout() {
 
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       color: colors.sides,
@@ -95,7 +95,7 @@ export default function diagramLayout() {
 
   const splitTri = {
     name: 'splitTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       // points: [
       //   split[0].add(0.025, 0),
@@ -206,7 +206,7 @@ export default function diagramLayout() {
 
   const aTri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: anyTriPoints,
       color: colors.sides,
@@ -222,7 +222,7 @@ export default function diagramLayout() {
 
   const aGreyTri = {
     name: 'greyTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: anyTriPoints,
       color: colors.darkGrey,
@@ -269,7 +269,7 @@ export default function diagramLayout() {
 
   const topTri = {
     name: 'topTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         anyTriSplit[0],
@@ -294,7 +294,7 @@ export default function diagramLayout() {
 
   const topLeftTri = {
     name: 'topLeftTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         anyTriSplit[0],
@@ -314,7 +314,7 @@ export default function diagramLayout() {
 
   const topRightTri = {
     name: 'topRightTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         hSplitPoint,
@@ -334,7 +334,7 @@ export default function diagramLayout() {
 
   const leftTri = {
     name: 'leftTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         anyTriPoints[1],
@@ -349,7 +349,7 @@ export default function diagramLayout() {
 
   const rightTri = {
     name: 'rightTri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         vSplitPoint,
@@ -429,7 +429,7 @@ export default function diagramLayout() {
 
   const triangle = (name, p1, p2, p3, color = colors.highlight) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [p1, p2, p3],
       close: true,
@@ -1241,7 +1241,7 @@ export default function diagramLayout() {
   // ////////////////////////////////////////////////////////////
   // const pTri = {
   //   name: 'tri',
-  //   method: 'polyLine',
+  //   method: 'polyline',
   //   options: {
   //     points: anyTriPoints,
   //     color: colors.sides,

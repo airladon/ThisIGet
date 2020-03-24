@@ -26,7 +26,7 @@ export default function diagramLayout() {
   ];
   const tri = (name, points) => ({
     name,
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points,
       width: lineWidth,

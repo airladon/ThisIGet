@@ -268,7 +268,7 @@ export default function diagramLayout() {
       angle('a90', '', equilPoints[2], midPoint, equilPoints[1]),
       {
         name: 'equil',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: equilPoints,
           width: 0.03,
@@ -288,7 +288,7 @@ export default function diagramLayout() {
       },
       {
         name: 'tri',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points: [midPoint, equilPoints[1], equilPoints[2]],
           width: 0.03,

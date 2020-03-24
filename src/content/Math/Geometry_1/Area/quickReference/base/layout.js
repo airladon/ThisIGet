@@ -138,7 +138,7 @@ export default function diagramLayout() {
   const rectGrid = 0.25;
   const rect = {
     name: 'line',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-rectWidth / 2, -rectHeight / 2],
@@ -189,7 +189,7 @@ export default function diagramLayout() {
 
   const squareLine = {
     name: 'line',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       points: [
         [-rectHeight / 2, -rectHeight / 2],

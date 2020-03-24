@@ -234,7 +234,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     angleBTop.hide();
 
     this._totalAngle._bottomParallel.scenarios.parallel = {
-      position: [0, left.y - this.layout.width / 2],
+      position: [0, left.y - this.layout.width / 8],
     };
     this._totalAngle._topParallel.scenarios.parallel = {
       position: [0, top.y + this.layout.width / 4],

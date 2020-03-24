@@ -47,7 +47,7 @@ export default function diagramLayout() {
 
   const tri = {
     name: 'tri',
-    method: 'polyLine',
+    method: 'polyline',
     options: {
       color: colors.qrSideAngleRelationshipSides,
       width,

@@ -61,13 +61,13 @@ export default function diagramLayout() {
     radius,
     color: [1, 1, 0, 1],
     transform: new Transform('filledCircle').scale(1, 1).translate(0, 0),
-    textureLocation: textureFile,
+    texture: { src: textureFile },
   };
 
-  const moonTex = { textureCoords: new Rect(0, 0, 0.3333, 0.3333) };
-  const wheelTex = { textureCoords: new Rect(0.3333, 0, 0.2222, 0.2222) };
-  const ballTex = { textureCoords: new Rect(0.5555, 0, 0.1667, 0.1667) };
-  const ringTex = { textureCoords: new Rect(0.7222, 0.1481, 0.1481, 0.1481) };
+  const moonTex = { texture: { mapFrom: new Rect(0, 0, 0.3333, 0.3333) } };
+  const wheelTex = { texture: { mapFrom: new Rect(0.3333, 0, 0.2222, 0.2222) } };
+  const ballTex = { texture: { mapFrom: new Rect(0.5555, 0, 0.1667, 0.1667) } };
+  const ringTex = { texture: { mapFrom: new Rect(0.7222, 0.1481, 0.1481, 0.1481) } };
   layout.moon = {
     name: 'moon',
     method: 'polygon',
@@ -147,12 +147,15 @@ export default function diagramLayout() {
   radius = 0.9;
   layout.circleLine = {
     name: 'line',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       sides: 400,
       radius,
       width,
       color: colors.circle,
+      line: {
+        widthIs: 'inside',
+      },
       transform: new Transform('Circle').scale(1, 1).translate(0, 0),
     },
   };
@@ -323,15 +326,16 @@ export default function diagramLayout() {
 
   layout.circumferenceLeftArc = {
     name: 'leftArc',
-    method: 'polygon',
+    method: 'shapes.polygonSweep',
     options: {
       radius,
       width,
       sides: 400,
       sidesToDraw: 200,
-      clockwise: true,
+      // clockwise: true,
+      direction: -1,
       color: colors.circle,
-      rotation: Math.PI / 2,
+      rotation: -Math.PI / 2,
       transform: new Transform().translate(0, 0),
     },
   };
@@ -339,7 +343,7 @@ export default function diagramLayout() {
     {}, layout.circumferenceLeftArc,
     {
       name: 'rightArc',
-      options: { rotation: -Math.PI / 2, clockwise: false },
+      options: { rotation: -Math.PI / 2, direction: 1 },
     },
   );
 

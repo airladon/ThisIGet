@@ -159,7 +159,7 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points,
           width: w * 1.5,

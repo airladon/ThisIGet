@@ -111,7 +111,7 @@ export default function diagramLayout() {
       angle('right', '', points[0], points[1], points[2], 0.3),
       {
         name: 'line',
-        method: 'polyLine',
+        method: 'polyline',
         options: {
           points,
           width: 0.03,

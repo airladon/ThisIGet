@@ -131,10 +131,10 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       modifiers: {
         shape: click(circ.pulseCircle, [circ], colors.circle),
-        Properties: click(circ.growDimensions, [circ, null, 4], colors.dimension),
+        Properties: click(circ.growDimensionsWithoutDarkCircle, [circ, null, 4], colors.dimension),
       },
       transitionFromAny: (done) => {
-        circ.growDimensions(done);
+        circ.growDimensionsWithoutDarkCircle(done);
       },
       setEnterState: () => {
         circ._circle.setScenario('right');

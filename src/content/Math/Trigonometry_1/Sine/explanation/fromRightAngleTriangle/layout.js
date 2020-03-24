@@ -501,7 +501,7 @@ export default function diagramLayout() {
       circle,
       {
         name: 'arc',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           sides: 400,
           width: 0.015,
@@ -511,13 +511,13 @@ export default function diagramLayout() {
       },
       {
         name: 'mirrorArc',
-        method: 'polygon',
+        method: 'shapes.polygonSweep',
         options: {
           sides: 400,
           width: 0.015,
           radius: r,
           color: colors.angles,
-          clockwise: true,
+          direction: -1,
         },
       },
       // angle('real', null),
@@ -559,7 +559,7 @@ export default function diagramLayout() {
   //     angle('rightAngle', 'a', 0.3, triPoints[1], triPoints[2], triPoints[0]),
   //     {
   //       name: 'line',
-  //       method: 'polyLine',
+  //       method: 'polyline',
   //       options: {
   //         points: triPoints,
   //         close: true,

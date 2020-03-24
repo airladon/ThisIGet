@@ -48,7 +48,7 @@ class Content extends PresentationFormatContent {
         `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
       ]),
       modifiers: {
-        two_equal_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        two_equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
         two_equal_sides: click(coll.pulseEqualSides, [coll], colors.sides),
         opposite: click(coll.pulseOpposites, [coll], colors.diagram.action),
       },
