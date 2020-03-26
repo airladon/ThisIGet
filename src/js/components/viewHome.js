@@ -106,7 +106,7 @@ export default class ViewHome extends React.Component<Props> {
   // eslint-disable-next-line class-methods-use-this
   componentDidMount() {
     const element = document.getElementById('id_navigator__scroll_container_Geometry_1');
-    const left = 1000;
+    const left = 0;
     const right = 1500;
     let pos = left;
     let direction = 1;

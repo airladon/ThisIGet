@@ -2741,26 +2741,6 @@
     ],
     "enabled": true
   },
-  "Math/Geometry_1/ToDo/CalculatingPi": {
-    "title": "Calculating Pi",
-    "approaches": {
-      "explanation": {
-        "base": {
-          "type": "presentation",
-          "title": "Base",
-          "description": "",
-          "htmlTitle": "",
-          "htmlDescription": "",
-          "fullTopic": true,
-          "links": ""
-        }
-      }
-    },
-    "dependencies": [
-      "RightAngleTriangles"
-    ],
-    "enabled": false
-  },
   "Math/Geometry_1/Triangles": {
     "title": "Triangles",
     "approaches": {
