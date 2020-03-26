@@ -114,8 +114,8 @@ export default class ViewHome extends React.Component<Props> {
       { /* <div className='vertical_blank_space'/> */ }
       <LearningPathNavigator learningPath={'Geometry_1'}/>
       <div className='vertical_blank_space'/>
-      { /* <LearningPathNavigator learningPath={'Trigonometry_1'}/>
-      <div className='vertical_blank_space'/> */ }
+      <LearningPathNavigator learningPath={'Trigonometry_1'}/>
+      <div className='vertical_blank_space'/>
       </main>
     </div>;
   }

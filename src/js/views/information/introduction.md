@@ -146,7 +146,7 @@ An example of presentation format is below. Arrows to the side or beneath the co
 
 ![](presentation.png)
 
-Some of the presentation content versions are interactive. Generally text that is bold can be touched that will result in an acation, and sometimes the diagram itself can be manipulated.
+Some of the presentation content versions are interactive. Generally text that is bold can be touched that will result in an action, and sometimes the diagram itself can be manipulated.
 
 Repeated touching of the "Interactive Hint Button" will highlight all the interactive elements on the current slide.
 

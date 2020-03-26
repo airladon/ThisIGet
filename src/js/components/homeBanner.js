@@ -17,7 +17,7 @@ export default class HomeBanner extends React.Component
         <table>
           <tbody>
           <tr>
-            <td>Understand Your Way</td>
+            <td>Learn Your Way</td>
           </tr>
           </tbody>
         </table>
