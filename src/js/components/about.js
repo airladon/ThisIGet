@@ -105,8 +105,8 @@ export default class About extends React.Component
               </div>
             </div>
             {title(
-              'Different versions of the same concepts',
-              'Find the way that works for you, and rate it for others',
+              'Different ways to learn each topic',
+              'Rate the ways that work for you',
             )}
         </div>
       </div>
