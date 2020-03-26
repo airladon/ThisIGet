@@ -104,6 +104,35 @@ function renderDiagram() {
 
 export default class ViewHome extends React.Component<Props> {
   // eslint-disable-next-line class-methods-use-this
+  componentDidMount() {
+    const element = document.getElementById('id_navigator__scroll_container_Geometry_1');
+    const left = 1000;
+    const right = 1500;
+    let pos = left;
+    let direction = 1;
+    const scroll = () => {
+      if (direction === 1) {
+        pos += 1;
+        if (pos >= right) {
+          direction = -1;
+          pos = right;
+        }
+      } else {
+        pos -= 1;
+        if (pos <= left) {
+          direction = 1;
+          pos = left;
+        }
+      }
+      element.scrollLeft = pos;
+      window.requestAnimationFrame(scroll);
+    }
+    window.requestAnimationFrame(scroll);
+    console.log(right)
+    element.scrollLeft += 1000;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   render() {
     // const props = Object.assign({}, this.props);
     // delete props.active;

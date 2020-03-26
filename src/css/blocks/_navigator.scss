@@ -40,6 +40,7 @@
   width: 15vw;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(50, 50, 50, 0));
   pointer-events: none;
+  display: none;
 }
 
 .navigator__right_side {
@@ -54,6 +55,7 @@
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   background-color: white;
+  overflow-x: hidden;
 }
 
 .navigator__topic_tile {
@@ -293,6 +295,7 @@
   font-weight: 400;
   color: #555;
   color: var(--color-lp-tile-text);
+  margin-top: 300px;
 }
 
 @media screen and (min-width: 600px) {
