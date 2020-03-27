@@ -112,8 +112,11 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   goToNext() {
+    const element = document.getElementById('video_tester');
+    element.play();
+    element.addEventListener('timeupdate', () => console.log(element.currentTime));
     this.version.nextSection();
-  }
+  } 
 
   goToPrevious() {
     this.version.prevSection();
@@ -417,6 +420,10 @@ export default class PresentationFormatComponent extends React.Component
                 </canvas>
                 <canvas id="id_figureone__text__low" className='figureone__text'>
                 </canvas>
+                <video controls id="video_tester">
+                  <source src="/static/assets/intro.mp4" type="video/mp4"/>
+                  <p>Your browser does not support HTML5 video. Here is a <a href="assets/intro.mp4">link to the video</a> instead.</p>
+                </video>
                 <div id="id_figureone__html" className='figureone__html'>
                   {this.renderContent(this.state.htmlText)}
                   <div className="figureone__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
