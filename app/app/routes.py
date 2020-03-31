@@ -25,7 +25,7 @@ import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
-from app.models import VersionRatingsCache
+from app.models import VersionRatingsCache, NewUsers
 # from app.models import Ratings, AllRatings
 # from app.models import Lessons, Versions, Topics
 # from functools import reduce
@@ -553,6 +553,7 @@ def create():
             f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
+        # newUser = NewUsers()
         user = Users()
         user.set_username(form.username.data)
         user.set_email(form.email.data)
@@ -683,6 +684,9 @@ def reset_password(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
+        if not user.confirmed:
+          user.confirmed = True
+          user.confirmed_on = datetime.datetime.now()
         db.session.commit()
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')

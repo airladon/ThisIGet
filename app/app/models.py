@@ -88,6 +88,72 @@ from app.tools import hash_str_with_pepper, format_email
 def expiration():
     return 1800
 
+class NewUsers(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(88), index=True, unique=True)
+    username_hash = db.Column(db.String(31))
+    email = db.Column(db.String(472))
+    email_hash = db.Column(db.String(31))
+    password = db.Column(db.String(124))
+    signed_up_on = db.Column(db.DateTime)
+    # confirmed = db.Column(db.Boolean, default=False)
+    # confirmed_on = db.Column(db.DateTime)
+    # last_login = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return '<New User {}>'.format(self.username)
+
+    def set_email(self, email):
+        formatted_email = format_email(email)
+        self.email = encrypt(formatted_email, min_length_for_padding=320)
+        self.email_hash = hash_str_with_pepper(formatted_email)
+
+    def get_email(self):
+        return decrypt(self.email)
+
+    def set_username(self, username):
+        self.username = encrypt(username, min_length_for_padding=32)
+        self.username_hash = hash_str_with_pepper(username.lower())
+
+    def get_username(self):
+        return decrypt(self.username)
+
+    def set_password(self, password):
+        self.password = encrypt(hash_str(password))
+
+    def check_password(self, password):
+        return check_hash(password, decrypt(self.password))
+
+    def get_account_confirmation_token(self, expires_in=1800):
+        return jwt.encode(
+            {'account_confirmation': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_account_confirmation_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['account_confirmation']
+        except jwt.ExpiredSignatureError:
+            id = jwt.decode(
+                token,
+                app.config['SECRET_KEY'],
+                algorithms=['HS256'],
+                options={'verify_exp': False}
+            )['account_confirmation']
+            return {
+                'status': 'expired',
+                'user': Users.query.get(id),
+            }
+        except Exception:
+            return {
+                'status': 'fail'
+            }
+        return {
+            'status': 'ok',
+            'user': Users.query.get(id),
+        }
+
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
