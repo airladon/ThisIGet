@@ -25,7 +25,7 @@ import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
-from app.models import VersionRatingsCache, NewUsers
+from app.models import VersionRatingsCache
 # from app.models import Ratings, AllRatings
 # from app.models import Lessons, Versions, Topics
 # from functools import reduce
@@ -553,8 +553,17 @@ def create():
             f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
-        # newUser = NewUsers()
-        user = Users()
+        user = Users.query.filter(
+            Users.username_hash.ilike(
+                hash_str_with_pepper(
+                    form.username.data.lower()))).first()
+        if user is None:
+            formatted_email = format_email(form.username_or_email.data)
+            user = Users.query.filter_by(
+                email_hash=hash_str_with_pepper(
+                    formatted_email)).first()
+        if user is None:
+            user = Users()
         user.set_username(form.username.data)
         user.set_email(form.email.data)
         user.set_password(form.password.data)
