@@ -39,7 +39,12 @@ def client(request):
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'app_test.db')
     app.config['WTF_CSRF_ENABLED'] = False
-    app.config['MAIL_USERNAME'] = ''
+    app.config['MAIL_USERNAME'] = 'test'
+    app.config['MAIL_PASSWORD'] = 'test'
+    app.config['MAIL_SERVER'] = 'test'
+    app.config['MAIL_SENDER'] ='test'
+    # app.config['MAIL_SUPPRESS_SEND'] = True
+    # app.config['TESTING'] = True
     # ctx = app.app_context()
     # ctx.push()
 

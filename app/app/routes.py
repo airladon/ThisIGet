@@ -21,6 +21,7 @@ from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 from app.email import send_change_email_email
 import datetime
+from sqlalchemy import or_
 
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
@@ -558,7 +559,7 @@ def create():
                 hash_str_with_pepper(
                     form.username.data.lower()))).first()
         if user is None:
-            formatted_email = format_email(form.username_or_email.data)
+            formatted_email = format_email(form.email.data)
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(
                     formatted_email)).first()
@@ -633,6 +634,18 @@ def confirm_account(token):
         # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
+    email_hash = result['email_hash']
+    username_hash = result['username_hash']
+    if user.email_hash != email_hash and user.username_hash != username_hash:
+        flash('Username and email are now already in use.')
+        return redirect(url_for('create'))
+    if user.email_hash != email_hash:
+        flash('Email has now been taken by another user.')
+        return redirect(url_for('create'))
+    if user.username_hash != username_hash:
+        flash('Username has now been taken by another user.')
+        return redirect(url_for('create'))
+
     if user.confirmed:
         flash(
             'Account has already been confirmed. You can now log in.',
@@ -641,6 +654,14 @@ def confirm_account(token):
         return redirect(url_for('login', username=user.get_username()))
     user.confirmed = True
     user.confirmed_on = datetime.datetime.now()
+
+    Users.query \
+        .filter(Users.id != user.id) \
+        .filter(or_(
+            Users.username_hash == user.username_hash,
+            Users.email_hash == user.email_hash,
+        )) \
+        .delete()
     db.session.commit()
     flash('Thankyou for confirming your email', 'before')
     flash('You can now login to your account.', 'before')

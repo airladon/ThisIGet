@@ -4,11 +4,50 @@ import sys
 from common import create_account, remove_account
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
-from app.tools import hash_str_with_pepper  # noqa E402
+from app.tools import hash_str_with_pepper, format_email  # noqa E402
+from app import mail
+import datetime
+from sqlalchemy import or_
+import app.email
+import re
 
 new_user = 'new_test_user_01'
 new_user2 = 'new_test_user_02'
 new_email = 'new_test_user_01@thisiget.com'
+
+def always_true_mock():
+    return True
+
+
+def send_email_mock(subject, sender, recipients, text_body, html_body):
+    lines = text_body.split('\n')
+    global email_token
+    global email_username
+    email_username = re.sub('Dear ', '', lines[0]).strip(',')
+    email_token = re.sub(
+        'https://localhost.*/confirmAccount/', '', lines[4])
+
+
+def create_account_with_confirm(
+  client,
+  username='new_test_user_01',
+  email='new_test_user_01@thisiget.com',
+  password='12345678',
+  signed_up_on=datetime.datetime.now(),
+  confirm=True):
+    create_account(client=client, username=username, email=email, password=password, repeat_password=password)
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
+    if user is None:
+        formatted_email = format_email(email)
+        user = Users.query.filter_by(
+            email_hash=hash_str_with_pepper(
+                formatted_email)).first() 
+    if user is not None and confirm:
+        user.confirmed = True
+        db.session.commit()
+    if user is not None:
+      user.signed_up_on=signed_up_on
 
 
 def test_create_new_user(client):
@@ -60,11 +99,11 @@ def test_create_account_fail(
         terms, error):
     remove_account(client)
     if exists:
-        create_account(client)
+        create_account_with_confirm(client)
+    
     res = create_account(
         client=client, username=username, email=email,
         password=password, repeat_password=repeat_password, terms=terms)
-    # pdb.set_trace()
     assert error in str(res.data)
 
 
@@ -91,3 +130,74 @@ def test_create_account_pass(
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username)).first()
     assert user.confirmed is False
+
+
+# If a previous account exists, but is not confirmed, then its username
+# and email can be reused
+user1 = 'user1'
+user2 = 'user2'
+email1 = 'user1@thisiget.com'
+email2 = 'user2@thisiget.com'
+
+@pytest.mark.parametrize(
+    "username, email", [
+        # Both username and email exist in same row
+        (user1, email1),
+        # Both username and email exist but in different rows
+        (user1, email2),
+        # Only username exists
+        (user1, 'user3@thisiget.com'),
+        # Only email exists
+        ('user3', email1),
+    ])
+def test_create_account_existing_unconfirmed(
+        client, monkeypatch, username, email):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+    global email_token
+    email_token = ''
+
+    remove_account(client, username=user1)
+    remove_account(client, username=user2)
+    remove_account(client, username=username)
+
+    create_account_with_confirm(
+      client, username=user1, email=email1, confirm=False,
+      signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
+    create_account_with_confirm(
+      client, username=user2, email=email2, confirm=False,
+      signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
+
+    res = create_account(
+        client=client, username=username, email=email,
+        password='12345678', repeat_password='12345678',
+        follow_redirects=False)
+
+    assert res.headers['Location'] == \
+        f'https://localhost/confirmAccountEmailSent/{username}'
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
+
+    assert user is not None
+    assert user.confirmed is False
+
+    # confirm it is a new signed up on time
+    if user is not None:
+        assert (datetime.datetime.now() - user.signed_up_on).seconds < 5
+
+    # Confirm the account
+    res = client.get(
+        f'/confirmAccount/{email_token}', follow_redirects=True)
+    html = str(res.data)
+    assert 'Thankyou for confirming your email' in html
+
+    # confirm only one account with the desired username or email exists
+    formatted_email = format_email(email)
+    users = Users.query \
+        .filter(or_(
+            Users.username_hash == hash_str_with_pepper(username),
+            Users.email_hash == hash_str_with_pepper(formatted_email),
+        )) \
+        .all()
+    assert len(users) == 1 
+    

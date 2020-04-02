@@ -190,14 +190,19 @@ class Users(UserMixin, db.Model):
 
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
-            {'account_confirmation': self.id, 'exp': time() + expires_in},
+            {'account_confirmation': self.id, 'exp': time() + expires_in,
+            'username_hash': self.username_hash, 'email_hash': self.email_hash},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     @staticmethod
     def verify_account_confirmation_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'],
-                            algorithms=['HS256'])['account_confirmation']
+            decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            # id = jwt.decode(token, app.config['SECRET_KEY'],
+            #                 algorithms=['HS256'])['account_confirmation']
+            id = decoded_token['account_confirmation']
+            username_hash = decoded_token['username_hash']
+            email_hash = decoded_token['email_hash']
         except jwt.ExpiredSignatureError:
             id = jwt.decode(
                 token,
@@ -216,6 +221,8 @@ class Users(UserMixin, db.Model):
         return {
             'status': 'ok',
             'user': Users.query.get(id),
+            'email_hash': email_hash,
+            'username_hash': username_hash,
         }
 
 

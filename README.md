@@ -341,6 +341,11 @@ unset MAIL_SERVER
 unset MAIL_USERNAME
 ```
 
+Run in existing running contaner:
+```
+docker exec -it devenv-dev bash
+```
+
 ##### Test
 ```
 ./getenv.sh test

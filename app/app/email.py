@@ -19,6 +19,13 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 
 def can_send_email():
+    # print(app.config['MAIL_PASSWORD'])
+    # print(app.config['MAIL_USERNAME'])
+    # print(app.config['MAIL_SERVER'])
+    # print(app.config['MAIL_SENDER'])
+    # print(app.config['TESTING'])
+    # print(app.config['MAIL_SUPPRESS_SEND'])
+
     if app.config['MAIL_PASSWORD'] == '' \
        or app.config['MAIL_USERNAME'] == '' \
        or app.config['MAIL_SERVER'] == '' \

@@ -166,12 +166,12 @@ def test_account_settings_email_used_email(client, monkeypatch):
     res = client.post(
         '/account',
         data={
-            'email_form-email': "unconfirmed_user_01@thisiget.com",
+            'email_form-email': "test_user_02@thisiget.com",
             'email_form-submit_email': 'Verify & Change',
         },
         follow_redirects=True)
 
-    # Status should be shown as email sent
+    # Status should be shown as email already in use
     html = str(res.data)
     assert 'Email address already in use' in html
     assert email_token == ''
