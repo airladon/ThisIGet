@@ -200,4 +200,97 @@ def test_create_account_existing_unconfirmed(
         )) \
         .all()
     assert len(users) == 1 
+
+# Test the case where you create two accounts before confirming either
+def test_create_account_twice_same_user_email(
+        client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+    global email_token
+    email_token = ''
+
+    remove_account(client, username=user1)
+
+    create_account_with_confirm(
+      client, username=user1, email=email1, confirm=False)
+    token1 = email_token
+
+    create_account_with_confirm(
+      client, username=user1, email=email1, confirm=False)
+    token2 = email_token
+
+    formatted_email = format_email(email1)
+    users = Users.query \
+        .filter(or_(
+            Users.username_hash == hash_str_with_pepper(user1),
+            Users.email_hash == hash_str_with_pepper(formatted_email),
+        )) \
+        .all()
     
+    assert len(users) == 1
+    assert token1 != token2
+
+# Test the case where you create two accounts before confirming either
+def test_create_account_thrice_different_user_email(
+        client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+    global email_token
+    email_token = ''
+
+    remove_account(client, username=user1)
+
+    create_account_with_confirm(
+      client, username=user1, email=email2, confirm=False)
+
+    create_account_with_confirm(
+      client, username=user2, email=email1, confirm=False)
+
+    create_account_with_confirm(
+      client, username=user1, email=email1, confirm=False)
+
+    formatted_email = format_email(email1)
+    users = Users.query \
+        .filter(or_(
+            Users.username_hash == hash_str_with_pepper(user1),
+            Users.email_hash == hash_str_with_pepper(formatted_email),
+        )) \
+        .all()
+    
+    assert len(users) == 2
+
+
+# Create two accounts without confirming, then confirm both
+def test_create_account_twice_and_confirm_both(
+        client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+    global email_token
+    email_token = ''
+
+    remove_account(client, username=user1)
+
+    create_account_with_confirm(
+      client, username=user1, email=email1, confirm=False)
+    token1 = email_token
+
+    create_account_with_confirm(
+      client, username=user1, email=email2, confirm=False)
+    token2 = email_token
+
+    print(f'email1: {hash_str_with_pepper(email1)}')
+    print(f'email2: {hash_str_with_pepper(email2)}')
+    
+    # Confirm the account
+    print('confirming 1')
+    res = client.get(
+        f'/confirmAccount/{token1}', follow_redirects=True)
+    html = str(res.data)
+    print(html)
+    assert 'Thankyou for confirming your email' in html
+    print('confirming 2')
+    res = client.get(
+        f'/confirmAccount/{token2}', follow_redirects=True)
+    html = str(res.data)
+    print(html)
+    assert 'Username and email are now already in use' in html

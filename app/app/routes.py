@@ -422,16 +422,24 @@ def login(username=''):
         # form = LoginForm(obj=user)
         form.username_or_email.data = username
     if form.validate_on_submit():
-        user = Users.query.filter(
-            Users.username_hash.ilike(
-                hash_str_with_pepper(
-                    form.username_or_email.data.lower()))).first()
+        # user = Users.query.filter(
+        #     Users.username_hash.ilike(
+        #         hash_str_with_pepper(
+        #             form.username_or_email.data.lower()))).last()
         # pdb.set_trace()
-        if user is None:
-            formatted_email = format_email(form.username_or_email.data)
-            user = Users.query.filter_by(
-                email_hash=hash_str_with_pepper(
-                    formatted_email)).first()
+        formatted_email = format_email(form.username_or_email.data)
+        user = Users.query \
+            .filter(or_(
+                Users.username_hash == hash_str_with_pepper(form.username_or_email.data.lower()),
+                Users.email_hash == hash_str_with_pepper(formatted_email),
+            )) \
+            .first()
+            # .order_by(Users.signed_up_on.desc())
+        # if user is None:
+        #     formatted_email = format_email(form.username_or_email.data)
+        #     user = Users.query.filter_by(
+        #         email_hash=hash_str_with_pepper(
+        #             formatted_email)).last()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -540,6 +548,24 @@ def account_deleted():
     return make_response_with_files('confirm_account_deleted.html')
 
 
+@app.route('/tokenError/<error>', methods=['GET'])
+def token_error(error):
+    if error == 'expired':
+        return make_response_with_files('createAccountTokenError.html')
+    if error == 'deleted':
+        return make_response_with_files('createAccountTokenErrorAccountDeleted.html')
+    return make_response_with_files('createAccountTokenError.html')
+
+# @app.route('/tokenExpired', methods=['GET'])
+# def create_account_token_expired():
+#     return make_response_with_files('createAccountTokenError.html')
+
+
+# @app.route('/tokenErrorAccountDeleted', methods=['GET'])
+# def create_account_token_error_account_deleted():
+#     return make_response_with_files('createAccountTokenErrorAccountDeleted.html')
+
+
 @app.route('/createAccount', methods=['GET', 'POST'])
 def create():
     if current_user.is_authenticated:
@@ -554,17 +580,17 @@ def create():
             f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
-        user = Users.query.filter(
-            Users.username_hash.ilike(
-                hash_str_with_pepper(
-                    form.username.data.lower()))).first()
-        if user is None:
-            formatted_email = format_email(form.email.data)
-            user = Users.query.filter_by(
-                email_hash=hash_str_with_pepper(
-                    formatted_email)).first()
-        if user is None:
-            user = Users()
+        # Delete any rows in the database that have either the username or
+        # email (these rows are guaranteed not confirmed as if they were
+        # confirmed the submit validation would have failed)
+        formatted_email = format_email(form.email.data)
+        Users.query \
+            .filter(or_(
+                Users.username_hash == hash_str_with_pepper(form.username.data.lower()),
+                Users.email_hash == hash_str_with_pepper(form.email.data),
+            )) \
+            .delete()
+        user = Users()
         user.set_username(form.username.data)
         user.set_email(form.email.data)
         user.set_password(form.password.data)
@@ -622,30 +648,19 @@ def confirm_account(token):
     if result['status'] == 'fail':
         return redirect(url_for('home'))
     user = result['user']
-    if user is None:
-        flash('''User doesn't exist''')
-        return redirect(url_for('home'))
+    if user is None \
+      or (user is not None and str(user.signed_up_on) != result['signed_up_on']):
+        return redirect(url_for('token_error', error='expired'))
+    if user.username_hash == 'deleted account':
+        return redirect(url_for('token_error', error='deleted'))
     if result['status'] == 'expired':
         flash('Email verification time elapsed.', 'after')
         flash('''You have 30 minutes to verify your account after the email
             has been sent.''', 'after')
         flash('Just now, another email has been sent.', 'after')
         send_confirm_account_email(user)
-        # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
             'confirm_account_message', username=user.get_username()))
-    email_hash = result['email_hash']
-    username_hash = result['username_hash']
-    if user.email_hash != email_hash and user.username_hash != username_hash:
-        flash('Username and email are now already in use.')
-        return redirect(url_for('create'))
-    if user.email_hash != email_hash:
-        flash('Email has now been taken by another user.')
-        return redirect(url_for('create'))
-    if user.username_hash != username_hash:
-        flash('Username has now been taken by another user.')
-        return redirect(url_for('create'))
-
     if user.confirmed:
         flash(
             'Account has already been confirmed. You can now log in.',
