@@ -3,8 +3,9 @@
 {% block message %}
   <h1>Token Expired</h1>
   <div class=input_form__information>
+    <p>{{ error_message }}</p>
     <p>
-      This token to confirm account creation has expired.
+      If you wish to rate topics, you can <a href="/login">login</a> to an existing account, or <a href="/createAccount">create a new account</a>.
     </p>
   </div>
 {% endblock %}

@@ -551,9 +551,9 @@ def account_deleted():
 @app.route('/tokenError/<error>', methods=['GET'])
 def token_error(error):
     if error == 'expired':
-        return make_response_with_files('createAccountTokenError.html')
+        return make_response_with_files('createAccountTokenError.html', error_message='A more recent account with the same username or email has since been created.')
     if error == 'deleted':
-        return make_response_with_files('createAccountTokenErrorAccountDeleted.html')
+        return make_response_with_files('createAccountTokenError.html', error_message='The token points to an account that has been deleted.')
     return make_response_with_files('createAccountTokenError.html')
 
 # @app.route('/tokenExpired', methods=['GET'])
