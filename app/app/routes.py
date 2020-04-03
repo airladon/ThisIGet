@@ -22,6 +22,7 @@ from app.email import send_password_reset_email, send_confirm_account_email
 from app.email import send_change_email_email
 import datetime
 from sqlalchemy import or_
+# import pdb
 
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
@@ -647,7 +648,8 @@ def confirm_account(token):
     result = Users.verify_account_confirmation_token(token)
     if result['status'] == 'fail':
         return redirect(url_for('home'))
-    user = result['user']
+    # user = result['user']
+    user = Users.query.get(result['user'])
     if user is None \
       or (user is not None and str(user.signed_up_on) != result['signed_up_on']):
         return redirect(url_for('token_error', error='expired'))

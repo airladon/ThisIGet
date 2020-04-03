@@ -1,15 +1,16 @@
 import pytest  # noqa: F401
 import sys
 # import pdb
-from common import create_account, remove_account
+from common import create_account, remove_account, login
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
 from app.tools import hash_str_with_pepper, format_email  # noqa E402
 from app import mail
 import datetime
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 import app.email
 import re
+
 
 new_user = 'new_test_user_01'
 new_user2 = 'new_test_user_02'
@@ -33,21 +34,21 @@ def create_account_with_confirm(
   username='new_test_user_01',
   email='new_test_user_01@thisiget.com',
   password='12345678',
-  signed_up_on=datetime.datetime.now(),
+  signed_up_on=0,
   confirm=True):
     create_account(client=client, username=username, email=email, password=password, repeat_password=password)
-    user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
-    if user is None:
-        formatted_email = format_email(email)
-        user = Users.query.filter_by(
-            email_hash=hash_str_with_pepper(
-                formatted_email)).first() 
-    if user is not None and confirm:
-        user.confirmed = True
-        db.session.commit()
+    formatted_email = format_email(email)
+    user = Users.query \
+        .filter(Users.username_hash == hash_str_with_pepper(username)) \
+        .filter(Users.email_hash == hash_str_with_pepper(formatted_email)) \
+        .order_by(desc('signed_up_on')) \
+        .first()
     if user is not None:
-      user.signed_up_on=signed_up_on
+        if confirm:
+          user.confirmed = True
+        if signed_up_on != 0:
+          user.signed_up_on =signed_up_on
+        db.session.commit()
 
 
 def test_create_new_user(client):
@@ -237,17 +238,19 @@ def test_create_account_thrice_different_user_email(
     monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     global email_token
     email_token = ''
-
     remove_account(client, username=user1)
 
     create_account_with_confirm(
       client, username=user1, email=email2, confirm=False)
+    token1 = email_token
 
     create_account_with_confirm(
       client, username=user2, email=email1, confirm=False)
+    token2 = email_token
 
     create_account_with_confirm(
       client, username=user1, email=email1, confirm=False)
+    token3 = email_token
 
     formatted_email = format_email(email1)
     users = Users.query \
@@ -257,8 +260,12 @@ def test_create_account_thrice_different_user_email(
         )) \
         .all()
     
-    assert len(users) == 2
+    assert len(users) == 1
 
+    res = client.get(
+        f'/confirmAccount/{token3}', follow_redirects=True)
+    html = str(res.data)
+    assert 'Thankyou for confirming your email' in html
 
 # Create two accounts without confirming, then confirm both
 def test_create_account_twice_and_confirm_both(
@@ -275,22 +282,44 @@ def test_create_account_twice_and_confirm_both(
     token1 = email_token
 
     create_account_with_confirm(
-      client, username=user1, email=email2, confirm=False)
+      client, username=user1, email=email1, confirm=False)
     token2 = email_token
 
-    print(f'email1: {hash_str_with_pepper(email1)}')
-    print(f'email2: {hash_str_with_pepper(email2)}')
-    
     # Confirm the account
-    print('confirming 1')
     res = client.get(
         f'/confirmAccount/{token1}', follow_redirects=True)
     html = str(res.data)
-    print(html)
-    assert 'Thankyou for confirming your email' in html
-    print('confirming 2')
+    assert 'A more recent account with the same username or email has since been created' in html
+
     res = client.get(
         f'/confirmAccount/{token2}', follow_redirects=True)
     html = str(res.data)
-    print(html)
-    assert 'Username and email are now already in use' in html
+    assert 'Thankyou for confirming your email' in html
+
+
+# Create two accounts without confirming, then confirm both
+def test_create_account_confirm_after_delete(
+        client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
+    global email_token
+    email_token = ''
+
+    remove_account(client, username=user1)
+    create_account(client, username=user1)
+    res = client.get(
+        f'/confirmAccount/{email_token}', follow_redirects=True)
+    html = str(res.data)
+    assert 'Thankyou for confirming your email' in html
+
+    login(client, username=user1)
+    client.post('/confirmDelete', data={'form-submit_delete': "Delete NOW"})
+
+    users = Users.query.all()
+    for user in users:
+        print(user.id, user.username_hash)
+    res = client.get(
+        f'/confirmAccount/{email_token}', follow_redirects=True)
+    html = str(res.data)
+    assert 'The token points to an account that has been deleted.' in html
+

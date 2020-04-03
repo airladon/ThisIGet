@@ -222,7 +222,7 @@ class Users(UserMixin, db.Model):
             signed_up_on = decoded_token['signed_up_on']
             return {
                 'status': 'expired',
-                'user': Users.query.get(id),
+                'user': id,
                 'signed_up_on': signed_up_on,
             }
         except Exception as e:
@@ -231,7 +231,7 @@ class Users(UserMixin, db.Model):
             }
         return {
             'status': 'ok',
-            'user': Users.query.get(id),
+            'user': id,
             'signed_up_on': signed_up_on,
             # 'email_hash': email_hash,
             # 'username_hash': username_hash,
