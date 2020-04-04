@@ -315,9 +315,6 @@ def test_create_account_confirm_after_delete(
     login(client, username=user1)
     client.post('/confirmDelete', data={'form-submit_delete': "Delete NOW"})
 
-    users = Users.query.all()
-    for user in users:
-        print(user.id, user.username_hash)
     res = client.get(
         f'/confirmAccount/{email_token}', follow_redirects=True)
     html = str(res.data)

@@ -73,7 +73,6 @@ def send_change_email_email(user, email_address):
         app.logger.error('No mail sent to user.email')
         return
     token = user.get_change_email_token(email_address)
-    print(email_address)
     send_email('This I Get Account Email Change Confirmation',
                sender=app.config['MAIL_SENDER'],
                recipients=[email_address],
