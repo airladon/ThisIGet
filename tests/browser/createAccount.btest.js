@@ -29,7 +29,7 @@ describe('Create Account', () => {
   });
 
   test('Create Account', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await sleep(500);
     await deleteAccount(username, password);
     await createAccount(
@@ -44,7 +44,7 @@ describe('Create Account', () => {
   });
 
   test('Create Account - Errors', async () => {
-    jest.setTimeout(10000);
+    jest.setTimeout(40000);
     await logout();
     await click('id_navbar_loginout');
     await click('login_form__create_account');
