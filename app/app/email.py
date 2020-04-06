@@ -19,6 +19,13 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 
 def can_send_email():
+    # print(app.config['MAIL_PASSWORD'])
+    # print(app.config['MAIL_USERNAME'])
+    # print(app.config['MAIL_SERVER'])
+    # print(app.config['MAIL_SENDER'])
+    # print(app.config['TESTING'])
+    # print(app.config['MAIL_SUPPRESS_SEND'])
+
     if app.config['MAIL_PASSWORD'] == '' \
        or app.config['MAIL_USERNAME'] == '' \
        or app.config['MAIL_SERVER'] == '' \
@@ -66,7 +73,6 @@ def send_change_email_email(user, email_address):
         app.logger.error('No mail sent to user.email')
         return
     token = user.get_change_email_token(email_address)
-    print(email_address)
     send_email('This I Get Account Email Change Confirmation',
                sender=app.config['MAIL_SENDER'],
                recipients=[email_address],

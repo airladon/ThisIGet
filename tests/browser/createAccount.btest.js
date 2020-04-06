@@ -1,9 +1,11 @@
 /* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+/* eslint-disable import/named */
 import {
-  logout, snap, checkSnap, writeReplacements,
+  logout, snap, checkSnap, writeReplacements, createAccountWithoutConfirm,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,
+  confirmCreateAccount,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -12,7 +14,7 @@ const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
 
 const snapshots = [];
-const indexes = Array.from(Array(12).keys());
+const indexes = Array.from(Array(26).keys());
 const replacements = [];
 
 
@@ -27,7 +29,7 @@ describe('Create Account', () => {
   });
 
   test('Create Account', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await sleep(500);
     await deleteAccount(username, password);
     await createAccount(
@@ -42,7 +44,7 @@ describe('Create Account', () => {
   });
 
   test('Create Account - Errors', async () => {
-    jest.setTimeout(10000);
+    jest.setTimeout(40000);
     await logout();
     await click('id_navbar_loginout');
     await click('login_form__create_account');
@@ -61,6 +63,26 @@ describe('Create Account', () => {
     await snap('create-account-errors', snapshots);
   });
 
+  test('Create Account Twice', async () => {
+    jest.setTimeout(60000);
+    await sleep(500);
+    await deleteAccount(username, password);
+
+    const token1 = await createAccountWithoutConfirm(
+      username, `${username}@thisiget.com`, password,
+      'create-account-twice', snapshots, 0,
+    );
+    await goHome();
+    const token2 = await createAccountWithoutConfirm(
+      username, `${username}@thisiget.com`, password,
+      'create-account-twice', snapshots,
+    );
+
+    await confirmCreateAccount(token2, 'create-account-twice', snapshots);
+    await confirmCreateAccount(token1, 'create-account-twice', snapshots);
+  });
+});
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {

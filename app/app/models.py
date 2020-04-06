@@ -190,24 +190,43 @@ class Users(UserMixin, db.Model):
 
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
-            {'account_confirmation': self.id, 'exp': time() + expires_in},
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            {
+                'account_confirmation': self.id,
+                'exp': time() + expires_in,
+                'signed_up_on': str(self.signed_up_on),
+                # 'username_hash': self.username_hash,
+                # 'email_hash': self.email_hash
+            },
+            app.config['SECRET_KEY'],
+            algorithm='HS256').decode('utf-8')
 
     @staticmethod
     def verify_account_confirmation_token(token):
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'],
-                            algorithms=['HS256'])['account_confirmation']
+            decoded_token = jwt.decode(
+                token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            # id = jwt.decode(token, app.config['SECRET_KEY'],
+            #                 algorithms=['HS256'])['account_confirmation']
+            id = decoded_token['account_confirmation']
+            signed_up_on = decoded_token['signed_up_on']
+            # username_hash = decoded_token['username_hash']
+            # email_hash = decoded_token['email_hash']
         except jwt.ExpiredSignatureError:
-            id = jwt.decode(
-                token,
-                app.config['SECRET_KEY'],
-                algorithms=['HS256'],
-                options={'verify_exp': False}
-            )['account_confirmation']
+            decoded_token = jwt.decode(
+                token, app.config['SECRET_KEY'], algorithms=['HS256'],
+                options={'verify_exp': False})
+            # id = jwt.decode(
+            #     token,
+            #     app.config['SECRET_KEY'],
+            #     algorithms=['HS256'],
+            #     options={'verify_exp': False}
+            # )['account_confirmation']
+            id = decoded_token['account_confirmation']
+            signed_up_on = decoded_token['signed_up_on']
             return {
                 'status': 'expired',
-                'user': Users.query.get(id),
+                'user': id,
+                'signed_up_on': signed_up_on,
             }
         except Exception:
             return {
@@ -215,7 +234,10 @@ class Users(UserMixin, db.Model):
             }
         return {
             'status': 'ok',
-            'user': Users.query.get(id),
+            'user': id,
+            'signed_up_on': signed_up_on,
+            # 'email_hash': email_hash,
+            # 'username_hash': username_hash,
         }
 
 

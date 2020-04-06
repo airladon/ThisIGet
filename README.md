@@ -341,6 +341,11 @@ unset MAIL_SERVER
 unset MAIL_USERNAME
 ```
 
+Run in existing running contaner:
+```
+docker exec -it devenv-dev bash
+```
+
 ##### Test
 ```
 ./getenv.sh test
@@ -423,6 +428,75 @@ unset MAIL_USERNAME
 Can check with
 `heroku pg:psql --app=itgetitest -c 'select username,last_login from users'`
 
+
+#### Local Browser test debug
+Run site and browser tests local and within containers (so don't have to restart containers all the time)
+
+##### Terminal 1
+
+Setup terminal 1 to host the site, auto rebuilding on file changes
+```
+./start dev
+```
+
+It needs to be able to send emails for account creation confirmaion and resetting passwords
+```
+export MAIL_SERVER=
+export MAIL_USERNAME=
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+```
+
+Setup the remote db if needed
+```
+export AES_KEY=
+export PEPPER=
+export DATABASE_URL=
+```
+
+Build and watch files
+```
+./dev-server.sh
+```
+
+##### Terminal 2
+This terminal runs the browser tests. It needs to be able to receive emails from account creation and password reset events.
+```
+docker exec -it devenv-dev bash
+export MAIL_RECEIVE_SERVER=
+export MAIL_RECEIVE_USERNAME=
+export MAIL_RECEIVE_PASSWORD=
+export MAIL_SERVER=
+```
+
+To enter bash for the browser test container and run tests manually:
+```
+./browser_test.sh debug http://host.docker.internal:5002
+jest "--runInBand" tests/browser/createAccount.btest.js
+```
+
+Otherwise, to run tests from the dev environment starting the container each time:
+```
+./browser_test.sh http://host.docker.internal:5002 tests/browser/createAccount
+```
+
+##### Terminal 3 (when required):
+This terminal resets the test users (if testing crashed).
+```
+docker exec -it devenv-dev bash
+```
+
+Setup the remote db if needed
+```
+export AES_KEY=
+export PEPPER=
+export DATABASE_URL=
+```
+
+Reset test uers
+```
+python tools/reset_test_users.py
+```
 
 #### Upload local database to Heroku
 Assume local database is called `thisiget_local` and you want to update heroku database `thisiget-dev`

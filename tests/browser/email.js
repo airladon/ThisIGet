@@ -25,15 +25,17 @@ const getEmail = () => new Promise((resolve) => {
   let bodyContent = '';
   let messageNumber = 0;
 
+  /* eslint-disable max-len */
   imap.once('ready', () => {
     // getBoxes((err, boxes) => {
     //   console.log(boxes)
     // })
     openInbox((err, box) => {
       if (err) throw err;
-      const f = imap.seq.fetch(`${box.messages.total}:*`, { bodies: ['HEADER.FIELDS (FROM)','TEXT'] });
+      const f = imap.seq.fetch(`${box.messages.total}:*`, { bodies: ['HEADER.FIELDS (FROM)', 'TEXT'] });
       f.on('message', (msg, seqno) => {
         messageNumber = seqno;
+        // eslint-disable-next-line no-unused-vars
         msg.on('body', (stream, info) => {
           // if (info.which === 'TEXT') {
           //   // console.log(prefix + 'Body [%s] found, %d total bytes', inspect(info.which), info.size);
@@ -58,6 +60,7 @@ const getEmail = () => new Promise((resolve) => {
           //   }
           // });
         });
+        // eslint-disable-next-line no-unused-vars
         msg.once('attributes', (attrs) => {
           // console.log(prefix + 'Attributes: %s', inspect(attrs, false, 8));
         });
@@ -65,7 +68,8 @@ const getEmail = () => new Promise((resolve) => {
         //   // console.log(prefix + 'Finished');
         // });
       });
-      f.once('error', (err) => {
+      // eslint-disable-next-line no-unused-vars
+      f.once('error', (err1) => {
         resolve('error');
       });
       f.once('end', () => {
@@ -75,8 +79,8 @@ const getEmail = () => new Promise((resolve) => {
     });
   });
 
+  // eslint-disable-next-line no-unused-vars
   imap.once('error', (err) => {
-    // console.log(err);
     resolve('error');
   });
 
