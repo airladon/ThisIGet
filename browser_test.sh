@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# To execute tests at some site:
 # browser_test.sh local              http://host.docker.internal:5003
 # browser_test.sh dev                https://thisiget-dev.herokuapp.com
 # browser_test.sh test               https://thisiget-test.herokuapp.com
@@ -7,6 +8,15 @@
 # browser_test.sh prod               https://thisiget.com
 # browser_test.sh <SITE>             SITE
 # browser_test.sh <SITE> -u          SITE updating jest snap shots
+
+# To open a bash terminal where calling jest will use some site by default:
+# browser_test.sh debug local
+# browser_test.sh debug dev
+# browser_test.sh debug test
+# browser_test.sh debug beta
+# browser_test.sh debug prod
+# browser_test.sh debug <SITE>
+
 
 # Setup colors and text formatting
 red=`tput setaf 1`
@@ -72,8 +82,6 @@ title() {
     echo
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
-# chmod +777 -R src
-# chmod +777 -R tests
 
 cp containers/pupp/Dockerfile Dockerfile_pupp
 
@@ -85,24 +93,29 @@ rm Dockerfile_pupp
 docker build -t thisiget-pupp .
 rm Dockerfile
 
+ADDRESS=$1
 if [ "$1" = debug ];
 then
-    docker_start_browser_test_container
-    exit 0
+  ADDRESS=$2
 fi
 
-if [ $1 ];
+if [ $ADDRESS ];
 then
-    case $1 in
+    case $ADDRESS in
         local) TIG_ADDRESS='http://host.docker.internal:5003';;
         dev) TIG_ADDRESS='https://thisiget-dev.herokuapp.com';;
         test) TIG_ADDRESS='https://thisiget-test.herokuapp.com';;
         beta) TIG_ADDRESS='https://thisiget-beta.herokuapp.com';;
         prod) TIG_ADDRESS='https://thisiget.herokuapp.com';;
-        *) TIG_ADDRESS=$1;;
+        *) TIG_ADDRESS=$ADDRESS;;
     esac
 fi
 
+if [ "$1" = debug ];
+then
+    docker_start_browser_test_container
+    exit 0
+fi
 
 title "Running tests on $TIG_ADDRESS"
 # docker_run_browser_test "$TIG_ADDRESS" "${@:2}"
