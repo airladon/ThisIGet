@@ -185,7 +185,8 @@ describe('Account Settings Flow - Wide Screen', () => {
     await click('password_form-submit_password');
     await snap('account-settings-password-wide', snapshots);
   });
-
+});
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {

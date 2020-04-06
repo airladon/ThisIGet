@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+/* eslint-disable import/named */
 import {
   logout, snap, checkSnap, writeReplacements, createAccountWithoutConfirm,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,

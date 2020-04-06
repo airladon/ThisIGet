@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+/* eslint-disable import/named */
 import {
   login, snap, logout,
   setFormInput, click, goHome, sleep, checkSnap, writeReplacements,
@@ -42,7 +43,8 @@ describe('Account Settings Flow', () => {
     await click('submit');
     await snap('login-errors', snapshots);
   });
-
+});
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {
