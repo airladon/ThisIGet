@@ -471,8 +471,7 @@ export MAIL_SERVER=
 
 To enter bash for the browser test container and run tests manually:
 ```
-export TIG_ADDRESS=http://host.docker.internal:5002
-./browser_test.sh debug
+./browser_test.sh debug http://host.docker.internal:5002
 jest "--runInBand" tests/browser/createAccount.btest.js
 ```
 
