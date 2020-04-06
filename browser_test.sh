@@ -2,6 +2,10 @@
 
 # To execute tests at some site:
 # browser_test.sh local              http://host.docker.internal:5003
+# browser_test.sh 5000               http://host.docker.internal:5002
+# browser_test.sh 5001               http://host.docker.internal:5001
+# browser_test.sh 5002               http://host.docker.internal:5002
+# browser_test.sh 5003               http://host.docker.internal:5003
 # browser_test.sh dev                https://thisiget-dev.herokuapp.com
 # browser_test.sh test               https://thisiget-test.herokuapp.com
 # browser_test.sh beta               https://thisiget-beta.herokuapp.com
@@ -11,6 +15,10 @@
 
 # To open a bash terminal where calling jest will use some site by default:
 # browser_test.sh debug local
+# browser_test.sh debug 5000
+# browser_test.sh debug 5001
+# browser_test.sh debug 5002
+# browser_test.sh debug 5003
 # browser_test.sh debug dev
 # browser_test.sh debug test
 # browser_test.sh debug beta
@@ -103,6 +111,10 @@ if [ $ADDRESS ];
 then
     case $ADDRESS in
         local) TIG_ADDRESS='http://host.docker.internal:5003';;
+        5000) TIG_ADDRESS='http://host.docker.internal:5000';;
+        5001) TIG_ADDRESS='http://host.docker.internal:5001';;
+        5002) TIG_ADDRESS='http://host.docker.internal:5002';;
+        5003) TIG_ADDRESS='http://host.docker.internal:5003';;
         dev) TIG_ADDRESS='https://thisiget-dev.herokuapp.com';;
         test) TIG_ADDRESS='https://thisiget-test.herokuapp.com';;
         beta) TIG_ADDRESS='https://thisiget-beta.herokuapp.com';;
