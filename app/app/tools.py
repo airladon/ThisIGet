@@ -163,6 +163,10 @@ def getContent():
 
     return file_list
 
+def getBuildTime():
+    with open('./app/app/buildTime.json', 'r') as f:
+        build_time = json.loads(f.read())
+    return build_time
 
 def getTopicIndex():
     index = {}

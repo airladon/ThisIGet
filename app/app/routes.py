@@ -12,6 +12,7 @@
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request, abort
 from app import app, db, static_files, version_list, topic_index, link_list
+from app import build_time
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from app.forms import AccountSettingsEmailForm, AccountSettingsUsernameForm
@@ -244,12 +245,18 @@ def not_found_error(error):
             or request.referrer.startswith('https://www.thisiget')
             or request.referrer.startswith('http://localhost')):
         route = ','.join([address for address in request.access_route])
+        try:
+            short_date = build_time['shortDate']
+        except:
+            short_date = 'none'
+
         app.logger.error(
             'Internal link broken. '
             f'Referrer: {request.referrer}, '
             f'Route: {route}, '
             f'User Agent: {request.headers.get("User-Agent")}, '
-            f'Url: {request.url}'
+            f'Url: {request.url}, '
+            f'Build Date: {short_date}}'
         )
         return render_template('404_internal.html'), 404
     return render_template('404.html'), 404
