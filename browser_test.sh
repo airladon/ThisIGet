@@ -17,7 +17,7 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
-TIG_ADDRESS=http://host.docker.internal:5003       # default to local
+TIG_ADDRESS=http://host.docker.internal:5002       # default to local
 
 check_status() {
   if [ $? != 0 ];
@@ -92,7 +92,7 @@ fi
 if [ $1 ];
 then
     case $1 in
-        local) TIG_ADDRESS='http://host.docker.internal:5003';;
+        local) TIG_ADDRESS='http://host.docker.internal:5002';;
         dev) TIG_ADDRESS='https://thisiget-dev.herokuapp.com';;
         test) TIG_ADDRESS='https://thisiget-test.herokuapp.com';;
         beta) TIG_ADDRESS='https://thisiget-beta.herokuapp.com';;

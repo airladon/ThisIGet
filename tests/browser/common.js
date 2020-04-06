@@ -7,7 +7,7 @@ const fs = require('fs');
 
 expect.extend({ toMatchImageSnapshot });
 
-const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5002';
 
 /**
  * Takes a screen snapshot.
@@ -107,7 +107,6 @@ async function getToken(prefix, oldMsgNumber) {
     [msgNumber, body] = await getEmail();
     count += 1;
   }
-
   expect(msgNumber).not.toEqual(oldMsgNumber);
   const [token] = body.match(new RegExp(`${prefix}/[^\r]*`));
 
@@ -195,7 +194,7 @@ async function gotoAccountSettings(
 }
 
 
-async function createAccount(
+async function createAccountWithoutConfirm(
   username, email, password,
   fileNamePrefix = '', snapshots = null, startIndex = null,
 ) {
@@ -221,9 +220,49 @@ async function createAccount(
   await debugSnapshot(fileNamePrefix, snapshots);
 
   const token = await getToken('confirmAccount', currentMsgNumber);
+  return token;
+}
+
+async function confirmCreateAccount(token, fileNamePrefix = '', snapshots = null) {
   await page.goto(`${sitePath}/${token}`);
   await debugSnapshot(fileNamePrefix, snapshots);
 }
+
+
+async function createAccount(
+  username, email, password,
+  fileNamePrefix = '', snapshots = null, startIndex = null,
+) {
+  // await debugSnapshot(fileNamePrefix, snapshots, startIndex);
+  // await logout();
+  // await debugSnapshot(fileNamePrefix, snapshots);
+
+  // await click('id_navbar_loginout');
+  // await debugSnapshot(fileNamePrefix, snapshots);
+
+  // await click('login_form__create_account');
+  // await debugSnapshot(fileNamePrefix, snapshots);
+
+  // await setFormInput('username', username);
+  // await setFormInput('email', email);
+  // await setFormInput('password', password);
+  // await setFormInput('repeat_password', password);
+  // await page.$eval('#terms', elem => elem.click());
+  // await debugSnapshot(fileNamePrefix, snapshots);
+
+  // const currentMsgNumber = await getLatestMessage();
+  // await click('submit');
+  // await debugSnapshot(fileNamePrefix, snapshots);
+
+  // const token = await getToken('confirmAccount', currentMsgNumber);
+  // await page.goto(`${sitePath}/${token}`);
+  // await debugSnapshot(fileNamePrefix, snapshots);
+  const token = await createAccountWithoutConfirm(
+    username, email, password, fileNamePrefix, snapshots, startIndex,
+  );
+  await confirmCreateAccount(token, fileNamePrefix, snapshots);
+}
+
 
 async function deleteAccount(username, password, debug) {
   await debugSnapshot(debug, 0);
@@ -246,7 +285,7 @@ async function deleteAccount(username, password, debug) {
 function cleanReplacementFolder(callingScriptPath) {
   const deleteFolderRecursive = (folderPath) => {
     if (fs.existsSync(folderPath)) {
-      fs.readdirSync(folderPath).forEach((file, index) => {
+      fs.readdirSync(folderPath).forEach((file) => {
         const curPath = path.join(folderPath, file);
         if (fs.lstatSync(curPath).isDirectory()) { // recurse
           deleteFolderRecursive(curPath);
@@ -295,6 +334,8 @@ module.exports = {
   click,
   goHome,
   createAccount,
+  createAccountWithoutConfirm,
+  confirmCreateAccount,
   deleteAccount,
   snap,
   writeReplacements,

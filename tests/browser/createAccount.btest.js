@@ -2,8 +2,9 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
-  logout, snap, checkSnap, writeReplacements,
+  logout, snap, checkSnap, writeReplacements, createAccountWithoutConfirm,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,
+  confirmCreateAccount,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -59,6 +60,25 @@ describe('Create Account', () => {
     await setFormInput('repeat_password', 'asdfasdf1');
     await click('submit');
     await snap('create-account-errors', snapshots);
+  });
+
+  test('Create Account Twice', async () => {
+    jest.setTimeout(20000);
+    await sleep(500);
+    await deleteAccount(username, password);
+
+    const token1 = await createAccountWithoutConfirm(
+      username, `${username}@thisiget.com`, password,
+      'create-account-twice', snapshots, 0,
+    );
+    const token2 = await createAccountWithoutConfirm(
+      username, `${username}@thisiget.com`, password,
+      'create-account-twice', snapshots,
+    );
+
+    await confirmCreateAccount(token2, 'create-account-twice', snapshots);
+
+    await confirmCreateAccount(token1, 'create-account-twice', snapshots);
   });
 
   test.each(indexes)(

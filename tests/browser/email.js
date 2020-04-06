@@ -66,6 +66,7 @@ const getEmail = () => new Promise((resolve) => {
         // });
       });
       f.once('error', (err) => {
+        console.log(err)
         resolve('error');
       });
       f.once('end', () => {
@@ -76,7 +77,7 @@ const getEmail = () => new Promise((resolve) => {
   });
 
   imap.once('error', (err) => {
-    // console.log(err);
+    console.log(err);
     resolve('error');
   });
 
