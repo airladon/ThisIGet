@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# browser_test.sh                    http://host.docker.internal:5003
 # browser_test.sh local              http://host.docker.internal:5003
 # browser_test.sh dev                https://thisiget-dev.herokuapp.com
 # browser_test.sh test               https://thisiget-test.herokuapp.com
@@ -17,7 +16,10 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
-TIG_ADDRESS=http://host.docker.internal:5002       # default to local
+if [ -z "${TIG_ADDRESS}" ];
+then
+  TIG_ADDRESS=http://host.docker.internal:5003       # default to local
+fi
 
 check_status() {
   if [ $? != 0 ];
@@ -40,7 +42,7 @@ docker_run_browser_test() {
         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
-        -e TIG_ADDRESS=$1 \
+        -e TIG_ADDRESS=$TIG_ADDRESS \
         -e MAIL_RECEIVE_SERVER=$MAIL_RECEIVE_SERVER \
         -e MAIL_RECEIVE_USERNAME=$MAIL_RECEIVE_USERNAME \
         -e MAIL_RECEIVE_PASSWORD=$MAIL_RECEIVE_PASSWORD \
@@ -57,7 +59,7 @@ docker_start_browser_test_container() {
         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
-        -e TIG_ADDRESS=$1 \
+        -e TIG_ADDRESS=$TIG_ADDRESS \
         -e MAIL_RECEIVE_SERVER=$MAIL_RECEIVE_SERVER \
         -e MAIL_RECEIVE_USERNAME=$MAIL_RECEIVE_USERNAME \
         -e MAIL_RECEIVE_PASSWORD=$MAIL_RECEIVE_PASSWORD \
@@ -92,7 +94,7 @@ fi
 if [ $1 ];
 then
     case $1 in
-        local) TIG_ADDRESS='http://host.docker.internal:5002';;
+        local) TIG_ADDRESS='http://host.docker.internal:5003';;
         dev) TIG_ADDRESS='https://thisiget-dev.herokuapp.com';;
         test) TIG_ADDRESS='https://thisiget-test.herokuapp.com';;
         beta) TIG_ADDRESS='https://thisiget-beta.herokuapp.com';;
@@ -103,5 +105,6 @@ fi
 
 
 title "Running tests on $TIG_ADDRESS"
-docker_run_browser_test "$TIG_ADDRESS" "${@:2}"
+# docker_run_browser_test "$TIG_ADDRESS" "${@:2}"
+docker_run_browser_test "${@:2}"
 

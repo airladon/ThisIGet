@@ -7,7 +7,7 @@ const fs = require('fs');
 
 expect.extend({ toMatchImageSnapshot });
 
-const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5002';
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 
 /**
  * Takes a screen snapshot.
