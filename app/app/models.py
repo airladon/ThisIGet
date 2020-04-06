@@ -203,7 +203,8 @@ class Users(UserMixin, db.Model):
     @staticmethod
     def verify_account_confirmation_token(token):
         try:
-            decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+            decoded_token = jwt.decode(
+                token, app.config['SECRET_KEY'], algorithms=['HS256'])
             # id = jwt.decode(token, app.config['SECRET_KEY'],
             #                 algorithms=['HS256'])['account_confirmation']
             id = decoded_token['account_confirmation']
@@ -211,7 +212,9 @@ class Users(UserMixin, db.Model):
             # username_hash = decoded_token['username_hash']
             # email_hash = decoded_token['email_hash']
         except jwt.ExpiredSignatureError:
-            decoded_token = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'], options={'verify_exp': False})
+            decoded_token = jwt.decode(
+                token, app.config['SECRET_KEY'], algorithms=['HS256'],
+                options={'verify_exp': False})
             # id = jwt.decode(
             #     token,
             #     app.config['SECRET_KEY'],
@@ -225,7 +228,7 @@ class Users(UserMixin, db.Model):
                 'user': id,
                 'signed_up_on': signed_up_on,
             }
-        except Exception as e:
+        except Exception:
             return {
                 'status': 'fail'
             }

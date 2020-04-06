@@ -42,7 +42,7 @@ def client(request):
     app.config['MAIL_USERNAME'] = 'test'
     app.config['MAIL_PASSWORD'] = 'test'
     app.config['MAIL_SERVER'] = 'test'
-    app.config['MAIL_SENDER'] ='test'
+    app.config['MAIL_SENDER'] = 'test'
     # app.config['MAIL_SUPPRESS_SEND'] = True
     # app.config['TESTING'] = True
     # ctx = app.app_context()

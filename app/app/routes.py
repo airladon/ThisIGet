@@ -431,11 +431,12 @@ def login(username=''):
         formatted_email = format_email(form.username_or_email.data)
         user = Users.query \
             .filter(or_(
-                Users.username_hash == hash_str_with_pepper(form.username_or_email.data.lower()),
+                Users.username_hash == hash_str_with_pepper(
+                    form.username_or_email.data.lower()),
                 Users.email_hash == hash_str_with_pepper(formatted_email),
             )) \
             .first()
-            # .order_by(Users.signed_up_on.desc())
+        #       .order_by(Users.signed_up_on.desc())
         # if user is None:
         #     formatted_email = format_email(form.username_or_email.data)
         #     user = Users.query.filter_by(
@@ -552,19 +553,14 @@ def account_deleted():
 @app.route('/tokenError/<error>', methods=['GET'])
 def token_error(error):
     if error == 'expired':
-        return make_response_with_files('createAccountTokenError.html', error_message='A more recent account with the same username or email has since been created.')
+        return make_response_with_files(
+            'createAccountTokenError.html',
+            error_message='''A more recent account with the same username or email has since been created.''')  # noqa
     if error == 'deleted':
-        return make_response_with_files('createAccountTokenError.html', error_message='The token points to an account that has been deleted.')
+        return make_response_with_files(
+            'createAccountTokenError.html',
+            error_message='''The token points to an account that has been deleted.''')  # noqa
     return make_response_with_files('createAccountTokenError.html')
-
-# @app.route('/tokenExpired', methods=['GET'])
-# def create_account_token_expired():
-#     return make_response_with_files('createAccountTokenError.html')
-
-
-# @app.route('/tokenErrorAccountDeleted', methods=['GET'])
-# def create_account_token_error_account_deleted():
-#     return make_response_with_files('createAccountTokenErrorAccountDeleted.html')
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
@@ -584,10 +580,11 @@ def create():
         # Delete any rows in the database that have either the username or
         # email (these rows are guaranteed not confirmed as if they were
         # confirmed the submit validation would have failed)
-        formatted_email = format_email(form.email.data)
+        # formatted_email = format_email(form.email.data)
         Users.query \
             .filter(or_(
-                Users.username_hash == hash_str_with_pepper(form.username.data.lower()),
+                Users.username_hash == hash_str_with_pepper(
+                    form.username.data.lower()),
                 Users.email_hash == hash_str_with_pepper(form.email.data),
             )) \
             .delete()
@@ -651,7 +648,8 @@ def confirm_account(token):
     # user = result['user']
     user = Users.query.get(result['user'])
     if user is None \
-      or (user is not None and str(user.signed_up_on) != result['signed_up_on']):
+       or (user is not None
+           and str(user.signed_up_on) != result['signed_up_on']):
         return redirect(url_for('token_error', error='expired'))
     if user.username_hash == 'deleted account':
         return redirect(url_for('token_error', error='deleted'))
@@ -732,8 +730,8 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         if not user.confirmed:
-          user.confirmed = True
-          user.confirmed_on = datetime.datetime.now()
+            user.confirmed = True
+            user.confirmed_on = datetime.datetime.now()
         db.session.commit()
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')

@@ -5,7 +5,7 @@ from common import create_account, remove_account, login
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
 from app.tools import hash_str_with_pepper, format_email  # noqa E402
-from app import mail
+# from app import mail
 import datetime
 from sqlalchemy import or_, desc
 import app.email
@@ -15,6 +15,7 @@ import re
 new_user = 'new_test_user_01'
 new_user2 = 'new_test_user_02'
 new_email = 'new_test_user_01@thisiget.com'
+
 
 def always_true_mock():
     return True
@@ -29,14 +30,14 @@ def send_email_mock(subject, sender, recipients, text_body, html_body):
         'https://localhost.*/confirmAccount/', '', lines[4])
 
 
-def create_account_with_confirm(
-  client,
-  username='new_test_user_01',
-  email='new_test_user_01@thisiget.com',
-  password='12345678',
-  signed_up_on=0,
-  confirm=True):
-    create_account(client=client, username=username, email=email, password=password, repeat_password=password)
+def create_account_with_confirm(client, username='new_test_user_01',
+                                email='new_test_user_01@thisiget.com',
+                                password='12345678',
+                                signed_up_on=0,
+                                confirm=True):
+    create_account(
+        client=client, username=username, email=email, password=password,
+        repeat_password=password)
     formatted_email = format_email(email)
     user = Users.query \
         .filter(Users.username_hash == hash_str_with_pepper(username)) \
@@ -45,9 +46,9 @@ def create_account_with_confirm(
         .first()
     if user is not None:
         if confirm:
-          user.confirmed = True
+            user.confirmed = True
         if signed_up_on != 0:
-          user.signed_up_on =signed_up_on
+            user.signed_up_on = signed_up_on
         db.session.commit()
 
 
@@ -101,7 +102,7 @@ def test_create_account_fail(
     remove_account(client)
     if exists:
         create_account_with_confirm(client)
-    
+
     res = create_account(
         client=client, username=username, email=email,
         password=password, repeat_password=repeat_password, terms=terms)
@@ -140,6 +141,7 @@ user2 = 'user2'
 email1 = 'user1@thisiget.com'
 email2 = 'user2@thisiget.com'
 
+
 @pytest.mark.parametrize(
     "username, email", [
         # Both username and email exist in same row
@@ -163,11 +165,11 @@ def test_create_account_existing_unconfirmed(
     remove_account(client, username=username)
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False,
-      signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
+        client, username=user1, email=email1, confirm=False,
+        signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
     create_account_with_confirm(
-      client, username=user2, email=email2, confirm=False,
-      signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
+        client, username=user2, email=email2, confirm=False,
+        signed_up_on=datetime.datetime.now() - datetime.timedelta(seconds=10))
 
     res = create_account(
         client=client, username=username, email=email,
@@ -200,11 +202,11 @@ def test_create_account_existing_unconfirmed(
             Users.email_hash == hash_str_with_pepper(formatted_email),
         )) \
         .all()
-    assert len(users) == 1 
+    assert len(users) == 1
+
 
 # Test the case where you create two accounts before confirming either
-def test_create_account_twice_same_user_email(
-        client, monkeypatch):
+def test_create_account_twice_same_user_email(client, monkeypatch):
     monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
     monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     global email_token
@@ -213,11 +215,11 @@ def test_create_account_twice_same_user_email(
     remove_account(client, username=user1)
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False)
+        client, username=user1, email=email1, confirm=False)
     token1 = email_token
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False)
+        client, username=user1, email=email1, confirm=False)
     token2 = email_token
 
     formatted_email = format_email(email1)
@@ -227,9 +229,10 @@ def test_create_account_twice_same_user_email(
             Users.email_hash == hash_str_with_pepper(formatted_email),
         )) \
         .all()
-    
+
     assert len(users) == 1
     assert token1 != token2
+
 
 # Test the case where you create two accounts before confirming either
 def test_create_account_thrice_different_user_email(
@@ -241,15 +244,15 @@ def test_create_account_thrice_different_user_email(
     remove_account(client, username=user1)
 
     create_account_with_confirm(
-      client, username=user1, email=email2, confirm=False)
-    token1 = email_token
+        client, username=user1, email=email2, confirm=False)
+    # token1 = email_token
 
     create_account_with_confirm(
-      client, username=user2, email=email1, confirm=False)
-    token2 = email_token
+        client, username=user2, email=email1, confirm=False)
+    # token2 = email_token
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False)
+        client, username=user1, email=email1, confirm=False)
     token3 = email_token
 
     formatted_email = format_email(email1)
@@ -259,13 +262,14 @@ def test_create_account_thrice_different_user_email(
             Users.email_hash == hash_str_with_pepper(formatted_email),
         )) \
         .all()
-    
+
     assert len(users) == 1
 
     res = client.get(
         f'/confirmAccount/{token3}', follow_redirects=True)
     html = str(res.data)
     assert 'Thankyou for confirming your email' in html
+
 
 # Create two accounts without confirming, then confirm both
 def test_create_account_twice_and_confirm_both(
@@ -278,18 +282,18 @@ def test_create_account_twice_and_confirm_both(
     remove_account(client, username=user1)
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False)
+        client, username=user1, email=email1, confirm=False)
     token1 = email_token
 
     create_account_with_confirm(
-      client, username=user1, email=email1, confirm=False)
+        client, username=user1, email=email1, confirm=False)
     token2 = email_token
 
     # Confirm the account
     res = client.get(
         f'/confirmAccount/{token1}', follow_redirects=True)
     html = str(res.data)
-    assert 'A more recent account with the same username or email has since been created' in html
+    assert 'A more recent account with the same username or email has since been created' in html  # noqa
 
     res = client.get(
         f'/confirmAccount/{token2}', follow_redirects=True)
@@ -319,4 +323,3 @@ def test_create_account_confirm_after_delete(
         f'/confirmAccount/{email_token}', follow_redirects=True)
     html = str(res.data)
     assert 'The token points to an account that has been deleted.' in html
-
