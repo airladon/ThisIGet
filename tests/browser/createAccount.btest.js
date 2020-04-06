@@ -13,7 +13,7 @@ const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
 
 const snapshots = [];
-const indexes = Array.from(Array(12).keys());
+const indexes = Array.from(Array(26).keys());
 const replacements = [];
 
 
@@ -63,7 +63,7 @@ describe('Create Account', () => {
   });
 
   test('Create Account Twice', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(60000);
     await sleep(500);
     await deleteAccount(username, password);
 
@@ -71,16 +71,17 @@ describe('Create Account', () => {
       username, `${username}@thisiget.com`, password,
       'create-account-twice', snapshots, 0,
     );
+    await goHome();
     const token2 = await createAccountWithoutConfirm(
       username, `${username}@thisiget.com`, password,
       'create-account-twice', snapshots,
     );
 
     await confirmCreateAccount(token2, 'create-account-twice', snapshots);
-
     await confirmCreateAccount(token1, 'create-account-twice', snapshots);
   });
-
+});
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {
