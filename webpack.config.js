@@ -17,7 +17,8 @@ const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
 // eslint-disable-next-line no-console
 console.log('Record Build Time');
 const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
-
+// eslint-disable-next-line no-console
+console.log(buildTime);
 
 const envConfig = {
   prod: {

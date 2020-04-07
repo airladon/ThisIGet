@@ -256,7 +256,7 @@ def not_found_error(error):
             f'Route: {route}, '
             f'User Agent: {request.headers.get("User-Agent")}, '
             f'Url: {request.url}, '
-            f'Build Date: {short_date}}'
+            f'Build Date: {short_date}'
         )
         return render_template('404_internal.html'), 404
     return render_template('404.html'), 404
