@@ -247,7 +247,7 @@ def not_found_error(error):
         route = ','.join([address for address in request.access_route])
         try:
             short_date = build_time['shortDate']
-        except:
+        except:  # noqa
             short_date = 'none'
 
         app.logger.error(
