@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_talisman import Talisman
-from app.tools import getContent, getTopicIndex
+from app.tools import getContent, getTopicIndex, getBuildTime
 import os
 import logging
 from logging.handlers import SMTPHandler
@@ -108,6 +108,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
 static_files = getContent()
+build_time = getBuildTime()
 topic_index, version_list, link_list = getTopicIndex()
 
 from app import routes, models  # noqa
