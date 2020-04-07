@@ -70,10 +70,11 @@ export default function diagramLayout() {
 
   const grid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       xStep: 0.25,
       yStep: 0.25,
+      // numLinesThick: 4,
       bounds: new Rect(-radius, -radius, radius * 2, radius * 2),
       color: colors.grid,
     },

@@ -42,12 +42,12 @@ export default function diagramLayout() {
 
   const grid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-1.5, -1.25, 3, 1.75),
       xStep: 0.25,
       yStep: 0.25,
-      numLinesThick: 2,
+      width: 0.005,
       color: colors.grid,
     },
   };
@@ -563,12 +563,13 @@ export default function diagramLayout() {
 
   const implicationsGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: layout.bounds,
       xStep: layout.gridSpacing,
       yStep: layout.gridSpacing,
-      numLinesThick: 2,
+      // numLinesThick: 2,
+      width: 0.005,
       color: colors.grid,
     },
   };

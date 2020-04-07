@@ -100,7 +100,7 @@ export default function diagramLayout() {
 
   const measureAreaGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.gridLegacy',
     options: {
       bounds: new Rect(-2.5, -1.25, 5, 1.75),
       xStep: 0.25,
@@ -204,7 +204,7 @@ export default function diagramLayout() {
   };
   const squareGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.gridLegacy',
     options: {
       bounds: new Rect(-rectHeight / 2, -rectHeight / 2, rectHeight, rectHeight),
       xStep: rectGrid,
