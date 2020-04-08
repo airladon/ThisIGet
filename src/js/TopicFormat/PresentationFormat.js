@@ -128,10 +128,6 @@ class PresentationFormat extends SimpleFormat {
     this.elementStates = {};
   }
 
-  record() {
-
-  }
-
   getContentHtml(): string {
     let htmlText = '';
     const section = this.content.sections[this.currentSectionIndex];

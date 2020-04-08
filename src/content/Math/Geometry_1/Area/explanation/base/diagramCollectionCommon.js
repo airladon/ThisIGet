@@ -159,7 +159,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     layout: Object,
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
-    console.log('asdfasdf')
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.diagram.addElements(this.layout.addElements, this);
