@@ -16014,7 +16014,8 @@ function Generic(webgl, vertices, border, holeBorder, drawType, color, transform
   var textureCoords = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](0, 0, 1, 1);
   var textureRepeat = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : false;
   var onLoad = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : null;
-  var generic = new _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, vertices, border, holeBorder, drawType, textureLocation, textureVertexSpace, textureCoords, textureRepeat);
+  var copy = arguments.length > 13 ? arguments[13] : undefined;
+  var generic = new _DrawingObjects_VertexObject_VertexGeneric__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, vertices, border, holeBorder, drawType, textureLocation, textureVertexSpace, textureCoords, textureRepeat, copy);
 
   if (textureLocation) {
     generic.onLoad = onLoad;
@@ -20981,11 +20982,11 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimitives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
 /* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
@@ -21005,6 +21006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
 /* harmony import */ var _DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
 /* harmony import */ var _DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../DrawingObjects/Geometries/polygon/polygon */ "./src/js/diagram/DrawingObjects/Geometries/polygon/polygon.js");
+/* harmony import */ var _DrawingObjects_Geometries_copy_copy__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../DrawingObjects/Geometries/copy/copy */ "./src/js/diagram/DrawingObjects/Geometries/copy/copy.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -21026,6 +21028,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -21059,10 +21062,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 /**
   Curved Corner Definition
  */
 
+// export type TypePointTransforms = {
+//   offset?: TypeParsablePoint,
+//   transform?: Transform,
+//   repeatRect?: {
+//     xNum?: number,
+//     xStep?: number,
+//     yNum?: number,
+//     yStep?: number,
+//   },
+//   repeatPolar?: {
+//     magNum?: number,
+//     magStep?: number,
+//     angleNum?: number,
+//     angleStep?: number,
+//     angleStart?: number,
+//   },
+//   repeatTransforms?: Array<Transform>,
+// };
+// export type TypeCopyLinear = {
+//   num?: number,
+//   step?: number,
+//   angle?: number,
+//   axis?: 'x' | 'y',
+// }
+// export type TypeCopyRadial = {
+//   numMag?: number,
+//   numAngle?: number,
+//   stepMag?: number,
+//   stepAngle?: number,
+//   startAngle?: number,
+// }
+// export type TypeCopyOffset = {
+//   offset: TypeParsablePoint,
+// };
+// export type TypeCopyTransform = {
+//   transform: Transform;
+// }
+// export type TypeCopy = Array<Transform> | Array<Point> | TypeCopyRadial
+//                        | TypeCopyLinear | Point | Transform | TypeCopyOffset
+//                        | TypeCopyTransform;
+// export type TypePointTransforms1 = {
+//   offset?: TypeParsablePoint,
+//   transform?: Transform,
+//   copy: {
+//     xNum?: number,
+//     xStep?: number,
+//     yNum?: number,
+//     yStep?: number,
+//     magNum?: number,
+//     magStep?: number,
+//     angleNum?: number,
+//     angleStep?: number,
+//     angleStart?: number,
+//     transforms?: Array<Transform>,
+//   },
+//   copy: TypeCopy | Array<TypeCopy>,
+// };
 function parsePoints(options, keysToParsePointsOrPointArrays) {
   var parseKey = function parseKey(key) {
     var value = options[key];
@@ -21205,9 +21266,14 @@ function () {
       };
 
       var parsedBorder = parseBorder(options.border);
-      var parsedBorderHoles = parseBorder(options.hole); // console.log(parsedPoints)
+      var parsedBorderHoles = parseBorder(options.hole);
+      var copyToUse = options.copy;
 
-      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad);
+      if (options.copy != null && !Array.isArray(options.copy)) {
+        copyToUse = [options.copy];
+      }
+
+      var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad, copyToUse);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21237,7 +21303,8 @@ function () {
         lineNum: 1,
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyline').standard(),
         border: 'line',
-        hole: 'none'
+        hole: 'none' // repeat: null,
+
       };
 
       for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -21273,8 +21340,10 @@ function () {
       var element = this.generic(options, {
         drawType: options.linePrimitives ? 'lines' : 'triangles',
         points: triangles,
+        // $FlowFixMe
         border: Array.isArray(options.border) ? options.border : borders,
-        holeBorder: Array.isArray(options.hole) ? options.hole : holes
+        holeBorder: Array.isArray(options.hole) ? options.hole : holes // repeat: options.repeat,
+
       });
 
       element.custom.updatePoints = function (points) {
@@ -21360,6 +21429,107 @@ function () {
       return element;
     }
   }, {
+    key: "grid",
+    value: function grid() {
+      var defaultOptions = {
+        bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+        width: 0.005,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard(),
+        dash: [],
+        linePrimitives: false,
+        lineNum: 2
+      };
+
+      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        optionsIn[_key5] = arguments[_key5];
+      }
+
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
+      parsePoints(options, []);
+      options.bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getRect"])(options.bounds);
+
+      var getTris = function getTris(points) {
+        return Object(_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_23__["makePolyLine"])(points, options.width, false, 'mid', 'auto', // cornerStyle doesn't matter
+        0.1, // cornerSize doesn't matter
+        1, // cornerSides,
+        Math.PI / 7, // minAutoCornerAngle,
+        options.dash, options.linePrimitives, options.lineNum, [[]], [[]]);
+      }; // Prioritize Num over Step. Only define Num from Step if Num is undefined.
+
+
+      var bounds = options.bounds;
+      var xStep = options.xStep,
+          xNum = options.xNum,
+          yStep = options.yStep,
+          yNum = options.yNum,
+          width = options.width;
+
+      if (options.linePrimitives && options.lineNum === 1) {
+        width = 0;
+      }
+
+      var totWidth = bounds.width;
+      var totHeight = bounds.height;
+
+      if (xStep != null && xNum == null) {
+        xNum = xStep === 0 ? 1 : 1 + Math.floor((totWidth + xStep * 0.1) / xStep);
+      }
+
+      if (yStep != null && yNum == null) {
+        yNum = yStep === 0 ? 1 : 1 + Math.floor((totHeight + yStep * 0.1) / yStep);
+      }
+
+      if (xNum == null) {
+        xNum = 2;
+      }
+
+      if (yNum == null) {
+        yNum = 2;
+      }
+
+      xStep = xNum < 2 ? 0 : totWidth / (xNum - 1);
+      yStep = yNum < 2 ? 0 : totHeight / (yNum - 1);
+      var start = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, bounds.bottom);
+      var xLineStart = start.add(-width / 2, 0);
+      var xLineStop = start.add(totWidth + width / 2, 0);
+      var yLineStart = start.add(0, -width / 2);
+      var yLineStop = start.add(0, totHeight + width / 2);
+      var xTris = [];
+      var yTris = [];
+
+      if (xNum > 0) {
+        var _getTris3 = getTris([yLineStart, yLineStop]),
+            _getTris4 = _slicedToArray(_getTris3, 1),
+            yLine = _getTris4[0];
+
+        yTris = Object(_DrawingObjects_Geometries_copy_copy__WEBPACK_IMPORTED_MODULE_25__["copyPoints"])(yLine, [{
+          along: 'x',
+          num: xNum - 1,
+          step: xStep
+        }]);
+      }
+
+      if (yNum > 0) {
+        var _getTris5 = getTris([xLineStart, xLineStop]),
+            _getTris6 = _slicedToArray(_getTris5, 1),
+            xLine = _getTris6[0];
+
+        xTris = Object(_DrawingObjects_Geometries_copy_copy__WEBPACK_IMPORTED_MODULE_25__["copyPoints"])(xLine, [{
+          along: 'y',
+          num: yNum - 1,
+          step: yStep
+        }]);
+      }
+
+      var element = this.generic(options, {
+        drawType: options.linePrimitives ? 'lines' : 'triangles',
+        // $FlowFixMe
+        points: [].concat(_toConsumableArray(xTris), _toConsumableArray(yTris)),
+        border: [[start.add(-width / 2, -width / 2), start.add(totWidth + width / 2, -width / 2), start.add(totWidth + width / 2, totHeight + width / 2), start.add(-width / 2, totHeight + width / 2)]]
+      });
+      return element;
+    }
+  }, {
     key: "polygonSweep",
     value: function polygonSweep() {
       var defaultOptions = {
@@ -21378,16 +21548,15 @@ function () {
         }
       };
 
-      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        optionsIn[_key5] = arguments[_key5];
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
       }
 
-      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn, [forceOptions])); // const options = joinObjects(defaultOptions, optionsIn);
-
+      var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn, [forceOptions]));
       var element = this.polygon(options); // $FlowFixMe
 
       element.drawingObject.getPointCountForAngle = function (angle) {
-        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
+        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](Math.PI * 2) * options.sides);
 
         if (options.fill) {
           return sidesToDraw + 2;
@@ -21412,8 +21581,8 @@ function () {
         position: null
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21465,8 +21634,8 @@ function () {
       };
       var options;
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-        optionsIn[_key7 - 1] = arguments[_key7];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+        optionsIn[_key8 - 1] = arguments[_key8];
       }
 
       if (typeof textOrOptions === 'string') {
@@ -21492,7 +21661,7 @@ function () {
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21520,8 +21689,8 @@ function () {
         rotation: 0
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -21616,7 +21785,7 @@ function () {
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
       var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
@@ -21647,8 +21816,8 @@ function () {
 
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21687,15 +21856,15 @@ function () {
 
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
       var inside = document.createElement('div'); // const htmlText = toHTML(options.textInput, '', '', options.color);
       // console.log(options.textInput, htmlText)
 
-      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__["setHTML"])(inside, options.text, options.modifiers);
+      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__["setHTML"])(inside, options.text, options.modifiers);
       var id = options.id,
           classes = options.classes,
           position = options.position,
@@ -21724,8 +21893,8 @@ function () {
       return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
     }
   }, {
-    key: "grid",
-    value: function grid() {
+    key: "gridLegacy",
+    value: function gridLegacy() {
       var defaultOptions = {
         bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
         xStep: 0.1,
@@ -21738,8 +21907,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21761,13 +21930,13 @@ function () {
           transform = options.transform;
 
       if (options.xStep !== 0) {
-        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](x, 8) <= bounds.right; x += xStep) {
+        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](x, 8) <= bounds.right; x += xStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
         }
       }
 
       if (yStep !== 0) {
-        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](y, 8) <= bounds.top; y += yStep) {
+        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](y, 8) <= bounds.top; y += yStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
         }
       }
@@ -21779,122 +21948,7 @@ function () {
       }
 
       return element;
-    } // polygonLegacy(...optionsIn: Array<OBJ_Polygon>) {
-    //   const defaultOptions = {
-    //     sides: 4,
-    //     radius: 1,
-    //     width: 0.01,
-    //     rotation: 0,
-    //     clockwise: false,
-    //     sidesToDraw: null,
-    //     color: [1, 0, 0, 1],
-    //     fill: false,
-    //     textureLocation: '',        // If including a texture, make sure to use
-    //     textureCoords: new Rect(0, 0, 1, 1),  // correct shader in diagram
-    //     onLoad: this.animateNextFrame,
-    //     mods: {},
-    //     transform: new Transform('polygon').standard(),
-    //     position: null,
-    //     center: new Point(0, 0),
-    //     trianglePrimitives: false,
-    //     linePrimitives: false,
-    //     angleToDraw: null,
-    //   };
-    //   const options = Object.assign({}, defaultOptions, ...optionsIn);
-    //   // const o = optionsToUse;
-    //   // let { transform } = options;
-    //   // if (transform == null) {
-    //   //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
-    //   // }
-    //   if (options.position != null) {
-    //     const point = getPoint(options.position);
-    //     options.transform.updateTranslation(point);
-    //   }
-    //   if (options.center != null) {
-    //     options.center = getPoint(options.center);
-    //   }
-    //   if (options.sidesToDraw == null) {
-    //     options.sidesToDraw = options.sides;
-    //   }
-    //   if (options.angleToDraw != null) {
-    //     options.sidesToDraw = Math.max(
-    //       0, Math.floor(options.angleToDraw / Math.PI / 2 * options.sides),
-    //     );
-    //   }
-    //   let direction = 1;
-    //   if (options.clockwise) {
-    //     direction = -1;
-    //   }
-    //   let element;
-    //   if (options.linePrimitives) {
-    //     element = PolygonLine(
-    //       this.webgl,
-    //       options.sides,
-    //       options.radius,
-    //       options.rotation,
-    //       direction,
-    //       options.sidesToDraw,
-    //       options.width,
-    //       options.color,
-    //       options.transform,
-    //       this.limits,
-    //     );
-    //   } else if (options.fill) {
-    //     element = PolygonFilled(
-    //       this.webgl,
-    //       options.sides,
-    //       options.radius,
-    //       options.rotation,
-    //       direction,
-    //       options.sidesToDraw,
-    //       options.center,
-    //       options.color,
-    //       options.transform,
-    //       this.limits,
-    //       options.textureLocation,
-    //       options.textureCoords,
-    //       options.onLoad,
-    //     );
-    //   } else {
-    //     element = Polygon(
-    //       this.webgl,
-    //       options.sides,
-    //       options.radius,
-    //       options.width,
-    //       options.rotation,
-    //       direction,
-    //       options.sidesToDraw,
-    //       options.center,
-    //       options.color,
-    //       options.transform,
-    //       this.limits,
-    //       options.trianglePrimitives,
-    //     );
-    //   }
-    //   if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-    //     element.pulseDefault.scale = options.pulse;
-    //   }
-    //   if (options.mods != null && options.mods !== {}) {
-    //     element.setProperties(options.mods);
-    //   }
-    //   return element;
-    // }
-    // polygonLine(
-    //   numSides: number,
-    //   radius: number,
-    //   rotation: number,
-    //   direction: -1 | 1,
-    //   numSidesToDraw: number,
-    //   numLines: number,     // equivalent to thickness - integer
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return PolygonLine(
-    //     this.webgl, numSides, radius,
-    //     rotation, direction, numSidesToDraw, numLines, color, transform, this.limits,
-    //   );
-    // }
-
+    }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
@@ -21914,8 +21968,8 @@ function () {
         position: null
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -21965,8 +22019,8 @@ function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22006,8 +22060,8 @@ function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22040,8 +22094,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22070,8 +22124,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        optionsIn[_key17] = arguments[_key17];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22131,8 +22185,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-          moreOptions[_key17 - 1] = arguments[_key17];
+        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+          moreOptions[_key18 - 1] = arguments[_key18];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -22154,7 +22208,7 @@ function () {
         }
       }
 
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"](transform, this.limits);
       element.setColor(color);
 
       if (pulse != null && typeof element.pulseDefault !== 'function') {
@@ -22250,8 +22304,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
-        optionsIn[_key18] = arguments[_key18];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22298,7 +22352,7 @@ function () {
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
       xProps.majorTicks.color = color.slice();
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22335,7 +22389,7 @@ function () {
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
       yProps.majorTicks.color = color.slice();
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22365,9 +22419,12 @@ function () {
       if (showGrid) {
         var gridLines = this.grid({
           bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
-          stepX: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepX * width / limits.width, 8),
-          stepY: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepY * height / limits.height, 8),
+          xStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepX * width / limits.width, 8),
+          yStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepY * height / limits.height, 8),
           numThickLines: 1,
+          // linePrimitives: true,
+          // lineNum: 2,
+          width: options.lineWidth * 0.6,
           color: gridColor,
           transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0)
         });
@@ -22400,8 +22457,8 @@ function () {
         position: null
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22457,8 +22514,8 @@ function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
+        optionsIn[_key21] = arguments[_key21];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22737,6 +22794,287 @@ function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (DrawingObject);
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/Geometries/copy/copy.js":
+/*!***************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/Geometries/copy/copy.js ***!
+  \***************************************************************/
+/*! exports provided: copyPoints, copyStep */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyPoints", function() { return copyPoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyStep", function() { return copyStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+/* eslint-disable camelcase */
+
+
+
+function getPointsToCopy(points, startIn, endIn, marks) {
+  var out = [];
+  var start = marks["".concat(startIn)];
+  var end;
+
+  if (endIn === 'end') {
+    end = points.length;
+  } else {
+    end = marks["".concat(endIn)];
+  }
+
+  if (end == null) {
+    end = points.length;
+  }
+
+  for (var i = start; i < end; i += 1) {
+    out.push(points[i]._dup());
+  }
+
+  return out;
+}
+
+function copyOffset(pointsToCopy, // initialPoints: Array<Point>,
+optionsIn) {
+  var defaultOptions = {
+    to: []
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+  options.to = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoints"])(options.to);
+  var out = [];
+
+  var _loop = function _loop(i) {
+    out = [].concat(_toConsumableArray(out), _toConsumableArray(pointsToCopy.map(function (p) {
+      return p.add(options.to[i]);
+    })));
+  };
+
+  for (var i = 0; i < options.to.length; i += 1) {
+    _loop(i);
+  }
+
+  return out;
+}
+
+function copyTransform(pointsToCopy, // initialPoints: Array<Point>,
+optionsIn) {
+  var defaultOptions = {
+    to: []
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+
+  if (options.to instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+    options.to = [optionsIn.to];
+  }
+
+  var out = [];
+
+  var _loop2 = function _loop2(i) {
+    // $FlowFixMe
+    var matrix = options.to[i].matrix();
+    out = [].concat(_toConsumableArray(out), _toConsumableArray(pointsToCopy.map(function (p) {
+      return p.transformBy(matrix);
+    })));
+  };
+
+  for (var i = 0; i < options.to.length; i += 1) {
+    _loop2(i);
+  }
+
+  return out;
+}
+
+function copyLinear(pointsToCopy, // initialPoints: Array<Point>,
+optionsIn) {
+  if (optionsIn.along == null) {
+    return [];
+  }
+
+  var defaultOptions = {
+    num: 1
+  };
+  var angle = 0;
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+
+  if (options.along === 'y') {
+    angle = Math.PI / 2;
+  } else if (options.along === 'x') {
+    angle = 0;
+  } else if (typeof options.along === 'number') {
+    angle = options.along;
+  }
+
+  if (options.step == null) {
+    var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(pointsToCopy);
+    options.step = Math.abs(bounds.height / Math.sin(angle));
+  }
+
+  var out = [];
+
+  var _loop3 = function _loop3(i) {
+    var step = options.step * i;
+    out = [].concat(_toConsumableArray(out), _toConsumableArray(pointsToCopy.map(function (p) {
+      return p.add(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(step, angle));
+    })));
+  };
+
+  for (var i = 1; i < options.num + 1; i += 1) {
+    _loop3(i);
+  }
+
+  return out;
+}
+
+function copyAngle(pointsToCopy, // initialPoints: Array<Point>,
+optionsIn) {
+  var defaultOptions = {
+    num: 1,
+    step: Math.PI / 4,
+    center: [0, 0]
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+  options.center = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.center);
+  var out = [];
+  var center = options.center;
+
+  var _loop4 = function _loop4(i) {
+    var matrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(-center.x, -center.y).rotate(i * options.step).translate(center.x, center.y).matrix();
+    out = [].concat(_toConsumableArray(out), _toConsumableArray(pointsToCopy.map(function (p) {
+      return p.transformBy(matrix);
+    })));
+  };
+
+  for (var i = 1; i < options.num + 1; i += 1) {
+    _loop4(i);
+  }
+
+  return out;
+} // function copyArc(
+//   pointsToCopy: Array<Point>,
+//   initialPoints: Array<Point>,
+//   optionsIn: CPY_Arc,
+// ) {
+//   const defaultOptions = {
+//     num: 1,
+//     step: 0.1,
+//     angleStep: Math.PI / 4,
+//     // arcStep: 0.1,
+//     startAngle: 0,
+//     stopAngle: Math.PI * 2,
+//     center: [0, 0],
+//   };
+//   const options = joinObjects({}, defaultOptions, optionsIn);
+//   options.center = getPoint(options.center);
+//   let out = initialPoints;
+//   const { center } = options;
+//   for (let i = 1; i < options.num + 1; i += 1) {
+//     const matrix = new Transform()
+//       .translate(-center.x, -center.y)
+//       .rotate(i * options.step)
+//       .translate(center.x, center.y)
+//       .matrix();
+//     out = [...out, ...pointsToCopy.map(p => p.transformBy(matrix))];
+//   }
+//   return out;
+// }
+
+
+function copyStep(points, copyStyle, options) // marks: CPY_Marks,
+{
+  // const out = [];
+  if (copyStyle === 'linear' || copyStyle === 'x' || copyStyle === 'y' || typeof copyStyle === 'number') {
+    return copyLinear(points, options);
+  }
+
+  if (copyStyle === 'to') {
+    if (options.to == null) {
+      return points;
+    }
+
+    if (Array.isArray(options.to) && options.to.length === 0) {
+      return points;
+    }
+
+    if (options.to instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+      return copyTransform(points, options);
+    }
+
+    if (Array.isArray(options.to) && options.to[0] instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+      return copyTransform(points, options);
+    }
+
+    return copyOffset(points, options);
+  }
+
+  if (copyStyle === 'rotation') {
+    return copyAngle(points, options);
+  }
+
+  return points;
+}
+
+function copyPoints(points, chain) {
+  var marks = {}; // let out = [];
+
+  var startIndex = 0; // let all = [];
+  // $FlowFixMe
+
+  var out = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoints"])(points);
+
+  if (chain == null) {
+    return out;
+  }
+
+  var chainToUse = [];
+
+  if (!Array.isArray(chain)) {
+    chainToUse = [chain];
+  } else {
+    chainToUse = chain;
+  }
+
+  marks['0'] = 0;
+  marks['1'] = points.length;
+  chainToUse.forEach(function (c, index) {
+    if (typeof c === 'string') {
+      marks[c] = out.length;
+    } else {
+      var defaultOptions = {
+        start: startIndex,
+        end: 'end',
+        original: true
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, c);
+      var copyStyle = 'to';
+
+      if (options.along != null) {
+        copyStyle = options.along;
+      }
+
+      var pointsToCopy = getPointsToCopy(out, options.start, options.end, marks);
+
+      if (options.original === false) {
+        startIndex = out.length;
+      }
+
+      out = [].concat(_toConsumableArray(out), _toConsumableArray(copyStep(pointsToCopy, copyStyle, options)));
+      marks["".concat(index + 2)] = out.length;
+    }
+  });
+  return _toConsumableArray(out.slice(startIndex));
+}
+
+
 
 /***/ }),
 
@@ -25217,6 +25555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _Geometries_copy_copy__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Geometries/copy/copy */ "./src/js/diagram/DrawingObjects/Geometries/copy/copy.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25235,9 +25574,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+ // import { joinObjects } from '../../../tools/tools';
 
 
- // export type TypeVertexPolyLineBorderToPoint = TypeBorderToPoint;
+
+
 
 var VertexGeneric =
 /*#__PURE__*/
@@ -25252,6 +25593,7 @@ function (_VertexObject) {
     var textureVertexSpace = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
     var textureCoords = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1);
     var textureRepeat = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
+    var copy = arguments.length > 9 ? arguments[9] : undefined;
 
     _classCallCheck(this, VertexGeneric);
 
@@ -25270,7 +25612,7 @@ function (_VertexObject) {
       _this.glPrimitive = _this.gl[0].TRIANGLE_FAN;
     }
 
-    _this.setupPoints(vertices, border, holeBorder);
+    _this.setupPoints(vertices, border, holeBorder, copy);
 
     _this.setupTexture(textureLocation, textureVertexSpace, textureCoords, textureRepeat);
 
@@ -25306,18 +25648,20 @@ function (_VertexObject) {
     }
   }, {
     key: "setupPoints",
-    value: function setupPoints(vertices, border, holeBorder) {
+    value: function setupPoints(vertices, border, holeBorder, copy) {
       var _this2 = this;
 
       this.points = [];
-      vertices.forEach(function (v) {
+      var newVerts = vertices;
+      newVerts = Object(_Geometries_copy_copy__WEBPACK_IMPORTED_MODULE_3__["copyPoints"])(vertices, copy);
+      newVerts.forEach(function (v) {
         _this2.points.push(v.x);
 
         _this2.points.push(v.y);
       });
 
       if (border == null) {
-        var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(vertices);
+        var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBoundingRect"])(newVerts);
         this.border[0] = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, bounds.bottom), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, bounds.bottom), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, bounds.top)];
       } else {
         this.border = border;
@@ -31283,7 +31627,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, quadBezierPoints */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getPoints, quadBezierPoints, getRect */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31321,7 +31665,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipAngle", function() { return clipAngle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spaceToSpaceScale", function() { return spaceToSpaceScale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoint", function() { return getPoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoints", function() { return getPoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadBezierPoints", function() { return quadBezierPoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -31953,6 +32299,49 @@ function getPoint(p) {
   }
 
   return parsedPoint;
+}
+
+function parseRect(r, onFail) {
+  if (r instanceof Rect) {
+    return r;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (Array.isArray(r) && r.length === 4) {
+    return new Rect(r[0], r[1], r[2], r[3]);
+  }
+
+  return onFailToUse;
+}
+
+function getRect(r) {
+  var parsedRect = parseRect(r);
+
+  if (parsedRect == null) {
+    parsedRect = new Rect(0, 0, 1, 1);
+  }
+
+  return parsedRect;
+}
+
+function getPoints(points) {
+  if (Array.isArray(points) && points.length > 0 && typeof points[0] === 'number') {
+    // $FlowFixMe
+    return [getPoint(points)];
+  }
+
+  if (Array.isArray(points)) {
+    return points.map(function (p) {
+      return getPoint(p);
+    });
+  }
+
+  return [getPoint(points)];
 }
 
 function linearPath(start, delta, percent) {

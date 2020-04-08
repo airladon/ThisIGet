@@ -47,7 +47,7 @@ export default function diagramLayout() {
       bounds: new Rect(-1.5, -1.25, 3, 1.75),
       xStep: 0.25,
       yStep: 0.25,
-      width: 0.005,
+      width: 0.01,
       color: colors.grid,
     },
   };
@@ -569,7 +569,7 @@ export default function diagramLayout() {
       xStep: layout.gridSpacing,
       yStep: layout.gridSpacing,
       // numLinesThick: 2,
-      width: 0.005,
+      width: 0.01,
       color: colors.grid,
     },
   };

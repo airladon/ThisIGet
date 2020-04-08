@@ -102,7 +102,13 @@ class PresentationFormat extends SimpleFormat {
   goToSectionIndex: number;
   firstPageShown: boolean;
   elementStates: Object;
+  recorded: Object;
   // type: string;
+
+  //  recorded: {
+  //    0: [[x, y, down | up | html click]
+  //
+  //
 
   constructor(content: Object) {
     super(content);
@@ -120,6 +126,10 @@ class PresentationFormat extends SimpleFormat {
     this.goToSectionIndex = 0;
     this.type = 'presentation';
     this.elementStates = {};
+  }
+
+  record() {
+
   }
 
   getContentHtml(): string {
