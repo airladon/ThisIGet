@@ -5,6 +5,7 @@ build_flask_gen/
 app/app/static/build
 app/app/static/dist
 app/app/static/index.js.map
+app/app/buildTime.json
 node_modules/
 reports
 src/figureone
