@@ -86,6 +86,10 @@ export MAIL_USERNAME=enter_your_email_here
 export MAIL_PASSWORD=enter_your_password_here
 ```
 
+#### `MAIL_SEVER`, `MAIL_RECEIVE_SERVER`, `MAIL_RECEIVE_USERNAME`, `MAIL_RECEIVE_PASSWORD`
+
+These are used for receiving emails. Receiving emails is required when doing end to end browser tests, and tokens need to be received by email to create accounts or reset passwords.
+
 #### `LOGGING`
 Set to `heroku` if app is running on heroku and needs to stream logs to stdout through gunicorn
 
@@ -102,7 +106,9 @@ export FLASK_APP=app/my_app.py
 #### `HEROKU_API_KEY`
 If deploying the app to HEROKU, then the `HEROKU_API_KEY` environment variable needs to be set. The variable can be set by using:
 
-```export HEROKU_API_KEY=`heroku auth:token` ```
+```
+export HEROKU_API_KEY=`heroku auth:token`
+```
 
 This is only needed if deploying a build from the local machine.
 
@@ -113,13 +119,13 @@ You can deploy to your own heroku site for testing purposes. Create a heroku acc
 ```
 
 #### `AES_KEY`
-Only needed if writing to or reading from a database used by an app with a custom AES_KEY (like the heroku test or production database).
+Needed if writing to or reading from a database used by an app with a custom AES_KEY (like the heroku test or production database).
 
 #### `PEPPER`
-Only needed if writing to or reading from a production database used by an app with a custom PEPPER (like the heroku test or production database).
+Needed if writing to or reading from a production database used by an app with a custom PEPPER (like the heroku test or production database).
 
 #### `SECRET_KEY`
-Only needed if debugging a flask session from an app with a custom SECRET_KEY.
+Needed if debugging a flask session from an app with a custom SECRET_KEY.
 
 #### `LOCAL_PRODUCTION`
 If there is an environment variable called `LOCAL_PRODUCTION` and its value is `DISABLE_SECURITY`, then flask Talisman will not be run.
@@ -130,7 +136,7 @@ This is useful for running stage and production environments locally, where you 
 All lint and type checking, testing, building and deployment can be done using docker containers that can be used on any system that has docker installed. This makes development easy to start on any platform.
 
 ### Interactive Dev Environment container
-A docker container can be used to do lint and type checking, and tests, building, and deployments. To start the container
+A docker container can be used to do lint and type checking, unit tests, browser tests, javascript building and packaging, and deployment. To start the container
 
 * `./startenv dev`
 
@@ -143,10 +149,14 @@ From here you can perform:
   * `npm run css` for CSS/SCSS linting
   * `flake8` for python linting
 
+* Dev server
+  * `./dev-server.sh` to run a local web server where the site is rebuilt automatically whenever files change. Access it through `http://localhost:5002/`.
+ 
 * Testing:
   * `jest` for Javascript unit tests
   * `pytest` for Python unit tests
   * `./browser_test.sh local` for localhost browser tests
+  * `./browser_test.sh 5002` for localhost (port 5002) browser tests
   * `./browser_test.sh dev` for heroku dev site browser teststests
   * `./browser_test.sh test` for heroku test site browser tests
   * `./browser_test.sh beta` for heroku beta site browser tests
@@ -191,6 +201,10 @@ From here you can perform:
     * You would only do this for some debugging purposes, generally running the `dev-server` container (below) is sufficent.
 
 Note, to do any deployments the HEROKU_API_KEY associated with the accounts to deploy to needs to be set as an environment variable.
+
+To attach to the same container from different terminal instances use:
+`docker exec -it devenv-dev bash`
+
 
 ### Dev-Server Container
 `./startenv dev-server`
@@ -428,6 +442,25 @@ unset MAIL_USERNAME
 Can check with
 `heroku pg:psql --app=itgetitest -c 'select username,last_login from users'`
 
+
+##### Terminal 1
+``` bash
+# start container
+./start dev
+# setup mail if want local server to send emails (e.g. account creation)
+# pytest can be run without emails, but browser tests of account pages will
+# need 
+export MAIL_SERVER=
+export MAIL_USERNAME=
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+# only required if communicating with external database
+export DATABASE_URL=
+# only required if communicating with an encrypted database
+export AES_KEY=
+export PEPPER=
+./dev-server.sh
+```
 
 #### Local Browser test debug
 Run site and browser tests local and within containers (so don't have to restart containers all the time)

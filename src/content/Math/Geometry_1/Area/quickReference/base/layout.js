@@ -100,12 +100,15 @@ export default function diagramLayout() {
 
   const measureAreaGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-2.5, -1.25, 5, 1.75),
       xStep: 0.25,
       yStep: 0.25,
-      numLinesThick: 2,
+      // numLinesThick: 2,
+      // linePrimitives: true,
+      // lineNum: 2,
+      width: 0.01,
       color: colors.qrArea_grid,
     },
   };
@@ -204,7 +207,7 @@ export default function diagramLayout() {
   };
   const squareGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-rectHeight / 2, -rectHeight / 2, rectHeight, rectHeight),
       xStep: rectGrid,

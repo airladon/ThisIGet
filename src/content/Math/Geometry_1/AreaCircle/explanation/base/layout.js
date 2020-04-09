@@ -70,11 +70,13 @@ export default function diagramLayout() {
 
   const grid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       xStep: 0.25,
       yStep: 0.25,
-      bounds: new Rect(-radius, -radius, radius * 2, radius * 2),
+      // numLinesThick: 4,
+      width: 0.01,
+      bounds: new Rect(-radius - 0.01, -radius - 0.01, radius * 2 + 0.02, radius * 2 + 0.02),
       color: colors.grid,
     },
   };
