@@ -91,7 +91,6 @@ def test_account_settings_email_signout(client, monkeypatch):
 
     # Status should be shown as email sent
     html = str(res.data)
-    print(html)
     assert '<span class="input_form__submit_ok_message_text">Confirmation email sent</span>' in html  # noqa
     logout(client)
 
@@ -147,7 +146,6 @@ def test_account_settings_email_wrong_token(client, monkeypatch):
     # Should see token error page, and
     # database should NOT be updated
     html = str(res.data)
-    print(html)
     assert 'The change to your account email address has failed as either the verification token is invalid or corrupt' in html  # noqa
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper('test_user_01')).first()
@@ -166,12 +164,12 @@ def test_account_settings_email_used_email(client, monkeypatch):
     res = client.post(
         '/account',
         data={
-            'email_form-email': "unconfirmed_user_01@thisiget.com",
+            'email_form-email': "test_user_02@thisiget.com",
             'email_form-submit_email': 'Verify & Change',
         },
         follow_redirects=True)
 
-    # Status should be shown as email sent
+    # Status should be shown as email already in use
     html = str(res.data)
     assert 'Email address already in use' in html
     assert email_token == ''
@@ -253,7 +251,6 @@ def test_account_settings_email_expired_token(client, monkeypatch):
     # Now should be back to account page, new email should be shown, and
     # database should be updated
     html = str(res.data)
-    print(html)
     assert 'You need to verify any email change within 30 minutes' in html
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper('test_user_01')).first()

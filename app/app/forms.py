@@ -22,7 +22,7 @@ def check_username(username):
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username.data.lower())).first()
     # user = Users.query.filter_by(username=username.data).first()
-    if user is not None:
+    if user is not None and user.confirmed:
         raise ValidationError('Username already exists.')
 
 
@@ -31,7 +31,7 @@ def check_email(email):
     #     return
     user = Users.query.filter_by(
         email_hash=hash_str_with_pepper(format_email(email.data))).first()
-    if user is not None:
+    if user is not None and user.confirmed:
         raise ValidationError('Email address already in use.')
 
 

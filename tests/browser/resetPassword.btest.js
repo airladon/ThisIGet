@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
+/* eslint-disable import/named */
 import {
   logout, getLatestMessage, getToken, sleep,
   setFormInput, click, goHome, gotoAccountSettings, snap,
@@ -65,7 +66,9 @@ describe('Reset Password', () => {
     await logout();
     expect(indexes).toHaveLength(snapshots.length);
   });
+});
 
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {

@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+/* eslint-disable import/named */
 import {
   login, gotoAccountSettings, snap, logout, getToken,
   getLatestMessage, setFormInput, click, goHome, createAccount, sleep,
@@ -21,7 +22,7 @@ const replacements = [];
 
 describe('Account Settings Open', () => {
   test('Open', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await goHome(500, 1400);
     await sleep(500);
     await snap('account-settings-open', snapshots, 1);
@@ -43,7 +44,7 @@ describe('Account Settings', () => {
   });
 
   test('Delete Cancel', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-cancel-delete', snapshots, 1);
     await click('delete_form-submit');
     await snap('account-settings-cancel-delete', snapshots);
@@ -52,7 +53,7 @@ describe('Account Settings', () => {
   });
 
   test('Delete', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-delete', snapshots, 1);
 
     await click('delete_form-submit');
@@ -101,7 +102,7 @@ describe('Account Settings', () => {
   });
 
   test('Change Username', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-username', snapshots, 1);
     await setFormInput('username_form-username', username2);
     await click('username_form-submit_username');
@@ -118,7 +119,7 @@ describe('Account Settings', () => {
   });
 
   test('Change Password', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-password', snapshots, 1);
 
     await setFormInput('password_form-password', 'asdfasdf');
@@ -138,7 +139,7 @@ describe('Account Settings', () => {
   });
 
   test('Error Messages', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-errors', snapshots, 1);
 
     await setFormInput('username_form-username', 'test_user_001');
@@ -167,7 +168,7 @@ describe('Account Settings Flow - Wide Screen', () => {
     await logout();
   });
   test('Change Password', async () => {
-    jest.setTimeout(20000);
+    jest.setTimeout(40000);
     await snap('account-settings-password-wide', snapshots, 1);
 
     await setFormInput('password_form-password', 'asdfasdf');
@@ -185,7 +186,8 @@ describe('Account Settings Flow - Wide Screen', () => {
     await click('password_form-submit_password');
     await snap('account-settings-password-wide', snapshots);
   });
-
+});
+describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {

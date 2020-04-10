@@ -8,10 +8,17 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./webpack/getContent.js');
 const createTopicIndex = require('./webpack/createIndex.js');
+const recordBuildTime = require('./webpack/recordBuildTime.js');
 const setFilesForBuild = require('./webpack/setFilesForBuild.js');
 const FlaskReloaderPlugin = require('./webpack/flaskReloaderPlugin');
 
 const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
+
+// eslint-disable-next-line no-console
+console.log('Record Build Time');
+const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
+// eslint-disable-next-line no-console
+console.log(buildTime);
 
 const envConfig = {
   prod: {
@@ -22,9 +29,9 @@ const envConfig = {
     devtool: false,
     uglifySourceMap: false,
     reactDevMode: false,
-    outputFilename: '[name]-[chunkhash].js',
+    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
     imageFileName: '[path][name].[ext]',
-    cssFileName: '[name]-[contenthash].css',
+    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
   },
   stage: {
     name: 'stage',
@@ -34,9 +41,9 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: true,
     reactDevMode: false,
-    outputFilename: '[name]-[chunkhash].js',
+    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
     imageFileName: '[path][name].[ext]',
-    cssFileName: '[name]-[contenthash].css',
+    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
   },
   dev: {
     name: 'development',
@@ -68,6 +75,7 @@ module.exports = (env) => {
   }
 
   entryPoints.updateDetailsAndVersions();
+
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
   createTopicIndex(

@@ -187,12 +187,16 @@ export default function diagramLayout() {
 
   const measureLengthTicks = {
     name: 'ticks',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-2, -0.05, 4, 0.1),
       xStep: 1,
-      yStep: 0,
-      numLinesThick: 2,
+      // yStep: 0,
+      yNum: 0,
+      // linePrimitives: true,
+      // lineNum: 40,
+      width: 0.01,
+      // numLinesThick: 3,
       color: colors.measure,
       position: [0, -0.2],
     },
@@ -321,12 +325,15 @@ export default function diagramLayout() {
 
   const measureAreaGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-2.5, -1.25, 5, 1.75),
       xStep: 0.25,
       yStep: 0.25,
-      numLinesThick: 2,
+      // linePrimitives: true,
+      // lineNum: 2,
+      width: 0.008,
+      // numLinesThick: 2,
       color: colors.grid,
     },
   };
@@ -430,7 +437,7 @@ export default function diagramLayout() {
     addElements: [
       {
         name: 'squares',
-        method: 'grid',
+        method: 'shapes.grid',
         options: {
           xStep: squareSize,
           yStep: squareSize,
@@ -504,23 +511,27 @@ export default function diagramLayout() {
   };
   const rectangleGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight),
       xStep: rectGrid,
       yStep: rectGrid,
       color: colors.grid,
+      width: 0.01,
     },
   };
   const row = {
     name: 'row',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-rectWidth / 2, 0, rectWidth, rectGrid),
       xStep: rectGrid,
       yStep: rectGrid,
       color: colors.row,
-      numLinesThick: 6,
+      // numLinesThick: 6,
+      // linePrimitives: true,
+      // lineNum: 6,
+      width: 0.03,
     },
     mods: {
       scenarios: {
@@ -586,7 +597,7 @@ export default function diagramLayout() {
   };
   const squareGrid = {
     name: 'grid',
-    method: 'grid',
+    method: 'shapes.grid',
     options: {
       bounds: new Rect(-rectHeight / 2, -rectHeight / 2, rectHeight, rectHeight),
       xStep: rectGrid,
