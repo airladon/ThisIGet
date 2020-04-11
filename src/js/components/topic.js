@@ -15,6 +15,7 @@ import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
 import ShareBar from './share';
+import RecordButton from './recordButton';
 
 type Props = {
   version: Object;
@@ -477,6 +478,7 @@ export default class TopicComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
           label={this.ratingLabel()}
         />
+        <RecordButton/>
       </div>
       {this.renderTopic()}
       <ShareBar

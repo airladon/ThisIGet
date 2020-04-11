@@ -108,26 +108,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _js_tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/diagram/Diagram */ "./src/js/diagram/Diagram.js");
-/* harmony import */ var _js_tools_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/styleSheets */ "./src/js/tools/styleSheets.js");
-/* harmony import */ var _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
-/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
-/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/diagram/Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _js_tools_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/tools/color */ "./src/js/tools/color.js");
+/* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/tools/styleSheets */ "./src/js/tools/styleSheets.js");
+/* harmony import */ var _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
+/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+
 
 
 
@@ -163,11 +165,11 @@ __webpack_require__.r(__webpack_exports__);
 var tools = {
   math: _js_tools_math__WEBPACK_IMPORTED_MODULE_1__,
   g2: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__,
-  color: _js_tools_color__WEBPACK_IMPORTED_MODULE_3__,
-  css: _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_6__,
-  html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__,
-  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_5__,
-  lines: _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_7__
+  color: _js_tools_color__WEBPACK_IMPORTED_MODULE_4__,
+  css: _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_7__,
+  html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_5__,
+  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_6__,
+  lines: _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_8__
 };
 /**
  * FigureOne entry point
@@ -180,30 +182,31 @@ var tools = {
 var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
+  Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["default"],
   //
-  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElement"],
-  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElementCollection"],
-  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_8__["DiagramElementPrimitive"],
-  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_9__["default"],
-  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_10__["default"],
+  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElement"],
+  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElementCollection"],
+  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElementPrimitive"],
+  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_10__["default"],
+  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_11__["default"],
   //
-  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__["default"],
-  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__["default"],
-  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["TextObject"],
-  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramText"],
-  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramFont"],
-  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__["default"],
+  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_12__["default"],
+  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_13__["default"],
+  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["TextObject"],
+  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["DiagramText"],
+  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["DiagramFont"],
+  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_15__["default"],
   //
-  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__["default"],
-  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__["default"],
-  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_18__["default"],
-  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_19__["default"],
-  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_20__["default"],
+  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_17__["default"],
+  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_18__["default"],
+  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_19__["default"],
+  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_20__["default"],
+  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_21__["default"],
   //
-  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__["Equation"],
+  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_23__["default"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_22__["Equation"],
   //
-  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__["default"],
+  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_16__["default"],
   //
   Point: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"],
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
@@ -3684,12 +3687,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3697,6 +3701,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
  // import getShaders from './webgl/shaders';
+
 
 
 
@@ -3851,10 +3856,10 @@ function () {
           this.webglOffscreen = webglOffscreen;
         }
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
 
         if (this.textCanvasOffscreen) {
-          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasOffscreen);
+          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasOffscreen);
           this.draw2DOffscreen = draw2DOffscreen;
         } // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
 
@@ -3874,7 +3879,7 @@ function () {
     }
 
     if (this instanceof Diagram) {
-      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_5__["default"](this);
+      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_6__["default"](this);
     }
 
     this.fontScale = optionsToUse.fontScale;
@@ -3886,6 +3891,8 @@ function () {
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_5__["default"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
+    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this));
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -3959,7 +3966,7 @@ function () {
       var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
     }
   }, {
     key: "addElement",
@@ -3967,7 +3974,7 @@ function () {
       var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
     }
   }, {
     key: "getElement",
@@ -4004,7 +4011,7 @@ function () {
       // }
 
 
-      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
+      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
@@ -4014,7 +4021,7 @@ function () {
       //   shapes = this.shapesHigh;
       // }
 
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
   }, {
     key: "getObjects",
@@ -4025,7 +4032,7 @@ function () {
       //   equation = this.equationHigh;
       // }
 
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
     }
   }, {
     key: "sizeHtmlText",
@@ -4107,7 +4114,13 @@ function () {
         glToPixel: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(glSpace, pixelSpace),
         diagramToCSSPercent: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, percentSpace)
       };
-    }
+    } // startRecording() {
+    //   this.isRecording = true;
+    // }
+    // stopRecording() {
+    //   this.isRecording = false;
+    // }
+
   }, {
     key: "initialize",
     value: function initialize() {
@@ -4298,6 +4311,30 @@ function () {
       if (this.elements != null) {
         this.elements.updateHTMLElementTie(this.canvasLow);
       }
+    }
+  }, {
+    key: "simulateTouchDown",
+    value: function simulateTouchDown(diagramPoint) {
+      var pointerElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'pointer';
+      // const pixelPoint = diagramPoint.transformBy(this.spaceTransforms.diagramToPixel.matrix());
+      // const clientPoint = this.pixelToClient(pixelPoint);
+      // this.touchDownHandler(clientPoint);
+      var pointer = this.getElement(pointerElement);
+
+      if (pointer == null) {
+        return;
+      }
+
+      var up = pointer.getElement('up');
+      var down = pointer.getElement('down');
+
+      if (up == null || down == null) {
+        return;
+      }
+
+      up.hide();
+      down.show();
+      pointer.setPosition(diagramPoint);
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
     // and dragged, then when they are released, for them to move freely before
@@ -4306,6 +4343,12 @@ function () {
   }, {
     key: "touchDownHandler",
     value: function touchDownHandler(clientPoint) {
+      if (this.recorder.isRecording) {
+        var pixelP = this.clientToPixel(clientPoint);
+        var diagramPoint = pixelP.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+        this.recorder.recordEvent('touchDown', diagramPoint.x, diagramPoint.y);
+      }
+
       if (this.inTransition) {
         return false;
       } // Get the touched point in clip space
@@ -4352,6 +4395,27 @@ function () {
       }
 
       return false;
+    }
+  }, {
+    key: "simulateTouchUp",
+    value: function simulateTouchUp() {
+      var pointerElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'pointer';
+      // this.touchUpHandler();
+      var pointer = this.getElement(pointerElement);
+
+      if (pointer == null) {
+        return;
+      }
+
+      var up = pointer.getElement('up');
+      var down = pointer.getElement('down');
+
+      if (up == null || down == null) {
+        return;
+      }
+
+      up.show();
+      down.hide();
     } // Handle touch up, or mouse click up events in the canvas. When an UP even
     // happens, the default behavior is to let any elements being moved to move
     // freely until they decelerate to 0.
@@ -4359,8 +4423,12 @@ function () {
   }, {
     key: "touchUpHandler",
     value: function touchUpHandler() {
-      // console.log("before", this.elements._circle.transform.t())
+      if (this.recorder.isRecording) {
+        this.recorder.recordEvent('touchUp');
+      } // console.log("before", this.elements._circle.transform.t())
       // console.log(this.beingMovedElements)
+
+
       for (var i = 0; i < this.beingMovedElements.length; i += 1) {
         var element = this.beingMovedElements[i];
 
@@ -4372,6 +4440,27 @@ function () {
 
       this.beingMovedElements = [];
       this.beingTouchedElements = []; // console.log("after", this.elements._circle.transform.t())
+    }
+  }, {
+    key: "simulateCursorMove",
+    value: function simulateCursorMove(diagramPoint) {
+      var pointerElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'pointer';
+      var pointer = this.getElement(pointerElement);
+
+      if (pointer == null) {
+        return;
+      }
+
+      pointer.setPosition(diagramPoint);
+    }
+  }, {
+    key: "touchFreeHandler",
+    value: function touchFreeHandler(clientPoint) {
+      if (this.recorder.isRecording) {
+        var pixelP = this.clientToPixel(clientPoint);
+        var diagramPoint = pixelP.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+        this.recorder.recordEvent('cursorMove', diagramPoint.x, diagramPoint.y);
+      }
     }
   }, {
     key: "rotateElement",
@@ -4475,7 +4564,25 @@ function () {
 
         element.moved(currentTransform);
       }
-    } // Handle touch/mouse move events in the canvas. These events will only be
+    } // simulateTouchMove(
+    //   previousDiagramPoint: Point,
+    //   currentDiagramPoint: Point,
+    //   pointerElement: string = 'pointer',
+    // ) {
+    //   // const previousPixelPoint = previousDiagramPoint
+    //   //   .transformBy(this.spaceTransforms.diagramToPixel.matrix());
+    //   // const previousClientPoint = this.pixelToClient(previousPixelPoint);
+    //   // const currentPixelPoint = currentDiagramPoint
+    //   //   .transformBy(this.spaceTransforms.diagramToPixel.matrix());
+    //   // const currentClientPoint = this.pixelToClient(currentPixelPoint);
+    //   // this.touchMoveHandler(previousClientPoint, currentClientPoint);
+    //   const pointer = this.getElement(pointerElement);
+    //   if (pointer == null) {
+    //     return;
+    //   }
+    //   pointer.setPosition(currentDiagramPoint);
+    // }
+    // Handle touch/mouse move events in the canvas. These events will only be
     // sent if the initial touch down happened in the canvas.
     // The default behavior is to drag (move) any objects that were touched in
     // the down event to the new location.
@@ -4487,6 +4594,12 @@ function () {
   }, {
     key: "touchMoveHandler",
     value: function touchMoveHandler(previousClientPoint, currentClientPoint) {
+      if (this.recorder.isRecording) {
+        var currentPixelPoint = this.clientToPixel(currentClientPoint);
+        var diagramPoint = currentPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+        this.recorder.recordEvent('cursorMove', diagramPoint.x, diagramPoint.y);
+      }
+
       if (this.inTransition) {
         return false;
       }
@@ -4727,6 +4840,12 @@ function () {
     value: function clientToPixel(clientLocation) {
       var canvas = this.canvasLow.getBoundingClientRect();
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](clientLocation.x - canvas.left, clientLocation.y - canvas.top);
+    }
+  }, {
+    key: "pixelToClient",
+    value: function pixelToClient(pixelLocation) {
+      var canvas = this.canvasLow.getBoundingClientRect();
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](pixelLocation.x + canvas.left, pixelLocation.y + canvas.top);
     }
   }]);
 
@@ -20982,11 +21101,11 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimitives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
 /* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
@@ -21029,7 +21148,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // import {
+//   round
+// } from '../../tools/math';
 
 
 
@@ -21556,7 +21677,7 @@ function () {
       var element = this.polygon(options); // $FlowFixMe
 
       element.drawingObject.getPointCountForAngle = function (angle) {
-        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](Math.PI * 2) * options.sides);
+        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
 
         if (options.fill) {
           return sidesToDraw + 2;
@@ -21661,7 +21782,7 @@ function () {
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21785,7 +21906,7 @@ function () {
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
       var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
@@ -21864,7 +21985,7 @@ function () {
       var inside = document.createElement('div'); // const htmlText = toHTML(options.textInput, '', '', options.color);
       // console.log(options.textInput, htmlText)
 
-      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__["setHTML"])(inside, options.text, options.modifiers);
+      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__["setHTML"])(inside, options.text, options.modifiers);
       var id = options.id,
           classes = options.classes,
           position = options.position,
@@ -21891,64 +22012,45 @@ function () {
       var color = arguments.length > 2 ? arguments[2] : undefined;
       var transform = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
-    }
-  }, {
-    key: "gridLegacy",
-    value: function gridLegacy() {
-      var defaultOptions = {
-        bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
-        xStep: 0.1,
-        yStep: 0.1,
-        xOffset: 0,
-        yOffset: 0,
-        numLinesThick: 1,
-        color: [1, 0, 0, 1],
-        position: null,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
-      };
+    } // gridLegacy(...optionsIn: Array<TypeGridOptions>) {
+    //   const defaultOptions = {
+    //     bounds: new Rect(-1, -1, 2, 2),
+    //     xStep: 0.1,
+    //     yStep: 0.1,
+    //     xOffset: 0,
+    //     yOffset: 0,
+    //     numLinesThick: 1,
+    //     color: [1, 0, 0, 1],
+    //     position: null,
+    //     transform: new Transform('grid').standard(),
+    //   };
+    //   const options = joinObjects({}, defaultOptions, ...optionsIn);
+    //   if (options.position != null) {
+    //     const point = getPoint(options.position);
+    //     options.transform.updateTranslation(point);
+    //   }
+    //   const linePairs = [];
+    //   // const xLimit = tools.roundNum(bounds.righ + xStep);
+    //   const {
+    //     bounds, xStep, xOffset, yStep, yOffset, color, numLinesThick, transform,
+    //   } = options;
+    //   if (options.xStep !== 0) {
+    //     for (let x = bounds.left + xOffset; tools.roundNum(x, 8) <= bounds.right; x += xStep) {
+    //       linePairs.push([new Point(x, bounds.top), new Point(x, bounds.bottom)]);
+    //     }
+    //   }
+    //   if (yStep !== 0) {
+    //     for (let y = bounds.bottom + yOffset; tools.roundNum(y, 8) <= bounds.top; y += yStep) {
+    //       linePairs.push([new Point(bounds.left, y), new Point(bounds.right, y)]);
+    //     }
+    //   }
+    //   const element = this.lines(linePairs, numLinesThick, color, transform);
+    //   if (options.pulse != null && typeof element.pulseDefault !== 'function') {
+    //     element.pulseDefault.scale = options.pulse;
+    //   }
+    //   return element;
+    // }
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.position != null) {
-        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(point);
-      }
-
-      var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
-
-      var bounds = options.bounds,
-          xStep = options.xStep,
-          xOffset = options.xOffset,
-          yStep = options.yStep,
-          yOffset = options.yOffset,
-          color = options.color,
-          numLinesThick = options.numLinesThick,
-          transform = options.transform;
-
-      if (options.xStep !== 0) {
-        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](x, 8) <= bounds.right; x += xStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
-        }
-      }
-
-      if (yStep !== 0) {
-        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](y, 8) <= bounds.top; y += yStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
-        }
-      }
-
-      var element = this.lines(linePairs, numLinesThick, color, transform);
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
-      return element;
-    }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
@@ -21968,8 +22070,8 @@ function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22019,8 +22121,8 @@ function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22060,8 +22162,8 @@ function () {
         position: null
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22094,8 +22196,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22124,8 +22226,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22185,8 +22287,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-          moreOptions[_key18 - 1] = arguments[_key18];
+        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+          moreOptions[_key17 - 1] = arguments[_key17];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -22208,7 +22310,7 @@ function () {
         }
       }
 
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
       element.setColor(color);
 
       if (pulse != null && typeof element.pulseDefault !== 'function') {
@@ -22304,8 +22406,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22352,7 +22454,7 @@ function () {
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
       xProps.majorTicks.color = color.slice();
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22389,7 +22491,7 @@ function () {
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
       yProps.majorTicks.color = color.slice();
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22419,8 +22521,8 @@ function () {
       if (showGrid) {
         var gridLines = this.grid({
           bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
-          xStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepX * width / limits.width, 8),
-          yStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepY * height / limits.height, 8),
+          xStep: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepX * width / limits.width, 8),
+          yStep: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepY * height / limits.height, 8),
           numThickLines: 1,
           // linePrimitives: true,
           // lineNum: 2,
@@ -22457,8 +22559,8 @@ function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22514,8 +22616,8 @@ function () {
         position: null
       };
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
-        optionsIn[_key21] = arguments[_key21];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -27034,16 +27136,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElementCollection", function() { return DiagramElementCollection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElement", function() { return DiagramElement; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/m2 */ "./src/js/tools/m2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/m2 */ "./src/js/tools/m2.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -27058,10 +27161,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -27070,9 +27169,13 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
 
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -27087,6 +27190,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
  // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
@@ -27239,6 +27343,7 @@ function () {
       parentCount: 0,
       elementCount: 0
     };
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_1__["default"]();
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
@@ -27258,78 +27363,78 @@ function () {
           optionsIn[_key] = arguments[_key];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
           optionsIn[_key2] = arguments[_key2];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
       },
       trigger: function trigger() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
           optionsIn[_key3] = arguments[_key3];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TriggerStep"](options);
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TriggerStep"](options);
       },
       position: function position() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
           optionsIn[_key4] = arguments[_key4];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
           optionsIn[_key5] = arguments[_key5];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
           optionsIn[_key6] = arguments[_key6];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
           optionsIn[_key7] = arguments[_key7];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
           optionsIn[_key8] = arguments[_key8];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -27344,14 +27449,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -27366,14 +27471,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dim: function dim() {
@@ -27388,14 +27493,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DimAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       undim: function undim() {
@@ -27410,14 +27515,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["UndimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["UndimAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -27425,10 +27530,10 @@ function () {
           optionsIn[_key13] = arguments[_key13];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
-      scenario: function scenario() {
+      scenarioNew: function scenarioNew() {
         var defaultOptions = {
           element: _this
         };
@@ -27437,44 +27542,135 @@ function () {
           optionsIn[_key14] = arguments[_key14];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
         if (options.target != null && options.target in options.element.scenarios) {
-          var target = options.element.getScenarioTarget(options.target);
-          options.target = target;
+          var _target = options.element.getScenarioTarget(options.target);
+
+          options.target = _target;
         }
 
         if (options.start != null && options.start in options.element.scenarios) {
-          var start = options.element.getScenarioTarget(options.start);
-          options.start = start;
+          var _start = options.element.getScenarioTarget(options.start);
+
+          options.start = _start;
         }
 
-        if (options.delta != null && options.delta in options.element.scenarios) {
-          var delta = options.element.getScenarioTarget(options.delta);
-          options.delta = delta;
+        var _options = _slicedToArray(options, 3),
+            start = _options[0],
+            target = _options[1],
+            element = _options[2];
+
+        var steps = [];
+        var timeOptions = {
+          delay: options.delay,
+          duration: options.duration
+        };
+
+        var duration = _this.getTimeToMoveToScenario(target, options, start || '');
+
+        options.duration = duration;
+        options.velocity = undefined; // if (options.velocity) {
+        //   const duration = getTimeToMoveToScenario()
+
+        var startColor;
+        var startTransform;
+        var startIsShown;
+
+        if (start == null) {
+          startColor = _this.color.slice();
+          startTransform = _this.transform._dup();
+          startIsShown = _this.isShown;
+        } else {
+          startColor = start.color.slice();
+          startTransform = start.transform._dup();
+          startIsShown = start.isShown;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        if (target.isShown === true && startIsShown === false) {
+          steps.push(element.anim.dissolveIn({
+            duration: options.duration
+          }));
+        }
+
+        if (target.isShown === false && startIsShown === true) {
+          steps.push(element.anim.dissolveOut({
+            duration: options.duration
+          }));
+        }
+
+        if (target.isShown === true && startIsShown === true) {
+          steps.push(element.anim.dissolveIn({
+            duration: 0
+          }));
+        }
+
+        if (target.isShown === false && startIsShown === false) {
+          steps.push(element.anim.dissolveOut({
+            duration: 0
+          }));
+        }
+
+        steps.push(element.anim.color({
+          start: startColor,
+          target: target.color,
+          duration: options.duration
+        }));
+        steps.push(element.anim.transform(options, {
+          start: startTransform,
+          target: target.transform
+        }));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](timeOptions, {
+          steps: steps
+        });
       },
-      // eslint-disable-next-line max-len
-      scenarios: function scenarios() {
-        var defaultOptions = {};
+      scenario: function scenario() {
+        var defaultOptions = {
+          element: _this
+        };
 
         for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
           optionsIn[_key15] = arguments[_key15];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+        if (options.target != null && options.target in options.element.scenarios) {
+          var target = options.element.getScenarioTargetLegacy(options.target);
+          options.target = target;
+        }
+
+        if (options.start != null && options.start in options.element.scenarios) {
+          var start = options.element.getScenarioTargetLegacy(options.start);
+          options.start = start;
+        }
+
+        if (options.delta != null && options.delta in options.element.scenarios) {
+          var delta = options.element.getScenarioTargetLegacy(options.delta);
+          options.delta = delta;
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      scenarios: function scenarios() {
+        var defaultOptions = {};
+
+        for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+          optionsIn[_key16] = arguments[_key16];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
         var elements = _this.getAllElementsWithScenario(options.target);
 
         var steps = [];
         var simpleOptions = {};
-        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
+        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
         elements.forEach(function (element) {
           steps.push(element.anim.scenario(simpleOptions));
         });
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ParallelAnimationStep"](simpleOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
           steps: steps
         });
       }
@@ -27504,7 +27700,7 @@ function () {
       A: 1,
       B: 0.5,
       C: 0,
-      style: _tools_math__WEBPACK_IMPORTED_MODULE_2__["sinusoid"],
+      style: _tools_math__WEBPACK_IMPORTED_MODULE_3__["sinusoid"],
       num: 1,
       delta: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       transformMethod: function transformMethod(s, d) {
@@ -27530,7 +27726,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -27546,7 +27742,7 @@ function () {
     key: "setProperties",
     value: function setProperties(properties) {
       var except = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjectsWithOptions"])({
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjectsWithOptions"])({
         except: except
       }, this, properties);
     } // Space definition:
@@ -27759,9 +27955,9 @@ function () {
         options = defaultOptions;
         done = null;
       } else {
-        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])({}, defaultOptions, optionsOrDone);
-        var _options = options;
-        done = _options.done;
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsOrDone);
+        var _options2 = options;
+        done = _options2.done;
       }
 
       if (typeof this.pulseDefault === 'function') {
@@ -27954,12 +28150,16 @@ function () {
       this.opacity = opacity;
     }
   }, {
-    key: "getScenarioTarget",
-    value: function getScenarioTarget(scenarioName) {
+    key: "getScenarioTargetLegacy",
+    value: function getScenarioTargetLegacy(scenarioName) {
       var target = this.transform._dup();
 
       if (scenarioName in this.scenarios) {
         var scenario = this.scenarios[scenarioName];
+
+        if (scenario.transform != null) {
+          target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(scenario.transform);
+        }
 
         if (scenario.position != null) {
           target.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
@@ -27977,11 +28177,66 @@ function () {
       return target;
     }
   }, {
+    key: "getScenarioTarget",
+    value: function getScenarioTarget(scenarioName) {
+      var transform = this.transform._dup();
+
+      var color = this.color.slice();
+      var opacity = this.opacity; // eslint-disable-line prefer-destructuring
+
+      var isShown = this.isShown; // eslint-disable-line prefer-destructuring
+
+      if (scenarioName in this.scenarios) {
+        var scenario = this.scenarios[scenarioName];
+
+        if (scenario.transform != null) {
+          transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(scenario.transform);
+        }
+
+        if (scenario.position != null) {
+          transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
+        }
+
+        if (scenario.rotation != null) {
+          transform.updateRotation(scenario.rotation);
+        }
+
+        if (scenario.scale != null) {
+          transform.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.scale));
+        }
+
+        if (scenario.color) {
+          color = scenario.color.slice();
+        }
+
+        if (scenario.opacity) {
+          opacity = scenario.opacity;
+        }
+
+        if (scenario.isShown) {
+          isShown = scenario.isShown;
+        }
+      }
+
+      return {
+        transform: transform,
+        color: color,
+        opacity: opacity,
+        isShown: isShown
+      };
+    }
+  }, {
     key: "setScenario",
     value: function setScenario(scenarioName) {
       if (this.scenarios[scenarioName] != null) {
         var target = this.getScenarioTarget(scenarioName);
-        this.setTransform(target._dup());
+        this.setTransform(target.transform._dup()); // this.setColor(target.color.slice());
+
+        if (target.isShown) {
+          this.show();
+        } else {
+          this.hide();
+        }
       }
     }
   }, {
@@ -27992,6 +28247,20 @@ function () {
       }
     }
   }, {
+    key: "saveScenario",
+    value: function saveScenario(scenarioName) {
+      this.scenarios[scenarioName] = {
+        transform: this.transform._dup(),
+        color: this.color.slice(),
+        isShown: this.isShown
+      };
+    }
+  }, {
+    key: "saveScenarios",
+    value: function saveScenarios(scenarioName) {
+      this.saveScenario(scenarioName);
+    }
+  }, {
     key: "getAllElementsWithScenario",
     value: function getAllElementsWithScenario(scenarioName) {
       if (this.scenarios[scenarioName] != null) {
@@ -27999,18 +28268,74 @@ function () {
       }
 
       return [];
-    }
+    } // deprecate
+
   }, {
-    key: "getTimeToMoveToScenario",
-    value: function getTimeToMoveToScenario(scenarioName) {
+    key: "getTimeToMoveToScenarioLegacy",
+    value: function getTimeToMoveToScenarioLegacy(scenarioName) {
       var rotDirection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var target = this.getScenarioTarget(scenarioName);
+      var target = this.getScenarioTargetLegacy(scenarioName);
       var velocity = this.transform.constant(0);
       velocity.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / 2, 1 / 2));
       velocity.updateRotation(2 * Math.PI / 6);
       velocity.updateScale(1, 1);
       var time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform._dup(), target, velocity, rotDirection);
       return time;
+    }
+  }, {
+    key: "getTimeToMoveToScenario",
+    value: function getTimeToMoveToScenario(scenarioName, optionsIn) {
+      var startScenario = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var defaultOptions = {
+        rotDirection: 0,
+        minTime: 0,
+        velocity: {
+          translation: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / 2, 1 / 2),
+          rotation: 2 * Math.PI / 6,
+          scale: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1)
+        }
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsIn);
+      var target = this.getScenarioTarget(scenarioName);
+      var start = this;
+
+      if (startScenario) {
+        start = this.getScenarioTarget(scenarioName);
+      }
+
+      var velocity = this.transform.constant(0);
+
+      if (options.transform != null) {
+        velocity = options.transform;
+      }
+
+      if (options.velocity.translation) {
+        velocity.updateTranslation(options.velocity.translation);
+      }
+
+      if (options.velocity.rotation) {
+        velocity.updateRotation(options.velocity.rotation);
+      }
+
+      if (options.velocity.scale) {
+        velocity.updateScale(options.velocity.scale);
+      } // const velocity = this.transform.constant(0);
+      // velocity.updateTranslation(new Point(1 / 2, 1 / 2));
+      // velocity.updateRotation(2 * Math.PI / 6);
+      // velocity.updateScale(1, 1);
+
+
+      var time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(start.transform._dup(), target.transform, velocity, options.rotDirection);
+
+      if (start.isShown !== target.isShown) {
+        options.minTime = 0.8;
+      }
+
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_9__["areColorsSame"])(start.color, target.color)) {
+        options.minTime = 0.8;
+      }
+
+      return Math.min(time, options.minTime);
     } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity
 
@@ -28091,6 +28416,19 @@ function () {
     value: function getParentLastDrawTransform() {
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(-parentCount));
+    }
+  }, {
+    key: "getPath",
+    value: function getPath() {
+      if (this.parent == null) {
+        return this.name;
+      }
+
+      if (this.parent.name === 'diagramRoot') {
+        return this.name;
+      }
+
+      return "".concat(this.parent.getPath(), ".").concat(this.name);
     } // Being Moved
 
   }, {
@@ -28104,12 +28442,21 @@ function () {
       this.state.movement.previousTime = Date.now() / 1000;
       this.state.isBeingMoved = true;
       this.unrender();
+
+      if (this.recorder.isRecording) {
+        this.recorder.recordEvent('startBeingMoved', this.getPath());
+      }
     }
   }, {
     key: "moved",
     value: function moved(newTransform) {
       this.calcVelocity(newTransform);
       this.setTransform(newTransform._dup());
+
+      if (this.recorder.isRecording) {
+        this.recorder.recordEvent('moved', this.getPath(), this.transform // this.state.movement.velocity.toString(),
+        );
+      }
     }
   }, {
     key: "stopBeingMoved",
@@ -28125,6 +28472,11 @@ function () {
 
       this.state.isBeingMoved = false;
       this.state.movement.previousTime = -1;
+
+      if (this.recorder.isRecording) {
+        this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform, this.state.movement.velocity // this.state.movement.velocity.toString(),
+        );
+      }
     }
   }, {
     key: "calcVelocity",
@@ -28144,6 +28496,13 @@ function () {
 
       this.state.movement.velocity = newTransform.velocity(this.transform, deltaTime, this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
       this.state.movement.previousTime = currentTime;
+    }
+  }, {
+    key: "simulateStartMovingFreely",
+    value: function simulateStartMovingFreely(transform, velocity) {
+      this.transform = transform;
+      this.state.movement.velocity = velocity;
+      this.startMovingFreely();
     } // Moving Freely
 
   }, {
@@ -28162,6 +28521,11 @@ function () {
       this.state.isMovingFreely = true;
       this.state.movement.previousTime = -1;
       this.state.movement.velocity = this.state.movement.velocity.clipMag(this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
+
+      if (this.recorder.isRecording) {
+        this.recorder.recordEvent('startMovingFreely', this.getPath(), this.transform, this.state.movement.velocity // this.state.movement.velocity.toString(),
+        );
+      }
     }
   }, {
     key: "stopMovingFreely",
@@ -28691,7 +29055,7 @@ function () {
     value: function diagramSpaceToVertexSpaceTransformMatrix() {
       // Diagram transform will always be two
       var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.lastDrawElementTransformPosition.elementCount, this.lastDrawTransform.order.length - 2));
-      return _tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix());
+      return _tools_m2__WEBPACK_IMPORTED_MODULE_2__["inverse"](t.matrix());
     }
   }, {
     key: "vertexToDiagramSpaceTransformMatrix",
@@ -28725,7 +29089,7 @@ function () {
       var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
       var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
       var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.transform.order.length));
-      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix()));
+      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_2__["inverse"](t.matrix()));
       this.setPosition(newLocation._dup());
     }
   }, {
@@ -28981,6 +29345,16 @@ function (_DiagramElement) {
       this.angleToDraw = intputAngle;
     }
   }, {
+    key: "setScenario",
+    value: function setScenario(scenarioName) {
+      _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "setScenario", this).call(this, scenarioName);
+
+      if (this.scenarios[scenarioName] != null) {
+        var target = this.getScenarioTarget(scenarioName);
+        this.setColor(target.color.slice());
+      }
+    }
+  }, {
     key: "isBeingTouched",
     value: function isBeingTouched(glLocation) {
       if (!this.isTouchable) {
@@ -29037,7 +29411,7 @@ function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative, ['parent']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(this, primative, ['parent']);
 
       if (transform != null) {
         primative.transform = transform._dup();
@@ -29050,7 +29424,7 @@ function (_DiagramElement) {
     value: function clear() {
       var canvasIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
         this.drawingObject.clear(canvasIndex);
       }
     }
@@ -29080,13 +29454,13 @@ function (_DiagramElement) {
       }
 
       if (this instanceof DiagramElementPrimitive) {
-        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
           this.drawingObject.setColor(this.color);
         }
 
-        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
           // $FlowFixMe
-          this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_8__["colorArrayToRGBA"])(this.color);
+          this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_9__["colorArrayToRGBA"])(this.color);
         }
       }
     }
@@ -29097,11 +29471,11 @@ function (_DiagramElement) {
       this.opacity = opacity;
 
       if (this instanceof DiagramElementPrimitive) {
-        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
           this.drawingObject.setOpacity(opacity);
         }
 
-        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
           // this.drawingObject.element.style.color =
           // colorArrayToRGBA([...this.color.slice(0, 2), opacity]);
           // console.log(this.drawingObject.element)
@@ -29114,7 +29488,7 @@ function (_DiagramElement) {
     value: function show() {
       _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "show", this).call(this);
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
         this.drawingObject.show = true; // This line is a challenge.
         // It will show a html element immediately before the next draw frame
         // meaning the draw matrix will be old.
@@ -29135,7 +29509,7 @@ function (_DiagramElement) {
     value: function hide() {
       _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "hide", this).call(this);
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
         this.drawingObject.show = false;
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
@@ -29159,14 +29533,14 @@ function (_DiagramElement) {
   }, {
     key: "setFont",
     value: function setFont(fontSize) {
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
         this.drawingObject.setFont(fontSize);
       }
     }
   }, {
     key: "resizeHtmlObject",
     value: function resizeHtmlObject() {
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     }
@@ -29211,7 +29585,7 @@ function (_DiagramElement) {
 
         var pointCount = -1;
 
-        if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
           pointCount = this.drawingObject.numPoints;
 
           if (this.angleToDraw !== -1) {
@@ -29264,7 +29638,7 @@ function (_DiagramElement) {
       var firstTransform = parentTransform.transform(this.getTransform());
       this.lastDrawTransform = firstTransform;
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
         this.drawingObject.transformHtml(firstTransform.matrix());
       }
 
@@ -29374,7 +29748,7 @@ function (_DiagramElement) {
         }
       }
 
-      if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
         for (var b = 0; b < this.drawingObject.border.length; b += 1) {
           var border = this.drawingObject.border[b];
 
@@ -29425,7 +29799,7 @@ function (_DiagramElement2) {
       var doNotDuplicate = this.drawOrder.map(function (e) {
         return "_".concat(e);
       });
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var name = this.drawOrder[i];
@@ -29667,9 +30041,9 @@ function (_DiagramElement2) {
         doneToUse = done;
         elements = optionsOrElementsOrDone;
       } else {
-        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])({}, defaultOptions, optionsOrElementsOrDone);
-        var _options2 = options;
-        elements = _options2.elements;
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsOrElementsOrDone);
+        var _options3 = options;
+        elements = _options3.elements;
         doneToUse = options.done;
 
         if (optionsOrElementsOrDone.scale == null) {
@@ -30440,7 +30814,7 @@ function (_DiagramElement2) {
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
+      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_3__["easeinout"];
       var callbackMethod = callback;
       var timeToAnimate = 0;
 
@@ -30668,6 +31042,16 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "setScenario",
+    value: function setScenario(scenarioName) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setScenario", this).call(this, scenarioName);
+
+      if (this.scenarios[scenarioName] != null) {
+        var target = this.getScenarioTarget(scenarioName);
+        this.color = target.color.slice();
+      }
+    }
+  }, {
     key: "setScenarios",
     value: function setScenarios(scenarioName) {
       var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -30680,6 +31064,16 @@ function (_DiagramElement2) {
         if (onlyIfVisible && element.isShown || onlyIfVisible === false) {
           element.setScenarios(scenarioName, onlyIfVisible);
         }
+      }
+    }
+  }, {
+    key: "saveScenarios",
+    value: function saveScenarios(scenarioName) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "saveScenarios", this).call(this, scenarioName);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.saveScenarios(scenarioName);
       }
     }
   }]);
@@ -30746,6 +31140,7 @@ function () {
     this.start = this.diagram.touchDownHandler.bind(this.diagram);
     this.end = this.diagram.touchUpHandler.bind(this.diagram);
     this.move = this.diagram.touchMoveHandler.bind(this.diagram);
+    this.free = this.diagram.touchFreeHandler.bind(this.diagram);
   }
 
   _createClass(Gesture, [{
@@ -30786,6 +31181,8 @@ function () {
         }
 
         this.previousPoint = point;
+      } else {
+        this.free(point);
       } // event.preventDefault();
 
     }
@@ -30845,6 +31242,404 @@ function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (Gesture);
+
+/***/ }),
+
+/***/ "./src/js/diagram/Recorder.js":
+/*!************************************!*\
+  !*** ./src/js/diagram/Recorder.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import type { Transform } from '../tools/g2';
+
+
+ // Singleton class that contains projects global variables
+
+var Recorder =
+/*#__PURE__*/
+function () {
+  // Method for requesting the next animation frame
+  // touchMoveDown: (Point, Point) => boolean;
+  // requestNextAnimationFrame: (()=>mixed) => AnimationFrameID;
+  // animationId: AnimationFrameID;    // used to cancel animation frames
+  // drawQueue: Array<(number) => void>;
+  // nextDrawQueue: Array<(number) => void>;
+  function Recorder(diagramTouchDown, diagramTouchUp, // diagramCursorMove?: (Point) => void,
+  // diagramTouchMoveDown?: (Point, Point) => boolean,
+  diagramCursorMove, animateNextFrame, getElement) {
+    _classCallCheck(this, Recorder);
+
+    // If the instance alread exists, then don't create a new instance.
+    // If it doesn't, then setup some default values.
+    if (!Recorder.instance) {
+      Recorder.instance = this;
+      this.events = [];
+      this.isRecording = false;
+      this.precision = 5;
+
+      if (diagramTouchDown) {
+        this.touchDown = diagramTouchDown;
+      }
+
+      if (diagramTouchUp) {
+        this.touchUp = diagramTouchUp;
+      } // if (diagramTouchMoveDown) {
+      //   this.touchMoveDown = diagramTouchMoveDown;
+      // }
+
+
+      if (diagramCursorMove) {
+        this.cursorMove = diagramCursorMove;
+      }
+
+      this.queueNextFrame = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]();
+      this.previousPoint = null;
+
+      if (animateNextFrame) {
+        this.animateNextFrame = animateNextFrame;
+      }
+
+      if (getElement) {
+        this.getElement = getElement;
+      } // this.drawScene = this.draw.bind(this);
+
+    }
+
+    return Recorder.instance;
+  }
+
+  _createClass(Recorder, [{
+    key: "timeStamp",
+    value: function timeStamp() {
+      // eslint-disable-line class-methods-use-this
+      return new Date().getTime();
+    }
+  }, {
+    key: "now",
+    value: function now() {
+      // eslint-disable-line class-methods-use-this
+      return this.timeStamp() - this.startTime;
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      this.startTime = this.timeStamp();
+      this.isRecording = true;
+      this.events = [];
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      this.isRecording = false;
+    }
+  }, {
+    key: "recordEvent",
+    value: function recordEvent() {
+      var _this = this;
+
+      var out = [];
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      args.forEach(function (arg) {
+        if (arg instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+          out.push(arg.toString(5));
+        } else if (typeof arg === 'string') {
+          out.push("\"".concat(arg, "\""));
+        } else if (typeof arg === 'number') {
+          out.push(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(arg, _this.precision));
+        } else {
+          out.push(arg);
+        }
+      });
+      this.events.push([this.now() / 1000].concat(out));
+    }
+  }, {
+    key: "show",
+    value: function show() {
+      // eslint-disable-line class-methods-use-this
+      var wnd = window.open('about:blank', '', '_blank');
+      this.events.forEach(function (event) {
+        wnd.document.write("[".concat(event.join(','), "],"), '<br>');
+      });
+    }
+  }, {
+    key: "recordClick",
+    value: function recordClick(id) {
+      this.events.push([this.now(), id]);
+    }
+  }, {
+    key: "startPlayback",
+    value: function startPlayback() {
+      var fromTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.isRecording = false;
+      this.isPlaying = true;
+      this.eventIndex = 0;
+      this.previousPoint = null;
+      this.touchUp();
+      this.eventIndex = this.getNextIndexForTime(fromTime);
+      this.queuePlaybackEvent(this.getTimeToIndex(fromTime)); // this.playbackEvent(this.getTimeToIndex);
+    }
+  }, {
+    key: "getTimeToIndex",
+    value: function getTimeToIndex(time) {
+      if (this.eventIndex === -1 || this.eventIndex > this.events.length) {
+        return -1;
+      }
+
+      var nextTime = this.events[this.eventIndex][0];
+      return nextTime - time;
+    }
+  }, {
+    key: "getNextIndexForTime",
+    value: function getNextIndexForTime(time) {
+      var startSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var endSearch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.events.length - 1;
+
+      if (time === 0) {
+        return 0;
+      }
+
+      var endTime = parseFloat(this.events[endSearch][0]);
+
+      if (time > endTime) {
+        return -1;
+      }
+
+      var searchRange = endSearch - startSearch;
+      var midSearch = startSearch;
+
+      if (searchRange > 1) {
+        midSearch = Math.floor(startSearch + searchRange / 2);
+      } else if (searchRange === 1) {
+        midSearch = endSearch;
+      } // console.log(startSearch, endSearch, midSearch)
+
+
+      if (midSearch === 0) {
+        return 0;
+      }
+
+      var prevTime = this.events[midSearch - 1][0];
+      var midTime = this.events[midSearch][0];
+
+      if (time === midTime) {
+        return midSearch;
+      }
+
+      if (time <= midTime && time > prevTime) {
+        return midSearch;
+      }
+
+      if (time < midTime) {
+        return this.getNextIndexForTime(time, startSearch, midSearch);
+      }
+
+      return this.getNextIndexForTime(time, midSearch, endSearch);
+    }
+  }, {
+    key: "stopPlayback",
+    value: function stopPlayback() {
+      this.isPlaying = false;
+      clearTimeout(this.nextTimeout);
+    }
+  }, {
+    key: "processEvent",
+    value: function processEvent(event) {
+      var _event = _slicedToArray(event, 1),
+          eventType = _event[0];
+
+      switch (eventType) {
+        case 'touchDown':
+          {
+            var _event2 = _slicedToArray(event, 3),
+                x = _event2[1],
+                y = _event2[2];
+
+            this.touchDown(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y));
+            break;
+          }
+
+        case 'touchUp':
+          this.touchUp();
+          break;
+
+        case 'cursorMove':
+          {
+            var _event3 = _slicedToArray(event, 3),
+                _x = _event3[1],
+                _y = _event3[2];
+
+            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event[1], event[2]));
+            break;
+          }
+
+        case 'startBeingMoved':
+          {
+            var _event4 = _slicedToArray(event, 2),
+                elementPath = _event4[1];
+
+            var element = this.getElement(elementPath);
+            element.startBeingMoved();
+            break;
+          }
+
+        case 'moved':
+          {
+            var _event5 = _slicedToArray(event, 3),
+                _elementPath = _event5[1],
+                transformDefinition = _event5[2];
+
+            var _element = this.getElement(_elementPath);
+
+            var transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(transformDefinition);
+
+            _element.moved(transform);
+
+            break;
+          }
+        // case 'cursorMoved': {
+        //   const [, x, y] = event;
+        //   this.
+        // }
+
+        case 'stopBeingMoved':
+          {
+            var _event6 = _slicedToArray(event, 4),
+                _elementPath2 = _event6[1],
+                _transformDefinition = _event6[2],
+                velocityDefinition = _event6[3];
+
+            var _element2 = this.getElement(_elementPath2);
+
+            var _transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_transformDefinition);
+
+            var velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(velocityDefinition);
+            _element2.transform = _transform;
+            _element2.state.movement.velocity = velocity;
+
+            _element2.stopBeingMoved();
+
+            break;
+          }
+
+        case 'startMovingFreely':
+          {
+            var _event7 = _slicedToArray(event, 4),
+                _elementPath3 = _event7[1],
+                _transformDefinition2 = _event7[2],
+                _velocityDefinition = _event7[3];
+
+            var _element3 = this.getElement(_elementPath3);
+
+            var _transform2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_transformDefinition2);
+
+            var _velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_velocityDefinition);
+
+            _element3.simulateStartMovingFreely(_transform2, _velocity);
+
+            break;
+          }
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "queuePlaybackEvent",
+    value: function queuePlaybackEvent() {
+      var _this2 = this;
+
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (time === 0) {
+        this.playbackEvent();
+        return;
+      }
+
+      this.nextTimeout = setTimeout(function () {
+        if (_this2.isPlaying) {
+          _this2.playbackEvent();
+        }
+      }, time);
+    }
+  }, {
+    key: "playbackEvent",
+    value: function playbackEvent() {
+      var event = this.events[this.eventIndex];
+
+      var _event8 = _slicedToArray(event, 1),
+          currentTime = _event8[0];
+
+      this.processEvent(event.slice(1));
+      this.animateNextFrame();
+      this.eventIndex += 1;
+
+      if (this.eventIndex === this.events.length) {
+        this.stopPlayback();
+        return;
+      }
+
+      var nextTime = (this.events[this.eventIndex][0] - currentTime) * 1000;
+      this.queuePlaybackEvent(nextTime);
+    } // playbackClick() { // eslint-disable-line class-methods-use-this
+    // }
+    // playbackTouch() {
+    //   const [, x, y, touch] = this.events[this.eventIndex];
+    //   switch (touch) {
+    //     case 'd':
+    //       this.touchDown(new Point(x, y));
+    //       if (this.previousPoint == null && x != null && y != null) {
+    //         this.previousPoint = new Point(x, y);
+    //       }
+    //       break;
+    //     case 'u':
+    //       this.touchUp();
+    //       this.previousPoint = null;
+    //       break;
+    //     case 'm':
+    //       this.touchMoveDown(this.previousPoint, new Point(x, y));
+    //       this.previousPoint = new Point(x, y);
+    //       break;
+    //     default:
+    //       this.touchMoveUp(new Point(x, y));
+    //       break;
+    //   }
+    // }
+
+  }]);
+
+  return Recorder;
+}(); // Do not automatically create and instance and return it otherwise can't
+// mock elements in jest
+// // const globalvars: Object = new GlobalVariables();
+// // Object.freeze(globalvars);
+
+
+/* harmony default export */ __webpack_exports__["default"] = (Recorder);
 
 /***/ }),
 
@@ -31358,7 +32153,7 @@ function () {
 /*!*******************************!*\
   !*** ./src/js/tools/color.js ***!
   \*******************************/
-/*! exports provided: RGBToArray, HexToArray, cssColorToArray, colorArrayToRGB, colorArrayToRGBA, getCSSColors */
+/*! exports provided: RGBToArray, HexToArray, cssColorToArray, colorArrayToRGB, colorArrayToRGBA, getCSSColors, areColorsSame */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31368,6 +32163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cssColorToArray", function() { return cssColorToArray; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorArrayToRGB", function() { return colorArrayToRGB; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorArrayToRGBA", function() { return colorArrayToRGBA; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "areColorsSame", function() { return areColorsSame; });
 /* harmony import */ var _colorNames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colorNames */ "./src/js/tools/colorNames.js");
 /* harmony import */ var _getCssColors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCssColors */ "./src/js/tools/getCssColors.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCSSColors", function() { return _getCssColors__WEBPACK_IMPORTED_MODULE_1__["default"]; });
@@ -31447,6 +32243,20 @@ function colorArrayToRGBA(color) {
 
 function colorArrayToRGB(color) {
   return "rgb(".concat(Math.floor(color[0] * 255), ",").concat(Math.floor(color[1] * 255), ",").concat(Math.floor(color[2] * 255), ")");
+}
+
+function areColorsSame(color1, color2) {
+  if (color1.length !== color2.length) {
+    return false;
+  }
+
+  for (var i = 0; i < color1.length; i += 1) {
+    if (color1[i] !== color2[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 
@@ -31627,7 +32437,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getPoints, quadBezierPoints, getRect */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getPoints, quadBezierPoints, getRect, getTransform */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -31668,8 +32478,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoints", function() { return getPoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadBezierPoints", function() { return quadBezierPoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransform", function() { return getTransform; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -32975,6 +33794,12 @@ function () {
   }
 
   _createClass(Rotation, [{
+    key: "toString",
+    value: function toString() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return "[\"r\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.r, precision), "]");
+    }
+  }, {
     key: "matrix",
     value: function matrix() {
       return _m2__WEBPACK_IMPORTED_MODULE_1__["rotationMatrix"](this.r);
@@ -33039,6 +33864,12 @@ function (_Point) {
   }
 
   _createClass(Translation, [{
+    key: "toString",
+    value: function toString() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return "[\"t\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), ",").concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision), "]");
+    }
+  }, {
     key: "matrix",
     value: function matrix() {
       return _m2__WEBPACK_IMPORTED_MODULE_1__["translationMatrix"](this.x, this.y);
@@ -33120,6 +33951,12 @@ function (_Point2) {
   }
 
   _createClass(Scale, [{
+    key: "toString",
+    value: function toString() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return "[\"s\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), ",").concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision), "]");
+    }
+  }, {
     key: "matrix",
     value: function matrix() {
       return _m2__WEBPACK_IMPORTED_MODULE_1__["scaleMatrix"](this.x, this.y);
@@ -33228,6 +34065,21 @@ function () {
   }
 
   _createClass(Transform, [{
+    key: "toString",
+    value: function toString() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      var out = [];
+      this.order.forEach(function (transformElement) {
+        out.push(transformElement.toString(precision));
+      });
+
+      if (this.name !== '') {
+        return "[\"".concat(this.name, "\",").concat(out.join(','), "]");
+      }
+
+      return "[".concat(out.join(','), "]");
+    }
+  }, {
     key: "standard",
     value: function standard() {
       return this.scale(1, 1).rotate(0).translate(0, 0);
@@ -33915,6 +34767,82 @@ function () {
   return Transform;
 }();
 
+function parseTransform(inTransform, onFail) {
+  if (inTransform instanceof Transform) {
+    return inTransform;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  var tToUse = inTransform;
+
+  if (typeof inTransform === 'string') {
+    tToUse = JSON.parse(inTransform);
+  }
+
+  if (!Array.isArray(tToUse)) {
+    return onFailToUse;
+  }
+
+  if (tToUse.length === 0) {
+    return new Transform();
+  }
+
+  if (tToUse.length === 1 && typeof tToUse[0] === 'string') {
+    return new Transform(tToUse[0]);
+  }
+
+  var t = new Transform();
+  tToUse.forEach(function (transformElement) {
+    if (typeof transformElement === 'string') {
+      t.name = transformElement;
+      return;
+    }
+
+    if (transformElement.length === 3) {
+      var _transformElement = _slicedToArray(transformElement, 3),
+          _type = _transformElement[0],
+          x = _transformElement[1],
+          y = _transformElement[2];
+
+      if (_type === 's') {
+        t = t.scale(x, y);
+      } else {
+        t = t.translate(x, y);
+      }
+
+      return;
+    }
+
+    var _transformElement2 = _slicedToArray(transformElement, 2),
+        type = _transformElement2[0],
+        value = _transformElement2[1];
+
+    if (type === 's') {
+      t = t.scale(value, value);
+    } else if (type === 't') {
+      t = t.translate(value, value);
+    } else {
+      t = t.rotate(value);
+    }
+  });
+  return t;
+}
+
+function getTransform(t) {
+  var parsedTransform = parseTransform(t);
+
+  if (parsedTransform == null) {
+    parsedTransform = new Transform();
+  }
+
+  return parsedTransform;
+}
+
 function spaceToSpaceTransform(s1, s2) {
   var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
   var xScale = s2.x.width / s1.x.width;
@@ -34398,6 +35326,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "link", function() { return link; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../diagram/Recorder */ "./src/js/diagram/Recorder.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
 
 
 
@@ -34815,41 +35753,52 @@ function onClickId(id, actionMethod, bind) {
       }
     });
 
-    if (bind.length === 1) {
-      element.onclick = actionMethod.bind(bind[0]);
-    }
+    var onClickFn = function onClickFn() {
+      var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["default"]();
 
-    if (bind.length === 2) {
-      element.onclick = actionMethod.bind(bind[0], bind[1]);
-    }
+      if (recorder.isRecording) {
+        recorder.recordEvent('click', 'id');
+      }
 
-    if (bind.length === 3) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2]);
-    }
+      actionMethod.bind.apply(actionMethod, _toConsumableArray(bind))();
+    };
 
-    if (bind.length === 4) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3]);
-    }
-
-    if (bind.length === 5) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4]);
-    }
-
-    if (bind.length === 6) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5]);
-    }
-
-    if (bind.length === 7) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5], bind[6]);
-    }
-
-    if (bind.length === 8) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5], bind[6], bind[7]);
-    }
-
-    if (bind.length === 9) {
-      element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5], bind[6], bind[7], bind[8]);
-    }
+    element.onclick = onClickFn; // if (bind.length === 1) {
+    //   element.onclick = actionMethod.bind(bind[0]);
+    // }
+    // if (bind.length === 2) {
+    //   element.onclick = actionMethod.bind(bind[0], bind[1]);
+    // }
+    // if (bind.length === 3) {
+    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2]);
+    // }
+    // if (bind.length === 4) {
+    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3]);
+    // }
+    // if (bind.length === 5) {
+    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4]);
+    // }
+    // if (bind.length === 6) {
+    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5]);
+    // }
+    // if (bind.length === 7) {
+    //   element.onclick = actionMethod.bind(
+    //     bind[0], bind[1], bind[2], bind[3], bind[4],
+    //     bind[5], bind[6],
+    //   );
+    // }
+    // if (bind.length === 8) {
+    //   element.onclick = actionMethod.bind(
+    //     bind[0], bind[1], bind[2], bind[3], bind[4],
+    //     bind[5], bind[6], bind[7],
+    //   );
+    // }
+    // if (bind.length === 9) {
+    //   element.onclick = actionMethod.bind(
+    //     bind[0], bind[1], bind[2], bind[3], bind[4],
+    //     bind[5], bind[6], bind[7], bind[8],
+    //   );
+    // }
   }
 }
 

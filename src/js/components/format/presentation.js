@@ -213,11 +213,21 @@ export default class PresentationFormatComponent extends React.Component
 
     const nextButton = document.getElementById('topic__button-next');
     if (nextButton instanceof HTMLElement) {
-      nextButton.onclick = this.goToNext.bind(this);
+      nextButton.onclick = () => {
+        if (this.version.content.diagram.recorder.isRecording) {
+          this.version.content.diagram.recorder.recordEvent('next');
+        }
+        this.goToNext();
+      };
     }
     const prevButton = document.getElementById('topic__button-previous');
     if (prevButton instanceof HTMLElement) {
-      prevButton.onclick = this.goToPrevious.bind(this);
+      prevButton.onclick = () => {
+        if (this.version.content.diagram.recorder.isRecording) {
+          this.version.content.diagram.recorder.recordEvent('prev');
+        }
+        this.goToPrevious();
+      };
     }
 
     const infoButton = document.getElementById('id_topic__info_button');
