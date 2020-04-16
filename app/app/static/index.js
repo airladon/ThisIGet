@@ -350,9 +350,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -365,7 +369,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 // import SerialAnimationStep from './AnimationStep/SerialAnimationStep';
 // eslint-disable-next-line import/no-cycle
 
-
+ // import { getState, setState } from '../state';
+// import type Diagram from '../Diagram';
 
 var AnimationBuilder =
 /*#__PURE__*/
@@ -395,10 +400,72 @@ function (_animation$SerialAnim) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AnimationBuilder).call(this, options));
     _this.element = options.element;
+    _this._stepType = 'builder';
     return _possibleConstructorReturn(_this, _assertThisInitialized(_this));
-  }
+  } // eslint-disable-next-line class-methods-use-this
+  // _finishSetState(diagram: Diagram) {
+  //   if (this.element != null && typeof this.element === 'string') {
+  //     const element = diagram.getElement(this.element);
+  //     if (element != null) {
+  //       this.element = element;
+  //     }
+  //   }
+  // }
+  // _getState() {
+  //   const state = super._getState();
+  //   // const state = getState(this, keys);
+  //   if (this.element != null) {
+  //     state.element = this.element.getPath();
+  //   }
+  //   return state;
+  // }
+
 
   _createClass(AnimationBuilder, [{
+    key: "_fromState",
+    value: function _fromState(state, getElement) {
+      // const obj = new this.constructor();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(this, state);
+
+      if (this.element != null && typeof this.element === 'string' && getElement != null) {
+        this.element = getElement(this.element);
+      }
+
+      return this;
+    } // _getStateProperties() {  // eslint-disable-line class-methods-use-this
+    //   return [...super._getStateProperties(),
+    //     'steps',
+    //   ];
+    // }
+
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'animationBuilder';
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var state = _get(_getPrototypeOf(AnimationBuilder.prototype), "_state", this).call(this); // definition.f1Type = 'animationBuilder';
+      // if (this.element != null) {
+      //   definition.state.element = this.element.getPath();
+      // }
+
+
+      if (this.element != null) {
+        state.state.element = {
+          f1Type: 'de',
+          state: this.element.getPath()
+        };
+      } // if (this.steps.length > 0) {
+      //   definition.def.steps = getState()
+      // }
+
+
+      return state;
+    }
+  }, {
     key: "custom",
     value: function custom() {
       for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -757,6 +824,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -775,6 +843,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import type Diagram from '../Diagram';
 
 var AnimationManager =
 /*#__PURE__*/
@@ -809,6 +878,54 @@ function () {
   }
 
   _createClass(AnimationManager, [{
+    key: "_state",
+    value: function _state() {
+      var state = Object(_state__WEBPACK_IMPORTED_MODULE_3__["getState"])(this, ['animations', 'state', 'options']);
+
+      if (this.element != null) {
+        state.element = {
+          f1Type: 'de',
+          state: this.element.getPath()
+        };
+      }
+
+      return state;
+    } // _finishSetState(diagram: Diagram) {
+    //   for (let i = 0; i < this.animations.length; i += 1) {
+    //     const animationStepState = this.animations[i];
+    //     let animationStep = {};
+    //     if (animationStepState._stepType === 'builder') {
+    //       animationStep = new anim.AnimationBuilder();
+    //     }
+    //     if (animationStepState._stepType === 'position') {
+    //       animationStep = new anim.PositionAnimationStep();
+    //     }
+    //     joinObjects(animationStep, animationStepState);
+    //     animationStep._finishSetState(diagram);
+    //     this.animations[i] = animationStep;
+    //   }
+    //   // this.animations.forEach((animation) => {
+    //   //   let animationStep = {};
+    //   //   if (animation.type === 'builder') {
+    //   //     animationStep = new anim.AnimationBuilder();
+    //   //   }
+    //   //   if (animation.type === 'position') {
+    //   //     animationStep = new anim.PositionAnimationStep();
+    //   //   }
+    //   //   joinObjects(animationStep, animation);
+    //   //   animation._finishSetState(diagram);
+    //   //   // }
+    //   // });
+    // }
+
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      this.animations.forEach(function (animation) {
+        animation.setTimeDelta(delta);
+      });
+    }
+  }, {
     key: "willStartAnimating",
     value: function willStartAnimating() {
       if (this.state === 'animating') {
@@ -1036,6 +1153,8 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationStep; });
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1052,10 +1171,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import { DiagramElement } from './Element';
 
 
+ // import * as anim from './Animation';
+
 var AnimationStep =
 /*#__PURE__*/
 function () {
   // animations: Array<AnimationStep>;
+  // onFinish: ?(boolean) => void;
   function AnimationStep() {
     var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -1092,12 +1214,135 @@ function () {
     // When progressions aren't linear, then this time is non-trival.
 
     this.startTimeOffset = 0;
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_2__["default"]();
     return this;
-  } // returns remaining time if this step completes
-  // Return of 0 means this step is still going
+  } // _getStateProperties(): Array<string> {  // eslint-disable-line class-methods-use-this
+  //   return Object.keys(this);
+  // }
+  // _getState() {
+  //   const keys = [];
+  //   Object.keys(this).forEach((key) => {
+  //     if (key !== 'element') {
+  //       keys.push(key);
+  //     }
+  //   });
+  //   console.log(keys)
+  //   const state = getState(this, keys);
+  //   return state;
+  // }
+  // eslint-disable-next-line no-unused-vars
 
 
   _createClass(AnimationStep, [{
+    key: "_fromDef",
+    value: function _fromDef(definition) {
+      var getElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(this, definition);
+      return this;
+    } // _finishSetState(diagram: Diagram) {
+    //   if (this.element != null && typeof this.element === 'string') {
+    //     const element = diagram.getElement(this.element);
+    //     if (element != null) {
+    //       this.element = element;
+    //     }
+    //   }
+    //   if (this.steps != null) {
+    //     for (let i = 0; i < this.steps.length; i += 1) {
+    //       const animationStepState = this.steps[i];
+    //       let animationStep = {};
+    //       if (animationStepState._stepType === 'builder') {
+    //         animationStep = new anim.AnimationBuilder();
+    //       }
+    //       if (animationStepState._stepType === 'position') {
+    //         animationStep = new anim.PositionAnimationStep();
+    //       }
+    //       joinObjects(animationStep, animationStepState);
+    //       animationStep._finishSetState(diagram);
+    //       this.steps[i] = animationStep;
+    //     }
+    //   }
+    // }
+    // eslint-disable-next-line class-methods-use-this, no-unused-vars
+    // _finishSetState(diagram: Diagram) {
+    // }
+
+  }, {
+    key: "execFn",
+    value: function execFn(fn) {
+      if (fn == null) {
+        return null;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof fn === 'string') {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
+      }
+
+      return fn.apply(void 0, args);
+    }
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      if (this.startTime > -1) {
+        this.startTime += delta;
+      } // if (this.steps != null) {
+      //   this.steps.forEach((step) => {
+      //     step.setTimeDelta(delta);
+      //   });
+      // }
+
+    }
+  }, {
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      // console.log('animationStep')
+      return ['startTime', 'duration', 'onFinish', 'completeOnCancel', 'state', 'startTimeOffset', 'removeOnFinish', 'name', 'startDelay', 'beforeFrame', 'afterFrame', '_stepType'];
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'animationStep';
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+      return {
+        f1Type: this._getStateName(),
+        // def: {
+        //   startTime: this.startTime,
+        //   duration: this.duration,
+        //   onFinish: this.onFinish,
+        //   completeOnCancel: this.completeOnCancel,
+        //   state: this.state,
+        //   startTimeOffset: this.startTimeOffset,
+        //   removeOnFinish: this.removeOnFinish,
+        //   name: this.name,
+        //   startDelay: this.startDelay,
+        //   beforeFrame: this.beforeFrame,
+        //   afterFrame: this.afterFrame,
+        //   _stepType: this._stepType,
+        // },
+        state: Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(), precision)
+      };
+    } // eslint-disable-next-line no-unused-vars
+
+  }, {
+    key: "_fromState",
+    value: function _fromState(state, getElement) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(this, state);
+      return this;
+    } // returns remaining time if this step completes
+    // Return of 0 means this step is still going
+
+  }, {
     key: "nextFrame",
     value: function nextFrame(now) {
       if (this.startTime === -1) {
@@ -1203,7 +1448,7 @@ function () {
       }
 
       if (this.onFinish != null) {
-        this.onFinish(cancelled);
+        this.execFn(this.onFinish, cancelled); // this.onFinish(cancelled);
       }
     } // eslint-disable-next-line class-methods-use-this
 
@@ -1261,14 +1506,21 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return CustomAnimationStep; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return custom; });
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1280,13 +1532,17 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-
+// import * as tools from '../../../tools/math';
 
 
 var CustomAnimationStep =
@@ -1303,54 +1559,94 @@ function (_AnimationStep) {
       optionsIn[_key] = arguments[_key];
     }
 
-    var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+    var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomAnimationStep).call(this, AnimationStepOptionsIn));
     var defaultPositionOptions = {
       callback: null,
       startPercent: 0,
       progression: 'linear'
     };
-    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+    _this.progression = options.progression;
 
-    if (options.progression === 'linear') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    if (_this.progression === 'linear') {
+      _this.progression = 'tools.math.linear';
     } else if (options.progression === 'easein') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+      _this.progression = 'tools.math.easein';
     } else if (options.progression === 'easeout') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+      _this.progression = 'tools.math.easeout';
     } else if (options.progression === 'easeinout') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
-    } else {
-      _this.progression = options.progression;
+      _this.progression = 'tools.math.easeinout';
     }
 
     _this.callback = options.callback;
-    _this.startPercent = options.startPercent;
+    _this.startPercent = options.startPercent; // if (typeof this.progression === 'function') {
+    //   this.startTimeOffset = this.progression(options.startPercent, true) * options.duration;
+    // }
 
-    if (typeof _this.progression === 'function') {
-      _this.startTimeOffset = _this.progression(options.startPercent, true) * options.duration;
-    }
-
+    _this.startTimeOffset = _this.getPercentComplete(options.startPercent, true) * options.duration;
     _this.duration = options.duration;
     return _this;
   }
 
   _createClass(CustomAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(CustomAnimationStep.prototype), "_getStateProperties", this).call(this)), ['callback', 'startPercent', 'progression']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'customAnimationStep';
+    }
+  }, {
     key: "setFrame",
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
+      this.execFn(this.callback, percentComplete); // if (this.callback != null) {
+      //   if (typeof this.callback === 'string') {
+      //     this.fnMap.exec(this.callback, percentComplete);
+      //   } else {
+      //     this.callback(percentComplete);
+      //   }
+      // }
+    }
+  }, {
+    key: "getPercentComplete",
+    value: function getPercentComplete(percentTime) {
+      var invert = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      if (this.callback != null) {
-        this.callback(percentComplete);
+      if (typeof this.progression === 'string') {
+        var result = this.fnMap.exec(this.progression, percentTime, invert);
+
+        if (result == null) {
+          return 0;
+        }
+
+        return result;
       }
+
+      if (typeof this.progression === 'function') {
+        return this.progression(percentTime);
+      }
+
+      return 0;
     }
   }, {
     key: "setToEnd",
     value: function setToEnd() {
-      if (this.callback != null) {
-        this.callback(1);
-      }
+      // if (this.callback != null) {
+      //   // this.callback(1);
+      //   if (typeof this.callback === 'string') {
+      //     this.fnMap.exec(this.callback, 1);
+      //   } else {
+      //     this.callback(1);
+      //   }
+      // }
+      this.execFn(this.callback, 1);
     } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
     //   if (this.state === 'idle') {
     //     return;
@@ -1379,13 +1675,13 @@ function (_AnimationStep) {
     key: "_dup",
     value: function _dup() {
       var step = new CustomAnimationStep();
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step);
       return step;
     }
   }]);
 
   return CustomAnimationStep;
-}(_AnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
 function custom() {
   for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
     optionsIn[_key2] = arguments[_key2];
@@ -1472,6 +1768,19 @@ function (_AnimationStep) {
       var dup = new DelayStep();
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, dup);
       return dup;
+    } // _getStateProperties() {  // eslint-disable-line class-methods-use-this
+    //   return [...super._getStateProperties(),
+    //     'callback',
+    //     'startPercent',
+    //     'progression',
+    //   ];
+    // }
+
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'delayAnimationStep';
     }
   }]);
 
@@ -1499,10 +1808,17 @@ function delay() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ElementAnimationStep; });
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1514,14 +1830,18 @@ function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) ===
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
- // import { DiagramElement } from '../../Element';
-
+// import * as tools from '../../../tools/math';
+// import { DiagramElement } from '../../Element';
 
 
 
@@ -1550,20 +1870,21 @@ function (_AnimationStep) {
       progression: defaultProgression,
       duration: 0
     };
-    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, optionsIn);
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
     _this.element = options.element;
     _this.type = options.type;
     _this.onFinish = options.onFinish;
     _this.duration = options.duration;
+    _this.progression = options.progression;
 
-    if (options.progression === 'linear') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    if (_this.progression === 'linear') {
+      _this.progression = 'tools.math.linear';
     } else if (options.progression === 'easein') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+      _this.progression = 'tools.math.easein';
     } else if (options.progression === 'easeout') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+      _this.progression = 'tools.math.easeout';
     } else if (options.progression === 'easeinout') {
-      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
+      _this.progression = 'tools.math.easeinout';
     } else {
       _this.progression = options.progression;
     }
@@ -1572,17 +1893,74 @@ function (_AnimationStep) {
   }
 
   _createClass(ElementAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      // console.log('elementstep');
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(ElementAnimationStep.prototype), "_getStateProperties", this).call(this)), [// 'element',
+      'type', // 'duration',
+      'progression']);
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state, getElement) {
+      // const obj = new this.constructor();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(this, state);
+
+      if (this.element != null && typeof this.element === 'string' && getElement != null) {
+        this.element = getElement(this.element);
+      }
+
+      return this;
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var state = _get(_getPrototypeOf(ElementAnimationStep.prototype), "_state", this).call(this);
+
+      if (this.element != null) {
+        state.state.element = {
+          f1Type: 'de',
+          state: this.element.getPath()
+        };
+      } // if (this.element != null) {
+      //   definition.state.element = this.element.getPath();
+      // }
+
+
+      return state;
+    }
+  }, {
+    key: "getPercentComplete",
+    value: function getPercentComplete(percentTime) {
+      if (typeof this.progression === 'string') {
+        var result = this.fnMap.exec(this.progression, percentTime);
+
+        if (result == null) {
+          return 0;
+        }
+
+        return result;
+      }
+
+      if (typeof this.progression === 'function') {
+        return this.progression(percentTime);
+      }
+
+      return 0;
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       var step = new ElementAnimationStep();
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, step, ['element']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
       step.element = this.element;
       return step;
     }
   }]);
 
   return ElementAnimationStep;
-}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 
@@ -1610,6 +1988,14 @@ function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Ref
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1633,6 +2019,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 // import {
 //   Transform, Point, getMaxTimeFromVelocity,
 // } from '../../../../tools/g2';
+ // import * as tools from '../../../../tools/math';
 
 
 
@@ -1695,13 +2082,25 @@ function (_ElementAnimationStep) {
     }
 
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(ColorAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(ColorAnimationStep.prototype), "_getStateProperties", this).call(this)), ['color']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'colorAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       var element = this.element;
@@ -1742,7 +2141,7 @@ function (_ElementAnimationStep) {
       var _this2 = this;
 
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete;
       var next = this.color.start.map(function (c, index) {
         var newColor = c + _this2.color.delta[index] * p;
@@ -1967,6 +2366,14 @@ function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Ref
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1990,6 +2397,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 // import {
 //   Transform, Point, getMaxTimeFromVelocity,
 // } from '../../../../tools/g2';
+// import * as tools from '../../../../tools/math';
 
 
 var OpacityAnimationStep =
@@ -2022,13 +2430,25 @@ function (_ElementAnimationStep) {
     _this.opacity = {};
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.opacity, ['start', 'delta', 'target', 'dissolve']);
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(OpacityAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(OpacityAnimationStep.prototype), "_getStateProperties", this).call(this)), ['opacity']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'opacityAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       var element = this.element;
@@ -2085,7 +2505,7 @@ function (_ElementAnimationStep) {
     key: "setFrame",
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete;
       var next = this.opacity.start + this.opacity.delta * p;
 
@@ -2240,6 +2660,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2262,7 +2690,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-
+ // import type { DiagramElement } from '../../../Element';
 
 var PositionAnimationStep =
 /*#__PURE__*/
@@ -2283,6 +2711,7 @@ function (_ElementAnimationStep) {
     }].concat(optionsIn));
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime']);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PositionAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    _this._stepType = 'position';
     var defaultPositionOptions = {
       start: null,
       target: null,
@@ -2331,13 +2760,25 @@ function (_ElementAnimationStep) {
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.position.translationOptions);
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(PositionAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(PositionAnimationStep.prototype), "_getStateProperties", this).call(this)), ['position']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'positionAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       _get(_getPrototypeOf(PositionAnimationStep.prototype), "start", this).call(this, startTime);
@@ -2382,7 +2823,7 @@ function (_ElementAnimationStep) {
     key: "setFrame",
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete;
 
       if (this.position.delta != null && this.position.start != null) {
@@ -2430,6 +2871,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2488,13 +2937,25 @@ function (_ElementAnimationStep) {
     _this.frequency = options.frequency;
     _this.stopAfterDuration = options.stopAfterDuration;
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(PulseAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(PulseAnimationStep.prototype), "_getStateProperties", this).call(this)), ['scale', 'numLines', 'frequency', 'stopAfterDuration']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'pulseAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       _get(_getPrototypeOf(PulseAnimationStep.prototype), "start", this).call(this, startTime);
@@ -2551,6 +3012,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2619,13 +3088,27 @@ function (_ElementAnimationStep) {
     _this.rotation = {};
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo', 'maxTime']);
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(RotationAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      var a = [].concat(_toConsumableArray(_get(_getPrototypeOf(RotationAnimationStep.prototype), "_getStateProperties", this).call(this)), ['rotation']); // console.log('rotationStep')
+
+      return a;
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'rotationAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       _get(_getPrototypeOf(RotationAnimationStep.prototype), "start", this).call(this, startTime);
@@ -2666,7 +3149,7 @@ function (_ElementAnimationStep) {
     key: "setFrame",
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete;
       var nextR = this.rotation.start + this.rotation.delta * p;
       nextR = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(nextR, this.rotation.clipTo);
@@ -2683,7 +3166,7 @@ function (_ElementAnimationStep) {
 
       if (element != null) {
         element.transform.updateRotation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(this.rotation.target, this.rotation.clipTo));
-        element.setTransformCallback(element.transform);
+        this.execFn(element.setTransformCallback, element.transform);
       }
     }
   }, {
@@ -2717,6 +3200,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2786,13 +3277,25 @@ function (_ElementAnimationStep) {
 
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(ScaleAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(ScaleAnimationStep.prototype), "_getStateProperties", this).call(this)), ['scale']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'scaleAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       _get(_getPrototypeOf(ScaleAnimationStep.prototype), "start", this).call(this, startTime);
@@ -2840,7 +3343,7 @@ function (_ElementAnimationStep) {
     key: "setFrame",
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete;
 
       if (this.scale.start != null && this.scale.delta != null) {
@@ -2889,6 +3392,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2979,13 +3490,25 @@ function (_ElementAnimationStep) {
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
-  } // On start, calculate the duration, target and delta if not already present.
-  // This is done here in case the start is defined as null meaning it is
-  // going to start from present transform.
-  // Setting a duration to 0 will effectively skip this animation step
-
+  }
 
   _createClass(TransformAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(TransformAnimationStep.prototype), "_getStateProperties", this).call(this)), ['transform']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'transformAnimationStep';
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
     key: "start",
     value: function start(startTime) {
       var _this2 = this;
@@ -3038,7 +3561,7 @@ function (_ElementAnimationStep) {
       // const start = phase.startTransform._dup();
       // const delta = phase.deltaTransform._dup();
       var percentTime = deltaTime / this.duration;
-      var percentComplete = this.progression(percentTime);
+      var percentComplete = this.getPercentComplete(percentTime);
       var p = percentComplete; // let next = delta._dup().constant(p);
       // next = start.add(delta.mul(next));
 
@@ -3118,6 +3641,14 @@ function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Ref
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3184,6 +3715,29 @@ function (_AnimationStep) {
   }
 
   _createClass(ParallelAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(ParallelAnimationStep.prototype), "_getStateProperties", this).call(this)), ['steps']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'parallelAnimationStep';
+    }
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "setTimeDelta", this).call(this, delta);
+
+      if (this.steps != null) {
+        this.steps.forEach(function (step) {
+          step.setTimeDelta(delta);
+        });
+      }
+    }
+  }, {
     key: "with",
     value: function _with(step) {
       this.steps.push(step);
@@ -3294,7 +3848,7 @@ function (_AnimationStep) {
       });
 
       if (this.onFinish != null) {
-        this.onFinish(cancelled);
+        this.execFn(this.onFinish, cancelled);
       }
     }
   }, {
@@ -3338,6 +3892,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3402,22 +3964,45 @@ function (_AnimationStep) {
     }
 
     return _this;
-  } // constructor(optionsIn: TypeSerialAnimationStepInputOptions = {}) {
-  //   super(optionsIn);
-  //   this.index = 0;
-  //   const defaultOptions = {};
-  //   const options = joinObjects({}, defaultOptions, optionsIn);
-  //   this.steps = [];
-  //   if (!Array.isArray(options.steps) && options.steps != null) {
-  //     this.steps = [options.steps];
-  //   } else if (options.steps != null) {
-  //     this.steps = options.steps;
-  //   }
-  //   return this;
-  // }
-
+  }
 
   _createClass(SerialAnimationStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(SerialAnimationStep.prototype), "_getStateProperties", this).call(this)), ['steps', 'index']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'serialAnimationStep';
+    } // constructor(optionsIn: TypeSerialAnimationStepInputOptions = {}) {
+    //   super(optionsIn);
+    //   this.index = 0;
+    //   const defaultOptions = {};
+    //   const options = joinObjects({}, defaultOptions, optionsIn);
+    //   this.steps = [];
+    //   if (!Array.isArray(options.steps) && options.steps != null) {
+    //     this.steps = [options.steps];
+    //   } else if (options.steps != null) {
+    //     this.steps = options.steps;
+    //   }
+    //   return this;
+    // }
+
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      _get(_getPrototypeOf(SerialAnimationStep.prototype), "setTimeDelta", this).call(this, delta);
+
+      if (this.steps != null) {
+        this.steps.forEach(function (step) {
+          step.setTimeDelta(delta);
+        });
+      }
+    }
+  }, {
     key: "then",
     value: function then(step) {
       this.steps.push(step);
@@ -3535,7 +4120,7 @@ function (_AnimationStep) {
       });
 
       if (this.onFinish != null) {
-        this.onFinish(cancelled);
+        this.execFn(this.onFinish, cancelled);
       }
     }
   }, {
@@ -3580,6 +4165,14 @@ function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Ref
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3589,6 +4182,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -3620,7 +4217,7 @@ function (_AnimationStep) {
       optionsIn[_key - 1] = arguments[_key];
     }
 
-    if (typeof triggerOrOptionsIn === 'function') {
+    if (typeof triggerOrOptionsIn === 'function' || typeof triggerOrOptionsIn === 'string') {
       options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
       options.callback = triggerOrOptionsIn;
     } else {
@@ -3635,20 +4232,35 @@ function (_AnimationStep) {
   }
 
   _createClass(TriggerStep, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(TriggerStep.prototype), "_getStateProperties", this).call(this)), ['callback', 'payload']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'triggerAnimationStep';
+    }
+  }, {
     key: "setFrame",
     value: function setFrame() {
-      if (this.callback != null) {
-        this.callback(this.payload);
-        this.callback = null;
-      }
+      this.execFn(this.callback, this.payload);
+      this.callback = null; // if (this.callback != null) {
+      //   this.callback(this.payload);
+      //   this.callback = null;
+      // }
     }
   }, {
     key: "setToEnd",
     value: function setToEnd() {
-      if (this.callback != null) {
-        this.callback(this.payload);
-        this.callback = null;
-      }
+      // if (this.callback != null) {
+      //   this.callback(this.payload);
+      //   this.callback = null;
+      // }
+      this.execFn(this.callback, this.payload);
+      this.callback = null;
     }
   }, {
     key: "_dup",
@@ -3684,16 +4296,20 @@ function trigger() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
-/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
+/* harmony import */ var _parseState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parseState */ "./src/js/diagram/parseState.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3701,6 +4317,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
  // import getShaders from './webgl/shaders';
+
+
+
+
 
 
 
@@ -3786,9 +4406,16 @@ function () {
       fontScale: 1 // updateFontSize: '',
 
     };
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["default"]();
+    this.fnMap.add('tools.math.easein', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easein"]);
+    this.fnMap.add('tools.math.easeout', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeout"]);
+    this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"]);
+    this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+    this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_2__["sinusoid"]);
+    this.fnMap.add('doNothing', function () {});
     this.scrolled = false; // this.oldScrollY = 0;
 
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         limits = optionsToUse.limits;
     this.htmlId = htmlId; // this.layout = layout;
@@ -3856,10 +4483,10 @@ function () {
           this.webglOffscreen = webglOffscreen;
         }
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__["default"](this.textCanvasLow);
 
         if (this.textCanvasOffscreen) {
-          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasOffscreen);
+          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__["default"](this.textCanvasOffscreen);
           this.draw2DOffscreen = draw2DOffscreen;
         } // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
 
@@ -3879,7 +4506,7 @@ function () {
     }
 
     if (this instanceof Diagram) {
-      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_6__["default"](this);
+      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_10__["default"](this);
     }
 
     this.fontScale = optionsToUse.fontScale;
@@ -3890,9 +4517,9 @@ function () {
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
-    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]();
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_5__["default"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
-    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this));
+    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["default"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
+    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this));
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -3907,13 +4534,14 @@ function () {
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
-    } // this.updateFontSize = optionsToUse.updateFontSize;
+    }
 
+    this.stateTime = performance.now() / 1000; // this.updateFontSize = optionsToUse.updateFontSize;
 
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
-    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
+    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["isTouchDevice"])();
     this.animateNextFrame(true, 'first frame');
 
     if (optionsToUse.elements) {
@@ -3946,6 +4574,22 @@ function () {
     value: function disableScrolling() {
       document.removeEventListener('scroll', this.scrollEvent.bind(this), false);
     }
+  }, {
+    key: "getState",
+    value: function getState() {
+      this.stateTime = performance.now() / 1000;
+      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime']);
+    }
+  }, {
+    key: "setState",
+    value: function setState(stateIn) {
+      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this);
+
+      Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(this, state);
+
+      this.elements.setTimeDelta(performance.now() / 1000 - this.stateTime);
+      this.animateNextFrame();
+    }
     /**
      * Add elements to diagram
      * @param {Array<TypeAddElementObject>} elementsToAdd - array of element definitions
@@ -3966,7 +4610,7 @@ function () {
       var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
     }
   }, {
     key: "addElement",
@@ -3974,11 +4618,15 @@ function () {
       var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
     }
   }, {
     key: "getElement",
     value: function getElement(elementName) {
+      if (elementName === this.elements.name) {
+        return this.elements;
+      }
+
       return this.elements.getElement(elementName);
     }
   }, {
@@ -4011,7 +4659,7 @@ function () {
       // }
 
 
-      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, // this.draw2DFigures,
+      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_12__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
@@ -4021,7 +4669,7 @@ function () {
       //   shapes = this.shapesHigh;
       // }
 
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_13__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
   }, {
     key: "getObjects",
@@ -4032,7 +4680,7 @@ function () {
       //   equation = this.equationHigh;
       // }
 
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_14__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
     }
   }, {
     key: "sizeHtmlText",
@@ -6590,6 +7238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -6603,6 +7252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -6657,9 +7307,29 @@ function () {
       ascent: this.ascent,
       descent: this.descent
     };
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"]();
   }
 
   _createClass(Element, [{
+    key: "execFn",
+    value: function execFn(fn) {
+      if (fn == null) {
+        return null;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof fn === 'string') {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
+      }
+
+      return fn.apply(void 0, args);
+    }
+  }, {
     key: "calcSize",
     value: function calcSize(location, scale) {
       var content = this.content;
@@ -6680,7 +7350,7 @@ function () {
         content.updateLastDrawTransform();
 
         if (content.internalSetTransformCallback != null) {
-          content.internalSetTransformCallback(content.transform);
+          this.execFn(content.internalSetTransformCallback, content.transform);
         } // Get the boundaries of element
 
 
@@ -6815,9 +7485,29 @@ function () {
     this.width = 0;
     this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.height = 0;
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"]();
   }
 
   _createClass(Elements, [{
+    key: "execFn",
+    value: function execFn(fn) {
+      if (fn == null) {
+        return null;
+      }
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      if (typeof fn === 'string') {
+        var _this$fnMap2;
+
+        return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [fn].concat(args));
+      }
+
+      return fn.apply(void 0, args);
+    }
+  }, {
     key: "_dup",
     value: function _dup(namedCollection) {
       var contentCopy = [];
@@ -7548,6 +8238,14 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -7728,12 +8426,18 @@ function (_DiagramElementCollec) {
 
     return _this;
   }
-  /**
-    * Set the current form series to 'name'
-   */
-
 
   _createClass(Equation, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this)), ['eqn.currentForm', 'eqn.currentSubForm', 'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
+    }
+    /**
+      * Set the current form series to 'name'
+     */
+
+  }, {
     key: "setFormSeries",
     value: function setFormSeries(name) {
       if (this.eqn.formSeries[name] != null) {
@@ -8635,19 +9339,19 @@ function (_DiagramElementCollec) {
 
         if (duration === 0) {
           this.showForm(subForm);
-
-          if (options.callback != null) {
-            options.callback();
-          }
+          this.execFn(options.callback); // if (options.callback != null) {
+          //   options.callback();
+          // }
         } else {
           this.eqn.isAnimating = true;
 
           var end = function end() {
             _this7.eqn.isAnimating = false;
 
-            if (options.callback != null) {
-              options.callback();
-            }
+            _this7.execFn(options.callback); // if (options.callback != null) {
+            //   options.callback();
+            // }
+
           };
 
           if (options.animate === 'move') {
@@ -8674,16 +9378,19 @@ function (_DiagramElementCollec) {
               start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestart.moveFrom);
             }
 
+            var showFormCallback = function showFormCallback() {
+              // $FlowFixMe
+              _this7.showForm(subForm.name, subFormToUse, false);
+            };
+
+            this.fnMap.add('_equationShowFormCallback', showFormCallback());
             this.animations["new"]().dissolveOut({
               duration: options.dissolveOutTime
             }).position({
               target: start,
               duration: 0
             }).trigger({
-              callback: function callback() {
-                // $FlowFixMe
-                _this7.showForm(subForm.name, subFormToUse, false);
-              },
+              callback: 'showFormCallback',
               duration: 0.01
             }).position({
               target: target,
@@ -9179,6 +9886,8 @@ function (_Elements) {
   }, {
     key: "dissolveElements",
     value: function dissolveElements(elements) {
+      var _this3 = this;
+
       var dissolve = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'in';
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.01;
       var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
@@ -9186,7 +9895,8 @@ function (_Elements) {
 
       if (elements.length === 0) {
         if (callback) {
-          callback(false);
+          this.execFn(callback, false); // callback(false);
+
           return;
         }
       }
@@ -9199,7 +9909,8 @@ function (_Elements) {
 
         if (completed === count) {
           if (callback) {
-            callback(cancelled);
+            // callback(cancelled);
+            _this3.execFn(callback, cancelled);
           }
         }
       };
@@ -9314,7 +10025,7 @@ function (_Elements) {
   }, {
     key: "allHideShow",
     value: function allHideShow() {
-      var _this3 = this;
+      var _this4 = this;
 
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var hideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
@@ -9343,12 +10054,12 @@ function (_Elements) {
       }
 
       var dissolveOutCallback = function dissolveOutCallback() {
-        _this3.setPositions();
+        _this4.setPositions();
       };
 
       if (elementsToShow.length === 0) {
         dissolveOutCallback = function dissolveOutCallback(cancelled) {
-          _this3.setPositions();
+          _this4.setPositions();
 
           if (callback != null) {
             callback(cancelled);
@@ -9395,12 +10106,12 @@ function (_Elements) {
   }, {
     key: "applyElementMods",
     value: function applyElementMods() {
-      var _this4 = this;
+      var _this5 = this;
 
       Object.keys(this.elementMods).forEach(function (elementName) {
-        var _this4$elementMods$el = _this4.elementMods[elementName],
-            element = _this4$elementMods$el.element,
-            mods = _this4$elementMods$el.mods;
+        var _this5$elementMods$el = _this5.elementMods[elementName],
+            element = _this5$elementMods$el.element,
+            mods = _this5$elementMods$el.mods;
 
         if (element != null && mods != null) {
           element.setProperties(mods);
@@ -9501,7 +10212,7 @@ function (_Elements) {
         this.dissolveElements(elementsToHide, 'out', delay, dissolveOutTime, dissolveOutCallback);
         cumTime += dissolveOutTime;
       } else if (dissolveOutCallback != null) {
-        dissolveOutCallback();
+        this.execFn(dissolveOutCallback);
       }
 
       this.applyElementMods();
@@ -16338,8 +17049,8 @@ function (_DiagramElementCollec) {
       var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D[0], titleText);
       this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
 
-      this.addTickLabels('major', this.drawContext2D[0], majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
-      this.addTickLabels('minor', this.drawContext2D[0], minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
+      this.addTickLabels('major', this.drawContext2D[0], majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(this.props.majorTicks.labelOffset));
+      this.addTickLabels('minor', this.drawContext2D[0], minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(this.props.minorTicks.labelOffset));
     }
   }, {
     key: "toClip",
@@ -17103,6 +17814,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 /* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -17486,6 +18205,22 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectAngle, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectAngle.prototype), "_getStateProperties", this).call(this)), ['angle', 'lastLabelRotationOffset']);
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(this, state);
+      this.setAngle({
+        angle: this.angle,
+        rotationOffset: this.lastLabelRotationOffset
+      });
+      return this;
+    }
+  }, {
     key: "setNextPositionAndRotation",
     value: function setNextPositionAndRotation() {
       if (this.nextPosition != null) {
@@ -19079,6 +19814,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -19521,6 +20264,19 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectLine, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectLine.prototype), "_getStateProperties", this).call(this)), ['offset', 'angle', 'length', 'position']);
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])(this, state);
+      this.setLineDimensions();
+      return this;
+    }
+  }, {
     key: "pulseWidth",
     value: function pulseWidth() {
       var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -20044,24 +20800,29 @@ function (_DiagramElementCollec) {
         _this3.setLength(initialLength + deltaLength * percent);
 
         if (onStepCallback != null) {
-          onStepCallback(percent, initialLength + deltaLength * percent);
+          _this3.execFn(onStepCallback, percent, initialLength + deltaLength * percent); // onStepCallback(percent, initialLength + deltaLength * percent);
+
         }
       };
+
+      this.fnMap.add('_DiagramObjectsLineAnimateLengthToFunc', func);
 
       var done = function done() {
         if (finishOnCancel) {
           _this3.setLength(initialLength + deltaLength);
         }
 
-        if (typeof callback === 'function' && callback) {
-          callback();
-        }
+        _this3.execFn(callback); // if (typeof callback === 'function' && callback) {
+        //   callback();
+        // }
+
       };
 
+      this.fnMap.add('_DiagramObjectsLineAnimateLengthToCallback', done);
       this.animations["new"]('Line Length').custom({
-        callback: func,
+        callback: '_DiagramObjectsLineAnimateLengthToFunc',
         duration: time
-      }).whenFinished(done).start(); // this.animations.start();
+      }).whenFinished('_DiagramObjectsLineAnimateLengthToCallback').start(); // this.animations.start();
 
       this.animateNextFrame(); // console.log(this)
       // this.animateCustomTo(func, time, 0, done);
@@ -20149,6 +20910,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
 /* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -20166,6 +20935,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
@@ -20426,8 +21199,9 @@ function (_DiagramElementCollec) {
           }
 
           padShape.setMoveBoundaryToDiagram(boundary);
+          var fnName = "_polyline_".concat(_this.getPath(), "_pad").concat(i);
 
-          padShape.setTransformCallback = function (transform) {
+          _this.fnMap.add(fnName, function (transform) {
             var index = parseInt(padShape.name.slice(3), 10);
             var translation = transform.t();
 
@@ -20436,7 +21210,9 @@ function (_DiagramElementCollec) {
 
               _this.updatePoints(_this.points);
             }
-          };
+          });
+
+          padShape.setTransformCallback = fnName;
         }
 
         _this.add(name, padShape);
@@ -20561,6 +21337,19 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectPolyLine, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectPolyLine.prototype), "_getStateProperties", this).call(this)), ['points']);
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(this, state);
+      this.updatePoints(this.points);
+      return this;
+    }
+  }, {
     key: "updateSideLabels",
     value: function updateSideLabels() {
       var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -20739,7 +21528,7 @@ function (_DiagramElementCollec) {
       }
 
       if (this.updatePointsCallback != null && !skipCallback) {
-        this.updatePointsCallback();
+        this.execFn(this.updatePointsCallback);
       }
     }
   }, {
@@ -21309,6 +22098,15 @@ function processOptions() {
   return options;
 }
 
+function setupPulse(element, options) {
+  if (options.pulse != null) {
+    if (typeof element.pulseDefault !== 'function' && typeof element.pulseDefault !== 'string') {
+      // eslint-disable-next-line no-param-reassign
+      element.pulseDefault.scale = options.pulse;
+    }
+  }
+}
+
 var DiagramPrimitives =
 /*#__PURE__*/
 function () {
@@ -21395,13 +22193,7 @@ function () {
       }
 
       var element = Object(_DiagramElements_Generic__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, parsedPoints, parsedBorder, parsedBorderHoles, options.drawType, options.color, options.transform, this.limits, options.texture.src, options.texture.mapTo, options.texture.mapFrom, options.texture.repeat, options.texture.onLoad, copyToUse);
-
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
-
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -21471,14 +22263,14 @@ function () {
         var _element$drawingObjec;
 
         (_element$drawingObjec = element.drawingObject).change.apply(_element$drawingObjec, _toConsumableArray(getTris(points)));
-      };
+      }; // if (options.pulse != null) {
+      //   if (typeof element.pulseDefault !== 'function') {
+      //     element.pulseDefault.scale = options.pulse;
+      //   }
+      // }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
 
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -21715,13 +22507,13 @@ function () {
 
       var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__["default"])(this.webgl, options.points.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
-      }), options.color, options.transform, this.limits);
+      }), options.color, options.transform, this.limits); // if (options.pulse != null) {
+      //   if (typeof element.pulseDefault !== 'function') {
+      //     element.pulseDefault.scale = options.pulse;
+      //   }
+      // }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
+      setupPulse(element, options);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -21782,13 +22574,13 @@ function () {
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits); // if (options.pulse != null) {
+      //   if (typeof element.pulseDefault !== 'function') {
+      //     element.pulseDefault.scale = options.pulse;
+      //   }
+      // }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
+      setupPulse(element, options);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -21821,13 +22613,13 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits); // if (options.pulse != null) {
+      //   if (typeof element.pulseDefault !== 'function') {
+      //     element.pulseDefault.scale = options.pulse;
+      //   }
+      // }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
+      setupPulse(element, options);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -21954,14 +22746,14 @@ function () {
 
       if (options.color != null) {
         element.setColor(options.color);
-      }
+      } // if (options.pulse != null) {
+      //   if (typeof element.pulseDefault !== 'function') {
+      //     element.pulseDefault.scale = options.pulse;
+      //   }
+      // }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
 
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -21997,12 +22789,7 @@ function () {
         element.setColor(options.color);
       }
 
-      if (options.pulse != null) {
-        if (typeof element.pulseDefault !== 'function') {
-          element.pulseDefault.scale = options.pulse;
-        }
-      }
-
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -22081,11 +22868,7 @@ function () {
       }
 
       var element = Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
+      setupPulse(element, options);
       return element;
     } // dashedLine(
     //   start: Point,
@@ -22143,10 +22926,7 @@ function () {
         element = Object(_DiagramElements_Rectangle__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.xAlign, options.yAlign, options.width, options.height, options.lineWidth, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
       }
 
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -22177,11 +22957,7 @@ function () {
       }
 
       var element = Object(_DiagramElements_Box__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, options.width, options.height, options.lineWidth, options.fill, options.color, options.transform, this.limits);
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -22207,11 +22983,7 @@ function () {
       }
 
       var element = Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
+      setupPulse(element, options);
       return element;
     }
   }, {
@@ -22275,6 +23047,30 @@ function () {
       return copy;
     }
   }, {
+    key: "pointer",
+    value: function pointer(optionsIn) {
+      var defaultOptions = {
+        color: [1, 1, 0, 0.5],
+        width: 0.01,
+        radius: 0.05
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])(defaultOptions, optionsIn);
+      var pointer = this.collection();
+      var polygon = {
+        width: options.width,
+        color: options.color,
+        radius: options.radius,
+        sides: 50
+      };
+      var up = this.polygon(polygon);
+      var down = this.polygon(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, polygon, {
+        fill: true
+      }));
+      pointer.add('up', up);
+      pointer.add('down', down);
+      return pointer;
+    }
+  }, {
     key: "collection",
     value: function collection() {
       var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -22313,7 +23109,7 @@ function () {
       var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
       element.setColor(color);
 
-      if (pulse != null && typeof element.pulseDefault !== 'function') {
+      if (pulse != null && typeof element.pulseDefault !== 'function' && typeof element.pulseDefault !== 'string') {
         element.pulseDefault.scale = pulse;
       }
 
@@ -22536,7 +23332,7 @@ function () {
       xy.add('y', yAxis);
       xy.add('x', xAxis);
 
-      if (options.pulse != null && typeof xy.pulseDefault !== 'function') {
+      if (options.pulse != null && typeof xy.pulseDefault !== 'function' && typeof xy.pulseDefault !== 'string') {
         xy.pulseDefault.scale = options.pulse;
       }
 
@@ -22577,7 +23373,7 @@ function () {
       var collection = this.collection(options.transform);
       collection.setColor(options.color);
 
-      if (options.pulse != null && typeof collection.pulseDefault !== 'function') {
+      if (options.pulse != null && typeof collection.pulseDefault !== 'function' && typeof collection.pulseDefault !== 'string') {
         collection.pulseDefault.scale = options.pulse;
       }
 
@@ -22630,7 +23426,7 @@ function () {
       var collection = this.collection(options.transform);
       collection.setColor(options.color);
 
-      if (options.pulse != null && typeof collection.pulseDefault !== 'function') {
+      if (options.pulse != null && typeof collection.pulseDefault !== 'function' && typeof collection.pulseDefault !== 'string') {
         collection.pulseDefault.scale = options.pulse;
       }
 
@@ -27136,9 +27932,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElementCollection", function() { return DiagramElementCollection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DiagramElement", function() { return DiagramElement; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
-/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/m2 */ "./src/js/tools/m2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/m2 */ "./src/js/tools/m2.js");
 /* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
 /* harmony import */ var _DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
@@ -27147,6 +27943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
 /* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -27161,15 +27958,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
+function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _nonIterableRest(); }
-
 function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -27193,8 +27990,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
 
+ // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
+// import * as tools from '../tools/math';
 
 
 
@@ -27205,6 +28003,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import DrawContext2D from './DrawContext2D';
 
 // eslint-disable-next-line import/no-cycle
+
 
  // eslint-disable-next-line import/no-cycle
 // import {
@@ -27270,6 +28069,7 @@ function () {
   // Callbacks
   // element.transform is updated
   // For the future when collections use color
+  // noRotationFromParent: boolean;
   // this is in vertex space
   // Current animation/movement state of element
   // pulse: Object;                  // Pulse animation state
@@ -27328,14 +28128,10 @@ function () {
     this.dimColor = [0.5, 0.5, 0.5, 1];
     this.defaultColor = this.color.slice();
     this.opacity = 1;
-
-    this.setTransformCallback = function () {};
-
+    this.setTransformCallback = null;
     this.beforeDrawCallback = null;
     this.afterDrawCallback = null;
-
-    this.internalSetTransformCallback = function () {};
-
+    this.internalSetTransformCallback = null;
     this.lastDrawTransform = this.transform._dup();
     this.lastDrawPulseTransform = this.transform._dup();
     this.onClick = null;
@@ -27343,11 +28139,13 @@ function () {
       parentCount: 0,
       elementCount: 0
     };
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["default"]();
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false; // this.pulseDefault = (callback: ?() => void = null) => {
+    this.stateProperties = [];
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_12__["default"](); // this.noRotationFromParent = false;
+    // this.pulseDefault = (callback: ?() => void = null) => {
     //   this.pulseScaleNow(1, 2, 0, callback);
     // };
 
@@ -27694,22 +28492,26 @@ function () {
       transformClip: null
     };
     this.scenarios = {};
+
+    var pulseTransformMethod = function pulseTransformMethod(s, d) {
+      if (d == null || d.x === 0 && d.y === 0) {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(s, s);
+      }
+
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(-d.x, -d.y).scale(s, s).translate(d.x, d.y);
+    };
+
+    this.fnMap.add('_elementPulseSettingsTransformMethod', pulseTransformMethod);
     this.pulseSettings = {
       time: 1,
       frequency: 0.5,
       A: 1,
       B: 0.5,
       C: 0,
-      style: _tools_math__WEBPACK_IMPORTED_MODULE_3__["sinusoid"],
+      style: 'tools.math.sinusoid',
       num: 1,
       delta: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-      transformMethod: function transformMethod(s, d) {
-        if (d == null || d.x === 0 && d.y === 0) {
-          return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(s, s);
-        }
-
-        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(-d.x, -d.y).scale(s, s).translate(d.x, d.y);
-      },
+      transformMethod: '_elementPulseSettingsTransformMethod',
       callback: function callback() {}
     };
     this.state = {
@@ -27745,6 +28547,51 @@ function () {
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjectsWithOptions"])({
         except: except
       }, this, properties);
+    }
+  }, {
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move'].concat(_toConsumableArray(this.stateProperties));
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
+    }
+  }, {
+    key: "execFn",
+    value: function execFn(fn) {
+      if (fn == null) {
+        return null;
+      }
+
+      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        args[_key17 - 1] = arguments[_key17];
+      }
+
+      if (typeof fn === 'string') {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
+      }
+
+      return fn.apply(void 0, args);
+    }
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      if (this.animations.state === 'animating') {
+        this.animations.setTimeDelta(delta);
+      }
+
+      if (this.state.isPulsing) {
+        this.state.pulse.startTime += delta;
+      }
+
+      if (this.state.movement.previousTime > 0) {
+        this.state.movement.previousTime += delta / 1000;
+      }
     } // Space definition:
     //   * Pixel space: css pixels
     //   * GL Space: x,y = -1 to 1
@@ -27929,7 +28776,7 @@ function () {
         scale: 2
       };
 
-      if (typeof this.pulseDefault !== 'function') {
+      if (typeof this.pulseDefault !== 'function' && typeof this.pulseDefault !== 'string') {
         defaultPulseOptions.frequency = this.pulseDefault.frequency;
         defaultPulseOptions.time = this.pulseDefault.time;
         defaultPulseOptions.scale = this.pulseDefault.scale;
@@ -27960,29 +28807,25 @@ function () {
         done = _options2.done;
       }
 
-      if (typeof this.pulseDefault === 'function') {
-        this.pulseDefault(done);
+      if (typeof this.pulseDefault === 'function' || typeof this.pulseDefault === 'string') {
+        this.execFn(this.pulseDefault, done);
       } else {
         // const { frequency, time, scale } = this.pulseDefault;
         // this.pulseScaleNow(time, scale, frequency, done);
         this.pulseScaleRelativeTo(options.centerOn, options.x, options.y, options.space, options.time, options.scale, options.frequency, done);
       }
-    }
-  }, {
-    key: "pulseLegacy",
-    value: function pulseLegacy() {
-      var done = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    } // pulseLegacy(done: ?(mixed) => void = null) {
+    //   if (
+    //     typeof this.pulseDefault === 'function'
+    //     || typeof this.pulseDefault === 'string'
+    //   ) {
+    //     this.execFn(this.pulseDefault, done);
+    //   } else {
+    //     const { frequency, time, scale } = this.pulseDefault;
+    //     this.pulseScaleNow(time, scale, frequency, done);
+    //   }
+    // }
 
-      if (typeof this.pulseDefault === 'function') {
-        this.pulseDefault(done);
-      } else {
-        var _this$pulseDefault = this.pulseDefault,
-            frequency = _this$pulseDefault.frequency,
-            time = _this$pulseDefault.time,
-            scale = _this$pulseDefault.scale;
-        this.pulseScaleNow(time, scale, frequency, done);
-      }
-    }
   }, {
     key: "getElement",
     value: function getElement() {
@@ -28047,18 +28890,18 @@ function () {
     key: "setTransform",
     value: function setTransform(transform) {
       if (this.move.transformClip != null) {
-        this.transform = this.move.transformClip(transform);
+        this.transform = this.execFn(this.move.transformClip, transform);
       } else {
         this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
       }
 
       if (this.internalSetTransformCallback) {
-        this.internalSetTransformCallback(this.transform);
+        this.execFn(this.internalSetTransformCallback, this.transform);
       }
 
-      if (this.setTransformCallback) {
-        this.setTransformCallback(this.transform);
-      }
+      this.execFn(this.setTransformCallback, this.transform); // if (this.setTransformCallback) {
+      //   this.setTransformCallback(this.transform);
+      // }
     } // Set the next transform (and velocity if moving freely) for the next
     // animation frame.
     //
@@ -28207,11 +29050,10 @@ function () {
 
         if (scenario.color) {
           color = scenario.color.slice();
-        }
+        } // if (scenario.opacity) {
+        //   ({ opacity } = scenario);
+        // }
 
-        if (scenario.opacity) {
-          opacity = scenario.opacity;
-        }
 
         if (scenario.isShown) {
           isShown = scenario.isShown;
@@ -28454,7 +29296,7 @@ function () {
       this.setTransform(newTransform._dup());
 
       if (this.recorder.isRecording) {
-        this.recorder.recordEvent('moved', this.getPath(), this.transform // this.state.movement.velocity.toString(),
+        this.recorder.recordEvent('moved', this.getPath(), this.transform.round(this.recorder.precision) // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -28535,12 +29377,7 @@ function () {
       this.state.movement.previousTime = -1;
 
       if (this.move.freely.callback) {
-        this.move.freely.callback(result); // if (result !== null && result !== undefined) {
-        //   this.animate.transform.callback(result);
-        // } else {
-        //   this.animate.transform.callback();
-        // }
-
+        this.execFn(this.move.freely.callback, result);
         this.move.freely.callback = null;
       }
     } // Take an input transform matrix, and output a list of transform matrices
@@ -28573,7 +29410,7 @@ function () {
         // draw). If the pulse time is 0, that means pulsing will loop
         // indefinitely.
 
-        if (deltaTime > this.pulseSettings.time && this.pulseSettings.time !== 0) {
+        if (deltaTime >= this.pulseSettings.time && this.pulseSettings.time !== 0) {
           // this.state.isPulsing = false;
           this.stopPulsing(true);
           deltaTime = this.pulseSettings.time;
@@ -28583,15 +29420,17 @@ function () {
 
         for (var i = 0; i < this.pulseSettings.num; i += 1) {
           // Get the current pulse magnitude
-          var pulseMag = this.pulseSettings.style(deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
+          var pulseMag = this.execFn(this.pulseSettings.style, deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
-          var pTransform = this.pulseSettings.transformMethod(pulseMag, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.pulseSettings.delta)); // if(this.name === '_radius') {
+          var pTransform = this.execFn(this.pulseSettings.transformMethod, pulseMag, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.pulseSettings.delta)); // if(this.name === '_radius') {
           // }
           // Transform the current transformMatrix by the pulse transform matrix
           // const pMatrix = m2.mul(m2.copy(transform), pTransform.matrix());
-          // Push the pulse transformed matrix to the array of pulse matrices
+          // Push the pulse transformed matrix to the array of pulse matrices\
 
-          pulseTransforms.push(transform.transform(pTransform));
+          if (pTransform != null) {
+            pulseTransforms.push(transform.transform(pTransform));
+          }
         } // If not pulsing, then make no changes to the transformMatrix.
 
       } else {
@@ -28712,7 +29551,7 @@ function () {
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
         this.pulseSettings.callback = null;
-        callback(result);
+        this.execFn(callback, result);
       }
     }
   }, {
@@ -29055,7 +29894,7 @@ function () {
     value: function diagramSpaceToVertexSpaceTransformMatrix() {
       // Diagram transform will always be two
       var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.lastDrawElementTransformPosition.elementCount, this.lastDrawTransform.order.length - 2));
-      return _tools_m2__WEBPACK_IMPORTED_MODULE_2__["inverse"](t.matrix());
+      return _tools_m2__WEBPACK_IMPORTED_MODULE_3__["inverse"](t.matrix());
     }
   }, {
     key: "vertexToDiagramSpaceTransformMatrix",
@@ -29089,7 +29928,7 @@ function () {
       var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
       var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
       var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.transform.order.length));
-      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_2__["inverse"](t.matrix()));
+      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_3__["inverse"](t.matrix()));
       this.setPosition(newLocation._dup());
     }
   }, {
@@ -29287,7 +30126,8 @@ function () {
     key: "click",
     value: function click() {
       if (this.onClick !== null && this.onClick !== undefined) {
-        this.onClick(this);
+        // this.onClick(this);
+        this.execFn(this.onClick, this);
       }
     } // setMovable(movable: boolean = true) {
     //   if (movable) {
@@ -29314,6 +30154,8 @@ var DiagramElementPrimitive =
 function (_DiagramElement) {
   _inherits(DiagramElementPrimitive, _DiagramElement);
 
+  // color: Array<number>;
+  // opacity: number;
   function DiagramElementPrimitive(drawingObject) {
     var _this3;
 
@@ -29339,6 +30181,12 @@ function (_DiagramElement) {
   }
 
   _createClass(DiagramElementPrimitive, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole']);
+    }
+  }, {
     key: "setAngleToDraw",
     value: function setAngleToDraw() {
       var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
@@ -29563,7 +30411,7 @@ function (_DiagramElement) {
         }
 
         if (this.beforeDrawCallback != null) {
-          this.beforeDrawCallback(now);
+          this.execFn(this.beforeDrawCallback, now);
         }
 
         this.animations.nextFrame(now);
@@ -29622,7 +30470,7 @@ function (_DiagramElement) {
         }
 
         if (this.afterDrawCallback != null) {
-          this.afterDrawCallback(now);
+          this.execFn(this.afterDrawCallback, now);
         }
       }
     }
@@ -29791,6 +30639,12 @@ function (_DiagramElement2) {
   }
 
   _createClass(DiagramElementCollection, [{
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this)), ['touchInBoundingRect', 'elements', 'hasTouchableElements']);
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       var collection = new DiagramElementCollection(); // collection.touchInBoundingRect = this.touchInBoundingRect;
@@ -29922,7 +30776,7 @@ function (_DiagramElement2) {
         }
 
         if (this.beforeDrawCallback != null) {
-          this.beforeDrawCallback(now);
+          this.execFn(this.beforeDrawCallback, now);
         }
 
         this.animations.nextFrame(now);
@@ -29960,7 +30814,8 @@ function (_DiagramElement2) {
         }
 
         if (this.afterDrawCallback != null) {
-          this.afterDrawCallback(now);
+          // this.afterDrawCallback(now);
+          this.execFn(this.afterDrawCallback, now);
         }
       }
     }
@@ -30015,7 +30870,7 @@ function (_DiagramElement2) {
         scale: 2
       };
 
-      if (typeof this.pulseDefault !== 'function') {
+      if (typeof this.pulseDefault !== 'function' && typeof this.pulseDefault !== 'string') {
         defaultPulseOptions.frequency = this.pulseDefault.frequency;
         defaultPulseOptions.time = this.pulseDefault.time;
         defaultPulseOptions.scale = this.pulseDefault.scale;
@@ -30114,41 +30969,34 @@ function (_DiagramElement2) {
       //     done,
       //   );
       // }
-    }
-  }, {
-    key: "pulseLegacy",
-    value: function pulseLegacy(elementsOrDone) {
-      var _this8 = this;
+    } // pulseLegacy(
+    //   elementsOrDone: ?(Array<string | DiagramElement> | (mixed) => void),
+    //   // elementsToPulse: Array<string | DiagramElement>,
+    //   done: ?(mixed) => void = null,
+    // ) {
+    //   if (elementsOrDone == null || typeof elementsOrDone === 'function') {
+    //     super.pulse(elementsOrDone);
+    //     return;
+    //   }
+    //   let doneToUse = done;
+    //   elementsOrDone.forEach((elementToPulse) => {
+    //     let element: ?DiagramElement;
+    //     if (typeof elementToPulse === 'string') {
+    //       element = this.getElement(elementToPulse);
+    //     } else {
+    //       element = elementToPulse;
+    //     }
+    //     if (element != null) {
+    //       // element.pulseDefault(doneToUse);
+    //       element.pulse(doneToUse);
+    //       doneToUse = null;
+    //     }
+    //   });
+    //   if (doneToUse != null) {
+    //     doneToUse();
+    //   }
+    // }
 
-      var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-      if (elementsOrDone == null || typeof elementsOrDone === 'function') {
-        _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, elementsOrDone);
-
-        return;
-      }
-
-      var doneToUse = done;
-      elementsOrDone.forEach(function (elementToPulse) {
-        var element;
-
-        if (typeof elementToPulse === 'string') {
-          element = _this8.getElement(elementToPulse);
-        } else {
-          element = elementToPulse;
-        }
-
-        if (element != null) {
-          // element.pulseDefault(doneToUse);
-          element.pulse(doneToUse);
-          doneToUse = null;
-        }
-      });
-
-      if (doneToUse != null) {
-        doneToUse();
-      }
-    }
   }, {
     key: "getElement",
     value: function getElement() {
@@ -30190,11 +31038,11 @@ function (_DiagramElement2) {
   }, {
     key: "getElements",
     value: function getElements(children) {
-      var _this9 = this;
+      var _this8 = this;
 
       var elements = [];
       children.forEach(function (child) {
-        var element = _this9.getElement(child);
+        var element = _this8.getElement(child);
 
         if (element != null) {
           elements.push(element);
@@ -30382,7 +31230,7 @@ function (_DiagramElement2) {
   }, {
     key: "getBoundaries",
     value: function getBoundaries() {
-      var _this10 = this;
+      var _this9 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -30393,7 +31241,7 @@ function (_DiagramElement2) {
       }
 
       children.forEach(function (child) {
-        var e = _this10.getElement(child);
+        var e = _this9.getElement(child);
 
         if (e == null) {
           return;
@@ -30484,7 +31332,7 @@ function (_DiagramElement2) {
   }, {
     key: "getBoundingRect",
     value: function getBoundingRect() {
-      var _this11 = this;
+      var _this10 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -30496,7 +31344,7 @@ function (_DiagramElement2) {
 
       var points = [];
       children.forEach(function (child) {
-        var e = _this11.getElement(child);
+        var e = _this10.getElement(child);
 
         if (e == null) {
           return;
@@ -30517,7 +31365,7 @@ function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var _this12 = this;
+      var _this11 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -30529,7 +31377,7 @@ function (_DiagramElement2) {
 
       var points = [];
       elementsToBound.forEach(function (element) {
-        var e = _this12.getElement(element);
+        var e = _this11.getElement(element);
 
         if (e == null) {
           return;
@@ -30719,7 +31567,7 @@ function (_DiagramElement2) {
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
-      var _this13 = this;
+      var _this12 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -30732,7 +31580,7 @@ function (_DiagramElement2) {
         var e;
 
         if (typeof element === 'string') {
-          e = _this13.getElement(element);
+          e = _this12.getElement(element);
         } else {
           e = element;
         }
@@ -30780,7 +31628,7 @@ function (_DiagramElement2) {
           element.transform = elementTransforms[element.name];
 
           if (element.internalSetTransformCallback) {
-            element.internalSetTransformCallback(element.transform);
+            this.execFn(element.internalSetTransformCallback, element.transform);
           }
         }
       }
@@ -30788,11 +31636,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this14 = this;
+      var _this13 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this14.elements[a];
-        var elemB = _this14.elements[b];
+        var elemA = _this13.elements[a];
+        var elemB = _this13.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -30814,7 +31662,7 @@ function (_DiagramElement2) {
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_3__["easeinout"];
+      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'tools.math.easeinout';
       var callbackMethod = callback;
       var timeToAnimate = 0;
 
@@ -30839,14 +31687,14 @@ function (_DiagramElement2) {
             element.transform = elementTransforms[element.name]._dup();
 
             if (element.internalSetTransformCallback) {
-              element.internalSetTransformCallback(element.transform);
+              this.execFn(element.internalSetTransformCallback, element.transform);
             }
           }
         }
       }
 
       if (timeToAnimate === 0 && callbackMethod != null) {
-        callbackMethod(true);
+        this.execFn(callbackMethod, true); // callbackMethod(true);
       }
 
       return timeToAnimate;
@@ -31075,6 +31923,23 @@ function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
         element.saveScenarios(scenarioName);
       }
+    } // _finishSetState(diagram: Diagram) {
+    //   super._finishSetState(diagram);
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     element._finishSetState(diagram);
+    //   }
+    // }
+
+  }, {
+    key: "setTimeDelta",
+    value: function setTimeDelta(delta) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setTimeDelta", this).call(this, delta);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setTimeDelta(delta);
+      }
     }
   }]);
 
@@ -31082,6 +31947,78 @@ function (_DiagramElement2) {
 }(DiagramElement);
 
 
+
+/***/ }),
+
+/***/ "./src/js/diagram/FunctionMap.js":
+/*!***************************************!*\
+  !*** ./src/js/diagram/FunctionMap.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import type { Transform } from '../tools/g2';
+// import { Point, getTransform, Transform } from '../tools/g2';
+// import { round } from '../tools/math';
+// import type { DiagramElement } from './Element';
+// import GlobalAnimation from './webgl/GlobalAnimation';
+// Singleton class that contains projects global functions
+var FunctionMap =
+/*#__PURE__*/
+function () {
+  function FunctionMap() {
+    _classCallCheck(this, FunctionMap);
+
+    // If the instance alread exists, then don't create a new instance.
+    // If it doesn't, then setup some default values.
+    if (!FunctionMap.instance) {
+      FunctionMap.instance = this;
+      this.map = {};
+    }
+
+    return FunctionMap.instance;
+  }
+
+  _createClass(FunctionMap, [{
+    key: "add",
+    value: function add(id, fn) {
+      this.map[id] = {
+        fn: fn
+      };
+    }
+  }, {
+    key: "exec",
+    value: function exec(id) {
+      if (this.map[id] != null) {
+        var _this$map$id;
+
+        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+          args[_key - 1] = arguments[_key];
+        }
+
+        if (args.length === 0) {
+          return this.map[id].fn();
+        }
+
+        return (_this$map$id = this.map[id]).fn.apply(_this$map$id, args);
+      }
+
+      return null;
+    }
+  }]);
+
+  return FunctionMap;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (FunctionMap);
 
 /***/ }),
 
@@ -31276,6 +32213,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
  // Singleton class that contains projects global variables
 
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', "data:text/plain;charset=utf-8,".concat(encodeURIComponent(text)));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  var _document = document,
+      body = _document.body;
+
+  if (body != null) {
+    body.appendChild(element);
+    element.click();
+    body.removeChild(element);
+  }
+}
+
 var Recorder =
 /*#__PURE__*/
 function () {
@@ -31287,7 +32239,7 @@ function () {
   // nextDrawQueue: Array<(number) => void>;
   function Recorder(diagramTouchDown, diagramTouchUp, // diagramCursorMove?: (Point) => void,
   // diagramTouchMoveDown?: (Point, Point) => boolean,
-  diagramCursorMove, animateNextFrame, getElement) {
+  diagramCursorMove, animateNextFrame, getElement, getState) {
     _classCallCheck(this, Recorder);
 
     // If the instance alread exists, then don't create a new instance.
@@ -31297,6 +32249,7 @@ function () {
       this.events = [];
       this.isRecording = false;
       this.precision = 5;
+      this.stateTimeStep = 1000;
 
       if (diagramTouchDown) {
         this.touchDown = diagramTouchDown;
@@ -31322,6 +32275,10 @@ function () {
 
       if (getElement) {
         this.getElement = getElement;
+      }
+
+      if (getState) {
+        this.getState = getState;
       } // this.drawScene = this.draw.bind(this);
 
     }
@@ -31344,14 +32301,18 @@ function () {
   }, {
     key: "start",
     value: function start() {
+      this.events = [];
+      this.slides = [];
+      this.states = [];
       this.startTime = this.timeStamp();
       this.isRecording = true;
-      this.events = [];
+      this.queueRecordState(0);
     }
   }, {
     key: "stop",
     value: function stop() {
       this.isRecording = false;
+      clearTimeout(this.stateTimeout);
     }
   }, {
     key: "recordEvent",
@@ -31365,25 +32326,139 @@ function () {
       }
 
       args.forEach(function (arg) {
-        if (arg instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
-          out.push(arg.toString(5));
-        } else if (typeof arg === 'string') {
-          out.push("\"".concat(arg, "\""));
-        } else if (typeof arg === 'number') {
+        if (typeof arg === 'number' && _this.precision > -1) {
           out.push(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(arg, _this.precision));
-        } else {
-          out.push(arg);
+          return;
         }
+
+        out.push(arg);
       });
       this.events.push([this.now() / 1000].concat(out));
+    }
+  }, {
+    key: "recordState",
+    value: function recordState(state) {
+      this.states.push([this.now() / 1000, state]);
+    }
+  }, {
+    key: "recordSlide",
+    value: function recordSlide(slide) {
+      this.slides.push([this.now() / 1000, slide]);
     }
   }, {
     key: "show",
     value: function show() {
       // eslint-disable-line class-methods-use-this
+      // this.showState();
+      // this.showEvents();
+      this.showAll();
+    }
+  }, {
+    key: "showEvents",
+    value: function showEvents() {
+      var _this2 = this;
+
       var wnd = window.open('about:blank', '', '_blank');
       this.events.forEach(function (event) {
-        wnd.document.write("[".concat(event.join(','), "],"), '<br>');
+        var out = [];
+        event.forEach(function (arg) {
+          if (arg instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+            out.push(arg.toString(5));
+          } else if (typeof arg === 'string') {
+            out.push("\"".concat(arg, "\""));
+          } else if (typeof arg === 'number') {
+            out.push(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(arg, _this2.precision));
+          } else {
+            out.push(arg);
+          }
+        });
+        wnd.document.write("[".concat(out.join(','), "],"), '<br>');
+      });
+    }
+  }, {
+    key: "showState",
+    value: function showState() {
+      var wnd = window.open('about:blank', '', '_blank');
+      this.states.forEach(function (state) {
+        // const out = [];
+        // event.forEach((arg) => {
+        //   if (arg instanceof Transform) {
+        //     out.push(arg.toString(5));
+        //   } else if (typeof arg === 'string') {
+        //     out.push(`"${arg}"`);
+        //   } else if (typeof arg === 'number') {
+        //     out.push(round(arg, this.precision));
+        //   } else {
+        //     out.push(arg);
+        //   }
+        // });
+        // wnd.document.write(`[${out.join(',')}],`, '<br>');
+        wnd.document.write(JSON.stringify(state), '<br>');
+      });
+    }
+  }, {
+    key: "save",
+    value: function save() {
+      var slidesOut = [];
+      this.slides.forEach(function (slide) {
+        slidesOut.push(JSON.stringify(slide));
+      });
+      var eventsOut = [];
+      this.events.forEach(function (event) {
+        eventsOut.push(JSON.stringify(event));
+      });
+      var statesOut = [];
+      this.states.forEach(function (state) {
+        statesOut.push(JSON.stringify(state));
+      });
+      var dateStr = new Date().toISOString();
+      var location = window.location.pathname.replace('/', '_');
+      download("".concat(dateStr, " ").concat(location, " slides.txt"), slidesOut.join('\n'));
+      download("".concat(dateStr, " ").concat(location, " events.txt"), eventsOut.join('\n'));
+      download("".concat(dateStr, " ").concat(location, " states.txt"), statesOut.join('\n'));
+    }
+  }, {
+    key: "showAll",
+    value: function showAll() {
+      var _this3 = this;
+
+      var wnd = window.open('about:blank', '', '_blank');
+      this.slides.forEach(function (slide) {
+        wnd.document.write(JSON.stringify(slide), '<br>');
+      });
+      wnd.document.write('<br><br>');
+      wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
+      wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
+      wnd.document.write('<br><br>');
+      this.events.forEach(function (event) {
+        // const out = [];
+        // event.forEach((arg) => {
+        //   if (arg instanceof Transform) {
+        //     out.push(arg.toString(5));
+        //   } else if (typeof arg === 'string') {
+        //     out.push(`"${arg}"`);
+        //   } else if (typeof arg === 'number') {
+        //     out.push(round(arg, this.precision));
+        //   } else {
+        //     out.push(arg);
+        //   }
+        // });
+        // wnd.document.write(`[${out.join(',')}],`, '<br>');
+        var rounded = event.map(function (e) {
+          if (typeof e === 'number') {
+            return Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(e, _this3.precision);
+          }
+
+          return e;
+        });
+        wnd.document.write(JSON.stringify(rounded), '<br>');
+      });
+      wnd.document.write('<br><br>');
+      wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
+      wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
+      wnd.document.write('<br><br>');
+      this.states.forEach(function (state) {
+        wnd.document.write(JSON.stringify(state), '<br>');
       });
     }
   }, {
@@ -31521,6 +32596,20 @@ function () {
 
             break;
           }
+
+        case 'click':
+          {
+            var _event6 = _slicedToArray(event, 2),
+                id = _event6[1];
+
+            var _element2 = document.getElementById(id);
+
+            if (_element2 != null) {
+              _element2.click();
+            }
+
+            break;
+          }
         // case 'cursorMoved': {
         //   const [, x, y] = event;
         //   this.
@@ -31528,38 +32617,38 @@ function () {
 
         case 'stopBeingMoved':
           {
-            var _event6 = _slicedToArray(event, 4),
-                _elementPath2 = _event6[1],
-                _transformDefinition = _event6[2],
-                velocityDefinition = _event6[3];
+            var _event7 = _slicedToArray(event, 4),
+                _elementPath2 = _event7[1],
+                _transformDefinition = _event7[2],
+                velocityDefinition = _event7[3];
 
-            var _element2 = this.getElement(_elementPath2);
+            var _element3 = this.getElement(_elementPath2);
 
             var _transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_transformDefinition);
 
             var velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(velocityDefinition);
-            _element2.transform = _transform;
-            _element2.state.movement.velocity = velocity;
+            _element3.transform = _transform;
+            _element3.state.movement.velocity = velocity;
 
-            _element2.stopBeingMoved();
+            _element3.stopBeingMoved();
 
             break;
           }
 
         case 'startMovingFreely':
           {
-            var _event7 = _slicedToArray(event, 4),
-                _elementPath3 = _event7[1],
-                _transformDefinition2 = _event7[2],
-                _velocityDefinition = _event7[3];
+            var _event8 = _slicedToArray(event, 4),
+                _elementPath3 = _event8[1],
+                _transformDefinition2 = _event8[2],
+                _velocityDefinition = _event8[3];
 
-            var _element3 = this.getElement(_elementPath3);
+            var _element4 = this.getElement(_elementPath3);
 
             var _transform2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_transformDefinition2);
 
             var _velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(_velocityDefinition);
 
-            _element3.simulateStartMovingFreely(_transform2, _velocity);
+            _element4.simulateStartMovingFreely(_transform2, _velocity);
 
             break;
           }
@@ -31571,7 +32660,7 @@ function () {
   }, {
     key: "queuePlaybackEvent",
     value: function queuePlaybackEvent() {
-      var _this2 = this;
+      var _this4 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
@@ -31581,8 +32670,25 @@ function () {
       }
 
       this.nextTimeout = setTimeout(function () {
-        if (_this2.isPlaying) {
-          _this2.playbackEvent();
+        if (_this4.isPlaying) {
+          _this4.playbackEvent();
+        }
+      }, time);
+    }
+  }, {
+    key: "queueRecordState",
+    value: function queueRecordState() {
+      var _this5 = this;
+
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      // if (time === 0) {
+      //   this.recordState(this.getState());
+      // }
+      this.stateTimeout = setTimeout(function () {
+        if (_this5.isRecording) {
+          _this5.recordState(_this5.getState());
+
+          _this5.queueRecordState(_this5.stateTimeStep);
         }
       }, time);
     }
@@ -31591,8 +32697,8 @@ function () {
     value: function playbackEvent() {
       var event = this.events[this.eventIndex];
 
-      var _event8 = _slicedToArray(event, 1),
-          currentTime = _event8[0];
+      var _event9 = _slicedToArray(event, 1),
+          currentTime = _event9[0];
 
       this.processEvent(event.slice(1));
       this.animateNextFrame();
@@ -31640,6 +32746,399 @@ function () {
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Recorder);
+
+/***/ }),
+
+/***/ "./src/js/diagram/parseState.js":
+/*!**************************************!*\
+  !*** ./src/js/diagram/parseState.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
+
+
+
+function parseState(state, diagram) {
+  if (typeof state === 'number') {
+    return state;
+  }
+
+  if (typeof state === 'string') {
+    return state;
+  }
+
+  if (typeof state === 'boolean') {
+    return state;
+  }
+
+  if (state == null) {
+    return state;
+  }
+
+  if (Array.isArray(state)) {
+    var _out = [];
+    state.forEach(function (stateElement) {
+      _out.push(parseState(stateElement, diagram));
+    });
+    return _out;
+  }
+
+  if (state.f1Type != null) {
+    if (state.f1Type === 'rect') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getRect"])(state);
+    }
+
+    if (state.f1Type === 'p') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(state);
+    }
+
+    if (state.f1Type === 'tf') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(state);
+    }
+
+    if (state.f1Type === 't') {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Translation"](state);
+    }
+
+    if (state.f1Type === 's') {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Scale"](state);
+    }
+
+    if (state.f1Type === 'r') {
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rotation"](state);
+    }
+
+    if (state.f1Type === 'l') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getLine"])(state);
+    }
+
+    if (state.f1Type === 'de') {
+      return diagram.getElement(state.state);
+    }
+
+    if (state.f1Type === 'positionAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["PositionAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'rotationAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["RotationAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'scaleAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["ScaleAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'transformAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["TransformAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'colorAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["ColorAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'opacityAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["OpacityAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'pulseAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["PulseAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'customAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["CustomAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'delayAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["DelayStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'parallelAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["ParallelAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'serialAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["SerialAnimationStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'triggerAnimationStep') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["TriggerStep"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+
+    if (state.f1Type === 'animationBuilder') {
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_0__["AnimationBuilder"]()._fromState(parseState(state.state, diagram), diagram.getElement.bind(diagram));
+    }
+  }
+
+  var out = {};
+  Object.keys(state).forEach(function (property) {
+    out[property] = parseState(state[property], diagram);
+  });
+  return out;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (parseState);
+
+/***/ }),
+
+/***/ "./src/js/diagram/state.js":
+/*!*********************************!*\
+  !*** ./src/js/diagram/state.js ***!
+  \*********************************/
+/*! exports provided: setState, getState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setState", function() { return setState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+// import {
+//   PositionAnimationStep, AnimationBuilder,
+// } from './Animation/Animation';
+// import type Diagram from './Diagram';
+// import {
+//   getPoint, getTransform, getRect, getLine, Translation, Rotation, Scale,
+// } from '../tools/g2';
+// import parseState from './parseState';
+
+
+function getState(obj, stateProperties) {
+  var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+  // const stateProperties = this._getStateProperties();
+  // const path = this.getPath();
+  var state = {};
+
+  var processValue = function processValue(value) {
+    if (typeof value === 'string') {
+      return value;
+    }
+
+    if (typeof value === 'number') {
+      return value;
+    }
+
+    if (typeof value === 'boolean') {
+      return value;
+    }
+
+    if (value == null) {
+      return value;
+    }
+
+    if (value._def != null) {
+      return value._def(precision);
+    }
+
+    if (value._state != null) {
+      return value._state(precision);
+    }
+
+    if (Array.isArray(value)) {
+      var dupArray = [];
+      value.forEach(function (v) {
+        // console.log('array v', v);
+        dupArray.push(processValue(v));
+      });
+      return dupArray;
+    } // if (value._getState != null) {
+    //   console.log('v', value)
+    //   return value._getState();
+    // }
+
+
+    if (value._dup != null) {
+      return value._dup();
+    }
+
+    var out = {};
+    Object.keys(value).forEach(function (key) {
+      out[key] = processValue(value[key]);
+    });
+    return out; // return joinObjects({}, value);
+  }; // console.log(stateProperties)
+
+
+  stateProperties.forEach(function (prop) {
+    var processPath = function processPath(currentState, currentObj, remainingPath) {
+      var _remainingPath = _slicedToArray(remainingPath, 1),
+          nextLevel = _remainingPath[0];
+
+      if (remainingPath.length === 1) {
+        return [currentState, currentObj, remainingPath[0]];
+      }
+
+      if (currentState[nextLevel] == null) {
+        currentState[nextLevel] = {}; // eslint-disable-line no-param-reassign
+      }
+
+      if (currentObj[nextLevel] == null) {
+        return null;
+      }
+
+      return processPath(currentState[nextLevel], currentObj[nextLevel], remainingPath.slice(1));
+    };
+
+    var result = processPath(state, obj, prop.split('.'));
+
+    if (result == null) {
+      return;
+    }
+
+    var _result = _slicedToArray(result, 3),
+        statePath = _result[0],
+        objPath = _result[1],
+        remainingProp = _result[2];
+
+    statePath[remainingProp] = processValue(objPath[remainingProp]);
+  });
+  return state;
+} // function parseState(state: Object, diagram: Diagram) {
+//   if (typeof state === 'number') {
+//     return state;
+//   }
+//   if (typeof state === 'string') {
+//     return state;
+//   }
+//   if (typeof state === 'boolean') {
+//     return state;
+//   }
+//   if (state == null) {
+//     return state;
+//   }
+//   if (Array.isArray(state)) {
+//     const out = [];
+//     state.forEach((stateElement) => {
+//       out.push(parseState(stateElement, diagram));
+//     });
+//     return out;
+//   }
+//   if (state.f1Type != null) {
+//     if (state.f1Type === 'rect') {
+//       return getRect(state);
+//     }
+//     if (state.f1Type === 'p') {
+//       return getPoint(state);
+//     }
+//     if (state.f1Type === 'tf') {
+//       return getTransform(state);
+//     }
+//     if (state.f1Type === 't') {
+//       return new Translation(state);
+//     }
+//     if (state.f1Type === 's') {
+//       return new Scale(state);
+//     }
+//     if (state.f1Type === 'r') {
+//       return new Rotation(state);
+//     }
+//     if (state.f1Type === 'l') {
+//       return getLine(state);
+//     }
+//     if (state.f1Type === 'de') {
+//       return diagram.getElement(state.state);
+//     }
+//     if (state.f1Type === 'positionAnimationStep') {
+//       return new PositionAnimationStep()._fromState(
+//         parseState(state.state, diagram),
+//         diagram.getElement.bind(diagram),
+//       );
+//     }
+//     if (state.f1Type === 'animationBuilder') {
+//       return new AnimationBuilder()._fromState(
+//         parseState(state.state, diagram),
+//         diagram.getElement.bind(diagram),
+//       );
+//     }
+//   }
+//   const out = {};
+//   Object.keys(state).forEach((property) => {
+//     out[property] = parseState(state[property], diagram);
+//   });
+//   return out;
+// }
+
+
+function setState(obj, stateIn) {
+  Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(obj, stateIn); // const state = getDef(stateIn);
+  // Object.keys(state).forEach((prop) => {
+  //   const value = state[prop];
+  //   if (
+  //     typeof value === 'string'
+  //     || typeof value === 'number'
+  //     || typeof value === 'boolean'
+  //     || value === null) {
+  //   ) {
+  //     obj[prop] = value;
+  //   }
+  //   if (Array.isArray(value) && Array.isArray) {
+  //     for (let i = 0; i < value.length; i += 1)
+  //   }
+  //   if (obj[prop] != null && obj[prop]._setState != null) {
+  //     obj[prop]._setState(getDef(state[prop]));
+  //   } else {
+  //     setState(obj[prop], def())
+  //   }
+  // });
+} // function setState(obj: Object, state: Object) {
+//   const processValue = (value) => {
+//     if (
+//       typeof value === 'number'
+//       || typeof value === 'string'
+//       || typeof value === 'boolean'
+//       || value == null
+//     ) {
+//       return value;
+//     }
+//     if (Array.isArray(value)) {
+//       const out = [];
+//       value.forEach((v) => {
+//         out.push(processValue);
+//       });
+//       return out;
+//     }
+//     if (value._setState)
+//   };
+//   Object.keys(state).forEach((prop) => {
+//     const value = state[prop];
+//     if (
+//       typeof value === 'number'
+//       || typeof value === 'string'
+//       || typeof value === 'boolean'
+//       || value == null
+//     ) {
+//       obj[prop] = value; // eslint-disable-line no-param-reassign
+//       return;
+//     }
+//     if (Array.isArray(value)) {
+//       for (let i = 0; i < obj[prop].length; i += 1) {
+//         // eslint-disable-next-line no-param-reassign
+//         obj[prop][i] = setState(obj[prop][i], value);
+//       }
+//       return;
+//     }
+//     if (obj[prop]._setState != null) {
+//       obj[prop]._setState(value);
+//       return;
+//     }
+//     obj[prop] = setState(obj[prop], value); // eslint-disable-line no-param-reassign
+//   });
+// }
+
+
+
 
 /***/ }),
 
@@ -32437,7 +33936,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getPoints, quadBezierPoints, getRect, getTransform */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getPoints, quadBezierPoints, getRect, getTransform, getLine */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32479,15 +33978,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "quadBezierPoints", function() { return quadBezierPoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransform", function() { return getTransform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLine", function() { return getLine; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -32499,7 +33993,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -32507,36 +34007,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// 2D geometry functions including:
-//  - Point
-//  - Line
-//  - minAngleDiff
-//  - normAngle
  // import { Console } from '../../tools/tools';
 
- // function nullDefaultNum(input: number | null, defaultValue: number): number {
-//   if (input === null) {
-//     return defaultValue;
-//   }
-//   return input;
-// }
-// export type PointType = {
-//   x: number;
-//   y: number;
-//   _dup(): PointType;
-//   // sub(): PointType;
-//   // add(): PointType;
-//   // distance(): number;
-//   // round(): PointType;
-//   // rotate(): PointType;
-//   // isEqualTo: boolean;
-//   // isNotEqualTo: boolean;
-//   // isOnLine: boolean;
-//   // isOnUnboundLine: boolean;
-//   // console: void;
-//   // isInPolygon: boolean;
-//   // isOnPolygon: boolean;
-// };
+ // import { joinObjects } from './tools';
 
 function _quadraticBezier(P0, P1, P2, t) {
   return (1 - t) * ((1 - t) * P0 + t * P1) + t * ((1 - t) * P1 + t * P2);
@@ -32600,10 +34073,75 @@ function () {
     value: function _dup() {
       return new Rect(this.left, this.bottom, this.width, this.height);
     }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+      return {
+        f1Type: 'rect',
+        state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.width, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.height, precision)]
+      };
+    }
   }]);
 
   return Rect;
 }();
+
+function parseRect(rIn, onFail) {
+  if (rIn instanceof Rect) {
+    return rIn;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (rIn == null) {
+    return onFailToUse;
+  }
+
+  var r = rIn;
+
+  if (typeof r === 'string') {
+    try {
+      r = JSON.parse(r);
+    } catch (_unused) {
+      return onFailToUse;
+    }
+  }
+
+  if (Array.isArray(r) && r.length === 4) {
+    return new Rect(r[0], r[1], r[2], r[3]);
+  }
+
+  var _r = r,
+      f1Type = _r.f1Type,
+      state = _r.state;
+
+  if (f1Type != null && f1Type === 'rect' && state != null && Array.isArray([state]) && state.length === 4) {
+    var _state2 = _slicedToArray(state, 4),
+        l = _state2[0],
+        b = _state2[1],
+        w = _state2[2],
+        h = _state2[3];
+
+    return new Rect(l, b, w, h);
+  }
+
+  return onFailToUse;
+}
+
+function getRect(r) {
+  var parsedRect = parseRect(r);
+
+  if (parsedRect == null) {
+    parsedRect = new Rect(0, 0, 1, 1);
+  }
+
+  return parsedRect;
+}
 /* eslint-disable comma-dangle */
 
 /**
@@ -32655,12 +34193,21 @@ function () {
     this.y = y;
     this._type = 'point';
   }
-  /**
-   * Return a duplicate of the {@link Point} object
-   */
-
 
   _createClass(Point, [{
+    key: "_state",
+    value: function _state() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return {
+        f1Type: 'p',
+        state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
+      };
+    }
+    /**
+     * Return a duplicate of the {@link Point} object
+     */
+
+  }, {
     key: "_dup",
     value: function _dup() {
       return new Point(this.x, this.y);
@@ -33075,16 +34622,30 @@ function () {
 // point can be defined as:
 //    - Point instance
 //    - [1, 1]
-//    - { x: 1, y: 1 }
-function parsePoint(p, onFail) {
-  if (p instanceof Point) {
-    return p;
+//    - { f1Type: 'p', def: [1, 1]}
+function parsePoint(pIn, onFail) {
+  if (pIn instanceof Point) {
+    return pIn;
   }
 
   var onFailToUse = onFail;
 
   if (onFailToUse == null) {
     onFailToUse = null;
+  }
+
+  if (pIn == null) {
+    return onFailToUse;
+  }
+
+  var p = pIn;
+
+  if (typeof p === 'string') {
+    try {
+      p = JSON.parse(p);
+    } catch (_unused2) {
+      return onFailToUse;
+    }
   }
 
   if (Array.isArray(p)) {
@@ -33095,17 +34656,27 @@ function parsePoint(p, onFail) {
     return onFailToUse;
   }
 
+  if (p.f1Type != null) {
+    if (p.f1Type === 'p' && p.state != null && Array.isArray([p.state]) && p.state.length === 2) {
+      var _p$state = _slicedToArray(p.state, 2),
+          x = _p$state[0],
+          y = _p$state[1];
+
+      return new Point(x, y);
+    }
+
+    return onFailToUse;
+  }
+
   if (typeof p === 'number') {
     return new Point(p, p);
-  }
+  } // if (typeof (p) === 'object') {
+  //   const keys = Object.keys(p);
+  //   if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
+  //     return new Point(p.x, p.y);
+  //   }
+  // }
 
-  if (_typeof(p) === 'object') {
-    var keys = Object.keys(p);
-
-    if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
-      return new Point(p.x, p.y);
-    }
-  }
 
   return onFailToUse;
 }
@@ -33120,41 +34691,14 @@ function getPoint(p) {
   return parsedPoint;
 }
 
-function parseRect(r, onFail) {
-  if (r instanceof Rect) {
-    return r;
-  }
-
-  var onFailToUse = onFail;
-
-  if (onFailToUse == null) {
-    onFailToUse = null;
-  }
-
-  if (Array.isArray(r) && r.length === 4) {
-    return new Rect(r[0], r[1], r[2], r[3]);
-  }
-
-  return onFailToUse;
-}
-
-function getRect(r) {
-  var parsedRect = parseRect(r);
-
-  if (parsedRect == null) {
-    parsedRect = new Rect(0, 0, 1, 1);
-  }
-
-  return parsedRect;
-}
-
 function getPoints(points) {
-  if (Array.isArray(points) && points.length > 0 && typeof points[0] === 'number') {
-    // $FlowFixMe
-    return [getPoint(points)];
-  }
-
   if (Array.isArray(points)) {
+    if (points.length === 2 && typeof points[0] === 'number') {
+      // $FlowFixMe
+      return [getPoint(points)];
+    } // $FlowFixMe
+
+
     return points.map(function (p) {
       return getPoint(p);
     });
@@ -33355,22 +34899,27 @@ function () {
 
     this.p1 = getPoint(p1);
 
-    if (p2OrMag instanceof Point || Array.isArray(p2OrMag)) {
-      this.p2 = getPoint(p2OrMag);
-      this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
-    } else {
+    if (typeof p2OrMag === 'number') {
       this.p2 = this.p1.add(p2OrMag * Math.cos(angle), p2OrMag * Math.sin(angle));
       this.ang = angle;
-    } // this.A = this.p2.y - this.p1.y;
-    // this.B = this.p1.x - this.p2.x;
-    // this.C = this.A * this.p1.x + this.B * this.p1.y;
-    // this.distance = distance(this.p1, this.p2);
-
+    } else {
+      this.p2 = getPoint(p2OrMag);
+      this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
+    }
 
     this.setupLine();
   }
 
   _createClass(Line, [{
+    key: "_state",
+    value: function _state() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return {
+        f1Type: 'l',
+        state: [[Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.y, precision)], [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.y, precision)]]
+      };
+    }
+  }, {
     key: "setupLine",
     value: function setupLine() {
       this.A = this.p2.y - this.p1.y;
@@ -33699,29 +35248,29 @@ function () {
           var line21 = new Line(l1.p2, l2.p1);
           var line22 = new Line(l1.p2, l2.p2);
 
-          var _i2 = line11.midPoint();
+          var _i3 = line11.midPoint();
 
           var len = line11.length();
 
           if (line12.length() < len) {
-            _i2 = line12.midPoint();
+            _i3 = line12.midPoint();
             len = line12.length();
           }
 
           if (line21.length() < len) {
-            _i2 = line21.midPoint();
+            _i3 = line21.midPoint();
             len = line21.length();
           }
 
           if (line22.length() < len) {
-            _i2 = line22.midPoint();
+            _i3 = line22.midPoint();
             len = line22.length();
           }
 
           return {
             onLine: true,
             inLine: false,
-            intersect: _i2
+            intersect: _i3
           };
         }
 
@@ -33753,16 +35302,16 @@ function () {
           midLine = new Line(l1.p2, l2.p2);
         }
 
-        var _i;
+        var _i2;
 
         if (midLine instanceof Line) {
-          _i = midLine.midPoint();
+          _i2 = midLine.midPoint();
         }
 
         return {
           onLine: true,
           inLine: true,
-          intersect: _i
+          intersect: _i2
         };
       }
 
@@ -33781,23 +35330,114 @@ function line(p1, p2) {
   return new Line(p1, p2);
 }
 
+// line can be defined as:
+//    - [[0, 0], [1, 0]]
+//    - [[0, 0], 1, 0]
+function parseLine(lIn, onFail) {
+  if (lIn instanceof Line) {
+    return lIn;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (lIn == null) {
+    return onFailToUse;
+  }
+
+  var l = lIn;
+
+  if (typeof l === 'string') {
+    try {
+      l = JSON.parse(l);
+    } catch (_unused3) {
+      return onFailToUse;
+    }
+  }
+
+  if (Array.isArray(l)) {
+    if (l.length === 3) {
+      return new Line(getPoint(l[0]), l[1], l[2]);
+    }
+
+    if (l.length === 2) {
+      return new Line(getPoint(l[0]), getPoint(l[1]));
+    }
+
+    return onFailToUse;
+  }
+
+  if (l.f1Type != null) {
+    if (l.f1Type === 'l' && l.state != null && Array.isArray([l.state]) && l.state.length === 2) {
+      var _l$state = _slicedToArray(l.state, 2),
+          p1 = _l$state[0],
+          p2 = _l$state[1];
+
+      return new Line(getPoint(p1), getPoint(p2));
+    }
+
+    return onFailToUse;
+  }
+
+  return onFailToUse;
+}
+
+function getLine(p) {
+  var parsedLine = parseLine(p);
+
+  if (parsedLine == null) {
+    parsedLine = new Line(new Point(0, 0), new Point(1, 0));
+  }
+
+  return parsedLine;
+}
+
 var Rotation =
 /*#__PURE__*/
 function () {
-  function Rotation(angle) {
-    var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  function Rotation(angleIn) {
+    var nameIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
     _classCallCheck(this, Rotation);
 
-    this.r = angle;
+    var name = nameIn;
+    var angle = angleIn;
+
+    if (typeof angle === 'string') {
+      try {
+        angle = JSON.parse(angle);
+      } catch (_unused4) {
+        angle = 0;
+      }
+    }
+
+    if (typeof angle === 'number') {
+      this.r = angle;
+    } else if (angle.f1Type != null && angle.f1Type === 'r' && angle.state != null && Array.isArray(angle.state) && angle.state.length === 2) {
+      var _angle$state = _slicedToArray(angle.state, 2),
+          n = _angle$state[0],
+          r = _angle$state[1];
+
+      name = n;
+      this.r = r;
+    } else {
+      this.r = 0;
+    }
+
     this.name = name;
   }
 
   _createClass(Rotation, [{
-    key: "toString",
-    value: function toString() {
+    key: "_state",
+    value: function _state() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
-      return "[\"r\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.r, precision), "]");
+      return {
+        f1Type: 'r',
+        state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.r, precision)]
+      };
     }
   }, {
     key: "matrix",
@@ -33843,20 +35483,49 @@ var Translation =
 function (_Point) {
   _inherits(Translation, _Point);
 
-  function Translation(tx) {
+  function Translation(txIn) {
     var _this;
 
-    var ty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+    var tyIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
     _classCallCheck(this, Translation);
 
+    var name = nameIn;
+    var tx = txIn;
+    var ty = tyIn;
+
+    if (typeof tx === 'string') {
+      try {
+        tx = JSON.parse(tx);
+      } catch (_unused5) {
+        tx = 0;
+      }
+
+      if (Array.isArray(tx) && tx.length === 2) {
+        var _tx = tx;
+
+        var _tx2 = _slicedToArray(_tx, 2);
+
+        tx = _tx2[0];
+        ty = _tx2[1];
+      }
+    }
+
     if (tx instanceof Point) {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, tx.x, tx.y)); // this.x = tx.x;
-      // this.y = tx.y;
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, tx.x, tx.y));
+    } else if (typeof tx === 'number') {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, tx, ty));
+    } else if (tx.f1Type != null && tx.f1Type === 't' && tx.state != null && Array.isArray(tx.state) && tx.state.length === 3) {
+      var _tx$state = _slicedToArray(tx.state, 3),
+          n = _tx$state[0],
+          x = _tx$state[1],
+          y = _tx$state[2];
+
+      name = n;
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, x, y));
     } else {
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, tx, ty)); // this.x = tx;
-      // this.y = ty;
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Translation).call(this, 0, 0));
     }
 
     _this.name = name;
@@ -33864,10 +35533,13 @@ function (_Point) {
   }
 
   _createClass(Translation, [{
-    key: "toString",
-    value: function toString() {
+    key: "_state",
+    value: function _state() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
-      return "[\"t\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), ",").concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision), "]");
+      return {
+        f1Type: 't',
+        state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
+      };
     }
   }, {
     key: "matrix",
@@ -33931,19 +35603,52 @@ var Scale =
 function (_Point2) {
   _inherits(Scale, _Point2);
 
-  function Scale(sx, sy) {
+  function Scale(sxIn, syIn) {
     var _this2;
 
-    var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+    var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
     _classCallCheck(this, Scale);
 
+    var name = nameIn;
+    var sx = sxIn;
+    var sy = syIn;
+
+    if (typeof sx === 'string') {
+      try {
+        sx = JSON.parse(sx);
+      } catch (_unused6) {
+        sx = 0;
+      }
+
+      if (Array.isArray(sx) && sx.length === 2) {
+        var _sx = sx;
+
+        var _sx2 = _slicedToArray(_sx, 2);
+
+        sx = _sx2[0];
+        sy = _sx2[1];
+      }
+    }
+
     if (sx instanceof Point) {
-      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, sx.x, sx.y)); // this.x = sx.x;
-      // this.y = sx.y;
+      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, sx.x, sx.y));
+    } else if (typeof sx === 'number') {
+      if (sy != null) {
+        _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, sx, sy));
+      } else {
+        _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, sx, sx));
+      }
+    } else if (sx.f1Type != null && sx.f1Type === 's' && sx.state != null && Array.isArray(sx.state) && sx.state.length === 3) {
+      var _sx$state = _slicedToArray(sx.state, 3),
+          n = _sx$state[0],
+          x = _sx$state[1],
+          y = _sx$state[2];
+
+      name = n;
+      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, x, y));
     } else {
-      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, sx, sy)); // this.x = sx;
-      // this.y = sy;
+      _this2 = _possibleConstructorReturn(this, _getPrototypeOf(Scale).call(this, 1, 1));
     }
 
     _this2.name = name;
@@ -33951,10 +35656,13 @@ function (_Point2) {
   }
 
   _createClass(Scale, [{
-    key: "toString",
-    value: function toString() {
+    key: "_state",
+    value: function _state() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
-      return "[\"s\",".concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), ",").concat(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision), "]");
+      return {
+        f1Type: 's',
+        state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
+      };
     }
   }, {
     key: "matrix",
@@ -34065,19 +35773,21 @@ function () {
   }
 
   _createClass(Transform, [{
-    key: "toString",
-    value: function toString() {
+    key: "_state",
+    value: function _state() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
       var out = [];
       this.order.forEach(function (transformElement) {
-        out.push(transformElement.toString(precision));
-      });
+        out.push(transformElement._state(precision));
+      }); // if (this.name !== '') {
+      //   // return [this.name, ...out];
+      //   out = [this.name, ...out];
+      // }
 
-      if (this.name !== '') {
-        return "[\"".concat(this.name, "\",").concat(out.join(','), "]");
-      }
-
-      return "[".concat(out.join(','), "]");
+      return {
+        f1Type: 'tf',
+        state: [this.name].concat(out)
+      };
     }
   }, {
     key: "standard",
@@ -34778,59 +36488,90 @@ function parseTransform(inTransform, onFail) {
     onFailToUse = null;
   }
 
-  var tToUse = inTransform;
-
-  if (typeof inTransform === 'string') {
-    tToUse = JSON.parse(inTransform);
-  }
-
-  if (!Array.isArray(tToUse)) {
+  if (inTransform == null) {
     return onFailToUse;
   }
 
-  if (tToUse.length === 0) {
-    return new Transform();
-  }
+  var tToUse = inTransform;
 
-  if (tToUse.length === 1 && typeof tToUse[0] === 'string') {
-    return new Transform(tToUse[0]);
-  }
-
-  var t = new Transform();
-  tToUse.forEach(function (transformElement) {
-    if (typeof transformElement === 'string') {
-      t.name = transformElement;
-      return;
+  if (typeof tToUse === 'string') {
+    try {
+      tToUse = JSON.parse(tToUse);
+    } catch (_unused7) {
+      return onFailToUse;
     }
+  }
 
-    if (transformElement.length === 3) {
-      var _transformElement = _slicedToArray(transformElement, 3),
-          _type = _transformElement[0],
-          x = _transformElement[1],
-          y = _transformElement[2];
-
-      if (_type === 's') {
-        t = t.scale(x, y);
-      } else {
-        t = t.translate(x, y);
+  if (Array.isArray(tToUse)) {
+    var t = new Transform();
+    tToUse.forEach(function (transformElement) {
+      if (typeof transformElement === 'string') {
+        t.name = transformElement;
+        return;
       }
 
-      return;
-    }
+      if (transformElement.length === 3) {
+        var _transformElement = _slicedToArray(transformElement, 3),
+            _type = _transformElement[0],
+            x = _transformElement[1],
+            y = _transformElement[2];
 
-    var _transformElement2 = _slicedToArray(transformElement, 2),
-        type = _transformElement2[0],
-        value = _transformElement2[1];
+        if (_type === 's') {
+          t = t.scale(x, y);
+        } else {
+          t = t.translate(x, y);
+        }
 
-    if (type === 's') {
-      t = t.scale(value, value);
-    } else if (type === 't') {
-      t = t.translate(value, value);
-    } else {
-      t = t.rotate(value);
-    }
-  });
-  return t;
+        return;
+      }
+
+      var _transformElement2 = _slicedToArray(transformElement, 2),
+          type = _transformElement2[0],
+          value = _transformElement2[1];
+
+      if (type === 's') {
+        t = t.scale(value, value);
+      } else if (type === 't') {
+        t = t.translate(value, value);
+      } else {
+        t = t.rotate(value);
+      }
+    });
+    return t;
+  }
+
+  var _tToUse = tToUse,
+      f1Type = _tToUse.f1Type,
+      state = _tToUse.state;
+
+  if (f1Type != null && f1Type === 'tf' && state != null && Array.isArray(state)) {
+    var _t2 = new Transform();
+
+    tToUse.state.forEach(function (transformElement) {
+      if (typeof transformElement === 'string') {
+        _t2.name = transformElement;
+        return;
+      }
+
+      var teF1Type = transformElement.f1Type;
+
+      if (teF1Type != null) {
+        if (teF1Type === 's') {
+          // $FlowFixMe
+          _t2 = _t2.scale(transformElement);
+        } else if (teF1Type === 't') {
+          // $FlowFixMe
+          _t2 = _t2.translate(transformElement);
+        } else if (teF1Type === 'r') {
+          // $FlowFixMe
+          _t2 = _t2.rotate(transformElement);
+        }
+      }
+    });
+    return _t2;
+  }
+
+  return onFailToUse;
 }
 
 function getTransform(t) {
@@ -35757,7 +37498,7 @@ function onClickId(id, actionMethod, bind) {
       var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["default"]();
 
       if (recorder.isRecording) {
-        recorder.recordEvent('click', 'id');
+        recorder.recordEvent('click', id);
       }
 
       actionMethod.bind.apply(actionMethod, _toConsumableArray(bind))();
