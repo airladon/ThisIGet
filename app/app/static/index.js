@@ -182,7 +182,7 @@ var tools = {
 var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
-  Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["default"],
+  Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["Recorder"],
   //
   DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElement"],
   DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElementCollection"],
@@ -4518,8 +4518,8 @@ function () {
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["default"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
-    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this));
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
+    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this));
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -20300,12 +20300,17 @@ function (_DiagramElementCollec) {
           line.pulseSettings.callback = oldPulseCallback;
         };
 
+        var finishPulsingName = "".concat(this.getPath(), "_finishPulsing");
+        this.fnMap.add(finishPulsingName, finishPulsing);
         line.pulseSettings.callback = finishPulsing;
 
-        line.pulseSettings.transformMethod = function (s) {
+        var scaleTransformMethod = function scaleTransformMethod(s) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
+        var scaleTransformMethodName = "".concat(this.getPath(), "_transformMethod");
+        this.fnMap.add(scaleTransformMethodName, scaleTransformMethod);
+        line.pulseSettings.transformMethod = scaleTransformMethodName;
         line.pulseScaleNow(1, options.line, 0, done);
         done = null;
       }
@@ -28139,7 +28144,7 @@ function () {
       parentCount: 0,
       elementCount: 0
     };
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
@@ -29266,7 +29271,7 @@ function () {
         return this.name;
       }
 
-      if (this.parent.name === 'diagramRoot') {
+      if (this.parent.name === 'diagramRoot' || this.parent.parent == null) {
         return this.name;
       }
 
@@ -32186,14 +32191,27 @@ function () {
 /*!************************************!*\
   !*** ./src/js/diagram/Recorder.js ***!
   \************************************/
-/*! exports provided: default */
+/*! exports provided: Recorder, getIndexOfEarliestTime, download, getIndexOfLatestTime, getLastUniqueIndeces, getNextIndexForTime, getPrevIndexForTime */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Recorder", function() { return Recorder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIndexOfEarliestTime", function() { return getIndexOfEarliestTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "download", function() { return download; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIndexOfLatestTime", function() { return getIndexOfLatestTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLastUniqueIndeces", function() { return getLastUniqueIndeces; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNextIndexForTime", function() { return getNextIndexForTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPrevIndexForTime", function() { return getPrevIndexForTime; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -32201,12 +32219,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 // import type { Transform } from '../tools/g2';
 
@@ -32228,18 +32240,204 @@ function download(filename, text) {
   }
 }
 
+function getIndexOfEarliestTime(events, index) {
+  if (index < 1) {
+    return index;
+  }
+
+  var i = index;
+  var same = true;
+  var time = events[index][0];
+
+  while (i > 0 && same) {
+    var prevTime = events[i - 1][0];
+
+    if (prevTime !== time) {
+      same = false;
+    } else {
+      i -= 1;
+    }
+  }
+
+  return i;
+}
+
+function getIndexOfLatestTime(events, index) {
+  var time = events[index][0];
+  var i = index;
+  var loop = true;
+
+  while (loop) {
+    if (i === events.length - 1) {
+      loop = false;
+    } else if (events[i + 1][0] === time) {
+      i += 1;
+    } else {
+      loop = false;
+    }
+  }
+
+  return Math.max(i, index);
+}
+
+function getLastUniqueIndeces(events, startIndex, endIndex) {
+  // const indeces = [];
+  var types = {};
+  var start = startIndex;
+
+  if (start < 0) {
+    start = 0;
+  }
+
+  for (var i = start; i <= endIndex; i += 1) {
+    var event = events[i];
+
+    var _event = _slicedToArray(event, 2),
+        type = _event[1];
+
+    types[type] = i;
+  }
+
+  return Object.values(types);
+}
+
+function getIndexRangeForTime(events, time) {
+  var startSearch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var endSearch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : events.length - 1;
+
+  if (events.length === 0) {
+    return [-1, -1];
+  }
+
+  var startTime = parseFloat(events[startSearch][0]);
+
+  if (time === startTime) {
+    return [startSearch, startSearch];
+  }
+
+  if (time < startTime) {
+    return [-1, startSearch];
+  }
+
+  var endTime = parseFloat(events[endSearch][0]);
+
+  if (time === endTime) {
+    return [endSearch, endSearch];
+  }
+
+  if (time > endTime) {
+    return [endSearch, -1];
+  }
+
+  var searchRange = endSearch - startSearch;
+
+  if (searchRange < 2) {
+    return [startSearch, endSearch];
+  }
+
+  var midSearch = startSearch + Math.floor(searchRange / 2);
+  var midTime = parseFloat(events[midSearch][0]);
+
+  if (time === midTime) {
+    return [midSearch, midSearch];
+  }
+
+  if (time < midTime) {
+    return getIndexRangeForTime(events, time, startSearch, midSearch);
+  }
+
+  return getIndexRangeForTime(events, time, midSearch, endSearch);
+}
+
+function getNextIndexForTime(events, time) {
+  var startSearch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var endSearch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : events.length - 1;
+  // // console.log(startSearch, endSearch)
+  // if (events.length === 0) {
+  //   return -1;
+  // }
+  // if (time === 0) {
+  //   return 0;
+  // }
+  // const startTime = parseFloat(events[startSearch][0]);
+  // if (time <= startTime) {
+  //   return startSearch;
+  // }
+  // const endTime = parseFloat(events[endSearch][0]);
+  // if (time > endTime) {
+  //   return -1;
+  // }
+  // if (startSearch === endSearch) {
+  //   return startSearch;
+  // }
+  // const searchRange = endSearch - startSearch;
+  // let midSearch = startSearch;
+  // if (searchRange > 1) {
+  //   midSearch = Math.floor(startSearch + searchRange / 2);
+  // } else if (searchRange === 1) {
+  //   midSearch = endSearch;
+  // }
+  // // console.log(startSearch, endSearch, midSearch)
+  // if (midSearch === 0) {
+  //   return 0;
+  // }
+  // const prevTime = events[midSearch - 1][0];
+  // const midTime = events[midSearch][0];
+  // if (time === midTime) {
+  //   return midSearch;
+  // }
+  // if (time <= midTime && time > prevTime) {
+  //   return midSearch;
+  // }
+  // if (time < midTime) {
+  //   return getNextIndexForTime(events, time, startSearch, midSearch);
+  // }
+  // return getNextIndexForTime(events, midSearch, endSearch);
+  var nextIndex = getIndexRangeForTime(events, time, startSearch, endSearch)[1];
+  return getIndexOfEarliestTime(events, nextIndex);
+}
+
+function getPrevIndexForTime(events, time) {
+  var startSearch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var endSearch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : events.length - 1;
+  // if (events.length === 0) {
+  //   return -1;
+  // }
+  // if (events.length < startSearch || events.length < endSearch) {
+  //   return -1;
+  // }
+  // console.log(time, events)
+  // const index = getNextIndexForTime(events, time, startSearch, endSearch);
+  // if (index === 0 || index === -1) {
+  //   return index;
+  // }
+  // return index - 1;
+  var prevIndex = getIndexRangeForTime(events, time, startSearch, endSearch)[0];
+  return getIndexOfEarliestTime(events, prevIndex);
+}
+
+function getTimeToIndex(events, eventIndex, time) {
+  if (eventIndex === -1 || eventIndex > events.length - 1) {
+    return -1;
+  }
+
+  var nextTime = events[eventIndex][0];
+  return nextTime - time;
+}
+
 var Recorder =
 /*#__PURE__*/
 function () {
   // Method for requesting the next animation frame
   // touchMoveDown: (Point, Point) => boolean;
+  // currentTime: number;
   // requestNextAnimationFrame: (()=>mixed) => AnimationFrameID;
   // animationId: AnimationFrameID;    // used to cancel animation frames
   // drawQueue: Array<(number) => void>;
   // nextDrawQueue: Array<(number) => void>;
   function Recorder(diagramTouchDown, diagramTouchUp, // diagramCursorMove?: (Point) => void,
   // diagramTouchMoveDown?: (Point, Point) => boolean,
-  diagramCursorMove, animateNextFrame, getElement, getState) {
+  diagramCursorMove, animateDiagramNextFrame, getElement, getState, setDiagramState) {
     _classCallCheck(this, Recorder);
 
     // If the instance alread exists, then don't create a new instance.
@@ -32247,9 +32445,14 @@ function () {
     if (!Recorder.instance) {
       Recorder.instance = this;
       this.events = [];
+      this.slides = [];
+      this.states = [];
       this.isRecording = false;
       this.precision = 5;
       this.stateTimeStep = 1000;
+      this.lastShownEventIndex = -1;
+      this.lastShownStateIndex = -1;
+      this.lastShownSlideIndex = -1;
 
       if (diagramTouchDown) {
         this.touchDown = diagramTouchDown;
@@ -32257,20 +32460,17 @@ function () {
 
       if (diagramTouchUp) {
         this.touchUp = diagramTouchUp;
-      } // if (diagramTouchMoveDown) {
-      //   this.touchMoveDown = diagramTouchMoveDown;
-      // }
-
+      }
 
       if (diagramCursorMove) {
         this.cursorMove = diagramCursorMove;
       }
 
-      this.queueNextFrame = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]();
+      this.animation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]();
       this.previousPoint = null;
 
-      if (animateNextFrame) {
-        this.animateNextFrame = animateNextFrame;
+      if (animateDiagramNextFrame) {
+        this.animateDiagramNextFrame = animateDiagramNextFrame;
       }
 
       if (getElement) {
@@ -32279,12 +32479,24 @@ function () {
 
       if (getState) {
         this.getState = getState;
-      } // this.drawScene = this.draw.bind(this);
+      }
 
+      if (setDiagramState) {
+        this.setDiagramState = setDiagramState;
+      }
+
+      this.nextSlide = null;
+      this.prevSlide = null;
+      this.goToSlide = null;
     }
 
     return Recorder.instance;
-  }
+  } // ////////////////////////////////////
+  // ////////////////////////////////////
+  // Time
+  // ////////////////////////////////////
+  // ////////////////////////////////////
+
 
   _createClass(Recorder, [{
     key: "timeStamp",
@@ -32299,12 +32511,51 @@ function () {
       return this.timeStamp() - this.startTime;
     }
   }, {
+    key: "getCurrentTime",
+    value: function getCurrentTime() {
+      return this.now() / 1000;
+    }
+  }, {
+    key: "setStartTime",
+    value: function setStartTime() {
+      var fromTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.startTime = this.timeStamp() - fromTime * 1000;
+    }
+  }, {
+    key: "getTotalTime",
+    value: function getTotalTime() {
+      var time = 0;
+
+      if (this.slides.length > 0) {
+        var endTime = this.slides.slice(-1)[0][0];
+        time = Math.max(time, endTime);
+      }
+
+      if (this.events.length > 0) {
+        var _endTime = this.events.slice(-1)[0][0];
+        time = Math.max(time, _endTime);
+      }
+
+      if (this.states.length > 0) {
+        var _endTime2 = this.states.slice(-1)[0][0];
+        time = Math.max(time, _endTime2);
+      }
+
+      return time;
+    } // ////////////////////////////////////
+    // ////////////////////////////////////
+    // Recording
+    // ////////////////////////////////////
+    // ////////////////////////////////////
+
+  }, {
     key: "start",
     value: function start() {
       this.events = [];
       this.slides = [];
       this.states = [];
       this.startTime = this.timeStamp();
+      this.isPlaying = false;
       this.isRecording = true;
       this.queueRecordState(0);
     }
@@ -32334,6 +32585,21 @@ function () {
         out.push(arg);
       });
       this.events.push([this.now() / 1000].concat(out));
+    } // States are recorded every second
+
+  }, {
+    key: "queueRecordState",
+    value: function queueRecordState() {
+      var _this2 = this;
+
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.stateTimeout = setTimeout(function () {
+        if (_this2.isRecording) {
+          _this2.recordState(_this2.getState());
+
+          _this2.queueRecordState(_this2.stateTimeStep);
+        }
+      }, time);
     }
   }, {
     key: "recordState",
@@ -32342,59 +32608,13 @@ function () {
     }
   }, {
     key: "recordSlide",
-    value: function recordSlide(slide) {
-      this.slides.push([this.now() / 1000, slide]);
+    value: function recordSlide(direction, slide) {
+      this.slides.push([this.now() / 1000, direction, slide]);
     }
   }, {
-    key: "show",
-    value: function show() {
-      // eslint-disable-line class-methods-use-this
-      // this.showState();
-      // this.showEvents();
-      this.showAll();
-    }
-  }, {
-    key: "showEvents",
-    value: function showEvents() {
-      var _this2 = this;
-
-      var wnd = window.open('about:blank', '', '_blank');
-      this.events.forEach(function (event) {
-        var out = [];
-        event.forEach(function (arg) {
-          if (arg instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
-            out.push(arg.toString(5));
-          } else if (typeof arg === 'string') {
-            out.push("\"".concat(arg, "\""));
-          } else if (typeof arg === 'number') {
-            out.push(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(arg, _this2.precision));
-          } else {
-            out.push(arg);
-          }
-        });
-        wnd.document.write("[".concat(out.join(','), "],"), '<br>');
-      });
-    }
-  }, {
-    key: "showState",
-    value: function showState() {
-      var wnd = window.open('about:blank', '', '_blank');
-      this.states.forEach(function (state) {
-        // const out = [];
-        // event.forEach((arg) => {
-        //   if (arg instanceof Transform) {
-        //     out.push(arg.toString(5));
-        //   } else if (typeof arg === 'string') {
-        //     out.push(`"${arg}"`);
-        //   } else if (typeof arg === 'number') {
-        //     out.push(round(arg, this.precision));
-        //   } else {
-        //     out.push(arg);
-        //   }
-        // });
-        // wnd.document.write(`[${out.join(',')}],`, '<br>');
-        wnd.document.write(JSON.stringify(state), '<br>');
-      });
+    key: "recordClick",
+    value: function recordClick(id) {
+      this.events.push([this.now(), id]);
     }
   }, {
     key: "save",
@@ -32418,8 +32638,8 @@ function () {
       download("".concat(dateStr, " ").concat(location, " states.txt"), statesOut.join('\n'));
     }
   }, {
-    key: "showAll",
-    value: function showAll() {
+    key: "show",
+    value: function show() {
       var _this3 = this;
 
       var wnd = window.open('about:blank', '', '_blank');
@@ -32431,19 +32651,6 @@ function () {
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write('<br><br>');
       this.events.forEach(function (event) {
-        // const out = [];
-        // event.forEach((arg) => {
-        //   if (arg instanceof Transform) {
-        //     out.push(arg.toString(5));
-        //   } else if (typeof arg === 'string') {
-        //     out.push(`"${arg}"`);
-        //   } else if (typeof arg === 'number') {
-        //     out.push(round(arg, this.precision));
-        //   } else {
-        //     out.push(arg);
-        //   }
-        // });
-        // wnd.document.write(`[${out.join(',')}],`, '<br>');
         var rounded = event.map(function (e) {
           if (typeof e === 'number') {
             return Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(e, _this3.precision);
@@ -32460,99 +32667,163 @@ function () {
       this.states.forEach(function (state) {
         wnd.document.write(JSON.stringify(state), '<br>');
       });
+    } // ////////////////////////////////////
+    // ////////////////////////////////////
+    // Scrubbing
+    // ////////////////////////////////////
+    // ////////////////////////////////////
+
+  }, {
+    key: "scrub",
+    value: function scrub(percentTime) {
+      this.stopPlayback();
+      var totalTime = this.getTotalTime();
+      var timeTarget = percentTime * totalTime;
+      this.setToTime(timeTarget);
     }
   }, {
-    key: "recordClick",
-    value: function recordClick(id) {
-      this.events.push([this.now(), id]);
-    }
+    key: "setToTime",
+    value: function setToTime(time) {
+      this.slideIndex = Math.max(getPrevIndexForTime(this.slides, time), 0);
+      this.stateIndex = Math.max(getPrevIndexForTime(this.states, time), 0);
+      this.setSlide(this.slideIndex, true);
+      this.setState(this.stateIndex);
+      this.animateDiagramNextFrame();
+    } // ////////////////////////////////////
+    // ////////////////////////////////////
+    // Playback
+    // ////////////////////////////////////
+    // ////////////////////////////////////
+
   }, {
     key: "startPlayback",
     value: function startPlayback() {
       var fromTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var showPointer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      this.lastShownEventIndex = -1;
+      this.lastShownStateIndex = -1;
+      this.lastShownSlideIndex = -1;
       this.isRecording = false;
-      this.isPlaying = true;
-      this.eventIndex = 0;
+      this.isPlaying = true; // this.eventIndex = 0;
+      // this.stateIndex = 0;
+      // this.slideIndex = 0;
+
       this.previousPoint = null;
-      this.touchUp();
-      this.eventIndex = this.getNextIndexForTime(fromTime);
-      this.queuePlaybackEvent(this.getTimeToIndex(fromTime)); // this.playbackEvent(this.getTimeToIndex);
-    }
-  }, {
-    key: "getTimeToIndex",
-    value: function getTimeToIndex(time) {
-      if (this.eventIndex === -1 || this.eventIndex > this.events.length) {
-        return -1;
+      this.setStartTime(fromTime);
+      this.touchUp(); // this.animation.queueNextFrame(this.playFrame.bind(this));
+
+      var pointer = this.getElement('pointer');
+
+      if (pointer != null && showPointer) {
+        pointer.showAll();
       }
 
-      var nextTime = this.events[this.eventIndex][0];
-      return nextTime - time;
-    }
-  }, {
-    key: "getNextIndexForTime",
-    value: function getNextIndexForTime(time) {
-      var startSearch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var endSearch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.events.length - 1;
-
-      if (time === 0) {
-        return 0;
-      }
-
-      var endTime = parseFloat(this.events[endSearch][0]);
-
-      if (time > endTime) {
-        return -1;
-      }
-
-      var searchRange = endSearch - startSearch;
-      var midSearch = startSearch;
-
-      if (searchRange > 1) {
-        midSearch = Math.floor(startSearch + searchRange / 2);
-      } else if (searchRange === 1) {
-        midSearch = endSearch;
-      } // console.log(startSearch, endSearch, midSearch)
-
-
-      if (midSearch === 0) {
-        return 0;
-      }
-
-      var prevTime = this.events[midSearch - 1][0];
-      var midTime = this.events[midSearch][0];
-
-      if (time === midTime) {
-        return midSearch;
-      }
-
-      if (time <= midTime && time > prevTime) {
-        return midSearch;
-      }
-
-      if (time < midTime) {
-        return this.getNextIndexForTime(time, startSearch, midSearch);
-      }
-
-      return this.getNextIndexForTime(time, midSearch, endSearch);
+      this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
+      this.stateIndex = Math.max(getPrevIndexForTime(this.states, fromTime), 0);
+      this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
+      this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex, 0));
+      this.setState(this.stateIndex);
+      this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, 0));
     }
   }, {
     key: "stopPlayback",
     value: function stopPlayback() {
       this.isPlaying = false;
-      clearTimeout(this.nextTimeout);
+      clearTimeout(this.nextEventTimeout);
+      clearTimeout(this.stateTimeout);
+      var pointer = this.getElement('pointer');
+
+      if (pointer != null) {
+        pointer.hide();
+      }
     }
   }, {
-    key: "processEvent",
-    value: function processEvent(event) {
-      var _event = _slicedToArray(event, 1),
-          eventType = _event[0];
+    key: "playFrame",
+    value: function playFrame() {
+      var time = this.getCurrentTime();
+      var prevStateIndex = Math.max(getPrevIndexForTime(this.states, time), 0);
+
+      if (prevStateIndex > this.lastShownStateIndex) {
+        var lastIndexWithSameTime = getIndexOfLatestTime(this.states, prevStateIndex);
+        this.setState(lastIndexWithSameTime);
+        this.lastShownStateIndex = lastIndexWithSameTime;
+      }
+
+      var prevEventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
+
+      if (prevEventIndex > this.lastShownEventIndex) {
+        var _lastIndexWithSameTime = getIndexOfLatestTime(this.events, prevEventIndex);
+
+        var indexRange = getLastUniqueIndeces(this.events, this.lastShownEventIndex, _lastIndexWithSameTime).sort();
+
+        for (var i = 0; i < indexRange.length; i += 1) {
+          this.setEvent(indexRange[i]);
+        }
+
+        this.lastShownEventIndex = indexRange[indexRange.length - 1];
+      }
+
+      if ((this.lastShownEventIndex >= this.events.length - 1 || this.lastShownEventIndex === -1) && (this.lastShownStateIndex >= this.states.length - 1 || this.lastShownStateIndex === -1)) {
+        this.stopPlayback();
+      } else {
+        this.animation.queueNextFrame(this.playFrame.bind(this));
+      }
+
+      this.animateDiagramNextFrame(); // console.log(this.getCurrentTime() - time);
+      // const prevSlideIndex = getPrevIndexForTime(this.slides, time);
+    }
+  }, {
+    key: "queuePlaybackEvent",
+    value: function queuePlaybackEvent() {
+      var _this4 = this;
+
+      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.nextEventTimeout = setTimeout(function () {
+        if (_this4.isPlaying) {
+          _this4.playbackEvent();
+        }
+      }, delay);
+    }
+  }, {
+    key: "playbackEvent",
+    value: function playbackEvent() {
+      if (this.eventIndex > this.events.length - 1) {
+        return;
+      } // const event = this.events[this.eventIndex];
+
+
+      this.setEvent(this.eventIndex);
+      this.animateDiagramNextFrame();
+      this.eventIndex += 1;
+
+      if (this.eventIndex === this.events.length) {
+        this.stopPlayback();
+        return;
+      }
+
+      var nextTime = (this.events[this.eventIndex][0] - this.getCurrentTime()) * 1000;
+      this.queuePlaybackEvent(Math.max(nextTime, 0));
+    }
+  }, {
+    key: "setEvent",
+    value: function setEvent() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.eventIndex;
+
+      if (index > this.events.length - 1) {
+        return;
+      }
+
+      var event = this.events[index];
+
+      var _event2 = _slicedToArray(event, 2),
+          eventType = _event2[1];
 
       switch (eventType) {
         case 'touchDown':
           {
-            var _event2 = _slicedToArray(event, 3),
-                x = _event2[1],
-                y = _event2[2];
+            var _event3 = _slicedToArray(event, 4),
+                x = _event3[2],
+                y = _event3[3];
 
             this.touchDown(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y));
             break;
@@ -32564,43 +32835,49 @@ function () {
 
         case 'cursorMove':
           {
-            var _event3 = _slicedToArray(event, 3),
-                _x = _event3[1],
-                _y = _event3[2];
+            var _event4 = _slicedToArray(event, 4),
+                _x = _event4[2],
+                _y = _event4[3];
 
-            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event[1], event[2]));
+            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x, _y));
             break;
           }
 
         case 'startBeingMoved':
           {
-            var _event4 = _slicedToArray(event, 2),
-                elementPath = _event4[1];
+            var _event5 = _slicedToArray(event, 3),
+                elementPath = _event5[2];
 
             var element = this.getElement(elementPath);
-            element.startBeingMoved();
+
+            if (element != null) {
+              element.startBeingMoved();
+            }
+
             break;
           }
 
         case 'moved':
           {
-            var _event5 = _slicedToArray(event, 3),
-                _elementPath = _event5[1],
-                transformDefinition = _event5[2];
+            var _event6 = _slicedToArray(event, 4),
+                _elementPath = _event6[2],
+                transformDefinition = _event6[3];
 
             var _element = this.getElement(_elementPath);
 
-            var transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(transformDefinition);
+            if (_element != null) {
+              var transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(transformDefinition);
 
-            _element.moved(transform);
+              _element.moved(transform);
+            }
 
             break;
           }
 
         case 'click':
           {
-            var _event6 = _slicedToArray(event, 2),
-                id = _event6[1];
+            var _event7 = _slicedToArray(event, 3),
+                id = _event7[2];
 
             var _element2 = document.getElementById(id);
 
@@ -32617,10 +32894,10 @@ function () {
 
         case 'stopBeingMoved':
           {
-            var _event7 = _slicedToArray(event, 4),
-                _elementPath2 = _event7[1],
-                _transformDefinition = _event7[2],
-                velocityDefinition = _event7[3];
+            var _event8 = _slicedToArray(event, 5),
+                _elementPath2 = _event8[2],
+                _transformDefinition = _event8[3],
+                velocityDefinition = _event8[4];
 
             var _element3 = this.getElement(_elementPath2);
 
@@ -32637,10 +32914,10 @@ function () {
 
         case 'startMovingFreely':
           {
-            var _event8 = _slicedToArray(event, 4),
-                _elementPath3 = _event8[1],
-                _transformDefinition2 = _event8[2],
-                _velocityDefinition = _event8[3];
+            var _event9 = _slicedToArray(event, 5),
+                _elementPath3 = _event9[2],
+                _transformDefinition2 = _event9[3],
+                _velocityDefinition = _event9[4];
 
             var _element4 = this.getElement(_elementPath3);
 
@@ -32658,84 +32935,104 @@ function () {
       }
     }
   }, {
-    key: "queuePlaybackEvent",
-    value: function queuePlaybackEvent() {
-      var _this4 = this;
-
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
-      if (time === 0) {
-        this.playbackEvent();
-        return;
-      }
-
-      this.nextTimeout = setTimeout(function () {
-        if (_this4.isPlaying) {
-          _this4.playbackEvent();
-        }
-      }, time);
-    }
-  }, {
-    key: "queueRecordState",
-    value: function queueRecordState() {
+    key: "queuePlaybackState",
+    value: function queuePlaybackState() {
       var _this5 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      // if (time === 0) {
-      //   this.recordState(this.getState());
-      // }
-      this.stateTimeout = setTimeout(function () {
-        if (_this5.isRecording) {
-          _this5.recordState(_this5.getState());
-
-          _this5.queueRecordState(_this5.stateTimeStep);
+      this.nextStateTimeout = setTimeout(function () {
+        if (_this5.isPlaying) {
+          _this5.playbackState();
         }
       }, time);
     }
   }, {
-    key: "playbackEvent",
-    value: function playbackEvent() {
-      var event = this.events[this.eventIndex];
+    key: "playbackState",
+    value: function playbackState() {
+      if (this.stateIndex > this.states.length - 1) {
+        return;
+      }
 
-      var _event9 = _slicedToArray(event, 1),
-          currentTime = _event9[0];
+      this.setState(this.stateIndex);
+      this.animateDiagramNextFrame();
+      this.stateIndex += 1;
 
-      this.processEvent(event.slice(1));
-      this.animateNextFrame();
-      this.eventIndex += 1;
-
-      if (this.eventIndex === this.events.length) {
+      if (this.stateIndex === this.states.length) {
         this.stopPlayback();
         return;
       }
 
-      var nextTime = (this.events[this.eventIndex][0] - currentTime) * 1000;
-      this.queuePlaybackEvent(nextTime);
-    } // playbackClick() { // eslint-disable-line class-methods-use-this
-    // }
-    // playbackTouch() {
-    //   const [, x, y, touch] = this.events[this.eventIndex];
-    //   switch (touch) {
-    //     case 'd':
-    //       this.touchDown(new Point(x, y));
-    //       if (this.previousPoint == null && x != null && y != null) {
-    //         this.previousPoint = new Point(x, y);
-    //       }
-    //       break;
-    //     case 'u':
-    //       this.touchUp();
-    //       this.previousPoint = null;
-    //       break;
-    //     case 'm':
-    //       this.touchMoveDown(this.previousPoint, new Point(x, y));
-    //       this.previousPoint = new Point(x, y);
-    //       break;
-    //     default:
-    //       this.touchMoveUp(new Point(x, y));
-    //       break;
-    //   }
-    // }
+      var nextTime = (this.states[this.stateIndex][0] - this.getCurrentTime()) * 1000;
+      this.queuePlaybackState(nextTime);
+    }
+  }, {
+    key: "setState",
+    value: function setState(index) {
+      if (index > this.states.length - 1) {
+        return;
+      }
 
+      this.setDiagramState(this.states[index][1]);
+    }
+  }, {
+    key: "queuePlaybackSlide",
+    value: function queuePlaybackSlide() {
+      var _this6 = this;
+
+      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.nextSlideTimeout = setTimeout(function () {
+        if (_this6.isPlaying) {
+          _this6.playbackSlide();
+        }
+      }, delay);
+    }
+  }, {
+    key: "playbackSlide",
+    value: function playbackSlide() {
+      if (this.slideIndex > this.slides.length - 1) {
+        return;
+      } // const event = this.events[this.slideIndex];
+
+
+      this.setSlide(this.slideIndex);
+      this.animateDiagramNextFrame();
+      this.slideIndex += 1;
+
+      if (this.slideIndex === this.slides.length) {
+        this.stopPlayback();
+        return;
+      }
+
+      var nextTime = (this.slides[this.slideIndex][0] - this.getCurrentTime()) * 1000;
+      this.queuePlaybackSlide(Math.max(nextTime, 0));
+    }
+  }, {
+    key: "setSlide",
+    value: function setSlide(index) {
+      var forceGoTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (index > this.slides.length - 1) {
+        return;
+      }
+
+      var slide = this.slides[index];
+
+      var _slide = _slicedToArray(slide, 3),
+          direction = _slide[1],
+          slideNumber = _slide[2];
+
+      if (direction === 'next' && forceGoTo === false) {
+        if (this.nextSlide != null) {
+          this.nextSlide();
+        }
+      } else if (direction === 'prev' && forceGoTo === false) {
+        if (this.prevSlide != null) {
+          this.prevSlide();
+        }
+      } else if (this.goToSlide != null) {
+        this.goToSlide(slideNumber);
+      }
+    }
   }]);
 
   return Recorder;
@@ -32745,7 +33042,7 @@ function () {
 // // Object.freeze(globalvars);
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Recorder);
+
 
 /***/ }),
 
@@ -37495,7 +37792,7 @@ function onClickId(id, actionMethod, bind) {
     });
 
     var onClickFn = function onClickFn() {
-      var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["default"]();
+      var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
 
       if (recorder.isRecording) {
         recorder.recordEvent('click', id);

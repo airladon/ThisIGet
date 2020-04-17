@@ -8,6 +8,8 @@ type State = {
   label: 'Record' | 'Stop';
   saveStyle: Object,
   circleX: number,
+  playLabel: 'Play' | 'Stop';
+  time: string,
 }
 type Props = {};
 
@@ -19,12 +21,14 @@ export default class RecordButton extends React.Component<Props, State> {
     this.touchState = 'up';
     this.state = {
       label: 'Record',
+      playLabel: 'Play',
       saveStyle: {
         display: 'inline-block',
         color: 'lightGrey',
         padding: '10px',
       },
       circleX: 0,
+      time: '00:00',
     };
   }
 
@@ -35,14 +39,30 @@ export default class RecordButton extends React.Component<Props, State> {
     }
   }
 
-  play() {
-    if (this.state.label === 'Record') {
-      const recorder = new Recorder();
+  // pressPlay() {
+  //   if (this.state.label === 'Record') {
+  //     const recorder = new Recorder();
+  //     recorder.startPlayback();
+  //   }
+  // }
+
+  pressPlay() {
+    const recorder = new Recorder();
+    recorder.stop();
+    if (this.state.playLabel === 'Play') {
+      this.setState({
+        playLabel: 'Stop',
+      });
       recorder.startPlayback();
+    } else if (this.state.playLabel === 'Stop') {
+      this.setState({
+        playLabel: 'Play',
+      });
+      recorder.stopPlayback();
     }
   }
 
-  record() {
+  pressRecord() {
     const recorder = new Recorder();
     recorder.stopPlayback();
     if (this.state.label === 'Record') {
@@ -98,12 +118,11 @@ export default class RecordButton extends React.Component<Props, State> {
 
   touchMove(event: MouseEvent) {
     if (this.touchState === 'down') {
-      this.scrub(event.offsetX)
+      this.scrub(event.offsetX);
     }
   }
 
   scrub(offsetX: number) {
-    this.setState({ circleX: offsetX - 7 });
     const element = document.getElementById('scrubber');
     if (element == null) {
       return;
@@ -116,6 +135,17 @@ export default class RecordButton extends React.Component<Props, State> {
     if (percentage > 1) {
       percentage = 1;
     }
+    const recorder = new Recorder();
+    recorder.scrub(percentage);
+    const totalTime = recorder.getTotalTime();
+    const time = Math.floor(totalTime * percentage);
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    this.setState({
+      circleX: offsetX - 7,
+      time: `${(minutes + seconds / 100).toFixed(2)}`,
+    });
   }
 
 
@@ -124,7 +154,7 @@ export default class RecordButton extends React.Component<Props, State> {
       <div
         className='record-button'
         style={{display: 'inline-block', padding: '10px' }}
-        onClick={this.record.bind(this)}
+        onClick={this.pressRecord.bind(this)}
       >{this.state.label}
       </div>
       <div
@@ -136,14 +166,14 @@ export default class RecordButton extends React.Component<Props, State> {
       <div
         className='play-button'
         style={ this.state.saveStyle }
-        onClick={this.play.bind(this)}
-      >Play
+        onClick={this.pressPlay.bind(this)}
+      >{this.state.playLabel}
       </div>
       <div
         id='scrubber'
         style={{
           width: '500px',
-          height: '20px',
+          height: '30px',
           backgroundColor: 'lightGrey',
           padding: '10px',
           position: 'relative',
@@ -165,6 +195,15 @@ export default class RecordButton extends React.Component<Props, State> {
             pointerEvents: 'none',
           }}
         >
+        </div>
+        <div
+          style={{
+            color: 'var(--color-site-text)',
+            padding: '10px',
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >{this.state.time}
         </div>
       </div>
     </div>;

@@ -69,7 +69,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.add('pointer', this.diagram.shapes.pointer());
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
-    this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
+    this.fnMap.add('updateAngle', this.updateAngle.bind(this));
+    this._circle._line1.setTransformCallback = 'updateAngle';
 
     this._equation.__arc.onClick = this.goToArcForm.bind(this);
     this._equation.__radius.onClick = this.goToRadiusForm.bind(this);
@@ -263,9 +264,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     const target = bendLine.transform._dup();
     target.updateRotation(Math.PI / 2);
     target.updateTranslation(radius + width / 2, 0);
+    this.fnMap.add('bendRadius', this.bend.bind(this));
     bendLine.animations.new()
       .transform({ target, duration: 1 })
-      .custom({ callback: this.bend.bind(this), duration: 1 })
+      .custom({ callback: 'bendRadius', duration: 1 })
       .rotation({
         element: this._circle._line1, target: 1, duration: 1, direction: 2,
       })
