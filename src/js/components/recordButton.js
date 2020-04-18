@@ -15,6 +15,8 @@ type Props = {};
 
 export default class RecordButton extends React.Component<Props, State> {
   touchState: 'up' | 'down';
+  currentTime: number;
+  timer: TimeoutID;
 
   constructor() {
     super();
@@ -39,6 +41,21 @@ export default class RecordButton extends React.Component<Props, State> {
     }
   }
 
+  startTime(fromTime: number) {
+    this.currentTime = fromTime;
+    this.incrementTime();
+  }
+
+  incrementTime() {
+    this.setTime(this.currentTime);
+    this.timer = setTimeout(() => {
+      const recorder = new Recorder();
+      this.currentTime += 1;
+      if (this.currentTime < recorder.getTotalTime());
+      this.incrementTime();
+    }, 1000);
+  }
+
   // pressPlay() {
   //   if (this.state.label === 'Record') {
   //     const recorder = new Recorder();
@@ -53,12 +70,14 @@ export default class RecordButton extends React.Component<Props, State> {
       this.setState({
         playLabel: 'Stop',
       });
-      recorder.startPlayback();
+      recorder.startPlayback(this.currentTime);
+      this.incrementTime();
     } else if (this.state.playLabel === 'Stop') {
       this.setState({
         playLabel: 'Play',
       });
       recorder.stopPlayback();
+      clearTimeout(this.timer);
     }
   }
 
@@ -75,6 +94,8 @@ export default class RecordButton extends React.Component<Props, State> {
         },
       });
       recorder.start();
+      this.setTime(0);
+      this.incrementTime();
     } else if (this.state.label === 'Stop') {
       this.setState({
         label: 'Record',
@@ -85,6 +106,7 @@ export default class RecordButton extends React.Component<Props, State> {
         },
       });
       recorder.stop();
+      clearTimeout(this.timer);
     }
     // else if (this.state.label === 'show') {
     //   this.setState({ label: 'playback' });
@@ -102,6 +124,7 @@ export default class RecordButton extends React.Component<Props, State> {
     if (element == null) {
       return;
     }
+    this.currentTime = 0;
     element.addEventListener('mousedown', this.touchDown.bind(this), false);
     element.addEventListener('mouseup', this.touchUp.bind(this), false);
     element.addEventListener('mousemove', this.touchMove.bind(this), false);
@@ -122,6 +145,14 @@ export default class RecordButton extends React.Component<Props, State> {
     }
   }
 
+  setTime(timeInSeconds: number) {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    this.setState({
+      time: `${(minutes + seconds / 100).toFixed(2)}`,
+    })
+  }
+
   scrub(offsetX: number) {
     const element = document.getElementById('scrubber');
     if (element == null) {
@@ -138,13 +169,11 @@ export default class RecordButton extends React.Component<Props, State> {
     const recorder = new Recorder();
     recorder.scrub(percentage);
     const totalTime = recorder.getTotalTime();
-    const time = Math.floor(totalTime * percentage);
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+    this.currentTime = Math.floor(percentage * totalTime)
+    this.setTime(this.currentTime);
 
     this.setState({
       circleX: offsetX - 7,
-      time: `${(minutes + seconds / 100).toFixed(2)}`,
     });
   }
 
@@ -173,7 +202,7 @@ export default class RecordButton extends React.Component<Props, State> {
         id='scrubber'
         style={{
           width: '500px',
-          height: '30px',
+          height: '20px',
           backgroundColor: 'lightGrey',
           padding: '10px',
           position: 'relative',
@@ -196,15 +225,15 @@ export default class RecordButton extends React.Component<Props, State> {
           }}
         >
         </div>
-        <div
-          style={{
-            color: 'var(--color-site-text)',
-            padding: '10px',
-            width: '100%',
-            textAlign: 'center',
-          }}
-        >{this.state.time}
-        </div>
+      </div>
+      <div
+        style={{
+          color: 'var(--color-site-text)',
+          padding: '10px',
+          width: '100%',
+          textAlign: 'center',
+        }}
+      >{this.state.time}
       </div>
     </div>;
   }
