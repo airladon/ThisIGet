@@ -28579,7 +28579,13 @@ function () {
   }, {
     key: "_state",
     value: function _state() {
-      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
+      if (this.isShown) {
+        return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
+      }
+
+      return {
+        isShown: false
+      };
     }
   }, {
     key: "execFn",
@@ -32581,8 +32587,8 @@ function () {
       this.states = [];
       this.startTime = this.timeStamp();
       this.isPlaying = false;
-      this.isRecording = true;
-      this.unpauseDiagram();
+      this.isRecording = true; // this.unpauseDiagram();
+
       this.queueRecordState(0);
     }
   }, {
@@ -32645,23 +32651,26 @@ function () {
   }, {
     key: "save",
     value: function save() {
-      var slidesOut = [];
-      this.slides.forEach(function (slide) {
-        slidesOut.push(JSON.stringify(slide));
-      });
-      var eventsOut = [];
-      this.events.forEach(function (event) {
-        eventsOut.push(JSON.stringify(event));
-      });
-      var statesOut = [];
-      this.states.forEach(function (state) {
-        statesOut.push(JSON.stringify(state));
-      });
+      // const slidesOut = [];
+      // this.slides.forEach((slide) => {
+      //   slidesOut.push(JSON.stringify(slide));
+      // });
+      // const eventsOut = [];
+      // this.events.forEach((event) => {
+      //   eventsOut.push(JSON.stringify(event));
+      // });
+      // const statesOut = [];
+      // this.states.forEach((state) => {
+      //   statesOut.push(JSON.stringify(state));
+      // });
       var dateStr = new Date().toISOString();
-      var location = window.location.pathname.replace('/', '_');
-      download("".concat(dateStr, " ").concat(location, " slides.txt"), slidesOut.join('\n'));
-      download("".concat(dateStr, " ").concat(location, " events.txt"), eventsOut.join('\n'));
-      download("".concat(dateStr, " ").concat(location, " states.txt"), statesOut.join('\n'));
+      var location = window.location.pathname.replace('/', '_'); // download(`${dateStr} ${location} slides.txt`, slidesOut.join('\n'));
+      // download(`${dateStr} ${location} events.txt`, eventsOut.join('\n'));
+      // download(`${dateStr} ${location} states.txt`, statesOut.join('\n'));
+
+      download("".concat(dateStr, " ").concat(location, " slides.json"), JSON.stringify(this.slides));
+      download("".concat(dateStr, " ").concat(location, " events.json"), JSON.stringify(this.events));
+      download("".concat(dateStr, " ").concat(location, " states.json"), JSON.stringify(this.states));
     }
   }, {
     key: "show",
@@ -32748,9 +32757,8 @@ function () {
 
       if (pointer != null && showPointer) {
         pointer.showAll();
-      }
+      } // this.unpauseDiagram();
 
-      this.unpauseDiagram();
     }
   }, {
     key: "stopPlayback",
@@ -32762,9 +32770,8 @@ function () {
 
       if (pointer != null) {
         pointer.hide();
-      }
+      } // this.pauseDiagram();
 
-      this.pauseDiagram();
     }
   }, {
     key: "playFrame",

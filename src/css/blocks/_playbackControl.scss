@@ -13,3 +13,25 @@
   width: 20px;
   height: 20px;
 }
+
+.figureone_playback_control__control_container {
+  display: inline-block;
+}
+
+.figureone_playback_control__play {
+  background-image: $play;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.figureone_playback_control__pause {
+  background-image: $pause;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.figureone_playback_control__time {
+  display: inline-block;
+}

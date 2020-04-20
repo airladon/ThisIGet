@@ -11,6 +11,9 @@ import diagramLayout from './layout';
 import details from '../../details';
 import CommonCollection from './diagramCollectionCommon';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
+import states from './vidstates.json';
+import events from './videvents.json';
+import slides from './vidslides.json';
 
 const {
   click,
@@ -41,6 +44,9 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
+    this.diagram.recorder.events = events;
+    this.diagram.recorder.states = states;
+    this.diagram.recorder.slides = slides;
   }
 
   addSections() {
@@ -154,9 +160,9 @@ class Content extends PresentationFormatContent {
     });
 
     common.modifiers = {
-      arc_length: click(diag.pulseArc, [diag], colors.arc),
-      radius_length: click(diag.pulseRadius, [diag], colors.lines),
-      equal: click(diag.bendRadius, [diag, null], colors.radianLines),
+      arc_length: click(diag.pulseArc, [diag], { color: colors.arc, id: 'qwer4' }),
+      radius_length: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'asdfasdf' }),
+      equal: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'aw3r3' }),
     };
     this.addSection(common, {
       transitionFromPrev: (done) => {

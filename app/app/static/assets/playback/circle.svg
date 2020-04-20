@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <circle style="fill-opacity: 0.7; fill: rgb(141, 141, 141);" cx="250" cy="250" r="200"/>
+  <circle style="fill: rgb(102, 102, 102); fill-opacity: 0.5;" cx="250" cy="250" r="200"/>
 </svg>

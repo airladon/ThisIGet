@@ -24,6 +24,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   currentTime: number;
   seekTouchDown: boolean;
   volumeTouchDown: boolean;
+  recorder: Recorder;
   // timer: TimeoutID;
 
   constructor() {
@@ -39,9 +40,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
     };
   }
 
+  componentDidMount() {
+    // this.recorder = new Recorder();
+  }
 
-  play(fromTime: number) {
-
+  play() {
+    new Recorder().startPlayback(0);
   }
 
   seek(toTime:number) {
@@ -215,16 +219,15 @@ export default class PlaybackControl extends React.Component<Props, State> {
   render() {  // eslint-disable-line class-methods-use-this
     return <div className="figureone_playback_control">
       <div className="figureone_playback_control__seek_container">
-        { /*<div className="figureone_playback_control__seek_total"/>
-        <div className="figureone_playback_control__seek_time"/>
-        */}
-        <div className="figureone_playback_control__seek_circle"/>
+        <div className="figureone_playback_control__seek_total"></div>
+        <div className="figureone_playback_control__seek_time"></div>
+        <div className="figureone_playback_control__seek_circle"></div>
       </div>
-      {/* 
       <div className="figureone_playback_control__control_container">
-        <div className="figureone_playback_control__play"/>
+        <div className="figureone_playback_control__play"
+          onClick={this.play.bind(this)}
+        />
         <div className="figureone_playback_control__pause"/>
-        </div>
         <div className="figureone_playback_control__time">
           {this.state.time}
         </div>
@@ -234,7 +237,6 @@ export default class PlaybackControl extends React.Component<Props, State> {
         <div className="figureone_playback_control__settings"/>
         <div className="figureone_playback_control__full_screen"/>
       </div>
-      */}
     </div>;
   }
 }
