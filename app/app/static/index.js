@@ -28579,6 +28579,7 @@ function () {
   }, {
     key: "_state",
     value: function _state() {
+      // return getState(this, this._getStateProperties());
       if (this.isShown) {
         return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
       }

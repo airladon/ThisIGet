@@ -14,6 +14,7 @@ import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import states from './vidstates.json';
 import events from './videvents.json';
 import slides from './vidslides.json';
+import audio from './audio.m4a';
 
 const {
   click,
@@ -47,6 +48,8 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.events = events;
     this.diagram.recorder.states = states;
     this.diagram.recorder.slides = slides;
+    this.diagram.recorder.audio = audio;
+    console.log(audio)
   }
 
   addSections() {

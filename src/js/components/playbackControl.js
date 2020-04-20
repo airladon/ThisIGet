@@ -25,6 +25,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   seekTouchDown: boolean;
   volumeTouchDown: boolean;
   recorder: Recorder;
+  audio: HTMLAudioElement;
   // timer: TimeoutID;
 
   constructor() {
@@ -45,7 +46,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   play() {
-    new Recorder().startPlayback(0);
+    const recorder = new Recorder();
+    recorder.startPlayback(0);
+    const audio = new Audio(recorder.audio);
+    this.audio = audio;
+    console.log(audio.src)
+    audio.play();
   }
 
   seek(toTime:number) {

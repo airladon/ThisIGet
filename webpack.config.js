@@ -304,6 +304,19 @@ module.exports = (env) => {
             },
           ],
         },
+        {
+          test: /\.(m4a)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[path][name].[ext]',
+                publicPath: '/static/dist/',
+                context: '/opt/app/src',
+              },
+            },
+          ],
+        },
       ],
     },
     plugins: pluginArray,
