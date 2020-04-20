@@ -32750,8 +32750,14 @@ function () {
   }, {
     key: "startPlayback",
     value: function startPlayback() {
-      var fromTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getCurrentTime();
       var showPointer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var fromTime = fromTimeIn;
+
+      if (fromTimeIn === this.getTotalTime()) {
+        fromTime = 0;
+      }
+
       this.lastShownEventIndex = -1;
       this.lastShownStateIndex = -1;
       this.lastShownSlideIndex = -1;

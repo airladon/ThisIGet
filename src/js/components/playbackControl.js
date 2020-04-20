@@ -19,6 +19,12 @@ type Props = {
   slidesSrc: string;
 };
 
+function timeToStr(time: number) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time - minutes * 60);
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
 export default class PlaybackControl extends React.Component<Props, State> {
   isPlaying: boolean;
   currentTime: number;
@@ -46,7 +52,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   play() {
     const recorder = new Recorder();
-    recorder.startPlayback(0);
+    recorder.startPlayback();
     // recorder.audio.play();
     this.setState({
       pauseClass: '',
@@ -72,14 +78,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
     this.setState({
-      time: `${this.timeToStr(time)} / ${this.timeToStr(totalTime)}`,
+      time: `${timeToStr(time)} / ${timeToStr(totalTime)}`,
     });
-  }
-
-  timeToStr(time: number) {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time - minutes * 60);
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
   seek(toTime:number) {
