@@ -132,7 +132,7 @@ export default class RecordButton extends React.Component<Props, State> {
 
   touchDown(event: MouseEvent) {
     this.touchState = 'down';
-    this.scrub(event.offsetX);
+    this.seek(event.offsetX);
   }
 
   touchUp() {
@@ -141,7 +141,7 @@ export default class RecordButton extends React.Component<Props, State> {
 
   touchMove(event: MouseEvent) {
     if (this.touchState === 'down') {
-      this.scrub(event.offsetX);
+      this.seek(event.offsetX);
     }
   }
 
@@ -153,7 +153,7 @@ export default class RecordButton extends React.Component<Props, State> {
     });
   }
 
-  scrub(offsetX: number) {
+  seek(offsetX: number) {
     const element = document.getElementById('scrubber');
     if (element == null) {
       return;
@@ -167,7 +167,7 @@ export default class RecordButton extends React.Component<Props, State> {
       percentage = 1;
     }
     const recorder = new Recorder();
-    recorder.scrub(percentage);
+    recorder.seek(percentage);
     const totalTime = recorder.getTotalTime();
     this.currentTime = Math.floor(percentage * totalTime)
     this.setTime(this.currentTime);

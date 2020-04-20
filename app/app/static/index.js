@@ -32467,6 +32467,7 @@ function () {
       this.events = [];
       this.slides = [];
       this.states = [];
+      this.currentTime = 0;
       this.isRecording = false;
       this.precision = 5;
       this.stateTimeStep = 1000;
@@ -32516,6 +32517,7 @@ function () {
       this.nextSlide = null;
       this.prevSlide = null;
       this.goToSlide = null;
+      this.audio = null;
     }
 
     return Recorder.instance;
@@ -32541,7 +32543,11 @@ function () {
   }, {
     key: "getCurrentTime",
     value: function getCurrentTime() {
-      return this.now() / 1000;
+      if (this.isPlaying) {
+        return this.now() / 1000;
+      }
+
+      return this.currentTime;
     }
   }, {
     key: "setStartTime",
@@ -32569,6 +32575,10 @@ function () {
         time = Math.max(time, _endTime2);
       }
 
+      if (this.audio != null) {
+        time = Math.max(time, this.audio.duration);
+      }
+
       return time;
     } // ////////////////////////////////////
     // ////////////////////////////////////
@@ -32589,6 +32599,7 @@ function () {
 
       this.recordSlide('goto', '', slideStart);
       this.queueRecordState(0);
+      this.recordEvent('start');
     }
   }, {
     key: "stop",
@@ -32708,8 +32719,8 @@ function () {
     // ////////////////////////////////////
 
   }, {
-    key: "scrub",
-    value: function scrub(percentTime) {
+    key: "seek",
+    value: function seek(percentTime) {
       this.stopPlayback();
       var totalTime = this.getTotalTime();
       var timeTarget = percentTime * totalTime;
@@ -32720,9 +32731,16 @@ function () {
     value: function setToTime(time) {
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, time), 0);
       this.stateIndex = Math.max(getPrevIndexForTime(this.states, time), 0);
+      this.eventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
       this.setSlide(this.slideIndex, true);
       this.setState(this.stateIndex);
       this.animateDiagramNextFrame();
+
+      if (this.audio) {
+        this.audio.currentTime = time;
+      }
+
+      this.currentTime = time;
     } // ////////////////////////////////////
     // ////////////////////////////////////
     // Playback
@@ -32738,13 +32756,17 @@ function () {
       this.lastShownStateIndex = -1;
       this.lastShownSlideIndex = -1;
       this.isRecording = false;
-      this.isPlaying = true; // this.eventIndex = 0;
-      // this.stateIndex = 0;
-      // this.slideIndex = 0;
-
+      this.isPlaying = true;
       this.previousPoint = null;
       this.setStartTime(fromTime);
-      this.touchUp(); // this.animation.queueNextFrame(this.playFrame.bind(this));
+      this.touchUp();
+      this.currentTime = fromTime; // if (this.audio) {
+      //   this.audio.currentTime = fromTime;
+      // }
+      // this.animation.queueNextFrame(this.playFrame.bind(this));
+      // this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
+      // this.stateIndex = Math.max(getPrevIndexForTime(this.states, fromTime), 0);
+      // this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
 
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
       this.stateIndex = Math.max(getPrevIndexForTime(this.states, fromTime), 0);
@@ -32752,16 +32774,25 @@ function () {
       this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex, 0));
       this.setState(this.stateIndex);
       this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, 0));
+
+      if (this.audio) {
+        this.audio.currentTime = fromTime;
+        this.audio.play();
+        console.log('playing');
+      }
+
       var pointer = this.getElement('pointer.up');
 
       if (pointer != null && showPointer) {
         pointer.showAll();
-      } // this.unpauseDiagram();
+      }
 
+      this.animateDiagramNextFrame(); // this.unpauseDiagram();
     }
   }, {
     key: "stopPlayback",
     value: function stopPlayback() {
+      this.currentTime = this.getCurrentTime();
       this.isPlaying = false;
       clearTimeout(this.nextEventTimeout);
       clearTimeout(this.stateTimeout);
@@ -32769,6 +32800,10 @@ function () {
 
       if (pointer != null) {
         pointer.hide();
+      }
+
+      if (this.audio) {
+        this.audio.pause();
       } // this.pauseDiagram();
 
     }
@@ -32827,7 +32862,8 @@ function () {
       } // const event = this.events[this.eventIndex];
 
 
-      this.setEvent(this.eventIndex);
+      this.setEvent(this.eventIndex); // this.lastTime = this.getCurrentTime();
+
       this.animateDiagramNextFrame();
       this.eventIndex += 1;
 

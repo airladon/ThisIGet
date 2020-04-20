@@ -25,8 +25,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   seekTouchDown: boolean;
   volumeTouchDown: boolean;
   recorder: Recorder;
-  audio: HTMLAudioElement;
-  // timer: TimeoutID;
+  timer: TimeoutID;
 
   constructor() {
     super();
@@ -48,25 +47,60 @@ export default class PlaybackControl extends React.Component<Props, State> {
   play() {
     const recorder = new Recorder();
     recorder.startPlayback(0);
-    recorder.audio.play();
+    // recorder.audio.play();
     this.setState({
       pauseClass: '',
       playClass: 'figureone_playback_control__hide',
     });
+    // if (recorder.audio) {
+    //   recorder.audio.addEventListener('timeupdate', this.updateTime.bind(this), false);
+    // }
+    this.queueTimeUpdate();
+  }
+
+  queueTimeUpdate() {
+    const recorder = new Recorder();
+    const currentTime = recorder.getCurrentTime();
+    this.updateTime(currentTime);
+    if (recorder.isPlaying) {
+      const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
+      setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
+    }
+  }
+
+  updateTime(time: number) {
+    const recorder = new Recorder();
+    const totalTime = recorder.getTotalTime();
+    this.setState({
+      time: `${this.timeToStr(time)} / ${this.timeToStr(totalTime)}`,
+    });
+  }
+
+  timeToStr(time: number) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time - minutes * 60);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
   seek(toTime:number) {
-
+    const recorder = new Recorder();
+    if (recorder.audio) {
+    //   recorder.audio.removeEventListener('timeupdate', this.updateTime.bind(this), false);
+      recorder.audio.seek(toTime);
+    }
   }
 
   pause() {
     const recorder = new Recorder();
     recorder.stopPlayback();
-    recorder.audio.pause();
+    // recorder.audio.pause();
     this.setState({
       playClass: '',
       pauseClass: 'figureone_playback_control__hide',
     });
+    // if (recorder.audio) {
+    //   recorder.audio.removeEventListener('timeupdate', this.updateTime.bind(this), false);
+    // }
   }
 
   getVolume() {
