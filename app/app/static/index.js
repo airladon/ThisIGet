@@ -28579,14 +28579,10 @@ function () {
   }, {
     key: "_state",
     value: function _state() {
-      // return getState(this, this._getStateProperties());
-      if (this.isShown) {
-        return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
-      }
-
-      return {
-        isShown: false
-      };
+      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties()); // if (this.isShown) {
+      //   return getState(this, this._getStateProperties());
+      // }
+      // return { isShown: false };
     }
   }, {
     key: "execFn",
@@ -29325,7 +29321,7 @@ function () {
       this.setTransform(newTransform._dup());
 
       if (this.recorder.isRecording) {
-        this.recorder.recordEvent('moved', this.getPath(), this.transform.round(this.recorder.precision) // this.state.movement.velocity.toString(),
+        this.recorder.recordEvent('moved', this.getPath(), this.transform.round(this.recorder.precision)._state() // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -29345,7 +29341,7 @@ function () {
       this.state.movement.previousTime = -1;
 
       if (this.recorder.isRecording) {
-        this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform, this.state.movement.velocity // this.state.movement.velocity.toString(),
+        this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -29394,7 +29390,7 @@ function () {
       this.state.movement.velocity = this.state.movement.velocity.clipMag(this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
 
       if (this.recorder.isRecording) {
-        this.recorder.recordEvent('startMovingFreely', this.getPath(), this.transform, this.state.movement.velocity // this.state.movement.velocity.toString(),
+        this.recorder.recordEvent('startMovingFreely', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -32583,6 +32579,7 @@ function () {
   }, {
     key: "start",
     value: function start() {
+      var slideStart = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.events = [];
       this.slides = [];
       this.states = [];
@@ -32590,6 +32587,7 @@ function () {
       this.isPlaying = false;
       this.isRecording = true; // this.unpauseDiagram();
 
+      this.recordSlide('goto', '', slideStart);
       this.queueRecordState(0);
     }
   }, {
@@ -32641,8 +32639,8 @@ function () {
     }
   }, {
     key: "recordSlide",
-    value: function recordSlide(direction, slide) {
-      this.slides.push([this.now() / 1000, direction, slide]);
+    value: function recordSlide(direction, message, slide) {
+      this.slides.push([this.now() / 1000, direction, message, slide]);
     }
   }, {
     key: "recordClick",
@@ -33054,17 +33052,18 @@ function () {
 
       var slide = this.slides[index];
 
-      var _slide = _slicedToArray(slide, 3),
+      var _slide = _slicedToArray(slide, 4),
           direction = _slide[1],
-          slideNumber = _slide[2];
+          message = _slide[2],
+          slideNumber = _slide[3];
 
       if (direction === 'next' && forceGoTo === false) {
         if (this.nextSlide != null) {
-          this.nextSlide();
+          this.nextSlide(message);
         }
       } else if (direction === 'prev' && forceGoTo === false) {
         if (this.prevSlide != null) {
-          this.prevSlide();
+          this.prevSlide(message);
         }
       } else if (this.goToSlide != null) {
         this.goToSlide(slideNumber);

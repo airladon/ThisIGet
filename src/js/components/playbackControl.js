@@ -34,7 +34,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.volumeTouchDown = false;
     this.state = {
       playClass: '',
-      pauseClass: '',
+      pauseClass: 'figureone_playback_control__hide',
       volumeOnClass: '',
       volumeMuteClass: '',
       time: '00:00 / 00:00',
@@ -48,10 +48,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
   play() {
     const recorder = new Recorder();
     recorder.startPlayback(0);
-    const audio = new Audio(recorder.audio);
-    this.audio = audio;
-    console.log(audio.src)
-    audio.play();
+    recorder.audio.play();
+    this.setState({
+      pauseClass: '',
+      playClass: 'figureone_playback_control__hide',
+    });
   }
 
   seek(toTime:number) {
@@ -59,6 +60,13 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   pause() {
+    const recorder = new Recorder();
+    recorder.stopPlayback();
+    recorder.audio.pause();
+    this.setState({
+      playClass: '',
+      pauseClass: 'figureone_playback_control__hide',
+    });
   }
 
   getVolume() {
@@ -230,10 +238,14 @@ export default class PlaybackControl extends React.Component<Props, State> {
         <div className="figureone_playback_control__seek_circle"></div>
       </div>
       <div className="figureone_playback_control__control_container">
-        <div className="figureone_playback_control__play"
+        <div
+          className={`figureone_playback_control__play ${this.state.playClass}`}
           onClick={this.play.bind(this)}
         />
-        <div className="figureone_playback_control__pause"/>
+        <div
+          className={`figureone_playback_control__pause ${this.state.pauseClass}`}
+          onClick={this.pause.bind(this)}
+        />
         <div className="figureone_playback_control__time">
           {this.state.time}
         </div>

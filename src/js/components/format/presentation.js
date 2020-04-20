@@ -215,18 +215,18 @@ export default class PresentationFormatComponent extends React.Component
     const nextButton = document.getElementById('topic__button-next');
     if (nextButton instanceof HTMLElement) {
       nextButton.onclick = () => {
-        if (this.version.content.diagram.recorder.isRecording) {
-          this.version.content.diagram.recorder.recordEvent('next');
-        }
+        // if (this.version.content.diagram.recorder.isRecording) {
+        //   this.version.content.diagram.recorder.recordSlides('next');
+        // }
         this.goToNext();
       };
     }
     const prevButton = document.getElementById('topic__button-previous');
     if (prevButton instanceof HTMLElement) {
       prevButton.onclick = () => {
-        if (this.version.content.diagram.recorder.isRecording) {
-          this.version.content.diagram.recorder.recordEvent('prev');
-        }
+        // if (this.version.content.diagram.recorder.isRecording) {
+        //   this.version.content.diagram.recorder.recordSlides('prev');
+        // }
         this.goToPrevious();
       };
     }
@@ -235,6 +235,11 @@ export default class PresentationFormatComponent extends React.Component
     if (infoButton instanceof HTMLElement) {
       infoButton.onclick = this.version.content.toggleInfo.bind(this.version.content);
     }
+
+    // if (this.version.content.diagram.recorder) {
+    //   this.version.content.diagram.recorder.nextSlide = this.goToNext.bind(this);
+    //   this.version.content.diagram.recorder.prevSlide = this.goToPrev.bind(this);
+    // }
 
     // window.addEventListener('resize', this.centerContent.bind(this));
     // window.addEventListener('orientationchange', this.orientationChange.bind(this));

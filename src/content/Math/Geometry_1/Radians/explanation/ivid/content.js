@@ -48,8 +48,8 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.events = events;
     this.diagram.recorder.states = states;
     this.diagram.recorder.slides = slides;
-    this.diagram.recorder.audio = audio;
-    console.log(audio)
+    this.diagram.recorder.audio = new Audio(audio);
+    console.log(slides)
   }
 
   addSections() {
@@ -177,6 +177,7 @@ class Content extends PresentationFormatContent {
         diag.bendLineToEnd();
         circle.setScenario('center');
         diag.updateAngle();
+        console.log(circle._line1)
       },
     });
 
