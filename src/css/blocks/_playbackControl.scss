@@ -1,0 +1,15 @@
+.figureone_playback_control {
+  width: 100%;
+  height: 50px;
+  background-color: red;
+}
+
+.figureone_playback_control__seek_container {
+  height: 50%;
+}
+
+.figureone_playback_control__seek_circle {
+  background-image: $circle;
+  width: 20px;
+  height: 20px;
+}

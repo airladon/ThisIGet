@@ -16,6 +16,7 @@ import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
 import ShareBar from './share';
 import RecordButton from './recordButton';
+import PlaybackControl from './playbackControl';
 
 type Props = {
   version: Object;
@@ -479,6 +480,7 @@ export default class TopicComponent extends React.Component
           label={this.ratingLabel()}
         />
         <RecordButton/>
+        <PlaybackControl/>
       </div>
       {this.renderTopic()}
       <ShareBar

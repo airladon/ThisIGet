@@ -4413,6 +4413,7 @@ function () {
     this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
     this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_2__["sinusoid"]);
     this.fnMap.add('doNothing', function () {});
+    this.isPaused = false;
     this.scrolled = false; // this.oldScrollY = 0;
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, options);
@@ -4519,7 +4520,7 @@ function () {
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
     this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
-    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this));
+    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this), this.pause.bind(this), this.unpause.bind(this));
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -5361,9 +5362,25 @@ function () {
       this.draw(time);
     }
   }, {
+    key: "pause",
+    value: function pause() {
+      this.isPaused = true;
+    }
+  }, {
+    key: "unpause",
+    value: function unpause() {
+      this.isPaused = false;
+      this.animateNextFrame();
+    }
+  }, {
     key: "draw",
     value: function draw(nowIn) {
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.isPaused) {
+        return;
+      }
+
       var now = nowIn;
 
       if (nowIn === -1) {
@@ -32437,7 +32454,7 @@ function () {
   // nextDrawQueue: Array<(number) => void>;
   function Recorder(diagramTouchDown, diagramTouchUp, // diagramCursorMove?: (Point) => void,
   // diagramTouchMoveDown?: (Point, Point) => boolean,
-  diagramCursorMove, animateDiagramNextFrame, getElement, getState, setDiagramState) {
+  diagramCursorMove, animateDiagramNextFrame, getElement, getState, setDiagramState, pauseDiagram, unpauseDiagram) {
     _classCallCheck(this, Recorder);
 
     // If the instance alread exists, then don't create a new instance.
@@ -32483,6 +32500,14 @@ function () {
 
       if (setDiagramState) {
         this.setDiagramState = setDiagramState;
+      }
+
+      if (pauseDiagram) {
+        this.pauseDiagram = pauseDiagram;
+      }
+
+      if (unpauseDiagram) {
+        this.unpauseDiagram = unpauseDiagram;
       }
 
       this.nextSlide = null;
@@ -32557,6 +32582,7 @@ function () {
       this.startTime = this.timeStamp();
       this.isPlaying = false;
       this.isRecording = true;
+      this.unpauseDiagram();
       this.queueRecordState(0);
     }
   }, {
@@ -32723,6 +32749,8 @@ function () {
       if (pointer != null && showPointer) {
         pointer.showAll();
       }
+
+      this.unpauseDiagram();
     }
   }, {
     key: "stopPlayback",
@@ -32735,6 +32763,8 @@ function () {
       if (pointer != null) {
         pointer.hide();
       }
+
+      this.pauseDiagram();
     }
   }, {
     key: "playFrame",

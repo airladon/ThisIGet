@@ -150,7 +150,7 @@ export default class RecordButton extends React.Component<Props, State> {
     const seconds = timeInSeconds % 60;
     this.setState({
       time: `${(minutes + seconds / 100).toFixed(2)}`,
-    })
+    });
   }
 
   scrub(offsetX: number) {
