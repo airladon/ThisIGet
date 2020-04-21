@@ -92,7 +92,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   seekToPercent(percent: number) {
+    const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
+    this.setState({ seek: percent });
     this.seek(percent * totalTime);
   }
 
@@ -284,7 +286,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
         */}
         <ScrollBar
           id='playback_control_seek'
-          seek={this.state.seek}
+          changed={this.seekToPercent.bind(this)}
+          position={this.state.seek}
         />
       </div>
       <div className="figureone_playback_control__control_container">

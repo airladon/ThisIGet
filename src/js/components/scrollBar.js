@@ -10,21 +10,21 @@ type State = {
 type Props = {
   changed: (number) => void,
   id: string,
-  seek: number,
+  position: number,
 };
 
 export default class SrollBar extends React.Component<Props, State> {
   touchState: 'up' | 'down';
   changed: (number) => void;
   id: string;
-  initialSeek: number;
+  // initialSeek: number;
 
   constructor(props: Props) {
     super();
     this.changed = props.changed;
     this.id = props.id;
     this.touchState = 'up';
-    this.initialSeek = props.seek;
+    // this.initialSeek = props.seek;
     this.state = {
       x: 0,
     };
@@ -38,7 +38,8 @@ export default class SrollBar extends React.Component<Props, State> {
     element.addEventListener('mousedown', this.touchDown.bind(this), false);
     window.addEventListener('mouseup', this.touchUp.bind(this), false);
     window.addEventListener('mousemove', this.touchMove.bind(this), false);
-    this.seek(this.initialSeek);
+    // this.seek(this.props.position);
+    // console.log('asdf')
   }
 
   touchDown(event: MouseEvent) {
@@ -71,16 +72,17 @@ export default class SrollBar extends React.Component<Props, State> {
     if (percent > 1) {
       percent = 1;
     }
+
     if (this.changed) {
       this.changed(percentage);
     }
-    this.seek(percentage);
+    // this.seek(percentage);
   }
 
   seek(percentIn: number) {
     const element = document.getElementById(this.id);
     if (element == null) {
-      return;
+      return 0;
     }
     const { width } = element.getBoundingClientRect();
     let percent = percentIn;
@@ -90,10 +92,15 @@ export default class SrollBar extends React.Component<Props, State> {
     if (percent > 1) {
       percent = 1;
     }
-    this.setState({
-      x: percent * width - 6,
-    });
+    // this.setState({
+    //   x: percent * width - 6,
+    // });
+    return percent * width - 6;
   }
+
+  // componentDidMount() {
+  //   this.seek(this.props.position);
+  // }
 
 
   render() {  // eslint-disable-line class-methods-use-this
@@ -104,7 +111,7 @@ export default class SrollBar extends React.Component<Props, State> {
       />
       <div
         style={{
-          width: `${this.state.x + 10}px`,
+          width: `${this.seek(this.props.position) + 10}px`,
         }}
         className='figureone_scrollbar_currentTime'
         id={`${this.id}_currentTime`}
@@ -113,7 +120,7 @@ export default class SrollBar extends React.Component<Props, State> {
         className='figureone_scrollbar_circle'
         id={`${this.id}_circle`}
         style={{
-          left: `${this.state.x}px`,
+          left: `${this.seek(this.props.position)}px`,
         }}
       />
     </div>;
