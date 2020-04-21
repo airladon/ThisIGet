@@ -118,6 +118,8 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this._radDegEqn.isTouchable = false;
     this._radDegEqn.hasTouchableElements = false;
+
+    this.fnMap.add('bendRadius', this.bend.bind(this));
   }
 
   goToRadiusForm() {
@@ -252,7 +254,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  bendRadius(finished: ?() => void = null) {
+  bendRadius(finished: ?(string | (() => void)) = null) {
     const line1 = this._circle._line1;
     const bendLine = this._circle._bendLine;
     const { radius, width } = this.layout;
@@ -264,7 +266,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     const target = bendLine.transform._dup();
     target.updateRotation(Math.PI / 2);
     target.updateTranslation(radius + width / 2, 0);
-    this.fnMap.add('bendRadius', this.bend.bind(this));
     bendLine.animations.new()
       .transform({ target, duration: 1 })
       .custom({ callback: 'bendRadius', duration: 1 })
@@ -286,7 +287,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  appearRadianLines(done: ?() => void = null) {
+  appearRadianLines(done: ?(string | (() => void)) = null) {
     const lines = this._circle._radianLines;
     lines._line1.hide();
     lines._line2.hide();
@@ -309,7 +310,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     toAngle: ?number = null,
     direction: number = 0,
     duration: number = 2,
-    whenFinished: ?() => void = null,
+    whenFinished: ?(string | (() => void)) = null,
   ) {
     let r = toAngle;
     if (toAngle != null
@@ -381,7 +382,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   setLineRotation(
     r: ?number = null,
     animate: boolean = true,
-    whenFinished: ?() => void = null,
+    whenFinished: ?() => void | string = null,
   ) {
     let target = r;
     let direction = 0;
@@ -395,7 +396,8 @@ export default class CommonCollection extends CommonDiagramCollection {
         direction = -1;
       } else {
         if (whenFinished != null) {
-          whenFinished();
+          this.fnMap.exec(whenFinished);
+          // whenFinished();
         }
         this.updateAngle();
         return;
@@ -406,7 +408,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       this._circle._line1.setRotation(target);
       if (whenFinished != null) {
-        whenFinished();
+        // whenFinished();
+        this.fnMap.exec(whenFinished);
       }
     }
   }

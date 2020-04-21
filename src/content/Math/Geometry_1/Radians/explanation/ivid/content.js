@@ -60,8 +60,8 @@ class Content extends PresentationFormatContent {
       setContent: [],
       show: [],
       modifiers: {},
-      transitionFromAny: (done) => {
-        diag.setLineRotation(null, true, done);
+      transitionFromAny: (done, fnString) => {
+        diag.setLineRotation(null, true, fnString);
       },
       setSteadyState: () => {
         circle.setScenario('center');
@@ -116,11 +116,11 @@ class Content extends PresentationFormatContent {
         // circle._angleText,
         circle._arc,
       ],
-      transitionFromAny: (done) => {
+      transitionFromAny: (done, doneFnString) => {
         if (this.comingFrom !== 'prev') {
-          diag.setLineRotation(1.3, false, done);
+          diag.setLineRotation(1.3, false, doneFnString);
         } else {
-          diag.setLineRotation(null, true, done);
+          diag.setLineRotation(null, true, doneFnString);
         }
       },
       setSteadyState: () => {
@@ -167,9 +167,9 @@ class Content extends PresentationFormatContent {
       equal: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'aw3r3' }),
     };
     this.addSection(common, {
-      transitionFromPrev: (done) => {
+      transitionFromPrev: (done, doneFnString) => {
         circle._bendLine.showAll();
-        diag.bendRadius(done);
+        diag.bendRadius(doneFnString);
       },
       setSteadyState: () => {
         // circle._line1.setRotation(1);

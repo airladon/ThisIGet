@@ -126,6 +126,12 @@ class PresentationFormat extends SimpleFormat {
     this.goToSectionIndex = 0;
     this.type = 'presentation';
     this.elementStates = {};
+    this.fnMap.add('_finishTransitionReset', this.finishTransitionReset.bind(this));
+    this.fnMap.add('_finishTransFromNextOrPrev', this.finishTransFromNextOrPrev.bind(this));
+    this.fnMap.add('_finishTransitionFromAny', this.finishTransitionFromAny.bind(this));
+    this.fnMap.add('_finishTransitionEqnForms', this.finishTransitionEqnForms.bind(this));
+    this.fnMap.add('_finishTransToNextOrPrev', this.finishTransToNextOrPrev.bind(this));
+    this.fnMap.add('_finishTransToAny', this.finishTransToAny.bind(this));
   }
 
   getContentHtml(): string {
@@ -168,7 +174,7 @@ class PresentationFormat extends SimpleFormat {
       // this.sections.[this.currentSectionIndex + 1].comingFrom = 'prev';
       this.transitionStart('prev');
       this.goToSectionIndex = this.currentSectionIndex + 1;
-      this.currentSection().transitionToNext(this.finishTransToNextOrPrev.bind(this));
+      this.currentSection().transitionToNext(this.finishTransToNextOrPrev.bind(this), '_finishTransToNextOrPrev');
     }
     this.renderDiagrams();
   }
@@ -209,7 +215,7 @@ class PresentationFormat extends SimpleFormat {
           this.goToSectionIndex = this.currentSectionIndex - 2;
         }
       }
-      this.currentSection().transitionToPrev(this.finishTransToNextOrPrev.bind(this));
+      this.currentSection().transitionToPrev(this.finishTransToNextOrPrev.bind(this), '_finishTransToNextOrPrev');
     }
     this.renderDiagrams();
   }
@@ -250,7 +256,7 @@ class PresentationFormat extends SimpleFormat {
       this.content.toggleInfo(false);
       this.transitionStart('goto');
       this.goToSectionIndex = sectionIndex;
-      this.currentSection().transitionToAny(this.finishTransToAny.bind(this));
+      this.currentSection().transitionToAny(this.finishTransToAny.bind(this), '_finishTransToAny');
     }
     this.renderDiagrams();
   }
@@ -279,7 +285,7 @@ class PresentationFormat extends SimpleFormat {
     if (this.transitionCancelled) {
       this.finishTransToAny();
     } else {
-      this.currentSection().transitionToAny(this.finishTransToAny.bind(this));
+      this.currentSection().transitionToAny(this.finishTransToAny.bind(this), '_finishTransToAny');
     }
   }
 
@@ -347,7 +353,7 @@ class PresentationFormat extends SimpleFormat {
       if (this.comingFrom === 'prev') {
         this.fadeInTextFromPrev();
       }
-      section.transitionReset(this.finishTransitionReset.bind(this));
+      section.transitionReset(this.finishTransitionReset.bind(this), '_finishTransitionReset');
       // if (this.comingFrom === 'next') {
       //   section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
       // } else if (this.comingFrom === 'prev') {
@@ -365,12 +371,12 @@ class PresentationFormat extends SimpleFormat {
     } else {
       const section = this.content.sections[this.currentSectionIndex];
       if (this.comingFrom === 'next') {
-        section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
+        section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this), '_finishTransFromNextOrPrev');
       } else if (this.comingFrom === 'prev') {
         // this.fadeInTextFromPrev();
-        section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
+        section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this), '_finishTransFromNextOrPrev');
       } else {
-        section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
+        section.transitionEqnForms(this.finishTransitionEqnForms.bind(this), '_finishTransitionEqnForms');
       }
     }
   }
@@ -380,7 +386,7 @@ class PresentationFormat extends SimpleFormat {
       this.finishTransitionFromAny();
     } else {
       const section = this.content.sections[this.currentSectionIndex];
-      section.transitionEqnForms(this.finishTransitionEqnForms.bind(this));
+      section.transitionEqnForms(this.finishTransitionEqnForms.bind(this), '_finishTransitionEqnForms');
     }
   }
 
@@ -389,7 +395,7 @@ class PresentationFormat extends SimpleFormat {
       this.finishTransitionFromAny();
     } else {
       const section = this.content.sections[this.currentSectionIndex];
-      section.transitionFromAny(this.finishTransitionFromAny.bind(this));
+      section.transitionFromAny(this.finishTransitionFromAny.bind(this), '_finishTransitionFromAny');
     }
   }
 

@@ -1,6 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import type { TypeParsablePoint } from 'figureone';
+import { FunctionMap } from 'figureone';
 // import TopicDescription from './topicDescription';
 // import getTopicIndez from '../../content/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
@@ -136,6 +137,7 @@ class Section {
   interactiveElementList: TypeInteractiveElements;
   currentInteractiveItem: number;
   refresh: ?() => void;
+  fnMap: FunctionMap;
 
   constructor(diagram: Diagram) {
     this.diagram = diagram;
@@ -160,6 +162,7 @@ class Section {
     this.currentInteractiveItem = -1;
     this.skipWhenComingFromNext = false;
     this.refresh = null;
+    this.fnMap = new FunctionMap();
   }
 
   setContent(): Array<string> | string {
@@ -606,38 +609,54 @@ class Section {
     return {};
   }
 
-  transitionToNext(done: () => void = function temp() {}): void {
-    done();
+  transitionToNext(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
-  transitionFromNext(done: () => void = function temp() {}): void {
-    done();
+  transitionFromNext(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
-  transitionToPrev(done: () => void = function temp() {}): void {
-    done();
+  transitionToPrev(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
-  transitionFromPrev(done: () => void = function temp() {}): void {
-    done();
+  transitionFromPrev(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
-  transitionFromAny(done: () => void = function temp() {}): void {
-    done();
+  transitionFromAny(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
-  transitionToAny(done: () => void = function temp() {}): void {
-    done();
+  transitionToAny(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  transitionReset(done: () => void = function temp() {}): void {
-    done();
+  transitionReset(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  transitionEqnForms(done: () => void = function temp() {}): void {
-    done();
+  transitionEqnForms(done: () => void = function temp() {}, fnString: string): void {
+    // console.log(fnString, this.fnMap.map[fnString])
+    // done();
+    this.fnMap.exec(fnString);
   }
   /* eslint-enable no-unused-vars */
 }

@@ -72,8 +72,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
     if (recorder.isPlaying) {
-      const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
-      setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
+      // const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
+      // setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
+      setTimeout(this.queueTimeUpdate.bind(this), 20);
     }
   }
 
