@@ -109,26 +109,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/diagram/Diagram */ "./src/js/diagram/Diagram.js");
 /* harmony import */ var _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/diagram/Recorder */ "./src/js/diagram/Recorder.js");
-/* harmony import */ var _js_tools_color__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/tools/styleSheets */ "./src/js/tools/styleSheets.js");
-/* harmony import */ var _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
-/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
-/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/diagram/FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _js_tools_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/color */ "./src/js/tools/color.js");
+/* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/tools/styleSheets */ "./src/js/tools/styleSheets.js");
+/* harmony import */ var _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/Geometries/lines/lines */ "./src/js/diagram/DrawingObjects/Geometries/lines/lines.js");
+/* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+
 
 
 
@@ -165,11 +167,11 @@ __webpack_require__.r(__webpack_exports__);
 var tools = {
   math: _js_tools_math__WEBPACK_IMPORTED_MODULE_1__,
   g2: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__,
-  color: _js_tools_color__WEBPACK_IMPORTED_MODULE_4__,
-  css: _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_7__,
-  html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_5__,
-  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_6__,
-  lines: _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_8__
+  color: _js_tools_color__WEBPACK_IMPORTED_MODULE_5__,
+  css: _js_tools_styleSheets__WEBPACK_IMPORTED_MODULE_8__,
+  html: _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__,
+  misc: _js_tools_tools__WEBPACK_IMPORTED_MODULE_7__,
+  lines: _js_diagram_DrawingObjects_Geometries_lines_lines__WEBPACK_IMPORTED_MODULE_9__
 };
 /**
  * FigureOne entry point
@@ -183,30 +185,31 @@ var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
   Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["Recorder"],
+  FunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"],
   //
-  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElement"],
-  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElementCollection"],
-  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_9__["DiagramElementPrimitive"],
-  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_10__["default"],
-  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_11__["default"],
+  DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElement"],
+  DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElementCollection"],
+  DiagramElementPrimitive: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElementPrimitive"],
+  DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_11__["default"],
+  WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_12__["default"],
   //
-  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_12__["default"],
-  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_13__["default"],
-  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["TextObject"],
-  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["DiagramText"],
-  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_14__["DiagramFont"],
-  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_15__["default"],
+  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_13__["default"],
+  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_14__["default"],
+  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_15__["TextObject"],
+  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_15__["DiagramText"],
+  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_15__["DiagramFont"],
+  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_16__["default"],
   //
-  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_17__["default"],
-  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_18__["default"],
-  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_19__["default"],
-  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_20__["default"],
-  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_21__["default"],
+  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_18__["default"],
+  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_19__["default"],
+  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_20__["default"],
+  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_21__["default"],
+  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_22__["default"],
   //
-  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_23__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_22__["Equation"],
+  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_24__["default"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_23__["Equation"],
   //
-  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_16__["default"],
+  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_17__["default"],
   //
   Point: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"],
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
@@ -32021,22 +32024,37 @@ function () {
     }
   }, {
     key: "exec",
-    value: function exec(id) {
-      if (this.map[id] != null) {
-        var _this$map$id;
-
-        for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-          args[_key - 1] = arguments[_key];
-        }
-
-        if (args.length === 0) {
-          return this.map[id].fn();
-        }
-
-        return (_this$map$id = this.map[id]).fn.apply(_this$map$id, args);
+    value: function exec(idOrFn) {
+      if (idOrFn == null) {
+        return null;
       }
 
-      return null;
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof idOrFn === 'string') {
+        // return this.fnMap.exec(fn, ...args);
+        if (this.map[idOrFn] != null) {
+          var _this$map$idOrFn;
+
+          if (args.length === 0) {
+            return this.map[idOrFn].fn();
+          }
+
+          return (_this$map$idOrFn = this.map[idOrFn]).fn.apply(_this$map$idOrFn, args);
+        }
+
+        return null;
+      }
+
+      return idOrFn.apply(void 0, args); // if (this.map[id] != null) {
+      //   if (args.length === 0) {
+      //     return this.map[id].fn();
+      //   }
+      //   return this.map[id].fn(...args);
+      // }
+      // return null;
     }
   }]);
 
