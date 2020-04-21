@@ -12,6 +12,7 @@ type State = {
   volumeMuteClass: string,
   time: string,
   seek: number,
+  timeValue: number,
 }
 
 type Props = {
@@ -45,26 +46,28 @@ export default class PlaybackControl extends React.Component<Props, State> {
       volumeOnClass: '',
       volumeMuteClass: '',
       time: '00:00 / 00:00',
+      timeValue: 0,
       seek: 0,
     };
   }
 
-  componentDidMount() {
-    // this.recorder = new Recorder();
-  }
+  // componentDidMount() {
+  //   // this.recorder = new Recorder();
+  // }
 
   play() {
     const recorder = new Recorder();
-    recorder.startPlayback();
     recorder.playbackStopped = this.playbackStopped.bind(this);
-    // recorder.audio.play();
+    // console.log(this.state.time)
+    if (this.state.seek < 1) {
+      recorder.startPlayback(this.state.timeValue);
+    } else {
+      recorder.startPlayback(0);
+    }
     this.setState({
       pauseClass: '',
       playClass: 'figureone_playback_control__hide',
     });
-    // if (recorder.audio) {
-    //   recorder.audio.addEventListener('timeupdate', this.updateTime.bind(this), false);
-    // }
     this.queueTimeUpdate();
   }
 
@@ -73,6 +76,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
     if (recorder.isPlaying) {
+      console.log(recorder.isPlaying)
       // const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
       // setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
       setTimeout(this.queueTimeUpdate.bind(this), 20);
@@ -84,6 +88,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const totalTime = recorder.getTotalTime();
     this.setState({
       time: `${timeToStr(time)} / ${timeToStr(totalTime)}`,
+      timeValue: time,
       seek: time / totalTime,
     });
     // const progressBar = document.getElementById('playback_control_seek');
@@ -92,8 +97,14 @@ export default class PlaybackControl extends React.Component<Props, State> {
     // }
   }
 
+  // getTimeStr(time: number) {
+  //   const recorder = new Recorder();
+  //   const totalTime = recorder.getTotalTime();
+  //   return 
+  // }
+
   seekToPercent(percent: number) {
-    console.log(percent)
+    // console.log(percent)
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
     this.setState({ seek: percent });
@@ -103,6 +114,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   seek(toTime:number) {
     const recorder = new Recorder();
     recorder.seek(toTime);
+    this.updateTime(toTime);
   }
 
   playbackStopped() {

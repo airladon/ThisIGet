@@ -32590,12 +32590,11 @@ function () {
       if (this.events.length > 0) {
         var _endTime = this.events.slice(-1)[0][0];
         time = Math.max(time, _endTime);
-      }
+      } // if (this.states.length > 0) {
+      //   const endTime = this.states.slice(-1)[0][0];
+      //   time = Math.max(time, endTime);
+      // }
 
-      if (this.states.length > 0) {
-        var _endTime2 = this.states.slice(-1)[0][0];
-        time = Math.max(time, _endTime2);
-      }
 
       if (this.audio != null) {
         time = Math.max(time, this.audio.duration);
@@ -32831,21 +32830,21 @@ function () {
   }, {
     key: "checkStopPlayback",
     value: function checkStopPlayback() {
+      // console.log(this.isAudioPlaying, this.eventIndex < this.events.length, this.slideIndex < this.slides.length, this.stateIndex < this.states.length)
       if (this.isAudioPlaying) {
         return;
       }
 
-      if (this.eventIndex !== this.events.length) {
+      if (this.eventIndex < this.events.length) {
         return;
       }
 
-      if (this.slideIndex !== this.slides.length) {
+      if (this.slideIndex < this.slides.length) {
         return;
-      }
+      } // if (this.stateIndex < this.states.length) {
+      //   return;
+      // }
 
-      if (this.stateIndex !== this.states.length) {
-        return;
-      }
 
       this.stopPlayback();
     }
