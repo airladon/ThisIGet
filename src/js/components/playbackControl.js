@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import Fig from 'figureone';
+import ScrollBar from './scrollBar';
 
 const { Recorder } = Fig;
 
@@ -267,9 +268,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
   render() {  // eslint-disable-line class-methods-use-this
     return <div className="figureone_playback_control">
       <div className="figureone_playback_control__seek_container">
-        <div className="figureone_playback_control__seek_total"></div>
+        {/*<div className="figureone_playback_control__seek_total"></div>
         <div className="figureone_playback_control__seek_time"></div>
         <div className="figureone_playback_control__seek_circle"></div>
+        */}
+        <ScrollBar id='playback_control_seek'/>
       </div>
       <div className="figureone_playback_control__control_container">
         <div
