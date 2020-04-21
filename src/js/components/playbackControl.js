@@ -76,7 +76,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
     if (recorder.isPlaying) {
-      console.log(recorder.isPlaying)
+      // console.log(recorder.isPlaying)
       // const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
       // setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
       setTimeout(this.queueTimeUpdate.bind(this), 20);
@@ -108,12 +108,17 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
     this.setState({ seek: percent });
-    this.seek(percent * totalTime);
+    // this.seek(percent * totalTime);
+    recorder.seek(percent);
+    this.updateTime(percent * totalTime);
   }
 
-  seek(toTime:number) {
+  seek(toTime: number) {
     const recorder = new Recorder();
-    recorder.seek(toTime);
+    const totalTime = recorder.getTotalTime();
+    const percent = toTime / totalTime;
+    this.setState({ seek: percent });
+    recorder.seek(percent);
     this.updateTime(toTime);
   }
 

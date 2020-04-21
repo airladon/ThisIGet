@@ -70,7 +70,7 @@ export default class SrollBar extends React.Component<Props, State> {
     // let circleWidth = 10;
     const circle = document.getElementById(`${this.id}_circle`);
     if (circle == null) {
-      return  0;
+      return 0;
     }
     const circleRect = circle.getBoundingClientRect();
     const seekRect = element.getBoundingClientRect();
