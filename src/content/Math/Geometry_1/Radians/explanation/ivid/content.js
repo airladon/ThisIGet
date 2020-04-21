@@ -169,6 +169,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       transitionFromPrev: (done, doneFnString) => {
         circle._bendLine.showAll();
+        console.log(doneFnString);
         diag.bendRadius(doneFnString);
       },
       setSteadyState: () => {
