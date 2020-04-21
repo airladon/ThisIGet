@@ -56,6 +56,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   play() {
     const recorder = new Recorder();
     recorder.startPlayback();
+    recorder.playbackStopped = this.playbackStopped.bind(this);
     // recorder.audio.play();
     this.setState({
       pauseClass: '',
@@ -89,10 +90,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
     // if (progressBar) {
     //   progressBar.seek(time / totalTime);
     // }
-
   }
 
   seekToPercent(percent: number) {
+    console.log(percent)
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
     this.setState({ seek: percent });
@@ -104,14 +105,22 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.seek(toTime);
   }
 
-  pause() {
-    const recorder = new Recorder();
-    recorder.stopPlayback();
-    // recorder.audio.pause();
+  playbackStopped() {
     this.setState({
       playClass: '',
       pauseClass: 'figureone_playback_control__hide',
     });
+  }
+
+  pause() {
+    const recorder = new Recorder();
+    recorder.stopPlayback();
+    // recorder.audio.pause();
+    // this.setState({
+    //   playClass: '',
+    //   pauseClass: 'figureone_playback_control__hide',
+    // });
+    // this.playbackStopped
     // if (recorder.audio) {
     //   recorder.audio.removeEventListener('timeupdate', this.updateTime.bind(this), false);
     // }

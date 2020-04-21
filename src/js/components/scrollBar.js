@@ -38,13 +38,11 @@ export default class SrollBar extends React.Component<Props, State> {
     element.addEventListener('mousedown', this.touchDown.bind(this), false);
     window.addEventListener('mouseup', this.touchUp.bind(this), false);
     window.addEventListener('mousemove', this.touchMove.bind(this), false);
-    // this.seek(this.props.position);
-    // console.log('asdf')
   }
 
   touchDown(event: MouseEvent) {
     this.touchState = 'down';
-    this.seekOffset(event.clientX);
+    this.touchHandler(event.clientX);
   }
 
   touchUp() {
@@ -53,55 +51,72 @@ export default class SrollBar extends React.Component<Props, State> {
 
   touchMove(event: MouseEvent) {
     if (this.touchState === 'down') {
-      // this.seekOffset(event.clientX);
-      this.seekOffset(event.clientX);
+      this.touchHandler(event.clientX);
     }
   }
 
-  seekOffset(offsetX: number) {
-    const element = document.getElementById(this.id);
-    if (element == null) {
-      return;
-    }
-    const { width, left } = element.getBoundingClientRect();
-    const percentage = (offsetX - left) / width;
-    let percent = percentage;
-    if (percent < 0) {
-      percent = 0;
-    }
-    if (percent > 1) {
-      percent = 1;
-    }
-
+  touchHandler(x: number) {
     if (this.changed) {
-      this.changed(percentage);
+      const percent = this.clientXToPercent(x);
+      this.changed(percent);
     }
-    // this.seek(percentage);
   }
 
-  seek(percentIn: number) {
+  getValue() {
     const element = document.getElementById(this.id);
     if (element == null) {
       return 0;
     }
-    const { width } = element.getBoundingClientRect();
-    let percent = percentIn;
-    if (percent < 0) {
-      percent = 0;
+    // let circleWidth = 10;
+    const circle = document.getElementById(`${this.id}_circle`);
+    if (circle == null) {
+      return  0;
     }
-    if (percent > 1) {
-      percent = 1;
-    }
-    // this.setState({
-    //   x: percent * width - 6,
-    // });
-    return percent * width - 6;
+    const circleRect = circle.getBoundingClientRect();
+    const seekRect = element.getBoundingClientRect();
+    const x = circleRect.left - seekRect.left + circleRect.width / 2;
+    return this.clientXToPercent(x);
   }
 
-  // componentDidMount() {
-  //   this.seek(this.props.position);
-  // }
+  percentToX(percentIn: number) {
+    let percent = percentIn;
+    if (percent > 1) {
+      percent = 1;
+    } else if (percent < 0) {
+      percent = 0;
+    }
+    const element = document.getElementById(this.id);
+    if (element == null) {
+      return 0;
+    }
+    const circle = document.getElementById(`${this.id}_circle`);
+    if (circle == null) {
+      return 0;
+    }
+    const circleWidth = circle.getBoundingClientRect().width;
+    const { width } = element.getBoundingClientRect();
+    return width * percent - circleWidth / 2;
+  }
 
+  clientXToPercent(x: number) {
+    const element = document.getElementById(this.id);
+    if (element == null) {
+      return 0;
+    }
+    const circle = document.getElementById(`${this.id}_circle`);
+    if (circle == null) {
+      return 0;
+    }
+    const circleWidth = circle.getBoundingClientRect().width;
+    const { left, width } = element.getBoundingClientRect();
+    let percent = (x - left + circleWidth / 2) / width;
+    if (percent > 1) {
+      percent = 1;
+    } else if (percent < 0) {
+      percent = 0;
+    }
+    return percent;
+  }
 
   render() {  // eslint-disable-line class-methods-use-this
     return <div className='figureone_scrollbar' id={this.id}>
@@ -111,7 +126,7 @@ export default class SrollBar extends React.Component<Props, State> {
       />
       <div
         style={{
-          width: `${this.seek(this.props.position) + 10}px`,
+          width: `${this.percentToX(this.props.position) + 10}px`,
         }}
         className='figureone_scrollbar_currentTime'
         id={`${this.id}_currentTime`}
@@ -120,7 +135,7 @@ export default class SrollBar extends React.Component<Props, State> {
         className='figureone_scrollbar_circle'
         id={`${this.id}_circle`}
         style={{
-          left: `${this.seek(this.props.position)}px`,
+          left: `${this.percentToX(this.props.position)}px`,
         }}
       />
     </div>;

@@ -530,6 +530,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   stopTransition() {
+    console.log(this.currentSectionIndex)
     const { diagram } = this;
     this.transitionCancelled = true;
     if (diagram) {

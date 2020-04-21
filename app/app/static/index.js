@@ -1272,21 +1272,21 @@ function () {
   }, {
     key: "execFn",
     value: function execFn(fn) {
-      if (fn == null) {
-        return null;
-      }
+      var _this$fnMap;
 
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
 
-      if (typeof fn === 'string') {
-        var _this$fnMap;
-
-        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
-      }
-
-      return fn.apply(void 0, args);
+      // if (fn == null) {
+      //   return null;
+      // }
+      // if (typeof fn === 'string') {
+      //   return this.fnMap.exec(fn, ...args);
+      // }
+      // console.log(fn)
+      // return fn(...args);
+      return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
     }
   }, {
     key: "setTimeDelta",
@@ -7333,21 +7333,20 @@ function () {
   _createClass(Element, [{
     key: "execFn",
     value: function execFn(fn) {
-      if (fn == null) {
-        return null;
-      }
+      var _this$fnMap;
 
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
 
-      if (typeof fn === 'string') {
-        var _this$fnMap;
-
-        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
-      }
-
-      return fn.apply(void 0, args);
+      // if (fn == null) {
+      //   return null;
+      // }
+      // if (typeof fn === 'string') {
+      //   return this.fnMap.exec(fn, ...args);
+      // }
+      // return fn(...args);
+      return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
     }
   }, {
     key: "calcSize",
@@ -7511,21 +7510,20 @@ function () {
   _createClass(Elements, [{
     key: "execFn",
     value: function execFn(fn) {
-      if (fn == null) {
-        return null;
-      }
+      var _this$fnMap2;
 
       for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
         args[_key2 - 1] = arguments[_key2];
       }
 
-      if (typeof fn === 'string') {
-        var _this$fnMap2;
-
-        return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [fn].concat(args));
-      }
-
-      return fn.apply(void 0, args);
+      // if (fn == null) {
+      //   return null;
+      // }
+      // if (typeof fn === 'string') {
+      //   return this.fnMap.exec(fn, ...args);
+      // }
+      // return fn(...args);
+      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [fn].concat(args));
     }
   }, {
     key: "_dup",
@@ -32048,7 +32046,11 @@ function () {
         return null;
       }
 
-      return idOrFn.apply(void 0, args); // if (this.map[id] != null) {
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null; // if (this.map[id] != null) {
       //   if (args.length === 0) {
       //     return this.map[id].fn();
       //   }
@@ -32536,6 +32538,8 @@ function () {
       this.prevSlide = null;
       this.goToSlide = null;
       this.audio = null;
+      this.isAudioPlaying = false;
+      this.playbackStopped = null;
     }
 
     return Recorder.instance;
@@ -32768,6 +32772,8 @@ function () {
   }, {
     key: "startPlayback",
     value: function startPlayback() {
+      var _this4 = this;
+
       var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getCurrentTime();
       var showPointer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var fromTime = fromTimeIn;
@@ -32800,9 +32806,18 @@ function () {
       this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, 0));
 
       if (this.audio) {
+        this.isAudioPlaying = true;
         this.audio.currentTime = fromTime;
         this.audio.play();
-        console.log('playing');
+
+        var audioEnded = function audioEnded() {
+          _this4.isAudioPlaying = false;
+
+          _this4.checkStopPlayback();
+        };
+
+        this.audio.removeEventListener('ended', audioEnded.bind(this), false);
+        this.audio.addEventListener('ended', audioEnded.bind(this), false);
       }
 
       var pointer = this.getElement('pointer.up');
@@ -32812,6 +32827,27 @@ function () {
       }
 
       this.animateDiagramNextFrame(); // this.unpauseDiagram();
+    }
+  }, {
+    key: "checkStopPlayback",
+    value: function checkStopPlayback() {
+      if (this.isAudioPlaying) {
+        return;
+      }
+
+      if (this.eventIndex !== this.events.length) {
+        return;
+      }
+
+      if (this.slideIndex !== this.slides.length) {
+        return;
+      }
+
+      if (this.stateIndex !== this.states.length) {
+        return;
+      }
+
+      this.stopPlayback();
     }
   }, {
     key: "stopPlayback",
@@ -32828,6 +32864,11 @@ function () {
 
       if (this.audio) {
         this.audio.pause();
+        this.isAudioPlaying = false;
+      }
+
+      if (this.playbackStopped != null) {
+        this.playbackStopped();
       } // this.pauseDiagram();
 
     }
@@ -32869,12 +32910,12 @@ function () {
   }, {
     key: "queuePlaybackEvent",
     value: function queuePlaybackEvent() {
-      var _this4 = this;
+      var _this5 = this;
 
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextEventTimeout = setTimeout(function () {
-        if (_this4.isPlaying) {
-          _this4.playbackEvent();
+        if (_this5.isPlaying) {
+          _this5.playbackEvent();
         }
       }, delay);
     }
@@ -32892,7 +32933,7 @@ function () {
       this.eventIndex += 1;
 
       if (this.eventIndex === this.events.length) {
-        this.stopPlayback();
+        this.checkStopPlayback();
         return;
       }
 
@@ -33032,12 +33073,12 @@ function () {
   }, {
     key: "queuePlaybackState",
     value: function queuePlaybackState() {
-      var _this5 = this;
+      var _this6 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextStateTimeout = setTimeout(function () {
-        if (_this5.isPlaying) {
-          _this5.playbackState();
+        if (_this6.isPlaying) {
+          _this6.playbackState();
         }
       }, time);
     }
@@ -33053,7 +33094,7 @@ function () {
       this.stateIndex += 1;
 
       if (this.stateIndex === this.states.length) {
-        this.stopPlayback();
+        this.checkStopPlayback();
         return;
       }
 
@@ -33072,12 +33113,12 @@ function () {
   }, {
     key: "queuePlaybackSlide",
     value: function queuePlaybackSlide() {
-      var _this6 = this;
+      var _this7 = this;
 
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextSlideTimeout = setTimeout(function () {
-        if (_this6.isPlaying) {
-          _this6.playbackSlide();
+        if (_this7.isPlaying) {
+          _this7.playbackSlide();
         }
       }, delay);
     }
@@ -33094,7 +33135,7 @@ function () {
       this.slideIndex += 1;
 
       if (this.slideIndex === this.slides.length) {
-        this.stopPlayback();
+        this.checkStopPlayback();
         return;
       }
 
