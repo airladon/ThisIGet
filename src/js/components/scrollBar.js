@@ -10,18 +10,21 @@ type State = {
 type Props = {
   changed: (number) => void,
   id: string,
+  seek: number,
 };
 
 export default class SrollBar extends React.Component<Props, State> {
   touchState: 'up' | 'down';
   changed: (number) => void;
   id: string;
+  initialSeek: number;
 
   constructor(props: Props) {
     super();
     this.changed = props.changed;
     this.id = props.id;
     this.touchState = 'up';
+    this.initialSeek = props.seek;
     this.state = {
       x: 0,
     };
@@ -32,15 +35,15 @@ export default class SrollBar extends React.Component<Props, State> {
     if (element == null) {
       return;
     }
-    this.currentTime = 0;
     element.addEventListener('mousedown', this.touchDown.bind(this), false);
     window.addEventListener('mouseup', this.touchUp.bind(this), false);
     window.addEventListener('mousemove', this.touchMove.bind(this), false);
+    this.seek(this.initialSeek);
   }
 
   touchDown(event: MouseEvent) {
     this.touchState = 'down';
-    this.seek(event.offsetX);
+    this.seekOffset(event.clientX);
   }
 
   touchUp() {
@@ -49,35 +52,46 @@ export default class SrollBar extends React.Component<Props, State> {
 
   touchMove(event: MouseEvent) {
     if (this.touchState === 'down') {
-      this.seek(event.clientX);
+      // this.seekOffset(event.clientX);
+      this.seekOffset(event.clientX);
     }
   }
 
-  // setCircle()
-
-  seek(offsetX: number) {
+  seekOffset(offsetX: number) {
     const element = document.getElementById(this.id);
     if (element == null) {
       return;
     }
     const { width, left } = element.getBoundingClientRect();
-    let percentage = (offsetX - left)/ width;
-    if (percentage < 0) {
-      percentage = 0;
+    const percentage = (offsetX - left) / width;
+    let percent = percentage;
+    if (percent < 0) {
+      percent = 0;
     }
-    if (percentage > 1) {
-      percentage = 1;
+    if (percent > 1) {
+      percent = 1;
     }
-    // const recorder = new Recorder();
-    // recorder.seek(percentage);
-    // const totalTime = recorder.getTotalTime();
-    // this.currentTime = Math.floor(percentage * totalTime)
-    // this.setTime(this.currentTime);
     if (this.changed) {
       this.changed(percentage);
     }
+    this.seek(percentage);
+  }
+
+  seek(percentIn: number) {
+    const element = document.getElementById(this.id);
+    if (element == null) {
+      return;
+    }
+    const { width } = element.getBoundingClientRect();
+    let percent = percentIn;
+    if (percent < 0) {
+      percent = 0;
+    }
+    if (percent > 1) {
+      percent = 1;
+    }
     this.setState({
-      x: offsetX - 7,
+      x: percent * width - 6,
     });
   }
 

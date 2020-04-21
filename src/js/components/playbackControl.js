@@ -11,6 +11,7 @@ type State = {
   volumeOnClass: string,
   volumeMuteClass: string,
   time: string,
+  seek: number,
 }
 
 type Props = {
@@ -44,6 +45,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       volumeOnClass: '',
       volumeMuteClass: '',
       time: '00:00 / 00:00',
+      seek: 0,
     };
   }
 
@@ -80,15 +82,23 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const totalTime = recorder.getTotalTime();
     this.setState({
       time: `${timeToStr(time)} / ${timeToStr(totalTime)}`,
+      seek: time / totalTime,
     });
+    // const progressBar = document.getElementById('playback_control_seek');
+    // if (progressBar) {
+    //   progressBar.seek(time / totalTime);
+    // }
+
+  }
+
+  seekToPercent(percent: number) {
+    const totalTime = recorder.getTotalTime();
+    this.seek(percent * totalTime);
   }
 
   seek(toTime:number) {
     const recorder = new Recorder();
-    if (recorder.audio) {
-    //   recorder.audio.removeEventListener('timeupdate', this.updateTime.bind(this), false);
-      recorder.audio.seek(toTime);
-    }
+    recorder.seek(toTime);
   }
 
   pause() {
@@ -272,7 +282,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
         <div className="figureone_playback_control__seek_time"></div>
         <div className="figureone_playback_control__seek_circle"></div>
         */}
-        <ScrollBar id='playback_control_seek'/>
+        <ScrollBar
+          id='playback_control_seek'
+          seek={this.state.seek}
+        />
       </div>
       <div className="figureone_playback_control__control_container">
         <div
