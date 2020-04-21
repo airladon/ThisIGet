@@ -32540,6 +32540,7 @@ function () {
       this.audio = null;
       this.isAudioPlaying = false;
       this.playbackStopped = null;
+      this.getCurrentSlide = null;
     }
 
     return Recorder.instance;
@@ -32800,9 +32801,10 @@ function () {
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
       this.stateIndex = Math.max(getPrevIndexForTime(this.states, fromTime), 0);
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
-      this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex, 0));
+      this.setSlide(this.slideIndex, true);
+      this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex + 1, fromTime));
       this.setState(this.stateIndex);
-      this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, 0));
+      this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, fromTime));
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -33157,11 +33159,13 @@ function () {
           message = _slide[2],
           slideNumber = _slide[3];
 
-      if (direction === 'next' && forceGoTo === false) {
+      var currentSlide = this.getCurrentSlide();
+
+      if (direction === 'next' && forceGoTo === false && currentSlide === slideNumber - 1) {
         if (this.nextSlide != null) {
           this.nextSlide(message);
         }
-      } else if (direction === 'prev' && forceGoTo === false) {
+      } else if (direction === 'prev' && forceGoTo === false && currentSlide === slideNumber + 1) {
         if (this.prevSlide != null) {
           this.prevSlide(message);
         }

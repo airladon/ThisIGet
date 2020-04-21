@@ -530,7 +530,6 @@ class PresentationFormat extends SimpleFormat {
   }
 
   stopTransition() {
-    console.log(this.currentSectionIndex)
     const { diagram } = this;
     this.transitionCancelled = true;
     if (diagram) {
@@ -569,7 +568,12 @@ class PresentationFormat extends SimpleFormat {
       recorder.nextSlide = this.nextSection.bind(this);
       recorder.prevSlide = this.prevSection.bind(this);
       recorder.goToSlide = this.goToSection.bind(this);
+      recorder.getCurrentSlide = this.getCurrentSlide.bind(this);
     }
+  }
+
+  getCurrentSlide() {
+    return this.currentSectionIndex;
   }
 
   // eslint-disable-next-line class-methods-use-this
