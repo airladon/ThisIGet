@@ -126,12 +126,12 @@ class PresentationFormat extends SimpleFormat {
     this.goToSectionIndex = 0;
     this.type = 'presentation';
     this.elementStates = {};
-    this.fnMap.add('_finishTransitionReset', this.finishTransitionReset.bind(this));
-    this.fnMap.add('_finishTransFromNextOrPrev', this.finishTransFromNextOrPrev.bind(this));
-    this.fnMap.add('_finishTransitionFromAny', this.finishTransitionFromAny.bind(this));
-    this.fnMap.add('_finishTransitionEqnForms', this.finishTransitionEqnForms.bind(this));
-    this.fnMap.add('_finishTransToNextOrPrev', this.finishTransToNextOrPrev.bind(this));
-    this.fnMap.add('_finishTransToAny', this.finishTransToAny.bind(this));
+    this.fnMap.global.add('_finishTransitionReset', this.finishTransitionReset.bind(this));
+    this.fnMap.global.add('_finishTransFromNextOrPrev', this.finishTransFromNextOrPrev.bind(this));
+    this.fnMap.global.add('_finishTransitionFromAny', this.finishTransitionFromAny.bind(this));
+    this.fnMap.global.add('_finishTransitionEqnForms', this.finishTransitionEqnForms.bind(this));
+    this.fnMap.global.add('_finishTransToNextOrPrev', this.finishTransToNextOrPrev.bind(this));
+    this.fnMap.global.add('_finishTransToAny', this.finishTransToAny.bind(this));
   }
 
   getContentHtml(): string {

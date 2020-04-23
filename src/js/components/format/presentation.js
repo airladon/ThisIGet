@@ -7,6 +7,7 @@ import DropDownButton from '../dropDownButton';
 import { getCookie, createCookie, getCurrentPath } from '../../tools/misc';
 import PresentationQR from '../presentationQR';
 import StaticQR from '../staticQR';
+import PlaybackControl from '../playbackControl';
 // import { Recorder } from Fig;
 // import '../../css/presentationFormat.scss';
 
@@ -183,6 +184,10 @@ export default class PresentationFormatComponent extends React.Component
     }
     this.version.content.qrDiagram.resize();
     this.version.content.qrDiagram.animateNextFrame();
+  }
+
+  getDiagram() {
+    return this.version.content.diagram;
   }
 
   componentDidMount() {
@@ -453,6 +458,7 @@ export default class PresentationFormatComponent extends React.Component
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
+              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
         </div>
       </div>
       </main>

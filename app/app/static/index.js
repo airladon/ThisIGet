@@ -185,7 +185,8 @@ var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
   Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["Recorder"],
-  FunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"],
+  FunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"],
+  GlobalFunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["GlobalFunctionMap"],
   //
   DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElement"],
   DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElementCollection"],
@@ -422,9 +423,38 @@ function (_animation$SerialAnim) {
   //   }
   //   return state;
   // }
+  // fnExec(idOrFn: string | Function | null, ...args: any) {
+  //   const result = this.fnMap.exec(idOrFn, ...args);
+  //   if (result == null && this.element != null) {
+  //     return this.element.fnMap.exec(idOrFn, ...args);
+  //   }
+  //   return result;
+  // }
 
 
   _createClass(AnimationBuilder, [{
+    key: "fnExec",
+    value: function fnExec(idOrFn) {
+      var _this$fnMap2;
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      // const result = this.fnMap.exec(idOrFn, ...args);
+      // if (result == null && this.element != null) {
+      //   return this.element.fnMap.exec(idOrFn, ...args);
+      // }
+      // return result;
+      if (this.element != null) {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).execOnMaps.apply(_this$fnMap, [idOrFn, [this.element.fnMap.map]].concat(args));
+      }
+
+      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [idOrFn].concat(args));
+    }
+  }, {
     key: "_fromState",
     value: function _fromState(state, getElement) {
       // const obj = new this.constructor();
@@ -471,11 +501,20 @@ function (_animation$SerialAnim) {
   }, {
     key: "custom",
     value: function custom() {
-      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        optionsIn[_key2] = arguments[_key2];
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
       }
 
-      this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"], optionsIn));
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"](options));
+      } else {
+        this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"], optionsIn));
+      }
+
       return this;
     }
   }, {
@@ -486,8 +525,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-          optionsIn[_key3] = arguments[_key3];
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -504,8 +543,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-          optionsIn[_key4] = arguments[_key4];
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -522,8 +561,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-          optionsIn[_key5] = arguments[_key5];
+        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          optionsIn[_key6] = arguments[_key6];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -546,8 +585,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-          optionsIn[_key6] = arguments[_key6];
+        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          optionsIn[_key7] = arguments[_key7];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -564,8 +603,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-          optionsIn[_key7] = arguments[_key7];
+        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          optionsIn[_key8] = arguments[_key8];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -582,8 +621,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-          optionsIn[_key8] = arguments[_key8];
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -600,8 +639,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-          optionsIn[_key9] = arguments[_key9];
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -618,8 +657,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-          optionsIn[_key10] = arguments[_key10];
+        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          optionsIn[_key11] = arguments[_key11];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -637,8 +676,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
-        args[_key11 - 1] = arguments[_key11];
+      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
+        args[_key12 - 1] = arguments[_key12];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -661,8 +700,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
-        args[_key12 - 1] = arguments[_key12];
+      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        args[_key13 - 1] = arguments[_key13];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -685,8 +724,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
-        args[_key13 - 1] = arguments[_key13];
+      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        args[_key14 - 1] = arguments[_key14];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -709,8 +748,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-        args[_key14 - 1] = arguments[_key14];
+      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        args[_key15 - 1] = arguments[_key15];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -729,8 +768,8 @@ function (_animation$SerialAnim) {
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-        args[_key15 - 1] = arguments[_key15];
+      for (var _len16 = arguments.length, args = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        args[_key16 - 1] = arguments[_key16];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -741,11 +780,21 @@ function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
-        optionsIn[_key16 - 1] = arguments[_key16];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        optionsIn[_key17 - 1] = arguments[_key17];
       }
 
-      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"](triggerOrOptionsIn, options));
+      } else {
+        this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      } // this.then(animation.trigger(triggerOrOptionsIn, ...optionsIn));
+
+
       return this;
     }
   }, {
@@ -753,8 +802,8 @@ function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-        optionsIn[_key17 - 1] = arguments[_key17];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+        optionsIn[_key18 - 1] = arguments[_key18];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -765,8 +814,8 @@ function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len18 = arguments.length, optionsIn = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-        optionsIn[_key18 - 1] = arguments[_key18];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19 > 1 ? _len19 - 1 : 0), _key19 = 1; _key19 < _len19; _key19++) {
+        optionsIn[_key19 - 1] = arguments[_key19];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -779,8 +828,8 @@ function (_animation$SerialAnim) {
         element: this.element
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -1156,8 +1205,9 @@ function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationStep; });
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1172,6 +1222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import type { pathOptionsType } from '../tools/g2';
 // eslint-disable-next-line import/no-cycle
 // import { DiagramElement } from './Element';
+
 
 
  // import * as anim from './Animation';
@@ -1217,7 +1268,12 @@ function () {
     // When progressions aren't linear, then this time is non-trival.
 
     this.startTimeOffset = 0;
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"]();
+    this.fnMap.add('tools.math.easein', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easein"]);
+    this.fnMap.add('tools.math.easeout', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeout"]);
+    this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"]);
+    this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_1__["linear"]);
+    this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_1__["sinusoid"]);
     return this;
   } // _getStateProperties(): Array<string> {  // eslint-disable-line class-methods-use-this
   //   return Object.keys(this);
@@ -1242,6 +1298,17 @@ function () {
       var getElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(this, definition);
       return this;
+    }
+  }, {
+    key: "fnExec",
+    value: function fnExec(idOrFn) {
+      var _this$fnMap;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [idOrFn].concat(args));
     } // _finishSetState(diagram: Diagram) {
     //   if (this.element != null && typeof this.element === 'string') {
     //     const element = diagram.getElement(this.element);
@@ -1268,26 +1335,18 @@ function () {
     // eslint-disable-next-line class-methods-use-this, no-unused-vars
     // _finishSetState(diagram: Diagram) {
     // }
+    // execFn(fn: string | Function | null, ...args: Array<any>) {
+    //   // if (fn == null) {
+    //   //   return null;
+    //   // }
+    //   // if (typeof fn === 'string') {
+    //   //   return this.fnMap.exec(fn, ...args);
+    //   // }
+    //   // console.log(fn)
+    //   // return fn(...args);
+    //   return this.fnMap.exec(fn, ...args);
+    // }
 
-  }, {
-    key: "execFn",
-    value: function execFn(fn) {
-      var _this$fnMap;
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      // if (fn == null) {
-      //   return null;
-      // }
-      // if (typeof fn === 'string') {
-      //   return this.fnMap.exec(fn, ...args);
-      // }
-      // console.log(fn)
-      // return fn(...args);
-      return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
-    }
   }, {
     key: "setTimeDelta",
     value: function setTimeDelta(delta) {
@@ -1333,7 +1392,7 @@ function () {
         //   afterFrame: this.afterFrame,
         //   _stepType: this._stepType,
         // },
-        state: Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(), precision)
+        state: Object(_state__WEBPACK_IMPORTED_MODULE_2__["getState"])(this, this._getStateProperties(), precision)
       };
     } // eslint-disable-next-line no-unused-vars
 
@@ -1451,7 +1510,7 @@ function () {
       }
 
       if (this.onFinish != null) {
-        this.execFn(this.onFinish, cancelled); // this.onFinish(cancelled);
+        this.fnExec(this.onFinish, cancelled); // this.onFinish(cancelled);
       }
     } // eslint-disable-next-line class-methods-use-this
 
@@ -1565,11 +1624,13 @@ function (_AnimationStep) {
     var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomAnimationStep).call(this, AnimationStepOptionsIn));
     var defaultPositionOptions = {
+      element: null,
       callback: null,
       startPercent: 0,
       progression: 'linear'
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+    _this.element = options.element;
     _this.progression = options.progression;
 
     if (_this.progression === 'linear') {
@@ -1590,13 +1651,67 @@ function (_AnimationStep) {
     _this.startTimeOffset = _this.getPercentComplete(options.startPercent, true) * options.duration;
     _this.duration = options.duration;
     return _this;
-  }
+  } // fnExec(idOrFn: string | Function | null, ...args: any) {
+  //   const result = this.fnMap.exec(idOrFn, ...args);
+  //   if (result == null && this.element != null) {
+  //     return this.element.fnMap.exec(idOrFn, ...args);
+  //   }
+  //   return result;
+  // }
+
 
   _createClass(CustomAnimationStep, [{
+    key: "fnExec",
+    value: function fnExec(idOrFn) {
+      var _this$fnMap2;
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      // const result = this.fnMap.exec(idOrFn, ...args);
+      // if (result == null && this.element != null) {
+      //   return this.element.fnMap.exec(idOrFn, ...args);
+      // }
+      // return result;
+      if (this.element != null) {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).execOnMaps.apply(_this$fnMap, [idOrFn, [this.element.fnMap.map]].concat(args));
+      }
+
+      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [idOrFn].concat(args));
+    }
+  }, {
     key: "_getStateProperties",
     value: function _getStateProperties() {
       // eslint-disable-line class-methods-use-this
       return [].concat(_toConsumableArray(_get(_getPrototypeOf(CustomAnimationStep.prototype), "_getStateProperties", this).call(this)), ['callback', 'startPercent', 'progression']);
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state, getElement) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(this, state);
+
+      if (this.element != null && typeof this.element === 'string' && getElement != null) {
+        this.element = getElement(this.element);
+      }
+
+      return this;
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var state = _get(_getPrototypeOf(CustomAnimationStep.prototype), "_state", this).call(this);
+
+      if (this.element != null) {
+        state.state.element = {
+          f1Type: 'de',
+          state: this.element.getPath()
+        };
+      }
+
+      return state;
     }
   }, {
     key: "_getStateName",
@@ -1609,13 +1724,7 @@ function (_AnimationStep) {
     value: function setFrame(deltaTime) {
       var percentTime = deltaTime / this.duration;
       var percentComplete = this.getPercentComplete(percentTime);
-      this.execFn(this.callback, percentComplete); // if (this.callback != null) {
-      //   if (typeof this.callback === 'string') {
-      //     this.fnMap.exec(this.callback, percentComplete);
-      //   } else {
-      //     this.callback(percentComplete);
-      //   }
-      // }
+      this.fnExec(this.callback, percentComplete);
     }
   }, {
     key: "getPercentComplete",
@@ -1623,7 +1732,7 @@ function (_AnimationStep) {
       var invert = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (typeof this.progression === 'string') {
-        var result = this.fnMap.exec(this.progression, percentTime, invert);
+        var result = this.fnExec(this.progression, percentTime, invert);
 
         if (result == null) {
           return 0;
@@ -1641,15 +1750,7 @@ function (_AnimationStep) {
   }, {
     key: "setToEnd",
     value: function setToEnd() {
-      // if (this.callback != null) {
-      //   // this.callback(1);
-      //   if (typeof this.callback === 'string') {
-      //     this.fnMap.exec(this.callback, 1);
-      //   } else {
-      //     this.callback(1);
-      //   }
-      // }
-      this.execFn(this.callback, 1);
+      this.fnExec(this.callback, 1);
     } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
     //   if (this.state === 'idle') {
     //     return;
@@ -1686,8 +1787,8 @@ function (_AnimationStep) {
   return CustomAnimationStep;
 }(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
 function custom() {
-  for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-    optionsIn[_key2] = arguments[_key2];
+  for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+    optionsIn[_key3] = arguments[_key3];
   }
 
   return _construct(CustomAnimationStep, optionsIn);
@@ -1896,6 +1997,28 @@ function (_AnimationStep) {
   }
 
   _createClass(ElementAnimationStep, [{
+    key: "fnExec",
+    value: function fnExec(idOrFn) {
+      var _this$fnMap2;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      // const result = this.fnMap.exec(idOrFn, ...args);
+      // if (result == null && this.element != null) {
+      //   return this.element.fnMap.exec(idOrFn, ...args);
+      // }
+      // return result;
+      if (this.element != null) {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).execOnMaps.apply(_this$fnMap, [idOrFn, [this.element.fnMap.map]].concat(args));
+      }
+
+      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [idOrFn].concat(args));
+    }
+  }, {
     key: "_getStateProperties",
     value: function _getStateProperties() {
       // eslint-disable-line class-methods-use-this
@@ -1937,7 +2060,7 @@ function (_AnimationStep) {
     key: "getPercentComplete",
     value: function getPercentComplete(percentTime) {
       if (typeof this.progression === 'string') {
-        var result = this.fnMap.exec(this.progression, percentTime);
+        var result = this.fnExec(this.progression, percentTime);
 
         if (result == null) {
           return 0;
@@ -3169,7 +3292,7 @@ function (_ElementAnimationStep) {
 
       if (element != null) {
         element.transform.updateRotation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(this.rotation.target, this.rotation.clipTo));
-        this.execFn(element.setTransformCallback, element.transform);
+        this.fnExec(element.setTransformCallback, element.transform);
       }
     }
   }, {
@@ -3851,7 +3974,7 @@ function (_AnimationStep) {
       });
 
       if (this.onFinish != null) {
-        this.execFn(this.onFinish, cancelled);
+        this.fnExec(this.onFinish, cancelled);
       }
     }
   }, {
@@ -4123,7 +4246,7 @@ function (_AnimationStep) {
       });
 
       if (this.onFinish != null) {
-        this.execFn(this.onFinish, cancelled);
+        this.fnExec(this.onFinish, cancelled);
       }
     }
   }, {
@@ -4228,13 +4351,68 @@ function (_AnimationStep) {
     }
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
+    _this.element = options.element;
     _this.callback = options.callback;
     _this.payload = options.payload;
     _this.duration = options.duration;
     return _this;
-  }
+  } // fnExec(idOrFn: string | Function | null, ...args: any) {
+  //   const result = this.fnMap.exec(idOrFn, ...args);
+  //   if (result == null && this.element != null) {
+  //     return this.element.fnMap.exec(idOrFn, ...args);
+  //   }
+  //   return result;
+  // }
+
 
   _createClass(TriggerStep, [{
+    key: "fnExec",
+    value: function fnExec(idOrFn) {
+      var _this$fnMap2;
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      // const result = this.fnMap.exec(idOrFn, ...args);
+      // if (result == null && this.element != null) {
+      //   return this.element.fnMap.exec(idOrFn, ...args);
+      // }
+      // return result;
+      if (this.element != null) {
+        var _this$fnMap;
+
+        return (_this$fnMap = this.fnMap).execOnMaps.apply(_this$fnMap, [idOrFn, [this.element.fnMap.map]].concat(args));
+      }
+
+      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [idOrFn].concat(args));
+    }
+  }, {
+    key: "_fromState",
+    value: function _fromState(state, getElement) {
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(this, state);
+
+      if (this.element != null && typeof this.element === 'string' && getElement != null) {
+        this.element = getElement(this.element);
+      }
+
+      return this;
+    }
+  }, {
+    key: "_state",
+    value: function _state() {
+      var state = _get(_getPrototypeOf(TriggerStep.prototype), "_state", this).call(this);
+
+      if (this.element != null) {
+        state.state.element = {
+          f1Type: 'de',
+          state: this.element.getPath()
+        };
+      }
+
+      return state;
+    }
+  }, {
     key: "_getStateProperties",
     value: function _getStateProperties() {
       // eslint-disable-line class-methods-use-this
@@ -4249,7 +4427,7 @@ function (_AnimationStep) {
   }, {
     key: "setFrame",
     value: function setFrame() {
-      this.execFn(this.callback, this.payload);
+      this.fnExec(this.callback, this.payload);
       this.callback = null; // if (this.callback != null) {
       //   this.callback(this.payload);
       //   this.callback = null;
@@ -4262,7 +4440,7 @@ function (_AnimationStep) {
       //   this.callback(this.payload);
       //   this.callback = null;
       // }
-      this.execFn(this.callback, this.payload);
+      this.fnExec(this.callback, this.payload);
       this.callback = null;
     }
   }, {
@@ -4279,8 +4457,8 @@ function (_AnimationStep) {
 function trigger() {
   var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-    optionsIn[_key2 - 1] = arguments[_key2];
+  for (var _len3 = arguments.length, optionsIn = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    optionsIn[_key3 - 1] = arguments[_key3];
   }
 
   return _construct(TriggerStep, [triggerOrOptionsIn].concat(optionsIn));
@@ -4409,13 +4587,13 @@ function () {
       fontScale: 1 // updateFontSize: '',
 
     };
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["default"]();
-    this.fnMap.add('tools.math.easein', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easein"]);
-    this.fnMap.add('tools.math.easeout', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeout"]);
-    this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"]);
-    this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
-    this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_2__["sinusoid"]);
-    this.fnMap.add('doNothing', function () {});
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"](); // this.fnMap.global.add('tools.math.easein', math.easein);
+    // this.fnMap.global.add('tools.math.easeout', math.easeout);
+    // this.fnMap.global.add('tools.math.easeinout', math.easeinout);
+    // this.fnMap.global.add('tools.math.linear', math.linear);
+    // this.fnMap.global.add('tools.math.sinusoid', math.sinusoid);
+    // this.fnMap.add('doNothing', () => {});
+
     this.isPaused = false;
     this.scrolled = false; // this.oldScrollY = 0;
 
@@ -7327,28 +7505,20 @@ function () {
       ascent: this.ascent,
       descent: this.descent
     };
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"]();
-  }
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+  } // execFn(fn: string | Function | null, ...args: Array<any>) {
+  //   // if (fn == null) {
+  //   //   return null;
+  //   // }
+  //   // if (typeof fn === 'string') {
+  //   //   return this.fnMap.exec(fn, ...args);
+  //   // }
+  //   // return fn(...args);
+  //   return this.fnMap.exec(fn, ...args);
+  // }
+
 
   _createClass(Element, [{
-    key: "execFn",
-    value: function execFn(fn) {
-      var _this$fnMap;
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      // if (fn == null) {
-      //   return null;
-      // }
-      // if (typeof fn === 'string') {
-      //   return this.fnMap.exec(fn, ...args);
-      // }
-      // return fn(...args);
-      return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
-    }
-  }, {
     key: "calcSize",
     value: function calcSize(location, scale) {
       var content = this.content;
@@ -7369,7 +7539,7 @@ function () {
         content.updateLastDrawTransform();
 
         if (content.internalSetTransformCallback != null) {
-          this.execFn(content.internalSetTransformCallback, content.transform);
+          this.fnMap.exec(content.internalSetTransformCallback, content.transform);
         } // Get the boundaries of element
 
 
@@ -7504,28 +7674,20 @@ function () {
     this.width = 0;
     this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.height = 0;
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["default"]();
-  }
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+  } // execFn(fn: string | Function | null, ...args: Array<any>) {
+  //   // if (fn == null) {
+  //   //   return null;
+  //   // }
+  //   // if (typeof fn === 'string') {
+  //   //   return this.fnMap.exec(fn, ...args);
+  //   // }
+  //   // return fn(...args);
+  //   return this.fnMap.exec(fn, ...args);
+  // }
+
 
   _createClass(Elements, [{
-    key: "execFn",
-    value: function execFn(fn) {
-      var _this$fnMap2;
-
-      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        args[_key2 - 1] = arguments[_key2];
-      }
-
-      // if (fn == null) {
-      //   return null;
-      // }
-      // if (typeof fn === 'string') {
-      //   return this.fnMap.exec(fn, ...args);
-      // }
-      // return fn(...args);
-      return (_this$fnMap2 = this.fnMap).exec.apply(_this$fnMap2, [fn].concat(args));
-    }
-  }, {
     key: "_dup",
     value: function _dup(namedCollection) {
       var contentCopy = [];
@@ -9357,7 +9519,7 @@ function (_DiagramElementCollec) {
 
         if (duration === 0) {
           this.showForm(subForm);
-          this.execFn(options.callback); // if (options.callback != null) {
+          this.fnMap.exec(options.callback); // if (options.callback != null) {
           //   options.callback();
           // }
         } else {
@@ -9366,7 +9528,7 @@ function (_DiagramElementCollec) {
           var end = function end() {
             _this7.eqn.isAnimating = false;
 
-            _this7.execFn(options.callback); // if (options.callback != null) {
+            _this7.fnMap.exec(options.callback); // if (options.callback != null) {
             //   options.callback();
             // }
 
@@ -9401,7 +9563,7 @@ function (_DiagramElementCollec) {
               _this7.showForm(subForm.name, subFormToUse, false);
             };
 
-            this.fnMap.add('_equationShowFormCallback', showFormCallback());
+            this.fnMap.add('_equationShowFormCallback', showFormCallback);
             this.animations["new"]().dissolveOut({
               duration: options.dissolveOutTime
             }).position({
@@ -9913,7 +10075,7 @@ function (_Elements) {
 
       if (elements.length === 0) {
         if (callback) {
-          this.execFn(callback, false); // callback(false);
+          this.fnMap.exec(callback, false); // callback(false);
 
           return;
         }
@@ -9928,7 +10090,7 @@ function (_Elements) {
         if (completed === count) {
           if (callback) {
             // callback(cancelled);
-            _this3.execFn(callback, cancelled);
+            _this3.fnMap.exec(callback, cancelled);
           }
         }
       };
@@ -10230,7 +10392,7 @@ function (_Elements) {
         this.dissolveElements(elementsToHide, 'out', delay, dissolveOutTime, dissolveOutCallback);
         cumTime += dissolveOutTime;
       } else if (dissolveOutCallback != null) {
-        this.execFn(dissolveOutCallback);
+        this.fnMap.exec(dissolveOutCallback);
       }
 
       this.applyElementMods();
@@ -20118,9 +20280,30 @@ function (_DiagramElementCollec) {
     _this2.largerTouchBorder = optionsToUse.largerTouchBorder;
     _this2.isTouchDevice = isTouchDevice;
     _this2.animateNextFrame = animateNextFrame;
-    _this2.dashStyle = dashStyle; // Calculate and store the line geometry
+    _this2.dashStyle = dashStyle;
+    _this2.animateLengthToOptions = {
+      initialLength: 0,
+      deltaLength: 1,
+      finishOnCancel: true
+    };
+    _this2.pulseWidthOptions = {
+      oldCallback: null,
+      oldTransformMethod: null
+    };
+    _this2.animateLengthToStepFunctionName = '_animateToLengthStep';
+
+    _this2.fnMap.add(_this2.animateLengthToStepFunctionName, _this2.animateLengthToStep.bind(_assertThisInitialized(_this2)));
+
+    _this2.animateLengthToDoneFunctionName = '_animateToLengthDone';
+
+    _this2.fnMap.add(_this2.animateLengthToDoneFunctionName, _this2.animateLengthToDone.bind(_assertThisInitialized(_this2)));
+
+    _this2.pulseWidthDoneCallbackName = '_pulseWidthDone';
+
+    _this2.fnMap.add(_this2.pulseWidthDoneCallbackName, _this2.pulseWidthDone.bind(_assertThisInitialized(_this2))); // Calculate and store the line geometry
     //    The length, angle, p1 and p2 properties also exist in this.line,
     //    but are at this level for convenience
+
 
     _this2.offset = optionsToUse.offset;
     _this2.width = optionsToUse.width;
@@ -20159,7 +20342,8 @@ function (_DiagramElementCollec) {
       vertexSpaceMidLength: 0,
       bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2)
     };
-    _this2._midLine = null; // If the line is to be shown (and not just a label) then make it
+    _this2._midLine = null;
+    _this2.scaleTransformMethodName = '_transformMethod'; // If the line is to be shown (and not just a label) then make it
 
     _this2._line = null;
 
@@ -20169,6 +20353,12 @@ function (_DiagramElementCollec) {
       //   dashStyleToUse = null;
       // }
       var straightLine = makeStraightLine(_this2.shapes, _this2.vertexSpaceLength, _this2.width, _this2.vertexSpaceStart, optionsToUse.color, _this2.dashStyle, optionsToUse.largerTouchBorder, isTouchDevice);
+
+      var scaleTransformMethod = function scaleTransformMethod(s) {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
+      };
+
+      straightLine.fnMap.add(_this2.scaleTransformMethodName, scaleTransformMethod);
 
       _this2.add('line', straightLine);
     } // Arrow related properties
@@ -20285,7 +20475,7 @@ function (_DiagramElementCollec) {
     key: "_getStateProperties",
     value: function _getStateProperties() {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectLine.prototype), "_getStateProperties", this).call(this)), ['offset', 'angle', 'length', 'position']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectLine.prototype), "_getStateProperties", this).call(this)), ['offset', 'angle', 'length', 'position', 'animateLengthToOptions', 'pulseWidthOptions']);
     }
   }, {
     key: "_fromState",
@@ -20293,6 +20483,21 @@ function (_DiagramElementCollec) {
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])(this, state);
       this.setLineDimensions();
       return this;
+    }
+  }, {
+    key: "pulseWidthDone",
+    value: function pulseWidthDone() {
+      var line = this._line;
+
+      if (line == null) {
+        return;
+      }
+
+      if (this.pulseWidthOptions.oldTransformMethod) {
+        line.pulseSettings.transformMethod = this.pulseWidthOptions.oldTransformMethod;
+      }
+
+      line.pulseSettings.callback = this.pulseWidthOptions.oldCallback;
     }
   }, {
     key: "pulseWidth",
@@ -20310,25 +20515,23 @@ function (_DiagramElementCollec) {
 
       if (line != null) {
         line.stopPulsing();
-        var oldTransformMethod = line.pulseSettings.transformMethod;
-        var oldPulseCallback = line.pulseSettings.callback;
+        this.pulseWidthOptions = {
+          oldTransformMethod: line.pulseSettings.transformMethod,
+          oldCallback: line.pulseSettings.callback
+        }; // const oldTransformMethod = line.pulseSettings.transformMethod;
+        // const oldPulseCallback = line.pulseSettings.callback;
+        // const finishPulsing = () => {
+        //   line.pulseSettings.transformMethod = oldTransformMethod;
+        //   line.pulseSettings.callback = oldPulseCallback;
+        // };
+        // const finishPulsingName = `${this.getPath()}_finishPulsing`;
+        // this.fnMap.add(finishPulsingName, finishPulsing);
 
-        var finishPulsing = function finishPulsing() {
-          line.pulseSettings.transformMethod = oldTransformMethod;
-          line.pulseSettings.callback = oldPulseCallback;
-        };
+        line.pulseSettings.callback = this.pulseWidthDoneCallbackName; // const scaleTransformMethod = s => new Transform().scale(1, s);
+        // const scaleTransformMethodName = `${this.getPath()}_transformMethod`;
+        // this.fnMap.add(scaleTransformMethodName, scaleTransformMethod);
 
-        var finishPulsingName = "".concat(this.getPath(), "_finishPulsing");
-        this.fnMap.add(finishPulsingName, finishPulsing);
-        line.pulseSettings.callback = finishPulsing;
-
-        var scaleTransformMethod = function scaleTransformMethod(s) {
-          return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
-        };
-
-        var scaleTransformMethodName = "".concat(this.getPath(), "_transformMethod");
-        this.fnMap.add(scaleTransformMethodName, scaleTransformMethod);
-        line.pulseSettings.transformMethod = scaleTransformMethodName;
+        line.pulseSettings.transformMethod = this.scaleTransformMethodName;
         line.pulseScaleNow(1, options.line, 0, done);
         done = null;
       }
@@ -20801,10 +21004,38 @@ function (_DiagramElementCollec) {
       // this.updateLabel();
     }
   }, {
+    key: "animateLengthToStep",
+    value: function animateLengthToStep(percent) {
+      var _this$animateLengthTo = this.animateLengthToOptions,
+          initialLength = _this$animateLengthTo.initialLength,
+          deltaLength = _this$animateLengthTo.deltaLength,
+          onStepCallback = _this$animateLengthTo.onStepCallback;
+      this.setLength(initialLength + deltaLength * percent);
+
+      if (onStepCallback != null) {
+        this.fnMap.exec(onStepCallback, percent, initialLength + deltaLength * percent); // onStepCallback(percent, initialLength + deltaLength * percent);
+      }
+    }
+  }, {
+    key: "animateLengthToDone",
+    value: function animateLengthToDone() {
+      var _this$animateLengthTo2 = this.animateLengthToOptions,
+          initialLength = _this$animateLengthTo2.initialLength,
+          callback = _this$animateLengthTo2.callback,
+          deltaLength = _this$animateLengthTo2.deltaLength,
+          finishOnCancel = _this$animateLengthTo2.finishOnCancel;
+
+      if (finishOnCancel) {
+        this.setLength(initialLength + deltaLength);
+      }
+
+      this.fnMap.exec(callback); // if (typeof callback === 'function' && callback) {
+      //   callback();
+      // }
+    }
+  }, {
     key: "animateLengthTo",
     value: function animateLengthTo() {
-      var _this3 = this;
-
       var toLength = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var finishOnCancel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
@@ -20816,36 +21047,37 @@ function (_DiagramElementCollec) {
         this.stop();
       }
 
-      var initialLength = this.currentLength;
-      var deltaLength = toLength - this.currentLength;
+      this.animateToOptions = {
+        initialLength: this.currentLength,
+        delaLength: toLength - this.currentLength,
+        callback: callback,
+        onStepCallback: onStepCallback,
+        finishOnCancel: finishOnCancel
+      }; // const initialLength = this.currentLength;
+      // const deltaLength = toLength - this.currentLength;
+      // const func = (percent) => {
+      //   this.setLength(initialLength + deltaLength * percent);
+      //   if (onStepCallback != null) {
+      //     this.execFn(onStepCallback, percent, initialLength + deltaLength * percent);
+      //     // onStepCallback(percent, initialLength + deltaLength * percent);
+      //   }
+      // };
+      // this.fnMap.add('_DiagramObjectsLineAnimateLengthToFunc', func);
+      // const done = () => {
+      //   if (finishOnCancel) {
+      //     this.setLength(initialLength + deltaLength);
+      //   }
+      //   this.execFn(callback);
+      //   // if (typeof callback === 'function' && callback) {
+      //   //   callback();
+      //   // }
+      // };
+      // this.fnMap.add('_DiagramObjectsLineAnimateLengthToCallback', done);
 
-      var func = function func(percent) {
-        _this3.setLength(initialLength + deltaLength * percent);
-
-        if (onStepCallback != null) {
-          _this3.execFn(onStepCallback, percent, initialLength + deltaLength * percent); // onStepCallback(percent, initialLength + deltaLength * percent);
-
-        }
-      };
-
-      this.fnMap.add('_DiagramObjectsLineAnimateLengthToFunc', func);
-
-      var done = function done() {
-        if (finishOnCancel) {
-          _this3.setLength(initialLength + deltaLength);
-        }
-
-        _this3.execFn(callback); // if (typeof callback === 'function' && callback) {
-        //   callback();
-        // }
-
-      };
-
-      this.fnMap.add('_DiagramObjectsLineAnimateLengthToCallback', done);
       this.animations["new"]('Line Length').custom({
-        callback: '_DiagramObjectsLineAnimateLengthToFunc',
+        callback: this.animateLengthToStepFunctionName,
         duration: time
-      }).whenFinished('_DiagramObjectsLineAnimateLengthToCallback').start(); // this.animations.start();
+      }).whenFinished(this.animateLengthToDoneFunctionName).start(); // this.animations.start();
 
       this.animateNextFrame(); // console.log(this)
       // this.animateCustomTo(func, time, 0, done);
@@ -21222,7 +21454,7 @@ function (_DiagramElementCollec) {
           }
 
           padShape.setMoveBoundaryToDiagram(boundary);
-          var fnName = "_polyline_".concat(_this.getPath(), "_pad").concat(i);
+          var fnName = "_polyline_pad".concat(i);
 
           _this.fnMap.add(fnName, function (transform) {
             var index = parseInt(padShape.name.slice(3), 10);
@@ -21551,7 +21783,7 @@ function (_DiagramElementCollec) {
       }
 
       if (this.updatePointsCallback != null && !skipCallback) {
-        this.execFn(this.updatePointsCallback);
+        this.fnMap.exec(this.updatePointsCallback);
       }
     }
   }, {
@@ -27958,15 +28190,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
 /* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
 /* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/m2 */ "./src/js/tools/m2.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -28015,7 +28248,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
-// import * as tools from '../tools/math';
+
 
 
 
@@ -28027,6 +28260,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 // eslint-disable-next-line import/no-cycle
 
+ // import type Diagram from './Diagram';
 
  // eslint-disable-next-line import/no-cycle
 // import {
@@ -28167,7 +28401,7 @@ function () {
     this.parent = parent;
     this.drawPriority = 1;
     this.stateProperties = [];
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_12__["default"](); // this.noRotationFromParent = false;
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_13__["FunctionMap"](); // this.noRotationFromParent = false;
     // this.pulseDefault = (callback: ?() => void = null) => {
     //   this.pulseScaleNow(1, 2, 0, callback);
     // };
@@ -28184,78 +28418,78 @@ function () {
           optionsIn[_key] = arguments[_key];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
           optionsIn[_key2] = arguments[_key2];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ScaleAnimationStep"](options);
       },
       trigger: function trigger() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
           optionsIn[_key3] = arguments[_key3];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TriggerStep"](options);
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["TriggerStep"](options);
       },
       position: function position() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
           optionsIn[_key4] = arguments[_key4];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
           optionsIn[_key5] = arguments[_key5];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
           optionsIn[_key6] = arguments[_key6];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
           optionsIn[_key7] = arguments[_key7];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
           optionsIn[_key8] = arguments[_key8];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, {
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -28270,14 +28504,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -28292,14 +28526,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dim: function dim() {
@@ -28314,14 +28548,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DimAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       undim: function undim() {
@@ -28336,14 +28570,14 @@ function () {
         }
 
         if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
             duration: timeOrOptionsIn
           }].concat(args));
         } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["UndimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["UndimAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -28351,7 +28585,7 @@ function () {
           optionsIn[_key13] = arguments[_key13];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
       scenarioNew: function scenarioNew() {
@@ -28363,7 +28597,7 @@ function () {
           optionsIn[_key14] = arguments[_key14];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
         if (options.target != null && options.target in options.element.scenarios) {
           var _target = options.element.getScenarioTarget(options.target);
@@ -28441,7 +28675,7 @@ function () {
           start: startTransform,
           target: target.transform
         }));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](timeOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ParallelAnimationStep"](timeOptions, {
           steps: steps
         });
       },
@@ -28454,7 +28688,7 @@ function () {
           optionsIn[_key15] = arguments[_key15];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
         if (options.target != null && options.target in options.element.scenarios) {
           var target = options.element.getScenarioTargetLegacy(options.target);
@@ -28471,7 +28705,7 @@ function () {
           options.delta = delta;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["TransformAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       scenarios: function scenarios() {
@@ -28481,17 +28715,17 @@ function () {
           optionsIn[_key16] = arguments[_key16];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
         var elements = _this.getAllElementsWithScenario(options.target);
 
         var steps = [];
         var simpleOptions = {};
-        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
+        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
         elements.forEach(function (element) {
           steps.push(element.anim.scenario(simpleOptions));
         });
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ParallelAnimationStep"](simpleOptions, {
           steps: steps
         });
       }
@@ -28525,6 +28759,9 @@ function () {
     };
 
     this.fnMap.add('_elementPulseSettingsTransformMethod', pulseTransformMethod);
+    this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_4__["easeinout"]);
+    this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_4__["linear"]);
+    this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_4__["sinusoid"]);
     this.pulseSettings = {
       time: 1,
       frequency: 0.5,
@@ -28551,7 +28788,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -28567,7 +28804,7 @@ function () {
     key: "setProperties",
     value: function setProperties(properties) {
       var except = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjectsWithOptions"])({
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjectsWithOptions"])({
         except: except
       }, this, properties);
     }
@@ -28584,26 +28821,16 @@ function () {
       //   return getState(this, this._getStateProperties());
       // }
       // return { isShown: false };
-    }
-  }, {
-    key: "execFn",
-    value: function execFn(fn) {
-      if (fn == null) {
-        return null;
-      }
+    } // execFn(fn: string | Function | null, ...args: Array<any>) {
+    //   if (fn == null) {
+    //     return null;
+    //   }
+    //   if (typeof fn === 'string') {
+    //     return this.fnMap.exec(fn, ...args);
+    //   }
+    //   return fn(...args);
+    // }
 
-      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-        args[_key17 - 1] = arguments[_key17];
-      }
-
-      if (typeof fn === 'string') {
-        var _this$fnMap;
-
-        return (_this$fnMap = this.fnMap).exec.apply(_this$fnMap, [fn].concat(args));
-      }
-
-      return fn.apply(void 0, args);
-    }
   }, {
     key: "setTimeDelta",
     value: function setTimeDelta(delta) {
@@ -28828,13 +29055,13 @@ function () {
         options = defaultOptions;
         done = null;
       } else {
-        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsOrDone);
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, defaultOptions, optionsOrDone);
         var _options2 = options;
         done = _options2.done;
       }
 
       if (typeof this.pulseDefault === 'function' || typeof this.pulseDefault === 'string') {
-        this.execFn(this.pulseDefault, done);
+        this.fnMap.exec(this.pulseDefault, done);
       } else {
         // const { frequency, time, scale } = this.pulseDefault;
         // this.pulseScaleNow(time, scale, frequency, done);
@@ -28916,16 +29143,16 @@ function () {
     key: "setTransform",
     value: function setTransform(transform) {
       if (this.move.transformClip != null) {
-        this.transform = this.execFn(this.move.transformClip, transform);
+        this.transform = this.fnMap.exec(this.move.transformClip, transform);
       } else {
         this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
       }
 
       if (this.internalSetTransformCallback) {
-        this.execFn(this.internalSetTransformCallback, this.transform);
+        this.fnMap.exec(this.internalSetTransformCallback, this.transform);
       }
 
-      this.execFn(this.setTransformCallback, this.transform); // if (this.setTransformCallback) {
+      this.fnMap.exec(this.setTransformCallback, this.transform); // if (this.setTransformCallback) {
       //   this.setTransformCallback(this.transform);
       // }
     } // Set the next transform (and velocity if moving freely) for the next
@@ -29163,7 +29390,7 @@ function () {
           scale: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1)
         }
       };
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsIn);
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, defaultOptions, optionsIn);
       var target = this.getScenarioTarget(scenarioName);
       var start = this;
 
@@ -29199,7 +29426,7 @@ function () {
         options.minTime = 0.8;
       }
 
-      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_9__["areColorsSame"])(start.color, target.color)) {
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(start.color, target.color)) {
         options.minTime = 0.8;
       }
 
@@ -29403,7 +29630,7 @@ function () {
       this.state.movement.previousTime = -1;
 
       if (this.move.freely.callback) {
-        this.execFn(this.move.freely.callback, result);
+        this.fnMap.exec(this.move.freely.callback, result);
         this.move.freely.callback = null;
       }
     } // Take an input transform matrix, and output a list of transform matrices
@@ -29446,9 +29673,9 @@ function () {
 
         for (var i = 0; i < this.pulseSettings.num; i += 1) {
           // Get the current pulse magnitude
-          var pulseMag = this.execFn(this.pulseSettings.style, deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
+          var pulseMag = this.fnMap.exec(this.pulseSettings.style, deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
-          var pTransform = this.execFn(this.pulseSettings.transformMethod, pulseMag, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.pulseSettings.delta)); // if(this.name === '_radius') {
+          var pTransform = this.fnMap.exec(this.pulseSettings.transformMethod, pulseMag, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.pulseSettings.delta)); // if(this.name === '_radius') {
           // }
           // Transform the current transformMatrix by the pulse transform matrix
           // const pMatrix = m2.mul(m2.copy(transform), pTransform.matrix());
@@ -29577,7 +29804,7 @@ function () {
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
         this.pulseSettings.callback = null;
-        this.execFn(callback, result);
+        this.fnMap.exec(callback, result);
       }
     }
   }, {
@@ -30153,7 +30380,7 @@ function () {
     value: function click() {
       if (this.onClick !== null && this.onClick !== undefined) {
         // this.onClick(this);
-        this.execFn(this.onClick, this);
+        this.fnMap.exec(this.onClick, this);
       }
     } // setMovable(movable: boolean = true) {
     //   if (movable) {
@@ -30285,7 +30512,7 @@ function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(this, primative, ['parent']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["duplicateFromTo"])(this, primative, ['parent']);
 
       if (transform != null) {
         primative.transform = transform._dup();
@@ -30298,7 +30525,7 @@ function (_DiagramElement) {
     value: function clear() {
       var canvasIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__["TextObject"]) {
         this.drawingObject.clear(canvasIndex);
       }
     }
@@ -30328,13 +30555,13 @@ function (_DiagramElement) {
       }
 
       if (this instanceof DiagramElementPrimitive) {
-        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__["TextObject"]) {
           this.drawingObject.setColor(this.color);
         }
 
-        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
           // $FlowFixMe
-          this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_9__["colorArrayToRGBA"])(this.color);
+          this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["colorArrayToRGBA"])(this.color);
         }
       }
     }
@@ -30345,11 +30572,11 @@ function (_DiagramElement) {
       this.opacity = opacity;
 
       if (this instanceof DiagramElementPrimitive) {
-        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__["TextObject"]) {
           this.drawingObject.setOpacity(opacity);
         }
 
-        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
           // this.drawingObject.element.style.color =
           // colorArrayToRGBA([...this.color.slice(0, 2), opacity]);
           // console.log(this.drawingObject.element)
@@ -30362,7 +30589,7 @@ function (_DiagramElement) {
     value: function show() {
       _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "show", this).call(this);
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         this.drawingObject.show = true; // This line is a challenge.
         // It will show a html element immediately before the next draw frame
         // meaning the draw matrix will be old.
@@ -30383,7 +30610,7 @@ function (_DiagramElement) {
     value: function hide() {
       _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "hide", this).call(this);
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         this.drawingObject.show = false;
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
@@ -30407,14 +30634,14 @@ function (_DiagramElement) {
   }, {
     key: "setFont",
     value: function setFont(fontSize) {
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_7__["TextObject"]) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__["TextObject"]) {
         this.drawingObject.setFont(fontSize);
       }
     }
   }, {
     key: "resizeHtmlObject",
     value: function resizeHtmlObject() {
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     }
@@ -30437,7 +30664,7 @@ function (_DiagramElement) {
         }
 
         if (this.beforeDrawCallback != null) {
-          this.execFn(this.beforeDrawCallback, now);
+          this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
         this.animations.nextFrame(now);
@@ -30459,7 +30686,7 @@ function (_DiagramElement) {
 
         var pointCount = -1;
 
-        if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+        if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
           pointCount = this.drawingObject.numPoints;
 
           if (this.angleToDraw !== -1) {
@@ -30496,7 +30723,7 @@ function (_DiagramElement) {
         }
 
         if (this.afterDrawCallback != null) {
-          this.execFn(this.afterDrawCallback, now);
+          this.fnMap.exec(this.afterDrawCallback, now);
         }
       }
     }
@@ -30512,7 +30739,7 @@ function (_DiagramElement) {
       var firstTransform = parentTransform.transform(this.getTransform());
       this.lastDrawTransform = firstTransform;
 
-      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_4__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         this.drawingObject.transformHtml(firstTransform.matrix());
       }
 
@@ -30622,7 +30849,7 @@ function (_DiagramElement) {
         }
       }
 
-      if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+      if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
         for (var b = 0; b < this.drawingObject.border.length; b += 1) {
           var border = this.drawingObject.border[b];
 
@@ -30679,7 +30906,7 @@ function (_DiagramElement2) {
       var doNotDuplicate = this.drawOrder.map(function (e) {
         return "_".concat(e);
       });
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var name = this.drawOrder[i];
@@ -30802,7 +31029,7 @@ function (_DiagramElement2) {
         }
 
         if (this.beforeDrawCallback != null) {
-          this.execFn(this.beforeDrawCallback, now);
+          this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
         this.animations.nextFrame(now);
@@ -30841,7 +31068,7 @@ function (_DiagramElement2) {
 
         if (this.afterDrawCallback != null) {
           // this.afterDrawCallback(now);
-          this.execFn(this.afterDrawCallback, now);
+          this.fnMap.exec(this.afterDrawCallback, now);
         }
       }
     }
@@ -30922,7 +31149,7 @@ function (_DiagramElement2) {
         doneToUse = done;
         elements = optionsOrElementsOrDone;
       } else {
-        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_8__["joinObjects"])({}, defaultOptions, optionsOrElementsOrDone);
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, defaultOptions, optionsOrElementsOrDone);
         var _options3 = options;
         elements = _options3.elements;
         doneToUse = options.done;
@@ -31654,7 +31881,7 @@ function (_DiagramElement2) {
           element.transform = elementTransforms[element.name];
 
           if (element.internalSetTransformCallback) {
-            this.execFn(element.internalSetTransformCallback, element.transform);
+            this.fnMap.exec(element.internalSetTransformCallback, element.transform);
           }
         }
       }
@@ -31713,14 +31940,14 @@ function (_DiagramElement2) {
             element.transform = elementTransforms[element.name]._dup();
 
             if (element.internalSetTransformCallback) {
-              this.execFn(element.internalSetTransformCallback, element.transform);
+              this.fnMap.exec(element.internalSetTransformCallback, element.transform);
             }
           }
         }
       }
 
       if (timeToAnimate === 0 && callbackMethod != null) {
-        this.execFn(callbackMethod, true); // callbackMethod(true);
+        this.fnMap.exec(callbackMethod, true); // callbackMethod(true);
       }
 
       return timeToAnimate;
@@ -31980,11 +32207,37 @@ function (_DiagramElement2) {
 /*!***************************************!*\
   !*** ./src/js/diagram/FunctionMap.js ***!
   \***************************************/
-/*! exports provided: default */
+/*! exports provided: FunctionMap, GlobalFunctionMap */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FunctionMap", function() { return FunctionMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalFunctionMap", function() { return GlobalFunctionMap; });
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -31997,25 +32250,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import type { DiagramElement } from './Element';
 // import GlobalAnimation from './webgl/GlobalAnimation';
 // Singleton class that contains projects global functions
-var FunctionMap =
+var GeneralFunctionMap =
 /*#__PURE__*/
 function () {
-  function FunctionMap() {
-    _classCallCheck(this, FunctionMap);
+  function GeneralFunctionMap() {
+    _classCallCheck(this, GeneralFunctionMap);
 
-    // If the instance alread exists, then don't create a new instance.
-    // If it doesn't, then setup some default values.
-    if (!FunctionMap.instance) {
-      FunctionMap.instance = this;
-      this.map = {};
-    }
-
-    return FunctionMap.instance;
+    this.map = {};
   }
 
-  _createClass(FunctionMap, [{
+  _createClass(GeneralFunctionMap, [{
     key: "add",
     value: function add(id, fn) {
+      if (this.map == null) {
+        this.map = {};
+      }
+
       this.map[id] = {
         fn: fn
       };
@@ -32042,28 +32292,124 @@ function () {
 
           return (_this$map$idOrFn = this.map[idOrFn]).fn.apply(_this$map$idOrFn, args);
         }
-
-        return null;
       }
 
       if (typeof idOrFn === 'function') {
         return idOrFn.apply(void 0, args);
       }
 
-      return null; // if (this.map[id] != null) {
-      //   if (args.length === 0) {
-      //     return this.map[id].fn();
-      //   }
-      //   return this.map[id].fn(...args);
+      return null;
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      if (idOrFn == null) {
+        return null;
+      }
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      if (typeof idOrFn === 'string') {
+        var maps = [this.map].concat(_toConsumableArray(mapsIn));
+
+        for (var i = 0; i < maps.length; i += 1) {
+          var map = maps[i];
+
+          if (map[idOrFn] != null) {
+            var _map$idOrFn;
+
+            if (args.length === 0) {
+              return map[idOrFn].fn();
+            }
+
+            return (_map$idOrFn = map[idOrFn]).fn.apply(_map$idOrFn, args);
+          }
+        }
+      }
+
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null;
+    }
+  }]);
+
+  return GeneralFunctionMap;
+}();
+
+var GlobalFunctionMap =
+/*#__PURE__*/
+function (_GeneralFunctionMap) {
+  _inherits(GlobalFunctionMap, _GeneralFunctionMap);
+
+  function GlobalFunctionMap() {
+    var _this;
+
+    _classCallCheck(this, GlobalFunctionMap);
+
+    // If the instance alread exists, then don't create a new instance.
+    // If it doesn't, then setup some default values.
+    if (!GlobalFunctionMap.instance) {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(GlobalFunctionMap).call(this));
+      GlobalFunctionMap.instance = _assertThisInitialized(_this);
+      _this.map = {};
+    }
+
+    return _possibleConstructorReturn(_this, GlobalFunctionMap.instance);
+  }
+
+  return GlobalFunctionMap;
+}(GeneralFunctionMap);
+
+var FunctionMap =
+/*#__PURE__*/
+function (_GeneralFunctionMap2) {
+  _inherits(FunctionMap, _GeneralFunctionMap2);
+
+  function FunctionMap() {
+    var _this2;
+
+    _classCallCheck(this, FunctionMap);
+
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(FunctionMap).call(this));
+    _this2.global = new GlobalFunctionMap();
+    return _this2;
+  }
+
+  _createClass(FunctionMap, [{
+    key: "exec",
+    value: function exec(idOrFn) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
+      }
+
+      // const result = super.exec(idOrFn, ...args);
+      // if (result === null) {
+      //   return this.global.exec(idOrFn, ...args);
       // }
-      // return null;
+      // return result;
+      return this.execOnMaps.apply(this, [idOrFn, [this.global.map]].concat(args));
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      var _get2;
+
+      for (var _len4 = arguments.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
+        args[_key4 - 2] = arguments[_key4];
+      }
+
+      return (_get2 = _get(_getPrototypeOf(FunctionMap.prototype), "execOnMaps", this)).call.apply(_get2, [this, idOrFn, [].concat(_toConsumableArray(mapsIn), [this.global.map])].concat(args));
     }
   }]);
 
   return FunctionMap;
-}();
+}(GeneralFunctionMap);
 
-/* harmony default export */ __webpack_exports__["default"] = (FunctionMap);
+
 
 /***/ }),
 
@@ -38569,7 +38915,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions */
+/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, getObjectPaths, getObjectDiff */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38596,6 +38942,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicate", function() { return duplicate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assignObjectFromTo", function() { return assignObjectFromTo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinObjectsWithOptions", function() { return joinObjectsWithOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getObjectPaths", function() { return getObjectPaths; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getObjectDiff", function() { return getObjectDiff; });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39101,6 +39449,132 @@ function copyKeysFromTo(source, destination, keys) {
 function generateRandomString() {
   return (Math.random() * 1e18).toString(36);
 }
+
+function getObjectPaths(obj) {
+  var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var pathObj = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || typeof obj === 'function') {
+    pathObj["".concat(path)] = obj.toString(); // eslint-disable-line no-param-reassign
+
+    return pathObj;
+  }
+
+  if (obj === null) {
+    pathObj["".concat(path)] = 'null'; // eslint-disable-line no-param-reassign
+
+    return pathObj;
+  }
+
+  if (obj === undefined) {
+    pathObj["".concat(path)] = 'undefined'; // eslint-disable-line no-param-reassign
+
+    return pathObj;
+  }
+
+  if (Array.isArray(obj)) {
+    obj.forEach(function (o, index) {
+      getObjectPaths(o, "".concat(path, ".[").concat(index, "]"), pathObj);
+    });
+    return pathObj;
+  }
+
+  Object.keys(obj).forEach(function (key) {
+    getObjectPaths(obj[key], "".concat(path, ".").concat(key), pathObj);
+  });
+  return pathObj;
+}
+
+function getObjectDiff(obj1, obj2) {
+  var paths1 = getObjectPaths(obj1);
+  var paths2 = getObjectPaths(obj2);
+  var added = {};
+  var diff = {};
+  var removed = {};
+  Object.keys(paths1).forEach(function (key1) {
+    if (paths2[key1] == null) {
+      removed[key1] = paths1[key1];
+      return;
+    }
+
+    if (paths1[key1] !== paths2[key1]) {
+      diff[key1] = "".concat(paths1[key1], " :: ").concat(paths2[key1]);
+    }
+  });
+  Object.keys(paths2).forEach(function (key2) {
+    if (paths1[key2] == null) {
+      added[key2] = paths2[key2];
+    }
+  });
+  return {
+    diff: diff,
+    added: added,
+    removed: removed
+  };
+} // function objDiffOnly(val1: any, val2: any) {
+//   if (
+//     typeof val1 === 'string'
+//     || typeof val1 === 'number'
+//     || typeof val1 === 'boolean'
+//     || val1 == null
+//     || typeof val1 === 'function'
+//   ) {
+//     if (val1 === val2) {
+//       return true;
+//     }
+//     return false;
+//   }
+//   if (Array.isArray(val1)) {
+//     if (!Array.isArray(val2)) {
+//       return false;
+//     }
+//     if (val1.length !== val2.length) {
+//       return false;
+//     }
+//     return val1.map((v, index) => objDiffOnly(v, val2[index]));
+//   }
+//   const diffObj = {};
+//   Object.keys(val1).forEach((key) => {
+//     const diff = objDiffOnly(val1[key], val2[key]);
+//     diffObj[key] = diff;
+//   });
+//   return diffObj;
+// }
+// function objDiff(obj1: Object, obj2: Object) {
+//   const diff = objDiffOnly(obj1, obj2);
+//   const summarizedDiff = {};
+//   Object.keys(diff).forEach((key) => {
+//     const valueDiff = diff[key];
+//     if (typeof valueDiff === 'boolean') {
+//       if (valueDiff === false) {
+//         summarizedDiff[key] = false;
+//       }
+//     } else if (Array.isArray(valueDiff)) {
+//     }
+//   });
+// }
+// // diff of obj2 relative to obj1
+// function objDiff(obj1, obj2) {
+//   const added = {};
+//   const diff = {};
+//   const removed = {};
+//   Object.keys(obj1).forEach((key) => {
+//     const value1 = obj1[key];
+//     const value2 = obj2[key];
+//     if (value2 === undefined) {
+//       removed[key] = obj1[key];
+//     }
+//     if (
+//       typeof value1 === 'string'
+//       || typeof value1 === 'boolean'
+//       || typeof value1 === 'number'
+//       || typeof value1 === null,
+//     ) {
+//       if ()
+//     }
+//   });
+// }
+
 
 
 

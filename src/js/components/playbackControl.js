@@ -3,7 +3,8 @@ import * as React from 'react';
 import Fig from 'figureone';
 import ScrollBar from './scrollBar';
 
-const { Recorder } = Fig;
+const { Recorder, Diagram, FunctionMap } = Fig;
+const { getObjectDiff } = Fig.tools.misc;
 
 type State = {
   playClass: string,
@@ -20,6 +21,8 @@ type Props = {
   statesSrc: string;
   eventsSrc: string;
   slidesSrc: string;
+  getDiagram: () => Diagram;
+  // diagram: Diagram;
 };
 
 function timeToStr(time: number) {
@@ -35,8 +38,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
   volumeTouchDown: boolean;
   recorder: Recorder;
   timer: TimeoutID;
+  getDiagram: () => Diagram;
 
-  constructor() {
+  constructor(props: Props) {
     super();
     this.seekTouchDown = false;
     this.volumeTouchDown = false;
@@ -49,6 +53,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       timeValue: 0,
       seek: 0,
     };
+    this.getDiagram = props.getDiagram;
   }
 
   // componentDidMount() {
@@ -104,13 +109,32 @@ export default class PlaybackControl extends React.Component<Props, State> {
   // }
 
   seekToPercent(percent: number) {
-    // console.log(percent)
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
     this.setState({ seek: percent });
-    // this.seek(percent * totalTime);
     recorder.seek(percent);
     this.updateTime(percent * totalTime);
+    // recorder.seek(58.5 / totalTime);
+    // this.updateTime(58.5);
+    // console.log(percent, percent * totalTime)
+    // console.log(recorder.states)
+    // console.log(recorder.slides)
+    // console.log(this.getDiagram().elements._circle._line1)
+    // console.log(recorder.stateIndex)
+    // this.getDiagram().elements._circle._line1._line.afterDrawCallback = () => {
+    //   console.log('line1', this.getDiagram().elements._circle._line1)
+    // }
+    // this.getDiagram().elements._circle._line2._line.afterDrawCallback = () => {
+    //   console.log('line2', this.getDiagram().elements._circle._line2)
+    // }
+    // this.getDiagram().setFirstTransform();
+    // recorder.setSlide(5);
+    // recorder.setState(58);
+    // console.log(getObjectDiff(recorder.states[57], recorder.states[58]));
+    // console.log(getObjectDiff(recorder.states[58], recorder.states[59]));
+    // // console.log(new FunctionMap())
+    // console.log(this.getDiagram().elements._circle._line1.)
+    // this.getDiagram().animateNextFrame();
   }
 
   seek(toTime: number) {
