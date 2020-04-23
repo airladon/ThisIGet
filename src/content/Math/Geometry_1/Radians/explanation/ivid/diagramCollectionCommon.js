@@ -69,7 +69,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.add('pointer', this.diagram.shapes.pointer());
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
-    this.fnMap.add('updateAngle', this.updateAngle.bind(this));
+    this._circle._line1.fnMap.add('updateAngle', this.updateAngle.bind(this));
     this._circle._line1.setTransformCallback = 'updateAngle';
 
     this._equation.__arc.onClick = this.goToArcForm.bind(this);
@@ -119,7 +119,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._radDegEqn.isTouchable = false;
     this._radDegEqn.hasTouchableElements = false;
 
-    this.fnMap.add('bendRadius', this.bend.bind(this));
+    this._circle._bendLine.fnMap.global.add('bendRadius', this.bend.bind(this));
   }
 
   goToRadiusForm() {
