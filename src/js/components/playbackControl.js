@@ -149,7 +149,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   pause() {
     const recorder = new Recorder();
-    recorder.stopPlayback();
+    recorder.pausePlayback();
     // recorder.audio.pause();
     // this.setState({
     //   playClass: '',

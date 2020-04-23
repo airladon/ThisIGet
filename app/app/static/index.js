@@ -4577,6 +4577,7 @@ function () {
   // oldScrollY: number;
   // used for drawing debug only
   // updateFontSize: string;
+  // pauseAfterNextDrawFlag: boolean;
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -4689,7 +4690,8 @@ function () {
 
     if (this instanceof Diagram) {
       this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_10__["default"](this);
-    }
+    } // this.pauseAfterNextDrawFlag = false;
+
 
     this.fontScale = optionsToUse.fontScale;
     this.updateLimits(limits);
@@ -4701,7 +4703,9 @@ function () {
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
     this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
-    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this), this.pause.bind(this), this.unpause.bind(this));
+    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this), // this.pauseAfterNextDraw.bind(this),
+    this.pause.bind(this), this.unpause.bind(this));
+    this.pauseTime = performance.now() / 1000;
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -5179,6 +5183,10 @@ function () {
         this.recorder.recordEvent('touchDown', diagramPoint.x, diagramPoint.y);
       }
 
+      if (this.isPaused) {
+        this.unpause();
+      }
+
       if (this.inTransition) {
         return false;
       } // Get the touched point in clip space
@@ -5545,23 +5553,23 @@ function () {
   }, {
     key: "pause",
     value: function pause() {
+      this.pauseTime = performance.now() / 1000;
       this.isPaused = true;
-    }
+    } // pauseAfterNextDraw() {
+    //   this.pauseAfterNextDrawFlag = true;
+    // }
+
   }, {
     key: "unpause",
     value: function unpause() {
       this.isPaused = false;
+      this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
       this.animateNextFrame();
     }
   }, {
     key: "draw",
     value: function draw(nowIn) {
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-      if (this.isPaused) {
-        return;
-      }
-
       var now = nowIn;
 
       if (nowIn === -1) {
@@ -5604,6 +5612,14 @@ function () {
       this.clearContext(canvasIndex); // console.log('really drawing')
 
       this.elements.draw(this.spaceTransforms.diagramToGL, now, canvasIndex); // console.log('really done')
+      // if (this.pauseAfterNextDrawFlag) {
+      //   this.pause();
+      //   this.pauseAfterNextDrawFlag = false;
+      // }
+
+      if (this.isPaused) {
+        return;
+      }
 
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -33089,10 +33105,11 @@ function () {
   }, {
     key: "seek",
     value: function seek(percentTime) {
-      this.stopPlayback();
+      this.pausePlayback();
       var totalTime = this.getTotalTime();
       var timeTarget = percentTime * totalTime;
       this.setToTime(timeTarget);
+      this.pauseDiagram();
     }
   }, {
     key: "setToTime",
@@ -33145,7 +33162,8 @@ function () {
       this.previousPoint = null;
       this.setStartTime(fromTime);
       this.touchUp();
-      this.currentTime = fromTime; // if (this.audio) {
+      this.currentTime = fromTime;
+      this.unpauseDiagram(); // if (this.audio) {
       //   this.audio.currentTime = fromTime;
       // }
       // this.animation.queueNextFrame(this.playFrame.bind(this));
@@ -33203,11 +33221,12 @@ function () {
       // }
 
 
-      this.stopPlayback();
+      this.pausePlayback();
     }
   }, {
-    key: "stopPlayback",
-    value: function stopPlayback() {
+    key: "pausePlayback",
+    value: function pausePlayback() {
+      this.pauseDiagram();
       this.currentTime = this.getCurrentTime();
       this.isPlaying = false;
       clearTimeout(this.nextEventTimeout);
@@ -33255,7 +33274,7 @@ function () {
       }
 
       if ((this.lastShownEventIndex >= this.events.length - 1 || this.lastShownEventIndex === -1) && (this.lastShownStateIndex >= this.states.length - 1 || this.lastShownStateIndex === -1)) {
-        this.stopPlayback();
+        this.pausePlayback();
       } else {
         this.animation.queueNextFrame(this.playFrame.bind(this));
       }

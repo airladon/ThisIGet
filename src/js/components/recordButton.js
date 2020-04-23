@@ -76,14 +76,14 @@ export default class RecordButton extends React.Component<Props, State> {
       this.setState({
         playLabel: 'Play',
       });
-      recorder.stopPlayback();
+      recorder.pausePlayback();
       clearTimeout(this.timer);
     }
   }
 
   pressRecord() {
     const recorder = new Recorder();
-    recorder.stopPlayback();
+    recorder.pausePlayback();
     if (this.state.label === 'Record') {
       this.setState({
         label: 'Stop',
