@@ -114,26 +114,20 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.setState({ seek: percent });
     recorder.seek(percent);
     this.updateTime(percent * totalTime);
-    // recorder.seek(58.5 / totalTime);
-    // this.updateTime(58.5);
-    // console.log(percent, percent * totalTime)
+    // recorder.seek(34.5 / totalTime);
+    // this.updateTime(34.5);
     // console.log(recorder.states)
     // console.log(recorder.slides)
     // console.log(this.getDiagram().elements._circle._line1)
-    // console.log(recorder.stateIndex)
     // this.getDiagram().elements._circle._line1._line.afterDrawCallback = () => {
     //   console.log('line1', this.getDiagram().elements._circle._line1)
     // }
     // this.getDiagram().elements._circle._line2._line.afterDrawCallback = () => {
     //   console.log('line2', this.getDiagram().elements._circle._line2)
     // }
-    // this.getDiagram().setFirstTransform();
     // recorder.setSlide(5);
     // recorder.setState(58);
     // console.log(getObjectDiff(recorder.states[57], recorder.states[58]));
-    // console.log(getObjectDiff(recorder.states[58], recorder.states[59]));
-    // // console.log(new FunctionMap())
-    // console.log(this.getDiagram().elements._circle._line1.)
     // this.getDiagram().animateNextFrame();
   }
 
