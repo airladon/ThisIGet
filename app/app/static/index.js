@@ -4701,10 +4701,22 @@ function () {
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
-    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"](this.simulateTouchDown.bind(this), this.simulateTouchUp.bind(this), // this.simulateTouchMove.bind(this),
-    this.simulateCursorMove.bind(this), this.animateNextFrame.bind(this), this.getElement.bind(this), this.getState.bind(this), this.setState.bind(this), // this.pauseAfterNextDraw.bind(this),
-    this.pause.bind(this), this.unpause.bind(this));
+    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"](); // this.recorder = new Recorder(
+    //   this.simulateTouchDown.bind(this),
+    //   this.simulateTouchUp.bind(this),
+    //   // this.simulateTouchMove.bind(this),
+    //   this.simulateCursorMove.bind(this),
+    //   this.animateNextFrame.bind(this),
+    //   this.getElement.bind(this),
+    //   this.getState.bind(this),
+    //   this.setState.bind(this),
+    //   // this.pauseAfterNextDraw.bind(this),
+    //   this.pause.bind(this),
+    //   this.unpause.bind(this),
+    // );
+
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"]();
+    this.bindRecorder();
     this.pauseTime = performance.now() / 1000;
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
@@ -4745,6 +4757,21 @@ function () {
   }
 
   _createClass(Diagram, [{
+    key: "bindRecorder",
+    value: function bindRecorder() {
+      this.recorder.touchDown = this.simulateTouchDown.bind(this);
+      this.recorder.touchUp = this.simulateTouchUp.bind(this); // this.simulateTouchMove.bind(this),
+
+      this.recorder.cursorMove = this.simulateCursorMove.bind(this);
+      this.recorder.animateDiagramNextFrame = this.animateNextFrame.bind(this);
+      this.recorder.getElement = this.getElement.bind(this);
+      this.recorder.getDiagramState = this.getState.bind(this);
+      this.recorder.setDiagramState = this.setState.bind(this); // this.pauseAfterNextDraw.bind(this),
+
+      this.recorder.pauseDiagram = this.pause.bind(this);
+      this.recorder.unpauseDiagram = this.unpause.bind(this);
+    }
+  }, {
     key: "scrollEvent",
     value: function scrollEvent() {
       this.scrolled = true;
@@ -4769,7 +4796,8 @@ function () {
   }, {
     key: "setState",
     value: function setState(stateIn) {
-      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this);
+      // console.log(stateIn)
+      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this); // console.log(state)
 
       Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(this, state);
 
@@ -32607,7 +32635,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPrevIndexForTime", function() { return getPrevIndexForTime; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -32623,6 +32660,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 // import type { Transform } from '../tools/g2';
+
 
 
  // Singleton class that contains projects global variables
@@ -32831,6 +32869,12 @@ var Recorder =
 /*#__PURE__*/
 function () {
   // Method for requesting the next animation frame
+  // states: Array<[number, Object]>;
+  // statesNew1: {
+  //   reference: Object,
+  //   states: Array<[number, Object]>,
+  //   map: UniqueMap;
+  // };
   // touchMoveDown: (Point, Point) => boolean;
   // currentTime: number;
   // requestNextAnimationFrame: (()=>mixed) => AnimationFrameID;
@@ -32839,7 +32883,7 @@ function () {
   // nextDrawQueue: Array<(number) => void>;
   function Recorder(diagramTouchDown, diagramTouchUp, // diagramCursorMove?: (Point) => void,
   // diagramTouchMoveDown?: (Point, Point) => boolean,
-  diagramCursorMove, animateDiagramNextFrame, getElement, getState, setDiagramState, pauseDiagram, unpauseDiagram) {
+  diagramCursorMove, animateDiagramNextFrame, getElement, getDiagramState, setDiagramState, pauseDiagram, unpauseDiagram) {
     _classCallCheck(this, Recorder);
 
     // If the instance alread exists, then don't create a new instance.
@@ -32848,7 +32892,19 @@ function () {
       Recorder.instance = this;
       this.events = [];
       this.slides = [];
-      this.states = [];
+      this.states = {
+        states: [],
+        map: new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"](),
+        reference: null
+      }; // this.statesNew = {
+      //   states: [],
+      //   map: new UniqueMap(),
+      // };
+      // this.statesNew1 = {
+      //   states: [],
+      //   map: new UniqueMap(),
+      // }
+
       this.currentTime = 0;
       this.isRecording = false;
       this.precision = 5;
@@ -32869,7 +32925,7 @@ function () {
         this.cursorMove = diagramCursorMove;
       }
 
-      this.animation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]();
+      this.animation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]();
       this.previousPoint = null;
 
       if (animateDiagramNextFrame) {
@@ -32880,8 +32936,8 @@ function () {
         this.getElement = getElement;
       }
 
-      if (getState) {
-        this.getState = getState;
+      if (getDiagramState) {
+        this.getDiagramState = getDiagramState;
       }
 
       if (setDiagramState) {
@@ -32903,6 +32959,7 @@ function () {
       this.isAudioPlaying = false;
       this.playbackStopped = null;
       this.getCurrentSlide = null;
+      this.startTime = 0;
     }
 
     return Recorder.instance;
@@ -32971,12 +33028,22 @@ function () {
     // ////////////////////////////////////
 
   }, {
+    key: "resetStates",
+    value: function resetStates() {
+      this.states.states = [];
+      this.states.map.reset();
+      this.states.reference = null;
+    }
+  }, {
     key: "start",
     value: function start() {
       var slideStart = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.events = [];
-      this.slides = [];
-      this.states = [];
+      this.slides = []; // this.states.states = [];
+      // this.states.map.reset();
+      // this.states.reference = null;
+
+      this.resetStates();
       this.startTime = this.timeStamp();
       this.isPlaying = false;
       this.isRecording = true; // this.unpauseDiagram();
@@ -33021,16 +33088,241 @@ function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.stateTimeout = setTimeout(function () {
         if (_this2.isRecording) {
-          _this2.recordState(_this2.getState());
+          _this2.recordState(_this2.getDiagramState());
 
-          _this2.queueRecordState(_this2.stateTimeStep);
+          _this2.queueRecordState(_this2.stateTimeStep * 1000);
         }
       }, time);
     }
   }, {
+    key: "loadStates",
+    value: function loadStates(states) {
+      var unminify = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      this.resetStates();
+
+      if (unminify) {
+        this.states = this.unminifyStates(states);
+      } else {
+        this.states.states = states.states;
+        this.states.reference = states.reference;
+      } // this.states.map.map = states.map.map;
+      // this.states.map.index = states.map.index;
+      // this.states.map.letters = states.map.letters;
+      // this.states.map.makeInverseMap();
+      // this.states.reference = uncompressObject(states.reference, this.states.map, true, true);
+      // this.states.states = states.states.map(s => [
+      //   s[0],
+      //   uncompressObject(s[1], this.states.map, true, true),
+      // ]);
+
+    } // recordState(state: Object, precision: number = 4) {
+    //   const compressed = compressObject(state, this.states.map, true, true, precision);
+    //   // const compressed = duplicate(state);
+    //   // const compressNew1 = compressObject(duplicate(state), this.statesNew1.map);
+    //   if (this.states.reference == null) {
+    //     this.states.reference = duplicate(compressed);
+    //   }
+    //   // if (this.statesNew1.reference == null) {
+    //   //   // this.statesNew1.reference = state;
+    //   //   this.statesNew1.reference = compressNew1;
+    //   // }
+    //   // this.states.push([this.now() / 1000, state]);
+    //   // StatesNew
+    //   // const diffNew1 = getObjectDiff(this.statesNew1.reference, [], compressNew1);
+    //   // this.statesNew1.states.push([this.now() / 1000, diffNew1]);
+    //   const diff = getObjectDiff(this.states.reference, [], compressed);
+    //   // console.log(this.states.reference, state, compressed, diff);
+    //   const diffKey = this.states.map.add('diff');
+    //   const removedKey = this.states.map.add('removed');
+    //   const addedKey = this.states.map.add('added');
+    //   const stateToSave = {};
+    //   stateToSave[diffKey] = pathsToObj(diff.diff);
+    //   stateToSave[removedKey] = pathsToObj(diff.removed);
+    //   stateToSave[addedKey] = pathsToObj(diff.added);
+    //   // console.log(diff, stateToSave)
+    //   this.states.states.push([
+    //     this.now() / 1000,
+    //     // {
+    //     //   diff: pathsToObj(diff.diff),
+    //     //   removed: pathsToObj(diff.removed),
+    //     //   added: pathsToObj(diff.added),
+    //     // },
+    //     stateToSave,
+    //   ]);
+    //   // console.log(this.states.states.slice(-1)[0][1])
+    //   // this.states.map.makeInverseMap();
+    //   // console.log(uncompressObject(this.states.states.slice(-1)[0][1], this.states.map));
+    //   // console.log(getObjectDiff(this.statesNew.reference, state));
+    //   // console.log(toObj(getObjectDiff(this.statesNew.reference, state)));
+    // }
+
+  }, {
+    key: "addReferenceState",
+    value: function addReferenceState(state) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+
+      if (this.states.reference == null) {
+        this.states.reference = [];
+        this.states.reference.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(state));
+        return;
+      }
+
+      var diff = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["getObjectDiff"])(this.states.reference[0], [], state, precision);
+      this.states.reference.push(diff);
+    }
+  }, {
+    key: "getReferenceState",
+    value: function getReferenceState() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (this.states.reference.length === 0) {
+        return {};
+      }
+
+      if (index === 0 || this.states.reference.length === 1) {
+        return this.states.reference[0];
+      }
+
+      if (index === -1) {
+        return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["refAndDiffToObject"])(this.states.reference[0], this.states.reference[this.states.reference.length - 1]);
+      }
+
+      return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["refAndDiffToObject"])(this.states.reference[0], this.states.reference[index]);
+    }
+  }, {
+    key: "addState",
+    value: function addState(state) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+      var ref = this.getReferenceState(-1);
+      var diff = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["getObjectDiff"])(ref, [], state, precision);
+      this.states.states.push([this.now() / 1000, this.states.reference.length - 1, diff]);
+    }
+  }, {
+    key: "getState",
+    value: function getState(index) {
+      var state = this.states.states[index];
+
+      var _state = _slicedToArray(state, 3),
+          time = _state[0],
+          refIndex = _state[1],
+          diff = _state[2]; // console.log('Index', refIndex)
+
+
+      var ref = this.getReferenceState(refIndex); // console.log(diff)
+
+      var stateObj = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["refAndDiffToObject"])(ref, diff);
+      return [time, stateObj];
+    }
+  }, {
+    key: "minifyStates",
+    value: function minifyStates() {
+      var asObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+      var map = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"]();
+      var ref = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.states.reference[0]);
+      var refsDiffPaths = this.states.reference.slice(1);
+      var statesDiffPaths = this.states.states;
+      var refDiff;
+      var statesDiff;
+
+      if (asObject) {
+        refDiff = refsDiffPaths.map(function (d) {
+          return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["diffPathsToObj"])(d);
+        });
+        statesDiff = statesDiffPaths.map(function (d) {
+          return [d[0], d[1], Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["diffPathsToObj"])(d[2])];
+        });
+      } else {
+        refDiff = refsDiffPaths.map(function (d) {
+          return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(d);
+        });
+        statesDiff = statesDiffPaths.map(function (d) {
+          return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(d);
+        });
+      }
+
+      var states = {
+        reference: [ref].concat(_toConsumableArray(refDiff)),
+        states: statesDiff,
+        isObject: asObject
+      };
+      return {
+        states: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["compressObject"])(states, map, true, true, precision),
+        map: map
+      };
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "unminifyStates",
+    value: function unminifyStates(compressedStates) {
+      var cStates = compressedStates.states;
+      var map = compressedStates.map;
+
+      if (!(map instanceof _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"])) {
+        var uMap = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"]();
+        uMap.map = map.map;
+        uMap.index = map.index;
+        uMap.letters = map.letters;
+        map = uMap;
+      }
+
+      map.makeInverseMap();
+      console.log(compressedStates);
+      console.log(map);
+      var states = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["uncompressObject"])(cStates, map, true, true);
+      console.log(states);
+      var ref = states.reference[0];
+      var refDiff = states.reference.slice(1);
+      var statesDiff = states.states;
+
+      if (states.isObject) {
+        refDiff = refDiff.map(function (d) {
+          return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["diffObjToPaths"])(d);
+        });
+        statesDiff = statesDiff.map(function (d) {
+          return [d[0], d[1], Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["diffObjToPaths"])(d[2])];
+        });
+      }
+
+      return {
+        reference: [ref].concat(_toConsumableArray(refDiff)),
+        states: statesDiff
+      };
+    }
+  }, {
     key: "recordState",
     value: function recordState(state) {
-      this.states.push([this.now() / 1000, state]);
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+
+      if (this.states.reference == null) {
+        this.addReferenceState(state);
+      }
+
+      this.addState(state, precision); // const referenceState = 
+      // const diff = getObjectDiff(this.states.reference, [], compressed);
+      // // console.log(this.states.reference, state, compressed, diff);
+      // const diffKey = this.states.map.add('diff');
+      // const removedKey = this.states.map.add('removed');
+      // const addedKey = this.states.map.add('added');
+      // const stateToSave = {};
+      // stateToSave[diffKey] = pathsToObj(diff.diff);
+      // stateToSave[removedKey] = pathsToObj(diff.removed);
+      // stateToSave[addedKey] = pathsToObj(diff.added);
+      // // console.log(diff, stateToSave)
+      // this.states.states.push([
+      //   this.now() / 1000,
+      //   // {
+      //   //   diff: pathsToObj(diff.diff),
+      //   //   removed: pathsToObj(diff.removed),
+      //   //   added: pathsToObj(diff.added),
+      //   // },
+      //   stateToSave,
+      // ]);
+      // console.log(this.states.states.slice(-1)[0][1])
+      // this.states.map.makeInverseMap();
+      // console.log(uncompressObject(this.states.states.slice(-1)[0][1], this.states.map));
+      // console.log(getObjectDiff(this.statesNew.reference, state));
+      // console.log(toObj(getObjectDiff(this.statesNew.reference, state)));
     }
   }, {
     key: "recordSlide",
@@ -33062,9 +33354,12 @@ function () {
       // download(`${dateStr} ${location} events.txt`, eventsOut.join('\n'));
       // download(`${dateStr} ${location} states.txt`, statesOut.join('\n'));
 
+      var minifiedStates = this.minifyStates(true, 4); // const minifiedEvents = this.minifyEvents(true, 4);
+
       download("".concat(dateStr, " ").concat(location, " slides.json"), JSON.stringify(this.slides));
       download("".concat(dateStr, " ").concat(location, " events.json"), JSON.stringify(this.events));
-      download("".concat(dateStr, " ").concat(location, " states.json"), JSON.stringify(this.states));
+      download("".concat(dateStr, " ").concat(location, " states.json"), JSON.stringify(minifiedStates)); // download(`${dateStr} ${location} statesNew.json`, JSON.stringify(this.statesNew));
+      // download(`${dateStr} ${location} statesNew1.json`, JSON.stringify(this.statesNew1));
     }
   }, {
     key: "show",
@@ -33105,7 +33400,8 @@ function () {
   }, {
     key: "seek",
     value: function seek(percentTime) {
-      this.pausePlayback();
+      this.pausePlayback(); // this.unpauseDiagram();
+
       var totalTime = this.getTotalTime();
       var timeTarget = percentTime * totalTime;
       this.setToTime(timeTarget);
@@ -33115,16 +33411,16 @@ function () {
     key: "setToTime",
     value: function setToTime(time) {
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, time), 0);
-      this.stateIndex = Math.max(getPrevIndexForTime(this.states, time), 0);
+      this.stateIndex = Math.max(getPrevIndexForTime(this.states.states, time), 0);
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
 
-      if (this.states[this.stateIndex][0] < this.slides[this.slideIndex][0]) {
+      if (this.states.states[this.stateIndex][0] < this.slides[this.slideIndex][0]) {
         this.setState(this.stateIndex);
       }
 
       this.setSlide(this.slideIndex, true);
 
-      if (this.states[this.stateIndex][0] >= this.slides[this.slideIndex][0]) {
+      if (this.states.states[this.stateIndex][0] >= this.slides[this.slideIndex][0]) {
         this.setState(this.stateIndex);
       }
 
@@ -33172,7 +33468,7 @@ function () {
       // this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
 
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
-      this.stateIndex = Math.max(getPrevIndexForTime(this.states, fromTime), 0);
+      this.stateIndex = Math.max(getPrevIndexForTime(this.states.states, fromTime), 0);
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
       this.setSlide(this.slideIndex, true);
       this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex + 1, fromTime));
@@ -33251,10 +33547,10 @@ function () {
     key: "playFrame",
     value: function playFrame() {
       var time = this.getCurrentTime();
-      var prevStateIndex = Math.max(getPrevIndexForTime(this.states, time), 0);
+      var prevStateIndex = Math.max(getPrevIndexForTime(this.states.states, time), 0);
 
       if (prevStateIndex > this.lastShownStateIndex) {
-        var lastIndexWithSameTime = getIndexOfLatestTime(this.states, prevStateIndex);
+        var lastIndexWithSameTime = getIndexOfLatestTime(this.states.states, prevStateIndex);
         this.setState(lastIndexWithSameTime);
         this.lastShownStateIndex = lastIndexWithSameTime;
       }
@@ -33273,7 +33569,7 @@ function () {
         this.lastShownEventIndex = indexRange[indexRange.length - 1];
       }
 
-      if ((this.lastShownEventIndex >= this.events.length - 1 || this.lastShownEventIndex === -1) && (this.lastShownStateIndex >= this.states.length - 1 || this.lastShownStateIndex === -1)) {
+      if ((this.lastShownEventIndex >= this.events.length - 1 || this.lastShownEventIndex === -1) && (this.lastShownStateIndex >= this.states.states.length - 1 || this.lastShownStateIndex === -1)) {
         this.pausePlayback();
       } else {
         this.animation.queueNextFrame(this.playFrame.bind(this));
@@ -33460,7 +33756,7 @@ function () {
   }, {
     key: "playbackState",
     value: function playbackState() {
-      if (this.stateIndex > this.states.length - 1) {
+      if (this.stateIndex > this.states.states.length - 1) {
         return;
       }
 
@@ -33468,22 +33764,43 @@ function () {
       this.animateDiagramNextFrame();
       this.stateIndex += 1;
 
-      if (this.stateIndex === this.states.length) {
+      if (this.stateIndex === this.states.states.length) {
         this.checkStopPlayback();
         return;
       }
 
-      var nextTime = (this.states[this.stateIndex][0] - this.getCurrentTime()) * 1000;
+      var nextTime = (this.states.states[this.stateIndex][0] - this.getCurrentTime()) * 1000;
       this.queuePlaybackState(nextTime);
     }
   }, {
     key: "setState",
     value: function setState(index) {
-      if (index > this.states.length - 1) {
+      if (index > this.states.states.length - 1) {
         return;
       }
 
-      this.setDiagramState(this.states[index][1]);
+      var state = this.getState(index); // console.log(state[1].elements.elements.line.animations.element)
+      // delete state[1].elements.elements.line.animations.element
+      // delete state[1].elements.elements.line.elements.line.animations.element
+      // console.log(this.states.states[index])
+      // console.log(state)
+      // console.log(state[1].elements.elements.line.transform.state[3])
+      // const diff = this.states.states[index][1];
+      // const removed = objectToPaths(diff.removed);
+      // const added = objectToPaths(diff.added);
+      // const diffPaths = objectToPaths(diff.diff);
+      // const state = refAndDiffToObject(
+      //   this.states.reference,
+      //   // this.states.states[index][1],
+      //   {
+      //     removed,
+      //     added,
+      //     diff: diffPaths,
+      //   },
+      // );
+      // console.log(index, this.states.states[index], state)
+
+      this.setDiagramState(state[1]);
     }
   }, {
     key: "queuePlaybackSlide",
@@ -33574,6 +33891,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function assignAsLinkOnly(obj) {
+  if (obj != null) {
+    obj._assignAsLinkOnly = true;
+  }
+
+  return obj;
+}
+
 function parseState(state, diagram) {
   if (typeof state === 'number') {
     return state;
@@ -33629,7 +33954,7 @@ function parseState(state, diagram) {
     }
 
     if (state.f1Type === 'de') {
-      return diagram.getElement(state.state);
+      return assignAsLinkOnly(diagram.getElement(state.state));
     }
 
     if (state.f1Type === 'positionAnimationStep') {
@@ -33687,6 +34012,11 @@ function parseState(state, diagram) {
 
   var out = {};
   Object.keys(state).forEach(function (property) {
+    // console.log('prop', state, property)
+    // if (property === 'element') {
+    //   console.log(state[property].name)
+    // }
+    // console.log(property)
     out[property] = parseState(state[property], diagram);
   });
   return out;
@@ -33724,7 +34054,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //   getPoint, getTransform, getRect, getLine, Translation, Rotation, Scale,
 // } from '../tools/g2';
 // import parseState from './parseState';
-
+ // import parseState from './parseState';
 
 function getState(obj, stateProperties) {
   var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
@@ -33880,10 +34210,60 @@ function getState(obj, stateProperties) {
 //   });
 //   return out;
 // }
+// function assignStateToObject(
+//   state: Object,
+//   obj: Object,
+//   exceptIn: Array<string> | string = [],
+//   parentPath: string = '',
+//   diagram: Diagram,
+// ) {
+//   const except = typeof exceptIn === 'string' ? [exceptIn] : exceptIn;
+//   Object.keys(state).forEach((key) => {
+//     const keyPath = parentPath !== '' ? `${parentPath}.${key}` : key;
+//     if (except.indexOf(keyPath) !== -1) {
+//       return;
+//     }
+//     const value = state[key];
+//     if (typeof value === 'number'
+//       || typeof value === 'boolean'
+//       || typeof value === 'string'
+//       || value == null
+//       || typeof value === 'function'
+//       || Array.isArray(value)
+//     ) {
+//       // Only assign the value if:
+//       //    * Value is not undefined OR
+//       //    * Value is undefined and toObject[key] is undefined
+//       if (value !== undefined || obj[key] === undefined) {
+//         obj[key] = value;
+//       }
+//       return;
+//     }
+//     if (value.f1Type != null) {
+//       obj[key] = parseState(value, diagram);
+//       return;
+//     }
+//     // If the fromObject[key] value is an object, but the toObject[key] value
+//     // is not an object, but then make toObject[key] an empty object
+//     const toValue = obj[key];
+//     if (typeof toValue === 'number'
+//       || typeof toValue === 'boolean'
+//       || typeof toValue === 'string'
+//       || toValue == null
+//       || typeof toValue === 'function'
+//       || Array.isArray(toValue)
+//     ) {
+//       // eslint-disable-next-line no-param-reassign
+//       obj[key] = {};
+//     }
+//     assignStateToObject(value, obj[key], except, keyPath, diagram);
+//   });
+// }
 
 
 function setState(obj, stateIn) {
-  Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(obj, stateIn); // const state = getDef(stateIn);
+  Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])(obj, stateIn); // assignStateToObject(stateIn, obj, [], '', diagram);
+  // const state = getDef(stateIn);
   // Object.keys(state).forEach((prop) => {
   //   const value = state[prop];
   //   if (
@@ -38943,11 +39323,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, getObjectPaths, getObjectDiff */
+/*! exports provided: diffPathsToObj, diffObjToPaths, divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "diffPathsToObj", function() { return diffPathsToObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "diffObjToPaths", function() { return diffObjToPaths; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "divide", function() { return divide; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mulToString", function() { return mulToString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
@@ -38970,8 +39352,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "duplicate", function() { return duplicate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assignObjectFromTo", function() { return assignObjectFromTo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinObjectsWithOptions", function() { return joinObjectsWithOptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getObjectPaths", function() { return getObjectPaths; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "objectToPaths", function() { return objectToPaths; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getObjectDiff", function() { return getObjectDiff; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateObjFromPath", function() { return updateObjFromPath; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pathsToObj", function() { return pathsToObj; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UniqueMap", function() { return UniqueMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compressObject", function() { return compressObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "refAndDiffToObject", function() { return refAndDiffToObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uncompressObject", function() { return uncompressObject; });
+/* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -38979,6 +39376,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 var Console = function Console(text) {
   console.log(text); // eslint-disable-line no-console
@@ -39205,6 +39604,12 @@ function assignObjectFromTo(fromObject, toObject) {
 
     var value = fromObject[key];
 
+    if (_typeof(value) === 'object' && value != null && value._assignAsLinkOnly) {
+      // eslint-disable-next-line no-param-reassign
+      toObject[key] = fromObject[key];
+      return;
+    }
+
     if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || typeof value === 'function' || typeof value._dup === 'function' || Array.isArray(value)) {
       // Only assign the value if:
       //    * Value is not undefined OR
@@ -39266,50 +39671,6 @@ function joinObjects() {
     objects[_key2] = arguments[_key2];
   }
 
-  // if (typeof objects === 'object') {
-  //   return objects;
-  // }
-  // const assignObjectFromTo1 = (fromObject: Object, toObject: Object) => {
-  //   Object.keys(fromObject).forEach((key) => {
-  //     const value = fromObject[key];
-  //     if (typeof value === 'number'
-  //       || typeof value === 'boolean'
-  //       || typeof value === 'string'
-  //       || value == null
-  //       || typeof value === 'function'
-  //       || typeof value._dup === 'function'
-  //       || Array.isArray(value)
-  //     ) {
-  //       // console.log(value, toObject[key])
-  //       if (value !== undefined || toObject[key] === undefined) {
-  //         // eslint-disable-next-line no-param-reassign
-  //         toObject[key] = value;
-  //       }
-  //     } else {
-  //       const toValue = toObject[key];
-  //       if (typeof toValue === 'number'
-  //         || typeof toValue === 'boolean'
-  //         || typeof toValue === 'string'
-  //         || toValue == null
-  //         || typeof toValue === 'function'
-  //         || Array.isArray(toValue)
-  //       ) {
-  //         // eslint-disable-next-line no-param-reassign
-  //         toObject[key] = {};
-  //       }
-  //       assignObjectFromTo1(value, toObject[key]);
-  //     }
-  //   });
-  // };
-  // const num = objects.length;
-  // const out = objects[0];
-  // for (let i = 1; i < num; i += 1) {
-  //   const o = objects[i];
-  //   if (o != null) {
-  //     assignObjectFromTo1(o, out);
-  //   }
-  // }
-  // return out;
   return joinObjectsWithOptions.apply(void 0, [{}].concat(objects));
 }
 
@@ -39478,68 +39839,450 @@ function generateRandomString() {
   return (Math.random() * 1e18).toString(36);
 }
 
-function getObjectPaths(obj) {
+var UniqueMap =
+/*#__PURE__*/
+function () {
+  function UniqueMap() {
+    _classCallCheck(this, UniqueMap);
+
+    this.map = {};
+    this.index = 1;
+    this.inverseMap = {};
+    this.letters = '0abcdefghijklmnopqrstuvwxz';
+  }
+
+  _createClass(UniqueMap, [{
+    key: "reset",
+    value: function reset() {
+      this.index = 1;
+      this.map = {};
+    }
+  }, {
+    key: "add",
+    value: function add(pathStr) {
+      if (this.map[pathStr] != null) {
+        return this.map[pathStr];
+      }
+
+      var unique = this.getNextUniqueString();
+      this.map[pathStr] = unique;
+      return unique;
+    }
+  }, {
+    key: "getNextUniqueString",
+    value: function getNextUniqueString() {
+      if (this.index === 0) {
+        return 'a';
+      }
+
+      var order = Math.floor(Math.log(this.index) / Math.log(this.letters.length));
+      var remainder = this.index;
+      var out = '';
+
+      for (var i = order; i >= 0; i -= 1) {
+        var factor = Math.floor(remainder / Math.pow(this.letters.length, i));
+        remainder -= factor * Math.pow(this.letters.length, i);
+        out = "".concat(out).concat(this.letters[factor]);
+      }
+
+      this.index += 1;
+      return out;
+    }
+  }, {
+    key: "makeInverseMap",
+    value: function makeInverseMap() {
+      var _this = this;
+
+      this.inverseMap = {};
+      Object.keys(this.map).forEach(function (key) {
+        var uniqueStr = _this.map[key];
+        _this.inverseMap[uniqueStr] = key;
+      });
+    }
+  }, {
+    key: "get",
+    value: function get(uniqueStr) {
+      if (this.inverseMap[uniqueStr] != null) {
+        return this.inverseMap[uniqueStr];
+      }
+
+      return uniqueStr;
+    }
+  }]);
+
+  return UniqueMap;
+}();
+
+function compressObject(obj, map) {
+  var keys = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var strValues = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  var precision = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var uncompress = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
+
+  if (typeof obj === 'string') {
+    // if (obj === 'do') {
+    //   console.log(obj, strValues, uncompress, map.get(obj))
+    // }
+    if (strValues && uncompress) {
+      return map.get(obj);
+    }
+
+    if (strValues) {
+      return map.add(obj);
+    }
+
+    return obj;
+  }
+
+  if (typeof obj === 'number') {
+    if (precision == null || uncompress) {
+      return obj;
+    }
+
+    return Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(obj, precision);
+  }
+
+  if (typeof obj === 'boolean' || typeof obj === 'function' || obj == null) {
+    return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    for (var i = 0; i < obj.length; i += 1) {
+      obj[i] = compressObject(obj[i], map, keys, strValues, precision, uncompress);
+    }
+
+    return obj;
+  }
+
+  if (_typeof(obj) === 'object') {
+    var objKeys = Object.keys(obj);
+    var obj2 = {};
+
+    for (var _i = 0; _i < objKeys.length; _i += 1) {
+      var k = objKeys[_i];
+      obj[k] = compressObject(obj[k], map, keys, strValues, precision, uncompress);
+
+      if (keys && uncompress) {
+        obj2[map.get(k)] = obj[k];
+      } else if (keys) {
+        obj2[map.add(k)] = obj[k];
+      } else {
+        obj2[k] = obj[k];
+      }
+    }
+
+    if (keys) {
+      return obj2;
+    }
+
+    return obj2;
+  }
+
+  return obj;
+}
+
+function uncompressObject(obj, map) {
+  var keys = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var strValues = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  return compressObject(obj, map, keys, strValues, null, true);
+}
+
+function objectToPaths(obj) {
   var path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var pathObj = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var precision = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-  if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || typeof obj === 'function') {
-    pathObj["".concat(path)] = obj.toString(); // eslint-disable-line no-param-reassign
+  if (typeof obj === 'string' // || typeof obj === 'number'
+  || typeof obj === 'boolean' || typeof obj === 'function') {
+    pathObj["".concat(path)] = obj; // eslint-disable-line no-param-reassign
+
+    return pathObj;
+  }
+
+  if (typeof obj === 'number') {
+    if (precision != null) {
+      pathObj["".concat(path)] = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(obj, precision); // eslint-disable-line no-param-reassign
+    } else {
+      pathObj["".concat(path)] = obj; // eslint-disable-line no-param-reassign
+    }
 
     return pathObj;
   }
 
   if (obj === null) {
-    pathObj["".concat(path)] = 'null'; // eslint-disable-line no-param-reassign
+    pathObj["".concat(path)] = null; // eslint-disable-line no-param-reassign
 
     return pathObj;
   }
 
   if (obj === undefined) {
-    pathObj["".concat(path)] = 'undefined'; // eslint-disable-line no-param-reassign
-
+    // pathObj[`${path}`] = undefined; // eslint-disable-line no-param-reassign
     return pathObj;
   }
 
   if (Array.isArray(obj)) {
     obj.forEach(function (o, index) {
-      getObjectPaths(o, "".concat(path, ".[").concat(index, "]"), pathObj);
+      objectToPaths(o, "".concat(path, "[").concat(index, "]"), pathObj, precision);
     });
     return pathObj;
   }
 
   Object.keys(obj).forEach(function (key) {
-    getObjectPaths(obj[key], "".concat(path, ".").concat(key), pathObj);
+    objectToPaths(obj[key], "".concat(path, ".").concat(key), pathObj, precision);
   });
   return pathObj;
 }
 
-function getObjectDiff(obj1, obj2) {
-  var paths1 = getObjectPaths(obj1);
-  var paths2 = getObjectPaths(obj2);
+function getObjectDiff(obj1In, diffs, obj2) {
+  var precision = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var debug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  // const pathMap = {};
+  var obj1 = obj1In;
+
+  if (diffs.length > 0) {
+    // eslint-disable-next-line no-use-before-define
+    obj1 = refAndDiffToObject.apply(void 0, [obj1In].concat(_toConsumableArray(diffs)));
+  }
+
+  var paths1 = objectToPaths(obj1, '', {}, precision);
+  var paths2 = objectToPaths(obj2, '', {}, precision);
   var added = {};
   var diff = {};
   var removed = {};
   Object.keys(paths1).forEach(function (key1) {
-    if (paths2[key1] == null) {
+    if (paths2[key1] === undefined) {
       removed[key1] = paths1[key1];
       return;
     }
 
     if (paths1[key1] !== paths2[key1]) {
-      diff[key1] = "".concat(paths1[key1], " :: ").concat(paths2[key1]);
+      if (debug) {
+        diff[key1] = [paths1[key1], paths2[key1]];
+      } else {
+        diff[key1] = paths2[key1];
+      }
     }
   });
   Object.keys(paths2).forEach(function (key2) {
-    if (paths1[key2] == null) {
+    if (paths1[key2] === undefined) {
       added[key2] = paths2[key2];
     }
   });
-  return {
-    diff: diff,
-    added: added,
-    removed: removed
-  };
-} // function objDiffOnly(val1: any, val2: any) {
+  var out = {};
+
+  if (Object.keys(diff).length > 0) {
+    out.diff = diff;
+  }
+
+  if (Object.keys(added).length > 0) {
+    out.added = added;
+  }
+
+  if (Object.keys(removed).length > 0) {
+    out.removed = removed;
+  }
+
+  return out;
+}
+
+function updateObjFromPath(remainingPath, obj, value) {
+  var remove = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  // console.log(remainingPath)
+  var fullP = remainingPath[0];
+
+  if (fullP.length === 0) {
+    return;
+  }
+
+  var arrayStringIndeces = fullP.match(/\[[^\]]*\]/g);
+  var p = fullP.replace(/\[.*/, '');
+
+  if (remainingPath.length === 1 && remove && !arrayStringIndeces) {
+    delete obj[p];
+    return;
+  }
+
+  if (arrayStringIndeces) {
+    var arrayIndeces = arrayStringIndeces.map(function (e) {
+      return parseInt(e.replace(/\[|\]/g, ''), 10);
+    }); // console.log(arrayIndeces)
+    // return;
+
+    if (obj[p] == null || !Array.isArray(obj[p])) {
+      obj[p] = [];
+    } // console.log(obj)
+    // return
+
+
+    var currentArray = obj[p];
+    var index = 0;
+
+    for (var i = 0; i < arrayIndeces.length; i += 1) {
+      index = arrayIndeces[i];
+
+      if (currentArray.length <= index) {
+        for (var j = currentArray.length; j < index - currentArray.length + 1; j += 1) {
+          currentArray.push(undefined);
+        }
+      }
+
+      if (i < arrayIndeces.length - 1) {
+        // currentArray[index] = currentArray[index][i];
+        if (!Array.isArray(currentArray[index])) {
+          currentArray[index] = [];
+        }
+
+        currentArray = currentArray[index];
+      }
+    }
+
+    if (remainingPath.length === 1 && remove) {
+      currentArray[index] = undefined;
+      return;
+    }
+
+    if (remainingPath.length === 1) {
+      currentArray[index] = value;
+      return;
+    }
+
+    if (currentArray[index] == null || _typeof(currentArray[index]) !== 'object') {
+      currentArray[index] = {};
+    }
+
+    updateObjFromPath(remainingPath.slice(1), currentArray[index], value, remove);
+    return;
+  } // if (remainingPath.length === 1 && remove) {
+  //   console.log('asdf')
+  //   obj[p] = undefined;
+  // }
+
+
+  if (remainingPath.length === 1) {
+    obj[p] = value;
+    return;
+  }
+
+  if (obj[p] == null) {
+    obj[p] = {};
+  }
+
+  updateObjFromPath(remainingPath.slice(1), obj[p], value, remove);
+}
+
+function pathsToObj(paths) {
+  var obj = {};
+  Object.keys(paths).forEach(function (key) {
+    var path = key.split('.').filter(function (p) {
+      return p.length > 0;
+    });
+    var value = paths[key];
+
+    if (Array.isArray(value)) {
+      updateObjFromPath(path, obj, value.slice(-1)[0]);
+    } else {
+      updateObjFromPath(path, obj, value);
+    }
+  });
+  return obj;
+}
+
+function refAndDiffToObject(referenceIn) {
+  var ref = duplicate(referenceIn);
+
+  var processPaths = function processPaths(paths) {
+    var remove = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    // console.log(paths)
+    Object.keys(paths).forEach(function (pathStr) {
+      // console.log(pathStr)
+      var path = pathStr.split('.').filter(function (p) {
+        return p.length > 0;
+      });
+      var value = paths[pathStr];
+
+      if (Array.isArray(value)) {
+        updateObjFromPath(path, ref, value.slice(-1)[0], remove);
+      } else {
+        updateObjFromPath(path, ref, value, remove);
+      }
+    });
+  }; // console.log(diffsIn)
+
+
+  for (var _len3 = arguments.length, diffsIn = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    diffsIn[_key3 - 1] = arguments[_key3];
+  }
+
+  diffsIn.forEach(function (diffIn) {
+    // console.log(diffIn)
+    var added = diffIn.added,
+        removed = diffIn.removed,
+        diff = diffIn.diff; // console.log(1, removed)
+
+    if (removed != null) {
+      processPaths(removed, true);
+    } // console.log(2)
+
+
+    if (added != null) {
+      processPaths(added);
+    } // console.log(3)
+
+
+    if (diff != null) {
+      processPaths(diff);
+    }
+  });
+  return ref;
+}
+
+function diffPathsToObj(diff) {
+  var out = {};
+
+  if (diff.diff && Object.keys(diff.diff).length > 0) {
+    out.diff = pathsToObj(diff.diff);
+  }
+
+  if (diff.added && Object.keys(diff.added).length > 0) {
+    out.added = pathsToObj(diff.added);
+  }
+
+  if (diff.removed && Object.keys(diff.removed).length > 0) {
+    out.removed = pathsToObj(diff.removed);
+  }
+
+  return out;
+}
+
+function diffObjToPaths(diff) {
+  var out = {};
+
+  if (diff.diff && Object.keys(diff.diff).length > 0) {
+    out.diff = objectToPaths(diff.diff);
+  }
+
+  if (diff.added && Object.keys(diff.added).length > 0) {
+    out.added = objectToPaths(diff.added);
+  }
+
+  if (diff.removed && Object.keys(diff.removed).length > 0) {
+    out.removed = objectToPaths(diff.removed);
+  }
+
+  return out;
+} // function diffToObj(diff: Object, obj: object) {
+//   const { added, diff, removed } = diff;
+// }
+// function addedOrRemovedToObj(addedOrRemoved: Object) {
+//   const obj = {};
+//   Object.keys(addedOrRemoved).forEach((key) => {
+//     const path = key.split('.').filter(p => p.length > 0);
+//     const value = addedOrRemoved[key];
+//     updateObjFromPath(path, obj, value);
+//   });
+//   return obj;
+// }
+// function objDiffOnly(val1: any, val2: any) {
 //   if (
 //     typeof val1 === 'string'
 //     || typeof val1 === 'number'

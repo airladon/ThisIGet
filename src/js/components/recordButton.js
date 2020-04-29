@@ -93,6 +93,7 @@ export default class RecordButton extends React.Component<Props, State> {
           padding: '10px',
         },
       });
+      recorder.stateTimeStep = 0.2;
       recorder.start();
       this.setTime(0);
       this.incrementTime();
@@ -106,6 +107,7 @@ export default class RecordButton extends React.Component<Props, State> {
         },
       });
       recorder.stop();
+      console.log(recorder.states)
       clearTimeout(this.timer);
     }
     // else if (this.state.label === 'show') {
