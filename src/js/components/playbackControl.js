@@ -65,7 +65,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.playbackStopped = this.playbackStopped.bind(this);
     // console.log(this.state.time)
     if (this.state.seek < 1) {
+      console.log('Before', this.getDiagram().elements.elements.circle.elements.line1.state.movement.previousTime)
       recorder.startPlayback(this.state.timeValue);
+      console.log('After', this.getDiagram().elements.elements.circle.elements.line1.state.movement.previousTime)
     } else {
       recorder.startPlayback(0);
     }
@@ -111,7 +113,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   seekToPercent(percent: number) {
     const recorder = new Recorder();
     const totalTime = recorder.getTotalTime();
+    // console.log('STARTING ****', percent * totalTime)
+    console.log("B", this.getDiagram().elements.elements.circle.elements.line1.state.movement.previousTime)
     this.setState({ seek: percent });
+    console.log("A", this.getDiagram().elements.elements.circle.elements.line1.state.movement.previousTime)
     recorder.seek(percent);
     this.updateTime(percent * totalTime);
     // recorder.seek(34.5 / totalTime);

@@ -5581,6 +5581,7 @@ function () {
   }, {
     key: "pause",
     value: function pause() {
+      this.elements.pause();
       this.pauseTime = performance.now() / 1000;
       this.isPaused = true;
     } // pauseAfterNextDraw() {
@@ -5590,6 +5591,7 @@ function () {
   }, {
     key: "unpause",
     value: function unpause() {
+      this.elements.unpause();
       this.isPaused = false;
       this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
       this.animateNextFrame();
@@ -5648,6 +5650,8 @@ function () {
       if (this.isPaused) {
         return;
       }
+
+      console.log('isMoving', this.elements.isMoving());
 
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -28454,7 +28458,8 @@ function () {
       frequency: 0,
       scale: 2,
       time: 1
-    }; // Rename to animate in future
+    };
+    this.isPaused = false; // Rename to animate in future
 
     this.anim = {
       rotation: function rotation() {
@@ -28822,7 +28827,7 @@ function () {
       isBeingMoved: false,
       isMovingFreely: false,
       movement: {
-        previousTime: -1,
+        previousTime: null,
         previousTransform: this.transform._dup(),
         velocity: this.transform.zero()
       },
@@ -28883,11 +28888,11 @@ function () {
       }
 
       if (this.state.isPulsing) {
-        this.state.pulse.startTime += delta;
+        this.state.pulse.startTime += delta * 1000;
       }
 
-      if (this.state.movement.previousTime > 0) {
-        this.state.movement.previousTime += delta / 1000;
+      if (this.state.movement.previousTime !== null) {
+        this.state.movement.previousTime += delta;
       }
     } // Space definition:
     //   * Pixel space: css pixels
@@ -29140,6 +29145,16 @@ function () {
       this.undim();
     }
   }, {
+    key: "pause",
+    value: function pause() {
+      this.isPaused = true;
+    }
+  }, {
+    key: "unpause",
+    value: function unpause() {
+      this.isPaused = false;
+    }
+  }, {
     key: "setPosition",
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -29222,7 +29237,8 @@ function () {
       if (this.state.isMovingFreely) {
         // If this is the first frame of moving freely, then record the current
         // time so can calculate velocity on next frame
-        if (this.state.movement.previousTime < 0) {
+        if (this.state.movement.previousTime === null) {
+          console.log('reset');
           this.state.movement.previousTime = now;
           return;
         } // If got here, then we are now after the first frame, so calculate
@@ -29232,11 +29248,13 @@ function () {
         var deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
 
         var next = this.decelerate(deltaTime);
+        console.log('freely', now, this.state.movement.previousTime, deltaTime, next, this.transform._dup());
         this.state.movement.velocity = next.velocity;
         this.state.movement.previousTime = now; // If the velocity is 0, then stop moving freely and return the current
         // transform
 
         if (this.state.movement.velocity.isZero()) {
+          console.log('stopped');
           this.state.movement.velocity = this.state.movement.velocity.zero();
           this.stopMovingFreely(false);
         }
@@ -29578,7 +29596,7 @@ function () {
       this.stopMovingFreely();
       this.state.movement.velocity = this.transform.zero();
       this.state.movement.previousTransform = this.transform._dup();
-      this.state.movement.previousTime = Date.now() / 1000;
+      this.state.movement.previousTime = performance.now() / 1000;
       this.state.isBeingMoved = true;
       this.unrender();
 
@@ -29600,17 +29618,17 @@ function () {
   }, {
     key: "stopBeingMoved",
     value: function stopBeingMoved() {
-      var currentTime = Date.now() / 1000; // Check wether last movement was a long time ago, if it was, then make
+      var currentTime = performance.now() / 1000; // Check wether last movement was a long time ago, if it was, then make
       // velocity 0 as the user has stopped moving before releasing touch/click
 
-      if (this.state.movement.previousTime !== -1) {
+      if (this.state.movement.previousTime !== null) {
         if (currentTime - this.state.movement.previousTime > 0.05) {
           this.state.movement.velocity = this.transform.zero();
         }
       }
 
       this.state.isBeingMoved = false;
-      this.state.movement.previousTime = -1;
+      this.state.movement.previousTime = null;
 
       if (this.recorder.isRecording) {
         this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
@@ -29622,7 +29640,7 @@ function () {
     value: function calcVelocity(newTransform) {
       var currentTime = Date.now() / 1000;
 
-      if (this.state.movement.previousTime < 0) {
+      if (this.state.movement.previousTime === null) {
         this.state.movement.previousTime = currentTime;
         return;
       }
@@ -29658,7 +29676,7 @@ function () {
       }
 
       this.state.isMovingFreely = true;
-      this.state.movement.previousTime = -1;
+      this.state.movement.previousTime = null;
       this.state.movement.velocity = this.state.movement.velocity.clipMag(this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
 
       if (this.recorder.isRecording) {
@@ -29670,8 +29688,9 @@ function () {
     key: "stopMovingFreely",
     value: function stopMovingFreely() {
       var result = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      // console.trace()
       this.state.isMovingFreely = false;
-      this.state.movement.previousTime = -1;
+      this.state.movement.previousTime = null;
 
       if (this.move.freely.callback) {
         this.fnMap.exec(this.move.freely.callback, result);
@@ -30711,8 +30730,10 @@ function (_DiagramElement) {
           this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
-        this.animations.nextFrame(now);
-        this.nextMovingFreelyFrame(now);
+        if (!this.isPaused) {
+          this.animations.nextFrame(now);
+          this.nextMovingFreelyFrame(now);
+        }
 
         if (!this.isShown) {
           return;
@@ -31076,8 +31097,11 @@ function (_DiagramElement2) {
           this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
-        this.animations.nextFrame(now);
-        this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
+        if (!this.isPaused) {
+          this.animations.nextFrame(now);
+          this.nextMovingFreelyFrame(now);
+        } // set next color can end up hiding an element when disolving out
+
 
         if (!this.isShown) {
           return;
@@ -32238,6 +32262,26 @@ function (_DiagramElement2) {
         element.setTimeDelta(delta);
       }
     }
+  }, {
+    key: "pause",
+    value: function pause() {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.pause();
+      }
+    }
+  }, {
+    key: "unpause",
+    value: function unpause() {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "unpause", this).call(this);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.unpause();
+      }
+    }
   }]);
 
   return DiagramElementCollection;
@@ -33030,9 +33074,13 @@ function () {
   }, {
     key: "resetStates",
     value: function resetStates() {
-      this.states.states = [];
-      this.states.map.reset();
-      this.states.reference = null;
+      this.states = {
+        states: [],
+        map: new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"](),
+        reference: null
+      }; // this.states.states = [];
+      // this.states.map.reset();
+      // this.states.reference = null;
     }
   }, {
     key: "start",
@@ -33267,10 +33315,7 @@ function () {
       }
 
       map.makeInverseMap();
-      console.log(compressedStates);
-      console.log(map);
       var states = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["uncompressObject"])(cStates, map, true, true);
-      console.log(states);
       var ref = states.reference[0];
       var refDiff = states.reference.slice(1);
       var statesDiff = states.states;
@@ -33415,12 +33460,14 @@ function () {
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
 
       if (this.states.states[this.stateIndex][0] < this.slides[this.slideIndex][0]) {
+        console.log('state before');
         this.setState(this.stateIndex);
       }
 
       this.setSlide(this.slideIndex, true);
 
       if (this.states.states[this.stateIndex][0] >= this.slides[this.slideIndex][0]) {
+        console.log('state after');
         this.setState(this.stateIndex);
       }
 
@@ -33469,9 +33516,10 @@ function () {
 
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, fromTime), 0);
       this.stateIndex = Math.max(getPrevIndexForTime(this.states.states, fromTime), 0);
-      this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0);
-      this.setSlide(this.slideIndex, true);
-      this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex + 1, fromTime));
+      this.eventIndex = Math.max(getPrevIndexForTime(this.events, fromTime), 0); // this.setSlide(this.slideIndex, true);
+      // this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex + 1, fromTime));
+
+      this.playbackSlide();
       this.setState(this.stateIndex);
       this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, fromTime));
 
@@ -33775,11 +33823,19 @@ function () {
   }, {
     key: "setState",
     value: function setState(index) {
+      console.log('setting state');
+
       if (index > this.states.states.length - 1) {
         return;
       }
 
-      var state = this.getState(index); // console.log(state[1].elements.elements.line.animations.element)
+      var state = this.getState(index); // console.log(index, state, state[1].elements.elements.circle.elements.line1.transform.state[2].state)
+      // try {
+      //   console.log();
+      // } catch {
+      //   console.log('fail');
+      // }
+      // console.log(state[1].elements.elements.line.animations.element)
       // delete state[1].elements.elements.line.animations.element
       // delete state[1].elements.elements.line.elements.line.animations.element
       // console.log(this.states.states[index])
@@ -33817,12 +33873,14 @@ function () {
   }, {
     key: "playbackSlide",
     value: function playbackSlide() {
+      var forceGoTo = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       if (this.slideIndex > this.slides.length - 1) {
         return;
       } // const event = this.events[this.slideIndex];
 
 
-      this.setSlide(this.slideIndex);
+      this.setSlide(this.slideIndex, forceGoTo);
       this.animateDiagramNextFrame();
       this.slideIndex += 1;
 
@@ -33838,6 +33896,7 @@ function () {
     key: "setSlide",
     value: function setSlide(index) {
       var forceGoTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      console.log('setting slide');
 
       if (index > this.slides.length - 1) {
         return;
@@ -39849,6 +39908,7 @@ function () {
     this.index = 1;
     this.inverseMap = {};
     this.letters = '0abcdefghijklmnopqrstuvwxz';
+    this.undefinedCode = '.a';
   }
 
   _createClass(UniqueMap, [{
@@ -39902,6 +39962,10 @@ function () {
   }, {
     key: "get",
     value: function get(uniqueStr) {
+      if (uniqueStr === this.undefinedCode) {
+        return undefined;
+      }
+
       if (this.inverseMap[uniqueStr] != null) {
         return this.inverseMap[uniqueStr];
       }
@@ -39935,15 +39999,19 @@ function compressObject(obj, map) {
   }
 
   if (typeof obj === 'number') {
-    if (precision == null || uncompress) {
+    if (precision === null || uncompress) {
       return obj;
     }
 
     return Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(obj, precision);
   }
 
-  if (typeof obj === 'boolean' || typeof obj === 'function' || obj == null) {
+  if (typeof obj === 'boolean' || typeof obj === 'function' || obj === null) {
     return obj;
+  }
+
+  if (obj === undefined) {
+    return map.undefinedCode;
   }
 
   if (Array.isArray(obj)) {
