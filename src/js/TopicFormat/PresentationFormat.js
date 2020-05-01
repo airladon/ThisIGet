@@ -142,10 +142,6 @@ class PresentationFormat extends SimpleFormat {
   }
 
   nextSection(message: ?string = null) {
-    const { recorder } = this.diagram;
-    if (recorder && recorder.isRecording) {
-      recorder.recordSlide('next', message, Math.min(this.currentSectionIndex + 1, this.content.sections.length));
-    }
     closeQRs();
     if (typeof message === 'string') {
       this.content.message = message;
@@ -180,10 +176,6 @@ class PresentationFormat extends SimpleFormat {
   }
 
   prevSection(message: ?string = null) {
-    const { recorder } = this.diagram;
-    if (recorder && recorder.isRecording) {
-      recorder.recordSlide('prev', message, Math.max(this.currentSectionIndex - 1, 0));
-    }
     closeQRs();
     if (typeof message === 'string') {
       this.content.message = message;
@@ -221,10 +213,6 @@ class PresentationFormat extends SimpleFormat {
   }
 
   goToSection(sectionId: number | string) {
-    const { recorder } = this.diagram;
-    if (recorder && recorder.isRecording) {
-      recorder.recordSlide('goto', '', sectionId);
-    }
     closeQRs();
     window.presentationFormatTransitionStatus = 'notSteady';
     // console.log('goToSection')
@@ -566,20 +554,6 @@ class PresentationFormat extends SimpleFormat {
 
     // this.overlayDiagram = this.content.overlayDiagram;
     this.diagram.version = this;
-    const { recorder } = this.diagram;
-    if (recorder) {
-      recorder.nextSlide = this.nextSection.bind(this);
-      recorder.prevSlide = this.prevSection.bind(this);
-      recorder.goToSlide = this.goToSection.bind(this);
-      recorder.getCurrentSlide = this.getCurrentSlide.bind(this);
-      recorder.seek(0);
-      recorder.unpauseDiagram();
-      this.diagram.animateNextFrame();
-    }
-  }
-
-  getCurrentSlide() {
-    return this.currentSectionIndex;
   }
 
   // eslint-disable-next-line class-methods-use-this

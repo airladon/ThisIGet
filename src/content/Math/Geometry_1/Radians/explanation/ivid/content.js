@@ -50,8 +50,9 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.slides = slides;
     this.diagram.recorder.audio = new Audio(audio);
-    // this.diagram.recorder.seek(0);
+
     console.log(this.diagram.recorder)
+    console.log(this.diagram.elements._circle._arc.state.pulse.startTime)
   }
 
   addSections() {
@@ -108,6 +109,7 @@ class Content extends PresentationFormatContent {
         circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
         // circle._angleText.setScenario('bottomLeft');
+        console.log(circle.state.pulse.startTime)
       },
     });
 

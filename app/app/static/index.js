@@ -33234,7 +33234,8 @@ function () {
 
       if (this.states.reference == null) {
         this.states.reference = [];
-        this.states.reference.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(state));
+        this.states.reference.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(state)); // console.log(state)
+
         return;
       }
 
