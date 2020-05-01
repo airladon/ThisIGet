@@ -33138,6 +33138,18 @@ function () {
       }, time);
     }
   }, {
+    key: "loadEvents",
+    value: function loadEvents(minifiedEvents) {
+      var isMinified = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      this.events = [];
+
+      if (isMinified) {
+        this.events = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["unminify"])(minifiedEvents);
+      } else {
+        this.events = minifiedEvents;
+      }
+    }
+  }, {
     key: "loadStates",
     value: function loadStates(states) {
       var unminify = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -33255,7 +33267,14 @@ function () {
 
       var stateObj = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["refAndDiffToObject"])(ref, diff);
       return [time, stateObj];
-    }
+    } // minifyEvents(precision: ?number = 4) {
+    //   const map = new UniqueMap();
+    //   return {
+    //     events: compressObject(this.events, map, true, true, precision),
+    //     map,
+    //   };
+    // }
+
   }, {
     key: "minifyStates",
     value: function minifyStates() {
@@ -33397,7 +33416,7 @@ function () {
       var minifiedStates = this.minifyStates(true, 4); // const minifiedEvents = this.minifyEvents(true, 4);
 
       download("".concat(dateStr, " ").concat(location, " slides.json"), JSON.stringify(this.slides));
-      download("".concat(dateStr, " ").concat(location, " events.json"), JSON.stringify(this.events));
+      download("".concat(dateStr, " ").concat(location, " events.json"), JSON.stringify(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["minify"])(this.events)));
       download("".concat(dateStr, " ").concat(location, " states.json"), JSON.stringify(minifiedStates)); // download(`${dateStr} ${location} statesNew.json`, JSON.stringify(this.statesNew));
       // download(`${dateStr} ${location} statesNew1.json`, JSON.stringify(this.statesNew1));
     }
@@ -39481,7 +39500,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: diffPathsToObj, diffObjToPaths, divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject */
+/*! exports provided: diffPathsToObj, diffObjToPaths, divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39518,6 +39537,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compressObject", function() { return compressObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "refAndDiffToObject", function() { return refAndDiffToObject; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "uncompressObject", function() { return uncompressObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unminify", function() { return unminify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "minify", function() { return minify; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -40152,6 +40173,30 @@ function uncompressObject(obj, map) {
   var keys = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var strValues = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   return compressObject(obj, map, keys, strValues, null, true);
+}
+
+function minify(objectOrArray) {
+  var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+  var map = new UniqueMap();
+  return {
+    minified: compressObject(objectOrArray, map, true, true, precision),
+    map: map
+  };
+}
+
+function unminify(minObjectOrArray) {
+  var map = minObjectOrArray.map;
+
+  if (!(map instanceof UniqueMap)) {
+    var uMap = new UniqueMap();
+    uMap.map = map.map;
+    uMap.index = map.index;
+    uMap.letters = map.letters;
+    map = uMap;
+  }
+
+  map.makeInverseMap();
+  return uncompressObject(minObjectOrArray.minified, map, true, true);
 }
 
 function objectToPaths(obj) {
