@@ -111,6 +111,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.setState({ seek: percent });
     recorder.seek(percent);
     this.updateTime(percent * totalTime);
+    console.log(this.getDiagram().getElement('circle.arc').state.pulse.startTime)
     // recorder.seek(34.5 / totalTime);
     // this.updateTime(34.5);
     // console.log(recorder.states)

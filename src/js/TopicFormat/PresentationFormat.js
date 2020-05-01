@@ -573,6 +573,8 @@ class PresentationFormat extends SimpleFormat {
       recorder.goToSlide = this.goToSection.bind(this);
       recorder.getCurrentSlide = this.getCurrentSlide.bind(this);
       recorder.seek(0);
+      recorder.unpauseDiagram();
+      this.diagram.animateNextFrame();
     }
   }
 

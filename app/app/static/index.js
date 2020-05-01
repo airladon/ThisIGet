@@ -1251,7 +1251,7 @@ function () {
     this.onFinish = options.onFinish;
     this.completeOnCancel = options.completeOnCancel;
     this.duration = options.duration;
-    this.startTime = -1;
+    this.startTime = null;
     this.state = 'idle';
     this.name = options.name;
     this.afterFrame = options.afterFrame;
@@ -1350,7 +1350,7 @@ function () {
   }, {
     key: "setTimeDelta",
     value: function setTimeDelta(delta) {
-      if (this.startTime > -1) {
+      if (this.startTime != null) {
         this.startTime += delta;
       } // if (this.steps != null) {
       //   this.steps.forEach((step) => {
@@ -1407,7 +1407,7 @@ function () {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
-      if (this.startTime === -1) {
+      if (this.startTime === null) {
         this.startTime = now - this.startTimeOffset;
       }
 
@@ -1452,7 +1452,7 @@ function () {
   }, {
     key: "start",
     value: function start() {
-      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.startTime = startTime;
       this.state = 'animating';
     }
@@ -2228,7 +2228,8 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var element = this.element;
 
       if (element != null) {
@@ -2576,7 +2577,8 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var element = this.element;
 
       if (element != null) {
@@ -2906,7 +2908,9 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
       _get(_getPrototypeOf(PositionAnimationStep.prototype), "start", this).call(this, startTime);
 
       if (this.position.start === null) {
@@ -3083,7 +3087,9 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
       _get(_getPrototypeOf(PulseAnimationStep.prototype), "start", this).call(this, startTime);
 
       var element = this.element;
@@ -3236,7 +3242,9 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
       _get(_getPrototypeOf(RotationAnimationStep.prototype), "start", this).call(this, startTime);
 
       if (this.rotation.start === null) {
@@ -3423,7 +3431,9 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
       _get(_getPrototypeOf(ScaleAnimationStep.prototype), "start", this).call(this, startTime);
 
       if (this.scale.start === null) {
@@ -3636,8 +3646,10 @@ function (_ElementAnimationStep) {
 
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
       var _this2 = this;
+
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       _get(_getPrototypeOf(TransformAnimationStep.prototype), "start", this).call(this, startTime);
 
@@ -3931,7 +3943,8 @@ function (_AnimationStep) {
     }
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.startWaiting();
 
       _get(_getPrototypeOf(ParallelAnimationStep.prototype), "start", this).call(this, startTime);
@@ -4145,7 +4158,9 @@ function (_AnimationStep) {
     }
   }, {
     key: "start",
-    value: function start(startTime) {
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
       if (this.state !== 'animating') {
         this.startWaiting();
 
@@ -28831,7 +28846,7 @@ function () {
       },
       isPulsing: false,
       pulse: {
-        startTime: -1
+        startTime: null
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
@@ -28886,7 +28901,7 @@ function () {
       }
 
       if (this.state.isPulsing) {
-        this.state.pulse.startTime += delta * 1000;
+        this.state.pulse.startTime += delta;
       }
 
       if (this.state.movement.previousTime !== null) {
@@ -29710,7 +29725,7 @@ function () {
 
       if (this.state.isPulsing) {
         // If this is the first pulse frame, then set the startTime
-        if (this.state.pulse.startTime === -1) {
+        if (this.state.pulse.startTime === null) {
           this.state.pulse.startTime = now;
         } // Calculate how much time has elapsed between this frame and the first
         // pulse frame
@@ -29851,7 +29866,7 @@ function () {
     key: "pulseNow",
     value: function pulseNow() {
       this.state.isPulsing = true;
-      this.state.pulse.startTime = -1;
+      this.state.pulse.startTime = null;
       this.unrender();
     }
   }, {
@@ -33082,7 +33097,8 @@ function () {
     value: function start() {
       var slideStart = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.events = [];
-      this.slides = []; // this.states.states = [];
+      this.slides = [];
+      this.unpauseDiagram(); // this.states.states = [];
       // this.states.map.reset();
       // this.states.reference = null;
 

@@ -46,12 +46,12 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/Circle/base',
     ]);
     this.diagram.recorder.events = events;
-    console.log(events)
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.slides = slides;
     this.diagram.recorder.audio = new Audio(audio);
     // this.diagram.recorder.seek(0);
+    console.log(this.diagram.recorder)
   }
 
   addSections() {
@@ -94,6 +94,13 @@ class Content extends PresentationFormatContent {
         circle._degrees,
         circle._arc,
       ],
+      transitionFromAny: (done, doneFnString) => {
+        if (this.comingFrom !== 'next') {
+          diag.setLineRotation(1.3, false, doneFnString);
+        } else {
+          diag.setLineRotation(null, true, doneFnString);
+        }
+      },
       setSteadyState: () => {
         if (this.comingFrom !== 'next') {
           circle._line1.setRotation(1.3);
@@ -110,8 +117,8 @@ class Content extends PresentationFormatContent {
         `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html(colors.arc)}`,
       ],
       modifiers: {
-        less: click(diag.pushLine, [diag, null, 2, 1, null], colors.arc),
-        arc: click(diag.pulseArc, [diag], colors.arc),
+        less: click(diag.pushLine, [diag, null, 2, 1, null], { color: colors.arc, id: 'click_less' }),
+        arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'click_arc' }),
       },
       show: [
         circle._line1, circle._line2,
@@ -154,9 +161,9 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       modifiers: {
-        arc_length: click(diag.pulseArc, [diag], colors.arc),
-        radius_length: click(diag.pulseRadius, [diag], colors.lines),
-        equal: click(this.next, [this, null], colors.radianLines),
+        arc_length: click(diag.pulseArc, [diag], { color: colors.arc, id: 'arc_pulse' }),
+        radius_length: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'radius:_pulse' }),
+        equal: click(this.next, [this, null], { color: colors.radianLines, id: 'equal_next' }),
       },
       setSteadyState: () => {
         circle.setScenario('center');
@@ -165,14 +172,13 @@ class Content extends PresentationFormatContent {
     });
 
     common.modifiers = {
-      arc_length: click(diag.pulseArc, [diag], { color: colors.arc, id: 'qwer4' }),
-      radius_length: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'asdfasdf' }),
-      equal: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'aw3r3' }),
+      arc_length: click(diag.pulseArc, [diag], { color: colors.arc, id: 'arc_pulse' }),
+      radius_length: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'radius_pulse' }),
+      equal: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'equal_anim' }),
     };
     this.addSection(common, {
       transitionFromPrev: (done, doneFnString) => {
         circle._bendLine.showAll();
-        console.log(doneFnString);
         diag.bendRadius(doneFnString);
       },
       setSteadyState: () => {
