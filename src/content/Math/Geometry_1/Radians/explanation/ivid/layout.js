@@ -34,6 +34,7 @@ export default function diagramLayout() {
     options: {
       length: radius,
       width,
+      // widthIs: 'outside',
       color: colors.lines,
       move: {
         type: 'rotation',
@@ -47,6 +48,16 @@ export default function diagramLayout() {
       },
     },
     scenario: 'start',
+  };
+  layout.corner = {
+    name: 'corner',
+    method: 'polyline',
+    options: {
+      width,
+      cornerStyle: 'fill',
+      color: colors.lines,
+      points: [[radius, 0], [0, 0], [radius, 0]],
+    },
   };
   layout.line2 = {
     name: 'line2',
@@ -197,6 +208,7 @@ export default function diagramLayout() {
         bottomRight: { position: new Point(0.2, -1.5) },
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
+        bottomDeg: { position: new Point(0.2, -1.6) },
         summary: { position: new Point(-0.2, -1.5) },
         bottomSlightRight: { position: new Point(0.1, -1.5) },
       },
@@ -214,14 +226,16 @@ export default function diagramLayout() {
       layout.arc,
       layout.line2,
       layout.line1,
+      layout.corner,
       layout.angleText,
       layout.bendLine,
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, -0.3), scale: 1 },
+        'center': { position: new Point(0, 0), scale: 1 },
         'centerSmaller': { position: new Point(0, -0.3), scale: 0.9 },
         'centerSmall': { position: new Point(0, -0.3), scale: 0.8 },
+        'title': { position: new Point(-0.4, -1), scale: 0.7 },
         'bottom': { position: new Point(0, -0.4), scale: 1 },
         'right': { position: new Point(1.2, -0.1), scale: 0.9 },
         'top': { position: new Point(0, 0.1), scale: 0.8 },

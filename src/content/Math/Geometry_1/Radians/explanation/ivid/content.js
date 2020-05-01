@@ -21,6 +21,7 @@ const {
   centerVH, centerV,
   highlightWord,
   highlight,
+  style,
   // actionWord,
   // onClickId,
 } = Fig.tools.html;
@@ -50,9 +51,7 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.slides = slides;
     this.diagram.recorder.audio = new Audio(audio);
-
     console.log(this.diagram.recorder)
-    console.log(this.diagram.elements._circle._arc.state.pulse.startTime)
   }
 
   addSections() {
@@ -72,11 +71,45 @@ class Content extends PresentationFormatContent {
       },
     };
 
+    // Hello and welcome to this interactive video introducing the radian. We will go through where a radian comes from and why we use it.
+    // This is an interactive video, meaning if you see me interact with an element on the screen, then you can as well.
     this.addSection({
       title: 'Introduction',
-      setContent: centerV([
-        'The second common way to measure angle is by relating it to the |properties of a circle|.',
-      ]),
+      setContent: [
+        style({ centerH: true, size: 1.8, top: 20 }, 'Radian'),
+        style({ centerH: true, size: 0.8, top: 2 }, 'Where does it come from, and why do we use it?'),
+      ],
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._angle,
+      ],
+      setSteadyState: () => {
+        circle._line1.setRotation(1);
+        circle.setScenario('title');
+      },
+    });
+
+    // We often first learn how to measure angle using degrees.
+    this.addSection({
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._angle,
+      ],
+      transitionFromPrev(done, doneFnString) {
+        circle.setScenario('title');
+        circle.animations.new()
+          .scenario({ start: 'title', target: 'center', duration: 1 })
+          .trigger({ callback: 'setLineRotation', payload: 1, duration: 2 })
+          .whenFinished(doneFnString)
+          .start();
+      },
+      setSteadyState: () => {
+        circle._line1.setRotation(1);
+        circle._degrees.showAll();
+        circle._angleText.showAll();
+        diag.setAngleTextProperties(360, 0, 'º');
+        circle._angleText.setScenario('bottomDeg');
+        diag.updateAngle();
+        circle.setScenario('center');
+      },
     });
 
     this.addSection(common, {
@@ -93,7 +126,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2,
         circle._degrees,
-        circle._arc,
+        circle._arc, circle._corner,
       ],
       transitionFromAny: (done, doneFnString) => {
         if (this.comingFrom !== 'next') {
@@ -109,7 +142,6 @@ class Content extends PresentationFormatContent {
         circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
         // circle._angleText.setScenario('bottomLeft');
-        console.log(circle.state.pulse.startTime)
       },
     });
 

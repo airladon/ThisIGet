@@ -120,6 +120,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._radDegEqn.hasTouchableElements = false;
 
     this._circle._bendLine.fnMap.global.add('bendRadius', this.bend.bind(this));
+    this.fnMap.global.add('setLineRotation', this.setLineRotation.bind(this));
   }
 
   goToRadiusForm() {
@@ -205,6 +206,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._circle._angleText.isShown) {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)} ${this.units}`;
       this._circle._angleText._value.drawingObject.setText(text);
+    }
+    if (this._circle._corner.isShown) {
+      const p1 = [this.layout.radius, 0];
+      const p2 = [0, 0];
+      const p3 = this._circle._line1.getP2();
+      this._circle._corner.updatePoints([p1, p2, p3]);
     }
   }
 

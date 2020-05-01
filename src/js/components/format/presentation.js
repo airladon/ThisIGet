@@ -204,9 +204,7 @@ export default class PresentationFormatComponent extends React.Component
         }
       },
     };
-    console.log('1')
     this.version.initialize();
-    console.log(this.version.content.diagram.elements._circle._arc.state.pulse.startTime)
     this.version.content.diagram.resize();
     this.setState({
       listOfSections: this.addListOfSections(),
