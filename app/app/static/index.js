@@ -33280,7 +33280,7 @@ function () {
     value: function minifyStates() {
       var asObject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
-      var map = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"]();
+      // const map = new UniqueMap();
       var ref = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.states.reference[0]);
       var refsDiffPaths = this.states.reference.slice(1);
       var statesDiffPaths = this.states.states;
@@ -33307,29 +33307,30 @@ function () {
         reference: [ref].concat(_toConsumableArray(refDiff)),
         states: statesDiff,
         isObject: asObject
-      };
-      return {
-        states: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["compressObject"])(states, map, true, true, precision),
-        map: map
-      };
+      }; // return {
+      //   states: compressObject(states, map, true, true, precision),
+      //   map,
+      // };
+
+      return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["minify"])(states);
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "unminifyStates",
     value: function unminifyStates(compressedStates) {
-      var cStates = compressedStates.states;
-      var map = compressedStates.map;
+      var states = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["unminify"])(compressedStates); // const cStates = compressedStates.states;
+      // let { map } = compressedStates;
+      // if (!(map instanceof UniqueMap)) {
+      //   const uMap = new UniqueMap();
+      //   uMap.map = map.map;
+      //   uMap.index = map.index;
+      //   uMap.letters = map.letters;
+      //   map = uMap;
+      // }
+      // map.makeInverseMap();
+      // const states = uncompressObject(cStates, map, true, true);
+      // console.log(states)
 
-      if (!(map instanceof _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"])) {
-        var uMap = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["UniqueMap"]();
-        uMap.map = map.map;
-        uMap.index = map.index;
-        uMap.letters = map.letters;
-        map = uMap;
-      }
-
-      map.makeInverseMap();
-      var states = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["uncompressObject"])(cStates, map, true, true);
       var ref = states.reference[0];
       var refDiff = states.reference.slice(1);
       var statesDiff = states.states;
@@ -33459,6 +33460,10 @@ function () {
   }, {
     key: "seek",
     value: function seek(percentTime) {
+      if (this.states.states.length === 0) {
+        return;
+      }
+
       this.pausePlayback(); // this.unpauseDiagram();
 
       var totalTime = this.getTotalTime();
@@ -33571,10 +33576,18 @@ function () {
   }, {
     key: "showPointer",
     value: function showPointer() {
-      // const pos = this.getMostRecentPointPosition();
+      if (this.isRecording) {
+        return;
+      }
+
+      if (this.slides.length === 0 || this.states.states.length === 0 || this.events.length === 0) {
+        return;
+      } // const pos = this.getMostRecentPointPosition();
       // if (pos == null) {
       //   return;
       // }
+
+
       if (this.slideIndex > this.slides.length - 1 || this.eventIndex > this.events.length - 1) {
         return;
       }
@@ -33600,6 +33613,10 @@ function () {
   }, {
     key: "getMostRecentPointerPosition",
     value: function getMostRecentPointerPosition() {
+      if (this.isRecording) {
+        return null;
+      }
+
       var i = this.eventIndex;
 
       while (i >= 0 && i < this.events.length) {
@@ -33633,6 +33650,10 @@ function () {
   }, {
     key: "getIsPointerUp",
     value: function getIsPointerUp() {
+      if (this.isRecording) {
+        return;
+      }
+
       var slideTime = this.slides[this.slideIndex][0];
       var i = this.eventIndex;
       var eventTime;
