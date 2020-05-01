@@ -346,6 +346,9 @@ class PresentationFormat extends SimpleFormat {
       //   this.overlayDiagram.elements.hideAll();
       // }
       section.setVisible();
+      if (diagram.recorder != null) {
+        diagram.recorder.showPointer();
+      }
       this.renderDiagrams();
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
@@ -569,6 +572,7 @@ class PresentationFormat extends SimpleFormat {
       recorder.prevSlide = this.prevSection.bind(this);
       recorder.goToSlide = this.goToSection.bind(this);
       recorder.getCurrentSlide = this.getCurrentSlide.bind(this);
+      recorder.seek(0);
     }
   }
 

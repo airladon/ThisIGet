@@ -107,7 +107,6 @@ export default class RecordButton extends React.Component<Props, State> {
         },
       });
       recorder.stop();
-      console.log(recorder.states)
       clearTimeout(this.timer);
     }
     // else if (this.state.label === 'show') {

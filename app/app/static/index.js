@@ -5651,8 +5651,6 @@ function () {
         return;
       }
 
-      console.log('isMoving', this.elements.isMoving());
-
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
       }
@@ -29238,7 +29236,6 @@ function () {
         // If this is the first frame of moving freely, then record the current
         // time so can calculate velocity on next frame
         if (this.state.movement.previousTime === null) {
-          console.log('reset');
           this.state.movement.previousTime = now;
           return;
         } // If got here, then we are now after the first frame, so calculate
@@ -29248,13 +29245,11 @@ function () {
         var deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
 
         var next = this.decelerate(deltaTime);
-        console.log('freely', now, this.state.movement.previousTime, deltaTime, next, this.transform._dup());
         this.state.movement.velocity = next.velocity;
         this.state.movement.previousTime = now; // If the velocity is 0, then stop moving freely and return the current
         // transform
 
         if (this.state.movement.velocity.isZero()) {
-          console.log('stopped');
           this.state.movement.velocity = this.state.movement.velocity.zero();
           this.stopMovingFreely(false);
         }
@@ -29627,13 +29622,13 @@ function () {
         }
       }
 
-      this.state.isBeingMoved = false;
-      this.state.movement.previousTime = null;
-
-      if (this.recorder.isRecording) {
+      if (this.recorder.isRecording && this.state.isBeingMoved) {
         this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
         );
       }
+
+      this.state.isBeingMoved = false;
+      this.state.movement.previousTime = null;
     }
   }, {
     key: "calcVelocity",
@@ -33060,7 +33055,7 @@ function () {
       // }
 
 
-      if (this.audio != null) {
+      if (this.audio != null && !isNaN(this.audio.duration)) {
         time = Math.max(time, this.audio.duration);
       }
 
@@ -33460,24 +33455,23 @@ function () {
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
 
       if (this.states.states[this.stateIndex][0] < this.slides[this.slideIndex][0]) {
-        console.log('state before');
         this.setState(this.stateIndex);
       }
 
       this.setSlide(this.slideIndex, true);
 
       if (this.states.states[this.stateIndex][0] >= this.slides[this.slideIndex][0]) {
-        console.log('state after');
         this.setState(this.stateIndex);
       }
 
-      this.animateDiagramNextFrame();
+      this.animateDiagramNextFrame(); // console.log(time)
 
       if (this.audio) {
         this.audio.currentTime = time;
       }
 
       this.currentTime = time;
+      this.showPointer();
     } // ////////////////////////////////////
     // ////////////////////////////////////
     // Playback
@@ -33490,7 +33484,6 @@ function () {
       var _this4 = this;
 
       var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getCurrentTime();
-      var showPointer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       var fromTime = fromTimeIn;
 
       if (fromTimeIn === this.getTotalTime()) {
@@ -33521,6 +33514,7 @@ function () {
 
       this.playbackSlide();
       this.setState(this.stateIndex);
+      this.showPointer();
       this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, fromTime));
 
       if (this.audio) {
@@ -33538,13 +33532,115 @@ function () {
         this.audio.addEventListener('ended', audioEnded.bind(this), false);
       }
 
-      var pointer = this.getElement('pointer.up');
+      this.animateDiagramNextFrame(); // this.unpauseDiagram();
+    }
+  }, {
+    key: "setPointerPosition",
+    value: function setPointerPosition(pos) {
+      var pointer = this.getElement('pointer');
 
-      if (pointer != null && showPointer) {
-        pointer.showAll();
+      if (pointer == null) {
+        return;
+      } // const pos = this.getMostRecentPointPosition();
+      // if (pos == null) {
+      //   return;
+      // }
+
+
+      pointer.setPosition(pos);
+    }
+  }, {
+    key: "showPointer",
+    value: function showPointer() {
+      // const pos = this.getMostRecentPointPosition();
+      // if (pos == null) {
+      //   return;
+      // }
+      if (this.slideIndex > this.slides.length - 1 || this.eventIndex > this.events.length - 1) {
+        return;
       }
 
-      this.animateDiagramNextFrame(); // this.unpauseDiagram();
+      var p = this.getMostRecentPointerPosition();
+      var pointer = this.getElement('pointer');
+
+      if (pointer == null) {
+        return;
+      }
+
+      this.setPointerPosition(p);
+      var isPointerUp = this.getIsPointerUp();
+
+      if (pointer != null && pointer._up != null && isPointerUp) {
+        pointer._up.showAll();
+      }
+
+      if (pointer != null && pointer._down != null && !isPointerUp) {
+        pointer._down.showAll();
+      }
+    }
+  }, {
+    key: "getMostRecentPointerPosition",
+    value: function getMostRecentPointerPosition() {
+      var i = this.eventIndex;
+
+      while (i >= 0 && i < this.events.length) {
+        var eventAction = this.events[i][1];
+
+        if (eventAction === 'touchDown' || eventAction === 'touchUp' || eventAction === 'cursorMove') {
+          var _this$events$i = _slicedToArray(this.events[i], 4),
+              x = _this$events$i[2],
+              y = _this$events$i[3];
+
+          if (x != null && y != null) {
+            return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
+          }
+
+          return null;
+        }
+
+        if (i <= this.eventIndex) {
+          i -= 1;
+        } else {
+          i += 1;
+        }
+
+        if (i === -1) {
+          i = this.eventIndex + 1;
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "getIsPointerUp",
+    value: function getIsPointerUp() {
+      var slideTime = this.slides[this.slideIndex][0];
+      var i = this.eventIndex;
+      var eventTime;
+
+      while (i > 0) {
+        var eventAction = this.events[i][1];
+
+        var _this$events$i2 = _slicedToArray(this.events[i], 1);
+
+        eventTime = _this$events$i2[0];
+
+        if (eventTime < slideTime) {
+          return true;
+        }
+
+        if (eventAction === 'touchDown') {
+          return false;
+        }
+
+        if (eventAction === 'touchUp') {
+          return true;
+        }
+
+        i -= 1;
+      }
+
+      return true;
     }
   }, {
     key: "checkStopPlayback",
@@ -33634,6 +33730,8 @@ function () {
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextEventTimeout = setTimeout(function () {
         if (_this5.isPlaying) {
+          _this5.eventIndex += 1;
+
           _this5.playbackEvent();
         }
       }, delay);
@@ -33642,21 +33740,21 @@ function () {
     key: "playbackEvent",
     value: function playbackEvent() {
       if (this.eventIndex > this.events.length - 1) {
+        this.checkStopPlayback();
         return;
       } // const event = this.events[this.eventIndex];
 
 
       this.setEvent(this.eventIndex); // this.lastTime = this.getCurrentTime();
 
-      this.animateDiagramNextFrame();
-      this.eventIndex += 1;
+      this.animateDiagramNextFrame(); // this.eventIndex += 1;
 
-      if (this.eventIndex === this.events.length) {
+      if (this.eventIndex + 1 === this.events.length) {
         this.checkStopPlayback();
         return;
       }
 
-      var nextTime = (this.events[this.eventIndex][0] - this.getCurrentTime()) * 1000;
+      var nextTime = (this.events[this.eventIndex + 1][0] - this.getCurrentTime()) * 1000;
       this.queuePlaybackEvent(Math.max(nextTime, 0));
     }
   }, {
@@ -33797,6 +33895,8 @@ function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextStateTimeout = setTimeout(function () {
         if (_this6.isPlaying) {
+          _this6.stateIndex += 1;
+
           _this6.playbackState();
         }
       }, time);
@@ -33805,26 +33905,24 @@ function () {
     key: "playbackState",
     value: function playbackState() {
       if (this.stateIndex > this.states.states.length - 1) {
+        this.checkStopPlayback();
         return;
       }
 
       this.setState(this.stateIndex);
       this.animateDiagramNextFrame();
-      this.stateIndex += 1;
 
-      if (this.stateIndex === this.states.states.length) {
+      if (this.stateIndex + 1 === this.states.states.length) {
         this.checkStopPlayback();
         return;
       }
 
-      var nextTime = (this.states.states[this.stateIndex][0] - this.getCurrentTime()) * 1000;
+      var nextTime = (this.states.states[this.stateIndex + 1][0] - this.getCurrentTime()) * 1000;
       this.queuePlaybackState(nextTime);
     }
   }, {
     key: "setState",
     value: function setState(index) {
-      console.log('setting state');
-
       if (index > this.states.states.length - 1) {
         return;
       }
@@ -33866,6 +33964,8 @@ function () {
       var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.nextSlideTimeout = setTimeout(function () {
         if (_this7.isPlaying) {
+          _this7.slideIndex += 1;
+
           _this7.playbackSlide();
         }
       }, delay);
@@ -33876,27 +33976,26 @@ function () {
       var forceGoTo = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (this.slideIndex > this.slides.length - 1) {
+        this.checkStopPlayback();
         return;
       } // const event = this.events[this.slideIndex];
 
 
       this.setSlide(this.slideIndex, forceGoTo);
       this.animateDiagramNextFrame();
-      this.slideIndex += 1;
 
-      if (this.slideIndex === this.slides.length) {
+      if (this.slideIndex + 1 === this.slides.length) {
         this.checkStopPlayback();
         return;
       }
 
-      var nextTime = (this.slides[this.slideIndex][0] - this.getCurrentTime()) * 1000;
+      var nextTime = (this.slides[this.slideIndex + 1][0] - this.getCurrentTime()) * 1000;
       this.queuePlaybackSlide(Math.max(nextTime, 0));
     }
   }, {
     key: "setSlide",
     value: function setSlide(index) {
       var forceGoTo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      console.log('setting slide');
 
       if (index > this.slides.length - 1) {
         return;
