@@ -221,15 +221,17 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
+        note({ top: 75 }, '|Radian|'),
         note({ top: 80 }, '|Radius|'),
         note({ top: 90 }, '|Arc|'),
         note({ top: 85 }, '|Angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], colors.arc),
-        Angle: click(diag.pulseAngle, [diag], colors.angles),
-        Radius: click(diag.pulseRadius, [diag], colors.lines),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+        Radian: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'equal_anim' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner,
