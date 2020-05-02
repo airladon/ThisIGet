@@ -5656,7 +5656,8 @@ function () {
       this.drawQueued = false;
       this.clearContext(canvasIndex); // console.log('really drawing')
 
-      this.elements.draw(this.spaceTransforms.diagramToGL, now, canvasIndex); // console.log('really done')
+      this.elements.setupDraw(this.spaceTransforms.diagramToGL, now, canvasIndex);
+      this.elements.draw(now, canvasIndex); // console.log('really done')
       // if (this.pauseAfterNextDrawFlag) {
       //   this.pause();
       //   this.pauseAfterNextDrawFlag = false;
@@ -28386,6 +28387,7 @@ function () {
   // Touch event is not processed by Diagram
   // Callbacks
   // element.transform is updated
+  // redrawElements: Array<DiagramElement>;
   // For the future when collections use color
   // noRotationFromParent: boolean;
   // this is in vertex space
@@ -28456,7 +28458,8 @@ function () {
     this.lastDrawElementTransformPosition = {
       parentCount: 0,
       elementCount: 0
-    };
+    }; // this.redrawElements = [];
+
     this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
     this.custom = {};
     this.parent = parent;
@@ -28860,6 +28863,7 @@ function () {
     this.isRenderedAsImage = false;
     this.unrenderNextDraw = false;
     this.renderedOnNextDraw = false;
+    this.pulseTransforms = [];
   }
 
   _createClass(DiagramElement, [{
@@ -30719,10 +30723,8 @@ function (_DiagramElement) {
       }
     }
   }, {
-    key: "draw",
-    value: function draw() {
-      var _this4 = this;
-
+    key: "setupDraw",
+    value: function setupDraw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -30755,10 +30757,56 @@ function (_DiagramElement) {
         };
         var newTransform = parentTransform.transform(this.getTransform());
         this.lastDrawTransform = newTransform._dup();
-        var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
+        this.pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawPulseTransform = pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        this.lastDrawPulseTransform = this.pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        // let pointCount = -1;
+        // if (this.drawingObject instanceof VertexObject) {
+        //   pointCount = this.drawingObject.numPoints;
+        //   if (this.angleToDraw !== -1) {
+        //     pointCount = this.drawingObject.getPointCountForAngle(this.angleToDraw);
+        //   }
+        //   if (this.lengthToDraw !== -1) {
+        //     pointCount = this.drawingObject.getPointCountForLength(this.lengthToDraw);
+        //   }
+        //   if (this.pointsToDraw !== -1) {
+        //     pointCount = this.pointsToDraw;
+        //   }
+        // } else {
+        //   pointCount = 1;
+        // }
+        // const colorToUse = [...this.color.slice(0, 3), this.color[3] * this.opacity];
+        // if (pointCount > 0) {
+        //   this.pulseTransforms.forEach((t) => {
+        //     this.drawingObject.drawWithTransformMatrix(
+        //       t.matrix(), colorToUse, canvasIndex, pointCount,
+        //     );
+        //   });
+        // }
+        // if (this.unrenderNextDraw) {
+        //   this.clearRender();
+        //   this.unrenderNextDraw = false;
+        // }
+        // if (this.renderedOnNextDraw) {
+        //   this.isRenderedAsImage = true;
+        //   this.renderedOnNextDraw = false;
+        // }
+        // // this.redrawElements.forEach((element) => {
+        // //   element.draw(element.getParentLastDrawTransform(), now);
+        // // })
+        // if (this.afterDrawCallback != null) {
+        //   this.fnMap.exec(this.afterDrawCallback, now);
+        // }
+      }
+    }
+  }, {
+    key: "draw",
+    value: function draw(now) {
+      var _this4 = this;
 
+      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.isShown) {
         var pointCount = -1;
 
         if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
@@ -30782,7 +30830,9 @@ function (_DiagramElement) {
         var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
 
         if (pointCount > 0) {
-          pulseTransforms.forEach(function (t) {
+          // console.log(this.pulseTransforms, pointCount)
+          this.pulseTransforms.forEach(function (t) {
+            // console.log(t.matrix(), colorToUse, canvasIndex, pointCount)
             _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
           });
         }
@@ -30795,7 +30845,10 @@ function (_DiagramElement) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
-        }
+        } // this.redrawElements.forEach((element) => {
+        //   element.draw(element.getParentLastDrawTransform(), now);
+        // })
+
 
         if (this.afterDrawCallback != null) {
           this.fnMap.exec(this.afterDrawCallback, now);
@@ -31088,8 +31141,8 @@ function (_DiagramElement2) {
       return false;
     }
   }, {
-    key: "draw",
-    value: function draw() {
+    key: "setupDraw",
+    value: function setupDraw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
@@ -31123,16 +31176,45 @@ function (_DiagramElement2) {
         };
         var newTransform = parentTransform.transform(this.getTransform());
         this.lastDrawTransform = newTransform._dup();
-        var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
+        this.pulseTransforms = this.transformWithPulse(now, newTransform); // this.pulseTransforms
+        // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawPulseTransform = pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        this.lastDrawPulseTransform = this.pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
         // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
 
-        for (var k = 0; k < pulseTransforms.length; k += 1) {
+        for (var k = 0; k < this.pulseTransforms.length; k += 1) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
-            this.elements[this.drawOrder[i]].draw(pulseTransforms[k], now, canvasIndex);
+            this.elements[this.drawOrder[i]].setupDraw(this.pulseTransforms[k], now, canvasIndex);
           }
-        }
+        } // if (this.unrenderNextDraw) {
+        //   this.clearRender();
+        //   this.unrenderNextDraw = false;
+        // }
+        // if (this.renderedOnNextDraw) {
+        //   this.isRenderedAsImage = true;
+        //   this.renderedOnNextDraw = false;
+        // }
+        // // this.redrawElements.forEach((element) => {
+        // //   element.draw(element.getParentLastDrawTransform(), now);
+        // // })
+        // if (this.afterDrawCallback != null) {
+        //   // this.afterDrawCallback(now);
+        //   this.fnMap.exec(this.afterDrawCallback, now);
+        // }
+
+      }
+    }
+  }, {
+    key: "draw",
+    value: function draw(now) {
+      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.isShown) {
+        // for (let k = 0; k < this.pulseTransforms.length; k += 1) {
+        for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
+          this.elements[this.drawOrder[i]].draw(now, canvasIndex);
+        } // }
+
 
         if (this.unrenderNextDraw) {
           this.clearRender();
@@ -31142,14 +31224,41 @@ function (_DiagramElement2) {
         if (this.renderedOnNextDraw) {
           this.isRenderedAsImage = true;
           this.renderedOnNextDraw = false;
-        }
+        } // this.redrawElements.forEach((element) => {
+        //   element.draw(element.getParentLastDrawTransform(), now);
+        // })
+
 
         if (this.afterDrawCallback != null) {
           // this.afterDrawCallback(now);
           this.fnMap.exec(this.afterDrawCallback, now);
         }
       }
-    }
+    } // drawNew() {
+    //   if (this.isShown) {
+    //     for (let k = 0; k < this.pulseTransforms.length; k += 1) {
+    //       for (let i = 0, j = this.drawOrder.length; i < j; i += 1) {
+    //         this.elements[this.drawOrder[i]].draw(this.pulseTransforms[k], now, canvasIndex);
+    //       }
+    //     }
+    //     if (this.unrenderNextDraw) {
+    //       this.clearRender();
+    //       this.unrenderNextDraw = false;
+    //     }
+    //     if (this.renderedOnNextDraw) {
+    //       this.isRenderedAsImage = true;
+    //       this.renderedOnNextDraw = false;
+    //     }
+    //     // this.redrawElements.forEach((element) => {
+    //     //   element.draw(element.getParentLastDrawTransform(), now);
+    //     // })
+    //     if (this.afterDrawCallback != null) {
+    //       // this.afterDrawCallback(now);
+    //       this.fnMap.exec(this.afterDrawCallback, now);
+    //     }
+    //   }
+    // }
+
   }, {
     key: "exec",
     value: function exec(execFunctionAndArgs) {
@@ -35422,7 +35531,7 @@ function _quadraticBezier(P0, P1, P2, t) {
 }
 
 function clipAngle(angleToClip, clipTo) {
-  var angle = angleToClip;
+  var angle = angleToClip % (Math.PI * 2);
 
   if (clipTo === '0to360') {
     if (angle < 0) {

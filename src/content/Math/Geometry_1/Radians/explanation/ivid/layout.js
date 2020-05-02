@@ -49,6 +49,7 @@ export default function diagramLayout() {
     },
     scenario: 'start',
   };
+
   layout.corner = {
     name: 'corner',
     method: 'polyline',
@@ -73,7 +74,7 @@ export default function diagramLayout() {
     method: 'angle',
     options: {
       curve: {
-        width,
+        width: radius / 4,
         sides: 400,
         radius: radius / 4,
       },
@@ -89,6 +90,14 @@ export default function diagramLayout() {
       color: colors.arc,
       sides: 400,
     },
+    // mods: {
+    //   pulseDefault: {
+    //     scale: 1.1,
+    //   },
+    //   pulseSettings: {
+    //     num: 5,
+    //   },
+    // },
   };
 
   const marks = (numMarks: number, inner: number = radius) => ({
@@ -98,7 +107,7 @@ export default function diagramLayout() {
       innerRadius: inner,
       outerRadius: radius * 1.1,
       color: colors.marks,
-      width: width / 2,
+      width: width / 4,
       dAngle: Math.PI * 2 / numMarks,
     },
   });

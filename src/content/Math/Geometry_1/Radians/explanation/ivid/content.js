@@ -6,6 +6,7 @@ import {
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
+import { note } from '../../../../../common/tools/note';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -63,12 +64,12 @@ class Content extends PresentationFormatContent {
       setContent: [],
       show: [],
       modifiers: {},
-      transitionFromAny: (done, fnString) => {
-        diag.setLineRotation(null, true, fnString);
-      },
-      setSteadyState: () => {
-        circle.setScenario('center');
-      },
+      // transitionFromAny: (done, fnString) => {
+      //   diag.setLineRotation(null, true, fnString);
+      // },
+      // setSteadyState: () => {
+      //   circle.setScenario('center');
+      // },
     };
 
     // Hello and welcome to this interactive video introducing the radian. We will go through where a radian comes from and why we use it.
@@ -88,25 +89,109 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // We often first learn how to measure angle using degrees.
+    // Lets start with two lines on top of each other. We can rotate one line while tracing its end. As we rotate the line, an arc is formed. A full rotation results in a circle.
     this.addSection({
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
+      setContent: [
+        note({ top: 90 }, '|Arc|'),
       ],
-      transitionFromPrev(done, doneFnString) {
-        circle.setScenario('title');
-        circle.animations.new()
-          .scenario({ start: 'title', target: 'center', duration: 1 })
-          .trigger({ callback: 'setLineRotation', payload: 1, duration: 2 })
-          .whenFinished(doneFnString)
-          .start();
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], colors.arc),
       },
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._arc,
+      ],
       setSteadyState: () => {
-        circle._line1.setRotation(1);
+        circle._arc.showAll();
+        circle._angle.hide();
+        circle._line1.setRotation(0);
+        diag.updateAngle();
+        circle.setScenario('center');
+      },
+    });
+
+    // These two lines form an angle. We often first learn how to measure angle using degrees, where a full angle, or angle within a circle, is 360º, and all other angles a portion of that.
+    this.addSection({
+      setContent: [
+        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], colors.arc),
+        Angle: click(diag.pulseAngle, [diag], colors.angles),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
+      ],
+      setSteadyState: () => {
+        diag.accent(circle._angle);
+        // circle._line1.setRotation(1);
         circle._degrees.showAll();
         circle._angleText.showAll();
         diag.setAngleTextProperties(360, 0, 'º');
         circle._angleText.setScenario('bottomDeg');
+        diag.updateAngle();
+        circle.setScenario('center');
+      },
+    });
+
+    // Now, you could split the circle up into any number of portions and similary count them to measure the angle, but 360 is a choice of tradition that was mostly likely due to convenience. As 360 has many factors, then many fractions of a circle are also whole numbers making some calculations easier.
+
+    // But, there are other choices of convenience we can make to measure angle. Instead of comparing the angle to a portion of a circle, we can define angle so it is easy to relate to arc length and radius. Relating these properties will enable easy calculations of one property from the others.
+
+    // We do this 
+
+    // Now one of the goals we have when we study a shape is to the find relationships between the properties of that shape. That way you can calculate one property from another.
+    // For instance, three properties of a circle are diameter, radius and circumference. You can show that these three are related as: diameter is twice the radius. The ratio between the circumference and the diameter is π, and thus by extension the ratio between circumference and radius is 2π.
+    //
+    // These properties are inherent in a circle. We cannot change them, that is what they are. A circle on mars will be the same as a circle on earth. Similarly, an angle between two lines is also something that exists. However, how we measure the angle is a choice. Using 360 degrees is a choice of convenience that goes back thousands of years. 360 is a number that has many factors and therefore fractions of a circle are easy to calculate. 360º is convenient to represent different angles with minimal use of complicated fractions.
+    // And so there is another choice of a different convenience to measure angle.
+    // Instead of comparing the angle to the proportion of a circle, we can define it so it can easily RELATE the arc length, radius and angle.
+    // So how do we do this?
+    // We find the angle where the arc length is equal to the radius length.
+    // This angle we call one radian. The name radian comes directly from the rdaius.
+    // We then use radians as our portion to relate angle.
+    // Now, the first thing we may see is that radians do not fit evenly into the circle. In fact a little over 6 radians fit into a circle. So, this does not have the same convenience as degrees, as even just the fraction of 1 circle is not necessarily easy to deal with the value of radians.
+    // However, lets see what happens to arc length when we change the angle.
+    // By definition, at an angle of 1 radian we have an arc length of one radius length.
+    // By extension, at an angle of 2 radians, we will have an arc length of two radius lengths.
+    // Similarly for 3 radians we have an arc length of 3 radius lengths.
+    // In other words, the arc length is the product of radius and angle (when the angle is in radians) which we can generalize to a relationship.
+
+    this.addSection({
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
+      ],
+      setSteadyState: () => {
+        diag.accent(circle._angle);
+        // circle._line1.setRotation(1);
+        circle._degrees.showAll();
+        circle._angleText.showAll();
+        diag.setAngleTextProperties(360, 0, 'º');
+        circle._angleText.setScenario('bottomDeg');
+        diag.updateAngle();
+        circle.setScenario('center');
+      },
+    });
+
+    // Now, let's trace the end points of the rotating line.
+    this.addSection({
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        // circle._angle,
+      ],
+      transitionFromPrev(done, doneFnString) {
+        circle.setScenario('center');
+        circle.animations.new()
+          .trigger({ callback: 'setLineRotation', payload: 0, duration: 2 })
+          .trigger({ callback: 'showArc' })
+          .trigger({ callback: 'setLineRotation', payload: 2, duration: 2 })
+          .whenFinished(doneFnString)
+          .start();
+      },
+      setSteadyState: () => {
+        circle._line1.setRotation(2);
+        circle._arc.showAll();
         diag.updateAngle();
         circle.setScenario('center');
       },

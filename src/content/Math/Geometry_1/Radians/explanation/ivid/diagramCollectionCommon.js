@@ -71,7 +71,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._line1.makeTouchable();
     this._circle._line1.fnMap.add('updateAngle', this.updateAngle.bind(this));
     this._circle._line1.setTransformCallback = 'updateAngle';
-
+    this._circle._line1.move.canBeMovedAfterLosingTouch = true;
     this._equation.__arc.onClick = this.goToArcForm.bind(this);
     this._equation.__radius.onClick = this.goToRadiusForm.bind(this);
     this._equation.__angle.onClick = this.goToAngleForm.bind(this);
@@ -121,8 +121,14 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this._circle._bendLine.fnMap.global.add('bendRadius', this.bend.bind(this));
     this.fnMap.global.add('setLineRotation', this.setLineRotation.bind(this));
+    // this._circle._line1.redrawElements = [this._circle._angle, this._circle._arc];
+    this.fnMap.global.add('showArc', () => {
+      this._circle._arc.showAll();
+      this.updateAngle();
+    });
   }
 
+  
   goToRadiusForm() {
     // $FlowFixMe
     if (this._equation.getCurrentForm().name === 'radius') {
@@ -197,6 +203,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
+
     if (this._circle._angle.isShown) {
       this._circle._angle.setAngle({ angle: r });
     }
@@ -366,7 +373,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseArc() {
-    this._circle._arc.pulseThickNow(1, 1.03, 5);
+    this._circle._arc.pulseThickNow(1, 1.05, 8);
     this.diagram.animateNextFrame();
   }
 
