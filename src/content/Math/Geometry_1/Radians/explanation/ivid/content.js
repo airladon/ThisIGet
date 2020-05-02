@@ -157,18 +157,85 @@ class Content extends PresentationFormatContent {
     // By extension, at an angle of 2 radians, we will have an arc length of two radius lengths.
     // Similarly for 3 radians we have an arc length of 3 radius lengths.
     // In other words, the arc length is the product of radius and angle (when the angle is in radians) which we can generalize to a relationship.
+    const row = (portion: string, angle: number) => `<tr><td class="topic__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
 
+    const rowClick = (angle: number) => click(
+      diag.pushLine,
+      [diag, angle / 180 * Math.PI, 0, 1, null],
+      {
+        color: colors.angles,
+        id: `id_${angle}`,
+        text: `${angle}&deg;`,
+      },
+    );
     this.addSection({
+      setContent: [
+        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
+        `
+          <table class="in_topic__fraction_table">
+            <tr>
+              <th class="topic__fraction_title"> Fraction </th>
+              <th class="topic__angle_title"> Angle </th>
+            </tr>
+            ${row('<sup>1</sup>&frasl;<sub>2</sub>', 180)}
+            ${row('<sup>1</sup>&frasl;<sub>3</sub>', 120)}
+            ${row('<sup>1</sup>&frasl;<sub>4</sub>', 90)}
+            ${row('<sup>1</sup>&frasl;<sub>5</sub>', 72)}
+            ${row('<sup>1</sup>&frasl;<sub>6</sub>', 60)}
+            ${row('<sup>1</sup>&frasl;<sub>8</sub>', 45)}
+            ${row('<sup>1</sup>&frasl;<sub>9</sub>', 40)}
+            ${row('<sup>1</sup>&frasl;<sub>10</sub>', 36)}
+            ${row('<sup>1</sup>&frasl;<sub>12</sub>', 30)}
+            ${row('<sup>1</sup>&frasl;<sub>15</sub>', 24)}
+            <tr><td>\u22ee</td><td>\u22ee</td>
+          </table>
+        `,
+      ],
+      modifiers: {
+        _180deg: rowClick(180),
+        _120deg: rowClick(120),
+        _90deg: rowClick(90),
+        _72deg: rowClick(72),
+        _60deg: rowClick(60),
+        _45deg: rowClick(45),
+        _40deg: rowClick(40),
+        _36deg: rowClick(36),
+        _30deg: rowClick(30),
+        _24deg: rowClick(24),
+        _20deg: rowClick(20),
+        Arc: click(diag.pulseArc, [diag], colors.arc),
+        Angle: click(diag.pulseAngle, [diag], colors.angles),
+      },
       show: [
-        circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
+        circle._line1, circle._line2, circle._corner, circle._angle,
+        circle._arc, circle._degrees, circle._angleText,
       ],
       setSteadyState: () => {
-        diag.accent(circle._angle);
-        // circle._line1.setRotation(1);
-        circle._degrees.showAll();
-        circle._angleText.showAll();
         diag.setAngleTextProperties(360, 0, 'º');
         circle._angleText.setScenario('bottomDeg');
+        diag.updateAngle();
+        circle.setScenario('center');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        note({ top: 80 }, '|Radius|'),
+        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], colors.arc),
+        Angle: click(diag.pulseAngle, [diag], colors.angles),
+        Radius: click(diag.pulseRadius, [diag], colors.lines),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        circle._angle, circle._arc,
+      ],
+      setSteadyState: () => {
         diag.updateAngle();
         circle.setScenario('center');
       },

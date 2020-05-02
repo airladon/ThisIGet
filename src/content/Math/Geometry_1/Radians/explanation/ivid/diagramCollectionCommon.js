@@ -368,7 +368,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseRadius() {
-    this._circle._line1.pulseWidth();
+    this._circle._line1.pulseWidth({ line: 5 });
     this.diagram.animateNextFrame();
   }
 
