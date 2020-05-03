@@ -119,8 +119,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._radDegEqn.isTouchable = false;
     this._radDegEqn.hasTouchableElements = false;
 
-    this._circle._bendLine.fnMap.global.add('bendRadius', this.bend.bind(this));
+    this.fnMap.global.add('bendRadius', this.bend.bind(this));
     this.fnMap.global.add('setLineRotation', this.setLineRotation.bind(this));
+    this.fnMap.global.add('pulseRadius', this.pulseRadius.bind(this));
     // this._circle._line1.redrawElements = [this._circle._angle, this._circle._arc];
     this.fnMap.global.add('showArc', () => {
       this._circle._arc.showAll();
@@ -281,10 +282,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     target.updateRotation(Math.PI / 2);
     target.updateTranslation(radius + width / 2, 0);
     bendLine.animations.new()
-      .transform({ target, duration: 1 })
-      .custom({ callback: 'bendRadius', duration: 1 })
+      .trigger({ callback: 'pulseRadius', duration: 1 })
+      .transform({ target, velocity: 1 })
+      .custom({ callback: 'bendRadius', duration: 1.5 })
       .rotation({
-        element: this._circle._line1, target: 1, duration: 1, direction: 2,
+        element: this._circle._line1, target: 1, velocity: 0.5, maxTime: 1, direction: 2,
       })
       .whenFinished(finished)
       .start();

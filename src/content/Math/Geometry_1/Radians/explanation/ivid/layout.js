@@ -20,7 +20,7 @@ export default function diagramLayout() {
   colors.angles = colors.get('green').rgb;
   colors.arc = colors.get('red').rgb;
   colors.marks = colors.get('grey', 'dark').rgb;
-  colors.radianLines = colors.get('yellow').rgb;
+  colors.radianLines = colors.get('blue').rgb;
   colors.degrees = colors.get('blue', 'lighter').rgb;
   layout.position = new Point(0, 0);
   const radius = 1.2;

@@ -47,11 +47,11 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
-    this.diagram.recorder.events = events;
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
-    this.diagram.recorder.slides = slides;
-    this.diagram.recorder.audio = new Audio(audio);
+    // this.diagram.recorder.events = events;
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.slides = slides;
+    // this.diagram.recorder.audio = new Audio(audio);
     console.log(this.diagram.recorder)
   }
 
@@ -221,7 +221,7 @@ class Content extends PresentationFormatContent {
 
     this.addSection({
       setContent: [
-        note({ top: 75 }, '|Radian|'),
+        style({ top: 55, centerH: true }, 'Set |arc_length| to |equal| |radius_length|'),
         note({ top: 80 }, '|Radius|'),
         note({ top: 90 }, '|Arc|'),
         note({ top: 85 }, '|Angle|'),
@@ -231,7 +231,9 @@ class Content extends PresentationFormatContent {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-        Radian: click(diag.bendRadius, [diag, null], { color: colors.radianLines, id: 'equal_anim' }),
+        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+        'radius_length': highlight(colors.lines),
+        'arc_length': highlight(colors.arc),
       },
       show: [
         circle._line1, circle._line2, circle._corner,
