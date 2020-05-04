@@ -4785,6 +4785,7 @@ function () {
 
       this.recorder.pauseDiagram = this.pause.bind(this);
       this.recorder.unpauseDiagram = this.unpause.bind(this);
+      this.recorder.diagramIsInTransition = this.getIsInTransition.bind(this);
     }
   }, {
     key: "scrollEvent",
@@ -5445,6 +5446,11 @@ function () {
 
         element.moved(currentTransform);
       }
+    }
+  }, {
+    key: "getIsInTransition",
+    value: function getIsInTransition() {
+      return this.inTransition;
     } // simulateTouchMove(
     //   previousDiagramPoint: Point,
     //   currentDiagramPoint: Point,
@@ -33123,6 +33129,8 @@ function () {
       this.playbackStopped = null;
       this.getCurrentSlide = null;
       this.startTime = 0;
+
+      this.diagramIsInTransition = function () {};
     }
 
     return Recorder.instance;
@@ -33256,7 +33264,9 @@ function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.stateTimeout = setTimeout(function () {
         if (_this2.isRecording) {
-          _this2.recordState(_this2.getDiagramState());
+          if (_this2.diagramIsInTransition === false) {
+            _this2.recordState(_this2.getDiagramState());
+          }
 
           _this2.queueRecordState(_this2.stateTimeStep * 1000);
         }
@@ -38657,6 +38667,7 @@ function style() {
   var className = '';
   var color = '';
   var listStyleType = '';
+  var id = '';
 
   if (typeof options === 'number') {
     marginTop = "margin-top:".concat(options, "%");
@@ -38696,13 +38707,17 @@ function style() {
     if (options.listStyleType) {
       listStyleType = "list-style-type:".concat(options.listStyleType, ";");
     }
+
+    if (options.id) {
+      id = "id=\"".concat(options.id, "\"");
+    }
   }
 
   var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color, "\"").concat(className, ">");
-  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className).concat(id, ">");
   var li = "<li style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color).concat(listStyleType, "\"").concat(className, ">");
-  var ul = "<ul style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
-  var ol = "<ol style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var ul = "<ul style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className).concat(id, ">");
+  var ol = "<ol style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className).concat(id, ">");
   var textToUse;
 
   if (options.list != null) {

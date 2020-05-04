@@ -12,6 +12,7 @@ import { note } from '../../../../../common/tools/note';
 import details from '../../details';
 import CommonCollection from './diagramCollectionCommon';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
+import { removeClass, addClass } from '../../../../../common/tools/tools';
 import states from './vidstates.json';
 import events from './videvents.json';
 import slides from './vidslides.json';
@@ -173,7 +174,7 @@ class Content extends PresentationFormatContent {
         note({ top: 90 }, '|Arc|'),
         note({ top: 85 }, '|Angle|'),
         `
-          <table class="in_topic__fraction_table">
+          <table class="in_topic__fraction_table" id="radians_table">
             <tr>
               <th class="topic__fraction_title"> Fraction </th>
               <th class="topic__angle_title"> Angle </th>
@@ -211,18 +212,42 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._corner, circle._angle,
         circle._arc, circle._degrees, circle._angleText,
       ],
+      fadeInFromPrev: false,
+      transitionFromPrev: (done, doneStr) => {
+        addClass('radians_table', 'topic__diagram_text_fade_in_05');
+        circle.animations.new()
+          .delay(0.5)
+          .whenFinished(doneStr)
+          .start();
+      },
       setSteadyState: () => {
+        removeClass('radians_table', 'topic__diagram_text_fade_in_05');
         diag.setAngleTextProperties(360, 0, 'º');
         circle._angleText.setScenario('bottomDeg');
         diag.updateAngle();
         circle.setScenario('center');
       },
+      transitionToNext: (done, doneStr) => {
+        const table = document.getElementById('radians_table');
+        if (table) {
+          table.classList.add('topic__diagram_text_fade_out_05');
+        }
+        circle._degrees.animations.new()
+          .inParallel([
+            circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+            circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
     });
 
     this.addSection({
       setContent: [
-        style({ top: 55, centerH: true }, 'Set |arc_length| to |equal| |radius_length|'),
-        note({ top: 80 }, '|Radius|'),
+        style({
+          top: 58, centerH: true, id: 'id_main_text',
+        }, 'Set arc length to |equal| radius length.'),
+        note({ top: 80, id: 'id_radius_text' }, '|Radius|'),
         note({ top: 90 }, '|Arc|'),
         note({ top: 85 }, '|Angle|'),
       ],
@@ -239,9 +264,108 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc,
       ],
+      transitionFromPrev: (done, doneStr) => {
+        addClass('id_radius_text', 'topic__diagram_text_fade_in_05');
+        addClass('id_main_text', 'topic__diagram_text_fade_in_05');
+        circle.animations.new()
+          .delay(0.5)
+          .whenFinished(doneStr)
+          .start();
+      },
       setSteadyState: () => {
         diag.updateAngle();
         circle.setScenario('center');
+        removeClass('id_radius_text', 'topic__diagram_text_fade_in_05');
+        removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
+      },
+    });
+
+
+    this.addSection({
+      setContent: [
+        style({
+          top: 58, centerH: true, id: 'id_main_text',
+        }, 'Set arc length to |equal| radius length.'),
+        note({ top: 80, id: 'id_radius_text' }, '|Radius|'),
+        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+        'radius_length': highlight(colors.lines),
+        'arc_length': highlight(colors.arc),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        circle._angle, circle._arc, circle._radianLines._line0,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        // console.log('asdfasdf')
+        // addClass('id_radius_text', 'topic__diagram_text_fade_in_05');
+        // addClass('id_main_text', 'topic__diagram_text_fade_in_05');
+        circle.animations.new()
+          .dissolveIn({ element: circle._radianLines._line1, duration: 0.3 })
+          .dissolveIn({ element: circle._radianLines._line2, duration: 0.3 })
+          .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
+          .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
+          .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag.updateAngle();
+        circle.setScenario('center');
+        circle._radianLines.showAll();
+        // removeClass('id_radius_text', 'topic__diagram_text_fade_in_05');
+        // removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
+      },
+    });
+
+
+
+
+    this.addSection({
+      setContent: [
+        style({
+          top: 55, centerH: true, id: 'id_main_text',
+        }, 'Set arc length to |equal| radius length.'),
+        note({ top: 80, id: 'id_radius_text' }, '|Radius|'),
+        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+        'radius_length': highlight(colors.lines),
+        'arc_length': highlight(colors.arc),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        circle._angle, circle._arc,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        // console.log('asdfasdf')
+        addClass(
+          ['id_radius_text', 'id_main_text'], 'topic__diagram_text_fade_in_05',
+        );
+        circle.animations.new()
+          .delay(0.5)
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag.updateAngle();
+        circle.setScenario('center');
+        removeClass(
+          ['id_radius_text', 'id_main_text'], 'topic__diagram_text_fade_in_05',
+        );
       },
     });
 
