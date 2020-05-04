@@ -433,17 +433,41 @@ export default function diagramLayout() {
         'radius': ['radius', 'equals', { frac: ['arc', 'v', 'angle'] }],
         'arcToRadius0': ['arc', 'equals', 'angle_1', 'x', 'radius'],
         'arcToRadius1': [
-          { frac: ['arc', 'v', 'angle'] }, 'equals', { frac: [['angle_1', 'x', 'radius'], 'v_2', 'angle_2'] },
+          {
+            frac: {
+              numerator: 'arc',
+              symbol: 'v',
+              denominator: 'angle',
+              baseline: 'numerator',
+              overhang: 0,
+            },
+          }, 'equals', {
+            frac: {
+              numerator: ['angle_1', 'x', 'radius'],
+              symbol: 'v_2',
+              denominator: 'angle_2',
+              baseline: 'numerator',
+              overhang: 0,
+            },
+          },
         ],
         'arcToRadius2': [
-          { frac: ['arc', 'v', 'angle'] },
-          'equals',
           {
-            frac: [
-              [{ strike: ['angle_1', 's_1'] }, 'x', 'radius'],
-              'v_2',
-              { strike: ['angle_2', 's_2'] }
-            ],
+            frac: {
+              numerator: 'arc',
+              symbol: 'v',
+              denominator: 'angle',
+              baseline: 'numerator',
+              overhang: 0,
+            },
+          }, 'equals', {
+            frac: {
+              numerator: [{ strike: ['angle_1', 's_1'] }, 'x', 'radius'],
+              symbol: 'v_2',
+              denominator: { strike: ['angle_2', 's_2'] },
+              baseline: 'numerator',
+              overhang: 0,
+            },
           },
         ],
         'arcToRadius3': [

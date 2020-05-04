@@ -7981,7 +7981,8 @@ function (_BaseEquationFunction) {
           denominatorSpace = _this$options.denominatorSpace,
           overhang = _this$options.overhang,
           offsetY = _this$options.offsetY,
-          fullContentBounds = _this$options.fullContentBounds;
+          fullContentBounds = _this$options.fullContentBounds,
+          baseline = _this$options.baseline;
       var scale = incomingScale * scaleModifier;
       var vinculumBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
       var numeratorBounds = new _Bounds__WEBPACK_IMPORTED_MODULE_1__["default"]();
@@ -8019,12 +8020,20 @@ function (_BaseEquationFunction) {
       // const yDenominator = denominatorBounds.ascent
       //                      + vSpaceDenom - lineVAboveBaseline;
 
+      var baselineOffset = 0;
+
+      if (baseline === 'numerator' && numerator != null) {
+        baselineOffset = loc.y - numeratorLoc.y;
+      } else if (baseline === 'denominator' && denominator != null) {
+        baselineOffset = loc.y - denominatorLoc.y;
+      }
+
       if (numerator != null) {
-        numerator.offsetLocation(numeratorLoc.sub(numerator.location));
+        numerator.offsetLocation(numeratorLoc.sub(numerator.location.x, numerator.location.y - baselineOffset));
       }
 
       if (denominator != null) {
-        denominator.offsetLocation(denominatorLoc.sub(denominator.location));
+        denominator.offsetLocation(denominatorLoc.sub(denominator.location.x, denominator.location.y - baselineOffset));
       }
 
       this.width = vinculumBounds.width;
@@ -8041,7 +8050,7 @@ function (_BaseEquationFunction) {
       //               + numeratorBounds.descent;
 
       this.height = this.descent + this.ascent;
-      this.glyphLocations[0] = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.location.x, this.location.y + lineVAboveBaseline);
+      this.glyphLocations[0] = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.location.x, this.location.y + lineVAboveBaseline + baselineOffset);
       this.glyphWidths[0] = vinculumBounds.width;
       this.glyphHeights[0] = vinculumBounds.height;
       fullBounds.copyFrom(vinculumBounds);
@@ -11420,7 +11429,8 @@ function () {
       var numeratorSpace;
       var denominatorSpace;
       var offsetY;
-      var fullContentBounds; // This is imperfect type checking, as the assumption is if den, sym
+      var fullContentBounds;
+      var baseline; // This is imperfect type checking, as the assumption is if den, sym
       // and fractionScale is null, then they weren't defined by the caller
       // and therefore the caller is passing in a TypeFracObject or TypeFracArray
       // All the flow errors go away if TypeEquationPhrase is removed from
@@ -11432,11 +11442,12 @@ function () {
         denominatorSpace: 0.05,
         offsetY: 0.07,
         overhang: 0.05,
-        fullContentBounds: false
+        fullContentBounds: false,
+        baseline: 'vinculum'
       };
 
       if (Array.isArray(optionsOrArray)) {
-        var _optionsOrArray5 = _slicedToArray(optionsOrArray, 9);
+        var _optionsOrArray5 = _slicedToArray(optionsOrArray, 10);
 
         numerator = _optionsOrArray5[0];
         symbol = _optionsOrArray5[1];
@@ -11446,7 +11457,8 @@ function () {
         denominatorSpace = _optionsOrArray5[5];
         overhang = _optionsOrArray5[6];
         offsetY = _optionsOrArray5[7];
-        fullContentBounds = _optionsOrArray5[8];
+        baseline = _optionsOrArray5[8];
+        fullContentBounds = _optionsOrArray5[9];
       } else {
         numerator = optionsOrArray.numerator;
         symbol = optionsOrArray.symbol;
@@ -11456,6 +11468,7 @@ function () {
         denominatorSpace = optionsOrArray.denominatorSpace;
         overhang = optionsOrArray.overhang;
         offsetY = optionsOrArray.offsetY;
+        baseline = optionsOrArray.baseline;
         fullContentBounds = optionsOrArray.fullContentBounds;
       }
 
@@ -11465,7 +11478,8 @@ function () {
         numeratorSpace: numeratorSpace,
         denominatorSpace: denominatorSpace,
         offsetY: offsetY,
-        fullContentBounds: fullContentBounds
+        fullContentBounds: fullContentBounds,
+        baseline: baseline
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
       return new _Elements_Fraction__WEBPACK_IMPORTED_MODULE_4__["default"]([this.contentToElement(numerator), this.contentToElement(denominator)], // $FlowFixMe
@@ -29120,7 +29134,7 @@ function () {
       var done;
       var options = defaultOptions;
 
-      if (typeof optionsOrDone === 'function') {
+      if (typeof optionsOrDone === 'function' || typeof optionsOrDone === 'string') {
         options = defaultOptions;
         done = optionsOrDone;
       } else if (optionsOrDone == null) {
@@ -29658,12 +29672,13 @@ function () {
   }, {
     key: "calcVelocity",
     value: function calcVelocity(newTransform) {
-      var currentTime = Date.now() / 1000;
+      var currentTime = performance.now() / 1000;
 
       if (this.state.movement.previousTime === null) {
         this.state.movement.previousTime = currentTime;
         return;
-      }
+      } // console.log(currentTime, this.state.movement.previousTime)
+
 
       var deltaTime = currentTime - this.state.movement.previousTime; // If the time is too small, weird calculations may happen
 
@@ -30733,7 +30748,6 @@ function (_DiagramElement) {
     value: function setupDraw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
       if (this.isShown) {
         if (this.isRenderedAsImage === true) {
@@ -31304,7 +31318,7 @@ function (_DiagramElement2) {
       var optionsOrElementsOrDone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      if (optionsOrElementsOrDone == null || typeof optionsOrElementsOrDone === 'function') {
+      if (optionsOrElementsOrDone == null || typeof optionsOrElementsOrDone === 'function' || typeof optionsOrElementsOrDone === 'string') {
         _get(_getPrototypeOf(DiagramElementCollection.prototype), "pulse", this).call(this, optionsOrElementsOrDone);
 
         return;

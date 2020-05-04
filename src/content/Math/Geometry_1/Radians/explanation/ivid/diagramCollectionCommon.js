@@ -186,9 +186,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     // const options3 = joinObjects({ name: 'arcToRadius3' }, options);
 
     this.animations.new()
-      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToRadius1') })
-      .trigger({ callback: 'goToForm', duration: 1, payload: options('arcToRadius2') })
-      .trigger({ callback: 'goToForm', duration: 1.8, payload: options('arcToRadius3') })
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToRadius1') })
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToRadius2') })
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToRadius3') })
       .trigger({ callback: 'goToForm', duration: 1, payload: options('arcToRadius4') })
       .trigger({ callback: 'goToForm', duration: 0, payload: { name: 'radius', animate: 'move' } })
       .start();
