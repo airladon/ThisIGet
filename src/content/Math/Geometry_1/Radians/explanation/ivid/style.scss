@@ -96,16 +96,16 @@
 .in_topic__fraction_table {
   text-align: center;
   table-layout: fixed;
-  width: calc(var(--topic__diagram-font-size) * 7);
+  width: calc(var(--topic__diagram-font-size) * 5);
   // margin-left: calc(var(--topic__diagram-font-size) * 1);
-  margin-left: 70%;
+  margin-left: 72%;
   border-spacing: 0;
   color: #fdf1aa;
   color: var(--color-diagram-text);
   border-radius: 0.5em;
-  font-size: 0.7em;
+  font-size: 0.6em;
   position: absolute;
-  top: 10%;
+  top: 16%;
   left: 7%;
   font-weight: 100;
 }

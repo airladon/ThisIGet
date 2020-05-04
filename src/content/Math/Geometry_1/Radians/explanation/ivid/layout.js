@@ -218,6 +218,7 @@ export default function diagramLayout() {
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
         bottomDeg: { position: new Point(0.2, -1.6) },
+        bottomRad: { position: new Point(-0.1, -1.6) },
         summary: { position: new Point(-0.2, -1.5) },
         bottomSlightRight: { position: new Point(0.1, -1.5) },
       },

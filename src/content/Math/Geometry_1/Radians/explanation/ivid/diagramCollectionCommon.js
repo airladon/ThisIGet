@@ -127,6 +127,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._circle._arc.showAll();
       this.updateAngle();
     });
+    this.fnMap.global.add('setAngleTextRadians', this.setAngleTextRadians.bind(this));
   }
 
   
@@ -227,6 +228,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.marks = marks;
     this.decimals = decimals;
     this.units = units;
+  }
+
+  setAngleTextRadians() {
+    this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    this.updateAngle();
   }
 
   setAngleMarks(
