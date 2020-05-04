@@ -11,6 +11,8 @@ const {
 
 const { rand, round } = Fig.tools.math;
 
+const { joinObjects } = Fig.tools.misc;
+
 export default class CommonCollection extends CommonDiagramCollection {
   _circle: {
     _line1: DiagramObjectLine;
@@ -130,6 +132,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.fnMap.global.add('setAngleTextRadians', this.setAngleTextRadians.bind(this));
     this.fnMap.global.add('setAngleTextDeg', this.setAngleTextDeg.bind(this));
     this.fnMap.global.add('updateAngle', this.updateAngle.bind(this));
+    this.fnMap.global.add('goToForm', this._eqn.goToForm.bind(this._eqn));
+    this.fnMap.global.add('arcToRadius', this.arcToRadius.bind(this));
+    this._eqn._radius.onClick = this.goToRadiusForm1.bind(this);
+    this._eqn._angle.onClick = () => console.log(this._eqn)
   }
 
   goToRadiusForm() {
@@ -148,6 +154,46 @@ export default class CommonCollection extends CommonDiagramCollection {
       });
     }
     this.diagram.animateNextFrame();
+  }
+
+  goToRadiusForm1() {
+    const eqn = this._eqn;
+    console.log(eqn.getCurrentForm())
+    const form = eqn.getCurrentForm().name;
+    if (form === 'arc') {
+      this.arcToRadius();
+      return;
+    } else if (form === 'angle') {
+      // this.angleToRadius();
+      return;
+    }
+    eqn.goToForm({ name: 'radius' });
+    return;
+  }
+
+  arcToRadius() {
+    const eqn = this._eqn;
+    eqn.showForm('arcToRadius0');
+    const options = name => ({
+      name,
+      animate: 'move',
+      duration: 1.2,
+      dissolveInTime: 0.4,
+      dissolveOutTime: 0.4,
+    });
+    // const options1 = joinObjects({ name: 'arcToRadius1' }, options);
+    // const options2 = joinObjects({ name: 'arcToRadius2' }, options);
+    // const options3 = joinObjects({ name: 'arcToRadius3' }, options);
+
+    this.animations.new()
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToRadius1') })
+      .trigger({ callback: 'goToForm', duration: 1, payload: options('arcToRadius2') })
+      .trigger({ callback: 'goToForm', duration: 1.8, payload: options('arcToRadius3') })
+      .trigger({ callback: 'goToForm', duration: 1, payload: options('arcToRadius4') })
+      .trigger({ callback: 'goToForm', duration: 0, payload: { name: 'radius', animate: 'move' } })
+      .start();
+    this.diagram.animateNextFrame();
+    // console.log(eqn.animations.animations[0])
   }
 
   toggleDegrees() {
@@ -223,13 +269,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       const p3 = this._circle._line1.getP2();
       this._circle._corner.updatePoints([p1, p2, p3]);
     }
-    if (this._equation._value.isShown) {
+    if (this._eqn._value.isShown) {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)}`;
-      this._equation._value.drawingObject.setText(text);
+      this._eqn._value.drawingObject.setText(text);
       if (round(r, 2) === 1) {
-        this._equation._radiusLengths.drawingObject.setText('radius length');
+        this._eqn._radiusLengths.drawingObject.setText('radius length');
       } else {
-        this._equation._radiusLengths.drawingObject.setText('radius lengths');
+        this._eqn._radiusLengths.drawingObject.setText('radius lengths');
       }
     }
   }

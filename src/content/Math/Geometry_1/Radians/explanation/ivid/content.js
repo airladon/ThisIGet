@@ -60,6 +60,7 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const circle = diag._circle;
     const equation = diag._equation;
+    const eqn = diag._eqn;
 
     let common = {
       setContent: [],
@@ -454,22 +455,22 @@ class Content extends PresentationFormatContent {
       ],
       setEnterState: () => {
         circle._angleText.setScenario('bottomRad');
-        equation.setScenario('top');
+        eqn.setScenario('top');
         circle.setScenario('center');
       },
       transitionFromPrev: (done, doneStr) => {
-        equation.setScenario('top');
-        // equation.showForm('value');
+        eqn.setScenario('top');
+        // eqn.showForm('value');
         circle._line1.setRotation(1);
-        equation._radiusLengths.drawingObject.setText('radius length');
-        equation._value.drawingObject.setText('1.00');
-        // equation.hide();
+        eqn._radiusLengths.drawingObject.setText('radius length');
+        eqn._value.drawingObject.setText('1.00');
+        // eqn.hide();
         diag.setAngleTextRadians();
-        equation.goToForm({ name: 'value', animate: 'dissolve', callback: doneStr });
+        eqn.goToForm({ name: 'value', animate: 'dissolve', callback: doneStr });
       },
       setSteadyState: () => {
         circle._line1.setRotation(1);
-        equation.showForm('value');
+        eqn.showForm('value');
         diag.updateAngle();
         circle._radianLines.showAll();
         circle._angleText.showAll();
@@ -497,19 +498,19 @@ class Content extends PresentationFormatContent {
       ],
       setEnterState: () => {
         circle._angleText.setScenario('bottomRad');
-        equation.setScenario('top');
+        eqn.setScenario('top');
         circle.setScenario('center');
       },
       transitionFromPrev: (done, doneStr) => {
-        equation.setScenario('top');
-        equation.showForm('value');
+        eqn.setScenario('top');
+        eqn.showForm('value');
         diag.setAngleTextRadians();
         diag.setAngleTextRadians();
-        equation.goToForm({ name: 'generalize', animate: 'move', callback: doneStr });
+        eqn.goToForm({ name: 'generalize', animate: 'move', callback: doneStr });
       },
       setSteadyState: () => {
         // circle._line1.setRotation(1);
-        equation.showForm('generalize');
+        eqn.showForm('generalize');
         diag.updateAngle();
         circle._radianLines.showAll();
         circle._angleText.showAll();
@@ -537,23 +538,70 @@ class Content extends PresentationFormatContent {
       ],
       setEnterState: () => {
         circle._angleText.setScenario('bottomRad');
-        equation.setScenario('top');
+        eqn.setScenario('top');
         circle.setScenario('center');
       },
       transitionFromPrev: (done, doneStr) => {
-        equation.setScenario('top');
-        equation.showForm('generalize');
+        eqn.setScenario('top');
+        eqn.showForm('generalize');
         diag.setAngleTextRadians();
         diag.setAngleTextRadians();
-        equation.goToForm({ name: 'general', animate: 'move', callback: doneStr });
+        eqn.goToForm({ name: 'arc', animate: 'move', callback: doneStr });
       },
       setSteadyState: () => {
         // circle._line1.setRotation(1);
-        equation.showForm('general');
+        eqn.showForm('arc');
         diag.updateAngle();
         circle._radianLines.showAll();
         circle._angleText.showAll();
         diag.setAngleTextRadians();
+      },
+    });
+
+    this.addSection({
+      // setContent: [
+      //   note({ top: 75 }, '|Radian|'),
+      //   note({ top: 80 }, '|Radius|'),
+      //   note({ top: 85 }, '|Angle|'),
+      //   note({ top: 90 }, '|Arc|'),
+      // ],
+      // fadeInFromPrev: false,
+      // modifiers: {
+      //   Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+      //   Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+      //   Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
+      // },
+      show: [
+        eqn,
+      ],
+      setEnterState: () => {
+        // circle._angleText.setScenario('bottomRad');
+        eqn.setScenario('top');
+        // circle.setScenario('center');
+      },
+      transitionFromPrev: (done, doneStr) => {
+        // eqn.setScenario('top');
+        // eqn.showForm('generalize');
+        // diag.setAngleTextRadians();
+        // diag.setAngleTextRadians();
+        // eqn.goToForm({ name: 'arc', animate: 'move', callback: doneStr });
+        eqn.showForm('arc');
+        eqn.animations.new()
+          .scenario({ target: 'center', duration: 2 })
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        // circle._line1.setRotation(1);
+        eqn.showForm('arc');
+        eqn.setScenario('center');
+        // diag.updateAngle();
+        // circle._radianLines.showAll();
+        // circle._angleText.showAll();
+        // diag.setAngleTextRadians();
+        eqn._radius.makeTouchable();
+        eqn._angle.makeTouchable();
       },
     });
 

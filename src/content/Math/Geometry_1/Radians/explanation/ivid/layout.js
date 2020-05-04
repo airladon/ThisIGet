@@ -19,6 +19,7 @@ export default function diagramLayout() {
   colors.lines = colors.get('blue').rgb;
   colors.angles = colors.get('green').rgb;
   colors.arc = colors.get('red').rgb;
+  colors.dull = colors.get('grey', 'dark').rgb;
   colors.marks = colors.get('grey', 'dark').rgb;
   colors.radianLines = colors.get('blue').rgb;
   colors.degrees = colors.get('blue', 'lighter').rgb;
@@ -367,6 +368,118 @@ export default function diagramLayout() {
     scenario: 'lowerLeft',
   };
 
+  layout.eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        arc: { text: 'arc length', color: colors.arc },
+        radius: { color: colors.lines },
+        radius_1: { color: colors.lines },
+        radius_2: { color: colors.lines },
+        angle: { color: colors.angles },
+        angle_1: { color: colors.angles },
+        angle_2: { color: colors.angles },
+        radiusLengths: { text: 'radius lengths', color: colors.radianLines },
+        value: { text: '0.00', color: colors.angles },
+        x: `  ${String.fromCharCode(215)}  `,
+        equals: '  =  ',
+        v: { symbol: 'vinculum' },
+        v_1: { symbol: 'vinculum' },
+        v_2: { symbol: 'vinculum' },
+        s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_2: { symbol: 'strike', style: 'cross', color: colors.dull },
+        // div_1: { text: '÷' },
+        // div_2: { text: '÷' },
+        largeBrace: {
+          symbol: 'brace',
+          side: 'top',
+          color: colors.marks,
+          lineWidth: 0.012,
+          width: 0.05,
+        },
+        smallBrace: {
+          symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012, width: 0.05,
+        },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        xAlign: 'right',
+        yAlign: 'top',
+      },
+      forms: {
+        'value': ['arc', 'equals', 'value', '   ', 'radiusLengths'],
+        'generalize': [
+          'arc',
+          'equals',
+          {
+            topComment: {
+              content: '_value',
+              comment: 'angle',
+              symbol: 'smallBrace',
+              contentSpace: 0.04,
+              inSize: false,
+            },
+          },
+          '   ',
+          {
+            topComment: ['radiusLengths', 'radius', 'largeBrace', 0.04, 0.06],
+          },
+        ],
+        'arc': ['arc', 'equals', 'angle', 'x', 'radius'],
+        'angle': ['angle', 'equals', { frac: ['arc', 'v', 'radius'] }],
+        'radius': ['radius', 'equals', { frac: ['arc', 'v', 'angle'] }],
+        'arcToRadius0': ['arc', 'equals', 'angle_1', 'x', 'radius'],
+        'arcToRadius1': [
+          { frac: ['arc', 'v', 'angle'] }, 'equals', { frac: [['angle_1', 'x', 'radius'], 'v_2', 'angle_2'] },
+        ],
+        'arcToRadius2': [
+          { frac: ['arc', 'v', 'angle'] },
+          'equals',
+          {
+            frac: [
+              [{ strike: ['angle_1', 's_1'] }, 'x', 'radius'],
+              'v_2',
+              { strike: ['angle_2', 's_2'] }
+            ],
+          },
+        ],
+        'arcToRadius3': [
+          { frac: ['arc', 'v', 'angle'] },
+          'equals',
+          'radius',
+        ],
+        'arcToRadius4': {
+          content: [
+            'radius',
+            'equals',
+            { frac: ['arc', 'v', 'angle'] },
+          ],
+          translation: {
+            radius: ['curved', 'up', 0.6],
+            arc: ['curved', 'down', 0.6],
+            v: ['curved', 'down', 0.6],
+            angle: ['curved', 'down', 0.6],
+          },
+        },
+        // 'arcFromRadius0': []
+      },
+      formSeries: ['arc', 'radius', 'angle'],
+    },
+    mods: {
+      scenarios: {
+        // lowerLeft: { position: new Point(-1, -1), scale: 1 },
+        top: { position: new Point(-0.2, 1.6), scale: 1 },
+        center: { position: new Point(0 ,0), scale: 1.3 },
+        // summary: { position: new Point(0, 0), scale: 1 },
+        // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
+      },
+    },
+    scenario: 'top',
+  };
+
   layout.circumferenceEqn = {
     name: 'circumferenceEqn',
     method: 'addEquation',
@@ -692,6 +805,7 @@ export default function diagramLayout() {
   layout.addElements = [
     layout.circle,
     layout.equation,
+    layout.eqn,
     layout.circumferenceEqn,
     // layout.arcEqn,
     layout.arcEqnNav,
