@@ -132,7 +132,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.fnMap.global.add('updateAngle', this.updateAngle.bind(this));
   }
 
-  
   goToRadiusForm() {
     // $FlowFixMe
     if (this._equation.getCurrentForm().name === 'radius') {
@@ -223,6 +222,15 @@ export default class CommonCollection extends CommonDiagramCollection {
       const p2 = [0, 0];
       const p3 = this._circle._line1.getP2();
       this._circle._corner.updatePoints([p1, p2, p3]);
+    }
+    if (this._equation._value.isShown) {
+      const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)}`;
+      this._equation._value.drawingObject.setText(text);
+      if (round(r, 2) === 1) {
+        this._equation._radiusLengths.drawingObject.setText('radius length');
+      } else {
+        this._equation._radiusLengths.drawingObject.setText('radius lengths');
+      }
     }
   }
 

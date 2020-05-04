@@ -283,6 +283,7 @@ export default function diagramLayout() {
         _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
         angle: { text: 'angle', color: colors.angles },
         _angle: { text: 'angle', color: colors.angles, mods: mods('down', 0.4) },
+        radiusLengths: { text: 'radius lengths', color: colors.radianLines },
         radiusLength1: { text: 'radius length', color: colors.radianLines },
         radiusLengths2: { text: 'radius lengths', color: colors.radianLines },
         radiusLengths3: { text: 'radius lengths', color: colors.radianLines },
@@ -303,6 +304,7 @@ export default function diagramLayout() {
         _1: { text: ' 1 ', color: colors.angles },
         _2: { text: ' 2 ', color: colors.angles },
         _3: { text: ' 3 ', color: colors.angles },
+        value: { text: '0.00', color: colors.angles },
         x: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
         v: { symbol: 'vinculum' },
@@ -331,12 +333,13 @@ export default function diagramLayout() {
         '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength1'],
         '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths2'],
         '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths3'],
-        '3rad1': [
+        'value': ['arc', 'equals', 'value', '   ', 'radiusLengths'],
+        'generalize': [
           'arc',
           'equals',
           {
             topComment: {
-              content: '_3',
+              content: '_value',
               comment: 'angle',
               symbol: 'smallBrace',
               contentSpace: 0.04,
@@ -345,7 +348,7 @@ export default function diagramLayout() {
           },
           '   ',
           {
-            topComment: ['radiusLengths3', 'radius', 'largeBrace', 0.04, 0.06],
+            topComment: ['radiusLengths', 'radius', 'largeBrace', 0.04, 0.06],
           },
         ],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],
@@ -355,7 +358,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         lowerLeft: { position: new Point(-1, -1), scale: 1 },
-        top: { position: new Point(0, 1.3), scale: 1 },
+        top: { position: new Point(-0.2, 1.6), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
         // summary: { position: new Point(0, 0), scale: 1 },
         'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
