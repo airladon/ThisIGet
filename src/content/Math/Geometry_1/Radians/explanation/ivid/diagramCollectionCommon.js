@@ -128,6 +128,8 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.updateAngle();
     });
     this.fnMap.global.add('setAngleTextRadians', this.setAngleTextRadians.bind(this));
+    this.fnMap.global.add('setAngleTextDeg', this.setAngleTextDeg.bind(this));
+    this.fnMap.global.add('updateAngle', this.updateAngle.bind(this));
   }
 
   
@@ -232,6 +234,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   setAngleTextRadians() {
     this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    this.updateAngle();
+  }
+
+  setAngleTextDeg() {
+    this.setAngleTextProperties(360, 0, 'º');
     this.updateAngle();
   }
 

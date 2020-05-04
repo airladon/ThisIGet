@@ -96,7 +96,7 @@ class Content extends PresentationFormatContent {
         note({ top: 90 }, '|Arc|'),
       ],
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], colors.arc),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._arc,
@@ -118,19 +118,40 @@ class Content extends PresentationFormatContent {
       ],
       fadeInFromPrev: false,
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], colors.arc),
-        Angle: click(diag.pulseAngle, [diag], colors.angles),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
       ],
+      transitionFromPrev: (done, doneStr) => {
+        circle._angleText.setScenario('bottomDeg');
+        diag.updateAngle();
+        addClass('note_angle', 'topic__diagram_text_fade_in_05');
+        circle.animations.new()
+          // .inParallel([
+          //   circle._angle.anim.dissolveIn(0.5),
+          //   circle.anim.trigger({ callback: 'updateAngle' }),
+          // ])
+          .pulse({ element: circle._angle, duration: 1 })
+          .inParallel([
+            circle._degrees.anim.dissolveIn({ duration: 0.5 }),
+            circle._angleText.anim.dissolveIn(0.5),
+            circle.anim.trigger({ callback: 'setAngleTextDeg' }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
       setSteadyState: () => {
-        diag.accent(circle._angle);
+        removeClass('note_angle', 'topic__diagram_text_fade_in_05');
+        circle._angleText.setScenario('bottomDeg');
+        // console.log('asdf')
+        // diag.accent(circle._angle);
         // circle._line1.setRotation(1);
         circle._degrees.showAll();
         circle._angleText.showAll();
-        diag.setAngleTextProperties(360, 0, 'º');
-        circle._angleText.setScenario('bottomDeg');
+        // diag.setAngleTextProperties(360, 0, 'º');
+        diag.setAngleTextDeg();
         diag.updateAngle();
         circle.setScenario('center');
       },
@@ -205,8 +226,8 @@ class Content extends PresentationFormatContent {
         _30deg: rowClick(30),
         _24deg: rowClick(24),
         _20deg: rowClick(20),
-        Arc: click(diag.pulseArc, [diag], colors.arc),
-        Angle: click(diag.pulseAngle, [diag], colors.angles),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,
@@ -301,7 +322,7 @@ class Content extends PresentationFormatContent {
       },
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc,
+        circle._angle, circle._arc, circle._radianLines._line0,
       ],
       transitionFromPrev: (done, doneStr) => {
         // addClass('id_radius_text', 'topic__diagram_text_fade_in_05');
@@ -358,7 +379,7 @@ class Content extends PresentationFormatContent {
           .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
           .inParallel([
             circle._angleText.anim.dissolveIn(0.3),
-            circle.anim.trigger({ callback: 'setAngleTextRadians', payload: 'radians' }),
+            circle.anim.trigger({ callback: 'setAngleTextRadians' }),
           ])
           .whenFinished(doneStr)
           .start();
