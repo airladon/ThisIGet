@@ -134,6 +134,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.fnMap.global.add('updateAngle', this.updateAngle.bind(this));
     this.fnMap.global.add('goToForm', this._eqn.goToForm.bind(this._eqn));
     this.fnMap.global.add('showForm', this._eqn.showForm.bind(this._eqn));
+    this.fnMap.global.add('degShowForm', this._degEqn.showForm.bind(this._degEqn));
     // this.fnMap.global.add('arcToRadius', this.arcToRadius.bind(this));
     // this._eqn._radius.onClick = this.goToRadiusForm1.bind(this);
     // this._eqn._angle.onClick = this.goToAngleForm1.bind(this);

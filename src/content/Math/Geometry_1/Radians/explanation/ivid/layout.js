@@ -534,6 +534,7 @@ export default function diagramLayout() {
         yAlign: 'bottom',
       },
       forms: {
+        'start': [],
         '0': [
           container({ bottomComment: ['twoPi', 'radians'] }),
           'equals',
@@ -612,7 +613,8 @@ export default function diagramLayout() {
         // top: { position: new Point(-0.2, 1.5), scale: 1 },
         // topCirc: { position: new Point(0, 1.5), scale: 1 },
         // topCircle: { position: new Point(0, 1.5), scale: 1 },
-        center: { position: new Point(0 ,0), scale: 1.3 },
+        center: { position: new Point(0, 0), scale: 1.3 },
+        up: { position: new Point(-0.4, 0.6), scale: 1.3 },
         // summary: { position: new Point(0, 0), scale: 1 },
         // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
       },
@@ -746,7 +748,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: new Point(0 ,0), scale: 1.3 },
+        down: { position: new Point(-0.4 , -0.6), scale: 1.3 },
       },
     },
     scenario: 'top',
