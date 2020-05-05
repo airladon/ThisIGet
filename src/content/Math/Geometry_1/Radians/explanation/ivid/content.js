@@ -602,6 +602,8 @@ class Content extends PresentationFormatContent {
         // diag.setAngleTextRadians();
         eqn._radius.makeTouchable();
         eqn._angle.makeTouchable();
+        eqn._arc.makeTouchable();
+        eqn.showForm('angle')
       },
     });
 

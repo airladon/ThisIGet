@@ -133,9 +133,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.fnMap.global.add('setAngleTextDeg', this.setAngleTextDeg.bind(this));
     this.fnMap.global.add('updateAngle', this.updateAngle.bind(this));
     this.fnMap.global.add('goToForm', this._eqn.goToForm.bind(this._eqn));
+    this.fnMap.global.add('showForm', this._eqn.showForm.bind(this._eqn));
     this.fnMap.global.add('arcToRadius', this.arcToRadius.bind(this));
     this._eqn._radius.onClick = this.goToRadiusForm1.bind(this);
-    this._eqn._angle.onClick = () => console.log(this._eqn)
+    this._eqn._angle.onClick = this.goToAngleForm1.bind(this);
+    this._eqn._arc.onClick = this.goToArcForm1.bind(this);
   }
 
   goToRadiusForm() {
@@ -156,19 +158,52 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  goToAngleForm1() {
+    const eqn = this._eqn;
+    const form = eqn.getCurrentForm().name;
+    if (form === 'arc') {
+      this.arcToAngle();
+      return;
+    } else if (form === 'radius') {
+      // this.angleToRadius();
+      return;
+    }
+    this.stop();
+    eqn.goToForm({ name: 'angle' });
+    this.diagram.animateNextFrame();
+  }
+
+
   goToRadiusForm1() {
     const eqn = this._eqn;
-    console.log(eqn.getCurrentForm())
     const form = eqn.getCurrentForm().name;
     if (form === 'arc') {
       this.arcToRadius();
       return;
-    } else if (form === 'angle') {
+    }
+    if (form === 'angle') {
       // this.angleToRadius();
       return;
     }
+    this.stop();
     eqn.goToForm({ name: 'radius' });
-    return;
+    this.diagram.animateNextFrame();
+  }
+
+  goToArcForm1() {
+    const eqn = this._eqn;
+    const form = eqn.getCurrentForm().name;
+    if (form === 'angle') {
+      this.angleToArc();
+      return;
+    }
+    if (form === 'radius') {
+      this.radiusToArc();
+      return;
+    }
+    this.stop();
+    eqn.goToForm({ name: 'arc' });
+    this.diagram.animateNextFrame();
   }
 
   arcToRadius() {
@@ -181,16 +216,79 @@ export default class CommonCollection extends CommonDiagramCollection {
       dissolveInTime: 0.4,
       dissolveOutTime: 0.4,
     });
-    // const options1 = joinObjects({ name: 'arcToRadius1' }, options);
-    // const options2 = joinObjects({ name: 'arcToRadius2' }, options);
-    // const options3 = joinObjects({ name: 'arcToRadius3' }, options);
 
     this.animations.new()
       .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToRadius1') })
       .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToRadius2') })
       .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToRadius3') })
-      .trigger({ callback: 'goToForm', duration: 1, payload: options('arcToRadius4') })
-      .trigger({ callback: 'goToForm', duration: 0, payload: { name: 'radius', animate: 'move' } })
+      .trigger({ callback: 'goToForm', duration: 1.2, payload: options('arcToRadius4') })
+      .trigger({ callback: 'showForm', duration: 0, payload: 'radius' })
+      .start();
+    this.diagram.animateNextFrame();
+    // console.log(eqn.animations.animations[0])
+  }
+
+  arcToAngle() {
+    const eqn = this._eqn;
+    eqn.showForm('arcToAngle0');
+    const options = name => ({
+      name,
+      animate: 'move',
+      duration: 1.2,
+      dissolveInTime: 0.4,
+      dissolveOutTime: 0.4,
+    });
+
+    this.animations.new()
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToAngle1') })
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('arcToAngle2') })
+      // .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToAngle3') })
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('arcToAngle4') })
+      .trigger({ callback: 'showForm', duration: 0, payload: 'angle' })
+      .start();
+    this.diagram.animateNextFrame();
+    // console.log(eqn.animations.animations[0])
+  }
+
+  angleToArc() {
+    const eqn = this._eqn;
+    eqn.showForm('angleToArc0');
+    const options = name => ({
+      name,
+      animate: 'move',
+      duration: 1.2,
+      dissolveInTime: 0.4,
+      dissolveOutTime: 0.4,
+    });
+
+    this.animations.new()
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('angleToArc1') })
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('angleToArc2') })
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('angleToArc3') })
+      .trigger({ callback: 'goToForm', duration: 1.2, payload: options('angleToArc4') })
+      .trigger({ callback: 'showForm', duration: 0, payload: 'arc' })
+      .start();
+    this.diagram.animateNextFrame();
+    // console.log(eqn.animations.animations[0])
+  }
+
+  radiusToArc() {
+    const eqn = this._eqn;
+    eqn.showForm('radiusToArc0');
+    const options = name => ({
+      name,
+      animate: 'move',
+      duration: 1.2,
+      dissolveInTime: 0.4,
+      dissolveOutTime: 0.4,
+    });
+
+    this.animations.new()
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('radiusToArc1') })
+      .trigger({ callback: 'goToForm', duration: 1.4, payload: options('radiusToArc2') })
+      .trigger({ callback: 'goToForm', duration: 2.2, payload: options('radiusToArc3') })
+      .trigger({ callback: 'goToForm', duration: 1.2, payload: options('radiusToArc4') })
+      .trigger({ callback: 'showForm', duration: 0, payload: 'arc' })
       .start();
     this.diagram.animateNextFrame();
     // console.log(eqn.animations.animations[0])

@@ -368,6 +368,21 @@ export default function diagramLayout() {
     scenario: 'lowerLeft',
   };
 
+  const translation = diff => joinObjects({}, {
+    radius: ['linear'],
+    radius_1: ['linear'],
+    radius_2: ['linear'],
+    arc: ['linear'],
+    v: ['linear'],
+    v_1: ['linear'],
+    v_2: ['linear'],
+    angle: ['linear'],
+    angle_1: ['linear'],
+    angle_2: ['linear'],
+    x_1: ['linear'],
+    x_2: ['linear'],
+  }, diff);
+
   layout.eqn = {
     name: 'eqn',
     method: 'addEquation',
@@ -385,14 +400,13 @@ export default function diagramLayout() {
         radiusLengths: { text: 'radius lengths', color: colors.radianLines },
         value: { text: '0.00', color: colors.angles },
         x: `  ${String.fromCharCode(215)}  `,
+        x_1: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
         v: { symbol: 'vinculum' },
         v_1: { symbol: 'vinculum' },
         v_2: { symbol: 'vinculum' },
         s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
         s_2: { symbol: 'strike', style: 'cross', color: colors.dull },
-        // div_1: { text: '÷' },
-        // div_2: { text: '÷' },
         largeBrace: {
           symbol: 'brace',
           side: 'top',
@@ -431,62 +445,202 @@ export default function diagramLayout() {
         'arc': ['arc', 'equals', 'angle', 'x', 'radius'],
         'angle': ['angle', 'equals', { frac: ['arc', 'v', 'radius'] }],
         'radius': ['radius', 'equals', { frac: ['arc', 'v', 'angle'] }],
-        'arcToRadius0': ['arc', 'equals', 'angle_1', 'x', 'radius'],
-        'arcToRadius1': [
-          {
-            frac: {
-              numerator: 'arc',
-              symbol: 'v',
-              denominator: 'angle',
-              baseline: 'numerator',
-              overhang: 0,
+        'arcToRadius0': {
+          content: ['arc', 'equals', 'angle_1', 'x', 'radius'],
+          translation: translation(),
+        },
+        'arcToRadius1': {
+          content: [
+            {
+              frac: {
+                numerator: 'arc',
+                symbol: 'v',
+                denominator: 'angle',
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            }, 'equals', {
+              frac: {
+                numerator: ['angle_1', 'x', 'radius'],
+                symbol: 'v_2',
+                denominator: 'angle_2',
+                baseline: 'numerator',
+                overhang: 0,
+              },
             },
-          }, 'equals', {
-            frac: {
-              numerator: ['angle_1', 'x', 'radius'],
-              symbol: 'v_2',
-              denominator: 'angle_2',
-              baseline: 'numerator',
-              overhang: 0,
+          ],
+          translation: translation(),
+        },
+        'arcToRadius2':{
+          content: [
+            {
+              frac: {
+                numerator: 'arc',
+                symbol: 'v',
+                denominator: 'angle',
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            }, 'equals', {
+              frac: {
+                numerator: [{ strike: ['angle_1', 's_1'] }, 'x', 'radius'],
+                symbol: 'v_2',
+                denominator: { strike: ['angle_2', 's_2'] },
+                baseline: 'numerator',
+                overhang: 0,
+              },
             },
-          },
-        ],
-        'arcToRadius2': [
-          {
-            frac: {
-              numerator: 'arc',
-              symbol: 'v',
-              denominator: 'angle',
-              baseline: 'numerator',
-              overhang: 0,
-            },
-          }, 'equals', {
-            frac: {
-              numerator: [{ strike: ['angle_1', 's_1'] }, 'x', 'radius'],
-              symbol: 'v_2',
-              denominator: { strike: ['angle_2', 's_2'] },
-              baseline: 'numerator',
-              overhang: 0,
-            },
-          },
-        ],
-        'arcToRadius3': [
-          { frac: ['arc', 'v', 'angle'] },
-          'equals',
-          'radius',
-        ],
+          ],
+          translation: translation(),
+        },
+        'arcToRadius3': {
+          content: [
+            { frac: ['arc', 'v', 'angle'] },
+            'equals',
+            'radius',
+          ],
+          translation: translation(),
+        },
         'arcToRadius4': {
           content: [
             'radius',
             'equals',
             { frac: ['arc', 'v', 'angle'] },
           ],
-          translation: {
+          translation: translation({
             radius: ['curved', 'up', 0.6],
             arc: ['curved', 'down', 0.6],
             v: ['curved', 'down', 0.6],
             angle: ['curved', 'down', 0.6],
-          },
+          }),
+        },
+        // 'arcFromRadius0': []
+        'arcToAngle0': {
+          content: ['arc', 'equals', 'angle', 'x', 'radius_1'],
+          translation: translation(),
+        },
+        'arcToAngle1': {
+          content: [
+            {
+              frac: {
+                numerator: 'arc',
+                symbol: 'v',
+                denominator: 'radius',
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            }, 'equals', {
+              frac: {
+                numerator: ['angle', 'x', 'radius_1'],
+                symbol: 'v_2',
+                denominator: 'radius_2',
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            },
+          ],
+          translation: translation(),
+        },
+        'arcToAngle2': {
+          content: [
+            {
+              frac: {
+                numerator: 'arc',
+                symbol: 'v',
+                denominator: 'radius',
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            }, 'equals', {
+              frac: {
+                numerator: ['angle', 'x', { strike: ['radius_1', 's_1'] }],
+                symbol: 'v_2',
+                denominator: { strike: ['radius_2', 's_2'] },
+                baseline: 'numerator',
+                overhang: 0,
+              },
+            },
+          ],
+          translation: translation(),
+        },
+        'arcToAngle4': {
+          content: [
+            'angle',
+            'equals',
+            { frac: ['arc', 'v', 'radius'] },
+          ],
+          translation: translation({
+            radius: ['curved', 'down', 0.6],
+            arc: ['curved', 'down', 0.6],
+            v: ['curved', 'down', 0.6],
+            angle: ['curved', 'up', 0.6],
+          }),
+        },
+        angleToArc0: {
+          content: ['angle', 'equals', { frac: ['arc', 'v', 'radius_1'] }],
+          translation: translation(),
+        },
+        angleToArc1: {
+          content: [
+            'angle', 'x', 'radius', 'equals',
+            { frac: ['arc', 'v', 'radius_1'] }, 'x_1', 'radius_2',
+          ],
+          translation: translation(),
+        },
+        angleToArc2: {
+          content: [
+            'angle', 'x', 'radius', 'equals',
+            { frac: ['arc', 'v', { strike: ['radius_1', 's_1'] }] }, 'x_1', { strike: ['radius_2', 's_2'] },
+          ],
+          translation: translation(),
+        },
+        angleToArc3: {
+          content: [
+            'angle', 'x', 'radius', 'equals', 'arc',
+          ],
+          translation: translation(),
+        },
+        angleToArc4: {
+          content: ['arc', 'equals', 'angle', 'x', 'radius'],
+          translation: translation({
+            radius: ['curved', 'down', 0.6],
+            arc: ['curved', 'up', 0.6],
+            x: ['curved', 'down', 0.6],
+            angle: ['curved', 'down', 0.6],
+          }),
+        },
+        radiusToArc0: {
+          content: ['radius', 'equals', { frac: ['arc', 'v', 'angle_1'] }],
+          translation: translation(),
+        },
+        radiusToArc1: {
+          content: [
+            'angle', 'x', 'radius', 'equals',
+            { frac: ['arc', 'v', 'angle_1'] }, 'x_1', 'angle_2',
+          ],
+          translation: translation(),
+        },
+        radiusToArc2: {
+          content: [
+            'angle', 'x', 'radius', 'equals',
+            { frac: ['arc', 'v', { strike: ['angle_1', 's_1'] }] }, 'x_1', { strike: ['angle_2', 's_2'] },
+          ],
+          translation: translation(),
+        },
+        radiusToArc3: {
+          content: [
+            'angle', 'x', 'radius', 'equals', 'arc',
+          ],
+          translation: translation(),
+        },
+        radiusToArc4: {
+          content: ['arc', 'equals', 'angle', 'x', 'radius'],
+          translation: translation({
+            radius: ['curved', 'down', 0.6],
+            arc: ['curved', 'up', 0.6],
+            x: ['curved', 'down', 0.6],
+            angle: ['curved', 'down', 0.6],
+          }),
         },
         // 'arcFromRadius0': []
       },
