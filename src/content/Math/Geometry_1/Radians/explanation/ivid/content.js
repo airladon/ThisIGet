@@ -320,14 +320,9 @@ class Content extends PresentationFormatContent {
         note({ top: 85 }, '|Angle|'),
         note({ top: 90 }, '|Arc|'),
       ],
-      // fadeInFromPrev: false,
       modifiers: {
-        // Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-        // Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
         'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
-        // 'radius_length': highlight(colors.lines),
-        // 'arc_length': highlight(colors.arc),
       },
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -386,15 +381,6 @@ class Content extends PresentationFormatContent {
         note({ top: 85 }, '|Angle|'),
         note({ top: 90 }, '|Arc|'),
       ],
-      // fadeInFromPrev: false,
-      // modifiers: {
-      //   Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-      //   Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-      //   Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
-      //   // 'radius_length': highlight(colors.lines),
-      //   // 'arc_length': highlight(colors.arc),
-      // },
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines._line0,
@@ -425,44 +411,17 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
-      // setContent: [
-      //   // style({
-      //   //   top: 3, centerH: true, id: 'id_main_text',
-      //   // }, 'When |arc length equals radius length|, the angle is |one radian|'),
-      //   note({ top: 75 }, '|Radian|'),
-      //   note({ top: 80 }, '|Radius|'),
-      //   note({ top: 85 }, '|Angle|'),
-      //   note({ top: 90 }, '|Arc|'),
-      // ],
-      // fadeInFromPrev: false,
-      // modifiers: {
-      //   Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-      //   Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-      //   Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
-
-      //   // 'radius_length': highlight(colors.lines),
-      //   // 'arc_length': highlight(colors.arc),
-      // },
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines._line0,
       ],
       transitionFromPrev: (done, doneStr) => {
-        // console.log('asdfasdf')
-        // addClass('note_radian', 'topic__diagram_text_fade_in_05');
-        // addClass('id_main_text', 'topic__diagram_text_fade_in_05');
-        // circle._angleText.setScenario('bottomRad');
         circle.animations.new()
           .dissolveIn({ element: circle._radianLines._line1, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line2, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
-          // .inParallel([
-          //   circle._angleText.anim.dissolveIn(0.3),
-          //   circle.anim.trigger({ callback: 'setAngleTextRadians' }),
-          // ])
           .whenFinished(doneStr)
           .start();
       },
@@ -470,11 +429,6 @@ class Content extends PresentationFormatContent {
         diag.updateAngle();
         circle.setScenario('center');
         circle._radianLines.showAll();
-        // circle._angleText.showAll();
-        // diag.setAngleTextRadians();
-        // circle._angleText.setScenario('bottomRad');
-        // removeClass('note_radian', 'topic__diagram_text_fade_in_05');
-        // removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
       },
     });
 
@@ -487,40 +441,19 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
-      // setContent: [
-      //   note({ top: 75 }, '|Radian|'),
-      //   note({ top: 80 }, '|Radius|'),
-      //   note({ top: 85 }, '|Angle|'),
-      //   note({ top: 90 }, '|Arc|'),
-      // ],
-      // fadeInFromPrev: false,
-      // modifiers: {
-      //   Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-      //   Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-      //   Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
-      // },
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines,
-        // circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCirc');
-        // diag.setAngleTextRadians();
         diag.updateAngle();
         eqn.goToForm({ name: 'circ', animate: 'dissolve', callback: doneStr });
-        // circle._angleText.setScenario('bottomRad');
       },
       setSteadyState: () => {
         eqn.setScenario('topCirc');
-        // circle._line1.setRotation(1);
         eqn.showForm('circ');
         diag.updateAngle();
-        // circle._radianLines.showAll();
-        // circle._angleText.showAll();
-        // diag.setAngleTextRadians();
-        // circle._angleText.setScenario('bottomRad');
       },
     });
 
@@ -532,22 +465,6 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
-      // setContent: [
-      //   // style({
-      //   //   top: 3, centerH: true, id: 'id_main_text',
-      //   // }, '2π radians in a circle.'),
-      //   note({ top: 75 }, '|Radian|'),
-      //   note({ top: 80 }, '|Radius|'),
-      //   note({ top: 85 }, '|Angle|'),
-      //   note({ top: 90 }, '|Arc|'),
-      // ],
-      // fadeInFromPrev: false,
-      // modifiers: {
-      //   Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-      //   Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-      //   Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
-      // },
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines,
@@ -557,7 +474,6 @@ class Content extends PresentationFormatContent {
         diag.setAngleTextRadians();
         diag.updateAngle();
         eqn.goToForm({ name: 'circle', animate: 'dissolve', callback: doneStr });
-        // circle._angleText.setScenario('bottomRad');
       },
       setSteadyState: () => {
         eqn.setScenario('topCircle');
