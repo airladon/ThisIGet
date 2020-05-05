@@ -391,6 +391,12 @@ export default function diagramLayout() {
       scale: 1,
       elements: {
         arc: { text: 'arc length', color: colors.arc },
+        circumference: { color: colors.arc },
+        twoPi: { text: '2π' },
+        r: { color: colors.lines },
+        circle: 'circle',
+        radians: ' radians',
+        twoPiAngle: { text: '2π', color: colors.angles },
         radius: { color: colors.lines },
         radius_1: { color: colors.lines },
         radius_2: { color: colors.lines },
@@ -421,9 +427,27 @@ export default function diagramLayout() {
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
-        yAlign: 'top',
+        yAlign: 'bottom',
       },
       forms: {
+        'circ': {
+          content: ['circumference', 'equals', 'twoPi', 'r'],
+          scale: 1.1,
+          alignment: {
+            fixTo: '',
+            xAlign: 'center',
+            yAlign: 'bottom',
+          },
+        },
+        'circle': {
+          content: ['circle', 'equals', 'twoPiAngle', 'radians'],
+          scale: 1.1,
+          alignment: {
+            fixTo: '',
+            xAlign: 'center',
+            yAlign: 'bottom',
+          },
+        },
         'value': ['arc', 'equals', 'value', '   ', 'radiusLengths'],
         'generalize': [
           'arc',
@@ -649,7 +673,9 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         // lowerLeft: { position: new Point(-1, -1), scale: 1 },
-        top: { position: new Point(-0.2, 1.6), scale: 1 },
+        top: { position: new Point(-0.2, 1.5), scale: 1 },
+        topCirc: { position: new Point(0, 1.5), scale: 1 },
+        topCircle: { position: new Point(0, 1.5), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
         // summary: { position: new Point(0, 0), scale: 1 },
         // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
