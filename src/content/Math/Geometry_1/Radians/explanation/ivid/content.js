@@ -59,8 +59,9 @@ class Content extends PresentationFormatContent {
   addSections() {
     const diag = this.diagram.elements;
     const circle = diag._circle;
-    const equation = diag._equation;
+    // const equation = diag._equation;
     const eqn = diag._eqn;
+    const radEqnNav = diag._radEqnNav;
 
     let common = {
       setContent: [],
@@ -625,12 +626,74 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.showForm('arc');
         eqn.setScenario('center');
-        eqn._radius.makeTouchable();
-        eqn._angle.makeTouchable();
-        eqn._arc.makeTouchable();
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      show: [
+        eqn,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        eqn.setScenario('center');
+        eqn.showForm('arc');
+        diag.setAngleTextRadians();
+        eqn.goToForm({ name: 'twoPiEquals360', animate: 'dissolve', callback: doneStr });
+      },
+      setSteadyState: () => {
+        eqn.showForm('twoPiEquals360');
+        eqn.setScenario('center');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      show: [
+        eqn,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        eqn.setScenario('center');
+        eqn.showForm('twoPiEquals360');
+        diag.setAngleTextRadians();
+        eqn.goToForm({
+          name: 'angleRatios', animate: 'move', duration: 1.2, callback: doneStr,
+        });
+      },
+      setSteadyState: () => {
+        eqn.showForm('angleRatios');
+        eqn.setScenario('center');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      show: [
+        radEqnNav, diag._radEqn,
+      ],
+      setSteadyState: () => {
+        diag._radEqn.showForm('3');
+        diag._radEqn.setScenario('center');
+        // console.log(diag)
+      },
+    });
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************

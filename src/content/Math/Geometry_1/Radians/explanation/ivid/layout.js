@@ -257,132 +257,6 @@ export default function diagramLayout() {
     scenario: 'center',
   };
 
-  // ///////////////////////////////////////////////////////
-  // Equation
-  // ///////////////////////////////////////////////////////
-  // const mods = (direction, mag) => ({
-  //   animations: {
-  //     options: {
-  //       translation: {
-  //         style: 'curved',
-  //         magnitude: mag,
-  //         direction,
-  //       },
-  //     },
-  //   },
-  // });
-  // layout.equation = {
-  //   name: 'equation',
-  //   method: 'addEquation',
-  //   options: {
-  //     color: colors.diagram.text.base,
-  //     scale: 1,
-  //     elements: {
-  //       arc: { text: 'arc length', color: colors.arc },
-  //       _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4) },
-  //       radius: { text: 'radius', color: colors.lines },
-  //       _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
-  //       angle: { text: 'angle', color: colors.angles },
-  //       _angle: { text: 'angle', color: colors.angles, mods: mods('down', 0.4) },
-  //       radiusLengths: { text: 'radius lengths', color: colors.radianLines },
-  //       radiusLength1: { text: 'radius length', color: colors.radianLines },
-  //       radiusLengths2: { text: 'radius lengths', color: colors.radianLines },
-  //       radiusLengths3: { text: 'radius lengths', color: colors.radianLines },
-  //       _2p: {
-  //         text: '2π',
-  //         elementOptions: {
-  //           animations: {
-  //             options: {
-  //               translation: {
-  //                 style: 'curved',
-  //                 magnitude: 0.6,
-  //                 direction: 'down',
-  //               },
-  //             },
-  //           },
-  //         },
-  //       },
-  //       _1: { text: ' 1 ', color: colors.angles },
-  //       _2: { text: ' 2 ', color: colors.angles },
-  //       _3: { text: ' 3 ', color: colors.angles },
-  //       value: { text: '0.00', color: colors.angles },
-  //       x: `  ${String.fromCharCode(215)}  `,
-  //       equals: '  =  ',
-  //       v: { symbol: 'vinculum' },
-  //       largeBrace: {
-  //         symbol: 'brace',
-  //         side: 'top',
-  //         color: colors.marks,
-  //         lineWidth: 0.012,
-  //         width: 0.05,
-  //       },
-  //       smallBrace: {
-  //         symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012, width: 0.05,
-  //       },
-  //     },
-  //     defaultFormAlignment: {
-  //       fixTo: 'equals',    // Points can also be defined as objects
-  //       xAlign: 'right',
-  //       yAlign: 'top',
-  //     },
-  //     forms: {
-  //       'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
-  //       // 'radius': [{ frac: ['_arc', '_angle', 'v'] }, 'equals', '_radius'],
-  //       // 'angle': [{ frac: ['_arc', '_radius', 'v'] }, 'equals', '_angle'],
-  //       'radius': ['_radius', 'equals', { frac: ['_arc', 'v', '_angle'] }],
-  //       'angle': ['_angle', 'equals', { frac: ['_arc', 'v', '_radius'] }],
-  //       '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength1'],
-  //       '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths2'],
-  //       '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths3'],
-  //       'value': ['arc', 'equals', 'value', '   ', 'radiusLengths'],
-  //       'generalize': [
-  //         'arc',
-  //         'equals',
-  //         {
-  //           topComment: {
-  //             content: '_value',
-  //             comment: 'angle',
-  //             symbol: 'smallBrace',
-  //             contentSpace: 0.04,
-  //             inSize: false,
-  //           },
-  //         },
-  //         '   ',
-  //         {
-  //           topComment: ['radiusLengths', 'radius', 'largeBrace', 0.04, 0.06],
-  //         },
-  //       ],
-  //       'general': ['arc', 'equals', 'angle', 'x', 'radius'],
-  //     },
-  //     formSeries: ['arc', 'radius', 'angle'],
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       lowerLeft: { position: new Point(-1, -1), scale: 1 },
-  //       top: { position: new Point(-0.2, 1.6), scale: 1 },
-  //       center: { position: new Point(0 ,0), scale: 1.3 },
-  //       // summary: { position: new Point(0, 0), scale: 1 },
-  //       'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
-  //     },
-  //   },
-  //   scenario: 'lowerLeft',
-  // };
-
-  const translation = diff => joinObjects({}, {
-    radius: ['linear'],
-    radius_1: ['linear'],
-    radius_2: ['linear'],
-    arc: ['linear'],
-    v: ['linear'],
-    v_1: ['linear'],
-    v_2: ['linear'],
-    angle: ['linear'],
-    angle_1: ['linear'],
-    angle_2: ['linear'],
-    x_1: ['linear'],
-    x_2: ['linear'],
-  }, diff);
-
   layout.eqn = {
     name: 'eqn',
     method: 'addEquation',
@@ -393,6 +267,12 @@ export default function diagramLayout() {
         arc: { text: 'arc length', color: colors.arc },
         circumference: { color: colors.arc },
         twoPi: { text: '2π' },
+        twoPi_2: { text: '2π' },
+        twoPi_3: { text: '2π' },
+        two: { text: '2' },
+        pi: { text: 'pi' },
+        _360: { text: '360' },
+        deg: { text: 'º' },
         r: { color: colors.lines },
         circle: 'circle',
         radians: ' radians',
@@ -408,11 +288,12 @@ export default function diagramLayout() {
         x: `  ${String.fromCharCode(215)}  `,
         x_1: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
-        v: { symbol: 'vinculum' },
+        // v: { symbol: 'vinculum' },
         v_1: { symbol: 'vinculum' },
         v_2: { symbol: 'vinculum' },
         s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
         s_2: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_3: { symbol: 'strike', style: 'cross', color: colors.dull },
         largeBrace: {
           symbol: 'brace',
           side: 'top',
@@ -469,10 +350,123 @@ export default function diagramLayout() {
         'arc': ['arc', 'equals', 'angle', 'x', 'radius'],
         'angle': ['angle', 'equals', { frac: ['arc', 'v', 'radius'] }],
         'radius': ['radius', 'equals', { frac: ['arc', 'v', 'angle'] }],
-        'arcToRadius0': {
-          content: ['arc', 'equals', 'angle_1', 'x', 'radius'],
-          translation: translation(),
-        },
+        'twoPiEquals360': [
+          {
+            container: {
+              content: { bottomComment: ['twoPi', 'radians'] },
+              width: 0.8,
+            },
+          },
+          'equals',
+          {
+            container: {
+              content: ['_360', 'deg'],
+              width: 0.8,
+            },
+          },
+        ],
+        'angleRatios': [
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_1', 'rad'] },
+                  symbol: 'v_1',
+                  denominator: 'twoPi',
+                },
+              },
+              width: 0.8,
+            },
+          },
+          'equals',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_2', 'deg_1'] },
+                  symbol: 'v_2',
+                  denominator: '_360',
+                },
+              },
+              width:0.8,
+            },
+          },
+        ],
+        'angleRatios1': [
+          'twoPi_2', 'x_1',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_1', 'rad'] },
+                  symbol: 'v_1',
+                  denominator: 'twoPi',
+                },
+              },
+              width: 0.8,
+            },
+          },
+          'equals',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_2', 'deg_1'] },
+                  symbol: 'v_2',
+                  denominator: '_360',
+                },
+              },
+              width:0.8,
+            },
+          },
+          'x_2', 'two', 'pi',
+        ],
+        'angleRatios2': [
+          { strike: ['twoPi_2', 's_1'] }, 'x_1',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_1', 'rad'] },
+                  symbol: 'v_1',
+                  denominator: 'twoPi',
+                },
+              },
+              width: 0.8,
+            },
+          },
+          'equals',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_2', 'deg_1'] },
+                  symbol: 'v_2',
+                  denominator: { bottomStrike: ['_360', 's_3', '_180'] },
+                },
+              },
+              width:0.8,
+            },
+          },
+          'x_2', { strike: ['two', 's_2'] }, 'pi',
+        ],
+        'angleRatios3': [
+          'angle_1', 'rad',
+          'equals',
+          {
+            container: {
+              content: {
+                frac: {
+                  numerator: { sub: ['angle_2', 'deg_1'] },
+                  symbol: 'v_2',
+                  denominator: '_360',
+                },
+              },
+              width:0.8,
+            },
+          },
+          'x_2', { strike: ['twoPi_3', 's_2'] },
+        ],
         // 'arcFromRadius0': []
       },
       formSeries: ['arc', 'radius', 'angle'],
@@ -491,11 +485,164 @@ export default function diagramLayout() {
     scenario: 'top',
   };
 
+  const container = content => ({
+    container: {
+      content,
+      width: 0.7,
+    },
+  });
+
+  const frac = (numerator, symbol, denominator) => ({
+    frac: {
+      numerator,
+      symbol,
+      denominator,
+      overhang: 0.05,
+    },
+  });
+
+  layout.radEqn = {
+    name: 'radEqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        twoPi: { text: '2π' },
+        twoPi_1: { text: '2π' },
+        two: { text: '2' },
+        pi: { text: 'π' },
+        _360: { text: '360' },
+        _180: { text: '180' },
+        degSym: { text: 'º' },
+        rad: { color: colors.angles },
+        deg: { color: colors.angles },
+        radians: ' radians',
+        x_1: `  ${String.fromCharCode(215)}  `,
+        x_2: `  ${String.fromCharCode(215)}  `,
+        equals: '  =  ',
+        v_1: { symbol: 'vinculum' },
+        v_2: { symbol: 'vinculum' },
+        s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_2: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_3: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_4: { symbol: 'strike', style: 'cross', color: colors.dull },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        xAlign: 'center',
+        yAlign: 'bottom',
+      },
+      forms: {
+        '0': [
+          container({ bottomComment: ['twoPi', 'radians'] }),
+          'equals',
+          container(['_360', 'degSym'])
+        ],
+        '1': [
+          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
+          'equals',
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+        ],
+        '2': [
+          'twoPi_1', 'x_1',
+          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
+          'equals',
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          'x_2', 'two', 'pi',
+        ],
+        '3': [
+          { strike: ['twoPi_1', 's_1'] }, 'x_1',
+          container(frac(
+            { sub: ['angle_1', 'rad'] },
+            'v_1',
+            { strike: ['twoPi', 's_2'] },
+          )),
+          'equals',
+          container(frac(
+            { sub: ['angle_2', 'deg'] },
+            'v_2',
+            {
+              sub: {
+                content: { strike: ['_360', 's_3'] },
+                subscript: '_180',
+                offset: [0.05, 0],
+                inSize: false,
+              },
+            },
+          )),
+          'x_2', { strike: ['two', 's_4'] }, 'pi',
+        ],
+        '4': [
+          { sub: ['angle_1', 'rad'] },
+          'equals',
+          frac(
+            { sub: ['angle_2', 'deg'] },
+            'v_2',
+            '_180',
+          ),
+          'x_2', 'pi',
+        ],
+        '5': [
+          { sub: ['angle_1', 'rad'] },
+          'equals',
+          frac(
+            [{ sub: ['angle_2', 'deg'] }, 'x_2', 'pi'],
+            'v_2',
+            '_180',
+          ),
+        ],
+        '6': [
+          { sub: ['angle_1', 'rad'] },
+          'equals',
+          { sub: ['angle_2', 'deg'] },
+          'x_2',
+          frac(
+            'pi',
+            'v_2',
+            '_180',
+          ),
+        ],
+      },
+      formSeries: ['0', '1', '2', '3', '4', '5', '6'],
+    },
+    mods: {
+      scenarios: {
+        // lowerLeft: { position: new Point(-1, -1), scale: 1 },
+        // top: { position: new Point(-0.2, 1.5), scale: 1 },
+        // topCirc: { position: new Point(0, 1.5), scale: 1 },
+        // topCircle: { position: new Point(0, 1.5), scale: 1 },
+        center: { position: new Point(0 ,0), scale: 1.3 },
+        // summary: { position: new Point(0, 0), scale: 1 },
+        // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
+      },
+    },
+    scenario: 'top',
+  };
+
+  layout.radEqnNav = {
+    name: 'radEqnNav',
+    method: 'addNavigator',
+    options: {
+      equation: layout.radEqn,
+      type: 'equationOnly',
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0), scale: 1.3 },
+        // bottom: { position: new Point(0, -1.6), scale: 0.9 },
+      },
+    },
+  };
+
 
   layout.addElements = [
     layout.circle,
     // layout.equation,
     layout.eqn,
+    // layout.radEqn,
+    layout.radEqnNav,
     // layout.circumferenceEqn,
     // // layout.arcEqn,
     // layout.arcEqnNav,
