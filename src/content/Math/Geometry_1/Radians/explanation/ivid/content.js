@@ -689,7 +689,7 @@ class Content extends PresentationFormatContent {
         diag._degEqnNav, diag._degEqn,
       ],
       setSteadyState: () => {
-        diag._degEqn.showForm('3');
+        diag._degEqn.showForm('0');
         diag._degEqn.setScenario('center');
         // console.log(diag)
       },
