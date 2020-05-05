@@ -74,52 +74,52 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._line1.fnMap.add('updateAngle', this.updateAngle.bind(this));
     this._circle._line1.setTransformCallback = 'updateAngle';
     this._circle._line1.move.canBeMovedAfterLosingTouch = true;
-    this._equation.__arc.onClick = this.goToArcForm.bind(this);
-    this._equation.__radius.onClick = this.goToRadiusForm.bind(this);
-    this._equation.__angle.onClick = this.goToAngleForm.bind(this);
-    this._equation.__arc.makeTouchable();
-    this._equation.__radius.makeTouchable();
-    this._equation.__angle.makeTouchable();
+    // this._equation.__arc.onClick = this.goToArcForm.bind(this);
+    // this._equation.__radius.onClick = this.goToRadiusForm.bind(this);
+    // this._equation.__angle.onClick = this.goToAngleForm.bind(this);
+    // this._equation.__arc.makeTouchable();
+    // this._equation.__radius.makeTouchable();
+    // this._equation.__angle.makeTouchable();
 
-    this._equation._arc.makeTouchable();
-    this._equation._arc.onClick = this.pulseArc.bind(this);
-    this._equation._radius.makeTouchable();
-    this._equation._radius.onClick = this.pulseRadius.bind(this);
-    this._equation._angle.makeTouchable();
-    this._equation._angle.onClick = this.pulseAngle.bind(this);
+    // this._equation._arc.makeTouchable();
+    // this._equation._arc.onClick = this.pulseArc.bind(this);
+    // this._equation._radius.makeTouchable();
+    // this._equation._radius.onClick = this.pulseRadius.bind(this);
+    // this._equation._angle.makeTouchable();
+    // this._equation._angle.onClick = this.pulseAngle.bind(this);
 
-    this._equation.__1.makeTouchable();
-    this._equation.__1.onClick = this.pushLine.bind(this, 1, 0, 1, null);
-    this._equation.__2.makeTouchable();
-    this._equation.__2.onClick = this.pushLine.bind(this, 2, 0, 1, null);
-    this._equation.__3.makeTouchable();
-    this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
-    this._equation._radiusLength1.makeTouchable();
-    this._equation._radiusLength1.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
-      this.diagram.animateNextFrame();
-    };
-    this._equation._radiusLengths2.makeTouchable();
-    this._equation._radiusLengths2.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
-      this.diagram.animateNextFrame();
-    };
-    this._equation._radiusLengths3.makeTouchable();
-    this._equation._radiusLengths3.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
-      this._circle._radianLines._line2.pulseThickNow(1, 1.03, 9);
-      this.diagram.animateNextFrame();
-    };
+    // this._equation.__1.makeTouchable();
+    // this._equation.__1.onClick = this.pushLine.bind(this, 1, 0, 1, null);
+    // this._equation.__2.makeTouchable();
+    // this._equation.__2.onClick = this.pushLine.bind(this, 2, 0, 1, null);
+    // this._equation.__3.makeTouchable();
+    // this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
+    // this._equation._radiusLength1.makeTouchable();
+    // this._equation._radiusLength1.onClick = () => {
+    //   this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
+    //   this.diagram.animateNextFrame();
+    // };
+    // this._equation._radiusLengths2.makeTouchable();
+    // this._equation._radiusLengths2.onClick = () => {
+    //   this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
+    //   this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
+    //   this.diagram.animateNextFrame();
+    // };
+    // this._equation._radiusLengths3.makeTouchable();
+    // this._equation._radiusLengths3.onClick = () => {
+    //   this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
+    //   this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
+    //   this._circle._radianLines._line2.pulseThickNow(1, 1.03, 9);
+    //   this.diagram.animateNextFrame();
+    // };
 
     this.decimals = 1;
     this.marks = 12;
     this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
     this._circle._angleText._label.makeTouchable();
 
-    this._radDegEqn.isTouchable = false;
-    this._radDegEqn.hasTouchableElements = false;
+    // this._radDegEqn.isTouchable = false;
+    // this._radDegEqn.hasTouchableElements = false;
 
     this.fnMap.global.add('bendRadius', this.bend.bind(this));
     this.fnMap.global.add('setLineRotation', this.setLineRotation.bind(this));
