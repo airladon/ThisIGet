@@ -636,18 +636,141 @@ export default function diagramLayout() {
     },
   };
 
+  layout.degEqn = {
+    name: 'degEqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        twoPi: { text: '2π' },
+        twoPi_1: { text: '2π' },
+        two: { text: '2' },
+        pi: { text: 'π' },
+        _360: { text: '360' },
+        _180: { text: '180' },
+        degSym: { text: 'º' },
+        rad: { color: colors.angles },
+        deg: { color: colors.angles },
+        radians: ' radians',
+        x_1: `  ${String.fromCharCode(215)}  `,
+        x_2: `  ${String.fromCharCode(215)}  `,
+        equals: '  =  ',
+        v_1: { symbol: 'vinculum' },
+        v_2: { symbol: 'vinculum' },
+        s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_2: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_3: { symbol: 'strike', style: 'cross', color: colors.dull },
+        s_4: { symbol: 'strike', style: 'cross', color: colors.dull },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        xAlign: 'center',
+        yAlign: 'bottom',
+      },
+      forms: {
+        '0': [
+          container({ bottomComment: [['two', 'pi'], 'radians'] }),
+          'equals',
+          container(['_360', 'degSym']),
+        ],
+        '1': [
+          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'two', 'pi')),
+          'equals',
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+        ],
+        '2': [
+          '_360_1', 'x_1',
+          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'two', 'pi')),
+          'equals',
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          'x_2', '_360_2',
+        ],
+        '3': [
+          {
+            sub: {
+              content: { strike: ['_360_1', 's_1'] },
+              subscript:'_180',
+              offset: [-0.05, -0.05],
+              inSize:false,
+            },
+          },
+          'x_1',
+          container(frac(
+            { sub: ['angle_1', 'rad'] },
+            'v_1',
+            [{ strike: ['two', 's_2'] }, 'pi'],
+          )),
+          'equals',
+          container(frac(
+            { sub: ['angle_2', 'deg'] },
+            'v_2',
+            { strike: ['_360', 's_3'] },
+          )),
+          'x_2', { strike: ['_360_2', 's_4'] },
+        ],
+        '4': [
+          '_180',
+          'x_1',
+          container(frac(
+            { sub: ['angle_1', 'rad'] },
+            'v_1',
+            'pi',
+          )),
+          'equals',
+          { sub: ['angle_2', 'deg'] },
+        ],
+        '5': [
+          frac(
+            ['_180', 'x_1', { sub: ['angle_1', 'rad'] }],
+            'v_1',
+            'pi',
+          ),
+          'equals',
+          { sub: ['angle_2', 'deg'] },
+        ],
+        '6': [
+          frac(
+            '_180',
+            'v_1',
+            'pi',
+          ),
+          'x_1', { sub: ['angle_1', 'rad'] },
+          'equals',
+          { sub: ['angle_2', 'deg'] },
+        ],
+      },
+      formSeries: ['0', '1', '2', '3', '4', '5', '6'],
+    },
+    mods: {
+      scenarios: {
+        center: { position: new Point(0 ,0), scale: 1.3 },
+      },
+    },
+    scenario: 'top',
+  };
+
+  layout.degEqnNav = {
+    name: 'degEqnNav',
+    method: 'addNavigator',
+    options: {
+      equation: layout.degEqn,
+      type: 'equationOnly',
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0), scale: 1.3 },
+      },
+    },
+  };
+
 
   layout.addElements = [
     layout.circle,
-    // layout.equation,
     layout.eqn,
-    // layout.radEqn,
     layout.radEqnNav,
-    // layout.circumferenceEqn,
-    // // layout.arcEqn,
-    // layout.arcEqnNav,
-    // layout.radDegEqnNav,
-    // layout.degRadEqn,
+    layout.degEqnNav,
   ];
   return layout;
 }

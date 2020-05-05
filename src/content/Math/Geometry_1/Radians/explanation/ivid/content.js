@@ -686,11 +686,11 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       show: [
-        radEqnNav, diag._radEqn,
+        diag._degEqnNav, diag._degEqn,
       ],
       setSteadyState: () => {
-        diag._radEqn.showForm('3');
-        diag._radEqn.setScenario('center');
+        diag._degEqn.showForm('3');
+        diag._degEqn.setScenario('center');
         // console.log(diag)
       },
     });
