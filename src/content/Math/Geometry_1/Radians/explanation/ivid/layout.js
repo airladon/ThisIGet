@@ -348,125 +348,125 @@ export default function diagramLayout() {
           },
         ],
         'arc': ['arc', 'equals', 'angle', 'x', 'radius'],
-        'angle': ['angle', 'equals', { frac: ['arc', 'v', 'radius'] }],
-        'radius': ['radius', 'equals', { frac: ['arc', 'v', 'angle'] }],
-        'twoPiEquals360': [
-          {
-            container: {
-              content: { bottomComment: ['twoPi', 'radians'] },
-              width: 0.8,
-            },
-          },
-          'equals',
-          {
-            container: {
-              content: ['_360', 'deg'],
-              width: 0.8,
-            },
-          },
-        ],
-        'angleRatios': [
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_1', 'rad'] },
-                  symbol: 'v_1',
-                  denominator: 'twoPi',
-                },
-              },
-              width: 0.8,
-            },
-          },
-          'equals',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_2', 'deg_1'] },
-                  symbol: 'v_2',
-                  denominator: '_360',
-                },
-              },
-              width:0.8,
-            },
-          },
-        ],
-        'angleRatios1': [
-          'twoPi_2', 'x_1',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_1', 'rad'] },
-                  symbol: 'v_1',
-                  denominator: 'twoPi',
-                },
-              },
-              width: 0.8,
-            },
-          },
-          'equals',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_2', 'deg_1'] },
-                  symbol: 'v_2',
-                  denominator: '_360',
-                },
-              },
-              width:0.8,
-            },
-          },
-          'x_2', 'two', 'pi',
-        ],
-        'angleRatios2': [
-          { strike: ['twoPi_2', 's_1'] }, 'x_1',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_1', 'rad'] },
-                  symbol: 'v_1',
-                  denominator: 'twoPi',
-                },
-              },
-              width: 0.8,
-            },
-          },
-          'equals',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_2', 'deg_1'] },
-                  symbol: 'v_2',
-                  denominator: { bottomStrike: ['_360', 's_3', '_180'] },
-                },
-              },
-              width:0.8,
-            },
-          },
-          'x_2', { strike: ['two', 's_2'] }, 'pi',
-        ],
-        'angleRatios3': [
-          'angle_1', 'rad',
-          'equals',
-          {
-            container: {
-              content: {
-                frac: {
-                  numerator: { sub: ['angle_2', 'deg_1'] },
-                  symbol: 'v_2',
-                  denominator: '_360',
-                },
-              },
-              width:0.8,
-            },
-          },
-          'x_2', { strike: ['twoPi_3', 's_2'] },
-        ],
+        'angle': ['angle', 'equals', { frac: ['arc', 'v_1', 'radius'] }],
+        'radius': ['radius', 'equals', { frac: ['arc', 'v_1', 'angle'] }],
+        // 'twoPiEquals360': [
+        //   {
+        //     container: {
+        //       content: { bottomComment: ['twoPi', 'radians'] },
+        //       width: 0.8,
+        //     },
+        //   },
+        //   'equals',
+        //   {
+        //     container: {
+        //       content: ['_360', 'deg'],
+        //       width: 0.8,
+        //     },
+        //   },
+        // ],
+        // 'angleRatios': [
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_1', 'rad'] },
+        //           symbol: 'v_1',
+        //           denominator: 'twoPi',
+        //         },
+        //       },
+        //       width: 0.8,
+        //     },
+        //   },
+        //   'equals',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_2', 'deg_1'] },
+        //           symbol: 'v_2',
+        //           denominator: '_360',
+        //         },
+        //       },
+        //       width:0.8,
+        //     },
+        //   },
+        // ],
+        // 'angleRatios1': [
+        //   'twoPi_2', 'x_1',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_1', 'rad'] },
+        //           symbol: 'v_1',
+        //           denominator: 'twoPi',
+        //         },
+        //       },
+        //       width: 0.8,
+        //     },
+        //   },
+        //   'equals',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_2', 'deg_1'] },
+        //           symbol: 'v_2',
+        //           denominator: '_360',
+        //         },
+        //       },
+        //       width:0.8,
+        //     },
+        //   },
+        //   'x_2', 'two', 'pi',
+        // ],
+        // 'angleRatios2': [
+        //   { strike: ['twoPi_2', 's_1'] }, 'x_1',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_1', 'rad'] },
+        //           symbol: 'v_1',
+        //           denominator: 'twoPi',
+        //         },
+        //       },
+        //       width: 0.8,
+        //     },
+        //   },
+        //   'equals',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_2', 'deg_1'] },
+        //           symbol: 'v_2',
+        //           denominator: { bottomStrike: ['_360', 's_3', '_180'] },
+        //         },
+        //       },
+        //       width:0.8,
+        //     },
+        //   },
+        //   'x_2', { strike: ['two', 's_2'] }, 'pi',
+        // ],
+        // 'angleRatios3': [
+        //   'angle_1', 'rad',
+        //   'equals',
+        //   {
+        //     container: {
+        //       content: {
+        //         frac: {
+        //           numerator: { sub: ['angle_2', 'deg_1'] },
+        //           symbol: 'v_2',
+        //           denominator: '_360',
+        //         },
+        //       },
+        //       width:0.8,
+        //     },
+        //   },
+        //   'x_2', { strike: ['twoPi_3', 's_2'] },
+        // ],
         // 'arcFromRadius0': []
       },
       formSeries: ['arc', 'radius', 'angle'],
@@ -488,7 +488,13 @@ export default function diagramLayout() {
   const container = content => ({
     container: {
       content,
-      width: 0.7,
+      width: 0.75,
+    },
+  });
+  const cont2 = content => ({
+    container: {
+      content,
+      width: 0.4,
     },
   });
 
@@ -514,9 +520,9 @@ export default function diagramLayout() {
         pi: { text: 'π' },
         _360: { text: '360' },
         _180: { text: '180' },
-        degSym: { text: 'o' },
+        degSym: { text: 'º' },
         rad: { color: colors.angles },
-        deg: { text: 'º', color: colors.angles },
+        deg: { text: 'deg', color: colors.angles },
         radians: ' radians',
         x_1: `  ${String.fromCharCode(215)}  `,
         x_2: `  ${String.fromCharCode(215)}  `,
@@ -535,21 +541,32 @@ export default function diagramLayout() {
       },
       forms: {
         'start': [],
-        '0': [
-          container({ bottomComment: ['twoPi', 'radians'] }),
-          'equals',
-          container(['_360', 'degSym'])
-        ],
+        // '0': [
+        //   container({ bottomComment: ['twoPi', 'radians'] }),
+        //   'equals',
+        //   container(['_360', 'degSym'])
+        // ],
+        '0': {
+          content: [
+            container({ sub: ['angle_1', 'rad'] }),
+            cont2(' '),
+            container({ sub: ['angle_2', 'deg'] }),
+          ],
+          alignment: {
+            fixTo: '',
+            xAlign: 'center',
+          },
+        },
         '1': [
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
-          'equals',
-          container(frac({ sup: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          cont2('equals'),
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
         ],
         '2': [
           'twoPi_1', 'x_1',
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
-          'equals',
-          container(frac({ sup: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          cont2('equals'),
+          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
           'x_2', 'two', 'pi',
         ],
         '3': [
@@ -559,7 +576,7 @@ export default function diagramLayout() {
             'v_1',
             { strike: ['twoPi', 's_2'] },
           )),
-          'equals',
+          cont2('equals'),
           container(frac(
             { sub: ['angle_2', 'deg'] },
             'v_2',
@@ -576,7 +593,7 @@ export default function diagramLayout() {
         ],
         '4': [
           { sub: ['angle_1', 'rad'] },
-          'equals',
+          cont2('equals'),
           frac(
             { sub: ['angle_2', 'deg'] },
             'v_2',
@@ -586,7 +603,7 @@ export default function diagramLayout() {
         ],
         '5': [
           { sub: ['angle_1', 'rad'] },
-          'equals',
+          cont2('equals'),
           frac(
             [{ sub: ['angle_2', 'deg'] }, 'x_2', 'pi'],
             'v_2',
@@ -595,8 +612,8 @@ export default function diagramLayout() {
         ],
         '6': [
           { sub: ['angle_1', 'rad'] },
-          'equals',
-          { sup: ['angle_2', 'deg'] },
+          cont2('equals'),
+          { sub: ['angle_2', 'deg'] },
           'x_2',
           frac(
             'pi',
@@ -671,20 +688,31 @@ export default function diagramLayout() {
         yAlign: 'bottom',
       },
       forms: {
-        '0': [
-          container(['_360', 'degSym']),
-          'equals',
-          container({ bottomComment: [['two', 'pi'], 'radians'] }),
-        ],
+        // '0': [
+        //   container(['_360', 'degSym']),
+        //   'equals',
+        //   container({ bottomComment: [['two', 'pi'], 'radians'] }),
+        // ],
+        '0': {
+          content: [
+            container({ sub: ['angle_2', 'deg'] }),
+            cont2(' '),
+            container({ sub: ['angle_1', 'rad'] }),
+          ],
+          alignment: {
+            fixTo: '',
+            xAlign: 'center',
+          },
+        },
         '1': [
           container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
-          'equals',
+          cont2('equals'),
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', ['two', 'pi'])),
         ],
         '2': [
           '_360_2', 'x_2',
           container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
-          'equals',
+          cont2('equals'),
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', ['two', 'pi'])),
           'x_1', '_360_1',
         ],
@@ -695,7 +723,7 @@ export default function diagramLayout() {
             'v_2',
             { strike: ['_360', 's_3'] },
           )),
-          'equals',
+          cont2('equals'),
           container(frac(
             { sub: ['angle_1', 'rad'] },
             'v_1',
@@ -714,7 +742,7 @@ export default function diagramLayout() {
         ],
         '4': [
           { sub: ['angle_2', 'deg'] },
-          'equals',
+          cont2('equals'),
           container(frac(
             { sub: ['angle_1', 'rad'] },
             'v_1',
@@ -725,7 +753,7 @@ export default function diagramLayout() {
         ],
         '5': [
           { sub: ['angle_2', 'deg'] },
-          'equals',
+          cont2('equals'),
           frac(
             [{ sub: ['angle_1', 'rad'] }, 'x_1', '_180'],
             'v_1',
@@ -734,7 +762,7 @@ export default function diagramLayout() {
         ],
         '6': [
           { sub: ['angle_2', 'deg'] },
-          'equals',
+          cont2('equals'),
           { sub: ['angle_1', 'rad'] },
           'x_1',
           frac(

@@ -113,6 +113,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     //   this.diagram.animateNextFrame();
     // };
 
+    this._eqn._arc.onClick = this.goToArcForm.bind(this);
+    this._eqn._radius.onClick = this.goToRadiusForm.bind(this);
+    this._eqn._angle.onClick = this.goToAngleForm.bind(this);
+    this._eqn._arc.makeTouchable();
+    this._eqn._radius.makeTouchable();
+    this._eqn._angle.makeTouchable();
+
     this.decimals = 1;
     this.marks = 12;
     this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
@@ -140,6 +147,61 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._eqn._angle.onClick = this.goToAngleForm1.bind(this);
     // this._eqn._arc.onClick = this.goToArcForm1.bind(this);
   }
+
+  goToRadiusForm() {
+    // $FlowFixMe
+    if (this._eqn.getCurrentForm().name === 'radius') {
+      this.accent(this._equation._radius);
+    } else {
+      this._eqn.goToForm({
+        name: 'radius',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  goToArcForm() {
+    // $FlowFixMe
+    if (this._eqn.getCurrentForm().name === 'arc') {
+      this.accent(this._eqn._arc);
+    } else {
+      this._eqn.goToForm({
+        name: 'arc',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  goToAngleForm() {
+    // $FlowFixMe
+    if (this._eqn.getCurrentForm().name === 'angle') {
+      this.accent(this._eqn._angle);
+    } else {
+      this._eqn.goToForm({
+        name: 'angle',
+        duration: 2,
+        animate: 'move',
+        ifAnimating: {
+          cancelGoTo: false,
+          skipToTarget: false,
+        },
+      });
+    }
+    this.diagram.animateNextFrame();
+  }
+
 
   toggleDegrees() {
     if (this._circle._degrees.isShown) {
