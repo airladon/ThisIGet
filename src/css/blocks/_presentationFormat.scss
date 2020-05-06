@@ -380,13 +380,13 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 @-webkit-keyframes fadeout {
-  0% { -webkit-opacity: 1; visibility: 'visible'; }
-  100% { -webkit-opacity: 0; visibility: 'hidden'; }
+  0% { -webkit-opacity: 1; }
+  100% { -webkit-opacity: 0; }
 }
 
 @keyframes fadeout {
-  0% { opacity: 1; visibility: 'visible'; }
-  100% { opacity: 0; visibility: 'hidden'; }
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @import './topic/presentation/navigationButtons';
