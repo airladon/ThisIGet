@@ -733,6 +733,108 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    const row1 = (angle: number) => `<tr><td>|_${angle}rad|</td><td>|_${angle}deg|</td></tr>`;
+
+    const degClick = (angle: number) => click(
+      diag.pushLineDeg,
+      [diag, angle / 180 * Math.PI, 0, 1, null],
+      {
+        color: colors.angles,
+        id: `id_${angle}`,
+        text: `${angle}&deg;`,
+        classes: 'action_word_table',
+      },
+    );
+    const radClick = (label: string, angle: number) => click(
+      diag.pushLineRad,
+      [diag, angle / 180 * Math.PI, 0, 1, null],
+      {
+        color: colors.angles,
+        id: `id_rad_${angle}`,
+        text: label,
+        classes: 'action_word_table',
+      },
+    );
+    this.addSection({
+      setContent: [
+        `
+          <table class="in_topic__fraction_table" id="radians_table">
+            <tr>
+              <th class="topic__fraction_title"> Radians </th>
+              <th class="topic__angle_title"> Degrees </th>
+            </tr>
+            ${row1(360)}
+            ${row1(270)}
+            ${row1(180)}
+            ${row1(120)}
+            ${row1(90)}
+            ${row1(60)}
+            ${row1(45)}
+            ${row1(30)}
+          </table>
+        `,
+      ],
+      modifiers: {
+        _360deg: degClick(360),
+        _270deg: degClick(270),
+        _180deg: degClick(180),
+        _120deg: degClick(120),
+        _90deg: degClick(90),
+        _60deg: degClick(60),
+        _45deg: degClick(45),
+        _30deg: degClick(30),
+        _360rad: radClick('2&pi;', 360),
+        _270rad: radClick('<sup>3&pi;</sup>&frasl;<sub>2</sub>', 270),
+        _180rad: radClick('&pi;', 180),
+        _120rad: radClick('<sup>2&pi;</sup>&frasl;<sub>3</sub>', 120),
+        _90rad: radClick('<sup>&pi;</sup>&frasl;<sub>2</sub>', 90),
+        _60rad: radClick('<sup>&pi;</sup>&frasl;<sub>3</sub>', 60),
+        _45rad: radClick('<sup>&pi;</sup>&frasl;<sub>4</sub>', 45),
+        _30rad: radClick('<sup>&pi;</sup>&frasl;<sub>6</sub>', 30),
+        // _90deg: degClick(90),
+        // _72deg: degClick(72),
+        // _60deg: degClick(60),
+        // _45deg: degClick(45),
+        // _40deg: degClick(40),
+        // _36deg: degClick(36),
+        // _30deg: degClick(30),
+        // _24deg: degClick(24),
+        // _20deg: degClick(20),
+      },
+      show: [
+        circle._line1, circle._line2, circle._degrees,
+        circle._radianLines, circle._angleText, circle._arc,
+        circle._angle,
+      ],
+      // transitionFromPrev: (done, doneStr) => {
+      //   diag._radEqn.setScenario('center');
+      //   diag._degEqn.setScenario('down');
+      //   diag._radEqn.showForm('6');
+      //   diag._radEqn.animations.new()
+      //     .scenario({ target: 'up', duration: 1 })
+      //     .inParallel([
+      //       diag._degEqn.anim.dissolveIn({ duration: 0.5 }),
+      //       diag.anim.trigger({ callback: 'degShowForm', payload: '6' }),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        circle.setScenario('center');
+        circle._angleText.setScenario('bottomRad');
+        diag.setAngleTextRadians();
+        diag.updateAngle();
+      },
+    });
+    
+
 
     // // **********************************************************************
     // // **********************************************************************
