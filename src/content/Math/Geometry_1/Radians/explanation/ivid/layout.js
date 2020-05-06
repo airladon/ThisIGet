@@ -91,29 +91,21 @@ export default function diagramLayout() {
       color: colors.arc,
       sides: 400,
     },
-    // mods: {
-    //   pulseDefault: {
-    //     scale: 1.1,
-    //   },
-    //   pulseSettings: {
-    //     num: 5,
-    //   },
-    // },
   };
 
-  const marks = (numMarks: number, inner: number = radius) => ({
+  const marks = (numMarks: number, inner: number = radius, outer: number = radius * 1.1) => ({
     name: `marks${numMarks}`,
     method: 'radialLines',
     options: {
       innerRadius: inner,
-      outerRadius: radius * 1.1,
+      outerRadius: outer,
       color: colors.marks,
       width: width / 4,
       dAngle: Math.PI * 2 / numMarks,
     },
   });
 
-  layout.radians = joinObjects(marks(Math.PI * 2), { name: 'radians' });
+  layout.radians = joinObjects(marks(Math.PI * 2, 0, radius), { name: 'radians' });
   layout.degrees = {
     name: 'degrees',
     method: 'collection',
@@ -292,7 +284,6 @@ export default function diagramLayout() {
         x: `  ${String.fromCharCode(215)}  `,
         x_1: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
-        // v: { symbol: 'vinculum' },
         v_1: { symbol: 'vinculum' },
         v_2: { symbol: 'vinculum' },
         s_1: { symbol: 'strike', style: 'cross', color: colors.dull },
@@ -354,136 +345,15 @@ export default function diagramLayout() {
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         'angle': ['_angle', 'equals', { frac: ['_arc', 'v_1', '_radius'] }],
         'radius': ['_radius', 'equals', { frac: ['_arc', 'v_1', '_angle'] }],
-        // 'twoPiEquals360': [
-        //   {
-        //     container: {
-        //       content: { bottomComment: ['twoPi', 'radians'] },
-        //       width: 0.8,
-        //     },
-        //   },
-        //   'equals',
-        //   {
-        //     container: {
-        //       content: ['_360', 'deg'],
-        //       width: 0.8,
-        //     },
-        //   },
-        // ],
-        // 'angleRatios': [
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_1', 'rad'] },
-        //           symbol: 'v_1',
-        //           denominator: 'twoPi',
-        //         },
-        //       },
-        //       width: 0.8,
-        //     },
-        //   },
-        //   'equals',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_2', 'deg_1'] },
-        //           symbol: 'v_2',
-        //           denominator: '_360',
-        //         },
-        //       },
-        //       width:0.8,
-        //     },
-        //   },
-        // ],
-        // 'angleRatios1': [
-        //   'twoPi_2', 'x_1',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_1', 'rad'] },
-        //           symbol: 'v_1',
-        //           denominator: 'twoPi',
-        //         },
-        //       },
-        //       width: 0.8,
-        //     },
-        //   },
-        //   'equals',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_2', 'deg_1'] },
-        //           symbol: 'v_2',
-        //           denominator: '_360',
-        //         },
-        //       },
-        //       width:0.8,
-        //     },
-        //   },
-        //   'x_2', 'two', 'pi',
-        // ],
-        // 'angleRatios2': [
-        //   { strike: ['twoPi_2', 's_1'] }, 'x_1',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_1', 'rad'] },
-        //           symbol: 'v_1',
-        //           denominator: 'twoPi',
-        //         },
-        //       },
-        //       width: 0.8,
-        //     },
-        //   },
-        //   'equals',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_2', 'deg_1'] },
-        //           symbol: 'v_2',
-        //           denominator: { bottomStrike: ['_360', 's_3', '_180'] },
-        //         },
-        //       },
-        //       width:0.8,
-        //     },
-        //   },
-        //   'x_2', { strike: ['two', 's_2'] }, 'pi',
-        // ],
-        // 'angleRatios3': [
-        //   'angle_1', 'rad',
-        //   'equals',
-        //   {
-        //     container: {
-        //       content: {
-        //         frac: {
-        //           numerator: { sub: ['angle_2', 'deg_1'] },
-        //           symbol: 'v_2',
-        //           denominator: '_360',
-        //         },
-        //       },
-        //       width:0.8,
-        //     },
-        //   },
-        //   'x_2', { strike: ['twoPi_3', 's_2'] },
-        // ],
-        // 'arcFromRadius0': []
       },
       formSeries: ['arc', 'radius', 'angle'],
     },
     mods: {
       scenarios: {
-        // lowerLeft: { position: new Point(-1, -1), scale: 1 },
         top: { position: new Point(-0.2, 1.5), scale: 1 },
         topCirc: { position: new Point(0, 1.5), scale: 1 },
         topCircle: { position: new Point(0, 1.5), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
-        // summary: { position: new Point(0, 0), scale: 1 },
-        // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
       },
     },
     scenario: 'top',
@@ -568,11 +438,6 @@ export default function diagramLayout() {
       },
       forms: {
         'start': [],
-        // '0': [
-        //   container({ bottomComment: ['twoPi', 'radians'] }),
-        //   'equals',
-        //   container(['_360', 'degSym'])
-        // ],
         '0': {
           content: [
             container(sub('angle_1', 'rad')),
@@ -653,14 +518,8 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        // lowerLeft: { position: new Point(-1, -1), scale: 1 },
-        // top: { position: new Point(-0.2, 1.5), scale: 1 },
-        // topCirc: { position: new Point(0, 1.5), scale: 1 },
-        // topCircle: { position: new Point(0, 1.5), scale: 1 },
         center: { position: new Point(0, 0), scale: 1.3 },
         up: { position: new Point(-0.4, 0.6), scale: 1.3 },
-        // summary: { position: new Point(0, 0), scale: 1 },
-        // 'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
       },
     },
     scenario: 'top',
@@ -769,7 +628,6 @@ export default function diagramLayout() {
               inSize:false,
             },
           },
-          
         ],
         '4': [
           sub('angle_2', 'deg'),

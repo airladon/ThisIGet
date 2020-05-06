@@ -393,11 +393,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setAngleTextProperties(Math.PI * 2, 2, 'rad');
     this.updateAngle();
     this.pushLine(toAngle, 2, 1, null);
+    // this._circle._degrees.hide();
+    // this._circle._radians.showAll();
     // this.setAngleMarks('radians');
   }
 
   pushLineDeg(toAngle: number) {
     this.setAngleTextProperties(360, 0, 'º');
+    // this._circle._degrees.showAll();
+    // this._circle._radians.hide();
     this.updateAngle();
     this.pushLine(toAngle, 2, 1, null);
   }
