@@ -122,8 +122,8 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this.decimals = 1;
     this.marks = 12;
-    this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
-    this._circle._angleText._label.makeTouchable();
+    // this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
+    // this._circle._angleText._label.makeTouchable();
 
     // this._radDegEqn.isTouchable = false;
     // this._radDegEqn.hasTouchableElements = false;
@@ -258,7 +258,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   setAngleTextRadians() {
-    this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    this.setAngleTextProperties(Math.PI * 2, 2, 'rad');
     this.updateAngle();
   }
 
@@ -276,7 +276,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.setAngleTextProperties(360, 0, 'º');
       this._circle._degrees.showAll();
     } else if (marks === 'radians') {
-      this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+      this.setAngleTextProperties(Math.PI * 2, 2, 'rad');
       this._circle._radians.showAll();
     }
     this.updateAngle();
@@ -390,7 +390,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pushLineRad(toAngle: number) {
-    this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    this.setAngleTextProperties(Math.PI * 2, 2, 'rad');
     this.updateAngle();
     this.pushLine(toAngle, 2, 1, null);
     // this.setAngleMarks('radians');

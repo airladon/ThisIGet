@@ -224,7 +224,7 @@ class Content extends PresentationFormatContent {
     // By extension, at an angle of 2 radians, we will have an arc length of two radius lengths.
     // Similarly for 3 radians we have an arc length of 3 radius lengths.
     // In other words, the arc length is the product of radius and angle (when the angle is in radians) which we can generalize to a relationship.
-    const row = (portion: string, angle: number) => `<tr><td class="topic__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
+    const row = (portion: string, angle: number) => `<tr><td class="topic__fraction radians_table_value">${portion}</td><td class="radians_table_value">|_${angle}deg|</td></tr>`;
 
     const rowClick = (angle: number) => click(
       diag.pushLine,
@@ -233,6 +233,7 @@ class Content extends PresentationFormatContent {
         color: colors.angles,
         id: `id_${angle}`,
         text: `${angle}&deg;`,
+        classes: 'action_word_table',
       },
     );
     this.addSection(common, {
@@ -240,7 +241,7 @@ class Content extends PresentationFormatContent {
         note({ top: 85 }, '|Angle|'),
         note({ top: 90 }, '|Arc|'),
         `
-          <table class="in_topic__fraction_table" id="radians_table">
+          <table class="radians_table fractions_table" id="radians_table">
             <tr>
               <th class="topic__fraction_title"> Fraction </th>
               <th class="topic__angle_title"> Angle </th>
@@ -280,12 +281,14 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done, doneStr) => {
         addClass('radians_table', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
-          .delay(0.5)
+          // .delay(0.5)
+          .scenario({ target: 'centerLeft', duration: 1 })
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
         removeClass('radians_table', 'topic__diagram_text_fade_in_05');
+        circle.setScenario('centerLeft');
         // diag.setAngleTextProperties(360, 0, 'º');
         // circle._angleText.setScenario('bottomDeg');
         diag.updateAngle();
@@ -330,10 +333,11 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
+        circle.setScenario('centerLeft');
         addClass('note_radius', 'topic__diagram_text_fade_in_05');
         addClass('id_main_text', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
-          .delay(0.5)
+          .scenario({ target: 'center', duration: 1 })
           .whenFinished(doneStr)
           .start();
       },
@@ -740,7 +744,7 @@ class Content extends PresentationFormatContent {
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
-    const row1 = (angle: number) => `<tr><td>|_${angle}rad|</td><td>|_${angle}deg|</td></tr>`;
+    const row1 = (angle: number) => `<tr><td class="radians_table_value">|_${angle}rad|</td><td class="radians_table_value">|_${angle}deg|</td></tr>`;
 
     const degClick = (angle: number) => click(
       diag.pushLineDeg,
@@ -765,7 +769,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       setContent: [
         `
-          <table class="in_topic__fraction_table" id="radians_table">
+          <table class="radians_table comparison_table" id="radians_table">
             <tr>
               <th class="topic__fraction_title"> Radians </th>
               <th class="topic__angle_title"> Degrees </th>
@@ -827,8 +831,8 @@ class Content extends PresentationFormatContent {
       //     .start();
       // },
       setSteadyState: () => {
-        circle.setScenario('center');
-        circle._angleText.setScenario('bottomRad');
+        circle.setScenario('left');
+        circle._angleText.setScenario('bottom');
         diag.setAngleTextRadians();
         diag.updateAngle();
       },

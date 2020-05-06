@@ -190,8 +190,8 @@ export default function diagramLayout() {
           text: 'Angle:',
           color: colors.angles,
           // style: 'normal',
-          weight: 700,
-          family: 'Helvetica',
+          weight: 100,
+          family: 'Times New Roman, Times, serif',
           position: [-0.1, 0],
           xAlign: 'right',
           size: 0.14,
@@ -206,7 +206,7 @@ export default function diagramLayout() {
         options: {
           color: colors.angles,
           weight: 500,
-          family: 'Helvetica',
+          family: 'Times New Roman, Times, serif',
           xAlign: 'left',
           size: 0.14,
         },
@@ -214,14 +214,9 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        topLeft: { position: new Point(-1.7, 1.5) },
-        bottomRight: { position: new Point(0.2, -1.5) },
-        bottomLeft: { position: new Point(-1.2, -1.2) },
-        bottom: { position: new Point(-0.2, -1.5) },
         bottomDeg: { position: new Point(0.2, -1.6) },
         bottomRad: { position: new Point(-0.1, -1.6) },
-        summary: { position: new Point(-0.2, -1.5) },
-        bottomSlightRight: { position: new Point(0.1, -1.5) },
+        bottom: { position: new Point(0, -1.6) },
       },
     },
   };
@@ -244,14 +239,8 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         'center': { position: new Point(0, 0), scale: 1 },
-        'centerSmaller': { position: new Point(0, -0.3), scale: 0.9 },
-        'centerSmall': { position: new Point(0, -0.3), scale: 0.8 },
-        'title': { position: new Point(-0.4, -1), scale: 0.7 },
-        'bottom': { position: new Point(0, -0.4), scale: 1 },
-        'right': { position: new Point(1.2, -0.1), scale: 0.9 },
-        'top': { position: new Point(0, 0.1), scale: 0.8 },
-        'summary': { position: new Point(1.5, 0.1 ), scale: 0.9 },
-        'qr': { position: new Point(0, 0 ), scale: 1 },
+        'left': { position: new Point(-0.9, 0), scale: 1 },
+        'centerLeft': { position: new Point(-0.6, 0), scale: 1 },
       },
     },
     scenario: 'center',
@@ -509,12 +498,21 @@ export default function diagramLayout() {
       yAlign: 'top',
     },
   });
-  // const container2 = content => ({
-  //   container: {
-  //     content,
-  //     width: 0.8,
-  //   },
-  // });
+
+  const sub = (content, subscript) => ({
+    container: {
+      content: {
+        sub: {
+          content,
+          subscript,
+          // inSize: false,
+        },
+      },
+      fit: 'width',
+      descent: 0.05,
+    },
+  });
+
   const cont2 = content => ({
     container: {
       content,
@@ -577,9 +575,9 @@ export default function diagramLayout() {
         // ],
         '0': {
           content: [
-            container({ sub: ['angle_1', 'rad'] }),
+            container(sub('angle_1', 'rad')),
             cont2('blank1'),
-            container({ sub: ['angle_2', 'deg'] }),
+            container(sub('angle_2', 'deg')),
           ],
           alignment: {
             fixTo: 'blank1',
@@ -587,27 +585,27 @@ export default function diagramLayout() {
           },
         },
         '1': [
-          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
+          container(frac(sub('angle_1', 'rad'), 'v_1', 'twoPi')),
           cont2('equals'),
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac(sub('angle_2', 'deg'), 'v_2', '_360')),
         ],
         '2': [
           'twoPi_1', 'x_1',
-          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
+          container(frac(sub('angle_1', 'rad'), 'v_1', 'twoPi')),
           cont2('equals'),
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac(sub('angle_2', 'deg'), 'v_2', '_360')),
           'x_2', 'two', 'pi',
         ],
         '3': [
           { strike: ['twoPi_1', 's_1'] }, 'x_1',
           container(frac(
-            { sub: ['angle_1', 'rad'] },
+            sub('angle_1', 'rad'),
             'v_1',
             { strike: ['twoPi', 's_2'] },
           )),
           cont2('equals'),
           container(frac(
-            { sub: ['angle_2', 'deg'] },
+            sub('angle_2', 'deg'),
             'v_2',
             {
               sub: {
@@ -621,28 +619,28 @@ export default function diagramLayout() {
           'x_2', { strike: ['two', 's_4'] }, 'pi',
         ],
         '4': [
-          { sub: ['angle_1', 'rad'] },
+          sub('angle_1', 'rad'),
           cont2('equals'),
           frac(
-            { sub: ['angle_2', 'deg'] },
+            sub('angle_2', 'deg'),
             'v_2',
             '_180',
           ),
           'x_2', 'pi',
         ],
         '5': [
-          { sub: ['angle_1', 'rad'] },
+          sub('angle_1', 'rad'),
           cont2('equals'),
           frac(
-            [{ sub: ['angle_2', 'deg'] }, 'x_2', 'pi'],
+            [sub('angle_2', 'deg'), 'x_2', 'pi'],
             'v_2',
             '_180',
           ),
         ],
         '6': [
-          { sub: ['angle_1', 'rad'] },
+          sub('angle_1', 'rad'),
           cont2('equals'),
-          { sub: ['angle_2', 'deg'] },
+          sub('angle_2', 'deg'),
           'x_2',
           frac(
             'pi',
@@ -728,9 +726,9 @@ export default function diagramLayout() {
         // ],
         '0': {
           content: [
-            container({ sub: ['angle_2', 'deg'] }),
+            container(sub('angle_2', 'deg')),
             cont2('blank1'),
-            container({ sub: ['angle_1', 'rad'] }),
+            container(sub('angle_1', 'rad')),
           ],
           alignment: {
             fixTo: 'blank1',
@@ -738,27 +736,27 @@ export default function diagramLayout() {
           },
         },
         '1': [
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac(sub('angle_2', 'deg'), 'v_2', '_360')),
           cont2('equals'),
-          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', ['two', 'pi'])),
+          container(frac(sub('angle_1', 'rad'), 'v_1', ['two', 'pi'])),
         ],
         '2': [
           '_360_2', 'x_2',
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac(sub('angle_2', 'deg'), 'v_2', '_360')),
           cont2('equals'),
-          container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', ['two', 'pi'])),
+          container(frac(sub('angle_1', 'rad'), 'v_1', ['two', 'pi'])),
           'x_1', '_360_1',
         ],
         '3': [
           { strike: ['_360_2', 's_4'] }, 'x_2',
           container(frac(
-            { sub: ['angle_2', 'deg'] },
+            sub('angle_2', 'deg'),
             'v_2',
             { strike: ['_360', 's_3'] },
           )),
           cont2('equals'),
           container(frac(
-            { sub: ['angle_1', 'rad'] },
+            sub('angle_1', 'rad'),
             'v_1',
             [{ strike: ['two', 's_2'] }, 'pi'],
           )),
@@ -774,10 +772,10 @@ export default function diagramLayout() {
           
         ],
         '4': [
-          { sub: ['angle_2', 'deg'] },
+          sub('angle_2', 'deg'),
           cont2('equals'),
           container(frac(
-            { sub: ['angle_1', 'rad'] },
+            sub('angle_1', 'rad'),
             'v_1',
             'pi',
           )),
@@ -785,18 +783,18 @@ export default function diagramLayout() {
           '_180',
         ],
         '5': [
-          { sub: ['angle_2', 'deg'] },
+          sub('angle_2', 'deg'),
           cont2('equals'),
           frac(
-            [{ sub: ['angle_1', 'rad'] }, 'x_1', '_180'],
+            [sub('angle_1', 'rad'), 'x_1', '_180'],
             'v_1',
             'pi',
           ),
         ],
         '6': [
-          { sub: ['angle_2', 'deg'] },
+          sub('angle_2', 'deg'),
           cont2('equals'),
-          { sub: ['angle_1', 'rad'] },
+          sub('angle_1', 'rad'),
           'x_1',
           frac(
             '_180',
