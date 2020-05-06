@@ -514,9 +514,9 @@ export default function diagramLayout() {
         pi: { text: 'π' },
         _360: { text: '360' },
         _180: { text: '180' },
-        degSym: { text: 'º' },
+        degSym: { text: 'o' },
         rad: { color: colors.angles },
-        deg: { color: colors.angles },
+        deg: { text: 'º', color: colors.angles },
         radians: ' radians',
         x_1: `  ${String.fromCharCode(215)}  `,
         x_2: `  ${String.fromCharCode(215)}  `,
@@ -543,13 +543,13 @@ export default function diagramLayout() {
         '1': [
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
           'equals',
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac({ sup: ['angle_2', 'deg'] }, 'v_2', '_360')),
         ],
         '2': [
           'twoPi_1', 'x_1',
           container(frac({ sub: ['angle_1', 'rad'] }, 'v_1', 'twoPi')),
           'equals',
-          container(frac({ sub: ['angle_2', 'deg'] }, 'v_2', '_360')),
+          container(frac({ sup: ['angle_2', 'deg'] }, 'v_2', '_360')),
           'x_2', 'two', 'pi',
         ],
         '3': [
@@ -596,7 +596,7 @@ export default function diagramLayout() {
         '6': [
           { sub: ['angle_1', 'rad'] },
           'equals',
-          { sub: ['angle_2', 'deg'] },
+          { sup: ['angle_2', 'deg'] },
           'x_2',
           frac(
             'pi',
