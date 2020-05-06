@@ -257,6 +257,18 @@ export default function diagramLayout() {
     scenario: 'center',
   };
 
+  const mods = (direction, mag) => ({
+    animations: {
+      options: {
+        translation: {
+          style: 'curved',
+          magnitude: mag,
+          direction,
+        },
+      },
+    },
+  });
+
   layout.eqn = {
     name: 'eqn',
     method: 'addEquation',
@@ -264,6 +276,9 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       scale: 1,
       elements: {
+        _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4) },
+        _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
+        _angle: { text: 'angle', color: colors.angles, mods: mods('down', 0.4) },
         arc: { text: 'arc length', color: colors.arc },
         circumference: { color: colors.arc },
         twoPi: { text: '2π' },
@@ -347,9 +362,9 @@ export default function diagramLayout() {
             topComment: ['radiusLengths', 'radius', 'largeBrace', 0.04, 0.06],
           },
         ],
-        'arc': ['arc', 'equals', 'angle', 'x', 'radius'],
-        'angle': ['angle', 'equals', { frac: ['arc', 'v_1', 'radius'] }],
-        'radius': ['radius', 'equals', { frac: ['arc', 'v_1', 'angle'] }],
+        'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
+        'angle': ['_angle', 'equals', { frac: ['_arc', 'v_1', '_radius'] }],
+        'radius': ['_radius', 'equals', { frac: ['_arc', 'v_1', '_angle'] }],
         // 'twoPiEquals360': [
         //   {
         //     container: {
@@ -488,13 +503,23 @@ export default function diagramLayout() {
   const container = content => ({
     container: {
       content,
-      width: 0.75,
+      width: 0.8,
+      descent: 0.3,
+      ascent: 0.3,
+      yAlign: 'top',
     },
   });
+  // const container2 = content => ({
+  //   container: {
+  //     content,
+  //     width: 0.8,
+  //   },
+  // });
   const cont2 = content => ({
     container: {
       content,
-      width: 0.4,
+      width: 0.5,
+      height: 0.2,
     },
   });
 
@@ -517,6 +542,10 @@ export default function diagramLayout() {
         twoPi: { text: '2π' },
         twoPi_1: { text: '2π' },
         two: { text: '2' },
+        // box: { symbol: 'box' },
+        // box2: { symbol: 'box' },
+        // box3: { symbol: 'box' },
+        blank1: { text: '  =  ', color: [0, 0, 0, 0.001] },
         pi: { text: 'π' },
         _360: { text: '360' },
         _180: { text: '180' },
@@ -549,11 +578,11 @@ export default function diagramLayout() {
         '0': {
           content: [
             container({ sub: ['angle_1', 'rad'] }),
-            cont2(' '),
+            cont2('blank1'),
             container({ sub: ['angle_2', 'deg'] }),
           ],
           alignment: {
-            fixTo: '',
+            fixTo: 'blank1',
             xAlign: 'center',
           },
         },
@@ -669,6 +698,10 @@ export default function diagramLayout() {
         _360: { text: '360' },
         _180: { text: '180' },
         degSym: { text: 'º' },
+        blank1: { text: '  =  ', color: [0, 0, 0, 0.001] },
+        // box: { symbol: 'box' },
+        // box2: { symbol: 'box' },
+        // box3: { symbol: 'box' },
         rad: { color: colors.angles },
         deg: { color: colors.angles },
         radians: ' radians',
@@ -696,11 +729,11 @@ export default function diagramLayout() {
         '0': {
           content: [
             container({ sub: ['angle_2', 'deg'] }),
-            cont2(' '),
+            cont2('blank1'),
             container({ sub: ['angle_1', 'rad'] }),
           ],
           alignment: {
-            fixTo: '',
+            fixTo: 'blank1',
             xAlign: 'center',
           },
         },

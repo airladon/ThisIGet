@@ -113,12 +113,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     //   this.diagram.animateNextFrame();
     // };
 
-    this._eqn._arc.onClick = this.goToArcForm.bind(this);
-    this._eqn._radius.onClick = this.goToRadiusForm.bind(this);
-    this._eqn._angle.onClick = this.goToAngleForm.bind(this);
-    this._eqn._arc.makeTouchable();
-    this._eqn._radius.makeTouchable();
-    this._eqn._angle.makeTouchable();
+    this._eqn.__arc.onClick = this.goToArcForm.bind(this);
+    this._eqn.__radius.onClick = this.goToRadiusForm.bind(this);
+    this._eqn.__angle.onClick = this.goToAngleForm.bind(this);
+    this._eqn.__arc.makeTouchable();
+    this._eqn.__radius.makeTouchable();
+    this._eqn.__angle.makeTouchable();
 
     this.decimals = 1;
     this.marks = 12;
@@ -151,7 +151,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   goToRadiusForm() {
     // $FlowFixMe
     if (this._eqn.getCurrentForm().name === 'radius') {
-      this.accent(this._equation._radius);
+      this.accent(this._equation.__radius);
     } else {
       this._eqn.goToForm({
         name: 'radius',
@@ -169,7 +169,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   goToArcForm() {
     // $FlowFixMe
     if (this._eqn.getCurrentForm().name === 'arc') {
-      this.accent(this._eqn._arc);
+      this.accent(this._eqn.__arc);
     } else {
       this._eqn.goToForm({
         name: 'arc',
@@ -187,7 +187,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   goToAngleForm() {
     // $FlowFixMe
     if (this._eqn.getCurrentForm().name === 'angle') {
-      this.accent(this._eqn._angle);
+      this.accent(this._eqn.__angle);
     } else {
       this._eqn.goToForm({
         name: 'angle',
