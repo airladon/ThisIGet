@@ -45,10 +45,12 @@ export default function diagramLayout() {
     mods: {
       interactiveLocation: new Point(radius * 0.8, 0),
       scenarios: {
-        start: { rotation: 1 },
+        connected: { position: [0, 0], rotation: 0 },
+        unconnected: { position: [-2, 0], rotation: Math.PI / 2 },
+        default: { position: [0, 0] },
       },
     },
-    scenario: 'start',
+    // scenario: 'connected',
   };
 
   layout.corner = {
@@ -69,6 +71,14 @@ export default function diagramLayout() {
       width,
       color: colors.lines,
     },
+    mods: {
+      scenarios: {
+        connected: { position: [0, 0], rotation: 0 },
+        unconnected: { position: [2, 0], rotation: Math.PI / 2 },
+        default: { position: [0, 0] },
+      },
+    },
+    // scenario: 'connected',
   };
   layout.angle = {
     name: 'angle',
@@ -233,6 +243,7 @@ export default function diagramLayout() {
         'center': { position: new Point(0, 0), scale: 1 },
         'left': { position: new Point(-0.9, 0), scale: 1 },
         'centerLeft': { position: new Point(-0.6, 0), scale: 1 },
+        'title': { position: new Point(-0.4, -1), scale: 0.7 },
       },
     },
     scenario: 'center',

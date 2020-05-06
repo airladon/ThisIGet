@@ -253,6 +253,22 @@ $height_limited_landscape_aspect_ratio: "408/200";
   -o-animation: fadeout 0.5s linear;
 }
 
+.topic__diagram_text_fade_out_08 {
+  // opacity: 1;
+  -webkit-animation: fadeout 0.8s linear;
+  -moz-animation: fadeout 0.8s linear;
+  animation: fadeout 0.8s linear;
+  -o-animation: fadeout 0.8s linear;
+}
+
+.topic__diagram_text_fade_out_1 {
+  // opacity: 1;
+  -webkit-animation: fadeout 1s linear;
+  -moz-animation: fadeout 1s linear;
+  animation: fadeout 1s linear;
+  -o-animation: fadeout 1s linear;
+}
+
 .topic__diagram_text_pulse {
   -webkit-animation: text-scaler 1s ease-in-out;
   -moz-animation: text-scaler 1s ease-in-out;
@@ -364,13 +380,13 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 @-webkit-keyframes fadeout {
-  0% { -webkit-opacity: 1; }
-  100% { -webkit-opacity: 0; }
+  0% { -webkit-opacity: 1; visibility: 'visible'; }
+  100% { -webkit-opacity: 0; visibility: 'hidden'; }
 }
 
 @keyframes fadeout {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% { opacity: 1; visibility: 'visible'; }
+  100% { opacity: 0; visibility: 'hidden'; }
 }
 
 @import './topic/presentation/navigationButtons';

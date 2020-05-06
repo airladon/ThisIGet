@@ -30,9 +30,6 @@
 
 .radians_table tr {
   padding: 0;
-}
-
-.radians_table tr {
   height: 2em;
 }
 
@@ -63,4 +60,23 @@
 .action_word_table {
   font-weight: normal;
   text-decoration: none;
+}
+
+.radians_table_fade_out {
+  -webkit-animation: fadeout 1s linear;
+  -moz-animation: fadeout 1s linear;
+  animation: fadeout 1s linear;
+  -o-animation: fadeout 1s linear;
+}
+
+@-webkit-keyframes fadeout {
+  0% { -webkit-opacity: 1; }
+  50% { -webkit-opacity: 0; }
+  100% { -webkit-opacity: 0; }
+}
+
+@keyframes fadeout {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 0; }
 }

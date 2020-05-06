@@ -95,6 +95,8 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._corner, circle._angle,
       ],
       setSteadyState: () => {
+        circle._line1.setScenario('default');
+        circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
       },
@@ -116,14 +118,30 @@ class Content extends PresentationFormatContent {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
       },
       show: [
-        circle._line1, circle._line2, circle._corner, circle._arc,
+        circle._line1, circle._line2,
       ],
+      transitionFromPrev: (done, doneStr) => {
+        circle.setScenario('center');
+        circle._line1.setScenario('unconnected');
+        circle._line2.setScenario('unconnected');
+        circle.animations.new()
+          .inParallel([
+            circle._line1.anim.scenario({ target: 'connected', duration: 1 }),
+            circle._line2.anim.scenario({ target: 'connected', duration: 1 }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
       setSteadyState: () => {
+        circle.setScenario('center');
+        circle._line1.setScenario('default');
+        circle._line2.setScenario('default');
         circle._arc.showAll();
         circle._angle.hide();
         circle._line1.setRotation(0);
+        circle._corner.showAll();
+        circle._arc.showAll();
         diag.updateAngle();
-        circle.setScenario('center');
       },
     });
 
@@ -140,6 +158,8 @@ class Content extends PresentationFormatContent {
         circle.setScenario('center');
         circle._angleText.setScenario('bottomDeg');
         diag.setAngleTextProperties(360, 0, 'º');
+        circle._line1.setScenario('default');
+        circle._line2.setScenario('default');
       },
       setContent: [
         note({ top: 85 }, '|Angle|'),
@@ -296,12 +316,13 @@ class Content extends PresentationFormatContent {
       transitionToNext: (done, doneStr) => {
         const table = document.getElementById('radians_table');
         if (table) {
-          table.classList.add('topic__diagram_text_fade_out_05');
+          table.classList.add('radians_table_fade_out');
         }
-        circle._degrees.animations.new()
+        circle.animations.new()
           .inParallel([
             circle._degrees.anim.dissolveOut({ duration: 0.5 }),
             circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+            circle.anim.scenario({ target: 'center', duration: 1 }),
           ])
           .whenFinished(doneStr)
           .start();
@@ -333,11 +354,12 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
-        circle.setScenario('centerLeft');
+        // circle.setScenario('centerLeft');
         addClass('note_radius', 'topic__diagram_text_fade_in_05');
         addClass('id_main_text', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
-          .scenario({ target: 'center', duration: 1 })
+          // .scenario({ target: 'center', duration: 1 })
+          .delay(0.5)
           .whenFinished(doneStr)
           .start();
       },
@@ -361,6 +383,8 @@ class Content extends PresentationFormatContent {
       setEnterState: () => {
         circle.setScenario('center');
         circle._angleText.setScenario('bottomRad');
+        circle._line1.setScenario('default');
+        circle._line2.setScenario('default');
       },
       setContent: [
         note({ top: 75 }, '|Radian|'),
