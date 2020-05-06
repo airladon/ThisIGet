@@ -239,6 +239,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       const p2 = [0, 0];
       const p3 = this._circle._line1.getP2();
       this._circle._corner.updatePoints([p1, p2, p3]);
+      console.log('updated corner')
     }
     if (this._eqn._value.isShown) {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)}`;

@@ -354,6 +354,7 @@ export default function diagramLayout() {
           },
         ],
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
+        '_arc': ['arc', 'equals', 'angle', 'x', 'radius'],
         'angle': ['_angle', 'equals', { frac: ['_arc', 'v_1', '_radius'] }],
         'radius': ['_radius', 'equals', { frac: ['_arc', 'v_1', '_angle'] }],
       },

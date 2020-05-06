@@ -4611,7 +4611,8 @@ function () {
     // this.fnMap.add('doNothing', () => {});
 
     this.isPaused = false;
-    this.scrolled = false; // this.oldScrollY = 0;
+    this.scrolled = false;
+    this.pointerElementName = 'pointer'; // this.oldScrollY = 0;
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
@@ -4705,8 +4706,10 @@ function () {
 
     if (this instanceof Diagram) {
       this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_10__["default"](this);
-    } // this.pauseAfterNextDrawFlag = false;
+    }
 
+    this.previousCursorPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
+    this.isTouchDown = false; // this.pauseAfterNextDrawFlag = false;
 
     this.fontScale = optionsToUse.fontScale;
     this.updateLimits(limits);
@@ -4769,6 +4772,7 @@ function () {
     this.drawTimeoutId = null;
     this.oldScroll = window.pageYOffset;
     this.drawAnimationFrames = 0;
+    this.cursorShown = false;
   }
 
   _createClass(Diagram, [{
@@ -4777,7 +4781,7 @@ function () {
       this.recorder.touchDown = this.simulateTouchDown.bind(this);
       this.recorder.touchUp = this.simulateTouchUp.bind(this); // this.simulateTouchMove.bind(this),
 
-      this.recorder.cursorMove = this.simulateCursorMove.bind(this);
+      this.recorder.cursorMove = this.setCursor.bind(this);
       this.recorder.animateDiagramNextFrame = this.animateNextFrame.bind(this);
       this.recorder.getElement = this.getElement.bind(this);
       this.recorder.getDiagramState = this.getState.bind(this);
@@ -4786,6 +4790,7 @@ function () {
       this.recorder.pauseDiagram = this.pause.bind(this);
       this.recorder.unpauseDiagram = this.unpause.bind(this);
       this.recorder.diagramIsInTransition = this.getIsInTransition.bind(this);
+      this.recorder.diagramShowCursor = this.showCursor.bind(this);
     }
   }, {
     key: "scrollEvent",
@@ -5193,11 +5198,10 @@ function () {
   }, {
     key: "simulateTouchDown",
     value: function simulateTouchDown(diagramPoint) {
-      var pointerElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'pointer';
       // const pixelPoint = diagramPoint.transformBy(this.spaceTransforms.diagramToPixel.matrix());
       // const clientPoint = this.pixelToClient(pixelPoint);
       // this.touchDownHandler(clientPoint);
-      var pointer = this.getElement(pointerElement);
+      var pointer = this.getElement(this.pointerElementName);
 
       if (pointer == null) {
         return;
@@ -5213,6 +5217,53 @@ function () {
       up.hide();
       down.show();
       pointer.setPosition(diagramPoint);
+    }
+  }, {
+    key: "toggleCursor",
+    value: function toggleCursor() {
+      this.cursorShown = !this.cursorShown;
+
+      if (this.recorder.isRecording) {
+        if (this.cursorShown) {
+          this.recorder.recordEvent('showCursor', this.previousCursorPoint.x, this.previousCursorPoint.y);
+
+          if (this.isTouchDown) {
+            this.showCursor('down');
+          } else {
+            this.showCursor('up');
+          }
+
+          console.log(this.previousCursorPoint);
+          this.setCursor(this.previousCursorPoint);
+        } else {
+          this.recorder.recordEvent('hideCursor');
+          this.showCursor('hide');
+        }
+      }
+    }
+  }, {
+    key: "showCursor",
+    value: function showCursor(show) {
+      var pointer = this.getElement(this.pointerElementName);
+
+      if (pointer == null) {
+        return;
+      }
+
+      var up = pointer.getElement('up');
+      var down = pointer.getElement('down');
+
+      if (show === 'up') {
+        up.showAll();
+        down.hide();
+      } else if (show === 'down') {
+        up.hide();
+        down.showAll();
+      } else {
+        pointer.hide();
+      }
+
+      this.animateNextFrame();
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
     // and dragged, then when they are released, for them to move freely before
@@ -5225,16 +5276,26 @@ function () {
         var pixelP = this.clientToPixel(clientPoint);
         var diagramPoint = pixelP.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
         this.recorder.recordEvent('touchDown', diagramPoint.x, diagramPoint.y);
+
+        if (this.cursorShown) {
+          this.showCursor('down');
+        }
       }
 
       if (this.isPaused) {
         this.unpause();
       }
 
+      if (this.recorder.isPlaying) {
+        this.recorder.pausePlayback();
+        this.showCursor('hide');
+      }
+
       if (this.inTransition) {
         return false;
-      } // Get the touched point in clip space
+      }
 
+      this.isTouchDown = true; // Get the touched point in clip space
 
       var pixelPoint = this.clientToPixel(clientPoint); // console.log(pixelPoint)
 
@@ -5281,9 +5342,8 @@ function () {
   }, {
     key: "simulateTouchUp",
     value: function simulateTouchUp() {
-      var pointerElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'pointer';
       // this.touchUpHandler();
-      var pointer = this.getElement(pointerElement);
+      var pointer = this.getElement(this.pointerElementName);
 
       if (pointer == null) {
         return;
@@ -5307,6 +5367,10 @@ function () {
     value: function touchUpHandler() {
       if (this.recorder.isRecording) {
         this.recorder.recordEvent('touchUp');
+
+        if (this.cursorShown) {
+          this.showCursor('up');
+        }
       } // console.log("before", this.elements._circle.transform.t())
       // console.log(this.beingMovedElements)
 
@@ -5320,20 +5384,29 @@ function () {
         }
       }
 
+      this.isTouchDown = false;
       this.beingMovedElements = [];
       this.beingTouchedElements = []; // console.log("after", this.elements._circle.transform.t())
-    }
+    } // simulateCursorMove(diagramPoint: Point) {
+    //   const pointer = this.getElement(this.pointerElementName);
+    //   if (pointer == null) {
+    //     return;
+    //   }
+    //   pointer.setPosition(diagramPoint);
+    // }
+
   }, {
-    key: "simulateCursorMove",
-    value: function simulateCursorMove(diagramPoint) {
-      var pointerElement = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'pointer';
-      var pointer = this.getElement(pointerElement);
+    key: "setCursor",
+    value: function setCursor(p) {
+      var pointer = this.getElement(this.pointerElementName);
 
       if (pointer == null) {
         return;
       }
 
-      pointer.setPosition(diagramPoint);
+      pointer.setPosition(p); // console.log(p, pointer.isShown, pointer._up.isShown, pointer);
+
+      this.animateNextFrame();
     }
   }, {
     key: "touchFreeHandler",
@@ -5341,7 +5414,12 @@ function () {
       if (this.recorder.isRecording) {
         var pixelP = this.clientToPixel(clientPoint);
         var diagramPoint = pixelP.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
-        this.recorder.recordEvent('cursorMove', diagramPoint.x, diagramPoint.y);
+        this.previousCursorPoint = diagramPoint;
+
+        if (this.cursorShown) {
+          this.recorder.recordEvent('cursorMove', diagramPoint.x, diagramPoint.y);
+          this.setCursor(diagramPoint);
+        }
       }
     }
   }, {
@@ -5485,6 +5563,10 @@ function () {
         var currentPixelPoint = this.clientToPixel(currentClientPoint);
         var diagramPoint = currentPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
         this.recorder.recordEvent('cursorMove', diagramPoint.x, diagramPoint.y);
+
+        if (this.cursorShown) {
+          this.setCursor(diagramPoint);
+        }
       }
 
       if (this.inTransition) {
@@ -32671,13 +32753,21 @@ function () {
     // this.diagram.canvas.onmousedown = this.mouseDownHandler.bind(this);
     // this.diagram.canvas.onmouseup = this.mouseUpHandler.bind(this);
     // this.diagram.canvas.onmousemove = this.mouseMoveHandler.bind(this);
+    // Override these if you want to use your own touch handlers
 
+    this.start = this.diagram.touchDownHandler.bind(this.diagram);
+    this.end = this.diagram.touchUpHandler.bind(this.diagram);
+    this.move = this.diagram.touchMoveHandler.bind(this.diagram);
+    this.free = this.diagram.touchFreeHandler.bind(this.diagram);
+    this.toggleCursor = this.diagram.toggleCursor.bind(this.diagram);
     this.addEvent('mousedown', this.mouseDownHandler, false);
     this.addEvent('mouseup', this.mouseUpHandler, false);
     this.addEvent('mousemove', this.mouseMoveHandler, false);
     this.addEvent('touchstart', this.touchStartHandler, false);
     this.addEvent('touchend', this.touchEndHandler, false);
-    this.addEvent('touchmove', this.touchMoveHandler, false); // this.diagram.canvas.addEventListener(
+    this.addEvent('touchmove', this.touchMoveHandler, false); // this.addEvent('keypress', this.keypressHandler, false);
+
+    document.addEventListener('keypress', this.toggleCursor, false); // this.diagram.canvas.addEventListener(
     //   'touchstart',
     //   this.touchStartHandler.bind(this), false,
     // );
@@ -32690,12 +32780,7 @@ function () {
     //   this.touchMoveHandler.bind(this), false,
     // );
 
-    this.enable = true; // Override these if you want to use your own touch handlers
-
-    this.start = this.diagram.touchDownHandler.bind(this.diagram);
-    this.end = this.diagram.touchUpHandler.bind(this.diagram);
-    this.move = this.diagram.touchMoveHandler.bind(this.diagram);
-    this.free = this.diagram.touchFreeHandler.bind(this.diagram);
+    this.enable = true;
   }
 
   _createClass(Gesture, [{
@@ -32782,6 +32867,17 @@ function () {
       this.endHandler();
     }
   }, {
+    key: "keypressHandler",
+    value: function keypressHandler(event) {
+      console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode));
+      console.log(this.toggleCursor);
+
+      if (String.fromCharCode(event.keyCode) === 'n' && this.toggleCursor) {
+        console.log('toggling');
+        this.toggleCursor();
+      }
+    }
+  }, {
     key: "destroy",
     value: function destroy() {
       this.removeEvent('mousedown', this.mouseDownHandler, false);
@@ -32789,7 +32885,9 @@ function () {
       this.removeEvent('mousemove', this.mouseMoveHandler, false);
       this.removeEvent('touchstart', this.touchStartHandler, false);
       this.removeEvent('touchend', this.touchEndHandler, false);
-      this.removeEvent('touchmove', this.touchMoveHandler, false);
+      this.removeEvent('touchmove', this.touchMoveHandler, false); // this.removeEvent('keypress', this.keypressHandler, false);
+
+      document.removeEvent('keypress', this.keypressHandler, false);
     }
   }]);
 
@@ -33048,6 +33146,58 @@ function getTimeToIndex(events, eventIndex, time) {
   return nextTime - time;
 }
 
+function getCursorState(events, eventIndex) {
+  var i = eventIndex;
+  var touchUp = null;
+  var cursorPosition = null;
+  var showCursor = null;
+
+  while (i >= 0 && (cursorPosition == null || touchUp == null || showCursor == null)) {
+    var _events$i = _slicedToArray(events[i], 2),
+        eventType = _events$i[1];
+
+    if (cursorPosition == null && eventType === 'cursorMove') {
+      var _events$i2 = _slicedToArray(events[i], 4),
+          x = _events$i2[2],
+          y = _events$i2[3];
+
+      cursorPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
+    }
+
+    if (touchUp == null && eventType === 'touchUp') {
+      touchUp = true;
+    }
+
+    if (touchUp == null && eventType === 'touchDown') {
+      touchUp = false;
+
+      if (cursorPosition == null) {
+        var _events$i3 = _slicedToArray(events[i], 4),
+            _x = _events$i3[2],
+            _y = _events$i3[3];
+
+        cursorPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x, _y);
+      }
+    }
+
+    if (showCursor == null && eventType === 'showCursor') {
+      showCursor = true;
+    }
+
+    if (showCursor == null && eventType === 'hideCursor') {
+      showCursor = false;
+    }
+
+    i -= 1;
+  }
+
+  return {
+    show: showCursor == null ? false : showCursor,
+    up: touchUp == null ? true : touchUp,
+    position: cursorPosition == null ? new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0) : cursorPosition
+  };
+}
+
 var Recorder =
 /*#__PURE__*/
 function () {
@@ -33145,6 +33295,8 @@ function () {
       this.startTime = 0;
 
       this.diagramIsInTransition = function () {};
+
+      this.diagramShowCursor = function () {};
     }
 
     return Recorder.instance;
@@ -33278,7 +33430,7 @@ function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.stateTimeout = setTimeout(function () {
         if (_this2.isRecording) {
-          if (_this2.diagramIsInTransition === false) {
+          if (_this2.diagramIsInTransition() === false) {
             _this2.recordState(_this2.getDiagramState());
           }
 
@@ -33301,10 +33453,10 @@ function () {
   }, {
     key: "loadStates",
     value: function loadStates(states) {
-      var unminify = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var unminifyFlag = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       this.resetStates();
 
-      if (unminify) {
+      if (unminifyFlag) {
         this.states = this.unminifyStates(states);
       } else {
         this.states.states = states.states;
@@ -33547,7 +33699,7 @@ function () {
   }, {
     key: "save",
     value: function save() {
-      // const slidesOut = [];
+      this.show(); // const slidesOut = [];
       // this.slides.forEach((slide) => {
       //   slidesOut.push(JSON.stringify(slide));
       // });
@@ -33559,6 +33711,7 @@ function () {
       // this.states.forEach((state) => {
       //   statesOut.push(JSON.stringify(state));
       // });
+
       var dateStr = new Date().toISOString();
       var location = window.location.pathname.replace('/', '_'); // download(`${dateStr} ${location} slides.txt`, slidesOut.join('\n'));
       // download(`${dateStr} ${location} events.txt`, eventsOut.join('\n'));
@@ -33598,7 +33751,7 @@ function () {
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write('<br><br>');
-      this.states.forEach(function (state) {
+      this.states.states.forEach(function (state) {
         wnd.document.write(JSON.stringify(state), '<br>');
       });
     } // ////////////////////////////////////
@@ -33627,6 +33780,7 @@ function () {
       this.slideIndex = Math.max(getPrevIndexForTime(this.slides, time), 0);
       this.stateIndex = Math.max(getPrevIndexForTime(this.states.states, time), 0);
       this.eventIndex = Math.max(getPrevIndexForTime(this.events, time), 0);
+      var cursorState = getCursorState(this.events, this.eventIndex);
 
       if (this.states.states[this.stateIndex][0] < this.slides[this.slideIndex][0]) {
         this.setState(this.stateIndex);
@@ -33645,7 +33799,16 @@ function () {
       }
 
       this.currentTime = time;
-      this.showPointer();
+
+      if (cursorState.show && cursorState.up) {
+        this.diagramShowCursor('up');
+        this.cursorMove(cursorState.position);
+      } else if (cursorState.show && cursorState.up === false) {
+        this.diagramShowCursor('down');
+        this.cursorMove(cursorState.position);
+      } else {
+        this.diagramShowCursor('hide');
+      }
     } // ////////////////////////////////////
     // ////////////////////////////////////
     // Playback
@@ -33687,8 +33850,8 @@ function () {
       // this.queuePlaybackSlide(getTimeToIndex(this.slides, this.slideIndex + 1, fromTime));
 
       this.playbackSlide();
-      this.setState(this.stateIndex);
-      this.showPointer();
+      this.setState(this.stateIndex); // this.showPointer();
+
       this.queuePlaybackEvent(getTimeToIndex(this.events, this.eventIndex, fromTime));
 
       if (this.audio) {
@@ -33979,10 +34142,10 @@ function () {
         case 'cursorMove':
           {
             var _event4 = _slicedToArray(event, 4),
-                _x = _event4[2],
-                _y = _event4[3];
+                _x2 = _event4[2],
+                _y2 = _event4[3];
 
-            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x, _y));
+            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x2, _y2));
             break;
           }
 
@@ -34030,6 +34193,23 @@ function () {
 
             break;
           }
+
+        case 'showCursor':
+          {
+            var _event8 = _slicedToArray(event, 4),
+                _x3 = _event8[2],
+                _y3 = _event8[3];
+
+            this.diagramShowCursor('up');
+            this.cursorMove(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x3, _y3));
+            break;
+          }
+
+        case 'hideCursor':
+          {
+            this.diagramShowCursor('hide');
+            break;
+          }
         // case 'cursorMoved': {
         //   const [, x, y] = event;
         //   this.
@@ -34037,10 +34217,10 @@ function () {
 
         case 'stopBeingMoved':
           {
-            var _event8 = _slicedToArray(event, 5),
-                _elementPath2 = _event8[2],
-                _transformDefinition = _event8[3],
-                velocityDefinition = _event8[4];
+            var _event9 = _slicedToArray(event, 5),
+                _elementPath2 = _event9[2],
+                _transformDefinition = _event9[3],
+                velocityDefinition = _event9[4];
 
             var _element3 = this.getElement(_elementPath2);
 
@@ -34057,10 +34237,10 @@ function () {
 
         case 'startMovingFreely':
           {
-            var _event9 = _slicedToArray(event, 5),
-                _elementPath3 = _event9[2],
-                _transformDefinition2 = _event9[3],
-                _velocityDefinition = _event9[4];
+            var _event10 = _slicedToArray(event, 5),
+                _elementPath3 = _event10[2],
+                _transformDefinition2 = _event10[3],
+                _velocityDefinition = _event10[4];
 
             var _element4 = this.getElement(_elementPath3);
 
