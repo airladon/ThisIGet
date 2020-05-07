@@ -147,6 +147,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._eqn._angle.onClick = this.goToAngleForm1.bind(this);
     // this._eqn._arc.onClick = this.goToArcForm1.bind(this);
     this.diagram.setStateCallback = 'updateAngle';
+    this.fnMap.global.add('showFormOfEqn', this.showForm.bind(this));
+  }
+
+  showForm(options: { element: 'string', form: 'string' }) {
+    const e = this.getElement(options.element);
+    console.log(e)
+    if (e == null || e.showForm == null) {
+      return;
+    }
+    e.showForm(options.form);
   }
 
   goToRadiusForm() {
