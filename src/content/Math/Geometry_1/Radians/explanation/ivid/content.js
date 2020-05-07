@@ -869,6 +869,41 @@ class Content extends PresentationFormatContent {
         eqn.showForm('arcDegrees');
       },
     });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used, then terms become increasingly complex
+    this.addSection({
+      show: [
+        diag._ex1,
+      ],
+      // transitionFromPrev: (done, doneStr) => {
+      //   eqn.setScenario('left');
+      //   // diag._eqn.showForm('arcDegrees');
+      //   diag.animations.new()
+      //     .inParallel([
+      //       diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
+      //       diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        diag._ex1.setScenario('topLeft');
+        diag._ex1.showForm('radFirst');
+        diag._ex2.setScenario('bottomLeft');
+        diag._ex2.showForm('radSecond');
+        diag._ex3.setScenario('topRight');
+        diag._ex3.showForm('degFirst');
+        diag._ex4.setScenario('bottomRight');
+        diag._ex4.showForm('degSecond');
+      },
+    });
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************

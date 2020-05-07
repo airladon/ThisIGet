@@ -381,6 +381,75 @@ export default function diagramLayout() {
     scenario: 'top',
   };
 
+  const dFrac = (numerator, symbol, denominator) => ({
+    frac: {
+      numerator,
+      denominator,
+      symbol,
+      overhang: 0,
+      scale: 0.8,
+    },
+  });
+
+  const exampleEquation = name => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        sin: { style: 'normal' },
+        sin_1: { style: 'normal' },
+        cos: { style: 'normal' },
+        times: `  ${String.fromCharCode(215)}  `,
+        minus: '– ',
+        // x_2: `  ${String.fromCharCode(215)}  `,
+        equals: '  =  ',
+        v_1: { symbol: 'vinculum' },
+        v_2: { symbol: 'vinculum' },
+        lb: { symbol: 'bracket', side: 'left' },
+        rb: { symbol: 'bracket', side: 'right' },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        xAlign: 'right',
+        yAlign: 'bottom',
+      },
+      forms: {
+        // radFirst: [
+        //   dFrac('d', 'v_1', 'dx'), ' ', 'sin', ' ', 'x_1', 'equals', 'cos', ' ', 'x_2',
+        // ],
+        radFirst: [
+          dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', { sub: ['cos', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+        ],
+        // radSecond: [
+        //   dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', 'sin', ' ', 'x_1', 'equals', 'minus', 'sin_1', ' ', 'x_2',
+        // ],
+        radSecond: [
+          dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', 'minus', { sub: ['sin_1', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+        ],
+        degFirst: [
+          dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', dFrac('π', 'v_2', '_180'), 'times', { sub: ['cos', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
+        ],
+        // degSecond: [
+        //   dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', 'minus', { sup: [{ brac: ['lb', dFrac('π', 'v_2', '_180'), 'rb'] }, '_2_3'] }, ' ', { sub: ['sin_1', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
+        // ],
+        degSecond: [
+          dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', dFrac({ sup: ['π', '_2_3'] }, 'v_2', { sup: ['_180', '_2_4'] }), 'times', 'minus', { sub: ['sin_1', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
+        ],
+      },
+    },
+    mods: {
+      scenarios: {
+        topLeft: { position: new Point(-1.3, 0.8), scale: 1.1 },
+        bottomLeft: { position: new Point(-1.3, -0.8), scale: 1.1 },
+        topRight: { position: new Point(1.1, 0.8), scale: 1.1 },
+        bottomRight: { position: new Point(1.1, -0.8), scale: 1.1 },
+      },
+    },
+  });
+
+
   const container = content => ({
     container: {
       content,
@@ -714,6 +783,10 @@ export default function diagramLayout() {
     layout.eqn,
     layout.radEqnNav,
     layout.degEqnNav,
+    exampleEquation('ex1'),
+    exampleEquation('ex2'),
+    exampleEquation('ex3'),
+    exampleEquation('ex4'),
   ];
   return layout;
 }
