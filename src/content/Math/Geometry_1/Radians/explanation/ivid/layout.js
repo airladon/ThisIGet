@@ -59,7 +59,8 @@ export default function diagramLayout() {
     options: {
       width,
       cornerStyle: 'fill',
-      color: colors.lines,
+      // color: colors.lines,
+      color: [1, 0, 1, 1],
       points: [[radius, 0], [0, 0], [radius, 0]],
     },
   };
