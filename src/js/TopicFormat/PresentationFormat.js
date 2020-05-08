@@ -334,13 +334,15 @@ class PresentationFormat extends SimpleFormat {
       //   this.overlayDiagram.elements.hideAll();
       // }
       section.setVisible();
-      if (diagram.recorder != null) {
-        diagram.recorder.showPointer();
-      }
       this.renderDiagrams();
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
       }
+      if (diagram.recorder != null && diagram.recorder.isRecording) {
+        // diagram.recorder.showPointer();
+        diagram.recorder.recordCurrentState();
+      }
+
       if (this.comingFrom === 'prev') {
         this.fadeInTextFromPrev();
       }
@@ -492,6 +494,10 @@ class PresentationFormat extends SimpleFormat {
     this.transitionCancelled = false;
     this.renderDiagrams();
     window.presentationFormatTransitionStatus = 'steady';
+    if (diagram.recorder != null && diagram.recorder.isRecording) {
+      // diagram.recorder.showPointer();
+      diagram.recorder.recordCurrentState();
+    }
   }
 
   updateInteractiveItems() {

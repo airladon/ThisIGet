@@ -403,12 +403,15 @@ export default function diagramLayout() {
         cos: { style: 'normal' },
         times: `  ${String.fromCharCode(215)}  `,
         minus: '– ',
-        // x_2: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
         v_1: { symbol: 'vinculum' },
-        v_2: { symbol: 'vinculum' },
+        v_2: { symbol: 'vinculum', color: colors.angles },
         lb: { symbol: 'bracket', side: 'left' },
         rb: { symbol: 'bracket', side: 'right' },
+        _180: { color: colors.angles },
+        π: { color: colors.angles },
+        _2_3: { color: colors.angles },
+        _2_4: { color: colors.angles },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects

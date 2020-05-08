@@ -48,11 +48,11 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
-    this.diagram.recorder.events = events;
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
-    this.diagram.recorder.slides = slides;
-    this.diagram.recorder.audio = new Audio(audio);
+    // this.diagram.recorder.events = events;
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.slides = slides;
+    // this.diagram.recorder.audio = new Audio(audio);
     console.log(this.diagram.recorder)
   }
 
@@ -82,11 +82,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-
-    // Hello and welcome to this interactive video introducing the radian. We will go through where a radian comes from and why we use it.
-    // This is an interactive video, meaning if you see me interact with an element on the screen, then you can as well.
-
-    // Welcome to this interactive video about the Radian. This is a bottom up
+    // Welcome to this interactive video about the Radian. The intention is for this to be a bottom up
     // explanation about where a radian comes from and why we use it. It is
     // appropriate for anyone learning about a radian for the first time, or
     // for those that learnt about it in the past, but feel like they need
@@ -123,7 +119,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // Lets start with two lines on top of each other and connected at one end.
     // As we rotate one of the lines we will trace its end to form an arc, which will result in a full circle after a full rotation. That said, we will start with an arc.
-    // Now the two lines form an angle at their connection point
+    // Now these two lines form an angle at their connection point
     this.addSection({
       setContent: [
         note({ top: 90 }, '|Arc|'),
@@ -132,28 +128,26 @@ class Content extends PresentationFormatContent {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
       },
       show: [
-        circle._line1, circle._line2,
+        circle._line1, circle._line2, circle._corner,
       ],
       transitionFromPrev: (done, doneStr) => {
-        circle.setScenario('center');
-        circle._line1.setScenario('unconnected');
-        circle._line2.setScenario('unconnected');
+        circle.setScenario('title');
         circle.animations.new()
           .inParallel([
-            circle._line1.anim.scenario({ target: 'connected', duration: 1 }),
-            circle._line2.anim.scenario({ target: 'connected', duration: 1 }),
+            circle.anim.scenario({ target: 'center', duration: 1 }),
+            circle._line1.anim.rotation({ target: 0, duration: 1 }),
           ])
+          .then(circle._arc.anim.dissolveIn(0))
+          .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
         circle.setScenario('center');
-        circle._line1.setScenario('default');
-        circle._line2.setScenario('default');
         circle._arc.showAll();
-        circle._angle.hide();
-        circle._line1.setRotation(0);
-        circle._corner.showAll();
+        // circle._angle.hide();
+        circle._line1.setRotation(1.5);
+        // circle._corner.showAll();
         circle._arc.showAll();
         diag.updateAngle();
       },
@@ -166,7 +160,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // The angles size changes with rotation of one of the lines and so we can measure it. We often first learn how to measure angle using degrees
+    // whose size changes with rotation of one of the lines and so we can measure it. Now whenever we have property whose size changes, we want to be able to measure it, and we often first learn how to measure angle using degrees
     common = {
       setEnterState: () => {
         circle.setScenario('center');
@@ -211,8 +205,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Where a circle's angle is split evenly into 360 pieces, or degrees, and we measure angles by counting how many degrees are within them. If you were inventing angle measurement today, you might choose a different number than 360, as one number isn't necessarily better than another, but a combination of tradition and convenience makes 360 the most common way to split a circle today.
-    // 360 is a convenient number as it has a lot of factors (24 in fact) which means we can split the circle into many different fractions and be left with whole numbers.
+    // Where a circle's angle is split evenly into 360 pieces, or degrees. We then measure angles by counting how many degrees are within them. If you were inventing angle measurement today, you might choose a different number than 360, and there are trade-offs to which number you choose. But 360 is a convenient number for many practical purposes. as it has a lot of factors (24 in fact) which means we can split the circle into many different fractions and be left with whole numbers.
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
@@ -358,7 +351,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Instead of splitting the circle into 360 equal pieces, lets find the angle when the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
+    // Instead of splitting the circle into 360 equal pieces, lets find the angle where the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
     this.addSection(common, {
       setContent: [
         style({
@@ -402,7 +395,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // We call this angle one radian, whose name suggests it comes from the radius. So let's take this further and see how many radians go into a circle.
+    // We call this angle one radian, where its name comes from its relationship with the radius. So let's take this further and see how many radians go into a circle.
     common = {
       setEnterState: () => {
         circle.setScenario('center');
@@ -461,7 +454,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // And we there are six and a bit radians that go into a circle. Now, as a radian is the angle were the arc length is one radius length, another way to ask this question is how many radius lengths make up the circumference of a circle?
+    // And we see there are six and a bit radians in a circle. How many precisely? Well, we defined a radian as the angle when the arc length is equal to the radius length, so instead of asking how many radians in a circle, we can ask how many radius lengths are there in the circumference of a circle?
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -492,7 +485,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Well we know a circle's circumference is equal to 2πr, where r is the radius length. This is the same as saying there are 2π lots of radius lengths in a circumference.
+    // We know a circle's circumference is equal to 2πr, where r is the radius length. This is the same as saying there are 2π lots of radius lengths in a circumference.
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -517,7 +510,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Therefore there are 2π radians in a circle. We can now look at what different angles are in radians. Note, these numbers are approximate, and most are irrational numbers with infinitely many decimal places, like π and 2π.
+    // Therefore if there are 2π radius lengths in the circumference, then there must be 2π radians in a circle. We can now look at what different angles are in radians. Note, these numbers are approximate, and most are irrational numbers with infinitely many decimal places, like π and 2π.
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -543,7 +536,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But let's remember how we defined a radian and write it as an expression.
+    // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But it is convenient when you right down its definition as an expression.
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -877,7 +870,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used, then terms become increasingly complex
+    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
     this.addSection({
       show: [
         diag._ex1,
@@ -885,9 +878,6 @@ class Content extends PresentationFormatContent {
       transitionFromPrev: (done, doneStr) => {
         diag._ex1.setScenario('topLeft');
         diag._ex2.setScenario('bottomLeft');
-        // diag._ex3.setScenario('topRight');
-        // diag._ex4.setScenario('bottomRight');
-        // diag._eqn.showForm('arcDegrees');
         diag.animations.new()
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
@@ -909,10 +899,6 @@ class Content extends PresentationFormatContent {
         diag._ex1.showForm('radFirst');
         diag._ex2.setScenario('bottomLeft');
         diag._ex2.showForm('radSecond');
-        // diag._ex3.setScenario('topRight');
-        // diag._ex3.showForm('degFirst');
-        // diag._ex4.setScenario('bottomRight');
-        // diag._ex4.showForm('degSecond');
       },
     });
 
@@ -923,7 +909,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used, then terms become increasingly complex
+    // Then we have an extra term. In complex problems these extra terms add up to a lot of extra noise, that makes it harder to read and easier to make mistakes. As such, in the vast majority of mathematics, science, engineering (including all major programming languages) radians are used be default.
     this.addSection({
       show: [
         diag._ex1,
@@ -935,7 +921,6 @@ class Content extends PresentationFormatContent {
         diag._ex2.showForm('radSecond');
         diag._ex3.setScenario('topRight');
         diag._ex4.setScenario('bottomRight');
-        // diag._eqn.showForm('arcDegrees');
         diag.animations.new()
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex3, duration: 0.5 }),
@@ -970,6 +955,7 @@ class Content extends PresentationFormatContent {
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
+    // FInally, lets look at some angles and compare radians to degrees. Usually radians are expressed in a fraction of π, but it is useful to get a basic numerical feeling for radians. This is especially useful in software development when dealing with geometries.
     const row1 = (angle: number) => `<tr><td class="radians_table_value">|_${angle}rad|</td><td class="radians_table_value">|_${angle}deg|</td></tr>`;
 
     const degClick = (angle: number) => click(
