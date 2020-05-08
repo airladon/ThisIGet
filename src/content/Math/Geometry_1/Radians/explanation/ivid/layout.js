@@ -18,6 +18,8 @@ export default function diagramLayout() {
   const { colors } = layout;
   colors.lines = colors.get('blue').rgb;
   colors.angles = colors.get('green').rgb;
+  // colors.angleFill = colors.get('green').rgb;
+  // colors.angleFill[3] = 0.8;
   colors.arc = colors.get('red').rgb;
   colors.dull = colors.get('grey', 'dark').rgb;
   colors.marks = colors.get('grey', 'dark').rgb;
@@ -87,7 +89,7 @@ export default function diagramLayout() {
     options: {
       curve: {
         width: radius / 4,
-        sides: 400,
+        sides: 300,
         radius: radius / 4,
       },
       color: colors.angles,

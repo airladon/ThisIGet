@@ -93,7 +93,7 @@ export default class RecordButton extends React.Component<Props, State> {
           padding: '10px',
         },
       });
-      recorder.stateTimeStep = 0.2;
+      recorder.stateTimeStep = 0.5;
       recorder.start();
       this.setTime(0);
       this.incrementTime();

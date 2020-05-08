@@ -48,11 +48,11 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
-    // this.diagram.recorder.events = events;
-    // this.diagram.recorder.loadEvents(events, true);
-    // this.diagram.recorder.loadStates(states, true);
-    // this.diagram.recorder.slides = slides;
-    // this.diagram.recorder.audio = new Audio(audio);
+    this.diagram.recorder.events = events;
+    this.diagram.recorder.loadEvents(events, true);
+    this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.slides = slides;
+    this.diagram.recorder.audio = new Audio(audio);
     console.log(this.diagram.recorder)
   }
 
@@ -137,8 +137,8 @@ class Content extends PresentationFormatContent {
             circle.anim.scenario({ target: 'center', duration: 1 }),
             circle._line1.anim.rotation({ target: 0, duration: 1 }),
           ])
-          .then(circle._arc.anim.dissolveIn(0))
-          .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
+          // .then(circle._arc.anim.dissolveIn(0))
+          // .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
           .whenFinished(doneStr)
           .start();
       },
@@ -146,7 +146,7 @@ class Content extends PresentationFormatContent {
         circle.setScenario('center');
         circle._arc.showAll();
         // circle._angle.hide();
-        circle._line1.setRotation(1.5);
+        circle._line1.setRotation(0);
         // circle._corner.showAll();
         circle._arc.showAll();
         diag.updateAngle();
@@ -467,10 +467,12 @@ class Content extends PresentationFormatContent {
           .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
+          .dissolveIn({ element: circle._radians, duration: 0.4 })
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
+        circle._radians.showAll();
         diag.updateAngle();
         circle.setScenario('center');
         circle._radianLines.showAll();
@@ -489,7 +491,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines,
+        circle._angle, circle._arc, circle._radianLines, circle._radians,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCirc');
@@ -514,7 +516,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines,
+        circle._angle, circle._arc, circle._radianLines, circle._radians,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCircle');
@@ -539,7 +541,7 @@ class Content extends PresentationFormatContent {
     // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But it is convenient when you right down its definition as an expression.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -570,7 +572,7 @@ class Content extends PresentationFormatContent {
     // One radian produces an arc length of 1 radius. Two radians produce an arc length of two radians. Half a radian produces an arc length of half a radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -602,7 +604,7 @@ class Content extends PresentationFormatContent {
     // More generally, this radian term is just the angle, and instead of writing out radius length each time, we will just write radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -633,7 +635,7 @@ class Content extends PresentationFormatContent {
     // And so we are left with a simple relationship.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {

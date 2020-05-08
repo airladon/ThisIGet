@@ -33466,6 +33466,11 @@ function () {
         out.push(arg);
       });
       this.events.push([this.now() / 1000].concat(out));
+    }
+  }, {
+    key: "recordCurrentState",
+    value: function recordCurrentState() {
+      this.recordState(this.getDiagramState());
     } // States are recorded every second
 
   }, {
@@ -33476,9 +33481,10 @@ function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       this.stateTimeout = setTimeout(function () {
         if (_this2.isRecording) {
-          if (_this2.diagramIsInTransition() === false) {
-            _this2.recordState(_this2.getDiagramState());
-          }
+          // if (this.diagramIsInTransition() === false) {
+          //   this.recordState(this.getDiagramState());
+          // }
+          _this2.recordCurrentState();
 
           _this2.queueRecordState(_this2.stateTimeStep * 1000);
         }
@@ -33745,7 +33751,8 @@ function () {
   }, {
     key: "save",
     value: function save() {
-      this.show(); // const slidesOut = [];
+      // this.show();
+      // const slidesOut = [];
       // this.slides.forEach((slide) => {
       //   slidesOut.push(JSON.stringify(slide));
       // });
@@ -33757,7 +33764,6 @@ function () {
       // this.states.forEach((state) => {
       //   statesOut.push(JSON.stringify(state));
       // });
-
       var dateStr = new Date().toISOString();
       var location = window.location.pathname.replace('/', '_'); // download(`${dateStr} ${location} slides.txt`, slidesOut.join('\n'));
       // download(`${dateStr} ${location} events.txt`, eventsOut.join('\n'));
@@ -33765,9 +33771,9 @@ function () {
 
       var minifiedStates = this.minifyStates(true, 4); // const minifiedEvents = this.minifyEvents(true, 4);
 
-      download("".concat(dateStr, " ").concat(location, " slides.json"), JSON.stringify(this.slides));
-      download("".concat(dateStr, " ").concat(location, " events.json"), JSON.stringify(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["minify"])(this.events)));
-      download("".concat(dateStr, " ").concat(location, " states.json"), JSON.stringify(minifiedStates)); // download(`${dateStr} ${location} statesNew.json`, JSON.stringify(this.statesNew));
+      download("".concat(dateStr, " ").concat(location, ".vidslides.json"), JSON.stringify(this.slides));
+      download("".concat(dateStr, " ").concat(location, ".videvents.json"), JSON.stringify(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["minify"])(this.events)));
+      download("".concat(dateStr, " ").concat(location, ".vidstates.json"), JSON.stringify(minifiedStates)); // download(`${dateStr} ${location} statesNew.json`, JSON.stringify(this.statesNew));
       // download(`${dateStr} ${location} statesNew1.json`, JSON.stringify(this.statesNew1));
     }
   }, {
