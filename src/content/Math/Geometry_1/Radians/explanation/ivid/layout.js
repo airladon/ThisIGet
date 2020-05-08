@@ -252,6 +252,101 @@ export default function diagramLayout() {
     scenario: 'center',
   };
 
+  layout.limRad = 3;
+  const limAngleProportion = 20;
+  const { limRad } = layout;
+  const limAngle = 2 * Math.PI / limAngleProportion;
+  layout.lim = {
+    name: 'lim',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'sin',
+        method: 'line',
+        options: {
+          color: colors.diagram.text.base,
+          p1: [limRad * Math.cos(limAngle) - 0.01, 0],
+          p2: [limRad * Math.cos(limAngle) - 0.01, limRad * Math.sin(limAngle) + 0.005],
+          width: 0.015,
+          label: {
+            text: 'sin x',
+            location: 'left',
+            offset: 0.01,
+          },
+        },
+      },
+      {
+        name: 'angle',
+        method: 'angle',
+        options: {
+          angle: limAngle,
+          color: colors.angles,
+          curve: {
+            radius: 0.7,
+            width: 0.02,
+            sides: 300,
+          },
+          label: {
+            text: 'x',
+            radius: 0.6,
+          },
+        },
+      },
+      {
+        name: 'arc',
+        method: 'shapes.polygonSweep',
+        options: {
+          radius: limRad,
+          sides: 600,
+          // sidesToDraw: 400 / limAngleProportion,
+          width: 0.02,
+          color: colors.arc,
+        },
+      },
+      {
+        name: 'xAxis',
+        method: 'shapes.polyline',
+        options: {
+          color: colors.dull,
+          points: [
+            [0, 0],
+            [limRad, 0],
+          ],
+          width: 0.01,
+          dash: [0.05, 0.02],
+        },
+      },
+      {
+        name: 'radius',
+        method: 'line',
+        options: {
+          color: colors.lines,
+          angle: limAngle,
+          length: limRad,
+          width: 0.02,
+          label: {
+            text: 'r = 1',
+            offset: 0.02,
+            location: 'top',
+          },
+          move: {
+            type: 'rotation',
+            middleLengthPercent: 0,
+          },
+        },
+        mods: {
+          interactiveLocation: new Point(limRad * 0.8, 0),
+        },
+      },
+      
+    ],
+    mods: {
+      scenarios: {
+        default: { position: [-1.5, -1.5] },
+      },
+    },
+  };
+
   const mods = (direction, mag) => ({
     animations: {
       options: {
@@ -367,7 +462,7 @@ export default function diagramLayout() {
         radiusEquals1_2: ['angle', 'equals', { frac: ['arc', 'v_1', { strike: ['_1', 's_1'] }] }],
         radiusEquals1_3: ['angle', 'equals', 'arc'],
         radiusEquals1_4: ['angle', 'equals', { bottomComment: ['arc', 'forRad1'] }],
-        arcDegrees: ['_arc', 'equals', '_angle', 'x', '_radius', 'x_1', { frac: ['π', 'v_1', '_180'] }],
+        arcDegrees: ['arc', 'equals', 'angle', 'x', 'radius', 'x_1', { frac: ['π', 'v_1', '_180'] }],
       },
       formSeries: ['arc', 'radius', 'angle'],
     },
@@ -383,6 +478,15 @@ export default function diagramLayout() {
     scenario: 'top',
   };
 
+  const frac = (numerator, symbol, denominator) => ({
+    frac: {
+      numerator,
+      symbol,
+      denominator,
+      overhang: 0.05,
+    },
+  });
+
   const dFrac = (numerator, symbol, denominator) => ({
     frac: {
       numerator,
@@ -391,6 +495,31 @@ export default function diagramLayout() {
       overhang: 0,
       scale: 0.8,
     },
+  });
+
+  const supBrac = (left, content, right, superscript) => ({
+    sup: {
+      content: {
+        brac: {
+          left,
+          right,
+          content,
+          insideSpace: 0.01,
+          topSpace: 0.02,
+          bottomSpace: 0.02,
+        },
+      },
+      superscript,
+      offset: [-0.02, 0.02],
+    },
+  });
+
+  const bracket = side => ({
+    symbol: 'bracket',
+    side,
+    lineWidth: 0.012,
+    // color: colors.angles,
+    color: [0, 1, 0, 1],
   });
 
   const exampleEquation = name => ({
@@ -402,18 +531,47 @@ export default function diagramLayout() {
       elements: {
         sin: { style: 'normal' },
         sin_1: { style: 'normal' },
+        lim: { style: 'normal' },
         cos: { style: 'normal' },
+        xTo0: 'x \u2192 0',
         times: `  ${String.fromCharCode(215)}  `,
         minus: '– ',
+        minus_1: '  –  ',
+        minus_2: '  –  ',
+        plus_1: '  +  ',
+        plus_2: '  +  ',
+        dots: '...',
         equals: '  =  ',
         v_1: { symbol: 'vinculum' },
         v_2: { symbol: 'vinculum', color: colors.angles },
-        lb: { symbol: 'bracket', side: 'left' },
-        rb: { symbol: 'bracket', side: 'right' },
+        v_3: { symbol: 'vinculum' },
+        v_4: { symbol: 'vinculum' },
+        v_5: { symbol: 'vinculum', color: colors.angles },
+        v_6: { symbol: 'vinculum', color: colors.angles },
+        v_7: { symbol: 'vinculum', color: colors.angles },
+        v_8: { symbol: 'vinculum', color: colors.angles },
+        lb: bracket('left'),
+        rb: bracket('right'),
+        lb1: bracket('left'),
+        rb1: bracket('right'),
+        lb2: bracket('left'),
+        rb2: bracket('right'),
+        _3_g: { color: colors.angles },
+        _5_g: { color: colors.angles },
+        _7_g: { color: colors.angles },
         _180: { color: colors.angles },
+        _180_1: { color: colors.angles },
+        _180_2: { color: colors.angles },
+        _180_3: { color: colors.angles },
         π: { color: colors.angles },
+        π_1: { color: colors.angles },
+        π_2: { color: colors.angles },
+        π_3: { color: colors.angles },
         _2_3: { color: colors.angles },
         _2_4: { color: colors.angles },
+        _3f: { text: '3!' },
+        _5f: { text: '5!' },
+        _7f: { text: '7!' },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -422,25 +580,80 @@ export default function diagramLayout() {
       },
       forms: {
         radFirst: [
-          dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', { sub: ['cos', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+          dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', '', 0.4] }, ' ', { sub: ['x_1', '', 0.4] }, 'equals', { sub: ['cos', '', 0.4] }, ' ', { sub: ['x_3', '', 0.4] },
         ],
+        // radFirst: [
+        //   dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', { sub: ['cos', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+        // ],
         radSecond: [
-          dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', 'minus', { sub: ['sin_1', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+          dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', ''] }), ' ', { sub: ['sin', '', 0.4] }, ' ', { sub: ['x_1', '', 0.4] }, 'equals', 'minus', { sub: ['sin_1', '', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
         ],
+        // radSecond: [
+        //   dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'r_1', 0.4] }, ' ', { sub: ['x_1', 'r_2', 0.4] }, 'equals', 'minus', { sub: ['sin_1', 'r_3', 0.4] }, ' ', { sub: ['x_3', 'r_4', 0.4] },
+        // ],
         degFirst: [
           dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', dFrac('π', 'v_2', '_180'), 'times', { sub: ['cos', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
         ],
         degSecond: [
           dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', dFrac({ sup: ['π', '_2_3'] }, 'v_2', { sup: ['_180', '_2_4'] }), 'times', 'minus', { sub: ['sin_1', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
         ],
+        lim: [
+          { bottomComment: { content: 'lim', comment: 'xTo0' } }, ' ',
+          frac(['sin', ' ', 'x_1'], 'v_1', 'x_2'),
+          'equals', '_1',
+
+        ],
+        limDeg: [
+          { bottomComment: { content: 'lim', comment: 'xTo0' } }, ' ',
+          frac([{ sub: ['sin', 'd_1'] }, ' ', { sub: ['x_1', 'd_2'] }], 'v_1', { sub: ['x_2', 'd_3'] }),
+          'equals', frac('π_1', 'v_2', '_180_1'),
+
+        ],
+        sin: {
+          content: [
+            'sin', ' ', 'x_1', 'equals',
+            'x_2',
+            'minus_1', dFrac({ sup: ['x_3', '_3'] }, 'v_1', '_3f'),
+            'plus_1', dFrac({ sup: ['x_4', '_5'] }, 'v_3', '_5f'),
+            'minus_2', dFrac({ sup: ['x_5', '_7'] }, 'v_4', '_7f'),
+            'plus_2', ' ', 'dots',
+          ],
+          // alignment: {
+          //   fixTo: null,
+          //   xAlign: 'center',
+          // },
+        },
+        sinDeg: {
+          content: [
+            { sub: ['sin', 'd'] }, ' ', { sub: ['x_1', 'd_1'] }, 'equals',
+            dFrac('π', 'v_5', '_180'), ' ', { sub: ['x_2', 'd_2'] },
+            'minus_1',
+            supBrac('lb', dFrac('π_1', 'v_6', '_180_1'), 'rb', '_3_g'), ' ',
+            dFrac({ supSub: ['x_3', '_3', 'd_3'] }, 'v_1', '_3f'),
+            'plus_1',
+            supBrac('lb1', dFrac('π_2', 'v_7', '_180_2'), 'rb1', '_5_g'), ' ',
+            dFrac({ supSub: ['x_4', '_5', 'd_4'] }, 'v_3', '_5f'),
+            'minus_2',
+            supBrac('lb2', dFrac('π_3', 'v_8', '_180_3'), 'rb2', '_7_g'), ' ',
+            dFrac({ supSub: ['x_5', '_7', 'd_5'] }, 'v_4', '_7f'),
+            'plus_2', ' ', 'dots',
+          ],
+          // alignment: {
+          //   fixto: new Point(0, 0),
+          //   xAlign: 'center',
+          // },
+        },
       },
     },
     mods: {
       scenarios: {
-        topLeft: { position: new Point(-1.3, 0.6), scale: 1.1 },
-        bottomLeft: { position: new Point(-1.3, -0.6), scale: 1.1 },
-        topRight: { position: new Point(1.1, 0.6), scale: 1.1 },
-        bottomRight: { position: new Point(1.1, -0.6), scale: 1.1 },
+        topLeft: { position: new Point(-0.8, 0.6), scale: 1.3 },
+        bottomLeft: { position: new Point(-1.8, -0.6), scale: 1.3 },
+        // topRight: { position: new Point(1.3, 0.6), scale: 1.3 },
+        // bottomRight: { position: new Point(1.3, -0.6), scale: 1.3 },
+        top: { position: new Point(0.4, 0.6), scale: 1.3 },
+        bottom: { position: new Point(0.4, -0.6), scale: 1.3 },
+        center: { position: new Point(0.4, 0), scale: 1.3 },
       },
     },
   });
@@ -475,15 +688,6 @@ export default function diagramLayout() {
       content,
       width: 0.5,
       height: 0.2,
-    },
-  });
-
-  const frac = (numerator, symbol, denominator) => ({
-    frac: {
-      numerator,
-      symbol,
-      denominator,
-      overhang: 0.05,
     },
   });
 
@@ -783,6 +987,7 @@ export default function diagramLayout() {
     exampleEquation('ex2'),
     exampleEquation('ex3'),
     exampleEquation('ex4'),
+    layout.lim,
   ];
   return layout;
 }

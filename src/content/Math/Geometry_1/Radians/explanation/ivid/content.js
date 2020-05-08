@@ -48,11 +48,11 @@ class Content extends PresentationFormatContent {
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
-    this.diagram.recorder.events = events;
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
-    this.diagram.recorder.slides = slides;
-    this.diagram.recorder.audio = new Audio(audio);
+    // this.diagram.recorder.events = events;
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.slides = slides;
+    // this.diagram.recorder.audio = new Audio(audio);
     console.log(this.diagram.recorder)
   }
 
@@ -170,12 +170,12 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 85 }, '|Angle|'),
+        note({ top: 90 }, '|Angle|'),
         // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
-        // Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
       },
     };
@@ -264,7 +264,7 @@ class Content extends PresentationFormatContent {
     );
     this.addSection(common, {
       setContent: [
-        note({ top: 85 }, '|Angle|'),
+        note({ top: 90 }, '|Angle|'),
         // note({ top: 90 }, '|Arc|'),
         `
           <table class="radians_table fractions_table" id="radians_table">
@@ -346,12 +346,12 @@ class Content extends PresentationFormatContent {
     // Instead of splitting the circle into 360 equal pieces, lets find the angle where the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
     this.addSection(common, {
       setContent: [
-        style({
-          top: 3, centerH: true, id: 'id_main_text',
-        }, 'Set arc length to |equal| radius length.'),
+        // style({
+        //   top: 3, centerH: true, id: 'id_main_text',
+        // }, 'Set arc length to |equal| radius length.'),
         // note({ top: 80 }, '|Radius|'),
-        // note({ top: 85 }, '|Angle|'),
-        // note({ top: 90 }, '|Arc|'),
+        note({ top: 90 }, '|Angle|'),
+        note({ top: 85 }, '|Arc|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -363,11 +363,11 @@ class Content extends PresentationFormatContent {
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle.setScenario('centerLeft');
-        addClass('note_radius', 'topic__diagram_text_fade_in_05');
-        addClass('id_main_text', 'topic__diagram_text_fade_in_05');
+        // addClass('note_radius', 'topic__diagram_text_fade_in_05');
+        // addClass('id_main_text', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
           // .scenario({ target: 'center', duration: 1 })
-          .delay(0.5)
+          // .delay(0.5)
           .inParallel([
             circle._arc.anim.dissolveIn(0.7),
             circle.anim.trigger({ callback: 'updateAngle', }),
@@ -377,6 +377,54 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         circle._arc.showAll();
+        diag.updateAngle();
+        circle.setScenario('center');
+        // removeClass('note_radius', 'topic__diagram_text_fade_in_05');
+        // removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // Instead of splitting the circle into 360 equal pieces, lets find the angle where the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
+    this.addSection(common, {
+      setContent: [
+        style({
+          top: 3, centerH: true, id: 'id_main_text',
+        }, 'Set arc length to |equal| radius length.'),
+        note({ top: 80 }, '|Radius|'),
+        note({ top: 85 }, '|Angle|'),
+        note({ top: 90 }, '|Arc|'),
+      ],
+      modifiers: {
+        Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        circle._angle, circle._arc,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        // circle.setScenario('centerLeft');
+        addClass('note_radius', 'topic__diagram_text_fade_in_05');
+        addClass('id_main_text', 'topic__diagram_text_fade_in_05');
+        circle.animations.new()
+          // .scenario({ target: 'center', duration: 1 })
+          .delay(0.5)
+          // .inParallel([
+          //   circle._arc.anim.dissolveIn(0.7),
+          //   circle.anim.trigger({ callback: 'updateAngle', }),
+          // ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        // circle._arc.showAll();
         diag.updateAngle();
         circle.setScenario('center');
         removeClass('note_radius', 'topic__diagram_text_fade_in_05');
@@ -403,8 +451,8 @@ class Content extends PresentationFormatContent {
       setContent: [
         note({ top: 75 }, '|Radian|'),
         note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Arc|'),
+        note({ top: 90 }, '|Angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -418,11 +466,11 @@ class Content extends PresentationFormatContent {
       setContent: [
         style({
           top: 3, centerH: true, id: 'id_main_text',
-        }, 'When |arc length equals radius length|, the angle is |one radian|'),
+        }, 'When arc length equals radius length, the angle is |one radian|'),
         note({ top: 75 }, '|Radian|'),
         note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Arc|'),
+        note({ top: 90 }, '|Angle|'),
       ],
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -472,7 +520,7 @@ class Content extends PresentationFormatContent {
         circle._radians.showAll();
         diag.updateAngle();
         circle.setScenario('center');
-        circle._radianLines.showAll();
+        // circle._radianLines.showAll();
       },
     });
 
@@ -488,7 +536,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines, circle._radians,
+        circle._angle, circle._arc, circle._radianLines, // circle._radians,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCirc');
@@ -513,7 +561,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines, circle._radians,
+        circle._angle, circle._arc, circle._radianLines, // circle._radians,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCircle');
@@ -538,7 +586,7 @@ class Content extends PresentationFormatContent {
     // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But it is convenient when you right down its definition as an expression.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -553,6 +601,7 @@ class Content extends PresentationFormatContent {
           .start();
       },
       setSteadyState: () => {
+        diag.setAngleTextRadians();
         eqn.setScenario('topCircle');
         eqn.showForm('circle');
         diag.updateAngle();
@@ -569,7 +618,7 @@ class Content extends PresentationFormatContent {
     // One radian produces an arc length of 1 radius. Two radians produce an arc length of two radians. Half a radian produces an arc length of half a radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -601,7 +650,7 @@ class Content extends PresentationFormatContent {
     // More generally, this radian term is just the angle, and instead of writing out radius length each time, we will just write radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -632,7 +681,7 @@ class Content extends PresentationFormatContent {
     // And so we are left with a simple relationship.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -643,7 +692,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         eqn.setScenario('top');
-        eqn.showForm('arc');
+        eqn.showForm('_arc');
         diag.updateAngle();
         circle._radianLines.showAll();
         circle._angleText.showAll();
@@ -869,14 +918,110 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
+    this.addSection({
+      show: [
+        diag._lim,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag._lim.setScenario('default');
+        diag._lim._radius.setRotation(0.6);
+        diag.updateLimAngle();
+        diag._lim.animations.new()
+          .dissolveIn(1)
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._lim.setScenario('default');
+        diag._lim._radius.setRotation(0.6);
+        diag.updateLimAngle();
+      },
+    });
+    
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      show: [
+        diag._ex1, diag._lim,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag._ex1.setScenario('top');
+        diag._lim.setScenario('default');
+        // diag._lim._radius.setRotation(0.6);
+        diag.updateLimAngle();
+        diag.animations.new()
+          .inParallel([
+            diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
+            diag.anim.trigger({
+              callback: 'showFormOfEqn',
+              payload: { element: 'ex1', form: 'lim' },
+            }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._ex1.setScenario('top');
+        diag._ex1.showForm('lim');
+        // diag._lim.showAll();
+        diag._lim.setScenario('default');
+        // diag._lim._radius.setRotation(0.5);
+        diag.updateLimAngle();
+      },
+    });
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
     this.addSection({
       show: [
         diag._ex1,
       ],
       transitionFromPrev: (done, doneStr) => {
-        diag._ex1.setScenario('topLeft');
-        diag._ex2.setScenario('bottomLeft');
+        diag._ex1.setScenario('top');
+        diag._ex1.showForm('lim');
+        diag._ex2.setScenario('bottom');
+        diag.animations.new()
+          .inParallel([
+            diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
+            diag.anim.trigger({
+              callback: 'showFormOfEqn',
+              payload: { element: 'ex2', form: 'limDeg' },
+            }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._ex1.setScenario('top');
+        diag._ex1.showForm('lim');
+        diag._ex2.setScenario('bottom');
+        diag._ex2.showForm('limDeg');
+      },
+    });
+  
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      show: [
+        diag._ex1,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag._ex1.setScenario('top');
         diag.animations.new()
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
@@ -884,22 +1029,50 @@ class Content extends PresentationFormatContent {
               callback: 'showFormOfEqn',
               payload: { element: 'ex1', form: 'radFirst' },
             }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._ex1.setScenario('top');
+        diag._ex1.showForm('radFirst');
+      },
+    });
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    this.addSection({
+      show: [
+        diag._ex1,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag._ex1.setScenario('top');
+        diag._ex1.showForm('radFirst');
+        diag._ex2.setScenario('bottom');
+        diag.animations.new()
+          .inParallel([
             diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
             diag.anim.trigger({
               callback: 'showFormOfEqn',
-              payload: { element: 'ex2', form: 'radSecond' },
+              payload: { element: 'ex2', form: 'degFirst' },
             }),
           ])
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
-        diag._ex1.setScenario('topLeft');
+        diag._ex1.setScenario('top');
         diag._ex1.showForm('radFirst');
-        diag._ex2.setScenario('bottomLeft');
-        diag._ex2.showForm('radSecond');
+        diag._ex2.setScenario('bottom');
+        diag._ex2.showForm('degFirst');
       },
     });
+
 
     // **********************************************************************
     // **********************************************************************
@@ -908,29 +1081,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Then we have an extra term. In complex problems these extra terms add up to a lot of extra noise, that makes it harder to read and easier to make mistakes. As such, in the vast majority of mathematics, science, engineering (including all major programming languages) radians are used be default.
     this.addSection({
       show: [
         diag._ex1,
       ],
       transitionFromPrev: (done, doneStr) => {
         diag._ex1.setScenario('topLeft');
-        diag._ex1.showForm('radFirst');
-        diag._ex2.setScenario('bottomLeft');
-        diag._ex2.showForm('radSecond');
-        diag._ex3.setScenario('topRight');
-        diag._ex4.setScenario('bottomRight');
         diag.animations.new()
           .inParallel([
-            diag.anim.dissolveIn({ element: diag._ex3, duration: 0.5 }),
+            diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
             diag.anim.trigger({
               callback: 'showFormOfEqn',
-              payload: { element: 'ex3', form: 'degFirst' },
-            }),
-            diag.anim.dissolveIn({ element: diag._ex4, duration: 0.5 }),
-            diag.anim.trigger({
-              callback: 'showFormOfEqn',
-              payload: { element: 'ex4', form: 'degSecond' },
+              payload: { element: 'ex1', form: 'sin' },
             }),
           ])
           .whenFinished(doneStr)
@@ -938,15 +1100,156 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         diag._ex1.setScenario('topLeft');
-        diag._ex1.showForm('radFirst');
-        diag._ex2.setScenario('bottomLeft');
-        diag._ex2.showForm('radSecond');
-        diag._ex3.setScenario('topRight');
-        diag._ex3.showForm('degFirst');
-        diag._ex4.setScenario('bottomRight');
-        diag._ex4.showForm('degSecond');
+        diag._ex1.showForm('sin');
       },
     });
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    this.addSection({
+      show: [
+        diag._ex1,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag._ex1.setScenario('topLeft');
+        diag._ex1.showForm('sin');
+        diag._ex2.setScenario('bottomLeft');
+        diag.animations.new()
+          .inParallel([
+            diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
+            diag.anim.trigger({
+              callback: 'showFormOfEqn',
+              payload: { element: 'ex2', form: 'sinDeg' },
+            }),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._ex1.setScenario('topLeft');
+        diag._ex1.showForm('sin');
+        diag._ex2.setScenario('bottomLeft');
+        diag._ex2.showForm('sinDeg');
+      },
+    });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   transitionFromPrev: (done, doneStr) => {
+    //     diag._ex1.setScenario('top');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex1', form: 'radSecond' },
+    //         }),
+    //       ])
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('top');
+    //     diag._ex1.showForm('radSecond');
+    //   },
+    // });
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   transitionFromPrev: (done, doneStr) => {
+    //     diag._ex1.setScenario('topLeft');
+    //     diag._ex1.showForm('radSecond');
+    //     diag._ex3.setScenario('bottom');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex3, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex3', form: 'degSecond' },
+    //         }),
+    //       ])
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('top');
+    //     diag._ex1.showForm('radSecond');
+    //     diag._ex3.setScenario('bottom');
+    //     diag._ex3.showForm('degSecond');
+    //     // diag._ex3.showForm('sinDeg');
+    //     // console.log(diag._ex3)
+    //   },
+    // });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // Then we have an extra term. In complex problems these extra terms add up to a lot of extra noise, that makes it harder to read and easier to make mistakes. As such, in the vast majority of mathematics, science, engineering (including all major programming languages) radians are used be default.
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   transitionFromPrev: (done, doneStr) => {
+    //     diag._ex1.setScenario('topLeft');
+    //     diag._ex1.showForm('radFirst');
+    //     diag._ex2.setScenario('bottomLeft');
+    //     diag._ex2.showForm('radSecond');
+    //     diag._ex3.setScenario('topRight');
+    //     diag._ex4.setScenario('bottomRight');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex3, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex3', form: 'degFirst' },
+    //         }),
+    //         diag.anim.dissolveIn({ element: diag._ex4, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex4', form: 'degSecond' },
+    //         }),
+    //       ])
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('topLeft');
+    //     diag._ex1.showForm('radFirst');
+    //     diag._ex2.setScenario('bottomLeft');
+    //     diag._ex2.showForm('radSecond');
+    //     diag._ex3.setScenario('topRight');
+    //     diag._ex3.showForm('degFirst');
+    //     diag._ex4.setScenario('bottomRight');
+    //     diag._ex4.showForm('degSecond');
+    //   },
+    // });
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************

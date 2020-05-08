@@ -148,15 +148,32 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._eqn._arc.onClick = this.goToArcForm1.bind(this);
     this.diagram.setStateCallback = 'updateAngle';
     this.fnMap.global.add('showFormOfEqn', this.showForm.bind(this));
+    this._lim._radius.setMovable();
+    this._lim._radius.setTransformCallback = 'updateLimAngle';
+    this.fnMap.global.add('updateLimAngle', this.updateLimAngle.bind(this));
+    this._lim._radius.move.maxTransform.updateRotation(0.7);
+    this._lim._radius.move.minTransform.updateRotation(0.1);
+    this._lim._radius.move.canBeMovedAfterLosingTouch = true;
   }
 
   showForm(options: { element: 'string', form: 'string' }) {
     const e = this.getElement(options.element);
-    console.log(e)
     if (e == null || e.showForm == null) {
       return;
     }
     e.showForm(options.form);
+  }
+
+  updateLimAngle() {
+    const r = this._lim._radius.getRotation();
+    this._lim._angle.setAngle({ angle: r });
+    this._lim._arc.setAngleToDraw(r + 0.005);
+    this._lim._sin.setEndPoints(
+      [this.layout.limRad * Math.cos(r) - 0.01, 0],
+      [this.layout.limRad * Math.cos(r) - 0.01, this.layout.limRad * Math.sin(r)],
+    );
+    this._lim._radius.updateLabel();
+    // this._lim._sin.updatePoints()
   }
 
   goToRadiusForm() {
