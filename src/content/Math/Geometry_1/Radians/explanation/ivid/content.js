@@ -120,38 +120,38 @@ class Content extends PresentationFormatContent {
     // Lets start with two lines on top of each other and connected at one end.
     // As we rotate one of the lines we will trace its end to form an arc, which will result in a full circle after a full rotation. That said, we will start with an arc.
     // Now these two lines form an angle at their connection point
-    this.addSection({
-      setContent: [
-        note({ top: 90 }, '|Arc|'),
-      ],
-      modifiers: {
-        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-      },
-      show: [
-        circle._line1, circle._line2, circle._corner,
-      ],
-      transitionFromPrev: (done, doneStr) => {
-        circle.setScenario('title');
-        circle.animations.new()
-          .inParallel([
-            circle.anim.scenario({ target: 'center', duration: 1 }),
-            circle._line1.anim.rotation({ target: 0, duration: 1 }),
-          ])
-          // .then(circle._arc.anim.dissolveIn(0))
-          // .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
-          .whenFinished(doneStr)
-          .start();
-      },
-      setSteadyState: () => {
-        circle.setScenario('center');
-        circle._arc.showAll();
-        // circle._angle.hide();
-        circle._line1.setRotation(0);
-        // circle._corner.showAll();
-        circle._arc.showAll();
-        diag.updateAngle();
-      },
-    });
+    // this.addSection({
+    //   setContent: [
+    //     note({ top: 90 }, '|Arc|'),
+    //   ],
+    //   modifiers: {
+    //     Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+    //   },
+    //   show: [
+    //     circle._line1, circle._line2, circle._corner,
+    //   ],
+    //   transitionFromPrev: (done, doneStr) => {
+    //     circle.setScenario('title');
+    //     circle.animations.new()
+    //       .inParallel([
+    //         circle.anim.scenario({ target: 'center', duration: 1 }),
+    //         circle._line1.anim.rotation({ target: 0, duration: 1 }),
+    //       ])
+    //       // .then(circle._arc.anim.dissolveIn(0))
+    //       // .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     circle.setScenario('center');
+    //     circle._arc.showAll();
+    //     // circle._angle.hide();
+    //     circle._line1.setRotation(0);
+    //     // circle._corner.showAll();
+    //     circle._arc.showAll();
+    //     diag.updateAngle();
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -171,32 +171,32 @@ class Content extends PresentationFormatContent {
       },
       setContent: [
         note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        // Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
       },
     };
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
-      ],
-      transitionFromPrev: (done, doneStr) => {
-        diag.updateAngle();
-        addClass('note_angle', 'topic__diagram_text_fade_in_05');
-        circle.animations.new()
-          .pulse({ element: circle._angle, duration: 1 })
-          .whenFinished(doneStr)
-          .start();
-      },
-      setSteadyState: () => {
-        removeClass('note_angle', 'topic__diagram_text_fade_in_05');
-        diag.updateAngle();
-        // circle.setScenario('center');
-      },
-    });
+    // this.addSection(common, {
+    //   show: [
+    //     circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
+    //   ],
+    //   transitionFromPrev: (done, doneStr) => {
+    //     diag.updateAngle();
+    //     addClass('note_angle', 'topic__diagram_text_fade_in_05');
+    //     circle.animations.new()
+    //       .pulse({ element: circle._angle, duration: 1 })
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     removeClass('note_angle', 'topic__diagram_text_fade_in_05');
+    //     diag.updateAngle();
+    //     // circle.setScenario('center');
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -208,17 +208,33 @@ class Content extends PresentationFormatContent {
     // Where a circle's angle is split evenly into 360 pieces, or degrees. We then measure angles by counting how many degrees are within them. If you were inventing angle measurement today, you might choose a different number than 360, and there are trade-offs to which number you choose. But 360 is a convenient number for many practical purposes. as it has a lot of factors (24 in fact) which means we can split the circle into many different fractions and be left with whole numbers.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, circle._angle, circle._arc,
+        circle._line1, circle._line2, circle._corner, circle._angle,
+        // circle._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle._angleText.setScenario('bottomDeg');
-        diag.updateAngle();
+        // diag.updateAngle();
+        // circle.animations.new()
+        //   .inParallel([
+        //     circle._degrees.anim.dissolveIn({ duration: 0.5 }),
+        //     circle._angleText.anim.dissolveIn(0.5),
+        //     circle.anim.trigger({ callback: 'setAngleTextDeg' }),
+        //   ])
+        //   .whenFinished(doneStr)
+        //   .start();
+        circle.setScenario('title');
         circle.animations.new()
+          .inParallel([
+            circle.anim.scenario({ target: 'center', duration: 1 }),
+            circle._line1.anim.rotation({ target: 1, duration: 1 }),
+          ])
           .inParallel([
             circle._degrees.anim.dissolveIn({ duration: 0.5 }),
             circle._angleText.anim.dissolveIn(0.5),
             circle.anim.trigger({ callback: 'setAngleTextDeg' }),
           ])
+          // .then(circle._arc.anim.dissolveIn(0))
+          // .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
           .whenFinished(doneStr)
           .start();
       },
@@ -230,31 +246,6 @@ class Content extends PresentationFormatContent {
         diag.updateAngle();
       },
     });
-
-    // Now, you could split the circle up into any number of portions and similary count them to measure the angle, but 360 is a choice of tradition that was mostly likely due to convenience. As 360 has many factors, then many fractions of a circle are also whole numbers making some calculations easier.
-
-    // But, there are other choices of convenience we can make to measure angle. Instead of comparing the angle to a portion of a circle, we can define angle so it is easy to relate to arc length and radius. Relating these properties will enable easy calculations of one property from the others.
-
-    // We do this 
-
-    // Now one of the goals we have when we study a shape is to the find relationships between the properties of that shape. That way you can calculate one property from another.
-    // For instance, three properties of a circle are diameter, radius and circumference. You can show that these three are related as: diameter is twice the radius. The ratio between the circumference and the diameter is π, and thus by extension the ratio between circumference and radius is 2π.
-    //
-    // These properties are inherent in a circle. We cannot change them, that is what they are. A circle on mars will be the same as a circle on earth. Similarly, an angle between two lines is also something that exists. However, how we measure the angle is a choice. Using 360 degrees is a choice of convenience that goes back thousands of years. 360 is a number that has many factors and therefore fractions of a circle are easy to calculate. 360º is convenient to represent different angles with minimal use of complicated fractions.
-    // And so there is another choice of a different convenience to measure angle.
-    // Instead of comparing the angle to the proportion of a circle, we can define it so it can easily RELATE the arc length, radius and angle.
-    // So how do we do this?
-    // We find the angle where the arc length is equal to the radius length.
-    // This angle we call one radian. The name radian comes directly from the rdaius.
-    // We then use radians as our portion to relate angle.
-    // Now, the first thing we may see is that radians do not fit evenly into the circle. In fact a little over 6 radians fit into a circle. So, this does not have the same convenience as degrees, as even just the fraction of 1 circle is not necessarily easy to deal with the value of radians.
-    // However, lets see what happens to arc length when we change the angle.
-    // By definition, at an angle of 1 radian we have an arc length of one radius length.
-    // By extension, at an angle of 2 radians, we will have an arc length of two radius lengths.
-    // Similarly for 3 radians we have an arc length of 3 radius lengths.
-    // In other words, the arc length is the product of radius and angle (when the angle is in radians) which we can generalize to a relationship.
-
-
 
 
     // For instance, these are the first 10 factors of 360 as a portion of a circle. When we use 360, a half circle is 180º, a third of a circle is 120º, a quarter is 90º and so on. This is useful for many simple, everyday practical applications of angles, such as angle arithmatic easy to do without aid from a computer or needing to write it down.
@@ -274,7 +265,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       setContent: [
         note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        // note({ top: 90 }, '|Arc|'),
         `
           <table class="radians_table fractions_table" id="radians_table">
             <tr>
@@ -310,7 +301,8 @@ class Content extends PresentationFormatContent {
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,
-        circle._arc, circle._degrees, circle._angleText,
+        // circle._arc,
+        circle._degrees, circle._angleText,
       ],
       // fadeInFromPrev: false,
       transitionFromPrev: (done, doneStr) => {
@@ -357,9 +349,9 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'Set arc length to |equal| radius length.'),
-        note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        // note({ top: 80 }, '|Radius|'),
+        // note({ top: 85 }, '|Angle|'),
+        // note({ top: 90 }, '|Arc|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -367,7 +359,7 @@ class Content extends PresentationFormatContent {
       },
       show: [
         circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc,
+        circle._angle, // circle._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle.setScenario('centerLeft');
@@ -376,10 +368,15 @@ class Content extends PresentationFormatContent {
         circle.animations.new()
           // .scenario({ target: 'center', duration: 1 })
           .delay(0.5)
+          .inParallel([
+            circle._arc.anim.dissolveIn(0.7),
+            circle.anim.trigger({ callback: 'updateAngle', }),
+          ])
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
+        circle._arc.showAll();
         diag.updateAngle();
         circle.setScenario('center');
         removeClass('note_radius', 'topic__diagram_text_fade_in_05');
