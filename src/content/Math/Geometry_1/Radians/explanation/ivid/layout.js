@@ -342,7 +342,8 @@ export default function diagramLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [-1.5, -1.5] },
+        center: { position: [-1.5, -0.8] },
+        bottom: { position: [-1.5, -1.5] },
       },
     },
   };
@@ -647,6 +648,7 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
+        left: { position: [-0.4, 0.6], scale: 1.3 },
         topLeft: { position: new Point(-0.8, 0.6), scale: 1.3 },
         bottomLeft: { position: new Point(-1.8, -0.6), scale: 1.3 },
         // topRight: { position: new Point(1.3, 0.6), scale: 1.3 },

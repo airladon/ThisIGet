@@ -171,12 +171,14 @@ class Content extends PresentationFormatContent {
       },
       setContent: [
         note({ top: 90 }, '|Angle|'),
+        note({ top: 85 }, '|Degrees|'),
         // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull }),
       },
     };
     // this.addSection(common, {
@@ -264,6 +266,7 @@ class Content extends PresentationFormatContent {
     );
     this.addSection(common, {
       setContent: [
+        note({ top: 85 }, '|Degrees|'),
         note({ top: 90 }, '|Angle|'),
         // note({ top: 90 }, '|Arc|'),
         `
@@ -350,8 +353,9 @@ class Content extends PresentationFormatContent {
         //   top: 3, centerH: true, id: 'id_main_text',
         // }, 'Set arc length to |equal| radius length.'),
         // note({ top: 80 }, '|Radius|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 80 }, '|Radius|'),
         note({ top: 85 }, '|Arc|'),
+        note({ top: 90 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -398,8 +402,8 @@ class Content extends PresentationFormatContent {
           top: 3, centerH: true, id: 'id_main_text',
         }, 'Set arc length to |equal| radius length.'),
         note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Angle|'),
-        note({ top: 90 }, '|Arc|'),
+        note({ top: 85 }, '|Arc|'),
+        note({ top: 90 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -411,7 +415,7 @@ class Content extends PresentationFormatContent {
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle.setScenario('centerLeft');
-        addClass('note_radius', 'topic__diagram_text_fade_in_05');
+        // addClass('note_radius', 'topic__diagram_text_fade_in_05');
         addClass('id_main_text', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
           // .scenario({ target: 'center', duration: 1 })
@@ -427,7 +431,7 @@ class Content extends PresentationFormatContent {
         // circle._arc.showAll();
         diag.updateAngle();
         circle.setScenario('center');
-        removeClass('note_radius', 'topic__diagram_text_fade_in_05');
+        // removeClass('note_radius', 'topic__diagram_text_fade_in_05');
         removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
       },
     });
@@ -512,12 +516,12 @@ class Content extends PresentationFormatContent {
           .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
-          .dissolveIn({ element: circle._radians, duration: 0.4 })
+          // .dissolveIn({ element: circle._radians, duration: 0.4 })
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
-        circle._radians.showAll();
+        // circle._radians.showAll();
         diag.updateAngle();
         circle.setScenario('center');
         // circle._radianLines.showAll();
@@ -923,7 +927,7 @@ class Content extends PresentationFormatContent {
         diag._lim,
       ],
       transitionFromPrev: (done, doneStr) => {
-        diag._lim.setScenario('default');
+        diag._lim.setScenario('center');
         diag._lim._radius.setRotation(0.6);
         diag.updateLimAngle();
         diag._lim.animations.new()
@@ -932,7 +936,7 @@ class Content extends PresentationFormatContent {
           .start();
       },
       setSteadyState: () => {
-        diag._lim.setScenario('default');
+        diag._lim.setScenario('center');
         diag._lim._radius.setRotation(0.6);
         diag.updateLimAngle();
       },
@@ -947,14 +951,15 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       show: [
-        diag._ex1, diag._lim,
+        diag._lim,
       ],
       transitionFromPrev: (done, doneStr) => {
-        diag._ex1.setScenario('top');
-        diag._lim.setScenario('default');
+        diag._ex1.setScenario('left');
+        diag._lim.setScenario('center');
         // diag._lim._radius.setRotation(0.6);
         diag.updateLimAngle();
         diag.animations.new()
+          // .then(diag._lim.anim.scenario({ target: 'bottom', duration: 1 }))
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
             diag.anim.trigger({
@@ -966,10 +971,10 @@ class Content extends PresentationFormatContent {
           .start();
       },
       setSteadyState: () => {
-        diag._ex1.setScenario('top');
+        diag._ex1.setScenario('left');
         diag._ex1.showForm('lim');
         // diag._lim.showAll();
-        diag._lim.setScenario('default');
+        diag._lim.setScenario('center');
         // diag._lim._radius.setRotation(0.5);
         diag.updateLimAngle();
       },
@@ -987,10 +992,11 @@ class Content extends PresentationFormatContent {
         diag._ex1,
       ],
       transitionFromPrev: (done, doneStr) => {
-        diag._ex1.setScenario('top');
+        diag._ex1.setScenario('left');
         diag._ex1.showForm('lim');
         diag._ex2.setScenario('bottom');
         diag.animations.new()
+          .then(diag._ex1.anim.scenario({ target: 'top', duration: 1 }))
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
             diag.anim.trigger({
@@ -1250,6 +1256,11 @@ class Content extends PresentationFormatContent {
     //     diag._ex4.showForm('degSecond');
     //   },
     // });
+    this.addSection({
+      setContent: [
+        style({ centerH: true, centerV: true }, 'In mathematis, working with radians is more |elegant and simple| than with degrees.'),
+      ],
+    });
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
