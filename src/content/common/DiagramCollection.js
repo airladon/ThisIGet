@@ -366,6 +366,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     if (options.color != null) {
       colorToUse = options.color;
     }
+
     if (Array.isArray(childrenOrColor)
       && childrenOrColor.length > 0
       && typeof childrenOrColor[0] === 'number'
@@ -380,7 +381,14 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       this.accent(options);
       this.diagram.animateNextFrame();
     };
-    return click(accenter, [this], colorToUse);
+
+    const clickOptions = {
+      color: colorToUse,
+    };
+    if (options.id != null) {
+      clickOptions.id = options.id;
+    } 
+    return click(accenter, [this], clickOptions);
   }
 
   accentEqn(

@@ -151,7 +151,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._lim._radius.setMovable();
     this._lim._radius.setTransformCallback = 'updateLimAngle';
     this.fnMap.global.add('updateLimAngle', this.updateLimAngle.bind(this));
-    this._lim._radius.move.maxTransform.updateRotation(0.7);
+    this._lim._radius.move.maxTransform.updateRotation(1);
     this._lim._radius.move.minTransform.updateRotation(0.1);
     this._lim._radius.move.canBeMovedAfterLosingTouch = true;
   }
@@ -442,6 +442,24 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseRadius() {
     this._circle._line1.pulseWidth({ line: 5 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLines() {
+    this._circle._line1.pulseWidth({ line: 5 });
+    this._circle._line2.pulseWidth({ line: 5 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSine() {
+    this._lim._sin.pulseWidth({ line: 5 });
+    this.accent({ element: this._lim._sin._label, x: 'right' });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseUnitR() {
+    this._lim._radius.pulseWidth({ line: 5 });
+    this.accent({ element: this._lim._radius._label, x: 'right' });
     this.diagram.animateNextFrame();
   }
 

@@ -31,6 +31,17 @@ export default function diagramLayout() {
   const width = 0.03;
   layout.width = width;
 
+  layout.circleDull = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      color: colors.dull,
+      width: width / 4,
+      sides: 300,
+      radius: layout.radius,
+    },
+  };
+
   layout.line1 = {
     name: 'line1',
     method: 'line',
@@ -230,6 +241,7 @@ export default function diagramLayout() {
     name: 'circle',
     method: 'collection',
     addElements: [
+      layout.circleDull,
       layout.degrees,
       layout.radians,
       layout.radianLines,
@@ -326,7 +338,7 @@ export default function diagramLayout() {
           width: 0.02,
           label: {
             text: 'r = 1',
-            offset: 0.02,
+            offset: 0.1,
             location: 'top',
           },
           move: {
@@ -383,6 +395,7 @@ export default function diagramLayout() {
         deg: { text: 'º' },
         r: { color: colors.lines },
         circle: 'circle',
+        d_g: { color: colors.angles },
         radians: ' radians',
         twoPiAngle: { text: '2π', color: colors.angles },
         radius: { color: colors.lines },
@@ -463,7 +476,7 @@ export default function diagramLayout() {
         radiusEquals1_2: ['angle', 'equals', { frac: ['arc', 'v_1', { strike: ['_1', 's_1'] }] }],
         radiusEquals1_3: ['angle', 'equals', 'arc'],
         radiusEquals1_4: ['angle', 'equals', { bottomComment: ['arc', 'forRad1'] }],
-        arcDegrees: ['arc', 'equals', 'angle', 'x', 'radius', 'x_1', { frac: ['π', 'v_1', '_180'] }],
+        arcDegrees: ['arc', 'equals', { sub: ['angle', 'd_g'] }, 'x', 'radius', 'x_1', { frac: ['π', 'v_1', '_180'] }],
       },
       formSeries: ['arc', 'radius', 'angle'],
     },
@@ -648,8 +661,9 @@ export default function diagramLayout() {
     },
     mods: {
       scenarios: {
-        left: { position: [-0.4, 0.6], scale: 1.3 },
+        left: { position: [0.6, -1.5], scale: 1.3 },
         topLeft: { position: new Point(-0.8, 0.6), scale: 1.3 },
+        // lowBottom: { position: new Point(), scale: 1.3 },
         bottomLeft: { position: new Point(-1.8, -0.6), scale: 1.3 },
         // topRight: { position: new Point(1.3, 0.6), scale: 1.3 },
         // bottomRight: { position: new Point(1.3, -0.6), scale: 1.3 },

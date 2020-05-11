@@ -172,13 +172,15 @@ class Content extends PresentationFormatContent {
       setContent: [
         note({ top: 90 }, '|Angle|'),
         note({ top: 85 }, '|Degrees|'),
+        note({ top: 80 }, '|Value|')
         // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull }),
+        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull, id: 'note_degrees' }),
+        Value: diag.bindAccent({ element: circle._angleText._value, scale: 2, color: colors.angles, id: 'note_value', x: 0.1 }),
       },
     };
     // this.addSection(common, {
@@ -353,6 +355,7 @@ class Content extends PresentationFormatContent {
         //   top: 3, centerH: true, id: 'id_main_text',
         // }, 'Set arc length to |equal| radius length.'),
         // note({ top: 80 }, '|Radius|'),
+        note({ top: 75 }, '|Lines|'),
         note({ top: 80 }, '|Radius|'),
         note({ top: 85 }, '|Arc|'),
         note({ top: 90 }, '|Angle|'),
@@ -360,10 +363,12 @@ class Content extends PresentationFormatContent {
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
         'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+        Lines: click(diag.pulseLines, [diag], { color: colors.lines, id: 'note_lines' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, // circle._arc,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle.setScenario('centerLeft');
@@ -375,6 +380,7 @@ class Content extends PresentationFormatContent {
           .inParallel([
             circle._arc.anim.dissolveIn(0.7),
             circle.anim.trigger({ callback: 'updateAngle', }),
+            circle._circle.anim.dissolveIn(0.7),
           ])
           .whenFinished(doneStr)
           .start();
@@ -412,6 +418,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         // circle.setScenario('centerLeft');
@@ -453,6 +460,9 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
+        note({ top: 60 }, '|EqnRadius|'),
+        note({ top: 65 }, '|EqnAngle|'),
+        note({ top: 70 }, '|Value|'),
         note({ top: 75 }, '|Radian|'),
         note({ top: 80 }, '|Radius|'),
         note({ top: 85 }, '|Arc|'),
@@ -464,6 +474,9 @@ class Content extends PresentationFormatContent {
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
         Radian: click(diag.bendRadius, [diag, null], { color: colors.lines, id: 'note_radian' }),
+        Value: diag.bindAccent({ element: circle._angleText._value, color: colors.angles, id: 'note_value', scale: 1.8, x: 0.1 }),
+        EqnAngle: diag.bindAccent({ element: eqn._angle, color: colors.angles, id: 'note_eqn_angle'}),
+        EqnRadius: diag.bindAccent({ element: eqn._radius, color: colors.lines, id: 'note_eqn_radius'})
       },
     };
     this.addSection(common, {
@@ -479,6 +492,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines._line0,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         addClass('id_main_text', 'topic__diagram_text_fade_in_05');
@@ -508,6 +522,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines._line0,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         circle.animations.new()
@@ -541,6 +556,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines, // circle._radians,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCirc');
@@ -566,6 +582,7 @@ class Content extends PresentationFormatContent {
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines, // circle._radians,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCircle');
@@ -590,8 +607,9 @@ class Content extends PresentationFormatContent {
     // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But it is convenient when you right down its definition as an expression.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('topCircle');
@@ -622,8 +640,9 @@ class Content extends PresentationFormatContent {
     // One radian produces an arc length of 1 radius. Two radians produce an arc length of two radians. Half a radian produces an arc length of half a radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('top');
@@ -654,8 +673,9 @@ class Content extends PresentationFormatContent {
     // More generally, this radian term is just the angle, and instead of writing out radius length each time, we will just write radius.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('top');
@@ -685,8 +705,9 @@ class Content extends PresentationFormatContent {
     // And so we are left with a simple relationship.
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._line1, circle._line2, circle._corner, circle._radians,
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._circle,
       ],
       transitionFromPrev: (done, doneStr) => {
         eqn.setScenario('top');
@@ -839,6 +860,21 @@ class Content extends PresentationFormatContent {
     // While the numerical value of the degrees and radians are different, we know if they represent the same angle then that angle must be the same portion of a full circle. Thus the ratios of the angles relative to their equivalent full circle angles must be the same. We can no rearrange the equation to find the radian angle in terms of the degree angle.
     // So to convert degrees to radians, we multiply by the ratio of pi over 180.
     this.addSection({
+      setContent: [
+        note({ top: 80 }, '|scalar|'),
+        note({ top: 85 }, '|_2pi|'),
+        note({ top: 90 }, '|_360|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
+        _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
+        scalar: diag.bindAccent({ elements: [
+          diag._radEqn._v_2,
+          diag._radEqn._pi,
+          diag._radEqn.__180,
+        ], id: 'note_scalar', centerOn: diag._radEqn._v_2, scale: 1.5 }),
+      },
       show: [
         diag._radEqnNav, diag._radEqn,
       ],
@@ -862,6 +898,26 @@ class Content extends PresentationFormatContent {
     // // **********************************************************************
     // We can do a similar procedure to find degrees from radians.
     this.addSection({
+      setContent: [
+        note({ top: 80 }, '|scalarRad|'),
+        note({ top: 85 }, '|scalarDeg|'),
+        // note({ top: 90 }, '|_360|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        // _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
+        // _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
+        scalarRad: diag.bindAccent({ elements: [
+          diag._radEqn._v_2,
+          diag._radEqn._pi,
+          diag._radEqn.__180,
+        ], id: 'note_scalar', centerOn: diag._radEqn._v_2, scale: 1.5 }),
+        scalarDeg: diag.bindAccent({ elements: [
+          diag._degEqn._v_1,
+          diag._degEqn._pi,
+          diag._degEqn.__180,
+        ], id: 'note_scalar_deg', centerOn: diag._degEqn._v_1, scale: 1.5 }),
+      },
       show: [
         diag._radEqnNav, diag._radEqn,
       ],
@@ -895,6 +951,32 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
     this.addSection({
+      setContent: [
+        note({ top: 85 }, '|angleD|'),
+        note({ top: 90 }, '|factor|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        factor: diag.bindAccent({
+          elements: [
+            eqn._π,
+            eqn._v_1,
+            eqn.__180,
+          ],
+          id: 'note_factor',
+          centerOn: eqn._v_1,
+          scale: 1.5,
+        }),
+        angleD: diag.bindAccent({
+          elements: [
+            eqn._angle,
+            eqn._d_g,
+          ],
+          id: 'note_angle',
+          centerOn: eqn._angle,
+          scale: 1.5,
+        }),
+      },
       show: [
         eqn,
       ],
@@ -923,12 +1005,34 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
+      setContent: [
+        note({ top: 75 }, '|sin|'),
+        note({ top: 80 }, '|arc|'),
+        note({ top: 85 }, '|radius|'),
+        note({ top: 90 }, '|angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        angle: diag.bindAccent({
+          element: diag._lim._angle,
+          id: 'note_angle',
+          // centerOn: eqn._v_1,
+          scale: 1.5,
+        }),
+        arc: diag.bindAccent({
+          element: diag._lim._arc,
+          id: 'note_arc',
+          scale: 1.5,
+        }),
+        sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
+        radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
+      },
       show: [
         diag._lim,
       ],
       transitionFromPrev: (done, doneStr) => {
         diag._lim.setScenario('center');
-        diag._lim._radius.setRotation(0.6);
+        diag._lim._radius.setRotation(0.8);
         diag.updateLimAngle();
         diag._lim.animations.new()
           .dissolveIn(1)
@@ -937,7 +1041,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         diag._lim.setScenario('center');
-        diag._lim._radius.setRotation(0.6);
+        diag._lim._radius.setRotation(0.8);
         diag.updateLimAngle();
       },
     });
@@ -950,6 +1054,60 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
+      setContent: [
+        note({ top: 55 }, '|limit|'),
+        note({ top: 60 }, '|sinx|'),
+        note({ top: 65 }, '|x|'),
+        note({ top: 70 }, '|one|'),
+        note({ top: 75 }, '|sin|'),
+        note({ top: 80 }, '|arc|'),
+        note({ top: 85 }, '|radius|'),
+        note({ top: 90 }, '|angle|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        limit: diag.bindAccent({
+          elements: [diag._ex1._lim, diag._ex1._xTo0],
+          centerOn: diag._ex1._lim,
+          // y: 'bottom',
+          id: 'note_limit',
+          // y: 'top',
+          scale: 1.5,
+        }),
+        sinx: diag.bindAccent({
+          elements: [diag._ex1._sin, diag._ex1._x_1],
+          centerOn: diag._ex1._sin,
+          x: 0.8,
+          id: 'note_sinx',
+          y: 'bottom',
+          scale: 1.5,
+        }),
+        x: diag.bindAccent({
+          element: diag._ex1._x_2,
+          id: 'note_x',
+          y: 'top',
+          scale: 1.5,
+        }),
+        one: diag.bindAccent({
+          element: diag._ex1.__1,
+          id: 'note_one',
+          x: 'left',
+          scale: 2,
+        }),
+        angle: diag.bindAccent({
+          element: diag._lim._angle,
+          id: 'note_angle',
+          // centerOn: eqn._v_1,
+          scale: 1.5,
+        }),
+        arc: diag.bindAccent({
+          element: diag._lim._arc,
+          id: 'note_arc',
+          scale: 1.5,
+        }),
+        sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
+        radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
+      },
       show: [
         diag._lim,
       ],
@@ -996,7 +1154,7 @@ class Content extends PresentationFormatContent {
         diag._ex1.showForm('lim');
         diag._ex2.setScenario('bottom');
         diag.animations.new()
-          .then(diag._ex1.anim.scenario({ target: 'top', duration: 1 }))
+          .then(diag._ex1.anim.scenario({ target: 'top', duration: 1.5 }))
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
             diag.anim.trigger({
