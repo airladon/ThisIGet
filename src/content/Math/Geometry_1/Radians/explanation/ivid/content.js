@@ -28,6 +28,8 @@ const {
   // onClickId,
 } = Fig.tools.html;
 
+const { round } = Fig.tools.math;
+
 // const { rand } = Fig.tools.math;
 
 const { HTMLEquation } = Fig;
@@ -1435,7 +1437,7 @@ class Content extends PresentationFormatContent {
       {
         color: colors.angles,
         id: `id_${angle}`,
-        text: `${angle}&deg;`,
+        text: `${round(angle, 0)}&deg;`,
         classes: 'action_word_table',
       },
     );
@@ -1469,7 +1471,7 @@ class Content extends PresentationFormatContent {
         `,
       ],
       modifiers: {
-        _360deg: degClick(360),
+        _360deg: degClick(359.9),
         _270deg: degClick(270),
         _180deg: degClick(180),
         _120deg: degClick(120),
@@ -1477,7 +1479,7 @@ class Content extends PresentationFormatContent {
         _60deg: degClick(60),
         _45deg: degClick(45),
         _30deg: degClick(30),
-        _360rad: radClick('2&pi;', 360),
+        _360rad: radClick('2&pi;', 359.9),
         _270rad: radClick('<sup>3&pi;</sup>&frasl;<sub>2</sub>', 270),
         _180rad: radClick('&pi;', 180),
         _120rad: radClick('<sup>2&pi;</sup>&frasl;<sub>3</sub>', 120),
