@@ -34058,7 +34058,7 @@ var Recorder = /*#__PURE__*/function () {
         if (_this8.state === 'recording') {
           _this8.recordCurrentState();
 
-          _this8.queueRecordState(_this8.getCurrentTime() % _this8.stateTimeStep);
+          _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
       };
 
@@ -34093,7 +34093,12 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function show() {
-      var _this9 = this;
+      var toJsonHtml = function toJsonHtml(obj) {
+        var s = JSON.stringify(obj, null, 2);
+        s = s.replace(/\n/g, '<br>');
+        s = s.replace(/ /g, '&nbsp');
+        return s;
+      };
 
       var wnd = window.open('about:blank', '', '_blank'); // this.slides.forEach((slide) => {
       //   wnd.document.write(JSON.stringify(slide), '<br>');
@@ -34102,26 +34107,28 @@ var Recorder = /*#__PURE__*/function () {
       wnd.document.write('<br><br>');
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
-      wnd.document.write('<br><br>');
-      Object.keys(this.events).forEach(function (eventName) {
-        var event = _this9.events[eventName]; // const rounded = event.map((e) => {
-        //   if (typeof e === 'number') {
-        //     return round(e, this.precision);
-        //   }
-        //   return e;
-        // });
+      wnd.document.write('<br><br>'); // Object.keys(this.events).forEach((eventName) => {
+      //   const event = this.events[eventName];
+      //   // const rounded = event.map((e) => {
+      //   //   if (typeof e === 'number') {
+      //   //     return round(e, this.precision);
+      //   //   }
+      //   //   return e;
+      //   // });
+      //   wnd.document.write('<br><br>');
+      //   wnd.document.write(`${eventName}`);
+      //   wnd.document.write(JSON.stringify(event, null, 2), '<br>');
+      // });
 
-        wnd.document.write('<br><br>');
-        wnd.document.write("".concat(eventName));
-        wnd.document.write(JSON.stringify(event), '<br>');
-      });
+      wnd.document.write(toJsonHtml(this.events), '<br>');
       wnd.document.write('<br><br>');
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write("// ".concat('/'.repeat(500), "<br>"));
       wnd.document.write('<br><br>');
-      this.states.diffs.forEach(function (state) {
-        wnd.document.write(JSON.stringify(state), '<br>');
-      });
+      wnd.document.write(toJsonHtml(this.states.diffs), '<br>');
+      wnd.document.write(toJsonHtml(this.states.references), '<br>'); // this.states.diffs.forEach((state) => {
+      //   wnd.document.write(JSON.stringify(state, null, 2), '<br>');
+      // });
     } // ////////////////////////////////////
     // ////////////////////////////////////
     // Seeking
@@ -34159,7 +34166,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "setToTime",
     value: function setToTime(time) {
-      var _this10 = this;
+      var _this9 = this;
 
       // if (this.states.diffs.length === 0) {
       //   return;
@@ -34181,7 +34188,7 @@ var Recorder = /*#__PURE__*/function () {
       var eventsToSetBeforeState = [];
       var eventsToSetAfterState = [];
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this10.events[eventName];
+        var event = _this9.events[eventName];
 
         if (event.setOnSeek === false) {
           return;
@@ -34200,7 +34207,7 @@ var Recorder = /*#__PURE__*/function () {
               eventTime = _event$list$i[0],
               timeCount = _event$list$i[2];
 
-          if (_this10.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
+          if (_this9.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
             eventsToSetBeforeState.push([eventName, i, eventTime, timeCount]);
           } else if (eventTime > stateTime || eventTime === stateTime && timeCount > stateTimeCount) {
             eventsToSetAfterState.push([eventName, i, eventTime, timeCount]);
@@ -34232,7 +34239,7 @@ var Recorder = /*#__PURE__*/function () {
               eventName = _event[0],
               index = _event[1];
 
-          _this10.setEvent(eventName, index);
+          _this9.setEvent(eventName, index);
         });
       };
 
@@ -34396,7 +34403,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
-      var _this11 = this;
+      var _this10 = this;
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -34404,10 +34411,10 @@ var Recorder = /*#__PURE__*/function () {
         this.audio.play();
 
         var audioEnded = function audioEnded() {
-          _this11.isAudioPlaying = false;
+          _this10.isAudioPlaying = false;
 
-          if (_this11.state === 'playing') {
-            _this11.finishPlaying();
+          if (_this10.state === 'playing') {
+            _this10.finishPlaying();
           }
         };
 
@@ -34422,14 +34429,14 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startEventsPlayback",
     value: function startEventsPlayback(fromTime) {
-      var _this12 = this;
+      var _this11 = this;
 
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this12.events[eventName].list.length === 0) {
+        if (_this11.events[eventName].list.length === 0) {
           return;
         }
 
-        var event = _this12.events[eventName];
+        var event = _this11.events[eventName];
         var index = getNextIndexForTime(event.list, fromTime);
 
         var _event$list$index = _slicedToArray(event.list[index], 1),
@@ -34440,9 +34447,9 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         if (index > event.list.length - 1) {
-          _this12.eventIndex[eventName] = -1;
+          _this11.eventIndex[eventName] = -1;
         } else {
-          _this12.eventIndex[eventName] = index;
+          _this11.eventIndex[eventName] = index;
         }
       });
       var nextEventName = this.getNextEvent();
@@ -34454,19 +34461,19 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getNextEvent",
     value: function getNextEvent() {
-      var _this13 = this;
+      var _this12 = this;
 
       var nextEventName = '';
       var nextTime = null;
       var nextTimeCount = null;
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this13.eventIndex[eventName] == null || _this13.eventIndex[eventName] === -1 || _this13.events[eventName].list.length <= _this13.eventIndex[eventName]) {
+        if (_this12.eventIndex[eventName] == null || _this12.eventIndex[eventName] === -1 || _this12.events[eventName].list.length <= _this12.eventIndex[eventName]) {
           return;
         }
 
-        var _this13$events$eventN = _slicedToArray(_this13.events[eventName].list[_this13.eventIndex[eventName]], 3),
-            time = _this13$events$eventN[0],
-            timeCount = _this13$events$eventN[2];
+        var _this12$events$eventN = _slicedToArray(_this12.events[eventName].list[_this12.eventIndex[eventName]], 3),
+            time = _this12$events$eventN[0],
+            timeCount = _this12$events$eventN[2];
 
         if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
@@ -34521,7 +34528,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "finishPlaying",
     value: function finishPlaying() {
-      var _this14 = this;
+      var _this13 = this;
 
       if (this.areEventsPlaying()) {
         return false;
@@ -34531,7 +34538,7 @@ var Recorder = /*#__PURE__*/function () {
 
       if (remainingTime > 0.0001) {
         this.timeoutID = setTimeout(function () {
-          _this14.finishPlaying();
+          _this13.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
       } // if (this.isAudioPlaying) {
