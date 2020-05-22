@@ -1,7 +1,7 @@
 .figureone_scrollbar {
   position: relative;
   height: 20px;
-  width: 80%;
+  width: calc(100% - 12px);
   margin-left: auto;
   margin-right: auto;
 }

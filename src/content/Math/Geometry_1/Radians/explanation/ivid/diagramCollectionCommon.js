@@ -68,7 +68,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.diagram.addElements(this.layout.addElements, this);
-    this.add('pointer', this.diagram.shapes.pointer());
+    this.add('cursor', this.diagram.shapes.cursor());
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
     this._circle._line1.fnMap.add('updateAngle', this.updateAngle.bind(this));

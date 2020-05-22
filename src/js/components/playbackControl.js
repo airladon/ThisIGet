@@ -8,8 +8,9 @@ const { getObjectDiff } = Fig.tools.misc;
 
 type State = {
   playClass: string,
-  pauseClass: string,
+  playPauseClass: string,
   recordClass: string,
+  recordPauseClass: string,
   volumeOnClass: string,
   volumeMuteClass: string,
   time: string,
@@ -47,8 +48,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.volumeTouchDown = false;
     this.state = {
       playClass: '',
-      pauseClass: 'figureone_playback_control__hide',
+      playPauseClass: 'figureone_playback_control__hide',
       recordClass: '',
+      recordPauseClass: 'figureone_playback_control__hide',
       volumeOnClass: '',
       volumeMuteClass: '',
       time: '00:00 / 00:00',
@@ -60,122 +62,97 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   play() {
     const recorder = new Recorder();
-    recorder.playbackStopped = this.playbackStopped.bind(this);
-    // console.log(this.state.time)
-    if (this.state.seek < 1) {
-      recorder.startPlayback(this.state.timeValue);
-    } else {
-      recorder.startPlayback(0);
+    if (recorder.duration === 0) {
+      return;
     }
+    recorder.startPlayback(this.state.timeValue);
+    recorder.playbackStoppedCallback = this.playToPause.bind.this();
     this.setState({
-      pauseClass: '',
+      playPauseClass: '',
       playClass: 'figureone_playback_control__hide',
     });
     this.queueTimeUpdate();
+  }
+
+  playToPause() {
+    this.setState({
+      playClass: '',
+      playPauseClass: 'figureone_playback_control__hide',
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  pause() {
+    const recorder = new Recorder();
+    recorder.pausePlayback();
+  }
+
+  record() {
+    const recorder = new Recorder();
+    recorder.startRecording(this.state.timeValue);
+    this.queueTimeUpdate();
+    this.setState({
+      recordPauseClass: '',
+      recordClass: 'figureone_playback_control__hide',
+    });
+  }
+
+
+  pauseRecording() {
+    const recorder = new Recorder();
+    recorder.stopRecording();
+    this.setState({
+      recordClass: '',
+      recordPauseClass: 'figureone_playback_control__hide',
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  showRecording() {
+    const recorder = new Recorder();
+    recorder.show();
   }
 
   queueTimeUpdate() {
     const recorder = new Recorder();
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
-    if (recorder.isPlaying) {
-      // console.log(recorder.isPlaying)
-      // const timeToNextSecond = 1 - (currentTime - Math.floor(currentTime));
-      // setTimeout(this.queueTimeUpdate.bind(this), timeToNextSecond * 1000);
+    if (recorder.state !== 'idle') {
       setTimeout(this.queueTimeUpdate.bind(this), 20);
     }
   }
 
   updateTime(time: number) {
     const recorder = new Recorder();
-    const totalTime = recorder.getTotalTime();
+    let totalTime = recorder.duration;
+    if (recorder.state === 'recording') {
+      if (time > totalTime) {
+        totalTime = time;
+      }
+    }
     this.setState({
-      time: `${timeToStr(time)} / ${timeToStr(totalTime)}`,
+      time: `${timeToStr(Math.floor(time))} / ${timeToStr(totalTime)}`,
       timeValue: time,
       seek: time / totalTime,
     });
-    // const progressBar = document.getElementById('playback_control_seek');
-    // if (progressBar) {
-    //   progressBar.seek(time / totalTime);
-    // }
   }
 
-  // getTimeStr(time: number) {
-  //   const recorder = new Recorder();
-  //   const totalTime = recorder.getTotalTime();
-  //   return 
-  // }
 
   seekToPercent(percent: number) {
     const recorder = new Recorder();
-    const totalTime = recorder.getTotalTime();
-    // console.log('STARTING ****', percent * totalTime)
+    const totalTime = recorder.duration;
     this.setState({ seek: percent });
-    recorder.seek(percent);
+    recorder.seekToPercent(percent);
     this.updateTime(percent * totalTime);
-    // recorder.seek(34.5 / totalTime);
-    // this.updateTime(34.5);
-    // console.log(recorder.states)
-    // console.log(recorder.slides)
-    // console.log(this.getDiagram().elements._circle._line1)
-    // this.getDiagram().elements._circle._line1._line.afterDrawCallback = () => {
-    //   console.log('line1', this.getDiagram().elements._circle._line1)
-    // }
-    // this.getDiagram().elements._circle._line2._line.afterDrawCallback = () => {
-    //   console.log('line2', this.getDiagram().elements._circle._line2)
-    // }
-    // recorder.setSlide(5);
-    // recorder.setState(58);
-    // console.log(getObjectDiff(recorder.states[57], recorder.states[58]));
-    // this.getDiagram().animateNextFrame();
   }
 
   seek(toTime: number) {
     const recorder = new Recorder();
-    const totalTime = recorder.getTotalTime();
+    const totalTime = recorder.duration;
     const percent = toTime / totalTime;
     this.setState({ seek: percent });
     recorder.seek(percent);
     this.updateTime(toTime);
-  }
-
-  playbackStopped() {
-    this.setState({
-      playClass: '',
-      pauseClass: 'figureone_playback_control__hide',
-    });
-  }
-
-  pause() {
-    const recorder = new Recorder();
-    if (recorder.isRecording) {
-      recorder.stop();
-      this.setState({
-        playClass: '',
-        pauseClass: 'figureone_playback_control__hide',
-      });
-      console.log(recorder);
-    } else {
-      recorder.pausePlayback();
-    }
-    // recorder.audio.pause();
-    // this.setState({
-    //   playClass: '',
-    //   pauseClass: 'figureone_playback_control__hide',
-    // });
-    // this.playbackStopped
-    // if (recorder.audio) {
-    //   recorder.audio.removeEventListener('timeupdate', this.updateTime.bind(this), false);
-    // }
-  }
-
-  record() {
-    const recorder = new Recorder();
-    recorder.start();
-    this.setState({
-      pauseClass: '',
-      playClass: 'figureone_playback_control__hide',
-    });
   }
 
   getVolume() {
@@ -198,35 +175,47 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   render() {  // eslint-disable-line class-methods-use-this
     return <div className="figureone_playback_control">
-      <div className="figureone_playback_control__seek_container">
+      <div className="figureone_playback_control__h_space"/>
+      <div
+        className={`figureone_playback_control__play ${this.state.playClass}`}
+        onClick={this.play.bind(this)}
+      />
+      <div
+        className={`figureone_playback_control__pause ${this.state.playPauseClass}`}
+        onClick={this.pause.bind(this)}
+      />
+      <div className="figureone_playback_control__time">
+        {this.state.time}
+      </div>
+      <div className="figureone_playback_controll_seek_container">
         <ScrollBar
           id='playback_control_seek'
           changed={this.seekToPercent.bind(this)}
           position={this.state.seek}
         />
       </div>
-      <div className="figureone_playback_control__control_container">
-        <div
-          className={`figureone_playback_control__play ${this.state.playClass}`}
-          onClick={this.play.bind(this)}
-        />
-        <div
-          className={`figureone_playback_control__pause ${this.state.pauseClass}`}
-          onClick={this.pause.bind(this)}
-        />
-        <div
-          className={`figureone_playback_control__record ${this.state.recordClass}`}
-          onClick={this.record.bind(this)}
-        />
-        <div className="figureone_playback_control__time">
-          {this.state.time}
-        </div>
-        <div className="figureone_playback_control__volume_on"/>
-        <div className="figureone_playback_control__volume_mute"/>
-        <div className="figureone_playback_control__volume_change"/>
-        <div className="figureone_playback_control__settings"/>
-        <div className="figureone_playback_control__full_screen"/>
+      <div
+        className={`figureone_playback_control__record ${this.state.recordClass}`}
+        onClick={this.record.bind(this)}
+      />
+      <div
+        className={`figureone_playback_control__pause_recording ${this.state.recordPauseClass}`}
+        onClick={this.pauseRecording.bind(this)}
+      />
+      <div
+        className={'figureone_playback_control__show_recording'}
+        onClick={this.showRecording.bind(this)}
+      >
+        show
       </div>
+      <div className="figureone_playback_control__h_space"/>
+      { /*
+      <div className="figureone_playback_control__volume_on"/>
+      <div className="figureone_playback_control__volume_mute"/>
+      <div className="figureone_playback_control__volume_change"/>
+      <div className="figureone_playback_control__settings"/>
+      <div className="figureone_playback_control__full_screen"/>
+      */ }
     </div>;
   }
 }

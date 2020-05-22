@@ -220,18 +220,12 @@ export default class PresentationFormatComponent extends React.Component
     const nextButton = document.getElementById('topic__button-next');
     if (nextButton instanceof HTMLElement) {
       nextButton.onclick = () => {
-        // if (this.version.content.diagram.recorder.isRecording) {
-        //   this.version.content.diagram.recorder.recordSlides('next');
-        // }
         this.goToNext();
       };
     }
     const prevButton = document.getElementById('topic__button-previous');
     if (prevButton instanceof HTMLElement) {
       prevButton.onclick = () => {
-        // if (this.version.content.diagram.recorder.isRecording) {
-        //   this.version.content.diagram.recorder.recordSlides('prev');
-        // }
         this.goToPrevious();
       };
     }
@@ -454,11 +448,11 @@ export default class PresentationFormatComponent extends React.Component
                   />
                 </div>
               </div>
+              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
               {this.addGoToButton()}
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
         </div>
       </div>
       </main>
