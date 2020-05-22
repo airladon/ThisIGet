@@ -4942,8 +4942,10 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "getState",
     value: function getState() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+      var ignoreShown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       this.stateTime = performance.now() / 1000;
-      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime']);
+      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], precision, ignoreShown);
     }
   }, {
     key: "setState",
@@ -29418,13 +29420,21 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "_getStateProperties",
     value: function _getStateProperties() {
+      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       // eslint-disable-line class-methods-use-this
-      return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move'].concat(_toConsumableArray(this.stateProperties));
+      if (this.isShown || ignoreShown) {
+        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move'].concat(_toConsumableArray(this.stateProperties));
+      }
+
+      return ['isShown', 'transform'];
     }
   }, {
     key: "_state",
     value: function _state() {
-      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties()); // if (this.isShown) {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+      var ignoreShown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(ignoreShown), precision, ignoreShown); // if (this.isShown) {
       //   return getState(this, this._getStateProperties());
       // }
       // return { isShown: false };
@@ -31055,8 +31065,14 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   _createClass(DiagramElementPrimitive, [{
     key: "_getStateProperties",
     value: function _getStateProperties() {
+      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject']);
+      if (this.isShown || ignoreShown) {
+        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, ignoreShown)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject']);
+      }
+
+      return ['isShown', 'transform'];
     }
   }, {
     key: "setAngleToDraw",
@@ -31563,8 +31579,14 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   _createClass(DiagramElementCollection, [{
     key: "_getStateProperties",
     value: function _getStateProperties() {
+      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this)), ['touchInBoundingRect', 'elements', 'hasTouchableElements']);
+      if (this.isShown || ignoreShown) {
+        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this, ignoreShown)), ['touchInBoundingRect', 'elements', 'hasTouchableElements']);
+      }
+
+      return ['isShown', 'transform', 'elements'];
     }
   }, {
     key: "_dup",
@@ -33832,6 +33854,11 @@ var Recorder = /*#__PURE__*/function () {
       this.setToTime(fromTime); // }
 
       this.states.precision = this.precision;
+
+      if (fromTime === 0 && this.states.baseReference == null) {
+        this.states.setBaseReference(this.diagram.getState(this.precision, true));
+      }
+
       this.eventsCache = {}; // this.slidesCache = [];
 
       this.statesCache = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["ObjectTracker"](this.precision);
@@ -33979,6 +34006,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       this.duration = this.calcDuration();
+      console.log(this);
     }
   }, {
     key: "addEventType",
@@ -33999,9 +34027,11 @@ var Recorder = /*#__PURE__*/function () {
       if (this.lastRecordTime == null || now > this.lastRecordTime) {
         this.lastRecordTime = now;
         this.lastRecordTimeCount = 0;
-      }
+      } // const start = performance.now();
 
-      this.statesCache.add(now, state, this.reference, this.lastRecordTimeCount);
+
+      this.statesCache.add(now, state, this.reference, this.lastRecordTimeCount); // console.log('add', performance.now() - start);
+
       this.duration = this.calcDuration();
       this.lastRecordTimeCount += 1;
 
@@ -34012,12 +34042,23 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordCurrentState",
     value: function recordCurrentState() {
-      this.recordState(this.diagram.getState());
+      // const start = performance.now();
+      var state = this.diagram.getState(this.precision); // console.log('getState', performance.now() - start);
+      // const start1 = performance.now();
+      // const str = JSON.stringify(state);
+      // console.log('stringify', str.length, performance.now() - start);
+      // console.log(state)
+      // console.log(str)
+      // const unStr = JSON.parse(str)
+      // console.log(unStr)
+      // console.log(unStr == state)
+
+      this.recordState(state);
     }
   }, {
     key: "recordCurrentStateAsReference",
     value: function recordCurrentStateAsReference(refName, basedOn) {
-      this.statesCache.addReference(this.diagram.getState(), refName, basedOn);
+      this.statesCache.addReference(this.diagram.getState(this.precision), refName, basedOn);
     }
   }, {
     key: "recordEvent",
@@ -34815,6 +34856,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function getState(obj, stateProperties) {
   var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+  var payload = arguments.length > 3 ? arguments[3] : undefined;
   // const stateProperties = this._getStateProperties();
   // const path = this.getPath();
   var state = {};
@@ -34841,7 +34883,7 @@ function getState(obj, stateProperties) {
     }
 
     if (value._state != null) {
-      return value._state(precision);
+      return value._state(precision, payload);
     }
 
     if (Array.isArray(value)) {

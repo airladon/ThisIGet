@@ -66,7 +66,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       return;
     }
     recorder.startPlayback(this.state.timeValue);
-    recorder.playbackStoppedCallback = this.playToPause.bind.this();
+    recorder.playbackStoppedCallback = this.playToPause.bind(this);
     this.setState({
       playPauseClass: '',
       playClass: 'figureone_playback_control__hide',
@@ -89,6 +89,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   record() {
     const recorder = new Recorder();
+    recorder.stateTimeStep = 1;
     recorder.startRecording(this.state.timeValue);
     this.queueTimeUpdate();
     this.setState({
