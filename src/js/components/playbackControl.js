@@ -148,7 +148,16 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   pause() {
     const recorder = new Recorder();
-    recorder.pausePlayback();
+    if (recorder.isRecording) {
+      recorder.stop();
+      this.setState({
+        playClass: '',
+        pauseClass: 'figureone_playback_control__hide',
+      });
+      console.log(recorder);
+    } else {
+      recorder.pausePlayback();
+    }
     // recorder.audio.pause();
     // this.setState({
     //   playClass: '',
@@ -161,7 +170,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   record() {
-    console.log('asdf');
+    const recorder = new Recorder();
+    recorder.start();
+    this.setState({
+      pauseClass: '',
+      playClass: 'figureone_playback_control__hide',
+    });
   }
 
   getVolume() {
