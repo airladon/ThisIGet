@@ -114,6 +114,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.show();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  saveRecording() {
+    const recorder = new Recorder();
+    recorder.save();
+  }
+
   queueTimeUpdate() {
     const recorder = new Recorder();
     const currentTime = recorder.getCurrentTime();
@@ -143,7 +149,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
+    const s = performance.now()
     recorder.seekToPercent(percent);
+    console.log('seek', performance.now() - s)
     this.updateTime(percent * totalTime);
   }
 
@@ -208,6 +216,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
         onClick={this.showRecording.bind(this)}
       >
         show
+      </div>
+      <div
+        className={'figureone_playback_control__ssave_recording'}
+        onClick={this.saveRecording.bind(this)}
+      >
+        save
       </div>
       <div className="figureone_playback_control__h_space"/>
       { /*

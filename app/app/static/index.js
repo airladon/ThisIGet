@@ -481,8 +481,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var state = _get(_getPrototypeOf(AnimationBuilder.prototype), "_state", this).call(this); // definition.f1Type = 'animationBuilder';
+    value: function _state(options) {
+      var state = _get(_getPrototypeOf(AnimationBuilder.prototype), "_state", this).call(this, options); // definition.f1Type = 'animationBuilder';
       // if (this.element != null) {
       //   definition.state.element = this.element.getPath();
       // }
@@ -931,8 +931,8 @@ var AnimationManager = /*#__PURE__*/function () {
 
   _createClass(AnimationManager, [{
     key: "_state",
-    value: function _state() {
-      var state = Object(_state__WEBPACK_IMPORTED_MODULE_3__["getState"])(this, ['animations', 'state', 'options']);
+    value: function _state(options) {
+      var state = Object(_state__WEBPACK_IMPORTED_MODULE_3__["getState"])(this, ['animations', 'state', 'options'], options);
 
       if (this.element != null) {
         state.element = {
@@ -1372,8 +1372,7 @@ var AnimationStep = /*#__PURE__*/function () {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+    value: function _state(options) {
       return {
         f1Type: this._getStateName(),
         // def: {
@@ -1390,7 +1389,7 @@ var AnimationStep = /*#__PURE__*/function () {
         //   afterFrame: this.afterFrame,
         //   _stepType: this._stepType,
         // },
-        state: Object(_state__WEBPACK_IMPORTED_MODULE_2__["getState"])(this, this._getStateProperties(), precision)
+        state: Object(_state__WEBPACK_IMPORTED_MODULE_2__["getState"])(this, this._getStateProperties(), options)
       };
     } // eslint-disable-next-line no-unused-vars
 
@@ -1705,8 +1704,8 @@ var CustomAnimationStep = /*#__PURE__*/function (_AnimationStep) {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var state = _get(_getPrototypeOf(CustomAnimationStep.prototype), "_state", this).call(this);
+    value: function _state(options) {
+      var state = _get(_getPrototypeOf(CustomAnimationStep.prototype), "_state", this).call(this, options);
 
       if (this.element != null) {
         state.state.element = {
@@ -2055,8 +2054,8 @@ var ElementAnimationStep = /*#__PURE__*/function (_AnimationStep) {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var state = _get(_getPrototypeOf(ElementAnimationStep.prototype), "_state", this).call(this);
+    value: function _state(options) {
+      var state = _get(_getPrototypeOf(ElementAnimationStep.prototype), "_state", this).call(this, options);
 
       if (this.element != null) {
         state.state.element = {
@@ -4499,8 +4498,8 @@ var TriggerStep = /*#__PURE__*/function (_AnimationStep) {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var state = _get(_getPrototypeOf(TriggerStep.prototype), "_state", this).call(this);
+    value: function _state(options) {
+      var state = _get(_getPrototypeOf(TriggerStep.prototype), "_state", this).call(this, options);
 
       if (this.element != null) {
         state.state.element = {
@@ -4941,11 +4940,9 @@ var Diagram = /*#__PURE__*/function () {
     }
   }, {
     key: "getState",
-    value: function getState() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
-      var ignoreShown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    value: function getState(options) {
       this.stateTime = performance.now() / 1000;
-      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], precision, ignoreShown);
+      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], options);
     }
   }, {
     key: "setState",
@@ -8952,9 +8949,9 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
   _createClass(Equation, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
+    value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this)), ['eqn.currentForm', 'eqn.currentSubForm', 'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this, options)), ['eqn.currentForm', 'eqn.currentSubForm', 'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
     }
     /**
       * Set the current form series to 'name'
@@ -18840,9 +18837,9 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
 
   _createClass(DiagramObjectAngle, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
+    value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectAngle.prototype), "_getStateProperties", this).call(this)), ['angle', 'lastLabelRotationOffset']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectAngle.prototype), "_getStateProperties", this).call(this, options)), ['angle', 'lastLabelRotationOffset']);
     }
   }, {
     key: "_fromState",
@@ -20935,9 +20932,9 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
 
   _createClass(DiagramObjectLine, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
+    value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectLine.prototype), "_getStateProperties", this).call(this)), ['offset', 'angle', 'length', 'position', 'animateLengthToOptions', 'pulseWidthOptions']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectLine.prototype), "_getStateProperties", this).call(this, options)), ['offset', 'angle', 'length', 'position', 'animateLengthToOptions', 'pulseWidthOptions']);
     }
   }, {
     key: "_fromState",
@@ -22063,9 +22060,9 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
 
   _createClass(DiagramObjectPolyLine, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
+    value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectPolyLine.prototype), "_getStateProperties", this).call(this)), ['points']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramObjectPolyLine.prototype), "_getStateProperties", this).call(this, options)), ['points']);
     }
   }, {
     key: "_fromState",
@@ -24419,8 +24416,8 @@ var DrawingObject = /*#__PURE__*/function () {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties());
+    value: function _state(options) {
+      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(), options);
     }
   }]);
 
@@ -29419,10 +29416,14 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "_getStateProperties",
-    value: function _getStateProperties() {
-      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    value: function _getStateProperties(options) {
+      var ignoreShown = options.ignoreShown;
 
-      // eslint-disable-line class-methods-use-this
+      if (ignoreShown == null) {
+        ignoreShown = false;
+      } // console.log('element', options, this.name, this.getPath(), this.isShown, ignoreShown, this.isShown || ignoreShown);
+
+
       if (this.isShown || ignoreShown) {
         return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move'].concat(_toConsumableArray(this.stateProperties));
       }
@@ -29431,13 +29432,8 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
-      var ignoreShown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(ignoreShown), precision, ignoreShown); // if (this.isShown) {
-      //   return getState(this, this._getStateProperties());
-      // }
-      // return { isShown: false };
+    value: function _state(options) {
+      return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(options), options);
     } // execFn(fn: string | Function | null, ...args: Array<any>) {
     //   if (fn == null) {
     //     return null;
@@ -31064,15 +31060,18 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
   _createClass(DiagramElementPrimitive, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
-      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    value: function _getStateProperties(options) {
+      var ignoreShown = options.ignoreShown;
 
-      // eslint-disable-line class-methods-use-this
-      if (this.isShown || ignoreShown) {
-        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, ignoreShown)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject']);
+      if (ignoreShown == null) {
+        ignoreShown = false;
       }
 
-      return ['isShown', 'transform'];
+      if (this.isShown || ignoreShown) {
+        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, options)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject']);
+      }
+
+      return _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, options);
     }
   }, {
     key: "setAngleToDraw",
@@ -31578,15 +31577,18 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
   _createClass(DiagramElementCollection, [{
     key: "_getStateProperties",
-    value: function _getStateProperties() {
-      var ignoreShown = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    value: function _getStateProperties(options) {
+      var ignoreShown = options.ignoreShown;
 
-      // eslint-disable-line class-methods-use-this
-      if (this.isShown || ignoreShown) {
-        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this, ignoreShown)), ['touchInBoundingRect', 'elements', 'hasTouchableElements']);
+      if (ignoreShown == null) {
+        ignoreShown = false;
       }
 
-      return ['isShown', 'transform', 'elements'];
+      if (this.isShown || ignoreShown) {
+        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this, options)), ['touchInBoundingRect', 'elements', 'hasTouchableElements']);
+      }
+
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this, options)), ['elements']);
     }
   }, {
     key: "_dup",
@@ -33382,6 +33384,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "download", function() { return _tools_tools__WEBPACK_IMPORTED_MODULE_2__["download"]; });
 
+/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./recorder.worker.js */ "./src/js/diagram/recorder.worker.js");
+/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_recorder_worker_js__WEBPACK_IMPORTED_MODULE_3__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33412,6 +33416,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import GlobalAnimation from './webgl/GlobalAnimation';
+// Singleton class that contains projects global variables
 
 function getIndexOfEarliestTime(recordedData, index) {
   if (index < 1) {
@@ -33574,6 +33580,7 @@ var Recorder = /*#__PURE__*/function () {
       };
       this.audio = null;
       this.playbackStoppedCallback = null;
+      this.worker = null;
     }
 
     return Recorder.instance;
@@ -33689,6 +33696,7 @@ var Recorder = /*#__PURE__*/function () {
       this.lastRecordTimeCount = 0;
       this.lastRecordTime = null;
       this.eventsToPlay = [];
+      this.lastSeekTime = null;
     }
   }, {
     key: "loadEvents",
@@ -33856,9 +33864,25 @@ var Recorder = /*#__PURE__*/function () {
       this.states.precision = this.precision;
 
       if (fromTime === 0 && this.states.baseReference == null) {
-        this.states.setBaseReference(this.diagram.getState(this.precision, true));
+        this.states.setBaseReference(this.diagram.getState({
+          precision: this.precision,
+          ignoreShown: false
+        })); // this.states.addReference(this.diagram.getState({
+        //   precision: this.precision,
+        //   ignoreShown: false,
+        // }), 'ref1');
+        // this.referenceIndex = 1;
+        // this.reference = 'ref1';
       }
 
+      this.startWorker();
+      this.worker.postMessage({
+        message: 'reset',
+        payload: {
+          baseReference: this.statesCache.baseReference,
+          references: this.statesCache.references
+        }
+      });
       this.eventsCache = {}; // this.slidesCache = [];
 
       this.statesCache = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["ObjectTracker"](this.precision);
@@ -33875,9 +33899,87 @@ var Recorder = /*#__PURE__*/function () {
       this.startAudioPlayback(fromTime);
     }
   }, {
+    key: "startWorker",
+    value: function startWorker() {
+      var _this6 = this;
+
+      if (this.worker == null) {
+        this.worker = new _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
+
+        this.worker.addEventListener("message", function (event) {
+          var _event$data = event.data,
+              message = _event$data.message,
+              payload = _event$data.payload; // if (message === 'duration')
+
+          if (message === 'cache') {
+            _this6.statesCache.diffs = payload.diffs;
+            _this6.statesCache.baseReference = payload.baseReference;
+            _this6.statesCache.references = payload.references;
+
+            _this6.mergeEventsCache();
+
+            _this6.mergeStatesCache();
+
+            _this6.duration = _this6.calcDuration();
+
+            if (_this6.duration % 1 > 0) {
+              var lastIndex = _this6.states.diffs.length - 1;
+
+              var _this6$states$diffs$l = _slicedToArray(_this6.states.diffs[lastIndex], 3),
+                  ref = _this6$states$diffs$l[1],
+                  diff = _this6$states$diffs$l[2];
+
+              _this6.states.diffs.push([Math.ceil(_this6.duration), ref, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(diff), 0]);
+            }
+
+            _this6.duration = _this6.calcDuration();
+            console.log(_this6);
+          }
+        });
+      } // this.worker = new Worker();
+
+    } // startWorker() {
+    //   // if (this.worker != null) {
+    //   //   return;
+    //   // }
+    //   // this.worker = new Worker('./worker.js');
+    //   // this.worker.addEventListener("message", event => {
+    //   //   console.log(event.data);
+    //   // });
+    //   // this.worker.postMessage([40, 2]);
+    //   if (this.worker != null) {
+    //     return;
+    //   }
+    //   this.worker = new Worker();
+    //   // this.worker.postMessage([4, 5]);
+    //   // this.worker.onmessage = function (event) {
+    //   //   console.log('asdfasdf')
+    //   // };
+    //   this.worker.addEventListener("message", function (event) {
+    //     console.log(event.data)
+    //   });
+    // }
+
+  }, {
+    key: "addCurrentStateAsReference",
+    value: function addCurrentStateAsReference() {
+      this.referenceIndex += 1;
+      this.reference = "ref".concat(this.referenceIndex);
+      var state = this.diagram.getState({
+        precision: this.precision,
+        ignoreShown: false
+      });
+
+      if (this.state === 'recording') {
+        this.statesCache.addReference(state, this.reference);
+      } else {
+        this.states.addReference(state, this.reference);
+      }
+    }
+  }, {
     key: "getCacheStartTime",
     value: function getCacheStartTime() {
-      var _this6 = this;
+      var _this7 = this;
 
       var time = null;
 
@@ -33886,7 +33988,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var event = _this6.eventsCache[eventName];
+        var event = _this7.eventsCache[eventName];
 
         if (event.list.length > 0) {
           var _event$list$ = _slicedToArray(event.list[0], 1),
@@ -33952,16 +34054,16 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "mergeEventsCache",
     value: function mergeEventsCache() {
-      var _this7 = this;
+      var _this8 = this;
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var merged = _this7.getMergedCacheArray(_this7.events[eventName].list, _this7.eventsCache[eventName].list);
+        var merged = _this8.getMergedCacheArray(_this8.events[eventName].list, _this8.eventsCache[eventName].list);
 
         if (merged.length === 0) {
           return;
         }
 
-        _this7.events[eventName].list = merged;
+        _this8.events[eventName].list = merged;
       });
     }
   }, {
@@ -33973,8 +34075,8 @@ var Recorder = /*#__PURE__*/function () {
         return;
       }
 
-      this.states.diffs = merged;
-      this.states.baseReference = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.statesCache.baseReference);
+      this.states.diffs = merged; // this.states.baseReference = duplicate(this.statesCache.baseReference);
+
       this.states.references = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.statesCache.references);
     }
   }, {
@@ -33991,22 +34093,18 @@ var Recorder = /*#__PURE__*/function () {
       this.currentTime = this.getCurrentTime();
       this.state = 'idle';
       this.stopTimeouts();
-      this.mergeEventsCache();
-      this.mergeStatesCache();
-      this.duration = this.calcDuration();
-
-      if (this.duration % 1 > 0) {
-        var lastIndex = this.states.diffs.length - 1;
-
-        var _this$states$diffs$la = _slicedToArray(this.states.diffs[lastIndex], 3),
-            ref = _this$states$diffs$la[1],
-            diff = _this$states$diffs$la[2];
-
-        this.states.diffs.push([Math.ceil(this.duration), ref, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(diff), 0]);
-      }
-
-      this.duration = this.calcDuration();
-      console.log(this);
+      this.worker.postMessage({
+        message: 'get'
+      }); // this.mergeEventsCache();
+      // this.mergeStatesCache();
+      // this.duration = this.calcDuration();
+      // if (this.duration % 1 > 0) {
+      //   const lastIndex = this.states.diffs.length - 1;
+      //   const [, ref, diff] = this.states.diffs[lastIndex];
+      //   this.states.diffs.push([Math.ceil(this.duration), ref, duplicate(diff), 0]);
+      // }
+      // this.duration = this.calcDuration();
+      // console.log(this)
     }
   }, {
     key: "addEventType",
@@ -34028,11 +34126,29 @@ var Recorder = /*#__PURE__*/function () {
         this.lastRecordTime = now;
         this.lastRecordTimeCount = 0;
       } // const start = performance.now();
+      // if (this.worker != null) {
+      //   this.worker.postMessage(state);
+      // }
 
 
-      this.statesCache.add(now, state, this.reference, this.lastRecordTimeCount); // console.log('add', performance.now() - start);
+      if (this.worker != null) {
+        this.worker.postMessage({
+          message: 'add',
+          payload: {
+            now: now,
+            state: state,
+            reference: this.reference,
+            lastRecordTimeCount: this.lastRecordTimeCount
+          }
+        });
+      } // this.statesCache.add(now, state, this.reference, this.lastRecordTimeCount);
+      // console.log('add', performance.now() - start);
+      // this.duration = this.calcDuration();
+      // if (now > this.duration) {
+      //   this.duration = now;
+      // }
 
-      this.duration = this.calcDuration();
+
       this.lastRecordTimeCount += 1;
 
       if (now > this.duration) {
@@ -34042,9 +34158,11 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordCurrentState",
     value: function recordCurrentState() {
-      // const start = performance.now();
-      var state = this.diagram.getState(this.precision); // console.log('getState', performance.now() - start);
-      // const start1 = performance.now();
+      var start = performance.now();
+      var state = this.diagram.getState({
+        precision: this.precision,
+        ignoreShown: false
+      }); // const start1 = performance.now();
       // const str = JSON.stringify(state);
       // console.log('stringify', str.length, performance.now() - start);
       // console.log(state)
@@ -34054,11 +34172,15 @@ var Recorder = /*#__PURE__*/function () {
       // console.log(unStr == state)
 
       this.recordState(state);
+      console.log('recordState', performance.now() - start);
     }
   }, {
     key: "recordCurrentStateAsReference",
     value: function recordCurrentStateAsReference(refName, basedOn) {
-      this.statesCache.addReference(this.diagram.getState(this.precision), refName, basedOn);
+      this.statesCache.addReference(this.diagram.getState({
+        precision: this.precision,
+        ignoreShown: false
+      }), refName, basedOn);
     }
   }, {
     key: "recordEvent",
@@ -34091,15 +34213,15 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "queueRecordState",
     value: function queueRecordState() {
-      var _this8 = this;
+      var _this9 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
       var recordAndQueue = function recordAndQueue() {
-        if (_this8.state === 'recording') {
-          _this8.recordCurrentState();
+        if (_this9.state === 'recording') {
+          _this9.recordCurrentState();
 
-          _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
+          _this9.queueRecordState(_this9.stateTimeStep - _this9.getCurrentTime() % _this9.stateTimeStep);
         }
       };
 
@@ -34201,13 +34323,16 @@ var Recorder = /*#__PURE__*/function () {
         this.pausePlayback();
       }
 
+      var s = performance.now(); // console.log(s)
+
       this.setToTime(time);
+      console.log(performance.now() - s);
       this.diagram.pause();
     }
   }, {
     key: "setToTime",
     value: function setToTime(time) {
-      var _this9 = this;
+      var _this10 = this;
 
       // if (this.states.diffs.length === 0) {
       //   return;
@@ -34221,15 +34346,20 @@ var Recorder = /*#__PURE__*/function () {
 
         stateTime = _this$states$diffs$th[0];
         stateTimeCount = _this$states$diffs$th[3];
-      } // For each eventName, if it is to be set on seek, then get the previous
+      }
+
+      if (stateTime === this.lastSeekTime) {
+        return;
+      }
+
+      this.lastSeekTime = stateTime; // For each eventName, if it is to be set on seek, then get the previous
       // index (or multiple indexes if multiple are set for the same time)
       // and add them to an eventsToExecuteArray
-
 
       var eventsToSetBeforeState = [];
       var eventsToSetAfterState = [];
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this9.events[eventName];
+        var event = _this10.events[eventName];
 
         if (event.setOnSeek === false) {
           return;
@@ -34248,7 +34378,7 @@ var Recorder = /*#__PURE__*/function () {
               eventTime = _event$list$i[0],
               timeCount = _event$list$i[2];
 
-          if (_this9.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
+          if (_this10.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
             eventsToSetBeforeState.push([eventName, i, eventTime, timeCount]);
           } else if (eventTime > stateTime || eventTime === stateTime && timeCount > stateTimeCount) {
             eventsToSetAfterState.push([eventName, i, eventTime, timeCount]);
@@ -34280,7 +34410,7 @@ var Recorder = /*#__PURE__*/function () {
               eventName = _event[0],
               index = _event[1];
 
-          _this9.setEvent(eventName, index);
+          _this10.setEvent(eventName, index);
         });
       };
 
@@ -34444,7 +34574,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -34452,10 +34582,10 @@ var Recorder = /*#__PURE__*/function () {
         this.audio.play();
 
         var audioEnded = function audioEnded() {
-          _this10.isAudioPlaying = false;
+          _this11.isAudioPlaying = false;
 
-          if (_this10.state === 'playing') {
-            _this10.finishPlaying();
+          if (_this11.state === 'playing') {
+            _this11.finishPlaying();
           }
         };
 
@@ -34470,14 +34600,14 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startEventsPlayback",
     value: function startEventsPlayback(fromTime) {
-      var _this11 = this;
+      var _this12 = this;
 
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this11.events[eventName].list.length === 0) {
+        if (_this12.events[eventName].list.length === 0) {
           return;
         }
 
-        var event = _this11.events[eventName];
+        var event = _this12.events[eventName];
         var index = getNextIndexForTime(event.list, fromTime);
 
         var _event$list$index = _slicedToArray(event.list[index], 1),
@@ -34488,9 +34618,9 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         if (index > event.list.length - 1) {
-          _this11.eventIndex[eventName] = -1;
+          _this12.eventIndex[eventName] = -1;
         } else {
-          _this11.eventIndex[eventName] = index;
+          _this12.eventIndex[eventName] = index;
         }
       });
       var nextEventName = this.getNextEvent();
@@ -34502,19 +34632,19 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getNextEvent",
     value: function getNextEvent() {
-      var _this12 = this;
+      var _this13 = this;
 
       var nextEventName = '';
       var nextTime = null;
       var nextTimeCount = null;
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this12.eventIndex[eventName] == null || _this12.eventIndex[eventName] === -1 || _this12.events[eventName].list.length <= _this12.eventIndex[eventName]) {
+        if (_this13.eventIndex[eventName] == null || _this13.eventIndex[eventName] === -1 || _this13.events[eventName].list.length <= _this13.eventIndex[eventName]) {
           return;
         }
 
-        var _this12$events$eventN = _slicedToArray(_this12.events[eventName].list[_this12.eventIndex[eventName]], 3),
-            time = _this12$events$eventN[0],
-            timeCount = _this12$events$eventN[2];
+        var _this13$events$eventN = _slicedToArray(_this13.events[eventName].list[_this13.eventIndex[eventName]], 3),
+            time = _this13$events$eventN[0],
+            timeCount = _this13$events$eventN[2];
 
         if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
@@ -34569,7 +34699,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "finishPlaying",
     value: function finishPlaying() {
-      var _this13 = this;
+      var _this14 = this;
 
       if (this.areEventsPlaying()) {
         return false;
@@ -34579,7 +34709,7 @@ var Recorder = /*#__PURE__*/function () {
 
       if (remainingTime > 0.0001) {
         this.timeoutID = setTimeout(function () {
-          _this13.finishPlaying();
+          _this14.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
       } // if (this.isAudioPlaying) {
@@ -34820,6 +34950,19 @@ function parseState(state, diagram) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/recorder.worker.js":
+/*!*******************************************!*\
+  !*** ./src/js/diagram/recorder.worker.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  return new Worker("/static/workers/" + "5868d357594e86001e2b.worker.js");
+};
+
+/***/ }),
+
 /***/ "./src/js/diagram/state.js":
 /*!*********************************!*\
   !*** ./src/js/diagram/state.js ***!
@@ -34854,11 +34997,17 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // import parseState from './parseState';
  // import parseState from './parseState';
 
-function getState(obj, stateProperties) {
-  var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
-  var payload = arguments.length > 3 ? arguments[3] : undefined;
+function getState(obj, stateProperties, optionsIn) // precision: number = 5,
+// payload: any,
+{
   // const stateProperties = this._getStateProperties();
   // const path = this.getPath();
+  var defaultOptions = {
+    precision: 5,
+    ignoreShown: false
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
+  var precision = options.precision;
   var state = {};
 
   var processValue = function processValue(value) {
@@ -34883,7 +35032,7 @@ function getState(obj, stateProperties) {
     }
 
     if (value._state != null) {
-      return value._state(precision, payload);
+      return value._state(options);
     }
 
     if (Array.isArray(value)) {
@@ -36067,8 +36216,8 @@ var Rect = /*#__PURE__*/function () {
     }
   }, {
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 'rect',
         state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.width, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.height, precision)]
@@ -36186,8 +36335,8 @@ var Point = /*#__PURE__*/function () {
 
   _createClass(Point, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 'p',
         state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
@@ -36900,8 +37049,8 @@ var Line = /*#__PURE__*/function () {
 
   _createClass(Line, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 'l',
         state: [[Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.y, precision)], [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.y, precision)]]
@@ -37418,8 +37567,8 @@ var Rotation = /*#__PURE__*/function () {
 
   _createClass(Rotation, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 'r',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.r, precision)]
@@ -37520,8 +37669,8 @@ var Translation = /*#__PURE__*/function (_Point) {
 
   _createClass(Translation, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 't',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
@@ -37643,8 +37792,8 @@ var Scale = /*#__PURE__*/function (_Point2) {
 
   _createClass(Scale, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      var precision = options.precision;
       return {
         f1Type: 's',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
@@ -37756,11 +37905,11 @@ var Transform = /*#__PURE__*/function () {
 
   _createClass(Transform, [{
     key: "_state",
-    value: function _state() {
-      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+    value: function _state(options) {
+      // const { precision } = options;
       var out = [];
       this.order.forEach(function (transformElement) {
-        out.push(transformElement._state(precision));
+        out.push(transformElement._state(options));
       }); // if (this.name !== '') {
       //   // return [this.name, ...out];
       //   out = [this.name, ...out];
@@ -40198,7 +40347,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // import Worker from '../diagram/recorder.worker.js';
 
 var Console = function Console(text) {
   console.log(text); // eslint-disable-line no-console
@@ -41221,8 +41370,13 @@ var ObjectTracker = /*#__PURE__*/function () {
   }, {
     key: "getDiffToReference",
     value: function getDiffToReference(obj, refName) {
-      var referenceChain = this.getReferenceChain(refName, []);
-      return getObjectDiff(this.baseReference, referenceChain, obj, this.precision);
+      var s1 = performance.now();
+      var referenceChain = this.getReferenceChain(refName, []); // console.log('ref Chain', performance.now() - s1);
+
+      var s2 = performance.now();
+      var diff = getObjectDiff(this.baseReference, referenceChain, obj, this.precision); // console.log('s2', performance.now() - s2);
+
+      return diff;
     }
   }, {
     key: "getObjFromDiffAndReference",
@@ -41243,6 +41397,34 @@ var ObjectTracker = /*#__PURE__*/function () {
 
       var diff = this.getDiffToReference(obj, refName);
       this.diffs.push([time, refName, diff, timeCount]);
+    }
+  }, {
+    key: "addWithWorker",
+    value: function addWithWorker(time, obj) {
+      var refName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.lastReferenceName;
+      var timeCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
+      if (this.baseReference == null) {
+        this.setBaseReference(obj);
+      }
+
+      this.startWorker();
+
+      if (this.worker != null) {
+        this.worker.postMessage([time, refName, obj, timeCount]);
+      }
+    }
+  }, {
+    key: "startWorker",
+    value: function startWorker() {
+      if (this.worker != null) {
+        return;
+      }
+
+      this.worker = new Worker();
+      this.worker.addEventListener("message", function (event) {
+        console.log(event.data);
+      });
     }
   }, {
     key: "getFromIndex",

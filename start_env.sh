@@ -10,6 +10,7 @@ reset=`tput sgr0`
 
 # Default values of variables
 DOCKERFILE='prod/Dockerfile'
+DOCKERIGNOREFILE='prod/Dockerfile'
 HOST_PORT=5000
 CMD=''
 FAIL=0
@@ -76,6 +77,7 @@ then
   CONTAINER_PORT=4000
   stop_dev_server
   DOCKERFILE="prod/Dockerfile"
+  DOCKERIGNOREFILE="prod/.dockerignore"
 fi
 
 if [ "$1" = "stage" ];
@@ -83,6 +85,7 @@ then
   HOST_PORT=5001
   CONTAINER_PORT=5000
   DOCKERFILE="stage/Dockerfile"
+  DOCKERIGNOREFILE="stage/.dockerignore"
 fi
 
 if [ "$1" = "dev" ];
@@ -90,6 +93,7 @@ then
   HOST_PORT=5002
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
 if [ "$1" = "dev-root" ];
@@ -97,12 +101,14 @@ then
   HOST_PORT=5002
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
 if [ "$1" = "pupp" ];
 then
   CONTAINER_PORT=5000
   DOCKERFILE="pupp/Dockerfile"
+  DOCKERIGNOREFILE="pupp/.dockerignore"
 fi
 
 if [ "$1" = 'dev-server' ];
@@ -110,6 +116,7 @@ then
   HOST_PORT=5003
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
   CMD=/opt/app/dev-server.sh
 fi
 
@@ -119,6 +126,7 @@ then
   CONTAINER_PORT=5000
   CMD="/opt/app/deploy_pipeline.sh"
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
 
@@ -127,6 +135,7 @@ then
   echo
   echo "${bold}${cyan}================= Building container ===================${reset}"
   cp containers/$DOCKERFILE Dockerfile
+  cp containers/$DOCKERIGNOREFILE .dockerignore 
 
   cp containers/$DOCKERFILE DockerfileTemp
   # set user id of new user in production container to the same user id of the 
@@ -158,6 +167,7 @@ then
   GUNICORN_PORT=4000
   docker build -t "devenv-$1" .
   rm Dockerfile
+  rm .dockerignore
 fi
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
