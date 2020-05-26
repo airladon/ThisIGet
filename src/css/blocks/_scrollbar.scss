@@ -1,6 +1,6 @@
 .figureone_scrollbar {
   position: relative;
-  height: 20px;
+  height: 40px;
   width: calc(100% - 12px);
   margin-left: auto;
   margin-right: auto;
@@ -12,7 +12,7 @@
   height: 4px;
   background-color: #333;
   pointer-events: none;
-  top: 8px;
+  top: 18px;
 }
 
 .figureone_scrollbar_currentTime {
@@ -20,16 +20,26 @@
   height: 4px;
   background-color: #aaa;
   pointer-events: none;
-  top: 8px;
+  top: 18px;
 }
 
 .figureone_scrollbar_circle {
   // background-image: $circle;
   width: 12px;
   height: 12px;
-  top: 4px;
+  top: 14px;
   position: absolute;
   pointer-events: none;
   border-radius: 6px;
   background-color: #ccc;
 }
+
+// .figureone_scrollbar_touch_circle {
+//   width: 40px;
+//   height: 40px;
+//   top: -10px;
+//   position: absolute;
+//   pointer-events: none;
+//   border-radius: 20px;
+//   background-color: rgba(255, 0, 0, 0.5);
+// }

@@ -98,6 +98,26 @@ export default class SrollBar extends React.Component<Props, State> {
     return width * percent - circleWidth / 2;
   }
 
+  // percentToTouchX(percentIn: number) {
+  //   let percent = percentIn;
+  //   if (percent > 1) {
+  //     percent = 1;
+  //   } else if (percent < 0) {
+  //     percent = 0;
+  //   }
+  //   const element = document.getElementById(this.id);
+  //   if (element == null) {
+  //     return 0;
+  //   }
+  //   const circle = document.getElementById(`${this.id}_touch_circle`);
+  //   if (circle == null) {
+  //     return 0;
+  //   }
+  //   const circleWidth = circle.getBoundingClientRect().width;
+  //   const { width } = element.getBoundingClientRect();
+  //   return width * percent - circleWidth / 2;
+  // }
+
   clientXToPercent(x: number) {
     const element = document.getElementById(this.id);
     if (element == null) {
@@ -138,6 +158,13 @@ export default class SrollBar extends React.Component<Props, State> {
           left: `${this.percentToX(this.props.position)}px`,
         }}
       />
+      {/* <div
+        className='figureone_scrollbar_touch_circle'
+        id={`${this.id}_touch_circle`}
+        style={{
+          left: `${this.percentToTouchX(this.props.position)}px`,
+        }}
+      /> */}
     </div>;
   }
 }
