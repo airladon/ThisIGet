@@ -64,6 +64,7 @@ class InteractiveVideoFormat extends PresentationFormat {
       // recorder.goToSlide = this.goToSection.bind(this);
       // recorder.getCurrentSlide = this.getCurrentSlide.bind(this);
       recorder.seek(0);
+      this.content.loadEvents();
       // recorder.unpauseDiagram();
       this.diagram.unpause();
       this.diagram.animateNextFrame();

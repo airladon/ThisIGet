@@ -51,10 +51,15 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/Circle/base',
     ]);
     // this.diagram.recorder.events = events;
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
     // this.diagram.recorder.slides = slides;
     // this.diagram.recorder.audio = new Audio(audio);
+  }
+
+  loadEvents() {
+    this.diagram.recorder.loadEvents(events, true);
+    this.diagram.recorder.loadStates(states, true);
     console.log(this.diagram.recorder)
   }
 
