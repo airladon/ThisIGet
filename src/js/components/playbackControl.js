@@ -218,7 +218,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
         show
       </div>
       <div
-        className={'figureone_playback_control__ssave_recording'}
+        className={'figureone_playback_control__save_recording'}
         onClick={this.saveRecording.bind(this)}
       >
         save
