@@ -479,7 +479,7 @@ export default class TopicComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
           label={this.ratingLabel()}
         />
-        <RecordButton/>
+        {/* <RecordButton/> */}
       </div>
       {this.renderTopic()}
       <ShareBar

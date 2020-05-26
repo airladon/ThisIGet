@@ -432,6 +432,7 @@ export default class PresentationFormatComponent extends React.Component
                 </canvas>
                 <canvas id="id_figureone__text__low" className='figureone__text'>
                 </canvas>
+                <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
                 <div id="id_figureone__html" className='figureone__html'>
                   {this.renderContent(this.state.htmlText)}
                   <div className="figureone__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
@@ -452,7 +453,6 @@ export default class PresentationFormatComponent extends React.Component
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
         </div>
       </div>
       </main>

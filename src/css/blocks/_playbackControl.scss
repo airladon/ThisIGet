@@ -4,6 +4,11 @@
   background-color: red;
   display: table;
   table-layout: fixed;
+  position: absolute;
+  bottom: 0;
+  pointer-events: auto;
+  z-index: 2;
+  // width: var(--pres__content_width);
 }
 
 .figureone_playback_controll_seek_container {

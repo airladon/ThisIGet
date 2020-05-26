@@ -4979,6 +4979,17 @@ var Diagram = /*#__PURE__*/function () {
         element.startMovingFreely();
       };
 
+      var click = function click(payload) {
+        var _payload8 = _slicedToArray(payload, 1),
+            id = _payload8[0];
+
+        var element = document.getElementById(id);
+
+        if (element != null) {
+          element.click();
+        }
+      };
+
       this.recorder.addEventType('cursor', onCursor);
       this.recorder.addEventType('cursorMove', onCursorMove);
       this.recorder.addEventType('touch', onTouch);
@@ -4986,6 +4997,7 @@ var Diagram = /*#__PURE__*/function () {
       this.recorder.addEventType('stopBeingMoved', stopBeingMoved);
       this.recorder.addEventType('startMovingFreely', startMovingFreely);
       this.recorder.addEventType('startBeingMoved', startBeingMoved);
+      this.recorder.addEventType('click', click);
     }
   }, {
     key: "scrollEvent",
@@ -39780,8 +39792,8 @@ function onClickId(id, actionMethod, bind) {
     var onClickFn = function onClickFn() {
       var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
 
-      if (recorder.isRecording) {
-        recorder.recordEvent('click', id);
+      if (recorder.state === 'recording') {
+        recorder.recordEvent('click', [id]);
       }
 
       actionMethod.bind.apply(actionMethod, _toConsumableArray(bind))();
