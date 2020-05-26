@@ -10,7 +10,7 @@ class InteractiveVideoFormat extends PresentationFormat {
     }
     const { recorder } = this.diagram;
     if (recorder && recorder.state === 'recording') {
-      recorder.recordSlide('slide', ['next', message, Math.min(this.currentSectionIndex + 1, this.content.sections.length)]);
+      recorder.recordEvent('slide', ['next', message, Math.min(this.currentSectionIndex + 1, this.content.sections.length)]);
     }
     super.nextSection(message);
   }
@@ -21,7 +21,7 @@ class InteractiveVideoFormat extends PresentationFormat {
     }
     const { recorder } = this.diagram;
     if (recorder && recorder.state === 'recording') {
-      recorder.recordSlide('slide', ['prev', message, Math.max(this.currentSectionIndex - 1, 0)]);
+      recorder.recordEvent('slide', ['prev', message, Math.max(this.currentSectionIndex - 1, 0)]);
     }
     super.prevSection(message);
   }
@@ -32,7 +32,7 @@ class InteractiveVideoFormat extends PresentationFormat {
     }
     const { recorder } = this.diagram;
     if (recorder && recorder.state === 'recording') {
-      recorder.recordSlide('slide', ['goto', '', sectionId]);
+      recorder.recordEvent('slide', ['goto', '', sectionId]);
     }
     super.goToSection(sectionId);
   }
@@ -58,7 +58,7 @@ class InteractiveVideoFormat extends PresentationFormat {
           this.goToSection(slideNo);
         }
       };
-      recorder.addEventType('slide', processSlide, true)
+      recorder.addEventType('slide', processSlide, true);
       // recorder.nextSlide = this.nextSection.bind(this);
       // recorder.prevSlide = this.prevSection.bind(this);
       // recorder.goToSlide = this.goToSection.bind(this);

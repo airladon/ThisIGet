@@ -4918,9 +4918,74 @@ var Diagram = /*#__PURE__*/function () {
         _this.setCursor(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](x, y));
       };
 
+      var moved = function moved(payload) {
+        var _payload4 = _slicedToArray(payload, 2),
+            elementPath = _payload4[0],
+            transform = _payload4[1];
+
+        var element = _this.getElement(elementPath);
+
+        if (element == null) {
+          return;
+        }
+
+        element.moved(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(transform));
+      };
+
+      var startBeingMoved = function startBeingMoved(payload) {
+        var _payload5 = _slicedToArray(payload, 1),
+            elementPath = _payload5[0];
+
+        var element = _this.getElement(elementPath);
+
+        if (element == null) {
+          return;
+        }
+
+        element.startBeingMoved();
+      };
+
+      var stopBeingMoved = function stopBeingMoved(payload) {
+        var _payload6 = _slicedToArray(payload, 3),
+            elementPath = _payload6[0],
+            transform = _payload6[1],
+            velocity = _payload6[2];
+
+        var element = _this.getElement(elementPath);
+
+        if (element == null) {
+          return;
+        }
+
+        element.stopBeingMoved();
+        element.state.movement.velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(velocity);
+        element.transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(transform);
+      };
+
+      var startMovingFreely = function startMovingFreely(payload) {
+        var _payload7 = _slicedToArray(payload, 3),
+            elementPath = _payload7[0],
+            transform = _payload7[1],
+            velocity = _payload7[2];
+
+        var element = _this.getElement(elementPath);
+
+        if (element == null) {
+          return;
+        }
+
+        element.transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(transform);
+        element.state.movement.velocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getTransform"])(velocity);
+        element.startMovingFreely();
+      };
+
       this.recorder.addEventType('cursor', onCursor);
       this.recorder.addEventType('cursorMove', onCursorMove);
       this.recorder.addEventType('touch', onTouch);
+      this.recorder.addEventType('moved', moved);
+      this.recorder.addEventType('stopBeingMoved', stopBeingMoved);
+      this.recorder.addEventType('startMovingFreely', startMovingFreely);
+      this.recorder.addEventType('startBeingMoved', startBeingMoved);
     }
   }, {
     key: "scrollEvent",
@@ -30161,8 +30226,8 @@ var DiagramElement = /*#__PURE__*/function () {
       this.state.isBeingMoved = true;
       this.unrender();
 
-      if (this.recorder.isRecording) {
-        this.recorder.recordEvent('startBeingMoved', this.getPath());
+      if (this.recorder.state === 'recording') {
+        this.recorder.recordEvent('startBeingMoved', [this.getPath()]);
       }
     }
   }, {
@@ -30171,8 +30236,8 @@ var DiagramElement = /*#__PURE__*/function () {
       this.calcVelocity(newTransform);
       this.setTransform(newTransform._dup());
 
-      if (this.recorder.isRecording) {
-        this.recorder.recordEvent('moved', this.getPath(), this.transform.round(this.recorder.precision)._state() // this.state.movement.velocity.toString(),
+      if (this.recorder.state === 'recording') {
+        this.recorder.recordEvent('moved', [this.getPath(), this.transform.round(this.recorder.precision)._state()] // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -30188,8 +30253,8 @@ var DiagramElement = /*#__PURE__*/function () {
         }
       }
 
-      if (this.recorder.isRecording && this.state.isBeingMoved) {
-        this.recorder.recordEvent('stopBeingMoved', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
+      if (this.recorder.state === 'recording' && this.state.isBeingMoved) {
+        this.recorder.recordEvent('stopBeingMoved', [this.getPath(), this.transform._state(), this.state.movement.velocity._state()] // this.state.movement.velocity.toString(),
         );
       }
 
@@ -30241,8 +30306,8 @@ var DiagramElement = /*#__PURE__*/function () {
       this.state.movement.previousTime = null;
       this.state.movement.velocity = this.state.movement.velocity.clipMag(this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
 
-      if (this.recorder.isRecording) {
-        this.recorder.recordEvent('startMovingFreely', this.getPath(), this.transform._state(), this.state.movement.velocity._state() // this.state.movement.velocity.toString(),
+      if (this.recorder.state === 'recording') {
+        this.recorder.recordEvent('startMovingFreely', [this.getPath(), this.transform._state(), this.state.movement.velocity._state()] // this.state.movement.velocity.toString(),
         );
       }
     }
@@ -33858,15 +33923,17 @@ var Recorder = /*#__PURE__*/function () {
       var whilePlaying = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       // if (fromTime > 0) {
       this.state = 'recording';
+      this.lastSeekTime = null;
       this.setVideoToNowDeltaTime(fromTime);
       this.setToTime(fromTime); // }
+      // console.log(this.stateIndex);
 
       this.states.precision = this.precision;
 
       if (fromTime === 0 && this.states.baseReference == null) {
         this.states.setBaseReference(this.diagram.getState({
           precision: this.precision,
-          ignoreShown: false
+          ignoreShown: true
         })); // this.states.addReference(this.diagram.getState({
         //   precision: this.precision,
         //   ignoreShown: false,
@@ -33876,19 +33943,22 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       this.startWorker();
-      this.worker.postMessage({
-        message: 'reset',
-        payload: {
-          baseReference: this.statesCache.baseReference,
-          references: this.statesCache.references
-        }
-      });
+
+      if (this.worker != null) {
+        this.worker.postMessage({
+          message: 'reset',
+          payload: {
+            baseReference: this.states.baseReference,
+            references: this.states.references
+          }
+        });
+      }
+
       this.eventsCache = {}; // this.slidesCache = [];
+      // this.statesCache = new ObjectTracker(this.precision);
+      // this.statesCache.baseReference = duplicate(this.states.baseReference);  // $FlowFixMe
+      // this.statesCache.references = duplicate(this.states.references);
 
-      this.statesCache = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["ObjectTracker"](this.precision);
-      this.statesCache.baseReference = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.states.baseReference); // $FlowFixMe
-
-      this.statesCache.references = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.states.references);
       this.diagram.unpause();
       this.lastRecordTime = null;
       this.duration = this.calcDuration();
@@ -33901,43 +33971,60 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startWorker",
     value: function startWorker() {
-      var _this6 = this;
-
       if (this.worker == null) {
         this.worker = new _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
+        // this.worker.addEventListener("message", event => {
+        //   const { message, payload } = event.data;
+        //   // if (message === 'duration')
+        //   if (message === 'cache') {
+        //     this.statesCache.diffs = payload.diffs;
+        //     this.statesCache.baseReference = payload.baseReference;
+        //     this.statesCache.references = payload.references;
+        //     this.mergeEventsCache();
+        //     this.mergeStatesCache();
+        //     this.duration = this.calcDuration();
+        //     if (this.duration % 1 > 0) {
+        //       const lastIndex = this.states.diffs.length - 1;
+        //       const [, ref, diff] = this.states.diffs[lastIndex];
+        //       this.states.diffs.push([Math.ceil(this.duration), ref, duplicate(diff), 0]);
+        //     }
+        //     this.duration = this.calcDuration();
+        //     console.log(this)
+        //   }
+        // });
 
-        this.worker.addEventListener("message", function (event) {
-          var _event$data = event.data,
-              message = _event$data.message,
-              payload = _event$data.payload; // if (message === 'duration')
-
-          if (message === 'cache') {
-            _this6.statesCache.diffs = payload.diffs;
-            _this6.statesCache.baseReference = payload.baseReference;
-            _this6.statesCache.references = payload.references;
-
-            _this6.mergeEventsCache();
-
-            _this6.mergeStatesCache();
-
-            _this6.duration = _this6.calcDuration();
-
-            if (_this6.duration % 1 > 0) {
-              var lastIndex = _this6.states.diffs.length - 1;
-
-              var _this6$states$diffs$l = _slicedToArray(_this6.states.diffs[lastIndex], 3),
-                  ref = _this6$states$diffs$l[1],
-                  diff = _this6$states$diffs$l[2];
-
-              _this6.states.diffs.push([Math.ceil(_this6.duration), ref, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(diff), 0]);
-            }
-
-            _this6.duration = _this6.calcDuration();
-            console.log(_this6);
-          }
-        });
+        this.worker.addEventListener("message", this.parseMessage.bind(this));
       } // this.worker = new Worker();
 
+    }
+  }, {
+    key: "parseMessage",
+    value: function parseMessage(event) {
+      var _event$data = event.data,
+          message = _event$data.message,
+          payload = _event$data.payload; // if (message === 'duration')
+
+      if (message === 'cache') {
+        this.statesCache = new _tools_tools__WEBPACK_IMPORTED_MODULE_2__["ObjectTracker"]();
+        this.statesCache.diffs = payload.diffs;
+        this.statesCache.baseReference = payload.baseReference;
+        this.statesCache.references = payload.references;
+        this.mergeEventsCache();
+        this.mergeStatesCache();
+        this.duration = this.calcDuration();
+
+        if (this.duration % 1 > 0) {
+          var lastIndex = this.states.diffs.length - 1;
+
+          var _this$states$diffs$la = _slicedToArray(this.states.diffs[lastIndex], 3),
+              ref = _this$states$diffs$la[1],
+              diff = _this$states$diffs$la[2];
+
+          this.states.diffs.push([Math.ceil(this.duration), ref, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(diff), 0]);
+        }
+
+        this.duration = this.calcDuration(); // console.log(this)
+      }
     } // startWorker() {
     //   // if (this.worker != null) {
     //   //   return;
@@ -33967,11 +34054,21 @@ var Recorder = /*#__PURE__*/function () {
       this.reference = "ref".concat(this.referenceIndex);
       var state = this.diagram.getState({
         precision: this.precision,
-        ignoreShown: false
+        ignoreShown: true
       });
 
       if (this.state === 'recording') {
-        this.statesCache.addReference(state, this.reference);
+        // this.statesCache.addReference(state, this.reference);
+        if (this.worker != null) {
+          this.worker.postMessage({
+            message: 'addReference',
+            payload: {
+              state: state,
+              refName: this.reference,
+              basedOn: '__base'
+            }
+          });
+        }
       } else {
         this.states.addReference(state, this.reference);
       }
@@ -33979,7 +34076,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getCacheStartTime",
     value: function getCacheStartTime() {
-      var _this7 = this;
+      var _this6 = this;
 
       var time = null;
 
@@ -33988,7 +34085,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var event = _this7.eventsCache[eventName];
+        var event = _this6.eventsCache[eventName];
 
         if (event.list.length > 0) {
           var _event$list$ = _slicedToArray(event.list[0], 1),
@@ -34054,16 +34151,16 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "mergeEventsCache",
     value: function mergeEventsCache() {
-      var _this8 = this;
+      var _this7 = this;
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var merged = _this8.getMergedCacheArray(_this8.events[eventName].list, _this8.eventsCache[eventName].list);
+        var merged = _this7.getMergedCacheArray(_this7.events[eventName].list, _this7.eventsCache[eventName].list);
 
         if (merged.length === 0) {
           return;
         }
 
-        _this8.events[eventName].list = merged;
+        _this7.events[eventName].list = merged;
       });
     }
   }, {
@@ -34158,10 +34255,10 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordCurrentState",
     value: function recordCurrentState() {
-      var start = performance.now();
+      // const start = performance.now();
       var state = this.diagram.getState({
         precision: this.precision,
-        ignoreShown: false
+        ignoreShown: true
       }); // const start1 = performance.now();
       // const str = JSON.stringify(state);
       // console.log('stringify', str.length, performance.now() - start);
@@ -34171,16 +34268,30 @@ var Recorder = /*#__PURE__*/function () {
       // console.log(unStr)
       // console.log(unStr == state)
 
-      this.recordState(state);
-      console.log('recordState', performance.now() - start);
+      this.recordState(state); // console.log('recordState', performance.now() - start);
     }
   }, {
     key: "recordCurrentStateAsReference",
     value: function recordCurrentStateAsReference(refName, basedOn) {
-      this.statesCache.addReference(this.diagram.getState({
+      var state = this.diagram.getState({
         precision: this.precision,
-        ignoreShown: false
-      }), refName, basedOn);
+        ignoreShown: true
+      });
+
+      if (this.worker != null) {
+        this.worker.postMessage({
+          message: 'addReference',
+          payload: {
+            state: state,
+            refName: refName,
+            basedOn: basedOn
+          }
+        });
+      } // this.statesCache.addReference(this.diagram.getState({
+      //   precision: this.precision,
+      //   ignoreShown: true,
+      // }), refName, basedOn);
+
     }
   }, {
     key: "recordEvent",
@@ -34213,15 +34324,15 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "queueRecordState",
     value: function queueRecordState() {
-      var _this9 = this;
+      var _this8 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
       var recordAndQueue = function recordAndQueue() {
-        if (_this9.state === 'recording') {
-          _this9.recordCurrentState();
+        if (_this8.state === 'recording') {
+          _this8.recordCurrentState();
 
-          _this9.queueRecordState(_this9.stateTimeStep - _this9.getCurrentTime() % _this9.stateTimeStep);
+          _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
       };
 
@@ -34323,21 +34434,19 @@ var Recorder = /*#__PURE__*/function () {
         this.pausePlayback();
       }
 
-      var s = performance.now(); // console.log(s)
-
       this.setToTime(time);
-      console.log(performance.now() - s);
       this.diagram.pause();
     }
   }, {
     key: "setToTime",
-    value: function setToTime(time) {
-      var _this10 = this;
+    value: function setToTime(timeIn) {
+      var _this9 = this;
 
       // if (this.states.diffs.length === 0) {
       //   return;
       // }
-      this.stateIndex = getPrevIndexForTime(this.states.diffs, time);
+      this.stateIndex = getPrevIndexForTime(this.states.diffs, timeIn); // console.log(this.stateIndex)
+
       var stateTime = 0;
       var stateTimeCount = 0;
 
@@ -34352,6 +34461,7 @@ var Recorder = /*#__PURE__*/function () {
         return;
       }
 
+      var time = stateTime;
       this.lastSeekTime = stateTime; // For each eventName, if it is to be set on seek, then get the previous
       // index (or multiple indexes if multiple are set for the same time)
       // and add them to an eventsToExecuteArray
@@ -34359,7 +34469,7 @@ var Recorder = /*#__PURE__*/function () {
       var eventsToSetBeforeState = [];
       var eventsToSetAfterState = [];
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this10.events[eventName];
+        var event = _this9.events[eventName];
 
         if (event.setOnSeek === false) {
           return;
@@ -34378,7 +34488,7 @@ var Recorder = /*#__PURE__*/function () {
               eventTime = _event$list$i[0],
               timeCount = _event$list$i[2];
 
-          if (_this10.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
+          if (_this9.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
             eventsToSetBeforeState.push([eventName, i, eventTime, timeCount]);
           } else if (eventTime > stateTime || eventTime === stateTime && timeCount > stateTimeCount) {
             eventsToSetAfterState.push([eventName, i, eventTime, timeCount]);
@@ -34410,7 +34520,7 @@ var Recorder = /*#__PURE__*/function () {
               eventName = _event[0],
               index = _event[1];
 
-          _this10.setEvent(eventName, index);
+          _this9.setEvent(eventName, index);
         });
       };
 
@@ -34428,7 +34538,7 @@ var Recorder = /*#__PURE__*/function () {
 
       this.currentTime = time;
       this.setCursor(time);
-      this.diagram.animateNextFrame();
+      this.diagram.animateNextFrame(); // console.log(this.diagram.getElement('a').getRotation())
     }
   }, {
     key: "setCursor",
@@ -34563,6 +34673,11 @@ var Recorder = /*#__PURE__*/function () {
       this.startEventsPlayback(fromTime);
       this.startAudioPlayback(fromTime);
       this.diagram.animateNextFrame();
+
+      if (this.areEventsPlaying() === false) {
+        this.finishPlaying();
+        return;
+      }
     } // initializePlayback(fromTime: number) {
     //   this.currentTime = fromTime;
     //   this.diagram.unpause();
@@ -34574,7 +34689,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
-      var _this11 = this;
+      var _this10 = this;
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -34582,10 +34697,10 @@ var Recorder = /*#__PURE__*/function () {
         this.audio.play();
 
         var audioEnded = function audioEnded() {
-          _this11.isAudioPlaying = false;
+          _this10.isAudioPlaying = false;
 
-          if (_this11.state === 'playing') {
-            _this11.finishPlaying();
+          if (_this10.state === 'playing') {
+            _this10.finishPlaying();
           }
         };
 
@@ -34600,15 +34715,20 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startEventsPlayback",
     value: function startEventsPlayback(fromTime) {
-      var _this12 = this;
+      var _this11 = this;
 
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this12.events[eventName].list.length === 0) {
+        if (_this11.events[eventName].list.length === 0) {
           return;
         }
 
-        var event = _this12.events[eventName];
+        var event = _this11.events[eventName];
         var index = getNextIndexForTime(event.list, fromTime);
+
+        if (index === -1) {
+          _this11.eventIndex[eventName] = -1;
+          return;
+        }
 
         var _event$list$index = _slicedToArray(event.list[index], 1),
             eventTime = _event$list$index[0];
@@ -34618,9 +34738,9 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         if (index > event.list.length - 1) {
-          _this12.eventIndex[eventName] = -1;
+          _this11.eventIndex[eventName] = -1;
         } else {
-          _this12.eventIndex[eventName] = index;
+          _this11.eventIndex[eventName] = index;
         }
       });
       var nextEventName = this.getNextEvent();
@@ -34632,19 +34752,19 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getNextEvent",
     value: function getNextEvent() {
-      var _this13 = this;
+      var _this12 = this;
 
       var nextEventName = '';
       var nextTime = null;
       var nextTimeCount = null;
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this13.eventIndex[eventName] == null || _this13.eventIndex[eventName] === -1 || _this13.events[eventName].list.length <= _this13.eventIndex[eventName]) {
+        if (_this12.eventIndex[eventName] == null || _this12.eventIndex[eventName] === -1 || _this12.events[eventName].list.length <= _this12.eventIndex[eventName]) {
           return;
         }
 
-        var _this13$events$eventN = _slicedToArray(_this13.events[eventName].list[_this13.eventIndex[eventName]], 3),
-            time = _this13$events$eventN[0],
-            timeCount = _this13$events$eventN[2];
+        var _this12$events$eventN = _slicedToArray(_this12.events[eventName].list[_this12.eventIndex[eventName]], 3),
+            time = _this12$events$eventN[0],
+            timeCount = _this12$events$eventN[2];
 
         if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
@@ -34699,7 +34819,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "finishPlaying",
     value: function finishPlaying() {
-      var _this14 = this;
+      var _this13 = this;
 
       if (this.areEventsPlaying()) {
         return false;
@@ -34709,13 +34829,14 @@ var Recorder = /*#__PURE__*/function () {
 
       if (remainingTime > 0.0001) {
         this.timeoutID = setTimeout(function () {
-          _this14.finishPlaying();
+          _this13.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
-      } // if (this.isAudioPlaying) {
-      //   return false;
-      // }
+      }
 
+      if (this.isAudioPlaying) {
+        return false;
+      }
 
       this.pausePlayback();
       return true;
@@ -34958,7 +35079,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function () {
-  return new Worker("/static/workers/" + "5868d357594e86001e2b.worker.js");
+  return new Worker("/static/workers/" + "cfd0fd9450bb5270502b.worker.js");
 };
 
 /***/ }),
@@ -36217,7 +36338,8 @@ var Rect = /*#__PURE__*/function () {
   }, {
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      // const { precision } = options;
+      var precision = getPrecision(options);
       return {
         f1Type: 'rect',
         state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.width, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.height, precision)]
@@ -36336,7 +36458,8 @@ var Point = /*#__PURE__*/function () {
   _createClass(Point, [{
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      // const { precision } = options;
+      var precision = getPrecision(options);
       return {
         f1Type: 'p',
         state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
@@ -37050,7 +37173,8 @@ var Line = /*#__PURE__*/function () {
   _createClass(Line, [{
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      // const { precision } = options;
+      var precision = getPrecision(options);
       return {
         f1Type: 'l',
         state: [[Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.y, precision)], [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.y, precision)]]
@@ -37568,7 +37692,8 @@ var Rotation = /*#__PURE__*/function () {
   _createClass(Rotation, [{
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      // const { precision } = options;
+      var precision = getPrecision(options);
       return {
         f1Type: 'r',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.r, precision)]
@@ -37612,6 +37737,23 @@ var Rotation = /*#__PURE__*/function () {
 
   return Rotation;
 }();
+
+function getPrecision(options) {
+  var defaultPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+  var precision;
+
+  if (options) {
+    precision = options.precision;
+  }
+
+  var precisionToUse = defaultPrecision;
+
+  if (precision != null) {
+    precisionToUse = precision;
+  }
+
+  return precisionToUse;
+}
 
 var Translation = /*#__PURE__*/function (_Point) {
   _inherits(Translation, _Point);
@@ -37670,7 +37812,7 @@ var Translation = /*#__PURE__*/function (_Point) {
   _createClass(Translation, [{
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      var precision = getPrecision(options);
       return {
         f1Type: 't',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]
@@ -37793,7 +37935,8 @@ var Scale = /*#__PURE__*/function (_Point2) {
   _createClass(Scale, [{
     key: "_state",
     value: function _state(options) {
-      var precision = options.precision;
+      // const { precision } = options;
+      var precision = getPrecision(options);
       return {
         f1Type: 's',
         state: [this.name, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.y, precision)]

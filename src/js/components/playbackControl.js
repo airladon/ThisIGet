@@ -91,6 +91,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     recorder.stateTimeStep = 1;
     recorder.startRecording(this.state.timeValue);
+    if (this.state.timeValue === 0) {
+      recorder.recordEvent('slide', ['goto', 0]);
+    }
     this.queueTimeUpdate();
     this.setState({
       recordPauseClass: '',
@@ -149,9 +152,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
-    const s = performance.now()
     recorder.seekToPercent(percent);
-    console.log('seek', performance.now() - s)
     this.updateTime(percent * totalTime);
   }
 

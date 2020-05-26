@@ -448,11 +448,11 @@ export default class PresentationFormatComponent extends React.Component
                   />
                 </div>
               </div>
-              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
               {this.addGoToButton()}
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
+              <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
         </div>
       </div>
       </main>

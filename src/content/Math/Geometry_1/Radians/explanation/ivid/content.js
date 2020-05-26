@@ -13,10 +13,10 @@ import details from '../../details';
 import CommonCollection from './diagramCollectionCommon';
 import CommonTopicDiagram from '../../../../../common/CommonTopicDiagram';
 import { removeClass, addClass } from '../../../../../common/tools/tools';
-import states from './vidstates.json';
-import events from './videvents.json';
-import slides from './vidslides.json';
-import audio from './audio.m4a';
+import states from './ividStates.json';
+import events from './ividEvents.json';
+// import slides from './vidslides.json';
+// import audio from './audio.m4a';
 
 const {
   click,
@@ -51,8 +51,8 @@ class Content extends PresentationFormatContent {
       'Math/Geometry_1/Circle/base',
     ]);
     // this.diagram.recorder.events = events;
-    // this.diagram.recorder.loadEvents(events, true);
-    // this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.loadEvents(events, true);
+    this.diagram.recorder.loadStates(states, true);
     // this.diagram.recorder.slides = slides;
     // this.diagram.recorder.audio = new Audio(audio);
     console.log(this.diagram.recorder)
