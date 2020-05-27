@@ -2132,7 +2132,7 @@
           "links": ""
         },
         "ivid": {
-          "type": "presentation",
+          "type": "ivid",
           "title": "Interactive Video",
           "description": "",
           "htmlTitle": "Introduction to radians and why we use them",

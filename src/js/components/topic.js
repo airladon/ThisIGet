@@ -10,12 +10,14 @@ import TopicButton from './topicButton';
 import Rating from './rating';
 import { login, getTopicPath, getCurrentPath } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
+import IVideoFormatComponent from './format/ivid';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
 import ShareBar from './share';
 import RecordButton from './recordButton';
+// import IVideoFormatComponent from './format/ivid';
 
 
 type Props = {
@@ -390,8 +392,14 @@ export default class TopicComponent extends React.Component
   }
 
   renderTopic() {
+    console.log(this.version.type)
     if (this.version.type === 'presentation') {
       return <PresentationFormatComponent
+        version={this.version}
+      />;
+    }
+    if (this.version.type === 'ivid') {
+      return <IVideoFormatComponent
         version={this.version}
       />;
     }

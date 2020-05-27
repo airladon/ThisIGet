@@ -9,7 +9,7 @@ var version = {
   htmlTitle: 'Introduction to radians and why we use them',
   htmlDescription: 'Radians and their relationship with arc length and radius',
   fullTopic: true,
-  type: 'presentation',
+  type: 'ivid',
 };
 
 module.exports = version;

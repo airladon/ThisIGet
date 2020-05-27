@@ -4,6 +4,11 @@ import PresentationFormat from './PresentationFormat';
 
 class InteractiveVideoFormat extends PresentationFormat {
 
+  constructor(content: Object) {
+    super(content);
+    this.type = 'ivid';
+  }
+
   nextSection(message: ?string = null) {
     if (this.diagram == null) {
       return;

@@ -1323,7 +1323,7 @@
           "fullTopic": true
         },
         "ivid": {
-          "type": "presentation",
+          "type": "ivid",
           "title": "Interactive Video",
           "description": "",
           "fullTopic": true
