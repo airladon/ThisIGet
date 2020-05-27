@@ -9,21 +9,34 @@ import PresentationQR from '../presentationQR';
 // import StaticQR from '../staticQR';
 import PlaybackControl from '../playbackControl';
 import InteractiveFormatComponent from './interactiveBase';
+import type { Props } from './interactiveBase';
 
 export default class IVideoFormatComponent extends InteractiveFormatComponent {
 
+  constructor(props: Props) {
+    super(props);
+    this.state.buttonClasses = 'hide__override';
+    this.state.topicContainerClasses = 'topic__container__ivid';
+  }
+
   toggleDev() {
-    const topicContainer = document.getElementById('topic__container_name');
+    // const topicContainer = document.getElementById('topic__container_name');
     if (this.state.buttonClasses === '') {
-      this.setState({ buttonClasses: 'hide__override' });
-      if (topicContainer != null) {
-        topicContainer.classList.add('topic__container__ivid')
-      }
+      this.setState({
+        buttonClasses: 'hide__override',
+        topicContainerClasses: 'topic__container__ivid',
+      });
+      // if (topicContainer != null) {
+      //   topicContainer.classList.add('topic__container__ivid')
+      // }
     } else {
-      this.setState({ buttonClasses: '' });
-      if (topicContainer != null) {
-        topicContainer.classList.remove('topic__container__ivid')
-      }
+      this.setState({
+        buttonClasses: '',
+        topicContainerClasses: '',
+      });
+      // if (topicContainer != null) {
+      //   topicContainer.classList.remove('topic__container__ivid')
+      // }
     }
   }
 
@@ -39,7 +52,7 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     return <div>
       <main>
       <div className="topic__widescreen_backdrop" id={this.version.content.htmlId}>
-        <div id="topic__container_name" className="topic__container">
+        <div id="topic__container_name" className={`topic__container ${this.state.topicContainerClasses}`}>
           {this.addPrevButton()}
           <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram">
             <canvas id="id_figureone__gl__low" className='figureone__gl'>

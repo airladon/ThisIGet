@@ -13,7 +13,7 @@ import PlaybackControl from '../playbackControl';
 
 // const { DiagramElementCollection } = Fig;
 
-type Props = {
+export type Props = {
   version: PresentationFormat;
   build: {
     date: string,
@@ -37,6 +37,7 @@ type State = {
     link: string;
   },
   buttonClasses: string;
+  topicContainerClasses: string;
 };
 
 export default class InteractiveFormatComponent extends React.Component
@@ -69,6 +70,7 @@ export default class InteractiveFormatComponent extends React.Component
         link: '',
       },
       buttonClasses: '',
+      topicContainerClasses: '',
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);
