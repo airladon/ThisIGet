@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ViewTopic from '../../components/viewTopic';
 import withLoginManager from '../../components/view';
+import buildStats from '../../../build.json';
 // import '../../../css/style.scss';
 
 function renderTopic(
@@ -33,6 +34,7 @@ function renderTopic(
     ReactDOM.render(
       <ViewTopicWithLoginState
         version={version}
+        build={buildStats}
       />,
       topicId,
     );

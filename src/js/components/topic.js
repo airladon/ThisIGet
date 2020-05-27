@@ -16,13 +16,18 @@ import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 import { setVersionRating } from '../TopicFormat/rating';
 import ShareBar from './share';
-import RecordButton from './recordButton';
+// import RecordButton from './recordButton';
 // import IVideoFormatComponent from './format/ivid';
 
 
 type Props = {
   version: Object;
   isLoggedIn: boolean;
+  build: {
+    date: string,
+    shortDate: string,
+    build: string
+  },
 };
 
 type State = {
@@ -392,15 +397,16 @@ export default class TopicComponent extends React.Component
   }
 
   renderTopic() {
-    console.log(this.version.type)
     if (this.version.type === 'presentation') {
       return <PresentationFormatComponent
         version={this.version}
+        build={this.props.build}
       />;
     }
     if (this.version.type === 'ivid') {
       return <IVideoFormatComponent
         version={this.version}
+        build={this.props.build}
       />;
     }
     if (this.version.type === 'singlePage') {

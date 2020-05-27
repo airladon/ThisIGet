@@ -7,6 +7,11 @@ type Props = {
   version: Object,
   isLoggedIn: boolean,
   username: string,
+  build: {
+    date: string,
+    shortDate: string,
+    build: string
+  },
 };
 
 export default class ViewTopic extends React.Component
@@ -16,6 +21,7 @@ export default class ViewTopic extends React.Component
     return <TopicComponent
         version={this.props.version}
         isLoggedIn={this.props.isLoggedIn}
+        build={this.props.build}
       />;
   }
 }

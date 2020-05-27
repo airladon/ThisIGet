@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
@@ -8,17 +9,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./webpack/getContent.js');
 const createTopicIndex = require('./webpack/createIndex.js');
-const recordBuildTime = require('./webpack/recordBuildTime.js');
+// const recordBuildTime = require('./webpack/recordBuildTime.js');
 const setFilesForBuild = require('./webpack/setFilesForBuild.js');
 const FlaskReloaderPlugin = require('./webpack/flaskReloaderPlugin');
 
 const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
 
-// eslint-disable-next-line no-console
-console.log('Record Build Time');
-const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
-// eslint-disable-next-line no-console
-console.log(buildTime);
+const dateString = new Date().toISOString();
+const shortDate = dateString.replace(/[-:.TZ]/g, '');
 
 const envConfig = {
   prod: {
@@ -29,9 +27,9 @@ const envConfig = {
     devtool: false,
     uglifySourceMap: false,
     reactDevMode: false,
-    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
+    outputFilename: `[name]-[chunkhash]-${shortDate}.js`,
     imageFileName: '[path][name].[ext]',
-    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
+    cssFileName: `[name]-[contenthash]-${shortDate}.css`,
   },
   stage: {
     name: 'stage',
@@ -41,9 +39,9 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: true,
     reactDevMode: false,
-    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
+    outputFilename: `[name]-[chunkhash]-${shortDate}.js`,
     imageFileName: '[path][name].[ext]',
-    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
+    cssFileName: `[name]-[contenthash]-${shortDate}.css`,
   },
   dev: {
     name: 'development',
@@ -73,6 +71,20 @@ module.exports = (env) => {
       e = envConfig.dev;
     }
   }
+
+  const buildStats = {
+    date: dateString,
+    shortDate,
+    build: e.name,
+  };
+
+  // eslint-disable-next-line no-console
+  console.log('Record Build Stats');
+  fs.writeFileSync(path.join(__dirname, 'app/app/buildTime.json'), JSON.stringify(buildStats, null, 2));
+  fs.writeFileSync(path.join(__dirname, 'src/build.json'), JSON.stringify(buildStats, null, 2));
+  // const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
+  // eslint-disable-next-line no-console
+  console.log(buildStats);
 
   entryPoints.updateDetailsAndVersions();
 

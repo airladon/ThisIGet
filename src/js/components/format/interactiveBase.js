@@ -15,6 +15,11 @@ import PlaybackControl from '../playbackControl';
 
 type Props = {
   version: PresentationFormat;
+  build: {
+    date: string,
+    shortDate: string,
+    build: string
+  },
 };
 
 type State = {
@@ -67,6 +72,7 @@ export default class InteractiveFormatComponent extends React.Component
     this.version.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
     this.centerContentFlag = false;
+    console.log(this.props.build)
     // this.refreshCallback = null;
   }
 
