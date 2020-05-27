@@ -7,7 +7,7 @@
   display: table;
   table-layout: fixed;
   position: absolute;
-  bottom: 0;
+  bottom: 0.2em;
   pointer-events: auto;
   z-index: 2;
   // width: var(--pres__content_width);
@@ -50,7 +50,7 @@
 
 .figureone_playback_control__record {
   background-image: $circle;
-  width: 20px;
+  width: 2em;
   height: 20px;
   display: table-cell;
   background-position: center;
@@ -88,4 +88,6 @@
   display: table-cell;
   vertical-align: middle;
   width: 7em;
+  border: 1px solid white;
+  border-radius: 0.4em;
 }
