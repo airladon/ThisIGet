@@ -34229,7 +34229,9 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordState",
     value: function recordState(state) {
-      var now = this.now();
+      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.getCurrentTime();
+      // const now = this.now();
+      var now = time;
 
       if (this.lastRecordTime == null || now > this.lastRecordTime) {
         this.lastRecordTime = now;
@@ -34267,6 +34269,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordCurrentState",
     value: function recordCurrentState() {
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getCurrentTime();
       // const start = performance.now();
       var state = this.diagram.getState({
         precision: this.precision,
@@ -34280,7 +34283,7 @@ var Recorder = /*#__PURE__*/function () {
       // console.log(unStr)
       // console.log(unStr == state)
 
-      this.recordState(state); // console.log('recordState', performance.now() - start);
+      this.recordState(state, time); // console.log('recordState', performance.now() - start);
     }
   }, {
     key: "recordCurrentStateAsReference",
@@ -34308,6 +34311,8 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "recordEvent",
     value: function recordEvent(eventName, payload) {
+      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.now();
+
       if (this.events[eventName] == null) {
         return;
       }
@@ -34316,20 +34321,19 @@ var Recorder = /*#__PURE__*/function () {
         this.eventsCache[eventName] = {
           list: []
         };
-      }
+      } // const now = this.now();
 
-      var now = this.now();
 
-      if (this.lastRecordTime == null || now > this.lastRecordTime) {
-        this.lastRecordTime = now;
+      if (this.lastRecordTime == null || time > this.lastRecordTime) {
+        this.lastRecordTime = time;
         this.lastRecordTimeCount = 0;
       }
 
-      this.eventsCache[eventName].list.push([now, payload, this.lastRecordTimeCount]);
+      this.eventsCache[eventName].list.push([time, payload, this.lastRecordTimeCount]);
       this.lastRecordTimeCount += 1;
 
-      if (now > this.duration) {
-        this.duration = now;
+      if (time > this.duration) {
+        this.duration = time;
       }
     } // States are recorded every second
 
@@ -34457,7 +34461,12 @@ var Recorder = /*#__PURE__*/function () {
       // if (this.states.diffs.length === 0) {
       //   return;
       // }
-      this.stateIndex = getPrevIndexForTime(this.states.diffs, timeIn); // console.log(this.stateIndex)
+      if (timeIn === 0 && this.states.diffs.length > 0) {
+        this.stateIndex = 0;
+      } else {
+        this.stateIndex = getPrevIndexForTime(this.states.diffs, timeIn);
+      } // console.log(this.stateIndex)
+
 
       var stateTime = 0;
       var stateTimeCount = 0;

@@ -92,7 +92,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.stateTimeStep = 1;
     recorder.startRecording(this.state.timeValue);
     if (this.state.timeValue === 0) {
-      recorder.recordEvent('slide', ['goto', 0]);
+      recorder.recordEvent('slide', ['goto', '', 0], 0);
     }
     this.queueTimeUpdate();
     this.setState({
