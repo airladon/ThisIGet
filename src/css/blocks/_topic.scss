@@ -274,5 +274,25 @@ $title_bar_space_low: 90px;
 //   width: calc(var(--topic__title_tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) * 2 - var(--navigator__tile_img_width) * 2);
 // }
 
+.topic__dev_toggle_button__container {
+  width: 80px;
+  height: 26px;
+  position: absolute;
+  top: -35px;
+  font-size: 0.5em;
+  background-color: var(--color-button-background);
+  border: 1px solid var(--color-button-border);
+  color: var(--color-button-text);
+  padding: 3px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.topic__dev_toggle_button__container:hover {
+  background-color: var(--color-button-hover-background);
+  border: 1px solid var(--color-button-hover-border);
+  color: var(--color-button-hover-text);
+}
+
 @import './topic/popupBox';
 @import './topic/pathTile';

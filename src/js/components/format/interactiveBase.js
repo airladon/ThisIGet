@@ -36,6 +36,7 @@ type State = {
     title: string;
     link: string;
   },
+  buttonClasses: string;
 };
 
 export default class InteractiveFormatComponent extends React.Component
@@ -67,12 +68,12 @@ export default class InteractiveFormatComponent extends React.Component
         title: '',
         link: '',
       },
+      buttonClasses: '',
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
     this.centerContentFlag = false;
-    console.log(this.props.build)
     // this.refreshCallback = null;
   }
 
@@ -310,7 +311,7 @@ export default class InteractiveFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addNextButton() {
-    return <Button label="" id="topic__button-next" className=" topic__np_button topic__button-next-enabled" aria-label="Next slide"><div className="topic__np_button_fill"></div></Button>;
+    return <Button label="" id="topic__button-next" className={` topic__np_button topic__button-next-enabled ${this.state.buttonClasses}`} aria-label="Next slide"><div className="topic__np_button_fill"></div></Button>;
   }
 
   // eslint-disable-next-line class-methods-use-this

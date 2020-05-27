@@ -19,3 +19,4 @@ thisiget.code-workspace
 __replacements__
 __diff_output__
 *.m4a
+buildStats.json

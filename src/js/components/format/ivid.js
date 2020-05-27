@@ -11,6 +11,23 @@ import PlaybackControl from '../playbackControl';
 import InteractiveFormatComponent from './interactiveBase';
 
 export default class IVideoFormatComponent extends InteractiveFormatComponent {
+
+  toggleDev() {
+    if (this.state.buttonClasses === '') {
+      this.setState({ buttonClasses: 'topic__hide' });
+    } else {
+      this.setState({ buttonClasses: '' });
+    }
+  }
+
+  addDevToggleButton() {
+    return <div id="id_topic__dev_toggle_button__container"
+      onClick={this.toggleDev.bind(this)}
+      className="topic__dev_toggle_button__container">
+        Toggle Dev
+      </div>;
+  }
+
   render() {
     return <div>
       <main>
@@ -43,6 +60,7 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
           {this.addNextButton()}
           {this.addInfoButton()}
           {this.addInteractiveElementButton()}
+          {this.addDevToggleButton()}
         </div>
       </div>
       </main>
