@@ -13,10 +13,17 @@ import InteractiveFormatComponent from './interactiveBase';
 export default class IVideoFormatComponent extends InteractiveFormatComponent {
 
   toggleDev() {
+    const topicContainer = document.getElementById('topic__container_name');
     if (this.state.buttonClasses === '') {
-      this.setState({ buttonClasses: 'topic__hide' });
+      this.setState({ buttonClasses: 'hide__override' });
+      if (topicContainer != null) {
+        topicContainer.classList.add('topic__container__ivid')
+      }
     } else {
       this.setState({ buttonClasses: '' });
+      if (topicContainer != null) {
+        topicContainer.classList.remove('topic__container__ivid')
+      }
     }
   }
 

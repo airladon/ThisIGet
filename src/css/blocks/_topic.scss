@@ -74,6 +74,10 @@ $title_bar_space_low: 90px;
   display: none;
 }
 
+.hide__override {
+  display: none !important;
+}
+
 .hide {
   display: none;
 }
@@ -279,7 +283,7 @@ $title_bar_space_low: 90px;
   height: 26px;
   position: absolute;
   top: -35px;
-  font-size: 0.5em;
+  font-size: 12px;
   background-color: var(--color-button-background);
   border: 1px solid var(--color-button-border);
   color: var(--color-button-text);

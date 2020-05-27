@@ -305,7 +305,7 @@ export default class InteractiveFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addPrevButton() {
-    return <Button label="" id="topic__button-previous" className=" topic__np_button topic__button-prev-enabled"
+    return <Button label="" id="topic__button-previous" className={` topic__np_button topic__button-prev-enabled ${this.state.buttonClasses}`}
     aria-label="Previous slide"><div className="topic__np_button_fill"></div></Button>;
   }
 
@@ -316,7 +316,7 @@ export default class InteractiveFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addInfoButton() {
-    return <div id="id_topic__info_button" className="topic__info_button topic__info_hide">
+    return <div id="id_topic__info_button" className={`topic__info_button topic__info_hide ${this.state.buttonClasses}`}>
       <div className="topic__info_button_label_container">
         <div className="topic__info_button_label">
           <div className="topic__info_button_label_text">
@@ -330,7 +330,7 @@ export default class InteractiveFormatComponent extends React.Component
   // eslint-disable-next-line class-methods-use-this
   addInteractiveElementButton() {
     return <div id="id_topic__interactive_element_button__container"
-      className="topic__interactive_element_button__container">
+      className={`topic__interactive_element_button__container ${this.state.buttonClasses}`}>
         <div
           id="id_topic__interactive_element_button"
           className="topic__interactive_element_button topic__interactive_element_button__hide"
@@ -342,7 +342,7 @@ export default class InteractiveFormatComponent extends React.Component
   addGoToButton() {
     if (this.state.listOfSections.length > 0) {
       return <div
-        className="topic__button-goto_container"
+        className={`topic__button-goto_container ${this.state.buttonClasses}`}
         id="id__topic__button-goto_container">
         <DropDownButton
           id="id__topic__goto_button"

@@ -168,6 +168,11 @@ $height_limited_landscape_aspect_ratio: "408/200";
   margin-bottom: 0;
 }
 
+.topic__container__ivid {
+  width: var(--pres__content_width);
+  height: var(--pres__content_height);
+}
+
 .topic__diagram {
   width: var(--pres__content_width);
   height: var(--pres__content_height);
