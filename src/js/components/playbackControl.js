@@ -24,6 +24,7 @@ type Props = {
   eventsSrc: string;
   slidesSrc: string;
   getDiagram: () => Diagram;
+  dev: boolean;
   // diagram: Diagram;
 };
 
@@ -181,7 +182,35 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   }
 
-
+  renderDev() {
+    if (!this.props.dev) {
+      return '';
+    }
+    return <div className='figureone_playback_control__dev_container'>
+      <div className='figureone_playback_control__dev_container__inner_table'>
+        <div
+          className={`figureone_playback_control__record ${this.state.recordClass}`}
+          onClick={this.record.bind(this)}
+        />
+        <div
+          className={`figureone_playback_control__pause_recording ${this.state.recordPauseClass}`}
+          onClick={this.pauseRecording.bind(this)}
+        />
+        <div
+          className={'figureone_playback_control__show_recording'}
+          onClick={this.showRecording.bind(this)}
+        >
+          show
+        </div>
+        <div
+          className={'figureone_playback_control__save_recording'}
+          onClick={this.saveRecording.bind(this)}
+        >
+          save
+        </div>
+      </div>
+    </div>;
+  }
 
   render() {  // eslint-disable-line class-methods-use-this
     return <div className="figureone_playback_control">
@@ -204,26 +233,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
           position={this.state.seek}
         />
       </div>
-      <div
-        className={`figureone_playback_control__record ${this.state.recordClass}`}
-        onClick={this.record.bind(this)}
-      />
-      <div
-        className={`figureone_playback_control__pause_recording ${this.state.recordPauseClass}`}
-        onClick={this.pauseRecording.bind(this)}
-      />
-      <div
-        className={'figureone_playback_control__show_recording'}
-        onClick={this.showRecording.bind(this)}
-      >
-        show
-      </div>
-      <div
-        className={'figureone_playback_control__save_recording'}
-        onClick={this.saveRecording.bind(this)}
-      >
-        save
-      </div>
+      {this.renderDev()}
       <div className="figureone_playback_control__h_space"/>
       { /*
       <div className="figureone_playback_control__volume_on"/>

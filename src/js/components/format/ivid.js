@@ -20,23 +20,18 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
   }
 
   toggleDev() {
-    // const topicContainer = document.getElementById('topic__container_name');
     if (this.state.buttonClasses === '') {
       this.setState({
         buttonClasses: 'hide__override',
         topicContainerClasses: 'topic__container__ivid',
+        dev: false,
       });
-      // if (topicContainer != null) {
-      //   topicContainer.classList.add('topic__container__ivid')
-      // }
     } else {
       this.setState({
         buttonClasses: '',
         topicContainerClasses: '',
+        dev: true,
       });
-      // if (topicContainer != null) {
-      //   topicContainer.classList.remove('topic__container__ivid')
-      // }
     }
   }
 
@@ -59,7 +54,10 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
             </canvas>
             <canvas id="id_figureone__text__low" className='figureone__text'>
             </canvas>
-            <PlaybackControl getDiagram={this.getDiagram.bind(this)}/>
+            <PlaybackControl
+              getDiagram={this.getDiagram.bind(this)}
+              dev={this.state.dev}
+            />
             <div id="id_figureone__html" className='figureone__html'>
               {this.renderContent(this.state.htmlText)}
               <div className="figureone__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
