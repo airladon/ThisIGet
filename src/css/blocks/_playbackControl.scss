@@ -101,10 +101,10 @@
 
 .playback_fade_out {
   opacity: 0;
-  -webkit-animation: fadeout_full 5s linear;
-  -moz-animation: fadeout_full 5s linear;
-  animation: fadeout_full 5s linear;
-  -o-animation: fadeout_full 5s linear;
+  -webkit-animation: fadeout_full 3s linear;
+  -moz-animation: fadeout_full 3s linear;
+  animation: fadeout_full 3s linear;
+  -o-animation: fadeout_full 3s linear;
 }
 
 @-webkit-keyframes fadeout_full {
@@ -123,10 +123,10 @@
 
 .playback_fade_out_partial {
   opacity: 0.6;
-  -webkit-animation: fadeout_partial 5s linear;
-  -moz-animation: fadeout_partial 5s linear;
-  animation: fadeout_partial 5s linear;
-  -o-animation: fadeout_partial 5s linear;
+  -webkit-animation: fadeout_partial 3s linear;
+  -moz-animation: fadeout_partial 3s linear;
+  animation: fadeout_partial 3s linear;
+  -o-animation: fadeout_partial 3s linear;
 }
 
 @-webkit-keyframes fadeout_partial {

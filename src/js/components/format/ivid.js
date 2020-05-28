@@ -26,6 +26,11 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       // console.log(diagram.recorder.duration)
       this.setState({ duration: diagram.recorder.duration });
     }
+    const elements = document.getElementsByClassName('figureone_dev_only');
+    
+    // for (let i = 0; i < elements.length; i += 1) {
+    //   elements[i].style.visibility = 'hidden';
+    // }
   }
 
   toggleDev() {
@@ -35,12 +40,19 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
         topicContainerClasses: 'topic__container__ivid',
         dev: false,
       });
+      const container = document.getElementById('id_figureone__html');
+      container.classList.remove('figureone_dev');
     } else {
       this.setState({
         buttonClasses: '',
         topicContainerClasses: '',
         dev: true,
       });
+      const container = document.getElementById('id_figureone__html');
+      container.classList.add('figureone_dev');
+    //   for (let i = 0; i < elements.length; i += 1) {
+    //     elements[i].style.visibility = 'visible';
+    //   }
     }
   }
 

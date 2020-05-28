@@ -394,6 +394,14 @@ $height_limited_landscape_aspect_ratio: "408/200";
   100% { opacity: 0; }
 }
 
+.figureone_dev_only {
+  visibility: hidden;
+}
+
+.figureone_dev .figureone_dev_only {
+  visibility: visible;
+}
+
 @import './topic/presentation/navigationButtons';
 @import './topic/presentation/gotoButton';
 @import './topic/presentation/interactiveItemButton';

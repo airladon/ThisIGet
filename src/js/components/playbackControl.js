@@ -365,12 +365,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
           position={this.state.seek}
         />
       </div>
-      <div
+      {/* <div
         className={'figureone_playback_control__full_screen'}
         onClick={this.toggleFullScreen.bind(this)}
       >
         full
-      </div>
+      </div> */}
       {this.renderDev()}
       <div className="figureone_playback_control__h_space"/>
       { /*

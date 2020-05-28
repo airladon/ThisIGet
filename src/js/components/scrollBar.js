@@ -76,6 +76,7 @@ export default class SrollBar extends React.Component<Props, State> {
   }
 
   touchStartHandler(event: TouchEvent) {
+    this.touchState = 'down';
     const touch = event.touches[0];
     // const disableEvent = this.startHandler(new Point(touch.clientX, touch.clientY));
     // if (disableEvent) {
@@ -85,6 +86,7 @@ export default class SrollBar extends React.Component<Props, State> {
   }
 
   mouseDownHandler(event: MouseEvent) {
+    this.touchState = 'down';
     // const disableEvent = this.startHandler(new Point(event.clientX, event.clientY));
     // if (disableEvent) {
     //   event.preventDefault();
@@ -93,14 +95,18 @@ export default class SrollBar extends React.Component<Props, State> {
   }
 
   touchMoveHandler(event: TouchEvent) {
-    const touch = event.touches[0];
-    this.touchHandler(touch.clientX);
+    if (this.touchState === 'down') {
+      const touch = event.touches[0];
+      this.touchHandler(touch.clientX);
+    }
     // this.moveHandler(event, new Point(touch.clientX, touch.clientY));
   }
 
   mouseMoveHandler(event: MouseEvent) {
     // this.moveHandler(event, new Point(event.clientX, event.clientY));
-    this.touchHandler(event.clientX);
+    if (this.touchState === 'down') {
+      this.touchHandler(event.clientX);
+    }
   }
 
   mouseUpHandler() {
