@@ -6,6 +6,34 @@ import ScrollBar from './scrollBar';
 const { Recorder, Diagram, FunctionMap } = Fig;
 const { getObjectDiff } = Fig.tools.misc;
 
+function removeClass(ids: string | Array<string>, className: string) {
+  let elementIds = ids;
+  if (typeof ids === 'string') {
+    elementIds = [ids];
+  }
+  elementIds.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element == null) {
+      return;
+    }
+    element.classList.remove(className);
+  });
+}
+
+function addClass(ids: string | Array<string>, className: string) {
+  let elementIds = ids;
+  if (typeof ids === 'string') {
+    elementIds = [ids];
+  }
+  elementIds.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element == null) {
+      return;
+    }
+    element.classList.add(className);
+  });
+}
+
 type State = {
   playClass: string,
   playPauseClass: string,
@@ -69,10 +97,13 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.startPlayback(this.state.timeValue);
     recorder.playbackStoppedCallback = this.playToPause.bind(this);
     this.setState({
-      playPauseClass: '',
+      playPauseClass: 'playback_fade_out_partial',
       playClass: 'figureone_playback_control__hide',
     });
     this.queueTimeUpdate();
+    addClass('id_figureone_playback_control__time', 'playback_fade_out');
+    addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // addClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
   }
 
   playToPause() {
@@ -80,6 +111,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
       playClass: '',
       playPauseClass: 'figureone_playback_control__hide',
     });
+    removeClass('id_figureone_playback_control__time', 'playback_fade_out');
+    removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // removeClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -220,13 +254,15 @@ export default class PlaybackControl extends React.Component<Props, State> {
         onClick={this.play.bind(this)}
       />
       <div
+        id="id_figureone_playback_control__pause"
         className={`figureone_playback_control__pause ${this.state.playPauseClass}`}
         onClick={this.pause.bind(this)}
       />
-      <div className="figureone_playback_control__time">
+      <div id="id_figureone_playback_control__time" className="figureone_playback_control__time">
         {this.state.time}
       </div>
-      <div className="figureone_playback_controll_seek_container">
+      <div id="id_figureone_playback_controll_seek_container"
+        className="figureone_playback_controll_seek_container">
         <ScrollBar
           id='playback_control_seek'
           changed={this.seekToPercent.bind(this)}
