@@ -177,17 +177,17 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 90, classes: 'figureone_dev_only'  }, '|Angle|'),
-        note({ top: 85, classes: 'figureone_dev_only'  }, '|Degrees|'),
-        note({ top: 80, classes: 'figureone_dev_only' }, '|Value|')
+        note({ top: 90, className: 'figureone_dev_only'  }, '|Angle|'),
+        note({ top: 85, className: 'figureone_dev_only'  }, '|Degrees|'),
+        note({ top: 80, className: 'figureone_dev_only' }, '|Value|')
         // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc', classes: 'figureone_dev_only' }),
-        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle', classes: 'figureone_dev_only' }),
-        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull, id: 'note_degrees', classes: 'figureone_dev_only' }),
-        Value: diag.bindAccent({ element: circle._angleText._value, scale: 2, color: colors.angles, id: 'note_value', x: 0.1, classes: 'figureone_dev_only' }),
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull, id: 'note_degrees' }),
+        Value: diag.bindAccent({ element: circle._angleText._value, scale: 2, color: colors.angles, id: 'note_value', x: 0.1 }),
       },
     };
     // this.addSection(common, {
