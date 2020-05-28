@@ -80,3 +80,10 @@
   50% { opacity: 0; }
   100% { opacity: 0; }
 }
+
+.temp_video {
+  // width: 800px;
+  // height: 400px;
+  z-index: 1000;
+  pointer-events: auto;
+}

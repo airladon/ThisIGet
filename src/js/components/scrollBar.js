@@ -35,31 +35,84 @@ export default class SrollBar extends React.Component<Props, State> {
     if (element == null) {
       return;
     }
-    element.addEventListener('mousedown', this.touchDown.bind(this), false);
-    window.addEventListener('mouseup', this.touchUp.bind(this), false);
-    window.addEventListener('mousemove', this.touchMove.bind(this), false);
+    let supportsPassive = false;
+    try {
+      var opts = Object.defineProperty({}, 'passive', {
+        get: function() {
+          supportsPassive = true;
+        }
+      });
+      window.addEventListener("testPassive", null, opts);
+      window.removeEventListener("testPassive", null, opts);
+    } catch (e) {}
+    element.addEventListener('mousedown', this.mouseDownHandler.bind(this), false);
+    window.addEventListener('mouseup', this.mouseUpHandler.bind(this), false);
+    window.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
+    element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive ? { passive: true } : false);
+    window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive ? { passive: true } : false);
+    window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive ? { passive: true } : false);
   }
 
-  touchDown(event: MouseEvent) {
-    this.touchState = 'down';
-    this.touchHandler(event.clientX);
-  }
+  // touchDown(event: MouseEvent) {
+  //   this.touchState = 'down';
+  //   this.touchHandler(event.clientX);
+  // }
 
-  touchUp() {
-    this.touchState = 'up';
-  }
+  // touchUp() {
+  //   this.touchState = 'up';
+  // }
 
-  touchMove(event: MouseEvent) {
-    if (this.touchState === 'down') {
-      this.touchHandler(event.clientX);
-    }
-  }
+  // touchMove(event: MouseEvent) {
+  //   if (this.touchState === 'down') {
+  //     this.touchHandler(event.clientX);
+  //   }
+  // }
 
   touchHandler(x: number) {
     if (this.changed) {
       const percent = this.clientXToPercent(x);
       this.changed(percent);
     }
+  }
+
+  touchStartHandler(event: TouchEvent) {
+    const touch = event.touches[0];
+    // const disableEvent = this.startHandler(new Point(touch.clientX, touch.clientY));
+    // if (disableEvent) {
+    //   event.preventDefault();
+    // }
+    this.touchHandler(touch.clientX);
+  }
+
+  mouseDownHandler(event: MouseEvent) {
+    // const disableEvent = this.startHandler(new Point(event.clientX, event.clientY));
+    // if (disableEvent) {
+    //   event.preventDefault();
+    // }
+    this.touchHandler(event.clientX);
+  }
+
+  touchMoveHandler(event: TouchEvent) {
+    const touch = event.touches[0];
+    this.touchHandler(touch.clientX);
+    // this.moveHandler(event, new Point(touch.clientX, touch.clientY));
+  }
+
+  mouseMoveHandler(event: MouseEvent) {
+    // this.moveHandler(event, new Point(event.clientX, event.clientY));
+    this.touchHandler(event.clientX);
+  }
+
+  mouseUpHandler() {
+    this.endHandler();
+  }
+
+  touchEndHandler() {
+    this.endHandler();
+  }
+
+  endHandler() {
+    this.touchState = 'up';
   }
 
   getValue() {

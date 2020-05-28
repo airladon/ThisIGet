@@ -74,6 +74,7 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
                 {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
               </div>
             </div>
+            {/* <video controls id="id_video" className="temp_video" src="/static/test.mp4" type="video/mp4"></video> */}
             <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
               {this.state.qr}
             </div>
