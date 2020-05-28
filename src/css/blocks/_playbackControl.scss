@@ -94,20 +94,20 @@
 
 .playback_fade_out {
   opacity: 0;
-  -webkit-animation: fadeout 5s linear;
-  -moz-animation: fadeout 5s linear;
-  animation: fadeout 5s linear;
-  -o-animation: fadeout 5s linear;
+  -webkit-animation: fadeout_full 5s linear;
+  -moz-animation: fadeout_full 5s linear;
+  animation: fadeout_full 5s linear;
+  -o-animation: fadeout_full 5s linear;
 }
 
-@-webkit-keyframes fadeout {
+@-webkit-keyframes fadeout_full {
   0% { -webkit-opacity: 1; }
   // 40% { -webkit-opacity: 1; }
   70% { -webkit-opacity: 1; }
   100% { -webkit-opacity: 0; }
 }
 
-@keyframes fadeout {
+@keyframes fadeout_full {
   0% { opacity: 1; }
   // 40% { opacity: 1; }
   70% { opacity: 1; }
