@@ -37,7 +37,7 @@ export default class SrollBar extends React.Component<Props, State> {
     }
     let supportsPassive = false;
     try {
-      var opts = Object.defineProperty({}, 'passive', {
+      const opts = Object.defineProperty({}, 'passive', {
         get: function() {
           supportsPassive = true;
         }
