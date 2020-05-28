@@ -19,6 +19,15 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     this.state.topicContainerClasses = 'topic__container__ivid';
   }
 
+  componentDidMount() {
+    super.componentDidMount();
+    const diagram = this.getDiagram();
+    if (diagram != null) {
+      // console.log(diagram.recorder.duration)
+      this.setState({ duration: diagram.recorder.duration });
+    }
+  }
+
   toggleDev() {
     if (this.state.buttonClasses === '') {
       this.setState({
@@ -57,6 +66,7 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
             <PlaybackControl
               getDiagram={this.getDiagram.bind(this)}
               dev={this.state.dev}
+              duration={this.state.duration}
             />
             <div id="id_figureone__html" className='figureone__html'>
               {this.renderContent(this.state.htmlText)}

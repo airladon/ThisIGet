@@ -53,6 +53,7 @@ type Props = {
   slidesSrc: string;
   getDiagram: () => Diagram;
   dev: boolean;
+  duration: number;
   // diagram: Diagram;
 };
 
@@ -87,6 +88,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
       seek: 0,
     };
     this.getDiagram = props.getDiagram;
+  }
+
+  componentDidMount() {
+    console.log(this.props.duration)
+    this.updateTime(this.props.duration);
   }
 
   play() {

@@ -39,6 +39,7 @@ type State = {
   buttonClasses: string;
   topicContainerClasses: string;
   dev: boolean;
+  duration: number;
 };
 
 export default class InteractiveFormatComponent extends React.Component
@@ -73,6 +74,7 @@ export default class InteractiveFormatComponent extends React.Component
       buttonClasses: '',
       topicContainerClasses: '',
       dev: false,
+      duration: 0,
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);
