@@ -206,6 +206,42 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.updateTime(toTime);
   }
 
+  fullScreen() {
+    const elem = document.getElementById('topic__container_name');
+    if (elem == null) {
+      return;
+    }
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { /* Firefox */
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE/Edge */
+      document.msExitFullscreen();
+    }
+  }
+
+  toggleFullScreen() {
+    if (document.webkitFullscreenElement || document.fullScreenElement) {
+      this.exitFullScreen();
+    } else {
+      this.fullScreen();
+    }
+  }
+
   getVolume() {
 
   }
@@ -274,6 +310,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
           changed={this.seekToPercent.bind(this)}
           position={this.state.seek}
         />
+      </div>
+      <div
+        className={'figureone_playback_control__full_screen'}
+        onClick={this.toggleFullScreen.bind(this)}
+      >
+        full
       </div>
       {this.renderDev()}
       <div className="figureone_playback_control__h_space"/>
