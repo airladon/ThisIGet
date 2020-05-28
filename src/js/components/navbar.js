@@ -105,7 +105,7 @@ export default class Navbar extends React.Component
     // delete props.active;
 
     const body =
-    <div>
+    <div id="id_navbar">
       <div className="navbar-container">
         {this.renderHomeButton()}
         {this.renderLearningPaths()}

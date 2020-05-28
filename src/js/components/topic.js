@@ -468,7 +468,7 @@ export default class TopicComponent extends React.Component
     const shareTitle = `This I Get - ${this.topicName} - ${this.versionTitle}`.replace(/ /, '%20');
 
     return <div>
-      <div className={`topic__title_bar${this.calcTitleHeight()}`}>
+      <div id="id__topic_title_bar" className={`topic__title_bar${this.calcTitleHeight()}`}>
 
         <TopicTitle
           imgLink={imgLink}

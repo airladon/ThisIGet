@@ -31,7 +31,7 @@ export default class ShareBar extends React.Component<Props> {
     const emailOnClick = () => {
       window.location.href = `mailto:?subject=${this.props.title}!&body=${this.props.link}`;
     };
-    return <div className="share_bar">
+    return <div id="id__share_bar" className="share_bar">
       <div className="share_bar_container">
         <div className="share_icon_container">
           <img

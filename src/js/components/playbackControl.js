@@ -242,6 +242,45 @@ export default class PlaybackControl extends React.Component<Props, State> {
     }
   }
 
+  manualFullScreen() {
+    const elements = [
+      'id__topic_title_bar',
+      'id_navbar',
+      'id__share_bar',
+    ]
+    let addOrRemove = 'add';
+    elements.forEach((elementName) => {
+      const element = document.getElementById(elementName);
+      if (element != null) {
+        element.classList[addOrRemove]('hide__override');
+      }
+    });
+
+    const classElements = [
+      'learning_path_navigator',
+      'vertical_blank_space',
+      'footer__container',
+    ]
+    classElements.forEach((className) => {
+      const list = document.getElementsByClassName(className);
+      for (var i = 0; i < list.length; i++) {
+        list[i].classList[addOrRemove]('hide__override');
+      }
+    })
+
+    // const navbar = document.getElementById('id_navbar');
+    // if (navbar != null) {
+    //   navbar.classList[addOrRemove]('hide__override')
+    // }
+  }
+
+  // manualFullScreenCancel() {
+  //   const navbar = document.getElementById('id_navbar');
+  //   if (navbar != null) {
+  //     navbar.classList.remove('hide__override')
+  //   }
+  // }
+
   getVolume() {
 
   }
@@ -313,7 +352,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       </div>
       <div
         className={'figureone_playback_control__full_screen'}
-        onClick={this.toggleFullScreen.bind(this)}
+        onClick={this.manualFullScreen.bind(this)}
       >
         full
       </div>

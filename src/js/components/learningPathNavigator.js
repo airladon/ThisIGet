@@ -289,7 +289,7 @@ export default class LearningPathNavigator extends React.Component
   // eslint-disable-next-line class-methods-use-this
   render() {
     const classStr = 'naviagator__container navigator__container_with_shadow';
-    return <div>
+    return <div className="learning_path_navigator">
         {this.renderSubText()}
         <div className="navigator__topic_title_container">
           <img src={`/static/dist/${this.learningPathPath}/topic.png`}
