@@ -59,8 +59,8 @@ class Content extends PresentationFormatContent {
 
   loadEvents() {
     this.diagram.recorder.loadAudio(new Audio(audio));
-    // this.diagram.recorder.loadEvents(events, true);
-    // this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.loadEvents(events, true);
+    this.diagram.recorder.loadStates(states, true);
     console.log(this.diagram.recorder)
   }
 

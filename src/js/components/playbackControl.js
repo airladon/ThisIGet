@@ -92,6 +92,33 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   componentDidMount() {
     this.updateTime(this.props.duration);
+    const element = document.getElementById('id__figureone_playback_control');
+    console.log(element)
+    if (element == null) {
+      return;
+    }
+    let supportsPassive = false;
+    try {
+      const opts = Object.defineProperty({}, 'passive', {
+        get: function() {
+          supportsPassive = true;
+        }
+      });
+      window.addEventListener("testPassive", null, opts);
+      window.removeEventListener("testPassive", null, opts);
+    } catch (e) {}
+    element.addEventListener('mousedown', this.showControls.bind(this), false);
+    element.addEventListener('touchstart', this.showControls.bind(this), supportsPassive ? { passive: true } : false);
+  }
+
+  showControls() {
+    console.log('showControls')
+    removeClass('id_figureone_playback_control__time', 'playback_fade_out');
+    removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    setTimeout(() => {
+      addClass('id_figureone_playback_control__time', 'playback_fade_out');
+      addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    }, 50);
   }
 
   play() {
@@ -342,7 +369,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   render() {  // eslint-disable-line class-methods-use-this
-    return <div className="figureone_playback_control">
+    return <div className="figureone_playback_control" id="id__figureone_playback_control">
       <div className="figureone_playback_control__h_space"/>
       <div
         className={`figureone_playback_control__play ${this.state.playClass}`}
