@@ -335,18 +335,18 @@ class Content extends PresentationFormatContent {
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });
           this.diagram.animateNextFrame();
-        }, [this]),
+        }, [this], { id: 'note_fractions' }),
         angles: click(() => {
           diag._box.setSize(0.5, 3);
           diag._box.setPosition([2.08, -0.1]);
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });
           this.diagram.animateNextFrame();
-        }, [this]),
+        }, [this], { id: 'note_angles' }),
         hide_box: click(() => {
           diag._box.hide();
           this.diagram.animateNextFrame();
-        }, [this]),
+        }, [this], { id: 'note_hide_box' }),
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,

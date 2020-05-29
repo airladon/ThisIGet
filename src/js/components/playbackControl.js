@@ -234,6 +234,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     //   clearTimeout(this.timeoutID);
     //   this.timeoutID = null;
     // }
+    console.log(recorder);
     this.unfade();
   }
 
