@@ -92,6 +92,31 @@ function note(
   return `<div class="${classNames}"${id}${inlineStyle}>${content}</div>`;
 }
 
+function devNote(
+  optionsIn: string | {
+    top?: number | string,
+    left?: number | string,
+    right?: number | string,
+    marginLeft?: number | string,
+    marginRight?: number | string,
+    size?: number | string,
+    color?: Array<number>,
+    className?: string,
+    id?: string,
+    label?: string,
+    hint?: boolean,
+    xAlign?: 'left' | 'center' | 'right',
+  } = '',
+  contentIn: string = '',
+) {
+  // let options = optionsIn;
+  let className = 'figureone_dev_only';
+  if (optionsIn.className != null) {
+    className = `${optionsIn.className} figureone_dev_only`;
+  }
+  return note(joinObjects(optionsIn, { className }), contentIn);
+}
+
 function hint(
   options: string | number | {
     top?: number | string,
@@ -117,4 +142,4 @@ function hint(
   return note(joinObjects({ hint: true, label: 'Hint:' }, options), contentIn);
 }
 
-export { hint, note };
+export { hint, note, devNote };

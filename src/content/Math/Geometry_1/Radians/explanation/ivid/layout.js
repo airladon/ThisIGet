@@ -125,13 +125,13 @@ export default function diagramLayout() {
     },
   };
 
-  const marks = (numMarks: number, inner: number = radius, outer: number = radius * 1.1) => ({
+  const marks = (numMarks: number, inner: number = radius, outer: number = radius * 1.1, color: colors.marks) => ({
     name: `marks${numMarks}`,
     method: 'radialLines',
     options: {
       innerRadius: inner,
       outerRadius: outer,
-      color: colors.marks,
+      color,
       width: width / 4,
       dAngle: Math.PI * 2 / numMarks,
     },
@@ -144,6 +144,15 @@ export default function diagramLayout() {
     addElements: [
       marks(360, radius * 1.05),
       marks(36, radius * 1.025),
+    ],
+  };
+
+  layout.degreesHighlight = {
+    name: 'degreesHighlight',
+    method: 'collection',
+    addElements: [
+      marks(360, radius * 1.05, radius * 1.1, colors.angles),
+      marks(36, radius * 1.025, radius * 1.1, colors.angles),
     ],
   };
 
@@ -251,6 +260,7 @@ export default function diagramLayout() {
     addElements: [
       layout.circleDull,
       layout.degrees,
+      layout.degreesHighlight,
       layout.radians,
       layout.radianLines,
       layout.angle,

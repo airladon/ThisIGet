@@ -6,7 +6,7 @@ import {
 } from '../../../../../../js/TopicFormat/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import diagramLayout from './layout';
-import { note } from '../../../../../common/tools/note';
+import { devNote } from '../../../../../common/tools/note';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -130,7 +130,7 @@ class Content extends PresentationFormatContent {
     // Now these two lines form an angle at their connection point
     // this.addSection({
     //   setContent: [
-    //     note({ top: 90 }, '|Arc|'),
+    //     devNote({ top: 90 }, '|Arc|'),
     //   ],
     //   modifiers: {
     //     Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
@@ -178,16 +178,22 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 85, className: 'figureone_dev_only'  }, '|Angle|'),
-        note({ top: 80, className: 'figureone_dev_only'  }, '|Degrees|'),
-        note({ top: 75, className: 'figureone_dev_only' }, '|Value|')
-        // note({ top: 90 }, '|Arc|'),
+        devNote({ top: 5 }, '|Angle|'),
+        devNote({ top: 10 }, '|Degrees|'),
+        devNote({ top: 15 }, '|Value|'),
+        // devNote({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Circle: click(diag.pulseCircle, [diag], { color: colors.arc, id: 'note_circle' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
-        Degrees: diag.bindAccent({ element: circle._degrees, scale: 1.15, color: colors.dull, id: 'note_degrees' }),
+        Degrees: diag.bindAccent({
+          elements: [circle._degrees, circle._degreesHighlight],
+          scale: 1.15,
+          color: colors.dull,
+          id: 'note_degrees',
+        }),
         Value: diag.bindAccent({ element: circle._angleText._value, scale: 2, color: colors.angles, id: 'note_value', x: 0.1 }),
       },
     };
@@ -221,6 +227,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,
+        // circle._degreesHighlight,
         // circle._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
@@ -242,6 +249,7 @@ class Content extends PresentationFormatContent {
           ])
           .inParallel([
             circle._degrees.anim.dissolveIn({ duration: 0.5 }),
+            circle._degreesHighlight.anim.dissolveIn({ duration: 0.5 }),
             circle._angleText.anim.dissolveIn(0.5),
             circle.anim.trigger({ callback: 'setAngleTextDeg' }),
           ])
@@ -253,6 +261,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         // circle._angleText.setScenario('bottomDeg');
         circle._degrees.showAll();
+        circle._degreesHighlight.showAll();
         circle._angleText.showAll();
         diag.setAngleTextDeg();
         diag.updateAngle();
@@ -282,12 +291,12 @@ class Content extends PresentationFormatContent {
     });
     this.addSection(common, {
       setContent: [
-        note({ top: 65 }, '|hide_box|'),
-        note({ top: 70 }, '|angles|'),
-        note({ top: 75 }, '|fractions|'),
-        note({ top: 80 }, '|Degrees|'),
-        note({ top: 85 }, '|Angle|'),
-        // note({ top: 90 }, '|Arc|'),
+        devNote({ top: 5 }, '|hide_box|'),
+        devNote({ top: 10 }, '|angles|'),
+        devNote({ top: 15 }, '|fractions|'),
+        devNote({ top: 20 }, '|Degrees|'),
+        devNote({ top: 25 }, '|Angle|'),
+        // devNote({ top: 90 }, '|Arc|'),
         `
           <table class="radians_table fractions_table" id="radians_table">
             <tr>
@@ -343,6 +352,7 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._corner, circle._angle,
         // circle._arc,
         circle._degrees, circle._angleText,
+        circle._degreesHighlight,
       ],
       // fadeInFromPrev: false,
       transitionFromPrev: (done, doneStr) => {
@@ -368,6 +378,7 @@ class Content extends PresentationFormatContent {
         circle.animations.new()
           .inParallel([
             circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+            circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
             circle._angleText.anim.dissolveOut({ duration: 0.5 }),
             circle.anim.scenario({ target: 'center', duration: 1 }),
           ])
@@ -389,11 +400,12 @@ class Content extends PresentationFormatContent {
         // style({
         //   top: 3, centerH: true, id: 'id_main_text',
         // }, 'Set arc length to |equal| radius length.'),
-        // note({ top: 80 }, '|Radius|'),
-        note({ top: 70 }, '|Lines|'),
-        note({ top: 75 }, '|Radius|'),
-        note({ top: 80 }, '|Arc|'),
-        note({ top: 85 }, '|Angle|'),
+        // devNote({ top: 80 }, '|Radius|'),
+        devNote({ top: 10 }, '|Circle|'),
+        devNote({ top: 15 }, '|Lines|'),
+        devNote({ top: 20 }, '|Radius|'),
+        devNote({ top: 25 }, '|Arc|'),
+        devNote({ top: 30 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -442,9 +454,9 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'Set arc length to |equal| radius length.'),
-        note({ top: 75 }, '|Radius|'),
-        note({ top: 80 }, '|Arc|'),
-        note({ top: 85 }, '|Angle|'),
+        devNote({ top: 75 }, '|Radius|'),
+        devNote({ top: 80 }, '|Arc|'),
+        devNote({ top: 85 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -495,13 +507,13 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 55 }, '|EqnRadius|'),
-        note({ top: 60 }, '|EqnAngle|'),
-        note({ top: 65 }, '|Value|'),
-        note({ top: 70 }, '|Radian|'),
-        note({ top: 75 }, '|Radius|'),
-        note({ top: 80 }, '|Arc|'),
-        note({ top: 85 }, '|Angle|'),
+        devNote({ top: 55 }, '|EqnRadius|'),
+        devNote({ top: 60 }, '|EqnAngle|'),
+        devNote({ top: 65 }, '|Value|'),
+        devNote({ top: 70 }, '|Radian|'),
+        devNote({ top: 75 }, '|Radius|'),
+        devNote({ top: 80 }, '|Arc|'),
+        devNote({ top: 85 }, '|Angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -519,10 +531,10 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'When arc length equals radius length, the angle is |one radian|'),
-        note({ top: 70 }, '|Radian|'),
-        note({ top: 75 }, '|Radius|'),
-        note({ top: 80 }, '|Arc|'),
-        note({ top: 85 }, '|Angle|'),
+        devNote({ top: 70 }, '|Radian|'),
+        devNote({ top: 75 }, '|Radius|'),
+        devNote({ top: 80 }, '|Arc|'),
+        devNote({ top: 85 }, '|Angle|'),
       ],
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -896,9 +908,9 @@ class Content extends PresentationFormatContent {
     // So to convert degrees to radians, we multiply by the ratio of pi over 180.
     this.addSection({
       setContent: [
-        note({ top: 75 }, '|scalar|'),
-        note({ top: 80 }, '|_2pi|'),
-        note({ top: 85 }, '|_360|'),
+        devNote({ top: 75 }, '|scalar|'),
+        devNote({ top: 80 }, '|_2pi|'),
+        devNote({ top: 85 }, '|_360|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -934,9 +946,9 @@ class Content extends PresentationFormatContent {
     // We can do a similar procedure to find degrees from radians.
     this.addSection({
       setContent: [
-        note({ top: 80 }, '|scalarRad|'),
-        note({ top: 85 }, '|scalarDeg|'),
-        // note({ top: 90 }, '|_360|'),
+        devNote({ top: 80 }, '|scalarRad|'),
+        devNote({ top: 85 }, '|scalarDeg|'),
+        // devNote({ top: 90 }, '|_360|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -987,8 +999,8 @@ class Content extends PresentationFormatContent {
     // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
     this.addSection({
       setContent: [
-        note({ top: 80 }, '|angleD|'),
-        note({ top: 85 }, '|factor|'),
+        devNote({ top: 80 }, '|angleD|'),
+        devNote({ top: 85 }, '|factor|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1041,10 +1053,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       setContent: [
-        note({ top: 70 }, '|sin|'),
-        note({ top: 75 }, '|arc|'),
-        note({ top: 80 }, '|radius|'),
-        note({ top: 85 }, '|angle|'),
+        devNote({ top: 70 }, '|sin|'),
+        devNote({ top: 75 }, '|arc|'),
+        devNote({ top: 80 }, '|radius|'),
+        devNote({ top: 85 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1090,14 +1102,14 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       setContent: [
-        note({ top: 50 }, '|limit|'),
-        note({ top: 55 }, '|sinx|'),
-        note({ top: 60 }, '|x|'),
-        note({ top: 65 }, '|one|'),
-        note({ top: 70 }, '|sin|'),
-        note({ top: 75 }, '|arc|'),
-        note({ top: 80 }, '|radius|'),
-        note({ top: 85 }, '|angle|'),
+        devNote({ top: 50 }, '|limit|'),
+        devNote({ top: 55 }, '|sinx|'),
+        devNote({ top: 60 }, '|x|'),
+        devNote({ top: 65 }, '|one|'),
+        devNote({ top: 70 }, '|sin|'),
+        devNote({ top: 75 }, '|arc|'),
+        devNote({ top: 80 }, '|radius|'),
+        devNote({ top: 85 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {

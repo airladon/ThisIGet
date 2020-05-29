@@ -262,6 +262,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)} ${this.units}`;
       this._circle._angleText._value.drawingObject.setText(text);
     }
+    if (this._circle._degreesHighlight.isShown) {
+      // const pointsToDraw = r / Math.PI / 2 * 6 + 2;
+      const angle = parseInt(this._circle._angleText._value.drawingObject.text[0].text, 10);
+      this._circle._degreesHighlight._marks360.pointsToDraw = Math.min(angle * 6 + 6, 360 * 6);
+      this._circle._degreesHighlight._marks36.pointsToDraw = Math.min(Math.floor(angle / 10) * 6 + 6, 36 * 6);
+    }
+
     if (this._circle._corner.isShown) {
       const p1 = [this.layout.radius, 0];
       const p2 = [0, 0];
@@ -465,6 +472,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseArc() {
     this._circle._arc.pulseThickNow(1, 1.05, 8);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseCircle() {
+    this._circle._circle.pulseThickNow(1, 1.03, 12);
     this.diagram.animateNextFrame();
   }
 
