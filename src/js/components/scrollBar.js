@@ -35,6 +35,10 @@ export default class SrollBar extends React.Component<Props, State> {
     if (element == null) {
       return;
     }
+    const page = document.getElementById('single-page-content');
+    if (page == null) {
+      return;
+    }
     let supportsPassive = false;
     try {
       const opts = Object.defineProperty({}, 'passive', {
@@ -48,6 +52,7 @@ export default class SrollBar extends React.Component<Props, State> {
     element.addEventListener('mousedown', this.mouseDownHandler.bind(this), false);
     window.addEventListener('mouseup', this.mouseUpHandler.bind(this), false);
     window.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
+    page.addEventListener('mouseleave', this.mouseUpHandler.bind(this), false);
     element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive ? { passive: true } : false);
     window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive ? { passive: true } : false);
     window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive ? { passive: true } : false);
