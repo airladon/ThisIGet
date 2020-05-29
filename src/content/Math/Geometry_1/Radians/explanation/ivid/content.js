@@ -999,8 +999,8 @@ class Content extends PresentationFormatContent {
     // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
     this.addSection({
       setContent: [
-        devNote({ top: 80 }, '|angleD|'),
-        devNote({ top: 85 }, '|factor|'),
+        devNote({ top: 5 }, '|angleD|'),
+        devNote({ top: 10 }, '|factor|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1012,16 +1012,17 @@ class Content extends PresentationFormatContent {
           ],
           id: 'note_factor',
           centerOn: eqn._v_1,
+          x: 0.2,
           scale: 1.5,
         }),
         angleD: diag.bindAccent({
           elements: [
-            eqn._angle,
+            // eqn._angle,
             eqn._d_g,
           ],
           id: 'note_angle',
-          centerOn: eqn._angle,
-          scale: 1.5,
+          centerOn: eqn._d_g,
+          scale: 2,
         }),
       },
       show: [
@@ -1051,12 +1052,12 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection({
+    common = {
       setContent: [
-        devNote({ top: 70 }, '|sin|'),
-        devNote({ top: 75 }, '|arc|'),
-        devNote({ top: 80 }, '|radius|'),
-        devNote({ top: 85 }, '|angle|'),
+        devNote({ top: 5 }, '|sin|'),
+        devNote({ top: 10 }, '|arc|'),
+        devNote({ top: 15 }, '|radius|'),
+        devNote({ top: 20 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1064,31 +1065,83 @@ class Content extends PresentationFormatContent {
           element: diag._lim._angle,
           id: 'note_angle',
           // centerOn: eqn._v_1,
-          scale: 1.5,
+          scale: 1.3,
         }),
-        arc: diag.bindAccent({
-          element: diag._lim._arc,
-          id: 'note_arc',
-          scale: 1.5,
-        }),
+        arc: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
         sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
         radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
       },
+    }
+    this.addSection(common, {
       show: [
-        diag._lim,
+        diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
       ],
       transitionFromPrev: (done, doneStr) => {
         diag._lim.setScenario('center');
         diag._lim._radius.setRotation(0.8);
         diag.updateLimAngle();
-        diag._lim.animations.new()
-          .dissolveIn(1)
+        diag.animations.new()
+          // .dissolveIn(1)
+          .inParallel([
+            diag._lim._radius.anim.dissolveIn(1),
+            diag._lim._angle.anim.dissolveIn(1),
+            diag._lim._xAxis.anim.dissolveIn(1),
+            diag._lim._arc.anim.dissolveIn(1),
+          ])
           .whenFinished(doneStr)
           .start();
       },
       setSteadyState: () => {
         diag._lim.setScenario('center');
         diag._lim._radius.setRotation(0.8);
+        diag.updateLimAngle();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection(common, {
+      show: [
+        diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
+        diag._lim._x,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        diag.animations.new()
+          .inParallel([
+            diag._lim._x.anim.dissolveIn(1),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._lim.setScenario('center');
+        diag.updateLimAngle();
+      },
+    });
+
+    this.addSection(common, {
+      show: [
+        diag._lim,
+      ],
+      transitionFromPrev: (done, doneStr) => {
+        // diag._lim.setScenario('center');
+        // diag._lim._radius.setRotation(0.8);
+        // diag.updateLimAngle();
+        diag.animations.new()
+          .inParallel([
+            diag._lim._sin.anim.dissolveIn(1),
+          ])
+          .whenFinished(doneStr)
+          .start();
+      },
+      setSteadyState: () => {
+        diag._lim.setScenario('center');
+        // diag._lim._radius.setRotation(0.8);
         diag.updateLimAngle();
       },
     });
@@ -1102,14 +1155,14 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       setContent: [
-        devNote({ top: 50 }, '|limit|'),
-        devNote({ top: 55 }, '|sinx|'),
-        devNote({ top: 60 }, '|x|'),
-        devNote({ top: 65 }, '|one|'),
-        devNote({ top: 70 }, '|sin|'),
-        devNote({ top: 75 }, '|arc|'),
-        devNote({ top: 80 }, '|radius|'),
-        devNote({ top: 85 }, '|angle|'),
+        devNote({ top: 5 }, '|limit|'),
+        devNote({ top: 10 }, '|sinx|'),
+        devNote({ top: 15 }, '|x|'),
+        devNote({ top: 20 }, '|one|'),
+        devNote({ top: 25 }, '|sin|'),
+        devNote({ top: 30 }, '|arc|'),
+        devNote({ top: 35 }, '|radius|'),
+        devNote({ top: 40 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1147,11 +1200,7 @@ class Content extends PresentationFormatContent {
           // centerOn: eqn._v_1,
           scale: 1.5,
         }),
-        arc: diag.bindAccent({
-          element: diag._lim._arc,
-          id: 'note_arc',
-          scale: 1.5,
-        }),
+        arc: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
         sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
         radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
       },

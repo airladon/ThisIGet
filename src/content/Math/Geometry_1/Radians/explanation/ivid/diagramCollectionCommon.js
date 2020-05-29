@@ -167,6 +167,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   updateLimAngle() {
     const r = this._lim._radius.getRotation();
     this._lim._angle.setAngle({ angle: r });
+    this._lim._x.setAngle({ angle: r });
+    // this._lim._arc.setAngle({ angle: r });
     this._lim._arc.setAngleToDraw(r + 0.005);
     this._lim._sin.setEndPoints(
       [this.layout.limRad * Math.cos(r) - 0.01, 0],
@@ -472,6 +474,13 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseArc() {
     this._circle._arc.pulseThickNow(1, 1.05, 8);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLimArc() {
+    this._lim._arc.pulseThickNow(1, 1.015, 8);
+    // this._lim._x._label.pulseScaleNow(1, 1.5);
+    this.accent({ element: this._lim._x._label, x: 'left' });
     this.diagram.animateNextFrame();
   }
 

@@ -323,6 +323,18 @@ export default function diagramLayout() {
         },
       },
       {
+        name: 'x',
+        method: 'angle',
+        options: {
+          angle: limAngle,
+          color: colors.arc,
+          label: {
+            text: 'x',
+            radius: limRad * 0.85,
+          },
+        },
+      },
+      {
         name: 'arc',
         method: 'shapes.polygonSweep',
         options: {
