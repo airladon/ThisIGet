@@ -262,20 +262,29 @@ class Content extends PresentationFormatContent {
 
     // For instance, these are the first 10 factors of 360 as a portion of a circle. When we use 360, a half circle is 180º, a third of a circle is 120º, a quarter is 90º and so on. This is useful for many simple, everyday practical applications of angles, such as angle arithmatic easy to do without aid from a computer or needing to write it down.
     // So 360 is a measure of convenience for easy angle arithmatic. Now, let's find a different measure that is convenient in a different way.
-    const row = (portion: string, angle: number) => `<tr><td class="topic__fraction radians_table_value">${portion}</td><td class="radians_table_value">|_${angle}deg|</td></tr>`;
+    const row = (portion: string, angle: number) => `<tr id="|id_${angle}degr|" ><td class="topic__fraction radians_table_value">${portion}</td><td class="radians_table_value">${angle}&deg</td></tr>`;
 
-    const rowClick = (angle: number) => click(
-      diag.pushLine,
-      [diag, angle / 180 * Math.PI, 0, 1, null],
-      {
-        color: colors.angles,
-        id: `id_${angle}`,
-        text: `${angle}&deg;`,
-        classes: 'action_word_table',
-      },
-    );
+    // const rowClick = (angle: number) => click(
+    //   diag.pushLine,
+    //   [diag, angle / 180 * Math.PI, 0, 1, null],
+    //   {
+    //     color: colors.angles,
+    //     id: `id_${angle}`,
+    //     text: null,
+    //     classes: 'action_word_table',
+    //   },
+    // );
+    const rowClick = (angle: number) => ({
+      replacementText: `id_${angle}degr`,
+      id: () => `id_${angle}degr`,
+      actionMethod: diag.pushLine,
+      bind: [diag, angle / 180 * Math.PI, 0, 1, null],
+    });
     this.addSection(common, {
       setContent: [
+        note({ top: 65 }, '|hide_box|'),
+        note({ top: 70 }, '|angles|'),
+        note({ top: 75 }, '|fractions|'),
         note({ top: 80 }, '|Degrees|'),
         note({ top: 85 }, '|Angle|'),
         // note({ top: 90 }, '|Arc|'),
@@ -300,17 +309,35 @@ class Content extends PresentationFormatContent {
         `,
       ],
       modifiers: {
-        _180deg: rowClick(180),
-        _120deg: rowClick(120),
-        _90deg: rowClick(90),
-        _72deg: rowClick(72),
-        _60deg: rowClick(60),
-        _45deg: rowClick(45),
-        _40deg: rowClick(40),
-        _36deg: rowClick(36),
-        _30deg: rowClick(30),
-        _24deg: rowClick(24),
-        _20deg: rowClick(20),
+        id_180degr: rowClick(180),
+        id_120degr: rowClick(120),
+        id_90degr: rowClick(90),
+        id_72degr: rowClick(72),
+        id_60degr: rowClick(60),
+        id_45degr: rowClick(45),
+        id_40degr: rowClick(40),
+        id_36degr: rowClick(36),
+        id_30degr: rowClick(30),
+        id_24degr: rowClick(24),
+        id_20degr: rowClick(20),
+        fractions: click(() => {
+          diag._box.setSize(0.7, 3);
+          diag._box.setPosition([1.47, -0.1]);
+          diag._box.showAll();
+          diag.accent({ element: diag._box, scale: 1.1 });
+          this.diagram.animateNextFrame();
+        }, [this]),
+        angles: click(() => {
+          diag._box.setSize(0.5, 3);
+          diag._box.setPosition([2.08, -0.1]);
+          diag._box.showAll();
+          diag.accent({ element: diag._box, scale: 1.1 });
+          this.diagram.animateNextFrame();
+        }, [this]),
+        hide_box: click(() => {
+          diag._box.hide();
+          this.diagram.animateNextFrame();
+        }, [this]),
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,

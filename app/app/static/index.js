@@ -6370,6 +6370,12 @@ function Box(webgl, width, height, lineWidth, fill, color, transformOrLocation, 
 
     element.drawingObject.updateBox(maxBounds.width, maxBounds.height);
     element.setPosition(maxBounds.left + maxBounds.width / 2, maxBounds.bottom + maxBounds.height / 2);
+  }; // $FlowFixMe
+
+
+  element.setSize = function (widthIn, heightIn) {
+    // $FlowFixMe
+    element.drawingObject.updateBox(widthIn, heightIn);
   };
 
   return element;
@@ -39825,42 +39831,7 @@ function onClickId(id, actionMethod, bind) {
       actionMethod.bind.apply(actionMethod, _toConsumableArray(bind))();
     };
 
-    element.onclick = onClickFn; // if (bind.length === 1) {
-    //   element.onclick = actionMethod.bind(bind[0]);
-    // }
-    // if (bind.length === 2) {
-    //   element.onclick = actionMethod.bind(bind[0], bind[1]);
-    // }
-    // if (bind.length === 3) {
-    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2]);
-    // }
-    // if (bind.length === 4) {
-    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3]);
-    // }
-    // if (bind.length === 5) {
-    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4]);
-    // }
-    // if (bind.length === 6) {
-    //   element.onclick = actionMethod.bind(bind[0], bind[1], bind[2], bind[3], bind[4], bind[5]);
-    // }
-    // if (bind.length === 7) {
-    //   element.onclick = actionMethod.bind(
-    //     bind[0], bind[1], bind[2], bind[3], bind[4],
-    //     bind[5], bind[6],
-    //   );
-    // }
-    // if (bind.length === 8) {
-    //   element.onclick = actionMethod.bind(
-    //     bind[0], bind[1], bind[2], bind[3], bind[4],
-    //     bind[5], bind[6], bind[7],
-    //   );
-    // }
-    // if (bind.length === 9) {
-    //   element.onclick = actionMethod.bind(
-    //     bind[0], bind[1], bind[2], bind[3], bind[4],
-    //     bind[5], bind[6], bind[7], bind[8],
-    //   );
-    // }
+    element.onclick = onClickFn;
   }
 }
 
@@ -39896,7 +39867,7 @@ function setOnClicks(modifiers) {
     var mod = modifiers[key];
 
     if (typeof mod !== 'string' && 'actionMethod' in mod) {
-      onClickId(mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd);
+      onClickId(typeof mod.id === 'string' ? mod.id : mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd);
     }
   });
 }

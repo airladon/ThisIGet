@@ -31,6 +31,14 @@ export default function diagramLayout() {
   const width = 0.03;
   layout.width = width;
 
+  layout.box = {
+    name: 'box',
+    method: 'box',
+    options: {
+      lineWidth: 0.008,
+      color: colors.angles,
+    },
+  };
   layout.circleDull = {
     name: 'circle',
     method: 'polygon',
@@ -996,6 +1004,7 @@ export default function diagramLayout() {
 
   layout.addElements = [
     layout.circle,
+    layout.box,
     layout.eqn,
     layout.radEqnNav,
     layout.degEqnNav,
