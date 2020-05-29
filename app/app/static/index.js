@@ -33776,19 +33776,30 @@ var Recorder = /*#__PURE__*/function () {
       this.lastSeekTime = null;
     }
   }, {
+    key: "loadAudio",
+    value: function loadAudio(audio) {
+      var _this3 = this;
+
+      this.audio = audio;
+
+      this.audio.onloadedmetadata = function () {
+        _this3.duration = _this3.calcDuration();
+      };
+    }
+  }, {
     key: "loadEvents",
     value: function loadEvents(encodedEventsList) {
-      var _this3 = this;
+      var _this4 = this;
 
       var isMinified = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       // $FlowFixMe
       var lists = this.decodeEvents(encodedEventsList, isMinified);
       Object.keys(lists).forEach(function (eventName) {
-        if (_this3.events[eventName] == null) {
+        if (_this4.events[eventName] == null) {
           return;
         }
 
-        _this3.events[eventName].list = lists[eventName];
+        _this4.events[eventName].list = lists[eventName];
       });
       this.duration = this.calcDuration();
     }
@@ -33803,12 +33814,12 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "encodeEvents",
     value: function encodeEvents() {
-      var _this4 = this;
+      var _this5 = this;
 
       var minifyEvents = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var lists = {};
       Object.keys(this.events).forEach(function (eventName) {
-        lists[eventName] = _this4.events[eventName].list;
+        lists[eventName] = _this5.events[eventName].list;
       });
 
       if (minifyEvents) {
@@ -33902,11 +33913,11 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "clear",
     value: function clear(startTime, stopTime) {
-      var _this5 = this;
+      var _this6 = this;
 
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this5.events[eventName];
-        event.list = _this5.clearListOrDiffs(event.list, startTime, stopTime);
+        var event = _this6.events[eventName];
+        event.list = _this6.clearListOrDiffs(event.list, startTime, stopTime);
       });
       this.states.diffs = this.clearListOrDiffs(this.states.diffs, startTime, stopTime); // const copyStateIndex = getPrevIndexForTime(this.states.diffs, startTime);
       // const replaceStartIndex = getNextIndexForTime(this.states.diffs, startTime);
@@ -34088,7 +34099,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getCacheStartTime",
     value: function getCacheStartTime() {
-      var _this6 = this;
+      var _this7 = this;
 
       var time = null;
 
@@ -34097,7 +34108,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var event = _this6.eventsCache[eventName];
+        var event = _this7.eventsCache[eventName];
 
         if (event.list.length > 0) {
           var _event$list$ = _slicedToArray(event.list[0], 1),
@@ -34163,16 +34174,16 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "mergeEventsCache",
     value: function mergeEventsCache() {
-      var _this7 = this;
+      var _this8 = this;
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var merged = _this7.getMergedCacheArray(_this7.events[eventName].list, _this7.eventsCache[eventName].list);
+        var merged = _this8.getMergedCacheArray(_this8.events[eventName].list, _this8.eventsCache[eventName].list);
 
         if (merged.length === 0) {
           return;
         }
 
-        _this7.events[eventName].list = merged;
+        _this8.events[eventName].list = merged;
       });
     }
   }, {
@@ -34204,7 +34215,12 @@ var Recorder = /*#__PURE__*/function () {
       this.stopTimeouts();
       this.worker.postMessage({
         message: 'get'
-      }); // this.mergeEventsCache();
+      });
+
+      if (this.audio) {
+        this.audio.pause();
+        this.isAudioPlaying = false;
+      } // this.mergeEventsCache();
       // this.mergeStatesCache();
       // this.duration = this.calcDuration();
       // if (this.duration % 1 > 0) {
@@ -34214,6 +34230,7 @@ var Recorder = /*#__PURE__*/function () {
       // }
       // this.duration = this.calcDuration();
       // console.log(this)
+
     }
   }, {
     key: "addEventType",
@@ -34340,15 +34357,15 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "queueRecordState",
     value: function queueRecordState() {
-      var _this8 = this;
+      var _this9 = this;
 
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
       var recordAndQueue = function recordAndQueue() {
-        if (_this8.state === 'recording') {
-          _this8.recordCurrentState();
+        if (_this9.state === 'recording') {
+          _this9.recordCurrentState();
 
-          _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
+          _this9.queueRecordState(_this9.stateTimeStep - _this9.getCurrentTime() % _this9.stateTimeStep);
         }
       };
 
@@ -34456,7 +34473,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "setToTime",
     value: function setToTime(timeIn) {
-      var _this9 = this;
+      var _this10 = this;
 
       // if (this.states.diffs.length === 0) {
       //   return;
@@ -34490,7 +34507,7 @@ var Recorder = /*#__PURE__*/function () {
       var eventsToSetBeforeState = [];
       var eventsToSetAfterState = [];
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this9.events[eventName];
+        var event = _this10.events[eventName];
 
         if (event.setOnSeek === false) {
           return;
@@ -34509,7 +34526,7 @@ var Recorder = /*#__PURE__*/function () {
               eventTime = _event$list$i[0],
               timeCount = _event$list$i[2];
 
-          if (_this9.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
+          if (_this10.stateIndex === -1 || eventTime < stateTime || eventTime === stateTime && timeCount < stateTimeCount) {
             eventsToSetBeforeState.push([eventName, i, eventTime, timeCount]);
           } else if (eventTime > stateTime || eventTime === stateTime && timeCount > stateTimeCount) {
             eventsToSetAfterState.push([eventName, i, eventTime, timeCount]);
@@ -34541,7 +34558,7 @@ var Recorder = /*#__PURE__*/function () {
               eventName = _event[0],
               index = _event[1];
 
-          _this9.setEvent(eventName, index);
+          _this10.setEvent(eventName, index);
         });
       };
 
@@ -34710,7 +34727,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -34718,10 +34735,10 @@ var Recorder = /*#__PURE__*/function () {
         this.audio.play();
 
         var audioEnded = function audioEnded() {
-          _this10.isAudioPlaying = false;
+          _this11.isAudioPlaying = false;
 
-          if (_this10.state === 'playing') {
-            _this10.finishPlaying();
+          if (_this11.state === 'playing') {
+            _this11.finishPlaying();
           }
         };
 
@@ -34736,18 +34753,18 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startEventsPlayback",
     value: function startEventsPlayback(fromTime) {
-      var _this11 = this;
+      var _this12 = this;
 
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this11.events[eventName].list.length === 0) {
+        if (_this12.events[eventName].list.length === 0) {
           return;
         }
 
-        var event = _this11.events[eventName];
+        var event = _this12.events[eventName];
         var index = getNextIndexForTime(event.list, fromTime);
 
         if (index === -1) {
-          _this11.eventIndex[eventName] = -1;
+          _this12.eventIndex[eventName] = -1;
           return;
         }
 
@@ -34759,9 +34776,9 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         if (index > event.list.length - 1) {
-          _this11.eventIndex[eventName] = -1;
+          _this12.eventIndex[eventName] = -1;
         } else {
-          _this11.eventIndex[eventName] = index;
+          _this12.eventIndex[eventName] = index;
         }
       });
       var nextEventName = this.getNextEvent();
@@ -34773,19 +34790,19 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getNextEvent",
     value: function getNextEvent() {
-      var _this12 = this;
+      var _this13 = this;
 
       var nextEventName = '';
       var nextTime = null;
       var nextTimeCount = null;
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this12.eventIndex[eventName] == null || _this12.eventIndex[eventName] === -1 || _this12.events[eventName].list.length <= _this12.eventIndex[eventName]) {
+        if (_this13.eventIndex[eventName] == null || _this13.eventIndex[eventName] === -1 || _this13.events[eventName].list.length <= _this13.eventIndex[eventName]) {
           return;
         }
 
-        var _this12$events$eventN = _slicedToArray(_this12.events[eventName].list[_this12.eventIndex[eventName]], 3),
-            time = _this12$events$eventN[0],
-            timeCount = _this12$events$eventN[2];
+        var _this13$events$eventN = _slicedToArray(_this13.events[eventName].list[_this13.eventIndex[eventName]], 3),
+            time = _this13$events$eventN[0],
+            timeCount = _this13$events$eventN[2];
 
         if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
@@ -34840,7 +34857,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "finishPlaying",
     value: function finishPlaying() {
-      var _this13 = this;
+      var _this14 = this;
 
       if (this.areEventsPlaying()) {
         return false;
@@ -34850,7 +34867,7 @@ var Recorder = /*#__PURE__*/function () {
 
       if (remainingTime > 0.0001) {
         this.timeoutID = setTimeout(function () {
-          _this13.finishPlaying();
+          _this14.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
       }

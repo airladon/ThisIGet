@@ -91,7 +91,6 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    console.log(this.props.duration)
     this.updateTime(this.props.duration);
   }
 

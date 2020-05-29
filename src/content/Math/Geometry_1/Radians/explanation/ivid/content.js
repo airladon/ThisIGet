@@ -16,7 +16,7 @@ import { removeClass, addClass } from '../../../../../common/tools/tools';
 import states from './ividStates.json';
 import events from './ividEvents.json';
 // import slides from './vidslides.json';
-// import audio from './audio.m4a';
+import audio from './audio.m4a';
 
 const {
   click,
@@ -58,8 +58,9 @@ class Content extends PresentationFormatContent {
   }
 
   loadEvents() {
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.loadAudio(new Audio(audio));
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
     console.log(this.diagram.recorder)
   }
 
@@ -177,9 +178,9 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 90, className: 'figureone_dev_only'  }, '|Angle|'),
-        note({ top: 85, className: 'figureone_dev_only'  }, '|Degrees|'),
-        note({ top: 80, className: 'figureone_dev_only' }, '|Value|')
+        note({ top: 85, className: 'figureone_dev_only'  }, '|Angle|'),
+        note({ top: 80, className: 'figureone_dev_only'  }, '|Degrees|'),
+        note({ top: 75, className: 'figureone_dev_only' }, '|Value|')
         // note({ top: 90 }, '|Arc|'),
       ],
       fadeInFromPrev: false,
@@ -275,8 +276,8 @@ class Content extends PresentationFormatContent {
     );
     this.addSection(common, {
       setContent: [
-        note({ top: 85 }, '|Degrees|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 80 }, '|Degrees|'),
+        note({ top: 85 }, '|Angle|'),
         // note({ top: 90 }, '|Arc|'),
         `
           <table class="radians_table fractions_table" id="radians_table">
@@ -362,10 +363,10 @@ class Content extends PresentationFormatContent {
         //   top: 3, centerH: true, id: 'id_main_text',
         // }, 'Set arc length to |equal| radius length.'),
         // note({ top: 80 }, '|Radius|'),
-        note({ top: 75 }, '|Lines|'),
-        note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Arc|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 70 }, '|Lines|'),
+        note({ top: 75 }, '|Radius|'),
+        note({ top: 80 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -414,9 +415,9 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'Set arc length to |equal| radius length.'),
-        note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Arc|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 75 }, '|Radius|'),
+        note({ top: 80 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -467,13 +468,13 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        note({ top: 60 }, '|EqnRadius|'),
-        note({ top: 65 }, '|EqnAngle|'),
-        note({ top: 70 }, '|Value|'),
-        note({ top: 75 }, '|Radian|'),
-        note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Arc|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 55 }, '|EqnRadius|'),
+        note({ top: 60 }, '|EqnAngle|'),
+        note({ top: 65 }, '|Value|'),
+        note({ top: 70 }, '|Radian|'),
+        note({ top: 75 }, '|Radius|'),
+        note({ top: 80 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -491,10 +492,10 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'When arc length equals radius length, the angle is |one radian|'),
-        note({ top: 75 }, '|Radian|'),
-        note({ top: 80 }, '|Radius|'),
-        note({ top: 85 }, '|Arc|'),
-        note({ top: 90 }, '|Angle|'),
+        note({ top: 70 }, '|Radian|'),
+        note({ top: 75 }, '|Radius|'),
+        note({ top: 80 }, '|Arc|'),
+        note({ top: 85 }, '|Angle|'),
       ],
       show: [
         circle._line1, circle._line2, circle._corner,
@@ -868,9 +869,9 @@ class Content extends PresentationFormatContent {
     // So to convert degrees to radians, we multiply by the ratio of pi over 180.
     this.addSection({
       setContent: [
-        note({ top: 80 }, '|scalar|'),
-        note({ top: 85 }, '|_2pi|'),
-        note({ top: 90 }, '|_360|'),
+        note({ top: 75 }, '|scalar|'),
+        note({ top: 80 }, '|_2pi|'),
+        note({ top: 85 }, '|_360|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -959,8 +960,8 @@ class Content extends PresentationFormatContent {
     // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
     this.addSection({
       setContent: [
-        note({ top: 85 }, '|angleD|'),
-        note({ top: 90 }, '|factor|'),
+        note({ top: 80 }, '|angleD|'),
+        note({ top: 85 }, '|factor|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1013,10 +1014,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       setContent: [
-        note({ top: 75 }, '|sin|'),
-        note({ top: 80 }, '|arc|'),
-        note({ top: 85 }, '|radius|'),
-        note({ top: 90 }, '|angle|'),
+        note({ top: 70 }, '|sin|'),
+        note({ top: 75 }, '|arc|'),
+        note({ top: 80 }, '|radius|'),
+        note({ top: 85 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
@@ -1062,14 +1063,14 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection({
       setContent: [
-        note({ top: 55 }, '|limit|'),
-        note({ top: 60 }, '|sinx|'),
-        note({ top: 65 }, '|x|'),
-        note({ top: 70 }, '|one|'),
-        note({ top: 75 }, '|sin|'),
-        note({ top: 80 }, '|arc|'),
-        note({ top: 85 }, '|radius|'),
-        note({ top: 90 }, '|angle|'),
+        note({ top: 50 }, '|limit|'),
+        note({ top: 55 }, '|sinx|'),
+        note({ top: 60 }, '|x|'),
+        note({ top: 65 }, '|one|'),
+        note({ top: 70 }, '|sin|'),
+        note({ top: 75 }, '|arc|'),
+        note({ top: 80 }, '|radius|'),
+        note({ top: 85 }, '|angle|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
