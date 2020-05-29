@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import Fig from 'figureone';
+import { supportsPassive } from '../tools/misc';
 
-const { Recorder } = Fig;
+// const { Recorder } = Fig;
 
 type State = {
   x: number;
@@ -17,14 +18,12 @@ export default class SrollBar extends React.Component<Props, State> {
   touchState: 'up' | 'down';
   changed: (number) => void;
   id: string;
-  // initialSeek: number;
 
   constructor(props: Props) {
     super();
     this.changed = props.changed;
     this.id = props.id;
     this.touchState = 'up';
-    // this.initialSeek = props.seek;
     this.state = {
       x: 0,
     };
@@ -39,39 +38,15 @@ export default class SrollBar extends React.Component<Props, State> {
     if (page == null) {
       return;
     }
-    let supportsPassive = false;
-    try {
-      const opts = Object.defineProperty({}, 'passive', {
-        get: function() {
-          supportsPassive = true;
-        }
-      });
-      window.addEventListener("testPassive", null, opts);
-      window.removeEventListener("testPassive", null, opts);
-    } catch (e) {}
+
     element.addEventListener('mousedown', this.mouseDownHandler.bind(this), false);
     window.addEventListener('mouseup', this.mouseUpHandler.bind(this), false);
     window.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
     page.addEventListener('mouseleave', this.mouseUpHandler.bind(this), false);
-    element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive ? { passive: true } : false);
-    window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive ? { passive: true } : false);
-    window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive ? { passive: true } : false);
+    element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive() ? { passive: true } : false);
+    window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive() ? { passive: true } : false);
+    window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive() ? { passive: true } : false);
   }
-
-  // touchDown(event: MouseEvent) {
-  //   this.touchState = 'down';
-  //   this.touchHandler(event.clientX);
-  // }
-
-  // touchUp() {
-  //   this.touchState = 'up';
-  // }
-
-  // touchMove(event: MouseEvent) {
-  //   if (this.touchState === 'down') {
-  //     this.touchHandler(event.clientX);
-  //   }
-  // }
 
   touchHandler(x: number) {
     if (this.changed) {
@@ -83,19 +58,11 @@ export default class SrollBar extends React.Component<Props, State> {
   touchStartHandler(event: TouchEvent) {
     this.touchState = 'down';
     const touch = event.touches[0];
-    // const disableEvent = this.startHandler(new Point(touch.clientX, touch.clientY));
-    // if (disableEvent) {
-    //   event.preventDefault();
-    // }
     this.touchHandler(touch.clientX);
   }
 
   mouseDownHandler(event: MouseEvent) {
     this.touchState = 'down';
-    // const disableEvent = this.startHandler(new Point(event.clientX, event.clientY));
-    // if (disableEvent) {
-    //   event.preventDefault();
-    // }
     this.touchHandler(event.clientX);
   }
 
@@ -104,11 +71,9 @@ export default class SrollBar extends React.Component<Props, State> {
       const touch = event.touches[0];
       this.touchHandler(touch.clientX);
     }
-    // this.moveHandler(event, new Point(touch.clientX, touch.clientY));
   }
 
   mouseMoveHandler(event: MouseEvent) {
-    // this.moveHandler(event, new Point(event.clientX, event.clientY));
     if (this.touchState === 'down') {
       this.touchHandler(event.clientX);
     }
@@ -127,8 +92,8 @@ export default class SrollBar extends React.Component<Props, State> {
   }
 
   getValue() {
-    const element = document.getElementById(this.id);
-    if (element == null) {
+    const bar = document.getElementById(this.id);
+    if (bar == null) {
       return 0;
     }
     // let circleWidth = 10;
@@ -137,63 +102,37 @@ export default class SrollBar extends React.Component<Props, State> {
       return 0;
     }
     const circleRect = circle.getBoundingClientRect();
-    const seekRect = element.getBoundingClientRect();
+    const seekRect = bar.getBoundingClientRect();
     const x = circleRect.left - seekRect.left + circleRect.width / 2;
     return this.clientXToPercent(x);
   }
 
-  percentToX(percentIn: number) {
+  percentToCirclePosition(percentIn: number) {
     let percent = percentIn;
     if (percent > 1) {
       percent = 1;
     } else if (percent < 0) {
       percent = 0;
     }
-    const element = document.getElementById(this.id);
-    if (element == null) {
-      return 0;
-    }
+    const bar = document.getElementById(this.id);
     const circle = document.getElementById(`${this.id}_circle`);
-    if (circle == null) {
+    if (bar == null || circle == null) {
       return 0;
     }
     const circleWidth = circle.getBoundingClientRect().width;
-    const { width } = element.getBoundingClientRect();
-    return width * percent - circleWidth / 2;
+    const { width } = bar.getBoundingClientRect();
+    return circleWidth / 2 + (width - circleWidth) * percent - circleWidth / 2;
   }
 
-  // percentToTouchX(percentIn: number) {
-  //   let percent = percentIn;
-  //   if (percent > 1) {
-  //     percent = 1;
-  //   } else if (percent < 0) {
-  //     percent = 0;
-  //   }
-  //   const element = document.getElementById(this.id);
-  //   if (element == null) {
-  //     return 0;
-  //   }
-  //   const circle = document.getElementById(`${this.id}_touch_circle`);
-  //   if (circle == null) {
-  //     return 0;
-  //   }
-  //   const circleWidth = circle.getBoundingClientRect().width;
-  //   const { width } = element.getBoundingClientRect();
-  //   return width * percent - circleWidth / 2;
-  // }
-
   clientXToPercent(x: number) {
-    const element = document.getElementById(this.id);
-    if (element == null) {
-      return 0;
-    }
+    const bar = document.getElementById(this.id);
     const circle = document.getElementById(`${this.id}_circle`);
-    if (circle == null) {
+    if (bar == null || circle == null) {
       return 0;
     }
     const circleWidth = circle.getBoundingClientRect().width;
-    const { left, width } = element.getBoundingClientRect();
-    let percent = (x - left + circleWidth / 2) / width;
+    const { left, width } = bar.getBoundingClientRect();
+    let percent = (x - (left + circleWidth / 2)) / (width - circleWidth);
     if (percent > 1) {
       percent = 1;
     } else if (percent < 0) {
@@ -210,7 +149,7 @@ export default class SrollBar extends React.Component<Props, State> {
       />
       <div
         style={{
-          width: `${this.percentToX(this.props.position) + 10}px`,
+          width: `${this.percentToCirclePosition(this.props.position) + 10}px`,
         }}
         className='figureone_scrollbar_currentTime'
         id={`${this.id}_currentTime`}
@@ -219,16 +158,9 @@ export default class SrollBar extends React.Component<Props, State> {
         className='figureone_scrollbar_circle'
         id={`${this.id}_circle`}
         style={{
-          left: `${this.percentToX(this.props.position)}px`,
+          left: `${this.percentToCirclePosition(this.props.position)}px`,
         }}
       />
-      {/* <div
-        className='figureone_scrollbar_touch_circle'
-        id={`${this.id}_touch_circle`}
-        style={{
-          left: `${this.percentToTouchX(this.props.position)}px`,
-        }}
-      /> */}
     </div>;
   }
 }

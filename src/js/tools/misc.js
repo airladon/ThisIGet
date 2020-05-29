@@ -255,9 +255,23 @@ function shuffle(
   return out;
 }
 
+function supportsPassive() {
+  let supportsPassive = false;
+  try {
+    const opts = Object.defineProperty({}, 'passive', {
+      get: function() {
+        supportsPassive = true;
+      }
+    });
+    window.addEventListener("testPassive", null, opts);
+    window.removeEventListener("testPassive", null, opts);
+  } catch (e) {}
+  return supportsPassive;
+}
+
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
   createCookie, activator, attachQuickReference, multichoice, shuffle,
-  getCurrentPath, getTopicPath,
+  getCurrentPath, getTopicPath, supportsPassive,
 };
 

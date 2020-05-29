@@ -16,11 +16,12 @@
 .figureone_playback_controll_seek_container {
   display: table-cell;
   vertical-align: middle;
+  padding-left: 10px;
 }
 
 .figureone_playback_control__play {
   background-image: $play;
-  width: 20px;
+  width: 25px;
   height: 20px;
   display: table-cell;
   background-position: center;
@@ -30,7 +31,7 @@
 
 .figureone_playback_control__pause {
   background-image: $pause;
-  width: 20px;
+  width: 25px;
   height: 20px;
   display: table-cell;
   background-position: center;
@@ -108,10 +109,15 @@
   -o-animation: fadeout_full 3s linear;
 }
 
+.playback_faded {
+  pointer-events: none;
+}
+
 @-webkit-keyframes fadeout_full {
   0% { -webkit-opacity: 1; }
   // 40% { -webkit-opacity: 1; }
   70% { -webkit-opacity: 1; }
+  99% { -webkit-opacity: 0; height: 0 }
   100% { -webkit-opacity: 0; }
 }
 

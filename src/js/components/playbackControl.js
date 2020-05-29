@@ -71,6 +71,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   recorder: Recorder;
   timer: TimeoutID;
   getDiagram: () => Diagram;
+  timeoutID: TimeoutID;
 
   constructor(props: Props) {
     super();
@@ -88,6 +89,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       seek: 0,
     };
     this.getDiagram = props.getDiagram;
+    this.timeoutID = null;
   }
 
   componentDidMount() {
@@ -113,8 +115,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   showControls() {
     const recorder = new Recorder();
-    removeClass('id_figureone_playback_control__time', 'playback_fade_out');
-    removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
+    // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    this.unfade();
     if (recorder.state !== 'idle') {
       this.setState({
         playPauseClass: '',
@@ -122,8 +125,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     }
     setTimeout(() => {
       if (recorder.state !== 'idle') {
-        addClass('id_figureone_playback_control__time', 'playback_fade_out');
-        addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+        // addClass('id_figureone_playback_control__time', 'playback_fade_out');
+        // addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+        this.startFade();
         this.setState({
           playPauseClass: 'playback_fade_out_partial',
         });
@@ -143,9 +147,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
       playClass: 'figureone_playback_control__hide',
     });
     this.queueTimeUpdate();
-    addClass('id_figureone_playback_control__time', 'playback_fade_out');
-    addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // addClass('id_figureone_playback_control__time', 'playback_fade_out');
+    // addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // this.timeoutID = setTimeout(this.finishFade.bind(this), 3000);
     // addClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
+    this.startFade();
   }
 
   playToPause() {
@@ -153,15 +159,52 @@ export default class PlaybackControl extends React.Component<Props, State> {
       playClass: '',
       playPauseClass: 'figureone_playback_control__hide',
     });
-    removeClass('id_figureone_playback_control__time', 'playback_fade_out');
-    removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
+    // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
     // removeClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
+    this.unfade();
   }
 
   // eslint-disable-next-line class-methods-use-this
   pause() {
     const recorder = new Recorder();
     recorder.pausePlayback();
+    this.unfade();
+    // if (this.timeoutID != null) {
+    //   clearTimeout(this.timeoutID);
+    //   this.timeoutID = null;
+    // }
+  }
+
+  // finishFade() {
+  //   const elements = document.getElementsByClassName('playback_fade_out');
+  //   for (let i = 0; i < elements.length; i += 1) {
+  //     elements[i].classList.remove('playback_fade_out');
+  //     elements[i].classList.add('playback_faded');
+  //   }
+  // }
+
+  startFade() {
+    addClass('id_figureone_playback_control__time', 'playback_fade_out');
+    addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    if (this.timeoutID != null) {
+      clearTimeout(this.timeoutID);
+    }
+    this.timeoutID = setTimeout(() => {
+      addClass('id_figureone_playback_control__time', 'playback_faded');
+      addClass('id_figureone_playback_controll_seek_container', 'playback_faded');
+    }, 3000);
+  }
+
+  unfade() {
+    removeClass('id_figureone_playback_control__time', 'playback_fade_out');
+    removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    removeClass('id_figureone_playback_control__time', 'playback_faded');
+    removeClass('id_figureone_playback_controll_seek_container', 'playback_faded');
+    if (this.timeoutID != null) {
+      clearTimeout(this.timeoutID);
+      this.timeoutID = null;
+    }
   }
 
   record() {
@@ -176,6 +219,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       recordPauseClass: '',
       recordClass: 'figureone_playback_control__hide',
     });
+    this.startFade();
   }
 
 
@@ -186,6 +230,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
       recordClass: '',
       recordPauseClass: 'figureone_playback_control__hide',
     });
+    // if (this.timeoutID != null) {
+    //   clearTimeout(this.timeoutID);
+    //   this.timeoutID = null;
+    // }
+    this.unfade();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -385,14 +434,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
         className={`figureone_playback_control__play ${this.state.playClass}`}
         onClick={this.play.bind(this)}
       />
+      {/* <div className="figureone_playback_control__h_space"/> */}
       <div
         id="id_figureone_playback_control__pause"
         className={`figureone_playback_control__pause ${this.state.playPauseClass}`}
         onClick={this.pause.bind(this)}
       />
-      <div id="id_figureone_playback_control__time" className="figureone_playback_control__time">
-        {this.state.time}
-      </div>
       <div id="id_figureone_playback_controll_seek_container"
         className="figureone_playback_controll_seek_container">
         <ScrollBar
@@ -400,6 +447,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
           changed={this.seekToPercent.bind(this)}
           position={this.state.seek}
         />
+      </div>
+      <div id="id_figureone_playback_control__time" className="figureone_playback_control__time">
+        {this.state.time}
       </div>
       {/* <div
         className={'figureone_playback_control__full_screen'}
