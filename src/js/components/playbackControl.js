@@ -112,13 +112,23 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   showControls() {
-    console.log('showControls')
+    const recorder = new Recorder();
     removeClass('id_figureone_playback_control__time', 'playback_fade_out');
     removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    if (recorder.state !== 'idle') {
+      this.setState({
+        playPauseClass: '',
+      });
+    }
     setTimeout(() => {
-      addClass('id_figureone_playback_control__time', 'playback_fade_out');
-      addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
-    }, 50);
+      if (recorder.state !== 'idle') {
+        addClass('id_figureone_playback_control__time', 'playback_fade_out');
+        addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+        this.setState({
+          playPauseClass: 'playback_fade_out_partial',
+        });
+      }
+    }, 300);
   }
 
   play() {
