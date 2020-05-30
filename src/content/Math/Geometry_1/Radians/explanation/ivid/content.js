@@ -61,6 +61,7 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadAudio(new Audio(audio));
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.states.baseReference = null;
     console.log(this.diagram.recorder)
   }
 
@@ -1512,7 +1513,7 @@ class Content extends PresentationFormatContent {
     // });
     this.addSection({
       setContent: [
-        style({ centerH: true, centerV: true }, 'In mathematis, working with radians is more |elegant and simple| than with degrees.'),
+        style({ centerH: true, centerV: true }, 'In mathematics, working with radians is more |elegant and simple| than with degrees.'),
       ],
     });
     // // **********************************************************************

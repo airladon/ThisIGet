@@ -5068,6 +5068,7 @@ var Diagram = /*#__PURE__*/function () {
       Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(this, state);
 
       this.elements.setTimeDelta(performance.now() / 1000 - this.stateTime);
+      this.elements.setPointsFromDefinition();
 
       if (this.setStateCallback != null) {
         this.fnMap.exec(this.setStateCallback);
@@ -6408,12 +6409,32 @@ function Box(webgl, width, height, lineWidth, fill, color, transformOrLocation, 
 
     element.drawingObject.updateBox(maxBounds.width, maxBounds.height);
     element.setPosition(maxBounds.left + maxBounds.width / 2, maxBounds.bottom + maxBounds.height / 2);
+    element.pointsDefinition = {
+      width: maxBounds.width,
+      height: maxBounds.height
+    };
   }; // $FlowFixMe
 
 
   element.setSize = function (widthIn, heightIn) {
     // $FlowFixMe
     element.drawingObject.updateBox(widthIn, heightIn);
+    element.pointsDefinition = {
+      width: widthIn,
+      height: heightIn
+    };
+  };
+
+  element.setPointsFromDefinition = function () {
+    var _element$pointsDefini = element.pointsDefinition,
+        width = _element$pointsDefini.width,
+        height = _element$pointsDefini.height;
+
+    if (width == null || height == null) {
+      return;
+    }
+
+    element.setSize(width, height);
   };
 
   return element;
@@ -31201,7 +31222,9 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
     _this3.angleToDraw = -1;
     _this3.lengthToDraw = -1;
     _this3.cannotTouchHole = false;
-    _this3.type = 'primitive'; // this.setMoveBoundaryToDiagram();
+    _this3.type = 'primitive';
+    _this3.pointsDefinition = {};
+    _this3.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
 
     return _this3;
   }
@@ -31216,7 +31239,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
       }
 
       if (this.isShown || ignoreShown) {
-        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, options)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject']);
+        return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, options)), ['pointsToDraw', 'angleToDraw', 'lengthToDraw', 'cannotTouchHole', 'drawingObject', 'pointsDefinition']);
       }
 
       return _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "_getStateProperties", this).call(this, options);
@@ -33026,6 +33049,19 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
 
       return elems;
+    }
+  }, {
+    key: "setPointsFromDefinition",
+    value: function setPointsFromDefinition() {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimitive) {
+          if (element.setPointsFromDefinition != null) {
+            element.setPointsFromDefinition();
+          }
+        }
+      }
     }
   }, {
     key: "unrenderAll",
