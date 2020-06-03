@@ -338,7 +338,7 @@ class PresentationFormat extends SimpleFormat {
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
       }
-      if (diagram.recorder != null && diagram.recorder.isRecording) {
+      if (diagram.recorder != null && diagram.recorder.state === 'recording') {
         // diagram.recorder.showPointer();
         diagram.recorder.recordCurrentState();
       }
@@ -494,7 +494,7 @@ class PresentationFormat extends SimpleFormat {
     this.transitionCancelled = false;
     this.renderDiagrams();
     window.presentationFormatTransitionStatus = 'steady';
-    if (diagram.recorder != null && diagram.recorder.isRecording) {
+    if (diagram.recorder != null && diagram.recorder.state === 'recording') {
       // diagram.recorder.showPointer();
       diagram.recorder.recordCurrentState();
     }

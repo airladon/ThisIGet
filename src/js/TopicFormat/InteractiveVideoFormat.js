@@ -55,6 +55,9 @@ class InteractiveVideoFormat extends PresentationFormat {
     if (recorder) {
       const processSlide = (payload) => {
         const [direction, message, slideNo] = payload;
+        // if (direction === 'next' && this.getCurrentSlide() !== slideNo - 1) {
+        //   console.log('fail', this.getCurrentSlide(), slideNo - 1)
+        // }
         if (direction === 'next' && this.getCurrentSlide() === slideNo - 1) {
           this.nextSection(message);
         } else if (direction === 'prev' && this.getCurrentSlide() === slideNo + 1) {

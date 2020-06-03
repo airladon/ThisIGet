@@ -59,8 +59,8 @@ class Content extends PresentationFormatContent {
 
   loadEvents() {
     this.diagram.recorder.loadAudio(new Audio(audio));
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
     // this.diagram.recorder.states.baseReference = null;
     console.log(this.diagram.recorder)
   }
@@ -932,6 +932,7 @@ class Content extends PresentationFormatContent {
         diag._radEqn.goToForm({ name: '0', animate: 'dissolve', callback: doneStr });
       },
       setSteadyState: () => {
+        // console.log('asdf')
         diag._radEqn.showForm('0');
         diag._radEqn.setScenario('center');
       },

@@ -4903,6 +4903,10 @@ var Diagram = /*#__PURE__*/function () {
             x = _payload2[1],
             y = _payload2[2];
 
+        if (!_this.isCursorShown()) {
+          return;
+        }
+
         if (action === 'down') {
           _this.showCursor('down', new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](x, y));
         } else {
@@ -5069,6 +5073,7 @@ var Diagram = /*#__PURE__*/function () {
 
       this.elements.setTimeDelta(performance.now() / 1000 - this.stateTime);
       this.elements.setPointsFromDefinition();
+      this.elements.setPrimitiveColors();
 
       if (this.setStateCallback != null) {
         this.fnMap.exec(this.setStateCallback);
@@ -5517,6 +5522,17 @@ var Diagram = /*#__PURE__*/function () {
       }
 
       this.animateNextFrame();
+    }
+  }, {
+    key: "isCursorShown",
+    value: function isCursorShown() {
+      var cursor = this.getElement(this.cursorElementName);
+
+      if (cursor == null) {
+        return;
+      }
+
+      return cursor.isShown;
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
     // and dragged, then when they are released, for them to move freely before
@@ -17038,9 +17054,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _Symbol; });
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _VertexSymbol__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexSymbol */ "./src/js/diagram/DiagramElements/Equation/Symbols/VertexSymbol.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _VertexSymbol__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VertexSymbol */ "./src/js/diagram/DiagramElements/Equation/Symbols/VertexSymbol.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _Elements_Bounds__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Elements/Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -17081,6 +17098,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
   _inherits(_Symbol, _DiagramElementPrimit);
 
@@ -17091,7 +17109,7 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
 
     _classCallCheck(this, _Symbol);
 
-    var vertexObject = new _VertexSymbol__WEBPACK_IMPORTED_MODULE_2__["default"](webgl, triangles);
+    var vertexObject = new _VertexSymbol__WEBPACK_IMPORTED_MODULE_3__["default"](webgl, triangles);
     var initialT;
 
     if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]) {
@@ -17114,8 +17132,13 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
               _this$getPoints2 = _slicedToArray(_this$getPoints, 3),
               pointsNew = _this$getPoints2[0],
               widthNew = _this$getPoints2[1],
-              heightNew = _this$getPoints2[2]; // $FlowFixMe
+              heightNew = _this$getPoints2[2];
 
+          _this.pointsDefinition = {
+            points: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(pointsNew),
+            width: widthNew,
+            height: heightNew
+          }; // $FlowFixMe
 
           _this.drawingObject.updatePoints(pointsNew, widthNew, heightNew);
 
@@ -17150,25 +17173,37 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
             points = _this$getPoints6[0];
             width = _this$getPoints6[1];
             height = _this$getPoints6[2];
-          } // $FlowFixMe
+          }
 
+          _this.pointsDefinition = {
+            points: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(points),
+            width: width,
+            height: height
+          }; // $FlowFixMe
 
           _this.drawingObject.updatePoints(points, width, height);
 
           _this.custom.options.staticHeight = height;
-          _this.custom.options.staticWidth = width;
+          _this.custom.options.staticWidth = width; // console.log('a', width, height)
+
           t.updateScale(width, height);
         } else {
         var _this$getPoints7 = _this.getPoints(_this.custom.options, widthIn, heightIn),
             _this$getPoints8 = _slicedToArray(_this$getPoints7, 3),
             pointsNew = _this$getPoints8[0],
             widthNew = _this$getPoints8[1],
-            heightNew = _this$getPoints8[2]; // $FlowFixMe
+            heightNew = _this$getPoints8[2];
 
+        _this.pointsDefinition = {
+          points: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(pointsNew),
+          width: widthNew,
+          height: heightNew
+        }; // $FlowFixMe
 
         _this.drawingObject.updatePoints(pointsNew, widthNew, heightNew);
 
-        _this.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](widthIn, heightIn);
+        _this.custom.scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](widthIn, heightIn); // console.log('b', widthIn, heightIn, this.getPath())
+
         t.updateScale(widthIn, heightIn);
       }
 
@@ -17177,8 +17212,28 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
       _this.setTransform(t);
     };
 
+    _this.setPointsFromDefinition = function () {
+      if (Object.keys(_this.pointsDefinition).length === 0) {
+        return;
+      }
+
+      var _this$pointsDefinitio = _this.pointsDefinition,
+          points = _this$pointsDefinitio.points,
+          width = _this$pointsDefinitio.width,
+          height = _this$pointsDefinitio.height; // $FlowFixMe
+
+      _this.drawingObject.updatePoints(points, width, height); // // if (width == null || height == null || location == null) {
+      // //   return;
+      // // }
+      // this.custom.setSize(this.getPosition(), width, height);
+
+    };
+
     return _this;
-  }
+  } // // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  // updatePoints(points: Array<Point>, width: Number, height: number) {
+  // }
+
 
   _createClass(_Symbol, [{
     key: "getTransform",
@@ -17273,7 +17328,7 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
           width = _this$getDefaultValue5.width,
           height = _this$getDefaultValue5.height;
 
-      var bounds = new _Elements_Bounds__WEBPACK_IMPORTED_MODULE_4__["default"]();
+      var bounds = new _Elements_Bounds__WEBPACK_IMPORTED_MODULE_5__["default"]();
 
       if (side === 'left') {
         bounds.left = contentX - width;
@@ -31554,7 +31609,10 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           pointCount = 1;
         }
 
-        var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
+        var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]); // if (this.getPath().endsWith('eqn.elements._1')) {
+        // console.log(this.getPath(), this.opacity, colorToUse);
+        // colorToUse = [1, 0, 0, 1];
+        // }
 
         if (pointCount > 0) {
           // console.log(this.pulseTransforms, pointCount)
@@ -33056,11 +33114,26 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
 
-        if (element instanceof DiagramElementPrimitive) {
-          if (element.setPointsFromDefinition != null) {
-            element.setPointsFromDefinition();
-          }
+        if (element.setPointsFromDefinition != null) {
+          element.setPointsFromDefinition();
         }
+      }
+    }
+  }, {
+    key: "setPrimitiveColors",
+    value: function setPrimitiveColors() {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimitive) {
+          element.setColor(element.color);
+          element.setOpacity(element.opacity);
+        } else {
+          element.setPrimitiveColors();
+        } // if (element.setPointsFromDefinition != null) {
+        //   element.setPointsFromDefinition();
+        // }
+
       }
     }
   }, {

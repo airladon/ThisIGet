@@ -279,6 +279,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
+    // console.log(this.getDiagram().elements.elements.eqn.elements._1.opacity)
     recorder.seekToPercent(percent);
     this.updateTime(percent * totalTime);
   }
