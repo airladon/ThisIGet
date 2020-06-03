@@ -338,10 +338,10 @@ class PresentationFormat extends SimpleFormat {
       if (this.transitionCancelled) {
         this.finishTransitionFromAny();
       }
-      if (diagram.recorder != null && diagram.recorder.state === 'recording') {
-        // diagram.recorder.showPointer();
-        diagram.recorder.recordCurrentState();
-      }
+      // if (diagram.recorder != null && diagram.recorder.state === 'recording') {
+      //   // diagram.recorder.showPointer();
+      //   diagram.recorder.recordCurrentState();
+      // }
 
       if (this.comingFrom === 'prev') {
         this.fadeInTextFromPrev();

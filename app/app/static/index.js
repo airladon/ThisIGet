@@ -4881,7 +4881,8 @@ var Diagram = /*#__PURE__*/function () {
         getElement: this.getElement.bind(this),
         showCursor: this.showCursor.bind(this),
         pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this)
+        unpause: this.unpause.bind(this),
+        getIsInTransition: this.getIsInTransition.bind(this)
       };
 
       var onCursor = function onCursor(payload) {
@@ -34542,7 +34543,9 @@ var Recorder = /*#__PURE__*/function () {
 
       var recordAndQueue = function recordAndQueue() {
         if (_this8.state === 'recording') {
-          _this8.recordCurrentState();
+          if (_this8.diagram.getIsInTransition() === false) {
+            _this8.recordCurrentState();
+          }
 
           _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
@@ -34646,6 +34649,7 @@ var Recorder = /*#__PURE__*/function () {
         this.pausePlayback();
       }
 
+      console.log(time);
       this.setToTime(time);
       this.diagram.pause();
     }
