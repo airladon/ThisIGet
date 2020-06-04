@@ -108,14 +108,42 @@ class Content extends PresentationFormatContent {
         style({ centerH: true, size: 0.8, top: 2 }, 'Where does it come from, and why do we use it?'),
       ],
       show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
+        circle._line1, circle._line2, circle._angle, // circle._corner
       ],
       setSteadyState: () => {
         circle._line1.setScenario('default');
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
-
+        circle._line1.scenarios.temp = {
+          // position: [0, 0],
+          rotation: Math.PI / 2,
+          // isShown: false,
+          color: [0, 1, 0, 1],
+        }
+        circle.scenarios.temp = {
+          position: [0, 0],
+          // rotation: Math.PI / 2,
+          // isShown: false,
+          // color: [0, 1, 0, 1],
+        }
+        circle._line2.scenarios.temp = {
+          // position: [0, 0],
+          // rotation: Math.PI / 2,
+          // isShown: false,
+          color: [1, 1, 0, 1],
+          isShown: false,
+        }
+        diag.animations.new()
+          .inParallel([
+            circle.anim.scenarioNew({ target: 'temp', duration: 10 }),
+            circle._line1.anim.scenarioNew({ target: 'temp', duration: 10 }),
+            circle._line2.anim.scenarioNew({ target: 'temp', duration: 10 }),
+          ])
+          // .color({ target: [0, 1, 0, 1], duration: 5 })
+          .start();
+        // circle.setColor([1, 0, 0, 1])
+        console.log(diag.animations.animations)
       },
     });
 
