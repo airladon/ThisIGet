@@ -170,6 +170,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     recorder.pausePlayback();
     this.unfade();
+    const s = performance.now();
+    console.log(this.getDiagram().getState({ min: true, precision: 3 }));
+    console.log(performance.now() - s)
     // if (this.timeoutID != null) {
     //   clearTimeout(this.timeoutID);
     //   this.timeoutID = null;

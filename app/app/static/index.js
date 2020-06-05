@@ -1977,7 +1977,7 @@ var ElementAnimationStep = /*#__PURE__*/function (_AnimationStep) {
     _this = _super.call(this, optionsIn);
     var defaultProgression = 'easeinout';
 
-    if (optionsIn.type === 'color' || optionsIn.type === 'custom') {
+    if (optionsIn.type === 'color' || optionsIn.type === 'custom' || optionsIn.type === 'opacity') {
       defaultProgression = 'linear';
     }
 
@@ -2568,20 +2568,21 @@ var OpacityAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     }
 
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn, [{
-      type: 'color'
+      type: 'opacity'
     }]));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve', 'dissolveFromCurrent']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultPositionOptions = {
       start: null,
       target: null,
       delta: null,
-      dissolve: null
+      dissolve: null,
+      dissolveFromCurrent: false
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.opacity = {};
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.opacity, ['start', 'delta', 'target', 'dissolve']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.opacity, ['start', 'delta', 'target', 'dissolve', 'dissolveFromCurrent']);
     return _this;
   }
 
@@ -2624,14 +2625,33 @@ var OpacityAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         this.opacity.whenComplete = this.opacity.target;
 
         if (this.opacity.dissolve === 'out') {
-          // this.opacity.start = 1;
+          if (this.opacity.dissolveFromCurrent) {
+            if (element.isShown) {
+              this.opacity.start = 1;
+            } else {
+              this.opacity.start = 0.001;
+            }
+          } else {
+            this.opacity.start = 1;
+          }
+
           this.opacity.target = 0.001;
           this.opacity.whenComplete = 1;
           element.setOpacity(this.opacity.start); // this.opacity.target = 0.001;
         }
 
         if (this.opacity.dissolve === 'in') {
-          this.opacity.start = 0.001;
+          if (this.opacity.dissolveFromCurrent) {
+            if (element.isShown) {
+              this.opacity.start = 1;
+            } else {
+              this.opacity.start = 0.001;
+            }
+          } else {
+            this.opacity.start = 0.001;
+          } // this.opacity.start = 0.001;
+
+
           this.opacity.target = 1;
           this.opacity.whenComplete = 1;
           element.showAll();
@@ -5084,6 +5104,34 @@ var Diagram = /*#__PURE__*/function () {
 
       this.animateNextFrame();
     }
+  }, {
+    key: "animateToState",
+    value: function animateToState(state, optionsIn, done) {
+      var _this2 = this;
+
+      var defaultOptions = {
+        delay: 0,
+        duration: 1
+      };
+      var counter = 0;
+
+      var countStart = function countStart() {
+        counter += 1;
+      };
+
+      var countEnd = function countEnd() {
+        counter -= 1;
+
+        if (counter === 0 && done != null) {
+          _this2.fnMap.exec(done);
+        }
+      };
+
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])(defaultOptions, optionsIn);
+      countStart();
+      this.elements.animateToState(state.elements, options, true, countStart, countEnd);
+      countEnd();
+    }
     /**
      * Add elements to diagram
      * @param {Array<TypeAddElementObject>} elementsToAdd - array of element definitions
@@ -5284,7 +5332,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderAllElementsToTiedCanvases",
     value: function renderAllElementsToTiedCanvases() {
-      var _this2 = this;
+      var _this3 = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -5294,12 +5342,12 @@ var Diagram = /*#__PURE__*/function () {
 
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this2.elements.elements[name];
+        var element = _this3.elements.elements[name];
 
         if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
           element.isRenderedAsImage = true;
 
-          _this2.renderElementToTiedCanvas(name);
+          _this3.renderElementToTiedCanvas(name);
 
           needClear = true;
         }
@@ -5317,17 +5365,17 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
-      var _this3 = this;
+      var _this4 = this;
 
       // record visibility of top level elements in diagram
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this3.elements.elements[name];
+        var element = _this4.elements.elements[name];
         currentVisibility[name] = element.isShown;
       }); // Hide all elements
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        _this3.elements.elements[name].hide();
+        _this4.elements.elements[name].hide();
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
@@ -5364,7 +5412,7 @@ var Diagram = /*#__PURE__*/function () {
       elementToRender.setScale(oldScale); // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this3.elements.elements[name];
+        var element = _this4.elements.elements[name];
 
         if (currentVisibility[name] === true) {
           element.show();
@@ -9113,6 +9161,28 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
       return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this, options)), ['eqn.currentForm', 'eqn.currentSubForm', 'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
+    }
+  }, {
+    key: "_getStatePropertiesMin",
+    value: function _getStatePropertiesMin() {
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStatePropertiesMin", this).call(this)), ['eqn.currentForm', 'eqn.currentSubForm']);
+    }
+  }, {
+    key: "animateToState",
+    value: function animateToState(state, options) {
+      var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var countStart = arguments.length > 3 ? arguments[3] : undefined;
+      var countEnd = arguments.length > 4 ? arguments[4] : undefined;
+
+      _get(_getPrototypeOf(Equation.prototype), "animateToState", this).call(this, state, options, independentOnly, countStart, countEnd);
+
+      if (this.eqn.currentForm !== state.eqn.currentForm) {
+        countStart();
+        this.goToForm({
+          name: state.eqn.currentForm,
+          callback: countEnd
+        });
+      }
     }
     /**
       * Set the current form series to 'name'
@@ -29298,7 +29368,7 @@ var DiagramElement = /*#__PURE__*/function () {
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
-          elements: _this
+          element: _this
         }].concat(optionsIn));
         return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["OpacityAnimationStep"](options);
       },
@@ -29419,9 +29489,10 @@ var DiagramElement = /*#__PURE__*/function () {
         return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
-      scenarioNew: function scenarioNew() {
+      scenario: function scenario() {
         var defaultOptions = {
-          element: _this
+          element: _this,
+          delay: 0
         };
 
         for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
@@ -29434,8 +29505,7 @@ var DiagramElement = /*#__PURE__*/function () {
           var _target = options.element.getScenarioTarget(options.target);
 
           options.target = _target;
-        } // console.log(options.target)
-
+        }
 
         if (options.start != null && options.start in options.element.scenarios) {
           var _start = options.element.getScenarioTarget(options.start);
@@ -29455,63 +29525,94 @@ var DiagramElement = /*#__PURE__*/function () {
           delay: options.delay,
           duration: options.duration
         };
+        options.delay = 0;
         options.velocity = undefined; // if (options.velocity) {
         //   const duration = getTimeToMoveToScenario()
 
         var startColor;
         var startTransform;
-        var startIsShown;
+        var startIsShown; // if (start == null) {
+        //   startColor = this.color.slice();
+        //   startTransform = this.transform._dup();
+        //   startIsShown = this.isShown;
+        // } else {
+        //   startColor = start.color.slice();
+        //   startTransform = start.transform._dup();
+        //   startIsShown = start.isShown;
+        // }
 
-        if (start == null) {
-          startColor = _this.color.slice();
-          startTransform = _this.transform._dup();
-          startIsShown = _this.isShown;
-        } else {
+        if (startColor != null) {
           startColor = start.color.slice();
           startTransform = start.transform._dup();
           startIsShown = start.isShown;
-        }
-
-        if (target.isShown === true && startIsShown === false) {
-          steps.push(element.anim.dissolveIn({
-            duration: options.duration
-          }));
-        }
-
-        if (target.isShown === false && startIsShown === true) {
-          steps.push(element.anim.dissolveOut({
-            duration: options.duration
-          }));
-        } // if (target.isShown === true && startIsShown === true) {
-        //   steps.push(element.anim.dissolveIn({ duration: 0 }));
+        } // console.log(this.name, target.isShown)
+        // if (target.isShown != null && target.isShown === true && startIsShown === false) {
+        //   steps.push(element.anim.dissolveIn({ duration: options.duration }));
         // }
-        // if (target.isShown === false && startIsShown === false) {
-        //   steps.push(element.anim.dissolveOut({ duration: 0 }));
+        // if (target.isShown != null && target.isShown === false && startIsShown === true) {
+        //   steps.push(element.anim.dissolveOut({ duration: options.duration }));
         // }
+        // console.log(startColor, target.color, element.name, !areColorsSame(startColor, target.color))
+        // if (!areColorsSame(startColor, target.color)) {
 
 
-        console.log(startColor, target.color, element.name, !Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(startColor, target.color));
-
-        if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(startColor, target.color)) {
+        if (target.color != null) {
           steps.push(element.anim.color({
             start: startColor,
             target: target.color,
             duration: options.duration
           }));
-        }
+        } // if (!startTransform.isEqualTo(target.transform)) {
 
-        if (!startTransform.isEqualTo(target.transform)) {
+
+        if (target.transform != null) {
           steps.push(element.anim.transform(options, {
             start: startTransform,
             target: target.transform
           }));
         }
 
+        if (target.isShown != null) {
+          if (startIsShown != null) {
+            if (target.isShown === true && startIsShown === true) {
+              steps.push(element.anim.dissolveIn({
+                duration: 0
+              }));
+            }
+
+            if (target.isShown === false && startIsShown === false) {
+              steps.push(element.anim.dissolveOut({
+                duration: 0
+              }));
+            }
+          } else {
+            var dissolveFromCurrent = true;
+
+            if (options.dissolveFromCurrent != null && options.dissolveFromCurrent === false) {
+              dissolveFromCurrent = false;
+            }
+
+            if (target.isShown) {
+              steps.push(element.anim.opacity({
+                duration: options.duration,
+                dissolve: 'in',
+                dissolveFromCurrent: dissolveFromCurrent
+              }));
+            } else {
+              steps.push(element.anim.opacity({
+                duration: options.duration,
+                dissolve: 'out',
+                dissolveFromCurrent: dissolveFromCurrent
+              }));
+            }
+          }
+        }
+
         return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ParallelAnimationStep"](timeOptions, {
           steps: steps
         });
       },
-      scenario: function scenario() {
+      scenarioLegacy: function scenarioLegacy() {
         var defaultOptions = {
           element: _this
         };
@@ -29658,8 +29759,21 @@ var DiagramElement = /*#__PURE__*/function () {
       return ['isShown', 'transform'];
     }
   }, {
+    key: "_getStatePropertiesMin",
+    value: function _getStatePropertiesMin() {
+      if (this.isShown) {
+        return ['color', 'transform', 'isShown'];
+      }
+
+      return ['isShown'];
+    }
+  }, {
     key: "_state",
     value: function _state(options) {
+      if (options.min) {
+        return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStatePropertiesMin(options), options);
+      }
+
       return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(options), options);
     } // execFn(fn: string | Function | null, ...args: Array<any>) {
     //   if (fn == null) {
@@ -29816,6 +29930,47 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "setFirstTransform",
     value: function setFirstTransform(parentTransform) {}
+  }, {
+    key: "animateToState",
+    value: function animateToState(state, options) {
+      var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var countStart = arguments.length > 3 ? arguments[3] : undefined;
+      var countEnd = arguments.length > 4 ? arguments[4] : undefined;
+      var target = {};
+      var dissolveFromCurrent = true;
+
+      if (this.isShown !== state.isShown) {
+        target.isShown = state.isShown;
+
+        if (this.isShown === false) {
+          this.show();
+          this.opacity = 0.001;
+          dissolveFromCurrent = false;
+        }
+      }
+
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(this.color, state.color)) {
+        target.color = state.color;
+      }
+
+      var stateTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform);
+
+      if (!this.transform.isEqualTo(stateTransform) && (independentOnly && this.transformUpdatesIndependantly || independentOnly === false)) {
+        target.transform = stateTransform;
+      } // if (!this.transform.isEqualTo(state.transform) && processTransform) {
+      //   target.transform = state.transform;
+      // }
+
+
+      if (Object.keys(target).length > 0) {
+        countStart();
+        this.animations["new"]().scenario(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({
+          target: target
+        }, options, {
+          dissolveFromCurrent: dissolveFromCurrent
+        })).whenFinished(countEnd).start();
+      }
+    }
   }, {
     key: "exec",
     value: function exec(execFunctionAndArgs) {
@@ -30125,11 +30280,12 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "getScenarioTarget",
     value: function getScenarioTarget(scenarioName) {
-      var transform = this.transform._dup();
+      var transform; // = this.transform._dup();
 
-      var color = this.color.slice(); // const opacity = this.opacity; // eslint-disable-line prefer-destructuring
+      var color; // = this.color.slice();
+      // const opacity = this.opacity; // eslint-disable-line prefer-destructuring
 
-      var isShown = this.isShown; // eslint-disable-line prefer-destructuring
+      var isShown; // = this.isShown; // eslint-disable-line prefer-destructuring
 
       if (scenarioName in this.scenarios) {
         var scenario = this.scenarios[scenarioName];
@@ -30139,14 +30295,26 @@ var DiagramElement = /*#__PURE__*/function () {
         }
 
         if (scenario.position != null) {
+          if (transform == null) {
+            transform = this.transform._dup();
+          }
+
           transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
         }
 
         if (scenario.rotation != null) {
+          if (transform == null) {
+            transform = this.transform._dup();
+          }
+
           transform.updateRotation(scenario.rotation);
         }
 
         if (scenario.scale != null) {
+          if (transform == null) {
+            transform = this.transform._dup();
+          }
+
           transform.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.scale));
         }
 
@@ -30174,12 +30342,22 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function setScenario(scenarioName) {
       if (this.scenarios[scenarioName] != null) {
         var target = this.getScenarioTarget(scenarioName);
-        this.setTransform(target.transform._dup()); // this.setColor(target.color.slice());
 
-        if (target.isShown) {
-          this.show();
-        } else {
-          this.hide();
+        if (target.transform != null) {
+          this.setTransform(target.transform._dup());
+        } // this.setColor(target.color.slice());
+
+
+        if (target.isShown != null) {
+          if (target.isShown) {
+            this.show();
+          } else {
+            this.hide();
+          }
+        }
+
+        if (target.color != null) {
+          this.setColor(target.color);
         }
       }
     }
@@ -30203,7 +30381,9 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "saveScenarios",
     value: function saveScenarios(scenarioName) {
       this.saveScenario(scenarioName);
-    }
+    } // animateToScenario() {
+    // }
+
   }, {
     key: "getAllElementsWithScenario",
     value: function getAllElementsWithScenario(scenarioName) {
@@ -31314,17 +31494,16 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
     value: function setAngleToDraw() {
       var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
       this.angleToDraw = intputAngle;
-    }
-  }, {
-    key: "setScenario",
-    value: function setScenario(scenarioName) {
-      _get(_getPrototypeOf(DiagramElementPrimitive.prototype), "setScenario", this).call(this, scenarioName);
+    } // setScenario(scenarioName: string) {
+    //   super.setScenario(scenarioName);
+    //   if (this.scenarios[scenarioName] != null) {
+    //     const target = this.getScenarioTarget(scenarioName);
+    //     if (target.color != null) {
+    //       this.setColor(target.color.slice());
+    //     }
+    //   }
+    // }
 
-      if (this.scenarios[scenarioName] != null) {
-        var target = this.getScenarioTarget(scenarioName);
-        this.setColor(target.color.slice());
-      }
-    }
   }, {
     key: "isBeingTouched",
     value: function isBeingTouched(glLocation) {
@@ -31539,17 +31718,23 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           this.nextMovingFreelyFrame(now);
         }
 
-        if (!this.isShown) {
-          return;
-        }
-
         this.lastDrawElementTransformPosition = {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
         };
         var newTransform = parentTransform.transform(this.getTransform());
         this.lastDrawTransform = newTransform._dup();
-        this.pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
+
+        if (!this.isShown) {
+          return;
+        }
+
+        this.pulseTransforms = this.transformWithPulse(now, newTransform); // if(now === 1 && this.name === 'p1') {
+        //   console.log(this.getPosition('diagram'))
+        //   console.log(this.getPosition('local'))
+        //   // window.aaa = 1;
+        // }
+        // eslint-disable-next-line prefer-destructuring
 
         this.lastDrawPulseTransform = this.pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
         // let pointCount = -1;
@@ -31828,6 +32013,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
 
       return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStateProperties", this).call(this, options)), ['elements']);
+    }
+  }, {
+    key: "_getStatePropertiesMin",
+    value: function _getStatePropertiesMin() {
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(DiagramElementCollection.prototype), "_getStatePropertiesMin", this).call(this)), ['elements']);
     }
   }, {
     key: "_dup",
@@ -33180,17 +33370,14 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
           element.unrenderAll();
         }
       }
-    }
-  }, {
-    key: "setScenario",
-    value: function setScenario(scenarioName) {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setScenario", this).call(this, scenarioName);
+    } // setScenario(scenarioName: string) {
+    //   super.setScenario(scenarioName);
+    //   if (this.scenarios[scenarioName] != null) {
+    //     const target = this.getScenarioTarget(scenarioName);
+    //     this.color = target.color.slice();
+    //   }
+    // }
 
-      if (this.scenarios[scenarioName] != null) {
-        var target = this.getScenarioTarget(scenarioName);
-        this.color = target.color.slice();
-      }
-    }
   }, {
     key: "setScenarios",
     value: function setScenarios(scenarioName) {
@@ -33214,6 +33401,25 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.saveScenarios(scenarioName);
+      }
+    }
+  }, {
+    key: "animateToState",
+    value: function animateToState(state, options) {
+      var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var countStart = arguments.length > 3 ? arguments[3] : undefined;
+      var countEnd = arguments.length > 4 ? arguments[4] : undefined;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "animateToState", this).call(this, state, options, independentOnly, countStart, countEnd);
+
+      if (this.transformUpdatesIndependantly && independentOnly || independentOnly === false) {
+        for (var i = 0; i < this.drawOrder.length; i += 1) {
+          var element = this.elements[this.drawOrder[i]];
+
+          if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
+            element.animateToState(state.elements[this.drawOrder[i]], options, independentOnly, countStart, countEnd);
+          }
+        }
       }
     } // _finishSetState(diagram: Diagram) {
     //   super._finishSetState(diagram);
@@ -34572,9 +34778,9 @@ var Recorder = /*#__PURE__*/function () {
 
       var recordAndQueue = function recordAndQueue() {
         if (_this8.state === 'recording') {
-          if (_this8.diagram.getIsInTransition() === false) {
-            _this8.recordCurrentState();
-          }
+          // if (this.diagram.getIsInTransition() === false) {
+          _this8.recordCurrentState(); // }
+
 
           _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
@@ -34731,7 +34937,7 @@ var Recorder = /*#__PURE__*/function () {
           return;
         }
 
-        var lastIndex = getIndexOfLatestTime(event.list, firstIndex);
+        var lastIndex = getIndexOfLatestTime(event.list, getPrevIndexForTime(event.list, timeIn)); // const lastIndex = getIndexOfLatestTime(event.list, firstIndex);
 
         for (var i = firstIndex; i <= lastIndex; i += 1) {
           var _event$list$i = _slicedToArray(event.list[i], 3),
@@ -34905,7 +35111,7 @@ var Recorder = /*#__PURE__*/function () {
       var events = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var fromTime = fromTimeIn;
 
-      if (fromTimeIn === this.duration) {
+      if (fromTimeIn >= this.duration) {
         fromTime = 0;
       }
 
@@ -35092,6 +35298,8 @@ var Recorder = /*#__PURE__*/function () {
       return true;
     } // clearPlaybackTimeouts() {
     //   this.timeoutID = null;
+    // }
+    // animateToState() {
     // }
 
   }, {

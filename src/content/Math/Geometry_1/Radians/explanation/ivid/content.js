@@ -108,42 +108,62 @@ class Content extends PresentationFormatContent {
         style({ centerH: true, size: 0.8, top: 2 }, 'Where does it come from, and why do we use it?'),
       ],
       show: [
-        circle._line1, circle._line2, circle._angle, // circle._corner
+        circle._line1, circle._line2, circle._angle, circle._corner,
       ],
       setSteadyState: () => {
         circle._line1.setScenario('default');
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
-        circle._line1.scenarios.temp = {
-          // position: [0, 0],
-          rotation: Math.PI / 2,
-          // isShown: false,
-          color: [0, 1, 0, 1],
-        }
-        circle.scenarios.temp = {
-          position: [0, 0],
-          // rotation: Math.PI / 2,
-          // isShown: false,
-          // color: [0, 1, 0, 1],
-        }
-        circle._line2.scenarios.temp = {
-          // position: [0, 0],
-          // rotation: Math.PI / 2,
-          // isShown: false,
-          color: [1, 1, 0, 1],
-          isShown: false,
-        }
-        diag.animations.new()
+      },
+    });
+
+    common = {
+      setEnterState: () => {
+        circle.setScenario('center');
+        circle._angleText.setScenario('bottomDeg');
+        diag.setAngleTextProperties(360, 0, 'º');
+      },
+      fadeInFromPrev: false,
+      modifiers: {
+        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        Circle: click(diag.pulseCircle, [diag], { color: colors.arc, id: 'note_circle' }),
+        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        Degrees: diag.bindAccent({
+          elements: [circle._degrees, circle._degreesHighlight],
+          scale: 1.15,
+          color: colors.dull,
+          id: 'note_degrees',
+        }),
+        Value: diag.bindAccent({ element: circle._angleText._value, scale: 2, color: colors.angles, id: 'note_value', x: 0.1 }),
+      },
+    };
+
+    this.addSection(common, {
+      setContent: [
+        devNote({ top: 5 }, '|Angle|'),
+        devNote({ top: 10 }, '|Degrees|'),
+        devNote({ top: 15 }, '|Value|'),
+      ],
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._corner,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('title');
+        circle._angleText.setScenario('bottomDeg');
+        diag.setAngleTextProperties(360, 0, 'º');
+        circle.animations.new()
           .inParallel([
-            circle.anim.scenarioNew({ target: 'temp', duration: 10 }),
-            circle._line1.anim.scenarioNew({ target: 'temp', duration: 10 }),
-            circle._line2.anim.scenarioNew({ target: 'temp', duration: 10 }),
+            circle.anim.scenario({ target: 'center', duration: 1 }),
+            circle._line1.anim.rotation({ target: 1, duration: 1 }),
           ])
-          // .color({ target: [0, 1, 0, 1], duration: 5 })
+          .inParallel([
+            circle._degrees.anim.dissolveIn({ duration: 0.5 }),
+            circle._degreesHighlight.anim.dissolveIn({ duration: 0.5 }),
+            circle._angleText.anim.dissolveIn(0.5),
+            circle.anim.trigger({ callback: 'setAngleTextDeg' }),
+          ])
           .start();
-        // circle.setColor([1, 0, 0, 1])
-        console.log(diag.animations.animations)
       },
     });
 
@@ -253,71 +273,38 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // Where a circle's angle is split evenly into 360 pieces, or degrees. We then measure angles by counting how many degrees are within them. If you were inventing angle measurement today, you might choose a different number than 360, and there are trade-offs to which number you choose. But 360 is a convenient number for many practical purposes. as it has a lot of factors (24 in fact) which means we can split the circle into many different fractions and be left with whole numbers.
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
-        // circle._degreesHighlight,
-        // circle._arc,
-      ],
-      transitionFromPrev: (done, doneStr) => {
-        // circle._angleText.setScenario('bottomDeg');
-        // diag.updateAngle();
-        // circle.animations.new()
-        //   .inParallel([
-        //     circle._degrees.anim.dissolveIn({ duration: 0.5 }),
-        //     circle._angleText.anim.dissolveIn(0.5),
-        //     circle.anim.trigger({ callback: 'setAngleTextDeg' }),
-        //   ])
-        //   .whenFinished(doneStr)
-        //   .start();
-        circle.setScenario('title');
-        circle.animations.new()
-          .inParallel([
-            circle.anim.scenario({ target: 'center', duration: 1 }),
-            circle._line1.anim.rotation({ target: 1, duration: 1 }),
-          ])
-          .inParallel([
-            circle._degrees.anim.dissolveIn({ duration: 0.5 }),
-            circle._degreesHighlight.anim.dissolveIn({ duration: 0.5 }),
-            circle._angleText.anim.dissolveIn(0.5),
-            circle.anim.trigger({ callback: 'setAngleTextDeg' }),
-          ])
-          // .then(circle._arc.anim.dissolveIn(0))
-          // .then(circle._line1.anim.rotation({ target: 1.5, duration: 1 }))
-          .whenFinished(doneStr)
-          .start();
-      },
-      setSteadyState: () => {
-        // circle._angleText.setScenario('bottomDeg');
-        circle._degrees.showAll();
-        circle._degreesHighlight.showAll();
-        circle._angleText.showAll();
-        diag.setAngleTextDeg();
-        diag.updateAngle();
-      },
-    });
 
 
     // For instance, these are the first 10 factors of 360 as a portion of a circle. When we use 360, a half circle is 180º, a third of a circle is 120º, a quarter is 90º and so on. This is useful for many simple, everyday practical applications of angles, such as angle arithmatic easy to do without aid from a computer or needing to write it down.
     // So 360 is a measure of convenience for easy angle arithmatic. Now, let's find a different measure that is convenient in a different way.
     const row = (portion: string, angle: number) => `<tr id="|id_${angle}degr|" ><td class="topic__fraction radians_table_value">${portion}</td><td class="radians_table_value">${angle}&deg</td></tr>`;
 
-    // const rowClick = (angle: number) => click(
-    //   diag.pushLine,
-    //   [diag, angle / 180 * Math.PI, 0, 1, null],
-    //   {
-    //     color: colors.angles,
-    //     id: `id_${angle}`,
-    //     text: null,
-    //     classes: 'action_word_table',
-    //   },
-    // );
     const rowClick = (angle: number) => ({
       replacementText: `id_${angle}degr`,
       id: () => `id_${angle}degr`,
       actionMethod: diag.pushLine,
       bind: [diag, angle / 180 * Math.PI, 0, 1, null],
     });
+
+    const tableContent = `
+      <table class="radians_table fractions_table" id="radians_table">
+        <tr>
+          <th class="topic__fraction_title"> Fraction </th>
+          <th class="topic__angle_title"> Angle </th>
+        </tr>
+        ${row('<sup>1</sup>&frasl;<sub>2</sub>', 180)}
+        ${row('<sup>1</sup>&frasl;<sub>3</sub>', 120)}
+        ${row('<sup>1</sup>&frasl;<sub>4</sub>', 90)}
+        ${row('<sup>1</sup>&frasl;<sub>5</sub>', 72)}
+        ${row('<sup>1</sup>&frasl;<sub>6</sub>', 60)}
+        ${row('<sup>1</sup>&frasl;<sub>8</sub>', 45)}
+        ${row('<sup>1</sup>&frasl;<sub>9</sub>', 40)}
+        ${row('<sup>1</sup>&frasl;<sub>10</sub>', 36)}
+        ${row('<sup>1</sup>&frasl;<sub>12</sub>', 30)}
+        ${row('<sup>1</sup>&frasl;<sub>15</sub>', 24)}
+        <tr><td>\u22ee</td><td>\u22ee</td>
+      </table>
+    `;
     this.addSection(common, {
       setContent: [
         devNote({ top: 5 }, '|hide_box|'),
@@ -326,25 +313,7 @@ class Content extends PresentationFormatContent {
         devNote({ top: 20 }, '|Degrees|'),
         devNote({ top: 25 }, '|Angle|'),
         // devNote({ top: 90 }, '|Arc|'),
-        `
-          <table class="radians_table fractions_table" id="radians_table">
-            <tr>
-              <th class="topic__fraction_title"> Fraction </th>
-              <th class="topic__angle_title"> Angle </th>
-            </tr>
-            ${row('<sup>1</sup>&frasl;<sub>2</sub>', 180)}
-            ${row('<sup>1</sup>&frasl;<sub>3</sub>', 120)}
-            ${row('<sup>1</sup>&frasl;<sub>4</sub>', 90)}
-            ${row('<sup>1</sup>&frasl;<sub>5</sub>', 72)}
-            ${row('<sup>1</sup>&frasl;<sub>6</sub>', 60)}
-            ${row('<sup>1</sup>&frasl;<sub>8</sub>', 45)}
-            ${row('<sup>1</sup>&frasl;<sub>9</sub>', 40)}
-            ${row('<sup>1</sup>&frasl;<sub>10</sub>', 36)}
-            ${row('<sup>1</sup>&frasl;<sub>12</sub>', 30)}
-            ${row('<sup>1</sup>&frasl;<sub>15</sub>', 24)}
-            <tr><td>\u22ee</td><td>\u22ee</td>
-          </table>
-        `,
+        tableContent,
       ],
       modifiers: {
         id_180degr: rowClick(180),
@@ -379,25 +348,19 @@ class Content extends PresentationFormatContent {
       },
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,
-        // circle._arc,
         circle._degrees, circle._angleText,
         circle._degreesHighlight,
       ],
-      // fadeInFromPrev: false,
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         addClass('radians_table', 'topic__diagram_text_fade_in_05');
         circle.animations.new()
           // .delay(0.5)
           .scenario({ target: 'centerLeft', duration: 1 })
-          .whenFinished(doneStr)
+          .trigger(() => {
+            removeClass('radians_table', 'topic__diagram_text_fade_in_05');
+            diag.updateAngle();
+          })
           .start();
-      },
-      setSteadyState: () => {
-        removeClass('radians_table', 'topic__diagram_text_fade_in_05');
-        circle.setScenario('centerLeft');
-        // diag.setAngleTextProperties(360, 0, 'º');
-        // circle._angleText.setScenario('bottomDeg');
-        diag.updateAngle();
       },
       transitionToNext: (done, doneStr) => {
         const table = document.getElementById('radians_table');
@@ -409,12 +372,60 @@ class Content extends PresentationFormatContent {
             circle._degrees.anim.dissolveOut({ duration: 0.5 }),
             circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
             circle._angleText.anim.dissolveOut({ duration: 0.5 }),
-            circle.anim.scenario({ target: 'center', duration: 1 }),
+            circle.anim.scenario({ target: 'center', duration: 3 }),
           ])
           .whenFinished(doneStr)
           .start();
       },
     });
+
+    // this.addSection(common, {
+    //   setContent: [
+    //     devNote({ top: 10 }, '|Circle|'),
+    //     devNote({ top: 15 }, '|Lines|'),
+    //     devNote({ top: 20 }, '|Radius|'),
+    //     devNote({ top: 25 }, '|Arc|'),
+    //     devNote({ top: 30 }, '|Angle|'),
+    //     tableContent,
+    //   ],
+    //   modifiers: {
+    //     Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+    //     'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+    //     Lines: click(diag.pulseLines, [diag], { color: colors.lines, id: 'note_lines' }),
+    //   },
+    //   show: [
+    //     circle._line1, circle._line2, circle._corner, circle._angle,
+    //     circle._degrees, circle._angleText,
+    //     circle._degreesHighlight,
+    //   ],
+    //   setSteadyState: () => {
+    //     addClass('radians_table', 'topic__diagram_text_fade_in_05');
+    //     circle.animations.new()
+    //       // .delay(0.5)
+    //       .scenario({ target: 'centerLeft', duration: 1 })
+    //       .trigger(() => {
+    //         removeClass('radians_table', 'topic__diagram_text_fade_in_05');
+    //         diag.updateAngle();
+    //       })
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     circle.
+    //     const table = document.getElementById('radians_table');
+    //     if (table) {
+    //       table.classList.add('radians_table_fade_out');
+    //     }
+    //     circle.animations.new()
+    //       .inParallel([
+    //         circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+    //         circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
+    //         circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+    //         circle.anim.scenario({ target: 'center', duration: 1 }),
+    //       ])
+    //       .whenFinished(doneStr)
+    //       .start();
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
