@@ -362,7 +362,48 @@ class Content extends PresentationFormatContent {
           })
           .start();
       },
-      transitionToNext: (done, doneStr) => {
+      // transitionToNext: (done, doneStr) => {
+      //   const table = document.getElementById('radians_table');
+      //   if (table) {
+      //     table.classList.add('radians_table_fade_out');
+      //   }
+      //   circle.animations.new()
+      //     .inParallel([
+      //       circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+      //       circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
+      //       circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+      //       circle.anim.scenario({ target: 'center', duration: 3 }),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        tableContent,
+      ],
+      modifiers: {
+        id_180degr: rowClick(180),
+        id_120degr: rowClick(120),
+        id_90degr: rowClick(90),
+        id_72degr: rowClick(72),
+        id_60degr: rowClick(60),
+        id_45degr: rowClick(45),
+        id_40degr: rowClick(40),
+        id_36degr: rowClick(36),
+        id_30degr: rowClick(30),
+        id_24degr: rowClick(24),
+        id_20degr: rowClick(20),
+      },
+      show: [
+        circle._line1, circle._line2, circle._corner, circle._angle,
+        circle._degrees, circle._angleText,
+        circle._degreesHighlight,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('centerLeft');
+        diag.updateAngle();
         const table = document.getElementById('radians_table');
         if (table) {
           table.classList.add('radians_table_fade_out');
@@ -374,7 +415,7 @@ class Content extends PresentationFormatContent {
             circle._angleText.anim.dissolveOut({ duration: 0.5 }),
             circle.anim.scenario({ target: 'center', duration: 3 }),
           ])
-          .whenFinished(doneStr)
+          .whenFinished(this.next())
           .start();
       },
     });
