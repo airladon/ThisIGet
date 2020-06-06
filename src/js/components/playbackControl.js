@@ -140,7 +140,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
     if (recorder.duration === 0) {
       return;
     }
-    recorder.startPlayback(this.state.timeValue);
+    if (this.state.timeValue > 0) {
+      recorder.unpausePlayback();
+    } else {
+      recorder.startPlayback(this.state.timeValue);
+    }
     recorder.playbackStoppedCallback = this.playToPause.bind(this);
     this.setState({
       playPauseClass: 'playback_fade_out_partial',

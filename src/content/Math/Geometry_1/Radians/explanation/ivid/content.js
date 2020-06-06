@@ -154,8 +154,8 @@ class Content extends PresentationFormatContent {
         diag.setAngleTextProperties(360, 0, 'º');
         circle.animations.new()
           .inParallel([
-            circle.anim.scenario({ target: 'center', duration: 1 }),
-            circle._line1.anim.rotation({ target: 1, duration: 1 }),
+            circle.anim.scenario({ target: 'center', duration: 4 }),
+            circle._line1.anim.rotation({ target: 1, duration: 4 }),
           ])
           .inParallel([
             circle._degrees.anim.dissolveIn({ duration: 0.5 }),
@@ -415,7 +415,7 @@ class Content extends PresentationFormatContent {
             circle._angleText.anim.dissolveOut({ duration: 0.5 }),
             circle.anim.scenario({ target: 'center', duration: 3 }),
           ])
-          .whenFinished(this.next())
+          .whenFinished(() => { this.next(); })
           .start();
       },
     });

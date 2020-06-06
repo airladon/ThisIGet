@@ -34778,9 +34778,9 @@ var Recorder = /*#__PURE__*/function () {
 
       var recordAndQueue = function recordAndQueue() {
         if (_this8.state === 'recording') {
-          // if (this.diagram.getIsInTransition() === false) {
-          _this8.recordCurrentState(); // }
-
+          if (_this8.diagram.getIsInTransition() === false) {
+            _this8.recordCurrentState();
+          }
 
           _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
@@ -35133,6 +35133,20 @@ var Recorder = /*#__PURE__*/function () {
       if (this.areEventsPlaying() === false) {
         this.finishPlaying();
         return;
+      }
+    }
+  }, {
+    key: "unpausePlayback",
+    value: function unpausePlayback() {
+      this.state = 'playing';
+      this.setVideoToNowDeltaTime(this.currentTime);
+      this.diagram.unpause();
+      this.startEventsPlayback(this.currentTime);
+      this.startAudioPlayback(this.currentTime);
+      this.diagram.animateNextFrame();
+
+      if (this.areEventsPlaying() === false) {
+        this.finishPlaying();
       }
     } // initializePlayback(fromTime: number) {
     //   this.currentTime = fromTime;
