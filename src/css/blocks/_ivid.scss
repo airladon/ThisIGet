@@ -1,0 +1,15 @@
+.ivid_animation_finishing_container {
+  position: absolute;
+  background-color: var(--color-diagram-disabled-darkest);
+  width: var(--pres__content_width);
+  bottom: 2em;
+  text-align: center;
+  padding: 0.5em;
+  font-weight: 300;
+  z-index: 10;
+  color: var(--color-diagram-quiz-button-text);
+}
+
+.ivid_animation_hidden {
+  display: none;
+}

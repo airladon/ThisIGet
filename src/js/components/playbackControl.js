@@ -136,6 +136,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   play() {
+    const element = document.getElementById('id_ivid_animation_finishing');
+    if (element != null) {
+      element.classList.add('ivid_animation_hidden');
+    }
     const recorder = new Recorder();
     if (recorder.duration === 0) {
       return;
@@ -174,9 +178,16 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const recorder = new Recorder();
     recorder.pausePlayback();
     this.unfade();
-    const s = performance.now();
+    let s = performance.now();
     console.log(this.getDiagram().getState({ min: true, precision: 3 }));
     console.log(performance.now() - s)
+    s = performance.now();
+    console.log(this.getDiagram().getState({ precision: 3 }));
+    console.log(performance.now() - s)
+    const element = document.getElementById('id_ivid_animation_finishing');
+    if (element != null) {
+      element.classList.remove('ivid_animation_hidden');
+    }
     // if (this.timeoutID != null) {
     //   clearTimeout(this.timeoutID);
     //   this.timeoutID = null;
