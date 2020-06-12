@@ -879,6 +879,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -897,6 +898,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
  // import type Diagram from '../Diagram';
 
 var AnimationManager = /*#__PURE__*/function () {
@@ -905,7 +907,9 @@ var AnimationManager = /*#__PURE__*/function () {
 
     _classCallCheck(this, AnimationManager);
 
-    var defaultOptions = {};
+    var defaultOptions = {
+      finishedCallback: null
+    };
     var options;
 
     for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -926,6 +930,8 @@ var AnimationManager = /*#__PURE__*/function () {
     this.options = {
       translation: {}
     };
+    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+    this.finishedCallback = options.finishedCallback;
     return this;
   }
 
@@ -993,9 +999,28 @@ var AnimationManager = /*#__PURE__*/function () {
       return isAnimating;
     }
   }, {
+    key: "isAnimating",
+    value: function isAnimating() {
+      // console.log(this.state)
+      if (this.state === 'animating' || this.state === 'waitingToStart') {
+        return true;
+      }
+
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
+
+        if (animation.state === 'waitingToStart' || animation.state === 'animating') {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
     key: "nextFrame",
     value: function nextFrame(now) {
       // console.log('animation manager', now)
+      // console.log(this.element.name, this.state)
       var animationsToRemove = [];
       var remaining = null;
       var isAnimating = false;
@@ -1029,17 +1054,17 @@ var AnimationManager = /*#__PURE__*/function () {
       if (isAnimating) {
         this.state = 'animating';
       } else {
+        if (this.state === 'animating') {
+          this.state = 'idle';
+          this.fnMap.exec(this.finishedCallback);
+        }
+
         this.state = 'idle';
       }
 
       for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
         this.animations.splice(animationsToRemove[i], 1);
-      } // if (initialState !== 'animating' && this.state === 'animating') {
-      //   if (this.element != null) {
-      //     this.element.unrender();
-      //   }
-      // }
-
+      }
 
       return remaining;
     }
@@ -1066,6 +1091,11 @@ var AnimationManager = /*#__PURE__*/function () {
       if (isAnimating) {
         this.state = 'animating';
       } else {
+        if (this.state === 'animating') {
+          this.state = 'idle';
+          this.fnMap.exec(this.finishedCallback);
+        }
+
         this.state = 'idle';
       }
     } // Cancel all primary animations with the name
@@ -1122,6 +1152,10 @@ var AnimationManager = /*#__PURE__*/function () {
           }
         }
       }
+
+      if (this.state === 'idle') {
+        this.fnMap.exec(this.finishedCallback);
+      }
     }
   }, {
     key: "startAll",
@@ -1138,6 +1172,38 @@ var AnimationManager = /*#__PURE__*/function () {
           }
         }
       }
+
+      if (this.state === 'idle') {
+        this.fnMap.exec(this.finishedCallback);
+      }
+    }
+  }, {
+    key: "getTotalDuration",
+    value: function getTotalDuration() {
+      var duration = 0;
+      this.animations.forEach(function (animation) {
+        var animationDuration = animation.getTotalDuration();
+
+        if (animationDuration > duration) {
+          duration = animationDuration;
+        }
+      });
+      return duration;
+    }
+  }, {
+    key: "getRemainingTime",
+    value: function getRemainingTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now();
+      var remainingTime = 0;
+      this.animations.forEach(function (animation) {
+        var animationRemainingTime = animation.getRemainingTime(now);
+
+        if (animationRemainingTime > remainingTime) {
+          remainingTime = animationRemainingTime;
+        }
+      }); // console.log(this.element.name, remainingTime, this.animations);
+
+      return remainingTime;
     }
   }, {
     key: "addTo",
@@ -1435,6 +1501,35 @@ var AnimationStep = /*#__PURE__*/function () {
       }
 
       return remainingTime;
+    }
+  }, {
+    key: "getRemainingTime",
+    value: function getRemainingTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now();
+      var totalDuration = this.getTotalDuration();
+
+      if (this.startTime == null) {
+        if (this.state === 'animating' || this.state === 'waitingToStart') {
+          return totalDuration;
+        } else {
+          return 0;
+        }
+      }
+
+      var deltaTime = now - this.startTime;
+      return this.duration + this.startDelay - deltaTime;
+    } // getRemainingTime(now: number = performance.now()){
+    //   if (this.startTime == null) {
+    //     return 0;
+    //   }
+    //   const deltaTime = now - this.startTime;
+    //   return this.duration + this.startDelay - deltaTime;
+    // }
+
+  }, {
+    key: "getTotalDuration",
+    value: function getTotalDuration() {
+      return this.duration + this.startDelay;
     } // eslint-disable-next-line class-methods-use-this, no-unused-vars
 
   }, {
@@ -3976,6 +4071,10 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
+      if (this.startTime === null) {
+        this.startTime = now - this.startTimeOffset;
+      }
+
       var remaining = null;
 
       if (this.beforeFrame != null) {
@@ -4082,6 +4181,36 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       if (this.onFinish != null) {
         this.fnExec(this.onFinish, cancelled);
       }
+    }
+  }, {
+    key: "getTotalDuration",
+    value: function getTotalDuration() {
+      var totalDuration = 0;
+      this.steps.forEach(function (step) {
+        var stepDuration = step.getTotalDuration();
+
+        if (stepDuration > totalDuration) {
+          totalDuration = stepDuration;
+        }
+      });
+      return totalDuration;
+    }
+  }, {
+    key: "getRemainingTime",
+    value: function getRemainingTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now();
+      var totalDuration = this.getTotalDuration();
+
+      if (this.startTime == null) {
+        if (this.state === 'animating' || this.state === 'waitingToStart') {
+          return totalDuration;
+        } else {
+          return 0;
+        }
+      }
+
+      var deltaTime = now - this.startTime;
+      return totalDuration - deltaTime;
     }
   }, {
     key: "_dup",
@@ -4299,6 +4428,10 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
+      if (this.startTime === null) {
+        this.startTime = now - this.startTimeOffset;
+      }
+
       var remaining = -1;
 
       if (this.beforeFrame != null) {
@@ -4362,6 +4495,32 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       if (this.onFinish != null) {
         this.fnExec(this.onFinish, cancelled);
       }
+    }
+  }, {
+    key: "getTotalDuration",
+    value: function getTotalDuration() {
+      var totalDuration = 0;
+      this.steps.forEach(function (step) {
+        totalDuration += step.getTotalDuration();
+      });
+      return totalDuration;
+    }
+  }, {
+    key: "getRemainingTime",
+    value: function getRemainingTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now();
+      var totalDuration = this.getTotalDuration();
+
+      if (this.startTime == null) {
+        if (this.state === 'animating' || this.state === 'waitingToStart') {
+          return totalDuration;
+        } else {
+          return 0;
+        }
+      }
+
+      var deltaTime = now - this.startTime;
+      return totalDuration - deltaTime;
     }
   }, {
     key: "_dup",
@@ -4733,7 +4892,8 @@ var Diagram = /*#__PURE__*/function () {
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         limits = optionsToUse.limits;
-    this.htmlId = htmlId; // this.layout = layout;
+    this.htmlId = htmlId;
+    this.animationFinishedCallback = null; // this.layout = layout;
 
     if (typeof htmlId === 'string') {
       var container = document.getElementById(htmlId);
@@ -5314,8 +5474,39 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
+      var _this3 = this;
+
       this.setFirstTransform();
+      var elements = this.elements.getAllElements();
+      elements.forEach(function (element) {
+        element.animationFinishedCallback = _this3.animationFinished.bind(_this3, element);
+      });
       this.animateNextFrame();
+    }
+  }, {
+    key: "getRemainingAnimationTime",
+    value: function getRemainingAnimationTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now();
+      var elements = this.elements.getAllElements();
+      var remainingTime = 0;
+      elements.forEach(function (element) {
+        var elementRemainingTime = element.animations.getRemainingTime(now);
+
+        if (elementRemainingTime > remainingTime) {
+          remainingTime = elementRemainingTime;
+        }
+      });
+      return remainingTime;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "animationFinished",
+    value: function animationFinished(element) {
+      if (this.isAnimating()) {
+        return;
+      }
+
+      this.fnMap.exec(this.animationFinishedCallback);
     }
   }, {
     key: "setFirstTransform",
@@ -5332,7 +5523,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderAllElementsToTiedCanvases",
     value: function renderAllElementsToTiedCanvases() {
-      var _this3 = this;
+      var _this4 = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -5342,12 +5533,12 @@ var Diagram = /*#__PURE__*/function () {
 
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this3.elements.elements[name];
+        var element = _this4.elements.elements[name];
 
         if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
           element.isRenderedAsImage = true;
 
-          _this3.renderElementToTiedCanvas(name);
+          _this4.renderElementToTiedCanvas(name);
 
           needClear = true;
         }
@@ -5365,17 +5556,17 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
-      var _this4 = this;
+      var _this5 = this;
 
       // record visibility of top level elements in diagram
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this4.elements.elements[name];
+        var element = _this5.elements.elements[name];
         currentVisibility[name] = element.isShown;
       }); // Hide all elements
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        _this4.elements.elements[name].hide();
+        _this5.elements.elements[name].hide();
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
@@ -5412,7 +5603,7 @@ var Diagram = /*#__PURE__*/function () {
       elementToRender.setScale(oldScale); // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this4.elements.elements[name];
+        var element = _this5.elements.elements[name];
 
         if (currentVisibility[name] === true) {
           element.show();
@@ -6143,7 +6334,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "isAnimating",
     value: function isAnimating() {
-      return this.elements.isMoving();
+      return this.elements.isAnimatingOrMovingFreely();
     }
   }, {
     key: "clientToPixel",
@@ -9626,7 +9817,7 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     value: function createForm() {
       var elements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.elements;
       return new _EquationForm__WEBPACK_IMPORTED_MODULE_6__["default"](elements, {
-        getAllElements: this.getAllElements.bind(this),
+        getAllElements: this.getChildren.bind(this),
         hideAll: this.hideAll.bind(this),
         show: this.show.bind(this),
         showOnly: this.showOnly.bind(this),
@@ -29721,7 +29912,11 @@ var DiagramElement = /*#__PURE__*/function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationManager"](this);
+    this.animationFinishedCallback = null;
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationManager"]({
+      element: this,
+      finishedCallback: this.animationFinished.bind(this)
+    });
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -29735,6 +29930,17 @@ var DiagramElement = /*#__PURE__*/function () {
   }
 
   _createClass(DiagramElement, [{
+    key: "animationFinished",
+    value: function animationFinished() {
+      // console.log(this.name, this.animationFinishedCallback)
+      this.fnMap.exec(this.animationFinishedCallback);
+    } // animationsFinishedCallback(element: DiagramElement) {
+    //   if (this.parent != null) {
+    //     this.parent.animationsFinishedCallback(element);
+    //   }
+    // }
+
+  }, {
     key: "setProperties",
     value: function setProperties(properties) {
       var except = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -30669,6 +30875,8 @@ var DiagramElement = /*#__PURE__*/function () {
         this.fnMap.exec(this.move.freely.callback, result);
         this.move.freely.callback = null;
       }
+
+      this.fnMap.exec(this.animationFinishedCallback);
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
     // will be the largest, so when saving lastDrawTransformMatrix it can be
@@ -31864,6 +32072,29 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
       }
 
       return false;
+    }
+  }, {
+    key: "isAnimatingOrMovingFreely",
+    value: function isAnimatingOrMovingFreely() {
+      if (this.isShown === false) {
+        return false;
+      } // console.log(this.name, this.state.isMovingFreely, this.state.isPulsing, this.animations.isAnimating())
+
+
+      if (this.state.isMovingFreely || this.state.isPulsing || this.animations.isAnimating()) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "isAnimating",
+    value: function isAnimating() {
+      if (this.isShown === false) {
+        return false;
+      }
+
+      return this.animations.isAnimating();
     } // setupWebGLBuffers(newWebgl: WebGLInstance) {
     //   const { drawingObject } = this;
     //   if (drawingObject instanceof VertexObject) {
@@ -32094,6 +32325,27 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
             return true;
           }
         } else if (element.isShown && element.color[3] > 0 && element.isMoving()) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
+    key: "isAnimatingOrMovingFreely",
+    value: function isAnimatingOrMovingFreely() {
+      if (this.isShown === false) {
+        return false;
+      }
+
+      if (this.state.isMovingFreely || this.state.isPulsing || this.animations.state === 'animating') {
+        return true;
+      }
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.isAnimatingOrMovingFreely()) {
           return true;
         }
       }
@@ -33162,7 +33414,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
 
         if (element instanceof DiagramElementCollection) {
-          elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllElements()));
+          elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllPrimitives()));
         } else {
           elements.push(element);
         }
@@ -33173,6 +33425,24 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getAllElements",
     value: function getAllElements() {
+      var elements = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimitive) {
+          elements.push(element);
+        } else {
+          elements.push.apply(elements, elements.concat(_toConsumableArray(element.getAllElements())));
+        }
+      }
+
+      return elements;
+    }
+  }, {
+    key: "getChildren",
+    value: function getChildren() {
+      var directChildrenOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {

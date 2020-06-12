@@ -184,9 +184,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
     s = performance.now();
     console.log(this.getDiagram().getState({ precision: 3 }));
     console.log(performance.now() - s)
-    const element = document.getElementById('id_ivid_animation_finishing');
-    if (element != null) {
-      element.classList.remove('ivid_animation_hidden');
+    if (this.getDiagram().isAnimating()) {
+      const element = document.getElementById('id_ivid_animation_finishing');
+      if (element != null) {
+        element.classList.remove('ivid_animation_hidden');
+      }
+      this.getDiagram().unpause();
     }
     // if (this.timeoutID != null) {
     //   clearTimeout(this.timeoutID);
