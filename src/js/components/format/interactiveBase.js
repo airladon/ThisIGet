@@ -53,6 +53,7 @@ export default class InteractiveFormatComponent extends React.Component
   centerContentFlag: boolean;
   topic: string;
   firstPage: number;
+  props: Props;
   // refreshCallback: ?() => void;
 
   constructor(props: Props) {
@@ -77,6 +78,7 @@ export default class InteractiveFormatComponent extends React.Component
       topicContainerClasses: '',
       dev: false,
       duration: 0,
+      diagram: null,
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);
@@ -232,7 +234,10 @@ export default class InteractiveFormatComponent extends React.Component
     this.setState({
       listOfSections: this.addListOfSections(),
       numPages: this.version.content.sections.length,
+      diagram: this.version.content.diagram,
     });
+
+    console.log('5678')
 
     if (this.firstPage != null && this.firstPage < this.version.content.sections.length) {
       this.version.goToSection(this.firstPage);

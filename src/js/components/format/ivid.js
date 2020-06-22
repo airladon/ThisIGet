@@ -33,6 +33,8 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     // for (let i = 0; i < elements.length; i += 1) {
     //   elements[i].style.visibility = 'hidden';
     // }
+    console.log('1234')
+    console.log(this.state)
   }
 
   toggleDev() {
@@ -78,7 +80,8 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
             <canvas id="id_figureone__text__low" className='figureone__text'>
             </canvas>
             <PlaybackControl
-              getDiagram={this.getDiagram.bind(this)}
+              // getDiagram={this.getDiagram.bind(this)}
+              diagram={this.state.diagram}
               dev={this.state.dev}
               duration={this.state.duration}
             />

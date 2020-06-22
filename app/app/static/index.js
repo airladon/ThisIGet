@@ -34781,6 +34781,7 @@ var Recorder = /*#__PURE__*/function () {
   // The precision with which to record numbers
   // in seconds
   // timeoutID: ?TimeoutID;
+  // playbackStoppedCallback: ?() =>void;
   // All slides, events and states are relative to 0, where 0 is the start of a recording.
   // Slides, events and states do not have to have a 0 time,
   // maybe the first event will not happen till 1s in
@@ -34833,8 +34834,8 @@ var Recorder = /*#__PURE__*/function () {
       //   subscriptions: SubscriptionManager
       // };
 
-      this.audio = null;
-      this.playbackStoppedCallback = null;
+      this.audio = null; // this.playbackStoppedCallback = null;
+
       this.worker = null;
       this.pauseState = null;
     } // ////////////////////////////////////
@@ -35902,7 +35903,7 @@ var Recorder = /*#__PURE__*/function () {
         this.finishPlaying(); // return;
       }
 
-      this.subscriptions.trigger('startPlayback');
+      this.subscriptions.trigger('playbackStarted');
     }
   }, {
     key: "resumePlayback",
@@ -35934,7 +35935,7 @@ var Recorder = /*#__PURE__*/function () {
           _this10.finishPlaying();
         }
 
-        _this10.subscriptions.trigger('startPlayback');
+        _this10.subscriptions.trigger('playbackStarted');
       }; // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
 
 
@@ -35949,10 +35950,15 @@ var Recorder = /*#__PURE__*/function () {
         },
         allDurationsSame: true,
         zeroDurationThreshold: 0.1
-      }, finished); // if (animationCount === 0) {
+      }, finished);
+
+      if (this.diagram.isAnimating()) {
+        this.subscriptions.trigger('preparingToPlay');
+      } // if (animationCount === 0) {
       //   this.diagram.subscriptions.unsubscribe('animationsFinished', id);
       //   finished();
       // }
+
     } // initializePlayback(fromTime: number) {
     //   this.currentTime = fromTime;
     //   this.diagram.unpause();
@@ -36139,28 +36145,24 @@ var Recorder = /*#__PURE__*/function () {
       var pause = function pause() {
         _this15.diagram.pause();
 
-        _this15.state = 'idle'; // this.clearPlaybackTimeouts();
+        _this15.state = 'idle';
 
-        _this15.stopTimeouts(); // const pointer = this.diagram.getElement('pointer');
-        // if (pointer != null) {
-        //   pointer.hide();
-        // }
-
+        _this15.stopTimeouts();
 
         if (_this15.audio) {
           _this15.audio.pause();
 
           _this15.isAudioPlaying = false;
-        }
+        } // if (this.playbackStoppedCallback != null) {
+        //   this.playbackStoppedCallback();
+        // }
 
-        if (_this15.playbackStoppedCallback != null) {
-          _this15.playbackStoppedCallback();
-        }
 
-        _this15.subscriptions.trigger('pausePlayback');
+        _this15.subscriptions.trigger('playbackStopped');
       };
 
       if (this.diagram.isAnimating()) {
+        this.subscriptions.trigger('preparingToPause');
         this.state = 'preparingToPause'; // this.diagram.setAnimationFinishedCallback(pause);
 
         this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Fig from 'figureone';
 import ScrollBar from './scrollBar';
-import type Diagram from 'figureone';
+// import type Diagram from 'figureone';
 // const {
 //   Recorder, Diagram, FunctionMap
 // } = Fig;
@@ -38,7 +38,7 @@ function addClass(ids: string | Array<string>, className: string) {
 
 type State = {
   playClass: string,
-  playPauseClass: string,
+  pauseClass: string,
   recordClass: string,
   recordPauseClass: string,
   volumeOnClass: string,
@@ -46,6 +46,9 @@ type State = {
   time: string,
   seek: number,
   timeValue: number,
+  // animationFinishing: string,
+  preparingToPlayClass: string,
+  preparingToPauseClass: string,
 }
 
 type Props = {
@@ -53,10 +56,10 @@ type Props = {
   statesSrc: string;
   eventsSrc: string;
   slidesSrc: string;
-  getDiagram: () => Diagram;
+  // getDiagram: () => Object;
   dev: boolean;
   duration: number;
-  // diagram: Diagram;
+  diagram: ?Object;
 };
 
 function timeToStr(time: number) {
@@ -72,26 +75,31 @@ export default class PlaybackControl extends React.Component<Props, State> {
   volumeTouchDown: boolean;
   recorder: Recorder;
   timer: TimeoutID;
-  getDiagram: () => Diagram;
+  // getDiagram: () => Diagram;
   timeoutID: TimeoutID;
+  diagram: ?Diagram;
 
   constructor(props: Props) {
-    super();
+    super(props);
     this.seekTouchDown = false;
     this.volumeTouchDown = false;
     this.state = {
       playClass: '',
-      playPauseClass: 'figureone_playback_control__hide',
+      pauseClass: 'figureone_playback__hidden',
       recordClass: '',
-      recordPauseClass: 'figureone_playback_control__hide',
+      recordPauseClass: 'figureone_playback__hidden',
       volumeOnClass: '',
       volumeMuteClass: '',
       time: '00:00 / 00:00',
       timeValue: 0,
       seek: 0,
+      preparingToPlayClass: 'figureone_playback__hidden',
+      preparingToPauseClass: 'figureone_playback__hidden',
     };
-    this.getDiagram = props.getDiagram;
+    // this.getDiagram = props.getDiagram;
+    this.diagram = null;
     this.timeoutID = null;
+    // this.props = props;
   }
 
   componentDidMount() {
@@ -103,129 +111,112 @@ export default class PlaybackControl extends React.Component<Props, State> {
     let supportsPassive = false;
     try {
       const opts = Object.defineProperty({}, 'passive', {
-        get: function() {
-          supportsPassive = true;
-        }
+        get: () => { supportsPassive = true; },
       });
-      window.addEventListener("testPassive", null, opts);
-      window.removeEventListener("testPassive", null, opts);
+      window.addEventListener('testPassive', null, opts);
+      window.removeEventListener('testPassive', null, opts);
     } catch (e) {}
     element.addEventListener('mousedown', this.showControls.bind(this), false);
     element.addEventListener('touchstart', this.showControls.bind(this), supportsPassive ? { passive: true } : false);
   }
 
+  componentDidUpdate() {
+    if (this.props.diagram != null && this.diagram == null) {
+      this.diagram = this.props.diagram;
+      const { subscriptions } = this.diagram.recorder;
+      subscriptions.subscribe('playbackStarted', this.playbackStarted.bind(this));
+      subscriptions.subscribe('preparingToPlay', this.preparingToPlay.bind(this));
+      subscriptions.subscribe('playbackStopped', this.playbackStopped.bind(this));
+      subscriptions.subscribe('preparingToStop', this.preparingToPause.bind(this));
+    }
+  }
+
+  preparingToPlay() {
+    // console.log('preparingToPlay')
+    this.setState({
+      preparingToPlayClass: '',
+      preparingToPauseClass: 'figureone_playback__hidden',
+      pauseClass: '',
+      playClass: 'figureone_playback__hidden',
+    });
+  }
+
+  playbackStarted() {
+    // console.log('started')
+    this.setState({
+      preparingToPlayClass: 'figureone_playback__hidden',
+      preparingToPauseClass: 'figureone_playback__hidden',
+      pauseClass: 'playback_fade_out_partial',
+      playClass: 'figureone_playback__hidden',
+    });
+  }
+
+  preparingToPause() {
+    this.setState({
+      preparingToPlayClass: 'figureone_playback__hidden',
+      preparingToPauseClass: '',
+      pauseClass: 'figureone_playback__hidden',
+      playClass: '',
+    });
+  }
+
+  playbackStopped() {
+    this.setState({
+      preparingToPlayClass: 'figureone_playback__hidden',
+      preparingToPauseClass: 'figureone_playback__hidden',
+      pauseClass: 'figureone_playback__hidden',
+      playClass: '',
+    });
+  }
+
   showControls() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    // const diagram = this.getDiagram();
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
-    // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
-    // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    const { recorder } = this.diagram;
     this.unfade();
     if (recorder.state !== 'idle') {
       this.setState({
-        playPauseClass: '',
+        pauseClass: '',
       });
     }
     setTimeout(() => {
       if (recorder.state !== 'idle') {
-        // addClass('id_figureone_playback_control__time', 'playback_fade_out');
-        // addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
         this.startFade();
         this.setState({
-          playPauseClass: 'playback_fade_out_partial',
+          pauseClass: 'playback_fade_out_partial',
         });
       }
     }, 300);
   }
 
   play() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const element = document.getElementById('id_ivid_animation_finishing');
-    if (element != null) {
-      element.classList.add('ivid_animation_hidden');
-    }
-    // const recorder = new Recorder();
-    const { recorder } = diagram;
+    const { recorder } = this.diagram;
     if (recorder.duration === 0) {
       return;
     }
     if (this.state.timeValue > 0) {
-      recorder.unpausePlayback();
+      recorder.resumePlayback();
     } else {
       recorder.startPlayback(this.state.timeValue);
     }
-    recorder.playbackStoppedCallback = this.playToPause.bind(this);
-    this.setState({
-      playPauseClass: 'playback_fade_out_partial',
-      playClass: 'figureone_playback_control__hide',
-    });
     this.queueTimeUpdate();
-    // addClass('id_figureone_playback_control__time', 'playback_fade_out');
-    // addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
-    // this.timeoutID = setTimeout(this.finishFade.bind(this), 3000);
-    // addClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
     this.startFade();
-  }
-
-  playToPause() {
-    this.setState({
-      playClass: '',
-      playPauseClass: 'figureone_playback_control__hide',
-    });
-    const element = document.getElementById('id_ivid_animation_finishing');
-    if (element != null) {
-      element.classList.add('ivid_animation_hidden');
-    }
-    // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
-    // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
-    // removeClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
-    this.unfade();
   }
 
   // eslint-disable-next-line class-methods-use-this
   pause() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    if (this.getDiagram().isAnimating()) {
-      const element = document.getElementById('id_ivid_animation_finishing');
-      if (element != null) {
-        element.classList.remove('ivid_animation_hidden');
-      }
-      // this.getDiagram().unpause();
-    }
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
+    this.unfade();
     recorder.pausePlayback();
-    // this.unfade();
-    // let s = performance.now();
-    // console.log(this.getDiagram().getState({ min: true, precision: 3 }));
-    // console.log(performance.now() - s)
-    // s = performance.now();
-    // console.log(this.getDiagram().getState({ precision: 3 }));
-    // console.log(performance.now() - s)
-    // if (this.getDiagram().isAnimating()) {
-    // }
-    // if (this.timeoutID != null) {
-    //   clearTimeout(this.timeoutID);
-    //   this.timeoutID = null;
-    // }
   }
-
-  // finishFade() {
-  //   const elements = document.getElementsByClassName('playback_fade_out');
-  //   for (let i = 0; i < elements.length; i += 1) {
-  //     elements[i].classList.remove('playback_fade_out');
-  //     elements[i].classList.add('playback_faded');
-  //   }
-  // }
 
   startFade() {
     addClass('id_figureone_playback_control__time', 'playback_fade_out');
@@ -251,12 +242,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   record() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     recorder.stateTimeStep = 1;
     recorder.startRecording(this.state.timeValue);
     if (this.state.timeValue === 0) {
@@ -265,61 +254,48 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.queueTimeUpdate();
     this.setState({
       recordPauseClass: '',
-      recordClass: 'figureone_playback_control__hide',
+      recordClass: 'figureone_playback__hidden',
     });
     this.startFade();
   }
 
 
   pauseRecording() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     recorder.stopRecording();
     this.setState({
       recordClass: '',
-      recordPauseClass: 'figureone_playback_control__hide',
+      recordPauseClass: 'figureone_playback__hidden',
     });
-    // if (this.timeoutID != null) {
-    //   clearTimeout(this.timeoutID);
-    //   this.timeoutID = null;
-    // }
-    console.log(recorder);
     this.unfade();
   }
 
   // eslint-disable-next-line class-methods-use-this
   showRecording() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     recorder.show();
   }
 
   // eslint-disable-next-line class-methods-use-this
   saveRecording() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     recorder.save();
   }
 
   queueTimeUpdate() {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
     if (recorder.state !== 'idle') {
@@ -328,12 +304,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   updateTime(time: number) {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     let totalTime = recorder.duration;
     if (recorder.state === 'recording') {
       if (time > totalTime) {
@@ -349,25 +323,21 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
 
   seekToPercent(percent: number) {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
-    // const recorder = new Recorder();
+    const { recorder } = this.diagram;
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
-    // console.log(this.getDiagram().elements.elements.eqn.elements._1.opacity)
     recorder.seekToPercent(percent);
     this.updateTime(percent * totalTime);
   }
 
   seek(toTime: number) {
-    const diagram = this.getDiagram();
-    if (diagram == null) {
+    if (this.diagram == null) {
       return;
     }
-    const { recorder } = diagram;
+    const { recorder } = this.diagram;
     // const recorder = new Recorder();
     const totalTime = recorder.duration;
     const percent = toTime / totalTime;
@@ -376,6 +346,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.updateTime(toTime);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   fullScreen() {
     const elem = document.getElementById('topic__container_name');
     if (elem == null) {
@@ -392,6 +363,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   exitFullScreen() {
     if (document.exitFullscreen) {
       document.exitFullscreen();
@@ -522,7 +494,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       {/* <div className="figureone_playback_control__h_space"/> */}
       <div
         id="id_figureone_playback_control__pause"
-        className={`figureone_playback_control__pause ${this.state.playPauseClass}`}
+        className={`figureone_playback_control__pause ${this.state.pauseClass}`}
         onClick={this.pause.bind(this)}
       />
       <div id="id_figureone_playback_controll_seek_container"
@@ -551,9 +523,14 @@ export default class PlaybackControl extends React.Component<Props, State> {
       <div className="figureone_playback_control__settings"/>
       <div className="figureone_playback_control__full_screen"/>
       */ }
-      <div id="id_ivid_animation_finishing" className="ivid_animation_finishing_container ivid_animation_hidden">
+      <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPauseClass}`}>
         <div className="ivid_animation_finishing_text">
           Animation Finishing before interaction
+        </div>
+      </div>
+      <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPlayClass}`}>
+        <div className="ivid_animation_finishing_text">
+          Preparing to Play
         </div>
       </div>
     </div>;
