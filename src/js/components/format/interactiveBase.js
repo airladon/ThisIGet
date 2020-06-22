@@ -77,7 +77,6 @@ export default class InteractiveFormatComponent extends React.Component
       topicContainerClasses: '',
       dev: false,
       duration: 0,
-      diagram: null,
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);

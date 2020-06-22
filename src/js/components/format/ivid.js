@@ -26,7 +26,6 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       // console.log(diagram.recorder.duration)
       this.setState({
         duration: diagram.recorder.duration
-        diagram,
       });
     }
     const elements = document.getElementsByClassName('figureone_dev_only');

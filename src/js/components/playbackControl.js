@@ -2,9 +2,11 @@
 import * as React from 'react';
 import Fig from 'figureone';
 import ScrollBar from './scrollBar';
-
-const { Recorder, Diagram, FunctionMap } = Fig;
-const { getObjectDiff } = Fig.tools.misc;
+import type Diagram from 'figureone';
+// const {
+//   Recorder, Diagram, FunctionMap
+// } = Fig;
+// const { getObjectDiff } = Fig.tools.misc;
 
 function removeClass(ids: string | Array<string>, className: string) {
   let elementIds = ids;
@@ -95,7 +97,6 @@ export default class PlaybackControl extends React.Component<Props, State> {
   componentDidMount() {
     this.updateTime(this.props.duration);
     const element = document.getElementById('id__figureone_playback_control');
-    console.log(element)
     if (element == null) {
       return;
     }
@@ -114,7 +115,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   showControls() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
     // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
     this.unfade();
@@ -136,11 +142,16 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   play() {
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
     const element = document.getElementById('id_ivid_animation_finishing');
     if (element != null) {
       element.classList.add('ivid_animation_hidden');
     }
-    const recorder = new Recorder();
+    // const recorder = new Recorder();
+    const { recorder } = diagram;
     if (recorder.duration === 0) {
       return;
     }
@@ -179,6 +190,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   // eslint-disable-next-line class-methods-use-this
   pause() {
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
     if (this.getDiagram().isAnimating()) {
       const element = document.getElementById('id_ivid_animation_finishing');
       if (element != null) {
@@ -186,7 +202,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       }
       // this.getDiagram().unpause();
     }
-    const recorder = new Recorder();
+    // const recorder = new Recorder();
     recorder.pausePlayback();
     // this.unfade();
     // let s = performance.now();
@@ -235,7 +251,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   record() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     recorder.stateTimeStep = 1;
     recorder.startRecording(this.state.timeValue);
     if (this.state.timeValue === 0) {
@@ -251,7 +272,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
 
   pauseRecording() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     recorder.stopRecording();
     this.setState({
       recordClass: '',
@@ -267,18 +293,33 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   // eslint-disable-next-line class-methods-use-this
   showRecording() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     recorder.show();
   }
 
   // eslint-disable-next-line class-methods-use-this
   saveRecording() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     recorder.save();
   }
 
   queueTimeUpdate() {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     const currentTime = recorder.getCurrentTime();
     this.updateTime(currentTime);
     if (recorder.state !== 'idle') {
@@ -287,7 +328,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   updateTime(time: number) {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     let totalTime = recorder.duration;
     if (recorder.state === 'recording') {
       if (time > totalTime) {
@@ -303,7 +349,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
 
   seekToPercent(percent: number) {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
     // console.log(this.getDiagram().elements.elements.eqn.elements._1.opacity)
@@ -312,7 +363,12 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   seek(toTime: number) {
-    const recorder = new Recorder();
+    const diagram = this.getDiagram();
+    if (diagram == null) {
+      return;
+    }
+    const { recorder } = diagram;
+    // const recorder = new Recorder();
     const totalTime = recorder.duration;
     const percent = toTime / totalTime;
     this.setState({ seek: percent });
