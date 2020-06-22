@@ -5903,9 +5903,11 @@ var Diagram = /*#__PURE__*/function () {
     key: "animationFinished",
     value: function animationFinished(element) {
       if (this.isAnimating()) {
+        console.log('animation finished but still animating');
         return;
       }
 
+      console.log('animation finished');
       this.fnMap.exec(this.animationFinishedCallback);
       this.subscriptions.trigger('animationsFinished');
     }
@@ -33894,6 +33896,9 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
+        console.log(element.name, element.getPath()); // if (element.getPath() === 'ex3.d_5') {
+        //   debugger;
+        // }
 
         if (element instanceof DiagramElementPrimitive) {
           elements.push(element);
@@ -33908,6 +33913,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     key: "getChildren",
     value: function getChildren() {
       var directChildrenOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      console.log('huh?', this.name);
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -36143,6 +36149,8 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       var pause = function pause() {
+        console.log('recorder pause');
+
         _this15.diagram.pause();
 
         _this15.state = 'idle';
@@ -36165,6 +36173,7 @@ var Recorder = /*#__PURE__*/function () {
         this.subscriptions.trigger('preparingToPause');
         this.state = 'preparingToPause'; // this.diagram.setAnimationFinishedCallback(pause);
 
+        console.log('recorder prep to pause');
         this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
       } else {
         pause();

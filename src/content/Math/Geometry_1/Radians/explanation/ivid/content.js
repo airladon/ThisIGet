@@ -47,6 +47,8 @@ class Content extends PresentationFormatContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
+    console.log(this.diagram.elements.elements.ex3.getAllElements());
+    this.diagram.initialize();
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);

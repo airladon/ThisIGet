@@ -132,7 +132,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   preparingToPlay() {
-    // console.log('preparingToPlay')
+    console.log('Preparing to Play')
     this.setState({
       preparingToPlayClass: '',
       preparingToPauseClass: 'figureone_playback__hidden',
@@ -142,7 +142,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   playbackStarted() {
-    // console.log('started')
+    console.log('Playback Started')
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: 'figureone_playback__hidden',
@@ -152,6 +152,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   preparingToPause() {
+    console.log('Preparing to Pause')
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: '',
@@ -161,6 +162,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   playbackStopped() {
+    console.log('Playback Stopped')
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: 'figureone_playback__hidden',
