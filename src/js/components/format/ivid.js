@@ -80,11 +80,17 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
               dev={this.state.dev}
               duration={this.state.duration}
             />
-            <div id="id_ivid_animation_finishing" className="ivid_animation_finishing_container ivid_animation_hidden">
+            { /*<div id="id_ivid_animation_finishing" className="ivid_animation_finishing_container ivid_animation_hidden">
               <div className="ivid_animation_finishing_text">
                 Animation Finishing before interaction
               </div>
+              <div className="ivid_animating_finishing_progress_container">
+                <div className="ivid_animating_finishing_progress_rot ivid_animating_finishing_progress_half_circle"></div>
+                <div className="ivid_animating_finishing_progress_fixed ivid_animating_finishing_progress_half_circle"></div>
+                <div className="ivid_animating_finishing_progress_mask ivid_animating_finishing_progress_half_circle"></div>
+              </div>
             </div>
+            */ }
             <div id="id_figureone__html" className='figureone__html'>
               {this.renderContent(this.state.htmlText)}
               <div className="figureone__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>

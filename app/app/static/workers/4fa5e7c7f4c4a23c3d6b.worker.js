@@ -584,7 +584,7 @@ function rand2D(minX, minY, maxX, maxY) {
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download */
+/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download, Subscriber, SubscriptionManager */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -622,6 +622,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "minify", function() { return minify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ObjectTracker", function() { return ObjectTracker; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "download", function() { return download; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Subscriber", function() { return Subscriber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionManager", function() { return SubscriptionManager; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -1748,6 +1750,117 @@ var ObjectTracker = /*#__PURE__*/function () {
   return ObjectTracker;
 }();
 
+var Subscriber = /*#__PURE__*/function () {
+  function Subscriber() {
+    _classCallCheck(this, Subscriber);
+
+    this.subscribers = {};
+    this.nextId = 0;
+    this.order = [];
+  }
+
+  _createClass(Subscriber, [{
+    key: "subscribe",
+    value: function subscribe(callback) {
+      var numberOfSubscriptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+      this.subscribers["".concat(this.nextId)] = {
+        callback: callback,
+        num: numberOfSubscriptions
+      };
+      this.order.push("".concat(this.nextId));
+      this.nextId += 1;
+      return this.nextId - 1;
+    }
+  }, {
+    key: "trigger",
+    value: function trigger(payload) {
+      var _this3 = this;
+
+      var subscribersToRemove = [];
+
+      for (var i = 0; i < this.order.length; i += 1) {
+        var _id = this.order[i];
+        var _this$subscribers$ = this.subscribers["".concat(_id)],
+            callback = _this$subscribers$.callback,
+            num = _this$subscribers$.num;
+
+        if (callback != null) {
+          callback(payload);
+        }
+
+        if (num === 1) {
+          subscribersToRemove.push(_id);
+        } else if (num > 1) {
+          this.subscribers["".concat(_id)].num = num - 1;
+        }
+      }
+
+      subscribersToRemove.forEach(function (id) {
+        _this3.unsubscribe(id);
+      });
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe(idIn) {
+      var id = "".concat(idIn);
+
+      if (this.subscribers[id] != null) {
+        delete this.subscribers[id];
+      }
+
+      var index = this.order.indexOf(id);
+
+      if (index > -1) {
+        this.order.splice(index, 1);
+      }
+    }
+  }]);
+
+  return Subscriber;
+}();
+
+var SubscriptionManager = /*#__PURE__*/function () {
+  function SubscriptionManager() {
+    _classCallCheck(this, SubscriptionManager);
+
+    this.subscriptions = {};
+  }
+
+  _createClass(SubscriptionManager, [{
+    key: "subscribe",
+    value: function subscribe(subscriptionName, callback) {
+      var numberOfSubscriptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+
+      if (this.subscriptions[subscriptionName] == null) {
+        this.subscriptions[subscriptionName] = new Subscriber();
+      }
+
+      return this.subscriptions[subscriptionName].subscribe(callback, numberOfSubscriptions);
+    }
+  }, {
+    key: "trigger",
+    value: function trigger(subscriptionName, payload) {
+      if (this.subscriptions[subscriptionName] != null) {
+        this.subscriptions[subscriptionName].trigger(payload);
+      }
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe(subscriptionName, id) {
+      if (this.subscriptions[subscriptionName] != null) {
+        var subscription = this.subscriptions[subscriptionName];
+        subscription.unsubscribe(id);
+
+        if (subscription.order.length === 0) {
+          delete this.subscriptions[subscriptionName];
+        }
+      }
+    }
+  }]);
+
+  return SubscriptionManager;
+}();
+
 function download(filename, text) {
   var element = document.createElement('a');
   element.setAttribute('href', "data:text/plain;charset=utf-8,".concat(encodeURIComponent(text)));
@@ -1768,4 +1881,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=cfd0fd9450bb5270502b.worker.js.map
+//# sourceMappingURL=4fa5e7c7f4c4a23c3d6b.worker.js.map

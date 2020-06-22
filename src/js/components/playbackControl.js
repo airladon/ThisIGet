@@ -167,6 +167,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
       playClass: '',
       playPauseClass: 'figureone_playback_control__hide',
     });
+    const element = document.getElementById('id_ivid_animation_finishing');
+    if (element != null) {
+      element.classList.add('ivid_animation_hidden');
+    }
     // removeClass('id_figureone_playback_control__time', 'playback_fade_out');
     // removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
     // removeClass('id_figureone_playback_control__pause', 'playback_fade_out_partial');
@@ -175,22 +179,24 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   // eslint-disable-next-line class-methods-use-this
   pause() {
-    const recorder = new Recorder();
-    recorder.pausePlayback();
-    this.unfade();
-    let s = performance.now();
-    console.log(this.getDiagram().getState({ min: true, precision: 3 }));
-    console.log(performance.now() - s)
-    s = performance.now();
-    console.log(this.getDiagram().getState({ precision: 3 }));
-    console.log(performance.now() - s)
     if (this.getDiagram().isAnimating()) {
       const element = document.getElementById('id_ivid_animation_finishing');
       if (element != null) {
         element.classList.remove('ivid_animation_hidden');
       }
-      this.getDiagram().unpause();
+      // this.getDiagram().unpause();
     }
+    const recorder = new Recorder();
+    recorder.pausePlayback();
+    // this.unfade();
+    // let s = performance.now();
+    // console.log(this.getDiagram().getState({ min: true, precision: 3 }));
+    // console.log(performance.now() - s)
+    // s = performance.now();
+    // console.log(this.getDiagram().getState({ precision: 3 }));
+    // console.log(performance.now() - s)
+    // if (this.getDiagram().isAnimating()) {
+    // }
     // if (this.timeoutID != null) {
     //   clearTimeout(this.timeoutID);
     //   this.timeoutID = null;
@@ -489,6 +495,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
       <div className="figureone_playback_control__settings"/>
       <div className="figureone_playback_control__full_screen"/>
       */ }
+      <div id="id_ivid_animation_finishing" className="ivid_animation_finishing_container ivid_animation_hidden">
+        <div className="ivid_animation_finishing_text">
+          Animation Finishing before interaction
+        </div>
+      </div>
     </div>;
   }
 }
