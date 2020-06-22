@@ -8,6 +8,7 @@ import { getCookie, createCookie, getCurrentPath } from '../../tools/misc';
 import PresentationQR from '../presentationQR';
 import StaticQR from '../staticQR';
 import PlaybackControl from '../playbackControl';
+import type Diagram from '../../diagram/diagram';
 // import { Recorder } from Fig;
 // import '../../css/presentationFormat.scss';
 
@@ -40,6 +41,7 @@ type State = {
   topicContainerClasses: string;
   dev: boolean;
   duration: number;
+  diagram: ?Diagram;
 };
 
 export default class InteractiveFormatComponent extends React.Component
@@ -75,6 +77,7 @@ export default class InteractiveFormatComponent extends React.Component
       topicContainerClasses: '',
       dev: false,
       duration: 0,
+      diagram: null,
     };
     this.key = 0;
     this.version.refresh = this.refreshText.bind(this);
