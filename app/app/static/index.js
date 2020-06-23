@@ -1093,6 +1093,10 @@ var AnimationManager = /*#__PURE__*/function () {
         this.animations.splice(animationsToRemove[i], 1);
       }
 
+      if (callback != null) {
+        console.log('finished', this.element.name, callback);
+      }
+
       this.fnMap.exec(callback);
       return remaining;
     }
@@ -5874,7 +5878,8 @@ var Diagram = /*#__PURE__*/function () {
       this.setFirstTransform();
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
-        element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element);
+        // console.log(element.name)
+        element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element); // console.log(element.name, element.animationFinishedCallback)
       });
       this.animateNextFrame();
     }
@@ -5902,6 +5907,8 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "animationFinished",
     value: function animationFinished(element) {
+      console.log('diagram finished', this.isAnimating(), element.name);
+
       if (this.isAnimating()) {
         console.log('animation finished but still animating');
         return;
@@ -30324,6 +30331,7 @@ var DiagramElement = /*#__PURE__*/function () {
   _createClass(DiagramElement, [{
     key: "animationFinished",
     value: function animationFinished() {
+      console.log('element', this.name, this.animationFinishedCallback);
       this.fnMap.exec(this.animationFinishedCallback);
     } // animationsFinishedCallback(element: DiagramElement) {
     //   if (this.parent != null) {

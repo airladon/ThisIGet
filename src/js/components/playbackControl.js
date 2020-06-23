@@ -128,6 +128,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
       subscriptions.subscribe('preparingToPlay', this.preparingToPlay.bind(this));
       subscriptions.subscribe('playbackStopped', this.playbackStopped.bind(this));
       subscriptions.subscribe('preparingToStop', this.preparingToPause.bind(this));
+      console.log(this.diagram)
+      // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
+      // console.log(this.diagram.elements.elements.circle.asdf)
     }
   }
 
@@ -208,6 +211,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     }
     this.queueTimeUpdate();
     this.startFade();
+    console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
   }
 
   // eslint-disable-next-line class-methods-use-this

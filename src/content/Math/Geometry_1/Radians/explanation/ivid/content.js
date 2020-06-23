@@ -48,6 +48,9 @@ class Content extends PresentationFormatContent {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.diagram.initialize();
+    // this.diagram.elements.elements.circle.animationFinishedCallback = this.diagram.animationFinished.bind(this.diagram, this.diagram.elements.elements.circle);
+    console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
+    // this.diagram.elements.elements.circle.asdf = true;
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
     ]);
