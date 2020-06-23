@@ -33896,14 +33896,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        console.log(element.name, element.getPath()); // if (element.getPath() === 'ex3.d_5') {
-        //   debugger;
-        // }
 
         if (element instanceof DiagramElementPrimitive) {
           elements.push(element);
         } else {
-          elements.push.apply(elements, elements.concat(_toConsumableArray(element.getAllElements())));
+          elements.push.apply(elements, _toConsumableArray(element.getAllElements()));
         }
       }
 
@@ -33913,7 +33910,6 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     key: "getChildren",
     value: function getChildren() {
       var directChildrenOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      console.log('huh?', this.name);
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -36155,19 +36151,15 @@ var Recorder = /*#__PURE__*/function () {
 
         _this15.state = 'idle';
 
-        _this15.stopTimeouts();
-
-        if (_this15.audio) {
-          _this15.audio.pause();
-
-          _this15.isAudioPlaying = false;
-        } // if (this.playbackStoppedCallback != null) {
-        //   this.playbackStoppedCallback();
-        // }
-
-
         _this15.subscriptions.trigger('playbackStopped');
       };
+
+      this.stopTimeouts();
+
+      if (this.audio) {
+        this.audio.pause();
+        this.isAudioPlaying = false;
+      }
 
       if (this.diagram.isAnimating()) {
         this.subscriptions.trigger('preparingToPause');
