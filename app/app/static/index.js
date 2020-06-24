@@ -1111,7 +1111,7 @@ var AnimationManager = /*#__PURE__*/function () {
 
         if (animation.state === 'finished' && animation.removeOnFinish) {
           animationsToRemove.push(i);
-        } else {
+        } else if (animation.state === 'animating' || animation.state === 'waitingToStart') {
           isAnimating = true;
         }
       }
@@ -1125,6 +1125,7 @@ var AnimationManager = /*#__PURE__*/function () {
       } else {
         if (this.state === 'animating') {
           this.state = 'idle';
+          console.log('clean finished', this.element.name, this.finishedCallback);
           this.fnMap.exec(this.finishedCallback);
         }
 
@@ -5879,6 +5880,7 @@ var Diagram = /*#__PURE__*/function () {
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
         // console.log(element.name)
+        element.asdf = true;
         element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element); // console.log(element.name, element.animationFinishedCallback)
       });
       this.animateNextFrame();
@@ -6748,7 +6750,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "isAnimating",
     value: function isAnimating() {
-      return this.elements.isAnimating();
+      return this.elements.isAnimatingOrMovingFreely();
     }
   }, {
     key: "clientToPixel",
@@ -31314,6 +31316,13 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function stopMovingFreely() {
       var result = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       // console.trace()
+      // console.log('was moving freely', this.name, this.state.isMovingFreely)
+      var wasMovingFreely = false;
+
+      if (this.state.isMovingFreely === true) {
+        wasMovingFreely = true;
+      }
+
       this.state.isMovingFreely = false;
       this.state.movement.previousTime = null;
 
@@ -31322,7 +31331,10 @@ var DiagramElement = /*#__PURE__*/function () {
         this.move.freely.callback = null;
       }
 
-      this.fnMap.exec(this.animationFinishedCallback);
+      if (wasMovingFreely) {
+        console.log('stop moving freely callback', this.animationFinishedCallback);
+        this.fnMap.exec(this.animationFinishedCallback);
+      }
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
     // will be the largest, so when saving lastDrawTransformMatrix it can be

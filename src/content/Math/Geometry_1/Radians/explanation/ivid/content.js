@@ -48,8 +48,10 @@ class Content extends PresentationFormatContent {
     this.diagram = new CommonTopicDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.diagram.initialize();
+    console.log(this.diagram.elements.elements.circle.elements.line1.animationFinishedCallback);
     // this.diagram.elements.elements.circle.animationFinishedCallback = this.diagram.animationFinished.bind(this.diagram, this.diagram.elements.elements.circle);
     console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
+    console.log(this.diagram.elements.elements.circle.asdf);
     // this.diagram.elements.elements.circle.asdf = true;
     this.loadQRs([
       'Math/Geometry_1/Circle/base',
