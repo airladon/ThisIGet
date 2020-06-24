@@ -1091,11 +1091,10 @@ var AnimationManager = /*#__PURE__*/function () {
 
       for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
         this.animations.splice(animationsToRemove[i], 1);
-      }
+      } // if (callback != null) {
+      //   console.log('finished', this.element.name, callback)
+      // }
 
-      if (callback != null) {
-        console.log('finished', this.element.name, callback);
-      }
 
       this.fnMap.exec(callback);
       return remaining;
@@ -1124,8 +1123,8 @@ var AnimationManager = /*#__PURE__*/function () {
         this.state = 'animating';
       } else {
         if (this.state === 'animating') {
-          this.state = 'idle';
-          console.log('clean finished', this.element.name, this.finishedCallback);
+          this.state = 'idle'; // console.log('clean finished', this.element.name, this.finishedCallback)
+
           this.fnMap.exec(this.finishedCallback);
         }
 
@@ -5880,7 +5879,7 @@ var Diagram = /*#__PURE__*/function () {
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
         // console.log(element.name)
-        console.log(element.name, element.asdf);
+        // console.log(element.name, element.getPath(), element.asdf)
         element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element); // console.log(element.name, element.animationFinishedCallback)
       });
       this.animateNextFrame();
@@ -6750,6 +6749,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "isAnimating",
     value: function isAnimating() {
+      // console.log('asdf')
       return this.elements.isAnimatingOrMovingFreely();
     }
   }, {
@@ -30333,7 +30333,7 @@ var DiagramElement = /*#__PURE__*/function () {
   _createClass(DiagramElement, [{
     key: "animationFinished",
     value: function animationFinished() {
-      console.log('element', this.name, this.animationFinishedCallback);
+      // console.log('element', this.name, this.animationFinishedCallback)
       this.fnMap.exec(this.animationFinishedCallback);
     } // animationsFinishedCallback(element: DiagramElement) {
     //   if (this.parent != null) {
@@ -31332,7 +31332,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       if (wasMovingFreely) {
-        console.log('stop moving freely callback', this.animationFinishedCallback);
+        // console.log('stop moving freely callback', this.animationFinishedCallback)
         this.fnMap.exec(this.animationFinishedCallback);
       }
     } // Take an input transform matrix, and output a list of transform matrices
@@ -33916,12 +33916,16 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
+        elements.push(element);
 
-        if (element instanceof DiagramElementPrimitive) {
-          elements.push(element);
-        } else {
+        if (element instanceof DiagramElementCollection) {
           elements.push.apply(elements, _toConsumableArray(element.getAllElements()));
-        }
+        } // if (element instanceof DiagramElementPrimitive) {
+        //   elements.push(element);
+        // } else {
+        //   elements.push(...element.getAllElements());
+        // }
+
       }
 
       return elements;
@@ -36179,7 +36183,8 @@ var Recorder = /*#__PURE__*/function () {
       if (this.audio) {
         this.audio.pause();
         this.isAudioPlaying = false;
-      }
+      } // console.log('pausePlayback before isAnimatingCheck', this.diagram.isAnimating())
+
 
       if (this.diagram.isAnimating()) {
         this.subscriptions.trigger('preparingToPause');

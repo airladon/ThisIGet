@@ -127,7 +127,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       subscriptions.subscribe('playbackStarted', this.playbackStarted.bind(this));
       subscriptions.subscribe('preparingToPlay', this.preparingToPlay.bind(this));
       subscriptions.subscribe('playbackStopped', this.playbackStopped.bind(this));
-      subscriptions.subscribe('preparingToStop', this.preparingToPause.bind(this));
+      subscriptions.subscribe('preparingToPause', this.preparingToPause.bind(this));
       console.log(this.diagram)
       // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
       // console.log(this.diagram.elements.elements.circle.asdf)
@@ -156,6 +156,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   preparingToPause() {
     console.log('Preparing to Pause')
+    this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: '',
@@ -166,6 +167,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   playbackStopped() {
     console.log('Playback Stopped')
+    this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: 'figureone_playback__hidden',
