@@ -5880,7 +5880,7 @@ var Diagram = /*#__PURE__*/function () {
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
         // console.log(element.name)
-        element.asdf = true;
+        console.log(element.name, element.asdf);
         element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element); // console.log(element.name, element.animationFinishedCallback)
       });
       this.animateNextFrame();
