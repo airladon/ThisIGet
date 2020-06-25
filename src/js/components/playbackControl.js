@@ -146,12 +146,17 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   playbackStarted() {
     console.log('Playback Started')
+    let preparingToPlayClass = 'figureone_playback__hidden'
+    if (this.state.preparingToPlayClass === '') {
+      preparingToPlayClass = 'playback_fadeout_quick'
+    }
     this.setState({
-      preparingToPlayClass: 'figureone_playback__hidden',
+      preparingToPlayClass,
       preparingToPauseClass: 'figureone_playback__hidden',
       pauseClass: 'playback_fade_out_partial',
       playClass: 'figureone_playback__hidden',
     });
+    this.startFade();
   }
 
   preparingToPause() {
@@ -212,8 +217,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       recorder.startPlayback(this.state.timeValue);
     }
     this.queueTimeUpdate();
-    this.startFade();
-    console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
+    // this.startFade();
   }
 
   // eslint-disable-next-line class-methods-use-this

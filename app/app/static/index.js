@@ -35977,7 +35977,8 @@ var Recorder = /*#__PURE__*/function () {
           color: 0.8
         },
         allDurationsSame: true,
-        zeroDurationThreshold: 0.1
+        zeroDurationThreshold: 0.1,
+        minTime: 1
       }, finished);
 
       if (this.diagram.isAnimating()) {
