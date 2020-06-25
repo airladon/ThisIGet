@@ -109,7 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/diagram/Diagram */ "./src/js/diagram/Diagram.js");
 /* harmony import */ var _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/diagram/Recorder */ "./src/js/diagram/Recorder.js");
-/* harmony import */ var _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/diagram/FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _js_tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 /* harmony import */ var _js_tools_color__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/tools/color */ "./src/js/tools/color.js");
 /* harmony import */ var _js_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
 /* harmony import */ var _js_tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/tools/tools */ "./src/js/tools/tools.js");
@@ -185,8 +185,8 @@ var Fig = {
   tools: tools,
   Diagram: _js_diagram_Diagram__WEBPACK_IMPORTED_MODULE_2__["default"],
   Recorder: _js_diagram_Recorder__WEBPACK_IMPORTED_MODULE_3__["Recorder"],
-  FunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"],
-  GlobalFunctionMap: _js_diagram_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["GlobalFunctionMap"],
+  FunctionMap: _js_tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"],
+  GlobalFunctionMap: _js_tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["GlobalFunctionMap"],
   //
   DiagramElement: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElement"],
   DiagramElementCollection: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_10__["DiagramElementCollection"],
@@ -898,7 +898,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -949,7 +949,7 @@ var AnimationManager = /*#__PURE__*/function () {
     this.options = {
       translation: {}
     };
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
     this.finishedCallback = options.finishedCallback;
     return this;
   }
@@ -1305,7 +1305,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1364,7 +1364,7 @@ var AnimationStep = /*#__PURE__*/function () {
     // When progressions aren't linear, then this time is non-trival.
 
     this.startTimeOffset = 0;
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"]();
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"]();
     this.fnMap.add('tools.math.easein', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easein"]);
     this.fnMap.add('tools.math.easeout', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeout"]);
     this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"]);
@@ -4031,9 +4031,9 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
           _this$getDuration2 = _slicedToArray(_this$getDuration, 3),
           transformDuration = _this$getDuration2[0],
           colorDuration = _this$getDuration2[1],
-          opacityDuration = _this$getDuration2[2];
+          opacityDuration = _this$getDuration2[2]; // console.log(transformDuration, colorDuration, opacityDuration);
 
-      console.log(transformDuration, colorDuration, opacityDuration);
+
       var steps = [];
 
       if (target.transform != null) {
@@ -5159,7 +5159,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
 /* harmony import */ var _parseState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parseState */ "./src/js/diagram/parseState.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
@@ -5279,7 +5279,7 @@ var Diagram = /*#__PURE__*/function () {
       fontScale: 1 // updateFontSize: '',
 
     };
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"](); // this.fnMap.global.add('tools.math.easein', math.easein);
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"](); // this.fnMap.global.add('tools.math.easein', math.easein);
     // this.fnMap.global.add('tools.math.easeout', math.easeout);
     // this.fnMap.global.add('tools.math.easeinout', math.easeinout);
     // this.fnMap.global.add('tools.math.linear', math.linear);
@@ -5398,7 +5398,7 @@ var Diagram = /*#__PURE__*/function () {
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
-    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_6__["SubscriptionManager"](); // this.recorder = new Recorder(
+    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_6__["SubscriptionManager"](this.fnMap); // this.recorder = new Recorder(
     //   this.simulateTouchDown.bind(this),
     //   this.simulateTouchUp.bind(this),
     //   // this.simulateTouchMove.bind(this),
@@ -5922,14 +5922,13 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "animationFinished",
     value: function animationFinished(element) {
-      console.log('diagram finished', this.isAnimating(), element.name);
-
+      // console.log('diagram finished', this.isAnimating(), element.name)
       if (this.isAnimating()) {
-        console.log('animation finished but still animating');
+        // console.log('animation finished but still animating')
         return;
-      }
+      } // console.log('animation finished')
 
-      console.log('animation finished');
+
       this.fnMap.exec(this.animationFinishedCallback);
       this.subscriptions.trigger('animationsFinished');
     }
@@ -6614,10 +6613,12 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "pause",
     value: function pause() {
+      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       // if (window.asdf) {
       //   debugger;
       // }
-      this.elements.pause();
+      this.elements.pause(forcePause, clearAnimations);
       this.pauseTime = performance.now() / 1000;
       this.isPaused = true;
     } // pauseAfterNextDraw() {
@@ -6689,7 +6690,7 @@ var Diagram = /*#__PURE__*/function () {
         return;
       }
 
-      if (this.elements.isMoving()) {
+      if (this.elements.isAnyElementMoving()) {
         this.animateNextFrame(true, 'is moving');
       }
 
@@ -6764,7 +6765,7 @@ var Diagram = /*#__PURE__*/function () {
     key: "isAnimating",
     value: function isAnimating() {
       // console.log('asdf')
-      return this.elements.isAnimatingOrMovingFreely();
+      return this.elements.isAnyElementAnimating();
     }
   }, {
     key: "clientToPixel",
@@ -8567,7 +8568,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8636,7 +8637,7 @@ var Element = /*#__PURE__*/function () {
       ascent: this.ascent,
       descent: this.descent
     };
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
   } // execFn(fn: string | Function | null, ...args: Array<any>) {
   //   // if (fn == null) {
   //   //   return null;
@@ -8803,7 +8804,7 @@ var Elements = /*#__PURE__*/function () {
     this.width = 0;
     this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.height = 0;
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
   } // execFn(fn: string | Function | null, ...args: Array<any>) {
   //   // if (fn == null) {
   //   //   return null;
@@ -29712,7 +29713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
 /* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/diagram/FunctionMap.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
@@ -29897,6 +29898,8 @@ var DiagramElement = /*#__PURE__*/function () {
     this.isShown = true;
     this.transform = transform._dup();
     this.transformUpdatesIndependantly = true;
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_13__["FunctionMap"]();
+    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_9__["SubscriptionManager"](this.fnMap);
     this.isMovable = false;
     this.isTouchable = false;
     this.isInteractive = undefined;
@@ -29922,7 +29925,7 @@ var DiagramElement = /*#__PURE__*/function () {
     this.parent = parent;
     this.drawPriority = 1;
     this.stateProperties = [];
-    this.fnMap = new _FunctionMap__WEBPACK_IMPORTED_MODULE_13__["FunctionMap"](); // this.noRotationFromParent = false;
+    this.finishAnimationOnPause = false; // this.noRotationFromParent = false;
     // this.pulseDefault = (callback: ?() => void = null) => {
     //   this.pulseScaleNow(1, 2, 0, callback);
     // };
@@ -30347,8 +30350,10 @@ var DiagramElement = /*#__PURE__*/function () {
   _createClass(DiagramElement, [{
     key: "animationFinished",
     value: function animationFinished() {
+      var typeOfAnimation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'animation';
       // console.log('element', this.name, this.animationFinishedCallback)
       this.fnMap.exec(this.animationFinishedCallback);
+      this.subscriptions.trigger('animationFinished', typeOfAnimation);
     } // animationsFinishedCallback(element: DiagramElement) {
     //   if (this.parent != null) {
     //     this.parent.animationsFinishedCallback(element);
@@ -30374,7 +30379,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
 
       if (this.isShown || ignoreShown) {
-        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move'].concat(_toConsumableArray(this.stateProperties));
+        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions'].concat(_toConsumableArray(this.stateProperties));
       }
 
       return ['isShown', 'transform'];
@@ -30699,7 +30704,24 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "pause",
     value: function pause() {
-      this.isPaused = true;
+      var _this2 = this;
+
+      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      var pause = function pause() {
+        _this2.isPaused = true;
+      };
+
+      if (forcePause === false && this.finishAnimationOnPause && this.isAnimating()) {
+        this.subscriptions.subscribe('animationFinished', pause, 1);
+      } else {
+        if (clearAnimations) {
+          this.stop(true, 'noComplete');
+        }
+
+        pause();
+      }
     }
   }, {
     key: "unpause",
@@ -30763,7 +30785,8 @@ var DiagramElement = /*#__PURE__*/function () {
         this.fnMap.exec(this.internalSetTransformCallback, this.transform);
       }
 
-      this.fnMap.exec(this.setTransformCallback, this.transform); // if (this.setTransformCallback) {
+      this.fnMap.exec(this.setTransformCallback, this.transform);
+      this.subscriptions.trigger('setTransform', [this.transform]); // if (this.setTransformCallback) {
       //   this.setTransformCallback(this.transform);
       // }
     } // Set the next transform (and velocity if moving freely) for the next
@@ -31003,23 +31026,23 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "getCurrentScenario",
     value: function getCurrentScenario() {
-      var _this2 = this;
+      var _this3 = this;
 
       var keys = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['transform', 'color', 'isShown'];
       var scenario = {};
       keys.forEach(function (key) {
         if (key === 'transform') {
-          scenario.transform = _this2.transform._dup();
+          scenario.transform = _this3.transform._dup();
         } else if (key === 'position') {
-          scenario.position = _this2.getPosition();
+          scenario.position = _this3.getPosition();
         } else if (key === 'rotation') {
-          scenario.rotation = _this2.getRotation();
+          scenario.rotation = _this3.getRotation();
         } else if (key === 'scale') {
-          scenario.scale = _this2.getScale();
+          scenario.scale = _this3.getScale();
         } else if (key === 'color') {
-          scenario.color = _this2.color.slice();
+          scenario.color = _this3.color.slice();
         } else if (key === 'isShown') {
-          scenario.isShown = _this2.isShown;
+          scenario.isShown = _this3.isShown;
         }
       });
       return scenario;
@@ -31198,13 +31221,13 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "updateLastDrawTransform",
     value: function updateLastDrawTransform() {
-      var _this3 = this;
+      var _this4 = this;
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
       var transform = this.getTransform();
       transform.order.forEach(function (t, index) {
-        _this3.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
+        _this4.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
     }
@@ -31347,7 +31370,9 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (wasMovingFreely) {
         // console.log('stop moving freely callback', this.animationFinishedCallback)
-        this.fnMap.exec(this.animationFinishedCallback);
+        this.fnMap.exec(this.animationFinishedCallback); // this.subscriptions.trigger('animationFinished', ['movingFreely']);
+
+        this.animationFinished('movingFreely');
       }
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
@@ -31515,12 +31540,18 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "stopPulsing",
     value: function stopPulsing(result) {
+      var wasPulsing = this.state.isPulsing;
       this.state.isPulsing = false;
 
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
         this.pulseSettings.callback = null;
         this.fnMap.exec(callback, result);
+      }
+
+      if (wasPulsing) {
+        // this.subscriptions.trigger('animationFinished', )
+        this.animationFinished('pulsing');
       }
     }
   }, {
@@ -32112,19 +32143,56 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "getTransform",
     value: function getTransform() {
       return this.transform;
-    }
+    } // isAnimating(): boolean {
+    //   // if (window.asdf && this.name === 'a') {
+    //   //   console.log(this.name, this.isShown, this.animations.isAnimating())
+    //   // }
+    //   // console.log(this.name, this.isShown, this.animations.isAnimating())
+    //   if (this.isShown === false) {
+    //     return false;
+    //   }
+    //   return this.animations.isAnimating();
+    // }
+
   }, {
-    key: "isAnimating",
-    value: function isAnimating() {
-      // if (window.asdf && this.name === 'a') {
-      //   console.log(this.name, this.isShown, this.animations.isAnimating())
-      // }
-      // console.log(this.name, this.isShown, this.animations.isAnimating())
+    key: "isMoving",
+    value: function isMoving() {
       if (this.isShown === false) {
         return false;
       }
 
-      return this.animations.isAnimating();
+      if (this.isAnimating()) {
+        return true;
+      }
+
+      if (this.state.isBeingMoved) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "isAnimating",
+    value: function isAnimating() {
+      if (this.isShown === false) {
+        return false;
+      }
+
+      if (this.state.isMovingFreely || this.state.isPulsing || this.animations.isAnimating()) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "isAnyElementAnimating",
+    value: function isAnyElementAnimating() {
+      return this.isAnimating();
+    }
+  }, {
+    key: "isAnyElementMoving",
+    value: function isAnyElementMoving() {
+      return this.isMoving();
     }
   }]);
 
@@ -32142,7 +32210,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   // color: Array<number>;
   // opacity: number;
   function DiagramElementPrimitive(drawingObject) {
-    var _this4;
+    var _this5;
 
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
@@ -32151,20 +32219,20 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
     _classCallCheck(this, DiagramElementPrimitive);
 
-    _this4 = _super.call(this, transform, diagramLimits, parent);
-    _this4.drawingObject = drawingObject;
-    _this4.color = color != null ? color.slice() : [0, 0, 0, 0];
-    _this4.defaultColor = _this4.color.slice();
-    _this4.dimColor = [0.5, 0.5, 0.5, 1];
-    _this4.pointsToDraw = -1;
-    _this4.angleToDraw = -1;
-    _this4.lengthToDraw = -1;
-    _this4.cannotTouchHole = false;
-    _this4.type = 'primitive';
-    _this4.pointsDefinition = {};
-    _this4.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
+    _this5 = _super.call(this, transform, diagramLimits, parent);
+    _this5.drawingObject = drawingObject;
+    _this5.color = color != null ? color.slice() : [0, 0, 0, 0];
+    _this5.defaultColor = _this5.color.slice();
+    _this5.dimColor = [0.5, 0.5, 0.5, 1];
+    _this5.pointsToDraw = -1;
+    _this5.angleToDraw = -1;
+    _this5.lengthToDraw = -1;
+    _this5.cannotTouchHole = false;
+    _this5.type = 'primitive';
+    _this5.pointsDefinition = {};
+    _this5.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
 
-    return _this4;
+    return _this5;
   }
 
   _createClass(DiagramElementPrimitive, [{
@@ -32402,6 +32470,8 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           }
         }
 
+        this.subscriptions.trigger('beforeDraw', [parentTransform, now]);
+
         if (this.beforeDrawCallback != null) {
           this.fnMap.exec(this.beforeDrawCallback, now);
         } // console.log(this.name, this.isShown, this.isPaused)
@@ -32473,7 +32543,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   }, {
     key: "draw",
     value: function draw(now) {
-      var _this5 = this;
+      var _this6 = this;
 
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
@@ -32507,7 +32577,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           // console.log(this.pulseTransforms, pointCount)
           this.pulseTransforms.forEach(function (t) {
             // console.log(t.matrix(), colorToUse, canvasIndex, pointCount)
-            _this5.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
+            _this6.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
           });
         }
 
@@ -32523,6 +32593,8 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
         //   element.draw(element.getParentLastDrawTransform(), now);
         // })
 
+
+        this.subscriptions.trigger('afterDrawDraw', [now]);
 
         if (this.afterDrawCallback != null) {
           this.fnMap.exec(this.afterDrawCallback, now);
@@ -32546,33 +32618,21 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
       }
 
       this.setMoveBoundaryToDiagram();
-    }
-  }, {
-    key: "isMoving",
-    value: function isMoving() {
-      if ( // this.state.isAnimating
-      this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing // || this.state.isAnimatingColor
-      // || this.state.isAnimatingCustom
-      || this.animations.willStartAnimating()) {
-        return true;
-      }
-
-      return false;
-    }
-  }, {
-    key: "isAnimatingOrMovingFreely",
-    value: function isAnimatingOrMovingFreely() {
-      if (this.isShown === false) {
-        return false;
-      } // console.log(this.name, this.state.isMovingFreely, this.state.isPulsing, this.animations.isAnimating())
-
-
-      if (this.state.isMovingFreely || this.state.isPulsing || this.animations.isAnimating()) {
-        return true;
-      }
-
-      return false;
-    } // setupWebGLBuffers(newWebgl: WebGLInstance) {
+    } // isMoving(): boolean {
+    //   if (
+    //     // this.state.isAnimating
+    //     this.state.isMovingFreely
+    //     || this.state.isBeingMoved
+    //     || this.state.isPulsing
+    //     // || this.state.isAnimatingColor
+    //     // || this.state.isAnimatingCustom
+    //     || this.animations.willStartAnimating()
+    //   ) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
+    // setupWebGLBuffers(newWebgl: WebGLInstance) {
     //   const { drawingObject } = this;
     //   if (drawingObject instanceof VertexObject) {
     //     const oldWebgl = drawingObject.webgl;
@@ -32690,7 +32750,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   var _super2 = _createSuper(DiagramElementCollection);
 
   function DiagramElementCollection() {
-    var _this6;
+    var _this7;
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
@@ -32698,13 +32758,13 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this6 = _super2.call(this, transform, diagramLimits, parent);
-    _this6.elements = {};
-    _this6.drawOrder = [];
-    _this6.touchInBoundingRect = false;
-    _this6.eqns = {};
-    _this6.type = 'collection';
-    return _this6;
+    _this7 = _super2.call(this, transform, diagramLimits, parent);
+    _this7.elements = {};
+    _this7.drawOrder = [];
+    _this7.touchInBoundingRect = false;
+    _this7.eqns = {};
+    _this7.type = 'collection';
+    return _this7;
   }
 
   _createClass(DiagramElementCollection, [{
@@ -32782,26 +32842,44 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         }
       });
       this.drawOrder = [].concat(_toConsumableArray(names.reverse()), newOrder);
-    }
+    } // isChildMoving(): boolean {
+    //   if (this.isShown === false) {
+    //     return false;
+    //   }
+    //   if (this.state.isMovingFreely
+    //       || this.state.isBeingMoved
+    //       || this.state.isPulsing
+    //       || this.animations.state === 'animating') {
+    //     return true;
+    //   }
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     if (element instanceof DiagramElementCollection) {
+    //       if (element.isMoving()) {
+    //         return true;
+    //       }
+    //     } else if (element.isShown && element.color[3] > 0 && element.isMoving()) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+
   }, {
-    key: "isMoving",
-    value: function isMoving() {
+    key: "isAnyElementMoving",
+    value: function isAnyElementMoving() {
       if (this.isShown === false) {
         return false;
       }
 
-      if (this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
+      if (this.isMoving()) {
         return true;
       }
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
 
-        if (element instanceof DiagramElementCollection) {
-          if (element.isMoving()) {
-            return true;
-          }
-        } else if (element.isShown && element.color[3] > 0 && element.isMoving()) {
+        if (element.isAnyElementMoving()) {
           return true;
         }
       }
@@ -32809,49 +32887,42 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       return false;
     }
   }, {
-    key: "isAnimatingOrMovingFreely",
-    value: function isAnimatingOrMovingFreely() {
+    key: "isAnyElementAnimating",
+    value: function isAnyElementAnimating() {
       if (this.isShown === false) {
         return false;
       }
 
-      if (this.state.isMovingFreely || this.state.isPulsing || this.animations.state === 'animating') {
+      if (this.isAnimating()) {
         return true;
       }
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
 
-        if (element.isAnimatingOrMovingFreely()) {
+        if (element.isAnyElementAnimating()) {
           return true;
         }
       }
 
       return false;
-    }
-  }, {
-    key: "isAnimating",
-    value: function isAnimating() {
-      if (this.isShown === false) {
-        return false;
-      }
+    } // isAnimating(): boolean {
+    //   if (this.isShown === false) {
+    //     return false;
+    //   }
+    //   const isThisAnimating = super.isAnimating();
+    //   if (isThisAnimating) {
+    //     return true;
+    //   }
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     if (element.isAnimating()) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
 
-      var isThisAnimating = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isAnimating", this).call(this);
-
-      if (isThisAnimating) {
-        return true;
-      }
-
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-
-        if (element.isAnimating()) {
-          return true;
-        }
-      }
-
-      return false;
-    }
   }, {
     key: "add",
     value: function add(name, diagramElement) {
@@ -33009,7 +33080,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "exec",
     value: function exec(execFunctionAndArgs) {
-      var _this7 = this;
+      var _this8 = this;
 
       var elementsToExec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -33027,7 +33098,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element;
 
         if (typeof elementToExec === 'string') {
-          element = _this7.getElement(elementToExec);
+          element = _this8.getElement(elementToExec);
         } else {
           element = elementToExec;
         }
@@ -33040,7 +33111,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "pulse",
     value: function pulse() {
-      var _this8 = this;
+      var _this9 = this;
 
       var optionsOrElementsOrDone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33128,7 +33199,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element;
 
         if (typeof elementToPulse === 'string') {
-          element = _this8.getElement(elementToPulse);
+          element = _this9.getElement(elementToPulse);
         } else {
           element = elementToPulse;
         }
@@ -33225,11 +33296,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getElements",
     value: function getElements(children) {
-      var _this9 = this;
+      var _this10 = this;
 
       var elements = [];
       children.forEach(function (child) {
-        var element = _this9.getElement(child);
+        var element = _this10.getElement(child);
 
         if (element != null) {
           elements.push(element);
@@ -33417,7 +33488,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getBoundaries",
     value: function getBoundaries() {
-      var _this10 = this;
+      var _this11 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33428,7 +33499,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
 
       children.forEach(function (child) {
-        var e = _this10.getElement(child);
+        var e = _this11.getElement(child);
 
         if (e == null) {
           return;
@@ -33519,7 +33590,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getBoundingRect",
     value: function getBoundingRect() {
-      var _this11 = this;
+      var _this12 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33531,7 +33602,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       var points = [];
       children.forEach(function (child) {
-        var e = _this11.getElement(child);
+        var e = _this12.getElement(child);
 
         if (e == null) {
           return;
@@ -33552,7 +33623,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var _this12 = this;
+      var _this13 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -33564,7 +33635,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       var points = [];
       elementsToBound.forEach(function (element) {
-        var e = _this12.getElement(element);
+        var e = _this13.getElement(element);
 
         if (e == null) {
           return;
@@ -33754,7 +33825,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
-      var _this13 = this;
+      var _this14 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -33767,7 +33838,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var e;
 
         if (typeof element === 'string') {
-          e = _this13.getElement(element);
+          e = _this14.getElement(element);
         } else {
           e = element;
         }
@@ -33823,11 +33894,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this14 = this;
+      var _this15 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this14.elements[a];
-        var elemB = _this14.elements[b];
+        var elemA = _this15.elements[a];
+        var elemB = _this15.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -34219,11 +34290,14 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "pause",
     value: function pause() {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this);
+      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, forcePause, clearAnimations);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.pause();
+        element.pause(forcePause, clearAnimations);
       }
     }
   }, {
@@ -34240,222 +34314,6 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
   return DiagramElementCollection;
 }(DiagramElement);
-
-
-
-/***/ }),
-
-/***/ "./src/js/diagram/FunctionMap.js":
-/*!***************************************!*\
-  !*** ./src/js/diagram/FunctionMap.js ***!
-  \***************************************/
-/*! exports provided: FunctionMap, GlobalFunctionMap */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FunctionMap", function() { return FunctionMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalFunctionMap", function() { return GlobalFunctionMap; });
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-// import type { Transform } from '../tools/g2';
-// import { Point, getTransform, Transform } from '../tools/g2';
-// import { round } from '../tools/math';
-// import type { DiagramElement } from './Element';
-// import GlobalAnimation from './webgl/GlobalAnimation';
-// Singleton class that contains projects global functions
-var GeneralFunctionMap = /*#__PURE__*/function () {
-  function GeneralFunctionMap() {
-    _classCallCheck(this, GeneralFunctionMap);
-
-    this.map = {};
-  }
-
-  _createClass(GeneralFunctionMap, [{
-    key: "add",
-    value: function add(id, fn) {
-      if (this.map == null) {
-        this.map = {};
-      }
-
-      this.map[id] = {
-        fn: fn
-      };
-    }
-  }, {
-    key: "exec",
-    value: function exec(idOrFn) {
-      if (idOrFn == null) {
-        return null;
-      }
-
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
-      }
-
-      if (typeof idOrFn === 'string') {
-        // return this.fnMap.exec(fn, ...args);
-        if (this.map[idOrFn] != null) {
-          var _this$map$idOrFn;
-
-          if (args.length === 0) {
-            return this.map[idOrFn].fn();
-          }
-
-          return (_this$map$idOrFn = this.map[idOrFn]).fn.apply(_this$map$idOrFn, args);
-        }
-      }
-
-      if (typeof idOrFn === 'function') {
-        return idOrFn.apply(void 0, args);
-      }
-
-      return null;
-    }
-  }, {
-    key: "execOnMaps",
-    value: function execOnMaps(idOrFn, mapsIn) {
-      if (idOrFn == null) {
-        return null;
-      }
-
-      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      if (typeof idOrFn === 'string') {
-        var maps = [this.map].concat(_toConsumableArray(mapsIn));
-
-        for (var i = 0; i < maps.length; i += 1) {
-          var map = maps[i];
-
-          if (map[idOrFn] != null) {
-            var _map$idOrFn;
-
-            if (args.length === 0) {
-              return map[idOrFn].fn();
-            }
-
-            return (_map$idOrFn = map[idOrFn]).fn.apply(_map$idOrFn, args);
-          }
-        }
-      }
-
-      if (typeof idOrFn === 'function') {
-        return idOrFn.apply(void 0, args);
-      }
-
-      return null;
-    }
-  }]);
-
-  return GeneralFunctionMap;
-}();
-
-var GlobalFunctionMap = /*#__PURE__*/function (_GeneralFunctionMap) {
-  _inherits(GlobalFunctionMap, _GeneralFunctionMap);
-
-  var _super = _createSuper(GlobalFunctionMap);
-
-  function GlobalFunctionMap() {
-    var _this;
-
-    _classCallCheck(this, GlobalFunctionMap);
-
-    // If the instance alread exists, then don't create a new instance.
-    // If it doesn't, then setup some default values.
-    if (!GlobalFunctionMap.instance) {
-      _this = _super.call(this);
-      GlobalFunctionMap.instance = _assertThisInitialized(_this);
-      _this.map = {};
-    }
-
-    return _possibleConstructorReturn(_this, GlobalFunctionMap.instance);
-  }
-
-  return GlobalFunctionMap;
-}(GeneralFunctionMap);
-
-var FunctionMap = /*#__PURE__*/function (_GeneralFunctionMap2) {
-  _inherits(FunctionMap, _GeneralFunctionMap2);
-
-  var _super2 = _createSuper(FunctionMap);
-
-  function FunctionMap() {
-    var _this2;
-
-    _classCallCheck(this, FunctionMap);
-
-    _this2 = _super2.call(this);
-    _this2.global = new GlobalFunctionMap();
-    return _this2;
-  }
-
-  _createClass(FunctionMap, [{
-    key: "exec",
-    value: function exec(idOrFn) {
-      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-        args[_key3 - 1] = arguments[_key3];
-      }
-
-      // const result = super.exec(idOrFn, ...args);
-      // if (result === null) {
-      //   return this.global.exec(idOrFn, ...args);
-      // }
-      // return result;
-      return this.execOnMaps.apply(this, [idOrFn, [this.global.map]].concat(args));
-    }
-  }, {
-    key: "execOnMaps",
-    value: function execOnMaps(idOrFn, mapsIn) {
-      var _get2;
-
-      for (var _len4 = arguments.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
-        args[_key4 - 2] = arguments[_key4];
-      }
-
-      return (_get2 = _get(_getPrototypeOf(FunctionMap.prototype), "execOnMaps", this)).call.apply(_get2, [this, idOrFn, [].concat(_toConsumableArray(mapsIn), [this.global.map])].concat(args));
-    }
-  }]);
-
-  return FunctionMap;
-}(GeneralFunctionMap);
 
 
 
@@ -34606,11 +34464,10 @@ var Gesture = /*#__PURE__*/function () {
   }, {
     key: "keypressHandler",
     value: function keypressHandler(event) {
-      console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode));
-      console.log(this.toggleCursor);
-
+      // console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode))
+      // console.log(this.toggleCursor)
       if (String.fromCharCode(event.keyCode) === 'n' && this.toggleCursor) {
-        console.log('toggling');
+        // console.log('toggling')
         this.toggleCursor();
       }
     }
@@ -35960,8 +35817,6 @@ var Recorder = /*#__PURE__*/function () {
       this.state = 'preparingToPlay';
 
       var finished = function finished() {
-        console.log('finished!!!!');
-
         _this10.diagram.setState(_this10.pauseState);
 
         _this10.state = 'playing';
@@ -35983,7 +35838,7 @@ var Recorder = /*#__PURE__*/function () {
 
 
       this.diagram.animateToState(this.pauseState, {
-        delay: 1,
+        // delay: 1,
         maxTime: 2,
         velocity: {
           position: 2,
@@ -36189,9 +36044,6 @@ var Recorder = /*#__PURE__*/function () {
 
       var pause = function pause() {
         console.log('recorder pause');
-
-        _this15.diagram.pause();
-
         _this15.state = 'idle';
 
         _this15.subscriptions.trigger('playbackStopped');
@@ -36202,13 +36054,14 @@ var Recorder = /*#__PURE__*/function () {
       if (this.audio) {
         this.audio.pause();
         this.isAudioPlaying = false;
-      } // console.log('pausePlayback before isAnimatingCheck', this.diagram.isAnimating())
+      }
 
+      this.diagram.pause(false, true);
+      console.log(this.diagram.isAnimating());
 
       if (this.diagram.isAnimating()) {
         this.subscriptions.trigger('preparingToPause');
-        this.state = 'preparingToPause'; // this.diagram.setAnimationFinishedCallback(pause);
-
+        this.state = 'preparingToPause';
         console.log('recorder prep to pause');
         this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
       } else {
@@ -36433,7 +36286,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function () {
-  return new Worker("/static/workers/" + "4fa5e7c7f4c4a23c3d6b.worker.js");
+  return new Worker("/static/workers/" + "2d48374e5c3d3e47aadd.worker.js");
 };
 
 /***/ }),
@@ -36528,7 +36381,27 @@ function getState(obj, stateProperties, optionsIn) // precision: number = 5,
     }
 
     var out = {};
-    Object.keys(value).forEach(function (key) {
+    var keys = Object.keys(value);
+
+    if (value._stateKeys) {
+      keys = value._stateKeys();
+    }
+
+    var keysToUse = keys;
+
+    if (value._excludeStateKeys) {
+      keysToUse = [];
+
+      var excludedKeys = value._excludeStateKeys();
+
+      keys.forEach(function (key) {
+        if (excludedKeys.indexOf(key) === -1) {
+          keysToUse.push(key);
+        }
+      });
+    }
+
+    keysToUse.forEach(function (key) {
       out[key] = processValue(value[key]);
     });
     return out; // return joinObjects({}, value);
@@ -37255,6 +37128,222 @@ var WebGLInstance = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (WebGLInstance);
+
+/***/ }),
+
+/***/ "./src/js/tools/FunctionMap.js":
+/*!*************************************!*\
+  !*** ./src/js/tools/FunctionMap.js ***!
+  \*************************************/
+/*! exports provided: FunctionMap, GlobalFunctionMap */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FunctionMap", function() { return FunctionMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalFunctionMap", function() { return GlobalFunctionMap; });
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import type { Transform } from '../tools/g2';
+// import { Point, getTransform, Transform } from '../tools/g2';
+// import { round } from '../tools/math';
+// import type { DiagramElement } from './Element';
+// import GlobalAnimation from './webgl/GlobalAnimation';
+// Singleton class that contains projects global functions
+var GeneralFunctionMap = /*#__PURE__*/function () {
+  function GeneralFunctionMap() {
+    _classCallCheck(this, GeneralFunctionMap);
+
+    this.map = {};
+  }
+
+  _createClass(GeneralFunctionMap, [{
+    key: "add",
+    value: function add(id, fn) {
+      if (this.map == null) {
+        this.map = {};
+      }
+
+      this.map[id] = {
+        fn: fn
+      };
+    }
+  }, {
+    key: "exec",
+    value: function exec(idOrFn) {
+      if (idOrFn == null) {
+        return null;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof idOrFn === 'string') {
+        // return this.fnMap.exec(fn, ...args);
+        if (this.map[idOrFn] != null) {
+          var _this$map$idOrFn;
+
+          if (args.length === 0) {
+            return this.map[idOrFn].fn();
+          }
+
+          return (_this$map$idOrFn = this.map[idOrFn]).fn.apply(_this$map$idOrFn, args);
+        }
+      }
+
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null;
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      if (idOrFn == null) {
+        return null;
+      }
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      if (typeof idOrFn === 'string') {
+        var maps = [this.map].concat(_toConsumableArray(mapsIn));
+
+        for (var i = 0; i < maps.length; i += 1) {
+          var map = maps[i];
+
+          if (map[idOrFn] != null) {
+            var _map$idOrFn;
+
+            if (args.length === 0) {
+              return map[idOrFn].fn();
+            }
+
+            return (_map$idOrFn = map[idOrFn]).fn.apply(_map$idOrFn, args);
+          }
+        }
+      }
+
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null;
+    }
+  }]);
+
+  return GeneralFunctionMap;
+}();
+
+var GlobalFunctionMap = /*#__PURE__*/function (_GeneralFunctionMap) {
+  _inherits(GlobalFunctionMap, _GeneralFunctionMap);
+
+  var _super = _createSuper(GlobalFunctionMap);
+
+  function GlobalFunctionMap() {
+    var _this;
+
+    _classCallCheck(this, GlobalFunctionMap);
+
+    // If the instance alread exists, then don't create a new instance.
+    // If it doesn't, then setup some default values.
+    if (!GlobalFunctionMap.instance) {
+      _this = _super.call(this);
+      GlobalFunctionMap.instance = _assertThisInitialized(_this);
+      _this.map = {};
+    }
+
+    return _possibleConstructorReturn(_this, GlobalFunctionMap.instance);
+  }
+
+  return GlobalFunctionMap;
+}(GeneralFunctionMap);
+
+var FunctionMap = /*#__PURE__*/function (_GeneralFunctionMap2) {
+  _inherits(FunctionMap, _GeneralFunctionMap2);
+
+  var _super2 = _createSuper(FunctionMap);
+
+  function FunctionMap() {
+    var _this2;
+
+    _classCallCheck(this, FunctionMap);
+
+    _this2 = _super2.call(this);
+    _this2.global = new GlobalFunctionMap();
+    return _this2;
+  }
+
+  _createClass(FunctionMap, [{
+    key: "exec",
+    value: function exec(idOrFn) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
+      }
+
+      // const result = super.exec(idOrFn, ...args);
+      // if (result === null) {
+      //   return this.global.exec(idOrFn, ...args);
+      // }
+      // return result;
+      return this.execOnMaps.apply(this, [idOrFn, [this.global.map]].concat(args));
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      var _get2;
+
+      for (var _len4 = arguments.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
+        args[_key4 - 2] = arguments[_key4];
+      }
+
+      return (_get2 = _get(_getPrototypeOf(FunctionMap.prototype), "execOnMaps", this)).call.apply(_get2, [this, idOrFn, [].concat(_toConsumableArray(mapsIn), [this.global.map])].concat(args));
+    }
+  }]);
+
+  return FunctionMap;
+}(GeneralFunctionMap);
+
+
 
 /***/ }),
 
@@ -41800,6 +41889,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Subscriber", function() { return Subscriber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionManager", function() { return SubscriptionManager; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -41827,6 +41917,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
  // import Worker from '../diagram/recorder.worker.js';
 
@@ -42927,8 +43018,11 @@ var ObjectTracker = /*#__PURE__*/function () {
 
 var Subscriber = /*#__PURE__*/function () {
   function Subscriber() {
+    var fnMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _FunctionMap__WEBPACK_IMPORTED_MODULE_1__["FunctionMap"]();
+
     _classCallCheck(this, Subscriber);
 
+    this.fnMap = fnMap;
     this.subscribers = {};
     this.nextId = 0;
     this.order = [];
@@ -42957,11 +43051,11 @@ var Subscriber = /*#__PURE__*/function () {
         var _id = this.order[i];
         var _this$subscribers$ = this.subscribers["".concat(_id)],
             callback = _this$subscribers$.callback,
-            num = _this$subscribers$.num;
+            num = _this$subscribers$.num; // if (callback != null) {
+        //   callback(payload);
+        // }
 
-        if (callback != null) {
-          callback(payload);
-        }
+        this.fnMap.exec(callback, payload);
 
         if (num === 1) {
           subscribersToRemove.push(_id);
@@ -42988,6 +43082,12 @@ var Subscriber = /*#__PURE__*/function () {
       if (index > -1) {
         this.order.splice(index, 1);
       }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "_excludeStateKeys",
+    value: function _excludeStateKeys() {
+      return ['fnMap'];
     }
   }]);
 
@@ -42996,9 +43096,12 @@ var Subscriber = /*#__PURE__*/function () {
 
 var SubscriptionManager = /*#__PURE__*/function () {
   function SubscriptionManager() {
+    var fnMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _FunctionMap__WEBPACK_IMPORTED_MODULE_1__["FunctionMap"]();
+
     _classCallCheck(this, SubscriptionManager);
 
     this.subscriptions = {};
+    this.fnMap = fnMap;
   }
 
   _createClass(SubscriptionManager, [{
@@ -43007,7 +43110,7 @@ var SubscriptionManager = /*#__PURE__*/function () {
       var numberOfSubscriptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
 
       if (this.subscriptions[subscriptionName] == null) {
-        this.subscriptions[subscriptionName] = new Subscriber();
+        this.subscriptions[subscriptionName] = new Subscriber(this.fnMap);
       }
 
       return this.subscriptions[subscriptionName].subscribe(callback, numberOfSubscriptions);
@@ -43030,6 +43133,12 @@ var SubscriptionManager = /*#__PURE__*/function () {
           delete this.subscriptions[subscriptionName];
         }
       }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "_excludeStateKeys",
+    value: function _excludeStateKeys() {
+      return ['fnMap'];
     }
   }]);
 

@@ -151,6 +151,222 @@ addEventListener("message", (event) => {
 
 /***/ }),
 
+/***/ "./src/js/tools/FunctionMap.js":
+/*!*************************************!*\
+  !*** ./src/js/tools/FunctionMap.js ***!
+  \*************************************/
+/*! exports provided: FunctionMap, GlobalFunctionMap */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FunctionMap", function() { return FunctionMap; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GlobalFunctionMap", function() { return GlobalFunctionMap; });
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import type { Transform } from '../tools/g2';
+// import { Point, getTransform, Transform } from '../tools/g2';
+// import { round } from '../tools/math';
+// import type { DiagramElement } from './Element';
+// import GlobalAnimation from './webgl/GlobalAnimation';
+// Singleton class that contains projects global functions
+var GeneralFunctionMap = /*#__PURE__*/function () {
+  function GeneralFunctionMap() {
+    _classCallCheck(this, GeneralFunctionMap);
+
+    this.map = {};
+  }
+
+  _createClass(GeneralFunctionMap, [{
+    key: "add",
+    value: function add(id, fn) {
+      if (this.map == null) {
+        this.map = {};
+      }
+
+      this.map[id] = {
+        fn: fn
+      };
+    }
+  }, {
+    key: "exec",
+    value: function exec(idOrFn) {
+      if (idOrFn == null) {
+        return null;
+      }
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof idOrFn === 'string') {
+        // return this.fnMap.exec(fn, ...args);
+        if (this.map[idOrFn] != null) {
+          var _this$map$idOrFn;
+
+          if (args.length === 0) {
+            return this.map[idOrFn].fn();
+          }
+
+          return (_this$map$idOrFn = this.map[idOrFn]).fn.apply(_this$map$idOrFn, args);
+        }
+      }
+
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null;
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      if (idOrFn == null) {
+        return null;
+      }
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      if (typeof idOrFn === 'string') {
+        var maps = [this.map].concat(_toConsumableArray(mapsIn));
+
+        for (var i = 0; i < maps.length; i += 1) {
+          var map = maps[i];
+
+          if (map[idOrFn] != null) {
+            var _map$idOrFn;
+
+            if (args.length === 0) {
+              return map[idOrFn].fn();
+            }
+
+            return (_map$idOrFn = map[idOrFn]).fn.apply(_map$idOrFn, args);
+          }
+        }
+      }
+
+      if (typeof idOrFn === 'function') {
+        return idOrFn.apply(void 0, args);
+      }
+
+      return null;
+    }
+  }]);
+
+  return GeneralFunctionMap;
+}();
+
+var GlobalFunctionMap = /*#__PURE__*/function (_GeneralFunctionMap) {
+  _inherits(GlobalFunctionMap, _GeneralFunctionMap);
+
+  var _super = _createSuper(GlobalFunctionMap);
+
+  function GlobalFunctionMap() {
+    var _this;
+
+    _classCallCheck(this, GlobalFunctionMap);
+
+    // If the instance alread exists, then don't create a new instance.
+    // If it doesn't, then setup some default values.
+    if (!GlobalFunctionMap.instance) {
+      _this = _super.call(this);
+      GlobalFunctionMap.instance = _assertThisInitialized(_this);
+      _this.map = {};
+    }
+
+    return _possibleConstructorReturn(_this, GlobalFunctionMap.instance);
+  }
+
+  return GlobalFunctionMap;
+}(GeneralFunctionMap);
+
+var FunctionMap = /*#__PURE__*/function (_GeneralFunctionMap2) {
+  _inherits(FunctionMap, _GeneralFunctionMap2);
+
+  var _super2 = _createSuper(FunctionMap);
+
+  function FunctionMap() {
+    var _this2;
+
+    _classCallCheck(this, FunctionMap);
+
+    _this2 = _super2.call(this);
+    _this2.global = new GlobalFunctionMap();
+    return _this2;
+  }
+
+  _createClass(FunctionMap, [{
+    key: "exec",
+    value: function exec(idOrFn) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
+      }
+
+      // const result = super.exec(idOrFn, ...args);
+      // if (result === null) {
+      //   return this.global.exec(idOrFn, ...args);
+      // }
+      // return result;
+      return this.execOnMaps.apply(this, [idOrFn, [this.global.map]].concat(args));
+    }
+  }, {
+    key: "execOnMaps",
+    value: function execOnMaps(idOrFn, mapsIn) {
+      var _get2;
+
+      for (var _len4 = arguments.length, args = new Array(_len4 > 2 ? _len4 - 2 : 0), _key4 = 2; _key4 < _len4; _key4++) {
+        args[_key4 - 2] = arguments[_key4];
+      }
+
+      return (_get2 = _get(_getPrototypeOf(FunctionMap.prototype), "execOnMaps", this)).call.apply(_get2, [this, idOrFn, [].concat(_toConsumableArray(mapsIn), [this.global.map])].concat(args));
+    }
+  }]);
+
+  return FunctionMap;
+}(GeneralFunctionMap);
+
+
+
+/***/ }),
+
 /***/ "./src/js/tools/math.js":
 /*!******************************!*\
   !*** ./src/js/tools/math.js ***!
@@ -625,6 +841,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Subscriber", function() { return Subscriber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionManager", function() { return SubscriptionManager; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
+/* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -652,6 +869,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
  // import Worker from '../diagram/recorder.worker.js';
 
@@ -1752,8 +1970,11 @@ var ObjectTracker = /*#__PURE__*/function () {
 
 var Subscriber = /*#__PURE__*/function () {
   function Subscriber() {
+    var fnMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _FunctionMap__WEBPACK_IMPORTED_MODULE_1__["FunctionMap"]();
+
     _classCallCheck(this, Subscriber);
 
+    this.fnMap = fnMap;
     this.subscribers = {};
     this.nextId = 0;
     this.order = [];
@@ -1782,11 +2003,11 @@ var Subscriber = /*#__PURE__*/function () {
         var _id = this.order[i];
         var _this$subscribers$ = this.subscribers["".concat(_id)],
             callback = _this$subscribers$.callback,
-            num = _this$subscribers$.num;
+            num = _this$subscribers$.num; // if (callback != null) {
+        //   callback(payload);
+        // }
 
-        if (callback != null) {
-          callback(payload);
-        }
+        this.fnMap.exec(callback, payload);
 
         if (num === 1) {
           subscribersToRemove.push(_id);
@@ -1813,6 +2034,12 @@ var Subscriber = /*#__PURE__*/function () {
       if (index > -1) {
         this.order.splice(index, 1);
       }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "_excludeStateKeys",
+    value: function _excludeStateKeys() {
+      return ['fnMap'];
     }
   }]);
 
@@ -1821,9 +2048,12 @@ var Subscriber = /*#__PURE__*/function () {
 
 var SubscriptionManager = /*#__PURE__*/function () {
   function SubscriptionManager() {
+    var fnMap = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _FunctionMap__WEBPACK_IMPORTED_MODULE_1__["FunctionMap"]();
+
     _classCallCheck(this, SubscriptionManager);
 
     this.subscriptions = {};
+    this.fnMap = fnMap;
   }
 
   _createClass(SubscriptionManager, [{
@@ -1832,7 +2062,7 @@ var SubscriptionManager = /*#__PURE__*/function () {
       var numberOfSubscriptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
 
       if (this.subscriptions[subscriptionName] == null) {
-        this.subscriptions[subscriptionName] = new Subscriber();
+        this.subscriptions[subscriptionName] = new Subscriber(this.fnMap);
       }
 
       return this.subscriptions[subscriptionName].subscribe(callback, numberOfSubscriptions);
@@ -1855,6 +2085,12 @@ var SubscriptionManager = /*#__PURE__*/function () {
           delete this.subscriptions[subscriptionName];
         }
       }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "_excludeStateKeys",
+    value: function _excludeStateKeys() {
+      return ['fnMap'];
     }
   }]);
 
@@ -1881,4 +2117,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=4fa5e7c7f4c4a23c3d6b.worker.js.map
+//# sourceMappingURL=2d48374e5c3d3e47aadd.worker.js.map
