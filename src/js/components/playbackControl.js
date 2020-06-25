@@ -147,9 +147,9 @@ export default class PlaybackControl extends React.Component<Props, State> {
   playbackStarted() {
     console.log('Playback Started')
     let preparingToPlayClass = 'figureone_playback__hidden'
-    if (this.state.preparingToPlayClass === '') {
-      preparingToPlayClass = 'playback_fadeout_quick'
-    }
+    // if (this.state.preparingToPlayClass === '') {
+      // preparingToPlayClass = 'playback_fadeout_quick'
+    // }
     this.setState({
       preparingToPlayClass,
       preparingToPauseClass: 'figureone_playback__hidden',
@@ -187,7 +187,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
-      preparingToPauseClass: 'playback_fadeout_quick',
+      // preparingToPauseClass: 'playback_fadeout_quick',
+      preparingToPauseClass: 'figureone_playback__hidden',
       pauseClass: 'figureone_playback__hidden',
       playClass: '',
     });
