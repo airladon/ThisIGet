@@ -170,7 +170,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
-      preparingToPauseClass: 'figureone_playback__hidden',
+      preparingToPauseClass: 'playback_fadeout_quick',
       pauseClass: 'figureone_playback__hidden',
       playClass: '',
     });

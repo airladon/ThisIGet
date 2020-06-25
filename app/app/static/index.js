@@ -35945,6 +35945,8 @@ var Recorder = /*#__PURE__*/function () {
       this.state = 'preparingToPlay';
 
       var finished = function finished() {
+        console.log('finished!!!!');
+
         _this10.diagram.setState(_this10.pauseState);
 
         _this10.state = 'playing';
