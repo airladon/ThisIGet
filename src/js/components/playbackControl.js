@@ -139,7 +139,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     this.setState({
       preparingToPlayClass: '',
       preparingToPauseClass: 'figureone_playback__hidden',
-      pauseClass: '',
+      pauseClass: 'figureone_playback__disabled',
       playClass: 'figureone_playback__hidden',
     });
   }
@@ -161,17 +161,29 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
   preparingToPause() {
     console.log('Preparing to Pause')
+    if (this.diagram != null) {
+      const cursor = this.diagram.getElement('cursor');
+      if (cursor != null) {
+        cursor.hide();
+      }
+    }
     this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: '',
       pauseClass: 'figureone_playback__hidden',
-      playClass: '',
+      playClass: 'figureone_playback__disabled',
     });
   }
 
   playbackStopped() {
     console.log('Playback Stopped')
+    if (this.diagram != null) {
+      const cursor = this.diagram.getElement('cursor');
+      if (cursor != null) {
+        cursor.hide();
+      }
+    }
     this.unfade();
     this.setState({
       preparingToPlayClass: 'figureone_playback__hidden',
@@ -188,13 +200,13 @@ export default class PlaybackControl extends React.Component<Props, State> {
     }
     const { recorder } = this.diagram;
     this.unfade();
-    if (recorder.state !== 'idle') {
+    if (recorder.state === 'playing' || recorder.state === 'recording') {
       this.setState({
         pauseClass: '',
       });
     }
     setTimeout(() => {
-      if (recorder.state !== 'idle') {
+      if (recorder.state === 'playing' || recorder.state === 'recording') {
         this.startFade();
         this.setState({
           pauseClass: 'playback_fade_out_partial',

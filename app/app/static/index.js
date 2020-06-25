@@ -3808,7 +3808,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'scenario'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression', 'minTime']);
     _this = _super.call(this, AnimationStepOptionsIn);
     _this._stepType = 'position';
     var defaultScenarioOptions = {
@@ -3829,7 +3829,8 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
       maxTime: null,
       allDurationsSame: true,
       zeroDurationThreshold: 0,
-      progression: 'tools.math.easeinout'
+      progression: 'tools.math.easeinout',
+      minTime: 0
     };
 
     if (_this.element && _this.element.animations.options.translation) {
@@ -3849,7 +3850,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     _this.scenario = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxTime', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxTime', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression', 'minTime']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.scenario.translationOptions);
     return _this;
   }
@@ -3944,12 +3945,24 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
         colorDuration = 0;
       }
 
+      if (colorDuration < this.scenario.minTime) {
+        colorDuration = this.scenario.minTime;
+      }
+
       if (opacityDuration <= this.scenario.zeroDurationThreshold) {
         opacityDuration = 0;
       }
 
+      if (opacityDuration < this.scenario.minTime) {
+        opacityDuration = this.scenario.minTime;
+      }
+
       if (transformDuration <= this.scenario.zeroDurationThreshold) {
         transformDuration = 0;
+      }
+
+      if (transformDuration < this.scenario.minTime) {
+        transformDuration = this.scenario.minTime;
       }
 
       if (this.scenario.allDurationsSame) {
@@ -4020,6 +4033,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
           colorDuration = _this$getDuration2[1],
           opacityDuration = _this$getDuration2[2];
 
+      console.log(transformDuration, colorDuration, opacityDuration);
       var steps = [];
 
       if (target.transform != null) {
@@ -35936,6 +35950,7 @@ var Recorder = /*#__PURE__*/function () {
     value: function resumePlayback() {
       var _this10 = this;
 
+      // console.log(this.pauseState);
       if (this.pauseState == null) {
         this.startPlayback(this.currentTime);
         return;
@@ -35968,7 +35983,8 @@ var Recorder = /*#__PURE__*/function () {
 
 
       this.diagram.animateToState(this.pauseState, {
-        maxTime: 1,
+        delay: 1,
+        maxTime: 2,
         velocity: {
           position: 2,
           rotation: Math.PI * 2 / 2,
@@ -35978,7 +35994,7 @@ var Recorder = /*#__PURE__*/function () {
         },
         allDurationsSame: true,
         zeroDurationThreshold: 0.1,
-        minTime: 1
+        minTime: 0.5
       }, finished);
 
       if (this.diagram.isAnimating()) {

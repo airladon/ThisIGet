@@ -207,3 +207,8 @@
   border-radius: 25px 0 0 25px;
   border-right: none;
 }
+
+.figureone_playback__disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
