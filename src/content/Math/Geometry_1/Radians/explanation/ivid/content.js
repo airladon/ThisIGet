@@ -431,6 +431,7 @@ class Content extends PresentationFormatContent {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
         'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
       },
+      fadeInFromPrev: true,
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc,
@@ -439,19 +440,6 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         diag.updateAngle();
         circle.setScenario('center');
-        circle.animations.new()
-          .trigger({
-            callback: () => {
-              addClass('id_main_text', 'topic__diagram_text_fade_in_05');
-            },
-          })
-          .delay(0.5)
-          .trigger({
-            callback: () => {
-              removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
-            },
-          })
-          .start();
       },
     });
 
@@ -472,15 +460,15 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
       },
       setContent: [
-        devNote({ top: 55 }, '|EqnRadius|'),
-        devNote({ top: 60 }, '|EqnAngle|'),
-        devNote({ top: 65 }, '|Value|'),
-        devNote({ top: 70 }, '|Radian|'),
-        devNote({ top: 75 }, '|Radius|'),
-        devNote({ top: 80 }, '|Arc|'),
-        devNote({ top: 85 }, '|Angle|'),
+        devNote({ top: 5 }, '|EqnRadius|'),
+        devNote({ top: 10 }, '|EqnAngle|'),
+        devNote({ top: 15 }, '|Value|'),
+        devNote({ top: 20 }, '|Radian|'),
+        devNote({ top: 25 }, '|Radius|'),
+        devNote({ top: 30 }, '|Arc|'),
+        devNote({ top: 35 }, '|Angle|'),
       ],
-      fadeInFromPrev: false,
+      // fadeInFromPrev: false,
       modifiers: {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
         Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
@@ -496,28 +484,18 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'When arc length equals radius length, the angle is |one radian|'),
-        devNote({ top: 70 }, '|Radian|'),
-        devNote({ top: 75 }, '|Radius|'),
-        devNote({ top: 80 }, '|Arc|'),
-        devNote({ top: 85 }, '|Angle|'),
+        devNote({ top: 5 }, '|Radian|'),
+        devNote({ top: 10 }, '|Radius|'),
+        devNote({ top: 15 }, '|Arc|'),
+        devNote({ top: 20 }, '|Angle|'),
       ],
       show: [
         circle._line1, circle._line2, circle._corner,
         circle._angle, circle._arc, circle._radianLines._line0,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
-        addClass('id_main_text', 'topic__diagram_text_fade_in_05');
-        addClass('note_radian', 'topic__diagram_text_fade_in_05');
-        circle.animations.new()
-          .delay(0.5)
-          .whenFinished(doneStr)
-          .start();
-      },
       setSteadyState: () => {
         diag.updateAngle();
-        removeClass('note_radian', 'topic__diagram_text_fade_in_05');
-        removeClass('id_main_text', 'topic__diagram_text_fade_in_05');
       },
     });
 
@@ -536,22 +514,16 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines._line0,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
+        diag.updateAngle();
+        circle.setScenario('center');
         circle.animations.new()
           .dissolveIn({ element: circle._radianLines._line1, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line2, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
           .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
-          // .dissolveIn({ element: circle._radians, duration: 0.4 })
-          .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        // circle._radians.showAll();
-        diag.updateAngle();
-        circle.setScenario('center');
-        // circle._radianLines.showAll();
       },
     });
 
@@ -570,15 +542,10 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, // circle._radians,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
-        eqn.setScenario('topCirc');
-        diag.updateAngle();
-        eqn.goToForm({ name: 'circ', animate: 'dissolve', callback: doneStr });
-      },
       setSteadyState: () => {
         eqn.setScenario('topCirc');
-        eqn.showForm('circ');
         diag.updateAngle();
+        eqn.goToForm({ name: 'circ', animate: 'dissolve' });
       },
     });
 
@@ -596,16 +563,11 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, // circle._radians,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.setScenario('topCircle');
         diag.setAngleTextRadians();
         diag.updateAngle();
-        eqn.goToForm({ name: 'circle', animate: 'dissolve', callback: doneStr });
-      },
-      setSteadyState: () => {
-        eqn.setScenario('topCircle');
-        eqn.showForm('circle');
-        diag.updateAngle();
+        eqn.goToForm({ name: 'circle', animate: 'dissolve' });
       },
     });
 
@@ -623,7 +585,8 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
+        diag.updateAngle();
         eqn.setScenario('topCircle');
         eqn.showForm('circle');
         circle.animations.new()
@@ -631,14 +594,7 @@ class Content extends PresentationFormatContent {
             circle._angleText.anim.dissolveIn(0.3),
             circle.anim.trigger({ callback: 'setAngleTextRadians' }),
           ])
-          .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        diag.setAngleTextRadians();
-        eqn.setScenario('topCircle');
-        eqn.showForm('circle');
-        diag.updateAngle();
       },
     });
 
@@ -656,22 +612,19 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.setScenario('top');
-        circle._line1.setRotation(1);
         eqn._radiusLengths.drawingObject.setText('radius length');
         eqn._value.drawingObject.setText('1.00');
         diag.setAngleTextRadians();
-        eqn.goToForm({ name: 'value', animate: 'dissolve', callback: doneStr });
-      },
-      setSteadyState: () => {
-        eqn.setScenario('top');
-        circle._line1.setRotation(1);
-        eqn.showForm('value');
-        diag.updateAngle();
-        circle._radianLines.showAll();
-        circle._angleText.showAll();
-        diag.setAngleTextRadians();
+        circle._line1.animations.new()
+          .rotation({ target: 1, velocity: 2 })
+          .trigger({
+            callback: () => {
+              eqn.goToForm({ name: 'value', animate: 'dissolve' });
+            }
+          })
+          .start();
       },
     });
 
@@ -689,20 +642,11 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.setScenario('top');
         eqn.showForm('value');
         diag.setAngleTextRadians();
-        diag.setAngleTextRadians();
-        eqn.goToForm({ name: 'generalize', animate: 'move', callback: doneStr });
-      },
-      setSteadyState: () => {
-        eqn.setScenario('top');
-        eqn.showForm('generalize');
-        diag.updateAngle();
-        circle._radianLines.showAll();
-        circle._angleText.showAll();
-        diag.setAngleTextRadians();
+        eqn.goToForm({ name: 'generalize', animate: 'move' });
       },
     });
 
@@ -721,19 +665,11 @@ class Content extends PresentationFormatContent {
         circle._angle, circle._arc, circle._radianLines, circle._angleText,
         circle._circle,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.setScenario('top');
         eqn.showForm('generalize');
         diag.setAngleTextRadians();
-        eqn.goToForm({ name: '_arc', animate: 'move', callback: doneStr });
-      },
-      setSteadyState: () => {
-        eqn.setScenario('top');
-        eqn.showForm('_arc');
-        diag.updateAngle();
-        circle._radianLines.showAll();
-        circle._angleText.showAll();
-        diag.setAngleTextRadians();
+        eqn.goToForm({ name: '_arc', animate: 'move' });
       },
     });
 
@@ -751,19 +687,11 @@ class Content extends PresentationFormatContent {
       show: [
         eqn,
       ],
-      // setEnterState: () => {
-      //   eqn.setScenario('top');
-      // },
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.showForm('arc');
         eqn.animations.new()
           .scenario({ target: 'center', duration: 2 })
-          .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        eqn.showForm('arc');
-        eqn.setScenario('center');
       },
     });
 
