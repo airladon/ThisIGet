@@ -135,9 +135,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   preparingToPlay() {
-    console.log('Preparing to Play')
+    // console.log('Preparing to Play')
     this.setState({
-      preparingToPlayClass: '',
+      // preparingToPlayClass: '',
+      preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: 'figureone_playback__hidden',
       pauseClass: 'figureone_playback__disabled',
       playClass: 'figureone_playback__hidden',
@@ -145,7 +146,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   playbackStarted() {
-    console.log('Playback Started')
+    // console.log('Playback Started')
     let preparingToPlayClass = 'figureone_playback__hidden'
     // if (this.state.preparingToPlayClass === '') {
       // preparingToPlayClass = 'playback_fadeout_quick'
@@ -160,7 +161,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   preparingToPause() {
-    console.log('Preparing to Pause')
+    // console.log('Preparing to Pause')
     if (this.diagram != null) {
       const cursor = this.diagram.getElement('cursor');
       if (cursor != null) {
@@ -177,7 +178,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   playbackStopped() {
-    console.log('Playback Stopped')
+    // console.log('Playback Stopped')
     if (this.diagram != null) {
       const cursor = this.diagram.getElement('cursor');
       if (cursor != null) {
@@ -227,7 +228,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     if (this.state.timeValue > 0) {
       recorder.resumePlayback();
     } else {
-      recorder.startPlayback(this.state.timeValue);
+      recorder.startPlayback(0);
     }
     this.queueTimeUpdate();
     // this.startFade();

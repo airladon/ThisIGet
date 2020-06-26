@@ -30375,11 +30375,10 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (ignoreShown == null) {
         ignoreShown = false;
-      } // console.log('element', options, this.name, this.getPath(), this.isShown, ignoreShown, this.isShown || ignoreShown);
-
+      }
 
       if (this.isShown || ignoreShown) {
-        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions'].concat(_toConsumableArray(this.stateProperties));
+        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions', 'finishAnimationOnPause'].concat(_toConsumableArray(this.stateProperties));
       }
 
       return ['isShown', 'transform'];
@@ -36043,7 +36042,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       var pause = function pause() {
-        console.log('recorder pause');
+        // console.log('recorder pause');
         _this15.state = 'idle';
 
         _this15.subscriptions.trigger('playbackStopped');
@@ -36056,13 +36055,12 @@ var Recorder = /*#__PURE__*/function () {
         this.isAudioPlaying = false;
       }
 
-      this.diagram.pause(false, true);
-      console.log(this.diagram.isAnimating());
+      this.diagram.pause(false, true); // console.log(this.diagram.isAnimating())
 
       if (this.diagram.isAnimating()) {
         this.subscriptions.trigger('preparingToPause');
-        this.state = 'preparingToPause';
-        console.log('recorder prep to pause');
+        this.state = 'preparingToPause'; // console.log('recorder prep to pause')
+
         this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
       } else {
         pause();

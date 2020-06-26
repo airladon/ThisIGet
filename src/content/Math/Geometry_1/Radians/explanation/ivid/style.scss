@@ -33,6 +33,10 @@
   height: 2em;
 }
 
+.radians_table_hidden {
+  display: none;
+}
+
 // .fractions_table tr {
 //   height: 2em;
 // }
@@ -63,6 +67,7 @@
 }
 
 .radians_table_fade_out {
+  opacity: 0;
   -webkit-animation: fadeout 3s linear;
   -moz-animation: fadeout 3s linear;
   animation: fadeout 3s linear;
