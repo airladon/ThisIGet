@@ -726,13 +726,10 @@ class Content extends PresentationFormatContent {
     // Next, if we make the radius equal to 1, we can see that angle equals the arc length, and they can therefore be used interchangably. In geometry and trigonometry we often start with a unit circle, which is a circle of radius 1, and find relationships between properties. The processs to find the relatipnship can be involved, but it is simplified assuming a unit radius. The result is then generalized at the end by scaling the radius.
     // Radians is useful because these relationships are clean and simple. When they get used in more complicated relationships they are easiest to manipulate. We can find similar relationships using degrees, but will see they are more complicated, and therefore less useful.
     this.addSection({
-      // setContent: [
-        // style({ top: 50, centerH: true }, 'Radians have no units!'),
-      // ],
       show: [
         eqn,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('radiusEquals1_0');
         diag.animations.new()
@@ -743,7 +740,6 @@ class Content extends PresentationFormatContent {
               animate: 'move',
               dissolveInTime: 0.7,
               dissolveOutTime: 0.7,
-              // duration: 1,
             },
             duration: 2,
           })
@@ -753,8 +749,6 @@ class Content extends PresentationFormatContent {
               name: 'radiusEquals1_2',
               animate: 'move',
               dissolveInTime: 0.7,
-              // dissolveOutTime: 0.7,
-              // duration: 1,
             },
             duration: 1,
           })
@@ -763,7 +757,6 @@ class Content extends PresentationFormatContent {
             payload: {
               name: 'radiusEquals1_3',
               animate: 'move',
-              // dissolveInTime: 0.4,
               dissolveOutTime: 0.7,
               duration: 1,
             },
@@ -775,17 +768,10 @@ class Content extends PresentationFormatContent {
               name: 'radiusEquals1_4',
               animate: 'move',
               dissolveInTime: 0.7,
-              // dissolveOutTime: 0.7,
-              // duration: 1,
             },
             duration: 0.7,
           })
-          .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        eqn.showForm('radiusEquals1_4');
-        eqn.setScenario('center');
       },
     });
 
@@ -801,11 +787,11 @@ class Content extends PresentationFormatContent {
     // So to convert degrees to radians, we multiply by the ratio of pi over 180.
     this.addSection({
       setContent: [
-        devNote({ top: 75 }, '|scalar|'),
-        devNote({ top: 80 }, '|_2pi|'),
-        devNote({ top: 85 }, '|_360|'),
+        devNote({ top: 5 }, '|scalar|'),
+        devNote({ top: 10 }, '|_2pi|'),
+        devNote({ top: 15 }, '|_360|'),
       ],
-      fadeInFromPrev: false,
+      // fadeInFromPrev: false,
       modifiers: {
         _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
         _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
@@ -818,15 +804,18 @@ class Content extends PresentationFormatContent {
       show: [
         diag._radEqnNav, diag._radEqn,
       ],
-      transitionFromPrev: (done, doneStr) => {
-        diag._radEqn.setScenario('center');
-        diag._radEqn.showForm('start');
-        diag._radEqn.goToForm({ name: '0', animate: 'dissolve', callback: doneStr });
-      },
+      // transitionFromPrev: (done, doneStr) => {
+      //   diag._radEqn.setScenario('center');
+      //   diag._radEqn.showForm('start');
+      //   diag._radEqn.goToForm({ name: '0', animate: 'dissolve', callback: doneStr });
+      // },
       setSteadyState: () => {
         // console.log('asdf')
-        diag._radEqn.showForm('0');
+        // diag._radEqn.showForm('0');
+        // diag._radEqn.setScenario('center');
         diag._radEqn.setScenario('center');
+        diag._radEqn.showForm('start');
+        diag._radEqn.goToForm({ name: '0', animate: 'dissolve' });
       },
     });
 
@@ -840,11 +829,11 @@ class Content extends PresentationFormatContent {
     // We can do a similar procedure to find degrees from radians.
     this.addSection({
       setContent: [
-        devNote({ top: 80 }, '|scalarRad|'),
-        devNote({ top: 85 }, '|scalarDeg|'),
+        devNote({ top: 5 }, '|scalarRad|'),
+        devNote({ top: 10 }, '|scalarDeg|'),
         // devNote({ top: 90 }, '|_360|'),
       ],
-      fadeInFromPrev: false,
+      // fadeInFromPrev: false,
       modifiers: {
         // _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
         // _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
@@ -862,24 +851,35 @@ class Content extends PresentationFormatContent {
       show: [
         diag._radEqnNav, diag._radEqn,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      // transitionFromPrev: (done, doneStr) => {
+      //   diag._radEqn.setScenario('center');
+      //   diag._degEqn.setScenario('down');
+      //   diag._radEqn.showForm('6');
+      //   diag._radEqn.animations.new()
+      //     .scenario({ target: 'up', duration: 1 })
+      //     .inParallel([
+      //       diag._degEqn.anim.dissolveIn({ duration: 0.5 }),
+      //       diag.anim.trigger({ callback: 'degShowForm', payload: '6' }),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        // diag._radEqn.showForm('6');
+        // diag._degEqn.showForm('6');
+        // diag._degEqn.setScenario('down');
         diag._radEqn.setScenario('center');
         diag._degEqn.setScenario('down');
         diag._radEqn.showForm('6');
+        // diag._radEqn.setScenario('up');
         diag._radEqn.animations.new()
           .scenario({ target: 'up', duration: 1 })
           .inParallel([
             diag._degEqn.anim.dissolveIn({ duration: 0.5 }),
             diag.anim.trigger({ callback: 'degShowForm', payload: '6' }),
           ])
-          .whenFinished(doneStr)
+          // .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        diag._radEqn.showForm('6');
-        diag._radEqn.setScenario('up');
-        diag._degEqn.showForm('6');
-        diag._degEqn.setScenario('down');
       },
     });
 
@@ -922,7 +922,20 @@ class Content extends PresentationFormatContent {
       show: [
         eqn,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      // transitionFromPrev: (done, doneStr) => {
+      //   eqn.setScenario('left');
+      //   // diag._eqn.showForm('arcDegrees');
+      //   diag.animations.new()
+      //     .inParallel([
+      //       diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
+      //       diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        // eqn.setScenario('left');
+        // eqn.showForm('arcDegrees');
         eqn.setScenario('left');
         // diag._eqn.showForm('arcDegrees');
         diag.animations.new()
@@ -930,12 +943,8 @@ class Content extends PresentationFormatContent {
             diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
             diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
           ])
-          .whenFinished(doneStr)
+          // .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        eqn.setScenario('left');
-        eqn.showForm('arcDegrees');
       },
     });
 
@@ -970,7 +979,25 @@ class Content extends PresentationFormatContent {
       show: [
         diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
       ],
-      transitionFromPrev: (done, doneStr) => {
+      // transitionFromPrev: (done, doneStr) => {
+      //   diag._lim.setScenario('center');
+      //   diag._lim._radius.setRotation(0.8);
+      //   diag.updateLimAngle();
+      //   diag.animations.new()
+      //     // .dissolveIn(1)
+      //     .inParallel([
+      //       diag._lim._radius.anim.dissolveIn(1),
+      //       diag._lim._angle.anim.dissolveIn(1),
+      //       diag._lim._xAxis.anim.dissolveIn(1),
+      //       diag._lim._arc.anim.dissolveIn(1),
+      //     ])
+      //     .whenFinished(doneStr)
+      //     .start();
+      // },
+      setSteadyState: () => {
+        // diag._lim.setScenario('center');
+        // diag._lim._radius.setRotation(0.8);
+        // diag.updateLimAngle();
         diag._lim.setScenario('center');
         diag._lim._radius.setRotation(0.8);
         diag.updateLimAngle();
@@ -984,11 +1011,6 @@ class Content extends PresentationFormatContent {
           ])
           .whenFinished(doneStr)
           .start();
-      },
-      setSteadyState: () => {
-        diag._lim.setScenario('center');
-        diag._lim._radius.setRotation(0.8);
-        diag.updateLimAngle();
       },
     });
 
