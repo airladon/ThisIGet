@@ -175,8 +175,8 @@ class Section {
   }
 
   setOnClicks() {
-    setOnClicks(this.modifiers);
-    setOnClicks(this.infoModifiers);
+    setOnClicks(this.modifiers, '', this.diagram.recorder);
+    setOnClicks(this.infoModifiers, '', this.diagram.recorder);
   }
 
   getInfo(): string {

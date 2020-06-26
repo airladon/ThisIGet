@@ -297,6 +297,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       recordPauseClass: 'figureone_playback__hidden',
     });
     this.unfade();
+    console.log(recorder)
   }
 
   // eslint-disable-next-line class-methods-use-this

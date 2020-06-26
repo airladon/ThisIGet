@@ -5894,7 +5894,8 @@ var Diagram = /*#__PURE__*/function () {
       elements.forEach(function (element) {
         // console.log(element.name)
         // console.log(element.name, element.getPath(), element.asdf)
-        element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element); // console.log(element.name, element.animationFinishedCallback)
+        element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element);
+        element.recorder = _this2.recorder; // console.log(element.name, element.animationFinishedCallback)
       });
       this.animateNextFrame();
     }
@@ -9788,24 +9789,20 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     key: "_getStatePropertiesMin",
     value: function _getStatePropertiesMin() {
       return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStatePropertiesMin", this).call(this)), ['eqn.currentForm', 'eqn.currentSubForm']);
-    }
-  }, {
-    key: "animateToState",
-    value: function animateToState(state, options) {
-      var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var countStart = arguments.length > 3 ? arguments[3] : undefined;
-      var countEnd = arguments.length > 4 ? arguments[4] : undefined;
+    } // animateToState(
+    //   state: Object,
+    //   options: Object,
+    //   independentOnly: boolean = false,
+    //   // countStart: () => void,
+    //   // countEnd: () => void,
+    // ) {
+    //   super.animateToState(state, options, independentOnly);
+    //   if (this.eqn.currentForm !== state.eqn.currentForm) {
+    //     // countStart();
+    //     this.goToForm({ name: state.eqn.currentForm, callback: countEnd });
+    //   }
+    // }
 
-      _get(_getPrototypeOf(Equation.prototype), "animateToState", this).call(this, state, options, independentOnly, countStart, countEnd);
-
-      if (this.eqn.currentForm !== state.eqn.currentForm) {
-        countStart();
-        this.goToForm({
-          name: state.eqn.currentForm,
-          callback: countEnd
-        });
-      }
-    }
     /**
       * Set the current form series to 'name'
      */
@@ -29920,7 +29917,7 @@ var DiagramElement = /*#__PURE__*/function () {
       elementCount: 0
     }; // this.redrawElements = [];
 
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"](true);
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
@@ -30707,6 +30704,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
       var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var elementOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       var pause = function pause() {
         _this2.isPaused = true;
@@ -30716,7 +30714,7 @@ var DiagramElement = /*#__PURE__*/function () {
         this.subscriptions.subscribe('animationFinished', pause, 1);
       } else {
         if (clearAnimations) {
-          this.stop(true, 'noComplete');
+          this.stop(true, 'noComplete', elementOnly);
         }
 
         pause();
@@ -33729,8 +33727,13 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     value: function stop() {
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var elementOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       _get(_getPrototypeOf(DiagramElementCollection.prototype), "stop", this).call(this, cancelled, forceSetToEndOfPlan);
+
+      if (elementOnly) {
+        return;
+      }
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
@@ -34292,11 +34295,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, forcePause, clearAnimations);
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, forcePause, clearAnimations, true);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.pause(forcePause, clearAnimations);
+        element.pause(forcePause, clearAnimations, true);
       }
     }
   }, {
@@ -35064,6 +35067,7 @@ var Recorder = /*#__PURE__*/function () {
       this.startEventsPlayback(fromTime);
       this.startAudioPlayback(fromTime);
       this.subscriptions.trigger('startRecording');
+      this.startRecordingTime = fromTime; // console.log('recorder is', this.state);
     }
   }, {
     key: "startWorker",
@@ -35205,8 +35209,10 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getMergedCacheArray",
     value: function getMergedCacheArray(eventListOrStatesDiff, cacheArray) {
-      var startTime = this.getCacheStartTime();
-      var endTime = this.getCacheEndTime();
+      // const startTime = this.getCacheStartTime();
+      // const endTime = this.getCacheEndTime();
+      var startTime = this.startRecordingTime;
+      var endTime = this.currentTime;
 
       if (startTime == null || endTime === 0) {
         return [];
@@ -35230,7 +35236,8 @@ var Recorder = /*#__PURE__*/function () {
         if (sliceEnd > eventListOrStatesDiff.length - 1) {
           sliceEnd = -1;
         }
-      }
+      } // console.log(sliceStart, sliceEnd)
+
 
       var beforeEvents = [];
       var afterEvents = [];
@@ -35250,8 +35257,37 @@ var Recorder = /*#__PURE__*/function () {
     value: function mergeEventsCache() {
       var _this7 = this;
 
+      // Object.keys(this.eventsCache).forEach((eventName) => {
+      //   const merged = this.getMergedCacheArray(
+      //     this.events[eventName].list, this.eventsCache[eventName].list,
+      //   );
+      //   if (merged.length === 0) {
+      //     return;
+      //   }
+      //   this.events[eventName].list = merged;
+      // });
+      var allEventNames = {};
+      Object.keys(this.events).forEach(function (eventName) {
+        allEventNames[eventName] = null;
+      });
       Object.keys(this.eventsCache).forEach(function (eventName) {
-        var merged = _this7.getMergedCacheArray(_this7.events[eventName].list, _this7.eventsCache[eventName].list);
+        allEventNames[eventName] = null;
+      });
+      Object.keys(allEventNames).forEach(function (eventName) {
+        var eventsCacheList = [];
+
+        if (_this7.eventsCache[eventName] != null) {
+          eventsCacheList = _this7.eventsCache[eventName].list;
+        }
+
+        var eventsList = [];
+
+        if (_this7.events[eventName] != null) {
+          eventsList = _this7.events[eventName].list;
+        } // console.log(eventName)
+
+
+        var merged = _this7.getMergedCacheArray(eventsList, eventsCacheList);
 
         if (merged.length === 0) {
           return;
@@ -35980,7 +36016,11 @@ var Recorder = /*#__PURE__*/function () {
         this.eventIndex[eventName] = index + 1;
       }
 
-      this.playbackEvent(this.getNextEvent());
+      var nextEvent = this.getNextEvent();
+
+      if (nextEvent != null && this.events[nextEvent]) {
+        this.playbackEvent(nextEvent);
+      }
     }
   }, {
     key: "areEventsPlaying",
@@ -41225,6 +41265,7 @@ function modifyText(text, key, mod) {
 
 function onClickId(id, actionMethod, bind) {
   var additionalClassesToAdd = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+  var recorder = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
   var element = document.getElementById(id);
 
   if (element) {
@@ -41236,8 +41277,7 @@ function onClickId(id, actionMethod, bind) {
     });
 
     var onClickFn = function onClickFn() {
-      var recorder = new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
-
+      // const recorder = new Recorder();
       if (recorder.state === 'recording') {
         recorder.recordEvent('click', [id]);
       }
@@ -41277,11 +41317,12 @@ function applyModifiers(text, modifiers) {
 
 function setOnClicks(modifiers) {
   var additionalClassesToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var recorder = arguments.length > 2 ? arguments[2] : undefined;
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
 
     if (typeof mod !== 'string' && 'actionMethod' in mod) {
-      onClickId(typeof mod.id === 'string' ? mod.id : mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd);
+      onClickId(typeof mod.id === 'string' ? mod.id : mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd, recorder);
     }
   });
 }
