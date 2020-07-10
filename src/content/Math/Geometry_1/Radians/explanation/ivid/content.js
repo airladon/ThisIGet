@@ -57,6 +57,9 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadAudio(new Audio(audio));
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.settings.pause = 'freeze';
+    this.diagram.recorder.settings.resume = 'animate';
+    console.log(this.diagram)
   }
 
   addSections() {
@@ -88,6 +91,7 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._angle, circle._corner,
       ],
       setSteadyState: () => {
+        this.diagram.globalAnimation.disableDebugFrameRate();
         circle._line1.setScenario('default');
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
@@ -148,6 +152,7 @@ class Content extends PresentationFormatContent {
             circle.anim.trigger({ callback: 'setAngleTextDeg' }),
           ])
           .start();
+        circle._angle.pulseSettings.allowFreezeOnStop = true;
       },
     });
 
@@ -161,6 +166,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     common = {
       setEnterState: () => {
+        this.diagram.globalAnimation.disableDebugFrameRate();
         circle.setScenario('center');
         circle._angleText.setScenario('bottomDeg');
         diag.setAngleTextProperties(360, 0, 'º');
@@ -278,6 +284,7 @@ class Content extends PresentationFormatContent {
             diag.updateAngle();
           })
           .start();
+        // this.diagram.globalAnimation.setDebugFrameRate(10, 0.5)
       },
     });
 

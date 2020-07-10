@@ -230,7 +230,7 @@ var Fig = {
 /*!***********************************************!*\
   !*** ./src/js/diagram/Animation/Animation.js ***!
   \***********************************************/
-/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep, DimAnimationStep, dim, UndimAnimationStep, undim, ScenarioAnimationStep */
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep, DimAnimationStep, dim, UndimAnimationStep, undim, ScenarioAnimationStep, PulseTransformAnimationStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -266,48 +266,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/TransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/RotationAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RotationAnimationStep", function() { return _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseTransformAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseTransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseTransformAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseTransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseTransformAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/RotationAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RotationAnimationStep", function() { return _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_7__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_7__["default"]; });
 
-/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_8__["TriggerStep"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_8__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_8__["trigger"]; });
+/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_9__["TriggerStep"]; });
 
-/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_9__["trigger"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_9__["custom"]; });
+/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_10__["custom"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_10__["inParallel"]; });
+/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_11__["ParallelAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_11__["SerialAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_11__["inParallel"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_11__["inSerial"]; });
+/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_12__["SerialAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_12__["DelayStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_12__["inSerial"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_12__["delay"]; });
+/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_13__["DelayStep"]; });
 
-/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_13__["delay"]; });
 
-/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_14__["default"]; });
 
-/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+
+/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_16__["default"]; });
+
 
 
 
@@ -611,6 +615,24 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       return this;
     }
   }, {
+    key: "pulseTransforms",
+    value: function pulseTransforms() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PulseTransformAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
     key: "scenario",
     value: function scenario() {
       // if (this.element != null) {
@@ -624,8 +646,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-          optionsIn[_key9] = arguments[_key9];
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -642,8 +664,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-          optionsIn[_key10] = arguments[_key10];
+        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          optionsIn[_key11] = arguments[_key11];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -660,8 +682,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-          optionsIn[_key11] = arguments[_key11];
+        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+          optionsIn[_key12] = arguments[_key12];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -678,8 +700,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-          optionsIn[_key12] = arguments[_key12];
+        for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+          optionsIn[_key13] = arguments[_key13];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -697,8 +719,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
-        args[_key13 - 1] = arguments[_key13];
+      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        args[_key14 - 1] = arguments[_key14];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -721,8 +743,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-        args[_key14 - 1] = arguments[_key14];
+      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        args[_key15 - 1] = arguments[_key15];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -745,8 +767,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-        args[_key15 - 1] = arguments[_key15];
+      for (var _len16 = arguments.length, args = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        args[_key16 - 1] = arguments[_key16];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -769,8 +791,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len16 = arguments.length, args = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
-        args[_key16 - 1] = arguments[_key16];
+      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        args[_key17 - 1] = arguments[_key17];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -789,8 +811,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-        args[_key17 - 1] = arguments[_key17];
+      for (var _len18 = arguments.length, args = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+        args[_key18 - 1] = arguments[_key18];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -801,8 +823,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len18 = arguments.length, optionsIn = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-        optionsIn[_key18 - 1] = arguments[_key18];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19 > 1 ? _len19 - 1 : 0), _key19 = 1; _key19 < _len19; _key19++) {
+        optionsIn[_key19 - 1] = arguments[_key19];
       }
 
       if (this.element != null) {
@@ -823,8 +845,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19 > 1 ? _len19 - 1 : 0), _key19 = 1; _key19 < _len19; _key19++) {
-        optionsIn[_key19 - 1] = arguments[_key19];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20 > 1 ? _len20 - 1 : 0), _key20 = 1; _key20 < _len20; _key20++) {
+        optionsIn[_key20 - 1] = arguments[_key20];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -835,8 +857,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20 > 1 ? _len20 - 1 : 0), _key20 = 1; _key20 < _len20; _key20++) {
-        optionsIn[_key20 - 1] = arguments[_key20];
+      for (var _len21 = arguments.length, optionsIn = new Array(_len21 > 1 ? _len21 - 1 : 0), _key21 = 1; _key21 < _len21; _key21++) {
+        optionsIn[_key21 - 1] = arguments[_key21];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -849,8 +871,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
         element: this.element
       };
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
-        optionsIn[_key21] = arguments[_key21];
+      for (var _len22 = arguments.length, optionsIn = new Array(_len22), _key22 = 0; _key22 < _len22; _key22++) {
+        optionsIn[_key22] = arguments[_key22];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -896,9 +918,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationManager; });
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
-/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -914,6 +937,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //   TypeColorAnimationStepInputOptions, TypeCustomAnimationStepInputOptions,
 // } from './Animation';
 // eslint-disable-next-line import/no-cycle
+
 
 
 
@@ -936,10 +960,10 @@ var AnimationManager = /*#__PURE__*/function () {
     }
 
     if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
-      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
       options.element = elementOrOptionsIn;
     } else {
-      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
     }
 
     this.element = options.element;
@@ -949,7 +973,7 @@ var AnimationManager = /*#__PURE__*/function () {
     this.options = {
       translation: {}
     };
-    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_5__["FunctionMap"]();
     this.finishedCallback = options.finishedCallback;
     return this;
   }
@@ -957,7 +981,7 @@ var AnimationManager = /*#__PURE__*/function () {
   _createClass(AnimationManager, [{
     key: "_state",
     value: function _state(options) {
-      var state = Object(_state__WEBPACK_IMPORTED_MODULE_3__["getState"])(this, ['animations', 'state', 'options'], options);
+      var state = Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['animations', 'state', 'options'], options);
 
       if (this.element != null) {
         state.element = {
@@ -1079,10 +1103,6 @@ var AnimationManager = /*#__PURE__*/function () {
       } else {
         if (this.state === 'animating') {
           this.state = 'idle';
-
-          if (window.asdf) {// debugger;
-          }
-
           callback = this.finishedCallback; // this.fnMap.exec(this.finishedCallback);
         }
 
@@ -1164,17 +1184,38 @@ var AnimationManager = /*#__PURE__*/function () {
       this.cleanAnimations();
     }
   }, {
+    key: "getFrameTime",
+    value: function getFrameTime(frame) {
+      if (frame === 'prev') {
+        return new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().lastFrame;
+      }
+
+      if (frame === 'now') {
+        return new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().now();
+      }
+
+      return null;
+    }
+  }, {
     key: "start",
-    value: function start(name) {
+    value: function start(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, optionsIn, {
+        name: null,
+        frame: 'next'
+      });
+      var name = options.name,
+          frame = options.frame;
+      var frameTime = this.getFrameTime(frame);
+
       if (name == null) {
-        this.startAll();
+        this.startAll(frame);
       } else {
         for (var i = 0; i < this.animations.length; i += 1) {
           var animation = this.animations[i];
 
           if (animation.name === name) {
             if (animation.state !== 'animating') {
-              animation.start();
+              animation.start(frameTime);
               animation.finishIfZeroDuration();
 
               if (animation.state === 'animating') {
@@ -1191,12 +1232,18 @@ var AnimationManager = /*#__PURE__*/function () {
     }
   }, {
     key: "startAll",
-    value: function startAll() {
+    value: function startAll(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, optionsIn, {
+        frame: 'next'
+      });
+      var frame = options.frame;
+      var frameTime = this.getFrameTime(frame);
+
       for (var i = 0; i < this.animations.length; i += 1) {
         var animation = this.animations[i];
 
         if (animation.state !== 'animating') {
-          animation.start();
+          animation.start(frameTime);
           animation.finishIfZeroDuration();
 
           if (animation.state === 'animating') {
@@ -1225,7 +1272,7 @@ var AnimationManager = /*#__PURE__*/function () {
   }, {
     key: "getRemainingTime",
     value: function getRemainingTime() {
-      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now() / 1000;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().now() / 1000;
       var remainingTime = 0;
       this.animations.forEach(function (animation) {
         var animationRemainingTime = animation.getRemainingTime(now);
@@ -1279,7 +1326,7 @@ var AnimationManager = /*#__PURE__*/function () {
     key: "_dup",
     value: function _dup() {
       var newManager = new AnimationManager();
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newManager, ['element']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["duplicateFromTo"])(this, newManager, ['element']);
       newManager.element = this.element;
       return newManager;
     }
@@ -1306,6 +1353,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state */ "./src/js/diagram/state.js");
 /* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1320,6 +1368,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import type { pathOptionsType } from '../tools/g2';
 // eslint-disable-next-line import/no-cycle
 // import { DiagramElement } from './Element';
+
 
 
 
@@ -1341,7 +1390,8 @@ var AnimationStep = /*#__PURE__*/function () {
       duration: 0,
       delay: 0,
       beforeFrame: null,
-      afterFrame: null
+      afterFrame: null,
+      precision: 8
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
     this.onFinish = options.onFinish;
@@ -1352,7 +1402,8 @@ var AnimationStep = /*#__PURE__*/function () {
     this.name = options.name;
     this.afterFrame = options.afterFrame;
     this.beforeFrame = options.beforeFrame;
-    this.startDelay = options.delay; // This is only for it this step is a primary path in an Animation Manager
+    this.startDelay = options.delay;
+    this.precision = options.precision; // This is only for it this step is a primary path in an Animation Manager
 
     this.removeOnFinish = options.removeOnFinish; // Each animation frame will typically calculate a percent complete,
     // which is based on the duration, and from the percent complete calculate
@@ -1509,7 +1560,7 @@ var AnimationStep = /*#__PURE__*/function () {
 
       var deltaTime = now - this.startTime; // console.log(now, this.startTime, deltaTime, this.startDelay);
 
-      var remainingTime = -(this.duration + this.startDelay - deltaTime);
+      var remainingTime = _tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](-(this.duration + this.startDelay - deltaTime), this.precision);
 
       if (deltaTime >= this.startDelay) {
         var deltaTimeAfterDelay = deltaTime - this.startDelay;
@@ -1540,7 +1591,7 @@ var AnimationStep = /*#__PURE__*/function () {
   }, {
     key: "getRemainingTime",
     value: function getRemainingTime() {
-      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now() / 1000;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]().now() / 1000;
       var totalDuration = this.getTotalDuration();
 
       if (this.startTime == null) {
@@ -3323,6 +3374,418 @@ var PulseAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseTransformAnimationStep.js":
+/*!****************************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseTransformAnimationStep.js ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PulseTransformAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+// A transform animation unit manages a transform animation on an element.
+//
+// The start transform can either be defined initially, or null. Null means
+// the start transform is whatever the current element transform is when the
+// unit is started with start().
+//
+// The transform target is defined with either the target or delta properties.
+// Target is used to predefine the target.
+// Delta is used to calculate the target when the unit is started with start()
+//
+var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
+  _inherits(PulseTransformAnimationStep, _ElementAnimationStep);
+
+  var _super = _createSuper(PulseTransformAnimationStep);
+
+  function PulseTransformAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, PulseTransformAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'transform'
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxTime', 'minTime', 'zeroDurationThreshold']);
+    _this = _super.call(this, ElementAnimationStepOptionsIn);
+    var defaultTransformOptions = {
+      start: null,
+      target: null,
+      delta: [],
+      translationStyle: 'linear',
+      rotDirection: 0,
+      translationOptions: {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: ''
+      },
+      velocity: null,
+      clipRotationTo: null,
+      maxTime: null,
+      minTime: 0,
+      zeroDurationThreshold: 0
+    };
+
+    if (_this.element && _this.element.animations.options.translation) {
+      var translationOptions = _this.element.animations.options.translation;
+
+      if (translationOptions.style != null) {
+        defaultTransformOptions.translationStyle = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultTransformOptions.translationOptions, translationOptions);
+    }
+
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.transform = {
+      translationOptions: {}
+    };
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime', 'minTime', 'zeroDurationThreshold']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
+    return _this;
+  } // If spreading to more transforms, add transforms to before start and after finish.
+  // If adding an odd number, more will be added to before start.
+  // If spreading to less transforms, subtract transforms from middle. If all but one
+  // is being subtracted, then the start transform will be retained.
+
+
+  _createClass(PulseTransformAnimationStep, [{
+    key: "spread",
+    value: function spread(transforms, toNum) {
+      if (toNum === transforms.length) {
+        return transforms;
+      }
+
+      if (toNum <= 1) {
+        return [transforms[0]];
+      }
+
+      var spreadTransforms = [];
+
+      if (toNum > transforms.length) {
+        var _delta = toNum - transforms.length;
+
+        var _startNum = Math.ceil(_delta / 2);
+
+        var _endNum = Math.floor(_delta / 2);
+
+        var startTransform = transforms[0]._dup();
+
+        var endTransform = transforms[transforms.length - 1]._dup();
+
+        for (var i = 0; i < _startNum; i += 1) {
+          spreadTransforms.push(startTransform._dup());
+        }
+
+        for (var _i = 0; _i < transforms.length; _i += 1) {
+          spreadTransforms.push(transforms[_i]._dup());
+        }
+
+        for (var _i2 = 0; _i2 < _endNum; _i2 += 1) {
+          spreadTransforms.push(endTransform._dup());
+        }
+
+        return spreadTransforms;
+      }
+
+      var delta = transforms.length - toNum;
+      var startNum = Math.ceil((transforms.length - delta) / 2);
+      var endNum = Math.floor((transforms.length - delta) / 2);
+
+      for (var _i3 = 0; _i3 < startNum; _i3 += 1) {
+        spreadTransforms.push(transforms[_i3]._dup());
+      }
+
+      for (var _i4 = transforms.length - endNum; _i4 < transforms.length; _i4 += 1) {
+        spreadTransforms.push(transforms[_i4]._dup());
+      }
+
+      return spreadTransforms;
+    }
+  }, {
+    key: "setStartAndTarget",
+    value: function setStartAndTarget() {
+      var _this$transform = this.transform,
+          start = _this$transform.start,
+          target = _this$transform.target;
+      var numTransforms = Math.max(start.length, target.length);
+      this.transform.start = this.spread(this.transform.start, numTransforms);
+      this.transform.target = this.spread(this.transform.target, numTransforms);
+    }
+  }, {
+    key: "calculateStartTargetDelta",
+    value: function calculateStartTargetDelta() {
+      var _this2 = this;
+
+      if (this.transform.start.length != this.transform.target.length) {
+        this.transform.delta = [];
+        return;
+      }
+
+      this.transform.delta = [];
+
+      var _loop = function _loop(i) {
+        var start = _this2.transform.start[i];
+        var target = _this2.transform.target[i];
+        var delta = target.sub(start);
+        delta.order.forEach(function (deltaStep, index) {
+          var startStep = start.order[index];
+          var targetStep = target.order[index];
+
+          if (deltaStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && startStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && targetStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
+            var rotDiff = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(startStep.r, targetStep.r, _this2.transform.rotDirection); // eslint-disable-next-line no-param-reassign
+
+            deltaStep.r = rotDiff;
+          }
+        });
+
+        _this2.transform.delta.push(delta);
+      };
+
+      for (var i = 0; i < this.transform.start.length; i += 1) {
+        _loop(i);
+      }
+    }
+  }, {
+    key: "_getStateProperties",
+    value: function _getStateProperties() {
+      // eslint-disable-line class-methods-use-this
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(PulseTransformAnimationStep.prototype), "_getStateProperties", this).call(this)), ['transform']);
+    }
+  }, {
+    key: "_getStateName",
+    value: function _getStateName() {
+      // eslint-disable-line class-methods-use-this
+      return 'transformAnimationStep';
+    }
+  }, {
+    key: "getVelocityTransform",
+    value: function getVelocityTransform() {
+      var element = this.element;
+
+      if (element == null) {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      }
+
+      var velocity = this.transform.velocity;
+
+      if (velocity == null) {
+        return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      }
+
+      if (velocity instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+        return velocity;
+      }
+
+      if (typeof velocity === 'number') {
+        return element.transform._dup().constant(velocity);
+      }
+
+      var transformVelocity = element.transform._dup().constant(1);
+
+      if (velocity.transform != null) {
+        transformVelocity = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(velocity.transform)._dup();
+      }
+
+      if (velocity.position != null) {
+        transformVelocity.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getScale"])(velocity.position));
+      }
+
+      if (velocity.translation != null) {
+        transformVelocity.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getScale"])(velocity.translation));
+      }
+
+      if (velocity.scale != null) {
+        transformVelocity.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getScale"])(velocity.scale));
+      }
+
+      if (velocity.rotation != null) {
+        transformVelocity.updateRotation(velocity.rotation);
+      }
+
+      return transformVelocity;
+    } // On start, calculate the duration, target and delta if not already present.
+    // This is done here in case the start is defined as null meaning it is
+    // going to start from present transform.
+    // Setting a duration to 0 will effectively skip this animation step
+
+  }, {
+    key: "start",
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _get(_getPrototypeOf(PulseTransformAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.transform.start == null || this.transform.start.length === 0) {
+        if (this.element != null) {
+          if (this.element.pulseTransforms.length > 0) {
+            this.transform.start = this.element.pulseTransforms.map(function (t) {
+              return t._dup();
+            });
+          } else {
+            this.transform.start = [this.transform.target[0].identity()];
+          }
+        } else {
+          this.duration = 0;
+          return;
+        }
+      }
+
+      if (this.transform.start.length === 0 && this.element != null) {
+        this.transform.start = [this.element.transform._dup()];
+      }
+
+      this.setStartAndTarget(); // if delta is null, then calculate it from start and target
+
+      this.calculateStartTargetDelta();
+
+      if (this.transform.delta.length === 0) {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      if (this.transform.velocity != null) {
+        var velocity = this.getVelocityTransform();
+
+        for (var i = 0; i < this.transform.start.length; i += 1) {
+          var start = this.transform.start[i];
+          var target = this.transform.target[i];
+          var duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(start, target, velocity, this.transform.rotDirection);
+
+          if (duration > this.duration) {
+            this.duration = duration;
+          }
+        }
+      }
+
+      if (this.transform.maxTime != null) {
+        if (this.duration > this.transform.maxTime) {
+          this.duration = this.transform.maxTime;
+        }
+      }
+
+      if (this.duration <= this.transform.zeroDurationThreshold) {
+        this.duration = 0;
+      }
+
+      if (this.duration < this.transform.minTime) {
+        this.duration = this.transform.minTime;
+      }
+
+      this.duration = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(this.duration, this.precision);
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      // const start = phase.startTransform._dup();
+      // const delta = phase.deltaTransform._dup();
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.getPercentComplete(percentTime);
+      var p = percentComplete; // let next = delta._dup().constant(p);
+      // next = start.add(delta.mul(next));
+
+      if (this.element == null) {
+        return;
+      }
+
+      var element = this.element;
+      element.frozenPulseTransforms = [];
+
+      for (var i = 0; i < this.transform.start.length; i += 1) {
+        var next = this.transform.start[i].toDelta(this.transform.delta[i], p, this.transform.translationStyle, this.transform.translationOptions);
+
+        if (this.transform.clipRotationTo !== null) {
+          next.clipRotation(this.transform.clipRotationTo);
+        }
+
+        element.frozenPulseTransforms.push(next);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element == null) {
+        return;
+      }
+
+      var element = this.element;
+      element.frozenPulseTransforms = [];
+      this.transform.target.forEach(function (t) {
+        element.frozenPulseTransforms.push(t._dup());
+      });
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new PulseTransformsAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return PulseTransformAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+
+
+/***/ }),
+
 /***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js":
 /*!**********************************************************************************************!*\
   !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js ***!
@@ -4047,8 +4510,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
           clipRotationTo: this.scenario.clipRotationTo,
           progression: this.scenario.progression
         }));
-      } // debugger;
-
+      }
 
       if (target.color != null) {
         steps.push(element.anim.color({
@@ -4356,6 +4818,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return inParallel; });
 /* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -4400,6 +4863,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 // import { DiagramElement } from '../Element';
 
 
+
 // Animations get started from a parent, but finish themselves
 var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   _inherits(ParallelAnimationStep, _AnimationStep);
@@ -4431,13 +4895,20 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
 
     _this = _super.call(this, options);
     _this.steps = [];
+    var steps = [];
 
     if (!Array.isArray(options.steps) && options.steps != null) {
-      _this.steps = [options.steps];
+      steps = [options.steps];
     } else if (options.steps != null) {
-      _this.steps = options.steps;
+      steps = options.steps;
     }
 
+    _this.steps = [];
+    steps.forEach(function (step) {
+      if (step != null) {
+        _this.steps.push(step);
+      }
+    });
     return _this;
   }
 
@@ -4467,7 +4938,10 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "with",
     value: function _with(step) {
-      this.steps.push(step);
+      if (step != null) {
+        this.steps.push(step);
+      }
+
       return this;
     }
   }, {
@@ -4600,7 +5074,7 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "getRemainingTime",
     value: function getRemainingTime() {
-      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now() / 1000;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().now() / 1000;
       var totalDuration = this.getTotalDuration();
 
       if (this.startTime == null) {
@@ -4650,6 +5124,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return inSerial; });
 /* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _construct(Parent, args, Class) { if (_isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -4692,6 +5167,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 // import * as tools from '../../tools/math';
 // import { DiagramElement } from '../Element';
+
 
 
 var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
@@ -4774,7 +5250,10 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "then",
     value: function then(step) {
-      this.steps.push(step);
+      if (step != null) {
+        this.steps.push(step);
+      }
+
       return this;
     }
   }, {
@@ -4910,7 +5389,7 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
   }, {
     key: "getRemainingTime",
     value: function getRemainingTime() {
-      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now() / 1000;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().now() / 1000;
       var totalDuration = this.getTotalDuration();
 
       if (this.startTime == null) {
@@ -5413,8 +5892,9 @@ var Diagram = /*#__PURE__*/function () {
     // );
 
     this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"]();
+    this.recorder.diagram = this;
     this.bindRecorder();
-    this.pauseTime = performance.now() / 1000;
+    this.pauseTime = this.globalAnimation.now() / 1000;
     this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
     this.shapes = this.shapesLow;
@@ -5431,7 +5911,10 @@ var Diagram = /*#__PURE__*/function () {
       this.elements.name = 'diagramRoot';
     }
 
-    this.stateTime = performance.now() / 1000; // this.updateFontSize = optionsToUse.updateFontSize;
+    this.state = {
+      pause: 'unpaused'
+    };
+    this.stateTime = this.globalAnimation.now() / 1000; // this.updateFontSize = optionsToUse.updateFontSize;
 
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
@@ -5459,21 +5942,22 @@ var Diagram = /*#__PURE__*/function () {
     value: function bindRecorder() {
       var _this = this;
 
-      this.recorder.diagram = {
-        animateNextFrame: this.animateNextFrame.bind(this),
-        setState: this.setState.bind(this),
-        getState: this.getState.bind(this),
-        getElement: this.getElement.bind(this),
-        showCursor: this.showCursor.bind(this),
-        pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this),
-        getIsInTransition: this.getIsInTransition.bind(this),
-        animateToState: this.animateToState.bind(this),
-        isAnimating: this.isAnimating.bind(this),
-        setAnimationFinishedCallback: this.setAnimationFinishedCallback.bind(this),
-        subscriptions: this.subscriptions
-      };
-
+      // this.recorder.diagram = {
+      //   animateNextFrame: this.animateNextFrame.bind(this),
+      //   setState: this.setState.bind(this),
+      //   getState: this.getState.bind(this),
+      //   getElement: this.getElement.bind(this),
+      //   showCursor: this.showCursor.bind(this),
+      //   pause: this.pause.bind(this),
+      //   unpause: this.unpause.bind(this),
+      //   getIsInTransition: this.getIsInTransition.bind(this),
+      //   animateToState: this.animateToState.bind(this),
+      //   isAnimating: this.isAnimating.bind(this),
+      //   setAnimationFinishedCallback: this.setAnimationFinishedCallback.bind(this),
+      //   subscriptions: this.subscriptions,
+      //   getPauseState: this.getPauseState.bind(this),
+      //   dissolveToState: this.dissolveToState.bind(this),
+      // };
       var onCursor = function onCursor(payload) {
         var _payload = _slicedToArray(payload, 3),
             action = _payload[0],
@@ -5650,7 +6134,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "getState",
     value: function getState(options) {
-      this.stateTime = performance.now() / 1000;
+      this.stateTime = this.globalAnimation.now() / 1000;
       return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], options);
     }
   }, {
@@ -5661,7 +6145,7 @@ var Diagram = /*#__PURE__*/function () {
 
       Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(this, state);
 
-      this.elements.setTimeDelta(performance.now() / 1000 - this.stateTime);
+      this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.stateTime);
       this.elements.setPointsFromDefinition();
       this.elements.setPrimitiveColors();
 
@@ -5673,34 +6157,86 @@ var Diagram = /*#__PURE__*/function () {
     }
   }, {
     key: "animateToState",
-    value: function animateToState(state, optionsIn, done) {
-      var defaultOptions = {
-        delay: 0,
-        duration: 1
-      };
-
-      if (optionsIn.velocity != null) {
-        defaultOptions.duration = 0;
-      } // let counter = 1;
-      // const countStart = () => {
-      //   counter += 1;
+    value: function animateToState(state) {
+      var optionsIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var done = arguments.length > 2 ? arguments[2] : undefined;
+      // const defaultOptions = {
+      //   // delay: 0,
+      //   duration: 1,
       // };
-      // const countEnd = () => {
-      //   counter -= 1;
-      //   // if (counter === 0 && done != null) {
-      //   //   this.fnMap.exec(done);
-      //   // }
-      // };
+      // if (optionsIn.velocity != null) {
+      //   defaultOptions.duration = null;
+      // }
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])(optionsIn, optionsIn); // countStart();
 
-
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])(defaultOptions, optionsIn); // countStart();
-
-      this.elements.animateToState(state.elements, options, true); // countEnd();
+      var duration = this.elements.animateToState(state.elements, options, true, state.lastDrawTime); // countEnd();
 
       if (done != null) {
-        if (this.isAnimating() === false) {
+        if (duration === 0) {
           this.fnMap.exec(done);
-        } else {
+        } else if (done != null) {
+          this.subscriptions.subscribe('animationsFinished', done, 1);
+        }
+      }
+    }
+  }, {
+    key: "dissolveToState",
+    value: function dissolveToState(optionsIn) {
+      var _this2 = this;
+
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
+        dissolveOutDuration: 0.8,
+        dissolveInDuration: 0.8,
+        delay: 0.2,
+        done: null
+      }, optionsIn);
+      this.elements.animations["new"]().opacity({
+        duration: options.dissolveOutDuration,
+        start: 1,
+        target: 0.001
+      }).trigger({
+        callback: function callback() {
+          _this2.elements.hideAll();
+
+          _this2.elements.show(); // this.elements.setOpacity(1);
+
+        }
+      }).delay({
+        duration: options.delay
+      }).trigger({
+        callback: function callback() {
+          _this2.dissolveInToState({
+            state: options.state,
+            duration: options.dissolveInDuration,
+            done: options.done
+          });
+        },
+        // duration: options.dissolveInDuration,
+        duration: 0
+      }).start();
+    }
+  }, {
+    key: "dissolveInToState",
+    value: function dissolveInToState(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
+        duration: 0.8,
+        done: null
+      }, optionsIn);
+      var state = options.state,
+          duration = options.duration,
+          done = options.done;
+      var dissolveDuration = this.elements.dissolveInToState(state.elements, duration);
+      var elements = this.elements.getAllElements();
+      elements.forEach(function (element) {
+        if (element.isShown && element.dependantTransform === false) {
+          element.setTransform(element.transform);
+        }
+      });
+
+      if (done != null) {
+        if (dissolveDuration === 0) {
+          this.fnMap.exec(done);
+        } else if (done != null) {
           this.subscriptions.subscribe('animationsFinished', done, 1);
         }
       }
@@ -5887,29 +6423,40 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
-      var _this2 = this;
+      var _this3 = this;
 
-      this.setFirstTransform();
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
-        // console.log(element.name)
-        // console.log(element.name, element.getPath(), element.asdf)
-        element.animationFinishedCallback = _this2.animationFinished.bind(_this2, element);
-        element.recorder = _this2.recorder; // console.log(element.name, element.animationFinishedCallback)
+        element.diagram = _this3;
+        element.recorder = _this3.recorder;
+        element.animationFinishedCallback = _this3.animationFinished.bind(_this3, element);
       });
+      this.setFirstTransform();
       this.animateNextFrame();
     }
   }, {
     key: "getRemainingAnimationTime",
     value: function getRemainingAnimationTime() {
-      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : performance.now() / 1000;
+      var nowIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.globalAnimation.now() / 1000;
       var elements = this.elements.getAllElements();
+      var now = nowIn;
+
+      if (this.state.pause === 'paused') {
+        now = this.pauseTime;
+      }
+
       var remainingTime = 0;
       elements.forEach(function (element) {
         var elementRemainingTime = element.animations.getRemainingTime(now);
 
         if (elementRemainingTime > remainingTime) {
           remainingTime = elementRemainingTime;
+        }
+
+        var remainingPulseTime = element.getRemainingPulseTime(now);
+
+        if (remainingPulseTime > remainingTime) {
+          remainingTime = remainingPulseTime;
         }
       });
       return remainingTime;
@@ -5948,7 +6495,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderAllElementsToTiedCanvases",
     value: function renderAllElementsToTiedCanvases() {
-      var _this3 = this;
+      var _this4 = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -5958,12 +6505,12 @@ var Diagram = /*#__PURE__*/function () {
 
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this3.elements.elements[name];
+        var element = _this4.elements.elements[name];
 
         if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
           element.isRenderedAsImage = true;
 
-          _this3.renderElementToTiedCanvas(name);
+          _this4.renderElementToTiedCanvas(name);
 
           needClear = true;
         }
@@ -5981,17 +6528,17 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
-      var _this4 = this;
+      var _this5 = this;
 
       // record visibility of top level elements in diagram
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this4.elements.elements[name];
+        var element = _this5.elements.elements[name];
         currentVisibility[name] = element.isShown;
       }); // Hide all elements
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        _this4.elements.elements[name].hide();
+        _this5.elements.elements[name].hide();
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
@@ -6028,7 +6575,7 @@ var Diagram = /*#__PURE__*/function () {
       elementToRender.setScale(oldScale); // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this4.elements.elements[name];
+        var element = _this5.elements.elements[name];
 
         if (currentVisibility[name] === true) {
           element.show();
@@ -6235,7 +6782,8 @@ var Diagram = /*#__PURE__*/function () {
 
       var pixelPoint = this.clientToPixel(clientPoint); // console.log(pixelPoint)
 
-      var glPoint = pixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
+      var glPoint = pixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // console.log(glPoint, clientPoint)
+      // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
       // const clipPoint = this.clientToClip(clientPoint);
       // Get all the diagram elements that were touched at this point (element
       // must have isTouchable = true to be considered)
@@ -6612,16 +7160,52 @@ var Diagram = /*#__PURE__*/function () {
       this.draw(time);
     }
   }, {
+    key: "getPaused",
+    value: function getPaused() {
+      return this.elements.getPaused();
+    }
+  }, {
+    key: "getPauseState",
+    value: function getPauseState() {
+      return this.state.pause;
+    }
+  }, {
     key: "pause",
-    value: function pause() {
-      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      // if (window.asdf) {
-      //   debugger;
-      // }
-      this.elements.pause(forcePause, clearAnimations);
-      this.pauseTime = performance.now() / 1000;
-      this.isPaused = true;
+    value: function pause(pauseSettings) {
+      var _this6 = this;
+
+      // forcePause: boolean = true, clearAnimations: boolean = false) {
+      this.elements.pause(pauseSettings);
+      var elements = this.elements.getAllElements();
+      var preparingToPauseCounter = 0;
+
+      var checkAllPaused = function checkAllPaused() {
+        if (preparingToPauseCounter > 0) {
+          preparingToPauseCounter -= 1;
+        }
+
+        if (preparingToPauseCounter === 0) {
+          _this6.state.pause = 'paused';
+          _this6.isPaused = true;
+
+          _this6.subscriptions.trigger('paused');
+        }
+      };
+
+      elements.forEach(function (element) {
+        if (element.state.pause === 'preparingToPause') {
+          preparingToPauseCounter += 1;
+          element.subscriptions.subscribe('paused', checkAllPaused, 1);
+        }
+      });
+      this.pauseTime = this.globalAnimation.now() / 1000;
+
+      if (preparingToPauseCounter === 0 && this.state.pause !== 'paused') {
+        checkAllPaused();
+      } else if (preparingToPauseCounter > 0) {
+        this.state.pause = 'preparingToPause';
+        this.subscriptions.trigger('preparingToPause');
+      }
     } // pauseAfterNextDraw() {
     //   this.pauseAfterNextDrawFlag = true;
     // }
@@ -6629,9 +7213,48 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "unpause",
     value: function unpause() {
+      var _this7 = this;
+
       this.elements.unpause();
-      this.isPaused = false;
-      this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
+      var elements = this.elements.getAllElements();
+      var preparingToUnpauseCounter = 0;
+
+      var checkAllUnpaused = function checkAllUnpaused() {
+        if (preparingToUnpauseCounter > 0) {
+          preparingToUnpauseCounter -= 1;
+        }
+
+        if (preparingToUnpauseCounter === 0) {
+          _this7.state.pause = 'unpaused';
+          _this7.isPaused = false;
+
+          _this7.elements.setTimeDelta(_this7.globalAnimation.now() / 1000 - _this7.pauseTime);
+
+          _this7.animateNextFrame();
+
+          _this7.subscriptions.trigger('unpaused');
+        }
+      };
+
+      elements.forEach(function (element) {
+        if (element.state.pause === 'preparingToUnpause') {
+          preparingToUnpauseCounter += 1;
+          element.subscriptions.subscribe('unpaused', checkAllUnpaused, 1);
+        }
+      });
+
+      if (preparingToUnpauseCounter === 0 && this.state.pause !== 'unpaused') {
+        checkAllUnpaused();
+      } else if (preparingToUnpauseCounter > 0) {
+        this.state.pause = 'preparingToUnpause';
+        this.subscriptions.trigger('preparingToUnpause');
+      } // // this.state.pause = this.elements.getPause();
+      // this.pauseTime = performance.now() / 1000;
+      // this.elements.unpause();
+      // this.isPaused = false;
+      // this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
+
+
       this.animateNextFrame();
     }
   }, {
@@ -29708,11 +30331,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -29730,6 +30352,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest(); }
 
@@ -29773,24 +30397,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import GlobalAnimation from './webgl/GlobalAnimation';
-// import DrawContext2D from './DrawContext2D';
+
+ // import DrawContext2D from './DrawContext2D';
 
 // eslint-disable-next-line import/no-cycle
 
  // import type Diagram from './Diagram';
 
- // eslint-disable-next-line import/no-cycle
-// import {
-//   AnimationPhase, ColorAnimationPhase, CustomAnimationPhase,
-// } from './AnimationPhase';
-// function checkCallback(callback: ?(boolean) => void): (boolean) => void {
-//   let callbackToUse = () => {};
-//   if (typeof callback === 'function') {
-//     callbackToUse = callback;
-//   }
-//   return callbackToUse; + width
-// }
+
 
 // A diagram is composed of multiple diagram elements.
 //
@@ -29845,6 +30459,7 @@ var DiagramElement = /*#__PURE__*/function () {
   // For the future when collections use color
   // noRotationFromParent: boolean;
   // this is in vertex space
+  // recorder: Recorder;
   // Current animation/movement state of element
   // pulse: Object;                  // Pulse animation state
   // Rename to animate in future
@@ -29884,7 +30499,7 @@ var DiagramElement = /*#__PURE__*/function () {
     var _this = this;
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-    var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var diagramLimitsOrDiagram = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
     var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
     _classCallCheck(this, DiagramElement);
@@ -29894,8 +30509,8 @@ var DiagramElement = /*#__PURE__*/function () {
     this.uid = (Math.random() * 1e18).toString(36);
     this.isShown = true;
     this.transform = transform._dup();
-    this.transformUpdatesIndependantly = true;
-    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_13__["FunctionMap"]();
+    this.dependantTransform = false;
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_14__["FunctionMap"]();
     this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_9__["SubscriptionManager"](this.fnMap);
     this.isMovable = false;
     this.isTouchable = false;
@@ -29916,13 +30531,15 @@ var DiagramElement = /*#__PURE__*/function () {
       parentCount: 0,
       elementCount: 0
     }; // this.redrawElements = [];
+    // this.diagram = null;
 
     this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"](true);
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
     this.stateProperties = [];
-    this.finishAnimationOnPause = false; // this.noRotationFromParent = false;
+    this.finishAnimationOnPause = false;
+    this.lastDrawTime = 0; // this.noRotationFromParent = false;
     // this.pulseDefault = (callback: ?() => void = null) => {
     //   this.pulseScaleNow(1, 2, 0, callback);
     // };
@@ -29932,7 +30549,9 @@ var DiagramElement = /*#__PURE__*/function () {
       scale: 2,
       time: 1
     };
-    this.isPaused = false; // Rename to animate in future
+    this.isPaused = false; // this.copies = [];
+
+    this.pauseSettings = {}; // Rename to animate in future
 
     this.anim = {
       rotation: function rotation() {
@@ -29943,7 +30562,7 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -29953,7 +30572,7 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["ScaleAnimationStep"](options);
       },
       trigger: function trigger() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -29961,19 +30580,17 @@ var DiagramElement = /*#__PURE__*/function () {
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["TriggerStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["TriggerStep"](options);
       },
-      translation: function translation() {
+      delay: function delay() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
           optionsIn[_key4] = arguments[_key4];
         }
 
-        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
-          element: _this
-        }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["PositionAnimationStep"](options);
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["DelayStep"](options);
       },
-      position: function position() {
+      translation: function translation() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
           optionsIn[_key5] = arguments[_key5];
         }
@@ -29981,9 +30598,9 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["PositionAnimationStep"](options);
       },
-      color: function color() {
+      position: function position() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
           optionsIn[_key6] = arguments[_key6];
         }
@@ -29991,9 +30608,9 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["PositionAnimationStep"](options);
       },
-      opacity: function opacity() {
+      color: function color() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
           optionsIn[_key7] = arguments[_key7];
         }
@@ -30001,9 +30618,9 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationStep"](options);
       },
-      transform: function transform() {
+      opacity: function opacity() {
         for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
           optionsIn[_key8] = arguments[_key8];
         }
@@ -30011,64 +30628,40 @@ var DiagramElement = /*#__PURE__*/function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["OpacityAnimationStep"](options);
       },
-      pulse: function pulse() {
+      transform: function transform() {
         for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
           optionsIn[_key9] = arguments[_key9];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["TransformAnimationStep"](options);
+      },
+      pulseTransform: function pulseTransform() {
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["PulseTransformAnimationStep"](options);
+      },
+      pulse: function pulse() {
+        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          optionsIn[_key11] = arguments[_key11];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
-        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        var defaultOptions = {
-          element: _this
-        };
-        var options;
-
-        for (var _len10 = arguments.length, args = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
-          args[_key10 - 1] = arguments[_key10];
-        }
-
-        if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
-            duration: timeOrOptionsIn
-          }].concat(args));
-        } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
-        }
-
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DissolveInAnimationStep"](options);
-      },
-      // eslint-disable-next-line max-len
-      dissolveOut: function dissolveOut() {
-        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-        var defaultOptions = {
-          element: _this
-        };
-        var options;
-
-        for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
-          args[_key11 - 1] = arguments[_key11];
-        }
-
-        if (typeof timeOrOptionsIn === 'number') {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
-            duration: timeOrOptionsIn
-          }].concat(args));
-        } else {
-          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
-        }
-
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DissolveOutAnimationStep"](options);
-      },
-      // eslint-disable-next-line max-len
-      dim: function dim() {
         var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var defaultOptions = {
           element: _this
@@ -30087,10 +30680,10 @@ var DiagramElement = /*#__PURE__*/function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["DimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
-      undim: function undim() {
+      dissolveOut: function dissolveOut() {
         var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
         var defaultOptions = {
           element: _this
@@ -30109,25 +30702,69 @@ var DiagramElement = /*#__PURE__*/function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["UndimAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["DissolveOutAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      dim: function dim() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+          args[_key14 - 1] = arguments[_key14];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["DimAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      undim: function undim() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+          args[_key15 - 1] = arguments[_key15];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["UndimAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
-        for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-          optionsIn[_key14] = arguments[_key14];
+        for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+          optionsIn[_key16] = arguments[_key16];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       scenario: function scenario() {
-        for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-          optionsIn[_key15] = arguments[_key15];
+        for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+          optionsIn[_key17] = arguments[_key17];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ScenarioAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["ScenarioAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       // scenario: (...optionsIn: Array<TypeTransformAnimationStepInputOptions
@@ -30250,8 +30887,8 @@ var DiagramElement = /*#__PURE__*/function () {
       scenarios: function scenarios() {
         var defaultOptions = {};
 
-        for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-          optionsIn[_key16] = arguments[_key16];
+        for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+          optionsIn[_key18] = arguments[_key18];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -30264,12 +30901,18 @@ var DiagramElement = /*#__PURE__*/function () {
         elements.forEach(function (element) {
           steps.push(element.anim.scenario(simpleOptions));
         });
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["ParallelAnimationStep"](simpleOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["ParallelAnimationStep"](simpleOptions, {
           steps: steps
         });
       }
     };
-    this.diagramLimits = diagramLimits;
+
+    if (diagramLimitsOrDiagram instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"]) {
+      this.diagramLimits = diagramLimitsOrDiagram;
+    } else if (diagramLimitsOrDiagram != null) {
+      this.diagramLimits = this.diagram.limits._dup();
+    }
+
     this.move = {
       maxTransform: this.transform.constant(1000),
       minTransform: this.transform.constant(-1000),
@@ -30311,7 +30954,9 @@ var DiagramElement = /*#__PURE__*/function () {
       num: 1,
       delta: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       transformMethod: '_elementPulseSettingsTransformMethod',
-      callback: function callback() {}
+      callback: function callback() {},
+      allowFreezeOnStop: false // clearFrozenTransforms: false,
+
     };
     this.state = {
       isBeingMoved: false,
@@ -30324,11 +30969,12 @@ var DiagramElement = /*#__PURE__*/function () {
       isPulsing: false,
       pulse: {
         startTime: null
-      }
+      },
+      pause: 'unpaused'
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.animationFinishedCallback = null;
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_11__["AnimationManager"]({
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__["AnimationManager"]({
       element: this,
       finishedCallback: this.animationFinished.bind(this)
     });
@@ -30342,6 +30988,9 @@ var DiagramElement = /*#__PURE__*/function () {
     this.unrenderNextDraw = false;
     this.renderedOnNextDraw = false;
     this.pulseTransforms = [];
+    this.frozenPulseTransforms = [];
+    this.copyTransforms = [];
+    this.drawTransforms = [];
   }
 
   _createClass(DiagramElement, [{
@@ -30375,7 +31024,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       if (this.isShown || ignoreShown) {
-        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions', 'finishAnimationOnPause'].concat(_toConsumableArray(this.stateProperties));
+        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions', 'finishAnimationOnPause', 'pulseTransforms', 'frozenPulseTransforms'].concat(_toConsumableArray(this.stateProperties));
       }
 
       return ['isShown', 'transform'];
@@ -30551,11 +31200,33 @@ var DiagramElement = /*#__PURE__*/function () {
 
   }, {
     key: "setFirstTransform",
-    value: function setFirstTransform(parentTransform) {}
+    value: function setFirstTransform(parentTransform) {} // animateToPulseTransforms(pulseTranforms: Array<Transform>) {
+    //   let startTransforms = this.pulseTransforms;
+    //   if (pulseTransforms.length != this.startTransforms.length) {
+    //     startTransforms = [];
+    //     for (let i = 0; i < pulseTranforms.length; i += 1) {
+    //       startTransforms.push(this.transform._dup());
+    //     }
+    //   }
+    // }
+
+  }, {
+    key: "clearFrozenPulseTransforms",
+    value: function clearFrozenPulseTransforms() {
+      this.frozenPulseTransforms = [];
+    }
+  }, {
+    key: "freezePulseTransforms",
+    value: function freezePulseTransforms() {
+      this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
+        return t._dup();
+      });
+    }
   }, {
     key: "animateToState",
     value: function animateToState(state, options) {
       var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var lastDrawTime = arguments.length > 3 ? arguments[3] : undefined;
       var target = {};
 
       if (this.isShown !== state.isShown && this.opacity === 1 || this.opacity !== 1) {
@@ -30568,15 +31239,135 @@ var DiagramElement = /*#__PURE__*/function () {
 
       var stateTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform);
 
-      if (!this.transform.isEqualTo(stateTransform) && (independentOnly && this.transformUpdatesIndependantly || independentOnly === false)) {
+      if (!this.transform.isEqualTo(stateTransform) && (this.dependantTransform === false || independentOnly === false)) {
         target.transform = stateTransform;
       }
 
+      var scenarioAnimation = null;
+      var duration = 0;
+
       if (Object.keys(target).length > 0) {
-        this.animations["new"]().scenario(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({
+        scenarioAnimation = this.anim.scenario(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({
           target: target
-        }, options)).start();
+        }, options));
       }
+
+      var pulseTrigger = null;
+      var pulseDelay = null; // let delay = 0;
+
+      var pulseAnimation = null;
+
+      if (state.state.isPulsing || this.state.isPulsing) {
+        pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])(options, {
+          start: this.pulseTransforms.map(function (t) {
+            return t._dup();
+          }),
+          target: state.pulseTransforms.map(function (t) {
+            return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t);
+          })
+        }));
+      }
+
+      if (scenarioAnimation != null || pulseAnimation != null) {
+        this.animations["new"]().inParallel([scenarioAnimation, pulseAnimation]) // .then(scenarioAnimation)
+        // .then(pulseTrigger)
+        // .then(pulseDelay)
+        .start();
+      } else {
+        this.frozenPulseTransforms = [];
+      }
+
+      if (scenarioAnimation != null) {
+        duration = Math.max(duration, scenarioAnimation.getTotalDuration());
+      }
+
+      if (pulseAnimation != null) {
+        duration = Math.max(duration, pulseAnimation.getTotalDuration());
+      }
+
+      return duration;
+    }
+  }, {
+    key: "dissolveInToState",
+    value: function dissolveInToState(state) {
+      var _this2 = this;
+
+      var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+
+      if (state.isShown === false) {
+        return 0;
+      }
+
+      var target = {};
+      this.transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform);
+      this.color = state.color.slice();
+      this.frozenPulseTransforms = [];
+      state.pulseTransforms.forEach(function (t) {
+        return _this2.frozenPulseTransforms.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t));
+      });
+      this.show();
+      this.animations["new"]().opacity({
+        target: state.opacity,
+        start: 0.001,
+        duration: duration
+      }).trigger({
+        callback: function callback() {
+          _this2.frozenPulseTransforms = [];
+        }
+      }).start();
+      return duration;
+    }
+  }, {
+    key: "isStateSame",
+    value: function isStateSame(state) {
+      if (this.isShown != state.isShown || this.opacity != state.opacity) {
+        return false;
+      }
+
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(this.color, state.color)) {
+        return false;
+      }
+
+      if (!this.transform.isEqualTo(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform))) {
+        return false;
+      }
+
+      if (state.pulseTransforms.length !== this.pulseTransforms.length) {
+        return false;
+      }
+
+      for (var i = 0; i < this.pulseTransforms.length; i += 1) {
+        if (!this.pulseTransforms[i].isEqualTo(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.pulseTransforms[i]))) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "getDrawTransforms",
+    value: function getDrawTransforms(transform) {
+      var drawTransforms = [transform];
+
+      var transformBy = function transformBy(inputTransforms, copyTransforms) {
+        var newTransforms = [];
+        inputTransforms.forEach(function (it) {
+          copyTransforms.forEach(function (t) {
+            newTransforms.push(it.transform(t));
+          });
+        });
+
+        if (newTransforms.length > 0) {
+          return newTransforms;
+        }
+
+        return inputTransforms;
+      };
+
+      drawTransforms = transformBy([transform], this.copyTransforms);
+      drawTransforms = transformBy(drawTransforms, this.pulseTransforms);
+      drawTransforms = transformBy(drawTransforms, this.frozenPulseTransforms);
+      return drawTransforms;
     }
   }, {
     key: "exec",
@@ -30698,25 +31489,109 @@ var DiagramElement = /*#__PURE__*/function () {
       this.undim();
     }
   }, {
+    key: "getPauseSettings",
+    value: function getPauseSettings(pauseSettingsIn) {
+      var pauseSettings;
+      var defaultPause = 'freeze';
+
+      if (typeof pauseSettingsIn === 'string') {
+        pauseSettings = {
+          animation: pauseSettingsIn,
+          pulse: pauseSettingsIn,
+          movingFreely: pauseSettingsIn
+        };
+        defaultPause = pauseSettingsIn;
+      } else {
+        pauseSettings = {
+          animation: pauseSettingsIn.animation,
+          pulse: pauseSettingsIn.pulse,
+          movingFreely: pauseSettingsIn.movingFreely
+        };
+        defaultPause = pauseSettingsIn["default"];
+      }
+
+      ;
+
+      if (typeof this.pauseSettings === 'string') {
+        defaultPause = this.pauseSettings;
+      }
+
+      if (defaultPause == null) {
+        defaultPause = 'freeze';
+      }
+
+      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.animation != null) {
+        pauseSettings.animation = this.pauseSettings.animation;
+      }
+
+      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.pulse != null) {
+        pauseSettings.pulse = this.pauseSettings.pulse;
+      }
+
+      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.movingFreely != null) {
+        pauseSettings.movingFreely = this.pauseSettings.movingFreely;
+      }
+
+      if (pauseSettings.animation == null) {
+        pauseSettings.animation = defaultPause;
+      }
+
+      if (pauseSettings.pulse == null) {
+        pauseSettings.pulse = defaultPause;
+      }
+
+      if (pauseSettings.movingFreely == null) {
+        pauseSettings.movingFreely = defaultPause;
+      }
+
+      return pauseSettings;
+    }
+  }, {
     key: "pause",
     value: function pause() {
-      var _this2 = this;
+      var _this3 = this;
 
-      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var elementOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var pauseSettingsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       var pause = function pause() {
-        _this2.isPaused = true;
+        _this3.isPaused = true;
+        _this3.state.pause = 'paused';
+
+        _this3.subscriptions.trigger('paused');
       };
 
-      if (forcePause === false && this.finishAnimationOnPause && this.isAnimating()) {
+      var pauseWhenFinished = false;
+
+      var _this$getPauseSetting = this.getPauseSettings(pauseSettingsIn),
+          animation = _this$getPauseSetting.animation,
+          pulse = _this$getPauseSetting.pulse,
+          movingFreely = _this$getPauseSetting.movingFreely;
+
+      if (this.animations.isAnimating()) {
+        if (animation === 'completeBeforePause') {
+          pauseWhenFinished = true;
+        } else if (animation === 'complete') {
+          this.animations.cancelAll('complete'); // } else {
+          //   this.animations.cancelAll('noComplete');
+        }
+      } // console.log(this.name, pauseWhenFinished)
+
+
+      if (this.state.isPulsing) {
+        if (pulse === 'completeBeforePause') {
+          pauseWhenFinished = true;
+        } else if (pulse === 'complete') {
+          this.stopPulsing(true, 'complete'); // } else {
+          //   this.stopPulsing(true, 'noComplete');
+        }
+      } // console.log(this.name, pauseWhenFinished)
+
+
+      if (pauseWhenFinished) {
+        this.state.pause = 'preparingToPause';
+        this.subscriptions.trigger('preparingToPause');
         this.subscriptions.subscribe('animationFinished', pause, 1);
       } else {
-        if (clearAnimations) {
-          this.stop(true, 'noComplete', elementOnly);
-        }
-
         pause();
       }
     }
@@ -30724,6 +31599,12 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "unpause",
     value: function unpause() {
       this.isPaused = false;
+
+      if (this.state.pause !== 'unpaused') {
+        this.subscriptions.trigger('unpaused');
+      }
+
+      this.state.pause = 'unpaused';
     }
   }, {
     key: "setPosition",
@@ -31023,23 +31904,23 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "getCurrentScenario",
     value: function getCurrentScenario() {
-      var _this3 = this;
+      var _this4 = this;
 
       var keys = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['transform', 'color', 'isShown'];
       var scenario = {};
       keys.forEach(function (key) {
         if (key === 'transform') {
-          scenario.transform = _this3.transform._dup();
+          scenario.transform = _this4.transform._dup();
         } else if (key === 'position') {
-          scenario.position = _this3.getPosition();
+          scenario.position = _this4.getPosition();
         } else if (key === 'rotation') {
-          scenario.rotation = _this3.getRotation();
+          scenario.rotation = _this4.getRotation();
         } else if (key === 'scale') {
-          scenario.scale = _this3.getScale();
+          scenario.scale = _this4.getScale();
         } else if (key === 'color') {
-          scenario.color = _this3.color.slice();
+          scenario.color = _this4.color.slice();
         } else if (key === 'isShown') {
-          scenario.isShown = _this3.isShown;
+          scenario.isShown = _this4.isShown;
         }
       });
       return scenario;
@@ -31153,7 +32034,61 @@ var DiagramElement = /*#__PURE__*/function () {
     //   }
     //   return Math.min(time, options.minTime);
     // }
-    // Decelerate over some time when moving freely to get a new element
+
+  }, {
+    key: "getRemainingMovingFreelyDuration",
+    value: function getRemainingMovingFreelyDuration() {
+      if (!this.state.isMovingFreely) {
+        return 0;
+      }
+
+      var velocity = this.state.movement.velocity;
+      var transform = this.transform;
+      var _this$move$freely = this.move.freely,
+          deceleration = _this$move$freely.deceleration,
+          zeroVelocityThreshold = _this$move$freely.zeroVelocityThreshold;
+      var isZero = false; // for (let i = 0; i < velocity.order.length; i += 1) {
+      //   const step = velocity.order[i];
+      //   if (step instanceof Translation) {
+      //     if
+      //   }
+      // }
+
+      if (this.state.movement.velocity.isZero(0.0000001)) {
+        return 0;
+      }
+
+      if (velocity.order.length !== transform.order.length) {
+        return 0;
+      }
+
+      var duration = 0;
+
+      for (var i = 0; i < velocity.order.length; i += 1) {
+        var v = velocity.order[i];
+        var t = transform.order[i];
+        var min = this.move.minTransform.order[i];
+        var max = this.move.maxTransform.order[i];
+        var translation = deceleration.translation,
+            rotation = deceleration.rotation,
+            scale = deceleration.scale;
+        var stepDuration = 0;
+
+        if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
+          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStopAngle"])(t.r, v.r, rotation, [min.r, max.r], 0.5).duration;
+        } else if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"]) {
+          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStop"])(t, v, translation, [min, max], 0.5).duration;
+        } else {
+          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStop"])(t, v, scale, [min, max], 0.5).duration;
+        }
+
+        if (stepDuration > duration) {
+          duration = stepDuration;
+        }
+      }
+
+      return duration;
+    } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity
 
   }, {
@@ -31218,13 +32153,13 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "updateLastDrawTransform",
     value: function updateLastDrawTransform() {
-      var _this4 = this;
+      var _this5 = this;
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
       var transform = this.getTransform();
       transform.order.forEach(function (t, index) {
-        _this4.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
+        _this5.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
     }
@@ -31246,6 +32181,11 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       return "".concat(this.parent.getPath(), ".").concat(this.name);
+    }
+  }, {
+    key: "getPause",
+    value: function getPause() {
+      return this.state.pause;
     } // Being Moved
 
   }, {
@@ -31256,7 +32196,7 @@ var DiagramElement = /*#__PURE__*/function () {
       this.stopMovingFreely();
       this.state.movement.velocity = this.transform.zero();
       this.state.movement.previousTransform = this.transform._dup();
-      this.state.movement.previousTime = performance.now() / 1000;
+      this.state.movement.previousTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
       this.state.isBeingMoved = true;
       this.unrender();
 
@@ -31278,7 +32218,7 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "stopBeingMoved",
     value: function stopBeingMoved() {
-      var currentTime = performance.now() / 1000; // Check wether last movement was a long time ago, if it was, then make
+      var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000; // Check wether last movement was a long time ago, if it was, then make
       // velocity 0 as the user has stopped moving before releasing touch/click
 
       if (this.state.movement.previousTime !== null) {
@@ -31298,7 +32238,7 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "calcVelocity",
     value: function calcVelocity(newTransform) {
-      var currentTime = performance.now() / 1000;
+      var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
 
       if (this.state.movement.previousTime === null) {
         this.state.movement.previousTime = currentTime;
@@ -31371,6 +32311,19 @@ var DiagramElement = /*#__PURE__*/function () {
 
         this.animationFinished('movingFreely');
       }
+    }
+  }, {
+    key: "getRemainingPulseTime",
+    value: function getRemainingPulseTime(now) {
+      if (this.state.isPulsing === false) {
+        return 0;
+      }
+
+      if (this.state.pulse.startTime == null) {
+        return this.pulseSettings.time;
+      }
+
+      return this.pulseSettings.time - (now - this.state.pulse.startTime);
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
     // will be the largest, so when saving lastDrawTransformMatrix it can be
@@ -31382,8 +32335,8 @@ var DiagramElement = /*#__PURE__*/function () {
     // of the element.
 
   }, {
-    key: "transformWithPulse",
-    value: function transformWithPulse(now, transform) {
+    key: "getPulseTransforms",
+    value: function getPulseTransforms(now) {
       var pulseTransforms = []; // To output list of transform matrices
       // If the diagram element is currently pulsing, the calculate the current
       // pulse magnitude, and transform the input matrix by the pulse
@@ -31420,12 +32373,10 @@ var DiagramElement = /*#__PURE__*/function () {
           // Push the pulse transformed matrix to the array of pulse matrices\
 
           if (pTransform != null) {
-            pulseTransforms.push(transform.transform(pTransform));
+            pulseTransforms.push(pTransform);
           }
         } // If not pulsing, then make no changes to the transformMatrix.
 
-      } else {
-        pulseTransforms.push(transform._dup());
       }
 
       return pulseTransforms;
@@ -31533,12 +32484,28 @@ var DiagramElement = /*#__PURE__*/function () {
       this.state.isPulsing = true;
       this.state.pulse.startTime = null;
       this.unrender();
+      this.frozenPulseTransforms = [];
     }
   }, {
     key: "stopPulsing",
     value: function stopPulsing(result) {
+      var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var wasPulsing = this.state.isPulsing;
+
+      if (this.state.isPulsing && this.pulseSettings.allowFreezeOnStop && (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete')) {
+        this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
+          return t._dup();
+        }); // this.pulseTransforms = this.pulseTransforms;
+
+        this.pulseTransforms = [];
+      }
+
+      if (forceSetToEndOfPlan === 'complete' || forceSetToEndOfPlan === true) {
+        this.pulseTransforms = [];
+      }
+
       this.state.isPulsing = false;
+      this.pulseSettings.num = 1;
 
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
@@ -31567,7 +32534,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
       this.stopMovingFreely(cancelled);
       this.stopBeingMoved();
-      this.stopPulsing(cancelled);
+      this.stopPulsing(cancelled, forceSetToEndOfPlan);
     }
   }, {
     key: "cancel",
@@ -32207,7 +33174,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   // color: Array<number>;
   // opacity: number;
   function DiagramElementPrimitive(drawingObject) {
-    var _this5;
+    var _this6;
 
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
@@ -32216,20 +33183,20 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
     _classCallCheck(this, DiagramElementPrimitive);
 
-    _this5 = _super.call(this, transform, diagramLimits, parent);
-    _this5.drawingObject = drawingObject;
-    _this5.color = color != null ? color.slice() : [0, 0, 0, 0];
-    _this5.defaultColor = _this5.color.slice();
-    _this5.dimColor = [0.5, 0.5, 0.5, 1];
-    _this5.pointsToDraw = -1;
-    _this5.angleToDraw = -1;
-    _this5.lengthToDraw = -1;
-    _this5.cannotTouchHole = false;
-    _this5.type = 'primitive';
-    _this5.pointsDefinition = {};
-    _this5.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
+    _this6 = _super.call(this, transform, diagramLimits, parent);
+    _this6.drawingObject = drawingObject;
+    _this6.color = color != null ? color.slice() : [0, 0, 0, 0];
+    _this6.defaultColor = _this6.color.slice();
+    _this6.dimColor = [0.5, 0.5, 0.5, 1];
+    _this6.pointsToDraw = -1;
+    _this6.angleToDraw = -1;
+    _this6.lengthToDraw = -1;
+    _this6.cannotTouchHole = false;
+    _this6.type = 'primitive';
+    _this6.pointsDefinition = {};
+    _this6.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
 
-    return _this5;
+    return _this6;
   }
 
   _createClass(DiagramElementPrimitive, [{
@@ -32319,7 +33286,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["duplicateFromTo"])(this, primative, ['parent']);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["duplicateFromTo"])(this, primative, ['parent', 'diagram']);
 
       if (transform != null) {
         primative.transform = transform._dup();
@@ -32459,6 +33426,12 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (this.isShown) {
+        this.lastDrawTime = now; // if (this.pulseSettings.clearFrozenTransforms) {
+        //   this.frozenPulseTransforms = [];
+        //   this.pulseSettings.clearFrozenTransforms = false;
+        // }
+        // this.pulseTransforms = [];
+
         if (this.isRenderedAsImage === true) {
           if (this.willStartAnimating()) {
             this.unrender();
@@ -32474,7 +33447,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
         } // console.log(this.name, this.isShown, this.isPaused)
 
 
-        if (!this.isPaused) {
+        if (this.state.pause !== 'paused') {
           this.animations.nextFrame(now);
           this.nextMovingFreelyFrame(now);
         }
@@ -32490,14 +33463,18 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           return;
         }
 
-        this.pulseTransforms = this.transformWithPulse(now, newTransform); // if(now === 1 && this.name === 'p1') {
+        if (this.state.pause !== 'paused') {
+          this.pulseTransforms = this.getPulseTransforms(now);
+        }
+
+        this.drawTransforms = this.getDrawTransforms(newTransform); // if(now === 1 && this.name === 'p1') {
         //   console.log(this.getPosition('diagram'))
         //   console.log(this.getPosition('local'))
         //   // window.aaa = 1;
         // }
         // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawPulseTransform = this.pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        this.lastDrawPulseTransform = this.drawTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
         // let pointCount = -1;
         // if (this.drawingObject instanceof VertexObject) {
         //   pointCount = this.drawingObject.numPoints;
@@ -32540,7 +33517,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   }, {
     key: "draw",
     value: function draw(now) {
-      var _this6 = this;
+      var _this7 = this;
 
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
@@ -32572,9 +33549,9 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
         if (pointCount > 0) {
           // console.log(this.pulseTransforms, pointCount)
-          this.pulseTransforms.forEach(function (t) {
+          this.drawTransforms.forEach(function (t) {
             // console.log(t.matrix(), colorToUse, canvasIndex, pointCount)
-            _this6.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
+            _this7.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
           });
         }
 
@@ -32747,7 +33724,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   var _super2 = _createSuper(DiagramElementCollection);
 
   function DiagramElementCollection() {
-    var _this7;
+    var _this8;
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
@@ -32755,13 +33732,13 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this7 = _super2.call(this, transform, diagramLimits, parent);
-    _this7.elements = {};
-    _this7.drawOrder = [];
-    _this7.touchInBoundingRect = false;
-    _this7.eqns = {};
-    _this7.type = 'collection';
-    return _this7;
+    _this8 = _super2.call(this, transform, diagramLimits, parent);
+    _this8.elements = {};
+    _this8.drawOrder = [];
+    _this8.touchInBoundingRect = false;
+    _this8.eqns = {};
+    _this8.type = 'collection';
+    return _this8;
   }
 
   _createClass(DiagramElementCollection, [{
@@ -32963,6 +33940,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       // console.log('draw', this.name)
       if (this.isShown) {
+        this.lastDrawTime = now; // if (this.pulseSettings.clearFrozenTransforms) {
+        //   this.frozenPulseTransforms = [];
+        //   this.pulseSettings.clearFrozenTransforms = false;
+        // }
+
         if (this.isRenderedAsImage === true) {
           if (this.willStartAnimating()) {
             this.unrender();
@@ -32975,7 +33957,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
           this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
-        if (!this.isPaused) {
+        if (this.state.pause !== 'paused') {
           this.animations.nextFrame(now);
           this.nextMovingFreelyFrame(now);
         } // set next color can end up hiding an element when disolving out
@@ -32991,15 +33973,16 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         };
         var newTransform = parentTransform.transform(this.getTransform());
         this.lastDrawTransform = newTransform._dup();
-        this.pulseTransforms = this.transformWithPulse(now, newTransform); // this.pulseTransforms
+        this.pulseTransforms = this.getPulseTransforms(now);
+        this.drawTransforms = this.getDrawTransforms(newTransform); // this.pulseTransforms
         // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawPulseTransform = this.pulseTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        this.lastDrawPulseTransform = this.drawTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
         // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
 
-        for (var k = 0; k < this.pulseTransforms.length; k += 1) {
+        for (var k = 0; k < this.drawTransforms.length; k += 1) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
-            this.elements[this.drawOrder[i]].setupDraw(this.pulseTransforms[k], now, canvasIndex);
+            this.elements[this.drawOrder[i]].setupDraw(this.drawTransforms[k], now, canvasIndex);
           }
         } // if (this.unrenderNextDraw) {
         //   this.clearRender();
@@ -33077,7 +34060,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "exec",
     value: function exec(execFunctionAndArgs) {
-      var _this8 = this;
+      var _this9 = this;
 
       var elementsToExec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
@@ -33095,7 +34078,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element;
 
         if (typeof elementToExec === 'string') {
-          element = _this8.getElement(elementToExec);
+          element = _this9.getElement(elementToExec);
         } else {
           element = elementToExec;
         }
@@ -33108,7 +34091,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "pulse",
     value: function pulse() {
-      var _this9 = this;
+      var _this10 = this;
 
       var optionsOrElementsOrDone = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var done = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33196,7 +34179,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element;
 
         if (typeof elementToPulse === 'string') {
-          element = _this9.getElement(elementToPulse);
+          element = _this10.getElement(elementToPulse);
         } else {
           element = elementToPulse;
         }
@@ -33293,11 +34276,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getElements",
     value: function getElements(children) {
-      var _this10 = this;
+      var _this11 = this;
 
       var elements = [];
       children.forEach(function (child) {
-        var element = _this10.getElement(child);
+        var element = _this11.getElement(child);
 
         if (element != null) {
           elements.push(element);
@@ -33485,7 +34468,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getBoundaries",
     value: function getBoundaries() {
-      var _this11 = this;
+      var _this12 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33496,7 +34479,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
 
       children.forEach(function (child) {
-        var e = _this11.getElement(child);
+        var e = _this12.getElement(child);
 
         if (e == null) {
           return;
@@ -33587,7 +34570,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getBoundingRect",
     value: function getBoundingRect() {
-      var _this12 = this;
+      var _this13 = this;
 
       var space = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'local';
       var children = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -33599,7 +34582,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       var points = [];
       children.forEach(function (child) {
-        var e = _this12.getElement(child);
+        var e = _this13.getElement(child);
 
         if (e == null) {
           return;
@@ -33620,7 +34603,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getVertexSpaceBoundingRect",
     value: function getVertexSpaceBoundingRect() {
-      var _this13 = this;
+      var _this14 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -33632,7 +34615,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       var points = [];
       elementsToBound.forEach(function (element) {
-        var e = _this13.getElement(element);
+        var e = _this14.getElement(element);
 
         if (e == null) {
           return;
@@ -33827,7 +34810,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
-      var _this14 = this;
+      var _this15 = this;
 
       var elementsToBound = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -33840,7 +34823,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var e;
 
         if (typeof element === 'string') {
-          e = _this14.getElement(element);
+          e = _this15.getElement(element);
         } else {
           e = element;
         }
@@ -33896,11 +34879,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this15 = this;
+      var _this16 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this15.elements[a];
-        var elemB = _this15.elements[b];
+        var elemA = _this16.elements[a];
+        var elemB = _this16.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -33999,20 +34982,16 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getAllElements",
     value: function getAllElements() {
-      var elements = [];
+      var elements = [this];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        elements.push(element);
+        var element = this.elements[this.drawOrder[i]]; // elements.push(element);
 
         if (element instanceof DiagramElementCollection) {
           elements.push.apply(elements, _toConsumableArray(element.getAllElements()));
-        } // if (element instanceof DiagramElementPrimitive) {
-        //   elements.push(element);
-        // } else {
-        //   elements.push(...element.getAllElements());
-        // }
-
+        } else {
+          elements.push(element);
+        }
       }
 
       return elements;
@@ -34257,20 +35236,51 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     // countEnd: () => void,
     {
       var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var lastDrawTime = arguments.length > 3 ? arguments[3] : undefined;
+      var duration = 0;
+      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "animateToState", this).call(this, state, options, independentOnly, lastDrawTime); // , countStart, countEnd);
 
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "animateToState", this).call(this, state, options, independentOnly); // , countStart, countEnd);
-
-
-      if (this.transformUpdatesIndependantly && independentOnly || independentOnly === false) {
+      if (this.dependantTransform === false || independentOnly === false) {
         for (var i = 0; i < this.drawOrder.length; i += 1) {
           var element = this.elements[this.drawOrder[i]];
 
           if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
-            element.animateToState(state.elements[this.drawOrder[i]], options, independentOnly // countStart, countEnd,
-            );
+            var elementDuration = element.animateToState(state.elements[this.drawOrder[i]], options, independentOnly, // countStart, countEnd,
+            lastDrawTime);
+
+            if (elementDuration > duration) {
+              duration = elementDuration;
+            }
           }
         }
       }
+
+      return duration;
+    }
+  }, {
+    key: "dissolveInToState",
+    value: function dissolveInToState(state) {
+      var durationIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+      var duration = 0;
+      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "dissolveInToState", this).call(this, state, durationIn);
+
+      if (duration === 0) {
+        return 0;
+      }
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
+          var elementDuration = element.dissolveInToState(state.elements[this.drawOrder[i]], durationIn);
+
+          if (elementDuration > duration) {
+            duration = elementDuration;
+          }
+        }
+      }
+
+      return duration;
     } // _finishSetState(diagram: Diagram) {
     //   super._finishSetState(diagram);
     //   for (let i = 0; i < this.drawOrder.length; i += 1) {
@@ -34292,14 +35302,13 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "pause",
     value: function pause() {
-      var forcePause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var clearAnimations = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var pauseSettingsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, forcePause, clearAnimations, true);
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, pauseSettingsIn);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.pause(forcePause, clearAnimations, true);
+        element.pause(pauseSettingsIn);
       }
     }
   }, {
@@ -34310,6 +35319,78 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.unpause();
+      }
+    } // Priority order:
+    // unpaused,
+    // preparingToPause
+    // preparingToUnpause
+    // paused
+
+  }, {
+    key: "getPause",
+    value: function getPause() {
+      var pause = this.state.pause;
+
+      if (this.state.pause === 'unpaused') {
+        return 'unpaused';
+      }
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        var elementPauseState = element.getPause();
+
+        if (elementPauseState === 'unpaused') {
+          return 'unpaused';
+        }
+
+        if (elementPauseState === 'preparingToPause' || elementPauseState === 'preparingToUnpause') {
+          pause = elementPauseState;
+        }
+      }
+
+      return pause;
+    }
+  }, {
+    key: "isStateSame",
+    value: function isStateSame(state) {
+      var thisElementResult = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isStateSame", this).call(this, state);
+
+      if (thisElementResult === false) {
+        return false;
+      }
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
+          var elementResult = element.isStateSame(state.elements[this.drawOrder[i]]);
+
+          if (elementResult === false) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "clearFrozenPulseTransforms",
+    value: function clearFrozenPulseTransforms() {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "clearFrozenPulseTransforms", this).call(this);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.clearFrozenPulseTransforms();
+      }
+    }
+  }, {
+    key: "freezePulseTransforms",
+    value: function freezePulseTransforms() {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "freezePulseTransforms", this).call(this);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.freezePulseTransforms();
       }
     }
   }]);
@@ -34545,8 +35626,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import GlobalAnimation from './webgl/GlobalAnimation';
-// Singleton class that contains projects global variables
+
 
 function getIndexOfEarliestTime(recordedData, index) {
   if (index < 1) {
@@ -34679,7 +35759,6 @@ var Recorder = /*#__PURE__*/function () {
   // The duration of the video
   // The precision with which to record numbers
   // in seconds
-  // timeoutID: ?TimeoutID;
   // playbackStoppedCallback: ?() =>void;
   // All slides, events and states are relative to 0, where 0 is the start of a recording.
   // Slides, events and states do not have to have a 0 time,
@@ -34737,6 +35816,10 @@ var Recorder = /*#__PURE__*/function () {
 
       this.worker = null;
       this.pauseState = null;
+      this.settings = {
+        pause: 'freeze',
+        resume: 'instant'
+      };
     } // ////////////////////////////////////
     // ////////////////////////////////////
     // Time
@@ -35838,20 +36921,85 @@ var Recorder = /*#__PURE__*/function () {
       this.subscriptions.trigger('playbackStarted');
     }
   }, {
+    key: "getResumeSettings",
+    value: function getResumeSettings() {
+      var onResume = {
+        action: 'instant',
+        maxTime: 6,
+        velocity: {
+          position: 2,
+          rotation: Math.PI * 2 / 2,
+          scale: 1,
+          opacity: 0.8,
+          color: 0.8
+        },
+        allDurationsSame: true,
+        zeroDurationThreshold: 0.00001,
+        minTime: 0,
+        duration: null
+      }; // console.log(resumeSettings)
+
+      if (typeof this.settings.resume === 'string') {
+        onResume.action = this.settings.resume;
+      } else {
+        onResume = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, onResume, this.settings.resume); // velocity trumps duration by default, but if only duration is defined by the
+        // user, then remove velocity;
+        // if (this.settings.resume.duration != null && this.settings.resume.velocity == null) {
+        //   onResume.velocity = undefined;
+        // }
+      }
+
+      if (onResume.action === 'dissolve') {
+        var defaultDuration = {
+          dissolveIn: 0.8,
+          dissolveOut: 0.8,
+          delay: 0.2
+        };
+
+        if (onResume.duration == null) {
+          onResume.duration = defaultDuration;
+        } else if (typeof onResume.duration === 'number') {
+          onResume.duration = {
+            dissolveOut: onResume.duration / 10 * 4.5,
+            dissolveIn: onResume.duration / 10 * 4.5,
+            delay: onResume.duration / 10 * 1
+          };
+        } else {
+          onResume.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultDuration, onResume.duration);
+        }
+      } else if (onResume.duration != null && typeof onResume.duration !== 'number') {
+        onResume.duration = 1;
+      }
+
+      return onResume;
+    }
+  }, {
     key: "resumePlayback",
     value: function resumePlayback() {
       var _this10 = this;
 
-      // console.log(this.pauseState);
       if (this.pauseState == null) {
         this.startPlayback(this.currentTime);
         return;
       }
 
+      var resumeSettings = this.getResumeSettings(); // const defaultOptions = {
+      //   maxTime: 1,
+      //   minTime: 0,
+      //   dissolve: false,
+      //   delay: 0.2,
+      // }
+      // const options = joinObjects({}, defaultOptions, optionsIn);
+      // if (options.dissolve && options.duration == null) {
+      //   options.duration = 0.8;
+      // }
+
       this.diagram.unpause();
-      this.state = 'preparingToPlay';
+      var finishedFlag = false;
 
       var finished = function finished() {
+        finishedFlag = true;
+
         _this10.diagram.setState(_this10.pauseState);
 
         _this10.state = 'playing';
@@ -35869,25 +37017,40 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         _this10.subscriptions.trigger('playbackStarted');
-      }; // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
+      };
+
+      if (resumeSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements)) {
+        finished();
+        return;
+      } // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
 
 
-      this.diagram.animateToState(this.pauseState, {
-        // delay: 1,
-        maxTime: 2,
-        velocity: {
-          position: 2,
-          rotation: Math.PI * 2 / 2,
-          scale: 1,
-          opacity: 0.8,
-          color: 0.8
-        },
-        allDurationsSame: true,
-        zeroDurationThreshold: 0.1,
-        minTime: 0.5
-      }, finished);
+      if (resumeSettings.action === 'dissolve') {
+        this.diagram.elements.freezePulseTransforms();
+        this.diagram.stop();
+        this.diagram.dissolveToState({
+          state: this.pauseState,
+          dissolveInDuration: resumeSettings.duration.dissolveIn,
+          dissolveOutDuration: resumeSettings.duration.dissolveOut,
+          done: finished,
+          delay: resumeSettings.duration.delay
+        });
+      } else {
+        this.diagram.stop();
+        this.diagram.animateToState(this.pauseState, // {
+        //   // delay: 1,
+        //   maxTime: resumeSettings.maxTime,
+        //   velocity: resumeSettings.velocity,
+        //   allDurationsSame: true,
+        //   zeroDurationThreshold: 0.1,
+        //   minTime: options.minTime,
+        //   duration: options.duration,
+        // },
+        resumeSettings, finished);
+      }
 
-      if (this.diagram.isAnimating()) {
+      if (this.diagram.isAnimating() && !finishedFlag) {
+        this.state = 'preparingToPlay';
         this.subscriptions.trigger('preparingToPlay');
       } // if (animationCount === 0) {
       //   this.diagram.subscriptions.unsubscribe('animationsFinished', id);
@@ -36065,27 +37228,38 @@ var Recorder = /*#__PURE__*/function () {
     // }
     // animateToState() {
     // }
+    // On pause, animations and pauses can complete and clear:
+    // Complete  Clear
+    // True      True     Animations finish and nextFrame nothing will happen
+    // True      False    Animations finish and nextFrame nothing will happen
+    //                    as by completing animations they will naturally clear
+    // False     True     Animations freeze and nextFrame nothing will happen
+    // False     False    Animations freeze and nextFrame will continue
+    //
+    // Pulse
+    // True      True     Pulse finish and nextFrame nothing will happen
+    // True      False    Pulse finish and nextFrame nothing will happen
+    //                    as by completing animations they will naturally clear
+    // False     True     Pulse freeze and nextFrame nothing will happen
+    // False     False    Pulse freeze and nextFrame will continue
 
   }, {
     key: "pausePlayback",
     value: function pausePlayback() {
       var _this15 = this;
 
-      var savePauseState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       this.currentTime = this.getCurrentTime();
-
-      if (savePauseState) {
-        this.pauseState = this.diagram.getState({
-          precision: this.precision,
-          ignoreShown: true
-        });
-      }
+      this.pauseState = this.diagram.getState({
+        precision: this.precision,
+        ignoreShown: true
+      });
 
       var pause = function pause() {
-        // console.log('recorder pause');
         _this15.state = 'idle';
 
         _this15.subscriptions.trigger('playbackStopped');
+
+        _this15.diagram.stop();
       };
 
       this.stopTimeouts();
@@ -36095,16 +37269,22 @@ var Recorder = /*#__PURE__*/function () {
         this.isAudioPlaying = false;
       }
 
-      this.diagram.pause(false, true); // console.log(this.diagram.isAnimating())
+      this.diagram.subscriptions.subscribe('paused', pause, 1);
+      this.diagram.pause(this.settings.pause);
 
-      if (this.diagram.isAnimating()) {
+      if (this.diagram.getPauseState() === 'preparingToPause') {
         this.subscriptions.trigger('preparingToPause');
         this.state = 'preparingToPause'; // console.log('recorder prep to pause')
+        // this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
+      } // if (this.diagram.isAnimating()) {
+      //   this.subscriptions.trigger('preparingToPause');
+      //   this.state = 'preparingToPause';
+      //   // console.log('recorder prep to pause')
+      //   this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
+      // } else {
+      //   pause();
+      // }
 
-        this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
-      } else {
-        pause();
-      }
     }
   }, {
     key: "setEvent",
@@ -36695,13 +37875,86 @@ var GlobalAnimation = /*#__PURE__*/function () {
       this.requestNextAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
       GlobalAnimation.instance = this;
       this.drawQueue = [];
-      this.nextDrawQueue = []; // this.drawScene = this.draw.bind(this);
+      this.nextDrawQueue = [];
+      this.lastFrame = null;
+      this.debug = false;
+      this.simulatedFPS = 60;
+      this.debugFrameTime = 0.5;
+      this.timeoutId = null;
+
+      this.now = function () {
+        return performance.now();
+      }; // this.drawScene = this.draw.bind(this);
+
     }
 
     return GlobalAnimation.instance;
   }
 
   _createClass(GlobalAnimation, [{
+    key: "setDebugFrameRate",
+    value: function setDebugFrameRate() {
+      var _this = this;
+
+      var simulatedFPS = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60;
+      var frameTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+      if (this.timeoutId != null) {
+        clearTimeout(this.timeoutId);
+      }
+
+      cancelAnimationFrame(this.animationId);
+      this.simulatedFPS = simulatedFPS;
+      this.debugFrameTime = frameTime;
+      this.debug = true;
+      this.nowTime = performance.now();
+
+      this.now = function () {
+        return _this.nowTime;
+      };
+
+      this.queueNextDebugFrame();
+    }
+  }, {
+    key: "queueNextDebugFrame",
+    value: function queueNextDebugFrame() {
+      var _this2 = this;
+
+      if (this.debugFrameTime != null) {
+        this.timeoutId = setTimeout(function () {
+          _this2.nowTime += 1 / _this2.simulatedFPS * 1000;
+
+          if (_this2.nextDrawQueue.length > 0) {
+            _this2.draw(_this2.now());
+          }
+
+          console.log(_this2.now(), performance.now());
+
+          _this2.queueNextDebugFrame();
+        }, this.debugFrameTime * 1000);
+      } else {
+        this.nowTime += 1 / this.simulatedFPS * 1000;
+
+        if (this.nextDrawQueue.length > 0) {
+          this.draw(this.now());
+        }
+      }
+    }
+  }, {
+    key: "disableDebugFrameRate",
+    value: function disableDebugFrameRate() {
+      if (this.timeoutId != null) {
+        clearTimeout(this.timeoutId);
+      }
+
+      this.timeoutId = null;
+      this.debug = false;
+
+      if (this.nextDrawQueue.length > 0) {
+        this.animateNextFrame();
+      }
+    }
+  }, {
     key: "draw",
     value: function draw(now) {
       this.drawQueue = this.nextDrawQueue;
@@ -36713,6 +37966,7 @@ var GlobalAnimation = /*#__PURE__*/function () {
       }
 
       this.drawQueue = [];
+      this.lastFrame = now;
     }
   }, {
     key: "queueNextFrame",
@@ -36724,9 +37978,16 @@ var GlobalAnimation = /*#__PURE__*/function () {
       // }
 
       if (this.nextDrawQueue.length === 1) {
-        this.animateNextFrame();
+        if (!this.debug) {
+          this.animateNextFrame();
+        }
       }
-    } // Queue up an animation frame
+    } // simulateNextFrame() {
+    //   if (this.timeoutId == null) {
+    //     this.queueNextDebugFrame();
+    //   }
+    // }
+    // Queue up an animation frame
 
   }, {
     key: "animateNextFrame",
@@ -37677,7 +38938,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine, calculateStop, calculateStopAngle */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37721,6 +38982,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransform", function() { return getTransform; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLine", function() { return getLine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateStop", function() { return calculateStop; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateStopAngle", function() { return calculateStopAngle; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -37830,6 +39093,22 @@ var Rect = /*#__PURE__*/function () {
         f1Type: 'rect',
         state: [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.width, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.height, precision)]
       };
+    }
+  }, {
+    key: "isPointInside",
+    value: function isPointInside(pointIn) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var p = getPoint(pointIn).round(precision);
+      var top = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.top, precision);
+      var bottom = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision);
+      var left = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision);
+      var right = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.right, precision);
+
+      if (p.x < left || p.x > right || p.y < bottom || p.y > top) {
+        return false;
+      }
+
+      return true;
     }
   }]);
 
@@ -39570,7 +40849,8 @@ var Transform = /*#__PURE__*/function () {
     key: "translate",
     value: function translate(x) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var translation = new Translation(x, y, this.name);
+      var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.name;
+      var translation = new Translation(x, y, name);
       var order = this.order.slice();
 
       if (this.index === this.order.length) {
@@ -39582,13 +40862,14 @@ var Transform = /*#__PURE__*/function () {
         return this;
       }
 
-      return new Transform(order, this.name);
+      return new Transform(order, name);
     }
   }, {
     key: "rotate",
     value: function rotate(r) {
-      var rotation = new Rotation(r, this.name);
-      rotation.name = this.name;
+      var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.name;
+      var rotation = new Rotation(r, name); // rotation.name = name;
+
       var order = this.order.slice();
 
       if (this.index === this.order.length) {
@@ -39602,13 +40883,14 @@ var Transform = /*#__PURE__*/function () {
       // this.calcMatrix();
 
 
-      return new Transform(order, this.name);
+      return new Transform(order, name);
     }
   }, {
     key: "scale",
     value: function scale(x) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var scale = new Scale(x, y, this.name);
+      var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.name;
+      var scale = new Scale(x, y, name);
       var order = this.order.slice();
 
       if (this.index === this.order.length) {
@@ -39620,7 +40902,7 @@ var Transform = /*#__PURE__*/function () {
         return this;
       }
 
-      return new Transform(order, this.name);
+      return new Transform(order, name);
     }
   }, {
     key: "remove",
@@ -39713,12 +40995,14 @@ var Transform = /*#__PURE__*/function () {
           if (count === actualIndex) {
             this.order[i] = new Translation(x, yOrIndex, this.name);
             this.calcMatrix();
-            return;
+            return this;
           }
 
           count += 1;
         }
       }
+
+      return this;
     }
   }, {
     key: "s",
@@ -39771,13 +41055,26 @@ var Transform = /*#__PURE__*/function () {
   }, {
     key: "updateScale",
     value: function updateScale(x) {
-      var yOrIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var yOrIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var count = 0;
       var actualIndex = index;
+      var scale = new Point(1, 1);
 
       if (x instanceof Point) {
-        actualIndex = yOrIndex;
+        if (yOrIndex == null) {
+          actualIndex = 0;
+        } else {
+          actualIndex = yOrIndex;
+        }
+
+        scale = x;
+      } else if (yOrIndex == null) {
+        scale.x = x;
+        scale.y = x;
+      } else {
+        scale.x = x;
+        scale.y = yOrIndex;
       }
 
       for (var i = 0; i < this.order.length; i += 1) {
@@ -39785,14 +41082,16 @@ var Transform = /*#__PURE__*/function () {
 
         if (t instanceof Scale) {
           if (count === actualIndex) {
-            this.order[i] = new Scale(x, yOrIndex, this.name);
+            this.order[i] = new Scale(scale.x, scale.y, this.name);
             this.calcMatrix();
-            return;
+            return this;
           }
 
           count += 1;
         }
       }
+
+      return this;
     }
   }, {
     key: "r",
@@ -39827,12 +41126,14 @@ var Transform = /*#__PURE__*/function () {
           if (count === index) {
             this.order[i] = new Rotation(r, this.name);
             this.calcMatrix();
-            return;
+            return this;
           }
 
           count += 1;
         }
       }
+
+      return this;
     }
   }, {
     key: "m",
@@ -40135,15 +41436,17 @@ var Transform = /*#__PURE__*/function () {
   }, {
     key: "isZero",
     value: function isZero() {
+      var zeroThreshold = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
       for (var i = 0; i < this.order.length; i += 1) {
         var t = this.order[i];
 
         if (t instanceof Translation || t instanceof Scale) {
-          if (t.x !== 0 || t.y !== 0) {
+          if (t.x > zeroThreshold || t.y > zeroThreshold) {
             return false;
           }
         } else if (t instanceof Rotation) {
-          if (t.r !== 0) {
+          if (clipAngle(t.r, '0to360') > zeroThreshold) {
             return false;
           }
         }
@@ -40243,6 +41546,25 @@ var Transform = /*#__PURE__*/function () {
       // }
 
       return v.clipMag(zeroThreshold, maxTransform);
+    }
+  }, {
+    key: "identity",
+    value: function identity() {
+      var order = [];
+
+      for (var i = 0; i < this.order.length; i += 1) {
+        var t = this.order[i];
+
+        if (t instanceof Translation) {
+          order.push(new Translation(0, 0, this.name));
+        } else if (t instanceof Rotation) {
+          order.push(new Rotation(0, this.name));
+        } else if (t instanceof Scale) {
+          order.push(new Scale(1, 1, this.name));
+        }
+      }
+
+      return new Transform(order, this.name);
     }
   }]);
 
@@ -40595,6 +41917,191 @@ function quadBezierPoints(p0, p1, p2, sides) {
   }
 
   return points;
+}
+
+function calculateStop(position, velocity, deceleration) {
+  var bounds = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var bounceLossIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  var zeroVelocityThreshold = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var precision = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 8;
+
+  if (velocity.x === 0 && velocity.y === 0) {
+    return {
+      duration: 0,
+      position: position
+    };
+  }
+
+  if (bounds != null) {
+    var outOfBounds = false;
+
+    if (bounds instanceof Line && !position.shaddowIsOnLine(bounds, precision)) {
+      outOfBounds = true;
+    }
+
+    if (bounds instanceof Rect && !bounds.isPointInside(position)) {
+      outOfBounds = true;
+    }
+
+    if (outOfBounds) {
+      return {
+        duration: 0,
+        position: position
+      };
+    }
+  }
+
+  var _velocity$toPolar = velocity.toPolar(),
+      mag = _velocity$toPolar.mag,
+      angle = _velocity$toPolar.angle;
+
+  if (mag <= zeroVelocityThreshold) {
+    return {
+      duration: 0,
+      position: position
+    };
+  }
+
+  var v0 = mag;
+  var deltaV = Math.abs(v0) - zeroVelocityThreshold;
+  var timeToZeroV = Math.abs(deltaV) / deceleration;
+  var distanceTravelled = v0 * timeToZeroV - 0.5 * deceleration * Math.pow(timeToZeroV, 2);
+  var newPosition = polarToRect(distanceTravelled, angle).add(position);
+
+  if (bounds == null) {
+    return {
+      duration: timeToZeroV,
+      position: newPosition
+    };
+  }
+
+  var inBounds = false;
+
+  if (bounds instanceof Line && newPosition.shaddowIsOnLine(bounds, precision)) {
+    inBounds = true;
+  }
+
+  if (bounds instanceof Rect && bounds.isPointInside(newPosition)) {
+    inBounds = true;
+  }
+
+  if (inBounds) {
+    return {
+      duration: timeToZeroV,
+      position: newPosition
+    };
+  }
+
+  var bounceScaler = 1 - bounceLossIn;
+  var trajectory = new Line(position, 1, angle);
+  var hBound;
+  var vBound;
+  var ang = clipAngle(angle, '0to360');
+  var distanceToBound = distanceTravelled;
+  var intersectPoint;
+  var xMirror = 1;
+  var yMirror = 1;
+
+  if (bounds instanceof Rect) {
+    if (ang > 0 && ang < Math.PI) {
+      hBound = new Line([bounds.left, bounds.top], [bounds.right, bounds.top]);
+    } else if (ang > Math.PI) {
+      hBound = new Line([bounds.left, bounds.bottom], [bounds.right, bounds.bottom]);
+    }
+
+    if (ang > Math.PI / 2 && ang < Math.PI / 2 * 3) {
+      vBound = new Line([bounds.left, bounds.bottom], [bounds.left, bounds.top]);
+    } else if (ang >= 0 && ang < Math.PI / 2 || ang > Math.PI / 2 * 3) {
+      vBound = new Line([bounds.right, bounds.bottom], [bounds.right, bounds.top]);
+    }
+
+    if (vBound != null) {
+      var result = trajectory.intersectsWith(vBound);
+
+      if (result.intersect != null) {
+        intersectPoint = result.intersect;
+        distanceToBound = distance(position, intersectPoint);
+        xMirror = -1;
+      }
+    }
+
+    if (hBound != null) {
+      var _result = trajectory.intersectsWith(hBound);
+
+      if (_result.intersect != null) {
+        var distanceToBoundH = distance(position, _result.intersect);
+
+        if (intersectPoint == null) {
+          intersectPoint = _result.intersect;
+          distanceToBound = distanceToBoundH;
+          xMirror = 1;
+          yMirror = -1;
+        } else if (distanceToBoundH < distanceToBound) {
+          intersectPoint = _result.intersect;
+          distanceToBound = distanceToBoundH;
+          xMirror = 1;
+          yMirror = -1;
+        } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBoundH, precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBound, precision)) {
+          xMirror = -1;
+          yMirror = -1;
+        }
+      }
+    }
+  }
+
+  if (bounds instanceof Line) {
+    xMirror = -1;
+    yMirror = -1;
+    var distanceToP1 = distance(newPosition, bounds.p1);
+    var distanceToP2 = distance(newPosition, bounds.p2);
+    var boundPoint;
+
+    if (distanceToP1 > distanceToP2) {
+      boundPoint = bounds.p2._dup();
+    } else {
+      boundPoint = bounds.p1._dup();
+    } // calculate distance to bound
+
+
+    var boundPerpendicular = new Line(boundPoint, 1, bounds.ang + Math.PI / 2);
+    intersectPoint = boundPerpendicular.intersectsWith(trajectory).intersect;
+
+    if (intersectPoint != null) {
+      distanceToBound = distance(position, intersectPoint);
+    } // distanceToBound = distance(position.getShaddowOnLine(bounds), intersectPoint);
+
+  }
+
+  if (intersectPoint == null) {
+    return {
+      duration: timeToZeroV,
+      position: newPosition
+    };
+  } // const v0 = mag;
+
+
+  var acc = -v0 / Math.abs(v0) * deceleration;
+  var s = distanceToBound;
+  var b = v0;
+  var a = 0.5 * acc;
+  var c = -s;
+  var t = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+  var velocityAtIntersect = v0 + acc * t; // (s - 0.5 * a * (t ** 2)) / t;
+
+  var bounceVelocity = velocityAtIntersect * bounceScaler;
+  var rectBounceVelocity = new Point(bounceVelocity * Math.cos(angle) * xMirror, bounceVelocity * Math.sin(angle) * yMirror);
+  var newStop = calculateStop(intersectPoint, rectBounceVelocity, deceleration, bounds, bounceLossIn, zeroVelocityThreshold, precision);
+  return {
+    duration: t + newStop.duration,
+    position: newStop.position
+  };
+}
+
+function calculateStopAngle(angle, velocity, deceleration, bounds) {
+  var bounceLossIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  var zeroVelocityThreshold = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var precision = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 8;
+  return calculateStop(new Point(angle, 0), new Point(angle, 0), deceleration, new Rect(bounds[0], -1, bounds[1] - bounds[0], 2), bounceLossIn, zeroVelocityThreshold, precision);
 }
 
 

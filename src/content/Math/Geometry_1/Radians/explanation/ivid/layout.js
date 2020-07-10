@@ -84,6 +84,9 @@ export default function diagramLayout() {
       // color: [1, 0, 1, 1],
       points: [[radius, 0], [0, 0], [radius, 0]],
     },
+    mods: {
+      dependantTransform: true,
+    },
   };
   layout.line2 = {
     name: 'line2',
