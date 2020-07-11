@@ -31266,6 +31266,7 @@ var DiagramElement = /*#__PURE__*/function () {
             return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t);
           })
         }));
+        console.log(pulseAnimation);
       }
 
       if (scenarioAnimation != null || pulseAnimation != null) {
@@ -32492,7 +32493,8 @@ var DiagramElement = /*#__PURE__*/function () {
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var wasPulsing = this.state.isPulsing;
 
-      if (this.state.isPulsing && this.pulseSettings.allowFreezeOnStop && (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete')) {
+      if (this.state.isPulsing // && this.pulseSettings.allowFreezeOnStop
+      && (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete')) {
         this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
           return t._dup();
         }); // this.pulseTransforms = this.pulseTransforms;
@@ -35594,8 +35596,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "download", function() { return _tools_tools__WEBPACK_IMPORTED_MODULE_2__["download"]; });
 
-/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./recorder.worker.js */ "./src/js/diagram/recorder.worker.js");
-/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_recorder_worker_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./recorder.worker.js */ "./src/js/diagram/recorder.worker.js");
+/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_recorder_worker_js__WEBPACK_IMPORTED_MODULE_4__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35623,6 +35626,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 // import type { Transform } from '../tools/g2';
+
 
 
 
@@ -35830,7 +35834,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "timeStamp",
     value: function timeStamp() {
       // eslint-disable-line class-methods-use-this
-      return performance.now();
+      return new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().now();
     }
   }, {
     key: "now",
@@ -36156,7 +36160,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "startWorker",
     value: function startWorker() {
       if (this.worker == null) {
-        this.worker = new _recorder_worker_js__WEBPACK_IMPORTED_MODULE_3___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
+        this.worker = new _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
         // this.worker.addEventListener("message", event => {
         //   const { message, payload } = event.data;
         //   // if (message === 'duration')
@@ -36576,7 +36580,7 @@ var Recorder = /*#__PURE__*/function () {
       // }
 
 
-      this.timeoutID = setTimeout(function () {
+      this.timeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(function () {
         recordAndQueue();
       }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(time * 1000, 0));
     }
@@ -37027,7 +37031,7 @@ var Recorder = /*#__PURE__*/function () {
 
       if (resumeSettings.action === 'dissolve') {
         this.diagram.elements.freezePulseTransforms();
-        this.diagram.stop();
+        this.diagram.stop(true, false);
         this.diagram.dissolveToState({
           state: this.pauseState,
           dissolveInDuration: resumeSettings.duration.dissolveIn,
@@ -37036,7 +37040,7 @@ var Recorder = /*#__PURE__*/function () {
           delay: resumeSettings.duration.delay
         });
       } else {
-        this.diagram.stop();
+        this.diagram.stop(true, false);
         this.diagram.animateToState(this.pauseState, // {
         //   // delay: 1,
         //   maxTime: resumeSettings.maxTime,
@@ -37160,7 +37164,7 @@ var Recorder = /*#__PURE__*/function () {
       var delay = this.events[eventName].list[index][0] - this.getCurrentTime();
 
       if (delay > 0.0001) {
-        this.timeoutID = setTimeout(this.playbackEvent.bind(this, eventName), Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(delay * 1000, 0));
+        this.timeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(this.playbackEvent.bind(this, eventName), Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(delay * 1000, 0));
         return;
       } // const index = this.eventIndex[eventName];
 
@@ -37211,7 +37215,7 @@ var Recorder = /*#__PURE__*/function () {
       var remainingTime = this.duration - this.getCurrentTime();
 
       if (remainingTime > 0.0001) {
-        this.timeoutID = setTimeout(function () {
+        this.timeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(function () {
           _this14.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
@@ -37940,6 +37944,36 @@ var GlobalAnimation = /*#__PURE__*/function () {
         }
       }
     }
+  }, {
+    key: "setTimeout",
+    value: function (_setTimeout) {
+      function setTimeout(_x, _x2) {
+        return _setTimeout.apply(this, arguments);
+      }
+
+      setTimeout.toString = function () {
+        return _setTimeout.toString();
+      };
+
+      return setTimeout;
+    }(function (f, time) {
+      if (this.debug) {
+        var timeScale = 0;
+
+        if (this.debugFrameTime != null) {
+          timeScale = (this.debugFrameTime || 0) / (1 / this.simulatedFPS);
+        } // console.log('setTimeout', time, timeScale)
+
+
+        if (timeScale > 0) {
+          return setTimeout(f, time * timeScale);
+        }
+
+        return setTimeout(f, 0);
+      } else {
+        return setTimeout(f, time);
+      }
+    })
   }, {
     key: "disableDebugFrameRate",
     value: function disableDebugFrameRate() {
