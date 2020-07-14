@@ -58,7 +58,7 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
-    this.diagram.recorder.settings.resume = 'dissolve';
+    this.diagram.recorder.settings.resume = 'animate';
     console.log(this.diagram)
   }
 
@@ -137,7 +137,7 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._angle, circle._corner,
       ],
       setSteadyState: () => {
-        this.diagram.globalAnimation.setDebugFrameRate(10, 0.5)
+        // this.diagram.globalAnimation.setDebugFrameRate(10, 0.5)
         circle.setScenario('title');
         circle._angleText.setScenario('bottomDeg');
         diag.setAngleTextProperties(360, 0, 'º');

@@ -1631,8 +1631,23 @@ var AnimationStep = /*#__PURE__*/function () {
     key: "start",
     value: function start() {
       var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.startTime = startTime;
       this.state = 'animating';
+
+      if (typeof startTime === 'number' || startTime == null) {
+        this.startTime = startTime;
+        return;
+      }
+
+      if (startTime === 'next') {
+        this.startTime = null;
+        return;
+      }
+
+      if (startTime === 'prev') {
+        this.startTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]().lastFrame;
+      }
+
+      this.startTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]().now() / 1000;
     }
   }, {
     key: "finishIfZeroDuration",
@@ -2437,6 +2452,8 @@ var ColorAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
 
         if (this.color.start == null) {
           this.color.start = element.color.slice();
+        } else if (startTime === 'now' || startTime === 'prev') {
+          element.setColor(this.color.start);
         }
 
         if (this.color.delta == null && this.color.target == null) {
@@ -2795,6 +2812,8 @@ var OpacityAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.opacity.start == null) {
           // eslint-disable-next-line prefer-destructuring
           this.opacity.start = element.opacity;
+        } else if (startTime === 'now' || startTime === 'prev') {
+          element.setOpacity(this.opacity.start);
         }
 
         if (this.opacity.delta == null && this.opacity.target == null) {
@@ -3148,12 +3167,16 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
 
       _get(_getPrototypeOf(PositionAnimationStep.prototype), "start", this).call(this, startTime);
 
-      if (this.position.start === null) {
+      if (this.position.start == null) {
         if (this.element != null) {
           this.position.start = this.element.getPosition();
         } else {
           this.duration = 0;
           return;
+        }
+      } else if (startTime === 'now' || startTime === 'prev') {
+        if (this.element != null) {
+          this.element.setPosition(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.position.start));
         }
       } // if delta is null, then calculate it from start and target
 
@@ -3728,6 +3751,10 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
       }
 
       this.duration = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(this.duration, this.precision);
+
+      if (startTime === 'now' || startTime === 'prev') {
+        this.setFrame(0);
+      }
     }
   }, {
     key: "setFrame",
@@ -3772,7 +3799,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
   }, {
     key: "_dup",
     value: function _dup() {
-      var step = new PulseTransformsAnimationStep();
+      var step = new PulseTransformAnimationStep();
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
       step.element = this.element;
       return step;
@@ -3941,6 +3968,10 @@ var RotationAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.duration > this.rotation.maxTime) {
           this.duration = this.rotation.maxTime;
         }
+      }
+
+      if (startTime === 'now' || startTime === 'prev') {
+        this.setFrame(0);
       }
     }
   }, {
@@ -4145,6 +4176,10 @@ var ScaleAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.duration > this.scale.maxTime) {
           this.duration = this.scale.maxTime;
         }
+      }
+
+      if (startTime === 'now' || startTime === 'prev') {
+        this.setFrame(0);
       }
     }
   }, {
@@ -4532,7 +4567,10 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
 
       this.steps = steps;
 
-      _get(_getPrototypeOf(ScenarioAnimationStep.prototype), "start", this).call(this, startTime);
+      _get(_getPrototypeOf(ScenarioAnimationStep.prototype), "start", this).call(this, startTime); // if (startTime === 'now' || startTime === 'prev') {
+      //   this.setFrame(0);
+      // }
+
     }
   }, {
     key: "_dup",
@@ -4736,6 +4774,10 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.duration > this.transform.maxTime) {
           this.duration = this.transform.maxTime;
         }
+      }
+
+      if (startTime === 'now' || startTime === 'prev') {
+        this.setFrame(0);
       }
     }
   }, {
@@ -6160,6 +6202,7 @@ var Diagram = /*#__PURE__*/function () {
     value: function animateToState(state) {
       var optionsIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var done = arguments.length > 2 ? arguments[2] : undefined;
+      var startTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       // const defaultOptions = {
       //   // delay: 0,
       //   duration: 1,
@@ -6167,9 +6210,10 @@ var Diagram = /*#__PURE__*/function () {
       // if (optionsIn.velocity != null) {
       //   defaultOptions.duration = null;
       // }
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])(optionsIn, optionsIn); // countStart();
-
-      var duration = this.elements.animateToState(state.elements, options, true, state.lastDrawTime); // countEnd();
+      // const options = joinObjects(optionsIn, optionsIn);
+      // countStart();
+      // debugger;
+      var duration = this.elements.animateToState(state.elements, optionsIn, true, startTime); // countEnd();
 
       if (done != null) {
         if (duration === 0) {
@@ -6188,7 +6232,8 @@ var Diagram = /*#__PURE__*/function () {
         dissolveOutDuration: 0.8,
         dissolveInDuration: 0.8,
         delay: 0.2,
-        done: null
+        done: null,
+        startTime: null
       }, optionsIn);
       this.elements.animations["new"]().opacity({
         duration: options.dissolveOutDuration,
@@ -6208,24 +6253,27 @@ var Diagram = /*#__PURE__*/function () {
           _this2.dissolveInToState({
             state: options.state,
             duration: options.dissolveInDuration,
-            done: options.done
+            done: options.done,
+            startTime: options.startTime
           });
         },
         // duration: options.dissolveInDuration,
         duration: 0
-      }).start();
+      }).start(options.startTime);
     }
   }, {
     key: "dissolveInToState",
     value: function dissolveInToState(optionsIn) {
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
         duration: 0.8,
-        done: null
+        done: null,
+        startTime: null
       }, optionsIn);
       var state = options.state,
           duration = options.duration,
-          done = options.done;
-      var dissolveDuration = this.elements.dissolveInToState(state.elements, duration);
+          done = options.done,
+          startTime = options.startTime;
+      var dissolveDuration = this.elements.dissolveInToState(state.elements, duration, startTime);
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
         if (element.isShown && element.dependantTransform === false) {
@@ -7101,7 +7149,8 @@ var Diagram = /*#__PURE__*/function () {
     value: function stop() {
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      this.elements.stop(cancelled, forceSetToEndOfPlan);
+      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      this.elements.stop(cancelled, forceSetToEndOfPlan, freeze);
     } // To add elements to a diagram, either this method can be overridden,
     // or the `add` method can be used.
 
@@ -7309,10 +7358,12 @@ var Diagram = /*#__PURE__*/function () {
       //   this.pause();
       //   this.pauseAfterNextDrawFlag = false;
       // }
-
-      if (this.isPaused) {
-        return;
-      }
+      // if (this.state.pause === 'paused') {
+      //   return;
+      // }
+      // if (this.isPaused) {
+      //   return;
+      // }
 
       if (this.elements.isAnyElementMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -30406,7 +30457,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-// A diagram is composed of multiple diagram elements.
+var transformBy = function transformBy(inputTransforms, copyTransforms) {
+  var newTransforms = [];
+  inputTransforms.forEach(function (it) {
+    copyTransforms.forEach(function (t) {
+      newTransforms.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(it).transform(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t)));
+    });
+  });
+
+  if (newTransforms.length > 0) {
+    return newTransforms;
+  }
+
+  return inputTransforms;
+}; // A diagram is composed of multiple diagram elements.
 //
 // A diagram element can either be a:
 //  - Primitive: a basic element that has the webGL vertices, color
@@ -30440,6 +30504,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // the element's current transform used for drawing itself and any children
 // elements it has.
 //
+
+
 var DiagramElement = /*#__PURE__*/function () {
   // Transform of diagram element
   // presetTransforms: Object;       // Convenience dict of transform presets
@@ -31218,15 +31284,25 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "freezePulseTransforms",
     value: function freezePulseTransforms() {
-      this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
-        return t._dup();
-      });
+      var forceOverwrite = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      // const freeze = () => {
+      //   this.frozenPulseTransforms = this.pulseTransforms.map(t => t._dup());
+      // };
+      if (forceOverwrite && this.pulseTransforms.length === 0 || !forceOverwrite && this.pulseTransforms.length > 0) {
+        this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
+          return t._dup();
+        });
+      }
     }
   }, {
     key: "animateToState",
     value: function animateToState(state, options) {
       var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var lastDrawTime = arguments.length > 3 ? arguments[3] : undefined;
+      var startTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      // if (this.name === 'line1' && this.parent.name === 'circle') {
+      //   debugger;
+      // }
       var target = {};
 
       if (this.isShown !== state.isShown && this.opacity === 1 || this.opacity !== 1) {
@@ -31247,33 +31323,34 @@ var DiagramElement = /*#__PURE__*/function () {
       var duration = 0;
 
       if (Object.keys(target).length > 0) {
-        scenarioAnimation = this.anim.scenario(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({
+        var scenarioOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, options, {
           target: target
-        }, options));
-      }
+        });
+        scenarioAnimation = this.anim.scenario(scenarioOptions);
+      } // let pulseTrigger = null;
+      // let pulseDelay = null;
+      // let delay = 0;
 
-      var pulseTrigger = null;
-      var pulseDelay = null; // let delay = 0;
 
-      var pulseAnimation = null;
+      var pulseAnimation = null; // const arePulseTransformsEqual = () => {
+      // };
 
-      if (state.state.isPulsing || this.state.isPulsing) {
-        pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])(options, {
+      if ((state.state.isPulsing || this.state.isPulsing) && !this.arePulseTransformsSame(state)) {
+        pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, options, {
           start: this.pulseTransforms.map(function (t) {
             return t._dup();
           }),
           target: state.pulseTransforms.map(function (t) {
             return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t);
           })
-        }));
-        console.log(pulseAnimation);
+        })); // console.log(pulseAnimation)
       }
 
       if (scenarioAnimation != null || pulseAnimation != null) {
         this.animations["new"]().inParallel([scenarioAnimation, pulseAnimation]) // .then(scenarioAnimation)
         // .then(pulseTrigger)
         // .then(pulseDelay)
-        .start();
+        .start(startTime);
       } else {
         this.frozenPulseTransforms = [];
       }
@@ -31294,6 +31371,7 @@ var DiagramElement = /*#__PURE__*/function () {
       var _this2 = this;
 
       var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+      var startTime = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
       if (state.isShown === false) {
         return 0;
@@ -31307,6 +31385,7 @@ var DiagramElement = /*#__PURE__*/function () {
         return _this2.frozenPulseTransforms.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t));
       });
       this.show();
+      window.asdf = true;
       this.animations["new"]().opacity({
         target: state.opacity,
         start: 0.001,
@@ -31315,12 +31394,14 @@ var DiagramElement = /*#__PURE__*/function () {
         callback: function callback() {
           _this2.frozenPulseTransforms = [];
         }
-      }).start();
+      }).start(startTime);
       return duration;
     }
   }, {
     key: "isStateSame",
     value: function isStateSame(state) {
+      var mergePulseTransforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
       if (this.isShown != state.isShown || this.opacity != state.opacity) {
         return false;
       }
@@ -31331,6 +31412,10 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (!this.transform.isEqualTo(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform))) {
         return false;
+      }
+
+      if (mergePulseTransforms) {
+        return this.arePulseTransformsSame(state);
       }
 
       if (state.pulseTransforms.length !== this.pulseTransforms.length) {
@@ -31346,25 +31431,31 @@ var DiagramElement = /*#__PURE__*/function () {
       return true;
     }
   }, {
+    key: "arePulseTransformsSame",
+    value: function arePulseTransformsSame(state) {
+      var statePulseTransforms = [];
+      var pulseTransforms = [];
+      statePulseTransforms = transformBy([this.transform._dup()], state.pulseTransforms);
+      statePulseTransforms = transformBy(statePulseTransforms, state.frozenPulseTransforms);
+      pulseTransforms = transformBy([this.transform._dup()], this.pulseTransforms);
+      pulseTransforms = transformBy(pulseTransforms, this.frozenPulseTransforms);
+
+      if (pulseTransforms.length !== statePulseTransforms.length) {
+        return false;
+      }
+
+      for (var i = 0; i < pulseTransforms.length; i += 1) {
+        if (!pulseTransforms[i].isEqualTo(statePulseTransforms[i])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
     key: "getDrawTransforms",
     value: function getDrawTransforms(transform) {
       var drawTransforms = [transform];
-
-      var transformBy = function transformBy(inputTransforms, copyTransforms) {
-        var newTransforms = [];
-        inputTransforms.forEach(function (it) {
-          copyTransforms.forEach(function (t) {
-            newTransforms.push(it.transform(t));
-          });
-        });
-
-        if (newTransforms.length > 0) {
-          return newTransforms;
-        }
-
-        return inputTransforms;
-      };
-
       drawTransforms = transformBy([transform], this.copyTransforms);
       drawTransforms = transformBy(drawTransforms, this.pulseTransforms);
       drawTransforms = transformBy(drawTransforms, this.frozenPulseTransforms);
@@ -31559,21 +31650,24 @@ var DiagramElement = /*#__PURE__*/function () {
         _this3.state.pause = 'paused';
 
         _this3.subscriptions.trigger('paused');
-      };
+      }; // console.log(pauseSettingsIn)
+
 
       var pauseWhenFinished = false;
 
       var _this$getPauseSetting = this.getPauseSettings(pauseSettingsIn),
           animation = _this$getPauseSetting.animation,
           pulse = _this$getPauseSetting.pulse,
-          movingFreely = _this$getPauseSetting.movingFreely;
+          movingFreely = _this$getPauseSetting.movingFreely; // console.log(animation, pulse)
+
 
       if (this.animations.isAnimating()) {
         if (animation === 'completeBeforePause') {
           pauseWhenFinished = true;
         } else if (animation === 'complete') {
-          this.animations.cancelAll('complete'); // } else {
-          //   this.animations.cancelAll('noComplete');
+          this.animations.cancelAll('complete');
+        } else {
+          this.animations.cancelAll('noComplete');
         }
       } // console.log(this.name, pauseWhenFinished)
 
@@ -31582,8 +31676,9 @@ var DiagramElement = /*#__PURE__*/function () {
         if (pulse === 'completeBeforePause') {
           pauseWhenFinished = true;
         } else if (pulse === 'complete') {
-          this.stopPulsing(true, 'complete'); // } else {
-          //   this.stopPulsing(true, 'noComplete');
+          this.stopPulsing(true, 'complete');
+        } else {
+          this.stopPulsing(true, 'noComplete', true);
         }
       } // console.log(this.name, pauseWhenFinished)
 
@@ -32357,7 +32452,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
         if (deltaTime >= this.pulseSettings.time && this.pulseSettings.time !== 0) {
           // this.state.isPulsing = false;
-          this.stopPulsing(true);
+          this.stopPulsing(false, true);
           deltaTime = this.pulseSettings.time;
         } // Go through each pulse matrix planned, and transform the input matrix
         // with the pulse.
@@ -32489,11 +32584,13 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "stopPulsing",
-    value: function stopPulsing(result) {
+    value: function stopPulsing(cancelled) {
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      // console.log(forceSetToEndOfPlan)
       var wasPulsing = this.state.isPulsing;
 
-      if (this.state.isPulsing // && this.pulseSettings.allowFreezeOnStop
+      if (freeze && this.state.isPulsing // && this.pulseSettings.allowFreezeOnStop
       && (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete')) {
         this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
           return t._dup();
@@ -32512,7 +32609,7 @@ var DiagramElement = /*#__PURE__*/function () {
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
         this.pulseSettings.callback = null;
-        this.fnMap.exec(callback, result);
+        this.fnMap.exec(callback, cancelled);
       }
 
       if (wasPulsing) {
@@ -32525,6 +32622,7 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function stop() {
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       if (forceSetToEndOfPlan === true || forceSetToEndOfPlan === 'complete') {
         this.animations.cancelAll('complete');
@@ -32536,7 +32634,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
       this.stopMovingFreely(cancelled);
       this.stopBeingMoved();
-      this.stopPulsing(cancelled, forceSetToEndOfPlan);
+      this.stopPulsing(cancelled, forceSetToEndOfPlan, freeze);
     }
   }, {
     key: "cancel",
@@ -35234,13 +35332,14 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     }
   }, {
     key: "animateToState",
-    value: function animateToState(state, options) // countStart: () => void,
+    value: function animateToState(state, options) // lastDrawTime: number,
+    // countStart: () => void,
     // countEnd: () => void,
     {
       var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var lastDrawTime = arguments.length > 3 ? arguments[3] : undefined;
+      var startTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var duration = 0;
-      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "animateToState", this).call(this, state, options, independentOnly, lastDrawTime); // , countStart, countEnd);
+      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "animateToState", this).call(this, state, options, independentOnly, startTime);
 
       if (this.dependantTransform === false || independentOnly === false) {
         for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -35248,7 +35347,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
           if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
             var elementDuration = element.animateToState(state.elements[this.drawOrder[i]], options, independentOnly, // countStart, countEnd,
-            lastDrawTime);
+            startTime);
 
             if (elementDuration > duration) {
               duration = elementDuration;
@@ -35263,8 +35362,9 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     key: "dissolveInToState",
     value: function dissolveInToState(state) {
       var durationIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.8;
+      var startTime = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var duration = 0;
-      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "dissolveInToState", this).call(this, state, durationIn);
+      duration = _get(_getPrototypeOf(DiagramElementCollection.prototype), "dissolveInToState", this).call(this, state, durationIn, startTime);
 
       if (duration === 0) {
         return 0;
@@ -35274,7 +35374,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
 
         if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
-          var elementDuration = element.dissolveInToState(state.elements[this.drawOrder[i]], durationIn);
+          var elementDuration = element.dissolveInToState(state.elements[this.drawOrder[i]], durationIn, startTime);
 
           if (elementDuration > duration) {
             duration = elementDuration;
@@ -35355,7 +35455,9 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "isStateSame",
     value: function isStateSame(state) {
-      var thisElementResult = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isStateSame", this).call(this, state);
+      var mergePulseTransforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      var thisElementResult = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isStateSame", this).call(this, state, mergePulseTransforms);
 
       if (thisElementResult === false) {
         return false;
@@ -35365,7 +35467,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
 
         if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
-          var elementResult = element.isStateSame(state.elements[this.drawOrder[i]]);
+          var elementResult = element.isStateSame(state.elements[this.drawOrder[i]], mergePulseTransforms);
 
           if (elementResult === false) {
             return false;
@@ -35388,11 +35490,13 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "freezePulseTransforms",
     value: function freezePulseTransforms() {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "freezePulseTransforms", this).call(this);
+      var forceOverwrite = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "freezePulseTransforms", this).call(this, forceOverwrite);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.freezePulseTransforms();
+        element.freezePulseTransforms(forceOverwrite);
       }
     }
   }]);
@@ -36529,6 +36633,7 @@ var Recorder = /*#__PURE__*/function () {
     value: function recordEvent(eventName, payload) {
       var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.now();
 
+      // console.log(time)
       if (this.events[eventName] == null) {
         return;
       }
@@ -37023,37 +37128,33 @@ var Recorder = /*#__PURE__*/function () {
         _this10.subscriptions.trigger('playbackStarted');
       };
 
-      if (resumeSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements)) {
+      if (resumeSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements, true)) {
+        // this.diagram.stop();
+        // this.diagram.elements.clearFrozenPulseTransforms();
         finished();
         return;
       } // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
 
 
       if (resumeSettings.action === 'dissolve') {
-        this.diagram.elements.freezePulseTransforms();
-        this.diagram.stop(true, false);
+        this.diagram.elements.freezePulseTransforms(false);
+        this.diagram.stop();
         this.diagram.dissolveToState({
           state: this.pauseState,
           dissolveInDuration: resumeSettings.duration.dissolveIn,
           dissolveOutDuration: resumeSettings.duration.dissolveOut,
           done: finished,
-          delay: resumeSettings.duration.delay
+          delay: resumeSettings.duration.delay,
+          startTime: 'now'
         });
       } else {
-        this.diagram.stop(true, false);
-        this.diagram.animateToState(this.pauseState, // {
-        //   // delay: 1,
-        //   maxTime: resumeSettings.maxTime,
-        //   velocity: resumeSettings.velocity,
-        //   allDurationsSame: true,
-        //   zeroDurationThreshold: 0.1,
-        //   minTime: options.minTime,
-        //   duration: options.duration,
-        // },
-        resumeSettings, finished);
-      }
+        this.diagram.stop();
+        this.diagram.animateToState(this.pauseState, resumeSettings, finished, 'now');
+      } // if (this.diagram.isAnimating() && !finishedFlag) {
+      // console.log(finishedFlag)
 
-      if (this.diagram.isAnimating() && !finishedFlag) {
+
+      if (!finishedFlag) {
         this.state = 'preparingToPlay';
         this.subscriptions.trigger('preparingToPlay');
       } // if (animationCount === 0) {
@@ -37225,7 +37326,7 @@ var Recorder = /*#__PURE__*/function () {
         return false;
       }
 
-      this.pausePlayback(false);
+      this.pausePlayback();
       return true;
     } // clearPlaybackTimeouts() {
     //   this.timeoutID = null;
