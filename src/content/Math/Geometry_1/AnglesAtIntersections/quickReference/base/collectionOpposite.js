@@ -51,7 +51,7 @@ export default class QRCollectionOpposite extends CommonDiagramCollection {
     const r1 = line1.getRotation();
     const r2 = line2.getRotation();
     const minAngle = minAngleDiff(r2, r1);
-    this._fig.stop(true, 'noComplete');
+    this._fig.stop('freeze');
     if (Math.abs(minAngle) < 0.3) {
       line2.animations.new()
         .rotation({ target: 1, duration: 0.5 })

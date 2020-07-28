@@ -78,8 +78,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   showAnswer() {
     super.showAnswer();
-    this._line1.stop(true, 'noComplete');
-    this._line2.stop(true, 'noComplete');
+    this._line1.stop('freeze');
+    this._line2.stop('freeze');
     makeAnglesClose(this._line1, this._line2);
 
     const r1 = this._line1.getRotation();

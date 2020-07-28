@@ -196,7 +196,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         callback();
       }
     } else {
-      this.triangle.stop(true, 'noComplete');
+      this.triangle.stop('freeze');
       this.triangle.animations.new()
         .scenarios({ target: 'next', duration })
         .whenFinished(callback)

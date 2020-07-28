@@ -65,8 +65,8 @@ class Content extends PresentationFormatContent {
       },
       show: [line1, line2],
       transitionFromAny: (done) => {
-        line1.stop(true, 'noComplete');
-        line2.stop(true, 'noComplete');
+        line1.stop('freeze');
+        line2.stop('freeze');
         coll.scaleLine(layout.length);
         line1.animations.new()
           .scenario({ target: 'center', duration: 1 })

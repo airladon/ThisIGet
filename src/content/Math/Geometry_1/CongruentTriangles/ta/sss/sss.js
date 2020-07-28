@@ -141,10 +141,10 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     angle1: number = this._rad1.getRotation(),
     angle2: number = this._rad2.getRotation(),
   ) {
-    this._pad1.stop(true, 'noComplete');
-    this._pad2.stop(true, 'noComplete');
-    this._circ1.stop(true, 'noComplete');
-    this._circ2.stop(true, 'noComplete');
+    this._pad1.stop('freeze');
+    this._pad2.stop('freeze');
+    this._circ1.stop('freeze');
+    this._circ2.stop('freeze');
 
     this._pad1.animations.new()
       .position({ target: [p1, 0], duration })

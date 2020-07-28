@@ -106,7 +106,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   newCustomTriangle(callback: ?() => void = null) {
     this.randomCustomTriangle(this._customTriangle, this.layout.customTriangle);
-    this._customTriangle.stop(true, 'noComplete');
+    this._customTriangle.stop('freeze');
     this._customTriangle.animations.new()
       .scenarios({ target: 'next', duration: 1.5 })
       .whenFinished(callback)
@@ -116,7 +116,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   newTotalTriangle(callback: ?() => void = null) {
     this.randomCustomTriangle(this._totalAngle._triangle, this.layout.triangle);
-    this._totalAngle.stop(true, 'noComplete');
+    this._totalAngle.stop('freeze');
     this._totalAngle.animations.new()
       .scenarios({ target: 'next', duration: 1.5 })
       .whenFinished(callback)
@@ -174,7 +174,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     fixedTri.setRotation(0);
     fixedTri.updatePoints(triangle.points.map(p => p._dup()));
     fixedTri.setPositionWithoutMoving(delta);
-    fixedTri.stop(true, 'noComplete');
+    fixedTri.stop('freeze');
     fixedTri.animations.new()
       .inParallel([
         fixedTri.anim.rotation({ target: -angle, velocity: 1 }),
@@ -253,7 +253,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   drawParallelLines(callback: ?() => void = null) {
     this._totalAngle.setScenarios('offscreen');
-    this._totalAngle.stop(true, 'noComplete');
+    this._totalAngle.stop('freeze');
     this._totalAngle.animations.new()
       .scenarios({ target: 'parallel', duration: 1.5 })
       .whenFinished(callback)
@@ -364,7 +364,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         callback();
       }
     } else {
-      this._triangleType.stop(true, 'noComplete');
+      this._triangleType.stop('freeze');
       this._triangleType.animations.new()
         .scenarios({ target: 'next', duration })
         .whenFinished(callback)

@@ -82,7 +82,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this.isFlipping) {
       tri2.stop(true, 'complete');
     } else {
-      tri2.stop(true, 'noComplete');
+      tri2.stop('freeze');
     }
     tri2.animations.new()
       .rotation({ target: rotation, duration: 2, diration: 0 })
@@ -96,7 +96,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this.isFlipping) {
       tri2.stop(true, 'complete');
     } else {
-      tri2.stop(true, 'noComplete');
+      tri2.stop('freeze');
     }
     tri2.hideAll();
     tri2._line.show();

@@ -441,7 +441,7 @@ class Content extends PresentationFormatContent {
           three.setScenarios('translate');
           done();
         } else if (this.comingFrom === 'prev') {
-          three._fig.stop(true, 'noComplete');
+          three._fig.stop('freeze');
           three._fig.animations.new()
             .inParallel([
               three._fig.anim.rotation({ target: 0, velocity: 2 }),

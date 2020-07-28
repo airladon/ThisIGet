@@ -70,7 +70,7 @@ class Content extends PresentationFormatContent {
       ],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'prev') {
-          custom.stop(true, 'noComplete');
+          custom.stop('freeze');
           custom.animations.new()
             .scenarios({ target: 'props', duration: 1 })
             .whenFinished(done)
@@ -94,7 +94,7 @@ class Content extends PresentationFormatContent {
       show: [custom._line],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'prev') {
-          custom.stop(true, 'noComplete');
+          custom.stop('freeze');
           custom.animations.new()
             .scenarios({ target: 'props', duration: 1 })
             .whenFinished(done)

@@ -274,7 +274,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.triangle._pad1.scenarios.next = { position: points[1] };
     this.triangle._pad2.scenarios.next = { position: points[2] };
 
-    this.triangle.stop(true, 'noComplete');
+    this.triangle.stop('freeze');
     this.triangle.animations.new()
       .scenarios({ target: 'next', duration })
       .whenFinished(callback)

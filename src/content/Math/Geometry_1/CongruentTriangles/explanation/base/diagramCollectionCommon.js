@@ -82,7 +82,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this.isFlipping) {
       tri2.stop(true, 'complete');
     } else {
-      tri2.stop(true, 'noComplete');
+      tri2.stop('freeze');
     }
     tri2.animations.new()
       .rotation({ target: rotation, duration: 2, diration: 0 })
@@ -159,7 +159,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const sidesShown = tri2._side01.isShown;
     tri2.hideAll();
     tri2._line.show();
-    tri2.stop(true, 'noComplete');
+    tri2.stop('freeze');
     this.isFlipping = true;
     tri2.animations.new()
       .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
@@ -206,7 +206,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this.isFlipping) {
       tri2.stop(true, 'complete');
     } else {
-      tri2.stop(true, 'noComplete');
+      tri2.stop('freeze');
     }
     // const anglesShown = tri2._angle0.isShown;
     // const sidesShown = tri2._side01.isShown;

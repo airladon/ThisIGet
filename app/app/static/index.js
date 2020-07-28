@@ -975,6 +975,7 @@ var AnimationManager = /*#__PURE__*/function () {
     };
     this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_5__["FunctionMap"]();
     this.finishedCallback = options.finishedCallback;
+    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_3__["SubscriptionManager"]();
     return this;
   }
 
@@ -1044,10 +1045,6 @@ var AnimationManager = /*#__PURE__*/function () {
   }, {
     key: "isAnimating",
     value: function isAnimating() {
-      // console.log(this.state)
-      // if (window.asdf && this.element.name === 'a') {
-      //   console.log(this.element.name, this.state, this.animations.length)
-      // }
       if (this.state === 'animating' || this.state === 'waitingToStart') {
         return true;
       }
@@ -1103,7 +1100,8 @@ var AnimationManager = /*#__PURE__*/function () {
       } else {
         if (this.state === 'animating') {
           this.state = 'idle';
-          callback = this.finishedCallback; // this.fnMap.exec(this.finishedCallback);
+          callback = this.finishedCallback;
+          this.subscriptions.trigger('finished'); // this.fnMap.exec(this.finishedCallback);
         }
 
         this.state = 'idle';
@@ -1146,6 +1144,7 @@ var AnimationManager = /*#__PURE__*/function () {
           this.state = 'idle'; // console.log('clean finished', this.element.name, this.finishedCallback)
 
           this.fnMap.exec(this.finishedCallback);
+          this.subscriptions.trigger('finished');
         }
 
         this.state = 'idle';
@@ -1182,19 +1181,12 @@ var AnimationManager = /*#__PURE__*/function () {
       }
 
       this.cleanAnimations();
-    }
+    } // eslint-disable-next-line class-methods-use-this
+
   }, {
     key: "getFrameTime",
     value: function getFrameTime(frame) {
-      if (frame === 'prev') {
-        return new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().lastFrame;
-      }
-
-      if (frame === 'now') {
-        return new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().now();
-      }
-
-      return null;
+      new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_2__["default"]().getWhen(frame);
     }
   }, {
     key: "start",
@@ -1228,6 +1220,7 @@ var AnimationManager = /*#__PURE__*/function () {
 
       if (this.state === 'idle') {
         this.fnMap.exec(this.finishedCallback);
+        this.subscriptions.trigger('finished');
       }
     }
   }, {
@@ -1254,6 +1247,7 @@ var AnimationManager = /*#__PURE__*/function () {
 
       if (this.state === 'idle') {
         this.fnMap.exec(this.finishedCallback);
+        this.subscriptions.trigger('finished');
       }
     }
   }, {
@@ -1553,7 +1547,7 @@ var AnimationStep = /*#__PURE__*/function () {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
-      if (this.startTime === null) {
+      if (this.startTime == null) {
         // console.log('new Start', this.startTime, now, this.startTimeOffset)
         this.startTime = now - this.startTimeOffset;
       }
@@ -1597,9 +1591,9 @@ var AnimationStep = /*#__PURE__*/function () {
       if (this.startTime == null) {
         if (this.state === 'animating' || this.state === 'waitingToStart') {
           return totalDuration;
-        } else {
-          return 0;
         }
+
+        return 0;
       }
 
       var deltaTime = now - this.startTime;
@@ -1733,6 +1727,19 @@ var AnimationStep = /*#__PURE__*/function () {
     key: "ifCanceledThenComplete",
     value: function ifCanceledThenComplete() {
       this.completeOnCancel = true;
+      return this;
+    }
+  }, {
+    key: "ifCancelled",
+    value: function ifCancelled() {
+      var then = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'freeze';
+
+      if (then === 'complete') {
+        this.completeOnCancel = true;
+      } else {
+        this.completeOnCancel = false;
+      }
+
       return this;
     }
   }, {
@@ -1950,30 +1957,7 @@ var CustomAnimationStep = /*#__PURE__*/function (_AnimationStep) {
     key: "setToEnd",
     value: function setToEnd() {
       this.fnExec(this.callback, 1);
-    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
-    //   if (this.state === 'idle') {
-    //     return;
-    //   }
-    //   super.finish(cancelled, force);
-    //   const setToEnd = () => {
-    //     if (this.callback != null) {
-    //       this.callback(1);
-    //     }
-    //   };
-    //   if (cancelled && force === 'complete') {
-    //     setToEnd();
-    //   }
-    //   if (cancelled && force == null && this.completeOnCancel === true) {
-    //     setToEnd();
-    //   }
-    //   if (cancelled === false) {
-    //     setToEnd();
-    //   }
-    //   if (this.onFinish != null) {
-    //     this.onFinish(cancelled);
-    //   }
-    // }
-
+    }
   }, {
     key: "_dup",
     value: function _dup() {
@@ -2519,34 +2503,7 @@ var ColorAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
           element.hide();
         }
       }
-    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
-    //   if (this.state === 'idle') {
-    //     return;
-    //   }
-    //   super.finish(cancelled, force);
-    //   const setToEnd = () => {
-    //     const { element } = this;
-    //     if (element != null) {
-    //       element.setColor(this.color.whenComplete);
-    //       if (this.color.dissolve === 'out') {
-    //         element.hide();
-    //       }
-    //     }
-    //   };
-    //   if (cancelled && force === 'complete') {
-    //     setToEnd();
-    //   }
-    //   if (cancelled && force == null && this.completeOnCancel === true) {
-    //     setToEnd();
-    //   }
-    //   if (cancelled === false) {
-    //     setToEnd();
-    //   }
-    //   if (this.onFinish != null) {
-    //     this.onFinish(cancelled);
-    //   }
-    // }
-
+    }
   }, {
     key: "_dup",
     value: function _dup() {
@@ -3376,7 +3333,7 @@ var PulseAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     value: function setToEnd() {
       if (this.element != null) {
         if (this.stopAfterDuration) {
-          this.element.stopPulsing(true);
+          this.element.stopPulsing();
         }
       }
     }
@@ -3525,6 +3482,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
   // If adding an odd number, more will be added to before start.
   // If spreading to less transforms, subtract transforms from middle. If all but one
   // is being subtracted, then the start transform will be retained.
+  // eslint-disable-next-line class-methods-use-this
 
 
   _createClass(PulseTransformAnimationStep, [{
@@ -4806,30 +4764,7 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
       if (this.element != null) {
         this.element.setTransform(this.transform.target);
       }
-    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
-    //   if (this.state === 'idle') {
-    //     return;
-    //   }
-    //   super.finish(cancelled, force);
-    //   const setToEnd = () => {
-    //     if (this.element != null) {
-    //       this.element.setTransform(this.transform.target);
-    //     }
-    //   };
-    //   if (cancelled && force === 'complete') {
-    //     setToEnd();
-    //   }
-    //   if (cancelled && force == null && this.completeOnCancel === true) {
-    //     setToEnd();
-    //   }
-    //   if (cancelled === false) {
-    //     setToEnd();
-    //   }
-    //   if (this.onFinish != null) {
-    //     this.onFinish(cancelled);
-    //   }
-    // }
-
+    }
   }, {
     key: "_dup",
     value: function _dup() {
@@ -5083,7 +5018,7 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       }
 
       if (this.completeOnCancel === false) {
-        forceToUse = 'noComplete';
+        forceToUse = 'freeze';
       }
 
       if (force != null) {
@@ -5402,7 +5337,7 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       }
 
       if (this.completeOnCancel === false) {
-        forceToUse = 'noComplete';
+        forceToUse = 'freeze';
       }
 
       if (force != null) {
@@ -5954,7 +5889,9 @@ var Diagram = /*#__PURE__*/function () {
     }
 
     this.state = {
-      pause: 'unpaused'
+      pause: 'unpaused',
+      preparingToStop: false,
+      preparingToSetState: false
     };
     this.stateTime = this.globalAnimation.now() / 1000; // this.updateFontSize = optionsToUse.updateFontSize;
 
@@ -6182,20 +6119,107 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "setState",
     value: function setState(stateIn) {
+      var _this2 = this;
+
+      var optionsIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'instant';
       // console.log(stateIn)
-      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this); // console.log(state)
+      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this);
+      var finishedFlag = false;
+      this.state.preparingToSetState = false;
 
-      Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(this, state);
+      var finished = function finished() {
+        finishedFlag = true;
+        _this2.state.preparingToSetState = false;
 
-      this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.stateTime);
-      this.elements.setPointsFromDefinition();
-      this.elements.setPrimitiveColors();
+        Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(_this2, state);
 
-      if (this.setStateCallback != null) {
-        this.fnMap.exec(this.setStateCallback);
+        _this2.elements.setTimeDelta(_this2.globalAnimation.now() / 1000 - _this2.stateTime);
+
+        _this2.elements.setPointsFromDefinition();
+
+        _this2.elements.setPrimitiveColors();
+
+        if (_this2.setStateCallback != null) {
+          _this2.fnMap.exec(_this2.setStateCallback);
+        }
+
+        _this2.animateNextFrame(); // console.log('triggered')
+
+
+        _this2.subscriptions.trigger('stateSet');
+      };
+
+      var options = {
+        action: 'instant',
+        maxTime: 6,
+        velocity: {
+          position: 2,
+          rotation: Math.PI * 2 / 2,
+          scale: 1,
+          opacity: 0.8,
+          color: 0.8
+        },
+        allDurationsSame: true,
+        zeroDurationThreshold: 0.00001,
+        minTime: 0,
+        duration: null
+      }; // console.log(resumeSettings)
+
+      if (typeof optionsIn === 'string') {
+        options.action = optionsIn;
+      } else {
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, optionsIn); // velocity trumps duration by default, but if only duration is defined by the
+        // user, then remove velocity;
+        // if (this.settings.resume.duration != null && this.settings.resume.velocity == null) {
+        //   options.velocity = undefined;
+        // }
       }
 
-      this.animateNextFrame();
+      if (options.action === 'dissolve') {
+        var defaultDuration = {
+          dissolveIn: 0.8,
+          dissolveOut: 0.8,
+          delay: 0.2
+        };
+
+        if (options.duration == null) {
+          options.duration = defaultDuration;
+        } else if (typeof options.duration === 'number') {
+          options.duration = {
+            dissolveOut: options.duration / 10 * 4.5,
+            dissolveIn: options.duration / 10 * 4.5,
+            delay: options.duration / 10 * 1
+          };
+        } else {
+          options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultDuration, options.duration);
+        }
+      } else if (options.duration != null && typeof options.duration !== 'number') {
+        options.duration = 1;
+      }
+
+      if (options.action === 'instant' || this.elements.isStateSame(state.elements, true)) {
+        finished();
+      } else if (options.action === 'animate') {
+        this.elements.stop('freeze'); // This is cancelling the pulse
+
+        this.animateToState(state, options, finished, 'now');
+      } else {
+        // this.diagram.elements.freezePulseTransforms(false);
+        this.elements.stop('freeze');
+        this.dissolveToState({
+          state: state,
+          dissolveInDuration: options.duration.dissolveIn,
+          dissolveOutDuration: options.duration.dissolveOut,
+          done: finished,
+          delay: options.duration.delay,
+          startTime: 'now'
+        });
+      }
+
+      if (!finishedFlag) {
+        this.state.preparingToSetState = true;
+        this.subscriptions.trigger('preparingToSetState');
+      }
     }
   }, {
     key: "animateToState",
@@ -6212,7 +6236,6 @@ var Diagram = /*#__PURE__*/function () {
       // }
       // const options = joinObjects(optionsIn, optionsIn);
       // countStart();
-      // debugger;
       var duration = this.elements.animateToState(state.elements, optionsIn, true, startTime); // countEnd();
 
       if (done != null) {
@@ -6226,7 +6249,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "dissolveToState",
     value: function dissolveToState(optionsIn) {
-      var _this2 = this;
+      var _this3 = this;
 
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
         dissolveOutDuration: 0.8,
@@ -6241,26 +6264,72 @@ var Diagram = /*#__PURE__*/function () {
         target: 0.001
       }).trigger({
         callback: function callback() {
-          _this2.elements.hideAll();
+          _this3.elements.hideAll();
 
-          _this2.elements.show(); // this.elements.setOpacity(1);
+          _this3.elements.show(); // this.elements.setOpacity(1);
 
         }
       }).delay({
         duration: options.delay
       }).trigger({
         callback: function callback() {
-          _this2.dissolveInToState({
+          _this3.dissolveInToState({
             state: options.state,
             duration: options.dissolveInDuration,
             done: options.done,
             startTime: options.startTime
-          });
+          }); // this.
+
         },
         // duration: options.dissolveInDuration,
         duration: 0
       }).start(options.startTime);
-    }
+    } // dissolveToComplete(optionsIn: {
+    //   dissolveOutDuration: number,
+    //   dissolveInDuration: number,
+    //   delay: Number,
+    //   done: ?(string | (() => void)),
+    //   startTime: ?number | 'now' | 'prev' | 'next',
+    // }) {
+    //   const options = joinObjects({}, {
+    //     dissolveOutDuration: 0.8,
+    //     dissolveInDuration: 0.8,
+    //     delay: 0.2,
+    //     done: null,
+    //     startTime: null,
+    //   }, optionsIn);
+    //   const state = this.getState({});
+    //   this.stop('complete');
+    //   const completeState = this.getState({});
+    //   this.setState(state, 'instant');
+    //   this.elements.animations.new()
+    //     .opacity({ duration: options.dissolveOutDuration, start: 1, target: 0.001 })
+    //     .trigger(
+    //       {
+    //         callback: () => {
+    //           this.elements.hideAll();
+    //           this.elements.show();
+    //           // this.elements.setOpacity(1);
+    //         },
+    //       },
+    //     )
+    //     .delay({ duration: options.delay })
+    //     .trigger({
+    //       callback: () => {
+    //         this.dissolveInToState({
+    //           state: completeState,
+    //           duration: options.dissolveInDuration,
+    //           done: options.done,
+    //           startTime: options.startTime,
+    //         });
+    //         // this.
+    //       },
+    //       // duration: options.dissolveInDuration,
+    //       duration: 0,
+    //     })
+    //     .start(options.startTime);
+    // }
+
   }, {
     key: "dissolveInToState",
     value: function dissolveInToState(optionsIn) {
@@ -6273,7 +6342,8 @@ var Diagram = /*#__PURE__*/function () {
           duration = options.duration,
           done = options.done,
           startTime = options.startTime;
-      var dissolveDuration = this.elements.dissolveInToState(state.elements, duration, startTime);
+      var dissolveDuration = this.elements.dissolveInToState(state.elements, duration, startTime); // force update of transforms to update any dependent transforms
+
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
         if (element.isShown && element.dependantTransform === false) {
@@ -6471,13 +6541,13 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "initialize",
     value: function initialize() {
-      var _this3 = this;
+      var _this4 = this;
 
       var elements = this.elements.getAllElements();
       elements.forEach(function (element) {
-        element.diagram = _this3;
-        element.recorder = _this3.recorder;
-        element.animationFinishedCallback = _this3.animationFinished.bind(_this3, element);
+        element.diagram = _this4;
+        element.recorder = _this4.recorder;
+        element.animationFinishedCallback = _this4.animationFinished.bind(_this4, element);
       });
       this.setFirstTransform();
       this.animateNextFrame();
@@ -6505,6 +6575,12 @@ var Diagram = /*#__PURE__*/function () {
 
         if (remainingPulseTime > remainingTime) {
           remainingTime = remainingPulseTime;
+        }
+
+        var remainingMovingFreelyTime = element.getRemainingMovingFreelyTime(now);
+
+        if (remainingMovingFreelyTime > remainingTime) {
+          remainingTime = remainingMovingFreelyTime;
         }
       });
       return remainingTime;
@@ -6543,7 +6619,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderAllElementsToTiedCanvases",
     value: function renderAllElementsToTiedCanvases() {
-      var _this4 = this;
+      var _this5 = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -6553,12 +6629,12 @@ var Diagram = /*#__PURE__*/function () {
 
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this4.elements.elements[name];
+        var element = _this5.elements.elements[name];
 
         if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
           element.isRenderedAsImage = true;
 
-          _this4.renderElementToTiedCanvas(name);
+          _this5.renderElementToTiedCanvas(name);
 
           needClear = true;
         }
@@ -6576,17 +6652,17 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
-      var _this5 = this;
+      var _this6 = this;
 
       // record visibility of top level elements in diagram
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this5.elements.elements[name];
+        var element = _this6.elements.elements[name];
         currentVisibility[name] = element.isShown;
       }); // Hide all elements
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        _this5.elements.elements[name].hide();
+        _this6.elements.elements[name].hide();
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
@@ -6614,7 +6690,7 @@ var Diagram = /*#__PURE__*/function () {
       // Stop animations and render
 
       elementToRender.isRenderedAsImage = false;
-      elementToRender.stop(true, true);
+      elementToRender.stop('complete');
       this.renderToCanvas(elementToRender.tieToHTML.element);
       elementToRender.isRenderedAsImage = true; // elementToRender.setRenderedOnNextDraw();
       // reset position
@@ -6623,7 +6699,7 @@ var Diagram = /*#__PURE__*/function () {
       elementToRender.setScale(oldScale); // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this5.elements.elements[name];
+        var element = _this6.elements.elements[name];
 
         if (currentVisibility[name] === true) {
           element.show();
@@ -6836,7 +6912,7 @@ var Diagram = /*#__PURE__*/function () {
       // Get all the diagram elements that were touched at this point (element
       // must have isTouchable = true to be considered)
 
-      this.beingTouchedElements = this.elements.getTouched(glPoint);
+      this.beingTouchedElements = this.elements.getTouched(glPoint); // console.log(this.beingTouchedElements)
 
       if (this.moveTopElementOnly) {
         if (this.beingTouchedElements.length > 0) {
@@ -7147,10 +7223,77 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "stop",
     value: function stop() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      this.elements.stop(cancelled, forceSetToEndOfPlan, freeze);
+      var _this7 = this;
+
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
+
+      var stopped = function stopped() {
+        _this7.subscriptions.trigger('stopped');
+
+        _this7.state.preparingToStop = false;
+      };
+
+      if (!this.elements.isAnimating()) {
+        stopped();
+        return;
+      }
+
+      if (how === 'freeze' || how === 'cancel' || how === 'complete') {
+        this.elements.stop(how);
+        stopped();
+        return;
+      }
+
+      this.state.preparingToStop = false;
+
+      if (how === 'animateToComplete') {
+        this.elements.stop(how);
+        var elements = this.elements.getAllElements();
+        var preparingToStopCounter = 0;
+
+        var checkAllStopped = function checkAllStopped() {
+          if (preparingToStopCounter > 0) {
+            preparingToStopCounter -= 1;
+          }
+
+          if (preparingToStopCounter === 0) {
+            stopped();
+          }
+        };
+
+        elements.forEach(function (element) {
+          if (element.state.preparingToStop) {
+            preparingToStopCounter += 1;
+            element.subscriptions.subscribe('stopped', checkAllStopped, 1);
+          }
+        });
+
+        if (preparingToStopCounter === 0) {
+          checkAllStopped();
+        } else if (preparingToStopCounter > 0) {
+          this.subscriptions.trigger('preparingToStop');
+          this.state.preparingToStop = true;
+        }
+
+        return;
+      } // console.log('asdf')
+      // Otherwise we are dissolving to complete
+
+
+      var state = this.getState({});
+      this.elements.stop('complete');
+      var completeState = this.getState({});
+      this.setState(state);
+      this.elements.stop('freeze');
+      this.setState(completeState, 'dissolve');
+
+      if (this.state.preparingToSetState) {
+        this.subscriptions.subscribe('stateSet', stopped, 1);
+        this.subscriptions.trigger('preparingToStop');
+        this.state.preparingToStop = true;
+      } else {
+        stopped();
+      }
     } // To add elements to a diagram, either this method can be overridden,
     // or the `add` method can be used.
 
@@ -7207,110 +7350,113 @@ var Diagram = /*#__PURE__*/function () {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
       this.drawQueued = true;
       this.draw(time);
-    }
-  }, {
-    key: "getPaused",
-    value: function getPaused() {
-      return this.elements.getPaused();
-    }
-  }, {
-    key: "getPauseState",
-    value: function getPauseState() {
-      return this.state.pause;
-    }
+    } // getPaused() {
+    //   return this.elements.getPaused();
+    // }
+    // getPauseState() {
+    //   return this.state.pause;
+    // }
+
   }, {
     key: "pause",
-    value: function pause(pauseSettings) {
-      var _this6 = this;
-
-      // forcePause: boolean = true, clearAnimations: boolean = false) {
-      this.elements.pause(pauseSettings);
-      var elements = this.elements.getAllElements();
-      var preparingToPauseCounter = 0;
-
-      var checkAllPaused = function checkAllPaused() {
-        if (preparingToPauseCounter > 0) {
-          preparingToPauseCounter -= 1;
-        }
-
-        if (preparingToPauseCounter === 0) {
-          _this6.state.pause = 'paused';
-          _this6.isPaused = true;
-
-          _this6.subscriptions.trigger('paused');
-        }
+    value: function pause() {
+      var pauseSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        simplePause: true
       };
-
-      elements.forEach(function (element) {
-        if (element.state.pause === 'preparingToPause') {
-          preparingToPauseCounter += 1;
-          element.subscriptions.subscribe('paused', checkAllPaused, 1);
-        }
-      });
+      this.state.pause = 'paused';
       this.pauseTime = this.globalAnimation.now() / 1000;
-
-      if (preparingToPauseCounter === 0 && this.state.pause !== 'paused') {
-        checkAllPaused();
-      } else if (preparingToPauseCounter > 0) {
-        this.state.pause = 'preparingToPause';
-        this.subscriptions.trigger('preparingToPause');
-      }
-    } // pauseAfterNextDraw() {
+    } // pauseLegacy(pauseSettings: TypePauseSettings = { simplePause: true }) {
+    //   // forcePause: boolean = true, clearAnimations: boolean = false) {
+    //   this.elements.pause(pauseSettings);
+    //   if (pauseSettings.simplePause != null && pauseSettings.simplePause) {
+    //     this.state.pause = 'paused';
+    //     this.pauseTime = this.globalAnimation.now() / 1000;
+    //     return;
+    //   }
+    //   const elements = this.elements.getAllElements();
+    //   let preparingToPauseCounter = 0;
+    //   const checkAllPaused = () => {
+    //     if (preparingToPauseCounter > 0) {
+    //       preparingToPauseCounter -= 1;
+    //     }
+    //     if (preparingToPauseCounter === 0) {
+    //       this.state.pause = 'paused';
+    //       this.isPaused = true;
+    //       this.subscriptions.trigger('paused');
+    //     }
+    //   }
+    //   elements.forEach((element) => {
+    //     if (element.state.pause === 'preparingToPause') {
+    //       preparingToPauseCounter += 1;
+    //       element.subscriptions.subscribe('paused', checkAllPaused, 1);
+    //     }
+    //   });
+    //   this.pauseTime = this.globalAnimation.now() / 1000;
+    //   if (preparingToPauseCounter === 0 && this.state.pause !== 'paused') {
+    //     checkAllPaused();
+    //   } else if (preparingToPauseCounter > 0) {
+    //     this.state.pause = 'preparingToPause';
+    //     this.subscriptions.trigger('preparingToPause');
+    //   }
+    // }
+    // pauseAfterNextDraw() {
     //   this.pauseAfterNextDrawFlag = true;
     // }
 
   }, {
     key: "unpause",
     value: function unpause() {
-      var _this7 = this;
-
-      this.elements.unpause();
-      var elements = this.elements.getAllElements();
-      var preparingToUnpauseCounter = 0;
-
-      var checkAllUnpaused = function checkAllUnpaused() {
-        if (preparingToUnpauseCounter > 0) {
-          preparingToUnpauseCounter -= 1;
-        }
-
-        if (preparingToUnpauseCounter === 0) {
-          _this7.state.pause = 'unpaused';
-          _this7.isPaused = false;
-
-          _this7.elements.setTimeDelta(_this7.globalAnimation.now() / 1000 - _this7.pauseTime);
-
-          _this7.animateNextFrame();
-
-          _this7.subscriptions.trigger('unpaused');
-        }
-      };
-
-      elements.forEach(function (element) {
-        if (element.state.pause === 'preparingToUnpause') {
-          preparingToUnpauseCounter += 1;
-          element.subscriptions.subscribe('unpaused', checkAllUnpaused, 1);
-        }
-      });
-
-      if (preparingToUnpauseCounter === 0 && this.state.pause !== 'unpaused') {
-        checkAllUnpaused();
-      } else if (preparingToUnpauseCounter > 0) {
-        this.state.pause = 'preparingToUnpause';
-        this.subscriptions.trigger('preparingToUnpause');
-      } // // this.state.pause = this.elements.getPause();
-      // this.pauseTime = performance.now() / 1000;
-      // this.elements.unpause();
-      // this.isPaused = false;
-      // this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
-
-
+      this.state.pause = 'unpaused';
+      this.isPaused = false;
+      this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.pauseTime);
       this.animateNextFrame();
-    }
+      this.subscriptions.trigger('unpaused');
+    } // unpauseLegacy() {
+    //   this.elements.unpause();
+    //   const elements = this.elements.getAllElements();
+    //   let preparingToUnpauseCounter = 0;
+    //   const checkAllUnpaused = () => {
+    //     if (preparingToUnpauseCounter > 0) {
+    //       preparingToUnpauseCounter -= 1;
+    //     }
+    //     if (preparingToUnpauseCounter === 0) {
+    //       this.state.pause = 'unpaused';
+    //       this.isPaused = false;
+    //       this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.pauseTime);
+    //       this.animateNextFrame();
+    //       this.subscriptions.trigger('unpaused');
+    //     }
+    //   };
+    //   elements.forEach((element) => {
+    //     if (element.state.pause === 'preparingToUnpause') {
+    //       preparingToUnpauseCounter += 1;
+    //       element.subscriptions.subscribe('unpaused', checkAllUnpaused, 1)
+    //     }
+    //   });
+    //   if (preparingToUnpauseCounter === 0 && this.state.pause !== 'unpaused') {
+    //     checkAllUnpaused();
+    //   } else if (preparingToUnpauseCounter > 0) {
+    //     this.state.pause = 'preparingToUnpause';
+    //     this.subscriptions.trigger('preparingToUnpause');
+    //   }
+    //   // // this.state.pause = this.elements.getPause();
+    //   // this.pauseTime = performance.now() / 1000;
+    //   // this.elements.unpause();
+    //   // this.isPaused = false;
+    //   // this.elements.setTimeDelta(performance.now() / 1000 - this.pauseTime);
+    //   this.animateNextFrame();
+    // }
+
   }, {
     key: "draw",
     value: function draw(nowIn) {
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      // console.log('Draw draw drawey draw draw', nowIn, this.drawQueued)
+
+      if (this.state.pause === 'paused') {
+        return;
+      } // console.log('Draw draw drawey draw draw', nowIn, this.drawQueued)
+
+
       var now = nowIn;
 
       if (nowIn === -1) {
@@ -7352,8 +7498,8 @@ var Diagram = /*#__PURE__*/function () {
       this.drawQueued = false;
       this.clearContext(canvasIndex); // console.log('really drawing')
 
-      this.elements.setupDraw(this.spaceTransforms.diagramToGL, now, canvasIndex);
-      this.elements.draw(now, canvasIndex); // console.log('really done')
+      this.elements.setupDraw(now, canvasIndex);
+      this.elements.draw(now, [this.spaceTransforms.diagramToGL], 1, canvasIndex); // console.log('really done')
       // if (this.pauseAfterNextDrawFlag) {
       //   this.pause();
       //   this.pauseAfterNextDrawFlag = false;
@@ -7440,7 +7586,7 @@ var Diagram = /*#__PURE__*/function () {
     key: "isAnimating",
     value: function isAnimating() {
       // console.log('asdf')
-      return this.elements.isAnyElementAnimating();
+      return this.elements.isAnimating();
     }
   }, {
     key: "clientToPixel",
@@ -11274,14 +11420,14 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
       if (this.eqn.isAnimating) {
         if (options.ifAnimating.skipToTarget) {
-          this.stop(true, true);
+          this.stop('complete');
           var currentForm = this.getCurrentForm();
 
           if (currentForm != null) {
             this.showForm(currentForm);
           }
         } else {
-          this.stop(true, false);
+          this.stop('cancel');
         }
 
         this.eqn.isAnimating = false;
@@ -11559,7 +11705,7 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     value: function replayCurrentForm(duration) {
       if (this.eqn.isAnimating) {
         // this.stop(true, true);
-        this.stop(true, true); // this.animations.cancel('complete');
+        this.stop('complete'); // this.animations.cancel('complete');
         // this.animations.cancel('complete');
 
         this.eqn.isAnimating = false;
@@ -22755,8 +22901,18 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
       if (r != null) {
         var w = Math.abs(this.currentLength / 2 * Math.cos(r));
         var h = Math.abs(this.currentLength / 2 * Math.sin(r));
-        this.move.maxTransform.updateTranslation(bounds.right - w, bounds.top - h);
-        this.move.minTransform.updateTranslation(bounds.left + w, bounds.bottom + h);
+
+        if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+          this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"](bounds.left + w, bounds.bottom + h, bounds.right - w - (bounds.left + w), bounds.top - h - (bounds.bottom + h)));
+        } // this.move.maxTransform.updateTranslation(
+        //   bounds.right - w,
+        //   bounds.top - h,
+        // );
+        // this.move.minTransform.updateTranslation(
+        //   bounds.left + w,
+        //   bounds.bottom + h,
+        // );
+
 
         if (r > 2 * Math.PI) {
           this.transform.updateRotation(r - 2 * Math.PI);
@@ -23507,7 +23663,7 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
             boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundary.left - delta, boundary.bottom - delta, boundary.width + 2 * delta, boundary.height + 2 * delta);
           }
 
-          padShape.setMoveBoundaryToDiagram(boundary);
+          padShape.setMoveBounds(boundary);
           var fnName = "_polyline_pad".concat(i);
 
           _this.fnMap.add(fnName, function (transform) {
@@ -30386,6 +30542,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -30403,8 +30561,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest(); }
 
@@ -30449,7 +30605,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
- // import DrawContext2D from './DrawContext2D';
 
 // eslint-disable-next-line import/no-cycle
 
@@ -30459,6 +30614,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var transformBy = function transformBy(inputTransforms, copyTransforms) {
   var newTransforms = [];
+
+  if (copyTransforms.length === 0) {
+    return inputTransforms.map(function (t) {
+      return t._dup();
+    });
+  }
+
   inputTransforms.forEach(function (it) {
     copyTransforms.forEach(function (t) {
       newTransforms.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(it).transform(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t)));
@@ -30469,7 +30631,9 @@ var transformBy = function transformBy(inputTransforms, copyTransforms) {
     return newTransforms;
   }
 
-  return inputTransforms;
+  return inputTransforms.map(function (t) {
+    return t._dup();
+  });
 }; // A diagram is composed of multiple diagram elements.
 //
 // A diagram element can either be a:
@@ -30546,6 +30710,9 @@ var DiagramElement = /*#__PURE__*/function () {
   //  fit: diagram units will be scaled so that diagram limits aspect ratio
   //       fits within the element aspect ratio
   //  '': defaults to fit keeping aspect ratio.
+  // isPaused: boolean;
+  // finishAnimationOnPause: boolean;
+  // pauseSettings: TypePauseSettings;
   // scenarioSet: {
   //   quiz1: [
   //     { element: xyz, position: (), scale: (), rotation: (), length: () }
@@ -30583,6 +30750,7 @@ var DiagramElement = /*#__PURE__*/function () {
     this.isInteractive = undefined;
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
+    this.lastDrawOpacity = 1;
     this.dimColor = [0.5, 0.5, 0.5, 1];
     this.defaultColor = this.color.slice();
     this.opacity = 1;
@@ -30591,6 +30759,7 @@ var DiagramElement = /*#__PURE__*/function () {
     this.afterDrawCallback = null;
     this.internalSetTransformCallback = null;
     this.lastDrawTransform = this.transform._dup();
+    this.parentTransform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     this.lastDrawPulseTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
@@ -30603,8 +30772,8 @@ var DiagramElement = /*#__PURE__*/function () {
     this.custom = {};
     this.parent = parent;
     this.drawPriority = 1;
-    this.stateProperties = [];
-    this.finishAnimationOnPause = false;
+    this.stateProperties = []; // this.finishAnimationOnPause = false;
+
     this.lastDrawTime = 0; // this.noRotationFromParent = false;
     // this.pulseDefault = (callback: ?() => void = null) => {
     //   this.pulseScaleNow(1, 2, 0, callback);
@@ -30614,10 +30783,10 @@ var DiagramElement = /*#__PURE__*/function () {
       frequency: 0,
       scale: 2,
       time: 1
-    };
-    this.isPaused = false; // this.copies = [];
-
-    this.pauseSettings = {}; // Rename to animate in future
+    }; // this.isPaused = false;
+    // this.copies = [];
+    // this.pauseSettings = {};
+    // Rename to animate in future
 
     this.anim = {
       rotation: function rotation() {
@@ -30980,20 +31149,24 @@ var DiagramElement = /*#__PURE__*/function () {
     }
 
     this.move = {
-      maxTransform: this.transform.constant(1000),
-      minTransform: this.transform.constant(-1000),
-      boundary: null,
-      maxVelocity: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
+      // maxTransform: this.transform.constant(1000),
+      // minTransform: this.transform.constant(-1000),
+      bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform),
+      // bounds: { scale: null, rotation: null, position: null },
+      // boundary: null,
+      maxVelocity: 5,
+      // maxVelocity: new TransformLimit(5, 5, 5),
       freely: {
-        zeroVelocityThreshold: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](0.001, 0.001, 0.001),
-        deceleration: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
-        callback: null
+        zeroVelocityThreshold: 0.0001,
+        deceleration: 5,
+        callback: null,
+        bounceLoss: 0.5
       },
-      bounce: true,
+      // bounce: true, // deprecate
       canBeMovedAfterLosingTouch: false,
       type: 'translation',
       element: null,
-      limitLine: null,
+      // limitLine: null,
       transformClip: null
     };
     this.scenarios = {};
@@ -31010,13 +31183,14 @@ var DiagramElement = /*#__PURE__*/function () {
     this.fnMap.add('tools.math.easeinout', _tools_math__WEBPACK_IMPORTED_MODULE_4__["easeinout"]);
     this.fnMap.add('tools.math.linear', _tools_math__WEBPACK_IMPORTED_MODULE_4__["linear"]);
     this.fnMap.add('tools.math.sinusoid', _tools_math__WEBPACK_IMPORTED_MODULE_4__["sinusoid"]);
+    this.fnMap.add('tools.math.triangle', _tools_math__WEBPACK_IMPORTED_MODULE_4__["triangle"]);
     this.pulseSettings = {
       time: 1,
       frequency: 0.5,
       A: 1,
       B: 0.5,
       C: 0,
-      style: 'tools.math.sinusoid',
+      progression: 'tools.math.sinusoid',
       num: 1,
       delta: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       transformMethod: '_elementPulseSettingsTransformMethod',
@@ -31036,7 +31210,7 @@ var DiagramElement = /*#__PURE__*/function () {
       pulse: {
         startTime: null
       },
-      pause: 'unpaused'
+      preparingToStop: false
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.animationFinishedCallback = null;
@@ -31090,7 +31264,8 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       if (this.isShown || ignoreShown) {
-        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions', 'finishAnimationOnPause', 'pulseTransforms', 'frozenPulseTransforms'].concat(_toConsumableArray(this.stateProperties));
+        return ['animations', 'color', 'opacity', 'dimColor', 'defaultColor', 'transform', 'isShown', 'isMovable', 'isTouchable', 'state', 'pulseSettings', 'setTransformCallback', 'move', 'subscriptions', // 'finishAnimationOnPause',
+        'pulseTransforms', 'frozenPulseTransforms'].concat(_toConsumableArray(this.stateProperties));
       }
 
       return ['isShown', 'transform'];
@@ -31286,9 +31461,6 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function freezePulseTransforms() {
       var forceOverwrite = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-      // const freeze = () => {
-      //   this.frozenPulseTransforms = this.pulseTransforms.map(t => t._dup());
-      // };
       if (forceOverwrite && this.pulseTransforms.length === 0 || !forceOverwrite && this.pulseTransforms.length > 0) {
         this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
           return t._dup();
@@ -31300,8 +31472,8 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function animateToState(state, options) {
       var independentOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
       var startTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      // if (this.name === 'line1' && this.parent.name === 'circle') {
-      //   debugger;
+      // if (this.name === 'a') {
+      //   console.log(this.frozenPulseTransforms)
       // }
       var target = {};
 
@@ -31332,17 +31504,36 @@ var DiagramElement = /*#__PURE__*/function () {
       // let delay = 0;
 
 
-      var pulseAnimation = null; // const arePulseTransformsEqual = () => {
-      // };
+      var pulseAnimation = null;
 
-      if ((state.state.isPulsing || this.state.isPulsing) && !this.arePulseTransformsSame(state)) {
-        pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, options, {
-          start: this.pulseTransforms.map(function (t) {
+      if (!this.arePulseTransformsSame(state)) {
+        var startPulseTransforms = this.pulseTransforms.map(function (t) {
+          return t._dup();
+        });
+
+        if (this.pulseTransforms.length === 0) {
+          startPulseTransforms = this.frozenPulseTransforms.map(function (t) {
             return t._dup();
-          }),
-          target: state.pulseTransforms.map(function (t) {
+          });
+        }
+
+        var targetPulseTransforms = state.pulseTransforms.map(function (t) {
+          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t);
+        });
+
+        if (targetPulseTransforms.length === 0 && state.frozenPulseTransforms.length > 0) {
+          targetPulseTransforms = state.frozenPulseTransforms.map(function (t) {
             return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t);
-          })
+          });
+        }
+
+        if (targetPulseTransforms.length === 0 && startPulseTransforms.length > 0) {
+          targetPulseTransforms = [startPulseTransforms[0].identity()];
+        }
+
+        pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, options, {
+          start: startPulseTransforms,
+          target: targetPulseTransforms
         })); // console.log(pulseAnimation)
       }
 
@@ -31351,8 +31542,6 @@ var DiagramElement = /*#__PURE__*/function () {
         // .then(pulseTrigger)
         // .then(pulseDelay)
         .start(startTime);
-      } else {
-        this.frozenPulseTransforms = [];
       }
 
       if (scenarioAnimation != null) {
@@ -31361,7 +31550,10 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (pulseAnimation != null) {
         duration = Math.max(duration, pulseAnimation.getTotalDuration());
-      }
+      } // if (this.name === 'a') {
+      //   console.log(this.frozenPulseTransforms)
+      // }
+
 
       return duration;
     }
@@ -31385,7 +31577,6 @@ var DiagramElement = /*#__PURE__*/function () {
         return _this2.frozenPulseTransforms.push(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(t));
       });
       this.show();
-      window.asdf = true;
       this.animations["new"]().opacity({
         target: state.opacity,
         start: 0.001,
@@ -31454,9 +31645,9 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "getDrawTransforms",
-    value: function getDrawTransforms(transform) {
-      var drawTransforms = [transform];
-      drawTransforms = transformBy([transform], this.copyTransforms);
+    value: function getDrawTransforms(initialTransforms) {
+      // let drawTransforms = [transform];
+      var drawTransforms = transformBy(initialTransforms, this.copyTransforms);
       drawTransforms = transformBy(drawTransforms, this.pulseTransforms);
       drawTransforms = transformBy(drawTransforms, this.frozenPulseTransforms);
       return drawTransforms;
@@ -31528,7 +31719,8 @@ var DiagramElement = /*#__PURE__*/function () {
         frequency: defaultPulseOptions.frequency,
         time: defaultPulseOptions.time,
         scale: defaultPulseOptions.scale,
-        done: null
+        done: null,
+        progression: 'tools.math.sinusoid'
       };
       var done;
       var options = defaultOptions;
@@ -31550,7 +31742,7 @@ var DiagramElement = /*#__PURE__*/function () {
       } else {
         // const { frequency, time, scale } = this.pulseDefault;
         // this.pulseScaleNow(time, scale, frequency, done);
-        this.pulseScaleRelativeTo(options.centerOn, options.x, options.y, options.space, options.time, options.scale, options.frequency, done);
+        this.pulseScaleRelativeTo(options.centerOn, options.x, options.y, options.space, options.time, options.scale, options.frequency, done, options.progression);
       }
     } // pulseLegacy(done: ?(mixed) => void = null) {
     //   if (
@@ -31579,128 +31771,6 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "highlight",
     value: function highlight() {
       this.undim();
-    }
-  }, {
-    key: "getPauseSettings",
-    value: function getPauseSettings(pauseSettingsIn) {
-      var pauseSettings;
-      var defaultPause = 'freeze';
-
-      if (typeof pauseSettingsIn === 'string') {
-        pauseSettings = {
-          animation: pauseSettingsIn,
-          pulse: pauseSettingsIn,
-          movingFreely: pauseSettingsIn
-        };
-        defaultPause = pauseSettingsIn;
-      } else {
-        pauseSettings = {
-          animation: pauseSettingsIn.animation,
-          pulse: pauseSettingsIn.pulse,
-          movingFreely: pauseSettingsIn.movingFreely
-        };
-        defaultPause = pauseSettingsIn["default"];
-      }
-
-      ;
-
-      if (typeof this.pauseSettings === 'string') {
-        defaultPause = this.pauseSettings;
-      }
-
-      if (defaultPause == null) {
-        defaultPause = 'freeze';
-      }
-
-      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.animation != null) {
-        pauseSettings.animation = this.pauseSettings.animation;
-      }
-
-      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.pulse != null) {
-        pauseSettings.pulse = this.pauseSettings.pulse;
-      }
-
-      if (_typeof(this.pauseSettings) === 'object' && this.pauseSettings.movingFreely != null) {
-        pauseSettings.movingFreely = this.pauseSettings.movingFreely;
-      }
-
-      if (pauseSettings.animation == null) {
-        pauseSettings.animation = defaultPause;
-      }
-
-      if (pauseSettings.pulse == null) {
-        pauseSettings.pulse = defaultPause;
-      }
-
-      if (pauseSettings.movingFreely == null) {
-        pauseSettings.movingFreely = defaultPause;
-      }
-
-      return pauseSettings;
-    }
-  }, {
-    key: "pause",
-    value: function pause() {
-      var _this3 = this;
-
-      var pauseSettingsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      var pause = function pause() {
-        _this3.isPaused = true;
-        _this3.state.pause = 'paused';
-
-        _this3.subscriptions.trigger('paused');
-      }; // console.log(pauseSettingsIn)
-
-
-      var pauseWhenFinished = false;
-
-      var _this$getPauseSetting = this.getPauseSettings(pauseSettingsIn),
-          animation = _this$getPauseSetting.animation,
-          pulse = _this$getPauseSetting.pulse,
-          movingFreely = _this$getPauseSetting.movingFreely; // console.log(animation, pulse)
-
-
-      if (this.animations.isAnimating()) {
-        if (animation === 'completeBeforePause') {
-          pauseWhenFinished = true;
-        } else if (animation === 'complete') {
-          this.animations.cancelAll('complete');
-        } else {
-          this.animations.cancelAll('noComplete');
-        }
-      } // console.log(this.name, pauseWhenFinished)
-
-
-      if (this.state.isPulsing) {
-        if (pulse === 'completeBeforePause') {
-          pauseWhenFinished = true;
-        } else if (pulse === 'complete') {
-          this.stopPulsing(true, 'complete');
-        } else {
-          this.stopPulsing(true, 'noComplete', true);
-        }
-      } // console.log(this.name, pauseWhenFinished)
-
-
-      if (pauseWhenFinished) {
-        this.state.pause = 'preparingToPause';
-        this.subscriptions.trigger('preparingToPause');
-        this.subscriptions.subscribe('animationFinished', pause, 1);
-      } else {
-        pause();
-      }
-    }
-  }, {
-    key: "unpause",
-    value: function unpause() {
-      this.isPaused = false;
-
-      if (this.state.pause !== 'unpaused') {
-        this.subscriptions.trigger('unpaused');
-      }
-
-      this.state.pause = 'unpaused';
     }
   }, {
     key: "setPosition",
@@ -31752,7 +31822,33 @@ var DiagramElement = /*#__PURE__*/function () {
       if (this.move.transformClip != null) {
         this.transform = this.fnMap.exec(this.move.transformClip, transform);
       } else {
-        this.transform = transform._dup().clip(this.move.minTransform, this.move.maxTransform, this.move.limitLine);
+        // console.log(transform)
+        // let { bounds } = this.move;
+        // if (bounds === 'diagram') {
+        //   bounds = new TransformBounds(this.transform);
+        //   bounds.updateTranslation(new RectBounds(this.diagram.limits));
+        // }
+        if (window.asdf && this.name === 'c') {
+          debugger;
+        }
+
+        if (!(this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"])) {
+          this.setMoveBounds();
+        }
+
+        if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+          this.transform = this.move.bounds.clip(transform); // if (this.name === 'c') {
+          // console.log(transform)
+          // console.log(this.transform)
+          // console.log(this.move.bounds.boundary[2])
+          // }
+        } // console.log(this.transform)
+        // this.transform = transform._dup().clip(
+        //   this.move.minTransform,
+        //   this.move.maxTransform,
+        //   this.move.limitLine,
+        // );
+
       }
 
       if (this.internalSetTransformCallback) {
@@ -31802,7 +31898,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
         if (this.state.movement.velocity.isZero()) {
           this.state.movement.velocity = this.state.movement.velocity.zero();
-          this.stopMovingFreely(false);
+          this.stopMovingFreely('complete');
         }
 
         this.setTransform(next.transform);
@@ -31852,34 +31948,28 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function setOpacity(opacity) {
       // this.color[3] = opacity;
       this.opacity = opacity;
-    }
-  }, {
-    key: "getScenarioTargetLegacy",
-    value: function getScenarioTargetLegacy(scenarioName) {
-      var target = this.transform._dup();
-
-      if (scenarioName in this.scenarios) {
-        var scenario = this.scenarios[scenarioName];
-
-        if (scenario.transform != null) {
-          target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(scenario.transform);
-        }
-
-        if (scenario.position != null) {
-          target.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
-        }
-
-        if (scenario.rotation != null) {
-          target.updateRotation(scenario.rotation);
-        }
-
-        if (scenario.scale != null) {
-          target.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getScale"])(scenario.scale));
-        }
-      }
-
-      return target;
-    } // retrieve a scenario
+    } // getScenarioTargetLegacy(
+    //   scenarioName: string,
+    // ) {
+    //   let target = this.transform._dup();
+    //   if (scenarioName in this.scenarios) {
+    //     const scenario = this.scenarios[scenarioName];
+    //     if (scenario.transform != null) {
+    //       target = getTransform(scenario.transform);
+    //     }
+    //     if (scenario.position != null) {
+    //       target.updateTranslation(getPoint(scenario.position));
+    //     }
+    //     if (scenario.rotation != null) {
+    //       target.updateRotation(scenario.rotation);
+    //     }
+    //     if (scenario.scale != null) {
+    //       target.updateScale(getScale(scenario.scale));
+    //     }
+    //   }
+    //   return target;
+    // }
+    // retrieve a scenario
 
   }, {
     key: "getScenarioTarget",
@@ -32000,23 +32090,23 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "getCurrentScenario",
     value: function getCurrentScenario() {
-      var _this4 = this;
+      var _this3 = this;
 
       var keys = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['transform', 'color', 'isShown'];
       var scenario = {};
       keys.forEach(function (key) {
         if (key === 'transform') {
-          scenario.transform = _this4.transform._dup();
+          scenario.transform = _this3.transform._dup();
         } else if (key === 'position') {
-          scenario.position = _this4.getPosition();
+          scenario.position = _this3.getPosition();
         } else if (key === 'rotation') {
-          scenario.rotation = _this4.getRotation();
+          scenario.rotation = _this3.getRotation();
         } else if (key === 'scale') {
-          scenario.scale = _this4.getScale();
+          scenario.scale = _this3.getScale();
         } else if (key === 'color') {
-          scenario.color = _this4.color.slice();
+          scenario.color = _this3.color.slice();
         } else if (key === 'isShown') {
-          scenario.isShown = _this4.isShown;
+          scenario.isShown = _this3.isShown;
         }
       });
       return scenario;
@@ -32036,226 +32126,55 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       return [];
-    } // // deprecate
-    // getTimeToMoveToScenarioLegacy(
-    //   scenarioName: string,
-    //   rotDirection: -1 | 1 | 0 | 2 = 0,
-    // ) {
-    //   const target = this.getScenarioTargetLegacy(scenarioName);
-    //   const velocity = this.transform.constant(0);
-    //   velocity.updateTranslation(new Point(1 / 2, 1 / 2));
-    //   velocity.updateRotation(2 * Math.PI / 6);
-    //   velocity.updateScale(1, 1);
-    //   const time = getMaxTimeFromVelocity(this.transform._dup(), target, velocity, rotDirection);
-    //   return time;
-    // }
-    // getTimeToMoveToScenario(
-    //   targetScenario: string | TypeScenario,
-    //   optionsIn: {
-    //     minTime?: number,
-    //     velocity?: {
-    //       translation?: TypeParsablePoint,
-    //       rotation?: number,
-    //       scale?: TypeParsablePoint,
-    //       transform?: TypeParsableTransform,
-    //       color?: number,
-    //     },
-    //     dissolveTime: number,
-    //     duration?: number,
-    //     rotDirection?: -1 | 1 | 0 | 2,
-    //   },
-    //   startScenario: string | TypeScenario = '',
-    // ) {
-    //   if (optionsIn.duration != null) {
-    //     return optionsIn.duration;
-    //   }
-    //   const defaultOptions = {
-    //     rotDirection: 0,
-    //     minTime: 0,
-    //     velocity: {
-    //       translation: new Point(1 / 2, 1 / 2),
-    //       rotation: 2 * Math.PI / 6,
-    //       scale: new Point(1, 1),
-    //       color: 1,
-    //     },
-    //   };
-    //   const options = joinObjects({}, defaultOptions, optionsIn);
-    //   const target = this.getScenarioTarget(targetScenario);
-    //   let start = this;
-    //   if (startScenario) {
-    //     start = this.getScenarioTarget(startScenario);
-    //   }
-    //   let velocity = this.transform.constant(0);
-    //   if (options.transform != null) {
-    //     velocity = options.transform;
-    //   }
-    //   if (options.velocity.translation) {
-    //     velocity.updateTranslation(options.velocity.translation);
-    //   }
-    //   if (options.velocity.rotation) {
-    //     velocity.updateRotation(options.velocity.rotation);
-    //   }
-    //   if (options.velocity.scale) {
-    //     velocity.updateScale(options.velocity.scale);
-    //   }
-    //   // const velocity = this.transform.constant(0);
-    //   // velocity.updateTranslation(new Point(1 / 2, 1 / 2));
-    //   // velocity.updateRotation(2 * Math.PI / 6);
-    //   // velocity.updateScale(1, 1);
-    //   // console.log(velocity)
-    //   // console.log(options.velocity)
-    //   const time = getMaxTimeFromVelocity(
-    //     start.transform._dup(), target.transform, velocity, options.rotDirection,
-    //   );
-    //   let colorTime = options.minTime;
-    //   if (start.isShown !== target.isShown) {
-    //     options.minTime = 0.8;
-    //   }
-    //   if (target.color != null) {
-    //     let startColor = start.color;
-    //     if (startColor == null) {
-    //       startColor = this.color.slice();
-    //     }
-    //     if (!areColorsSame(startColor, target.color)) {
-    //     // options.minTime = 0.8;
-    //       if (options.velocity.color != null) {
-    //         const v = options.velocity.color;
-    //         const r = Math.abs((target.color[0] - startColor[0]) / v);
-    //         const g = Math.abs((target.color[1] - startColor[1]) / v);
-    //         const b = Math.abs((target.color[2] - startColor[2]) / v);
-    //         const a = Math.abs((target.color[3] - startColor[3]) / v);
-    //         colorTime = Math.max(r, g, b, a);
-    //       }
-    //     }
-    //   }
-    //   return Math.min(time, options.minTime);
-    // }
-
+    }
   }, {
-    key: "getRemainingMovingFreelyDuration",
-    value: function getRemainingMovingFreelyDuration() {
-      if (!this.state.isMovingFreely) {
-        return 0;
+    key: "getMovingFreelyEnd",
+    value: function getMovingFreelyEnd() {
+      return this.decelerate(null);
+    }
+  }, {
+    key: "getRemainingMovingFreelyTime",
+    value: function getRemainingMovingFreelyTime() {
+      if (this.state.isMovingFreely) {
+        return this.decelerate(null).duration;
       }
 
-      var velocity = this.state.movement.velocity;
-      var transform = this.transform;
-      var _this$move$freely = this.move.freely,
-          deceleration = _this$move$freely.deceleration,
-          zeroVelocityThreshold = _this$move$freely.zeroVelocityThreshold;
-      var isZero = false; // for (let i = 0; i < velocity.order.length; i += 1) {
-      //   const step = velocity.order[i];
-      //   if (step instanceof Translation) {
-      //     if
-      //   }
-      // }
-
-      if (this.state.movement.velocity.isZero(0.0000001)) {
-        return 0;
-      }
-
-      if (velocity.order.length !== transform.order.length) {
-        return 0;
-      }
-
-      var duration = 0;
-
-      for (var i = 0; i < velocity.order.length; i += 1) {
-        var v = velocity.order[i];
-        var t = transform.order[i];
-        var min = this.move.minTransform.order[i];
-        var max = this.move.maxTransform.order[i];
-        var translation = deceleration.translation,
-            rotation = deceleration.rotation,
-            scale = deceleration.scale;
-        var stepDuration = 0;
-
-        if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
-          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStopAngle"])(t.r, v.r, rotation, [min.r, max.r], 0.5).duration;
-        } else if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"]) {
-          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStop"])(t, v, translation, [min, max], 0.5).duration;
-        } else {
-          stepDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["calculateStop"])(t, v, scale, [min, max], 0.5).duration;
-        }
-
-        if (stepDuration > duration) {
-          duration = stepDuration;
-        }
-      }
-
-      return duration;
+      return 0;
     } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity
 
   }, {
     key: "decelerate",
     value: function decelerate(deltaTime) {
-      var next = this.transform.decelerate(this.state.movement.velocity, this.move.freely.deceleration, deltaTime, this.move.freely.zeroVelocityThreshold);
+      var bounds;
 
-      if (deltaTime > 0) {
-        for (var i = 0; i < next.t.order.length; i += 1) {
-          var t = next.t.order[i];
-          var min = this.move.minTransform.order[i];
-          var max = this.move.maxTransform.order[i];
-          var v = next.v.order[i];
-
-          if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"] && v instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"] && max instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"] && min instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"] || t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"] && v instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"] && max instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"] && min instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"]) {
-            var onLine = true;
-
-            if (this.move.limitLine != null) {
-              onLine = t.shaddowIsOnLine(this.move.limitLine, 4);
-            }
-
-            if (min.x >= t.x || max.x <= t.x || !onLine) {
-              if (this.move.bounce) {
-                v.x = -v.x * 0.5;
-              } else {
-                v.x = 0;
-              }
-            }
-
-            if (min.y >= t.y || max.y <= t.y || !onLine) {
-              if (this.move.bounce) {
-                v.y = -v.y * 0.5;
-              } else {
-                v.y = 0;
-              }
-            }
-
-            next.v.order[i] = v;
-          }
-
-          if (t instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && v instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && max instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && min instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
-            if (min.r >= t.r || max.r <= t.r) {
-              if (this.move.bounce) {
-                v.r = -v.r * 0.5;
-              } else {
-                v.r = 0;
-              }
-            }
-
-            next.v.order[i] = v;
-          }
-        }
-
-        next.v.calcMatrix();
+      if (!this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+        this.setMoveBounds();
       }
 
+      if (!this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+        bounds = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform);
+      } else {
+        bounds = this.move.bounds;
+      }
+
+      var next = this.transform.decelerate(this.state.movement.velocity, this.move.freely.deceleration, deltaTime, bounds, this.move.freely.bounceLoss, this.move.freely.zeroVelocityThreshold);
       return {
-        velocity: next.v,
-        transform: next.t
+        velocity: next.velocity,
+        transform: next.transform,
+        duration: next.duration
       };
     }
   }, {
     key: "updateLastDrawTransform",
     value: function updateLastDrawTransform() {
-      var _this5 = this;
+      var _this4 = this;
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
       var transform = this.getTransform();
       transform.order.forEach(function (t, index) {
-        _this5.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
+        _this4.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
     }
@@ -32277,19 +32196,17 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       return "".concat(this.parent.getPath(), ".").concat(this.name);
-    }
-  }, {
-    key: "getPause",
-    value: function getPause() {
-      return this.state.pause;
-    } // Being Moved
+    } // getPause() {
+    //   return this.state.pause;
+    // }
+    // Being Moved
 
   }, {
     key: "startBeingMoved",
     value: function startBeingMoved() {
       // this.stopAnimating();
-      this.animations.cancelAll('noComplete');
-      this.stopMovingFreely();
+      this.animations.cancelAll('freeze');
+      this.stopMovingFreely('freeze');
       this.state.movement.velocity = this.transform.zero();
       this.state.movement.previousTransform = this.transform._dup();
       this.state.movement.previousTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
@@ -32314,6 +32231,10 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "stopBeingMoved",
     value: function stopBeingMoved() {
+      if (!this.state.isBeingMoved) {
+        return;
+      }
+
       var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000; // Check wether last movement was a long time ago, if it was, then make
       // velocity 0 as the user has stopped moving before releasing touch/click
 
@@ -32364,7 +32285,7 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function startMovingFreely() {
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       // this.stopAnimating();
-      this.animations.cancelAll('noComplete');
+      this.animations.cancelAll('freeze');
       this.stopBeingMoved();
 
       if (callback) {
@@ -32372,8 +32293,9 @@ var DiagramElement = /*#__PURE__*/function () {
         this.move.freely.callback = callback;
       }
 
-      this.state.isMovingFreely = true;
-      this.state.movement.previousTime = null;
+      this.state.isMovingFreely = true; // this.state.movement.previousTime = null;
+
+      this.state.movement.previousTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
       this.state.movement.velocity = this.state.movement.velocity.clipMag(this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
 
       if (this.recorder.state === 'recording') {
@@ -32384,33 +32306,63 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "stopMovingFreely",
     value: function stopMovingFreely() {
-      var result = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      // console.trace()
-      // console.log('was moving freely', this.name, this.state.isMovingFreely)
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
+
+      if (how === 'animateToComplete') {
+        return;
+      } // console.log(how)
+
+
       var wasMovingFreely = false;
 
       if (this.state.isMovingFreely === true) {
         wasMovingFreely = true;
       }
 
+      if (how === 'complete' && wasMovingFreely) {
+        var result = this.getMovingFreelyEnd();
+        this.setTransform(result.transform);
+      }
+
       this.state.isMovingFreely = false;
       this.state.movement.previousTime = null;
 
       if (this.move.freely.callback) {
-        this.fnMap.exec(this.move.freely.callback, result);
+        this.fnMap.exec(this.move.freely.callback, how);
         this.move.freely.callback = null;
       }
 
       if (wasMovingFreely) {
-        // console.log('stop moving freely callback', this.animationFinishedCallback)
-        this.fnMap.exec(this.animationFinishedCallback); // this.subscriptions.trigger('animationFinished', ['movingFreely']);
-
+        this.fnMap.exec(this.animationFinishedCallback);
         this.animationFinished('movingFreely');
+        this.subscriptions.trigger('stopMovingFreely');
       }
-    }
+    } // stopMovingFreelyLegacy(result: boolean = true): void {
+    //   // console.trace()
+    //   // console.log('was moving freely', this.name, this.state.isMovingFreely)
+    //   let wasMovingFreely = false;
+    //   if (this.state.isMovingFreely === true) {
+    //     wasMovingFreely = true;
+    //   }
+    //   this.state.isMovingFreely = false;
+    //   this.state.movement.previousTime = null;
+    //   if (this.move.freely.callback) {
+    //     this.fnMap.exec(this.move.freely.callback, result);
+    //     this.move.freely.callback = null;
+    //   }
+    //   if (wasMovingFreely) {
+    //     // console.log('stop moving freely callback', this.animationFinishedCallback)
+    //     this.fnMap.exec(this.animationFinishedCallback);
+    //     // this.subscriptions.trigger('animationFinished', ['movingFreely']);
+    //     this.animationFinished('movingFreely');
+    //   }
+    // }
+
   }, {
     key: "getRemainingPulseTime",
-    value: function getRemainingPulseTime(now) {
+    value: function getRemainingPulseTime() {
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
+
       if (this.state.isPulsing === false) {
         return 0;
       }
@@ -32452,7 +32404,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
         if (deltaTime >= this.pulseSettings.time && this.pulseSettings.time !== 0) {
           // this.state.isPulsing = false;
-          this.stopPulsing(false, true);
+          this.stopPulsing('complete');
           deltaTime = this.pulseSettings.time;
         } // Go through each pulse matrix planned, and transform the input matrix
         // with the pulse.
@@ -32460,7 +32412,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
         for (var i = 0; i < this.pulseSettings.num; i += 1) {
           // Get the current pulse magnitude
-          var pulseMag = this.fnMap.exec(this.pulseSettings.style, deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
+          var pulseMag = this.fnMap.exec(this.pulseSettings.progression, deltaTime, this.pulseSettings.frequency, this.pulseSettings.A instanceof Array ? this.pulseSettings.A[i] : this.pulseSettings.A, this.pulseSettings.B instanceof Array ? this.pulseSettings.B[i] : this.pulseSettings.B, this.pulseSettings.C instanceof Array ? this.pulseSettings.C[i] : this.pulseSettings.C); // Use the pulse magnitude to get the current pulse transform
 
           var pTransform = this.fnMap.exec(this.pulseSettings.transformMethod, pulseMag, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.pulseSettings.delta)); // if(this.name === '_radius') {
           // }
@@ -32483,43 +32435,84 @@ var DiagramElement = /*#__PURE__*/function () {
       var frequency = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var delta = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      this.pulseSettings.time = time;
+      var progression = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'tools.math.sinusoid';
+      // this.pulseSettings.time = time;
+      // if (frequency === 0 && time === 0) {
+      //   this.pulseSettings.frequency = 1;
+      // }
+      // if (frequency !== 0) {
+      //   this.pulseSettings.frequency = frequency;
+      // }
+      // if (time !== 0 && frequency === 0) {
+      //   this.pulseSettings.frequency = 1 / (time * 2);
+      // }
+      // this.pulseSettings.A = 1;
+      // this.pulseSettings.B = scale - 1;
+      // this.pulseSettings.C = 0;
+      // this.pulseSettings.num = 1;
+      // this.pulseSettings.delta = getPoint(delta);
+      // // this.pulseSettings.transformMethod = s => new Transform().scale(s, s);
+      // this.pulseSettings.callback = callback;
+      // this.pulseSettings.progression = progression;
+      // this.startPulsing();
+      this.pulseScale({
+        duration: time,
+        scale: scale,
+        frequency: frequency,
+        callback: callback,
+        delta: delta,
+        progression: progression,
+        when: 'nextFrame'
+      });
+    }
+  }, {
+    key: "pulseScale",
+    value: function pulseScale(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, {
+        duration: 1,
+        scale: 2,
+        callback: null,
+        delta: [0, 0],
+        when: 'sync',
+        progression: 'tools.math.sinusoid'
+      }, optionsIn);
 
-      if (frequency === 0 && time === 0) {
-        this.pulseSettings.frequency = 1;
+      if (options.frequency == null || options.frequency === 0 && options.duration !== 0) {
+        options.frequency = 1 / (options.duration * 2);
       }
 
-      if (frequency !== 0) {
-        this.pulseSettings.frequency = frequency;
+      if (options.frequency === 0 && options.duration === 0) {
+        options.frequency = 1;
       }
 
-      if (time !== 0 && frequency === 0) {
-        this.pulseSettings.frequency = 1 / (time * 2);
-      }
-
+      this.pulseSettings.time = options.duration;
+      this.pulseSettings.frequency = options.frequency;
       this.pulseSettings.A = 1;
-      this.pulseSettings.B = scale - 1;
+      this.pulseSettings.B = options.scale - 1;
       this.pulseSettings.C = 0;
       this.pulseSettings.num = 1;
-      this.pulseSettings.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(delta); // this.pulseSettings.transformMethod = s => new Transform().scale(s, s);
+      this.pulseSettings.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta); // this.pulseSettings.transformMethod = s => new Transform().scale(s, s);
 
-      this.pulseSettings.callback = callback;
-      this.pulseNow();
+      this.pulseSettings.callback = options.callback;
+      this.pulseSettings.progression = options.progression;
+      this.startPulsing(options.when);
     }
   }, {
     key: "pulseScaleRelativeToPoint",
     value: function pulseScaleRelativeToPoint(p, space, time, scale) {
       var frequency = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
       var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var progression = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'tools.math.sinusoid';
       var currentPosition = this.getPosition(space);
       var delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p).sub(currentPosition);
-      this.pulseScaleNow(time, scale, frequency, callback, delta);
+      this.pulseScaleNow(time, scale, frequency, callback, delta, progression);
     }
   }, {
     key: "pulseScaleRelativeToElement",
     value: function pulseScaleRelativeToElement(e, x, y, space, time, scale) {
       var frequency = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
       var callback = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+      var progression = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'tools.math.sinusoid';
       var p;
 
       if (e == null) {
@@ -32528,18 +32521,19 @@ var DiagramElement = /*#__PURE__*/function () {
         p = e.getPositionInBounds(space, x, y);
       }
 
-      this.pulseScaleRelativeToPoint(p, space, time, scale, frequency, callback);
+      this.pulseScaleRelativeToPoint(p, space, time, scale, frequency, callback, progression);
     }
   }, {
     key: "pulseScaleRelativeTo",
     value: function pulseScaleRelativeTo(e, x, y, space, time, scale) {
       var frequency = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
       var callback = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+      var progression = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'tools.math.sinusoid';
 
       if (e == null || e instanceof DiagramElement) {
-        this.pulseScaleRelativeToElement(e, x, y, space, time, scale, frequency, callback);
+        this.pulseScaleRelativeToElement(e, x, y, space, time, scale, frequency, callback, progression);
       } else {
-        this.pulseScaleRelativeToPoint(e, space, time, scale, frequency, callback);
+        this.pulseScaleRelativeToPoint(e, space, time, scale, frequency, callback, progression);
       }
     }
   }, {
@@ -32569,37 +32563,70 @@ var DiagramElement = /*#__PURE__*/function () {
       this.pulseSettings.B = bArray;
       this.pulseSettings.C = 0;
       this.pulseSettings.callback = callback;
-      this.pulseNow();
-    } // pulse(done: ?(mixed) => void = null) {
-    //   this.pulseDefault(done);
-    // }
-
+      this.startPulsing();
+    }
   }, {
-    key: "pulseNow",
-    value: function pulseNow() {
+    key: "pulseThick",
+    value: function pulseThick(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, {
+        duration: 1,
+        scale: 2,
+        callback: null,
+        // delta: [0, 0],
+        when: 'sync',
+        num: 3
+      }, optionsIn);
+      var bArray = [options.scale];
+      this.pulseSettings.num = options.num;
+
+      if (this.pulseSettings.num > 1) {
+        var b = Math.abs(1 - options.scale);
+        var bMax = b;
+        var bMin = -b;
+        var range = bMax - bMin;
+        var bStep = range / (this.pulseSettings.num - 1);
+        bArray = [];
+
+        for (var i = 0; i < this.pulseSettings.num; i += 1) {
+          bArray.push(bMax - i * bStep);
+        }
+      }
+
+      this.pulseSettings.time = options.duration;
+      this.pulseSettings.frequency = 1 / (options.duration * 2);
+      this.pulseSettings.A = 1;
+      this.pulseSettings.B = bArray;
+      this.pulseSettings.C = 0;
+      this.pulseSettings.callback = options.callback;
+      this.startPulsing(options.when);
+    }
+  }, {
+    key: "startPulsing",
+    value: function startPulsing() {
+      var when = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'nextFrame';
       this.state.isPulsing = true;
-      this.state.pulse.startTime = null;
+      this.state.pulse.startTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().getWhen(when) / 1000;
       this.unrender();
       this.frozenPulseTransforms = [];
     }
   }, {
     key: "stopPulsing",
-    value: function stopPulsing(cancelled) {
-      var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      // console.log(forceSetToEndOfPlan)
+    value: function stopPulsing() {
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
       var wasPulsing = this.state.isPulsing;
 
-      if (freeze && this.state.isPulsing // && this.pulseSettings.allowFreezeOnStop
-      && (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete')) {
+      if (how === 'animateToComplete') {
+        return;
+      }
+
+      if (how === 'freeze' && this.state.isPulsing) {
         this.frozenPulseTransforms = this.pulseTransforms.map(function (t) {
           return t._dup();
-        }); // this.pulseTransforms = this.pulseTransforms;
-
+        });
         this.pulseTransforms = [];
       }
 
-      if (forceSetToEndOfPlan === 'complete' || forceSetToEndOfPlan === true) {
+      if (how === 'cancel' || how === 'complete') {
         this.pulseTransforms = [];
       }
 
@@ -32609,38 +32636,86 @@ var DiagramElement = /*#__PURE__*/function () {
       if (this.pulseSettings.callback) {
         var callback = this.pulseSettings.callback;
         this.pulseSettings.callback = null;
-        this.fnMap.exec(callback, cancelled);
+        this.fnMap.exec(callback, how);
       }
 
       if (wasPulsing) {
         // this.subscriptions.trigger('animationFinished', )
         this.animationFinished('pulsing');
+        this.subscriptions.trigger('stopPulsing');
       }
-    }
+    } // isAnimating() {
+    //   if (this.state.isPulsing) {
+    //     return true;
+    //   }
+    //   if (this.state.isMovingFreely) {
+    //     return true;
+    //   }
+    //   if (this.animations.isAnimating()) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
+
   }, {
     key: "stop",
     value: function stop() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var freeze = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var _this5 = this;
 
-      if (forceSetToEndOfPlan === true || forceSetToEndOfPlan === 'complete') {
-        this.animations.cancelAll('complete');
-      } else if (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete') {
-        this.animations.cancelAll('noComplete');
-      } else {
-        this.animations.cancelAll(null);
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
+      var toComplete = 0;
+
+      var checkStop = function checkStop() {
+        toComplete -= 1;
+
+        if (toComplete <= 0) {
+          _this5.state.preparingToStop = false;
+
+          _this5.subscriptions.trigger('stopped');
+        }
+      };
+
+      if (how === 'animateToComplete' || how === 'dissolveToComplete') {
+        if (this.animations.isAnimating()) {
+          this.state.preparingToStop = true;
+          toComplete += 1;
+          this.animations.subscriptions.subscribe('finished', checkStop, 1);
+        }
+
+        if (this.state.isPulsing) {
+          this.state.preparingToStop = true;
+          toComplete += 1;
+          this.subscriptions.subscribe('stopPulsing', checkStop, 1);
+        }
+
+        if (this.state.isMovingFreely) {
+          this.state.preparingToStop = true;
+          toComplete += 1;
+          this.subscriptions.subscribe('stopMovingFreely', checkStop, 1);
+        }
       }
 
-      this.stopMovingFreely(cancelled);
+      if (this.state.preparingToStop) {
+        this.subscriptions.trigger('preparingToStop');
+      }
+
+      this.stopAnimating(how);
+      this.stopMovingFreely(how);
       this.stopBeingMoved();
-      this.stopPulsing(cancelled, forceSetToEndOfPlan, freeze);
+      this.stopPulsing(how);
     }
   }, {
-    key: "cancel",
-    value: function cancel() {
-      var forceSetToEndOfPlan = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      this.stop(true, forceSetToEndOfPlan);
+    key: "stopAnimating",
+    value: function stopAnimating() {
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
+
+      if (how === 'freeze') {
+        this.animations.cancelAll('freeze');
+      } else if (how === 'cancel') {
+        this.animations.cancelAll(null);
+      } else if (how === 'complete') {
+        this.animations.cancelAll('complete');
+      }
     }
   }, {
     key: "updateLimits",
@@ -32734,8 +32809,39 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "getDiagramBoundingRect",
     value: function getDiagramBoundingRect() {
       var gl = this.getGLBoundingRect();
-      var glToDiagramScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.diagramLimits.width / 2, this.diagramLimits.height / 2);
-      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](gl.left * glToDiagramScale.x, gl.bottom * glToDiagramScale.y, gl.width * glToDiagramScale.x, gl.height * glToDiagramScale.y);
+      var glSpace = {
+        x: {
+          bottomLeft: -1,
+          width: 2
+        },
+        y: {
+          bottomLeft: -1,
+          height: 2
+        }
+      };
+      var diagramSpace = {
+        x: {
+          bottomLeft: this.diagramLimits.left,
+          width: this.diagramLimits.width
+        },
+        y: {
+          bottomLeft: this.diagramLimits.bottom,
+          height: this.diagramLimits.height
+        }
+      };
+      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace); // const glToDiagramScale = new Point(
+      //   this.diagramLimits.width / 2,
+      //   this.diagramLimits.height / 2,
+      // );
+
+      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](gl.left, gl.bottom).transformBy(glToDiagramSpace.matrix());
+      var topRight = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](gl.right, gl.top).transformBy(glToDiagramSpace.matrix());
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y); // return new Rect(
+      //   gl.left * glToDiagramScale.x,
+      //   gl.bottom * glToDiagramScale.y,
+      //   gl.width * glToDiagramScale.x,
+      //   gl.height * glToDiagramScale.y,
+      // );
     }
   }, {
     key: "getBoundingRect",
@@ -32781,8 +32887,39 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "getRelativeDiagramBoundingRect",
     value: function getRelativeDiagramBoundingRect() {
       var gl = this.getRelativeGLBoundingRect();
-      var glToDiagramScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.diagramLimits.width / 2, this.diagramLimits.height / 2);
-      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](gl.left * glToDiagramScale.x, gl.bottom * glToDiagramScale.y, gl.width * glToDiagramScale.x, gl.height * glToDiagramScale.y);
+      var glSpace = {
+        x: {
+          bottomLeft: -1,
+          width: 2
+        },
+        y: {
+          bottomLeft: -1,
+          height: 2
+        }
+      };
+      var diagramSpace = {
+        x: {
+          bottomLeft: this.diagramLimits.left,
+          width: this.diagramLimits.width
+        },
+        y: {
+          bottomLeft: this.diagramLimits.bottom,
+          height: this.diagramLimits.height
+        }
+      };
+      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace);
+      var bottomLeft = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](gl.left, gl.bottom).transformBy(glToDiagramSpace.matrix());
+      var topRight = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](gl.right, gl.top).transformBy(glToDiagramSpace.matrix());
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y); // const glToDiagramScale = new Point(
+      //   this.diagramLimits.width / 2,
+      //   this.diagramLimits.height / 2,
+      // );
+      // return new Rect(
+      //   gl.left * glToDiagramScale.x,
+      //   gl.bottom * glToDiagramScale.y,
+      //   gl.width * glToDiagramScale.x,
+      //   gl.height * glToDiagramScale.y,
+      // );
     }
   }, {
     key: "getCenterDiagramPosition",
@@ -33011,73 +33148,112 @@ var DiagramElement = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "setMoveBoundaryToDiagram",
-    value: function setMoveBoundaryToDiagram() {
-      var boundaryIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.move.boundary;
-      var scale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
+    key: "setMoveBounds",
+    value: function setMoveBounds() {
+      var boundaryIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
       if (!this.isMovable) {
         return;
       }
 
-      if (boundaryIn != null) {
-        this.move.boundary = boundaryIn;
+      var boundary = boundaryIn;
+
+      if (boundaryIn == null) {
+        if (this.move.bounds === 'diagram' || Array.isArray(this.move.bounds) || this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"]) {
+          boundary = this.move.bounds;
+          this.move.bounds = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform);
+        } else {
+          this.move.bounds.updateTranslation(null);
+          return;
+        }
       }
 
-      if (this.move.boundary == null) {
+      if (boundary == null) {
         return;
       }
 
-      var boundary;
-
-      if (Array.isArray(this.move.boundary)) {
-        var _this$move$boundary = _slicedToArray(this.move.boundary, 4),
-            left = _this$move$boundary[0],
-            bottom = _this$move$boundary[1],
-            width = _this$move$boundary[2],
-            height = _this$move$boundary[3];
+      if (Array.isArray(boundary)) {
+        var _boundary = boundary,
+            _boundary2 = _slicedToArray(_boundary, 4),
+            left = _boundary2[0],
+            bottom = _boundary2[1],
+            width = _boundary2[2],
+            height = _boundary2[3];
 
         boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
-      } else if (this.move.boundary === 'diagram') {
+      } else if (boundary === 'diagram') {
         boundary = this.diagramLimits;
-      } else {
-        boundary = this.move.boundary;
       }
 
-      var glSpace = {
-        x: {
-          bottomLeft: -1,
-          width: 2
-        },
-        y: {
-          bottomLeft: -1,
-          height: 2
-        }
-      };
-      var diagramSpace = {
-        x: {
-          bottomLeft: this.diagramLimits.left,
-          width: this.diagramLimits.width
-        },
-        y: {
-          bottomLeft: this.diagramLimits.bottom,
-          height: this.diagramLimits.height
-        }
-      };
-      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace);
-      var rect = this.getRelativeGLBoundingRect();
-      var glToDiagramScaleMatrix = [glToDiagramSpace.matrix()[0], 0, 0, 0, glToDiagramSpace.matrix()[4], 0, 0, 0, 1];
-      var minPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.left, rect.bottom).transformBy(glToDiagramScaleMatrix);
-      var maxPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.right, rect.top).transformBy(glToDiagramScaleMatrix);
-      var min = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var max = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      min.x = boundary.left - minPoint.x * scale.x;
-      min.y = boundary.bottom - minPoint.y * scale.y;
-      max.x = boundary.right - maxPoint.x * scale.x;
-      max.y = boundary.top - maxPoint.y * scale.y;
-      this.move.maxTransform.updateTranslation(max.x, max.y);
-      this.move.minTransform.updateTranslation(min.x, min.y);
-    }
+      var rect = this.getRelativeBoundingRect('diagram');
+
+      if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+        this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"](boundary.left - rect.left, boundary.bottom - rect.bottom, boundary.right - rect.right - (boundary.left - rect.left), boundary.top - rect.top - (boundary.bottom - rect.bottom)));
+      } // if (this.name === 'c') {
+      //   console.log(this.move.bounds.boundary[2])
+      // }
+
+    } // setMoveBoundsLegacy(
+    //   boundaryIn: ?Array<number> | Rect | 'diagram' = this.move.bounds,
+    //   scale: Point = new Point(1, 1),
+    // ): void {
+    //   if (!this.isMovable) {
+    //     return;
+    //   }
+    //   if (boundaryIn != null) {
+    //     this.move.boundary = boundaryIn;
+    //   }
+    //   if (this.move.boundary == null) {
+    //     return;
+    //   }
+    //   let boundary;
+    //   if (Array.isArray(this.move.boundary)) {
+    //     const [left, bottom, width, height] = this.move.boundary;
+    //     boundary = new Rect(left, bottom, width, height);
+    //   } else if (this.move.boundary === 'diagram') {
+    //     boundary = this.diagramLimits;
+    //   } else {
+    //     ({ boundary } = this.move);
+    //   }
+    //   const glSpace = {
+    //     x: { bottomLeft: -1, width: 2 },
+    //     y: { bottomLeft: -1, height: 2 },
+    //   };
+    //   const diagramSpace = {
+    //     x: {
+    //       bottomLeft: this.diagramLimits.left,
+    //       width: this.diagramLimits.width,
+    //     },
+    //     y: {
+    //       bottomLeft: this.diagramLimits.bottom,
+    //       height: this.diagramLimits.height,
+    //     },
+    //   };
+    //   const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
+    //   const rect = this.getRelativeGLBoundingRect();
+    //   const glToDiagramScaleMatrix = [
+    //     glToDiagramSpace.matrix()[0], 0, 0,
+    //     0, glToDiagramSpace.matrix()[4], 0,
+    //     0, 0, 1];
+    //   const minPoint = new Point(rect.left, rect.bottom).transformBy(glToDiagramScaleMatrix);
+    //   const maxPoint = new Point(rect.right, rect.top).transformBy(glToDiagramScaleMatrix);
+    //   const min = new Point(0, 0);
+    //   const max = new Point(0, 0);
+    //   min.x = boundary.left - minPoint.x * scale.x;
+    //   min.y = boundary.bottom - minPoint.y * scale.y;
+    //   max.x = boundary.right - maxPoint.x * scale.x;
+    //   max.y = boundary.top - maxPoint.y * scale.y;
+    //   // this.move.maxTransform.updateTranslation(
+    //   //   max.x,
+    //   //   max.y,
+    //   // );
+    //   // this.move.minTransform.updateTranslation(
+    //   //   min.x,
+    //   //   min.y,
+    //   // );
+    //   this.move.bounds.updateTranslation(new RectBounds(min.x, min.y, max.x - min.x, max.y - min.y))
+    // }
+
   }, {
     key: "show",
     value: function show() {
@@ -33208,9 +33384,6 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function getTransform() {
       return this.transform;
     } // isAnimating(): boolean {
-    //   // if (window.asdf && this.name === 'a') {
-    //   //   console.log(this.name, this.isShown, this.animations.isAnimating())
-    //   // }
     //   // console.log(this.name, this.isShown, this.animations.isAnimating())
     //   if (this.isShown === false) {
     //     return false;
@@ -33247,12 +33420,10 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       return false;
-    }
-  }, {
-    key: "isAnyElementAnimating",
-    value: function isAnyElementAnimating() {
-      return this.isAnimating();
-    }
+    } // isAnyElementAnimating() {
+    //   return this.isAnimating();
+    // }
+
   }, {
     key: "isAnyElementMoving",
     value: function isAnyElementMoving() {
@@ -33294,7 +33465,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
     _this6.cannotTouchHole = false;
     _this6.type = 'primitive';
     _this6.pointsDefinition = {};
-    _this6.setPointsFromDefinition = null; // this.setMoveBoundaryToDiagram();
+    _this6.setPointsFromDefinition = null; // this.setMoveBounds();
 
     return _this6;
   }
@@ -33334,9 +33505,11 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
     value: function isBeingTouched(glLocation) {
       if (!this.isTouchable) {
         return false;
-      }
+      } // debugger;
 
-      var boundaries = this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix());
+
+      var boundaries = this.drawingObject.getGLBoundaries(this.lastDrawTransform.matrix()); // console.log(boundaries)
+
       var holeBoundaries = this.drawingObject.getGLBoundaryHoles(this.lastDrawTransform.matrix());
 
       for (var i = 0; i < boundaries.length; i += 1) {
@@ -33522,15 +33695,10 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
   }, {
     key: "setupDraw",
     value: function setupDraw() {
-      var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
       if (this.isShown) {
-        this.lastDrawTime = now; // if (this.pulseSettings.clearFrozenTransforms) {
-        //   this.frozenPulseTransforms = [];
-        //   this.pulseSettings.clearFrozenTransforms = false;
-        // }
-        // this.pulseTransforms = [];
+        this.lastDrawTime = now;
 
         if (this.isRenderedAsImage === true) {
           if (this.willStartAnimating()) {
@@ -33540,78 +33708,14 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           }
         }
 
-        this.subscriptions.trigger('beforeDraw', [parentTransform, now]);
+        this.subscriptions.trigger('beforeDraw', [now]);
 
         if (this.beforeDrawCallback != null) {
           this.fnMap.exec(this.beforeDrawCallback, now);
-        } // console.log(this.name, this.isShown, this.isPaused)
-
-
-        if (this.state.pause !== 'paused') {
-          this.animations.nextFrame(now);
-          this.nextMovingFreelyFrame(now);
         }
 
-        this.lastDrawElementTransformPosition = {
-          parentCount: parentTransform.order.length,
-          elementCount: this.transform.order.length
-        };
-        var newTransform = parentTransform.transform(this.getTransform());
-        this.lastDrawTransform = newTransform._dup();
-
-        if (!this.isShown) {
-          return;
-        }
-
-        if (this.state.pause !== 'paused') {
-          this.pulseTransforms = this.getPulseTransforms(now);
-        }
-
-        this.drawTransforms = this.getDrawTransforms(newTransform); // if(now === 1 && this.name === 'p1') {
-        //   console.log(this.getPosition('diagram'))
-        //   console.log(this.getPosition('local'))
-        //   // window.aaa = 1;
-        // }
-        // eslint-disable-next-line prefer-destructuring
-
-        this.lastDrawPulseTransform = this.drawTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
-        // let pointCount = -1;
-        // if (this.drawingObject instanceof VertexObject) {
-        //   pointCount = this.drawingObject.numPoints;
-        //   if (this.angleToDraw !== -1) {
-        //     pointCount = this.drawingObject.getPointCountForAngle(this.angleToDraw);
-        //   }
-        //   if (this.lengthToDraw !== -1) {
-        //     pointCount = this.drawingObject.getPointCountForLength(this.lengthToDraw);
-        //   }
-        //   if (this.pointsToDraw !== -1) {
-        //     pointCount = this.pointsToDraw;
-        //   }
-        // } else {
-        //   pointCount = 1;
-        // }
-        // const colorToUse = [...this.color.slice(0, 3), this.color[3] * this.opacity];
-        // if (pointCount > 0) {
-        //   this.pulseTransforms.forEach((t) => {
-        //     this.drawingObject.drawWithTransformMatrix(
-        //       t.matrix(), colorToUse, canvasIndex, pointCount,
-        //     );
-        //   });
-        // }
-        // if (this.unrenderNextDraw) {
-        //   this.clearRender();
-        //   this.unrenderNextDraw = false;
-        // }
-        // if (this.renderedOnNextDraw) {
-        //   this.isRenderedAsImage = true;
-        //   this.renderedOnNextDraw = false;
-        // }
-        // // this.redrawElements.forEach((element) => {
-        // //   element.draw(element.getParentLastDrawTransform(), now);
-        // // })
-        // if (this.afterDrawCallback != null) {
-        //   this.fnMap.exec(this.afterDrawCallback, now);
-        // }
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now);
       }
     }
   }, {
@@ -33619,7 +33723,9 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
     value: function draw(now) {
       var _this7 = this;
 
-      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var parentTransform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]()];
+      var parentOpacity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+      var canvasIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
       if (this.isShown) {
         var pointCount = -1;
@@ -33642,10 +33748,26 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           pointCount = 1;
         }
 
-        var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]); // if (this.getPath().endsWith('eqn.elements._1')) {
+        var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity * parentOpacity]); // eslint-disable-next-line prefer-destructuring
+
+        this.lastDrawOpacity = colorToUse[3]; // if (this.getPath().endsWith('eqn.elements._1')) {
         // console.log(this.getPath(), this.opacity, colorToUse);
         // colorToUse = [1, 0, 0, 1];
         // }
+
+        var transform = this.getTransform();
+        var newTransforms = transformBy(parentTransform, [transform]);
+        this.lastDrawElementTransformPosition = {
+          parentCount: parentTransform[0].order.length,
+          elementCount: this.transform.order.length
+        }; // const newTransform = parentTransform.transform(this.getTransform());
+        // this.parentTransform = parentTransform._dup();
+        // const newTransform = parentTransform.transform(this.getTransform());
+
+        this.pulseTransforms = this.getPulseTransforms(now);
+        this.drawTransforms = this.getDrawTransforms(newTransforms);
+        this.lastDrawTransform = parentTransform[0].transform(transform);
+        this.lastDrawPulseTransform = this.drawTransforms[0];
 
         if (pointCount > 0) {
           // console.log(this.pulseTransforms, pointCount)
@@ -33691,7 +33813,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
         this.drawingObject.transformHtml(firstTransform.matrix());
       }
 
-      this.setMoveBoundaryToDiagram();
+      this.setMoveBounds();
     } // isMoving(): boolean {
     //   if (
     //     // this.state.isAnimating
@@ -33959,28 +34081,22 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
 
       return false;
-    }
-  }, {
-    key: "isAnyElementAnimating",
-    value: function isAnyElementAnimating() {
-      if (this.isShown === false) {
-        return false;
-      }
-
-      if (this.isAnimating()) {
-        return true;
-      }
-
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-
-        if (element.isAnyElementAnimating()) {
-          return true;
-        }
-      }
-
-      return false;
-    } // isAnimating(): boolean {
+    } // isAnyElementAnimating(): boolean {
+    //   if (this.isShown === false) {
+    //     return false;
+    //   }
+    //   if (this.isAnimating()) {
+    //     return true;
+    //   }
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     if (element.isAnyElementAnimating()) {
+    //       return true;
+    //     }
+    //   }
+    //   return false;
+    // }
+    // isAnimating(): boolean {
     //   if (this.isShown === false) {
     //     return false;
     //   }
@@ -34034,9 +34150,8 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "setupDraw",
     value: function setupDraw() {
-      var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      var now = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       // console.log('draw', this.name)
       if (this.isShown) {
@@ -34057,34 +34172,31 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
           this.fnMap.exec(this.beforeDrawCallback, now);
         }
 
-        if (this.state.pause !== 'paused') {
-          this.animations.nextFrame(now);
-          this.nextMovingFreelyFrame(now);
-        } // set next color can end up hiding an element when disolving out
-
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
 
         if (!this.isShown) {
           return;
-        }
-
-        this.lastDrawElementTransformPosition = {
-          parentCount: parentTransform.order.length,
-          elementCount: this.transform.order.length
-        };
-        var newTransform = parentTransform.transform(this.getTransform());
-        this.lastDrawTransform = newTransform._dup();
-        this.pulseTransforms = this.getPulseTransforms(now);
-        this.drawTransforms = this.getDrawTransforms(newTransform); // this.pulseTransforms
-        // eslint-disable-next-line prefer-destructuring
-
-        this.lastDrawPulseTransform = this.drawTransforms[0]; // this.lastDrawTransform = pulseTransforms[0];
+        } // this.lastDrawElementTransformPosition = {
+        //   parentCount: parentTransform.order.length,
+        //   elementCount: this.transform.order.length,
+        // };
+        // const newTransform = parentTransform.transform(this.getTransform());
+        // this.lastDrawTransform = newTransform._dup();
+        // this.pulseTransforms = this.getPulseTransforms(now);
+        // this.drawTransforms = this.getDrawTransforms(newTransform);
+        // // this.pulseTransforms
+        // // eslint-disable-next-line prefer-destructuring
+        // this.lastDrawPulseTransform = this.drawTransforms[0];
+        // this.lastDrawTransform = pulseTransforms[0];
         // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
+        // for (let k = 0; k < this.drawTransforms.length; k += 1) {
 
-        for (var k = 0; k < this.drawTransforms.length; k += 1) {
-          for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
-            this.elements[this.drawOrder[i]].setupDraw(this.drawTransforms[k], now, canvasIndex);
-          }
-        } // if (this.unrenderNextDraw) {
+
+        for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
+          this.elements[this.drawOrder[i]].setupDraw(now, canvasIndex);
+        } // }
+        // if (this.unrenderNextDraw) {
         //   this.clearRender();
         //   this.unrenderNextDraw = false;
         // }
@@ -34105,12 +34217,30 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "draw",
     value: function draw(now) {
-      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var parentTransform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]()];
+      var parentOpacity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+      var canvasIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
       if (this.isShown) {
         // for (let k = 0; k < this.pulseTransforms.length; k += 1) {
+        this.lastDrawElementTransformPosition = {
+          parentCount: parentTransform[0].order.length,
+          elementCount: this.transform.order.length
+        };
+        var transform = this.getTransform();
+        var newTransforms = transformBy(parentTransform, [transform]); // this.lastDrawTransform = transform._dup();
+
+        this.lastDrawTransform = parentTransform[0].transform(transform);
+        this.pulseTransforms = this.getPulseTransforms(now);
+        this.drawTransforms = this.getDrawTransforms(newTransforms); // this.pulseTransforms
+        // eslint-disable-next-line prefer-destructuring
+
+        this.lastDrawPulseTransform = this.drawTransforms[0];
+        var opacityToUse = this.color[3] * this.opacity * parentOpacity;
+        this.lastDrawOpacity = opacityToUse;
+
         for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
-          this.elements[this.drawOrder[i]].draw(now, canvasIndex);
+          this.elements[this.drawOrder[i]].draw(now, this.drawTransforms, opacityToUse, canvasIndex);
         } // }
 
 
@@ -34223,7 +34353,8 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         time: defaultPulseOptions.time,
         scale: defaultPulseOptions.scale,
         done: null,
-        elements: null
+        elements: null,
+        progression: 'tools.math.sinusoid'
       };
       var doneToUse;
       var options;
@@ -34546,7 +34677,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         element.setFirstTransform(firstTransform);
       }
 
-      this.setMoveBoundaryToDiagram();
+      this.setMoveBounds();
     }
   }, {
     key: "getAllBoundaries",
@@ -34808,11 +34939,10 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "stop",
     value: function stop() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var elementOnly = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
+      var elementOnly = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "stop", this).call(this, cancelled, forceSetToEndOfPlan);
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "stop", this).call(this, how);
 
       if (elementOnly) {
         return;
@@ -34820,7 +34950,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.stop(cancelled, forceSetToEndOfPlan); // element.cancel(forceSetToEndOfPlan);
+        element.stop(how, elementOnly); // element.cancel(forceSetToEndOfPlan);
       }
     }
   }, {
@@ -34941,12 +35071,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "setOpacity",
     value: function setOpacity(opacity) {
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.setOpacity(opacity);
-      } // this.color[3] = opacity;
-
-
+      // for (let i = 0; i < this.drawOrder.length; i += 1) {
+      //   const element = this.elements[this.drawOrder[i]];
+      //   element.setOpacity(opacity);
+      // }
+      // this.color[3] = opacity;
       this.opacity = opacity;
     }
   }, {
@@ -35402,57 +35531,6 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       }
     }
   }, {
-    key: "pause",
-    value: function pause() {
-      var pauseSettingsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "pause", this).call(this, pauseSettingsIn);
-
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.pause(pauseSettingsIn);
-      }
-    }
-  }, {
-    key: "unpause",
-    value: function unpause() {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "unpause", this).call(this);
-
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.unpause();
-      }
-    } // Priority order:
-    // unpaused,
-    // preparingToPause
-    // preparingToUnpause
-    // paused
-
-  }, {
-    key: "getPause",
-    value: function getPause() {
-      var pause = this.state.pause;
-
-      if (this.state.pause === 'unpaused') {
-        return 'unpaused';
-      }
-
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        var elementPauseState = element.getPause();
-
-        if (elementPauseState === 'unpaused') {
-          return 'unpaused';
-        }
-
-        if (elementPauseState === 'preparingToPause' || elementPauseState === 'preparingToUnpause') {
-          pause = elementPauseState;
-        }
-      }
-
-      return pause;
-    }
-  }, {
     key: "isStateSame",
     value: function isStateSame(state) {
       var mergePulseTransforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -35498,6 +35576,39 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
         element.freezePulseTransforms(forceOverwrite);
       }
+    }
+  }, {
+    key: "isAnimating",
+    value: function isAnimating() {
+      // const result = super.isAnimating();
+      // if (result) {
+      //   return true;
+      // }
+      // for (let i = 0; i < this.drawOrder.length; i += 1) {
+      //   const element = this.elements[this.drawOrder[i]];
+      //   const r = element.isAnimating();
+      //   if (r) {
+      //     return true;
+      //   }
+      // }
+      // return false;
+      if (this.isShown === false) {
+        return false;
+      }
+
+      if (_get(_getPrototypeOf(DiagramElementCollection.prototype), "isAnimating", this).call(this)) {
+        return true;
+      }
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.isAnimating()) {
+          return true;
+        }
+      }
+
+      return false;
     }
   }]);
 
@@ -35944,7 +36055,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "now",
     value: function now() {
       // eslint-disable-line class-methods-use-this
-      return (this.timeStamp() - this.videoToNowDelta) / 1000;
+      return Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])((this.timeStamp() - this.videoToNowDelta) / 1000, 8);
     }
   }, {
     key: "getCurrentTime",
@@ -36219,7 +36330,7 @@ var Recorder = /*#__PURE__*/function () {
       this.setVideoToNowDeltaTime(fromTime);
 
       if (this.states.diffs.length > 0) {
-        this.setToTime(fromTime);
+        this.setToTime(fromTime, true);
       }
 
       this.states.precision = this.precision;
@@ -36243,12 +36354,7 @@ var Recorder = /*#__PURE__*/function () {
         });
       }
 
-      this.eventsCache = {}; // this.slidesCache = [];
-      // this.statesCache = new ObjectTracker(this.precision);
-      // this.statesCache.baseReference = duplicate(this.states.baseReference);  // $FlowFixMe
-      // this.statesCache.references = duplicate(this.states.references);
-
-      this.diagram.unpause(); // console.log('asdf3', this.diagram.getElement('a').animations.animations[0].steps[0].startTime)
+      this.eventsCache = {}; // this.diagram.unpause();
 
       this.lastRecordTime = null;
       this.duration = this.calcDuration();
@@ -36538,7 +36644,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "addEventType",
     value: function addEventType(eventName, playbackAction) {
-      var setOnSeek = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var setOnSeek = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.events[eventName] = {
         setOnSeek: setOnSeek,
         list: [],
@@ -36591,6 +36697,9 @@ var Recorder = /*#__PURE__*/function () {
     value: function recordCurrentState() {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getCurrentTime();
       // const start = performance.now();
+      // if (window.asdf) {
+      //   console.log('recording state', time);
+      // }
       var state = this.diagram.getState({
         precision: this.precision,
         ignoreShown: true
@@ -36777,18 +36886,21 @@ var Recorder = /*#__PURE__*/function () {
       } // console.log(time)
 
 
-      this.setToTime(time);
-      this.diagram.pause();
+      this.setToTime(time); // this.diagram.pause({
+      //   animation: 'freeze',
+      //   pulse: 'freeze',
+      //   movingFreely: 'freeze',
+      // });
+
+      this.diagram.stop('freeze');
     }
   }, {
     key: "setToTime",
     value: function setToTime(timeIn) {
       var _this9 = this;
 
-      // console.log(timeIn)
-      // if (this.states.diffs.length === 0) {
-      //   return;
-      // }
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
       if (timeIn === 0 && this.states.diffs.length > 0) {
         this.stateIndex = 0;
       } else {
@@ -36806,7 +36918,7 @@ var Recorder = /*#__PURE__*/function () {
         stateTimeCount = _this$states$diffs$th[3];
       }
 
-      if (stateTime === this.lastSeekTime) {
+      if (stateTime === this.lastSeekTime && !force) {
         return;
       }
 
@@ -37000,8 +37112,11 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startPlayback",
     value: function startPlayback() {
-      var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.lastSeekTime;
-      var events = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var _this10 = this;
+
+      var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.lastSeekTime || 0;
+      var forceStart = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var events = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
       var fromTime = fromTimeIn;
 
       if (fromTimeIn == null || fromTimeIn >= this.duration) {
@@ -37012,26 +37127,198 @@ var Recorder = /*#__PURE__*/function () {
         this.eventsToPlay = Object.keys(this.events);
       } else {
         this.eventsToPlay = events;
+      } // this.diagram.unpause();
+      // this.setVideoToNowDeltaTime(this.currentTime);
+
+
+      var stateToStartFrom = this.getStateForTime(fromTime);
+
+      if (!forceStart && this.pauseState != null) {
+        stateToStartFrom = this.pauseState;
       }
 
-      this.state = 'playing';
-      this.setVideoToNowDeltaTime(fromTime);
-      this.currentTime = fromTime;
-      this.diagram.unpause();
-      this.setToTime(fromTime);
-      this.startEventsPlayback(fromTime);
-      this.startAudioPlayback(fromTime);
-      this.diagram.animateNextFrame();
+      var finished = function finished() {
+        if (_this10.pauseState == null) {
+          _this10.setToTime(fromTime, true);
+        } else {
+          // this.diagram.setState(this.pauseState, 'instant');
+          _this10.pauseState = null;
+        }
 
-      if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
-        this.finishPlaying(); // return;
-      }
+        _this10.state = 'playing';
 
-      this.subscriptions.trigger('playbackStarted');
+        _this10.setVideoToNowDeltaTime(fromTime);
+
+        _this10.currentTime = fromTime;
+
+        _this10.startEventsPlayback(fromTime);
+
+        _this10.startAudioPlayback(fromTime);
+
+        _this10.diagram.animateNextFrame();
+
+        if (_this10.areEventsPlaying() === false && _this10.isAudioPlaying === false) {
+          _this10.finishPlaying();
+        }
+
+        _this10.subscriptions.trigger('playbackStarted');
+      }; // console.log(this.settings.play)
+
+
+      this.diagram.setState(stateToStartFrom, this.settings.play);
+
+      if (this.diagram.state.preparingToSetState) {
+        this.state = 'preparingToPlay';
+        this.subscriptions.trigger('preparingToPlay');
+        this.diagram.subscriptions.subscribe('stateSet', finished, 1); // console.log(this.diagram.subscriptions.subscriptions.stateSet)
+      } else {
+        finished();
+      } // let finishedFlag = false;
+      // const finished = () => {
+      //   // console.log('hello')
+      //   finishedFlag = true;
+      //   if (this.pauseState == null) {
+      //     this.setToTime(fromTime, true);
+      //   } else {
+      //     this.diagram.setState(this.pauseState);
+      //     this.pauseState = null;
+      //   }
+      //   this.state = 'playing';
+      //   this.setVideoToNowDeltaTime(fromTime);
+      //   this.currentTime = fromTime;
+      //   this.startEventsPlayback(fromTime);
+      //   this.startAudioPlayback(fromTime);
+      //   this.diagram.animateNextFrame();
+      //   if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
+      //     this.finishPlaying();
+      //   }
+      //   this.subscriptions.trigger('playbackStarted');
+      // };
+      // const playSettings = this.getPlaySettings();
+      // if (
+      //   playSettings.action === 'instant'
+      //   || this.diagram.elements.isStateSame(stateToStartFrom.elements, true)
+      // ) {
+      //   finished();
+      // } else if (playSettings.action === 'dissolve') {
+      //   // this.diagram.elements.freezePulseTransforms(false);
+      //   this.diagram.stop('freeze');
+      //   this.diagram.dissolveToState({
+      //     state: stateToStartFrom,
+      //     dissolveInDuration: playSettings.duration.dissolveIn,
+      //     dissolveOutDuration: playSettings.duration.dissolveOut,
+      //     done: finished,
+      //     delay: playSettings.duration.delay,
+      //     startTime: 'now',
+      //   });
+      // } else {
+      //   // console.log('asdf')
+      //   // debugger;
+      //   this.diagram.stop('freeze');  // This is cancelling the pulse
+      //   this.diagram.animateToState(
+      //     stateToStartFrom,
+      //     playSettings,
+      //     finished,
+      //     'now',
+      //   );
+      // }
+      // if (!finishedFlag) {
+      //   this.state = 'preparingToPlay';
+      //   this.subscriptions.trigger('preparingToPlay');
+      // }
+
     }
   }, {
-    key: "getResumeSettings",
-    value: function getResumeSettings() {
+    key: "startPlaybackLegacy",
+    value: function startPlaybackLegacy() {
+      var _this11 = this;
+
+      var fromTimeIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.lastSeekTime || 0;
+      var forceStart = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var events = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var fromTime = fromTimeIn;
+
+      if (fromTimeIn == null || fromTimeIn >= this.duration) {
+        fromTime = 0;
+      }
+
+      if (events == null) {
+        this.eventsToPlay = Object.keys(this.events);
+      } else {
+        this.eventsToPlay = events;
+      } // this.diagram.unpause();
+      // this.setVideoToNowDeltaTime(this.currentTime);
+
+
+      var stateToStartFrom = this.getStateForTime(fromTime);
+
+      if (!forceStart && this.pauseState != null) {
+        stateToStartFrom = this.pauseState;
+      }
+
+      var finishedFlag = false;
+
+      var finished = function finished() {
+        finishedFlag = true;
+
+        if (_this11.pauseState == null) {
+          _this11.setToTime(fromTime, true);
+        } else {
+          _this11.diagram.setState(_this11.pauseState);
+
+          _this11.pauseState = null;
+        }
+
+        _this11.state = 'playing';
+
+        _this11.setVideoToNowDeltaTime(fromTime);
+
+        _this11.currentTime = fromTime;
+
+        _this11.startEventsPlayback(fromTime);
+
+        _this11.startAudioPlayback(fromTime);
+
+        _this11.diagram.animateNextFrame();
+
+        if (_this11.areEventsPlaying() === false && _this11.isAudioPlaying === false) {
+          _this11.finishPlaying();
+        }
+
+        _this11.subscriptions.trigger('playbackStarted');
+      };
+
+      var playSettings = this.getPlaySettings();
+
+      if (playSettings.action === 'instant' || this.diagram.elements.isStateSame(stateToStartFrom.elements, true)) {
+        finished();
+      } else if (playSettings.action === 'dissolve') {
+        // this.diagram.elements.freezePulseTransforms(false);
+        this.diagram.stop('freeze');
+        this.diagram.dissolveToState({
+          state: stateToStartFrom,
+          dissolveInDuration: playSettings.duration.dissolveIn,
+          dissolveOutDuration: playSettings.duration.dissolveOut,
+          done: finished,
+          delay: playSettings.duration.delay,
+          startTime: 'now'
+        });
+      } else {
+        // console.log('asdf')
+        // debugger;
+        this.diagram.stop('freeze'); // This is cancelling the pulse
+
+        this.diagram.animateToState(stateToStartFrom, playSettings, finished, 'now');
+      }
+
+      if (!finishedFlag) {
+        this.state = 'preparingToPlay';
+        this.subscriptions.trigger('preparingToPlay');
+      }
+    }
+  }, {
+    key: "getPlaySettings",
+    value: function getPlaySettings() {
       var onResume = {
         action: 'instant',
         maxTime: 6,
@@ -37048,10 +37335,10 @@ var Recorder = /*#__PURE__*/function () {
         duration: null
       }; // console.log(resumeSettings)
 
-      if (typeof this.settings.resume === 'string') {
-        onResume.action = this.settings.resume;
+      if (typeof this.settings.play === 'string') {
+        onResume.action = this.settings.play;
       } else {
-        onResume = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, onResume, this.settings.resume); // velocity trumps duration by default, but if only duration is defined by the
+        onResume = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, onResume, this.settings.play); // velocity trumps duration by default, but if only duration is defined by the
         // user, then remove velocity;
         // if (this.settings.resume.duration != null && this.settings.resume.velocity == null) {
         //   onResume.velocity = undefined;
@@ -37085,84 +37372,78 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "resumePlayback",
     value: function resumePlayback() {
-      var _this10 = this;
-
-      if (this.pauseState == null) {
-        this.startPlayback(this.currentTime);
-        return;
-      }
-
-      var resumeSettings = this.getResumeSettings(); // const defaultOptions = {
-      //   maxTime: 1,
-      //   minTime: 0,
-      //   dissolve: false,
-      //   delay: 0.2,
-      // }
-      // const options = joinObjects({}, defaultOptions, optionsIn);
-      // if (options.dissolve && options.duration == null) {
-      //   options.duration = 0.8;
-      // }
-
-      this.diagram.unpause();
-      var finishedFlag = false;
-
-      var finished = function finished() {
-        finishedFlag = true;
-
-        _this10.diagram.setState(_this10.pauseState);
-
-        _this10.state = 'playing';
-
-        _this10.setVideoToNowDeltaTime(_this10.currentTime);
-
-        _this10.startEventsPlayback(_this10.currentTime);
-
-        _this10.startAudioPlayback(_this10.currentTime);
-
-        _this10.diagram.animateNextFrame();
-
-        if (_this10.areEventsPlaying() === false && _this10.isAudioPlaying === false) {
-          _this10.finishPlaying();
-        }
-
-        _this10.subscriptions.trigger('playbackStarted');
-      };
-
-      if (resumeSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements, true)) {
-        // this.diagram.stop();
-        // this.diagram.elements.clearFrozenPulseTransforms();
-        finished();
-        return;
-      } // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
-
-
-      if (resumeSettings.action === 'dissolve') {
-        this.diagram.elements.freezePulseTransforms(false);
-        this.diagram.stop();
-        this.diagram.dissolveToState({
-          state: this.pauseState,
-          dissolveInDuration: resumeSettings.duration.dissolveIn,
-          dissolveOutDuration: resumeSettings.duration.dissolveOut,
-          done: finished,
-          delay: resumeSettings.duration.delay,
-          startTime: 'now'
-        });
-      } else {
-        this.diagram.stop();
-        this.diagram.animateToState(this.pauseState, resumeSettings, finished, 'now');
-      } // if (this.diagram.isAnimating() && !finishedFlag) {
-      // console.log(finishedFlag)
-
-
-      if (!finishedFlag) {
-        this.state = 'preparingToPlay';
-        this.subscriptions.trigger('preparingToPlay');
-      } // if (animationCount === 0) {
-      //   this.diagram.subscriptions.unsubscribe('animationsFinished', id);
-      //   finished();
-      // }
-
-    } // initializePlayback(fromTime: number) {
+      this.startPlayback(this.currentTime, false);
+    } // resumePlaybackLegacy() {
+    //   if (this.pauseState == null) {
+    //     this.startPlayback(this.currentTime);
+    //     return;
+    //   }
+    //   const playSettings = this.getPlaySettings();
+    //   // const defaultOptions = {
+    //   //   maxTime: 1,
+    //   //   minTime: 0,
+    //   //   dissolve: false,
+    //   //   delay: 0.2,
+    //   // }
+    //   // const options = joinObjects({}, defaultOptions, optionsIn);
+    //   // if (options.dissolve && options.duration == null) {
+    //   //   options.duration = 0.8;
+    //   // }
+    //   this.diagram.unpause();
+    //   let finishedFlag = false;
+    //   const finished = () => {
+    //     finishedFlag = true;
+    //     this.diagram.setState(this.pauseState);
+    //     this.pauseState = null;
+    //     this.state = 'playing';
+    //     this.setVideoToNowDeltaTime(this.currentTime);
+    //     this.startEventsPlayback(this.currentTime);
+    //     this.startAudioPlayback(this.currentTime);
+    //     this.diagram.animateNextFrame();
+    //     if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
+    //       this.finishPlaying();
+    //     }
+    //     this.subscriptions.trigger('playbackStarted');
+    //   };
+    //   if (playSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements, true)) {
+    //     // this.diagram.stop();
+    //     // this.diagram.elements.clearFrozenPulseTransforms();
+    //     finished();
+    //     return;
+    //   }
+    //   // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
+    //   if (playSettings.action === 'dissolve') {
+    //     this.diagram.elements.freezePulseTransforms(false);
+    //     this.diagram.stop();
+    //     this.diagram.dissolveToState({
+    //       state: this.pauseState,
+    //       dissolveInDuration: playSettings.duration.dissolveIn,
+    //       dissolveOutDuration: playSettings.duration.dissolveOut,
+    //       done: finished,
+    //       delay: playSettings.duration.delay,
+    //       startTime: 'now',
+    //     });
+    //   } else {
+    //     this.diagram.stop();
+    //     this.diagram.animateToState(
+    //       this.pauseState,
+    //       playSettings,
+    //       finished,
+    //       'now',
+    //     );
+    //   }
+    //   // if (this.diagram.isAnimating() && !finishedFlag) {
+    //   // console.log(finishedFlag)
+    //   if (!finishedFlag) {
+    //     this.state = 'preparingToPlay';
+    //     this.subscriptions.trigger('preparingToPlay');
+    //   }
+    //   // if (animationCount === 0) {
+    //   //   this.diagram.subscriptions.unsubscribe('animationsFinished', id);
+    //   //   finished();
+    //   // }
+    // }
+    // initializePlayback(fromTime: number) {
     //   this.currentTime = fromTime;
     //   this.diagram.unpause();
     //   this.setToTime(fromTime);
@@ -37173,7 +37454,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
-      var _this11 = this;
+      var _this12 = this;
 
       if (this.audio) {
         this.isAudioPlaying = true;
@@ -37181,10 +37462,10 @@ var Recorder = /*#__PURE__*/function () {
         this.audio.play();
 
         var audioEnded = function audioEnded() {
-          _this11.isAudioPlaying = false;
+          _this12.isAudioPlaying = false;
 
-          if (_this11.state === 'playing') {
-            _this11.finishPlaying();
+          if (_this12.state === 'playing') {
+            _this12.finishPlaying();
           }
         };
 
@@ -37199,18 +37480,18 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "startEventsPlayback",
     value: function startEventsPlayback(fromTime) {
-      var _this12 = this;
+      var _this13 = this;
 
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this12.events[eventName].list.length === 0) {
+        if (_this13.events[eventName].list.length === 0) {
           return;
         }
 
-        var event = _this12.events[eventName];
+        var event = _this13.events[eventName];
         var index = getNextIndexForTime(event.list, fromTime);
 
         if (index === -1) {
-          _this12.eventIndex[eventName] = -1;
+          _this13.eventIndex[eventName] = -1;
           return;
         }
 
@@ -37222,9 +37503,9 @@ var Recorder = /*#__PURE__*/function () {
         }
 
         if (index > event.list.length - 1) {
-          _this12.eventIndex[eventName] = -1;
+          _this13.eventIndex[eventName] = -1;
         } else {
-          _this12.eventIndex[eventName] = index;
+          _this13.eventIndex[eventName] = index;
         }
       });
       var nextEventName = this.getNextEvent();
@@ -37236,19 +37517,19 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "getNextEvent",
     value: function getNextEvent() {
-      var _this13 = this;
+      var _this14 = this;
 
       var nextEventName = '';
       var nextTime = null;
       var nextTimeCount = null;
       this.eventsToPlay.forEach(function (eventName) {
-        if (_this13.eventIndex[eventName] == null || _this13.eventIndex[eventName] === -1 || _this13.events[eventName].list.length <= _this13.eventIndex[eventName]) {
+        if (_this14.eventIndex[eventName] == null || _this14.eventIndex[eventName] === -1 || _this14.events[eventName].list.length <= _this14.eventIndex[eventName]) {
           return;
         }
 
-        var _this13$events$eventN = _slicedToArray(_this13.events[eventName].list[_this13.eventIndex[eventName]], 3),
-            time = _this13$events$eventN[0],
-            timeCount = _this13$events$eventN[2];
+        var _this14$events$eventN = _slicedToArray(_this14.events[eventName].list[_this14.eventIndex[eventName]], 3),
+            time = _this14$events$eventN[0],
+            timeCount = _this14$events$eventN[2];
 
         if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
@@ -37262,7 +37543,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "playbackEvent",
     value: function playbackEvent(eventName) {
       var index = this.eventIndex[eventName];
-      var delay = this.events[eventName].list[index][0] - this.getCurrentTime();
+      var delay = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(this.events[eventName].list[index][0] - this.getCurrentTime(), 8);
 
       if (delay > 0.0001) {
         this.timeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(this.playbackEvent.bind(this, eventName), Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(delay * 1000, 0));
@@ -37307,7 +37588,7 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "finishPlaying",
     value: function finishPlaying() {
-      var _this14 = this;
+      var _this15 = this;
 
       if (this.areEventsPlaying()) {
         return false;
@@ -37317,23 +37598,39 @@ var Recorder = /*#__PURE__*/function () {
 
       if (remainingTime > 0.0001) {
         this.timeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(function () {
-          _this14.finishPlaying();
+          _this15.finishPlaying();
         }, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(remainingTime * 1000, 0));
         return false;
       }
 
       if (this.isAudioPlaying) {
         return false;
-      }
+      } // this.pausePlayback('cancel');
 
-      this.pausePlayback();
+
+      this.currentTime = this.getCurrentTime(); // console.log(this.currentTime)
+
+      this.stop();
       return true;
     } // clearPlaybackTimeouts() {
     //   this.timeoutID = null;
     // }
     // animateToState() {
     // }
-    // On pause, animations and pauses can complete and clear:
+
+  }, {
+    key: "stop",
+    value: function stop() {
+      this.stopTimeouts();
+
+      if (this.audio) {
+        this.audio.pause();
+        this.isAudioPlaying = false;
+      }
+
+      this.state = 'idle';
+      this.subscriptions.trigger('playbackStopped');
+    } // On pause, animations and pauses can complete and clear:
     // Complete  Clear
     // True      True     Animations finish and nextFrame nothing will happen
     // True      False    Animations finish and nextFrame nothing will happen
@@ -37351,8 +37648,9 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "pausePlayback",
     value: function pausePlayback() {
-      var _this15 = this;
+      var _this16 = this;
 
+      var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.settings.pause;
       this.currentTime = this.getCurrentTime();
       this.pauseState = this.diagram.getState({
         precision: this.precision,
@@ -37360,11 +37658,10 @@ var Recorder = /*#__PURE__*/function () {
       });
 
       var pause = function pause() {
-        _this15.state = 'idle';
+        _this16.state = 'idle';
 
-        _this15.subscriptions.trigger('playbackStopped');
+        _this16.subscriptions.trigger('playbackStopped'); // this.diagram.stop();
 
-        _this15.diagram.stop();
       };
 
       this.stopTimeouts();
@@ -37374,10 +37671,10 @@ var Recorder = /*#__PURE__*/function () {
         this.isAudioPlaying = false;
       }
 
-      this.diagram.subscriptions.subscribe('paused', pause, 1);
-      this.diagram.pause(this.settings.pause);
+      this.diagram.subscriptions.subscribe('stopped', pause, 1);
+      this.diagram.stop(how);
 
-      if (this.diagram.getPauseState() === 'preparingToPause') {
+      if (this.diagram.state.preparingToStop) {
         this.subscriptions.trigger('preparingToPause');
         this.state = 'preparingToPause'; // console.log('recorder prep to pause')
         // this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
@@ -37394,6 +37691,9 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "setEvent",
     value: function setEvent(eventName, index) {
+      // if (window.asdf) {
+      // console.log(eventName, performance.now())
+      // }
       var event = this.events[eventName];
 
       if (event == null) {
@@ -37439,6 +37739,28 @@ var Recorder = /*#__PURE__*/function () {
       var state = this.states.getFromIndex(index);
       this.diagram.setState(state);
     }
+  }, {
+    key: "getState",
+    value: function getState(index) {
+      if (index > this.states.diffs.length - 1) {
+        return {};
+      }
+
+      return this.states.getFromIndex(index);
+    }
+  }, {
+    key: "getStateForTime",
+    value: function getStateForTime(timeIn) {
+      var stateIndex;
+
+      if (timeIn === 0 && this.states.diffs.length > 0) {
+        stateIndex = 0;
+      } else {
+        stateIndex = getPrevIndexForTime(this.states.diffs, timeIn);
+      }
+
+      return this.getState(stateIndex);
+    }
   }]);
 
   return Recorder;
@@ -37464,6 +37786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function assignAsLinkOnly(obj) {
   if (obj != null) {
+    // eslint-disable-next-line no-param-reassign
     obj._assignAsLinkOnly = true;
   }
 
@@ -37609,7 +37932,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function () {
-  return new Worker("/static/workers/" + "2d48374e5c3d3e47aadd.worker.js");
+  return new Worker("/static/workers/" + "5fada4f413e2356931b3.worker.js");
 };
 
 /***/ }),
@@ -37971,6 +38294,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var GlobalAnimation = /*#__PURE__*/function () {
   // Method for requesting the next animation frame
   // used to cancel animation frames
+  // syncNow: () => number;
   function GlobalAnimation() {
     _classCallCheck(this, GlobalAnimation);
 
@@ -37978,28 +38302,95 @@ var GlobalAnimation = /*#__PURE__*/function () {
     // If it doesn't, then setup some default values.
     if (!GlobalAnimation.instance) {
       this.requestNextAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-      GlobalAnimation.instance = this;
-      this.drawQueue = [];
-      this.nextDrawQueue = [];
-      this.lastFrame = null;
-      this.debug = false;
-      this.simulatedFPS = 60;
-      this.debugFrameTime = 0.5;
-      this.timeoutId = null;
+      GlobalAnimation.instance = this; // this.drawQueue = [];
+      // this.nextDrawQueue = [];
+      // this.lastFrame = null;
+      // this.debug = false;
+      // this.simulatedFPS = 60;
+      // this.debugFrameTime = 0.5;
+      // this.timeoutId = null;
+      // this.now = () => performance.now();
+      // this.updateSyncNow = false;
+      // this.drawScene = this.draw.bind(this);
 
-      this.now = function () {
-        return performance.now();
-      }; // this.drawScene = this.draw.bind(this);
-
+      this.reset();
     }
 
     return GlobalAnimation.instance;
   }
 
   _createClass(GlobalAnimation, [{
+    key: "reset",
+    value: function reset() {
+      this.drawQueue = [];
+      this.nextDrawQueue = [];
+      this.lastFrame = null;
+      this.debug = false;
+      this.simulatedFPS = 60;
+      this.debugFrameTime = 0.5;
+
+      if (this.timers != null && this.timers.length > 0) {
+        this.timers.forEach(function (id) {
+          return clearTimeout(id);
+        });
+      }
+
+      this.timers = [];
+
+      if (this.timeoutId != null) {
+        clearTimeout(this.timeoutId);
+      }
+
+      this.timeoutId = null;
+
+      this.now = function () {
+        return performance.now();
+      };
+
+      this.updateSyncNow = true;
+    }
+  }, {
+    key: "getWhen",
+    value: function getWhen(when) {
+      if (when === 'now') {
+        return this.now();
+      }
+
+      if (when === 'prevFrame') {
+        return this.lastFrame;
+      }
+
+      if (when === 'sync') {
+        return this.syncNow();
+      }
+
+      return null;
+    }
+  }, {
+    key: "syncNow",
+    value: function syncNow() {
+      var _this = this;
+
+      if (this.updateSyncNow) {
+        this.updateSyncNow = false;
+        this.synchronizedNow = performance.now();
+        this.syncNowTimer = setTimeout(function () {
+          _this.updateSyncNow = true;
+        }, 100);
+      }
+
+      return this.synchronizedNow;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "now",
+    value: function now() {
+      return performance.now();
+    }
+  }, {
     key: "setDebugFrameRate",
     value: function setDebugFrameRate() {
-      var _this = this;
+      var _this2 = this;
 
       var simulatedFPS = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 60;
       var frameTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
@@ -38015,7 +38406,7 @@ var GlobalAnimation = /*#__PURE__*/function () {
       this.nowTime = performance.now();
 
       this.now = function () {
-        return _this.nowTime;
+        return _this2.nowTime;
       };
 
       this.queueNextDebugFrame();
@@ -38023,19 +38414,17 @@ var GlobalAnimation = /*#__PURE__*/function () {
   }, {
     key: "queueNextDebugFrame",
     value: function queueNextDebugFrame() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.debugFrameTime != null) {
         this.timeoutId = setTimeout(function () {
-          _this2.nowTime += 1 / _this2.simulatedFPS * 1000;
+          _this3.nowTime += 1 / _this3.simulatedFPS * 1000;
 
-          if (_this2.nextDrawQueue.length > 0) {
-            _this2.draw(_this2.now());
+          if (_this3.nextDrawQueue.length > 0) {
+            _this3.draw(_this3.now());
           }
 
-          console.log(_this2.now(), performance.now());
-
-          _this2.queueNextDebugFrame();
+          _this3.queueNextDebugFrame();
         }, this.debugFrameTime * 1000);
       } else {
         this.nowTime += 1 / this.simulatedFPS * 1000;
@@ -38067,13 +38456,21 @@ var GlobalAnimation = /*#__PURE__*/function () {
 
 
         if (timeScale > 0) {
-          return setTimeout(f, time * timeScale);
+          var _id2 = setTimeout(f, time * timeScale);
+
+          this.timers.push(_id2);
+          return _id2;
         }
 
-        return setTimeout(f, 0);
-      } else {
-        return setTimeout(f, time);
+        var _id = setTimeout(f, 0);
+
+        this.timers.push(_id);
+        return _id;
       }
+
+      var id = setTimeout(f, time);
+      this.timers.push(id);
+      return id;
     })
   }, {
     key: "disableDebugFrameRate",
@@ -38092,6 +38489,8 @@ var GlobalAnimation = /*#__PURE__*/function () {
   }, {
     key: "draw",
     value: function draw(now) {
+      clearTimeout(this.syncNowTimer);
+      this.updateSyncNow = true;
       this.drawQueue = this.nextDrawQueue;
       this.nextDrawQueue = [];
       var nowSeconds = now * 0.001;
@@ -39073,7 +39472,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine, calculateStop, calculateStopAngle */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine, deceleratePoint, decelerateValue, decelerateTransform, RectBounds, LineBounds, RangeBounds, ValueBounds, TransformBounds, Vector, transformValueToArray */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39087,7 +39486,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deg", function() { return deg; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normAngle", function() { return normAngle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transform", function() { return Transform; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransformLimit", function() { return TransformLimit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rect", function() { return Rect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Translation", function() { return Translation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scale", function() { return Scale; });
@@ -39117,8 +39515,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRect", function() { return getRect; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTransform", function() { return getTransform; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLine", function() { return getLine; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateStop", function() { return calculateStop; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculateStopAngle", function() { return calculateStopAngle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deceleratePoint", function() { return deceleratePoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decelerateValue", function() { return decelerateValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decelerateTransform", function() { return decelerateTransform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RectBounds", function() { return RectBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineBounds", function() { return LineBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RangeBounds", function() { return RangeBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValueBounds", function() { return ValueBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransformBounds", function() { return TransformBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Vector", function() { return Vector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transformValueToArray", function() { return transformValueToArray; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -39244,6 +39650,12 @@ var Rect = /*#__PURE__*/function () {
       }
 
       return true;
+    }
+  }, {
+    key: "round",
+    value: function round() {
+      var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
+      return new Rect(Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.left, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.bottom, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.width, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.height, precision));
     }
   }]);
 
@@ -39446,7 +39858,19 @@ var Point = /*#__PURE__*/function () {
   }, {
     key: "distance",
     value: function distance() {
-      return Math.sqrt(this.x * this.x + this.y * this.y);
+      var toPointIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (toPointIn == null) {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+      }
+
+      var toPoint = getPoint(toPointIn);
+
+      if (toPoint == null) {
+        return this.distance();
+      }
+
+      return this.sub(toPoint).distance();
     }
     /**
      * Return a new point with (x, y) values rounded to some precision
@@ -39647,6 +40071,28 @@ var Point = /*#__PURE__*/function () {
       }
 
       return false;
+    }
+  }, {
+    key: "clipToLine",
+    value: function clipToLine(l) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+
+      if (l.hasPointOn(this, precision)) {
+        return this._dup();
+      }
+
+      if (this.shaddowIsOnLine(l, precision)) {
+        return this.getShaddowOnLine(l, precision);
+      }
+
+      var d1 = this.distance(l.p1);
+      var d2 = this.distance(l.p2);
+
+      if (d1 <= d2) {
+        return l.p1._dup();
+      }
+
+      return l.p2._dup();
     }
   }, {
     key: "isOnUnboundLine",
@@ -40377,6 +40823,26 @@ var Line = /*#__PURE__*/function () {
       return new Line(p1, p2);
     }
   }, {
+    key: "reflectsOn",
+    value: function reflectsOn(l) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+
+      var _this$intersectsWith = this.intersectsWith(l, precision),
+          intersect = _this$intersectsWith.intersect;
+
+      if (intersect == null) {
+        return null;
+      }
+
+      var perpendicular = new Line(intersect, 1, l.ang + Math.PI / 2);
+      var shaddow = this.p1.getShaddowOnLine(perpendicular, precision);
+      var p1ToShaddow = new Line(p1, shaddow);
+      var distance = p1ToShaddow.distance; // const distance = shaddow.distance(this.p1);
+
+      var projection = Point(this.p1.x + distance * 2 * Math.cos(p1ToShaddow.ang), this.p1.y + distance * 2 * Math.sin(p1ToShaddow.ang));
+      return new Line(intersect, project);
+    }
+  }, {
     key: "intersectsWith",
     value: function intersectsWith(line2) {
       var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
@@ -40499,6 +40965,45 @@ var Line = /*#__PURE__*/function () {
   return Line;
 }();
 
+var Vector = /*#__PURE__*/function (_Line) {
+  _inherits(Vector, _Line);
+
+  var _super = _createSuper(Vector);
+
+  function Vector(p1OrLine, p2OrMag) {
+    var _this;
+
+    var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+    _classCallCheck(this, Vector);
+
+    if (p1OrLine instanceof Line) {
+      _this = _super.call(this, p1OrLine.p1, p1OrLine.distance, p1OrLine.ang);
+    } else {
+      _this = _super.call(this, p1OrLine, p2OrMag, angle);
+    }
+
+    _this.i = _this.distance * Math.cos(_this.ang);
+    _this.j = _this.distance * Math.sin(_this.ang);
+    return _possibleConstructorReturn(_this);
+  }
+
+  _createClass(Vector, [{
+    key: "unit",
+    value: function unit() {
+      return new Vector(this.p1, 1, this.ang);
+    }
+  }, {
+    key: "dotProduct",
+    value: function dotProduct(v) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      return Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.i * v.i + this.j * v.j, precision);
+    }
+  }]);
+
+  return Vector;
+}(Line);
+
 function line(p1, p2) {
   return new Line(p1, p2);
 }
@@ -40546,10 +41051,10 @@ function parseLine(lIn, onFail) {
   if (l.f1Type != null) {
     if (l.f1Type === 'l' && l.state != null && Array.isArray([l.state]) && l.state.length === 2) {
       var _l$state = _slicedToArray(l.state, 2),
-          p1 = _l$state[0],
+          _p = _l$state[0],
           p2 = _l$state[1];
 
-      return new Line(getPoint(p1), getPoint(p2));
+      return new Line(getPoint(_p), getPoint(p2));
     }
 
     return onFailToUse;
@@ -40670,10 +41175,10 @@ function getPrecision(options) {
 var Translation = /*#__PURE__*/function (_Point) {
   _inherits(Translation, _Point);
 
-  var _super = _createSuper(Translation);
+  var _super2 = _createSuper(Translation);
 
   function Translation(txIn) {
-    var _this;
+    var _this2;
 
     var tyIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -40702,9 +41207,9 @@ var Translation = /*#__PURE__*/function (_Point) {
     }
 
     if (tx instanceof Point) {
-      _this = _super.call(this, tx.x, tx.y);
+      _this2 = _super2.call(this, tx.x, tx.y);
     } else if (typeof tx === 'number') {
-      _this = _super.call(this, tx, ty);
+      _this2 = _super2.call(this, tx, ty);
     } else if (tx.f1Type != null && tx.f1Type === 't' && tx.state != null && Array.isArray(tx.state) && tx.state.length === 3) {
       var _tx$state = _slicedToArray(tx.state, 3),
           n = _tx$state[0],
@@ -40712,13 +41217,13 @@ var Translation = /*#__PURE__*/function (_Point) {
           y = _tx$state[2];
 
       name = n;
-      _this = _super.call(this, x, y);
+      _this2 = _super2.call(this, x, y);
     } else {
-      _this = _super.call(this, 0, 0);
+      _this2 = _super2.call(this, 0, 0);
     }
 
-    _this.name = name;
-    return _possibleConstructorReturn(_this);
+    _this2.name = name;
+    return _possibleConstructorReturn(_this2);
   }
 
   _createClass(Translation, [{
@@ -40790,10 +41295,10 @@ var Translation = /*#__PURE__*/function (_Point) {
 var Scale = /*#__PURE__*/function (_Point2) {
   _inherits(Scale, _Point2);
 
-  var _super2 = _createSuper(Scale);
+  var _super3 = _createSuper(Scale);
 
   function Scale(sxIn, syIn) {
-    var _this2;
+    var _this3;
 
     var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
@@ -40821,12 +41326,12 @@ var Scale = /*#__PURE__*/function (_Point2) {
     }
 
     if (sx instanceof Point) {
-      _this2 = _super2.call(this, sx.x, sx.y);
+      _this3 = _super3.call(this, sx.x, sx.y);
     } else if (typeof sx === 'number') {
       if (sy != null) {
-        _this2 = _super2.call(this, sx, sy);
+        _this3 = _super3.call(this, sx, sy);
       } else {
-        _this2 = _super2.call(this, sx, sx);
+        _this3 = _super3.call(this, sx, sx);
       }
     } else if (sx.f1Type != null && sx.f1Type === 's' && sx.state != null && Array.isArray(sx.state) && sx.state.length === 3) {
       var _sx$state = _slicedToArray(sx.state, 3),
@@ -40835,13 +41340,13 @@ var Scale = /*#__PURE__*/function (_Point2) {
           y = _sx$state[2];
 
       name = n;
-      _this2 = _super2.call(this, x, y);
+      _this3 = _super3.call(this, x, y);
     } else {
-      _this2 = _super2.call(this, 1, 1);
+      _this3 = _super3.call(this, 1, 1);
     }
 
-    _this2.name = name;
-    return _possibleConstructorReturn(_this2);
+    _this3.name = name;
+    return _possibleConstructorReturn(_this3);
   }
 
   _createClass(Scale, [{
@@ -40915,25 +41420,6 @@ var Scale = /*#__PURE__*/function (_Point2) {
 
   return Scale;
 }(Point);
-
-var TransformLimit = /*#__PURE__*/function () {
-  function TransformLimit(scale, rotation, translation) {
-    _classCallCheck(this, TransformLimit);
-
-    this.scale = scale;
-    this.rotation = rotation;
-    this.translation = translation;
-  }
-
-  _createClass(TransformLimit, [{
-    key: "_dup",
-    value: function _dup() {
-      return new TransformLimit(this.scale, this.rotation, this.translation);
-    }
-  }]);
-
-  return TransformLimit;
-}();
 
 var Transform = /*#__PURE__*/function () {
   function Transform() {
@@ -41177,11 +41663,11 @@ var Transform = /*#__PURE__*/function () {
         }
 
         if (stepStart instanceof Rotation && stepDelta instanceof Rotation) {
-          calcTransform.order[i] = new Rotation(stepStart.r + stepDelta.r * percent);
+          calcTransform.order[i] = new Rotation(stepStart.r + stepDelta.r * percent, stepStart.name);
         }
 
         if (stepStart instanceof Translation && stepDelta instanceof Translation) {
-          calcTransform.order[i] = new Translation(translationPath(translationStyle, stepStart, stepDelta, percent, translationOptions));
+          calcTransform.order[i] = new Translation(translationPath(translationStyle, stepStart, stepDelta, percent, translationOptions), 0, stepStart.name);
         }
       }
 
@@ -41495,8 +41981,9 @@ var Transform = /*#__PURE__*/function () {
       //   return new Transform(this.order);
       // }
       var order = [];
-      var z = zeroThresholdTransform;
-      var max = maxTransform;
+      var z = transformValueToArray(zeroThresholdTransform, this); // const max = maxTransform;
+
+      var max = transformValueToArray(maxTransform, this);
 
       for (var i = 0; i < this.order.length; i += 1) {
         var t = this.order[i];
@@ -41507,36 +41994,26 @@ var Transform = /*#__PURE__*/function () {
                 mag = _t$toPolar.mag,
                 angle = _t$toPolar.angle;
 
-            var clipM = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(mag, z.translation, max.translation);
+            var clipM = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(mag, z[i], max[i]);
 
             order.push(new Translation(clipM * Math.cos(angle), clipM * Math.sin(angle), this.name));
           } else {
-            var x = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z.translation, max.translation);
+            var x = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z[i], max[i]);
 
-            var y = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z.translation, max.translation);
+            var y = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z[i], max[i]);
 
             order.push(new Translation(x, y, this.name));
           }
         } else if (t instanceof Rotation) {
-          var r = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.r, z.rotation, max.rotation);
+          var r = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.r, z[i], max[i]);
 
           order.push(new Rotation(r, this.name));
         } else if (t instanceof Scale) {
-          if (vector) {
-            var _t$toPolar2 = t.toPolar(),
-                _mag = _t$toPolar2.mag,
-                _angle = _t$toPolar2.angle;
+          var _x2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z[i], max[i]);
 
-            var _clipM = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(_mag, z.scale, max.scale);
+          var _y2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z[i], max[i]);
 
-            order.push(new Scale(_clipM * Math.cos(_angle), _clipM * Math.sin(_angle), this.name));
-          } else {
-            var _x2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z.scale, max.scale);
-
-            var _y2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z.scale, max.scale);
-
-            order.push(new Scale(_x2, _y2, this.name));
-          }
+          order.push(new Scale(_x2, _y2, this.name));
         }
       }
 
@@ -41598,51 +42075,24 @@ var Transform = /*#__PURE__*/function () {
     }
   }, {
     key: "decelerate",
-    value: function decelerate(velocity, deceleration, deltaTime, zeroThreshold) {
-      var nextV = new Transform();
-      var nextT = new Transform();
-      var z = zeroThreshold;
-      var d = deceleration;
-
-      for (var i = 0; i < this.order.length; i += 1) {
-        var t = this.order[i];
-        var v = velocity.order[i]; // const z = zeroThreshold.order[i];
-
-        if (t instanceof Translation && v instanceof Translation) {
-          var _v$toPolar = v.toPolar(),
-              mag = _v$toPolar.mag,
-              angle = _v$toPolar.angle;
-
-          var next = Object(_math__WEBPACK_IMPORTED_MODULE_0__["decelerate"])(0, mag, d.translation, deltaTime, z.translation);
-
-          nextV = nextV.translate(next.v * Math.cos(angle), next.v * Math.sin(angle));
-          nextT = nextT.translate(t.x + next.p * Math.cos(angle), t.y + next.p * Math.sin(angle));
-        } else if (t instanceof Rotation && v instanceof Rotation) {
-          var r = Object(_math__WEBPACK_IMPORTED_MODULE_0__["decelerate"])(t.r, v.r, d.rotation, deltaTime, z.rotation);
-
-          nextV = nextV.rotate(r.v);
-          nextT = nextT.rotate(r.p);
-        } else if (t instanceof Scale && v instanceof Scale) {
-          var _v$toPolar2 = v.toPolar(),
-              _mag2 = _v$toPolar2.mag,
-              _angle2 = _v$toPolar2.angle;
-
-          var _next = Object(_math__WEBPACK_IMPORTED_MODULE_0__["decelerate"])(0, _mag2, d.scale, deltaTime, z.scale);
-
-          nextV = nextV.scale(_next.v * Math.cos(_angle2), _next.v * Math.sin(_angle2));
-          nextT = nextT.scale(t.x + _next.p * Math.cos(_angle2), t.y + _next.p * Math.sin(_angle2));
-        } else {
-          return {
-            v: new Transform(),
-            t: new Transform()
-          };
-        }
-      }
-
+    value: function decelerate(velocity, decelerationIn, deltaTime, boundsIn, bounceLossIn, zeroVelocityThresholdIn) {
+      var precision = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 8;
+      var deceleration = transformValueToArray(decelerationIn, this);
+      var bounceLoss = transformValueToArray(bounceLossIn, this);
+      var zeroVelocityThreshold = transformValueToArray(zeroVelocityThresholdIn, this);
+      var bounds = getTransformBoundsLimit(boundsIn, this);
+      var result = decelerateTransform(this, velocity, deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold, precision);
       return {
-        v: nextV,
-        t: nextT
+        velocity: result.velocity,
+        transform: result.transform,
+        duration: result.duration
       };
+    }
+  }, {
+    key: "timeToZeroV",
+    value: function timeToZeroV(velocity, deceleration, bounds, bounceLoss, zeroVelocityThreshold) {
+      var precision = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 8;
+      return this.decelerate(velocity, deceleration, null, bounds, bounceLoss, zeroVelocityThreshold, precision);
     } // Return the velocity of each element in the transform
     // If the current and previous transforms are inconsistent in type order,
     // then a transform of value 0, but with the same type order as "this" will
@@ -41671,15 +42121,7 @@ var Transform = /*#__PURE__*/function () {
         }
       }
 
-      var v = new Transform(order); // let z = zeroThreshold;
-      // let m = maxTransform;
-      // if (!this.isSimilarTo(zeroThreshold)) {
-      //   z = this.constant(0);
-      // }
-      // if (!this.isSimilarTo(maxTransform)) {
-      //   m = v._dup();
-      // }
-
+      var v = new Transform(order);
       return v.clipMag(zeroThreshold, maxTransform);
     }
   }, {
@@ -42054,37 +42496,721 @@ function quadBezierPoints(p0, p1, p2, sides) {
   return points;
 }
 
-function calculateStop(position, velocity, deceleration) {
-  var bounds = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var bounceLossIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-  var zeroVelocityThreshold = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-  var precision = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 8;
+var Bounds = /*#__PURE__*/function () {
+  function Bounds(boundary) {
+    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
 
-  if (velocity.x === 0 && velocity.y === 0) {
-    return {
-      duration: 0,
-      position: position
-    };
+    _classCallCheck(this, Bounds);
+
+    this.boundary = boundary;
+    this.precision = precision;
+  } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+
+  _createClass(Bounds, [{
+    key: "contains",
+    value: function contains(position) {
+      return true;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "intersect",
+    value: function intersect(position) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      return {
+        position: position,
+        distance: 0,
+        direction: direction
+      };
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "clip",
+    value: function clip(position) {
+      return position;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "clipVelocity",
+    value: function clipVelocity(velocity) {
+      return velocity;
+    }
+  }]);
+
+  return Bounds;
+}();
+
+var ValueBounds = /*#__PURE__*/function (_Bounds) {
+  _inherits(ValueBounds, _Bounds);
+
+  var _super4 = _createSuper(ValueBounds);
+
+  function ValueBounds() {
+    _classCallCheck(this, ValueBounds);
+
+    return _super4.apply(this, arguments);
   }
 
-  if (bounds != null) {
-    var outOfBounds = false;
+  return ValueBounds;
+}(Bounds);
 
-    if (bounds instanceof Line && !position.shaddowIsOnLine(bounds, precision)) {
-      outOfBounds = true;
+var RangeBounds = /*#__PURE__*/function (_Bounds2) {
+  _inherits(RangeBounds, _Bounds2);
+
+  var _super5 = _createSuper(RangeBounds);
+
+  function RangeBounds(minOrObject) {
+    var maxOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+    var precisionIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
+
+    _classCallCheck(this, RangeBounds);
+
+    var boundary;
+    var precision;
+
+    if (typeof minOrObject === 'number') {
+      boundary = {
+        min: minOrObject,
+        max: maxOrPrecision
+      };
+      precision = precisionIn;
+    } else {
+      boundary = minOrObject;
+      precision = maxOrPrecision;
     }
 
-    if (bounds instanceof Rect && !bounds.isPointInside(position)) {
-      outOfBounds = true;
-    }
+    return _super5.call(this, boundary, precision);
+  }
 
-    if (outOfBounds) {
+  _createClass(RangeBounds, [{
+    key: "contains",
+    value: function contains(position) {
+      if (typeof position === 'number') {
+        if (position >= this.boundary.min && position <= this.boundary.max) {
+          return true;
+        }
+
+        return false;
+      }
+
+      if (position.x >= this.boundary.min && position.y >= this.boundary.min && position.x <= this.boundary.max && position.y <= this.boundary.max) {
+        return true;
+      }
+
+      return false;
+    }
+  }, {
+    key: "intersect",
+    value: function intersect(positionIn) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+      var position;
+      var directionFlag = 'value';
+
+      if (!(typeof positionIn === 'number')) {
+        position = positionIn.x;
+        directionFlag = 'angle';
+      } else {
+        position = positionIn;
+      }
+
+      if (directionFlag === 'value' && direction === -1 || directionFlag === 'angle' && Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(direction, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(Math.PI, this.precision)) {
+        return {
+          position: this.boundary.min,
+          distance: Math.abs(position - this.boundary.min),
+          direction: directionFlag === 'value' ? 1 : direction + Math.PI
+        };
+      }
+
       return {
-        duration: 0,
-        position: position
+        position: this.boundary.max,
+        distance: Math.abs(this.boundary.max - position),
+        direction: directionFlag === 'value' ? 1 : direction + Math.PI
       };
     }
+  }, {
+    key: "clip",
+    value: function clip(position) {
+      if (!(typeof position === 'number')) {
+        return position;
+      }
+
+      if (position < this.boundary.min) {
+        return this.boundary.min;
+      }
+
+      if (position > this.boundary.max) {
+        return this.boundary.max;
+      }
+
+      return position;
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "clipVelocity",
+    value: function clipVelocity(position) {
+      return position;
+    }
+  }]);
+
+  return RangeBounds;
+}(Bounds);
+
+var RectBounds = /*#__PURE__*/function (_Bounds3) {
+  _inherits(RectBounds, _Bounds3);
+
+  var _super6 = _createSuper(RectBounds);
+
+  function RectBounds(leftOrRect) {
+    var bottomOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+    var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+    var precisionIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 8;
+
+    _classCallCheck(this, RectBounds);
+
+    var boundary;
+    var precision;
+
+    if (typeof leftOrRect === 'number') {
+      boundary = new Rect(leftOrRect, bottomOrPrecision, width, height);
+      precision = precisionIn;
+    } else {
+      boundary = leftOrRect;
+      precision = bottomOrPrecision;
+    }
+
+    return _super6.call(this, boundary, precision);
   }
+
+  _createClass(RectBounds, [{
+    key: "contains",
+    value: function contains(position) {
+      if (typeof position === 'number') {
+        return false;
+      }
+
+      return this.boundary.isPointInside(position, this.precision);
+    }
+  }, {
+    key: "clip",
+    value: function clip(position) {
+      if (typeof position === 'number') {
+        return position;
+      }
+
+      var bounds = this.boundary;
+      var x = position.x,
+          y = position.y;
+
+      if (position.x < bounds.left) {
+        x = bounds.left;
+      } else if (position.x > bounds.right) {
+        x = bounds.right;
+      }
+
+      if (position.y < bounds.bottom) {
+        y = bounds.bottom;
+      } else if (position.y > bounds.top) {
+        y = bounds.top;
+      }
+
+      return new Point(x, y);
+    }
+  }, {
+    key: "intersect",
+    value: function intersect(position) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (typeof position === 'number') {
+        return {
+          position: position,
+          distance: 0,
+          direction: direction
+        };
+      }
+
+      var ang = direction;
+      var trajectory = new Line(position, 1, ang);
+      var hBound;
+      var vBound;
+      var xMirror = 1;
+      var yMirror = 1;
+      var intersectPoint;
+      var distanceToBound = 0;
+      var bounds = this.boundary;
+
+      if (ang > 0 && ang < Math.PI) {
+        hBound = new Line([bounds.left, bounds.top], [bounds.right, bounds.top]);
+      } else if (ang > Math.PI) {
+        hBound = new Line([bounds.left, bounds.bottom], [bounds.right, bounds.bottom]);
+      }
+
+      if (ang > Math.PI / 2 && ang < Math.PI / 2 * 3) {
+        vBound = new Line([bounds.left, bounds.bottom], [bounds.left, bounds.top]);
+      } else if (ang >= 0 && ang < Math.PI / 2 || ang > Math.PI / 2 * 3) {
+        vBound = new Line([bounds.right, bounds.bottom], [bounds.right, bounds.top]);
+      }
+
+      if (vBound != null) {
+        var result = trajectory.intersectsWith(vBound);
+
+        if (result.intersect != null) {
+          intersectPoint = result.intersect;
+          distanceToBound = distance(position, intersectPoint);
+          xMirror = -1;
+        }
+      }
+
+      if (hBound != null) {
+        var _result = trajectory.intersectsWith(hBound);
+
+        if (_result.intersect != null) {
+          var distanceToBoundH = distance(position, _result.intersect);
+
+          if (intersectPoint == null) {
+            intersectPoint = _result.intersect;
+            distanceToBound = distanceToBoundH;
+            xMirror = 1;
+            yMirror = -1;
+          } else if (distanceToBoundH < distanceToBound) {
+            intersectPoint = _result.intersect;
+            distanceToBound = distanceToBoundH;
+            xMirror = 1;
+            yMirror = -1;
+          } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBoundH, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBound, this.precision)) {
+            xMirror = -1;
+            yMirror = -1;
+          }
+        }
+      }
+
+      if (intersectPoint == null) {
+        return {
+          position: position,
+          distance: 0,
+          direction: ang
+        };
+      } // let reflectionAngle = ang;
+
+
+      var reflection = polarToRect(1, ang);
+
+      if (xMirror === -1) {
+        reflection.x *= -1;
+      }
+
+      if (yMirror === -1) {
+        reflection.y *= -1;
+      }
+
+      return {
+        position: intersectPoint,
+        distance: intersectPoint.distance(position),
+        direction: rectToPolar(reflection).angle
+      };
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "clipVelocity",
+    value: function clipVelocity(velocity) {
+      return velocity;
+    }
+  }]);
+
+  return RectBounds;
+}(Bounds);
+
+var LineBounds = /*#__PURE__*/function (_Bounds4) {
+  _inherits(LineBounds, _Bounds4);
+
+  var _super7 = _createSuper(LineBounds);
+
+  function LineBounds(pointOrLine) {
+    var p2OrMagOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+    var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var precisionIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 8;
+
+    _classCallCheck(this, LineBounds);
+
+    var boundary;
+    var precision;
+
+    if (!(pointOrLine instanceof Line)) {
+      boundary = new Line(pointOrLine, p2OrMagOrPrecision, angle);
+      precision = precisionIn;
+    } else {
+      boundary = pointOrLine;
+      precision = p2OrMagOrPrecision;
+    }
+
+    return _super7.call(this, boundary, precision);
+  }
+
+  _createClass(LineBounds, [{
+    key: "contains",
+    value: function contains(position) {
+      if (typeof position === 'number') {
+        return false;
+      }
+
+      return position.isOnLine(this.boundary, this.precision);
+    } // containsShaddow(position: Point) {
+    //   return position.shaddowIsOnLine(this.boundary, this.precision);
+    // }
+
+  }, {
+    key: "clip",
+    value: function clip(position) {
+      if (typeof position === 'number') {
+        return position;
+      }
+
+      return position.clipToLine(this.boundary, this.precision);
+    }
+  }, {
+    key: "intersect",
+    value: function intersect(p) {
+      var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (typeof p === 'number') {
+        return {
+          p: p,
+          distance: 0,
+          direction: direction
+        };
+      }
+
+      var bounds = this.boundary;
+      var v1 = new Line(p, bounds.p1);
+      var v2 = new Line(p, bounds.p2);
+
+      if (Math.abs(v1.ang - direction) < Math.abs(v2.ang - direction)) {
+        return {
+          position: bounds.p1._dup(),
+          direction: direction + Math.PI,
+          distance: p.distance(bounds.p1)
+        };
+      }
+
+      return {
+        position: bounds.p2._dup(),
+        direction: direction + Math.PI,
+        distance: p.distance(bounds.p2)
+      };
+    }
+  }, {
+    key: "clipVelocity",
+    value: function clipVelocity(velocity) {
+      if (typeof velocity === 'number') {
+        return velocity;
+      }
+
+      var unitVector = new Vector(this.boundary).unit();
+      var projection = unitVector.dotProduct(new Vector([0, 0], velocity));
+      var ang = this.boundary.ang;
+
+      if (projection < -1) {
+        ang += Math.PI;
+        projection = -projection;
+      }
+
+      return polarToRect(projection, ang);
+    }
+  }]);
+
+  return LineBounds;
+}(Bounds);
+
+function makeBounds(bound) {
+  if (bound == null) {
+    return null;
+  }
+
+  if (typeof bound === 'number') {
+    return new ValueBounds(bound);
+  }
+
+  if (bound instanceof Rect) {
+    return new RectBounds(bound);
+  }
+
+  if (bound instanceof Line) {
+    return new LineBounds(bound);
+  }
+
+  if (bound instanceof Bounds) {
+    return bound;
+  }
+
+  return new RangeBounds(bound);
+}
+
+function transformValueToArray(transformValue, transform) {
+  if (Array.isArray(transformValue)) {
+    return transformValue;
+  }
+
+  var order = []; // debugger;
+
+  if (typeof transformValue === 'number') {
+    for (var i = 0; i < transform.order.length; i += 1) {
+      order.push(transformValue);
+    }
+
+    return order;
+  }
+
+  for (var _i4 = 0; _i4 < transform.order.length; _i4 += 1) {
+    var transformation = transform.order[_i4];
+
+    if (transformation instanceof Translation) {
+      var value = 0;
+
+      if (transformValue.position != null) {
+        value = transformValue.position;
+      }
+
+      if (transformValue.translation != null) {
+        value = transformValue.translation;
+      }
+
+      order.push(value);
+    } else if (transformation instanceof Scale) {
+      var _value = 0;
+
+      if (transformValue.scale != null) {
+        _value = transformValue.scale;
+      }
+
+      order.push(_value);
+    } else if (transformation instanceof Rotation) {
+      var _value2 = 0;
+
+      if (transformValue.rotation != null) {
+        _value2 = transformValue.rotation;
+      }
+
+      order.push(_value2);
+    }
+  }
+
+  return order;
+}
+
+var TransformBounds = /*#__PURE__*/function (_Bounds5) {
+  _inherits(TransformBounds, _Bounds5);
+
+  var _super8 = _createSuper(TransformBounds);
+
+  function TransformBounds(transform) {
+    var _this4;
+
+    var bounds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
+
+    _classCallCheck(this, TransformBounds);
+
+    // let boundary = [];
+    var order = [];
+
+    for (var i = 0; i < transform.order.length; i += 1) {
+      var transformation = transform.order[i];
+
+      if (transformation instanceof Translation) {
+        order.push('t');
+      } else if (transformation instanceof Scale) {
+        order.push('s');
+      } else {
+        order.push('r');
+      }
+    }
+
+    _this4 = _super8.call(this, [], precision);
+    _this4.order = order;
+
+    _this4.update(bounds);
+
+    return _this4;
+  }
+
+  _createClass(TransformBounds, [{
+    key: "update",
+    value: function update(boundOrBounds) {
+      var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (boundOrBounds == null || boundOrBounds instanceof Bounds) {
+        this.boundary[index] = boundOrBounds;
+        return;
+      }
+
+      if (Array.isArray(boundOrBounds)) {
+        this.boundary = boundOrBounds;
+        return;
+      }
+
+      var boundary = [];
+      this.order.forEach(function (o) {
+        var bound = null;
+
+        if (o === 't' && boundOrBounds.position != null) {
+          bound = makeBounds(boundOrBounds.position);
+        }
+
+        if (o === 't' && boundOrBounds.translation != null) {
+          bound = makeBounds(boundOrBounds.translation);
+        }
+
+        if (o === 'r' && boundOrBounds.rotation != null) {
+          bound = makeBounds(boundOrBounds.rotation);
+        }
+
+        if (o === 's' && boundOrBounds.scale != null) {
+          bound = makeBounds(boundOrBounds.scale);
+        }
+
+        boundary.push(bound);
+      });
+      this.boundary = boundary;
+    }
+  }, {
+    key: "updateBound",
+    value: function updateBound(type, bound) {
+      var typeIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      var index = 0;
+
+      for (var i = 0; i < this.order.length; i += 1) {
+        var o = this.order[i];
+
+        if (o === type && (typeIndex == null || typeIndex === index)) {
+          this.boundary[i] = makeBounds(bound);
+          index += 1;
+        }
+      }
+    }
+  }, {
+    key: "updateTranslation",
+    value: function updateTranslation(bound) {
+      var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      this.updateBound('t', bound, translationIndex);
+    }
+  }, {
+    key: "updateRotation",
+    value: function updateRotation(bound) {
+      var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      this.updateBound('r', bound, translationIndex);
+    }
+  }, {
+    key: "updateScale",
+    value: function updateScale(bound) {
+      var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      this.updateBound('s', bound, translationIndex);
+    }
+  }, {
+    key: "getBound",
+    value: function getBound(type) {
+      var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var typeIndex = 0;
+
+      for (var i = 0; i < this.order.length; i += 1) {
+        var o = this.order[i];
+
+        if (o === type) {
+          if (typeIndex === index) {
+            return this.boundary[i];
+          }
+
+          typeIndex += 1;
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: "getTranslation",
+    value: function getTranslation() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      return this.getBound('t', index);
+    }
+  }, {
+    key: "getScale",
+    value: function getScale() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      return this.getBound('s', index);
+    }
+  }, {
+    key: "getRotation",
+    value: function getRotation() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      return this.getBound('r', index);
+    }
+  }, {
+    key: "contains",
+    value: function contains(t) {
+      for (var i = 0; i < t.order.length; i += 1) {
+        var transformElement = t.order[i];
+        var b = this.boundary[i];
+
+        if (b != null && !b.contains(transformElement)) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "clip",
+    value: function clip(t) {
+      var order = [];
+
+      for (var i = 0; i < t.order.length; i += 1) {
+        var transformElement = t.order[i];
+        var b = this.boundary[i];
+
+        if (b != null) {
+          var clipped = b.clip(transformElement);
+          var newElement = void 0;
+
+          if (transformElement instanceof Translation) {
+            newElement = new Translation(clipped.x, clipped.y, transformElement.name);
+          } else if (transformElement instanceof Scale) {
+            newElement = new Scale(clipped.x, clipped.y, transformElement.name);
+          } else {
+            newElement = new Rotation(clipped, transformElement.name);
+          } // clipped.name = transformElement.name;
+
+
+          order.push(newElement);
+        } else {
+          order.push(transformElement);
+        }
+      }
+
+      return new Transform(order, t.name);
+    }
+  }]);
+
+  return TransformBounds;
+}(Bounds);
+
+function deceleratePoint(positionIn, velocityIn, deceleration) {
+  var deltaTimeIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var bounds = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var bounceLossIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
+  // clip velocity to the dimension of interest
+  var velocity = velocityIn;
+
+  if (bounds != null) {
+    velocity = bounds.clipVelocity(velocityIn);
+  }
+
+  var stopFlag = false;
+
+  if (deltaTimeIn == null) {
+    stopFlag = true;
+  } // Get the mag and angle of the velocity and check if under the zero threshold
+
 
   var _velocity$toPolar = velocity.toPolar(),
       mag = _velocity$toPolar.mag,
@@ -42092,151 +43218,244 @@ function calculateStop(position, velocity, deceleration) {
 
   if (mag <= zeroVelocityThreshold) {
     return {
-      duration: 0,
-      position: position
+      velocity: new Point(0, 0),
+      position: positionIn,
+      duration: 0
     };
-  }
+  } // Clip position in the bounds
 
-  var v0 = mag;
+
+  var position = positionIn._dup();
+
+  if (bounds != null) {
+    position = bounds.clip(positionIn);
+  } // Initial Velocity
+
+
+  var v0 = mag; // Total change in velocity to go to zero threshold
+
   var deltaV = Math.abs(v0) - zeroVelocityThreshold;
-  var timeToZeroV = Math.abs(deltaV) / deceleration;
-  var distanceTravelled = v0 * timeToZeroV - 0.5 * deceleration * Math.pow(timeToZeroV, 2);
-  var newPosition = polarToRect(distanceTravelled, angle).add(position);
+  var deltaTime = deltaTimeIn;
 
-  if (bounds == null) {
+  if (deltaTime == null || deltaTime > Math.abs(deltaV / deceleration)) {
+    deltaTime = Math.abs(deltaV / deceleration);
+  } // Calculate distance traveeled over time and so find the new Position
+
+
+  var distanceTravelled = v0 * deltaTime - 0.5 * deceleration * Math.pow(deltaTime, 2);
+  var newPosition = polarToRect(distanceTravelled, angle).add(position); // If the new position is within the bounds, then can return the result.
+
+  if (bounds == null || bounds.contains(newPosition)) {
+    if (stopFlag) {
+      return {
+        duration: deltaTime,
+        position: newPosition,
+        velocity: new Point(0, 0)
+      };
+    }
+
+    var v1 = v0 - deceleration * deltaTime;
+
+    if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(v1, precision) <= Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(zeroVelocityThreshold, precision)) {
+      v1 = 0;
+    }
+
     return {
-      duration: timeToZeroV,
-      position: newPosition
+      position: newPosition,
+      velocity: polarToRect(v1, angle),
+      duration: deltaTime
     };
-  }
+  } // if we got here, the new position is out of bounds
 
-  var inBounds = false;
-
-  if (bounds instanceof Line && newPosition.shaddowIsOnLine(bounds, precision)) {
-    inBounds = true;
-  }
-
-  if (bounds instanceof Rect && bounds.isPointInside(newPosition)) {
-    inBounds = true;
-  }
-
-  if (inBounds) {
-    return {
-      duration: timeToZeroV,
-      position: newPosition
-    };
-  }
 
   var bounceScaler = 1 - bounceLossIn;
-  var trajectory = new Line(position, 1, angle);
-  var hBound;
-  var vBound;
-  var ang = clipAngle(angle, '0to360');
-  var distanceToBound = distanceTravelled;
+  var result = bounds.intersect(position, clipAngle(angle, '0to360'));
   var intersectPoint;
-  var xMirror = 1;
-  var yMirror = 1;
 
-  if (bounds instanceof Rect) {
-    if (ang > 0 && ang < Math.PI) {
-      hBound = new Line([bounds.left, bounds.top], [bounds.right, bounds.top]);
-    } else if (ang > Math.PI) {
-      hBound = new Line([bounds.left, bounds.bottom], [bounds.right, bounds.bottom]);
-    }
-
-    if (ang > Math.PI / 2 && ang < Math.PI / 2 * 3) {
-      vBound = new Line([bounds.left, bounds.bottom], [bounds.left, bounds.top]);
-    } else if (ang >= 0 && ang < Math.PI / 2 || ang > Math.PI / 2 * 3) {
-      vBound = new Line([bounds.right, bounds.bottom], [bounds.right, bounds.top]);
-    }
-
-    if (vBound != null) {
-      var result = trajectory.intersectsWith(vBound);
-
-      if (result.intersect != null) {
-        intersectPoint = result.intersect;
-        distanceToBound = distance(position, intersectPoint);
-        xMirror = -1;
-      }
-    }
-
-    if (hBound != null) {
-      var _result = trajectory.intersectsWith(hBound);
-
-      if (_result.intersect != null) {
-        var distanceToBoundH = distance(position, _result.intersect);
-
-        if (intersectPoint == null) {
-          intersectPoint = _result.intersect;
-          distanceToBound = distanceToBoundH;
-          xMirror = 1;
-          yMirror = -1;
-        } else if (distanceToBoundH < distanceToBound) {
-          intersectPoint = _result.intersect;
-          distanceToBound = distanceToBoundH;
-          xMirror = 1;
-          yMirror = -1;
-        } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBoundH, precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBound, precision)) {
-          xMirror = -1;
-          yMirror = -1;
-        }
-      }
-    }
-  }
-
-  if (bounds instanceof Line) {
-    xMirror = -1;
-    yMirror = -1;
-    var distanceToP1 = distance(newPosition, bounds.p1);
-    var distanceToP2 = distance(newPosition, bounds.p2);
-    var boundPoint;
-
-    if (distanceToP1 > distanceToP2) {
-      boundPoint = bounds.p2._dup();
-    } else {
-      boundPoint = bounds.p1._dup();
-    } // calculate distance to bound
+  if (typeof result.position === 'number') {
+    intersectPoint = new Point(result.position, 0);
+  } else {
+    intersectPoint = result.position;
+  } // const intersectPoint = result.position;
 
 
-    var boundPerpendicular = new Line(boundPoint, 1, bounds.ang + Math.PI / 2);
-    intersectPoint = boundPerpendicular.intersectsWith(trajectory).intersect;
-
-    if (intersectPoint != null) {
-      distanceToBound = distance(position, intersectPoint);
-    } // distanceToBound = distance(position.getShaddowOnLine(bounds), intersectPoint);
-
-  }
-
-  if (intersectPoint == null) {
-    return {
-      duration: timeToZeroV,
-      position: newPosition
-    };
-  } // const v0 = mag;
-
+  var distanceToBound = result.distance;
+  var reflectionAngle = result.direction; // if (intersectPoint == null) {
+  //   return {
+  //     duration: timeToZeroV,
+  //     position: newPosition,
+  //   };
+  // }
+  // Calculate the time to the intersect point
 
   var acc = -v0 / Math.abs(v0) * deceleration;
   var s = distanceToBound;
   var b = v0;
   var a = 0.5 * acc;
   var c = -s;
-  var t = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a);
+  var t = (-b + Math.sqrt(Math.pow(b, 2) - 4 * a * c)) / (2 * a); // If there is no bounce (all energy is lost) then return the result
+
+  if (bounceLossIn === 1) {
+    return {
+      velocity: new Point(0, 0),
+      position: intersectPoint,
+      duration: t
+    };
+  }
+
   var velocityAtIntersect = v0 + acc * t; // (s - 0.5 * a * (t ** 2)) / t;
 
   var bounceVelocity = velocityAtIntersect * bounceScaler;
-  var rectBounceVelocity = new Point(bounceVelocity * Math.cos(angle) * xMirror, bounceVelocity * Math.sin(angle) * yMirror);
-  var newStop = calculateStop(intersectPoint, rectBounceVelocity, deceleration, bounds, bounceLossIn, zeroVelocityThreshold, precision);
+  var rectBounceVelocity = new Point(bounceVelocity * Math.cos(reflectionAngle), bounceVelocity * Math.sin(reflectionAngle));
+
+  if (stopFlag) {
+    var newStop = deceleratePoint(intersectPoint, rectBounceVelocity, deceleration, deltaTimeIn, bounds, bounceLossIn, zeroVelocityThreshold, precision);
+    return {
+      duration: t + newStop.duration,
+      position: newStop.position,
+      velocity: new Point(0, 0)
+    };
+  }
+
+  return deceleratePoint(intersectPoint, rectBounceVelocity, deceleration, deltaTime - t, bounds, bounceLossIn, zeroVelocityThreshold, precision);
+}
+
+function decelerateValue(value, velocity, deceleration) {
+  var deltaTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var boundsIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var bounceLoss = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
+  var bounds = boundsIn;
+
+  if (boundsIn != null) {
+    // let { min, max } = boundsIn.boundary;
+    // if (min == null) {
+    // }
+    bounds = new LineBounds([boundsIn.boundary.min, 0], [boundsIn.boundary.max, 0]);
+  }
+
+  var result = deceleratePoint(new Point(value, 0), new Point(velocity, 0), deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold, precision);
   return {
-    duration: t + newStop.duration,
-    position: newStop.position
+    duration: result.duration,
+    value: result.position.x,
+    velocity: result.velocity.x
   };
 }
 
-function calculateStopAngle(angle, velocity, deceleration, bounds) {
-  var bounceLossIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-  var zeroVelocityThreshold = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-  var precision = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 8;
-  return calculateStop(new Point(angle, 0), new Point(angle, 0), deceleration, new Rect(bounds[0], -1, bounds[1] - bounds[0], 2), bounceLossIn, zeroVelocityThreshold, precision);
+function decelerateIndependantPoint(value, velocity, deceleration) {
+  var deltaTime = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var boundsIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var bounceLoss = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+  var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+  var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
+  var xBounds = null;
+  var yBounds = null;
+
+  if (boundsIn != null) {
+    xBounds = new RangeBounds(boundsIn.boundary.left, boundsIn.boundary.right);
+    yBounds = new RangeBounds(boundsIn.boundary.bottom, boundsIn.boundary.top);
+  }
+
+  var xResult = decelerateValue(value.x, velocity.x, deceleration, deltaTime, xBounds, bounceLoss, zeroVelocityThreshold, precision);
+  var yResult = decelerateValue(value.y, velocity.y, deceleration, deltaTime, yBounds, bounceLoss, zeroVelocityThreshold, precision);
+  return {
+    duration: Math.max(xResult.duration, yResult.duration),
+    point: new Point(xResult.value, yResult.value),
+    velocity: new Point(xResult.velocity, yResult.velocity)
+  };
+}
+
+function getTransformBoundsLimit(boundsDefinition, transform) {
+  if (Array.isArray(boundsDefinition)) {
+    return boundsDefinition;
+  }
+
+  var order = [];
+
+  for (var i = 0; i < transform.order.length; i += 1) {
+    var transformation = transform.order[i];
+
+    if (transformation instanceof Translation) {
+      var position = null;
+
+      if (boundsDefinition.position != null) {
+        position = boundsDefinition.position;
+      }
+
+      if (boundsDefinition.translation != null) {
+        position = boundsDefinition.translation;
+      }
+
+      order.push(position);
+    } else if (transformation instanceof Scale) {
+      var scale = null;
+
+      if (boundsDefinition.scale != null) {
+        scale = boundsDefinition.scale;
+      }
+
+      order.push(scale);
+    } else if (transformation instanceof Rotation) {
+      var rotation = null;
+
+      if (boundsDefinition.rotation != null) {
+        rotation = boundsDefinition.rotation;
+      }
+
+      order.push(rotation);
+    }
+  }
+
+  return order;
+}
+
+function decelerateTransform(transform, velocity, deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold) {
+  var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
+  var duration = 0;
+  var newOrder = [];
+  var newVOrder = [];
+
+  for (var i = 0; i < transform.order.length; i += 1) {
+    var transformation = transform.order[i];
+    var result = void 0;
+    var newTransformation = void 0;
+    var newVTransformation = void 0;
+
+    if (transformation instanceof Translation) {
+      result = deceleratePoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      newTransformation = new Translation(result.position.x, result.position.y);
+      newVTransformation = new Translation(result.velocity.x, result.velocity.y);
+    } else if (transformation instanceof Scale) {
+      result = decelerateIndependantPoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      newTransformation = new Scale(result.point.x, result.point.y);
+      newVTransformation = new Scale(result.velocity.x, result.velocity.y);
+    } else {
+      result = decelerateValue(transformation.r, velocity.order[i].r, deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      newTransformation = new Rotation(result.value);
+      newVTransformation = new Rotation(result.velocity);
+    }
+
+    if (deltaTime === null) {
+      if (result.duration > duration) {
+        var _result2 = result;
+        duration = _result2.duration;
+      }
+    }
+
+    newVOrder.push(newVTransformation);
+    newOrder.push(newTransformation);
+  }
+
+  if (deltaTime != null) {
+    duration = deltaTime;
+  }
+
+  return {
+    transform: new Transform(newOrder),
+    velocity: new Transform(newVOrder),
+    duration: duration
+  };
 }
 
 
@@ -43075,7 +44294,7 @@ function inverse(m) {
 /*!******************************!*\
   !*** ./src/js/tools/math.js ***!
   \******************************/
-/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
+/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, triangle, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43088,6 +44307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easein", function() { return easein; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sinusoid", function() { return sinusoid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "linear", function() { return linear; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "triangle", function() { return triangle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipMag", function() { return clipMag; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipValue", function() { return clipValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "range", function() { return range; });
@@ -43331,6 +44551,15 @@ var linear = function linear(percentTime) {
 
   return percentTime;
 };
+
+function triangle() {
+  var deltaTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var frequency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var bias = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var mag = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+  var phaseOffset = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  return bias + 2 * mag / Math.PI * Math.asin(Math.sin(2 * Math.PI * frequency * deltaTime + phaseOffset)); // return bias + mag * Math.sin(deltaTime * frequency * 2.0 * Math.PI + phaseOffset);
+}
 
 var easeinout = function easeinout(percentTime) {
   var invert = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -44736,12 +45965,29 @@ var Subscriber = /*#__PURE__*/function () {
         //   callback(payload);
         // }
 
-        this.fnMap.exec(callback, payload);
-
         if (num === 1) {
           subscribersToRemove.push(_id);
-        } else if (num > 1) {
+        }
+
+        var triggerOk = false;
+
+        if (num !== 0) {
+          triggerOk = true; // subscribersToRemove.push(id);
+        }
+
+        if (num > 0) {
           this.subscribers["".concat(_id)].num = num - 1;
+        } // if (num > 0) {
+        // }
+        // else if (num > 1) {
+        //   triggerOk = true;
+        //   this.subscribers[`${id}`].num = num - 1;
+        // }
+        // if (this.subscribers[`${id}`].num > 0) {
+
+
+        if (triggerOk) {
+          this.fnMap.exec(callback, payload);
         }
       }
 

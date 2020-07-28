@@ -371,7 +371,7 @@ var FunctionMap = /*#__PURE__*/function (_GeneralFunctionMap2) {
 /*!******************************!*\
   !*** ./src/js/tools/math.js ***!
   \******************************/
-/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
+/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, triangle, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -384,6 +384,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "easein", function() { return easein; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sinusoid", function() { return sinusoid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "linear", function() { return linear; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "triangle", function() { return triangle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipMag", function() { return clipMag; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipValue", function() { return clipValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "range", function() { return range; });
@@ -627,6 +628,15 @@ var linear = function linear(percentTime) {
 
   return percentTime;
 };
+
+function triangle() {
+  var deltaTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var frequency = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var bias = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  var mag = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+  var phaseOffset = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+  return bias + 2 * mag / Math.PI * Math.asin(Math.sin(2 * Math.PI * frequency * deltaTime + phaseOffset)); // return bias + mag * Math.sin(deltaTime * frequency * 2.0 * Math.PI + phaseOffset);
+}
 
 var easeinout = function easeinout(percentTime) {
   var invert = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -2007,12 +2017,29 @@ var Subscriber = /*#__PURE__*/function () {
         //   callback(payload);
         // }
 
-        this.fnMap.exec(callback, payload);
-
         if (num === 1) {
           subscribersToRemove.push(_id);
-        } else if (num > 1) {
+        }
+
+        var triggerOk = false;
+
+        if (num !== 0) {
+          triggerOk = true; // subscribersToRemove.push(id);
+        }
+
+        if (num > 0) {
           this.subscribers["".concat(_id)].num = num - 1;
+        } // if (num > 0) {
+        // }
+        // else if (num > 1) {
+        //   triggerOk = true;
+        //   this.subscribers[`${id}`].num = num - 1;
+        // }
+        // if (this.subscribers[`${id}`].num > 0) {
+
+
+        if (triggerOk) {
+          this.fnMap.exec(callback, payload);
         }
       }
 
@@ -2117,4 +2144,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=2d48374e5c3d3e47aadd.worker.js.map
+//# sourceMappingURL=5fada4f413e2356931b3.worker.js.map

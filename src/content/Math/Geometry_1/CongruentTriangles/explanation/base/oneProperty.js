@@ -70,7 +70,7 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
     if (p.y > 0.6) {
       target[1] = p.y - y;
     }
-    this._sideTri._pad0.stop(true, 'noComplete');
+    this._sideTri._pad0.stop('freeze');
     this._sideTri._pad0.animations.new()
       .position({ target, duration: 0.8 })
       .start();
@@ -97,8 +97,8 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
     // const pad = randElement([this._angleTri._pad0, this._angleTri._pad1]);
     const target0 = this._angleTri._pad0.move.limitLine.pointAtPercent(rand(0, 1));
     const target1 = this._angleTri._pad1.move.limitLine.pointAtPercent(rand(0, 1));
-    this._angleTri._pad0.cancel('noComplete');
-    this._angleTri._pad1.cancel('noComplete');
+    this._angleTri._pad0.cancel('freeze');
+    this._angleTri._pad1.cancel('freeze');
     this._angleTri._pad0.animations.new()
       .position({ target: target0, duration: 0.8 })
       .start();

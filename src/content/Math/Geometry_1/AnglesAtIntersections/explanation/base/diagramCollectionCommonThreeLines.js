@@ -104,7 +104,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
 
   newPageRotation(angle: ?number, line3Angle: ?number, done: ?() => void = null) {
     if (angle != null || line3Angle != null) {
-      this._fig.stop(true, 'noComplete');
+      this._fig.stop('freeze');
       this._fig.animations.new()
         .inParallel([
           this._fig.anim.rotation({ target: angle, velocity: 1.5 }),
@@ -399,7 +399,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     if (p1.y > 0) {
       target = p1.sub(0, newY);
     }
-    this._fig._line1.stop(true, 'noComplete');
+    this._fig._line1.stop('freeze');
     this._fig._line1.animations.new()
       .position({ target, duration: 0.7 })
       .whenFinished(done)
@@ -420,7 +420,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
       angle += Math.PI / 2 - Math.PI / 3.7;
     }
     // const angle = rand(Math.PI / 3.7, Math.PI - Math.PI / 3.7);
-    this._fig.stop(true, 'noComplete');
+    this._fig.stop('freeze');
     // this._fig.animations.new()
     //   .rotation({ target: r, duration: 0.8 })
     //   .start();

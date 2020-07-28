@@ -96,8 +96,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   scaleLine(length: number) {
-    this._line1.stop(true, 'noComplete');
-    this._line2.stop(true, 'noComplete');
+    this._line1.stop('freeze');
+    this._line2.stop('freeze');
     const l1 = this._line1.length;
     const l2 = this._line1.length;
     this.hasTouchableElements = false;

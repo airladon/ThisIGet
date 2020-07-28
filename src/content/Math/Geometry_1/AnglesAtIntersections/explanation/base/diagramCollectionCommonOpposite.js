@@ -49,7 +49,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     const r1 = line1.getRotation();
     const r2 = line2.getRotation();
     const minAngle = minAngleDiff(r2, r1);
-    this._fig.stop(true, 'noComplete');
+    this._fig.stop('freeze');
     if (Math.abs(minAngle) < 0.3 || Math.abs(minAngle) > 2.8) {
       line2.animations.new()
         .rotation({ target: 1, duration: 0.5 })
@@ -198,7 +198,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     const r1 = line1.getRotation();
     const nextR1 = r1 + rand(0.5, 1, true);
     const nextR2 = nextR1 + rand(0.3, 2, true);
-    this._fig.stop(true, 'noComplete');
+    this._fig.stop('freeze');
     line1.animations.new()
       .rotation({ target: nextR1, duration: 0.8 })
       .start();
