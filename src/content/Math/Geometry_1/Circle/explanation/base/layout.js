@@ -430,6 +430,13 @@ export default function diagramLayout() {
         right: { position: new Point(1.5, 0.2), scale: 1 },
       },
       hasTouchableElements: true,
+      move: {
+        freely: {
+          bounceLoss: 0.5,
+          deceleration: 1,
+          zeroVelocityThreshold: 0.000001,
+        },
+      },
     },
     addElements: [
       layout.scalingCircle,

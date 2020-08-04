@@ -74,7 +74,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     }
     // console.log(r, delta * 180 / Math.PI, target * 180 / Math.PI)
-    this._angle._line1.stop(true, false);
+    this._angle._line1.stop('cancel');
     this._angle._line1.animations.new()
       .rotation({ target, duration: 1 })
       .start();

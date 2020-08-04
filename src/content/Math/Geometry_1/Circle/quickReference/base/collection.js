@@ -88,7 +88,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     if (toAngle != null) {
       target = toAngle;
     }
-    this.stop(true, false);
+    this.stop('cancel');
     this._circle._radius.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();
@@ -106,7 +106,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     if (toAngle != null) {
       target = toAngle;
     }
-    this.stop(true, false);
+    this.stop('cancel');
     this._circle._diameter.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();

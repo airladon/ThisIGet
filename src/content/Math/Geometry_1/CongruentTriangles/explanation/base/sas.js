@@ -209,7 +209,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
 
   createCongruentTriangles(callback: ?() => void = null, stop: boolean = false) {
     if (stop) {
-      this.stop(true, 'complete');
+      this.stop('complete');
     }
     this.configColors(this.layout.colors.sides, this.layout.colors.angles);
     this._config2.showAll();

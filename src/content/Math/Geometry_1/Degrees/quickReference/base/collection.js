@@ -92,7 +92,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (toAngle != null
       && round(toAngle, 5) === round(this._circle._line1.getRotation('0to360'), 5)
       && this._circle._angle.isShown === true) {
-      this._circle._line1.stop(true, false);
+      this._circle._line1.stop('cancel');
       this._circle._angle.pulseScaleNow(1, 1.3);
       this.diagram.animateNextFrame();
       if (whenFinished != null) {
@@ -103,7 +103,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (toAngle == null) {
       r = rand(Math.PI / 2) + Math.PI / 2 + this._circle._line1.getRotation('0to360');
     }
-    this._circle._line1.stop(true, false);
+    this._circle._line1.stop('cancel');
     this._circle._line1.animations.new()
       .rotation({ target: r, duration, direction })
       .whenFinished(whenFinished)

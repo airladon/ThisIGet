@@ -9,7 +9,7 @@ const {
   DiagramElementCollection,
   Equation,
   // DiagramObjectAngle,
-  Transform, Point,
+  Transform, Point, Rect,
 } = Fig;
 
 const { spaceToSpaceTransform } = Fig.tools.g2;
@@ -199,7 +199,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     if (toAngle != null) {
       target = toAngle;
     }
-    this.stop(true, false);
+    this.stop('cancel');
     this._circle._radius.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();
@@ -217,7 +217,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     if (toAngle != null) {
       target = toAngle;
     }
-    this.stop(true, false);
+    this.stop('cancel');
     this._circle._diameter.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();
@@ -226,6 +226,8 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
 
   pulseCenter() {
     this._circle._center.pulseScaleNow(1, 2);
+    // console.log(this._circle._center.state)
+    // this._circle._center.pulse({ scale: 2, duration: 1 });
     this.diagram.animateNextFrame();
   }
 
@@ -290,7 +292,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   //   eqn._r.show();
   //   eqn._d.setPosition(eqn._diameter.getPosition());
   //   eqn._r.setPosition(eqn._radius.getPosition());
-  //   eqn.stop(true, true);
+  //   eqn.stop('complete');
   //   eqn.animateToForm('d');
   //   this.diagram.animateNextFrame();
   // }
@@ -298,7 +300,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   // diameterEquationOriginal() {
   //   const eqn = this._eqnDiameterRadius;
   //   eqn.showForm('d');
-  //   eqn.stop(true, true);
+  //   eqn.stop('complete');
   //   eqn.animateToForm('diameter');
   //   this.diagram.animateNextFrame();
   // }
@@ -382,18 +384,28 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
     const { radius } = this.layout.circleLine.options;
     const scale = this._circle.getScale().x;
-    this._circle.move.maxTransform.updateTranslation(
-      location.x + width - Math.max(radius * scale, minWidth / 2),
-      location.y + height - radius * scale,
-    );
-    this._circle.move.minTransform.updateTranslation(
-      location.x + Math.max(radius * scale, minWidth / 2),
-      location.y + radius * scale,
-    );
+    const left = location.x + Math.max(radius * scale, minWidth / 2);
+    const bottom = location.y + radius * scale;
+    const right = location.x + width - Math.max(radius * scale, minWidth / 2);
+    const top = location.y + height - radius * scale;
+    this._circle.move.bounds.updateTranslation({
+      left,
+      bottom,
+      right,
+      top,
+    });
+    // this._circle.move.maxTransform.updateTranslation(
+    //   location.x + width - Math.max(radius * scale, minWidth / 2),
+    //   location.y + height - radius * scale,
+    // );
+    // this._circle.move.minTransform.updateTranslation(
+    //   location.x + Math.max(radius * scale, minWidth / 2),
+    //   location.y + radius * scale,
+    // );
   }
 
   straightenCircumference(duration: number = 4, done: ?() => void = null) {
-    this._circle._circumference.stop(true, false);
+    this._circle._circumference.stop('cancel');
     if (this.straightening || this.percentStraight === 1) {
       this.straightening = false;
       this._circle._circumference.animations.new()
@@ -436,18 +448,18 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       && (d < 0.1 || d > Math.PI * 1.9)
     ) {
       if (animate) {
-        this._circle._radius.stop(true, false);
+        this._circle._radius.stop('cancel');
         this._circle._radius.animations.new()
           .rotation({ target: 0.5, duration: 1 })
           .whenFinished(whenFinished)
           .start();
-        this._circle._diameter.stop(true, false);
+        this._circle._diameter.stop('cancel');
         this._circle._diameter.animations.new()
           .rotation({ target: 0, duration: 1 })
           .start();
       } else {
-        this._circle._radius.stop(true, false);
-        this._circle._diameter.stop(true, false);
+        this._circle._radius.stop('cancel');
+        this._circle._diameter.stop('cancel');
         this._circle._radius.setRotation(0.5);
         this._circle._diameter.setRotation(0);
         if (whenFinished != null) {
@@ -461,9 +473,9 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   }
 
   diameterToCicumferenceComparison(done: ?() => void = null) {
-    this.stop(true, true);
+    this.stop('complete');
     this._diameterLines.hideAll();
-    // this._circle.stop(true, false);
+    // this._circle.stop('cancel');
     this.straighten(0);
     this.straightening = false;
     this.diameterLinesAppear(done);

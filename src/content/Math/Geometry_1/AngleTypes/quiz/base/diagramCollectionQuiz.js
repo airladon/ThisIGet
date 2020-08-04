@@ -55,8 +55,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   goToAngle(
     start: number, angle: number, direction: number, whenFinished: () => void,
   ) {
-    this._main._fig.stop(true, false);
-    this._main._fig._line1.stop(true, false);
+    this._main._fig.stop('cancel');
+    this._main._fig._line1.stop('cancel');
     // const r = this._main._fig._line1.getRotation('0to360');
     this._main._fig.animations.new()
       .rotation({ target: start, duration: 1, direction })
@@ -70,8 +70,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
-    this._main._fig.stop(true, false);
-    this._main._fig._line1.stop(true, false);
+    this._main._fig.stop('cancel');
+    this._main._fig._line1.stop('cancel');
     this._main._fig._acute.hide();
     this._main._fig._obtuse.hide();
     this._main._fig._reflex.hide();

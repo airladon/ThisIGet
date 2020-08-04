@@ -66,7 +66,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   goToAngle(angle: number, whenFinished: ?() => void) {
-    this._fig._line1.stop(true, false);
+    this._fig._line1.stop('cancel');
     const r = this._fig._line1.getRotation('0to360');
     if (round(angle, 4) === round(r, 4)) {
       this._fig._angle.pulseScaleNow(1, 1.2);
@@ -96,7 +96,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   updateOff(angle: TypeAngles) {
-    this._fig._line1.stop(true, false);
+    this._fig._line1.stop('cancel');
     this.lastAngle = this.currentAngle;
     this.currentAngle = angle;
     this.updateFills();

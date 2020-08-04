@@ -513,7 +513,7 @@ class PresentationFormat extends SimpleFormat {
   stopDiagrams() {
     const { diagram } = this;
     if (diagram) {
-      diagram.stop(true, true);
+      diagram.stop('complete');
     }
   }
 
@@ -532,7 +532,7 @@ class PresentationFormat extends SimpleFormat {
     if (diagram) {
       diagram.inTransition = false;
       // console.log('stopping')
-      diagram.stop(true, true);
+      diagram.stop('complete');
     }
     this.inTransition = false;
   }

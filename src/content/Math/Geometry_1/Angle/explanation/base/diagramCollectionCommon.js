@@ -89,7 +89,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   push() {
     const r = this._angle._line1.getRotation('0to360');
-    this._angle._line1.stop(true, false);
+    this._angle._line1.stop('cancel');
     this._angle._line1.animations.new()
       .rotation({ target: r + 1, duration: 1 })
       .start();
@@ -168,7 +168,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     }
     // console.log(r, delta * 180 / Math.PI, target * 180 / Math.PI)
-    this._angle._line1.stop(true, false);
+    this._angle._line1.stop('cancel');
     this._angle._line1.animations.new()
       .rotation({ target, duration: 1 })
       .start();
@@ -197,7 +197,7 @@ export default class CommonCollection extends CommonDiagramCollection {
           angleElement.pulseScaleNow(1, 1.3);
         }
       } else {
-        angleElement.stop(true, true);
+        angleElement.stop('complete');
         angleElement.hide();
       }
     }

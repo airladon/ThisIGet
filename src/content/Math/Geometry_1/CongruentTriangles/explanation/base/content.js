@@ -126,7 +126,7 @@ class Content extends PresentationFormatContent {
         }
       },
       setLeaveState: () => {
-        congruent._tri2.stop(true, 'complete');
+        congruent._tri2.stop('complete');
         coll.resetTriangle();
       },
     });

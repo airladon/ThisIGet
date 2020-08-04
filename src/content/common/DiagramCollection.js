@@ -311,7 +311,10 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
           element.highlight();
         }
         if (style.includes('pulse')) {
-          element.pulse(options);
+          console.log('here', options)
+          // element.pulse(options);
+          element.pulseScaleNow(2, 2);
+          console.log(element)
           doneToUse = null;
         }
       } else {

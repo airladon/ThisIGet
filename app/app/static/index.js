@@ -216,7 +216,7 @@ var Fig = {
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
   Rect: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"],
   Transform: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"],
-  TransformLimit: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"],
+  // TransformLimit: g2.TransformLimit,
   Translation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"],
   Scale: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"],
   Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"],
@@ -22903,7 +22903,12 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         var h = Math.abs(this.currentLength / 2 * Math.sin(r));
 
         if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
-          this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"](bounds.left + w, bounds.bottom + h, bounds.right - w - (bounds.left + w), bounds.top - h - (bounds.bottom + h)));
+          this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+            left: bounds.left + w,
+            bottom: bounds.bottom + h,
+            right: bounds.right - w - (bounds.left + w),
+            top: bounds.top - h - (bounds.bottom + h)
+          }));
         } // this.move.maxTransform.updateTranslation(
         //   bounds.right - w,
         //   bounds.top - h,
@@ -23249,9 +23254,9 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         this.stop();
       }
 
-      this.animateToOptions = {
+      this.animateLengthToOptions = {
         initialLength: this.currentLength,
-        delaLength: toLength - this.currentLength,
+        deltaLength: toLength - this.currentLength,
         callback: callback,
         onStepCallback: onStepCallback,
         finishOnCancel: finishOnCancel
@@ -23371,21 +23376,13 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23643,27 +23640,76 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
             padShape.increaseBorderSize(multiplier);
           }
 
+          var delta = 0;
+
+          if (padArray[i].touchRadiusInBoundary === true && padArray[i].touchRadius != null) {
+            delta = padArray[i].touchRadius - padArray[i].radius;
+          }
+
+          var radius = padArray[i].radius;
           var boundary = padArray[i].boundary; // console.log(boundary, padArray[i])
 
           if (boundary === 'diagram') {
             boundary = shapes.limits._dup();
-          } else if (Array.isArray(boundary)) {
-            var _boundary = boundary,
-                _boundary2 = _slicedToArray(_boundary, 4),
-                left = _boundary2[0],
-                bottom = _boundary2[1],
-                width = _boundary2[2],
-                height = _boundary2[3];
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+              left: shapes.limits.left + radius + delta,
+              bottom: shapes.limits.bottom + radius + delta,
+              right: shapes.limits.right - radius - delta,
+              top: shapes.limits.top - radius - delta
+            });
+          } else if (Array.isArray(boundary) && boundary.length === 4) {
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+              left: boundary[0] + radius + delta,
+              bottom: boundary[1] + radius + delta,
+              right: boundary[2] - radius - delta,
+              top: boundary[3] - radius - delta
+            });
+          } else if (!(boundary instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Bounds"])) {
+            boundary = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBounds"])(boundary);
 
-            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
-          }
+            if (boundary instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RangeBounds"]) {
+              boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+                left: boundary.boundary.min + radius + delta,
+                right: boundary.boundary.max - radius - delta,
+                bottom: boundary.boundary.min + radius + delta,
+                top: boundary.boundary.max - radius - delta
+              });
+            } else if (!(boundary instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"])) {
+              boundary = null;
+            }
+          } // } Array.isArray(boundary)) {
+          //   const [left, bottom, width, height] = boundary;
+          //   boundary = new Rect(left, bottom, width, height);
+          // }
+          // debugger;
+          // if (padArray[i].touchRadiusInBoundary === false && padArray[i].touchRadius != null) {
+          //   const delta = padArray[i].touchRadius - padArray[i].radius;
+          //   if (boundary instanceof RectBounds) {
+          //     if (boundary.boundary.left != null) {
+          //       boundary.boundary.left -= delta;
+          //     }
+          //     if (boundary.boundary.bottom != null) {
+          //       boundary.boundary.bottom -= delta;
+          //     }
+          //     if (boundary.boundary.right != null) {
+          //       boundary.boundary.right += delta;
+          //     }
+          //     if (boundary.boundary.top != null) {
+          //       boundary.boundary.top += delta;
+          //     }
+          //   }
+          // boundary = new Rect(
+          //   boundary.left - delta,
+          //   boundary.bottom - delta,
+          //   boundary.width + 2 * delta,
+          //   boundary.height + 2 * delta,
+          // );
+          // }
 
-          if (padArray[i].touchRadiusInBoundary === false && padArray[i].touchRadius != null) {
-            var delta = padArray[i].touchRadius - padArray[i].radius;
-            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundary.left - delta, boundary.bottom - delta, boundary.width + 2 * delta, boundary.height + 2 * delta);
-          }
 
-          padShape.setMoveBounds(boundary);
+          padShape.setMoveBounds({
+            translation: boundary
+          });
           var fnName = "_polyline_pad".concat(i);
 
           _this.fnMap.add(fnName, function (transform) {
@@ -27021,13 +27067,13 @@ function joinLinesAcuteInside(mid, midNext, inside, insideNext) {
 function joinLinesObtuseInside(mid, midNext, inside, insideNext) {
   var intercept = inside.intersectsWith(midNext);
 
-  if (intercept.intersect != null && intercept.intersect.isOnLine(midNext, 8)) {
+  if (intercept.intersect != null && intercept.intersect.isWithinLine(midNext, 8)) {
     inside.setP2(intercept.intersect);
   }
 
   intercept = insideNext.intersectsWith(mid);
 
-  if (intercept.intersect != null && intercept.intersect.isOnLine(mid, 8)) {
+  if (intercept.intersect != null && intercept.intersect.isWithinLine(mid, 8)) {
     insideNext.setP1(intercept.intersect);
   }
 }
@@ -30558,10 +30604,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
 function _toArray(arr) { return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -31249,7 +31291,39 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "setProperties",
     value: function setProperties(properties) {
-      var except = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var exceptIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var except = exceptIn;
+
+      if (properties.move != null) {
+        if (properties.move.bounds != null && properties.move.bounds !== 'diagram') {
+          if (typeof except === 'string') {
+            except = [except, 'move.bounds'];
+          } else {
+            except.push('move.bounds');
+          }
+
+          var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBounds"])(properties.move.bounds, 'transform', this.transform);
+
+          if (bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+            for (var i = 0; i < bounds.boundary.length; i += 1) {
+              var bound = bounds.boundary[i];
+              var order = bounds.order[i];
+
+              if (bounds.boundary[i] != null && bound instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RangeBounds"] && (order === 't' || order === 's')) {
+                bounds.boundary[i] = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+                  left: bound.boundary.min,
+                  bottom: bound.boundary.min,
+                  right: bound.boundary.max,
+                  top: bound.boundary.max
+                });
+              }
+            }
+
+            this.move.bounds = bounds;
+          }
+        }
+      }
+
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjectsWithOptions"])({
         except: except
       }, this, properties);
@@ -31832,9 +31906,7 @@ var DiagramElement = /*#__PURE__*/function () {
           debugger;
         }
 
-        if (!(this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"])) {
-          this.setMoveBounds();
-        }
+        this.checkMoveBounds();
 
         if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
           this.transform = this.move.bounds.clip(transform); // if (this.name === 'c') {
@@ -32145,19 +32217,19 @@ var DiagramElement = /*#__PURE__*/function () {
 
   }, {
     key: "decelerate",
-    value: function decelerate(deltaTime) {
-      var bounds;
-
-      if (!this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
-        this.setMoveBounds();
-      }
-
-      if (!this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
-        bounds = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform);
-      } else {
-        bounds = this.move.bounds;
-      }
-
+    value: function decelerate() {
+      var deltaTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      // let bounds;
+      // if (!this.move.bounds instanceof TransformBounds) {
+      //   this.setMoveBounds();
+      // }
+      // if (!this.move.bounds instanceof TransformBounds) {
+      //   bounds = new TransformBounds(this.transform);
+      // } else {
+      //   ({ bounds } = this.move);
+      // }
+      this.checkMoveBounds();
+      var bounds = this.move.bounds;
       var next = this.transform.decelerate(this.state.movement.velocity, this.move.freely.deceleration, deltaTime, bounds, this.move.freely.bounceLoss, this.move.freely.zeroVelocityThreshold);
       return {
         velocity: next.velocity,
@@ -32605,7 +32677,8 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function startPulsing() {
       var when = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'nextFrame';
       this.state.isPulsing = true;
-      this.state.pulse.startTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().getWhen(when) / 1000;
+      var time = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().getWhen(when);
+      this.state.pulse.startTime = time == null ? time : time / 1000;
       this.unrender();
       this.frozenPulseTransforms = [];
     }
@@ -33148,49 +33221,115 @@ var DiagramElement = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "checkMoveBounds",
+    value: function checkMoveBounds() {
+      if (this.move.bounds === 'diagram') {
+        this.setMoveBounds('diagram', true);
+        return;
+      }
+
+      if (!(this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"])) {
+        this.setMoveBounds();
+      } // if (!(this.move.bounds instanceof TransformBounds)) {
+      //   bounds = new TransformBounds(this.transform);
+      // } else {
+      //   ({ bounds } = this.move);
+      // }
+
+    }
+  }, {
     key: "setMoveBounds",
     value: function setMoveBounds() {
       var boundaryIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var includeSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (!this.isMovable) {
         return;
       }
 
-      var boundary = boundaryIn;
-
-      if (boundaryIn == null) {
-        if (this.move.bounds === 'diagram' || Array.isArray(this.move.bounds) || this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"]) {
-          boundary = this.move.bounds;
+      if (boundaryIn instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+        this.move.bounds = boundaryIn; // return;
+      } else if (boundaryIn === null) {
+        this.move.bounds = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform); // return;
+      } else if (boundaryIn === 'diagram') {
+        if (!(this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"])) {
           this.move.bounds = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"](this.transform);
-        } else {
-          this.move.bounds.updateTranslation(null);
-          return;
+        }
+
+        this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
+          left: this.diagramLimits.left,
+          bottom: this.diagramLimits.bottom,
+          right: this.diagramLimits.right,
+          top: this.diagramLimits.top
+        })); // const rect = this.getRelativeBoundingRect('diagram');
+        // this.move.bounds.updateTranslation(new RectBounds({
+        //   left: this.diagramLimits.left - rect.left,
+        //   bottom: this.diagramLimits.bottom - rect.bottom,
+        //   right: this.diagramLimits.right - rect.right,
+        //   top: this.diagramLimits.top - rect.top,
+        // }));
+        // return;
+      } else {
+        var bounds = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBounds"])(boundaryIn, 'transform', this.transform);
+
+        if (bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
+          this.move.bounds = bounds;
         }
       }
 
-      if (boundary == null) {
-        return;
-      }
+      if (includeSize) {
+        var rect = this.getRelativeBoundingRect('diagram');
+        var b = this.move.bounds.getTranslation();
 
-      if (Array.isArray(boundary)) {
-        var _boundary = boundary,
-            _boundary2 = _slicedToArray(_boundary, 4),
-            left = _boundary2[0],
-            bottom = _boundary2[1],
-            width = _boundary2[2],
-            height = _boundary2[3];
+        if (b != null) {
+          b.boundary.left -= rect.left;
+          b.boundary.bottom -= rect.bottom;
+          b.boundary.right -= rect.right;
+          b.boundary.top -= rect.top;
+          this.move.bounds.updateTranslation(b);
+        } // this.move.bounds.updateTranslation(new RectBounds({
+        //   left: this.diagramLimits.left - rect.left,
+        //   bottom: this.diagramLimits.bottom - rect.bottom,
+        //   right: this.diagramLimits.right - rect.right,
+        //   top: this.diagramLimits.top - rect.top,
+        // }));
 
-        boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
-      } else if (boundary === 'diagram') {
-        boundary = this.diagramLimits;
-      }
-
-      var rect = this.getRelativeBoundingRect('diagram');
-
-      if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
-        this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"](boundary.left - rect.left, boundary.bottom - rect.bottom, boundary.right - rect.right - (boundary.left - rect.left), boundary.top - rect.top - (boundary.bottom - rect.bottom)));
-      } // if (this.name === 'c') {
-      //   console.log(this.move.bounds.boundary[2])
+      } // if (window.asdf) {
+      //   debugger;
+      // }
+      // let boundary = boundaryIn;
+      // if (boundaryIn == null) {
+      //   if (
+      //     this.move.bounds === 'diagram'
+      //     || Array.isArray(this.move.bounds)
+      //     || (this.move.bounds instanceof Bounds && !(this.move.bounds instanceof TransformBounds))
+      //     // || this.move.bounds instanceof Rect,
+      //   ) {
+      //   // if (boundaryIn !== null) {
+      //     boundary = this.move.bounds;
+      //     this.move.bounds = new TransformBounds(this.transform);
+      //   } else {
+      //     this.move.bounds.updateTranslation(null);
+      //     return;
+      //   }
+      // }
+      // if (boundary == null) {
+      //   return;
+      // }
+      // if (Array.isArray(boundary)) {
+      //   const [left, bottom, width, height] = boundary;
+      //   boundary = new Rect(left, bottom, width, height);
+      // } else if (boundary === 'diagram') {
+      //   boundary = this.diagramLimits;
+      // }
+      // const rect = this.getRelativeBoundingRect('diagram');
+      // if (this.move.bounds instanceof TransformBounds) {
+      //   this.move.bounds.updateTranslation(new RectBounds({
+      //     left: boundary.left - rect.left,
+      //     bottom: boundary.bottom - rect.bottom,
+      //     right: boundary.right - rect.right,
+      //     top: boundary.top - rect.top,
+      //   }));
       // }
 
     } // setMoveBoundsLegacy(
@@ -33811,9 +33950,10 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         this.drawingObject.transformHtml(firstTransform.matrix());
-      }
+      } // this.setMoveBounds();
 
-      this.setMoveBounds();
+
+      this.checkMoveBounds();
     } // isMoving(): boolean {
     //   if (
     //     // this.state.isAnimating
@@ -34677,7 +34817,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         element.setFirstTransform(firstTransform);
       }
 
-      this.setMoveBounds();
+      this.checkMoveBounds();
     }
   }, {
     key: "getAllBoundaries",
@@ -37847,6 +37987,22 @@ function parseState(state, diagram) {
       return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getLine"])(state);
     }
 
+    if (state.f1Type === 'rangeBounds') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getBounds"])(state);
+    }
+
+    if (state.f1Type === 'rectBounds') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getBounds"])(state);
+    }
+
+    if (state.f1Type === 'lineBounds') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getBounds"])(state);
+    }
+
+    if (state.f1Type === 'transformBounds') {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getBounds"])(state);
+    }
+
     if (state.f1Type === 'de') {
       return assignAsLinkOnly(diagram.getElement(state.state));
     }
@@ -39472,7 +39628,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine, deceleratePoint, decelerateValue, decelerateTransform, RectBounds, LineBounds, RangeBounds, ValueBounds, TransformBounds, Vector, transformValueToArray */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint, getScale, getPoints, quadBezierPoints, getRect, getTransform, getLine, deceleratePoint, decelerateValue, decelerateTransform, RectBounds, LineBounds, RangeBounds, TransformBounds, Vector, transformValueToArray, getBounds, Bounds */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39521,12 +39677,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RectBounds", function() { return RectBounds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LineBounds", function() { return LineBounds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RangeBounds", function() { return RangeBounds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValueBounds", function() { return ValueBounds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransformBounds", function() { return TransformBounds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Vector", function() { return Vector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transformValueToArray", function() { return transformValueToArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBounds", function() { return getBounds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bounds", function() { return Bounds; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
-/* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
@@ -39561,7 +39719,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
- // import { Console } from '../../tools/tools';
+
 
  // import { joinObjects } from './tools';
 
@@ -39949,7 +40107,7 @@ var Point = /*#__PURE__*/function () {
   }, {
     key: "transformBy",
     value: function transformBy(matrix) {
-      var transformedPoint = _m2__WEBPACK_IMPORTED_MODULE_1__["transform"](matrix, this.x, this.y);
+      var transformedPoint = _m2__WEBPACK_IMPORTED_MODULE_2__["transform"](matrix, this.x, this.y);
       return new Point(transformedPoint[0], transformedPoint[1]);
     }
   }, {
@@ -40040,8 +40198,8 @@ var Point = /*#__PURE__*/function () {
     /* eslint-disable no-use-before-define */
 
   }, {
-    key: "isOnLine",
-    value: function isOnLine(l, precision) {
+    key: "isWithinLine",
+    value: function isWithinLine(l, precision) {
       return l.hasPointOn(this, precision);
     }
   }, {
@@ -40051,10 +40209,10 @@ var Point = /*#__PURE__*/function () {
       var shaddow = new Line(this, 1, l.angle() + Math.PI / 2);
 
       var _shaddow$intersectsWi = shaddow.intersectsWith(l),
-          intersect = _shaddow$intersectsWi.intersect; // console.log(intersect, inLine, onLine, )
+          intersect = _shaddow$intersectsWi.intersect; // console.log(intersect, inLine, alongLine, )
 
 
-      if (intersect != null && intersect.isOnLine(l, precision)) {
+      if (intersect != null && intersect.isWithinLine(l, precision)) {
         return intersect;
       }
 
@@ -40081,8 +40239,10 @@ var Point = /*#__PURE__*/function () {
         return this._dup();
       }
 
-      if (this.shaddowIsOnLine(l, precision)) {
-        return this.getShaddowOnLine(l, precision);
+      var shaddow = this.getShaddowOnLine(l, precision);
+
+      if (shaddow != null) {
+        return shaddow;
       }
 
       var d1 = this.distance(l.p1);
@@ -40171,7 +40331,7 @@ var Point = /*#__PURE__*/function () {
         /* eslint-disable-next-line  no-use-before-define */
         var l = line(v[i], v[i + 1]);
 
-        if (p.isOnLine(l)) {
+        if (p.isWithinLine(l)) {
           if (popLastPoint) {
             v.pop();
           }
@@ -40507,17 +40667,62 @@ function getDeltaAngle(startAngle, targetAngle) {
   //   rotDiff = rotDirection * Math.PI * 2.0 + rotDiff;
   // }
   // return rotDiff;
-}
+} // Line definition: Ax + By = C
+//
+// So if we have two points: (x1, y1) and (x2, y2) on the same line, they must
+// both satisfy the same equation:
+//
+//    Ax1 + By1 = C   - 1
+//    Ax2 + By2 = C   - 2
+//
+// Both 1 and 2 equal C, so can equate left hand sides:
+//    Ax1 + By1 = Ax2 + By2
+//    A(x1 - x2) = B(y2 - y1)
+//    A / B = (y2 - y1) / (x1 - x2)
+//
+//    So A = (y2 - y1) and B = x1 - x2
+//
+//  Then C from 1 is:
+//    C = (y2 - y1)x1 + (x1 - x2)y1
+//
+//  So calculating y from x:
+//    y = (C - Ax) / B   for B != 0
+//      If B == 0, then x1 == x2, and so we have a vertical line at x1
+//      and so y is not dependent on x
+//  And calculating x from y:
+//    x = (C - By) / A    for A != 0
+//      If A == 0, then y1 == y2, and so we have a horizontal line at y1
+//      and so x is not dependent on y
+//
+//  To find the y intercept:
+//    if B != 0: y intercept = Ax + By = C => y = C / B
+//    if B == 0, there is no single y intercept
+//      - is either no intercept, or along the y axis
+//
+//  To find the x intercept:
+//    if A != 0: x intercept = Ax + By = C => x = C / A
+//    if A == 0, there is no single x intercept
+//      - is either no intercept, or along the x axis
+//
+//  Another form of the line equation is y = mx + c where:
+//   - c is the y intercept (or C / B)
+//   - m = y2 - y1 / x2 - x1 = A / (-B) = - A / B
+//
+
 
 var Line = /*#__PURE__*/function () {
   function Line(p1, p2OrMag) {
     var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    var ends = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
 
     _classCallCheck(this, Line);
 
     this.p1 = getPoint(p1);
 
-    if (typeof p2OrMag === 'number') {
+    if (p2OrMag == null) {
+      this.ang = angle;
+      this.p2 = this.p1.add(1 * Math.cos(this.ang), 1 * Math.sin(this.ang));
+    } else if (typeof p2OrMag === 'number') {
       this.p2 = this.p1.add(p2OrMag * Math.cos(angle), p2OrMag * Math.sin(angle));
       this.ang = angle;
     } else {
@@ -40525,6 +40730,7 @@ var Line = /*#__PURE__*/function () {
       this.ang = Math.atan2(this.p2.y - this.p1.y, this.p2.x - this.p1.x);
     }
 
+    this.ends = ends;
     this.setupLine();
   }
 
@@ -40535,7 +40741,7 @@ var Line = /*#__PURE__*/function () {
       var precision = getPrecision(options);
       return {
         f1Type: 'l',
-        state: [[Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.y, precision)], [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.y, precision)]]
+        state: [[Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p1.y, precision)], [Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.p2.y, precision)], this.ends]
       };
     }
   }, {
@@ -40549,7 +40755,7 @@ var Line = /*#__PURE__*/function () {
   }, {
     key: "_dup",
     value: function _dup() {
-      return new Line(this.p1, this.p2);
+      return new Line(this.p1, this.p2, 0, this.ends);
     }
   }, {
     key: "setP1",
@@ -40595,6 +40801,25 @@ var Line = /*#__PURE__*/function () {
       return null;
     }
   }, {
+    key: "getYIntercept",
+    value: function getYIntercept() {
+      return this.getYFromX(0);
+    }
+  }, {
+    key: "getXIntercept",
+    value: function getXIntercept() {
+      return this.getXFromY(0);
+    }
+  }, {
+    key: "getGradient",
+    value: function getGradient() {
+      if (this.B === 0) {
+        return null;
+      }
+
+      return -this.A / this.B;
+    }
+  }, {
     key: "angle",
     value: function angle() {
       return this.ang;
@@ -40603,7 +40828,7 @@ var Line = /*#__PURE__*/function () {
     key: "round",
     value: function round() {
       var precision = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 8;
-      var lineRounded = new Line(this.p1, this.p2);
+      var lineRounded = new Line(this.p1, this.p2, 0, this.ends);
       lineRounded.A = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(lineRounded.A, precision);
       lineRounded.B = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(lineRounded.B, precision);
       lineRounded.C = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(lineRounded.C, precision);
@@ -40653,7 +40878,10 @@ var Line = /*#__PURE__*/function () {
 
   }, {
     key: "hasPointAlong",
-    value: function hasPointAlong(p, precision) {
+    value: function hasPointAlong(pIn) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var p = getPoint(pIn);
+
       if (precision === undefined || precision === null) {
         if (this.C === this.A * p.x + this.B * p.y) {
           return true;
@@ -40667,60 +40895,104 @@ var Line = /*#__PURE__*/function () {
 
   }, {
     key: "distanceToPoint",
-    value: function distanceToPoint(p, precision) {
+    value: function distanceToPoint(pIn) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var p = getPoint(pIn);
       return Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(Math.abs(this.A * p.x + this.B * p.y - this.C) / Math.sqrt(Math.pow(this.A, 2) + Math.pow(this.B, 2)), precision);
     }
   }, {
     key: "hasPointOn",
-    value: function hasPointOn(p, precision) {
+    value: function hasPointOn(pIn) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var p = getPoint(pIn);
+
       if (this.hasPointAlong(p, precision)) {
-        if (pointinRect(p, this.p1, this.p2, precision)) {
-          return true;
+        if (this.ends === 2) {
+          if (pointinRect(p, this.p1, this.p2, precision)) {
+            return true;
+          }
+
+          return false;
         }
+
+        if (this.ends === 1) {
+          if (this.p1.isEqualTo(p, precision)) {
+            return true;
+          }
+
+          var p1ToP = new Line(this.p1, p);
+
+          if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(clipAngle(p1ToP.ang, '0to360'), precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(clipAngle(this.ang, '0to360'), precision)) {
+            return true;
+          }
+
+          return false;
+        }
+
+        return true; // if this.ends === 0 and point is along, then it is on.
       }
 
       return false;
     }
   }, {
     key: "isEqualTo",
-    value: function isEqualTo(line2, precision) {
+    value: function isEqualTo(line2) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
       var l1 = this;
       var l2 = line2;
 
-      if (typeof precision === 'number') {
-        l1 = l1.round(precision);
-        l2 = l2.round(precision);
-        l1.p1 = l1.p1.round(precision);
-        l1.p2 = l1.p2.round(precision);
-        l2.p1 = l2.p1.round(precision);
-        l2.p2 = l2.p2.round(precision);
-      }
-
-      if (l1.A !== l2.A) {
+      if (l1.ends !== l2.ends) {
         return false;
       }
 
-      if (l1.B !== l2.B) {
-        return false;
+      if (l1.ends === 2) {
+        if (l1.p1.isNotEqualTo(l2.p1, precision) && l1.p1.isNotEqualTo(l2.p2, precision)) {
+          return false;
+        }
+
+        if (l1.p2.isNotEqualTo(l2.p1, precision) && l1.p2.isNotEqualTo(l2.p2, precision)) {
+          return false;
+        }
+
+        return true;
       }
 
-      if (l1.C !== l2.C) {
-        return false;
-      }
+      if (l1.ends === 1) {
+        if (l1.p1.isNotEqualTo(l2.p1, precision)) {
+          return false;
+        }
 
-      if (l1.p1.isNotEqualTo(l2.p1) && l1.p1.isNotEqualTo(l2.p2)) {
-        return false;
-      }
+        if (!l1.hasPointOn(l2.p2, precision)) {
+          return false;
+        }
 
-      if (l1.p2.isNotEqualTo(l2.p1) && l1.p2.isNotEqualTo(l2.p2)) {
+        return true;
+      } // otherwise ends === 0
+
+
+      if (!l1.hasPointOn(l2.p1)) {
         return false;
       }
 
       return true;
+    } // isWithinLine
+    // hasLineWithin
+    // isAlongLine
+    // isParrallelToLine
+    // isPerpendicularToLine
+    // hasLineOn(line2: Line, precision: number = 8) {
+    //   return line2.isOn(this, precision);
+    // }
+
+  }, {
+    key: "hasLineWithin",
+    value: function hasLineWithin(line2) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      return line2.isWithinLine(this, precision);
     }
   }, {
-    key: "isOnSameLineAs",
-    value: function isOnSameLineAs(line2) {
+    key: "isAlongLine",
+    value: function isAlongLine(line2) {
       var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
       var l1 = this.round(precision);
       var l2 = line2.round(precision); // If A and B are zero, then this is not a line
@@ -40787,6 +41059,37 @@ var Line = /*#__PURE__*/function () {
       }
 
       return true;
+    }
+  }, {
+    key: "isWithinLine",
+    value: function isWithinLine(line2) {
+      var _this = this;
+
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var l1 = this.round(precision);
+      var l2 = line2.round(precision);
+
+      if (!l1.isAlongLine(l2, precision)) {
+        return false;
+      }
+
+      if (line2.ends === 0) {
+        return true;
+      }
+
+      var withinEnds = function withinEnds() {
+        return l2.hasPointOn(_this.p1, precision) && l2.hasPointOn(_this.p2, precision);
+      };
+
+      if (this.ends < line2.ends) {
+        return false;
+      }
+
+      if (this.ends === 2) {
+        return withinEnds();
+      }
+
+      return withinEnds();
     } // left, right, top, bottom is relative to cartesian coordinates
     // 'outside' is the outside of a polygon defined in the positive direction
     // (CCW).
@@ -40820,8 +41123,26 @@ var Line = /*#__PURE__*/function () {
 
       var p1 = new Point(this.p1.x + space * Math.cos(offsetAngle), this.p1.y + space * Math.sin(offsetAngle));
       var p2 = new Point(this.p2.x + space * Math.cos(offsetAngle), this.p2.y + space * Math.sin(offsetAngle));
-      return new Line(p1, p2);
-    }
+      return new Line(p1, p2, 0, this.ends);
+    } // If two lines are parallel, their determinant is 0
+
+  }, {
+    key: "isParallelWith",
+    value: function isParallelWith(line2) {
+      var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+      var l2 = line2; // line2.round(precision);
+
+      var l1 = this; // this.round(precision);
+
+      var det = l1.A * l2.B - l2.A * l1.B;
+
+      if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(det, precision) === 0) {
+        return true;
+      }
+
+      return false;
+    } // This needs to be tested somewhere as p1ToShaddow = line was updated
+
   }, {
     key: "reflectsOn",
     value: function reflectsOn(l) {
@@ -40836,12 +41157,23 @@ var Line = /*#__PURE__*/function () {
 
       var perpendicular = new Line(intersect, 1, l.ang + Math.PI / 2);
       var shaddow = this.p1.getShaddowOnLine(perpendicular, precision);
-      var p1ToShaddow = new Line(p1, shaddow);
+      var p1ToShaddow = new Line(this.p1, shaddow);
       var distance = p1ToShaddow.distance; // const distance = shaddow.distance(this.p1);
 
       var projection = Point(this.p1.x + distance * 2 * Math.cos(p1ToShaddow.ang), this.p1.y + distance * 2 * Math.sin(p1ToShaddow.ang));
       return new Line(intersect, project);
-    }
+    } // At two lines intersection, the x and y values must be equal
+    //   A1x + B1y = C1 => y = -A1/B1x + C1/B1      - Eq 1
+    //   A2x + B2y = C2 => y = -A2/B2x + C2/B2      - Eq 2
+    // Right hand sides are equal:
+    //   -A1/B1x + C1/B1 = -A2/B2x + C2/B2
+    //   x(-A1/B1 + A2/B2) = C2/B2 - C1/B1
+    //   x(-A1B2 + A2B1)/B1B2 = (C2B1 - C1B2)/B1B2
+    //   x = (C2B1 - C1B2) / (-A1B2 + A2B1)
+    //   y = -A1/B1x + C1/B1
+    // If however B1 is 0, then y can be found from eqn 2
+    //   y = -A2/B2x + C2/B2
+
   }, {
     key: "intersectsWith",
     value: function intersectsWith(line2) {
@@ -40850,114 +41182,251 @@ var Line = /*#__PURE__*/function () {
 
       var l1 = this; // this.round(precision);
 
-      var det = l1.A * l2.B - l2.A * l1.B;
-
-      if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(det, precision) !== 0) {
-        var i = point(0, 0);
-        i.x = (l2.B * l1.C - l1.B * l2.C) / det;
-        i.y = (l1.A * l2.C - l2.A * l1.C) / det;
-
-        if (pointinRect(i, l1.p1, l1.p2, precision) && pointinRect(i, l2.p1, l2.p2, precision)) {
-          return {
-            onLine: true,
-            inLine: true,
-            intersect: i
-          };
-        }
-
-        return {
-          onLine: true,
-          inLine: false,
-          intersect: i
-        };
-      }
-
-      if (det === 0 && l1.isOnSameLineAs(l2, precision)) {
-        // if the lines are colliner then:
-        //   - if overlapping,
-        //   - if partially overlapping: the intersect point is halfway between
-        //     overlapping ends
-        //   - if one line is within the other line, the intersect point is
-        //     halfway between the midpoints
-        //   - if not overlapping, the intersect point is halfway between the nearest ends
-        // let l1 = this;
-        if (!l1.p1.isOnLine(l2, precision) && !l1.p2.isOnLine(l2, precision) && !l2.p1.isOnLine(l1, precision) && !l2.p2.isOnLine(l1, precision)) {
-          var line11 = new Line(l1.p1, l2.p1);
-          var line12 = new Line(l1.p1, l2.p2);
-          var line21 = new Line(l1.p2, l2.p1);
-          var line22 = new Line(l1.p2, l2.p2);
-
-          var _i3 = line11.midPoint();
-
-          var len = line11.length();
-
-          if (line12.length() < len) {
-            _i3 = line12.midPoint();
-            len = line12.length();
-          }
-
-          if (line21.length() < len) {
-            _i3 = line21.midPoint();
-            len = line21.length();
-          }
-
-          if (line22.length() < len) {
-            _i3 = line22.midPoint();
-            len = line22.length();
-          }
-
-          return {
-            onLine: true,
-            inLine: false,
-            intersect: _i3
-          };
-        }
-
-        if (l1.p1.isOnLine(l2, precision) && l1.p2.isOnLine(l2, precision) && (!l2.p1.isOnLine(l1, precision) || !l2.p2.isOnLine(l1, precision)) || l2.p1.isOnLine(l1, precision) && l2.p2.isOnLine(l1, precision) && (!l1.p1.isOnLine(l2, precision) || !l1.p2.isOnLine(l2, precision))) {
-          var _midLine = new Line(l1.midPoint(), l2.midPoint());
-
-          return {
-            onLine: true,
-            inLine: true,
-            intersect: _midLine.midPoint()
-          };
-        }
-
-        var midLine;
-
-        if (l1.p1.isOnLine(l2, precision) && !l1.p2.isOnLine(l2, precision) && l2.p1.isOnLine(l1, precision) && !l2.p2.isOnLine(l1, precision)) {
-          midLine = new Line(l1.p1, l2.p1);
-        }
-
-        if (l1.p1.isOnLine(l2, precision) && !l1.p2.isOnLine(l2, precision) && !l2.p1.isOnLine(l1, precision) && l2.p2.isOnLine(l1, precision)) {
-          midLine = new Line(l1.p1, l2.p2);
-        }
-
-        if (!l1.p1.isOnLine(l2, precision) && l1.p2.isOnLine(l2, precision) && l2.p1.isOnLine(l1, precision) && !l2.p2.isOnLine(l1, precision)) {
-          midLine = new Line(l1.p2, l2.p1);
-        }
-
-        if (!l1.p1.isOnLine(l2, precision) && l1.p2.isOnLine(l2, precision) && !l2.p1.isOnLine(l1, precision) && l2.p2.isOnLine(l1, precision)) {
-          midLine = new Line(l1.p2, l2.p2);
-        }
-
+      if (!l1.isParallelWith(l2)) {
         var _i2;
 
-        if (midLine instanceof Line) {
-          _i2 = midLine.midPoint();
+        if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.A, precision) === 0 && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l2.B, precision) === 0) {
+          _i2 = new Point(l2.p1.x, l1.p1.y);
+        } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.B, precision) === 0 && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l2.A, precision) === 0) {
+          _i2 = new Point(l1.p1.x, l2.p1.y); // if l1.B is 0, then l1 has constant x
+        } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.B, precision) === 0) {
+          var x = (l2.C * l1.B - l1.C * l2.B) / (-l1.A * l2.B + l2.A * l1.B);
+          var y = -l2.A / l2.B * x + l2.C / l2.B;
+          _i2 = new Point(x, y);
+        } else {
+          var _x = (l2.C * l1.B - l1.C * l2.B) / (-l1.A * l2.B + l2.A * l1.B);
+
+          var _y = -l1.A / l1.B * _x + l1.C / l1.B;
+
+          _i2 = new Point(_x, _y);
+        }
+
+        if (l1.hasPointOn(_i2, precision) && l2.hasPointOn(_i2, precision)) {
+          return {
+            alongLine: true,
+            withinLine: true,
+            intersect: _i2
+          };
         }
 
         return {
-          onLine: true,
-          inLine: true,
+          alongLine: true,
+          withinLine: false,
           intersect: _i2
         };
       }
 
+      if (!l1.isAlongLine(l2, precision)) {
+        return {
+          alongLine: false,
+          withinLine: false,
+          intersect: undefined
+        };
+      } // If lines are collinear they could be either:
+      //   - equal:
+      //      - 0 ends: take the yIntercept (or xIntercept if vertical)
+      //      - 1 ends: take the p1 point
+      //      - 2 ends: take the midPoint
+      //   - one within the other: take mid point between mid points
+      //      - 2 ends around 2 ends: take the midPoint of the two midPoints
+      //      - 0 ends around 2 ends: take the midPoint of the 2 ends
+      //      - 0 ends around 1 ends: take the p1 of the 1 ends
+      //      - 1 end around 1 end: take the midPoint between the p1s
+      //      - 1 end around 2 ends: take the midPoint of the two ends
+      //   - not overlapping:
+      //      - Both 2 ends - take midPoint between 2 closest ends
+      //      - Both 1 ends - take midPoint between 2 p1s
+      //      - One 1 end and 2 end - take midPoint between p1 and closest point
+      //   - partially overlapping:
+      //      - Both 2 ends - take midPoint between 2 overlapping ends
+      //      - Both 1 ends - take midPoint between both p1s
+      //      - One 1 end and 2 end - take midPoint between overlapping end and p1
+      // If Equal
+
+
+      var xIntercept = this.getXIntercept();
+      var yIntercept = this.getYIntercept();
+      var defaultIntercept = yIntercept == null ? new Point(xIntercept, 0) : new Point(0, yIntercept);
+
+      if (l1.isEqualTo(l2, precision)) {
+        var _i3;
+
+        if (l1.ends === 2) {
+          _i3 = l1.midPoint();
+        } else if (l1.ends === 1) {
+          _i3 = l1.p1._dup();
+        } else {
+          _i3 = defaultIntercept;
+        }
+
+        return {
+          alongLine: true,
+          withinLine: true,
+          intersect: _i3
+        };
+      } // If one line is fully within the other
+
+
+      var i;
+
+      var lineIsWithin = function lineIsWithin(li1, li2) {
+        // If fully overlapping
+        if (li1.hasLineWithin(li2, precision)) {
+          if (li1.ends === 2) {
+            i = new Line(li1.midPoint(), li2.midPoint()).midPoint();
+          }
+
+          if (li1.ends === 1 && li2.ends === 1) {
+            i = new Line(li1.p1, li2.p1);
+          }
+
+          if (li1.ends === 1 && li2.ends === 2) {
+            i = li2.midPoint();
+          }
+
+          if (li1.ends === 0 && li2.ends === 2) {
+            i = li2.midPoint();
+          }
+
+          if (li1.ends === 0 && li2.ends === 1) {
+            i = li2.p1._dup();
+          }
+
+          if (li1.ends > li2.ends) {
+            if (li1.ends === 2) {
+              i = li1.midPoint();
+            } else {
+              i = li1.p1;
+            }
+          }
+
+          if (li1.ends === 1 && li2.ends === 1) {
+            i = new Line(li1.p1, li2.p1).midPoint();
+          }
+
+          return true;
+        }
+
+        return false;
+      };
+
+      if (lineIsWithin(l1, l2)) {
+        return {
+          alongLine: true,
+          withinLine: true,
+          intersect: i
+        };
+      }
+
+      if (lineIsWithin(l2, l1)) {
+        return {
+          alongLine: true,
+          withinLine: true,
+          intersect: i
+        };
+      } // Two finite lines
+
+
+      if (l1.ends === 2 && l2.ends === 2) {
+        // Not overlapping
+        if (!l1.p1.isWithinLine(l2, precision) && !l1.p2.isWithinLine(l2, precision) && !l2.p1.isWithinLine(l1, precision) && !l2.p2.isWithinLine(l1, precision)) {
+          var line11 = new Line(l1.p1, l2.p1);
+          var line12 = new Line(l1.p1, l2.p2);
+          var line21 = new Line(l1.p2, l2.p1);
+          var line22 = new Line(l1.p2, l2.p2);
+          i = line11.midPoint();
+          var len = line11.length();
+
+          if (line12.length() < len) {
+            i = line12.midPoint();
+            len = line12.length();
+          }
+
+          if (line21.length() < len) {
+            i = line21.midPoint();
+            len = line21.length();
+          }
+
+          if (line22.length() < len) {
+            i = line22.midPoint();
+            len = line22.length();
+          }
+
+          return {
+            alongLine: true,
+            withinLine: false,
+            intersect: i
+          };
+        } // Partial overlap
+
+
+        if (l1.p1.isWithinLine(l2, precision)) {
+          if (l2.p1.isWithinLine(l1, precision)) {
+            i = new Line(l1.p1, l2.p1).midPoint();
+          } else {
+            i = new Line(l1.p1, l2.p2).midPoint();
+          }
+        } else if (l2.p1.isWithinLine(l1, precision)) {
+          i = new Line(l1.p2, l2.p1).midPoint();
+        } else {
+          i = new Line(l1.p2, l2.p2).midPoint();
+        }
+
+        return {
+          alongLine: true,
+          withinLine: true,
+          intersect: i
+        };
+      } // Two 1 end lines
+
+
+      if (l1.ends === 1 && l2.ends === 1) {
+        // Both not overlapping and partial overlap will have an intersect as
+        // the midPoint between the p1s
+        return {
+          alongLine: true,
+          withinLine: false,
+          intersect: new Line(l1.p1, l2.p1).midPoint()
+        };
+      } // One 1 end, one 2 end is the only remaining possibility
+
+
+      var withinLine;
+
+      var checkOverlap = function checkOverlap(li1, li2) {
+        // partial overlap
+        if (li1.p1.isWithinLine(li2)) {
+          withinLine = true;
+
+          if (li2.p1.isWithinLine(li1)) {
+            i = new Line(li1.p1, li2.p1).midPoint();
+          } else {
+            i = new Line(li1.p1, li2.p2).midPoint();
+          } // No Overlap
+
+        } else {
+          withinLine = false;
+          var l11 = new Line(li1.p1, li2.p1);
+          var l12 = new Line(li1.p1, li2.p2);
+
+          if (l11.length() < l12.length()) {
+            i = l11.midPoint();
+          } else {
+            i = l12.midPoint();
+          }
+        }
+      };
+
+      if (l1.ends === 1 && l2.ends === 2) {
+        checkOverlap(l1, l2);
+      } else {
+        checkOverlap(l2, l1);
+      }
+
       return {
-        onLine: false,
-        inLine: false,
-        intersect: undefined
+        alongLine: true,
+        withinLine: withinLine,
+        intersect: i
       };
     }
   }]);
@@ -40971,21 +41440,21 @@ var Vector = /*#__PURE__*/function (_Line) {
   var _super = _createSuper(Vector);
 
   function Vector(p1OrLine, p2OrMag) {
-    var _this;
+    var _this2;
 
     var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
     _classCallCheck(this, Vector);
 
     if (p1OrLine instanceof Line) {
-      _this = _super.call(this, p1OrLine.p1, p1OrLine.distance, p1OrLine.ang);
+      _this2 = _super.call(this, p1OrLine.p1, p1OrLine.distance, p1OrLine.ang);
     } else {
-      _this = _super.call(this, p1OrLine, p2OrMag, angle);
+      _this2 = _super.call(this, p1OrLine, p2OrMag, angle);
     }
 
-    _this.i = _this.distance * Math.cos(_this.ang);
-    _this.j = _this.distance * Math.sin(_this.ang);
-    return _possibleConstructorReturn(_this);
+    _this2.i = _this2.distance * Math.cos(_this2.ang);
+    _this2.j = _this2.distance * Math.sin(_this2.ang);
+    return _possibleConstructorReturn(_this2);
   }
 
   _createClass(Vector, [{
@@ -41037,8 +41506,16 @@ function parseLine(lIn, onFail) {
   }
 
   if (Array.isArray(l)) {
+    if (l.length === 4) {
+      return new Line(getPoint(l[0]), l[1], l[2], l[3]);
+    }
+
     if (l.length === 3) {
-      return new Line(getPoint(l[0]), l[1], l[2]);
+      if (typeof l[1] === 'number') {
+        return new Line(getPoint(l[0]), l[1], l[2]);
+      }
+
+      return new Line(getPoint(l[0]), getPoint(l[1]), 0, l[2]);
     }
 
     if (l.length === 2) {
@@ -41049,19 +41526,21 @@ function parseLine(lIn, onFail) {
   }
 
   if (l.f1Type != null) {
-    if (l.f1Type === 'l' && l.state != null && Array.isArray([l.state]) && l.state.length === 2) {
-      var _l$state = _slicedToArray(l.state, 2),
-          _p = _l$state[0],
-          p2 = _l$state[1];
+    if (l.f1Type === 'l' && l.state != null && Array.isArray([l.state]) && l.state.length === 3) {
+      var _l$state = _slicedToArray(l.state, 3),
+          p1 = _l$state[0],
+          p2 = _l$state[1],
+          ends = _l$state[2];
 
-      return new Line(getPoint(_p), getPoint(p2));
+      return new Line(getPoint(p1), getPoint(p2), 0, ends);
     }
 
     return onFailToUse;
   }
 
   return onFailToUse;
-}
+} // To Update tests
+
 
 function getLine(p) {
   var parsedLine = parseLine(p);
@@ -41119,7 +41598,7 @@ var Rotation = /*#__PURE__*/function () {
   }, {
     key: "matrix",
     value: function matrix() {
-      return _m2__WEBPACK_IMPORTED_MODULE_1__["rotationMatrix"](this.r);
+      return _m2__WEBPACK_IMPORTED_MODULE_2__["rotationMatrix"](this.r);
     }
   }, {
     key: "sub",
@@ -41178,7 +41657,7 @@ var Translation = /*#__PURE__*/function (_Point) {
   var _super2 = _createSuper(Translation);
 
   function Translation(txIn) {
-    var _this2;
+    var _this3;
 
     var tyIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
@@ -41207,9 +41686,9 @@ var Translation = /*#__PURE__*/function (_Point) {
     }
 
     if (tx instanceof Point) {
-      _this2 = _super2.call(this, tx.x, tx.y);
+      _this3 = _super2.call(this, tx.x, tx.y);
     } else if (typeof tx === 'number') {
-      _this2 = _super2.call(this, tx, ty);
+      _this3 = _super2.call(this, tx, ty);
     } else if (tx.f1Type != null && tx.f1Type === 't' && tx.state != null && Array.isArray(tx.state) && tx.state.length === 3) {
       var _tx$state = _slicedToArray(tx.state, 3),
           n = _tx$state[0],
@@ -41217,13 +41696,13 @@ var Translation = /*#__PURE__*/function (_Point) {
           y = _tx$state[2];
 
       name = n;
-      _this2 = _super2.call(this, x, y);
+      _this3 = _super2.call(this, x, y);
     } else {
-      _this2 = _super2.call(this, 0, 0);
+      _this3 = _super2.call(this, 0, 0);
     }
 
-    _this2.name = name;
-    return _possibleConstructorReturn(_this2);
+    _this3.name = name;
+    return _possibleConstructorReturn(_this3);
   }
 
   _createClass(Translation, [{
@@ -41238,7 +41717,7 @@ var Translation = /*#__PURE__*/function (_Point) {
   }, {
     key: "matrix",
     value: function matrix() {
-      return _m2__WEBPACK_IMPORTED_MODULE_1__["translationMatrix"](this.x, this.y);
+      return _m2__WEBPACK_IMPORTED_MODULE_2__["translationMatrix"](this.x, this.y);
     }
   }, {
     key: "sub",
@@ -41298,7 +41777,7 @@ var Scale = /*#__PURE__*/function (_Point2) {
   var _super3 = _createSuper(Scale);
 
   function Scale(sxIn, syIn) {
-    var _this3;
+    var _this4;
 
     var nameIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
@@ -41326,12 +41805,12 @@ var Scale = /*#__PURE__*/function (_Point2) {
     }
 
     if (sx instanceof Point) {
-      _this3 = _super3.call(this, sx.x, sx.y);
+      _this4 = _super3.call(this, sx.x, sx.y);
     } else if (typeof sx === 'number') {
       if (sy != null) {
-        _this3 = _super3.call(this, sx, sy);
+        _this4 = _super3.call(this, sx, sy);
       } else {
-        _this3 = _super3.call(this, sx, sx);
+        _this4 = _super3.call(this, sx, sx);
       }
     } else if (sx.f1Type != null && sx.f1Type === 's' && sx.state != null && Array.isArray(sx.state) && sx.state.length === 3) {
       var _sx$state = _slicedToArray(sx.state, 3),
@@ -41340,13 +41819,13 @@ var Scale = /*#__PURE__*/function (_Point2) {
           y = _sx$state[2];
 
       name = n;
-      _this3 = _super3.call(this, x, y);
+      _this4 = _super3.call(this, x, y);
     } else {
-      _this3 = _super3.call(this, 1, 1);
+      _this4 = _super3.call(this, 1, 1);
     }
 
-    _this3.name = name;
-    return _possibleConstructorReturn(_this3);
+    _this4.name = name;
+    return _possibleConstructorReturn(_this4);
   }
 
   _createClass(Scale, [{
@@ -41362,7 +41841,7 @@ var Scale = /*#__PURE__*/function (_Point2) {
   }, {
     key: "matrix",
     value: function matrix() {
-      return _m2__WEBPACK_IMPORTED_MODULE_1__["scaleMatrix"](this.x, this.y);
+      return _m2__WEBPACK_IMPORTED_MODULE_2__["scaleMatrix"](this.x, this.y);
     }
   }, {
     key: "sub",
@@ -41547,10 +42026,10 @@ var Transform = /*#__PURE__*/function () {
   }, {
     key: "calcMatrix",
     value: function calcMatrix() {
-      var m = _m2__WEBPACK_IMPORTED_MODULE_1__["identity"]();
+      var m = _m2__WEBPACK_IMPORTED_MODULE_2__["identity"]();
 
       for (var i = this.order.length - 1; i >= 0; i -= 1) {
-        m = _m2__WEBPACK_IMPORTED_MODULE_1__["mul"](m, this.order[i].matrix());
+        m = _m2__WEBPACK_IMPORTED_MODULE_2__["mul"](m, this.order[i].matrix());
       } // this.mat = m2.copy(m);
       // return m;
 
@@ -41882,7 +42361,7 @@ var Transform = /*#__PURE__*/function () {
     value: function transform(_transform) {
       var t = new Transform([], this.name);
       t.order = _transform.order.concat(this.order);
-      t.mat = _m2__WEBPACK_IMPORTED_MODULE_1__["mul"](this.matrix(), _transform.matrix());
+      t.mat = _m2__WEBPACK_IMPORTED_MODULE_2__["mul"](this.matrix(), _transform.matrix());
       return t;
     }
   }, {
@@ -41890,7 +42369,7 @@ var Transform = /*#__PURE__*/function () {
     value: function transformBy(transform) {
       var t = new Transform([], this.name);
       t.order = this.order.concat(transform.order);
-      t.mat = _m2__WEBPACK_IMPORTED_MODULE_1__["mul"](transform.matrix(), this.matrix());
+      t.mat = _m2__WEBPACK_IMPORTED_MODULE_2__["mul"](transform.matrix(), this.matrix());
       return t;
     }
   }, {
@@ -41926,11 +42405,11 @@ var Transform = /*#__PURE__*/function () {
         } else if (t instanceof Rotation && min instanceof Rotation && max instanceof Rotation) {
           order.push(new Rotation(Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(t.r, min.r, max.r), this.name));
         } else if (t instanceof Scale && min instanceof Scale && max instanceof Scale) {
-          var _x = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(t.x, min.x, max.x);
+          var _x2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(t.x, min.x, max.x);
 
-          var _y = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(t.y, min.y, max.y);
+          var _y2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(t.y, min.y, max.y);
 
-          order.push(new Scale(_x, _y, this.name));
+          order.push(new Scale(_x2, _y2, this.name));
         }
       }
 
@@ -41946,7 +42425,7 @@ var Transform = /*#__PURE__*/function () {
               intersect = _perpLine$intersectsW.intersect;
 
           if (intersect) {
-            if (intersect.isOnLine(limitLine, 4)) {
+            if (intersect.isWithinLine(limitLine, 4)) {
               clippedTransform.updateTranslation(intersect);
             } else {
               var p1Dist = distance(intersect, limitLine.p1);
@@ -42009,11 +42488,11 @@ var Transform = /*#__PURE__*/function () {
 
           order.push(new Rotation(r, this.name));
         } else if (t instanceof Scale) {
-          var _x2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z[i], max[i]);
+          var _x3 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.x, z[i], max[i]);
 
-          var _y2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z[i], max[i]);
+          var _y3 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipMag"])(t.y, z[i], max[i]);
 
-          order.push(new Scale(_x2, _y2, this.name));
+          order.push(new Scale(_x3, _y3, this.name));
         }
       }
 
@@ -42054,7 +42533,7 @@ var Transform = /*#__PURE__*/function () {
         var t = this.order[i];
 
         if (t instanceof Translation || t instanceof Scale) {
-          if (t.x > zeroThreshold || t.y > zeroThreshold) {
+          if (Math.abs(t.x) > zeroThreshold || Math.abs(t.y) > zeroThreshold) {
             return false;
           }
         } else if (t instanceof Rotation) {
@@ -42080,7 +42559,15 @@ var Transform = /*#__PURE__*/function () {
       var deceleration = transformValueToArray(decelerationIn, this);
       var bounceLoss = transformValueToArray(bounceLossIn, this);
       var zeroVelocityThreshold = transformValueToArray(zeroVelocityThresholdIn, this);
-      var bounds = getTransformBoundsLimit(boundsIn, this);
+      var bounds;
+
+      if (boundsIn instanceof TransformBounds) {
+        bounds = boundsIn;
+      } else {
+        bounds = new TransformBounds(this, boundsIn);
+      } // const bounds = getTransformBoundsLimit(boundsIn, this);
+
+
       var result = decelerateTransform(this, velocity, deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold, precision);
       return {
         velocity: result.velocity,
@@ -42498,16 +42985,33 @@ function quadBezierPoints(p0, p1, p2, sides) {
 
 var Bounds = /*#__PURE__*/function () {
   function Bounds(boundary) {
-    var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+    var bounds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'inside';
+    var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
 
     _classCallCheck(this, Bounds);
 
     this.boundary = boundary;
+    this.bounds = bounds;
     this.precision = precision;
-  } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  } // eslint-disable-next-line class-methods-use-this
 
 
   _createClass(Bounds, [{
+    key: "_dup",
+    value: function _dup() {
+      return new Bounds();
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "_state",
+    value: function _state(options) {
+      return {
+        f1Type: 'bounds',
+        state: []
+      };
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
     key: "contains",
     value: function contains(position) {
       return true;
@@ -42517,179 +43021,315 @@ var Bounds = /*#__PURE__*/function () {
     key: "intersect",
     value: function intersect(position) {
       var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (typeof position === 'number') {
+        return {
+          intersect: position,
+          distance: 0,
+          reflection: direction + Math.PI
+        };
+      }
+
       return {
-        position: position,
+        intersect: getPoint(position),
         distance: 0,
-        direction: direction
+        reflection: direction + Math.PI
       };
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "clip",
     value: function clip(position) {
-      return position;
-    } // eslint-disable-next-line class-methods-use-this
+      if (typeof position === 'number') {
+        return position;
+      }
 
-  }, {
-    key: "clipVelocity",
-    value: function clipVelocity(velocity) {
-      return velocity;
-    }
+      return getPoint(position);
+    } // eslint-disable-next-line class-methods-use-this
+    // clipVelocity(velocity: TypeParsablePoint | number) {
+    //   if (typeof velocity === 'number') {
+    //     return velocity;
+    //   }
+    //   return getPoint(velocity);
+    // }
+
   }]);
 
   return Bounds;
-}();
+}(); // class ValueBounds extends Bounds {
+//   boundary: ?number;
+// }
 
-var ValueBounds = /*#__PURE__*/function (_Bounds) {
-  _inherits(ValueBounds, _Bounds);
 
-  var _super4 = _createSuper(ValueBounds);
+var RangeBounds = /*#__PURE__*/function (_Bounds) {
+  _inherits(RangeBounds, _Bounds);
 
-  function ValueBounds() {
-    _classCallCheck(this, ValueBounds);
+  var _super4 = _createSuper(RangeBounds);
 
-    return _super4.apply(this, arguments);
-  }
-
-  return ValueBounds;
-}(Bounds);
-
-var RangeBounds = /*#__PURE__*/function (_Bounds2) {
-  _inherits(RangeBounds, _Bounds2);
-
-  var _super5 = _createSuper(RangeBounds);
-
-  function RangeBounds(minOrObject) {
-    var maxOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
-    var precisionIn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
-
+  function RangeBounds(optionsIn) {
     _classCallCheck(this, RangeBounds);
 
-    var boundary;
-    var precision;
-
-    if (typeof minOrObject === 'number') {
-      boundary = {
-        min: minOrObject,
-        max: maxOrPrecision
-      };
-      precision = precisionIn;
-    } else {
-      boundary = minOrObject;
-      precision = maxOrPrecision;
-    }
-
-    return _super5.call(this, boundary, precision);
+    var defaultOptions = {
+      bounds: 'inside',
+      precision: 8,
+      min: null,
+      max: null
+    };
+    var options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
+    var boundary = {
+      min: options.min,
+      max: options.max
+    };
+    return _super4.call(this, boundary, options.bounds, options.precision);
   }
 
   _createClass(RangeBounds, [{
+    key: "_dup",
+    value: function _dup() {
+      return new RangeBounds({
+        bounds: this.bounds,
+        precision: this.precision,
+        min: this.boundary.min,
+        max: this.boundary.max
+      });
+    }
+  }, {
+    key: "_state",
+    value: function _state(options) {
+      // const { precision } = options;
+      var precision = getPrecision(options);
+      return {
+        f1Type: 'rangeBounds',
+        state: [this.bounds, this.precision, this.boundary.min != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.min, precision) : null, this.boundary.max != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.max, precision) : null]
+      };
+    }
+  }, {
     key: "contains",
     value: function contains(position) {
       if (typeof position === 'number') {
-        if (position >= this.boundary.min && position <= this.boundary.max) {
+        var _p = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(position, this.precision);
+
+        if ((this.boundary.min == null || _p >= Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.min, this.precision)) && (this.boundary.max == null || _p <= Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.max, this.precision))) {
           return true;
         }
 
         return false;
       }
 
-      if (position.x >= this.boundary.min && position.y >= this.boundary.min && position.x <= this.boundary.max && position.y <= this.boundary.max) {
+      var p = getPoint(position);
+
+      if (this.contains(p.x) && this.contains(p.y)) {
         return true;
       }
 
-      return false;
+      return false; // const p = getPoint(position);
+      // if (
+      //   (this.boundary.min == null
+      //     || (p.x >= this.boundary.min && p.y >= this.boundary.min))
+      //   && (this.boundary.max == null
+      //     || (p.x <= this.boundary.max && p.y <= this.boundary.max))
+      // ) {
+      //   return true;
+      // }
+      // return false;
     }
   }, {
     key: "intersect",
-    value: function intersect(positionIn) {
+    value: function intersect(position) {
       var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var position;
-      var directionFlag = 'value';
+      var reflection = direction * -1;
+      var _this$boundary = this.boundary,
+          min = _this$boundary.min,
+          max = _this$boundary.max;
 
-      if (!(typeof positionIn === 'number')) {
-        position = positionIn.x;
-        directionFlag = 'angle';
-      } else {
-        position = positionIn;
+      if (!(typeof position === 'number')) {
+        return {
+          intersect: null,
+          distance: 0,
+          reflection: direction
+        };
       }
 
-      if (directionFlag === 'value' && direction === -1 || directionFlag === 'angle' && Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(direction, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(Math.PI, this.precision)) {
+      if (this.contains(position)) {
+        if (max != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(position, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(max, this.precision) && this.bounds === 'outside') {
+          if (direction === -1) {
+            return {
+              intersect: max,
+              distance: 0,
+              reflection: 1
+            };
+          }
+
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: 1
+          };
+        }
+
+        if (min != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(position, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(min, this.precision) && this.bounds === 'outside') {
+          if (direction === 1) {
+            return {
+              intersect: min,
+              distance: 0,
+              reflection: -1
+            };
+          }
+
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: -1
+          };
+        }
+
+        if (direction === 1) {
+          if (max == null) {
+            return {
+              intersect: null,
+              distance: 0,
+              reflection: direction
+            };
+          }
+
+          return {
+            intersect: max,
+            distance: Math.abs(position - max),
+            reflection: -1
+          };
+        }
+
+        if (min == null) {
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: direction
+          };
+        }
+
         return {
-          position: this.boundary.min,
-          distance: Math.abs(position - this.boundary.min),
-          direction: directionFlag === 'value' ? 1 : direction + Math.PI
+          intersect: min,
+          distance: Math.abs(position - min),
+          reflection: 1
+        };
+      }
+
+      if (min != null && position < min && direction === 1) {
+        return {
+          intersect: min,
+          distance: Math.abs(position - min),
+          reflection: reflection
+        };
+      }
+
+      if (max != null && position > max && direction === -1) {
+        return {
+          intersect: max,
+          distance: Math.abs(position - max),
+          reflection: reflection
         };
       }
 
       return {
-        position: this.boundary.max,
-        distance: Math.abs(this.boundary.max - position),
-        direction: directionFlag === 'value' ? 1 : direction + Math.PI
+        intersect: null,
+        distance: 0,
+        reflection: direction
       };
     }
   }, {
     key: "clip",
     value: function clip(position) {
-      if (!(typeof position === 'number')) {
-        return position;
+      if (typeof position === 'number') {
+        return Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(position, this.boundary.min, this.boundary.max);
       }
 
-      if (position < this.boundary.min) {
-        return this.boundary.min;
-      }
+      var p = getPoint(position);
 
-      if (position > this.boundary.max) {
-        return this.boundary.max;
-      }
+      var clipped = p._dup();
 
-      return position;
-    } // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "clipVelocity",
-    value: function clipVelocity(position) {
-      return position;
+      clipped.x = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(p.x, this.boundary.min, this.boundary.max);
+      clipped.y = Object(_math__WEBPACK_IMPORTED_MODULE_0__["clipValue"])(p.y, this.boundary.min, this.boundary.max);
+      return clipped;
     }
   }]);
 
   return RangeBounds;
 }(Bounds);
 
-var RectBounds = /*#__PURE__*/function (_Bounds3) {
-  _inherits(RectBounds, _Bounds3);
+var RectBounds = /*#__PURE__*/function (_Bounds2) {
+  _inherits(RectBounds, _Bounds2);
 
-  var _super6 = _createSuper(RectBounds);
+  var _super5 = _createSuper(RectBounds);
 
-  function RectBounds(leftOrRect) {
-    var bottomOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
-    var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var precisionIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 8;
-
+  function RectBounds(optionsOrRect) {
     _classCallCheck(this, RectBounds);
 
-    var boundary;
-    var precision;
-
-    if (typeof leftOrRect === 'number') {
-      boundary = new Rect(leftOrRect, bottomOrPrecision, width, height);
-      precision = precisionIn;
-    } else {
-      boundary = leftOrRect;
-      precision = bottomOrPrecision;
-    }
-
-    return _super6.call(this, boundary, precision);
+    var defaultOptions = {
+      left: null,
+      right: null,
+      top: null,
+      bottom: null,
+      bounds: 'inside',
+      precision: 8
+    };
+    var options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsOrRect);
+    var boundary = {
+      left: options.left,
+      right: options.right,
+      top: options.top,
+      bottom: options.bottom
+    };
+    return _super5.call(this, boundary, options.bounds, options.precision);
   }
 
   _createClass(RectBounds, [{
+    key: "_dup",
+    value: function _dup() {
+      return new RectBounds({
+        bounds: this.bounds,
+        precision: this.precision,
+        left: this.boundary.left,
+        right: this.boundary.right,
+        top: this.boundary.top,
+        bottom: this.boundary.bottom
+      });
+    }
+  }, {
+    key: "_state",
+    value: function _state(options) {
+      // const { precision } = options;
+      var precision = getPrecision(options);
+      return {
+        f1Type: 'rectBounds',
+        state: [this.bounds, this.precision, this.boundary.left != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.left, precision) : null, this.boundary.bottom != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.bottom, precision) : null, this.boundary.right != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.right, precision) : null, this.boundary.top != null ? Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.top, precision) : null]
+      };
+    }
+  }, {
     key: "contains",
     value: function contains(position) {
       if (typeof position === 'number') {
         return false;
       }
 
-      return this.boundary.isPointInside(position, this.precision);
+      var p = getPoint(position);
+
+      if (this.boundary.left != null && p.x < this.boundary.left) {
+        return false;
+      }
+
+      if (this.boundary.right != null && p.x > this.boundary.right) {
+        return false;
+      }
+
+      if (this.boundary.bottom != null && p.y < this.boundary.bottom) {
+        return false;
+      }
+
+      if (this.boundary.top != null && p.y > this.boundary.top) {
+        return false;
+      }
+
+      return true;
     }
   }, {
     key: "clip",
@@ -42698,102 +43338,194 @@ var RectBounds = /*#__PURE__*/function (_Bounds3) {
         return position;
       }
 
-      var bounds = this.boundary;
-      var x = position.x,
-          y = position.y;
+      var clipped = getPoint(position);
 
-      if (position.x < bounds.left) {
-        x = bounds.left;
-      } else if (position.x > bounds.right) {
-        x = bounds.right;
+      if (this.boundary.left != null && clipped.x < this.boundary.left) {
+        clipped.x = this.boundary.left;
       }
 
-      if (position.y < bounds.bottom) {
-        y = bounds.bottom;
-      } else if (position.y > bounds.top) {
-        y = bounds.top;
+      if (this.boundary.right != null && clipped.x > this.boundary.right) {
+        clipped.x = this.boundary.right;
       }
 
-      return new Point(x, y);
+      if (this.boundary.bottom != null && clipped.y < this.boundary.bottom) {
+        clipped.y = this.boundary.bottom;
+      }
+
+      if (this.boundary.top != null && clipped.y > this.boundary.top) {
+        clipped.y = this.boundary.top;
+      }
+
+      return clipped;
     }
   }, {
     key: "intersect",
     value: function intersect(position) {
+      var _this5 = this;
+
       var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (typeof position === 'number') {
         return {
-          position: position,
+          intersect: null,
           distance: 0,
-          direction: direction
+          reflection: direction
         };
       }
 
-      var ang = direction;
-      var trajectory = new Line(position, 1, ang);
-      var hBound;
-      var vBound;
-      var xMirror = 1;
-      var yMirror = 1;
-      var intersectPoint;
-      var distanceToBound = 0;
-      var bounds = this.boundary;
+      var a = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(clipAngle(direction, '0to360'), this.precision);
+      var pi = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(Math.PI, this.precision);
+      var threePiOnTwo = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(3 * Math.PI / 2, this.precision);
+      var piOnTwo = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(Math.PI / 2, this.precision);
+      var p = getPoint(position);
+      var _this$boundary2 = this.boundary,
+          top = _this$boundary2.top,
+          bottom = _this$boundary2.bottom,
+          left = _this$boundary2.left,
+          right = _this$boundary2.right;
 
-      if (ang > 0 && ang < Math.PI) {
-        hBound = new Line([bounds.left, bounds.top], [bounds.right, bounds.top]);
-      } else if (ang > Math.PI) {
-        hBound = new Line([bounds.left, bounds.bottom], [bounds.right, bounds.bottom]);
-      }
+      var calcHBound = function calcHBound(h) {
+        if (h != null) {
+          if (bottom != null && top != null) {
+            return new Line([h, bottom], [h, top]);
+          }
 
-      if (ang > Math.PI / 2 && ang < Math.PI / 2 * 3) {
-        vBound = new Line([bounds.left, bounds.bottom], [bounds.left, bounds.top]);
-      } else if (ang >= 0 && ang < Math.PI / 2 || ang > Math.PI / 2 * 3) {
-        vBound = new Line([bounds.right, bounds.bottom], [bounds.right, bounds.top]);
-      }
+          if (bottom == null && top != null) {
+            return new Line([h, top], null, -Math.PI / 2, 1);
+          }
 
-      if (vBound != null) {
-        var result = trajectory.intersectsWith(vBound);
+          if (bottom != null && top == null) {
+            return new Line([h, bottom], null, Math.PI / 2, 1);
+          }
 
-        if (result.intersect != null) {
-          intersectPoint = result.intersect;
-          distanceToBound = distance(position, intersectPoint);
-          xMirror = -1;
-        }
-      }
-
-      if (hBound != null) {
-        var _result = trajectory.intersectsWith(hBound);
-
-        if (_result.intersect != null) {
-          var distanceToBoundH = distance(position, _result.intersect);
-
-          if (intersectPoint == null) {
-            intersectPoint = _result.intersect;
-            distanceToBound = distanceToBoundH;
-            xMirror = 1;
-            yMirror = -1;
-          } else if (distanceToBoundH < distanceToBound) {
-            intersectPoint = _result.intersect;
-            distanceToBound = distanceToBoundH;
-            xMirror = 1;
-            yMirror = -1;
-          } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBoundH, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(distanceToBound, this.precision)) {
-            xMirror = -1;
-            yMirror = -1;
+          if (bottom == null && top == null) {
+            return new Line([h, 0], null, Math.PI / 2, 0);
           }
         }
+
+        return null;
+      };
+
+      var calcVBound = function calcVBound(v) {
+        if (v != null) {
+          if (left != null && right != null) {
+            return new Line([left, v], [right, v]);
+          }
+
+          if (left == null && right != null) {
+            return new Line([right, v], null, -Math.PI, 1);
+          }
+
+          if (left != null && right == null) {
+            return new Line([left, v], null, 0, 1);
+          }
+
+          if (left == null && right == null) {
+            return new Line([0, v], null, Math.PI, 0);
+          }
+        }
+
+        return null;
+      }; // Get the lines for each bound
+
+
+      var boundBottom = calcVBound(bottom);
+      var boundTop = calcVBound(top);
+      var boundLeft = calcHBound(left);
+      var boundRight = calcHBound(right); // Get the closest boundary intersect
+
+      var trajectory = new Line(p, null, direction, 1);
+
+      var getIntersect = function getIntersect(boundLine, id) {
+        if (boundLine == null) {
+          return null;
+        }
+
+        if (boundLine.hasPointOn(p, _this5.precision)) {
+          return {
+            intersect: p._dup(),
+            distance: 0,
+            id: id
+          };
+        }
+
+        var result = trajectory.intersectsWith(boundLine, _this5.precision);
+
+        if (result.withinLine && result.intersect != null) {
+          return {
+            intersect: result.intersect,
+            distance: Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(p.distance(result.intersect), _this5.precision),
+            id: id
+          };
+        }
+
+        return null;
+      };
+
+      var bottomIntersect = getIntersect(boundBottom, 'bottom');
+      var topIntersect = getIntersect(boundTop, 'top');
+      var leftIntersect = getIntersect(boundLeft, 'left');
+      var rightIntersect = getIntersect(boundRight, 'right');
+
+      var getClosestIntersect = function getClosestIntersect(intersect1, intersect2) {
+        var closestIntersect = null;
+
+        if (intersect1 != null && intersect2 != null) {
+          if (intersect1.distance === 0 && _this5.bounds === 'inside') {
+            closestIntersect = intersect2;
+          } else if (intersect2.distance === 0 && _this5.bounds === 'inside') {
+            closestIntersect = intersect1;
+          } else if (intersect1.distance < intersect2.distance) {
+            closestIntersect = intersect1;
+          } else {
+            closestIntersect = intersect2;
+          }
+        } else if (intersect1 != null) {
+          closestIntersect = intersect1;
+        } else if (intersect2 != null) {
+          closestIntersect = intersect2;
+        }
+
+        return closestIntersect;
+      };
+
+      var vIntersect = getClosestIntersect(bottomIntersect, topIntersect);
+      var hIntersect = getClosestIntersect(leftIntersect, rightIntersect);
+      var intersects = [];
+
+      if (vIntersect != null && hIntersect != null && vIntersect.distance === hIntersect.distance) {
+        intersects = [vIntersect, hIntersect];
+      } else {
+        var result = getClosestIntersect(vIntersect, hIntersect);
+
+        if (result != null) {
+          intersects = [result];
+        }
       }
 
-      if (intersectPoint == null) {
+      if (intersects.length === 0) {
         return {
-          position: position,
+          intersect: null,
           distance: 0,
-          direction: ang
+          reflection: direction
         };
-      } // let reflectionAngle = ang;
+      }
 
+      var i;
+      var d;
+      var xMirror = 1;
+      var yMirror = 1;
+      intersects.forEach(function (intersect) {
+        if (intersect.id === 'left' || intersect.id === 'right') {
+          xMirror = -1;
+        } else {
+          yMirror = -1;
+        }
 
-      var reflection = polarToRect(1, ang);
+        i = intersect.intersect;
+        d = intersect.distance;
+      });
+      var reflection = polarToRect(1, direction);
 
       if (xMirror === -1) {
         reflection.x *= -1;
@@ -42803,61 +43535,194 @@ var RectBounds = /*#__PURE__*/function (_Bounds3) {
         reflection.y *= -1;
       }
 
-      return {
-        position: intersectPoint,
-        distance: intersectPoint.distance(position),
-        direction: rectToPolar(reflection).angle
-      };
-    } // eslint-disable-next-line class-methods-use-this
+      if (d === 0) {
+        i = p;
+      }
 
-  }, {
-    key: "clipVelocity",
-    value: function clipVelocity(velocity) {
-      return velocity;
+      var r = rectToPolar(reflection).angle;
+      var noIntersect = false; // Test for if the point is on the border, trajectory is along the border
+      // and the cross bound is null
+
+      if (d === 0 && this.bounds === 'inside' && intersects.length === 1) {
+        if ((intersects[0].id === 'bottom' || intersects[0].id === 'top') && (this.boundary.left == null || this.boundary.right == null) && (a === 0 || a === pi)) {
+          noIntersect = true;
+        }
+
+        if ((intersects[0].id === 'right' || intersects[0].id === 'left') && (this.boundary.top == null || this.boundary.bottom == null) && (a === piOnTwo || a === threePiOnTwo)) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'right' && this.boundary.left == null && a === pi) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'left' && this.boundary.right == null && a === 0) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && this.boundary.bottom == null && a === threePiOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'bottom' && this.boundary.top == null && a === piOnTwo) {
+          noIntersect = true;
+        }
+      }
+
+      if (d === 0 && this.bounds === 'inside' && intersects.length === 2) {
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'left' && this.boundary.right == null && a === 0) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'left' && this.boundary.top == null && a === piOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'left' && this.boundary.right == null && a === 0) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'left' && this.boundary.bottom == null && a === threePiOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'right' && this.boundary.left == null && a === pi) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'right' && this.boundary.bottom == null && a === threePiOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'right' && this.boundary.left == null && a === pi) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'right' && this.boundary.top == null && a === piOnTwo) {
+          noIntersect = true;
+        }
+      } // Test for if the point is on the border, bounds is outside, and the
+      // trajectory is away from the border
+
+
+      if (d === 0 && this.bounds === 'outside' && intersects.length === 2) {
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'left' && (a >= piOnTwo || a === 0)) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'left' && a >= 0 && a <= threePiOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'top' && intersects[1].id === 'right' && (a <= pi || a >= threePiOnTwo)) {
+          noIntersect = true;
+        }
+
+        if (intersects[0].id === 'bottom' && intersects[1].id === 'right' && (a <= piOnTwo || a >= pi)) {
+          noIntersect = true;
+        }
+      }
+
+      if (d === 0 && this.bounds === 'outside' && intersects.length === 1) {
+        var _intersects = intersects,
+            _intersects2 = _slicedToArray(_intersects, 1),
+            intersect = _intersects2[0];
+
+        if (intersect.id === 'left' && a >= piOnTwo && a <= threePiOnTwo) {
+          noIntersect = true;
+        }
+
+        if (intersect.id === 'right' && (a <= piOnTwo || a >= threePiOnTwo)) {
+          noIntersect = true;
+        }
+
+        if (intersect.id === 'bottom' && (a >= pi || a === 0)) {
+          noIntersect = true;
+        }
+
+        if (intersect.id === 'top' && a <= pi) {
+          noIntersect = true;
+        }
+      }
+
+      if (noIntersect) {
+        i = null;
+        r = direction;
+      }
+
+      return {
+        intersect: i,
+        distance: d,
+        reflection: r
+      };
     }
   }]);
 
   return RectBounds;
 }(Bounds);
 
-var LineBounds = /*#__PURE__*/function (_Bounds4) {
-  _inherits(LineBounds, _Bounds4);
+var LineBounds = /*#__PURE__*/function (_Bounds3) {
+  _inherits(LineBounds, _Bounds3);
 
-  var _super7 = _createSuper(LineBounds);
+  var _super6 = _createSuper(LineBounds);
 
-  function LineBounds(pointOrLine) {
-    var p2OrMagOrPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
-    var angle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var precisionIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 8;
-
+  function LineBounds(optionsIn) {
     _classCallCheck(this, LineBounds);
 
     var boundary;
-    var precision;
+    var defaultOptions = {
+      angle: 0,
+      mag: 1,
+      bounds: 'inside',
+      precision: 8,
+      ends: 2
+    };
+    var options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, optionsIn);
 
-    if (!(pointOrLine instanceof Line)) {
-      boundary = new Line(pointOrLine, p2OrMagOrPrecision, angle);
-      precision = precisionIn;
-    } else {
-      boundary = pointOrLine;
-      precision = p2OrMagOrPrecision;
+    if (options.line != null) {
+      boundary = getLine(options.line);
+    } else if (options.p1 != null && options.p2 != null) {
+      boundary = new Line(options.p1, options.p2, 0, options.ends);
+    } else if (options.p1 != null) {
+      boundary = new Line(options.p1, options.mag, options.angle, options.ends);
     }
 
-    return _super7.call(this, boundary, precision);
+    return _super6.call(this, boundary, options.bounds, options.precision);
   }
 
   _createClass(LineBounds, [{
+    key: "_dup",
+    value: function _dup() {
+      return new LineBounds({
+        bounds: this.bounds,
+        precision: this.precision,
+        p1: this.boundary.p1._dup(),
+        p2: this.boundary.p2._dup(),
+        mag: this.boundary.distance,
+        angle: this.boundary.ang,
+        ends: this.boundary.ends
+      });
+    }
+  }, {
+    key: "_state",
+    value: function _state(options) {
+      // const { precision } = options;
+      var precision = getPrecision(options);
+      return {
+        f1Type: 'lineBounds',
+        state: [this.bounds, this.precision, Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.p1.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.p1.y, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.p2.x, precision), Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.p2.y, precision), this.boundary.ends]
+      };
+    }
+  }, {
     key: "contains",
     value: function contains(position) {
       if (typeof position === 'number') {
         return false;
       }
 
-      return position.isOnLine(this.boundary, this.precision);
-    } // containsShaddow(position: Point) {
-    //   return position.shaddowIsOnLine(this.boundary, this.precision);
-    // }
-
+      var p = getPoint(position);
+      return p.isWithinLine(this.boundary, this.precision);
+    }
   }, {
     key: "clip",
     value: function clip(position) {
@@ -42865,37 +43730,165 @@ var LineBounds = /*#__PURE__*/function (_Bounds4) {
         return position;
       }
 
-      return position.clipToLine(this.boundary, this.precision);
-    }
+      var p = getPoint(position);
+      return p.clipToLine(this.boundary, this.precision);
+    } // The intersect of a Line Boundary can be its finite end points
+    //  - p1 only if 1 ended
+    //  - p1 or p2 if 2 ended
+
   }, {
     key: "intersect",
-    value: function intersect(p) {
+    value: function intersect(position) {
       var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (typeof p === 'number') {
+      if (typeof position === 'number' || this.boundary.ends === 0 // Unbounded line will have no intersect
+      ) {
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: direction
+          };
+        } // If the point is not along the line, then it is invalid
+
+
+      var p = getPoint(position);
+
+      if (!this.boundary.hasPointAlong(p, this.precision)) {
         return {
-          p: p,
+          intersect: null,
           distance: 0,
-          direction: direction
+          reflection: direction
         };
       }
 
-      var bounds = this.boundary;
-      var v1 = new Line(p, bounds.p1);
-      var v2 = new Line(p, bounds.p2);
+      var onLine = false;
 
-      if (Math.abs(v1.ang - direction) < Math.abs(v2.ang - direction)) {
+      if (this.boundary.hasPointOn(p, this.precision)) {
+        onLine = true;
+      }
+
+      var b = this.boundary;
+
+      var p1 = this.boundary.p1._dup();
+
+      var p2 = this.boundary.p2._dup();
+
+      var angleDelta = Object(_math__WEBPACK_IMPORTED_MODULE_0__["round"])(Math.abs(clipAngle(direction, '0to360') - clipAngle(b.ang, '0to360')), this.precision);
+      var d1 = p.distance(p1);
+      var d2 = p.distance(p2); // If the point is on p1, unless it is inside and going towards p2 the
+      // result can be given immediately
+
+      if (p.isEqualTo(p1, this.precision)) {
+        if (this.bounds === 'inside' && angleDelta !== 0) {
+          return {
+            intersect: p1,
+            distance: 0,
+            reflection: b.ang
+          };
+        }
+
+        if (this.bounds === 'outside' && angleDelta !== 0) {
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: direction
+          };
+        }
+
+        if (this.bounds === 'outside' && angleDelta === 0) {
+          return {
+            intersect: p1,
+            distance: 0,
+            reflection: b.ang + Math.PI
+          };
+        }
+      } // If it is a one ended line, then only p1 is an intersect
+
+
+      if (b.ends === 1) {
+        if (onLine === true && angleDelta === 0 || onLine === false && angleDelta !== 0) {
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: direction
+          };
+        }
+
         return {
-          position: bounds.p1._dup(),
-          direction: direction + Math.PI,
-          distance: p.distance(bounds.p1)
+          intersect: p1,
+          distance: d1,
+          reflection: direction + Math.PI
+        };
+      } // We are now left with a two ended line
+      // So if the point is on p2, then unless it is inside and going toward
+      // p1, the answer can be given now
+
+
+      if (p.isEqualTo(p2, this.precision)) {
+        if (this.bounds === 'inside' && angleDelta === 0) {
+          return {
+            intersect: p2,
+            distance: 0,
+            reflection: b.ang + Math.PI
+          };
+        }
+
+        if (this.bounds === 'outside' && angleDelta === 0) {
+          return {
+            intersect: null,
+            distance: 0,
+            reflection: direction
+          };
+        }
+
+        if (this.bounds === 'outside' && angleDelta !== 0) {
+          return {
+            intersect: p2,
+            distance: 0,
+            reflection: b.ang
+          };
+        } // return { intersect: p2, distance: 0, reflection };
+
+      }
+
+      if (onLine && angleDelta === 0) {
+        return {
+          intersect: p2,
+          distance: d2,
+          reflection: direction + Math.PI
+        };
+      }
+
+      if (onLine) {
+        return {
+          intersect: p1,
+          distance: d1,
+          reflection: direction + Math.PI
+        };
+      } // We now know the point is off a 2 ended line
+
+
+      var i;
+      var d;
+
+      if (d1 < d2 && angleDelta === 0) {
+        i = p1;
+        d = d1;
+      } else if (d2 < d1 && angleDelta !== 0) {
+        i = p2;
+        d = d2;
+      } else {
+        return {
+          intersect: null,
+          distance: 0,
+          reflection: direction
         };
       }
 
       return {
-        position: bounds.p2._dup(),
-        direction: direction + Math.PI,
-        distance: p.distance(bounds.p2)
+        intersect: i,
+        distance: d,
+        reflection: direction + Math.PI
       };
     }
   }, {
@@ -42905,8 +43898,9 @@ var LineBounds = /*#__PURE__*/function (_Bounds4) {
         return velocity;
       }
 
+      var v = getPoint(velocity);
       var unitVector = new Vector(this.boundary).unit();
-      var projection = unitVector.dotProduct(new Vector([0, 0], velocity));
+      var projection = unitVector.dotProduct(new Vector([0, 0], v));
       var ang = this.boundary.ang;
 
       if (projection < -1) {
@@ -42921,28 +43915,141 @@ var LineBounds = /*#__PURE__*/function (_Bounds4) {
   return LineBounds;
 }(Bounds);
 
-function makeBounds(bound) {
-  if (bound == null) {
-    return null;
+function getBounds(bounds) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var transform = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Transform();
+
+  if (bounds == null) {
+    return new Bounds();
   }
 
-  if (typeof bound === 'number') {
-    return new ValueBounds(bound);
+  if (bounds instanceof Bounds) {
+    return bounds;
   }
 
-  if (bound instanceof Rect) {
-    return new RectBounds(bound);
+  if (bounds.type != null) {
+    return getBounds(bounds.bounds, bounds.type);
   }
 
-  if (bound instanceof Line) {
-    return new LineBounds(bound);
+  if (type === 'rect') {
+    return new RectBounds(bounds);
   }
 
-  if (bound instanceof Bounds) {
-    return bound;
+  if (type === 'range') {
+    return new RangeBounds(bounds);
   }
 
-  return new RangeBounds(bound);
+  if (type === 'line') {
+    return new RectBounds(bounds);
+  }
+
+  if (type === 'transform') {
+    return new TransformBounds(transform, bounds);
+  }
+
+  if (bounds.min !== undefined || bounds.max !== undefined) {
+    return getBounds(bounds, 'range');
+  }
+
+  if (bounds instanceof Rect) {
+    return new RectBounds(bounds);
+  }
+
+  if (bounds.left !== undefined || bounds.right !== undefined || bounds.top !== undefined || bounds.bottom !== undefined) {
+    return getBounds(bounds, 'rect');
+  }
+
+  if (bounds.line !== undefined || bounds.p1 !== undefined || bounds.p2 !== undefined || bounds.angle !== undefined || bounds.mag !== undefined || bounds.ends !== undefined) {
+    return getBounds(bounds, 'line');
+  }
+
+  if (bounds.translation !== undefined || bounds.scale !== undefined || bounds.rotation !== undefined) {
+    return getBounds(bounds, 'transform', transform);
+  }
+
+  if (bounds.f1Type != undefined && bounds.state != null) {
+    var f1Type = bounds.f1Type,
+        state = bounds.state;
+
+    if (f1Type != null && f1Type === 'rangeBounds' && state != null && Array.isArray([state]) && state.length === 4) {
+      // $FlowFixMe
+      var _state3 = _slicedToArray(state, 4),
+          b = _state3[0],
+          precision = _state3[1],
+          min = _state3[2],
+          max = _state3[3];
+
+      return new RangeBounds({
+        bounds: b,
+        precision: precision,
+        min: min,
+        max: max
+      });
+    }
+
+    if (f1Type != null && f1Type === 'rectBounds' && state != null && Array.isArray([state]) && state.length === 6) {
+      // $FlowFixMe
+      var _state4 = _slicedToArray(state, 6),
+          _b = _state4[0],
+          _precision = _state4[1],
+          left = _state4[2],
+          bottom = _state4[3],
+          right = _state4[4],
+          top = _state4[5];
+
+      return new RectBounds({
+        bounds: _b,
+        precision: _precision,
+        left: left,
+        bottom: bottom,
+        right: right,
+        top: top
+      });
+    }
+
+    if (f1Type != null && f1Type === 'lineBounds' && state != null && Array.isArray([state]) && state.length === 7) {
+      // $FlowFixMe
+      var _state5 = _slicedToArray(state, 7),
+          _b2 = _state5[0],
+          _precision2 = _state5[1],
+          x = _state5[2],
+          y = _state5[3],
+          x2 = _state5[4],
+          y2 = _state5[5],
+          ends = _state5[6];
+
+      return new LineBounds({
+        bounds: _b2,
+        precision: _precision2,
+        p1: new Point(x, y),
+        p2: new Point(x2, y2),
+        ends: ends
+      });
+    }
+
+    if (f1Type != null && f1Type === 'transformBounds' && state != null && Array.isArray([state]) && state.length === 3) {
+      // $FlowFixMe
+      var _state6 = _slicedToArray(state, 3),
+          _precision3 = _state6[0],
+          order = _state6[1],
+          boundsArray = _state6[2];
+
+      var t = new TransformBounds(new Transform(), {}, _precision3);
+      t.order = order.slice();
+      var boundary = [];
+      boundsArray.forEach(function (b) {
+        if (b == null) {
+          boundary.push(null);
+        } else {
+          boundary.push(getBounds(b));
+        }
+      });
+      t.boundary = boundary;
+      return t;
+    }
+  }
+
+  return null;
 }
 
 function transformValueToArray(transformValue, transform) {
@@ -42995,15 +44102,23 @@ function transformValueToArray(transformValue, transform) {
   }
 
   return order;
-}
+} // bounds: null
+// bounds: { translation: [-1, -1, 2, 2], scale: [-1, 1], rotation: [-1, 1] }
+// bounds: 'diagram',
+// bounds: new TransformBounds(transform, [null, null] | { translation: null })
+// bounds: [null, [-1, -1, 2, 2], null]
+// bounds: [null, [null, -1, null, 2], null]
+// bounds: TransformBounds | Rect | Array<number> | 'diagram',
+// type TypeBoundsDefinition = null | ;
 
-var TransformBounds = /*#__PURE__*/function (_Bounds5) {
-  _inherits(TransformBounds, _Bounds5);
 
-  var _super8 = _createSuper(TransformBounds);
+var TransformBounds = /*#__PURE__*/function (_Bounds4) {
+  _inherits(TransformBounds, _Bounds4);
+
+  var _super7 = _createSuper(TransformBounds);
 
   function TransformBounds(transform) {
-    var _this4;
+    var _this6;
 
     var bounds = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
@@ -43025,26 +44140,61 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
       }
     }
 
-    _this4 = _super8.call(this, [], precision);
-    _this4.order = order;
+    _this6 = _super7.call(this, [], precision);
+    _this6.order = order;
 
-    _this4.update(bounds);
+    _this6.createBounds(bounds);
 
-    return _this4;
+    return _this6;
   }
 
   _createClass(TransformBounds, [{
-    key: "update",
-    value: function update(boundOrBounds) {
+    key: "_dup",
+    value: function _dup() {
+      var t = new TransformBounds(new Transform(), {}, this.precision);
+      t.order = this.order.slice();
+      t.boundary = [];
+      this.boundary.forEach(function (b) {
+        if (b == null) {
+          t.boundary.push(null);
+        } else {
+          t.boundary.push(b._dup());
+        }
+      });
+      return t;
+    }
+  }, {
+    key: "_state",
+    value: function _state(options) {
+      // const { precision } = options;
+      var precision = getPrecision(options);
+      var bounds = [];
+      this.boundary.forEach(function (b) {
+        if (b == null) {
+          bounds.push(null);
+        } else {
+          bounds.push(b._state({
+            precision: precision
+          }));
+        }
+      });
+      return {
+        f1Type: 'transformBounds',
+        state: [this.precision, this.order.slice(), bounds]
+      };
+    }
+  }, {
+    key: "createBounds",
+    value: function createBounds(bounds) {
       var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (boundOrBounds == null || boundOrBounds instanceof Bounds) {
-        this.boundary[index] = boundOrBounds;
+      if (bounds == null || bounds instanceof Bounds) {
+        this.boundary[index] = bounds;
         return;
       }
 
-      if (Array.isArray(boundOrBounds)) {
-        this.boundary = boundOrBounds;
+      if (Array.isArray(bounds)) {
+        this.boundary = bounds;
         return;
       }
 
@@ -43052,20 +44202,20 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
       this.order.forEach(function (o) {
         var bound = null;
 
-        if (o === 't' && boundOrBounds.position != null) {
-          bound = makeBounds(boundOrBounds.position);
+        if (o === 't' && bounds.position != null) {
+          bound = getBounds(bounds.position);
         }
 
-        if (o === 't' && boundOrBounds.translation != null) {
-          bound = makeBounds(boundOrBounds.translation);
+        if (o === 't' && bounds.translation != null) {
+          bound = getBounds(bounds.translation);
         }
 
-        if (o === 'r' && boundOrBounds.rotation != null) {
-          bound = makeBounds(boundOrBounds.rotation);
+        if (o === 'r' && bounds.rotation != null) {
+          bound = getBounds(bounds.rotation);
         }
 
-        if (o === 's' && boundOrBounds.scale != null) {
-          bound = makeBounds(boundOrBounds.scale);
+        if (o === 's' && bounds.scale != null) {
+          bound = getBounds(bounds.scale);
         }
 
         boundary.push(bound);
@@ -43073,37 +44223,55 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
       this.boundary = boundary;
     }
   }, {
-    key: "updateBound",
-    value: function updateBound(type, bound) {
+    key: "update",
+    value: function update(type, bound) {
       var typeIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var index = 0;
 
       for (var i = 0; i < this.order.length; i += 1) {
         var o = this.order[i];
 
-        if (o === type && (typeIndex == null || typeIndex === index)) {
-          this.boundary[i] = makeBounds(bound);
+        if (o === type) {
+          if (typeIndex == null || typeIndex === index) {
+            this.boundary[i] = getBounds(bound);
+          }
+
           index += 1;
-        }
+        } // if (o === type && (typeIndex == null || typeIndex === index)) {
+        //   this.boundary[i] = getBounds(bound);
+        //   index += 1;
+        // }
+
       }
     }
   }, {
     key: "updateTranslation",
     value: function updateTranslation(bound) {
       var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      this.updateBound('t', bound, translationIndex);
+      var b = getBounds(bound);
+
+      if (b instanceof RangeBounds) {
+        b = new RectBounds({
+          left: b.boundary.min,
+          bottom: b.boundary.min,
+          top: b.boundary.max,
+          right: b.boundary.max
+        });
+      }
+
+      this.update('t', b, translationIndex);
     }
   }, {
     key: "updateRotation",
     value: function updateRotation(bound) {
       var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      this.updateBound('r', bound, translationIndex);
+      this.update('r', bound, translationIndex);
     }
   }, {
     key: "updateScale",
     value: function updateScale(bound) {
       var translationIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      this.updateBound('s', bound, translationIndex);
+      this.update('s', bound, translationIndex);
     }
   }, {
     key: "getBound",
@@ -43142,21 +44310,27 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
     value: function getRotation() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       return this.getBound('r', index);
-    }
+    } // $FlowFixMe
+
   }, {
     key: "contains",
     value: function contains(t) {
       for (var i = 0; i < t.order.length; i += 1) {
         var transformElement = t.order[i];
-        var b = this.boundary[i];
+        var b = this.boundary[i]; // $FlowFixMe
 
-        if (b != null && !b.contains(transformElement)) {
+        if (transformElement instanceof Rotation) {
+          if (b != null && !b.contains(transformElement.r)) {
+            return false;
+          }
+        } else if (b != null && !b.contains(new Point(transformElement.x, transformElement.y))) {
           return false;
         }
       }
 
       return true;
-    }
+    } // $FlowFixMe
+
   }, {
     key: "clip",
     value: function clip(t) {
@@ -43167,7 +44341,14 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
         var b = this.boundary[i];
 
         if (b != null) {
-          var clipped = b.clip(transformElement);
+          var clipped = void 0;
+
+          if (transformElement instanceof Rotation) {
+            clipped = b.clip(transformElement.r);
+          } else {
+            clipped = b.clip(new Point(transformElement.x, transformElement.y));
+          }
+
           var newElement = void 0;
 
           if (transformElement instanceof Translation) {
@@ -43181,7 +44362,7 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
 
           order.push(newElement);
         } else {
-          order.push(transformElement);
+          order.push(transformElement._dup());
         }
       }
 
@@ -43194,16 +44375,30 @@ var TransformBounds = /*#__PURE__*/function (_Bounds5) {
 
 function deceleratePoint(positionIn, velocityIn, deceleration) {
   var deltaTimeIn = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var bounds = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var boundsIn = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
   var bounceLossIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
   var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
-  // clip velocity to the dimension of interest
+  var bounds;
+
+  if (boundsIn instanceof RangeBounds) {
+    bounds = new RectBounds({
+      left: boundsIn.min,
+      right: boundsIn.max,
+      bottom: boundsIn.min,
+      top: boundsIn.max
+    });
+  } else {
+    bounds = boundsIn;
+  } // clip velocity to the dimension of interest
+
+
   var velocity = velocityIn;
 
-  if (bounds != null) {
+  if (bounds != null && bounds.clipVelocity != null) {
     velocity = bounds.clipVelocity(velocityIn);
-  }
+  } // const velocity = velocityIn;
+
 
   var stopFlag = false;
 
@@ -43272,15 +44467,21 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   var result = bounds.intersect(position, clipAngle(angle, '0to360'));
   var intersectPoint;
 
-  if (typeof result.position === 'number') {
-    intersectPoint = new Point(result.position, 0);
+  if (typeof result.intersect === 'number') {
+    intersectPoint = new Point(result.intersect, 0);
+  } else if (result.intersect == null) {
+    return {
+      position: newPosition,
+      velocity: new Point(0, 0),
+      duration: deltaTime
+    };
   } else {
-    intersectPoint = result.position;
+    intersectPoint = result.intersect;
   } // const intersectPoint = result.position;
 
 
   var distanceToBound = result.distance;
-  var reflectionAngle = result.direction; // if (intersectPoint == null) {
+  var reflectionAngle = result.reflection; // if (intersectPoint == null) {
   //   return {
   //     duration: timeToZeroV,
   //     position: newPosition,
@@ -43332,7 +44533,10 @@ function decelerateValue(value, velocity, deceleration) {
     // let { min, max } = boundsIn.boundary;
     // if (min == null) {
     // }
-    bounds = new LineBounds([boundsIn.boundary.min, 0], [boundsIn.boundary.max, 0]);
+    bounds = new LineBounds({
+      p1: [boundsIn.boundary.min, 0],
+      p2: [boundsIn.boundary.max, 0]
+    });
   }
 
   var result = deceleratePoint(new Point(value, 0), new Point(velocity, 0), deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold, precision);
@@ -43353,8 +44557,14 @@ function decelerateIndependantPoint(value, velocity, deceleration) {
   var yBounds = null;
 
   if (boundsIn != null) {
-    xBounds = new RangeBounds(boundsIn.boundary.left, boundsIn.boundary.right);
-    yBounds = new RangeBounds(boundsIn.boundary.bottom, boundsIn.boundary.top);
+    xBounds = new RangeBounds({
+      min: boundsIn.boundary.left,
+      max: boundsIn.boundary.right
+    });
+    yBounds = new RangeBounds({
+      min: boundsIn.boundary.bottom,
+      max: boundsIn.boundary.top
+    });
   }
 
   var xResult = decelerateValue(value.x, velocity.x, deceleration, deltaTime, xBounds, bounceLoss, zeroVelocityThreshold, precision);
@@ -43410,11 +44620,18 @@ function getTransformBoundsLimit(boundsDefinition, transform) {
   return order;
 }
 
-function decelerateTransform(transform, velocity, deceleration, deltaTime, bounds, bounceLoss, zeroVelocityThreshold) {
+function decelerateTransform(transform, velocity, deceleration, deltaTime, boundsIn, bounceLoss, zeroVelocityThreshold) {
   var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
   var duration = 0;
   var newOrder = [];
   var newVOrder = [];
+  var bounds;
+
+  if (boundsIn instanceof TransformBounds) {
+    bounds = boundsIn;
+  } else {
+    bounds = new TransformBounds(transform, boundsIn);
+  }
 
   for (var i = 0; i < transform.order.length; i += 1) {
     var transformation = transform.order[i];
@@ -43423,23 +44640,23 @@ function decelerateTransform(transform, velocity, deceleration, deltaTime, bound
     var newVTransformation = void 0;
 
     if (transformation instanceof Translation) {
-      result = deceleratePoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = deceleratePoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Translation(result.position.x, result.position.y);
       newVTransformation = new Translation(result.velocity.x, result.velocity.y);
     } else if (transformation instanceof Scale) {
-      result = decelerateIndependantPoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = decelerateIndependantPoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Scale(result.point.x, result.point.y);
       newVTransformation = new Scale(result.velocity.x, result.velocity.y);
     } else {
-      result = decelerateValue(transformation.r, velocity.order[i].r, deceleration[i], deltaTime, bounds[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = decelerateValue(transformation.r, velocity.order[i].r, deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Rotation(result.value);
       newVTransformation = new Rotation(result.velocity);
     }
 
     if (deltaTime === null) {
       if (result.duration > duration) {
-        var _result2 = result;
-        duration = _result2.duration;
+        var _result = result;
+        duration = _result.duration;
       }
     }
 

@@ -243,7 +243,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const bendLine = this._circle._bendLine;
     const { radius, width } = this.layout;
     bendLine.showAll();
-    bendLine.stop(true, false);
+    bendLine.stop('cancel');
     this.bend(1);
     bendLine.setPosition(radius + width / 2, 0);
     bendLine.setRotation(Math.PI / 2);
@@ -255,7 +255,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const bendLine = this._circle._bendLine;
     const { radius, width } = this.layout;
     bendLine.showAll();
-    bendLine.stop(true, false);
+    bendLine.stop('cancel');
     this.bend(0);
     bendLine.setPosition(line1.getPosition());
     bendLine.setRotation(line1.getRotation(''));
@@ -290,7 +290,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     lines._line3.hide();
     lines._line4.hide();
     lines._line5.hide();
-    lines.stop(true, true);
+    lines.stop('complete');
     lines.animations.new()
       .dissolveIn({ element: lines._line1, duration: 0.5 })
       .dissolveIn({ element: lines._line2, duration: 0.5 })
@@ -312,7 +312,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (toAngle != null
       && round(toAngle, 5) === round(this._circle._line1.getRotation('0to360'), 5)
       && this._circle._angle.isShown === true) {
-      this._circle._line1.stop(true, false);
+      this._circle._line1.stop('cancel');
       this._circle._angle.pulseScaleNow(1, 1.3, 0, whenFinished);
       this.diagram.animateNextFrame();
       // if (whenFinished != null) {
@@ -323,7 +323,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (toAngle == null) {
       r = rand(Math.PI / 2) + Math.PI / 2 + this._circle._line1.getRotation('0to360');
     }
-    this._circle._line1.stop(true, false);
+    this._circle._line1.stop('cancel');
     this._circle._line1.animations.new()
       .rotation({ target: r, duration, direction })
       .whenFinished(whenFinished)
@@ -414,7 +414,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   showCircle() {
-    this._circle._line1.stop(true, false);
+    this._circle._line1.stop('cancel');
     this._circle._line1.setRotation(0);
     this.pushLine(Math.PI * 1.999, 1, 2);
   }

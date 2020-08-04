@@ -148,7 +148,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       return;
     }
 
-    fig.stop(true, false);
+    fig.stop('cancel');
     fig.animations.new()
       .rotation({ target: rotation, duration, direction: 2 })
       .whenFinished(callback)

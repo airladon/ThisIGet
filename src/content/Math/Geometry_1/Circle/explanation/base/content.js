@@ -19,8 +19,10 @@ const {
   highlight,
 } = Fig.tools.html;
 
+const { Rect } = Fig;
 const layout = diagramLayout();
 const { colors } = layout;
+const { TransformBounds } = Fig.tools.g2;
 
 class Content extends PresentationFormatContent {
   setTitle() {
@@ -243,6 +245,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         circ.updateCircleLocation();
+        console.log(circ._circle);
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;
@@ -433,8 +436,9 @@ class Content extends PresentationFormatContent {
         circ.straighten(0);
         circle._line.setColor(colors.grid);
         circle._diameter.isTouchable = false;
-        circle.move.maxTransform.updateTranslation(1000, 1000);
-        circle.move.minTransform.updateTranslation(-1000, -1000);
+        circle.move.bounds.updateTranslation(null);
+        // circle.move.maxTransform.updateTranslation(1000, 1000);
+        // circle.move.minTransform.updateTranslation(-1000, -1000);
         circ.diameterToCicumferenceComparison(done);
         circle.setScenario('centerHigh');
       },
@@ -556,8 +560,9 @@ class Content extends PresentationFormatContent {
         circle._radius.setRotation(0.5);
         circle._diameter.setRotation(0);
         circle.setScale(0.7);
-        circle.move.maxTransform.updateScale(0.78, 0.78);
-        circle.move.minTransform.updateScale(0.3, 0.3);
+        circle.move.bounds.updateScale(new Rect(0.3, 0.3, 0.48, 40.48));
+        // circle.move.maxTransform.updateScale(0.78, 0.78);
+        // circle.move.minTransform.updateScale(0.3, 0.3);
         circle._scale.isTouchable = true;
         circ._locationText.setScenario('summary');
         circ._circumferenceText.setScenario('summary');
@@ -566,7 +571,9 @@ class Content extends PresentationFormatContent {
         circ.updateCircleLocation();
       },
       setLeaveState: () => {
-        circle.move.maxTransform.updateScale(10, 10);
+        // const s = circle.move.bounds.getScale();
+        circle.move.bounds.updateScale(new Rect(0.3, 0.3, 9.7, 9.7));
+        // circle.move.maxTransform.updateScale(10, 10);
         circle.setScale(1);
         circle._scale.isTouchable = false;
         circle._line.setColor(colors.circle);

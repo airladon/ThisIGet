@@ -80,7 +80,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
 
     if (this.isFlipping) {
-      tri2.stop(true, 'complete');
+      tri2.stop('complete');
     } else {
       tri2.stop('freeze');
     }
@@ -139,7 +139,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   toggleBothSides(toShowIn: ?boolean = null) {
     if (this.isFlipping) {
-      this._congruentTriangles._tri2.stop(true, 'complete');
+      this._congruentTriangles._tri2.stop('complete');
     }
     this.toggleSides(1, toShowIn);
     this.toggleSides(2, toShowIn);
@@ -147,7 +147,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   toggleBothAngles(toShowIn: ?boolean = null) {
     if (this.isFlipping) {
-      this._congruentTriangles._tri2.stop(true, 'complete');
+      this._congruentTriangles._tri2.stop('complete');
     }
     this.toggleAngles(1, toShowIn);
     this.toggleAngles(2, toShowIn);
@@ -204,7 +204,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   simpleFlip(duration: number, callback: ?() => void = null) {
     const { tri2 } = this._congruentTriangles.elements;
     if (this.isFlipping) {
-      tri2.stop(true, 'complete');
+      tri2.stop('complete');
     } else {
       tri2.stop('freeze');
     }

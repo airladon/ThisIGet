@@ -60,7 +60,7 @@ export default class Collection extends CommonDiagramCollection {
   propertiesPosition: number;
 
   appearCircleAndMoveWheel() {
-    this.stop(true, true);
+    this.stop('complete');
     this._fig1._circle.hide();
     this._fig1._circle.setScenario('centerLeft');
     this._fig1._wheel.setScenario('centerLeft');
@@ -120,7 +120,7 @@ export default class Collection extends CommonDiagramCollection {
     stop: boolean = true,
   ) {
     if (stop) {
-      this.stop(true, true);
+      this.stop('complete');
     }
     const c = dimensions._c;
     const d = dimensions._d;
@@ -146,25 +146,25 @@ export default class Collection extends CommonDiagramCollection {
   }
 
   pulseProperties(dimensions: TypeDimensions) {
-    this.stop(true, true);
+    this.stop('complete');
     dimensions._c.pulseScaleNow(1, 1.7);
     dimensions._d.pulseScaleNow(1, 1.7);
     this.diagram.animateNextFrame();
   }
 
   pulseEquation(dimensions: TypeDimensions) {
-    this.stop(true, true);
+    this.stop('complete');
     dimensions._eqn.pulseScaleNow(1, 1.7);
     this.diagram.animateNextFrame();
   }
 
   makeEqnFromProperties(dimensions: TypeDimensions, stop: boolean = true) {
     if (stop) {
-      this.stop(true, true);
+      this.stop('complete');
     }
     const prop = dimensions;
     const eqn = prop._eqn;
-    this.stop(true, true);
+    this.stop('complete');
     eqn.showForm('base');
 
     const cPosition = eqn._c.getPosition();
@@ -195,7 +195,7 @@ export default class Collection extends CommonDiagramCollection {
   }
 
   makeDimensions(dimensions: TypeDimensions) {
-    this.stop(true, true);
+    this.stop('complete');
     const prop = dimensions;
     const eqn = prop._eqn;
     eqn.hideAll();

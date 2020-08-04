@@ -37,7 +37,7 @@ export default class CommonCollectionObjects extends CommonDiagramCollection {
     const objects = ['Moon', 'Wheel', 'Ball', 'Ring'];
     const start = ['moreLeft', 'left', 'center', 'right'];
     const circle = this.elements[`circle${objects[this.objectIndex]}`];
-    circle.stop(true, false);
+    circle.stop('cancel');
     circle.setScenario(start[this.objectIndex]);
     circle.animations.new()
       .dissolveIn(0.2)
