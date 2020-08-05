@@ -22,6 +22,8 @@ const {
 const layout = diagramLayout();
 const { colors } = layout;
 
+const { LineBounds } = Fig.tools.g2;
+
 class Content extends PresentationFormatContent {
   setTitle() {
     this.title = details.title;
@@ -403,7 +405,19 @@ class Content extends PresentationFormatContent {
       three._fig._line1.move.type = 'translation';
       three._fig._line1.move.element = null;
       three._fig._line1.setTransformCallback = three._fig._line3.setTransformCallback;
-      three._fig._line1.move.limitLine = layout.moveLine;
+      // three._fig._line1.move.limitLine = layout.moveLine;
+      // console.log(layout.moveLine)
+      const bounds = new LineBounds(layout.moveLine._dup());
+      three._fig._line1.move.bounds.updateTranslation(bounds);
+      // console.log(three._fig._line1.move.bounds.getTranslation()._dup())
+      // console.log(three._fig._line1.move.bounds._dup())
+      // three._fig._line1.subscriptions.subscribe('setTransform', () => {
+      //   console.log('a', three._fig._line1.transform.t()._dup());
+      //   console.log('b', three._fig._line1.move.bounds._dup());
+      // })
+      // three._fig._line3.setTransformCallback = (t: Transform) => {
+      //   three.updateIntersectingLineAngle();
+      // };
       three._fig._line3.isTouchable = false;
       three._fig._line3.isInteractive = false;
       three._fig._line2.isTouchable = false;
@@ -411,6 +425,7 @@ class Content extends PresentationFormatContent {
       three._fig._line2.setColor(colors.disabled);
     };
     const leaveTranslationLine = () => {
+      three._fig._line1.move.bounds.updateTranslation(this.diagram.limits._dup());
       three._fig._line1.move.type = 'rotation';
       three._fig._line1.move.element = three._fig;
       three._fig._line1.setTransformCallback = null;
@@ -420,6 +435,10 @@ class Content extends PresentationFormatContent {
       three._fig._line2.isTouchable = true;
       three._fig._line2.isInteractive = null;
       three._fig._line2.setColor(colors.lines);
+      // three._fig._line3.setTransformCallback = (t: Transform) => {
+      //   three._fig._line1.updateMoveTransform(t);
+      //   three.updateIntersectingLineAngle();
+      // };
     };
 
     this.addSection({

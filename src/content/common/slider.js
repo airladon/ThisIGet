@@ -65,7 +65,10 @@ export default function makeSlider(
 
   circle.isTouchable = true;
   circle.isMovable = true;
-  circle.move.bounds = { translation: new Rect(start, 0, travel, 0) };
+  // circle.move.bounds = { translation: new Rect(start, 0, travel, 0) };
+  circle.move.bounds.updateTranslation({
+    left: start, right: travel, bottom: 0, top: 0,
+  });
   // circle.move.minTransform.updateTranslation(start, 0);
   // circle.move.maxTransform.updateTranslation(start + travel, 0);
   circle.move.bounce = false;

@@ -59,8 +59,11 @@ export default class QRAngle extends PopupBoxCollection {
     angle._line2.showAll();
     angle._fill.show();
     angle._line1.setRotation(1);
-    angle._line1.move.maxTransform.updateRotation(Math.PI * 0.95);
-    angle._line1.move.minTransform.updateRotation(Math.PI * 0.05);
+    angle._line1.move.bounds.updateRotation({
+      min: Math.PI * 0.05,
+      max: Math.PI * 0.95,
+    });
+    // angle._line1.move.bounds.updateRotation(Math.PI * 0.05);
     angle._line1.makeTouchable();
     this.transformToQRWindow(collection, new Rect(-2, -0.6, 4, 2));
     this.diagram.animateNextFrame();

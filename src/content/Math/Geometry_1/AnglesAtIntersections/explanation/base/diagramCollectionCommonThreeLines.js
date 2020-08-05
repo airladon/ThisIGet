@@ -10,7 +10,7 @@ const {
   Transform, Point,
 } = Fig;
 
-// const { minAngleDiff } = Fig.tools.g2;
+const { LineBounds } = Fig.tools.g2;
 
 const { rand } = Fig.tools.math;
 
@@ -46,10 +46,16 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this._fig._line3.makeTouchable();
     this._fig._line1.move.element = this._fig;
     this._fig._line2.move.element = this._fig;
-    this._fig._line3.move.maxTransform.updateRotation(Math.PI - Math.PI / 3.7);
-    this._fig._line3.move.minTransform.updateRotation(Math.PI / 3.7);
+    // this._fig._line3.move.maxTransform.updateRotation(Math.PI - Math.PI / 3.7);
+    // this._fig._line3.move.minTransform.updateRotation(Math.PI / 3.7);
+    this._fig._line3.move.bounds.updateRotation({
+      min: Math.PI / 3.7,
+      max: Math.PI - Math.PI / 3.7,
+    });
     this._fig._line3.setTransformCallback = (t: Transform) => {
-      this._fig._line1.updateMoveTransform(t);
+      if (!(this._fig._line1.move.bounds.getTranslation() instanceof LineBounds)) {
+        this._fig._line1.updateMoveTransform(t);
+      }
       this.updateIntersectingLineAngle();
     };
     this._fig.setTransformCallback = () => {

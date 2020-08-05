@@ -289,6 +289,9 @@ export default function diagramLayout() {
             start: { position: new Point(0, 0), rotation: 0 },
           },
           interactiveLocation: new Point(length * 0.8, 0),
+          move: {
+            canBeMovedAfterLosingTouch: true,
+          },
         },
       },
       {

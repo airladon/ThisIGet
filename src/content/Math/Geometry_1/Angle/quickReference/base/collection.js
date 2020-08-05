@@ -33,13 +33,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.hasTouchableElements = true;
 
     this._angle._line1.makeTouchable();
+    // this._angle._line1.move.canBeMovedAfterLosingTouch = true;
     this._angle._line1.setTransformCallback = this.updateAngle.bind(this);
     this.angleIndex = 0;
   }
 
   updateAngle() {
     const r = this._angle._line1.getRotation();
-    const extraRotation = clipAngle(r + 0.05, '0to360');
+    const extraRotation = clipAngle(r + 0, '0to360');
     this._angle._fill.setAngleToDraw(extraRotation);
   }
 

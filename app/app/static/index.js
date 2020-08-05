@@ -22532,6 +22532,9 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
 
     _this2.multiMove = {
       vertexSpaceMidLength: 0,
+      // bounds: new RectBounds({
+      //   left: -1, bottom: -1, top: 1, right: 1
+      // }),
       bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2)
     };
     _this2._midLine = null;
@@ -22828,7 +22831,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
       var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var moveType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.move.type;
       var middleLengthPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.333;
-      var translationBounds = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.diagramLimits;
+      var translationBounds = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.diagramLimits._dup();
 
       if (movable) {
         if (moveType === 'translation' || moveType === 'rotation' || moveType === 'scale' || moveType === 'scaleX' || moveType === 'scaleY') {
@@ -22896,7 +22899,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
     value: function updateMoveTransform() {
       var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.transform._dup();
       var r = t.r();
-      var bounds = this.multiMove.bounds;
+      var bounds = this.multiMove.bounds; // console.log('qqwer')
 
       if (r != null) {
         var w = Math.abs(this.currentLength / 2 * Math.cos(r));
@@ -22906,8 +22909,8 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
           this.move.bounds.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
             left: bounds.left + w,
             bottom: bounds.bottom + h,
-            right: bounds.right - w - (bounds.left + w),
-            top: bounds.top - h - (bounds.bottom + h)
+            right: bounds.right - w,
+            top: bounds.top - h
           }));
         } // this.move.maxTransform.updateTranslation(
         //   bounds.right - w,
@@ -31896,31 +31899,11 @@ var DiagramElement = /*#__PURE__*/function () {
       if (this.move.transformClip != null) {
         this.transform = this.fnMap.exec(this.move.transformClip, transform);
       } else {
-        // console.log(transform)
-        // let { bounds } = this.move;
-        // if (bounds === 'diagram') {
-        //   bounds = new TransformBounds(this.transform);
-        //   bounds.updateTranslation(new RectBounds(this.diagram.limits));
-        // }
-        if (window.asdf && this.name === 'c') {
-          debugger;
-        }
-
         this.checkMoveBounds();
 
         if (this.move.bounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"]) {
-          this.transform = this.move.bounds.clip(transform); // if (this.name === 'c') {
-          // console.log(transform)
-          // console.log(this.transform)
-          // console.log(this.move.bounds.boundary[2])
-          // }
-        } // console.log(this.transform)
-        // this.transform = transform._dup().clip(
-        //   this.move.minTransform,
-        //   this.move.maxTransform,
-        //   this.move.limitLine,
-        // );
-
+          this.transform = this.move.bounds.clip(transform);
+        }
       }
 
       if (this.internalSetTransformCallback) {
@@ -31928,9 +31911,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       this.fnMap.exec(this.setTransformCallback, this.transform);
-      this.subscriptions.trigger('setTransform', [this.transform]); // if (this.setTransformCallback) {
-      //   this.setTransformCallback(this.transform);
-      // }
+      this.subscriptions.trigger('setTransform', [this.transform]);
     } // Set the next transform (and velocity if moving freely) for the next
     // animation frame.
     //
@@ -43940,7 +43921,7 @@ function getBounds(bounds) {
   }
 
   if (type === 'line') {
-    return new RectBounds(bounds);
+    return new LineBounds(bounds);
   }
 
   if (type === 'transform') {
@@ -43953,6 +43934,12 @@ function getBounds(bounds) {
 
   if (bounds instanceof Rect) {
     return new RectBounds(bounds);
+  }
+
+  if (bounds instanceof Line) {
+    return new LineBounds({
+      line: bounds
+    });
   }
 
   if (bounds.left !== undefined || bounds.right !== undefined || bounds.top !== undefined || bounds.bottom !== undefined) {
