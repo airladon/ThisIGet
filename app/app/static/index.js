@@ -22480,7 +22480,9 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
     _this2.animateLengthToOptions = {
       initialLength: 0,
       deltaLength: 1,
-      finishOnCancel: true
+      finishOnCancel: true,
+      callback: null,
+      onStepCallback: null
     };
     _this2.pulseWidthOptions = {
       oldCallback: null,
@@ -26741,6 +26743,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeDashes", function() { return makeDashes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lineToDash", function() { return lineToDash; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/math */ "./src/js/tools/math.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -26763,6 +26766,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function makeDashDefinition(dashes) {
   var cum = [];
   var cycleLength = dashes.reduce(function (p, sum) {
@@ -26777,17 +26781,26 @@ function makeDashDefinition(dashes) {
 }
 
 function getDashElementAndRemainder(dash, offset) {
+  var precision = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 8;
   var singleCycleOffset;
 
   if (offset > dash.sum) {
-    singleCycleOffset = offset % dash.sum;
+    singleCycleOffset = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(offset % dash.sum, precision);
   } else {
     singleCycleOffset = offset;
   }
 
   for (var i = 0; i < dash.definition.length; i += 1) {
-    if (singleCycleOffset <= dash.cum[i]) {
-      return [i, dash.cum[i] - singleCycleOffset];
+    if (singleCycleOffset < dash.cum[i]) {
+      return [i, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(dash.cum[i] - singleCycleOffset, precision)];
+    }
+
+    if (singleCycleOffset === dash.cum[i]) {
+      if (i + 1 < dash.definition.length) {
+        return [i + 1, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(dash.cum[i + 1] - singleCycleOffset, precision)];
+      }
+
+      return [0, Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(dash.cum[0], precision)];
     }
   }
 
@@ -26795,17 +26808,18 @@ function getDashElementAndRemainder(dash, offset) {
 }
 
 function makeDashes(dash, p1, p2, offset) {
+  var precision = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 8;
   var points = [];
   var cumDistance = 0; // eslint-disable-next-line prefer-const
 
-  var _getDashElementAndRem = getDashElementAndRemainder(dash, offset),
+  var _getDashElementAndRem = getDashElementAndRemainder(dash, offset, precision),
       _getDashElementAndRem2 = _slicedToArray(_getDashElementAndRem, 2),
       index = _getDashElementAndRem2[0],
       remainder = _getDashElementAndRem2[1];
 
   var line12 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p1, p2);
-  var totLength = line12.length();
-  var dashLength = remainder;
+  var totLength = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(line12.length(), precision);
+  var dashLength = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(remainder, precision);
   var lastIndex = index;
 
   while (cumDistance < totLength) {
@@ -26815,7 +26829,7 @@ function makeDashes(dash, p1, p2, offset) {
       var q1 = line12.pointAtPercent(cumDistance / totLength);
       var q2 = void 0;
 
-      if (cumDistance + dashLength <= totLength) {
+      if (Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(cumDistance + dashLength, precision) <= totLength) {
         q2 = line12.pointAtPercent((cumDistance + dashLength) / totLength);
         cumDistance += dashLength;
       } else {
@@ -26828,9 +26842,10 @@ function makeDashes(dash, p1, p2, offset) {
       cumDistance += dashLength;
     }
 
+    cumDistance = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(cumDistance, precision);
     lastIndex = index;
     index = (index + 1) % dash.definition.length;
-    dashLength = dash.definition[index];
+    dashLength = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(dash.definition[index], precision);
   }
 
   return {
@@ -26842,13 +26857,14 @@ function makeDashes(dash, p1, p2, offset) {
 function lineToDash(points, dash) {
   var close = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var offset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+  var precision = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 8;
   var out = [];
   var dd = makeDashDefinition(dash);
   var cumLength = offset;
   var lastContinue = false;
 
   var processLine = function processLine(p1, p2) {
-    var dashes = makeDashes(dd, p1, p2, cumLength);
+    var dashes = makeDashes(dd, p1, p2, cumLength, precision);
     var dashLines = dashes.points;
     var dashContinues = dashes.continues;
 
@@ -26860,7 +26876,7 @@ function lineToDash(points, dash) {
     }
 
     lastContinue = dashContinues;
-    cumLength += Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(p1, p2);
+    cumLength = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(cumLength + Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(p1, p2), precision);
   };
 
   for (var i = 0; i < points.length - 1; i += 1) {
@@ -27457,6 +27473,7 @@ function makePolyLine(pointsIn) {
   var lineNum = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 2;
   var borderIs = arguments.length > 11 ? arguments[11] : undefined;
   var holeIs = arguments.length > 12 ? arguments[12] : undefined;
+  var precision = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : 8;
   var points = [];
   var cornerStyleToUse;
   var orderedPoints = pointsIn; // const orderedPoints = setPointOrder(pointsIn, close, widthIs);
@@ -27480,7 +27497,7 @@ function makePolyLine(pointsIn) {
 
 
   if (dash.length > 1) {
-    var dashes = Object(_dashes__WEBPACK_IMPORTED_MODULE_1__["lineToDash"])(points, dash, close, 0);
+    var dashes = Object(_dashes__WEBPACK_IMPORTED_MODULE_1__["lineToDash"])(points, dash, close, 0, precision);
     var closeDashes = false;
 
     if (dashes.length === 1) {
@@ -32277,8 +32294,10 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "moved",
     value: function moved(newTransform) {
-      this.calcVelocity(newTransform);
+      var prevTransform = this.transform._dup();
+
       this.setTransform(newTransform._dup());
+      this.calcVelocity(prevTransform);
 
       if (this.recorder.state === 'recording') {
         this.recorder.recordEvent('moved', [this.getPath(), this.transform.round(this.recorder.precision)._state()] // this.state.movement.velocity.toString(),
@@ -32311,7 +32330,7 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "calcVelocity",
-    value: function calcVelocity(newTransform) {
+    value: function calcVelocity(prevTransform) {
       var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
 
       if (this.state.movement.previousTime === null) {
@@ -32326,7 +32345,7 @@ var DiagramElement = /*#__PURE__*/function () {
         return;
       }
 
-      this.state.movement.velocity = newTransform.velocity(this.transform, deltaTime, this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
+      this.state.movement.velocity = this.transform.velocity(prevTransform, deltaTime, this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
       this.state.movement.previousTime = currentTime;
     }
   }, {
@@ -41167,37 +41186,83 @@ var Line = /*#__PURE__*/function () {
 
       var l1 = this; // this.round(precision);
 
-      if (!l1.isParallelWith(l2)) {
+      var d1 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.distance, precision);
+      var d2 = Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l2.distance, precision);
+
+      if (d1 === 0 || d2 === 0) {
         var _i2;
 
+        var alongLine = false;
+        var _withinLine = false;
+
+        if (d1 === 0 && d2 === 0) {
+          if (l1.p1.isEqualTo(l2.p1, precision)) {
+            _i2 = l1.p1._dup();
+            alongLine = true;
+            _withinLine = true;
+          }
+        }
+
+        if (d1 > 0) {
+          if (l1.hasPointOn(l2.p1, precision)) {
+            _i2 = l2.p1._dup();
+            _withinLine = true;
+            alongLine = true;
+          } else if (l1.hasPointAlong(l2.p1), precision) {
+            _i2 = l2.p1._dup();
+            alongLine = true;
+          }
+        }
+
+        if (d2 > 0) {
+          if (l2.hasPointOn(l1.p1, precision)) {
+            _i2 = l1.p1._dup();
+            _withinLine = true;
+            alongLine = true;
+          } else if (l2.hasPointAlong(l1.p1, precision)) {
+            _i2 = l1.p1._dup();
+            alongLine = true;
+          }
+        }
+
+        return {
+          intersect: _i2,
+          alongLine: alongLine,
+          withinLine: _withinLine
+        };
+      }
+
+      if (!l1.isParallelWith(l2)) {
+        var _i3;
+
         if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.A, precision) === 0 && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l2.B, precision) === 0) {
-          _i2 = new Point(l2.p1.x, l1.p1.y);
+          _i3 = new Point(l2.p1.x, l1.p1.y);
         } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.B, precision) === 0 && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l2.A, precision) === 0) {
-          _i2 = new Point(l1.p1.x, l2.p1.y); // if l1.B is 0, then l1 has constant x
+          _i3 = new Point(l1.p1.x, l2.p1.y); // if l1.B is 0, then l1 has constant x
         } else if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(l1.B, precision) === 0) {
           var x = (l2.C * l1.B - l1.C * l2.B) / (-l1.A * l2.B + l2.A * l1.B);
           var y = -l2.A / l2.B * x + l2.C / l2.B;
-          _i2 = new Point(x, y);
+          _i3 = new Point(x, y);
         } else {
           var _x = (l2.C * l1.B - l1.C * l2.B) / (-l1.A * l2.B + l2.A * l1.B);
 
           var _y = -l1.A / l1.B * _x + l1.C / l1.B;
 
-          _i2 = new Point(_x, _y);
+          _i3 = new Point(_x, _y);
         }
 
-        if (l1.hasPointOn(_i2, precision) && l2.hasPointOn(_i2, precision)) {
+        if (l1.hasPointOn(_i3, precision) && l2.hasPointOn(_i3, precision)) {
           return {
             alongLine: true,
             withinLine: true,
-            intersect: _i2
+            intersect: _i3
           };
         }
 
         return {
           alongLine: true,
           withinLine: false,
-          intersect: _i2
+          intersect: _i3
         };
       }
 
@@ -41234,20 +41299,20 @@ var Line = /*#__PURE__*/function () {
       var defaultIntercept = yIntercept == null ? new Point(xIntercept, 0) : new Point(0, yIntercept);
 
       if (l1.isEqualTo(l2, precision)) {
-        var _i3;
+        var _i4;
 
         if (l1.ends === 2) {
-          _i3 = l1.midPoint();
+          _i4 = l1.midPoint();
         } else if (l1.ends === 1) {
-          _i3 = l1.p1._dup();
+          _i4 = l1.p1._dup();
         } else {
-          _i3 = defaultIntercept;
+          _i4 = defaultIntercept;
         }
 
         return {
           alongLine: true,
           withinLine: true,
-          intersect: _i3
+          intersect: _i4
         };
       } // If one line is fully within the other
 
@@ -43296,21 +43361,21 @@ var RectBounds = /*#__PURE__*/function (_Bounds2) {
         return false;
       }
 
-      var p = getPoint(position);
+      var p = getPoint(position).round(this.precision);
 
-      if (this.boundary.left != null && p.x < this.boundary.left) {
+      if (this.boundary.left != null && p.x < Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.left, this.precision)) {
         return false;
       }
 
-      if (this.boundary.right != null && p.x > this.boundary.right) {
+      if (this.boundary.right != null && p.x > Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.right, this.precision)) {
         return false;
       }
 
-      if (this.boundary.bottom != null && p.y < this.boundary.bottom) {
+      if (this.boundary.bottom != null && p.y < Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.bottom, this.precision)) {
         return false;
       }
 
-      if (this.boundary.top != null && p.y > this.boundary.top) {
+      if (this.boundary.top != null && p.y > Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(this.boundary.top, this.precision)) {
         return false;
       }
 
@@ -43368,6 +43433,17 @@ var RectBounds = /*#__PURE__*/function (_Bounds2) {
           bottom = _this$boundary2.bottom,
           left = _this$boundary2.left,
           right = _this$boundary2.right;
+      var zeroHeight = false;
+
+      if (top != null && bottom != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(top, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(bottom, this.precision)) {
+        zeroHeight = true;
+      }
+
+      var zeroWdith = false;
+
+      if (left != null && right != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(left, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(right, this.precision)) {
+        zeroWdith = true;
+      }
 
       var calcHBound = function calcHBound(h) {
         if (h != null) {
@@ -43705,7 +43781,7 @@ var LineBounds = /*#__PURE__*/function (_Bounds3) {
         return false;
       }
 
-      var p = getPoint(position);
+      var p = getPoint(position).round(this.precision);
       return p.isWithinLine(this.boundary, this.precision);
     }
   }, {
@@ -44058,8 +44134,8 @@ function transformValueToArray(transformValue, transform) {
     return order;
   }
 
-  for (var _i4 = 0; _i4 < transform.order.length; _i4 += 1) {
-    var transformation = transform.order[_i4];
+  for (var _i5 = 0; _i5 < transform.order.length; _i5 += 1) {
+    var transformation = transform.order[_i5];
 
     if (transformation instanceof Translation) {
       var value = 0;

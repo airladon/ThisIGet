@@ -77,15 +77,44 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._left.setLength(top - bottom + w);
     this._right.setLength(top - bottom + w);
 
-    this._bottom.move.minTransform.updateTranslation(left, limits.bottom);
-    this._bottom.move.maxTransform.updateTranslation(left, top - minSide);
-    this._top.move.minTransform.updateTranslation(left, bottom + minSide);
-    this._top.move.maxTransform.updateTranslation(left, limits.top);
+    this._bottom.move.bounds.updateTranslation({
+      left,
+      bottom: limits.bottom,
+      right: left,
+      top: top - minSide,
+    });
+    // this._bottom.move.minTransform.updateTranslation(left, limits.bottom);
+    // this._bottom.move.maxTransform.updateTranslation(left, top - minSide);
+    this._top.move.bounds.updateTranslation({
+      left,
+      bottom: bottom + minSide,
+      right: left,
+      top: limits.top,
+    });
+    // this._top.move.minTransform.updateTranslation(left, bottom + minSide);
+    // this._top.move.maxTransform.updateTranslation(left, limits.top);
 
-    this._left.move.minTransform.updateTranslation(limits.left, bottom);
-    this._left.move.maxTransform.updateTranslation(right - minSide, bottom);
-    this._right.move.minTransform.updateTranslation(left + minSide, bottom);
-    this._right.move.maxTransform.updateTranslation(limits.right, bottom);
+    // this._left.move.minTransform.updateTranslation(limits.left, bottom);
+    // this._left.move.maxTransform.updateTranslation(right - minSide, bottom);
+    this._left.move.bounds.updateTranslation({
+      left: limits.left,
+      bottom,
+      right: right - minSide,
+      top: bottom,
+    });
+    // this._right.move.minTransform.updateTranslation(left + minSide, bottom);
+    // this._right.move.maxTransform.updateTranslation(limits.right, bottom);
+    this._right.move.bounds.updateTranslation({
+      left: left + minSide,
+      bottom,
+      right: limits.right,
+      top: bottom,
+    });
+    // this._top.subscriptions.subscribe('setTransform', () => {
+    //   if (this._top.state.isBeingMoved) {
+    //     console.log(this._top.state.movement.velocity.t()._dup());
+    //   }
+    // });
 
     this._bottom.label.setText(`${round((right - left) * 5, 1).toString()}`);
     this._right.label.setText(`${round((top - bottom) * 5, 1).toString()}`);
