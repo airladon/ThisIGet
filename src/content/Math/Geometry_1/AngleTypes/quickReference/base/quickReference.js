@@ -64,8 +64,7 @@ export class QRAcute extends PopupBoxCollection {
     fig._line1.setRotation(0.5);
     fig._line1.makeTouchable();
     fig._acute.showAll();
-    fig._line1.move.maxTransform.updateRotation(Math.PI / 2 * 0.98);
-    fig._line1.move.minTransform.updateRotation(0);
+    fig._line1.move.bounds.updateRotation({ min: 0, max: Math.PI / 2 * 0.98 });
     this.transformToQRWindow(collection, new Rect(-0.6, 0.5, 2, 1.4));
     this.diagram.animateNextFrame();
   }
@@ -153,8 +152,7 @@ export class QRObtuse extends PopupBoxCollection {
     fig._line1.setRotation(2);
     fig._line1.makeTouchable();
     fig._obtuse.showAll();
-    fig._line1.move.minTransform.updateRotation(Math.PI / 2 * 1.02);
-    fig._line1.move.maxTransform.updateRotation(Math.PI * 0.98);
+    fig._line1.move.bounds.updateRotation({ min: Math.PI / 2 * 1.02, max: Math.PI * 0.98 });
     this.transformToQRWindow(collection, new Rect(-1.2, 0.6, 2.5, 1.2));
     this.diagram.animateNextFrame();
   }
@@ -255,8 +253,10 @@ export class QRReflex extends PopupBoxCollection {
     fig._line1.setRotation(4);
     fig._line1.makeTouchable();
     fig._reflex.showAll();
-    fig._line1.move.minTransform.updateRotation(Math.PI * 1.02);
-    fig._line1.move.maxTransform.updateRotation(Math.PI * 1.98);
+    fig._line1.move.bounds.updateRotation({
+      min: Math.PI * 1.02,
+      max: Math.PI * 1.98,
+    })
     this.transformToQRWindow(collection, new Rect(-1.5, -0.5, 3, 1.7));
     this.diagram.animateNextFrame();
   }

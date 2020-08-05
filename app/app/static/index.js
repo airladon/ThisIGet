@@ -220,7 +220,11 @@ var Fig = {
   Translation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"],
   Scale: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"],
   Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"],
-  parsePoint: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"]
+  parsePoint: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"],
+  LineBounds: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["LineBounds"],
+  TransformBounds: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformBounds"],
+  RectBounds: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"],
+  RangeBounds: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["RangeBounds"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (Fig);
 
@@ -31208,7 +31212,7 @@ var DiagramElement = /*#__PURE__*/function () {
         bounceLoss: 0.5
       },
       // bounce: true, // deprecate
-      canBeMovedAfterLosingTouch: false,
+      canBeMovedAfterLosingTouch: true,
       type: 'translation',
       element: null,
       // limitLine: null,
