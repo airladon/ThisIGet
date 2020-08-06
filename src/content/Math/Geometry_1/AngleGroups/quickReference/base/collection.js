@@ -121,6 +121,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       r1 += Math.PI * 2;
     }
     this._fig.transform.updateRotation(r1);
+    this._fig._line2.move.bounds.updateRotation({ min: 0, max: r3 });
     this._fig._line2.transform.updateRotation(r2);
     this._fig._line3.transform.updateRotation(r3);
     this._fig._angleA.setAngle({ angle: r2, rotationOffset: r1 });

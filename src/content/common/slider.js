@@ -69,7 +69,7 @@ export default function makeSlider(
   circle.move.bounds.updateTranslation({
     left: start, right: travel, bottom: 0, top: 0,
   });
-  circle.move.bounce = false;
+  circle.move.freely.bounceLoss = 1;
   circle.move.canBeMovedAfterLosingTouch = true;
   slider.hasTouchableElements = true;
 

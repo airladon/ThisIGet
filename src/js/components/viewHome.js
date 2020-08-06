@@ -84,7 +84,7 @@ function createDiagram(htmlId) {
         move: {
           boundary: 'diagram',
           canBeMovedAfterLosingTouch: true,
-          maxVelocity: new TransformLimit(10, 10, 10),
+          maxVelocity: 10,
         },
       },
     },
