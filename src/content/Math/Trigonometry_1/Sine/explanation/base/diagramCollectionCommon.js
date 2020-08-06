@@ -91,8 +91,6 @@ export default class CommonCollection extends CommonDiagramCollection {
       min: this.custom.minRotation,
       max: this.custom.maxRotation,
     });
-    // this._rotator._line.move.maxTransform.updateRotation(this.custom.maxRotation);
-    // this._rotator._line.move.minTransform.updateRotation(this.custom.minRotation);
     this._rotator._line.setTransformCallback = this.updateRotation.bind(this, null);
     this._rotator._pad.setTransformCallback = this.updatePad.bind(this, null);
     // this._rotator._v.setTransformCallback = this.updateV.bind(this);

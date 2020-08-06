@@ -53,10 +53,10 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
     fig._pad3.isTouchable = false;
     const points = this.layout.asa.options.points.map(p => getPoint(p));
     const line10 = new Line(points[1], points[0]);
-    fig._pad0.move.limitLine = null;
+    fig._pad0.move.bounds.updateTranslation(null);
     fig._pad0.setPosition(line10.pointAtPercent(0.25));
     const line23 = new Line(points[2], points[3]);
-    fig._pad3.move.limitLine = null;
+    fig._pad3.move.bounds.updateTranslation(null);
     fig._pad3.setPosition(line23.pointAtPercent(0.15));
   }
 
@@ -67,10 +67,10 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
     const points = this.layout.asa.options.points.map(p => getPoint(p));
     const line10 = new Line(points[1], points[0]);
     const moveLine01 = new Line(line10.pointAtPercent(0.4), 1.7, line10.angle());
-    fig._pad0.move.limitLine = moveLine01;
+    fig._pad0.move.bounds.updateTranslation({ line: moveLine01 });
     const line23 = new Line(points[2], points[3]);
     const moveLine23 = new Line(line23.midPoint(), 2.7, line23.angle());
-    fig._pad3.move.limitLine = moveLine23;
+    fig._pad3.move.bounds.updateTranslation({ line: moveLine23 });
   }
 
   randLength(sideId: '01' | '23') {

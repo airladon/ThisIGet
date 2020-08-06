@@ -84,7 +84,9 @@ export default function diagramLayout() {
         },
         mods: {
           move: {
-            limitLine: new Line(p1, p2),
+            bounds: {
+              translation: { line: [p1, p2] },
+            },
           },
           isTouchable: true,
           isMovable: true,
@@ -186,7 +188,9 @@ export default function diagramLayout() {
     },
     mods: {
       move: {
-        limitLine: new Line(p1, p2),
+        bounds: {
+          translation: { line: [p1, p2 ]},
+        },
       },
       isTouchable: true,
       isMovable: true,

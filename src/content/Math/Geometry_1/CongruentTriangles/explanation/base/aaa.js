@@ -60,7 +60,6 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const right = this._fig._tri._pad1;
     const left = this._fig._tri._pad2;
     const pad = randElement([right, left]);
-    // const { limitLine } = pad.move;
     const limitLine = pad.move.bounds.getTranslation().boundary;
     if (limitLine != null) {
       const midPoint = limitLine.midPoint();

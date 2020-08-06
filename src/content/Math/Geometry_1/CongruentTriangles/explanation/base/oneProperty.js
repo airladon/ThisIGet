@@ -40,8 +40,8 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
   } & DiagramObjectPolyLine;
 
   _angleTri: {
-    _pad0: { move: { limitLine: Line } } & DiagramElementPrimitive;
-    _pad1: { move: { limitLine: Line } } & DiagramElementPrimitive;
+    _pad0: DiagramElementPrimitive;
+    _pad1: DiagramElementPrimitive;
     _angle2: DiagramObjectAngle;
   } & DiagramObjectPolyLine;
 
