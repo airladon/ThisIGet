@@ -165,7 +165,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   growFig2VSplit(done: ?() => void = null) {
-    this._fig2._vSplit.stop(false, false);
+    this._fig2._vSplit.stop('cancel');
     this._fig2._rightAngle.hide();
     this._fig2._splitRightAngle.hide();
     this._fig2._vSplit.grow(0.05, 1.5, true, () => {
