@@ -96,20 +96,11 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const rightTop = new Line(right, 5, this.rightAngle);
     const top = leftTop.intersectsWith(rightTop).intersect;
     tri.updatePoints([top, right, left]);
-
     tri._pad0.move.bounds.updateTranslation({
       left: Math.min(-1, top.x),
       bottom: Math.min(0, top.y),
       right: Math.max(1, top.x),
       top: Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
     });
-    // tri._pad0.move.maxTransform.updateTranslation(
-    //   Math.max(1, top.x),
-    //   Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
-    // );
-    // tri._pad0.move.minTransform.updateTranslation(
-    //   Math.min(-1, top.x),
-    //   Math.min(0, top.y),
-    // );
   }
 }

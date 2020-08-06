@@ -46,7 +46,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.scenarios = this.layout.ssaScenarios;
     this._adjacentMovePad.makeTouchable();
     this._constructionLine.makeTouchable();
-    // this._adjacentMovePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
     this._adjacentMovePad.move.bounds.updateTranslation(new Line(new Point(-2.5, 0), 1.8, 0));
     this._adjacentMovePad.setTransformCallback = this.updatePosition.bind(this);
     this._constructionLine.setTransformCallback = this.updateRotation.bind(this);
@@ -54,8 +53,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
       min: Math.PI / 10,
       max: Math.PI * 3 / 4,
     });
-    // this._constructionLine.move.maxTransform.updateRotation(Math.PI * 3 / 4);
-    // this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
     this._opposite.makeTouchable();
     this._opposite.setTransformCallback = this.tryToShowTriangle.bind(this);
     this.toggleIndex = 0;

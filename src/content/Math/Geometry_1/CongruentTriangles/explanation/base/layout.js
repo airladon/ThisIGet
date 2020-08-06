@@ -414,8 +414,6 @@ export default function diagramLayout() {
         mods: {
           move: {
             type: 'scale',
-            // minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
-            // maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
             bounds: {
               scale: { min: 0.3, max: 1 },
               translation: null,
@@ -447,8 +445,6 @@ export default function diagramLayout() {
     mods: {
       move: {
         type: 'translate',
-        // minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
-        // maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
         bounds: {
           translation: {
             left: -2, right: 2, bottom: 0, top: 0,
@@ -481,68 +477,6 @@ export default function diagramLayout() {
   const baseLine = joinObjects({}, sssLineBase, {
     name: 'baseLine',
   });
-
-  // const anyCircleLeft = {
-  //   name: 'anyCircleLeft',
-  //   method: 'polygon',
-  //   options: {
-  //     width: 3,
-  //     color: colors.construction,
-  //     sides: 200,
-  //     radius: leftLen,
-  //     linePrimitives: true,
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
-  //     },
-  //     move: {
-  //       type: 'scale',
-  //     },
-  //   },
-  // };
-
-  // const scaleLeft = {
-  //   name: 'scaleLeft',
-  //   method: 'polygon',
-  //   options: {
-  //     color: [1, 1, 1, 0.2],
-  //     sides: 50,
-  //     radius: leftLen * 1.2,
-  //     fill: true,
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
-  //     },
-  //     move: {
-  //       type: 'scale',
-  //       maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
-  //       minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
-  //     },
-  //   },
-  // };
-
-  // const moveLeft = {
-  //   name: 'moveLeft',
-  //   method: 'polygon',
-  //   options: {
-  //     color: [1, 0, 0, 0.2],
-  //     sides: 50,
-  //     radius: 0.2,
-  //     fill: true,
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
-  //     },
-  //     move: {
-  //       type: 'translate',
-  //       maxTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
-  //       minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-2, 0),
-  //     },
-  //   },
-  // };
 
   layout.addElementsSSS = [
     rightCircle,

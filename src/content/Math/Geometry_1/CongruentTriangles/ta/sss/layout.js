@@ -82,8 +82,6 @@ export default function diagramLayout() {
         mods: {
           move: {
             type: 'scale',
-            // minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
-            // maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
             bounds: {
               scale: { min: 0.3, max: 1 },
             },
@@ -114,8 +112,6 @@ export default function diagramLayout() {
     mods: {
       move: {
         type: 'translate',
-        // minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
-        // maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
         bounds: {
           translation: {
             left: -2, right: 2, bottom: 0, top: 0,

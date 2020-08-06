@@ -394,14 +394,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       right,
       top,
     });
-    // this._circle.move.maxTransform.updateTranslation(
-    //   location.x + width - Math.max(radius * scale, minWidth / 2),
-    //   location.y + height - radius * scale,
-    // );
-    // this._circle.move.minTransform.updateTranslation(
-    //   location.x + Math.max(radius * scale, minWidth / 2),
-    //   location.y + radius * scale,
-    // );
   }
 
   straightenCircumference(duration: number = 4, done: ?() => void = null) {

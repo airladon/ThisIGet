@@ -178,10 +178,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     // New triangle points
     const points = [
-      left,
-      right,
-      p,
+      bottomLeftPad.getPosition(),
+      bottomRightPad.getPosition(),
+      topPad.getPosition(),
     ];
+
 
     // Calculate and store the current base, height and area
     this.base = round((right.x - left.x) / gridSpacing, 1);
