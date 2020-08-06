@@ -404,8 +404,6 @@ export default function diagramLayout() {
       interactiveLocation: [r / 2, 0],
       move: {
         canBeMovedAfterLosingTouch: true,
-        // maxTransform: new Transform().scale(1, 1).rotate(max).translate(1000, 1000),
-        // minTransform: new Transform().scale(1, 1).rotate(min).translate(-1000, -1000),
         bounds: {
           rotation: { min, max },
         },
