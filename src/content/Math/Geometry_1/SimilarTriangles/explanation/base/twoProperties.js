@@ -71,7 +71,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri._pad0.scenarios.next = {
       position: [x, y],
     };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -107,7 +107,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri._pad1.scenarios.next = {
       position: [x, -1],
     };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -136,7 +136,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
         1.5 * Math.sin(r) - 1,
       ],
     };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -169,7 +169,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri._pad2.scenarios.next = { position: [-d1, -1] };
     this._tri._pad1.scenarios.next = { position: [d2, -1] };
     this._tri._pad0.scenarios.next = { position: [0, h - 1] };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -200,7 +200,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     };
     this.lastValue = side;
     this.lastAuto = 'adjacentAngleSide';
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -237,7 +237,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     };
     this.lastValue = left;
     this.lastAuto = 'oppositeAngleSide';
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
