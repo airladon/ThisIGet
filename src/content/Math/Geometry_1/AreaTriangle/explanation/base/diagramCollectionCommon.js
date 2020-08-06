@@ -225,30 +225,48 @@ export default class CommonCollection extends CommonDiagramCollection {
     const bottomLeft = this._implications._pad0;
     const top = this._implications._pad1;
     const bottomRight = this._implications._pad2;
-    bottomLeft.move.minTransform.updateTranslation(
-      bounds.left,
-      bounds.bottom,
-    );
-    bottomLeft.move.maxTransform.updateTranslation(
-      bounds.right - minSeparation,
-      bounds.top - minSeparation,
-    );
-    bottomRight.move.minTransform.updateTranslation(
-      bounds.left + minSeparation,
-      bounds.bottom,
-    );
-    bottomRight.move.maxTransform.updateTranslation(
-      bounds.right,
-      bounds.top - minSeparation,
-    );
-    top.move.minTransform.updateTranslation(
-      bounds.left,
-      bounds.bottom + minSeparation,
-    );
-    top.move.maxTransform.updateTranslation(
-      bounds.right,
-      bounds.top,
-    );
+    bottomLeft.move.bounds.updateTranslation({
+      left: bounds.left,
+      right: bounds.right - minSeparation,
+      bottom: bounds.bottom,
+      top: bounds.top - minSeparation,
+    });
+    // bottomLeft.move.minTransform.updateTranslation(
+    //   bounds.left,
+    //   bounds.bottom,
+    // );
+    // bottomLeft.move.maxTransform.updateTranslation(
+    //   bounds.right - minSeparation,
+    //   bounds.top - minSeparation,
+    // );
+    bottomRight.move.bounds.updateTranslation({
+      left: bounds.left + minSeparation,
+      bottom: bounds.bottom,
+      right: bounds.right,
+      top: bounds.top - minSeparation,
+    });
+    // bottomRight.move.minTransform.updateTranslation(
+    //   bounds.left + minSeparation,
+    //   bounds.bottom,
+    // );
+    // bottomRight.move.maxTransform.updateTranslation(
+    //   bounds.right,
+    //   bounds.top - minSeparation,
+    // );
+    top.move.bounds.updateTranslation({
+      left: bounds.left,
+      bottom: bounds.bottom + minSeparation,
+      right: bounds.right,
+      top: bounds.top,
+    });
+    // top.move.minTransform.updateTranslation(
+    //   bounds.left,
+    //   bounds.bottom + minSeparation,
+    // );
+    // top.move.maxTransform.updateTranslation(
+    //   bounds.right,
+    //   bounds.top,
+    // );
   }
 
   moveTopPad() {

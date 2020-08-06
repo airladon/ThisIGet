@@ -23720,8 +23720,8 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
             translation: boundary
           });
           var fnName = "_polyline_pad".concat(i);
-
-          _this.fnMap.add(fnName, function (transform) {
+          padShape.fnMap.add(fnName, function (transform) {
+            // console.log('asdfasdfasdf')
             var index = parseInt(padShape.name.slice(3), 10);
             var translation = transform.t();
 
@@ -23731,7 +23731,6 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
               _this.updatePoints(_this.points);
             }
           });
-
           padShape.setTransformCallback = fnName;
         }
 
@@ -43781,7 +43780,7 @@ var LineBounds = /*#__PURE__*/function (_Bounds3) {
         return false;
       }
 
-      var p = getPoint(position).round(this.precision);
+      var p = getPoint(position);
       return p.isWithinLine(this.boundary, this.precision);
     }
   }, {
@@ -43791,7 +43790,10 @@ var LineBounds = /*#__PURE__*/function (_Bounds3) {
         return position;
       }
 
-      var p = getPoint(position);
+      var p = getPoint(position); // if (window.asdf) {
+      //   console.log(position, p)
+      // }
+
       return p.clipToLine(this.boundary, this.precision);
     } // The intersect of a Line Boundary can be its finite end points
     //  - p1 only if 1 ended
@@ -44446,6 +44448,7 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   var bounceLossIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
   var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
+  // console.log(positionIn._dup(), velocityIn._dup(), boundsIn._dup(), deceleration, deltaTimeIn, bounceLossIn, zeroVelocityThreshold, precision);
   var bounds;
 
   if (boundsIn instanceof RangeBounds) {
@@ -44460,12 +44463,10 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   } // clip velocity to the dimension of interest
 
 
-  var velocity = velocityIn;
-
-  if (bounds != null && bounds.clipVelocity != null) {
-    velocity = bounds.clipVelocity(velocityIn);
-  } // const velocity = velocityIn;
-
+  var velocity = velocityIn; // if (bounds != null && bounds.clipVelocity != null) {
+  //   velocity = bounds.clipVelocity(velocityIn);
+  // }
+  // const velocity = velocityIn;
 
   var stopFlag = false;
 
@@ -44490,7 +44491,14 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   var position = positionIn._dup();
 
   if (bounds != null) {
-    position = bounds.clip(positionIn);
+    position = bounds.clip(positionIn); // try {
+    //   position = bounds.clip(positionIn);
+    // } catch(error) {
+    //   console.log('error', error)
+    //   console.log('error - data', positionIn)
+    //   console.log('error - data', bounds)
+    //   debugger;
+    // }
   } // Initial Velocity
 
 
@@ -44530,8 +44538,22 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   } // if we got here, the new position is out of bounds
 
 
-  var bounceScaler = 1 - bounceLossIn;
-  var result = bounds.intersect(position, clipAngle(angle, '0to360'));
+  var bounceScaler = 1 - bounceLossIn; // let result;
+  // try {
+  //   result = bounds.intersect(position, clipAngle(angle, '0to360'));
+  // } catch(error) {
+  //   console.log(error)
+  //   debugger;
+  // }
+
+  var result = bounds.intersect(position, clipAngle(angle, '0to360')); // if newPosition is not contained within bounds, but the intersect distance
+  // is larger than the distance travelled in deltaTime, then there is likely a
+  // rounding error...
+
+  if (result.distance != null && result.distance > distanceTravelled) {
+    throw 'Error in calculating intersect';
+  }
+
   var intersectPoint;
 
   if (typeof result.intersect === 'number') {
@@ -44575,6 +44597,10 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
 
   var bounceVelocity = velocityAtIntersect * bounceScaler;
   var rectBounceVelocity = new Point(bounceVelocity * Math.cos(reflectionAngle), bounceVelocity * Math.sin(reflectionAngle));
+
+  if (isNaN(rectBounceVelocity.x)) {
+    debugger;
+  }
 
   if (stopFlag) {
     var newStop = deceleratePoint(intersectPoint, rectBounceVelocity, deceleration, deltaTimeIn, bounds, bounceLossIn, zeroVelocityThreshold, precision);

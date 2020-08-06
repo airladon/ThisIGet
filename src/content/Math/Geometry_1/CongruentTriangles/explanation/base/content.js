@@ -179,6 +179,9 @@ class Content extends PresentationFormatContent {
         top_point: click(oneProp.pulsePad, [oneProp], oneProp.colors.pads),
       },
       show: [oneProp._sideTri],
+      setSteadyState: () => {
+        window.asdf = true;
+      },
     });
 
     this.addSection({
@@ -1071,7 +1074,14 @@ class Content extends PresentationFormatContent {
       },
       show: [ssa],
       setEnterState: () => {
+        let angle;
+        if (this.comingFrom !== 'goto') {
+          angle = ssa._opposite.getRotation();
+        }
         ssa.setScenarios('init');
+        if (this.comingFrom !== 'goto') {
+          ssa._opposite.setRotation(angle);
+        }
         ssa.updatePosition();
         ssa.updateRotation();
       },
@@ -1083,7 +1093,11 @@ class Content extends PresentationFormatContent {
         ssa._constructionLine._line.isTouchable = false;
         ssa._adjacentMovePad.isTouchable = false;
         ssa._adjacentMovePad.isMovable = false;
-        ssa.setDefault();
+        if (this.comingFrom !== 'goto') {
+          ssa.setDefault(false);
+        } else {
+          ssa.setDefault(true);
+        }
       },
     });
     this.addSection({

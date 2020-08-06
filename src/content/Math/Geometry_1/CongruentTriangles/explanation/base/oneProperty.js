@@ -95,10 +95,10 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
 
   randomAngle() {
     // const pad = randElement([this._angleTri._pad0, this._angleTri._pad1]);
-    const target0 = this._angleTri._pad0.move.limitLine.pointAtPercent(rand(0, 1));
-    const target1 = this._angleTri._pad1.move.limitLine.pointAtPercent(rand(0, 1));
-    this._angleTri._pad0.cancel('freeze');
-    this._angleTri._pad1.cancel('freeze');
+    const target0 = this._angleTri._pad0.move.bounds.getTranslation().boundary.pointAtPercent(rand(0, 1));
+    const target1 = this._angleTri._pad1.move.bounds.getTranslation().boundary.pointAtPercent(rand(0, 1));
+    this._angleTri._pad0.stop('freeze');
+    this._angleTri._pad1.stop('freeze');
     this._angleTri._pad0.animations.new()
       .position({ target: target0, duration: 0.8 })
       .start();
@@ -109,14 +109,37 @@ export default class CommonCollectionOneProp extends CommonDiagramCollection {
   }
 
   resetTri() {
-    this._sideTri._pad0.move.minTransform.updateTranslation(-2.5, 0);
-    this._sideTri._pad0.move.maxTransform.updateTranslation(2.5, 1.2);
+    this._sideTri._pad0.move.bounds.updateTranslation({
+      left: -2.5,
+      bottom: 0,
+      right: 2.5,
+      top: 1.2,
+    });
+    // this._sideTri._pad0.move.minTransform.updateTranslation(-2.5, 0);
+    // this._sideTri._pad0.move.maxTransform.updateTranslation(2.5, 1.2);
     this._sideTri._pad0.makeTouchable();
     const leftPoint = parsePoint(this.layout.angleTri.options.points[2]);
     const leftLine = new Line(leftPoint, 4.5, Math.PI / 6);
     const bottomLine = new Line(leftPoint, 4.5, 0);
-    this._angleTri._pad0.move.limitLine = new Line(leftLine.pointAtPercent(0.4), leftLine.p2);
-    this._angleTri._pad1.move.limitLine = new Line(bottomLine.pointAtPercent(0.4), bottomLine.p2);
+    // this._angleTri._pad0.move.limitLine = new Line(leftLine.pointAtPercent(0.4), leftLine.p2);
+    this._angleTri._pad0.move.bounds.updateTranslation(
+      new Line(leftLine.pointAtPercent(0.4), leftLine.p2),
+    );
+    // this._angleTri._pad0.subscriptions.subscribe('setTransform', (t) => {
+    //   if (this._angleTri._pad0.state.isMovingFreely) {
+    //     console.log(this._angleTri._pad0.state.movement.velocity.t());
+    //     console.log(this._angleTri._pad0.move.bounds._dup())
+    //     console.log(t)
+    //     console.log(t[0]._dup())
+    //     console.log(this._angleTri._pad0.move.bounds.getTranslation().clip(t[0].t()))
+    //     console.log('done')
+    //   }
+    //   // console.log(this._angleTri._pad0.state.movement.velocity.t());
+    // })
+    // this._angleTri._pad1.move.limitLine = new Line(bottomLine.pointAtPercent(0.4), bottomLine.p2);
+    this._angleTri._pad1.move.bounds.updateTranslation(
+      new Line(bottomLine.pointAtPercent(0.4), bottomLine.p2),
+    );
     this._angleTri._pad0.makeTouchable();
   }
 }

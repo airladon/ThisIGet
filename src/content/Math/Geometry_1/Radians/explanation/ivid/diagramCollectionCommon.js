@@ -151,8 +151,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._lim._radius.setMovable();
     this._lim._radius.setTransformCallback = 'updateLimAngle';
     this.fnMap.global.add('updateLimAngle', this.updateLimAngle.bind(this));
-    this._lim._radius.move.maxTransform.updateRotation(1);
-    this._lim._radius.move.minTransform.updateRotation(0.1);
+    this._lim._radius.move.bounds.updateRotation({ min: 0.1, max: 1 });
+    // this._lim._radius.move.maxTransform.updateRotation(1);
+    // this._lim._radius.move.minTransform.updateRotation(0.1);
     this._lim._radius.move.canBeMovedAfterLosingTouch = true;
   }
 

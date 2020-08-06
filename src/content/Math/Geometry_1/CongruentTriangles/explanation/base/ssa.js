@@ -26,9 +26,9 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   _opposite: DiagramObjectLine;
   _constructionLine: { _line: DiagramElementPrimitive } & DiagramObjectLine;
   _adjacentMovePad: {
-    move: {
-      limitLine: Line;
-    };
+    // move: {
+    //   limitLine: Line;
+    // };
   } & DiagramElementPrimitive;
 
   _constructionCircle: DiagramElementPrimitive;
@@ -46,11 +46,16 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.scenarios = this.layout.ssaScenarios;
     this._adjacentMovePad.makeTouchable();
     this._constructionLine.makeTouchable();
-    this._adjacentMovePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
+    // this._adjacentMovePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
+    this._adjacentMovePad.move.bounds.updateTranslation(new Line(new Point(-2.5, 0), 1.8, 0));
     this._adjacentMovePad.setTransformCallback = this.updatePosition.bind(this);
     this._constructionLine.setTransformCallback = this.updateRotation.bind(this);
-    this._constructionLine.move.maxTransform.updateRotation(Math.PI * 3 / 4);
-    this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
+    this._constructionLine.move.bounds.updateRotation({
+      min: Math.PI / 10,
+      max: Math.PI * 3 / 4,
+    });
+    // this._constructionLine.move.maxTransform.updateRotation(Math.PI * 3 / 4);
+    // this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
     this._opposite.makeTouchable();
     this._opposite.setTransformCallback = this.tryToShowTriangle.bind(this);
     this.toggleIndex = 0;
@@ -239,10 +244,12 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  setDefault() {
+  setDefault(includingOpposite: boolean = true) {
     this._constructionLine.setRotation(Math.PI / 6);
     this._adjacentMovePad.setPosition(-2.2, 0);
-    this._opposite.setRotation(Math.PI / 3);
+    if (includingOpposite) {
+      this._opposite.setRotation(Math.PI / 3);
+    }
     this.diagram.animateNextFrame();
   }
 
@@ -254,12 +261,14 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
 
   adjacentShorter(done: ?() => void = null) {
     const adjacentLength = rand(
-      Math.abs(this._adjacentMovePad.move.limitLine.p2.x),
+      Math.abs(this._adjacentMovePad.move.bounds.getTranslation().boundary.p2.x),
       this.layout.ssaRadius * 0.9,
     );
     const angle = rand(
-      this._constructionLine.move.minTransform.r() || 0,
-      this._constructionLine.move.maxTransform.r() || 0,
+      this._constructionLine.move.bounds.getRotation().boundary.min || 0,
+      this._constructionLine.move.bounds.getRotation().boundary.max || 0,
+      // this._constructionLine.move.minTransform.r() || 0,
+      // this._constructionLine.move.maxTransform.r() || 0,
     );
     this.goToAngleAndLength(angle, adjacentLength, done);
   }
@@ -286,12 +295,13 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.toggleIndex = 1;
     const adjacentLength = rand(
       this.layout.ssaRadius + 0.3,
-      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+      Math.abs(this._adjacentMovePad.move.bounds.getTranslation().boundary.p1.x),
     );
     const maxAngle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
 
     const angle = rand(
-      this._constructionLine.move.minTransform.r() || 0,
+      // this._constructionLine.move.minTransform.r() || 0,
+      this._constructionLine.move.bounds.getRotation().boundary.min || 0,
       maxAngle * 0.9,
     );
     this.goToAngleAndLength(angle, adjacentLength, done);
@@ -300,7 +310,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   adjacentOne(done: ?() => void = null) {
     const adjacentLength = rand(
       this.layout.ssaRadius + 0.3,
-      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+      Math.abs(this._adjacentMovePad.move.bounds.getTranslation().boundary.p1.x),
     );
     const angle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
 
@@ -310,13 +320,13 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   adjacentZero(done: ?() => void = null) {
     const adjacentLength = rand(
       this.layout.ssaRadius + 0.3,
-      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+      Math.abs(this._adjacentMovePad.move.bounds.getTranslation().boundary.p1.x),
     );
     const minAngle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
 
     const angle = rand(
       minAngle * 1.1,
-      this._constructionLine.move.maxTransform.r() || 0,
+      this._constructionLine.move.bounds.getRotation().boundary.max || 0,
     );
     this.goToAngleAndLength(angle, adjacentLength, done);
   }

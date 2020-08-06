@@ -48,8 +48,8 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     this.rightAngle = Math.PI / 3 * 2;
     const tri = this._fig._tri;
     tri.updatePoints(this.layout.aaaTri.options.points.map(p => getPoint(p)));
-    tri._pad2.move.limitLine = new Line(new Point(-2.2, -1), new Point(-1, -1));
-    tri._pad1.move.limitLine = new Line(new Point(2.2, -1), new Point(1, -1));
+    tri._pad2.move.bounds.updateTranslation(new Line(new Point(-2.2, -1), new Point(-1, -1)));
+    tri._pad1.move.bounds.updateTranslation(new Line(new Point(2.2, -1), new Point(1, -1)));
     tri._pad1.makeTouchable();
     tri._pad2.setTransformCallback = this.updateTri.bind(this);
     tri._pad1.setTransformCallback = this.updateTri.bind(this);
@@ -60,7 +60,8 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const right = this._fig._tri._pad1;
     const left = this._fig._tri._pad2;
     const pad = randElement([right, left]);
-    const { limitLine } = pad.move;
+    // const { limitLine } = pad.move;
+    const limitLine = pad.move.bounds.getTranslation().boundary;
     if (limitLine != null) {
       const midPoint = limitLine.midPoint();
       let delta = rand(limitLine.length() / 3, limitLine.length() / 2);
@@ -96,13 +97,19 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const top = leftTop.intersectsWith(rightTop).intersect;
     tri.updatePoints([top, right, left]);
 
-    tri._pad0.move.maxTransform.updateTranslation(
-      Math.max(1, top.x),
-      Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
-    );
-    tri._pad0.move.minTransform.updateTranslation(
-      Math.min(-1, top.x),
-      Math.min(0, top.y),
-    );
+    tri._pad0.move.bounds.updateTranslation({
+      left: Math.min(-1, top.x),
+      bottom: Math.min(0, top.y),
+      right: Math.max(1, top.x),
+      top: Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
+    });
+    // tri._pad0.move.maxTransform.updateTranslation(
+    //   Math.max(1, top.x),
+    //   Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
+    // );
+    // tri._pad0.move.minTransform.updateTranslation(
+    //   Math.min(-1, top.x),
+    //   Math.min(0, top.y),
+    // );
   }
 }

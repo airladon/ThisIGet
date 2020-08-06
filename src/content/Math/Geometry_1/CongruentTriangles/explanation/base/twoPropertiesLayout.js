@@ -85,7 +85,7 @@ export default function diagramLayout() {
         curve: {
           radius: 0.3,
           width: layout.width,
-          sides: 100,
+          sides: 200,
         },
         label: {
           radius: 0.31,

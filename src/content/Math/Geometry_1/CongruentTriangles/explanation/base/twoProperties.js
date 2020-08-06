@@ -75,7 +75,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
         1.5 * Math.sin(r) - 1,
       ],
     };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -108,10 +108,13 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri._pad2.scenarios.next = { position: [-d1, -1] };
     this._tri._pad1.scenarios.next = { position: [d2, -1] };
     this._tri._pad0.scenarios.next = { position: [0, h - 1] };
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
+        // this._tri.updatePoints(this._tri.points);
+        console.log(this._tri._angle2.getAngle('rad') * 180 / Math.PI, );
+        console.log(this._tri._angle2)
         this._tri._angle1._label.pulseScaleNow(1, 2);
         this._tri._angle2._label.pulseScaleNow(1, 2);
       })
@@ -139,7 +142,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     };
     this.lastValue = side;
     this.lastAuto = 'adjacentAngleSide';
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
@@ -176,7 +179,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     };
     this.lastValue = left;
     this.lastAuto = 'oppositeAngleSide';
-    this._tri.cancel('freeze');
+    this._tri.stop('cancel');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
