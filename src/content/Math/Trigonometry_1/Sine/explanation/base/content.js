@@ -568,6 +568,7 @@ class Content extends PresentationFormatContent {
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
         coll._eqnSame.showForm('sinNoBracket');
+        coll.updateTri(false);
       },
     });
 
@@ -600,12 +601,12 @@ class Content extends PresentationFormatContent {
             coll._eqnSame.anim.dissolveOut({ duration: 0.8 }),
           ])
           .inParallel([
-            coll._tri.anim.trigger({
-              callback: () => {
-                coll.goToRotation(layout.historyAngle, 2, null);
-              },
-              duration: 1,
-            }),
+            // coll._tri.anim.trigger({
+            //   callback: () => {
+            //     coll.goToRotation(layout.historyAngle, 2, null);
+            //   },
+            //   duration: 1,
+            // }),
             coll._tri.anim.position({ target: coll._history.getPosition(), duration: 2 }),
             coll._tri.anim.scale({ target: layout.historyRadius / layout.triLen, duration: 2 }),
           ])
@@ -945,7 +946,15 @@ class Content extends PresentationFormatContent {
       ]),
       modifiers: {
         // table_of_sines: this.qr('Math/Trigonometry_1/Sine/base/TableOfSines'),
-        ratio: coll.bindAccent(coll._eqnSame, colors.diagram.action),
+        // ratio: coll.bindAccent(coll._eqnSame, colors.diagram.action),
+        ratio: coll.bindAccent({
+          element: coll._eqnSame,
+          children: ['opp', 'v', 'hyp'],
+          centerOn: 'v',
+          x: 0.8,
+          scale: 1.5,
+          color: colors.diagram.action,
+        }),
         constant: coll.bindAccent({
           element: coll._eqnSame,
           children: ['sin', 'theta', 'lb', 'rb'],

@@ -180,7 +180,7 @@ class Content extends PresentationFormatContent {
     // ************************************************************************
     commonContent = {
       setContent: [
-        'To find out, let\'s start with two triangles with the |same_angles|, but of |different_side_lengths|.',
+        'To find out, let\'s start with two triangles with the |same_angles|, but |different_side_lengths|.',
       ],
       modifiers: {
         different_side_lengths: click(coll.pulseTri1ASides, [coll], colors.sides),

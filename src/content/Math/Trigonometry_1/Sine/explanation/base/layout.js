@@ -40,7 +40,7 @@ export default function diagramLayout() {
   layout.triLen = new Line(points[0], points[2]).length();
   const historyRadius = 1;
   layout.historyRadius = historyRadius;
-  const historyAngle = Math.atan2(points[2].y, points[2].x) * 1.2;
+  const historyAngle = Math.atan2(points[2].y, points[2].x); // * 1.2;
   layout.historyAngle = historyAngle;
   const historyPoints = [
     new Point(0, 0),

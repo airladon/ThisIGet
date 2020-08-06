@@ -83,9 +83,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._fig._triScaler.setMovable();
     // this._fig._ball.setMovable();
     this._fig._triScaler.setTransformCallback = this.scaleTri.bind(this);
-    this._fig._triScaler.move.bounds.updateScale({ min: 0.5, max: 1.5 });
-    // this._fig._triScaler.move.maxTransform.updateScale(1.5, 1.5);
-    // this._fig._triScaler.move.minTransform.updateScale(0.5, 0.5);
+    // this._fig._triScaler.move.bounds.updateScale({ min: 0.5, max: 1.5 });
     this.similarCounter = 0;
     this.angleCounter = 0;
     this.sideCounter = 0;

@@ -232,42 +232,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       bottom: bounds.bottom,
       top: bounds.top - minSeparation,
     });
-    // bottomLeft.move.minTransform.updateTranslation(
-    //   bounds.left,
-    //   bounds.bottom,
-    // );
-    // bottomLeft.move.maxTransform.updateTranslation(
-    //   bounds.right - minSeparation,
-    //   bounds.top - minSeparation,
-    // );
     bottomRight.move.bounds.updateTranslation({
       left: bounds.left + minSeparation,
       bottom: bounds.bottom,
       right: bounds.right,
       top: bounds.top - minSeparation,
     });
-    // bottomRight.move.minTransform.updateTranslation(
-    //   bounds.left + minSeparation,
-    //   bounds.bottom,
-    // );
-    // bottomRight.move.maxTransform.updateTranslation(
-    //   bounds.right,
-    //   bounds.top - minSeparation,
-    // );
     top.move.bounds.updateTranslation({
       left: bounds.left,
       bottom: bounds.bottom + minSeparation,
       right: bounds.right,
       top: bounds.top,
     });
-    // top.move.minTransform.updateTranslation(
-    //   bounds.left,
-    //   bounds.bottom + minSeparation,
-    // );
-    // top.move.maxTransform.updateTranslation(
-    //   bounds.right,
-    //   bounds.top,
-    // );
   }
 
   moveTopPad() {

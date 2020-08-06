@@ -83,7 +83,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.custom.constantCounter = 2;
     this.custom.eqnCounter = 1;
     this.custom.maxRotation = 90 * Math.PI / 180;
-    this.custom.minRotation = 0 * Math.PI / 180;
+    this.custom.minRotation = 0.001 * Math.PI / 180;
     this.custom.minLineLength = 1.2;
     this.custom.maxLineLength = 3;
     this.custom.maxHeight = 2;
@@ -322,7 +322,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  updateRotation(setAngle: ?number = null) {
+  updateRotation(setAngle: ?number = null, includeLabels: boolean = true) {
     let r = this._rotator._line.getRotation();
     if (setAngle != null) {
       r = setAngle;
@@ -337,10 +337,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this._rotator._v.setEndPoints(points[1], points[2]);
     this._rotator._pad.transform.updateTranslation(points[2]);
     this._rotator._line.setEndPoints(new Point(0, 0), points[2]);
-    this.updateTri();
+    this.updateTri(includeLabels);
   }
 
-  updateTri() {
+  updateTri(includeLabels: boolean = true) {
     const { points } = this._tri._line;
     this._tri._right.setAngle({
       p1: points[2],
@@ -359,9 +359,11 @@ export default class CommonCollection extends CommonDiagramCollection {
       const len = new Line(new Point(0, 0), points[2]).length();
       const hyp = round((len - 0.5) ** 3, 4);
       const opp = round(hyp * Math.sin(theta), 4);
-      this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
-      this._tri._opp.setLabel(`${opp.toFixed(4)}`);
-      this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
+      if (includeLabels) {
+        this._tri._hyp.setLabel(`${hyp.toFixed(4)}`);
+        this._tri._opp.setLabel(`${opp.toFixed(4)}`);
+        this._eqnSame._value.drawingObject.setText(`${round(Math.sin(theta), 4).toFixed(4)}`);
+      }
       // const r = this._rotator._line.getRotation();
       if (points[1].x < 1.3 || points[2].y < 0.35) {
         this._tri._right.hide();
@@ -373,10 +375,14 @@ export default class CommonCollection extends CommonDiagramCollection {
         curveRadius: undefined,
         curveOffset: undefined,
       };
+      // if (points[1].x >= 0.85) {
+      //   this._tri._theta._curve.show();
+      // }
       if (points[1].x < 0.85) {
         const radius = Math.max(points[1].x - 0.25, 0.01);
         curveOptions.radius = radius;
         curveOptions.curveRadius = radius;
+        // this._tri._theta._curve.hide();
       }
       if (points[2].y < 0.2) {
         curveOptions.curveOffset = -(0.2 - points[2].y);

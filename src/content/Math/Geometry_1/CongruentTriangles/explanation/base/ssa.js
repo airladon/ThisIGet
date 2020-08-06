@@ -264,8 +264,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     const angle = rand(
       this._constructionLine.move.bounds.getRotation().boundary.min || 0,
       this._constructionLine.move.bounds.getRotation().boundary.max || 0,
-      // this._constructionLine.move.minTransform.r() || 0,
-      // this._constructionLine.move.maxTransform.r() || 0,
     );
     this.goToAngleAndLength(angle, adjacentLength, done);
   }
@@ -297,7 +295,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     const maxAngle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
 
     const angle = rand(
-      // this._constructionLine.move.minTransform.r() || 0,
       this._constructionLine.move.bounds.getRotation().boundary.min || 0,
       maxAngle * 0.9,
     );

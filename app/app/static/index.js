@@ -20715,7 +20715,11 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
     key: "change",
     value: function change(options) {
       if (this._curve != null && options.radius != null) {
-        this._curve.drawingObject.update({
+        // ToDo add update method to polygon primitive
+        // This no longer works as polygon in DiagramPrimitives is now a polyline
+        // for non-filled polygons
+        // this._curve.drawingObject.update({ radius: options.radius });
+        this._curve.update({
           radius: options.radius
         });
       }
@@ -24837,6 +24841,12 @@ var DiagramPrimitives = /*#__PURE__*/function () {
           // $FlowFixMe
           border: [_toConsumableArray(fan.slice(1, -1))]
         });
+
+        element.update = function (updateOptions) {
+          var o = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, updateOptions);
+          var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getFanTrisPolygon"])(o.radius, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
+          element.drawingObject.change(points, [_toConsumableArray(points.slice(1, -1))], []);
+        };
       } else {
         var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
         var border = 'line';
@@ -24850,7 +24860,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         if (options.direction === -1) {
           border = 'positive';
           hole = 'negative';
-        }
+        } // console.log(polygonPoints)
+
 
         element = this.polyline(options, options.line, {
           points: polygonPoints,
@@ -24858,6 +24869,26 @@ var DiagramPrimitives = /*#__PURE__*/function () {
           border: border,
           hole: hole
         });
+
+        var simplifyBorder = function simplifyBorder(e) {
+          var simpleBorder = [];
+
+          for (var i = 0; i < e.drawingObject.border[0].length; i += 2) {
+            simpleBorder.push(e.drawingObject.border[0][i]._dup());
+          }
+
+          e.drawingObject.border = [simpleBorder];
+        };
+
+        simplifyBorder(element); // element.drawingObject.border = [simpleBorder];
+
+        element.update = function (updateOptions) {
+          var o = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, updateOptions);
+          var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(o.radius, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
+          element.custom.updatePoints(points); // element.border = [points];
+
+          simplifyBorder(element);
+        };
       }
 
       return element;
@@ -28230,7 +28261,7 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
 
         if (diagramText.font.color != null) {
           var c = [].concat(_toConsumableArray(diagramText.font.color.slice(0, 3)), [// $FlowFixMe
-          diagramText.font.color[3] * diagramText.font.opacity]);
+          diagramText.font.color[3] * diagramText.font.opacity * color[3]]);
           ctx.fillStyle = colorArrayToString(c);
         } else {
           ctx.fillStyle = parentColor;
@@ -44463,10 +44494,12 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   } // clip velocity to the dimension of interest
 
 
-  var velocity = velocityIn; // if (bounds != null && bounds.clipVelocity != null) {
-  //   velocity = bounds.clipVelocity(velocityIn);
-  // }
-  // const velocity = velocityIn;
+  var velocity = velocityIn;
+
+  if (bounds != null && bounds.clipVelocity != null) {
+    velocity = bounds.clipVelocity(velocityIn);
+  } // const velocity = velocityIn;
+
 
   var stopFlag = false;
 
@@ -44597,10 +44630,6 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
 
   var bounceVelocity = velocityAtIntersect * bounceScaler;
   var rectBounceVelocity = new Point(bounceVelocity * Math.cos(reflectionAngle), bounceVelocity * Math.sin(reflectionAngle));
-
-  if (isNaN(rectBounceVelocity.x)) {
-    debugger;
-  }
 
   if (stopFlag) {
     var newStop = deceleratePoint(intersectPoint, rectBounceVelocity, deceleration, deltaTimeIn, bounds, bounceLossIn, zeroVelocityThreshold, precision);
