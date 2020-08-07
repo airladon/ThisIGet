@@ -206,7 +206,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         angle._line1.setRotation(1);
       },
-      show: [angle._line1, angle._line2, angle._fill],
+      show: [angle._line1, angle._line2, angle._fill, angle._corner],
     };
 
     this.addSection(common, {

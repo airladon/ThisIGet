@@ -323,6 +323,17 @@ export default function diagramLayout() {
           // position: [layout.arrowLocation, -lineWidth / 2],
         },
       },
+      {
+        name: 'corner',
+        method: 'angle',
+        options: {
+          corner: {
+            width: lineWidth,
+            length,
+            color: colors.lines,
+          },
+        },
+      },
     ],
   };
 

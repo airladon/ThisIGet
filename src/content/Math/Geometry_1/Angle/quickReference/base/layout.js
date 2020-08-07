@@ -92,6 +92,17 @@ export default function diagramLayout() {
           },
         },
       },
+      {
+        name: 'corner',
+        method: 'angle',
+        options: {
+          corner: {
+            width: lineWidth,
+            length,
+            color: colors.qrAngles_lines,
+          },
+        },
+      },
     ],
   };
 

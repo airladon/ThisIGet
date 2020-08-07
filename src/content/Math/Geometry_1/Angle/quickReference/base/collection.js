@@ -42,6 +42,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     const r = this._angle._line1.getRotation();
     const extraRotation = clipAngle(r + 0, '0to360');
     this._angle._fill.setAngleToDraw(extraRotation);
+    this._angle._corner.setAngle({ angle: r });
   }
 
   pulseFill() {

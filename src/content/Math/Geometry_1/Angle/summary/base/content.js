@@ -55,7 +55,7 @@ class Content extends PresentationFormatContent {
         angle._line1.isTouchable = true;
         angle.setScenario('summary');
       },
-      show: [angle._line1, angle._line2, angle._fill],
+      show: [angle._line1, angle._line2, angle._fill, angle._corner],
     });
   }
 }

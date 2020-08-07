@@ -58,6 +58,7 @@ export default class QRAngle extends PopupBoxCollection {
     angle._line1.showAll();
     angle._line2.showAll();
     angle._fill.show();
+    angle._corner.show();
     angle._line1.setRotation(1);
     angle._line1.move.bounds.updateRotation({
       min: Math.PI * 0.05,
