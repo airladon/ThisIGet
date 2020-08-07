@@ -245,7 +245,7 @@ class Content extends PresentationFormatContent {
       },
       setSteadyState: () => {
         circ.updateCircleLocation();
-        console.log(circ._circle);
+        // console.log(circ._circle);
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;

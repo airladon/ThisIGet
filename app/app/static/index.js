@@ -20689,6 +20689,9 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
           width: optionsToUse.width,
           color: this.color,
           fill: false,
+          // line: {
+          //   widthIs: 'mid',
+          // },
           transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('AngleCurve').rotate(0)
         });
         this.curve = optionsToUse;
@@ -20715,10 +20718,6 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
     key: "change",
     value: function change(options) {
       if (this._curve != null && options.radius != null) {
-        // ToDo add update method to polygon primitive
-        // This no longer works as polygon in DiagramPrimitives is now a polyline
-        // for non-filled polygons
-        // this._curve.drawingObject.update({ radius: options.radius });
         this._curve.update({
           radius: options.radius
         });
@@ -20736,45 +20735,8 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
         if (options.curveOffset != null) {
           this.label.curveOffset = options.curveOffset;
         }
-      } // // this._curve.drawingObject.radius = radius;
-      // // this._curve.drawingObject.makePolygon();
-      // // this._curve.drawingObject.change();
-      // if (curveRadius != null && this.label != null) {
-      //   this.label.radius = curveRadius;
-      // }
-      // if (curvePosition != null && this.label != null) {
-      //   this.label.curvePosition = curvePosition;
-      // }
-
-    } // pulseWidth() {
-    //   const line = this._line;
-    //   if (line != null) {
-    //     line.stopPulsing();
-    //     const oldTransformMethod = line.pulse.transformMethod;
-    //     const oldPulseCallback = line.pulse.callback;
-    //     const finishPulsing = () => {
-    //       line.pulse.transformMethod = oldTransformMethod;
-    //       line.pulse.callback = oldPulseCallback;
-    //     };
-    //     line.pulse.callback = finishPulsing;
-    //     line.pulse.transformMethod = s => new Transform().scale(1, s);
-    //     line.pulseScaleNow(1, 3);
-    //   }
-    //   const arrow1 = this._arrow1;
-    //   const arrow2 = this._arrow2;
-    //   if (arrow1 != null) {
-    //     arrow1.pulseScaleNow(1, 2);
-    //   }
-    //   if (arrow2 != null) {
-    //     arrow2.pulseScaleNow(1, 2);
-    //   }
-    //   const label = this._label;
-    //   if (label != null) {
-    //     label.pulseScaleNow(1, 1.5);
-    //   }
-    //   this.animateNextFrame();
-    // }
-
+      }
+    }
   }, {
     key: "addArrow",
     value: function addArrow(index) {
@@ -20843,7 +20805,9 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
                 var delta = 0;
 
                 if (this.curve) {
-                  delta = primaryCurveAngle % (2 * Math.PI / this.curve.sides);
+                  var sideAngle = 2 * Math.PI / this.curve.sides;
+                  var numSides = Math.floor(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(primaryCurveAngle / sideAngle));
+                  delta = primaryCurveAngle - numSides * sideAngle;
                 }
 
                 element.angleToDraw = primaryCurveAngle;
@@ -24808,20 +24772,33 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         // sidesToDraw: 4,
         rotation: 0,
         width: 0.01,
-        line: {
-          widthIs: 'inside'
-        },
+        // line: {
+        //   widthIs: 'mid',
+        // },
         // angle: Math.PI * 2,
         offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
         touchableLineOnly: false
       };
+      var radiusMod = 0;
 
       for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
         optionsIn[_key4] = arguments[_key4];
       }
 
       var options = processOptions.apply(void 0, [defaultOptions].concat(optionsIn));
+
+      if (options.line == null || options.line != null && options.line.widthIs == null) {
+        if (options.line == null) {
+          options.line = {};
+        }
+
+        options.line.widthIs = 'mid';
+        var sideAngle = Math.PI * 2 / options.sides;
+        var theta = (Math.PI - sideAngle) / 2;
+        radiusMod = options.width / 2 / Math.sin(theta);
+      }
+
       parsePoints(options, ['offset']);
       var element;
 
@@ -24848,7 +24825,7 @@ var DiagramPrimitives = /*#__PURE__*/function () {
           element.drawingObject.change(points, [_toConsumableArray(points.slice(1, -1))], []);
         };
       } else {
-        var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(options.radius, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
+        var polygonPoints = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(options.radius - radiusMod, options.rotation, options.offset, options.sides, options.sidesToDraw, options.direction);
         var border = 'line';
         var hole;
 
@@ -24884,7 +24861,7 @@ var DiagramPrimitives = /*#__PURE__*/function () {
 
         element.update = function (updateOptions) {
           var o = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, updateOptions);
-          var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(o.radius, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
+          var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(o.radius - radiusMod, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
           element.custom.updatePoints(points); // element.border = [points];
 
           simplifyBorder(element);
@@ -25021,7 +24998,7 @@ var DiagramPrimitives = /*#__PURE__*/function () {
       var element = this.polygon(options); // $FlowFixMe
 
       element.drawingObject.getPointCountForAngle = function (angle) {
-        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
+        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle, 8) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2, 8) * options.sides);
 
         if (options.fill) {
           return sidesToDraw + 2;
@@ -34612,34 +34589,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
       //     done,
       //   );
       // }
-    } // pulseLegacy(
-    //   elementsOrDone: ?(Array<string | DiagramElement> | (mixed) => void),
-    //   // elementsToPulse: Array<string | DiagramElement>,
-    //   done: ?(mixed) => void = null,
-    // ) {
-    //   if (elementsOrDone == null || typeof elementsOrDone === 'function') {
-    //     super.pulse(elementsOrDone);
-    //     return;
-    //   }
-    //   let doneToUse = done;
-    //   elementsOrDone.forEach((elementToPulse) => {
-    //     let element: ?DiagramElement;
-    //     if (typeof elementToPulse === 'string') {
-    //       element = this.getElement(elementToPulse);
-    //     } else {
-    //       element = elementToPulse;
-    //     }
-    //     if (element != null) {
-    //       // element.pulseDefault(doneToUse);
-    //       element.pulse(doneToUse);
-    //       doneToUse = null;
-    //     }
-    //   });
-    //   if (doneToUse != null) {
-    //     doneToUse();
-    //   }
-    // }
-
+    }
   }, {
     key: "getElement",
     value: function getElement() {

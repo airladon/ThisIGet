@@ -59,7 +59,7 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
     this.diagram.recorder.settings.resume = 'animate';
-    console.log(this.diagram)
+    // console.log(this.diagram)
   }
 
   addSections() {

@@ -113,8 +113,8 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
       .scenarios({ target: 'next', duration: 0.8 })
       .whenFinished(() => {
         // this._tri.updatePoints(this._tri.points);
-        console.log(this._tri._angle2.getAngle('rad') * 180 / Math.PI, );
-        console.log(this._tri._angle2)
+        // console.log(this._tri._angle2.getAngle('rad') * 180 / Math.PI, );
+        // console.log(this._tri._angle2)
         this._tri._angle1._label.pulseScaleNow(1, 2);
         this._tri._angle2._label.pulseScaleNow(1, 2);
       })
