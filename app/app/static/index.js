@@ -20321,6 +20321,7 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
       autoRightAngle: false,
       rightAngleRange: 0.001,
       curve: null,
+      corner: null,
       sides: null,
       sideStart: null,
       sideStop: null,
@@ -20440,6 +20441,14 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
       var _sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultSideOptions, optionsToUse.side2);
 
       _this2.addSide(2, _sideOptions.length, _sideOptions.width, _sideOptions.color);
+    }
+
+    if (optionsToUse.corner != null) {
+      var cornerOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultSideOptions, {
+        style: 'fill'
+      }, optionsToUse.corner);
+
+      _this2.addCorner(cornerOptions);
     } // Sides overrides side1 and side2
 
 
@@ -20610,11 +20619,43 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
         this.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
+      if (this.corner != null && this._corner != null) {
+        var points = this.getCornerPoints(this.corner.length);
+
+        this._corner.custom.updatePoints(points);
+      }
+
       if (options.rotationOffset != null) {
         this.update(options.rotationOffset);
       } else {
         this.update();
       }
+    }
+  }, {
+    key: "getCornerPoints",
+    value: function getCornerPoints(length) {
+      return [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](length, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](length * Math.cos(this.angle), length * Math.sin(this.angle))];
+    }
+  }, {
+    key: "addCorner",
+    value: function addCorner(options) {
+      var width = options.width,
+          color = options.color,
+          length = options.length,
+          style = options.style;
+      var corner = this.shapes.polyline({
+        width: width,
+        color: color,
+        points: this.getCornerPoints(length),
+        cornerStyle: style
+      });
+      this.corner = {
+        length: length,
+        width: width,
+        color: color,
+        style: style
+      };
+      this.add('corner', corner);
     }
   }, {
     key: "addSide",

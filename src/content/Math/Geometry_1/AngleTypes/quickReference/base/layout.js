@@ -62,6 +62,11 @@ export default function diagramLayout() {
         sides: 400,
         radius: radius / 4,
       },
+      corner: {
+        width,
+        length: radius,
+        color: colors.qrAngleTypes_lines,
+      },
       autoRightAngle: true,
       rightAngleRange: 0.01,
       color: colors.qrAngleTypes_angle,
