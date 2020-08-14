@@ -32,7 +32,7 @@ const { round } = Fig.tools.math;
 
 // const { rand } = Fig.tools.math;
 
-const { HTMLEquation } = Fig;
+const { HTMLEquation, DiagramElementCollection } = Fig;
 
 const layout = diagramLayout();
 const { colors } = layout;
@@ -67,6 +67,30 @@ class Content extends PresentationFormatContent {
         delay: 0.1,
       },
     };
+    // this.diagram.recorder.subscriptions.subscribe('preparingToPlay', () => {
+    //   // this.diagram.elements._lim.hide()
+    //   const showShown = (element) => {
+    //     if (element instanceof DiagramElementCollection) {
+    //       element.drawOrder.forEach((elementName) => {
+    //         const e = element.elements[elementName];
+    //         if (e.isShown) {
+    //           // console.log(e.getPath())
+    //           showShown(e)
+    //         }
+    //       });
+    //     }
+    //   };
+    //   showShown(this.diagram.elements)
+    //   // this.diagram.elements._circle.drawOrder.forEach((elementName) => {
+    //   //   const element = this.diagram.elements._circle.elements[elementName];
+    //   //   if (element.isShown) {
+    //   //     console.log(elementName)
+    //   //   }
+    //   // });
+    //   // console.log(this.diagram.elements._circle)
+    //   // console.log(Object.keys(this.diagram.elements._circle._corner))
+    //   // console.log(this.diagram.elements._circle._dup());
+    // })
     // console.log(this.diagram)
   }
 
@@ -104,6 +128,8 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
+        // console.log(this.diagram.elements._lim)
+        // console.log(this.diagram.recorder)
       },
     });
 

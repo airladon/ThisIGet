@@ -1091,6 +1091,7 @@ function assignObjectFromTo(fromObject, toObject) {
   var parentPath = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
   var except = typeof exceptIn === 'string' ? [exceptIn] : exceptIn;
   Object.keys(fromObject).forEach(function (key) {
+    // debugger;
     var keyPath = parentPath !== '' ? "".concat(parentPath, ".").concat(key) : key;
 
     if (except.indexOf(keyPath) !== -1) {
@@ -2144,4 +2145,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=5fada4f413e2356931b3.worker.js.map
+//# sourceMappingURL=516761de3c6c4cc77601.worker.js.map

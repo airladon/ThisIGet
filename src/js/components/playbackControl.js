@@ -103,7 +103,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.updateTime(this.props.duration);
+    this.updateTime([this.props.duration]);
     const element = document.getElementById('id__figureone_playback_control');
     if (element == null) {
       return;
@@ -128,7 +128,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
       subscriptions.subscribe('preparingToPlay', this.preparingToPlay.bind(this));
       subscriptions.subscribe('playbackStopped', this.playbackStopped.bind(this));
       subscriptions.subscribe('preparingToPause', this.preparingToPause.bind(this));
-      console.log(this.diagram)
+      subscriptions.subscribe('timeUpdate', this.updateTime.bind(this));
+      // console.log(this.diagram)
       // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
       // console.log(this.diagram.elements.elements.circle.asdf)
     }
@@ -230,7 +231,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     } else {
       recorder.startPlayback(0);
     }
-    this.queueTimeUpdate();
+    // this.queueTimeUpdate();
     // this.startFade();
   }
 
@@ -277,7 +278,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     if (this.state.timeValue === 0) {
       recorder.recordEvent('slide', ['goto', '', 0], 0);
     }
-    this.queueTimeUpdate();
+    // this.queueTimeUpdate();
     this.setState({
       recordPauseClass: '',
       recordClass: 'figureone_playback__hidden',
@@ -297,7 +298,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
       recordPauseClass: 'figureone_playback__hidden',
     });
     this.unfade();
-    console.log(recorder)
+    // console.log(recorder)
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -318,22 +319,23 @@ export default class PlaybackControl extends React.Component<Props, State> {
     recorder.save();
   }
 
-  queueTimeUpdate() {
-    if (this.diagram == null) {
-      return;
-    }
-    const { recorder } = this.diagram;
-    const currentTime = recorder.getCurrentTime();
-    this.updateTime(currentTime);
-    if (recorder.state !== 'idle') {
-      setTimeout(this.queueTimeUpdate.bind(this), 20);
-    }
-  }
+  // queueTimeUpdate() {
+  //   if (this.diagram == null) {
+  //     return;
+  //   }
+  //   const { recorder } = this.diagram;
+  //   const currentTime = recorder.getCurrentTime();
+  //   this.updateTime(currentTime);
+  //   if (recorder.state !== 'idle') {
+  //     setTimeout(this.queueTimeUpdate.bind(this), 20);
+  //   }
+  // }
 
-  updateTime(time: number) {
+  updateTime(timeIn: Array<number>) {
     if (this.diagram == null) {
       return;
     }
+    const [time] = timeIn;
     const { recorder } = this.diagram;
     let totalTime = recorder.duration;
     if (recorder.state === 'recording') {
@@ -357,7 +359,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
     recorder.seekToPercent(percent);
-    this.updateTime(percent * totalTime);
+    // this.updateTime(percent * totalTime);
   }
 
   seek(toTime: number) {
@@ -370,7 +372,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const percent = toTime / totalTime;
     this.setState({ seek: percent });
     recorder.seek(percent);
-    this.updateTime(toTime);
+    // this.updateTime(toTime);
   }
 
   // eslint-disable-next-line class-methods-use-this

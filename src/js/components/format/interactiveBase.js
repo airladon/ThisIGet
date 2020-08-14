@@ -237,8 +237,6 @@ export default class InteractiveFormatComponent extends React.Component
       diagram: this.version.content.diagram,
     });
 
-    console.log('5678')
-
     if (this.firstPage != null && this.firstPage < this.version.content.sections.length) {
       this.version.goToSection(this.firstPage);
     } else {

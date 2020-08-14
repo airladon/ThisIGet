@@ -33,8 +33,8 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     // for (let i = 0; i < elements.length; i += 1) {
     //   elements[i].style.visibility = 'hidden';
     // }
-    console.log('1234')
-    console.log(this.state)
+    // console.log('1234')
+    // console.log(this.state)
   }
 
   toggleDev() {

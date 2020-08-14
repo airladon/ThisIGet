@@ -116,6 +116,9 @@ export default function diagramLayout() {
       },
       color: colors.angles,
     },
+    mods: {
+      dependantTransform: true,
+    },
   };
   layout.arc = {
     name: 'arc',
