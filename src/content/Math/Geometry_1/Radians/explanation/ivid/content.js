@@ -58,7 +58,15 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
-    this.diagram.recorder.settings.resume = 'animate';
+    this.diagram.recorder.settings.play = {
+      action: 'animate',
+      velocity: { translation: 2, rotation: 4, scale: 2 },
+      duration: {
+        dissolveOut: 0.2,
+        dissolveIn: 0.2,
+        delay: 0.1,
+      },
+    };
     // console.log(this.diagram)
   }
 
@@ -252,14 +260,14 @@ class Content extends PresentationFormatContent {
         id_24degr: rowClick(24),
         id_20degr: rowClick(20),
         fractions: click(() => {
-          diag._box.setSize(0.7, 3);
+          diag._box.custom.setSize(0.7, 3);
           diag._box.setPosition([1.47, -0.1]);
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });
           this.diagram.animateNextFrame();
         }, [this], { id: 'note_fractions' }),
         angles: click(() => {
-          diag._box.setSize(0.5, 3);
+          diag._box.custom.setSize(0.5, 3);
           diag._box.setPosition([2.08, -0.1]);
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });

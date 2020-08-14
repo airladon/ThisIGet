@@ -570,11 +570,7 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
   }, {
     key: "translation",
     value: function translation() {
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
-      }
-
-      return this.position(optionsIn);
+      return this.position.apply(this, arguments);
     }
   }, {
     key: "scale",
@@ -584,8 +580,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-          optionsIn[_key7] = arguments[_key7];
+        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          optionsIn[_key6] = arguments[_key6];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -608,8 +604,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-          optionsIn[_key8] = arguments[_key8];
+        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          optionsIn[_key7] = arguments[_key7];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -626,8 +622,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-          optionsIn[_key9] = arguments[_key9];
+        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          optionsIn[_key8] = arguments[_key8];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -650,8 +646,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-          optionsIn[_key10] = arguments[_key10];
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -668,8 +664,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-          optionsIn[_key11] = arguments[_key11];
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -686,8 +682,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-          optionsIn[_key12] = arguments[_key12];
+        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          optionsIn[_key11] = arguments[_key11];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -704,8 +700,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-          optionsIn[_key13] = arguments[_key13];
+        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+          optionsIn[_key12] = arguments[_key12];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -723,8 +719,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-        args[_key14 - 1] = arguments[_key14];
+      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        args[_key13 - 1] = arguments[_key13];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -747,8 +743,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-        args[_key15 - 1] = arguments[_key15];
+      for (var _len14 = arguments.length, args = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        args[_key14 - 1] = arguments[_key14];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -771,8 +767,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len16 = arguments.length, args = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
-        args[_key16 - 1] = arguments[_key16];
+      for (var _len15 = arguments.length, args = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        args[_key15 - 1] = arguments[_key15];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -795,8 +791,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-        args[_key17 - 1] = arguments[_key17];
+      for (var _len16 = arguments.length, args = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        args[_key16 - 1] = arguments[_key16];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -815,8 +811,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len18 = arguments.length, args = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-        args[_key18 - 1] = arguments[_key18];
+      for (var _len17 = arguments.length, args = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        args[_key17 - 1] = arguments[_key17];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -827,8 +823,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19 > 1 ? _len19 - 1 : 0), _key19 = 1; _key19 < _len19; _key19++) {
-        optionsIn[_key19 - 1] = arguments[_key19];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+        optionsIn[_key18 - 1] = arguments[_key18];
       }
 
       if (this.element != null) {
@@ -849,8 +845,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20 > 1 ? _len20 - 1 : 0), _key20 = 1; _key20 < _len20; _key20++) {
-        optionsIn[_key20 - 1] = arguments[_key20];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19 > 1 ? _len19 - 1 : 0), _key19 = 1; _key19 < _len19; _key19++) {
+        optionsIn[_key19 - 1] = arguments[_key19];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -861,8 +857,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21 > 1 ? _len21 - 1 : 0), _key21 = 1; _key21 < _len21; _key21++) {
-        optionsIn[_key21 - 1] = arguments[_key21];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20 > 1 ? _len20 - 1 : 0), _key20 = 1; _key20 < _len20; _key20++) {
+        optionsIn[_key20 - 1] = arguments[_key20];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -875,8 +871,8 @@ var AnimationBuilder = /*#__PURE__*/function (_animation$SerialAnim) {
         element: this.element
       };
 
-      for (var _len22 = arguments.length, optionsIn = new Array(_len22), _key22 = 0; _key22 < _len22; _key22++) {
-        optionsIn[_key22] = arguments[_key22];
+      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
+        optionsIn[_key21] = arguments[_key21];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -2788,7 +2784,7 @@ var OpacityAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.opacity.dissolve === 'out') {
           if (this.opacity.dissolveFromCurrent) {
             if (element.isShown) {
-              this.opacity.start = this.element.opacity;
+              this.opacity.start = element.opacity;
             } else {
               this.opacity.start = 1;
             }
@@ -2804,7 +2800,7 @@ var OpacityAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         if (this.opacity.dissolve === 'in') {
           if (this.opacity.dissolveFromCurrent) {
             if (element.isShown) {
-              this.opacity.start = this.element.opacity;
+              this.opacity.start = element.opacity;
             } else {
               this.opacity.start = 0.001;
             }
@@ -3187,7 +3183,7 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
   }, {
     key: "setToEnd",
     value: function setToEnd() {
-      if (this.element != null) {
+      if (this.element != null && this.position.target != null) {
         this.element.setPosition(this.position.target);
       }
     }
@@ -4162,7 +4158,7 @@ var ScaleAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
   }, {
     key: "setToEnd",
     value: function setToEnd() {
-      if (this.element != null) {
+      if (this.element != null && this.scale.target != null) {
         this.element.setScale(this.scale.target);
       }
     }
@@ -4195,9 +4191,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ScenarioAnimationStep; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
-/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/color */ "./src/js/tools/color.js");
+/* harmony import */ var _ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -4246,8 +4241,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // import type { DiagramElement } from '../../../Element';
-
+// import ElementAnimationStep from '../ElementAnimationStep';
+// import type { DiagramElement } from '../../../Element';
 
 
 
@@ -4369,15 +4364,20 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
 
 
       var transformDuration = 0;
+      var startTransform = start.transform;
+      var targetTransform = target.transform;
 
-      if (start.transform != null && target.transform != null) {
-        transformDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(start.transform._dup(), target.transform._dup(), transformVelocity, this.scenario.rotDirection);
+      if (startTransform != null && targetTransform != null) {
+        transformDuration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(startTransform._dup(), targetTransform._dup(), transformVelocity, this.scenario.rotDirection);
       }
 
       var colorDuration = 0;
 
-      if (start.color != null && target.color != null && !Object(_tools_color__WEBPACK_IMPORTED_MODULE_3__["areColorsSame"])(target.color, start.color)) {
-        var deltaColor = Math.max(Math.abs(target.color[0] - start.color[0]), Math.abs(target.color[1] - start.color[1]), Math.abs(target.color[2] - start.color[2]), Math.abs(target.color[3] - start.color[3])); // const deltaColor = Math.abs(target.color - start.color);
+      if (start.color != null && target.color != null && !Object(_tools_color__WEBPACK_IMPORTED_MODULE_2__["areColorsSame"])(target.color, start.color)) {
+        var deltaColor = Math.max(Math.abs(target.color[0] - start.color[0]), // $FlowFixMe
+        Math.abs(target.color[1] - start.color[1]), // $FlowFixMe
+        Math.abs(target.color[2] - start.color[2]), // $FlowFixMe
+        Math.abs(target.color[3] - start.color[3])); // const deltaColor = Math.abs(target.color - start.color);
 
         colorDuration = deltaColor / colorVelocity;
       }
@@ -4390,15 +4390,17 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
           opacityDuration = opacityDelta / opacityVelocity;
         } else if (start.opacity != null && target.isShown === false) {
           opacityDuration = start.opacity / opacityVelocity;
-        } else if (start.isShown != target.isShown) {
+        } else if (start.isShown !== target.isShown) {
           opacityDuration = 1 / opacityVelocity;
         }
       }
 
-      if (this.scenario.maxTime != null) {
-        colorDuration = Math.min(colorDuration, this.scenario.maxTime);
-        opacityDuration = Math.min(opacityDuration, this.scenario.maxTime);
-        transformDuration = Math.min(transformDuration, this.scenario.maxTime);
+      var scenarioMaxTime = this.scenario.maxTime;
+
+      if (scenarioMaxTime != null) {
+        colorDuration = Math.min(colorDuration, scenarioMaxTime);
+        opacityDuration = Math.min(opacityDuration, scenarioMaxTime);
+        transformDuration = Math.min(transformDuration, scenarioMaxTime);
       }
 
       if (colorDuration <= this.scenario.zeroDurationThreshold) {
@@ -4485,7 +4487,8 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
       } else if (target.isShown === false && start.opacity != null) {
         dissolve = 'out';
         dissolveFromCurrent = true;
-      }
+      } // $FlowFixMe
+
 
       var _this$getDuration = this.getDuration(start, target),
           _this$getDuration2 = _slicedToArray(_this$getDuration, 3),
@@ -4545,7 +4548,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
   }]);
 
   return ScenarioAnimationStep;
-}(_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_4__["ParallelAnimationStep"]);
+}(_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_3__["ParallelAnimationStep"]);
 
 
 
@@ -4881,7 +4884,8 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
     if (!Array.isArray(options.steps) && options.steps != null) {
       steps = [options.steps];
     } else if (options.steps != null) {
-      steps = options.steps;
+      var _options = options;
+      steps = _options.steps;
     }
 
     _this.steps = [];
@@ -4935,6 +4939,7 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       var remaining = null;
 
       if (this.beforeFrame != null) {
+        // $FlowFixMe - as this has been confirmed
         this.beforeFrame(now - this.startTime);
       }
 
@@ -4954,6 +4959,7 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       });
 
       if (this.afterFrame != null) {
+        // $FlowFixMe - as this has been confirmed
         this.afterFrame(now - this.startTime);
       }
 
@@ -5061,9 +5067,9 @@ var ParallelAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       if (this.startTime == null) {
         if (this.state === 'animating' || this.state === 'waitingToStart') {
           return totalDuration;
-        } else {
-          return 0;
         }
+
+        return 0;
       }
 
       var deltaTime = now - this.startTime;
@@ -5297,6 +5303,7 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       var remaining = -1;
 
       if (this.beforeFrame != null) {
+        // $FlowFixMe - as this has been confirmed
         this.beforeFrame(now - this.startTime);
       }
 
@@ -5304,6 +5311,7 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
         remaining = this.steps[this.index].nextFrame(now);
 
         if (this.afterFrame != null) {
+          // $FlowFixMe - as this has been confirmed
           this.afterFrame(now - this.startTime);
         } // console.log('serial', now, this.index, remaining)
 
@@ -5376,9 +5384,9 @@ var SerialAnimationStep = /*#__PURE__*/function (_AnimationStep) {
       if (this.startTime == null) {
         if (this.state === 'animating' || this.state === 'waitingToStart') {
           return totalDuration;
-        } else {
-          return 0;
         }
+
+        return 0;
       }
 
       var deltaTime = now - this.startTime;
@@ -5618,20 +5626,19 @@ function trigger() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
-/* harmony import */ var _parseState__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parseState */ "./src/js/diagram/parseState.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
-/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./state */ "./src/js/diagram/state.js");
+/* harmony import */ var _parseState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parseState */ "./src/js/diagram/parseState.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Recorder */ "./src/js/diagram/Recorder.js");
+/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagramPrimitives/DiagramPrimitives */ "./src/js/diagram/DiagramPrimitives/DiagramPrimitives.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5652,7 +5659,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
  // import getShaders from './webgl/shaders';
 
-
+ // import * as math from '../tools/math';
 
 
 
@@ -5739,7 +5746,7 @@ var Diagram = /*#__PURE__*/function () {
       fontScale: 1 // updateFontSize: '',
 
     };
-    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_3__["FunctionMap"](); // this.fnMap.global.add('tools.math.easein', math.easein);
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_2__["FunctionMap"](); // this.fnMap.global.add('tools.math.easein', math.easein);
     // this.fnMap.global.add('tools.math.easeout', math.easeout);
     // this.fnMap.global.add('tools.math.easeinout', math.easeinout);
     // this.fnMap.global.add('tools.math.linear', math.linear);
@@ -5751,7 +5758,7 @@ var Diagram = /*#__PURE__*/function () {
     this.cursorElementName = 'cursor';
     this.setStateCallback = null; // this.oldScrollY = 0;
 
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         limits = optionsToUse.limits;
     this.htmlId = htmlId;
@@ -5820,10 +5827,10 @@ var Diagram = /*#__PURE__*/function () {
           this.webglOffscreen = webglOffscreen;
         }
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__["default"](this.textCanvasLow);
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_10__["default"](this.textCanvasLow);
 
         if (this.textCanvasOffscreen) {
-          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_11__["default"](this.textCanvasOffscreen);
+          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_10__["default"](this.textCanvasOffscreen);
           this.draw2DOffscreen = draw2DOffscreen;
         } // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
 
@@ -5843,7 +5850,7 @@ var Diagram = /*#__PURE__*/function () {
     }
 
     if (this instanceof Diagram) {
-      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_10__["default"](this);
+      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_9__["default"](this);
     }
 
     this.previousCursorPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
@@ -5857,8 +5864,8 @@ var Diagram = /*#__PURE__*/function () {
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
-    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_8__["default"]();
-    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_6__["SubscriptionManager"](this.fnMap); // this.recorder = new Recorder(
+    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_7__["default"]();
+    this.subscriptions = new _tools_tools__WEBPACK_IMPORTED_MODULE_5__["SubscriptionManager"](this.fnMap); // this.recorder = new Recorder(
     //   this.simulateTouchDown.bind(this),
     //   this.simulateTouchUp.bind(this),
     //   // this.simulateTouchMove.bind(this),
@@ -5872,7 +5879,7 @@ var Diagram = /*#__PURE__*/function () {
     //   this.unpause.bind(this),
     // );
 
-    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_9__["Recorder"]();
+    this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_8__["Recorder"]();
     this.recorder.diagram = this;
     this.bindRecorder();
     this.pauseTime = this.globalAnimation.now() / 1000;
@@ -5902,7 +5909,7 @@ var Diagram = /*#__PURE__*/function () {
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
-    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["isTouchDevice"])();
+    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["isTouchDevice"])();
     this.animateNextFrame(true, 'first frame');
 
     if (optionsToUse.elements) {
@@ -6079,7 +6086,7 @@ var Diagram = /*#__PURE__*/function () {
         }
 
         if (direction === 'prev') {
-          element.clickPrevt();
+          element.clickPrev();
         }
 
         if (direction === 'refresh') {
@@ -6118,7 +6125,7 @@ var Diagram = /*#__PURE__*/function () {
     key: "getState",
     value: function getState(options) {
       this.stateTime = this.globalAnimation.now() / 1000;
-      return Object(_state__WEBPACK_IMPORTED_MODULE_4__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], options);
+      return Object(_state__WEBPACK_IMPORTED_MODULE_3__["getState"])(this, ['lastDrawTime', 'elements', 'stateTime'], options);
     }
   }, {
     key: "setState",
@@ -6127,7 +6134,7 @@ var Diagram = /*#__PURE__*/function () {
 
       var optionsIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'instant';
       // console.log(stateIn)
-      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_5__["default"])(stateIn, this);
+      var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_4__["default"])(stateIn, this);
       var finishedFlag = false;
       this.state.preparingToSetState = false;
 
@@ -6135,7 +6142,7 @@ var Diagram = /*#__PURE__*/function () {
         finishedFlag = true;
         _this2.state.preparingToSetState = false;
 
-        Object(_state__WEBPACK_IMPORTED_MODULE_4__["setState"])(_this2, state);
+        Object(_state__WEBPACK_IMPORTED_MODULE_3__["setState"])(_this2, state);
 
         _this2.elements.setTimeDelta(_this2.globalAnimation.now() / 1000 - _this2.stateTime);
 
@@ -6172,7 +6179,7 @@ var Diagram = /*#__PURE__*/function () {
       if (typeof optionsIn === 'string') {
         options.action = optionsIn;
       } else {
-        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, optionsIn); // velocity trumps duration by default, but if only duration is defined by the
+        options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, options, optionsIn); // velocity trumps duration by default, but if only duration is defined by the
         // user, then remove velocity;
         // if (this.settings.resume.duration != null && this.settings.resume.velocity == null) {
         //   options.velocity = undefined;
@@ -6195,7 +6202,7 @@ var Diagram = /*#__PURE__*/function () {
             delay: options.duration / 10 * 1
           };
         } else {
-          options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultDuration, options.duration);
+          options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultDuration, options.duration);
         }
       } else if (options.duration != null && typeof options.duration !== 'number') {
         options.duration = 1;
@@ -6224,6 +6231,8 @@ var Diagram = /*#__PURE__*/function () {
         this.state.preparingToSetState = true;
         this.subscriptions.trigger('preparingToSetState');
       }
+
+      this.animateNextFrame();
     }
   }, {
     key: "animateToState",
@@ -6255,7 +6264,7 @@ var Diagram = /*#__PURE__*/function () {
     value: function dissolveToState(optionsIn) {
       var _this3 = this;
 
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, {
         dissolveOutDuration: 0.8,
         dissolveInDuration: 0.8,
         delay: 0.2,
@@ -6287,7 +6296,8 @@ var Diagram = /*#__PURE__*/function () {
         },
         // duration: options.dissolveInDuration,
         duration: 0
-      }).start(options.startTime);
+      }).start(options.startTime); // console.log(this.elements)
+      // console.log(this.globalAnimation.now())
     } // dissolveToComplete(optionsIn: {
     //   dissolveOutDuration: number,
     //   dissolveInDuration: number,
@@ -6337,7 +6347,7 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "dissolveInToState",
     value: function dissolveInToState(optionsIn) {
-      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, {
         duration: 0.8,
         done: null,
         startTime: null
@@ -6383,7 +6393,7 @@ var Diagram = /*#__PURE__*/function () {
       var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_14__["default"])(this.shapes, this.equation, this.objects, collection, elementsToAdd, addElementsKey);
     }
   }, {
     key: "addElement",
@@ -6391,7 +6401,7 @@ var Diagram = /*#__PURE__*/function () {
       var rootCollection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.elements;
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_15__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_14__["default"])(this.shapes, this.equation, this.objects, rootCollection, [layout], addElementsKey);
     }
   }, {
     key: "getElement",
@@ -6432,7 +6442,7 @@ var Diagram = /*#__PURE__*/function () {
       // }
 
 
-      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_12__["default"](webgl, draw2D, // this.draw2DFigures,
+      return new _DiagramPrimitives_DiagramPrimitives__WEBPACK_IMPORTED_MODULE_11__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
@@ -6442,7 +6452,7 @@ var Diagram = /*#__PURE__*/function () {
       //   shapes = this.shapesHigh;
       // }
 
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_13__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_12__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
   }, {
     key: "getObjects",
@@ -6453,7 +6463,7 @@ var Diagram = /*#__PURE__*/function () {
       //   equation = this.equationHigh;
       // }
 
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_14__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_13__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
     }
   }, {
     key: "sizeHtmlText",
@@ -7364,9 +7374,6 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "pause",
     value: function pause() {
-      var pauseSettings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-        simplePause: true
-      };
       this.state.pause = 'paused';
       this.pauseTime = this.globalAnimation.now() / 1000;
     } // pauseLegacy(pauseSettings: TypePauseSettings = { simplePause: true }) {
@@ -7930,7 +7937,7 @@ function Box(webgl, width, height, lineWidth, fill, color, transformOrLocation, 
   }; // $FlowFixMe
 
 
-  element.setSize = function (widthIn, heightIn) {
+  element.custom.setSize = function (widthIn, heightIn) {
     // $FlowFixMe
     element.drawingObject.updateBox(widthIn, heightIn);
     element.pointsDefinition = {
@@ -7940,15 +7947,15 @@ function Box(webgl, width, height, lineWidth, fill, color, transformOrLocation, 
   };
 
   element.setPointsFromDefinition = function () {
-    var _element$pointsDefini = element.pointsDefinition,
-        width = _element$pointsDefini.width,
-        height = _element$pointsDefini.height;
+    var w = element.pointsDefinition.width; // const { width, height } = element.pointsDefinition;
 
-    if (width == null || height == null) {
+    var h = element.pointsDefinition.height;
+
+    if (w == null || h == null) {
       return;
     }
 
-    element.setSize(width, height);
+    element.custom.setSize(w, h);
   };
 
   return element;
@@ -8005,6 +8012,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Bounds__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bounds */ "./src/js/diagram/DiagramElements/Equation/Elements/Bounds.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Symbols_SymbolNew__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Symbols/SymbolNew */ "./src/js/diagram/DiagramElements/Equation/Symbols/SymbolNew.js");
+/* harmony import */ var _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../tools/FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8043,6 +8051,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  // import { Element, Elements } from './Element';
 
 // import Symbol from '../Symbols/Symbol';
+
  // eslint-disable-next-line import/no-cycle
 // import type { TypeEquationPhrase } from '../EquationFunctions';
 
@@ -8169,6 +8178,7 @@ var BaseAnnotationFunction = /*#__PURE__*/function () {
     this.content = content;
     this.annotations = annotations;
     this.options = options;
+    this.fnMap = new _tools_FunctionMap__WEBPACK_IMPORTED_MODULE_4__["FunctionMap"]();
   }
 
   _createClass(BaseAnnotationFunction, [{
@@ -20619,10 +20629,13 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
         this.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
-      if (this.corner != null && this._corner != null) {
-        var points = this.getCornerPoints(this.corner.length);
+      var corner = this.corner,
+          _corner = this._corner;
 
-        this._corner.custom.updatePoints(points);
+      if (corner != null && _corner != null) {
+        var points = this.getCornerPoints(corner.length);
+
+        _corner.custom.updatePoints(points);
       }
 
       if (options.rotationOffset != null) {
@@ -20759,7 +20772,7 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
     key: "change",
     value: function change(options) {
       if (this._curve != null && options.radius != null) {
-        this._curve.update({
+        this._curve.custom.update({
           radius: options.radius
         });
       }
@@ -21332,6 +21345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _Recorder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Recorder */ "./src/js/diagram/Recorder.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21353,6 +21367,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -21804,6 +21819,7 @@ var EqnNavigator = /*#__PURE__*/function (_DiagramElementCollec) {
     _this.currentGroup = null;
     _this.nextGroup = null;
     _this.animateNextFrame = animateNextFrame;
+    _this.recorder = new _Recorder__WEBPACK_IMPORTED_MODULE_6__["Recorder"]();
     var defaultOptions = {
       offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       navType: 'twoLine',
@@ -23686,11 +23702,22 @@ var DiagramObjectPolyLine = /*#__PURE__*/function (_DiagramElementCollec) {
             boundary = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getBounds"])(boundary);
 
             if (boundary instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RangeBounds"]) {
+              var maxBounds = boundary.boundary.max;
+              var minBounds = boundary.boundary.min;
+
+              if (maxBounds != null) {
+                maxBounds += -radius - delta;
+              }
+
+              if (minBounds != null) {
+                minBounds += radius + delta;
+              }
+
               boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"]({
-                left: boundary.boundary.min + radius + delta,
-                right: boundary.boundary.max - radius - delta,
-                bottom: boundary.boundary.min + radius + delta,
-                top: boundary.boundary.max - radius - delta
+                left: minBounds,
+                right: maxBounds,
+                bottom: minBounds,
+                top: maxBounds
               });
             } else if (!(boundary instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"])) {
               boundary = null;
@@ -24860,7 +24887,7 @@ var DiagramPrimitives = /*#__PURE__*/function () {
           border: [_toConsumableArray(fan.slice(1, -1))]
         });
 
-        element.update = function (updateOptions) {
+        element.custom.update = function (updateOptions) {
           var o = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, updateOptions);
           var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getFanTrisPolygon"])(o.radius, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
           element.drawingObject.change(points, [_toConsumableArray(points.slice(1, -1))], []);
@@ -24900,7 +24927,7 @@ var DiagramPrimitives = /*#__PURE__*/function () {
 
         simplifyBorder(element); // element.drawingObject.border = [simpleBorder];
 
-        element.update = function (updateOptions) {
+        element.custom.update = function (updateOptions) {
           var o = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options, updateOptions);
           var points = Object(_DrawingObjects_Geometries_polygon_polygon__WEBPACK_IMPORTED_MODULE_24__["getPolygonPoints"])(o.radius - radiusMod, o.rotation, o.offset, o.sides, o.sidesToDraw, o.direction);
           element.custom.updatePoints(points); // element.border = [points];
@@ -31429,7 +31456,7 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "_state",
     value: function _state(options) {
       if (options.min) {
-        return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStatePropertiesMin(options), options);
+        return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStatePropertiesMin(), options);
       }
 
       return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStateProperties(options), options);
@@ -31627,7 +31654,7 @@ var DiagramElement = /*#__PURE__*/function () {
         target.isShown = state.isShown;
       }
 
-      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(this.color, state.color)) {
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsWithinDelta"])(this.color, state.color, 0.001)) {
         target.color = state.color;
       }
 
@@ -31743,16 +31770,17 @@ var DiagramElement = /*#__PURE__*/function () {
         return false;
       }
 
-      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsSame"])(this.color, state.color)) {
+      if (!Object(_tools_color__WEBPACK_IMPORTED_MODULE_10__["areColorsWithinDelta"])(this.color, state.color, 0.001)) {
         return false;
       }
 
-      if (!this.transform.isEqualTo(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform))) {
+      if (!this.transform.isWithinDelta(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform), 0.001)) {
         return false;
       }
 
-      if (mergePulseTransforms) {
-        return this.arePulseTransformsSame(state);
+      if (mergePulseTransforms && !this.arePulseTransformsSame(state, 0.001)) {
+        // return this.arePulseTransformsSame(state);
+        return false;
       }
 
       if (state.pulseTransforms.length !== this.pulseTransforms.length) {
@@ -31760,7 +31788,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       for (var i = 0; i < this.pulseTransforms.length; i += 1) {
-        if (!this.pulseTransforms[i].isEqualTo(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.pulseTransforms[i]))) {
+        if (!this.pulseTransforms[i].isWithinDelta(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.pulseTransforms[i]), 0.001)) {
           return false;
         }
       }
@@ -31770,6 +31798,7 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "arePulseTransformsSame",
     value: function arePulseTransformsSame(state) {
+      var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.001;
       var statePulseTransforms = [];
       var pulseTransforms = [];
       statePulseTransforms = transformBy([this.transform._dup()], state.pulseTransforms);
@@ -31782,7 +31811,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       for (var i = 0; i < pulseTransforms.length; i += 1) {
-        if (!pulseTransforms[i].isEqualTo(statePulseTransforms[i])) {
+        if (!pulseTransforms[i].isWithinDelta(statePulseTransforms[i], delta)) {
           return false;
         }
       }
@@ -32101,6 +32130,10 @@ var DiagramElement = /*#__PURE__*/function () {
       var isShown;
       var scenario;
 
+      if (scenarioIn == null) {
+        return {};
+      }
+
       if (typeof scenarioIn === 'string') {
         if (scenarioIn in this.scenarios) {
           scenario = this.scenarios[scenarioIn];
@@ -32345,7 +32378,23 @@ var DiagramElement = /*#__PURE__*/function () {
       var prevTransform = this.transform._dup();
 
       this.setTransform(newTransform._dup());
-      this.calcVelocity(prevTransform);
+      var tBounds = this.move.bounds.getTranslation(); // In a finite rect bounds, if we calculate the velocity from the clipped
+      // transform, the object will skip along the wall if the user lets the
+      // object go after intersecting with the wall
+
+      if (tBounds instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["RectBounds"] && tBounds.boundary.right > tBounds.boundary.left && tBounds.boundary.top > tBounds.boundary.bottom) {
+        this.calcVelocity(prevTransform, newTransform);
+      } else {
+        this.calcVelocity(prevTransform, this.transform);
+      } // if (
+      //   this.move.bounds.getTranslation instanceof LineBounds
+      //   || this.move.bounds.getTranslation()
+      // ) {
+      //   this.calcVelocity(prevTransform, this.transform);
+      // } else {
+      //   this.calcVelocity(prevTransform, newTransform);
+      // }
+
 
       if (this.recorder.state === 'recording') {
         this.recorder.recordEvent('moved', [this.getPath(), this.transform.round(this.recorder.precision)._state()] // this.state.movement.velocity.toString(),
@@ -32378,7 +32427,7 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "calcVelocity",
-    value: function calcVelocity(prevTransform) {
+    value: function calcVelocity(prevTransform, nextTransform) {
       var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
 
       if (this.state.movement.previousTime === null) {
@@ -32393,7 +32442,7 @@ var DiagramElement = /*#__PURE__*/function () {
         return;
       }
 
-      this.state.movement.velocity = this.transform.velocity(prevTransform, deltaTime, this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
+      this.state.movement.velocity = nextTransform.velocity(prevTransform, deltaTime, this.move.freely.zeroVelocityThreshold, this.move.maxVelocity);
       this.state.movement.previousTime = currentTime;
     }
   }, {
@@ -34362,7 +34411,8 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 
         if (this.beforeDrawCallback != null) {
           this.fnMap.exec(this.beforeDrawCallback, now);
-        }
+        } // console.log(this.name, now);
+
 
         this.animations.nextFrame(now);
         this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
@@ -38159,7 +38209,8 @@ function getState(obj, stateProperties, optionsIn) // precision: number = 5,
   // const path = this.getPath();
   var defaultOptions = {
     precision: 5,
-    ignoreShown: false
+    ignoreShown: false,
+    min: false
   };
   var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
   var precision = options.precision;
@@ -39365,7 +39416,7 @@ var FunctionMap = /*#__PURE__*/function (_GeneralFunctionMap2) {
 /*!*******************************!*\
   !*** ./src/js/tools/color.js ***!
   \*******************************/
-/*! exports provided: RGBToArray, HexToArray, cssColorToArray, colorArrayToRGB, colorArrayToRGBA, getCSSColors, areColorsSame */
+/*! exports provided: RGBToArray, HexToArray, cssColorToArray, colorArrayToRGB, colorArrayToRGBA, getCSSColors, areColorsSame, areColorsWithinDelta */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -39376,6 +39427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorArrayToRGB", function() { return colorArrayToRGB; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colorArrayToRGBA", function() { return colorArrayToRGBA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "areColorsSame", function() { return areColorsSame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "areColorsWithinDelta", function() { return areColorsWithinDelta; });
 /* harmony import */ var _colorNames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./colorNames */ "./src/js/tools/colorNames.js");
 /* harmony import */ var _getCssColors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getCssColors */ "./src/js/tools/getCssColors.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCSSColors", function() { return _getCssColors__WEBPACK_IMPORTED_MODULE_1__["default"]; });
@@ -39468,6 +39520,24 @@ function areColorsSame(color1, color2) {
 
   for (var i = 0; i < color1.length; i += 1) {
     if (Object(_math__WEBPACK_IMPORTED_MODULE_2__["round"])(color1[i], precision) !== Object(_math__WEBPACK_IMPORTED_MODULE_2__["round"])(color2[i], precision)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function areColorsWithinDelta(color1, color2) {
+  var delta = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.001;
+
+  if (color1.length !== color2.length) {
+    return false;
+  }
+
+  for (var i = 0; i < color1.length; i += 1) {
+    var dC = Math.abs(color1[i] - color2[i]);
+
+    if (dC > delta) {
       return false;
     }
   }
@@ -40203,6 +40273,19 @@ var Point = /*#__PURE__*/function () {
 
       return false;
     }
+  }, {
+    key: "isWithinDelta",
+    value: function isWithinDelta(p) {
+      var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0000001;
+      var dX = Math.abs(this.x - p.x);
+      var dY = Math.abs(this.y - p.y);
+
+      if (dX > delta || dY > delta) {
+        return false;
+      }
+
+      return true;
+    }
     /**
      * Compare two points for unequality to some precision
      * @example
@@ -40219,6 +40302,12 @@ var Point = /*#__PURE__*/function () {
     key: "isNotEqualTo",
     value: function isNotEqualTo(p, precision) {
       return !this.isEqualTo(p, precision);
+    }
+  }, {
+    key: "isNotWithinDelta",
+    value: function isNotWithinDelta(p) {
+      var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0000001;
+      return !this.isWithinDelta(p, delta);
     }
     /* eslint-disable no-use-before-define */
 
@@ -40984,6 +41073,48 @@ var Line = /*#__PURE__*/function () {
 
       if (l1.ends === 1) {
         if (l1.p1.isNotEqualTo(l2.p1, precision)) {
+          return false;
+        }
+
+        if (!l1.hasPointOn(l2.p2, precision)) {
+          return false;
+        }
+
+        return true;
+      } // otherwise ends === 0
+
+
+      if (!l1.hasPointOn(l2.p1)) {
+        return false;
+      }
+
+      return true;
+    }
+  }, {
+    key: "isWithinDelta",
+    value: function isWithinDelta(line2) {
+      var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.00000001;
+      var l1 = this;
+      var l2 = line2;
+
+      if (l1.ends !== l2.ends) {
+        return false;
+      }
+
+      if (l1.ends === 2) {
+        if (l1.p1.isNotWithinDelta(l2.p1, delta) && l1.p1.isNotWithinDelta(l2.p2, delta)) {
+          return false;
+        }
+
+        if (l1.p2.isNotWithinDelta(l2.p1, delta) && l1.p2.isNotWithinDelta(l2.p2, delta)) {
+          return false;
+        }
+
+        return true;
+      }
+
+      if (l1.ends === 1) {
+        if (l1.p1.isNotWithinDelta(l2.p1, precision)) {
           return false;
         }
 
@@ -42358,7 +42489,41 @@ var Transform = /*#__PURE__*/function () {
         }
 
         if (thisTrans instanceof Rotation) {
-          if (compare.r !== thisTrans.r) {
+          if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(compare.r, precision) !== Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(thisTrans.r, precision)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "isWithinDelta",
+    value: function isWithinDelta(transformToCompare) {
+      var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.00000001;
+
+      if (!this.isSimilarTo(transformToCompare)) {
+        return false;
+      }
+
+      for (var i = 0; i < this.order.length; i += 1) {
+        var compare = transformToCompare.order[i];
+        var thisTrans = this.order[i];
+
+        if (thisTrans.constructor.name !== compare.constructor.name) {
+          return false;
+        }
+
+        if (thisTrans instanceof Translation && compare instanceof Translation || thisTrans instanceof Scale && compare instanceof Scale) {
+          if (compare.isNotWithinDelta(thisTrans, delta)) {
+            return false;
+          }
+        }
+
+        if (thisTrans instanceof Rotation) {
+          var dR = Math.abs(compare.r - thisTrans.r);
+
+          if (dR > delta) {
             return false;
           }
         }
@@ -44066,13 +44231,13 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state3 = _slicedToArray(state, 4),
           b = _state3[0],
-          precision = _state3[1],
+          _precision = _state3[1],
           min = _state3[2],
           max = _state3[3];
 
       return new RangeBounds({
         bounds: b,
-        precision: precision,
+        precision: _precision,
         min: min,
         max: max
       });
@@ -44082,7 +44247,7 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state4 = _slicedToArray(state, 6),
           _b = _state4[0],
-          _precision = _state4[1],
+          _precision2 = _state4[1],
           left = _state4[2],
           bottom = _state4[3],
           right = _state4[4],
@@ -44090,7 +44255,7 @@ function getBounds(bounds) {
 
       return new RectBounds({
         bounds: _b,
-        precision: _precision,
+        precision: _precision2,
         left: left,
         bottom: bottom,
         right: right,
@@ -44102,7 +44267,7 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state5 = _slicedToArray(state, 7),
           _b2 = _state5[0],
-          _precision2 = _state5[1],
+          _precision3 = _state5[1],
           x = _state5[2],
           y = _state5[3],
           x2 = _state5[4],
@@ -44111,7 +44276,7 @@ function getBounds(bounds) {
 
       return new LineBounds({
         bounds: _b2,
-        precision: _precision2,
+        precision: _precision3,
         p1: new Point(x, y),
         p2: new Point(x2, y2),
         ends: ends
@@ -44121,11 +44286,11 @@ function getBounds(bounds) {
     if (f1Type != null && f1Type === 'transformBounds' && state != null && Array.isArray([state]) && state.length === 3) {
       // $FlowFixMe
       var _state6 = _slicedToArray(state, 3),
-          _precision3 = _state6[0],
+          _precision4 = _state6[0],
           order = _state6[1],
           boundsArray = _state6[2];
 
-      var t = new TransformBounds(new Transform(), {}, _precision3);
+      var t = new TransformBounds(new Transform(), {}, _precision4);
       t.order = order.slice();
       var boundary = [];
       boundsArray.forEach(function (b) {
@@ -45508,7 +45673,7 @@ function applyModifiers(text, modifiers) {
 
 function setOnClicks(modifiers) {
   var additionalClassesToAdd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var recorder = arguments.length > 2 ? arguments[2] : undefined;
+  var recorder = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _diagram_Recorder__WEBPACK_IMPORTED_MODULE_2__["Recorder"]();
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
 
