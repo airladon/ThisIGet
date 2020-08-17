@@ -6167,18 +6167,29 @@ var Diagram = /*#__PURE__*/function () {
       var options = {
         action: 'instant',
         maxDuration: 6,
-        velocity: {
+        // velocity: {
+        //   position: 2,
+        //   rotation: Math.PI * 2 / 2,
+        //   scale: 1,
+        //   opacity: 0.8,
+        //   color: 0.8,
+        // },
+        allDurationsSame: true,
+        zeroDurationThreshold: 0.00001,
+        minDuration: 0,
+        duration: null
+      };
+
+      if (optionsIn.duration == null) {
+        options.velocity = {
           position: 2,
           rotation: Math.PI * 2 / 2,
           scale: 1,
           opacity: 0.8,
           color: 0.8
-        },
-        allDurationsSame: true,
-        zeroDurationThreshold: 0.00001,
-        minDuration: 0,
-        duration: null
-      }; // console.log(resumeSettings)
+        };
+      } // console.log(resumeSettings)
+
 
       if (typeof optionsIn === 'string') {
         options.action = optionsIn;
