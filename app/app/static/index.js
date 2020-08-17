@@ -3048,7 +3048,7 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'position'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxDuration']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     _this._stepType = 'position';
     var defaultPositionOptions = {
@@ -3062,7 +3062,7 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         offset: 0.5,
         controlPoint: null,
         direction: '',
-        maxTime: null
+        maxDuration: null
       },
       velocity: null
     };
@@ -3096,7 +3096,7 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     _this.position = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxDuration']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.position.translationOptions);
     return _this;
   }
@@ -3158,9 +3158,9 @@ var PositionAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(velocityToUse));
       }
 
-      if (this.position.maxTime != null) {
-        if (this.duration > this.position.maxTime) {
-          this.duration = this.position.maxTime;
+      if (this.position.maxDuration != null) {
+        if (this.duration > this.position.maxDuration) {
+          this.duration = this.position.maxDuration;
         }
       }
     }
@@ -3438,7 +3438,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'transform'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxTime', 'minTime', 'zeroDurationThreshold']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxDuration', 'minDuration', 'zeroDurationThreshold']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultTransformOptions = {
       start: null,
@@ -3455,8 +3455,8 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
       },
       velocity: null,
       clipRotationTo: null,
-      maxTime: null,
-      minTime: 0,
+      maxDuration: null,
+      minDuration: 0,
       zeroDurationThreshold: 0
     };
 
@@ -3475,7 +3475,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
     _this.transform = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime', 'minTime', 'zeroDurationThreshold']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxDuration', 'minDuration', 'zeroDurationThreshold']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
   } // If spreading to more transforms, add transforms to before start and after finish.
@@ -3694,9 +3694,9 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
         }
       }
 
-      if (this.transform.maxTime != null) {
-        if (this.duration > this.transform.maxTime) {
-          this.duration = this.transform.maxTime;
+      if (this.transform.maxDuration != null) {
+        if (this.duration > this.transform.maxDuration) {
+          this.duration = this.transform.maxDuration;
         }
       }
 
@@ -3704,8 +3704,8 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
         this.duration = 0;
       }
 
-      if (this.duration < this.transform.minTime) {
-        this.duration = this.transform.minTime;
+      if (this.duration < this.transform.minDuration) {
+        this.duration = this.transform.minDuration;
       }
 
       this.duration = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(this.duration, this.precision);
@@ -3738,7 +3738,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
           next.clipRotation(this.transform.clipRotationTo);
         }
 
-        element.frozenPulseTransforms.push(next);
+        element.frozenPulseTransforms.push(next); // console.log(element.getPath(), deltaTime, next.s(), element.frozenPulseTransforms[0]._dup())
       }
     }
   }, {
@@ -3853,7 +3853,7 @@ var RotationAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'rotation'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'direction', 'velocity', 'clipTo', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'direction', 'velocity', 'clipTo', 'maxDuration']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultTransformOptions = {
       start: null,
@@ -3862,12 +3862,12 @@ var RotationAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
       direction: 0,
       velocity: null,
       clipTo: null,
-      maxTime: null
+      maxDuration: null
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.rotation = {};
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo', 'maxDuration']);
     return _this;
   }
 
@@ -3922,9 +3922,9 @@ var RotationAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(velocity), this.rotation.direction);
       }
 
-      if (this.rotation.maxTime != null) {
-        if (this.duration > this.rotation.maxTime) {
-          this.duration = this.rotation.maxTime;
+      if (this.rotation.maxDuration != null) {
+        if (this.duration > this.rotation.maxDuration) {
+          this.duration = this.rotation.maxDuration;
         }
       }
 
@@ -4045,14 +4045,14 @@ var ScaleAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'position'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'velocity', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'velocity', 'maxDuration']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultPositionOptions = {
       start: null,
       target: null,
       delta: null,
       velocity: null,
-      maxTime: null
+      maxDuration: null
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
 
@@ -4070,7 +4070,7 @@ var ScaleAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
       options.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta);
     }
 
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxDuration']);
     return _this;
   }
 
@@ -4130,9 +4130,9 @@ var ScaleAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(velocityToUse));
       }
 
-      if (this.scale.maxTime != null) {
-        if (this.duration > this.scale.maxTime) {
-          this.duration = this.scale.maxTime;
+      if (this.scale.maxDuration != null) {
+        if (this.duration > this.scale.maxDuration) {
+          this.duration = this.scale.maxDuration;
         }
       }
 
@@ -4263,7 +4263,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'scenario'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression', 'minTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxDuration', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression', 'minDuration']);
     _this = _super.call(this, AnimationStepOptionsIn);
     _this._stepType = 'position';
     var defaultScenarioOptions = {
@@ -4281,11 +4281,11 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
       rotDirection: 0,
       clipRotationTo: null,
       velocity: null,
-      maxTime: null,
+      maxDuration: null,
       allDurationsSame: true,
       zeroDurationThreshold: 0,
       progression: 'tools.math.easeinout',
-      minTime: 0
+      minDuration: 0
     };
 
     if (_this.element && _this.element.animations.options.translation) {
@@ -4305,7 +4305,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     _this.scenario = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxTime', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression', 'minTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxDuration', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression', 'minDuration']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.scenario.translationOptions);
     return _this;
   }
@@ -4326,7 +4326,9 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     key: "getDuration",
     value: function getDuration(start, target) {
       var element = this.element;
-      var velocity = this.scenario.velocity;
+      var velocity = this.scenario.velocity; // console.log(velocity)
+      // console.log(this.duration)
+      // console.log(element)
 
       if (velocity == null || element == null || this.duration > 0) {
         return [this.duration, this.duration, this.duration];
@@ -4395,7 +4397,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
         }
       }
 
-      var scenarioMaxTime = this.scenario.maxTime;
+      var scenarioMaxTime = this.scenario.maxDuration;
 
       if (scenarioMaxTime != null) {
         colorDuration = Math.min(colorDuration, scenarioMaxTime);
@@ -4407,24 +4409,24 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
         colorDuration = 0;
       }
 
-      if (colorDuration < this.scenario.minTime) {
-        colorDuration = this.scenario.minTime;
+      if (colorDuration < this.scenario.minDuration) {
+        colorDuration = this.scenario.minDuration;
       }
 
       if (opacityDuration <= this.scenario.zeroDurationThreshold) {
         opacityDuration = 0;
       }
 
-      if (opacityDuration < this.scenario.minTime) {
-        opacityDuration = this.scenario.minTime;
+      if (opacityDuration < this.scenario.minDuration) {
+        opacityDuration = this.scenario.minDuration;
       }
 
       if (transformDuration <= this.scenario.zeroDurationThreshold) {
         transformDuration = 0;
       }
 
-      if (transformDuration < this.scenario.minTime) {
-        transformDuration = this.scenario.minTime;
+      if (transformDuration < this.scenario.minDuration) {
+        transformDuration = this.scenario.minDuration;
       }
 
       if (this.scenario.allDurationsSame) {
@@ -4636,7 +4638,7 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'transform'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxDuration']);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultTransformOptions = {
       start: null,
@@ -4653,7 +4655,7 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
       },
       velocity: null,
       clipRotationTo: null,
-      maxTime: null
+      maxDuration: null
     };
 
     if (_this.element && _this.element.animations.options.translation) {
@@ -4671,7 +4673,7 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
     _this.transform = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxDuration']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
   }
@@ -4735,9 +4737,9 @@ var TransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform.start, this.transform.target, this.transform.velocity, this.transform.rotDirection);
       }
 
-      if (this.transform.maxTime != null) {
-        if (this.duration > this.transform.maxTime) {
-          this.duration = this.transform.maxTime;
+      if (this.transform.maxDuration != null) {
+        if (this.duration > this.transform.maxDuration) {
+          this.duration = this.transform.maxDuration;
         }
       }
 
@@ -6140,7 +6142,9 @@ var Diagram = /*#__PURE__*/function () {
 
       var finished = function finished() {
         finishedFlag = true;
-        _this2.state.preparingToSetState = false;
+        _this2.state.preparingToSetState = false; // if (window.asdf) {
+        //   debugger;
+        // }
 
         Object(_state__WEBPACK_IMPORTED_MODULE_3__["setState"])(_this2, state);
 
@@ -6162,7 +6166,7 @@ var Diagram = /*#__PURE__*/function () {
 
       var options = {
         action: 'instant',
-        maxTime: 6,
+        maxDuration: 6,
         velocity: {
           position: 2,
           rotation: Math.PI * 2 / 2,
@@ -6172,7 +6176,7 @@ var Diagram = /*#__PURE__*/function () {
         },
         allDurationsSame: true,
         zeroDurationThreshold: 0.00001,
-        minTime: 0,
+        minDuration: 0,
         duration: null
       }; // console.log(resumeSettings)
 
@@ -6205,11 +6209,10 @@ var Diagram = /*#__PURE__*/function () {
           options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultDuration, options.duration);
         }
       } else if (options.duration != null && typeof options.duration !== 'number') {
-        options.duration = 1;
-      } // console.log(this.elements.isStateSame(state.elements, true));
+        options.duration = null;
+      }
 
-
-      if (options.action === 'instant' || this.elements.isStateSame(state.elements, true)) {
+      if (options.action === 'instant' || this.elements.isStateSame(state.elements, true, ['cursor'])) {
         finished();
       } else if (options.action === 'animate') {
         this.elements.stop('freeze'); // This is cancelling the pulse
@@ -22252,16 +22255,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
- // top - text is on top of line (except when line is vertical)
-// bottom - text is on bottom of line (except when line is vertical)
-// left - text is to left of line (except when line is horiztonal)
-// right - text is to right of line (except when line is horiztonal)
-// end1 - text is on first end of line
-// end2 - text is on second end of line
-// outside - text is on left of line when line is vertical from 0 to 1
-//           or, if a polygon is defined clockwise, outside will be outside.
-// inside - text is on right of line when line is vertical from 0 to 1
-//           or, if a polygon is defined anti-clockwise, outside will be outside.
+
 
 // Line is a class that manages:
 //   A straight line
@@ -22734,7 +22728,9 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         line: 3,
         label: 1.5,
         arrow: 2,
-        done: null
+        done: null,
+        duration: 1,
+        when: 'nextFrame'
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])(defaultOptions, optionsIn);
       var done = options.done;
@@ -22759,7 +22755,13 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         // this.fnMap.add(scaleTransformMethodName, scaleTransformMethod);
 
         line.pulseSettings.transformMethod = this.scaleTransformMethodName;
-        line.pulseScaleNow(1, options.line, 0, done);
+        line.pulseScale({
+          duration: options.duration,
+          scale: options.line,
+          frequency: 0,
+          callback: done,
+          when: options.when
+        });
         done = null;
       }
 
@@ -22767,19 +22769,40 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
       var arrow2 = this._arrow2;
 
       if (arrow1 != null) {
-        arrow1.pulseScaleNow(1, options.arrow, 0, done);
+        arrow1.pulseScale({
+          duration: options.duration,
+          scale: options.arrow,
+          frequency: 0,
+          callback: done,
+          when: options.when
+        }); // arrow1.pulseScaleNow(options.duration, options.arrow, 0, done);
+
         done = null;
       }
 
       if (arrow2 != null) {
-        arrow2.pulseScaleNow(1, options.arrow, 0, done);
+        // arrow2.pulseScaleNow(options.duration, options.arrow, 0, done);
+        arrow2.pulseScale({
+          duration: options.duration,
+          scale: options.arrow,
+          frequency: 0,
+          callback: done,
+          when: options.when
+        });
         done = null;
       }
 
       var label = this._label;
 
       if (label != null) {
-        label.pulseScaleNow(1, options.label, 0, done);
+        // label.pulseScaleNow(options.duration, options.label, 0, done);
+        label.pulseScale({
+          duration: options.duration,
+          scale: options.label,
+          frequency: 0,
+          callback: done,
+          when: options.when
+        });
         done = null;
       }
 
@@ -29870,6 +29893,9 @@ var VertexObject = /*#__PURE__*/function (_DrawingObject) {
     key: "drawWithTransformMatrix",
     value: function drawWithTransformMatrix(transformMatrix, color, glIndex, count) // webglInstance: WebGLInstance = this.webgl,
     {
+      // if (window.asdf) {
+      //   console.log(transformMatrix, color, glIndex, count);
+      // }
       var gl = this.gl[glIndex];
       var webglInstance = this.webgl[glIndex];
       var size = 2; // 2 components per iteration
@@ -30777,7 +30803,10 @@ var transformBy = function transformBy(inputTransforms, copyTransforms) {
   });
 
   if (newTransforms.length > 0) {
-    return newTransforms;
+    // TODO Test without duping this
+    return newTransforms.map(function (t) {
+      return t._dup();
+    }); // return newTransforms;
   }
 
   return inputTransforms.map(function (t) {
@@ -31716,7 +31745,7 @@ var DiagramElement = /*#__PURE__*/function () {
         pulseAnimation = this.anim.pulseTransform(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_9__["joinObjects"])({}, options, {
           start: startPulseTransforms,
           target: targetPulseTransforms
-        })); // console.log(pulseAnimation)
+        }));
       }
 
       if (scenarioAnimation != null || pulseAnimation != null) {
@@ -31724,7 +31753,10 @@ var DiagramElement = /*#__PURE__*/function () {
         // .then(pulseTrigger)
         // .then(pulseDelay)
         .start(startTime);
-      }
+      } // if (this.animations.animations.length > 0) {
+      //   console.log(this.getPath(), this.animations.animations[0]._dup());
+      // }
+
 
       if (scenarioAnimation != null) {
         duration = Math.max(duration, scenarioAnimation.getTotalDuration());
@@ -31774,8 +31806,14 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "isStateSame",
     value: function isStateSame(state) {
       var mergePulseTransforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var exceptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var p = this.getPath();
 
-      if (this.isShown !== state.isShown || this.opacity !== state.opacity) {
+      if (exceptions.indexOf(p) > -1) {
+        return true;
+      }
+
+      if (this.isShown !== state.isShown || Math.abs(this.opacity - state.opacity) > 0.001) {
         return false;
       }
 
@@ -34025,8 +34063,18 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
         if (pointCount > 0) {
           // console.log(this.pulseTransforms, pointCount)
           this.drawTransforms.forEach(function (t) {
+            // let t = t2;
+            // console.log(t.matrix().slice(), t._dup().matrix().slice())
+            // const m = t._dup().matrix();
+            // if (this.getPath() === 'circle.line1.line') {
+            //   // colorToUse = [1, 0, 0, 1];
+            //   // t = t2._dup();
+            //   console.log(t.matrix().slice(), t._dup().matrix().slice())
+            // }
             // console.log(t.matrix(), colorToUse, canvasIndex, pointCount)
-            _this7.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
+            _this7.drawingObject.drawWithTransformMatrix( // m, colorToUse, canvasIndex, pointCount,
+            t.matrix(), colorToUse, canvasIndex, pointCount); // window.asdf = false;
+
           });
         }
 
@@ -35764,8 +35812,9 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
     key: "isStateSame",
     value: function isStateSame(state) {
       var mergePulseTransforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var exceptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-      var thisElementResult = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isStateSame", this).call(this, state, mergePulseTransforms);
+      var thisElementResult = _get(_getPrototypeOf(DiagramElementCollection.prototype), "isStateSame", this).call(this, state, mergePulseTransforms, exceptions);
 
       if (thisElementResult === false) {
         return false;
@@ -35775,7 +35824,7 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
 
         if (state.elements != null && state.elements[this.drawOrder[i]] != null) {
-          var elementResult = element.isStateSame(state.elements[this.drawOrder[i]], mergePulseTransforms);
+          var elementResult = element.isStateSame(state.elements[this.drawOrder[i]], mergePulseTransforms, exceptions);
 
           if (elementResult === false) {
             return false;
@@ -37560,7 +37609,7 @@ var Recorder = /*#__PURE__*/function () {
     value: function getPlaySettings() {
       var onResume = {
         action: 'instant',
-        maxTime: 6,
+        maxDuration: 6,
         velocity: {
           position: 2,
           rotation: Math.PI * 2 / 2,
@@ -37570,7 +37619,7 @@ var Recorder = /*#__PURE__*/function () {
         },
         allDurationsSame: true,
         zeroDurationThreshold: 0.00001,
-        minTime: 0,
+        minDuration: 0,
         duration: null
       }; // console.log(resumeSettings)
 
@@ -37619,8 +37668,8 @@ var Recorder = /*#__PURE__*/function () {
     //   }
     //   const playSettings = this.getPlaySettings();
     //   // const defaultOptions = {
-    //   //   maxTime: 1,
-    //   //   minTime: 0,
+    //   //   maxDuration: 1,
+    //   //   minDuration: 0,
     //   //   dissolve: false,
     //   //   delay: 0.2,
     //   // }
@@ -43247,7 +43296,7 @@ function getMoveTime(startTransform, stopTransform) // 100%/s
     return 0;
   }
 
-  var maxTime = 0;
+  var maxDuration = 0;
   startTransforms.forEach(function (startT, index) {
     var stopT = stopTransforms[index];
 
@@ -43269,11 +43318,11 @@ function getMoveTime(startTransform, stopTransform) // 100%/s
 
     var time = getMaxTimeFromVelocity(startT, stopT, velocity, rotDirection);
 
-    if (time > maxTime) {
-      maxTime = time;
+    if (time > maxDuration) {
+      maxDuration = time;
     }
   });
-  return maxTime;
+  return maxDuration;
 }
 
 function quadBezierPoints(p0, p1, p2, sides) {

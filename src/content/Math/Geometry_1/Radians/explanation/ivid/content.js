@@ -58,39 +58,44 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
+    
     this.diagram.recorder.settings.play = {
       action: 'animate',
-      velocity: { translation: 2, rotation: 4, scale: 2 },
-      duration: {
-        dissolveOut: 0.2,
-        dissolveIn: 0.2,
-        delay: 0.1,
-      },
+      velocity: { translation: 2, rotation: 100, scale: 1 },
+      // minDuration: 0.5,
+      // maxDuration: 0.5,
+      // duration: 0.5,
+      // duration: {
+      //   dissolveOut: 0.2,
+      //   dissolveIn: 0.2,
+      //   delay: 0.1,
+      // },
     };
-    // this.diagram.recorder.subscriptions.subscribe('preparingToPlay', () => {
-    //   // this.diagram.elements._lim.hide()
-    //   const showShown = (element) => {
-    //     if (element instanceof DiagramElementCollection) {
-    //       element.drawOrder.forEach((elementName) => {
-    //         const e = element.elements[elementName];
-    //         if (e.isShown) {
-    //           // console.log(e.getPath())
-    //           showShown(e)
-    //         }
-    //       });
-    //     }
-    //   };
-    //   showShown(this.diagram.elements)
-    //   // this.diagram.elements._circle.drawOrder.forEach((elementName) => {
-    //   //   const element = this.diagram.elements._circle.elements[elementName];
-    //   //   if (element.isShown) {
-    //   //     console.log(elementName)
-    //   //   }
-    //   // });
-    //   // console.log(this.diagram.elements._circle)
-    //   // console.log(Object.keys(this.diagram.elements._circle._corner))
-    //   // console.log(this.diagram.elements._circle._dup());
-    // })
+    this.diagram.recorder.subscriptions.subscribe('preparingToPlay', () => {
+      // this.diagram.elements._lim.hide()
+      console.log(this.diagram.getRemainingAnimationTime())
+      // const showShown = (element) => {
+      //   if (element instanceof DiagramElementCollection) {
+      //     element.drawOrder.forEach((elementName) => {
+      //       const e = element.elements[elementName];
+      //       if (e.isShown) {
+      //         // console.log(e.getPath())
+      //         showShown(e)
+      //       }
+      //     });
+      //   }
+      // };
+      // showShown(this.diagram.elements)
+      // this.diagram.elements._circle.drawOrder.forEach((elementName) => {
+      //   const element = this.diagram.elements._circle.elements[elementName];
+      //   if (element.isShown) {
+      //     console.log(elementName)
+      //   }
+      // });
+      // console.log(this.diagram.elements._circle)
+      // console.log(Object.keys(this.diagram.elements._circle._corner))
+      // console.log(this.diagram.elements._circle._dup());
+    })
     // console.log(this.diagram)
   }
 
@@ -130,6 +135,7 @@ class Content extends PresentationFormatContent {
         circle.setScenario('title');
         // console.log(this.diagram.elements._lim)
         // console.log(this.diagram.recorder)
+        console.log(circle)
       },
     });
 
