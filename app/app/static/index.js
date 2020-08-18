@@ -3555,7 +3555,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
     value: function calculateStartTargetDelta() {
       var _this2 = this;
 
-      if (this.transform.start.length != this.transform.target.length) {
+      if (this.transform.start.length !== this.transform.target.length) {
         this.transform.delta = [];
         return;
       }
@@ -3743,7 +3743,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
           next.clipRotation(this.transform.clipRotationTo);
         }
 
-        element.frozenPulseTransforms.push(next); // console.log(element.getPath(), deltaTime, next.s(), element.frozenPulseTransforms[0]._dup())
+        element.frozenPulseTransforms.push(next);
       }
     }
   }, {
@@ -6091,14 +6091,17 @@ var Diagram = /*#__PURE__*/function () {
         }
 
         if (direction === 'next') {
+          // $FlowFixMe
           element.clickNext();
         }
 
         if (direction === 'prev') {
+          // $FlowFixMe
           element.clickPrev();
         }
 
         if (direction === 'refresh') {
+          // $FlowFixMe
           element.clickRefresh();
         }
       };
@@ -6227,6 +6230,7 @@ var Diagram = /*#__PURE__*/function () {
           options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultDuration, options.duration);
         }
       } else if (options.duration != null && typeof options.duration !== 'number') {
+        // $FlowFixMe
         options.duration = {
           dissolveOut: 0,
           dissolveIn: 0,
@@ -16287,7 +16291,7 @@ var Box = /*#__PURE__*/function (_Symbol2) {
         return;
       }
 
-      var space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(spaceIn);
+      var space = typeof spaceIn === 'number' ? Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])([spaceIn, spaceIn]) : Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(spaceIn);
       var maxBounds;
 
       if (parent instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"]) {
@@ -30807,7 +30811,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
  // import type Diagram from './Diagram';
 
-
+ // import type Diagram from './Diagram';
+// import type { TypePauseSettings, TypeOnPause } from './Recorder';
+// eslint-disable-next-line import/no-cycle
+// import {
+//   AnimationPhase, ColorAnimationPhase, CustomAnimationPhase,
+// } from './AnimationPhase';
+// function checkCallback(callback: ?(boolean) => void): (boolean) => void {
+//   let callbackToUse = () => {};
+//   if (typeof callback === 'function') {
+//     callbackToUse = callback;
+//   }
+//   return callbackToUse; + width
+// }
 
 var transformBy = function transformBy(inputTransforms, copyTransforms) {
   var newTransforms = [];
@@ -31513,7 +31529,9 @@ var DiagramElement = /*#__PURE__*/function () {
     }
   }, {
     key: "_state",
-    value: function _state(options) {
+    value: function _state() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
       if (options.min) {
         return Object(_state__WEBPACK_IMPORTED_MODULE_1__["getState"])(this, this._getStatePropertiesMin(), options);
       }
@@ -31803,9 +31821,9 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (state.isShown === false) {
         return 0;
-      }
+      } // const target = {};
 
-      var target = {};
+
       this.transform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(state.transform);
       this.color = state.color.slice();
       this.frozenPulseTransforms = [];
@@ -32023,11 +32041,17 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "setPosition",
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(pointOrX);
+      var position;
 
       if (typeof pointOrX === 'number') {
         position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](pointOrX, y);
-      }
+      } else {
+        position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(pointOrX);
+      } // let position = getPoint(pointOrX);
+      // if (typeof pointOrX === 'number') {
+      //   position = new Point(pointOrX, y);
+      // }
+
 
       var currentTransform = this.transform._dup();
 
@@ -32046,15 +32070,25 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "setScale",
     value: function setScale(scaleOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var scale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scaleOrX);
+      var scale;
 
       if (typeof scaleOrX === 'number') {
-        if (y == null) {
-          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, scaleOrX);
-        } else {
+        if (typeof y === 'number') {
           scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, y);
+        } else {
+          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, scaleOrX);
         }
-      }
+      } else {
+        scale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scaleOrX);
+      } // let scale = getPoint(scaleOrX);
+      // if (typeof scaleOrX === 'number') {
+      //   if (y == null) {
+      //     scale = new Point(scaleOrX, scaleOrX);
+      //   } else {
+      //     scale = new Point(scaleOrX, y);
+      //   }
+      // }
+
 
       var currentTransform = this.transform._dup();
 
@@ -32067,7 +32101,11 @@ var DiagramElement = /*#__PURE__*/function () {
     key: "setTransform",
     value: function setTransform(transform) {
       if (this.move.transformClip != null) {
-        this.transform = this.fnMap.exec(this.move.transformClip, transform);
+        var clip = this.fnMap.exec(this.move.transformClip, transform);
+
+        if (clip instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
+          this.transform = clip;
+        }
       } else {
         this.checkMoveBounds();
 
@@ -32105,7 +32143,7 @@ var DiagramElement = /*#__PURE__*/function () {
       if (this.state.isMovingFreely) {
         // If this is the first frame of moving freely, then record the current
         // time so can calculate velocity on next frame
-        if (this.state.movement.previousTime === null) {
+        if (this.state.movement.previousTime == null) {
           this.state.movement.previousTime = now;
           return;
         } // If got here, then we are now after the first frame, so calculate
@@ -32483,7 +32521,7 @@ var DiagramElement = /*#__PURE__*/function () {
       var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000; // Check wether last movement was a long time ago, if it was, then make
       // velocity 0 as the user has stopped moving before releasing touch/click
 
-      if (this.state.movement.previousTime !== null) {
+      if (this.state.movement.previousTime != null) {
         if (currentTime - this.state.movement.previousTime > 0.05) {
           this.state.movement.velocity = this.transform.zero();
         }
@@ -32502,7 +32540,7 @@ var DiagramElement = /*#__PURE__*/function () {
     value: function calcVelocity(prevTransform, nextTransform) {
       var currentTime = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_11__["default"]().now() / 1000;
 
-      if (this.state.movement.previousTime === null) {
+      if (this.state.movement.previousTime == null) {
         this.state.movement.previousTime = currentTime;
         return;
       } // console.log(currentTime, this.state.movement.previousTime)
@@ -32636,7 +32674,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (this.state.isPulsing) {
         // If this is the first pulse frame, then set the startTime
-        if (this.state.pulse.startTime === null) {
+        if (this.state.pulse.startTime == null) {
           this.state.pulse.startTime = now;
         } // Calculate how much time has elapsed between this frame and the first
         // pulse frame
@@ -32887,7 +32925,7 @@ var DiagramElement = /*#__PURE__*/function () {
 
       if (wasPulsing) {
         // this.subscriptions.trigger('animationFinished', )
-        this.animationFinished('pulsing');
+        this.animationFinished('pulse');
         this.subscriptions.trigger('stopPulsing');
       }
     } // isAnimating() {
@@ -33505,67 +33543,7 @@ var DiagramElement = /*#__PURE__*/function () {
       //   }));
       // }
 
-    } // setMoveBoundsLegacy(
-    //   boundaryIn: ?Array<number> | Rect | 'diagram' = this.move.bounds,
-    //   scale: Point = new Point(1, 1),
-    // ): void {
-    //   if (!this.isMovable) {
-    //     return;
-    //   }
-    //   if (boundaryIn != null) {
-    //     this.move.boundary = boundaryIn;
-    //   }
-    //   if (this.move.boundary == null) {
-    //     return;
-    //   }
-    //   let boundary;
-    //   if (Array.isArray(this.move.boundary)) {
-    //     const [left, bottom, width, height] = this.move.boundary;
-    //     boundary = new Rect(left, bottom, width, height);
-    //   } else if (this.move.boundary === 'diagram') {
-    //     boundary = this.diagramLimits;
-    //   } else {
-    //     ({ boundary } = this.move);
-    //   }
-    //   const glSpace = {
-    //     x: { bottomLeft: -1, width: 2 },
-    //     y: { bottomLeft: -1, height: 2 },
-    //   };
-    //   const diagramSpace = {
-    //     x: {
-    //       bottomLeft: this.diagramLimits.left,
-    //       width: this.diagramLimits.width,
-    //     },
-    //     y: {
-    //       bottomLeft: this.diagramLimits.bottom,
-    //       height: this.diagramLimits.height,
-    //     },
-    //   };
-    //   const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
-    //   const rect = this.getRelativeGLBoundingRect();
-    //   const glToDiagramScaleMatrix = [
-    //     glToDiagramSpace.matrix()[0], 0, 0,
-    //     0, glToDiagramSpace.matrix()[4], 0,
-    //     0, 0, 1];
-    //   const minPoint = new Point(rect.left, rect.bottom).transformBy(glToDiagramScaleMatrix);
-    //   const maxPoint = new Point(rect.right, rect.top).transformBy(glToDiagramScaleMatrix);
-    //   const min = new Point(0, 0);
-    //   const max = new Point(0, 0);
-    //   min.x = boundary.left - minPoint.x * scale.x;
-    //   min.y = boundary.bottom - minPoint.y * scale.y;
-    //   max.x = boundary.right - maxPoint.x * scale.x;
-    //   max.y = boundary.top - maxPoint.y * scale.y;
-    //   // this.move.maxTransform.updateTranslation(
-    //   //   max.x,
-    //   //   max.y,
-    //   // );
-    //   // this.move.minTransform.updateTranslation(
-    //   //   min.x,
-    //   //   min.y,
-    //   // );
-    //   this.move.bounds.updateTranslation(new RectBounds(min.x, min.y, max.x - min.x, max.y - min.y))
-    // }
-
+    }
   }, {
     key: "show",
     value: function show() {
@@ -34079,7 +34057,8 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
 
         this.pulseTransforms = this.getPulseTransforms(now);
         this.drawTransforms = this.getDrawTransforms(newTransforms);
-        this.lastDrawTransform = parentTransform[0].transform(transform);
+        this.lastDrawTransform = parentTransform[0].transform(transform); // eslint-disable-next-line prefer-destructuring
+
         this.lastDrawPulseTransform = this.drawTransforms[0];
 
         if (pointCount > 0) {
@@ -35528,7 +35507,6 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
   }, {
     key: "getChildren",
     value: function getChildren() {
-      var directChildrenOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -35942,6 +35920,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var Gesture = /*#__PURE__*/function () {
+  // cursor: () => void;
   function Gesture(diagram) {
     _classCallCheck(this, Gesture);
 
@@ -36081,8 +36060,11 @@ var Gesture = /*#__PURE__*/function () {
       this.removeEvent('touchstart', this.touchStartHandler, false);
       this.removeEvent('touchend', this.touchEndHandler, false);
       this.removeEvent('touchmove', this.touchMoveHandler, false); // this.removeEvent('keypress', this.keypressHandler, false);
+      // $FlowFixMe
 
-      document.removeEvent('keypress', this.keypressHandler, false);
+      if (document.removeEvent != null) {
+        document.removeEvent('keypress', this.keypressHandler, false);
+      }
     }
   }]);
 
@@ -36113,8 +36095,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "download", function() { return _tools_tools__WEBPACK_IMPORTED_MODULE_2__["download"]; });
 
 /* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./recorder.worker.js */ "./src/js/diagram/recorder.worker.js");
-/* harmony import */ var _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_recorder_worker_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _recorder_worker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./recorder.worker */ "./src/js/diagram/recorder.worker.js");
+/* harmony import */ var _recorder_worker__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_recorder_worker__WEBPACK_IMPORTED_MODULE_4__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36145,6 +36127,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import type { DiagramElement } from './Element';
 
 
 
@@ -36338,7 +36321,7 @@ var Recorder = /*#__PURE__*/function () {
       this.pauseState = null;
       this.settings = {
         pause: 'freeze',
-        resume: 'instant'
+        play: 'instant'
       };
     } // ////////////////////////////////////
     // ////////////////////////////////////
@@ -36679,7 +36662,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "startWorker",
     value: function startWorker() {
       if (this.worker == null) {
-        this.worker = new _recorder_worker_js__WEBPACK_IMPORTED_MODULE_4___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
+        this.worker = new _recorder_worker__WEBPACK_IMPORTED_MODULE_4___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
         // this.worker.addEventListener("message", event => {
         //   const { message, payload } = event.data;
         //   // if (message === 'duration')
@@ -38273,7 +38256,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function () {
-  return new Worker("/static/workers/" + "516761de3c6c4cc77601.worker.js");
+  return new Worker("/static/workers/" + "7e7505d9b60b68d8d626.worker.js");
 };
 
 /***/ }),
@@ -39930,6 +39913,12 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -39942,12 +39931,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+/* eslint-disable no-use-before-define */
 
 
  // import { joinObjects } from './tools';
@@ -39980,6 +39964,123 @@ function clipAngle(angleToClip, clipTo) {
   }
 
   return angle;
+}
+
+function getPrecision(options) {
+  var defaultPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
+  var precision;
+
+  if (options) {
+    precision = options.precision;
+  }
+
+  var precisionToUse = defaultPrecision;
+
+  if (precision != null) {
+    precisionToUse = precision;
+  }
+
+  return precisionToUse;
+}
+
+// point can be defined as:
+//    - Point instance
+//    - [1, 1]
+//    - { f1Type: 'p', def: [1, 1]}
+function parsePoint(pIn, onFail) {
+  if (pIn instanceof Point) {
+    return pIn;
+  }
+
+  var onFailToUse = onFail;
+
+  if (onFailToUse == null) {
+    onFailToUse = null;
+  }
+
+  if (pIn == null) {
+    return onFailToUse;
+  }
+
+  var p = pIn;
+
+  if (typeof p === 'string') {
+    try {
+      p = JSON.parse(p);
+    } catch (_unused) {
+      return onFailToUse;
+    }
+  }
+
+  if (Array.isArray(p)) {
+    if (p.length === 2) {
+      return new Point(p[0], p[1]);
+    }
+
+    return onFailToUse;
+  }
+
+  if (p.f1Type != null) {
+    if (p.f1Type === 'p' && p.state != null && Array.isArray([p.state]) && p.state.length === 2) {
+      var _p$state = _slicedToArray(p.state, 2),
+          x = _p$state[0],
+          y = _p$state[1];
+
+      return new Point(x, y);
+    }
+
+    return onFailToUse;
+  }
+
+  if (typeof p === 'number') {
+    return new Point(p, p);
+  } // if (typeof (p) === 'object') {
+  //   const keys = Object.keys(p);
+  //   if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
+  //     return new Point(p.x, p.y);
+  //   }
+  // }
+
+
+  return onFailToUse;
+}
+
+function getPoint(p) {
+  var parsedPoint = parsePoint(p);
+
+  if (parsedPoint == null) {
+    parsedPoint = new Point(0, 0);
+  }
+
+  return parsedPoint;
+}
+
+function getPoints(points) {
+  if (Array.isArray(points)) {
+    if (points.length === 2 && typeof points[0] === 'number') {
+      // $FlowFixMe
+      return [getPoint(points)];
+    } // $FlowFixMe
+
+
+    return points.map(function (p) {
+      return getPoint(p);
+    });
+  }
+
+  return [getPoint(points)];
+}
+
+function getScale(s) {
+  var parsedPoint;
+
+  if (typeof s === 'number') {
+    parsedPoint = new Point(s, s);
+  } else {
+    parsedPoint = getPoint(s);
+  }
+
+  return parsedPoint;
 }
 /**
  * Rect
@@ -40069,7 +40170,7 @@ function parseRect(rIn, onFail) {
   if (typeof r === 'string') {
     try {
       r = JSON.parse(r);
-    } catch (_unused) {
+    } catch (_unused2) {
       return onFailToUse;
     }
   }
@@ -40443,8 +40544,6 @@ var Point = /*#__PURE__*/function () {
       var delta = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0000001;
       return !this.isWithinDelta(p, delta);
     }
-    /* eslint-disable no-use-before-define */
-
   }, {
     key: "isWithinLine",
     value: function isWithinLine(l, precision) {
@@ -40507,11 +40606,6 @@ var Point = /*#__PURE__*/function () {
     value: function isOnUnboundLine(l, precision) {
       return l.hasPointAlong(this, precision);
     }
-    /* eslint-enable no-use-before-define */
-    // console(text?: string) {
-    //   Console(`${text || ''} + ${this.x}, ${this.y}`);
-    // }
-
   }, {
     key: "isInPolygon",
     value: function isInPolygon(polygonVertices) {
@@ -40575,8 +40669,6 @@ var Point = /*#__PURE__*/function () {
         // if(p.isEqualTo(v[i])) {
         //   return true;
         // }
-
-        /* eslint-disable-next-line  no-use-before-define */
         var l = line(v[i], v[i + 1]);
 
         if (p.isWithinLine(l)) {
@@ -40621,7 +40713,6 @@ var Point = /*#__PURE__*/function () {
         controlPoint: null,
         direction: ''
       };
-      // eslint-disable-next-line no-use-before-define
       var pathPoint = translationPath(translationStyle, this._dup(), delta, percent, translationOptions);
       return pathPoint;
     }
@@ -40634,106 +40725,6 @@ var Point = /*#__PURE__*/function () {
 
   return Point;
 }();
-
-// point can be defined as:
-//    - Point instance
-//    - [1, 1]
-//    - { f1Type: 'p', def: [1, 1]}
-function parsePoint(pIn, onFail) {
-  if (pIn instanceof Point) {
-    return pIn;
-  }
-
-  var onFailToUse = onFail;
-
-  if (onFailToUse == null) {
-    onFailToUse = null;
-  }
-
-  if (pIn == null) {
-    return onFailToUse;
-  }
-
-  var p = pIn;
-
-  if (typeof p === 'string') {
-    try {
-      p = JSON.parse(p);
-    } catch (_unused2) {
-      return onFailToUse;
-    }
-  }
-
-  if (Array.isArray(p)) {
-    if (p.length === 2) {
-      return new Point(p[0], p[1]);
-    }
-
-    return onFailToUse;
-  }
-
-  if (p.f1Type != null) {
-    if (p.f1Type === 'p' && p.state != null && Array.isArray([p.state]) && p.state.length === 2) {
-      var _p$state = _slicedToArray(p.state, 2),
-          x = _p$state[0],
-          y = _p$state[1];
-
-      return new Point(x, y);
-    }
-
-    return onFailToUse;
-  }
-
-  if (typeof p === 'number') {
-    return new Point(p, p);
-  } // if (typeof (p) === 'object') {
-  //   const keys = Object.keys(p);
-  //   if (keys.indexOf('x') > -1 && keys.indexOf('y') > -1) {
-  //     return new Point(p.x, p.y);
-  //   }
-  // }
-
-
-  return onFailToUse;
-}
-
-function getPoint(p) {
-  var parsedPoint = parsePoint(p);
-
-  if (parsedPoint == null) {
-    parsedPoint = new Point(0, 0);
-  }
-
-  return parsedPoint;
-}
-
-function getPoints(points) {
-  if (Array.isArray(points)) {
-    if (points.length === 2 && typeof points[0] === 'number') {
-      // $FlowFixMe
-      return [getPoint(points)];
-    } // $FlowFixMe
-
-
-    return points.map(function (p) {
-      return getPoint(p);
-    });
-  }
-
-  return [getPoint(points)];
-}
-
-function getScale(s) {
-  var parsedPoint;
-
-  if (typeof s === 'number') {
-    parsedPoint = new Point(s, s);
-  } else {
-    parsedPoint = getPoint(s);
-  }
-
-  return parsedPoint;
-}
 
 function linearPath(start, delta, percent) {
   return start.add(delta.x * percent, delta.y * percent);
@@ -41248,11 +41239,11 @@ var Line = /*#__PURE__*/function () {
       }
 
       if (l1.ends === 1) {
-        if (l1.p1.isNotWithinDelta(l2.p1, precision)) {
+        if (l1.p1.isNotWithinDelta(l2.p1, delta)) {
           return false;
         }
 
-        if (!l1.hasPointOn(l2.p2, precision)) {
+        if (!l1.hasPointOn(l2.p2, delta)) {
           return false;
         }
 
@@ -41448,10 +41439,10 @@ var Line = /*#__PURE__*/function () {
       var perpendicular = new Line(intersect, 1, l.ang + Math.PI / 2);
       var shaddow = this.p1.getShaddowOnLine(perpendicular, precision);
       var p1ToShaddow = new Line(this.p1, shaddow);
-      var distance = p1ToShaddow.distance; // const distance = shaddow.distance(this.p1);
+      var dist = p1ToShaddow.distance; // const distance = shaddow.distance(this.p1);
 
-      var projection = Point(this.p1.x + distance * 2 * Math.cos(p1ToShaddow.ang), this.p1.y + distance * 2 * Math.sin(p1ToShaddow.ang));
-      return new Line(intersect, project);
+      var projection = new Point(this.p1.x + dist * 2 * Math.cos(p1ToShaddow.ang), this.p1.y + dist * 2 * Math.sin(p1ToShaddow.ang));
+      return new Line(intersect, projection);
     } // At two lines intersection, the x and y values must be equal
     //   A1x + B1y = C1 => y = -A1/B1x + C1/B1      - Eq 1
     //   A2x + B2y = C2 => y = -A2/B2x + C2/B2      - Eq 2
@@ -41494,7 +41485,7 @@ var Line = /*#__PURE__*/function () {
             _i2 = l2.p1._dup();
             _withinLine = true;
             alongLine = true;
-          } else if (l1.hasPointAlong(l2.p1), precision) {
+          } else if (l1.hasPointAlong(l2.p1, precision)) {
             _i2 = l2.p1._dup();
             alongLine = true;
           }
@@ -41582,7 +41573,17 @@ var Line = /*#__PURE__*/function () {
 
       var xIntercept = this.getXIntercept();
       var yIntercept = this.getYIntercept();
-      var defaultIntercept = yIntercept == null ? new Point(xIntercept, 0) : new Point(0, yIntercept);
+      var defaultIntercept;
+
+      if (yIntercept != null) {
+        defaultIntercept = new Point(0, yIntercept);
+      } else if (xIntercept != null) {
+        defaultIntercept = new Point(xIntercept, 0);
+      } else {
+        defaultIntercept = new Point(0, 0);
+      } // const defaultIntercept = yIntercept == null ? new Point(
+      // xIntercept == null ? 0 : xIntercept, 0) : new Point(0, yIntercept);
+
 
       if (l1.isEqualTo(l2, precision)) {
         var _i4;
@@ -41849,7 +41850,8 @@ function parseLine(lIn, onFail) {
     if (l.length === 3) {
       if (typeof l[1] === 'number') {
         return new Line(getPoint(l[0]), l[1], l[2]);
-      }
+      } // $FlowFixMe
+
 
       return new Line(getPoint(l[0]), getPoint(l[1]), 0, l[2]);
     }
@@ -41969,23 +41971,6 @@ var Rotation = /*#__PURE__*/function () {
 
   return Rotation;
 }();
-
-function getPrecision(options) {
-  var defaultPrecision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 8;
-  var precision;
-
-  if (options) {
-    precision = options.precision;
-  }
-
-  var precisionToUse = defaultPrecision;
-
-  if (precision != null) {
-    precisionToUse = precision;
-  }
-
-  return precisionToUse;
-}
 
 var Translation = /*#__PURE__*/function (_Point) {
   _inherits(Translation, _Point);
@@ -42272,7 +42257,10 @@ var Transform = /*#__PURE__*/function () {
 
   _createClass(Transform, [{
     key: "_state",
-    value: function _state(options) {
+    value: function _state() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        precision: 8
+      };
       // const { precision } = options;
       var out = [];
       this.order.forEach(function (transformElement) {
@@ -42634,6 +42622,7 @@ var Transform = /*#__PURE__*/function () {
         }
 
         if (thisTrans instanceof Rotation) {
+          // $FlowFixMe
           if (Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(compare.r, precision) !== Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(thisTrans.r, precision)) {
             return false;
           }
@@ -42666,6 +42655,7 @@ var Transform = /*#__PURE__*/function () {
         }
 
         if (thisTrans instanceof Rotation) {
+          // $FlowFixMe
           var dR = Math.abs(compare.r - thisTrans.r);
 
           if (dR > delta) {
@@ -43763,18 +43753,20 @@ var RectBounds = /*#__PURE__*/function (_Bounds2) {
           top = _this$boundary2.top,
           bottom = _this$boundary2.bottom,
           left = _this$boundary2.left,
-          right = _this$boundary2.right;
-      var zeroHeight = false;
-
-      if (top != null && bottom != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(top, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(bottom, this.precision)) {
-        zeroHeight = true;
-      }
-
-      var zeroWdith = false;
-
-      if (left != null && right != null && Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(left, this.precision) === Object(_math__WEBPACK_IMPORTED_MODULE_0__["roundNum"])(right, this.precision)) {
-        zeroWdith = true;
-      }
+          right = _this$boundary2.right; // let zeroHeight = false;
+      // if (
+      //   top != null && bottom != null
+      //   && roundNum(top, this.precision) === roundNum(bottom, this.precision)
+      // ) {
+      //   zeroHeight = true;
+      // }
+      // let zeroWdith = false;
+      // if (
+      //   left != null && right != null
+      //   && roundNum(left, this.precision) === roundNum(right, this.precision)
+      // ) {
+      //   zeroWdith = true;
+      // }
 
       var calcHBound = function calcHBound(h) {
         if (h != null) {
@@ -43904,7 +43896,7 @@ var RectBounds = /*#__PURE__*/function (_Bounds2) {
       }
 
       var i;
-      var d;
+      var d = 0;
       var xMirror = 1;
       var yMirror = 1;
       intersects.forEach(function (intersect) {
@@ -44293,7 +44285,12 @@ var LineBounds = /*#__PURE__*/function (_Bounds3) {
         return velocity;
       }
 
-      var v = getPoint(velocity);
+      if (this.boundary == null) {
+        return velocity;
+      }
+
+      var v = getPoint(velocity); // $FlowFixMe
+
       var unitVector = new Vector(this.boundary).unit();
       var projection = unitVector.dotProduct(new Vector([0, 0], v));
       var ang = this.boundary.ang;
@@ -44323,22 +44320,27 @@ function getBounds(bounds) {
   }
 
   if (bounds.type != null) {
+    // $FlowFixMe
     return getBounds(bounds.bounds, bounds.type);
   }
 
   if (type === 'rect') {
+    // $FlowFixMe
     return new RectBounds(bounds);
   }
 
   if (type === 'range') {
+    // $FlowFixMe
     return new RangeBounds(bounds);
   }
 
   if (type === 'line') {
+    // $FlowFixMe
     return new LineBounds(bounds);
   }
 
   if (type === 'transform') {
+    // $FlowFixMe
     return new TransformBounds(transform, bounds);
   }
 
@@ -44368,7 +44370,7 @@ function getBounds(bounds) {
     return getBounds(bounds, 'transform', transform);
   }
 
-  if (bounds.f1Type != undefined && bounds.state != null) {
+  if (bounds.f1Type !== undefined && bounds.state != null) {
     var f1Type = bounds.f1Type,
         state = bounds.state;
 
@@ -44376,13 +44378,13 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state3 = _slicedToArray(state, 4),
           b = _state3[0],
-          _precision = _state3[1],
+          precision = _state3[1],
           min = _state3[2],
           max = _state3[3];
 
       return new RangeBounds({
         bounds: b,
-        precision: _precision,
+        precision: precision,
         min: min,
         max: max
       });
@@ -44392,7 +44394,7 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state4 = _slicedToArray(state, 6),
           _b = _state4[0],
-          _precision2 = _state4[1],
+          _precision = _state4[1],
           left = _state4[2],
           bottom = _state4[3],
           right = _state4[4],
@@ -44400,7 +44402,7 @@ function getBounds(bounds) {
 
       return new RectBounds({
         bounds: _b,
-        precision: _precision2,
+        precision: _precision,
         left: left,
         bottom: bottom,
         right: right,
@@ -44412,7 +44414,7 @@ function getBounds(bounds) {
       // $FlowFixMe
       var _state5 = _slicedToArray(state, 7),
           _b2 = _state5[0],
-          _precision3 = _state5[1],
+          _precision2 = _state5[1],
           x = _state5[2],
           y = _state5[3],
           x2 = _state5[4],
@@ -44421,7 +44423,7 @@ function getBounds(bounds) {
 
       return new LineBounds({
         bounds: _b2,
-        precision: _precision3,
+        precision: _precision2,
         p1: new Point(x, y),
         p2: new Point(x2, y2),
         ends: ends
@@ -44431,11 +44433,11 @@ function getBounds(bounds) {
     if (f1Type != null && f1Type === 'transformBounds' && state != null && Array.isArray([state]) && state.length === 3) {
       // $FlowFixMe
       var _state6 = _slicedToArray(state, 3),
-          _precision4 = _state6[0],
+          _precision3 = _state6[0],
           order = _state6[1],
           boundsArray = _state6[2];
 
-      var t = new TransformBounds(new Transform(), {}, _precision4);
+      var t = new TransformBounds(new Transform(), {}, _precision3);
       t.order = order.slice();
       var boundary = [];
       boundsArray.forEach(function (b) {
@@ -44541,7 +44543,7 @@ var TransformBounds = /*#__PURE__*/function (_Bounds4) {
       }
     }
 
-    _this6 = _super7.call(this, [], precision);
+    _this6 = _super7.call(this, [], 'inside', precision);
     _this6.order = order;
 
     _this6.createBounds(bounds);
@@ -44780,24 +44782,24 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   var bounceLossIn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
   var zeroVelocityThreshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
   var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
-  // console.log(positionIn._dup(), velocityIn._dup(), boundsIn._dup(), deceleration, deltaTimeIn, bounceLossIn, zeroVelocityThreshold, precision);
   var bounds;
 
   if (boundsIn instanceof RangeBounds) {
     bounds = new RectBounds({
-      left: boundsIn.min,
-      right: boundsIn.max,
-      bottom: boundsIn.min,
-      top: boundsIn.max
+      left: boundsIn.boundary.min,
+      right: boundsIn.boundary.max,
+      bottom: boundsIn.boundary.min,
+      top: boundsIn.boundary.max
     });
   } else {
     bounds = boundsIn;
   } // clip velocity to the dimension of interest
 
 
-  var velocity = velocityIn;
+  var velocity = velocityIn; // $FlowFixMe
 
   if (bounds != null && bounds.clipVelocity != null) {
+    // $FlowFixMe
     velocity = bounds.clipVelocity(velocityIn);
   } // const velocity = velocityIn;
 
@@ -44885,7 +44887,7 @@ function deceleratePoint(positionIn, velocityIn, deceleration) {
   // rounding error...
 
   if (result.distance != null && result.distance > distanceTravelled) {
-    throw 'Error in calculating intersect';
+    throw new Error('Error in calculating intersect');
   }
 
   var intersectPoint;
@@ -44957,8 +44959,8 @@ function decelerateValue(value, velocity, deceleration) {
     // if (min == null) {
     // }
     bounds = new LineBounds({
-      p1: [boundsIn.boundary.min, 0],
-      p2: [boundsIn.boundary.max, 0]
+      p1: [boundsIn.boundary.min != null ? boundsIn.boundary.min : 0, 0],
+      p2: [boundsIn.boundary.max != null ? boundsIn.boundary.max : 0, 0]
     });
   }
 
@@ -44999,50 +45001,41 @@ function decelerateIndependantPoint(value, velocity, deceleration) {
   };
 }
 
-function getTransformBoundsLimit(boundsDefinition, transform) {
-  if (Array.isArray(boundsDefinition)) {
-    return boundsDefinition;
-  }
-
-  var order = [];
-
-  for (var i = 0; i < transform.order.length; i += 1) {
-    var transformation = transform.order[i];
-
-    if (transformation instanceof Translation) {
-      var position = null;
-
-      if (boundsDefinition.position != null) {
-        position = boundsDefinition.position;
-      }
-
-      if (boundsDefinition.translation != null) {
-        position = boundsDefinition.translation;
-      }
-
-      order.push(position);
-    } else if (transformation instanceof Scale) {
-      var scale = null;
-
-      if (boundsDefinition.scale != null) {
-        scale = boundsDefinition.scale;
-      }
-
-      order.push(scale);
-    } else if (transformation instanceof Rotation) {
-      var rotation = null;
-
-      if (boundsDefinition.rotation != null) {
-        rotation = boundsDefinition.rotation;
-      }
-
-      order.push(rotation);
-    }
-  }
-
-  return order;
-}
-
+// function getTransformBoundsLimit(
+//   boundsDefinition: TypeTransformLinkBoundsDefinition | TypeTransformBounds,
+//   transform: Transform,
+// ): TypeTransformBounds {
+//   if (Array.isArray(boundsDefinition)) {
+//     return boundsDefinition;
+//   }
+//   const order = [];
+//   for (let i = 0; i < transform.order.length; i += 1) {
+//     const transformation = transform.order[i];
+//     if (transformation instanceof Translation) {
+//       let position = null;
+//       if (boundsDefinition.position != null) {
+//         ({ position } = boundsDefinition);
+//       }
+//       if (boundsDefinition.translation != null) {
+//         position = boundsDefinition.translation;
+//       }
+//       order.push(position);
+//     } else if (transformation instanceof Scale) {
+//       let scale = null;
+//       if (boundsDefinition.scale != null) {
+//         ({ scale } = boundsDefinition);
+//       }
+//       order.push(scale);
+//     } else if (transformation instanceof Rotation) {
+//       let rotation = null;
+//       if (boundsDefinition.rotation != null) {
+//         ({ rotation } = boundsDefinition);
+//       }
+//       order.push(rotation);
+//     }
+//   }
+//   return order;
+// }
 function decelerateTransform(transform, velocity, deceleration, deltaTime, boundsIn, bounceLoss, zeroVelocityThreshold) {
   var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 8;
   var duration = 0;
@@ -45063,15 +45056,20 @@ function decelerateTransform(transform, velocity, deceleration, deltaTime, bound
     var newVTransformation = void 0;
 
     if (transformation instanceof Translation) {
-      result = deceleratePoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = deceleratePoint( // $FlowFixMe
+      transformation, velocity.order[i], deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Translation(result.position.x, result.position.y);
       newVTransformation = new Translation(result.velocity.x, result.velocity.y);
     } else if (transformation instanceof Scale) {
-      result = decelerateIndependantPoint(transformation, velocity.order[i], deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = decelerateIndependantPoint( // $FlowFixMe
+      transformation, velocity.order[i], deceleration[i], deltaTime, // $FlowFixMe
+      bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Scale(result.point.x, result.point.y);
       newVTransformation = new Scale(result.velocity.x, result.velocity.y);
     } else {
-      result = decelerateValue(transformation.r, velocity.order[i].r, deceleration[i], deltaTime, bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
+      result = decelerateValue( // $FlowFixMe
+      transformation.r, velocity.order[i].r, deceleration[i], deltaTime, // $FlowFixMe
+      bounds.boundary[i], bounceLoss[i], zeroVelocityThreshold[i], precision);
       newTransformation = new Rotation(result.value);
       newVTransformation = new Rotation(result.velocity);
     }
@@ -47039,6 +47037,7 @@ function compressObject(obj, map) {
 
   if (Array.isArray(obj)) {
     for (var i = 0; i < obj.length; i += 1) {
+      // eslint-disable-next-line no-param-reassign
       obj[i] = compressObject(obj[i], map, keys, strValues, precision, uncompress);
     }
 
@@ -47050,11 +47049,16 @@ function compressObject(obj, map) {
     var obj2 = {};
 
     for (var _i = 0; _i < objKeys.length; _i += 1) {
-      var k = objKeys[_i];
+      var k = objKeys[_i]; // eslint-disable-next-line no-param-reassign
+
       obj[k] = compressObject(obj[k], map, keys, strValues, precision, uncompress);
 
       if (keys && uncompress) {
-        obj2[map.get(k)] = obj[k];
+        var value = map.get(k);
+
+        if (value != null) {
+          obj2[value] = obj[k];
+        }
       } else if (keys) {
         obj2[map.add(k)] = obj[k];
       } else {
@@ -47213,6 +47217,7 @@ function updateObjFromPath(remainingPath, obj, value) {
   var p = fullP.replace(/\[.*/, '');
 
   if (remainingPath.length === 1 && remove && !arrayStringIndeces) {
+    // eslint-disable-next-line no-param-reassign
     delete obj[p];
     return;
   }
@@ -47224,7 +47229,7 @@ function updateObjFromPath(remainingPath, obj, value) {
     // return;
 
     if (obj[p] == null || !Array.isArray(obj[p])) {
-      obj[p] = [];
+      obj[p] = []; // eslint-disable-line no-param-reassign
     } // console.log(obj)
     // return
 
@@ -47274,12 +47279,13 @@ function updateObjFromPath(remainingPath, obj, value) {
 
 
   if (remainingPath.length === 1) {
-    obj[p] = value;
+    obj[p] = value; // eslint-disable-line no-param-reassign
+
     return;
   }
 
   if (obj[p] == null) {
-    obj[p] = {};
+    obj[p] = {}; // eslint-disable-line no-param-reassign
   }
 
   updateObjFromPath(remainingPath.slice(1), obj[p], value, remove);
