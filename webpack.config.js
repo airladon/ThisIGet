@@ -154,29 +154,54 @@ module.exports = (env) => {
   //   allChunks: true,
   // });
 
-  const copy = new CopyWebpackPlugin(
-    [
+  const copy = new CopyWebpackPlugin({
+    patterns: [
       {
         from: '/opt/app/src/content/*/*/topic.png',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)topic\.png$/,
-        ignore: ['*boilerplate*'],
+        to: '/opt/app/app/app/static/dist/',
+        transformPath: (targetPath, absolutePath) => {
+          return `${targetPath.replace('src/', '')}`;
+        },
+        globOptions: {
+          ignore: ['*boilerplate*'],
+        },
       },
       {
-        from: '/opt/app/src/content/*/*/*/*.svg',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
-        ignore: ['*boilerplate*'],
-      },
-      {
-        from: '/opt/app/src/content/*/*/*/*/*.svg',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
-        ignore: ['*boilerplate*'],
+        from: '/opt/app/src/content/**/*.svg',
+        to: '/opt/app/app/app/static/dist/',
+        transformPath: (targetPath, absolutePath) => {
+          return `${targetPath.replace('src/', '')}`;
+        },
+        globOptions: {
+          ignore: ['*boilerplate*'],
+        },
       },
     ],
-    // { debug: 'debug' },
-  );
+  });
+
+  // const copy = new CopyWebpackPlugin(
+  //   [
+  //     {
+  //       from: '/opt/app/src/content/*/*/topic.png',
+  //       to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+  //       test: /\/opt\/app\/src\/(.*)topic\.png$/,
+  //       ignore: ['*boilerplate*'],
+  //     },
+  //     {
+  //       from: '/opt/app/src/content/*/*/*/*.svg',
+  //       to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+  //       test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+  //       ignore: ['*boilerplate*'],
+  //     },
+  //     {
+  //       from: '/opt/app/src/content/*/*/*/*/*.svg',
+  //       to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+  //       test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+  //       ignore: ['*boilerplate*'],
+  //     },
+  //   ],
+  //   // { debug: 'debug' },
+  // );
 
   let cssMini = '';
   if (e.uglify) {
