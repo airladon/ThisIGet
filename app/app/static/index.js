@@ -3438,7 +3438,8 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'transform'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxDuration', 'minDuration', 'zeroDurationThreshold']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxDuration', 'zeroDurationThreshold' // 'minDuration',
+    ]);
     _this = _super.call(this, ElementAnimationStepOptionsIn);
     var defaultTransformOptions = {
       start: null,
@@ -3456,7 +3457,7 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
       velocity: null,
       clipRotationTo: null,
       maxDuration: null,
-      minDuration: 0,
+      // minDuration: 0,
       zeroDurationThreshold: 0
     };
 
@@ -3475,7 +3476,8 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
     _this.transform = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxDuration', 'minDuration', 'zeroDurationThreshold']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxDuration', 'zeroDurationThreshold' // 'minDuration',
+    ]);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
   } // If spreading to more transforms, add transforms to before start and after finish.
@@ -3677,7 +3679,8 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
 
       if (this.transform.delta.length === 0) {
         this.duration = 0;
-      } // If Velocity is defined, then use it to calculate duration
+      } // console.log(this.transform)
+      // If Velocity is defined, then use it to calculate duration
 
 
       if (this.transform.velocity != null) {
@@ -3690,7 +3693,10 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
 
           if (duration > this.duration) {
             this.duration = duration;
-          }
+          } // if (duration > 0) {
+          //   this.duration = duration;
+          // }
+
         }
       }
 
@@ -3702,11 +3708,10 @@ var PulseTransformAnimationStep = /*#__PURE__*/function (_ElementAnimationStep) 
 
       if (this.duration <= this.transform.zeroDurationThreshold) {
         this.duration = 0;
-      }
+      } // if (this.duration < this.transform.minDuration) {
+      //   this.duration = this.transform.minDuration;
+      // }
 
-      if (this.duration < this.transform.minDuration) {
-        this.duration = this.transform.minDuration;
-      }
 
       this.duration = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(this.duration, this.precision);
 
@@ -4263,7 +4268,8 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'scenario'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxDuration', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression', 'minDuration']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(AnimationStepOptionsIn, ['start', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxDuration', 'allDurationsSame', 'rotDirection', 'clipRotationTo', 'element', 'progression' // 'minDuration',
+    ]);
     _this = _super.call(this, AnimationStepOptionsIn);
     _this._stepType = 'position';
     var defaultScenarioOptions = {
@@ -4284,8 +4290,8 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
       maxDuration: null,
       allDurationsSame: true,
       zeroDurationThreshold: 0,
-      progression: 'tools.math.easeinout',
-      minDuration: 0
+      progression: 'tools.math.easeinout' // minDuration: 0,
+
     };
 
     if (_this.element && _this.element.animations.options.translation) {
@@ -4305,7 +4311,8 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
     _this.scenario = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxDuration', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression', 'minDuration']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scenario, ['start', 'target', 'translationStyle', 'velocity', 'maxDuration', 'allDurationsSame', 'zeroDurationThreshold', 'rotDirection', 'clipRotationTo', 'progression' // 'minDuration',
+    ]);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.scenario.translationOptions);
     return _this;
   }
@@ -4330,7 +4337,7 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
       // console.log(this.duration)
       // console.log(element)
 
-      if (velocity == null || element == null || this.duration > 0) {
+      if (velocity == null || element == null) {
         return [this.duration, this.duration, this.duration];
       }
 
@@ -4409,24 +4416,24 @@ var ScenarioAnimationStep = /*#__PURE__*/function (_ParallelAnimationSte) {
         colorDuration = 0;
       }
 
-      if (colorDuration < this.scenario.minDuration) {
-        colorDuration = this.scenario.minDuration;
+      if (colorDuration < this.duration) {
+        colorDuration = this.duration;
       }
 
       if (opacityDuration <= this.scenario.zeroDurationThreshold) {
         opacityDuration = 0;
       }
 
-      if (opacityDuration < this.scenario.minDuration) {
-        opacityDuration = this.scenario.minDuration;
+      if (opacityDuration < this.duration) {
+        opacityDuration = this.duration;
       }
 
       if (transformDuration <= this.scenario.zeroDurationThreshold) {
         transformDuration = 0;
       }
 
-      if (transformDuration < this.scenario.minDuration) {
-        transformDuration = this.scenario.minDuration;
+      if (transformDuration < this.duration) {
+        transformDuration = this.duration;
       }
 
       if (this.scenario.allDurationsSame) {
@@ -6165,7 +6172,7 @@ var Diagram = /*#__PURE__*/function () {
       };
 
       var options = {
-        action: 'instant',
+        how: 'instant',
         maxDuration: 6,
         // velocity: {
         //   position: 2,
@@ -6176,11 +6183,11 @@ var Diagram = /*#__PURE__*/function () {
         // },
         allDurationsSame: true,
         zeroDurationThreshold: 0.00001,
-        minDuration: 0,
-        duration: null
+        // minDuration: 0,
+        duration: 0
       };
 
-      if (optionsIn.duration == null) {
+      if (optionsIn.velocity != null) {
         options.velocity = {
           position: 2,
           rotation: Math.PI * 2 / 2,
@@ -6192,7 +6199,7 @@ var Diagram = /*#__PURE__*/function () {
 
 
       if (typeof optionsIn === 'string') {
-        options.action = optionsIn;
+        options.how = optionsIn;
       } else {
         options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, options, optionsIn); // velocity trumps duration by default, but if only duration is defined by the
         // user, then remove velocity;
@@ -6201,14 +6208,14 @@ var Diagram = /*#__PURE__*/function () {
         // }
       }
 
-      if (options.action === 'dissolve') {
+      if (options.how === 'dissolve') {
         var defaultDuration = {
           dissolveIn: 0.8,
           dissolveOut: 0.8,
           delay: 0.2
         };
 
-        if (options.duration == null) {
+        if (options.duration === 0) {
           options.duration = defaultDuration;
         } else if (typeof options.duration === 'number') {
           options.duration = {
@@ -6220,12 +6227,16 @@ var Diagram = /*#__PURE__*/function () {
           options.duration = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultDuration, options.duration);
         }
       } else if (options.duration != null && typeof options.duration !== 'number') {
-        options.duration = null;
+        options.duration = {
+          dissolveOut: 0,
+          dissolveIn: 0,
+          delay: 0
+        };
       }
 
-      if (options.action === 'instant' || this.elements.isStateSame(state.elements, true, ['cursor'])) {
+      if (options.how === 'instant' || this.elements.isStateSame(state.elements, true, ['cursor'])) {
         finished();
-      } else if (options.action === 'animate') {
+      } else if (options.how === 'animate') {
         this.elements.stop('freeze'); // This is cancelling the pulse
 
         this.animateToState(state, options, finished, 'now');
@@ -37619,7 +37630,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "getPlaySettings",
     value: function getPlaySettings() {
       var onResume = {
-        action: 'instant',
+        how: 'instant',
         maxDuration: 6,
         velocity: {
           position: 2,
@@ -37630,12 +37641,12 @@ var Recorder = /*#__PURE__*/function () {
         },
         allDurationsSame: true,
         zeroDurationThreshold: 0.00001,
-        minDuration: 0,
-        duration: null
+        // minDuration: 0,
+        duration: 0
       }; // console.log(resumeSettings)
 
       if (typeof this.settings.play === 'string') {
-        onResume.action = this.settings.play;
+        onResume.how = this.settings.play;
       } else {
         onResume = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, onResume, this.settings.play); // velocity trumps duration by default, but if only duration is defined by the
         // user, then remove velocity;
@@ -37644,14 +37655,14 @@ var Recorder = /*#__PURE__*/function () {
         // }
       }
 
-      if (onResume.action === 'dissolve') {
+      if (onResume.how === 'dissolve') {
         var defaultDuration = {
           dissolveIn: 0.8,
           dissolveOut: 0.8,
           delay: 0.2
         };
 
-        if (onResume.duration == null) {
+        if (onResume.duration === 0) {
           onResume.duration = defaultDuration;
         } else if (typeof onResume.duration === 'number') {
           onResume.duration = {

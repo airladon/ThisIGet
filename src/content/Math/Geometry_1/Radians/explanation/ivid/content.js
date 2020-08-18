@@ -58,9 +58,9 @@ class Content extends PresentationFormatContent {
     this.diagram.recorder.loadEvents(events, true);
     this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
-    
+
     this.diagram.recorder.settings.play = {
-      action: 'animate',
+      how: 'animate',
       // velocity: { translation: 2, rotation: 100, scale: 3 },
       // minDuration: 0.5,
       // maxDuration: 0.5,
