@@ -287,6 +287,8 @@ module.exports = (env) => {
               options: {
                 importLoaders: 2,
                 sourceMap: envConfig.uglifySourceMap,
+                // modules: true,
+                url: false,
               },
             },
             {
