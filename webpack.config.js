@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
@@ -131,7 +131,9 @@ module.exports = (env) => {
       sourceMap: e.uglifySourceMap,
     });
   }
-  const clean = new CleanWebpackPlugin([buildPath]);
+  // const clean = new CleanWebpackPlugin([buildPath]);
+  const clean = new CleanWebpackPlugin();
+
 
   let define = '';
   if (envConfig.reactDevMode) {
