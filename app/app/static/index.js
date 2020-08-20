@@ -1294,26 +1294,24 @@ var AnimationManager = /*#__PURE__*/function () {
   }, {
     key: "new",
     value: function _new(nameOrStep) {
-      if (typeof nameOrStep === 'string' || nameOrStep == null) {
-        var options = {};
+      var options = {};
 
-        if (this.element != null) {
-          options.element = this.element;
-        }
-
-        if (nameOrStep != null) {
-          options.name = nameOrStep;
-        }
-
-        var animation = new _Animation__WEBPACK_IMPORTED_MODULE_1__["AnimationBuilder"](options);
-        this.animations.push(animation);
-        return animation;
+      if (this.element != null) {
+        options.element = this.element;
       }
 
       if (nameOrStep != null) {
-        this.animations.push(nameOrStep);
+        options.name = nameOrStep;
       }
 
+      var animation = new _Animation__WEBPACK_IMPORTED_MODULE_1__["AnimationBuilder"](options);
+      this.animations.push(animation);
+      return animation;
+    }
+  }, {
+    key: "newFromStep",
+    value: function newFromStep(nameOrStep) {
+      this.animations.push(nameOrStep);
       return nameOrStep;
     }
   }, {
@@ -5859,6 +5857,7 @@ var Diagram = /*#__PURE__*/function () {
     }
 
     if (this instanceof Diagram) {
+      // $FlowFixMe
       this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_9__["default"](this);
     }
 
@@ -6146,6 +6145,7 @@ var Diagram = /*#__PURE__*/function () {
 
       var optionsIn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'instant';
       // console.log(stateIn)
+      // $FlowFixMe
       var state = Object(_parseState__WEBPACK_IMPORTED_MODULE_4__["default"])(stateIn, this);
       var finishedFlag = false;
       this.state.preparingToSetState = false;
@@ -6191,6 +6191,7 @@ var Diagram = /*#__PURE__*/function () {
       };
 
       if (optionsIn.velocity != null) {
+        // $FlowFixMe
         options.velocity = {
           position: 2,
           rotation: Math.PI * 2 / 2,
@@ -6238,7 +6239,8 @@ var Diagram = /*#__PURE__*/function () {
         };
       }
 
-      if (options.how === 'instant' || this.elements.isStateSame(state.elements, true, ['cursor'])) {
+      if (options.how === 'instant' // $FlowFixMe
+      || this.elements.isStateSame(state.elements, true, ['cursor'])) {
         finished();
       } else if (options.how === 'animate') {
         this.elements.stop('freeze'); // This is cancelling the pulse
@@ -6285,7 +6287,7 @@ var Diagram = /*#__PURE__*/function () {
         if (duration === 0) {
           this.fnMap.exec(done);
         } else if (done != null) {
-          this.subscriptions.subscribe('animationsFinished', done, 1);
+          this.subscriptions.add('animationsFinished', done, 1);
         }
       }
     }
@@ -6399,7 +6401,7 @@ var Diagram = /*#__PURE__*/function () {
         if (dissolveDuration === 0) {
           this.fnMap.exec(done);
         } else if (done != null) {
-          this.subscriptions.subscribe('animationsFinished', done, 1);
+          this.subscriptions.add('animationsFinished', done, 1);
         }
       }
     }
@@ -6588,11 +6590,15 @@ var Diagram = /*#__PURE__*/function () {
       var _this4 = this;
 
       var elements = this.elements.getAllElements();
+      /* eslint-disable no-param-reassign */
+
       elements.forEach(function (element) {
         element.diagram = _this4;
         element.recorder = _this4.recorder;
         element.animationFinishedCallback = _this4.animationFinished.bind(_this4, element);
       });
+      /* eslint-enable no-param-reassign */
+
       this.setFirstTransform();
       this.animateNextFrame();
     }
@@ -6633,17 +6639,13 @@ var Diagram = /*#__PURE__*/function () {
     key: "setAnimationFinishedCallback",
     value: function setAnimationFinishedCallback(callback) {
       this.animationFinishedCallback = callback;
-    } // eslint-disable-next-line class-methods-use-this
-
+    }
   }, {
     key: "animationFinished",
-    value: function animationFinished(element) {
-      // console.log('diagram finished', this.isAnimating(), element.name)
+    value: function animationFinished() {
       if (this.isAnimating()) {
-        // console.log('animation finished but still animating')
         return;
-      } // console.log('animation finished')
-
+      }
 
       this.fnMap.exec(this.animationFinishedCallback);
       this.subscriptions.trigger('animationsFinished');
@@ -6688,9 +6690,7 @@ var Diagram = /*#__PURE__*/function () {
         this.drawQueued = true;
         this.clearContext();
         this.draw2DLow.ctx.clearRect(0, 0, this.textCanvasLow.width, this.textCanvasLow.height);
-        this.draw(-1); // this.animateNextFrame(true, 'clear frame');
-        // this.draw(-1);
-        // this.clickearContext();
+        this.draw(-1);
       }
     }
   }, {
@@ -6911,7 +6911,7 @@ var Diagram = /*#__PURE__*/function () {
       var cursor = this.getElement(this.cursorElementName);
 
       if (cursor == null) {
-        return;
+        return false;
       }
 
       return cursor.isShown;
@@ -7308,7 +7308,7 @@ var Diagram = /*#__PURE__*/function () {
         elements.forEach(function (element) {
           if (element.state.preparingToStop) {
             preparingToStopCounter += 1;
-            element.subscriptions.subscribe('stopped', checkAllStopped, 1);
+            element.subscriptions.add('stopped', checkAllStopped, 1);
           }
         });
 
@@ -7332,7 +7332,7 @@ var Diagram = /*#__PURE__*/function () {
       this.setState(completeState, 'dissolve');
 
       if (this.state.preparingToSetState) {
-        this.subscriptions.subscribe('stateSet', stopped, 1);
+        this.subscriptions.add('stateSet', stopped, 1);
         this.subscriptions.trigger('preparingToStop');
         this.state.preparingToStop = true;
       } else {
@@ -7429,7 +7429,7 @@ var Diagram = /*#__PURE__*/function () {
     //   elements.forEach((element) => {
     //     if (element.state.pause === 'preparingToPause') {
     //       preparingToPauseCounter += 1;
-    //       element.subscriptions.subscribe('paused', checkAllPaused, 1);
+    //       element.subscriptions.add('paused', checkAllPaused, 1);
     //     }
     //   });
     //   this.pauseTime = this.globalAnimation.now() / 1000;
@@ -7471,7 +7471,7 @@ var Diagram = /*#__PURE__*/function () {
     //   elements.forEach((element) => {
     //     if (element.state.pause === 'preparingToUnpause') {
     //       preparingToUnpauseCounter += 1;
-    //       element.subscriptions.subscribe('unpaused', checkAllUnpaused, 1)
+    //       element.subscriptions.add('unpaused', checkAllUnpaused, 1)
     //     }
     //   });
     //   if (preparingToUnpauseCounter === 0 && this.state.pause !== 'unpaused') {
@@ -7928,7 +7928,14 @@ function Box(webgl, width, height, lineWidth, fill, color, transformOrLocation, 
       return;
     }
 
-    var space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(spaceIn);
+    var space;
+
+    if (typeof spaceIn === 'number') {
+      space = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](spaceIn, spaceIn);
+    } else {
+      space = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["getPoint"])(spaceIn);
+    }
+
     var maxBounds = elements[0].getBoundingRect(drawingSpace);
 
     for (var i = 1; i < elements.length; i += 1) {
@@ -16870,59 +16877,7 @@ var Bracket = /*#__PURE__*/function (_Symbol2) {
       }
 
       return out;
-    } // getBounds(
-    //   options: Object,
-    //   leftIn: number,
-    //   bottomIn: number,
-    //   widthIn: number,
-    //   heightIn: number,
-    //   side: 'left' | 'right' | 'bottom' | 'top' = 'left',
-    // ) {
-    //   const { width, height } = this.getDefaultValues(
-    //     heightIn, widthIn, options,
-    //   );
-    //   const bounds = new Bounds();
-    //   const glyphWidth = width;
-    //   const glyphHeight = height;
-    //   // if (options.draw === 'static') {
-    //   //   const { staticWidth, staticHeight } = options;
-    //   //   if (options.side === 'left' || options.side === 'right') {
-    //   //     console.log(widthIn, heightIn, width, height, staticWidth, staticHeight);
-    //   //     glyphWidth = height / staticHeight * width / height;
-    //   //     // glyphWidth = staticWidth / staticHeight * height;
-    //   //   } else {
-    //   //     glyphHeight = staticHeight / staticWidth * width;
-    //   //   }
-    //   // }
-    //   // console.log(glyphWidth, glyphHeight)
-    //   if (side === 'left') {
-    //     bounds.left = leftIn - glyphWidth;
-    //     bounds.bottom = bottomIn;
-    //     bounds.top = bounds.bottom + glyphHeight;
-    //     bounds.right = bounds.left + glyphWidth;
-    //   } else if (side === 'right') {
-    //     bounds.left = leftIn;
-    //     bounds.bottom = bottomIn;
-    //     bounds.top = bounds.bottom + glyphHeight;
-    //     bounds.right = bounds.left + glyphWidth;
-    //   } else if (side === 'top') {
-    //     bounds.bottom = bottomIn;
-    //     bounds.top = bottomIn + glyphHeight;
-    //     bounds.left = leftIn + widthIn / 2 - glyphWidth / 2;
-    //     bounds.right = bounds.left + glyphWidth;
-    //   } else {
-    //     bounds.top = bottomIn;
-    //     bounds.bottom = bottomIn - glyphHeight;
-    //     bounds.left = leftIn + widthIn / 2 - glyphWidth / 2;
-    //     bounds.right = bounds.left + glyphWidth;
-    //   }
-    //   bounds.width = glyphWidth;
-    //   bounds.height = glyphHeight;
-    //   bounds.ascent = glyphHeight;
-    //   bounds.descent = 0;
-    //   return bounds;
-    // }
-
+    }
   }]);
 
   return Bracket;
@@ -18875,12 +18830,13 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
 
       height = _this$getDefaultValue4.height;
       return height;
-    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
-
+    }
   }, {
     key: "getBounds",
-    value: function getBounds(options, contentX, contentY, widthIn, heightIn, side) {
-      var _this$getDefaultValue5 = this.getDefaultValues(heightIn, widthIn, options),
+    value: function getBounds(options, contentX, contentY, contentWidth, contentHeight, side) {
+      // const contentWidth = contentWidthIn == null ? 0 : contentWidthIn;
+      // const contentHeight = contentHeightIn == null ? 0 : contentHeightIn;
+      var _this$getDefaultValue5 = this.getDefaultValues(contentHeight, contentWidth, options),
           width = _this$getDefaultValue5.width,
           height = _this$getDefaultValue5.height;
 
@@ -18899,12 +18855,12 @@ var _Symbol = /*#__PURE__*/function (_DiagramElementPrimit) {
       } else if (side === 'top') {
         bounds.bottom = contentY;
         bounds.top = contentY + height;
-        bounds.left = contentX + widthIn / 2 - width / 2;
+        bounds.left = contentX + contentWidth / 2 - width / 2;
         bounds.right = bounds.left + width;
       } else {
         bounds.top = contentY;
         bounds.bottom = contentY - height;
-        bounds.left = contentX + widthIn / 2 - width / 2;
+        bounds.left = contentX + contentWidth / 2 - width / 2;
         bounds.right = bounds.left + width;
       }
 
@@ -20764,7 +20720,7 @@ var DiagramObjectAngle = /*#__PURE__*/function (_DiagramElementCollec) {
         autoHideMin: null,
         autoHideMax: null
       };
-      var optionsToUse = Object.assign({}, defaultCurveOptions, curveOptions);
+      var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultCurveOptions, curveOptions);
 
       for (var i = 0; i < optionsToUse.num; i += 1) {
         var curve = this.shapes.polygonSweep({
@@ -22072,7 +22028,7 @@ var EquationLabel = /*#__PURE__*/function () {
       xAlign: 'center',
       yAlign: 'middle'
     };
-    var optionsToUse = Object.assign({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var labelTextOrEquation = optionsToUse.label;
     var color = optionsToUse.color,
         scale = optionsToUse.scale,
@@ -22495,7 +22451,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         collection: 1
       }
     };
-    var optionsToUse = Object.assign({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
     var dashStyle = optionsToUse.dashStyle;
 
     if (dashStyle) {
@@ -22507,7 +22463,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         defaultMaxLength = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(optionsToUse.p1, optionsToUse.p2);
       }
 
-      dashStyle = Object.assign({}, {
+      dashStyle = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, {
         maxLength: defaultMaxLength,
         dashStyle: [0.1]
       }, options.dashStyle);
@@ -22632,13 +22588,13 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
     };
 
     if (optionsToUse.arrowStart) {
-      var arrowOptions = Object.assign({}, defaultArrowOptions, optionsToUse.arrowStart);
+      var arrowOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultArrowOptions, optionsToUse.arrowStart);
 
       _this2.addArrowStart(arrowOptions.height, arrowOptions.width);
     }
 
     if (optionsToUse.arrowEnd) {
-      var _arrowOptions = Object.assign({}, defaultArrowOptions, optionsToUse.arrowEnd);
+      var _arrowOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultArrowOptions, optionsToUse.arrowEnd);
 
       _this2.addArrowEnd(_arrowOptions.height, _arrowOptions.width);
     } // Arrows overrides arrowStart or arrowEnd
@@ -22651,7 +22607,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
         arrows = optionsToUse.arrows;
       }
 
-      var _arrowOptions2 = Object.assign({}, defaultArrowOptions, arrows);
+      var _arrowOptions2 = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultArrowOptions, arrows);
 
       _this2.addArrows(_arrowOptions2.height, _arrowOptions2.width);
     }
@@ -22669,7 +22625,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
     };
 
     if (optionsToUse.label) {
-      var labelOptions = Object.assign({}, defaultLabelOptions, optionsToUse.label);
+      var labelOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultLabelOptions, optionsToUse.label);
 
       if (labelOptions.text === null) {
         labelOptions.text = '';
@@ -26150,7 +26106,12 @@ var DrawContext2D = /*#__PURE__*/function () {
       dpr = 2;
     }
 
-    this.ratio = dpr / bsr;
+    if (typeof bsr === 'number') {
+      this.ratio = dpr / bsr;
+    } else {
+      this.ratio = 1;
+    }
+
     this.resize();
   }
 
@@ -27511,16 +27472,16 @@ function makeThickLine(points) {
       } else if (widthIs === 'positive') {
         joinLinesAcuteInside(mid, midNext, lineSegment, lineSegmentNext);
       }
-    } else if (angle === Math.PI * 2 || angle === 0) {} // do nothing
-    // if (widthIs === 'mid') {
-    //   joinLinesInPoint(lineSegment, lineSegmentNext);
-    //   // joinLinesInPoint(lineSegment, lineSegmentNext);
-    // } else if (widthIs === 'negative') {
-    //   joinLinesInPoint(lineSegment, lineSegmentNext);
-    // } else if (widthIs === 'positive') {
-    //   joinLinesInPoint(lineSegment, lineSegmentNext);
-    // }
-    // if (lineSegments.length >= 2) {
+    } else if (angle === Math.PI * 2 || angle === 0) {// do nothing
+      // if (widthIs === 'mid') {
+      //   joinLinesInPoint(lineSegment, lineSegmentNext);
+      //   // joinLinesInPoint(lineSegment, lineSegmentNext);
+      // } else if (widthIs === 'negative') {
+      //   joinLinesInPoint(lineSegment, lineSegmentNext);
+      // } else if (widthIs === 'positive') {
+      //   joinLinesInPoint(lineSegment, lineSegmentNext);
+      // }
+    } // if (lineSegments.length >= 2) {
     //   console.log(currentIndex, lineIndex, lineSegments[2][0]._dup())
     // }
 
@@ -31554,11 +31515,11 @@ var DiagramElement = /*#__PURE__*/function () {
         this.animations.setTimeDelta(delta);
       }
 
-      if (this.state.isPulsing) {
+      if (this.state.isPulsing && this.state.pulse.startTime != null) {
         this.state.pulse.startTime += delta;
       }
 
-      if (this.state.movement.previousTime !== null) {
+      if (this.state.movement.previousTime != null) {
         this.state.movement.previousTime += delta;
       }
     } // Space definition:
@@ -32963,19 +32924,19 @@ var DiagramElement = /*#__PURE__*/function () {
         if (this.animations.isAnimating()) {
           this.state.preparingToStop = true;
           toComplete += 1;
-          this.animations.subscriptions.subscribe('finished', checkStop, 1);
+          this.animations.subscriptions.add('finished', checkStop, 1);
         }
 
         if (this.state.isPulsing) {
           this.state.preparingToStop = true;
           toComplete += 1;
-          this.subscriptions.subscribe('stopPulsing', checkStop, 1);
+          this.subscriptions.add('stopPulsing', checkStop, 1);
         }
 
         if (this.state.isMovingFreely) {
           this.state.preparingToStop = true;
           toComplete += 1;
-          this.subscriptions.subscribe('stopMovingFreely', checkStop, 1);
+          this.subscriptions.add('stopMovingFreely', checkStop, 1);
         }
       }
 
@@ -35908,14 +35869,11 @@ var DiagramElementCollection = /*#__PURE__*/function (_DiagramElement2) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Diagram__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Diagram */ "./src/js/diagram/Diagram.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
- // eslint-disable-next-line import/no-cycle
 
 
 
@@ -36063,6 +36021,7 @@ var Gesture = /*#__PURE__*/function () {
       // $FlowFixMe
 
       if (document.removeEvent != null) {
+        // $FlowFixMe
         document.removeEvent('keypress', this.keypressHandler, false);
       }
     }
@@ -36293,28 +36252,7 @@ var Recorder = /*#__PURE__*/function () {
       this.reset(); // default recording values
 
       this.precision = 4;
-      this.stateTimeStep = 1; // this.diagram = {
-      //   animateNextFrame: () => {},
-      //   getElement: () => null,
-      //   getState: () => {},
-      //   setState: () => {},
-      //   pause: () => {},
-      //   unpause: () => {},
-      //   showCursor: () => {},
-      //   animateNextFrame: () => void,
-      //   setState: (Object) => void,
-      //   getState: ({ precision: number, ignoreShown: boolean }) => Object,
-      //   getElement: (string) => ?DiagramElement,
-      //   showCursor: ('up' | 'down' | 'hide', ?Point) => void,
-      //   pause: () => void,
-      //   unpause: () => void,
-      //   getIsInTransition: () => boolean,
-      //   animateToState: (Object, Object, ?(string | (() => void))) => void,
-      //   isAnimating: () => boolean,
-      //   setAnimationFinishedCallback: ?(string | (() => void)) => void,
-      //   subscriptions: SubscriptionManager
-      // };
-
+      this.stateTimeStep = 1;
       this.audio = null; // this.playbackStoppedCallback = null;
 
       this.worker = null;
@@ -36463,11 +36401,14 @@ var Recorder = /*#__PURE__*/function () {
 
       var isMinified = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       // $FlowFixMe
-      var lists = this.decodeEvents(encodedEventsList, isMinified);
+      var lists = this.decodeEvents(encodedEventsList, isMinified); // Loading, Decoding, Enconding events and states is a flow mess
+      // $FlowFixMe
+
       Object.keys(lists).forEach(function (eventName) {
         if (_this4.events[eventName] == null) {
           return;
-        }
+        } // $FlowFixMe
+
 
         _this4.events[eventName].list = lists[eventName];
       });
@@ -36488,8 +36429,10 @@ var Recorder = /*#__PURE__*/function () {
     value: function encodeEvents() {
       var minifyEvents = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var lists = {};
-      var events = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.events);
+      var events = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.events); // $FlowFixMe
+
       Object.keys(events).forEach(function (eventName) {
+        // $FlowFixMe
         lists[eventName] = events[eventName].list;
       });
 
@@ -36572,6 +36515,7 @@ var Recorder = /*#__PURE__*/function () {
       var newListOrDiffs = [];
 
       if (startIndex > 0) {
+        // $FlowFixMe
         newListOrDiffs = listOrDiffs.slice(0, startIndex);
       }
 
@@ -36587,24 +36531,13 @@ var Recorder = /*#__PURE__*/function () {
       var _this5 = this;
 
       Object.keys(this.events).forEach(function (eventName) {
-        var event = _this5.events[eventName];
+        var event = _this5.events[eventName]; // $FlowFixMe
+
         event.list = _this5.clearListOrDiffs(event.list, startTime, stopTime);
-      });
-      this.states.diffs = this.clearListOrDiffs(this.states.diffs, startTime, stopTime); // const copyStateIndex = getPrevIndexForTime(this.states.diffs, startTime);
-      // const replaceStartIndex = getNextIndexForTime(this.states.diffs, startTime);
-      // const replaceStopIndex = getPrevIndexForTime(this.states.diffs, startTime);
-      // if (copyStateIndex === -1 || replaceStartIndex === -1 || replaceStopIndex === -1) {
-      //   return;
-      // }
-      // const copy = duplicate(this.states.diffs[copyStateIndex]);
-      // for (let i = replaceStartIndex; i <= replaceStopIndex; i += 1) {
-      //   const [time] = this.states.diffs[i];
-      //   this.states.diffs[i] = duplicate(copy);
-      //   this.states.diffs[i][0] = time;
-      // }
-    } // deleteFromTime(time: number) {
-    // }
-    // ////////////////////////////////////
+      }); // $FlowFixMe
+
+      this.states.diffs = this.clearListOrDiffs(this.states.diffs, startTime, stopTime);
+    } // ////////////////////////////////////
     // ////////////////////////////////////
     // Recording
     // ////////////////////////////////////
@@ -36662,31 +36595,11 @@ var Recorder = /*#__PURE__*/function () {
     key: "startWorker",
     value: function startWorker() {
       if (this.worker == null) {
-        this.worker = new _recorder_worker__WEBPACK_IMPORTED_MODULE_4___default.a(); // this.worker.onmessage(event => console.log('from Worker: ', event.data))
-        // this.worker.addEventListener("message", event => {
-        //   const { message, payload } = event.data;
-        //   // if (message === 'duration')
-        //   if (message === 'cache') {
-        //     this.statesCache.diffs = payload.diffs;
-        //     this.statesCache.baseReference = payload.baseReference;
-        //     this.statesCache.references = payload.references;
-        //     this.mergeEventsCache();
-        //     this.mergeStatesCache();
-        //     this.duration = this.calcDuration();
-        //     if (this.duration % 1 > 0) {
-        //       const lastIndex = this.states.diffs.length - 1;
-        //       const [, ref, diff] = this.states.diffs[lastIndex];
-        //       this.states.diffs.push([Math.ceil(this.duration), ref, duplicate(diff), 0]);
-        //     }
-        //     this.duration = this.calcDuration();
-        //     console.log(this)
-        //   }
-        // });
-
+        this.worker = new _recorder_worker__WEBPACK_IMPORTED_MODULE_4___default.a();
         this.worker.addEventListener('message', this.parseMessage.bind(this));
-      } // this.worker = new Worker();
+      }
+    } // $FlowFixMe
 
-    }
   }, {
     key: "parseMessage",
     value: function parseMessage(event) {
@@ -36715,28 +36628,7 @@ var Recorder = /*#__PURE__*/function () {
 
         this.duration = this.calcDuration(); // console.log(this)
       }
-    } // startWorker() {
-    //   // if (this.worker != null) {
-    //   //   return;
-    //   // }
-    //   // this.worker = new Worker('./worker.js');
-    //   // this.worker.addEventListener("message", event => {
-    //   //   console.log(event.data);
-    //   // });
-    //   // this.worker.postMessage([40, 2]);
-    //   if (this.worker != null) {
-    //     return;
-    //   }
-    //   this.worker = new Worker();
-    //   // this.worker.postMessage([4, 5]);
-    //   // this.worker.onmessage = function (event) {
-    //   //   console.log('asdfasdf')
-    //   // };
-    //   this.worker.addEventListener("message", function (event) {
-    //     console.log(event.data)
-    //   });
-    // }
-
+    }
   }, {
     key: "addCurrentStateAsReference",
     value: function addCurrentStateAsReference() {
@@ -36771,7 +36663,7 @@ var Recorder = /*#__PURE__*/function () {
       var time = null;
 
       if (this.statesCache.diffs.length > 0) {
-        time = this.statesCache.diffs[0][0];
+        time = this.statesCache.diffs[0][0]; // eslint-disable-line prefer-destructuring
       }
 
       Object.keys(this.eventsCache).forEach(function (eventName) {
@@ -36876,11 +36768,13 @@ var Recorder = /*#__PURE__*/function () {
         } // console.log(eventName)
 
 
-        var merged = _this7.getMergedCacheArray(eventsList, eventsCacheList);
+        var merged = _this7.getMergedCacheArray( // $FlowFixMe
+        eventsList, eventsCacheList);
 
         if (merged.length === 0) {
           return;
-        }
+        } // $FlowFixMe
+
 
         _this7.events[eventName].list = merged;
       });
@@ -36888,13 +36782,16 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "mergeStatesCache",
     value: function mergeStatesCache() {
-      var merged = this.getMergedCacheArray(this.states.diffs, this.statesCache.diffs);
+      var merged = this.getMergedCacheArray( // $FlowFixMe
+      this.states.diffs, this.statesCache.diffs);
 
       if (merged.length === 0) {
         return;
-      }
+      } // $FlowFixMe
+
 
       this.states.diffs = merged; // this.states.baseReference = duplicate(this.statesCache.baseReference);
+      // $FlowFixMe
 
       this.states.references = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicate"])(this.statesCache.references);
     }
@@ -36919,7 +36816,8 @@ var Recorder = /*#__PURE__*/function () {
       // this.currentTime = this.getCurrentTime();
       this.setCurrentTime(this.getCurrentTime());
       this.state = 'idle';
-      this.stopTimeouts();
+      this.stopTimeouts(); // $FlowFixMe
+
       this.worker.postMessage({
         message: 'get'
       });
@@ -37079,8 +36977,7 @@ var Recorder = /*#__PURE__*/function () {
         if (_this8.state === 'recording') {
           if (_this8.diagram.getIsInTransition() === false) {
             _this8.recordCurrentState();
-          } // console.log('recording', time, this.stateTimeStep - this.getCurrentTime() % this.stateTimeStep)
-
+          }
 
           _this8.queueRecordState(_this8.stateTimeStep - _this8.getCurrentTime() % _this8.stateTimeStep);
         }
@@ -37182,7 +37079,7 @@ var Recorder = /*#__PURE__*/function () {
       if (this.state === 'recording') {
         this.stopRecording();
       } else if (this.state === 'playing') {
-        this.pausePlayback(false);
+        this.pausePlayback('freeze');
       } // console.log(time)
 
 
@@ -37204,6 +37101,7 @@ var Recorder = /*#__PURE__*/function () {
       if (timeIn === 0 && this.states.diffs.length > 0) {
         this.stateIndex = 0;
       } else {
+        // $FlowFixMe
         this.stateIndex = getPrevIndexForTime(this.states.diffs, timeIn);
       } // console.log(this.stateIndex)
 
@@ -37340,7 +37238,7 @@ var Recorder = /*#__PURE__*/function () {
       var cursorTimeCount = null;
 
       if (touchIndex !== -1) {
-        var event = this.events.touch.list[touchIndex];
+        var event = this.events.touch.list[touchIndex]; // $FlowFixMe
 
         var _event2 = _slicedToArray(event, 3),
             time = _event2[0],
@@ -37353,7 +37251,8 @@ var Recorder = /*#__PURE__*/function () {
         if (upOrDown === 'down') {
           touchUp = false;
           cursorTime = time;
-          cursorTimeCount = timeCount;
+          cursorTimeCount = timeCount; // $FlowFixMe
+
           cursorPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
         } else {
           touchUp = true;
@@ -37361,7 +37260,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       if (cursorIndex !== -1) {
-        var _event3 = this.events.cursor.list[cursorIndex];
+        var _event3 = this.events.cursor.list[cursorIndex]; // $FlowFixMe
 
         var _event4 = _slicedToArray(_event3, 3),
             _time = _event4[0],
@@ -37374,9 +37273,11 @@ var Recorder = /*#__PURE__*/function () {
         if (showOrHide === 'show') {
           showCursor = true;
 
-          if (cursorTime == null || _time > cursorTime || _time === cursorTime && _timeCount > cursorTimeCount) {
+          if (cursorTime == null || _time > cursorTime // $FlowFixMe
+          || _time === cursorTime && _timeCount > cursorTimeCount) {
             cursorTime = _time;
-            cursorTimeCount = _timeCount;
+            cursorTimeCount = _timeCount; // $FlowFixMe
+
             cursorPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x, _y);
           }
         } else {
@@ -37385,7 +37286,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       if (cursorMoveIndex !== -1) {
-        var _event5 = this.events.cursorMove.list[cursorMoveIndex];
+        var _event5 = this.events.cursorMove.list[cursorMoveIndex]; // $FlowFixMe
 
         var _event6 = _slicedToArray(_event5, 3),
             _time2 = _event6[0],
@@ -37394,7 +37295,9 @@ var Recorder = /*#__PURE__*/function () {
             _y2 = _event6$[1],
             _timeCount2 = _event6[2];
 
-        if (cursorTime == null || _time2 > cursorTime || _time2 === cursorTime && _timeCount2 > cursorTimeCount) {
+        if (cursorTime == null || _time2 > cursorTime // $FlowFixMe
+        || _time2 === cursorTime && _timeCount2 > cursorTimeCount) {
+          // $FlowFixMe
           cursorPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](_x2, _y2);
         }
       }
@@ -37474,141 +37377,11 @@ var Recorder = /*#__PURE__*/function () {
       if (this.diagram.state.preparingToSetState) {
         this.state = 'preparingToPlay';
         this.subscriptions.trigger('preparingToPlay');
-        this.diagram.subscriptions.subscribe('stateSet', finished, 1); // console.log(this.diagram.subscriptions.subscriptions.stateSet)
+        this.diagram.subscriptions.add('stateSet', finished, 1); // console.log(this.diagram.subscriptions.subscriptions.stateSet)
       } else {
         finished();
-      } // let finishedFlag = false;
-      // const finished = () => {
-      //   // console.log('hello')
-      //   finishedFlag = true;
-      //   if (this.pauseState == null) {
-      //     this.setToTime(fromTime, true);
-      //   } else {
-      //     this.diagram.setState(this.pauseState);
-      //     this.pauseState = null;
-      //   }
-      //   this.state = 'playing';
-      //   this.setVideoToNowDeltaTime(fromTime);
-      //   this.currentTime = fromTime;
-      //   this.startEventsPlayback(fromTime);
-      //   this.startAudioPlayback(fromTime);
-      //   this.diagram.animateNextFrame();
-      //   if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
-      //     this.finishPlaying();
-      //   }
-      //   this.subscriptions.trigger('playbackStarted');
-      // };
-      // const playSettings = this.getPlaySettings();
-      // if (
-      //   playSettings.action === 'instant'
-      //   || this.diagram.elements.isStateSame(stateToStartFrom.elements, true)
-      // ) {
-      //   finished();
-      // } else if (playSettings.action === 'dissolve') {
-      //   // this.diagram.elements.freezePulseTransforms(false);
-      //   this.diagram.stop('freeze');
-      //   this.diagram.dissolveToState({
-      //     state: stateToStartFrom,
-      //     dissolveInDuration: playSettings.duration.dissolveIn,
-      //     dissolveOutDuration: playSettings.duration.dissolveOut,
-      //     done: finished,
-      //     delay: playSettings.duration.delay,
-      //     startTime: 'now',
-      //   });
-      // } else {
-      //   // console.log('asdf')
-      //   // debugger;
-      //   this.diagram.stop('freeze');  // This is cancelling the pulse
-      //   this.diagram.animateToState(
-      //     stateToStartFrom,
-      //     playSettings,
-      //     finished,
-      //     'now',
-      //   );
-      // }
-      // if (!finishedFlag) {
-      //   this.state = 'preparingToPlay';
-      //   this.subscriptions.trigger('preparingToPlay');
-      // }
-
-    } // startPlaybackLegacy(
-    //   fromTimeIn: number = this.lastSeekTime || 0,
-    //   forceStart: boolean = true,
-    //   events: ?Array<string> = null,
-    // ) {
-    //   let fromTime = fromTimeIn;
-    //   if (fromTimeIn == null || fromTimeIn >= this.duration) {
-    //     fromTime = 0;
-    //   }
-    //   if (events == null) {
-    //     this.eventsToPlay = Object.keys(this.events);
-    //   } else {
-    //     this.eventsToPlay = events;
-    //   }
-    //   // this.diagram.unpause();
-    //   // this.setVideoToNowDeltaTime(this.currentTime);
-    //   let stateToStartFrom = this.getStateForTime(fromTime);
-    //   if (
-    //     !forceStart
-    //     && this.pauseState != null
-    //   ) {
-    //     stateToStartFrom = this.pauseState;
-    //   }
-    //   let finishedFlag = false;
-    //   const finished = () => {
-    //     finishedFlag = true;
-    //     if (this.pauseState == null) {
-    //       this.setToTime(fromTime, true);
-    //     } else {
-    //       this.diagram.setState(this.pauseState);
-    //       this.pauseState = null;
-    //     }
-    //     this.state = 'playing';
-    //     this.setVideoToNowDeltaTime(fromTime);
-    //     // this.currentTime = fromTime;
-    //     this.setCurrentTime(fromTime);
-    //     this.startEventsPlayback(fromTime);
-    //     this.startAudioPlayback(fromTime);
-    //     this.diagram.animateNextFrame();
-    //     if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
-    //       this.finishPlaying();
-    //     }
-    //     this.subscriptions.trigger('playbackStarted');
-    //   };
-    //   const playSettings = this.getPlaySettings();
-    //   if (
-    //     playSettings.action === 'instant'
-    //     || this.diagram.elements.isStateSame(stateToStartFrom.elements, true)
-    //   ) {
-    //     finished();
-    //   } else if (playSettings.action === 'dissolve') {
-    //     // this.diagram.elements.freezePulseTransforms(false);
-    //     this.diagram.stop('freeze');
-    //     this.diagram.dissolveToState({
-    //       state: stateToStartFrom,
-    //       dissolveInDuration: playSettings.duration.dissolveIn,
-    //       dissolveOutDuration: playSettings.duration.dissolveOut,
-    //       done: finished,
-    //       delay: playSettings.duration.delay,
-    //       startTime: 'now',
-    //     });
-    //   } else {
-    //     // console.log('asdf')
-    //     // debugger;
-    //     this.diagram.stop('freeze');  // This is cancelling the pulse
-    //     this.diagram.animateToState(
-    //       stateToStartFrom,
-    //       playSettings,
-    //       finished,
-    //       'now',
-    //     );
-    //   }
-    //   if (!finishedFlag) {
-    //     this.state = 'preparingToPlay';
-    //     this.subscriptions.trigger('preparingToPlay');
-    //   }
-    // }
-
+      }
+    }
   }, {
     key: "getPlaySettings",
     value: function getPlaySettings() {
@@ -37666,84 +37439,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "resumePlayback",
     value: function resumePlayback() {
       this.startPlayback(this.currentTime, false);
-    } // resumePlaybackLegacy() {
-    //   if (this.pauseState == null) {
-    //     this.startPlayback(this.currentTime);
-    //     return;
-    //   }
-    //   const playSettings = this.getPlaySettings();
-    //   // const defaultOptions = {
-    //   //   maxDuration: 1,
-    //   //   minDuration: 0,
-    //   //   dissolve: false,
-    //   //   delay: 0.2,
-    //   // }
-    //   // const options = joinObjects({}, defaultOptions, optionsIn);
-    //   // if (options.dissolve && options.duration == null) {
-    //   //   options.duration = 0.8;
-    //   // }
-    //   this.diagram.unpause();
-    //   let finishedFlag = false;
-    //   const finished = () => {
-    //     finishedFlag = true;
-    //     this.diagram.setState(this.pauseState);
-    //     this.pauseState = null;
-    //     this.state = 'playing';
-    //     this.setVideoToNowDeltaTime(this.currentTime);
-    //     this.startEventsPlayback(this.currentTime);
-    //     this.startAudioPlayback(this.currentTime);
-    //     this.diagram.animateNextFrame();
-    //     if (this.areEventsPlaying() === false && this.isAudioPlaying === false) {
-    //       this.finishPlaying();
-    //     }
-    //     this.subscriptions.trigger('playbackStarted');
-    //   };
-    //   if (playSettings.action === 'instant' || this.diagram.elements.isStateSame(this.pauseState.elements, true)) {
-    //     // this.diagram.stop();
-    //     // this.diagram.elements.clearFrozenPulseTransforms();
-    //     finished();
-    //     return;
-    //   }
-    //   // const id = this.diagram.subscriptions.subscribe('animationsFinished', finished, 1);
-    //   if (playSettings.action === 'dissolve') {
-    //     this.diagram.elements.freezePulseTransforms(false);
-    //     this.diagram.stop();
-    //     this.diagram.dissolveToState({
-    //       state: this.pauseState,
-    //       dissolveInDuration: playSettings.duration.dissolveIn,
-    //       dissolveOutDuration: playSettings.duration.dissolveOut,
-    //       done: finished,
-    //       delay: playSettings.duration.delay,
-    //       startTime: 'now',
-    //     });
-    //   } else {
-    //     this.diagram.stop();
-    //     this.diagram.animateToState(
-    //       this.pauseState,
-    //       playSettings,
-    //       finished,
-    //       'now',
-    //     );
-    //   }
-    //   // if (this.diagram.isAnimating() && !finishedFlag) {
-    //   // console.log(finishedFlag)
-    //   if (!finishedFlag) {
-    //     this.state = 'preparingToPlay';
-    //     this.subscriptions.trigger('preparingToPlay');
-    //   }
-    //   // if (animationCount === 0) {
-    //   //   this.diagram.subscriptions.unsubscribe('animationsFinished', id);
-    //   //   finished();
-    //   // }
-    // }
-    // initializePlayback(fromTime: number) {
-    //   this.currentTime = fromTime;
-    //   this.diagram.unpause();
-    //   this.setToTime(fromTime);
-    //   this.startEventsPlayback(fromTime);
-    //   this.startAudioPlayback(fromTime);
-    // }
-
+    }
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {
@@ -37837,7 +37533,8 @@ var Recorder = /*#__PURE__*/function () {
             time = _this14$events$eventN[0],
             timeCount = _this14$events$eventN[2];
 
-        if (nextTime == null || time < nextTime || time === nextTime && timeCount < nextTimeCount) {
+        if (nextTime == null || time < nextTime // $FlowFixMe
+        || time === nextTime && timeCount < nextTimeCount) {
           nextTime = time;
           nextTimeCount = timeCount;
           nextEventName = eventName;
@@ -37979,18 +37676,18 @@ var Recorder = /*#__PURE__*/function () {
         this.isAudioPlaying = false;
       }
 
-      this.diagram.subscriptions.subscribe('stopped', pause, 1);
+      this.diagram.subscriptions.add('stopped', pause, 1);
       this.diagram.stop(how);
 
       if (this.diagram.state.preparingToStop) {
         this.subscriptions.trigger('preparingToPause');
         this.state = 'preparingToPause'; // console.log('recorder prep to pause')
-        // this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
+        // this.diagram.subscriptions.add('animationsFinished', pause, 1);
       } // if (this.diagram.isAnimating()) {
       //   this.subscriptions.trigger('preparingToPause');
       //   this.state = 'preparingToPause';
       //   // console.log('recorder prep to pause')
-      //   this.diagram.subscriptions.subscribe('animationsFinished', pause, 1);
+      //   this.diagram.subscriptions.add('animationsFinished', pause, 1);
       // } else {
       //   pause();
       // }
@@ -37999,14 +37696,12 @@ var Recorder = /*#__PURE__*/function () {
   }, {
     key: "setEvent",
     value: function setEvent(eventName, index) {
-      // if (window.asdf) {
-      // console.log(eventName, performance.now())
-      // }
       var event = this.events[eventName];
 
       if (event == null) {
         return;
-      }
+      } // $FlowFixMe
+
 
       event.playbackAction(event.list[index][1], event.list[index][0]);
     } // queuePlaybackState(delay: number = 0) {
@@ -38064,6 +37759,7 @@ var Recorder = /*#__PURE__*/function () {
       if (timeIn === 0 && this.states.diffs.length > 0) {
         stateIndex = 0;
       } else {
+        // $FlowFixMe
         stateIndex = getPrevIndexForTime(this.states.diffs, timeIn);
       }
 
@@ -38255,8 +37951,8 @@ function parseState(state, diagram) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function () {
-  return new Worker("/static/workers/" + "7e7505d9b60b68d8d626.worker.js");
+module.exports = function() {
+  return new Worker("/static/workers/" + "26192037eeacff412304.worker.js");
 };
 
 /***/ }),
@@ -43174,8 +42870,7 @@ function rectToPolar(x) {
     mag: mag,
     angle: angle
   };
-} // $FlowFixMe
-
+}
 
 function getBoundingRect(pointArrays) {
   var firstPoint = true;
@@ -46645,7 +46340,8 @@ function addToObject(obj, nameToAdd, valueToAdd) {
 
 
 function duplicate(value) {
-  if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || value === NaN || typeof value === 'function') {
+  if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'string' || value == null || value === NaN // eslint-disable-line
+  || typeof value === 'function') {
     return value;
   }
 
@@ -47416,7 +47112,8 @@ var ObjectTracker = /*#__PURE__*/function () {
           basedOn: _this2.references[refName].basedOn,
           diff: diffPathsToObj(_this2.references[refName].diff)
         };
-      });
+      }); // $FlowFixMe
+
       var diffs = this.diffs.map(function (d) {
         return [d[0], d[1], diffPathsToObj(d[2]), d[3]];
       });
@@ -47499,10 +47196,10 @@ var ObjectTracker = /*#__PURE__*/function () {
   }, {
     key: "getDiffToReference",
     value: function getDiffToReference(obj, refName) {
-      var s1 = performance.now();
+      // const s1 = performance.now()
       var referenceChain = this.getReferenceChain(refName, []); // console.log('ref Chain', performance.now() - s1);
+      // const s2 = performance.now()
 
-      var s2 = performance.now();
       var diff = getObjectDiff(this.baseReference, referenceChain, obj, this.precision); // console.log('s2', performance.now() - s2);
 
       return diff;
@@ -47540,6 +47237,7 @@ var ObjectTracker = /*#__PURE__*/function () {
       this.startWorker();
 
       if (this.worker != null) {
+        // $FlowFixMe
         this.worker.postMessage([time, refName, obj, timeCount]);
       }
     }
@@ -47548,12 +47246,13 @@ var ObjectTracker = /*#__PURE__*/function () {
     value: function startWorker() {
       if (this.worker != null) {
         return;
-      }
+      } // $FlowFixMe
 
-      this.worker = new Worker();
-      this.worker.addEventListener("message", function (event) {
-        console.log(event.data);
-      });
+
+      this.worker = new Worker(); // // $FlowFixMe
+      // this.worker.addEventListener('message', function (event) {
+      //   console.log(event.data)
+      // });
     }
   }, {
     key: "getFromIndex",
@@ -47586,8 +47285,8 @@ var Subscriber = /*#__PURE__*/function () {
   }
 
   _createClass(Subscriber, [{
-    key: "subscribe",
-    value: function subscribe(callback) {
+    key: "add",
+    value: function add(callback) {
       var numberOfSubscriptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
       this.subscribers["".concat(this.nextId)] = {
         callback: callback,
@@ -47606,9 +47305,9 @@ var Subscriber = /*#__PURE__*/function () {
 
       for (var i = 0; i < this.order.length; i += 1) {
         var _id = this.order[i];
-        var _this$subscribers$ = this.subscribers["".concat(_id)],
-            callback = _this$subscribers$.callback,
-            num = _this$subscribers$.num; // if (callback != null) {
+        var _this$subscribers$_id = this.subscribers[_id],
+            callback = _this$subscribers$_id.callback,
+            num = _this$subscribers$_id.num; // if (callback != null) {
         //   callback(payload);
         // }
 
@@ -47639,12 +47338,12 @@ var Subscriber = /*#__PURE__*/function () {
       }
 
       subscribersToRemove.forEach(function (id) {
-        _this3.unsubscribe(id);
+        _this3.remove(id);
       });
     }
   }, {
-    key: "unsubscribe",
-    value: function unsubscribe(idIn) {
+    key: "remove",
+    value: function remove(idIn) {
       var id = "".concat(idIn);
 
       if (this.subscribers[id] != null) {
@@ -47679,15 +47378,15 @@ var SubscriptionManager = /*#__PURE__*/function () {
   }
 
   _createClass(SubscriptionManager, [{
-    key: "subscribe",
-    value: function subscribe(subscriptionName, callback) {
+    key: "add",
+    value: function add(subscriptionName, callback) {
       var numberOfSubscriptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
 
       if (this.subscriptions[subscriptionName] == null) {
         this.subscriptions[subscriptionName] = new Subscriber(this.fnMap);
       }
 
-      return this.subscriptions[subscriptionName].subscribe(callback, numberOfSubscriptions);
+      return this.subscriptions[subscriptionName].add(callback, numberOfSubscriptions);
     }
   }, {
     key: "trigger",
@@ -47697,11 +47396,11 @@ var SubscriptionManager = /*#__PURE__*/function () {
       }
     }
   }, {
-    key: "unsubscribe",
-    value: function unsubscribe(subscriptionName, id) {
+    key: "remove",
+    value: function remove(subscriptionName, id) {
       if (this.subscriptions[subscriptionName] != null) {
         var subscription = this.subscriptions[subscriptionName];
-        subscription.unsubscribe(id);
+        subscription.remove(id);
 
         if (subscription.order.length === 0) {
           delete this.subscriptions[subscriptionName];

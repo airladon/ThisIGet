@@ -124,11 +124,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
     if (this.props.diagram != null && this.diagram == null) {
       this.diagram = this.props.diagram;
       const { subscriptions } = this.diagram.recorder;
-      subscriptions.subscribe('playbackStarted', this.playbackStarted.bind(this));
-      subscriptions.subscribe('preparingToPlay', this.preparingToPlay.bind(this));
-      subscriptions.subscribe('playbackStopped', this.playbackStopped.bind(this));
-      subscriptions.subscribe('preparingToPause', this.preparingToPause.bind(this));
-      subscriptions.subscribe('timeUpdate', this.updateTime.bind(this));
+      subscriptions.add('playbackStarted', this.playbackStarted.bind(this));
+      subscriptions.add('preparingToPlay', this.preparingToPlay.bind(this));
+      subscriptions.add('playbackStopped', this.playbackStopped.bind(this));
+      subscriptions.add('preparingToPause', this.preparingToPause.bind(this));
+      subscriptions.add('timeUpdate', this.updateTime.bind(this));
       // console.log(this.diagram)
       // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
       // console.log(this.diagram.elements.elements.circle.asdf)

@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/airladon/thisiget#readme",
   "dependencies": {
-    "figureone": "^0.1.23",
+    "figureone": "^0.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "whatwg-fetch": "^3.4.0"

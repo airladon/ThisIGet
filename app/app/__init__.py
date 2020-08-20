@@ -100,6 +100,14 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 'https://fonts.googleapis.com',
                 "'unsafe-inline'",
             ],
+            'worker-src': [
+                SELF,
+                "blob:",
+            ],
+            'child-src': [
+                SELF,
+                "blob:",
+            ],
             # 'font-src': '*',
         },)
 

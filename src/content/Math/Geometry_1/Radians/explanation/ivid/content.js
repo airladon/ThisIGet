@@ -71,7 +71,7 @@ class Content extends PresentationFormatContent {
       //   delay: 0.1,
       // },
     };
-    // this.diagram.recorder.subscriptions.subscribe('preparingToPlay', () => {
+    // this.diagram.recorder.subscriptions.add('preparingToPlay', () => {
     //   // this.diagram.elements._lim.hide()
     //   console.log(this.diagram.getRemainingAnimationTime())
     //   // const showShown = (element) => {
