@@ -1991,8 +1991,8 @@ var Subscriber = /*#__PURE__*/function () {
       return this.nextId - 1;
     }
   }, {
-    key: "trigger",
-    value: function trigger(payload) {
+    key: "publish",
+    value: function publish(payload) {
       var _this3 = this;
 
       var subscribersToRemove = [];
@@ -2009,10 +2009,10 @@ var Subscriber = /*#__PURE__*/function () {
           subscribersToRemove.push(_id);
         }
 
-        var triggerOk = false;
+        var publishOk = false;
 
         if (num !== 0) {
-          triggerOk = true; // subscribersToRemove.push(id);
+          publishOk = true; // subscribersToRemove.push(id);
         }
 
         if (num > 0) {
@@ -2020,13 +2020,13 @@ var Subscriber = /*#__PURE__*/function () {
         } // if (num > 0) {
         // }
         // else if (num > 1) {
-        //   triggerOk = true;
+        //   publishOk = true;
         //   this.subscribers[`${id}`].num = num - 1;
         // }
         // if (this.subscribers[`${id}`].num > 0) {
 
 
-        if (triggerOk) {
+        if (publishOk) {
           this.fnMap.exec(callback, payload);
         }
       }
@@ -2083,10 +2083,10 @@ var SubscriptionManager = /*#__PURE__*/function () {
       return this.subscriptions[subscriptionName].add(callback, numberOfSubscriptions);
     }
   }, {
-    key: "trigger",
-    value: function trigger(subscriptionName, payload) {
+    key: "publish",
+    value: function publish(subscriptionName, payload) {
       if (this.subscriptions[subscriptionName] != null) {
-        this.subscriptions[subscriptionName].trigger(payload);
+        this.subscriptions[subscriptionName].publish(payload);
       }
     }
   }, {
@@ -2132,4 +2132,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=26192037eeacff412304.worker.js.map
+//# sourceMappingURL=dd868fb1b993e3068607.worker.js.map

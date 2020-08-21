@@ -1,17 +1,19 @@
 // @flow
 import * as React from 'react';
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import ScrollBar from './scrollBar';
-// import type Diagram from 'figureone';
+import type { Diagram, Recorder } from 'figureone';
 // const {
 //   Recorder, Diagram, FunctionMap
 // } = Fig;
 // const { getObjectDiff } = Fig.tools.misc;
 
 function removeClass(ids: string | Array<string>, className: string) {
-  let elementIds = ids;
+  let elementIds;
   if (typeof ids === 'string') {
     elementIds = [ids];
+  } else {
+    elementIds = ids;
   }
   elementIds.forEach((id) => {
     const element = document.getElementById(id);
@@ -76,7 +78,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   recorder: Recorder;
   timer: TimeoutID;
   // getDiagram: () => Diagram;
-  timeoutID: TimeoutID;
+  timeoutID: ?TimeoutID;
   diagram: ?Diagram;
 
   constructor(props: Props) {
@@ -136,9 +138,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   preparingToPlay() {
-    // console.log('Preparing to Play')
     this.setState({
-      // preparingToPlayClass: '',
       preparingToPlayClass: 'figureone_playback__hidden',
       preparingToPauseClass: 'figureone_playback__hidden',
       pauseClass: 'figureone_playback__disabled',
@@ -147,11 +147,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   playbackStarted() {
-    // console.log('Playback Started')
-    let preparingToPlayClass = 'figureone_playback__hidden'
-    // if (this.state.preparingToPlayClass === '') {
-      // preparingToPlayClass = 'playback_fadeout_quick'
-    // }
+    const preparingToPlayClass = 'figureone_playback__hidden'
     this.setState({
       preparingToPlayClass,
       preparingToPauseClass: 'figureone_playback__hidden',

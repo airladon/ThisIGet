@@ -159,7 +159,7 @@ module.exports = (env) => {
       {
         from: '/opt/app/src/content/*/*/topic.png',
         to: '/opt/app/app/app/static/dist/',
-        transformPath: (targetPath, absolutePath) => {
+        transformPath: (targetPath) => {
           return `${targetPath.replace('src/', '')}`;
         },
         globOptions: {
@@ -169,7 +169,7 @@ module.exports = (env) => {
       {
         from: '/opt/app/src/content/**/*.svg',
         to: '/opt/app/app/app/static/dist/',
-        transformPath: (targetPath, absolutePath) => {
+        transformPath: (targetPath) => {
           return `${targetPath.replace('src/', '')}`;
         },
         globOptions: {

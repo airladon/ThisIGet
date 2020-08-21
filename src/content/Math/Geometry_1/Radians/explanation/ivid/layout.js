@@ -23,8 +23,9 @@ export default function diagramLayout() {
   colors.arc = colors.get('red').rgb;
   colors.dull = colors.get('grey', 'dark').rgb;
   colors.marks = colors.get('grey', 'dark').rgb;
+  colors.degrees = colors.get('grey', 'darker').rgb;
   colors.radianLines = colors.get('blue').rgb;
-  colors.degrees = colors.get('blue', 'lighter').rgb;
+  colors.box = colors.diagram.text.base;
   layout.position = new Point(0, 0);
   const radius = 1.2;
   layout.radius = radius;
@@ -36,7 +37,7 @@ export default function diagramLayout() {
     method: 'box',
     options: {
       lineWidth: 0.008,
-      color: colors.angles,
+      color: colors.box,
     },
   };
   layout.circleDull = {
@@ -131,7 +132,7 @@ export default function diagramLayout() {
     },
   };
 
-  const marks = (numMarks: number, inner: number = radius, outer: number = radius * 1.1, color: colors.marks) => ({
+  const marks = (numMarks: number, inner: number = radius, outer: number = radius * 1.1, color: Array<number> = colors.degrees) => ({
     name: `marks${numMarks}`,
     method: 'radialLines',
     options: {
@@ -282,7 +283,7 @@ export default function diagramLayout() {
         'center': { position: new Point(0, 0), scale: 1 },
         'left': { position: new Point(-0.9, 0), scale: 1 },
         'centerLeft': { position: new Point(-0.6, 0), scale: 1 },
-        'title': { position: new Point(-0.4, -1), scale: 0.7 },
+        'title': { position: new Point(-0.4, -0.5), scale: 0.7 },
       },
     },
     scenario: 'center',
@@ -303,11 +304,12 @@ export default function diagramLayout() {
           color: colors.diagram.text.base,
           p1: [limRad * Math.cos(limAngle) - 0.01, 0],
           p2: [limRad * Math.cos(limAngle) - 0.01, limRad * Math.sin(limAngle) + 0.005],
-          width: 0.015,
+          width: 0.03,
           label: {
             text: 'sin x',
             location: 'left',
             offset: 0.01,
+            scale: 1.2,
           },
         },
       },
@@ -319,12 +321,13 @@ export default function diagramLayout() {
           color: colors.angles,
           curve: {
             radius: 0.7,
-            width: 0.02,
+            width: 0.03,
             sides: 300,
           },
           label: {
             text: 'x',
             radius: 0.6,
+            scale: 1.2,
           },
         },
       },
@@ -337,6 +340,7 @@ export default function diagramLayout() {
           label: {
             text: 'x',
             radius: limRad * 0.85,
+            scale: 1.2,
           },
         },
       },
@@ -347,7 +351,7 @@ export default function diagramLayout() {
           radius: limRad,
           sides: 600,
           // sidesToDraw: 400 / limAngleProportion,
-          width: 0.02,
+          width: 0.03,
           color: colors.arc,
         },
       },
@@ -371,11 +375,12 @@ export default function diagramLayout() {
           color: colors.lines,
           angle: limAngle,
           length: limRad,
-          width: 0.02,
+          width: 0.03,
           label: {
             text: 'r = 1',
             offset: 0.1,
             location: 'top',
+            scale: 1.2,
           },
           move: {
             type: 'rotation',

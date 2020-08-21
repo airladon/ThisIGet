@@ -162,7 +162,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     tri2.stop('freeze');
     this.isFlipping = true;
     tri2.animations.new()
-      .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+      .scenario({ target: 'right', velocity: 1, maxDuration: 0.9 })
       .scenario({ target: 'mirror', duration })
       // .scale({ target: new Point(-1, 1), duration })
       .whenFinished(() => {
@@ -216,7 +216,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this.isFlipping = true;
     tri2.animations.new()
-      // .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+      // .scenario({ target: 'right', velocity: 1, maxDuration: 0.9 })
       // .scenario({ target: 'mirror', duration })
       .scale({ target: [-currentScale, currentScale], duration })
       .whenFinished(() => {

@@ -361,7 +361,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       .transform({ target, velocity: 1 })
       .custom({ callback: 'bendRadius', duration: 1.5 })
       .rotation({
-        element: this._circle._line1, target: 1, velocity: 0.5, maxTime: 1, direction: 2,
+        element: this._circle._line1, target: 1, velocity: 0.5, maxDuration: 1, direction: 2,
       })
       .whenFinished(finished)
       .start();

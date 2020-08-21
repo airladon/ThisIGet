@@ -1101,7 +1101,7 @@ var AnimationManager = /*#__PURE__*/function () {
         if (this.state === 'animating') {
           this.state = 'idle';
           callback = this.finishedCallback;
-          this.subscriptions.trigger('finished'); // this.fnMap.exec(this.finishedCallback);
+          this.subscriptions.publish('finished'); // this.fnMap.exec(this.finishedCallback);
         }
 
         this.state = 'idle';
@@ -1144,7 +1144,7 @@ var AnimationManager = /*#__PURE__*/function () {
           this.state = 'idle'; // console.log('clean finished', this.element.name, this.finishedCallback)
 
           this.fnMap.exec(this.finishedCallback);
-          this.subscriptions.trigger('finished');
+          this.subscriptions.publish('finished');
         }
 
         this.state = 'idle';
@@ -1220,7 +1220,7 @@ var AnimationManager = /*#__PURE__*/function () {
 
       if (this.state === 'idle') {
         this.fnMap.exec(this.finishedCallback);
-        this.subscriptions.trigger('finished');
+        this.subscriptions.publish('finished');
       }
     }
   }, {
@@ -1247,7 +1247,7 @@ var AnimationManager = /*#__PURE__*/function () {
 
       if (this.state === 'idle') {
         this.fnMap.exec(this.finishedCallback);
-        this.subscriptions.trigger('finished');
+        this.subscriptions.publish('finished');
       }
     }
   }, {
@@ -6171,7 +6171,7 @@ var Diagram = /*#__PURE__*/function () {
         _this2.animateNextFrame(); // console.log('triggered')
 
 
-        _this2.subscriptions.trigger('stateSet');
+        _this2.subscriptions.publish('stateSet');
       };
 
       var options = {
@@ -6261,7 +6261,7 @@ var Diagram = /*#__PURE__*/function () {
 
       if (!finishedFlag) {
         this.state.preparingToSetState = true;
-        this.subscriptions.trigger('preparingToSetState');
+        this.subscriptions.publish('preparingToSetState');
       }
 
       this.animateNextFrame();
@@ -6648,7 +6648,7 @@ var Diagram = /*#__PURE__*/function () {
       }
 
       this.fnMap.exec(this.animationFinishedCallback);
-      this.subscriptions.trigger('animationsFinished');
+      this.subscriptions.publish('animationsFinished');
     }
   }, {
     key: "setFirstTransform",
@@ -7272,7 +7272,7 @@ var Diagram = /*#__PURE__*/function () {
       var how = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'cancel';
 
       var stopped = function stopped() {
-        _this7.subscriptions.trigger('stopped');
+        _this7.subscriptions.publish('stopped');
 
         _this7.state.preparingToStop = false;
       };
@@ -7315,7 +7315,7 @@ var Diagram = /*#__PURE__*/function () {
         if (preparingToStopCounter === 0) {
           checkAllStopped();
         } else if (preparingToStopCounter > 0) {
-          this.subscriptions.trigger('preparingToStop');
+          this.subscriptions.publish('preparingToStop');
           this.state.preparingToStop = true;
         }
 
@@ -7333,7 +7333,7 @@ var Diagram = /*#__PURE__*/function () {
 
       if (this.state.preparingToSetState) {
         this.subscriptions.add('stateSet', stopped, 1);
-        this.subscriptions.trigger('preparingToStop');
+        this.subscriptions.publish('preparingToStop');
         this.state.preparingToStop = true;
       } else {
         stopped();
@@ -7423,7 +7423,7 @@ var Diagram = /*#__PURE__*/function () {
     //     if (preparingToPauseCounter === 0) {
     //       this.state.pause = 'paused';
     //       this.isPaused = true;
-    //       this.subscriptions.trigger('paused');
+    //       this.subscriptions.publish('paused');
     //     }
     //   }
     //   elements.forEach((element) => {
@@ -7437,7 +7437,7 @@ var Diagram = /*#__PURE__*/function () {
     //     checkAllPaused();
     //   } else if (preparingToPauseCounter > 0) {
     //     this.state.pause = 'preparingToPause';
-    //     this.subscriptions.trigger('preparingToPause');
+    //     this.subscriptions.publish('preparingToPause');
     //   }
     // }
     // pauseAfterNextDraw() {
@@ -7451,7 +7451,7 @@ var Diagram = /*#__PURE__*/function () {
       this.isPaused = false;
       this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.pauseTime);
       this.animateNextFrame();
-      this.subscriptions.trigger('unpaused');
+      this.subscriptions.publish('unpaused');
     } // unpauseLegacy() {
     //   this.elements.unpause();
     //   const elements = this.elements.getAllElements();
@@ -7465,7 +7465,7 @@ var Diagram = /*#__PURE__*/function () {
     //       this.isPaused = false;
     //       this.elements.setTimeDelta(this.globalAnimation.now() / 1000 - this.pauseTime);
     //       this.animateNextFrame();
-    //       this.subscriptions.trigger('unpaused');
+    //       this.subscriptions.publish('unpaused');
     //     }
     //   };
     //   elements.forEach((element) => {
@@ -7478,7 +7478,7 @@ var Diagram = /*#__PURE__*/function () {
     //     checkAllUnpaused();
     //   } else if (preparingToUnpauseCounter > 0) {
     //     this.state.pause = 'preparingToUnpause';
-    //     this.subscriptions.trigger('preparingToUnpause');
+    //     this.subscriptions.publish('preparingToUnpause');
     //   }
     //   // // this.state.pause = this.elements.getPause();
     //   // this.pauseTime = performance.now() / 1000;
@@ -31416,7 +31416,7 @@ var DiagramElement = /*#__PURE__*/function () {
       var typeOfAnimation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'animation';
       // console.log('element', this.name, this.animationFinishedCallback)
       this.fnMap.exec(this.animationFinishedCallback);
-      this.subscriptions.trigger('animationFinished', typeOfAnimation);
+      this.subscriptions.publish('animationFinished', typeOfAnimation);
     } // animationsFinishedCallback(element: DiagramElement) {
     //   if (this.parent != null) {
     //     this.parent.animationsFinishedCallback(element);
@@ -32080,7 +32080,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       this.fnMap.exec(this.setTransformCallback, this.transform);
-      this.subscriptions.trigger('setTransform', [this.transform]);
+      this.subscriptions.publish('setTransform', [this.transform]);
     } // Set the next transform (and velocity if moving freely) for the next
     // animation frame.
     //
@@ -32579,7 +32579,7 @@ var DiagramElement = /*#__PURE__*/function () {
       if (wasMovingFreely) {
         this.fnMap.exec(this.animationFinishedCallback);
         this.animationFinished('movingFreely');
-        this.subscriptions.trigger('stopMovingFreely');
+        this.subscriptions.publish('stopMovingFreely');
       }
     } // stopMovingFreelyLegacy(result: boolean = true): void {
     //   // console.trace()
@@ -32597,7 +32597,7 @@ var DiagramElement = /*#__PURE__*/function () {
     //   if (wasMovingFreely) {
     //     // console.log('stop moving freely callback', this.animationFinishedCallback)
     //     this.fnMap.exec(this.animationFinishedCallback);
-    //     // this.subscriptions.trigger('animationFinished', ['movingFreely']);
+    //     // this.subscriptions.publish('animationFinished', ['movingFreely']);
     //     this.animationFinished('movingFreely');
     //   }
     // }
@@ -32885,9 +32885,9 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       if (wasPulsing) {
-        // this.subscriptions.trigger('animationFinished', )
+        // this.subscriptions.publish('animationFinished', )
         this.animationFinished('pulse');
-        this.subscriptions.trigger('stopPulsing');
+        this.subscriptions.publish('stopPulsing');
       }
     } // isAnimating() {
     //   if (this.state.isPulsing) {
@@ -32916,7 +32916,7 @@ var DiagramElement = /*#__PURE__*/function () {
         if (toComplete <= 0) {
           _this5.state.preparingToStop = false;
 
-          _this5.subscriptions.trigger('stopped');
+          _this5.subscriptions.publish('stopped');
         }
       };
 
@@ -32941,7 +32941,7 @@ var DiagramElement = /*#__PURE__*/function () {
       }
 
       if (this.state.preparingToStop) {
-        this.subscriptions.trigger('preparingToStop');
+        this.subscriptions.publish('preparingToStop');
       }
 
       this.stopAnimating(how);
@@ -33960,7 +33960,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
           }
         }
 
-        this.subscriptions.trigger('beforeDraw', [now]);
+        this.subscriptions.publish('beforeDraw', [now]);
 
         if (this.beforeDrawCallback != null) {
           this.fnMap.exec(this.beforeDrawCallback, now);
@@ -34053,7 +34053,7 @@ var DiagramElementPrimitive = /*#__PURE__*/function (_DiagramElement) {
         // })
 
 
-        this.subscriptions.trigger('afterDrawDraw', [now]);
+        this.subscriptions.publish('afterDrawDraw', [now]);
 
         if (this.afterDrawCallback != null) {
           this.fnMap.exec(this.afterDrawCallback, now);
@@ -36292,7 +36292,7 @@ var Recorder = /*#__PURE__*/function () {
     key: "setCurrentTime",
     value: function setCurrentTime(time) {
       this.currentTime = time;
-      this.subscriptions.trigger('timeUpdate', [time]);
+      this.subscriptions.publish('timeUpdate', [time]);
     }
   }, {
     key: "setVideoToNowDeltaTime",
@@ -36392,7 +36392,7 @@ var Recorder = /*#__PURE__*/function () {
         _this3.duration = _this3.calcDuration();
       };
 
-      this.subscriptions.trigger('audioLoaded');
+      this.subscriptions.publish('audioLoaded');
     }
   }, {
     key: "loadEvents",
@@ -36413,7 +36413,7 @@ var Recorder = /*#__PURE__*/function () {
         _this4.events[eventName].list = lists[eventName];
       });
       this.duration = this.calcDuration();
-      this.subscriptions.trigger('eventsLoaded');
+      this.subscriptions.publish('eventsLoaded');
     }
   }, {
     key: "loadStates",
@@ -36422,7 +36422,7 @@ var Recorder = /*#__PURE__*/function () {
       var isObjectForm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.states = this.decodeStates(statesIn, isMinified, isObjectForm);
       this.duration = this.calcDuration();
-      this.subscriptions.trigger('statesLoaded');
+      this.subscriptions.publish('statesLoaded');
     }
   }, {
     key: "encodeEvents",
@@ -36587,7 +36587,7 @@ var Recorder = /*#__PURE__*/function () {
 
       this.startEventsPlayback(fromTime);
       this.startAudioPlayback(fromTime);
-      this.subscriptions.trigger('startRecording');
+      this.subscriptions.publish('startRecording');
       this.startRecordingTime = fromTime;
       this.startTimeUpdates(); // console.log('recorder is', this.state);
     }
@@ -36828,7 +36828,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       this.lastSeekTime = null;
-      this.subscriptions.trigger('stopRecording'); // this.mergeEventsCache();
+      this.subscriptions.publish('stopRecording'); // this.mergeEventsCache();
       // this.mergeStatesCache();
       // this.duration = this.calcDuration();
       // if (this.duration % 1 > 0) {
@@ -37368,7 +37368,7 @@ var Recorder = /*#__PURE__*/function () {
           _this10.finishPlaying();
         }
 
-        _this10.subscriptions.trigger('playbackStarted');
+        _this10.subscriptions.publish('playbackStarted');
       }; // console.log(this.settings.play)
 
 
@@ -37376,7 +37376,7 @@ var Recorder = /*#__PURE__*/function () {
 
       if (this.diagram.state.preparingToSetState) {
         this.state = 'preparingToPlay';
-        this.subscriptions.trigger('preparingToPlay');
+        this.subscriptions.publish('preparingToPlay');
         this.diagram.subscriptions.add('stateSet', finished, 1); // console.log(this.diagram.subscriptions.subscriptions.stateSet)
       } else {
         finished();
@@ -37474,7 +37474,7 @@ var Recorder = /*#__PURE__*/function () {
       this.timeUpdatesTimeoutID = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_3__["default"]().setTimeout(function () {
         _this12.setCurrentTime(_this12.getCurrentTime());
 
-        _this12.subscriptions.trigger('timeUpdate', [_this12.getCurrentTime()]);
+        _this12.subscriptions.publish('timeUpdate', [_this12.getCurrentTime()]);
 
         _this12.startTimeUpdates();
       }, 100);
@@ -37633,7 +37633,7 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       this.state = 'idle';
-      this.subscriptions.trigger('playbackStopped');
+      this.subscriptions.publish('playbackStopped');
     } // On pause, animations and pauses can complete and clear:
     // Complete  Clear
     // True      True     Animations finish and nextFrame nothing will happen
@@ -37665,7 +37665,7 @@ var Recorder = /*#__PURE__*/function () {
       var pause = function pause() {
         _this16.state = 'idle';
 
-        _this16.subscriptions.trigger('playbackStopped'); // this.diagram.stop();
+        _this16.subscriptions.publish('playbackStopped'); // this.diagram.stop();
 
       };
 
@@ -37680,11 +37680,11 @@ var Recorder = /*#__PURE__*/function () {
       this.diagram.stop(how);
 
       if (this.diagram.state.preparingToStop) {
-        this.subscriptions.trigger('preparingToPause');
+        this.subscriptions.publish('preparingToPause');
         this.state = 'preparingToPause'; // console.log('recorder prep to pause')
         // this.diagram.subscriptions.add('animationsFinished', pause, 1);
       } // if (this.diagram.isAnimating()) {
-      //   this.subscriptions.trigger('preparingToPause');
+      //   this.subscriptions.publish('preparingToPause');
       //   this.state = 'preparingToPause';
       //   // console.log('recorder prep to pause')
       //   this.diagram.subscriptions.add('animationsFinished', pause, 1);
@@ -37952,7 +37952,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function() {
-  return new Worker("/static/workers/" + "26192037eeacff412304.worker.js");
+  return new Worker("/static/workers/" + "dd868fb1b993e3068607.worker.js");
 };
 
 /***/ }),
@@ -47297,8 +47297,8 @@ var Subscriber = /*#__PURE__*/function () {
       return this.nextId - 1;
     }
   }, {
-    key: "trigger",
-    value: function trigger(payload) {
+    key: "publish",
+    value: function publish(payload) {
       var _this3 = this;
 
       var subscribersToRemove = [];
@@ -47315,10 +47315,10 @@ var Subscriber = /*#__PURE__*/function () {
           subscribersToRemove.push(_id);
         }
 
-        var triggerOk = false;
+        var publishOk = false;
 
         if (num !== 0) {
-          triggerOk = true; // subscribersToRemove.push(id);
+          publishOk = true; // subscribersToRemove.push(id);
         }
 
         if (num > 0) {
@@ -47326,13 +47326,13 @@ var Subscriber = /*#__PURE__*/function () {
         } // if (num > 0) {
         // }
         // else if (num > 1) {
-        //   triggerOk = true;
+        //   publishOk = true;
         //   this.subscribers[`${id}`].num = num - 1;
         // }
         // if (this.subscribers[`${id}`].num > 0) {
 
 
-        if (triggerOk) {
+        if (publishOk) {
           this.fnMap.exec(callback, payload);
         }
       }
@@ -47389,10 +47389,10 @@ var SubscriptionManager = /*#__PURE__*/function () {
       return this.subscriptions[subscriptionName].add(callback, numberOfSubscriptions);
     }
   }, {
-    key: "trigger",
-    value: function trigger(subscriptionName, payload) {
+    key: "publish",
+    value: function publish(subscriptionName, payload) {
       if (this.subscriptions[subscriptionName] != null) {
-        this.subscriptions[subscriptionName].trigger(payload);
+        this.subscriptions[subscriptionName].publish(payload);
       }
     }
   }, {

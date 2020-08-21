@@ -55,21 +55,21 @@ class Content extends PresentationFormatContent {
 
   loadEvents() {
     this.diagram.recorder.loadAudio(new Audio(audio));
-    this.diagram.recorder.loadEvents(events, true);
-    this.diagram.recorder.loadStates(states, true);
+    // this.diagram.recorder.loadEvents(events, true);
+    // this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
 
     this.diagram.recorder.settings.play = {
-      how: 'animate',
+      how: 'dissolve',
       // velocity: { translation: 2, rotation: 100, scale: 3 },
       // minDuration: 0.5,
       // maxDuration: 0.5,
-      duration: 2,
-      // duration: {
-      //   dissolveOut: 0.2,
-      //   dissolveIn: 0.2,
-      //   delay: 0.1,
-      // },
+      // duration: 2,
+      duration: {
+        dissolveOut: 0.2,
+        dissolveIn: 0.2,
+        delay: 0.1,
+      },
     };
     // this.diagram.recorder.subscriptions.add('preparingToPlay', () => {
     //   // this.diagram.elements._lim.hide()
@@ -121,8 +121,8 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: 'Introduction',
       setContent: [
-        style({ centerH: true, size: 1.8, top: 20 }, 'Radian'),
-        style({ centerH: true, size: 0.8, top: 2 }, 'Where does it come from, and why do we use it?'),
+        style({ centerH: true, size: 1.8, top: 10 }, 'Radian'),
+        style({ centerH: true, size: 0.8, top: 2 }, 'What is it, and why use it?'),
       ],
       show: [
         circle._line1, circle._line2, circle._angle, circle._corner,
@@ -133,9 +133,6 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
-        // console.log(this.diagram.elements._lim)
-        // console.log(this.diagram.recorder)
-        console.log(circle)
       },
     });
 
@@ -168,6 +165,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
+      title: 'Degrees',
       setContent: [
         devNote({ top: 5 }, '|Angle|'),
         devNote({ top: 10 }, '|Degrees|'),
@@ -271,6 +269,7 @@ class Content extends PresentationFormatContent {
       </table>
     `;
     this.addSection(common, {
+      title: '360',
       setContent: [
         devNote({ top: 5 }, '|hide_box|'),
         devNote({ top: 10 }, '|angles|'),
@@ -293,14 +292,14 @@ class Content extends PresentationFormatContent {
         id_20degr: rowClick(20),
         fractions: click(() => {
           diag._box.custom.setSize(0.7, 3);
-          diag._box.setPosition([1.47, -0.1]);
+          diag._box.setPosition([1.49, 0.02]);
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });
           this.diagram.animateNextFrame();
         }, [this], { id: 'note_fractions' }),
         angles: click(() => {
           diag._box.custom.setSize(0.5, 3);
-          diag._box.setPosition([2.08, -0.1]);
+          diag._box.setPosition([2.10, 0.02]);
           diag._box.showAll();
           diag.accent({ element: diag._box, scale: 1.1 });
           this.diagram.animateNextFrame();
@@ -336,6 +335,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
+      title: 'Radian Angle',
       setContent: [
         tableContent('radians_table_hidden'),
         devNote({ top: 5 }, '|Circle|'),
@@ -405,17 +405,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // Instead of splitting the circle into 360 equal pieces, lets find the angle where the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
     this.addSection(common, {
+      title: 'Randian equals',
       setContent: [
         style({
           top: 3, centerH: true, id: 'id_main_text',
-        }, 'Set arc length to |equal| radius length.'),
+        }, 'The angle where |arc_length_equals_radius| is |one radian|.'),
         devNote({ top: 5 }, '|Radius|'),
         devNote({ top: 10 }, '|Arc|'),
         devNote({ top: 15 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+        'arc_length_equals_radius': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
       },
       fadeInFromPrev: true,
       show: [
@@ -921,6 +922,7 @@ class Content extends PresentationFormatContent {
       },
     }
     this.addSection(common, {
+      title: 'asdf',
       show: [
         diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
       ],
