@@ -702,6 +702,64 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    common = {
+      setContent: [
+        style({ list: 'unordered', top: 12, id: 'radians_1', left: 5, size: 1.1 }, 'A |radian| is the angle where arc length equals radius length'),
+        style({ list: 'unordered', top: 5, id: 'radians_2', left: 5, size: 1.1 }, 'There are |2π| radians in a circle'),
+        style({ list: 'unordered', top: 5, id: 'radians_3', left: 5, size: 1.1 }, 'With radians we can |relate| arc length, radius and angle'),
+      ]
+    }
+    this.addSection(common, {
+      title: '16 - Mid Summary',
+      setSteadyState: () => {
+        document.getElementById('radians_2').style.visibility = 'hidden';
+        document.getElementById('radians_3').style.visibility = 'hidden';
+      },
+    });
+
+    this.addSection(common, {
+      title: '17 - Mid Summary',
+      fadeInFromPrev: false,
+      setSteadyState: () => {
+        document.getElementById('radians_2').classList.add('topic__diagram_text_fade_in_05');
+        document.getElementById('radians_3').style.visibility = 'hidden';
+      },
+    });
+
+    this.addSection(common, {
+      title: '18 - Mid Summary',
+      fadeInFromPrev: false,
+      setSteadyState: () => {
+        document.getElementById('radians_3').classList.add('topic__diagram_text_fade_in_05');
+      },
+    });
+
+    // this.addSection({
+    //   title: '17 - Mid Summary',
+    //   fadeInFromPrev: false,
+    //   setContent: [
+    //     style({ top: 10 }, '• A |radian| is the angle where arc length equals radius length'),
+    //     style({ top: 5 }, '• There are |2π| radians in a circle'),
+    //   ],
+    // });
+
+    // this.addSection({
+    //   title: '18 - Mid Summary',
+    //   fadeInFromPrev: false,
+    //   setContent: [
+    //     style({ top: 10 }, '• A |radian| is the angle where arc length equals radius length'),
+    //     style({ top: 5 }, '• There are |2π| radians in a circle'),
+    //     style({ top: 5 }, '• With radians we can |relate| arc length, radius and angle'),
+    //   ],
+    // });
+
 
 
     // **********************************************************************
