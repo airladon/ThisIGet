@@ -4,6 +4,7 @@ import baseLayout from '../../../../../common/layout';
 
 const {
   Point,
+  DiagramFont,
   // Transform,
   // Line,
 } = Fig.tools.g2;
@@ -423,11 +424,21 @@ export default function diagramLayout() {
         _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4) },
         _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
         _angle: { text: 'angle', color: colors.angles, mods: mods('down', 0.4) },
+        radiansInACircle: {
+          text: 'radians in a circle',
+          color: colors.diagram.text.base,
+        },
+        _arcS: { text: 'arc length', color: colors.arc },
+        _radiusS: { text: 'radius', color: colors.lines },
+        _angleS: { text: 'angle', color: colors.angles },
+        questionMark: { text: '?', color: colors.angles },
+        ofCircle: { text: 'of a circle', color: colors.arc },
         _1: { color: colors.lines },
         forRad1: { text: 'for radius = 1', color: colors.lines, scale: 0.8 },
         arc: { text: 'arc length', color: colors.arc },
         circumference: { color: colors.arc },
         twoPi: { text: '2π' },
+        twoPiGreen: { text: '2π', color: colors.angles },
         twoPi_2: { text: '2π' },
         twoPi_3: { text: '2π' },
         two: { text: '2' },
@@ -508,8 +519,62 @@ export default function diagramLayout() {
             topComment: ['radiusLengths', 'radius', 'largeBrace', 0.04, 0.06],
           },
         ],
+        'arcSimple': ['_arcS', 'equals', {
+          container: {
+            content: '_angleS',
+            width: 0.444,
+            // descent: null,
+            // ascent: null,
+            xAlign: 'left',
+            yAlign: 'baseline',
+            // fit: null,
+            // scale: 1,
+          },
+         }, 'x', '_radiusS'],
+         'arcOfCircle': [{
+            bottomComment: ['_arcS', 'ofCircle']
+          }, 'equals', {
+          container: {
+            content: 'questionMark',
+            width: 0.444,
+            // descent: null,
+            // ascent: null,
+            xAlign: 'center',
+            yAlign: 'baseline',
+            // fit: null,
+            // scale: 1,
+          },
+        }, 'x', '_radiusS'],
+        'arcOfCircle2Pi': [
+          {
+            bottomComment: ['_arcS', 'ofCircle']
+          }, 'equals', {
+          container: {
+            content: 'twoPiGreen',
+            width: 0.444,
+            // descent: null,
+            // ascent: null,
+            xAlign: 'center',
+            yAlign: 'baseline',
+            // fit: null,
+            // scale: 1,
+          },
+        }, 'x', '_radiusS'],
+        'twoPiRadiansInACircle': {
+          content: ['twoPiGreen', '  ', 'radiansInACircle'],
+          alignment: {
+            fixTo: 'radiansInACircle',
+            xAlign: 0.4,
+            yAlign: 'baseline',
+          },
+        },
+        // 'arcOfCircle': [{
+        //   bottomComment: ['_arcS', 'ofCircle']
+        // }, 'equals', 'questionMark', 'x', '_radiusS'],
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         '_arc': ['arc', 'equals', 'angle', 'x', 'radius'],
+        '_arc1': ['arc', 'equals', 'angle', 'x', '_1'],
+        '_arc2': ['arc', 'equals', 'angle'],
         'angle': ['_angle', 'equals', { frac: ['_arc', 'v_1', '_radius'] }],
         'radius': ['_radius', 'equals', { frac: ['_arc', 'v_1', '_angle'] }],
         radiusEquals1_0: ['angle', 'equals', { frac: ['arc', 'v_1', 'radius'] }],
@@ -528,6 +593,47 @@ export default function diagramLayout() {
         topCircle: { position: new Point(0, 1.5), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
         left: { position: new Point(-0.5 ,0), scale: 1.3 },
+      },
+    },
+    scenario: 'top',
+  };
+
+  layout.eqnCirc = {
+    name: 'eqnCirc',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        radius: { text: 'radius', color: colors.lines },
+        circumference: { color: colors.arc },
+        twoPi: { text: '2π' },
+        x: `  ${String.fromCharCode(215)}  `,
+        equals: '  =  ',
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        xAlign: 'right',
+        yAlign: 'bottom',
+      },
+      forms: {
+        'circumference': ['circumference', 'equals', {
+          container: {
+            content: 'twoPi',
+            width: 0.444,
+            // descent: null,
+            // ascent: null,
+            xAlign: 'center',
+            yAlign: 'baseline',
+            // fit: null,
+            // scale: 1,
+          },
+         }, 'x', 'radius'],
+      },
+    },
+    mods: {
+      scenarios: {
+        low: { position: new Point(0, -0.8), scale: 1.3 },
       },
     },
     scenario: 'top',
@@ -1039,6 +1145,7 @@ export default function diagramLayout() {
     layout.circle,
     layout.box,
     layout.eqn,
+    layout.eqnCirc,
     layout.radEqnNav,
     layout.degEqnNav,
     exampleEquation('ex1'),

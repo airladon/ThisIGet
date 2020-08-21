@@ -103,6 +103,7 @@ class Content extends PresentationFormatContent {
     const diag = this.diagram.elements;
     const circle = diag._circle;
     const eqn = diag._eqn;
+    const eqnCirc = diag._eqnCirc;
     const radEqnNav = diag._radEqnNav;
 
     let common = {
@@ -119,7 +120,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
-      title: 'Introduction',
+      title: '0 -Introduction',
       setContent: [
         style({ centerH: true, size: 1.8, top: 10 }, 'Radian'),
         style({ centerH: true, size: 0.8, top: 2 }, 'What is it, and why use it?'),
@@ -165,7 +166,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
-      title: 'Degrees',
+      title: '1 - Degrees',
       setContent: [
         devNote({ top: 5 }, '|Angle|'),
         devNote({ top: 10 }, '|Degrees|'),
@@ -269,7 +270,7 @@ class Content extends PresentationFormatContent {
       </table>
     `;
     this.addSection(common, {
-      title: '360',
+      title: '2 - 360',
       setContent: [
         devNote({ top: 5 }, '|hide_box|'),
         devNote({ top: 10 }, '|angles|'),
@@ -335,7 +336,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
-      title: 'Radian Angle',
+      title: '3 - Radian Angle',
       setContent: [
         tableContent('radians_table_hidden'),
         devNote({ top: 5 }, '|Circle|'),
@@ -403,9 +404,8 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Instead of splitting the circle into 360 equal pieces, lets find the angle where the arc length equals the radius length. To do this, we will take the radius, bend it around the arc and set the angle to give that arc.
     this.addSection(common, {
-      title: 'Randian equals',
+      title: '4 - Randian equals',
       setContent: [
         style({
           top: 3, centerH: true, id: 'id_main_text',
@@ -438,7 +438,6 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // We call this angle one radian, where its name comes from its relationship with the radius. So let's take this further and see how many radians go into a circle.
     common = {
       setEnterState: () => {
         circle.setScenario('center');
@@ -466,137 +465,20 @@ class Content extends PresentationFormatContent {
         EqnRadius: diag.bindAccent({ element: eqn._radius, color: colors.lines, id: 'note_eqn_radius'})
       },
     };
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     this.addSection(common, {
-      setContent: [
-        style({
-          top: 3, centerH: true, id: 'id_main_text',
-        }, 'When arc length equals radius length, the angle is |one radian|'),
-        devNote({ top: 5 }, '|Radian|'),
-        devNote({ top: 10 }, '|Radius|'),
-        devNote({ top: 15 }, '|Arc|'),
-        devNote({ top: 20 }, '|Angle|'),
-      ],
+      title: '5 - Relationship',
       show: [
-        circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines._line0,
-        circle._circle,
-      ],
-      setSteadyState: () => {
-        diag.updateAngle();
-      },
-    });
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // And we see there are six and a bit radians in a circle. How many precisely? Well, we defined a radian as the angle when the arc length is equal to the radius length, so instead of asking how many radians in a circle, we can ask how many radius lengths are there in the circumference of a circle?
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines._line0,
-        circle._circle,
-      ],
-      setSteadyState: () => {
-        diag.updateAngle();
-        circle.setScenario('center');
-        circle.animations.new()
-          .dissolveIn({ element: circle._radianLines._line1, duration: 0.3 })
-          .dissolveIn({ element: circle._radianLines._line2, duration: 0.3 })
-          .dissolveIn({ element: circle._radianLines._line3, duration: 0.3 })
-          .dissolveIn({ element: circle._radianLines._line4, duration: 0.3 })
-          .dissolveIn({ element: circle._radianLines._line5, duration: 0.3 })
-          .start();
-      },
-    });
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // We know a circle's circumference is equal to 2πr, where r is the radius length. This is the same as saying there are 2π lots of radius lengths in a circumference.
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines, // circle._radians,
-        circle._circle,
-      ],
-      setSteadyState: () => {
-        eqn.setScenario('topCirc');
-        diag.updateAngle();
-        eqn.goToForm({ name: 'circ', animate: 'dissolve' });
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // Therefore if there are 2π radius lengths in the circumference, then there must be 2π radians in a circle. We can now look at what different angles are in radians. Note, these numbers are approximate, and most are irrational numbers with infinitely many decimal places, like π and 2π.
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner,
-        circle._angle, circle._arc, circle._radianLines, // circle._radians,
-        circle._circle,
-      ],
-      setSteadyState: () => {
-        eqn.setScenario('topCircle');
-        diag.setAngleTextRadians();
-        diag.updateAngle();
-        eqn.goToForm({ name: 'circle', animate: 'dissolve' });
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // Clearly a radian does not have the same practical convenience of 360. A quarter circle is approximately 1.57, and a third of a circle is 2.09 radians. This is not easy to remember or calculate. But it is convenient when you right down its definition as an expression.
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
-        circle._angle, circle._arc, circle._radianLines, circle._angleText,
-        circle._circle,
-      ],
-      setSteadyState: () => {
-        diag.updateAngle();
-        eqn.setScenario('topCircle');
-        eqn.showForm('circle');
-        circle.animations.new()
-          .inParallel([
-            circle._angleText.anim.dissolveIn(0.3),
-            circle.anim.trigger({ callback: 'setAngleTextRadians' }),
-          ])
-          .start();
-      },
-    });
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // One radian produces an arc length of 1 radius. Two radians produce an arc length of two radians. Half a radian produces an arc length of half a radius.
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
-        circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._angle, circle._arc, // circle._radianLines,
+        // circle._angleText,
         circle._circle,
       ],
       setSteadyState: () => {
@@ -622,11 +504,12 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // More generally, this radian term is just the angle, and instead of writing out radius length each time, we will just write radius.
     this.addSection(common, {
+      title: '6 - angle super',
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
-        circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._angle, circle._arc, // circle._radianLines,
+        // circle._angleText,
         circle._circle,
       ],
       setSteadyState: () => {
@@ -645,17 +528,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // And so we are left with a simple relationship.
     this.addSection(common, {
+      title: '7 - equation',
       show: [
-        circle._line1, circle._line2, circle._corner, circle._radians,
-        circle._angle, circle._arc, circle._radianLines, circle._angleText,
+        circle._line1, circle._line2, circle._corner, // circle._radians,
+        circle._angle, circle._arc, // circle._radianLines,
+        // circle._angleText,
         circle._circle,
       ],
       setSteadyState: () => {
         eqn.setScenario('top');
         eqn.showForm('generalize');
-        diag.setAngleTextRadians();
+        // diag.setAngleTextRadians();
         eqn.goToForm({ name: '_arc', animate: 'move' });
       },
     });
@@ -667,10 +551,9 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // Now let's look at some consequences of this relationship. First of all, this relationship tells us if you know any two terms, you can always calculate the third.
-    // Seconly, if we rearrange the relatipnship to show how angle is dependent on radius and arc length, we can see that the angle in radians is actually unitless.
 
     this.addSection({
+      title: '8 - Center Eqn',
       show: [
         eqn,
       ],
@@ -681,6 +564,145 @@ class Content extends PresentationFormatContent {
           .start();
       },
     });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+
+    this.addSection({
+      title: '9 - How many Rads in a circle?',
+      show: [
+        eqn,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('arcSimple');
+        eqn.goToForm({ name: 'arcOfCircle', animate: 'move' });
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '10 - Circumference',
+      show: [
+        eqn, eqnCirc,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('arcOfCircle');
+        eqnCirc.setScenario('low');
+        eqnCirc.showForm('circumference');
+        eqnCirc.animations.new()
+          .dissolveIn({ duration: 0.5 })
+          .start();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '11 - 2Pi Radius lengths',
+      show: [
+        eqn, eqnCirc,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('arcOfCircle');
+        eqnCirc.setScenario('low');
+        eqnCirc.showForm('circumference');
+        eqn.goToForm({ name: 'arcOfCircle2Pi', animate: 'move' });
+        eqnCirc.animations.new()
+          .dissolveOut({ duration: 1 })
+          .start();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '12 - 2Pi Radians in a circle',
+      show: [
+        eqn,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('arcOfCircle2Pi');
+        eqn.goToForm({ name: 'twoPiRadiansInACircle', animate: 'move', duration: 1 });
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '13',
+      show: [eqn],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('twoPiRadiansInACircle');
+        eqn.goToForm({ name: '_arc', animate: 'dissolve', duration: 1 });
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '14',
+      show: [eqn],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('_arc');
+        eqn.goToForm({ name: '_arc1', animate: 'move' });
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection({
+      title: '15',
+      show: [eqn],
+      setSteadyState: () => {
+        eqn.setScenario('center');
+        eqn.showForm('_arc1');
+        eqn.goToForm({ name: '_arc2', animate: 'move' });
+      },
+    });
+
+
 
     // **********************************************************************
     // **********************************************************************
