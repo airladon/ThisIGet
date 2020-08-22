@@ -709,138 +709,47 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    common = {
-      setContent: [
-        style({ list: 'unordered', top: 12, id: 'radians_1', left: 5, size: 1.1 }, 'A |radian| is the angle where arc length equals radius length'),
-        style({ list: 'unordered', top: 5, id: 'radians_2', left: 5, size: 1.1 }, 'There are |2π| radians in a circle'),
-        style({ list: 'unordered', top: 5, id: 'radians_3', left: 5, size: 1.1 }, 'With radians we can |relate| arc length, radius and angle'),
-      ]
-    }
-    this.addSection(common, {
-      title: '16 - Mid Summary',
-      setSteadyState: () => {
-        document.getElementById('radians_2').style.visibility = 'hidden';
-        document.getElementById('radians_3').style.visibility = 'hidden';
-      },
+    const listOptions = (top, id) => ({
+      list: 'unordered',
+      top,
+      left: 5,
+      size: 1.1,
+      id: `radians_${id}`,
     });
 
-    this.addSection(common, {
+    this.addSection({
+      title: '16 - Mid Summary - REALL',
+      setContent: [
+        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+      ],
+    });
+
+    this.addSection({
       title: '17 - Mid Summary',
-      fadeInFromPrev: false,
-      setSteadyState: () => {
-        document.getElementById('radians_2').classList.add('topic__diagram_text_fade_in_05');
-        document.getElementById('radians_3').style.visibility = 'hidden';
-      },
-    });
-
-    this.addSection(common, {
-      title: '18 - Mid Summary',
-      fadeInFromPrev: false,
-      setSteadyState: () => {
-        document.getElementById('radians_3').classList.add('topic__diagram_text_fade_in_05');
-      },
-    });
-
-    // this.addSection({
-    //   title: '17 - Mid Summary',
-    //   fadeInFromPrev: false,
-    //   setContent: [
-    //     style({ top: 10 }, '• A |radian| is the angle where arc length equals radius length'),
-    //     style({ top: 5 }, '• There are |2π| radians in a circle'),
-    //   ],
-    // });
-
-    // this.addSection({
-    //   title: '18 - Mid Summary',
-    //   fadeInFromPrev: false,
-    //   setContent: [
-    //     style({ top: 10 }, '• A |radian| is the angle where arc length equals radius length'),
-    //     style({ top: 5 }, '• There are |2π| radians in a circle'),
-    //     style({ top: 5 }, '• With radians we can |relate| arc length, radius and angle'),
-    //   ],
-    // });
-
-
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // Angle is just a ratio, as both arc length and radius are a measure of length, their units cancel. Thus when we use radians in our calculations we can simply use it as a number and not have to track units.
-    this.addSection({
       setContent: [
-        style({ top: 50, centerH: true }, 'Radians have no units!'),
+        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+        style(listOptions(5, 2), 'There are |2π| radians in a circle'),
       ],
-      show: [
-        eqn,
-      ],
+      fadeInFromPrev: false,
       setSteadyState: () => {
-        eqn.showForm('angle');
-        eqn.setScenario('center');
+        addClass('radians_2', 'topic__diagram_text_fade_in_05');
       },
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // Next, if we make the radius equal to 1, we can see that angle equals the arc length, and they can therefore be used interchangably. In geometry and trigonometry we often start with a unit circle, which is a circle of radius 1, and find relationships between properties. The processs to find the relatipnship can be involved, but it is simplified assuming a unit radius. The result is then generalized at the end by scaling the radius.
-    // Radians is useful because these relationships are clean and simple. When they get used in more complicated relationships they are easiest to manipulate. We can find similar relationships using degrees, but will see they are more complicated, and therefore less useful.
     this.addSection({
-      show: [
-        eqn,
+      title: '18 - Mid Summary',
+      setContent: [
+        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+        style(listOptions(5, 2), 'There are |2π| radians in a circle'),
+        style(listOptions(5, 3), 'With radians we can |relate| arc length, radius and angle'),
       ],
+      fadeInFromPrev: false,
       setSteadyState: () => {
-        eqn.setScenario('center');
-        eqn.showForm('radiusEquals1_0');
-        diag.animations.new()
-          .trigger({
-            callback: 'goToForm',
-            payload: {
-              name: 'radiusEquals1_1',
-              animate: 'move',
-              dissolveInTime: 0.7,
-              dissolveOutTime: 0.7,
-            },
-            duration: 2,
-          })
-          .trigger({
-            callback: 'goToForm',
-            payload: {
-              name: 'radiusEquals1_2',
-              animate: 'move',
-              dissolveInTime: 0.7,
-            },
-            duration: 1,
-          })
-          .trigger({
-            callback: 'goToForm',
-            payload: {
-              name: 'radiusEquals1_3',
-              animate: 'move',
-              dissolveOutTime: 0.7,
-              duration: 1,
-            },
-            duration: 2,
-          })
-          .trigger({
-            callback: 'goToForm',
-            payload: {
-              name: 'radiusEquals1_4',
-              animate: 'move',
-              dissolveInTime: 0.7,
-            },
-            duration: 0.7,
-          })
-          .start();
+        addClass('radians_3', 'topic__diagram_text_fade_in_05');
       },
     });
+
+
 
     // // **********************************************************************
     // // **********************************************************************
@@ -849,10 +758,89 @@ class Content extends PresentationFormatContent {
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
-    // To do this, we need to find a way to convert between degrees and radians.
-    // While the numerical value of the degrees and radians are different, we know if they represent the same angle then that angle must be the same portion of a full circle. Thus the ratios of the angles relative to their equivalent full circle angles must be the same. We can no rearrange the equation to find the radian angle in terms of the degree angle.
-    // So to convert degrees to radians, we multiply by the ratio of pi over 180.
+    // // Angle is just a ratio, as both arc length and radius are a measure of length, their units cancel. Thus when we use radians in our calculations we can simply use it as a number and not have to track units.
+    // this.addSection({
+    //   setContent: [
+    //     style({ top: 50, centerH: true }, 'Radians have no units!'),
+    //   ],
+    //   show: [
+    //     eqn,
+    //   ],
+    //   setSteadyState: () => {
+    //     eqn.showForm('angle');
+    //     eqn.setScenario('center');
+    //   },
+    // });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // Next, if we make the radius equal to 1, we can see that angle equals the arc length, and they can therefore be used interchangably. In geometry and trigonometry we often start with a unit circle, which is a circle of radius 1, and find relationships between properties. The processs to find the relatipnship can be involved, but it is simplified assuming a unit radius. The result is then generalized at the end by scaling the radius.
+    // // Radians is useful because these relationships are clean and simple. When they get used in more complicated relationships they are easiest to manipulate. We can find similar relationships using degrees, but will see they are more complicated, and therefore less useful.
+    // this.addSection({
+    //   show: [
+    //     eqn,
+    //   ],
+    //   setSteadyState: () => {
+    //     eqn.setScenario('center');
+    //     eqn.showForm('radiusEquals1_0');
+    //     diag.animations.new()
+    //       .trigger({
+    //         callback: 'goToForm',
+    //         payload: {
+    //           name: 'radiusEquals1_1',
+    //           animate: 'move',
+    //           dissolveInTime: 0.7,
+    //           dissolveOutTime: 0.7,
+    //         },
+    //         duration: 2,
+    //       })
+    //       .trigger({
+    //         callback: 'goToForm',
+    //         payload: {
+    //           name: 'radiusEquals1_2',
+    //           animate: 'move',
+    //           dissolveInTime: 0.7,
+    //         },
+    //         duration: 1,
+    //       })
+    //       .trigger({
+    //         callback: 'goToForm',
+    //         payload: {
+    //           name: 'radiusEquals1_3',
+    //           animate: 'move',
+    //           dissolveOutTime: 0.7,
+    //           duration: 1,
+    //         },
+    //         duration: 2,
+    //       })
+    //       .trigger({
+    //         callback: 'goToForm',
+    //         payload: {
+    //           name: 'radiusEquals1_4',
+    //           animate: 'move',
+    //           dissolveInTime: 0.7,
+    //         },
+    //         duration: 0.7,
+    //       })
+    //       .start();
+    //   },
+    // });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // 19
     this.addSection({
+      title: '19',
       setContent: [
         devNote({ top: 5 }, '|scalar|'),
         devNote({ top: 10 }, '|_2pi|'),
@@ -885,8 +873,8 @@ class Content extends PresentationFormatContent {
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
-    // We can do a similar procedure to find degrees from radians.
     this.addSection({
+      title: '20 - Deg and Rad',
       setContent: [
         devNote({ top: 5 }, '|scalarRad|'),
         devNote({ top: 10 }, '|scalarDeg|'),
@@ -924,55 +912,55 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
-    this.addSection({
-      setContent: [
-        devNote({ top: 5 }, '|angleD|'),
-        devNote({ top: 10 }, '|factor|'),
-      ],
-      fadeInFromPrev: false,
-      modifiers: {
-        factor: diag.bindAccent({
-          elements: [
-            eqn._π,
-            eqn._v_1,
-            eqn.__180,
-          ],
-          id: 'note_factor',
-          centerOn: eqn._v_1,
-          x: 0.2,
-          scale: 1.5,
-        }),
-        angleD: diag.bindAccent({
-          elements: [
-            // eqn._angle,
-            eqn._d_g,
-          ],
-          id: 'note_angle',
-          centerOn: eqn._d_g,
-          scale: 2,
-        }),
-      },
-      show: [
-        eqn,
-      ],
-      setSteadyState: () => {
-        eqn.setScenario('left');
-        diag.animations.new()
-          .inParallel([
-            diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
-            diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
-          ])
-          .start();
-      },
-    });
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
+    // this.addSection({
+    //   setContent: [
+    //     devNote({ top: 5 }, '|angleD|'),
+    //     devNote({ top: 10 }, '|factor|'),
+    //   ],
+    //   fadeInFromPrev: false,
+    //   modifiers: {
+    //     factor: diag.bindAccent({
+    //       elements: [
+    //         eqn._π,
+    //         eqn._v_1,
+    //         eqn.__180,
+    //       ],
+    //       id: 'note_factor',
+    //       centerOn: eqn._v_1,
+    //       x: 0.2,
+    //       scale: 1.5,
+    //     }),
+    //     angleD: diag.bindAccent({
+    //       elements: [
+    //         // eqn._angle,
+    //         eqn._d_g,
+    //       ],
+    //       id: 'note_angle',
+    //       centerOn: eqn._d_g,
+    //       scale: 2,
+    //     }),
+    //   },
+    //   show: [
+    //     eqn,
+    //   ],
+    //   setSteadyState: () => {
+    //     eqn.setScenario('left');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
+    //         diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
+    //       ])
+    //       .start();
+    //   },
+    // });
 
     // **********************************************************************
     // **********************************************************************
@@ -983,10 +971,10 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     common = {
       setContent: [
-        devNote({ top: 5 }, '|sin|'),
         devNote({ top: 10 }, '|arc|'),
         devNote({ top: 15 }, '|radius|'),
         devNote({ top: 20 }, '|angle|'),
+        devNote({ top: 5 }, '|sin|'),
       ],
       // fadeInFromPrev: false,
       modifiers: {
@@ -1002,7 +990,7 @@ class Content extends PresentationFormatContent {
       },
     }
     this.addSection(common, {
-      title: 'asdf',
+      title: '21 - Unit Circle',
       show: [
         diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
       ],
@@ -1021,6 +1009,40 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    this.addSection(common, {
+      title: '22 - Vertical',
+      show: [
+        diag._lim,
+      ],
+      hide: [ diag._lim._sin._label, diag._lim._x ],
+      setSteadyState: () => {
+        diag._lim.setScenario('center');
+        diag.updateLimAngle();
+        diag.animations.new()
+          .inParallel([
+            diag._lim._sin._line.anim.dissolveIn(1),
+          ])
+          .start();
+      },
+    });
+
+    this.addSection(common, {
+      title: '23 - Sine',
+      show: [
+        diag._lim,
+      ],
+      hide: [ diag._lim._x ],
+      setSteadyState: () => {
+        diag._lim.setScenario('center');
+        diag.updateLimAngle();
+        diag.animations.new()
+          .inParallel([
+            diag._lim._sin._label.anim.dissolveIn(1),
+          ])
+          .start();
+      },
+    });
+
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
@@ -1029,9 +1051,9 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection(common, {
+      title: '24 - x',
       show: [
-        diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
-        diag._lim._x,
+        diag._lim
       ],
       setSteadyState: () => {
         diag._lim.setScenario('center');
@@ -1039,21 +1061,6 @@ class Content extends PresentationFormatContent {
         diag.animations.new()
           .inParallel([
             diag._lim._x.anim.dissolveIn(1),
-          ])
-          .start();
-      },
-    });
-
-    this.addSection(common, {
-      show: [
-        diag._lim,
-      ],
-      setSteadyState: () => {
-        diag._lim.setScenario('center');
-        diag.updateLimAngle();
-        diag.animations.new()
-          .inParallel([
-            diag._lim._sin.anim.dissolveIn(1),
           ])
           .start();
       },
@@ -1067,6 +1074,7 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
+      title: '25 - limit',
       setContent: [
         devNote({ top: 5 }, '|limit|'),
         devNote({ top: 10 }, '|sinx|'),
@@ -1135,34 +1143,34 @@ class Content extends PresentationFormatContent {
           .start();
       },
     });
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
-    this.addSection({
-      show: [
-        diag._ex1,
-      ],
-      setSteadyState: () => {
-        diag._ex1.setScenario('left');
-        diag._ex1.showForm('lim');
-        diag._ex2.setScenario('bottom');
-        diag.animations.new()
-          .then(diag._ex1.anim.scenario({ target: 'top', duration: 1.5 }))
-          .inParallel([
-            diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
-            diag.anim.trigger({
-              callback: 'showFormOfEqn',
-              payload: { element: 'ex2', form: 'limDeg' },
-            }),
-          ])
-          .start();
-      },
-    });
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('left');
+    //     diag._ex1.showForm('lim');
+    //     diag._ex2.setScenario('bottom');
+    //     diag.animations.new()
+    //       .then(diag._ex1.anim.scenario({ target: 'top', duration: 1.5 }))
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex2', form: 'limDeg' },
+    //         }),
+    //       ])
+    //       .start();
+    //   },
+    // });
   
     // **********************************************************************
     // **********************************************************************
@@ -1172,11 +1180,12 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
+      title: '26 - First derivative',
       show: [
         diag._ex1,
       ],
       setSteadyState: () => {
-        diag._ex1.setScenario('top');
+        diag._ex1.setScenario('middle');
         diag.animations.new()
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
@@ -1188,34 +1197,6 @@ class Content extends PresentationFormatContent {
           .start();
       },
     });
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
-    this.addSection({
-      show: [
-        diag._ex1,
-      ],
-      setSteadyState: () => {
-        diag._ex1.setScenario('top');
-        diag._ex1.showForm('radFirst');
-        diag._ex2.setScenario('bottom');
-        diag.animations.new()
-          .inParallel([
-            diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
-            diag.anim.trigger({
-              callback: 'showFormOfEqn',
-              payload: { element: 'ex2', form: 'degFirst' },
-            }),
-          ])
-          .start();
-      },
-    });
-
 
     // **********************************************************************
     // **********************************************************************
@@ -1225,11 +1206,12 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
+      title: '27 - Sin infinite series',
       show: [
         diag._ex1,
       ],
       setSteadyState: () => {
-        diag._ex1.setScenario('topLeft');
+        diag._ex1.setScenario('middleLeft');
         diag.animations.new()
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
@@ -1241,6 +1223,7 @@ class Content extends PresentationFormatContent {
           .start();
       },
     });
+
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
@@ -1248,16 +1231,18 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
     this.addSection({
+      title: '28 - Sin degrees infinite series',
       show: [
         diag._ex1,
       ],
       setSteadyState: () => {
-        diag._ex1.setScenario('topLeft');
+        diag._ex1.setScenario('middleLeft');
         diag._ex1.showForm('sin');
         diag._ex2.setScenario('bottomLeft');
+
         diag.animations.new()
+          .then(diag._ex1.anim.scenario({ target: 'topLeft', duration: 1 }))
           .inParallel([
             diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
             diag.anim.trigger({
@@ -1269,11 +1254,106 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     this.addSection({
+      title: '29 - Radians are simple and intuitive',
       setContent: [
-        style({ centerH: true, centerV: true }, 'In mathematics, working with radians is more |elegant and simple| than with degrees.'),
+        style({ centerV: true, centerH: true }, 'Radians are a simple, natural way to express angles in mathematics'),
       ],
     });
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('top');
+    //     diag._ex1.showForm('radFirst');
+    //     diag._ex2.setScenario('bottom');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex2', form: 'sin' },
+    //         }),
+    //       ])
+    //       .start();
+    //   },
+    // });
+
+
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('topLeft');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex1, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex1', form: 'sin' },
+    //         }),
+    //       ])
+    //       .start();
+    //   },
+    // });
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // **********************************************************************
+    // // For instance, in calculus the first and second derivatives of the sine function when using radians are relatively simple. If however, degrees are being used,
+    // this.addSection({
+    //   show: [
+    //     diag._ex1,
+    //   ],
+    //   setSteadyState: () => {
+    //     diag._ex1.setScenario('topLeft');
+    //     diag._ex1.showForm('sin');
+    //     diag._ex2.setScenario('bottomLeft');
+    //     diag.animations.new()
+    //       .inParallel([
+    //         diag.anim.dissolveIn({ element: diag._ex2, duration: 0.5 }),
+    //         diag.anim.trigger({
+    //           callback: 'showFormOfEqn',
+    //           payload: { element: 'ex2', form: 'sinDeg' },
+    //         }),
+    //       ])
+    //       .start();
+    //   },
+    // });
+
+    // this.addSection({
+    //   setContent: [
+    //     style({ centerH: true, centerV: true }, 'In mathematics, working with radians is more |elegant and simple| than with degrees.'),
+    //   ],
+    // });
     // // **********************************************************************
     // // **********************************************************************
     // // **********************************************************************
@@ -1305,6 +1385,7 @@ class Content extends PresentationFormatContent {
       },
     );
     this.addSection({
+      title: '30 - final play',
       setContent: [
         `
           <table class="radians_table comparison_table" id="radians_table">
