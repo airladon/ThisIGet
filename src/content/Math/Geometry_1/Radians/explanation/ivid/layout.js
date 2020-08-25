@@ -573,8 +573,18 @@ export default function diagramLayout() {
         // }, 'equals', 'questionMark', 'x', '_radiusS'],
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         '_arc': ['arc', 'equals', 'angle', 'x', 'radius'],
-        '_arc1': ['arc', 'equals', 'angle', 'x', '_1'],
-        '_arc2': ['arc', 'equals', 'angle'],
+        '_arc1': [
+          {
+            bottomComment: ['arc', 'forRad1'],
+          },
+          'equals', 'angle', 'x', '_1',
+        ],
+        '_arc2': [
+          {
+            bottomComment: ['arc', 'forRad1'],
+          },
+          'equals', 'angle',
+        ],
         'angle': ['_angle', 'equals', { frac: ['_arc', 'v_1', '_radius'] }],
         'radius': ['_radius', 'equals', { frac: ['_arc', 'v_1', '_angle'] }],
         radiusEquals1_0: ['angle', 'equals', { frac: ['arc', 'v_1', 'radius'] }],

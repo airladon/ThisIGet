@@ -196,7 +196,7 @@ class Content extends PresentationFormatContent {
       title: '2 - 360',
       fadeInFromPrev: true,
       setContent: [
-        style({ top: 2, size: 0.8, centerH: true, className: 'radians_table_value', id: 'factors' },
+        style({ top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors' },
         '<span class="sub_highlight">1</span>, <span class="sub_highlight">2</span>, <span class="sub_highlight">3</span>, <span class="sub_highlight">4</span>, <span class="sub_highlight">5</span>, <span class="sub_highlight">6</span>, <span class="sub_highlight">8</span>, <span class="sub_highlight">9</span>, <span class="sub_highlight">10</span>, <span class="sub_highlight">12</span>, <span class="sub_highlight">15</span>, <span class="sub_highlight">18</span>, <span class="sub_highlight">20</span>, <span class="sub_highlight">24</span>, <span class="sub_highlight">30</span>, <span class="sub_highlight">36</span>, <span class="sub_highlight">40</span>, <span class="sub_highlight">45</span>, <span class="sub_highlight">60</span>, <span class="sub_highlight">72</span>, <span class="sub_highlight">90</span>, <span class="sub_highlight">120</span>, <span class="sub_highlight">180</span>, <span class="sub_highlight">360</span>',
           // '1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360',
           // '1  2  3  4  5  6  8  9  10  12  15  18  20  24  30  36  40  45  60  72  90  120  180  360',
@@ -286,22 +286,7 @@ class Content extends PresentationFormatContent {
         <tr><td>\u22ee</td><td>\u22ee</td>
       </table>
     `;
-    this.addSection(common, {
-      title: '2 - 360',
-      setContent: [
-        style({ top: 2, size: 0.8, centerH: true, className: 'radians_table_value', id: 'factors', },
-          '<span class="sub_highlight">1</span>, <span class="sub_highlight">2</span>, <span class="sub_highlight">3</span>, <span class="sub_highlight">4</span>, <span class="sub_highlight">5</span>, <span class="sub_highlight">6</span>, <span class="sub_highlight">8</span>, <span class="sub_highlight">9</span>, <span class="sub_highlight">10</span>, <span class="sub_highlight">12</span>, <span class="sub_highlight">15</span>, <span class="sub_highlight">18</span>, <span class="sub_highlight">20</span>, <span class="sub_highlight">24</span>, <span class="sub_highlight">30</span>, <span class="sub_highlight">36</span>, <span class="sub_highlight">40</span>, <span class="sub_highlight">45</span>, <span class="sub_highlight">60</span>, <span class="sub_highlight">72</span>, <span class="sub_highlight">90</span>, <span class="sub_highlight">120</span>, <span class="sub_highlight">180</span>, <span class="sub_highlight">360</span>',
-        ),
-        style({ top: 2, size: 0.8, centerH: true, className: 'radians_table_value', id: 'arithmetic', },
-          '<sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub> = 120º + 72º = 192º',
-        ),
-        devNote({ top: 5 }, '|hide_box|'),
-        devNote({ top: 10 }, '|angles|'),
-        devNote({ top: 15 }, '|fractions|'),
-        devNote({ top: 20 }, '|Degrees|'),
-        devNote({ top: 25 }, '|Angle|'),
-        tableContent(),
-      ],
+    const commonTable = {
       modifiers: {
         id_180degr: rowClick(180),
         id_120degr: rowClick(120),
@@ -338,6 +323,23 @@ class Content extends PresentationFormatContent {
         circle._degrees, circle._angleText,
         circle._degreesHighlight,
       ],
+    }
+    this.addSection(common, commonTable, {
+      title: '2 - 360',
+      setContent: [
+        style({ top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors', },
+          '<span class="sub_highlight">1</span>, <span class="sub_highlight">2</span>, <span class="sub_highlight">3</span>, <span class="sub_highlight">4</span>, <span class="sub_highlight">5</span>, <span class="sub_highlight">6</span>, <span class="sub_highlight">8</span>, <span class="sub_highlight">9</span>, <span class="sub_highlight">10</span>, <span class="sub_highlight">12</span>, <span class="sub_highlight">15</span>, <span class="sub_highlight">18</span>, <span class="sub_highlight">20</span>, <span class="sub_highlight">24</span>, <span class="sub_highlight">30</span>, <span class="sub_highlight">36</span>, <span class="sub_highlight">40</span>, <span class="sub_highlight">45</span>, <span class="sub_highlight">60</span>, <span class="sub_highlight">72</span>, <span class="sub_highlight">90</span>, <span class="sub_highlight">120</span>, <span class="sub_highlight">180</span>, <span class="sub_highlight">360</span>',
+        ),
+        style({ top: 2, size: 0.8, centerH: true, className: 'radians_table_value', id: 'arithmetic', },
+          // '<sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub> = 120º + 72º = 192º',
+        ),
+        // devNote({ top: 5 }, '|hide_box|'),
+        // devNote({ top: 10 }, '|angles|'),
+        // devNote({ top: 15 }, '|fractions|'),
+        // devNote({ top: 20 }, '|Degrees|'),
+        // devNote({ top: 25 }, '|Angle|'),
+        tableContent(),
+      ],
       setSteadyState: () => {
         // circle.setScenario('centerLeft');
         addClass('radians_table', 'invisible');
@@ -369,15 +371,75 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
+    this.addSection(common, commonTable, {
+      title: '2 - 360',
+      setContent: [
+        style({ top: 2, size: 1.1, centerH: true, className: 'radians_table_value', id: 'arithmetic', },
+          '<span id="arithmetic_1"><sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub></span> &nbsp <span id="arithmetic_2">= &nbsp 120º + 72º &nbsp </span><span id="arithmetic_3">= &nbsp 192º</span>',
+        ),
+        // devNote({ top: 5 }, '|hide_box|'),
+        // devNote({ top: 10 }, '|angles|'),
+        // devNote({ top: 15 }, '|fractions|'),
+        // devNote({ top: 20 }, '|Degrees|'),
+        // devNote({ top: 25 }, '|Angle|'),
+        tableContent(),
+      ],
+      setSteadyState: () => {
+        circle.setScenario('centerLeft');
+        addClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
+        addClass('arithmetic_2', 'invisible');
+        addClass('arithmetic_3', 'invisible');
+        diag.updateAngle();
+        circle.animations.new()
+          .inParallel([
+            circle._line1.anim.rotation({
+              target: 192 / 180 * Math.PI,
+              delay: 1.8,
+              duration: 1
+            }),
+            circle.anim.trigger({
+                callback: () => {
+                  removeClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
+                  removeClass('arithmetic_2', 'invisible');
+                  addClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
+              },
+              delay: 0.8,
+            }),
+            circle.anim.trigger({
+              callback: () => {
+                removeClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
+                removeClass('arithmetic_3', 'invisible');
+                addClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
+              },
+              delay: 1.8,
+            }),
+            circle.anim.trigger({
+              callback: () => {
+                removeClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
+              },
+              delay: 2.8,
+            }),
+          ])
+          .start();
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     this.addSection(common, {
       title: '3 - Radian Angle',
       setContent: [
         tableContent('radians_table_hidden'),
-        devNote({ top: 5 }, '|Circle|'),
-        devNote({ top: 10 }, '|Lines|'),
-        devNote({ top: 15 }, '|Radius|'),
-        devNote({ top: 20 }, '|Arc|'),
-        devNote({ top: 25 }, '|Angle|'),
+        // devNote({ top: 5 }, '|Circle|'),
+        // devNote({ top: 10 }, '|Lines|'),
+        // devNote({ top: 15 }, '|Radius|'),
+        // devNote({ top: 20 }, '|Arc|'),
+        // devNote({ top: 25 }, '|Angle|'),
       ],
       modifiers: {
         id_180degr: rowClick(180),
@@ -444,9 +506,9 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'The angle where |arc_length_equals_radius| is |one radian|.'),
-        devNote({ top: 5 }, '|Radius|'),
-        devNote({ top: 10 }, '|Arc|'),
-        devNote({ top: 15 }, '|Angle|'),
+        // devNote({ top: 5 }, '|Radius|'),
+        // devNote({ top: 10 }, '|Arc|'),
+        // devNote({ top: 15 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
@@ -479,15 +541,15 @@ class Content extends PresentationFormatContent {
         circle._line1.setScenario('default');
         circle._line2.setScenario('default');
       },
-      setContent: [
-        devNote({ top: 5 }, '|EqnRadius|'),
-        devNote({ top: 10 }, '|EqnAngle|'),
-        devNote({ top: 15 }, '|Value|'),
-        devNote({ top: 20 }, '|Radian|'),
-        devNote({ top: 25 }, '|Radius|'),
-        devNote({ top: 30 }, '|Arc|'),
-        devNote({ top: 35 }, '|Angle|'),
-      ],
+      // setContent: [
+      //   devNote({ top: 5 }, '|EqnRadius|'),
+      //   devNote({ top: 10 }, '|EqnAngle|'),
+      //   devNote({ top: 15 }, '|Value|'),
+      //   devNote({ top: 20 }, '|Radian|'),
+      //   devNote({ top: 25 }, '|Radius|'),
+      //   devNote({ top: 30 }, '|Arc|'),
+      //   devNote({ top: 35 }, '|Angle|'),
+      // ],
       // fadeInFromPrev: false,
       modifiers: {
         Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
@@ -659,17 +721,17 @@ class Content extends PresentationFormatContent {
         eqn.showForm('arcOfCircle');
         eqnCirc.setScenario('low');
         eqnCirc.showForm('circumference');
-        eqn._twoPiGreen.show();
-        console.log(eqn.getPosition('diagram'))
-        console.log(eqn._twoPiGreen.getPosition('diagram'))
-        console.log(eqnCirc.getPosition('diagram'))
-        console.log(eqnCirc._twoPi.getPosition('diagram'))
-        eqn._twoPiGreen.setPositionToElement(eqnCirc._twoPi, 'diagram')
-        console.log(eqn._twoPiGreen.getPosition('diagram'))
+        // eqn._twoPiGreen.show();
+        // console.log(eqn.getPosition('diagram'))
+        // console.log(eqn._twoPiGreen.getPosition('diagram'))
+        // console.log(eqnCirc.getPosition('diagram'))
+        // console.log(eqnCirc._twoPi.getPosition('diagram'))
+        // // eqn._twoPiGreen.setPositionToElement(eqnCirc._twoPi, 'diagram')
+        // console.log(eqn._twoPiGreen.getPosition('diagram'))
         // console.log(eqn._twoPiGreen.getPosition(), eqnCirc._twoPi.getPosition())
         eqn.goToForm({ name: 'arcOfCircle2Pi', animate: 'move' });
         eqnCirc.animations.new()
-          .dissolveOut({ duration: 1 })
+          .dissolveOut({ duration: 1, delay: 1 })
           .start();
       },
     });

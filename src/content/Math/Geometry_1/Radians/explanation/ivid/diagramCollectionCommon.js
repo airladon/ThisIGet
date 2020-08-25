@@ -363,6 +363,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       .rotation({
         element: this._circle._line1, target: 1, velocity: 0.5, maxDuration: 1, direction: 2,
       })
+      .dissolveOut({ duration: 0.8 })
       .whenFinished(finished)
       .start();
     this.diagram.animateNextFrame();

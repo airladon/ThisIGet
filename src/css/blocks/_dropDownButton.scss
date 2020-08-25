@@ -109,6 +109,8 @@ $button_size: 0.4em;
   border: 1px solid var(--color-menu-border);
   cursor: default;
   overflow: hidden;
+  overflow-y: scroll;
+  max-height: calc(var(--pres__content_height) * 0.7);
 }
 
 .dropdown_button_list_hide {

@@ -249,6 +249,13 @@ $height_limited_landscape_aspect_ratio: "408/200";
   animation: fadein 0.5s linear;
   -o-animation: fadein 0.5s linear;
 }
+.topic__diagram_text_fade_in_08 {
+  // opacity: 1;
+  -webkit-animation: fadein 0.8s linear;
+  -moz-animation: fadein 0.8s linear;
+  animation: fadein 0.8s linear;
+  -o-animation: fadein 0.8s linear;
+}
 
 .topic__diagram_text_fade_out_05 {
   // opacity: 1;
