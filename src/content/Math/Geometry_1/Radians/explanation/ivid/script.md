@@ -4,15 +4,15 @@ Welcome to this interactive video on the radian and why we use it.
 This is interactive, so if you see me interacting with an element on the screen then you can too. When you do so the video will pause so just press play to continue when you’re ready.
 
 # 1
-A Radian is a measure of angle, which we normally first learn how to measure using degrees.
+A Radian is a measure of angle, but we often first learn how to measure angle with degrees.
 
 # 2
-Splitting the circle into 360 pieces is very convenient as 360 has many factors and therefore many fractions of a circle can be expressed with whole numbers. ￼ this makes adding, subtracting and diving portions of a circle easy to do without a calculator. And so degrees has an every day, PRACTICAL convenience.
+Splitting the circle into 360 pieces is quite convenient as 360 has many factors and therefore many fractions of a circle can be expressed with whole numbers. ￼ This makes adding, subtracting and dividing portions of a circle easy to do without a calculator. And so we can say degrees has an every day, ARITHEMETIC or PRACTICAL convenience.
 
-In comparison, a radian RELATES PROPERTIES for MATHEMATICAL convenience.
+In comparison, measuring angles in radians provides a deeper, mathmatical convenience for when your using mathematics to express RELATIONSHIPS between angles, circles and other geometries.
 
 # 3, 4
-A radian is defined as the angle where the circle’s arc length equals the radius.
+So a radian is defined as the angle where the circle’s arc length equals the radius.
 
 # 5
 This means an arc of two radians has a length of 2 radius lengths, and an arc of 0.5 radians has a length of half the radius.

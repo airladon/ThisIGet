@@ -33386,11 +33386,23 @@ var DiagramElement = /*#__PURE__*/function () {
   }, {
     key: "setPositionToElement",
     value: function setPositionToElement(element) {
-      var p = element.transform.t();
+      var space = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'local';
 
-      if (p != null) {
-        this.setPosition(p._dup());
+      if (space === 'local') {
+        var _p = element.transform.t();
+
+        if (_p != null) {
+          this.setPosition(_p._dup());
+        }
+
+        return;
       }
+
+      var diagram = this.getPosition('diagram');
+      var local = this.getPosition('local');
+      var p = element.getPosition('diagram');
+      var deltaDiagram = p.sub(diagram);
+      this.setPosition(local.add(deltaDiagram));
     }
   }, {
     key: "checkMoveBounds",

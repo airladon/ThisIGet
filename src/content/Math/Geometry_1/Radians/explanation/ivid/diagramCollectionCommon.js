@@ -504,6 +504,20 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  showDegrees() {
+    this._circle._degrees.show();
+    this._circle._degreesHighlight.show();
+    this._circle.animations.new()
+      .inParallel([
+        this._circle._degrees.anim.dissolveIn({ duration: 0.5 }),
+        this._circle._degreesHighlight.anim.dissolveIn({ duration: 0.5 }),
+        this._circle._angleText.anim.dissolveIn(0.5),
+        this._circle.anim.trigger({ callback: 'setAngleTextDeg' }),
+      ])
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   setLineRotation(
     r: ?number = null,
     animate: boolean = true,
