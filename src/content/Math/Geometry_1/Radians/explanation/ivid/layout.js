@@ -112,7 +112,8 @@ export default function diagramLayout() {
     method: 'angle',
     options: {
       curve: {
-        width: radius / 4,
+        // width: radius / 4,
+        width,
         sides: 300,
         radius: radius / 4,
       },
@@ -309,7 +310,7 @@ export default function diagramLayout() {
           label: {
             text: 'sin x',
             location: 'left',
-            offset: 0.01,
+            offset: 0.08,
             scale: 1.2,
           },
         },
@@ -321,13 +322,13 @@ export default function diagramLayout() {
           angle: limAngle,
           color: colors.angles,
           curve: {
-            radius: 0.7,
+            radius: 0.5,
             width: 0.03,
             sides: 300,
           },
           label: {
             text: 'x',
-            radius: 0.6,
+            radius: 0.48,
             scale: 1.2,
           },
         },

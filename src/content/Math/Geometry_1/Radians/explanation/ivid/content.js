@@ -55,48 +55,18 @@ class Content extends PresentationFormatContent {
 
   loadEvents() {
     this.diagram.recorder.loadAudio(new Audio(audio));
-    // this.diagram.recorder.loadEvents(events, true);
-    // this.diagram.recorder.loadStates(states, true);
+    this.diagram.recorder.loadEvents(events, true);
+    this.diagram.recorder.loadStates(states, true);
     this.diagram.recorder.settings.pause = 'freeze';
 
     this.diagram.recorder.settings.play = {
       how: 'dissolve',
-      // velocity: { translation: 2, rotation: 100, scale: 3 },
-      // minDuration: 0.5,
-      // maxDuration: 0.5,
-      // duration: 2,
       duration: {
         dissolveOut: 0.2,
         dissolveIn: 0.2,
         delay: 0.1,
       },
     };
-    // this.diagram.recorder.subscriptions.add('preparingToPlay', () => {
-    //   // this.diagram.elements._lim.hide()
-    //   console.log(this.diagram.getRemainingAnimationTime())
-    //   // const showShown = (element) => {
-    //   //   if (element instanceof DiagramElementCollection) {
-    //   //     element.drawOrder.forEach((elementName) => {
-    //   //       const e = element.elements[elementName];
-    //   //       if (e.isShown) {
-    //   //         // console.log(e.getPath())
-    //   //         showShown(e)
-    //   //       }
-    //   //     });
-    //   //   }
-    //   // };
-    //   // showShown(this.diagram.elements)
-    //   // this.diagram.elements._circle.drawOrder.forEach((elementName) => {
-    //   //   const element = this.diagram.elements._circle.elements[elementName];
-    //   //   if (element.isShown) {
-    //   //     console.log(elementName)
-    //   //   }
-    //   // });
-    //   // console.log(this.diagram.elements._circle)
-    //   // console.log(Object.keys(this.diagram.elements._circle._corner))
-    //   // console.log(this.diagram.elements._circle._dup());
-    // })
-    // console.log(this.diagram)
   }
 
   addSections() {
@@ -145,9 +115,9 @@ class Content extends PresentationFormatContent {
       },
       fadeInFromPrev: false,
       modifiers: {
-        Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
-        Circle: click(diag.pulseCircle, [diag], { color: colors.arc, id: 'note_circle' }),
-        Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
+        // Arc: click(diag.pulseArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        // Circle: click(diag.pulseCircle, [diag], { color: colors.arc, id: 'note_circle' }),
+        // Angle: click(diag.pulseAngle, [diag], { color: colors.angles, id: 'note_angle' }),
         // Degrees: diag.bindAccent({
         //   elements: [circle._degrees, circle._degreesHighlight],
         //   scale: 1.15,
@@ -170,7 +140,7 @@ class Content extends PresentationFormatContent {
     this.addSection(common, {
       title: '1 - Degrees',
       setContent: [
-        devNote({ top: 5 }, '|Angle|'),
+        // devNote({ top: 5 }, '|Angle|'),
         devNote({ top: 10 }, '|Degrees|'),
         // devNote({ top: 15 }, '|Value|'),
       ],
@@ -187,6 +157,10 @@ class Content extends PresentationFormatContent {
             circle.anim.scenario({ target: 'center', duration: 2 }),
             circle._line1.anim.rotation({ target: 1, duration: 2 }),
           ])
+          .trigger({
+            callback: diag.pulseAngle.bind(diag),
+            duration: 1,
+          })
           .start();
         circle._angle.pulseSettings.allowFreezeOnStop = true;
       },
@@ -371,55 +345,57 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection(common, commonTable, {
+    this.addSection({
       title: '2 - 360',
+      fadeInFromPrev: false,
+      show: [],
       setContent: [
-        style({ top: 2, size: 1.1, centerH: true, className: 'radians_table_value', id: 'arithmetic', },
-          '<span id="arithmetic_1"><sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub></span> &nbsp <span id="arithmetic_2">= &nbsp 120º + 72º &nbsp </span><span id="arithmetic_3">= &nbsp 192º</span>',
+        style({ size: 1.1, centerH: true, centerV: true, size: 1.5, className: 'radians_table_value', id: 'arithmetic', },
+          '<span id="arithmetic_1"><sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub></span> &nbsp <span id="arithmetic_2">= &nbsp 120º + 144º &nbsp </span><span id="arithmetic_3">= &nbsp 264º</span>',
         ),
         // devNote({ top: 5 }, '|hide_box|'),
         // devNote({ top: 10 }, '|angles|'),
         // devNote({ top: 15 }, '|fractions|'),
         // devNote({ top: 20 }, '|Degrees|'),
         // devNote({ top: 25 }, '|Angle|'),
-        tableContent(),
+        // tableContent(),
       ],
       setSteadyState: () => {
-        circle.setScenario('centerLeft');
+        // circle.setScenario('centerLeft');
         addClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
         addClass('arithmetic_2', 'invisible');
         addClass('arithmetic_3', 'invisible');
-        diag.updateAngle();
-        circle.animations.new()
-          .inParallel([
-            circle._line1.anim.rotation({
-              target: 192 / 180 * Math.PI,
-              delay: 1.8,
-              duration: 1
-            }),
-            circle.anim.trigger({
+        // diag.updateAngle();
+        diag.animations.new()
+          // .inParallel([
+          //   circle._line1.anim.rotation({
+          //     target: 192 / 180 * Math.PI,
+          //     delay: 1.8,
+          //     duration: 1
+          //   }),
+            .trigger({
                 callback: () => {
                   removeClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
                   removeClass('arithmetic_2', 'invisible');
                   addClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
               },
               delay: 0.8,
-            }),
-            circle.anim.trigger({
+            })
+            .trigger({
               callback: () => {
                 removeClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
                 removeClass('arithmetic_3', 'invisible');
                 addClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
               },
-              delay: 1.8,
-            }),
-            circle.anim.trigger({
+              delay: 0.8,
+            })
+            .trigger({
               callback: () => {
                 removeClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
               },
-              delay: 2.8,
-            }),
-          ])
+              delay: 0.8,
+            })
+          // ])
           .start();
       },
     });
@@ -431,64 +407,148 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
+    const listOptions = (top, id) => ({
+      list: 'unordered',
+      top,
+      left: 5,
+      size: 1.1,
+      id: `radians_${id}`,
+    });
+
+    const listOptions1 = (top, id) => ({
+      // list: 'unordered',
+      centerH: true,
+      top,
+      // left: 5,
+      size: 1.2,
+      id: `radians_${id}`,
+    });
+
+    this.addSection({
+      title: '16 - Mid Summary - REALL',
+      setContent: [
+        style(listOptions1(20, 1), 'Degrees have |practical| convenience'),
+      ],
+    });
+
+    this.addSection({
+      title: '17 - Mid Summary',
+      setContent: [
+        style(listOptions1(20, 1), 'Degrees have |practical| convenience'),
+        style(listOptions1(8, 2), 'Radians have |mathmatical| convenience'),
+      ],
+      fadeInFromPrev: false,
+      setSteadyState: () => {
+        addClass('radians_2', 'topic__diagram_text_fade_in_05');
+      },
+    });
+    
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     this.addSection(common, {
       title: '3 - Radian Angle',
-      setContent: [
-        tableContent('radians_table_hidden'),
-        // devNote({ top: 5 }, '|Circle|'),
-        // devNote({ top: 10 }, '|Lines|'),
-        // devNote({ top: 15 }, '|Radius|'),
-        // devNote({ top: 20 }, '|Arc|'),
-        // devNote({ top: 25 }, '|Angle|'),
-      ],
-      modifiers: {
-        id_180degr: rowClick(180),
-        id_120degr: rowClick(120),
-        id_90degr: rowClick(90),
-        id_72degr: rowClick(72),
-        id_60degr: rowClick(60),
-        id_45degr: rowClick(45),
-        id_40degr: rowClick(40),
-        id_36degr: rowClick(36),
-        id_30degr: rowClick(30),
-        id_24degr: rowClick(24),
-        id_20degr: rowClick(20),
-        Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-        'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
-        Lines: click(diag.pulseLines, [diag], { color: colors.lines, id: 'note_lines' }),
-      },
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
-        circle._degrees, circle._angleText,
-        circle._degreesHighlight,
-      ],
+      // setContent: [
+      //   tableContent('radians_table_hidden'),
+      //   // devNote({ top: 5 }, '|Circle|'),
+      //   // devNote({ top: 10 }, '|Lines|'),
+      //   // devNote({ top: 15 }, '|Radius|'),
+      //   // devNote({ top: 20 }, '|Arc|'),
+      //   // devNote({ top: 25 }, '|Angle|'),
+      // ],
+      // modifiers: {
+      //   id_180degr: rowClick(180),
+      //   id_120degr: rowClick(120),
+      //   id_90degr: rowClick(90),
+      //   id_72degr: rowClick(72),
+      //   id_60degr: rowClick(60),
+      //   id_45degr: rowClick(45),
+      //   id_40degr: rowClick(40),
+      //   id_36degr: rowClick(36),
+      //   id_30degr: rowClick(30),
+      //   id_24degr: rowClick(24),
+      //   id_20degr: rowClick(20),
+      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
+      //   'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
+      //   Lines: click(diag.pulseLines, [diag], { color: colors.lines, id: 'note_lines' }),
+      // },
+      // show: [
+      //   circle._line1, circle._line2, circle._corner, circle._angle,
+      //   circle._arc
+      //   // circle._degrees, circle._angleText,
+      //   // circle._degreesHighlight,
+      // ],
+      // setSteadyState: () => {
+      //   circle.setScenario('centerLeft');
+      //   diag.updateAngle();
+      //   const table = document.getElementById('radians_table');
+      //   if (table) {
+      //     table.classList.remove('radians_table_hidden');
+      //     table.classList.add('radians_table_fade_out');
+      //   }
+      //   circle.animations.new()
+      //     .inParallel([
+      //       circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+      //       circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
+      //       circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+      //       circle.anim.scenario({ target: 'center', duration: 1 }),
+      //     // ])
+      //     // .inParallel([
+      //       circle._arc.anim.dissolveIn(1),
+      //       circle._circle.anim.dissolveIn({ delay: 0.2, duration: 1 }),
+      //       circle.anim.trigger({ callback: 'updateAngle' }),
+      //       circle.anim.trigger({
+      //         callback: () => {
+      //           if (table) {
+      //             table.classList.add('radians_table_hidden');
+      //           }
+      //         },
+      //       }),
+      //     ])
+      //     .start();
+      // },
       setSteadyState: () => {
-        circle.setScenario('centerLeft');
-        diag.updateAngle();
-        const table = document.getElementById('radians_table');
-        if (table) {
-          table.classList.remove('radians_table_hidden');
-          table.classList.add('radians_table_fade_out');
-        }
+        circle.setScenario('center');
+        // diag.updateAngle();
+        // const table = document.getElementById('radians_table');
+        // if (table) {
+        //   table.classList.remove('radians_table_hidden');
+        //   table.classList.add('radians_table_fade_out');
+        // }
+        circle._line1.setRotation(2.5);
         circle.animations.new()
           .inParallel([
-            circle._degrees.anim.dissolveOut({ duration: 0.5 }),
-            circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
-            circle._angleText.anim.dissolveOut({ duration: 0.5 }),
-            circle.anim.scenario({ target: 'center', duration: 1 }),
+            // circle._degrees.anim.dissolveOut({ duration: 0.5 }),
+            // circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
+            // circle._angleText.anim.dissolveOut({ duration: 0.5 }),
+            // circle.anim.scenario({ target: 'center', duration: 1 }),
           // ])
           // .inParallel([
             circle._arc.anim.dissolveIn(1),
-            circle._circle.anim.dissolveIn({ delay: 0.2, duration: 1 }),
+            circle._line1.anim.dissolveIn(1),
+            circle._corner.anim.dissolveIn(1),
+            circle._angle.anim.dissolveIn(1),
+            circle._circle.anim.dissolveIn(1),
             circle.anim.trigger({ callback: 'updateAngle' }),
-            circle.anim.trigger({
-              callback: () => {
-                if (table) {
-                  table.classList.add('radians_table_hidden');
-                }
-              },
-            }),
+            // circle.anim.trigger({
+            //   callback: () => {
+            //     if (table) {
+            //       table.classList.add('radians_table_hidden');
+            //     }
+            //   },
+            // }),
           ])
+          .trigger({
+            callback: diag.pulseAngle.bind(diag),
+            duration: 1.5,
+          })
+          .trigger({
+            callback: diag.pulseArc.bind(diag),
+          })
           .start();
       },
     });
@@ -813,13 +873,13 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    const listOptions = (top, id) => ({
-      list: 'unordered',
-      top,
-      left: 5,
-      size: 1.1,
-      id: `radians_${id}`,
-    });
+    // const listOptions = (top, id) => ({
+    //   list: 'unordered',
+    //   top,
+    //   left: 5,
+    //   size: 1.1,
+    //   id: `radians_${id}`,
+    // });
 
     this.addSection({
       title: '16 - Mid Summary - REALL',
@@ -1016,55 +1076,55 @@ class Content extends PresentationFormatContent {
       },
     });
 
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
-    // this.addSection({
-    //   setContent: [
-    //     devNote({ top: 5 }, '|angleD|'),
-    //     devNote({ top: 10 }, '|factor|'),
-    //   ],
-    //   fadeInFromPrev: false,
-    //   modifiers: {
-    //     factor: diag.bindAccent({
-    //       elements: [
-    //         eqn._π,
-    //         eqn._v_1,
-    //         eqn.__180,
-    //       ],
-    //       id: 'note_factor',
-    //       centerOn: eqn._v_1,
-    //       x: 0.2,
-    //       scale: 1.5,
-    //     }),
-    //     angleD: diag.bindAccent({
-    //       elements: [
-    //         // eqn._angle,
-    //         eqn._d_g,
-    //       ],
-    //       id: 'note_angle',
-    //       centerOn: eqn._d_g,
-    //       scale: 2,
-    //     }),
-    //   },
-    //   show: [
-    //     eqn,
-    //   ],
-    //   setSteadyState: () => {
-    //     eqn.setScenario('left');
-    //     diag.animations.new()
-    //       .inParallel([
-    //         diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
-    //         diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
-    //       ])
-    //       .start();
-    //   },
-    // });
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // This result in a relationship betwween angle, radius and arc length with an additional term. Now this doesn't seem like a lot of extra complexity, but the complexity adds up pretty quickly even for simple things.
+    this.addSection({
+      setContent: [
+        devNote({ top: 5 }, '|angleD|'),
+        devNote({ top: 10 }, '|factor|'),
+      ],
+      fadeInFromPrev: false,
+      modifiers: {
+        factor: diag.bindAccent({
+          elements: [
+            eqn._π,
+            eqn._v_1,
+            eqn.__180,
+          ],
+          id: 'note_factor',
+          centerOn: eqn._v_1,
+          x: 0.2,
+          scale: 1.5,
+        }),
+        angleD: diag.bindAccent({
+          elements: [
+            // eqn._angle,
+            eqn._d_g,
+          ],
+          id: 'note_angle',
+          centerOn: eqn._d_g,
+          scale: 2,
+        }),
+      },
+      show: [
+        eqn,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('left');
+        diag.animations.new()
+          .inParallel([
+            diag.anim.dissolveIn({ element: eqn, duration: 0.5 }),
+            diag.anim.trigger({ callback: 'showForm', payload: 'arcDegrees' }),
+          ])
+          .start();
+      },
+    });
 
     // **********************************************************************
     // **********************************************************************
