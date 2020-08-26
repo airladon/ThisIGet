@@ -24,7 +24,7 @@ $height: 5em;
 
 .figureone_playback_control__play {
   background-image: $play;
-  width: 1.5em;
+  width: 2em;
   height: $height;
   display: table-cell;
   background-position: center;
@@ -39,7 +39,7 @@ $height: 5em;
   width: 4em;
   height: 5em;
   display: table-cell;
-  padding-left: 1.8em;
+  padding-left: 1.4em;
 //   background-position: center;
 //   background-repeat: no-repeat;
 //   background-size: contain;
@@ -47,7 +47,7 @@ $height: 5em;
 
 .figureone_playback_control__pause {
   background-image: $pause;
-  width: 1.5em;
+  width: 2em;
   height: $height;
   display: table-cell;
   background-position: center;
