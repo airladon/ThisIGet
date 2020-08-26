@@ -1,13 +1,14 @@
+$height: 5em;
 .figureone_playback_control {
   width: 100%;
-  height: 40px;
+  height: $height;
   // background-color: red;
   color: white;
   font-size: 0.8em;
   display: table;
   table-layout: fixed;
   position: absolute;
-  bottom: 0.2em;
+  bottom: -0.5em;
   pointer-events: auto;
   z-index: 2;
   // width: var(--pres__content_width);
@@ -16,24 +17,37 @@
 .figureone_playback_controll_seek_container {
   display: table-cell;
   vertical-align: middle;
-  padding-left: 10px;
+  // padding-left: 10px;
   width: 100%;
 }
 
 .figureone_playback_control__play {
   background-image: $play;
-  width: 25px;
-  height: 20px;
+  width: 1.5em;
+  height: $height;
   display: table-cell;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
+.figureone_playback_control__play_container {
+  // background-image: $play;
+  // width: 25px;
+  // height: 20px;
+  width: 4em;
+  height: 5em;
+  display: table-cell;
+  padding-left: 1.8em;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: contain;
+}
+
 .figureone_playback_control__pause {
   background-image: $pause;
-  width: 25px;
-  height: 20px;
+  width: 1.5em;
+  height: $height;
   display: table-cell;
   background-position: center;
   background-repeat: no-repeat;
