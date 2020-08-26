@@ -43,9 +43,13 @@ export default class SrollBar extends React.Component<Props, State> {
     window.addEventListener('mouseup', this.mouseUpHandler.bind(this), false);
     window.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
     page.addEventListener('mouseleave', this.mouseUpHandler.bind(this), false);
-    element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive() ? { passive: true } : false);
-    window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive() ? { passive: true } : false);
-    window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive() ? { passive: true } : false);
+    element.addEventListener('touchstart', this.touchStartHandler.bind(this), supportsPassive() ? { passive: false } : false);
+    window.addEventListener('touchend', this.touchEndHandler.bind(this), supportsPassive() ? { passive: false } : false);
+    window.addEventListener('touchmove', this.touchMoveHandler.bind(this), supportsPassive() ? { passive: false } : false);
+
+    // element.addEventListener('touchstart', this.touchStartHandler.bind(this), false);
+    // window.addEventListener('touchend', this.touchEndHandler.bind(this), false);
+    // window.addEventListener('touchmove', this.touchMoveHandler.bind(this), false);
   }
 
   touchHandler(x: number) {
@@ -70,12 +74,14 @@ export default class SrollBar extends React.Component<Props, State> {
     if (this.touchState === 'down') {
       const touch = event.touches[0];
       this.touchHandler(touch.clientX);
+      event.preventDefault();
     }
   }
 
   mouseMoveHandler(event: MouseEvent) {
     if (this.touchState === 'down') {
       this.touchHandler(event.clientX);
+      event.preventDefault();
     }
   }
 
