@@ -36301,6 +36301,23 @@ var Recorder = /*#__PURE__*/function () {
       return this.currentTime;
     }
   }, {
+    key: "getDeltaTime",
+    value: function getDeltaTime() {
+      var delta = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var currentTime = this.getCurrentTime();
+      var newTime = currentTime + delta;
+
+      if (newTime > this.duration) {
+        return this.duration;
+      }
+
+      if (newTime < 0) {
+        return 0;
+      }
+
+      return newTime;
+    }
+  }, {
     key: "setCurrentTime",
     value: function setCurrentTime(time) {
       this.currentTime = time;
@@ -37451,7 +37468,17 @@ var Recorder = /*#__PURE__*/function () {
     key: "resumePlayback",
     value: function resumePlayback() {
       this.startPlayback(this.currentTime, false);
-    }
+    } // resumePlayback(delta: number = 0) {
+    //   if (delta > 0) {
+    //     this.pauseState = null;
+    //   }
+    //   const resumeTime = Math.min(
+    //     Math.max(this.currentTime + delta, 0),
+    //     this.duration,
+    //   );
+    //   this.startPlayback(resumeTime, false);
+    // }
+
   }, {
     key: "startAudioPlayback",
     value: function startAudioPlayback(fromTime) {

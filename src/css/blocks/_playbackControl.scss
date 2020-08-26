@@ -227,3 +227,12 @@ $height: 5em;
   opacity: 0.5;
   pointer-events: none;
 }
+
+.figureone_playback_control__skip {
+  height: var(--pres__content_height);
+  width: 4em;
+  background-color: red;
+  position: absolute;
+  left: 0;
+  bottom: calc(0px + 0.5em);
+}

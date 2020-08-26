@@ -224,13 +224,25 @@ export default class PlaybackControl extends React.Component<Props, State> {
     if (recorder.duration === 0) {
       return;
     }
+    
     if (this.state.timeValue > 0) {
-      recorder.resumePlayback();
+      if (recorder.pauseState != null) {
+        recorder.startPlayback(recorder.getDeltaTime(-1));
+      } else {
+        recorder.resumePlayback();
+      }
     } else {
       recorder.startPlayback(0);
     }
-    // this.queueTimeUpdate();
-    // this.startFade();
+  }
+
+  skip(delta: number = 0) {
+    if (this.diagram == null) {
+      return;
+    }
+    const { recorder } = this.diagram;
+    recorder.pausePlayback('freeze');
+    recorder.startPlayback(recorder.getDeltaTime(delta));
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -514,6 +526,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
   render() {  // eslint-disable-line class-methods-use-this
     return <div className="figureone_playback_control" id="id__figureone_playback_control">
       {/* <div className="figureone_playback_control__h_space"/> */}
+      {/* <div
+        id="id_figureone_playback_control__skip_back"
+        className="figureone_playback_control__skip"
+      /> */}
       <div
         className={`figureone_playback_control__play_container ${this.state.playClass}`}
         onClick={this.play.bind(this)}
