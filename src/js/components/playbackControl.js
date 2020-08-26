@@ -131,6 +131,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
       subscriptions.add('playbackStopped', this.playbackStopped.bind(this));
       subscriptions.add('preparingToPause', this.preparingToPause.bind(this));
       subscriptions.add('timeUpdate', this.updateTime.bind(this));
+      subscriptions.add('audioLoaded', this.updateTime.bind(this));
+      this.updateTime([this.diagram.recorder.getCurrentTime()]);
       // console.log(this.diagram)
       // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
       // console.log(this.diagram.elements.elements.circle.asdf)

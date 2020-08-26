@@ -38,22 +38,23 @@ But we can also use it to figure out how many radians there must be in a full ci
 Next, let’s rearrange the relationship for the angle. Now, as both arc length and radius are a measure of length, this tells us that angle is a ratio, or unitless quantity, and we just use symbols like degrees or  radians to signify the denominator of the ratio. 90 degrees is 90 360ths of a circle, and 2 radians is 2 /2π of a circle. -->
 
 # 13, 14, 15
-Next, we can look at the relationship and see the arc length is really just the angle scaled by the radius. Therefore, in the special case where the radius is 1, the arc length and angle are the same.
+Next, we can look at the relationship and think of the arc length as being the angle scaled by the radius. Therefore, in the special case where the radius is 1, the arc length and angle are the same.
 
-This simplifies problems considerably, and as a result radians and circles with radius 1 (also called unit circles), are often used to find the solutions problems to involving circles, arcs or rotations.
+This simplifies problems considerably, and as a result circles with radius 1 (also called unit circles), are often used to find the solutions to problems to involving circles, arcs or rotations.
 
 # 16, 17, 18
-So what we have so far is:
+So let's review what we have so far:
 * A radian is the angle where the arc length and radius length are equal
 * There are 2π radians in a circle
 * Using radians allows us relate arc length, radius length and angle directly
 
 # 19, 20
-Both as radians and degrees are useful in different areas, we need to know how to convert between them. We can do this by understanding that an angle in degrees and radians is actually expressing the same portion of a circle.
+Next, let's see why radians (and not degrees) are used almost exclusively in mathematics, science and enginerring.
 
-We can now rearrange this equation and find the scaling factor that converts radians to degrees, and similarly the factor to convert degrees to radians.
+We start this by figuring out how to convert between radians and degrees.
+An angle in degrees, and an angle in radians, is actually the same angle expressing the same portion of a circle.
 
-And using this, we will be able to see why radians are used almost exclusively in mathematics, science and engineering.
+We can now rearrange this equation and find the scaling factor that converts radians to degrees, and similarly the scaling factor to convert degrees to radians.
 
 # 21
 
@@ -78,7 +79,7 @@ Now this x of course, is both the arc length, and the angle - so we can also int
 <!-- 
 Now the x in the expression can also be angle, and so this can also be interpreted as the vertical component of the angle, and the angle effectively are the same at small angles. -->
 
-This is a tremendously useful relationship, and is used as a simplification in many proofs showing other relationships.
+This is a tremendously useful relationship, and is used as a simplification in many proofs.
 
 # 26, 27
 For instance, in calculus, you can use it to show the derivative of the sine function is the cosine function, and then from that show that the sine function can be expressed as an infinite series.
@@ -87,12 +88,12 @@ For instance, in calculus, you can use it to show the derivative of the sine fun
 Now what happens when we use degrees? Well, that extra term we saw in the initial relationship between arc length, angle and radius has cascaded and as a result, the infinite series is polluted with extra terms.
 
 # 29
-So radians keeps the mathematics simple and intuitive. Less unnecessary terms reduces mistakes, speeds solutions and makes it is easier to think about a relationship and its implications. In other words, radians is a more simple and natural way to express angles in mathematics, and so is used almost exclusively.
+So radians keeps the mathematics simple and intuitive. Less unnecessary terms reduces mistakes, speeds solutions and makes it easier to think about a relationship and its implications. In other words, radians is a more simple and natural way to express angles in mathematics, and so is used almost exclusively.
 
 # 30
 Finally, having covered what a radian is, and why we use it, let's end by getting a FEEL for them. This table directly compares some common angles in radians and degrees.
 
-As π is irrational, the most common, precisce and concise way to express angles in radians is as a fraction of π. However, there are areas, such as in software development, where you must use the value of radians directly, and it is convenient to be familiar with the value of some common angles.
+As π is irrational, the most common, precisce and concise way to express angles in radians is as a fraction of π. However, there are areas, such as in software development, where you must use the value of radians directly, and it is convenient to be familiar with the value of some common angles, so play around with this diagram.
 
 #
-Thanks for watching this video, and hopefully you got something from it. However, this is just one way to introduce radians, and may not resonate with everyone. Therefore This I Get publishes multiple explanations, and includes summaries, examples and quizes for each different concept, and provides links to other places on the internet that may also be helpful. So if this didn't work for you, please check out the other explanations, and rate what works for you and what doesn't. Your rating will help others more efficiently learn in the future.
+Thanks for watching this video, and hopefully you got something from it. However, this is just one way to introduce radians, and may not resonate with everyone. Therefore This I Get publishes multiple explanations, and includes summaries, examples and quizes for each different concept, it also provides links to other places on the internet that may be helpful. So if this didn't work for you, please check out the other explanations, and rate what works for you and what doesn't. Your rating will help others more efficiently learn in the future.
