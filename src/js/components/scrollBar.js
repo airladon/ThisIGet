@@ -113,22 +113,23 @@ export default class SrollBar extends React.Component<Props, State> {
     return this.clientXToPercent(x);
   }
 
-  percentToCirclePosition(percentIn: number) {
-    let percent = percentIn;
-    if (percent > 1) {
-      percent = 1;
-    } else if (percent < 0) {
-      percent = 0;
-    }
-    const bar = document.getElementById(this.id);
-    const circle = document.getElementById(`${this.id}_circle`);
-    if (bar == null || circle == null) {
-      return 0;
-    }
-    const circleWidth = circle.getBoundingClientRect().width;
-    const { width } = bar.getBoundingClientRect();
-    return circleWidth / 2 + (width - circleWidth) * percent - circleWidth / 2;
-  }
+  // percentToCirclePosition(percentIn: number) {
+  //   let percent = percentIn;
+  //   if (percent > 1) {
+  //     percent = 1;
+  //   } else if (percent < 0) {
+  //     percent = 0;
+  //   }
+  //   const bar = document.getElementById(this.id);
+  //   const circle = document.getElementById(`${this.id}_circle`);
+  //   if (bar == null || circle == null) {
+  //     return 0;
+  //   }
+  //   const circleWidth = circle.getBoundingClientRect().width;
+  //   const { width } = bar.getBoundingClientRect();
+  //   console.log(width)
+  //   return circleWidth / 2 + (width - circleWidth) * percent - circleWidth / 2;
+  // }
 
   clientXToPercent(x: number) {
     const bar = document.getElementById(this.id);
@@ -155,7 +156,7 @@ export default class SrollBar extends React.Component<Props, State> {
       />
       <div
         style={{
-          width: `${this.percentToCirclePosition(this.props.position) + 10}px`,
+          width: `calc(${this.props.position * 100}%`,
         }}
         className='figureone_scrollbar_currentTime'
         id={`${this.id}_currentTime`}
@@ -164,7 +165,7 @@ export default class SrollBar extends React.Component<Props, State> {
         className='figureone_scrollbar_circle'
         id={`${this.id}_circle`}
         style={{
-          left: `${this.percentToCirclePosition(this.props.position)}px`,
+          left: `calc((100% - 12px) * ${this.props.position})`
         }}
       />
     </div>;
