@@ -1035,14 +1035,14 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     common = {
-      setContent: [
-        devNote({ top: 5 }, '|angle|'),
-        devNote({ top: 10 }, '|arc_line|'),
-        devNote({ top: 15 }, '|radius|'),
-        devNote({ top: 20 }, '|sin_line|'),
-        devNote({ top: 25 }, '|sin_label|'),
-        devNote({ top: 30 }, '|arc_label|'),
-      ],
+      // setContent: [
+      //   devNote({ top: 5 }, '|angle|'),
+      //   devNote({ top: 10 }, '|arc_line|'),
+      //   devNote({ top: 15 }, '|radius|'),
+      //   devNote({ top: 20 }, '|sin_line|'),
+      //   devNote({ top: 25 }, '|sin_label|'),
+      //   devNote({ top: 30 }, '|arc_label|'),
+      // ],
       // fadeInFromPrev: false,
       modifiers: {
         angle: diag.bindAccent({
@@ -1063,10 +1063,53 @@ class Content extends PresentationFormatContent {
           y: 'bottom',
           scale: 1.8,
         }),
+        limit: diag.bindAccent({
+          elements: [diag._ex1._lim, diag._ex1._xTo0],
+          centerOn: [-0.8, -1.5],
+          id: 'note_limit',
+          scale: 1.4,
+        }),
+        ratio_arc: diag.bindAccent({
+          elements: [diag._ex1._sin, diag._ex1._x_g, diag._ex1._x_r, diag._ex1._v_1],
+          centerOn: diag._ex1._v_1,
+          id: 'note_ratio_Arc',
+          scale: 1.4,
+        }),
+        ratio_angle: diag.bindAccent({
+          elements: [diag._ex1._sin, diag._ex1._x_g, diag._ex1._x_g1, diag._ex1._v_1],
+          centerOn: diag._ex1._v_1,
+          id: 'note_ratio_angle',
+          scale: 1.4,
+        }),
+        sinx: diag.bindAccent({
+          elements: [diag._ex1._sin, diag._ex1._x_1],
+          centerOn: diag._ex1._sin,
+          x: 0.8,
+          id: 'note_sinx',
+          y: 'bottom',
+          scale: 1.5,
+        }),
+        x: diag.bindAccent({
+          element: diag._ex1._x_2,
+          id: 'note_x',
+          y: 'top',
+          scale: 1.5,
+        }),
+        one: diag.bindAccent({
+          element: diag._ex1.__1,
+          id: 'note_one',
+          x: 'left',
+          scale: 2,
+        }),
       },
     }
     this.addSection(common, {
       title: '21 - Unit Circle',
+      setContent: [
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
+        devNote({ top: 15 }, '|radius|'),
+      ],
       show: [
         diag._lim._radius, diag._lim._angle, diag._lim._xAxis, diag._lim._arc,
       ],
@@ -1087,6 +1130,12 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       title: '22 - Vertical',
+      setContent: [
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
+        devNote({ top: 15 }, '|radius|'),
+        devNote({ top: 20 }, '|sin_line|'),
+      ],
       show: [
         diag._lim,
       ],
@@ -1104,6 +1153,13 @@ class Content extends PresentationFormatContent {
 
     this.addSection(common, {
       title: '23 - Sine',
+      setContent: [
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
+        devNote({ top: 15 }, '|radius|'),
+        devNote({ top: 20 }, '|sin_line|'),
+        devNote({ top: 25 }, '|sin_label|'),
+      ],
       show: [
         diag._lim,
       ],
@@ -1128,6 +1184,14 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     this.addSection(common, {
       title: '24 - x',
+      setContent: [
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
+        devNote({ top: 15 }, '|radius|'),
+        devNote({ top: 20 }, '|sin_line|'),
+        devNote({ top: 25 }, '|sin_label|'),
+        devNote({ top: 30 }, '|arc_label|'),
+      ],
       show: [
         diag._lim
       ],
@@ -1149,74 +1213,84 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection({
-      title: '25 - limit',
+    const commonContent = {
       setContent: [
-        devNote({ top: 5 }, '|limit|'),
-        devNote({ top: 10 }, '|sinx|'),
-        devNote({ top: 15 }, '|x|'),
-        devNote({ top: 20 }, '|one|'),
-        devNote({ top: 25 }, '|sin|'),
-        devNote({ top: 30 }, '|arc|'),
-        devNote({ top: 35 }, '|radius|'),
-        devNote({ top: 40 }, '|angle|'),
-        devNote({ top: 45 }, '|ratio|'),
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
+        devNote({ top: 15 }, '|radius|'),
+        devNote({ top: 20 }, '|sin_line|'),
+        devNote({ top: 25 }, '|sin_label|'),
+        devNote({ top: 30 }, '|arc_label|'),
+        devNote({ top: 35 }, '|limit|'),
+        devNote({ top: 40 }, '|sinx|'),
+        devNote({ top: 45 }, '|x|'),
+        devNote({ top: 50 }, '|one|'),
+        devNote({ top: 55 }, '|ratio_arc|'),
+        devNote({ top: 60 }, '|ratio_angle|'),
       ],
-      fadeInFromPrev: false,
-      modifiers: {
-        limit: diag.bindAccent({
-          elements: [diag._ex1._lim, diag._ex1._xTo0],
-          // centerOn: diag._ex1._lim,
-          centerOn: [-0.8, -1.5],
-          // y: 'bottom',
-          id: 'note_limit',
-          // y: 'top',
-          scale: 1.4,
-        }),
-        ratio: diag.bindAccent({
-          elements: [diag._ex1._sin, diag._ex1._x_1, diag._ex1._x_2, diag._ex1._v_1],
-          // centerOn: diag._ex1._lim,
-          centerOn: diag._ex1._v_1,
-          // y: 'bottom',
-          id: 'note_ratio',
-          // y: 'top',
-          scale: 1.4,
-        }),
-        sinx: diag.bindAccent({
-          elements: [diag._ex1._sin, diag._ex1._x_1],
-          centerOn: diag._ex1._sin,
-          x: 0.8,
-          id: 'note_sinx',
-          y: 'bottom',
-          scale: 1.5,
-        }),
-        x: diag.bindAccent({
-          element: diag._ex1._x_2,
-          id: 'note_x',
-          y: 'top',
-          scale: 1.5,
-        }),
-        one: diag.bindAccent({
-          element: diag._ex1.__1,
-          id: 'note_one',
-          x: 'left',
-          scale: 2,
-        }),
-        angle: diag.bindAccent({
-          element: diag._lim._angle,
-          id: 'note_angle',
-          // centerOn: eqn._v_1,
-          scale: 1.5,
-        }),
-        arc: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
-        sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
-        radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
-      },
-      show: [
-        diag._lim,
-      ],
+      // // fadeInFromPrev: false,
+      // modifiers: {
+      //   limit: diag.bindAccent({
+      //     elements: [diag._ex1._lim, diag._ex1._xTo0],
+      //     centerOn: [-0.8, -1.5],
+      //     id: 'note_limit',
+      //     scale: 1.4,
+      //   }),
+      //   ratio_arc: diag.bindAccent({
+      //     elements: [diag._ex1._sin, diag._ex1._x_g, diag._ex1._x_r, diag._ex1._v_1],
+      //     centerOn: diag._ex1._v_1,
+      //     id: 'note_ratio_Arc',
+      //     scale: 1.4,
+      //   }),
+      //   ratio_angle: diag.bindAccent({
+      //     elements: [diag._ex1._sin, diag._ex1._x_g, diag._ex1._x_g1, diag._ex1._v_1],
+      //     centerOn: diag._ex1._v_1,
+      //     id: 'note_ratio_angle',
+      //     scale: 1.4,
+      //   }),
+      //   sinx: diag.bindAccent({
+      //     elements: [diag._ex1._sin, diag._ex1._x_1],
+      //     centerOn: diag._ex1._sin,
+      //     x: 0.8,
+      //     id: 'note_sinx',
+      //     y: 'bottom',
+      //     scale: 1.5,
+      //   }),
+      //   x: diag.bindAccent({
+      //     element: diag._ex1._x_2,
+      //     id: 'note_x',
+      //     y: 'top',
+      //     scale: 1.5,
+      //   }),
+      //   one: diag.bindAccent({
+      //     element: diag._ex1.__1,
+      //     id: 'note_one',
+      //     x: 'left',
+      //     scale: 2,
+      //   }),
+      //   angle: diag.bindAccent({
+      //     element: diag._lim._angle,
+      //     id: 'note_angle',
+      //     // centerOn: eqn._v_1,
+      //     scale: 1.5,
+      //   }),
+      //   arc: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
+      //   sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
+      //   radius: diag.bindAccent({
+      //     element: diag._lim._radius._label,
+      //     id: 'note_radius',
+      //     x: 'right',
+      //     y: 'bottom',
+      //     scale: 1.8,
+      //   }),
+      // },
+    }
+
+    this.addSection(common, commonContent, {
+      title: 'limit',
+      show: [diag._lim],
       setSteadyState: () => {
-        diag._ex1.setScenario('left');
+        diag._ex1.setScenario('low');
         diag._lim.setScenario('center');
         diag.updateLimAngle();
         diag.animations.new()
@@ -1227,6 +1301,23 @@ class Content extends PresentationFormatContent {
               payload: { element: 'ex1', form: 'lim' },
             }),
           ])
+          .start();
+      },
+    });
+
+    this.addSection(common, commonContent, {
+      show: [diag._lim, diag._ex1],
+      setSteadyState: () => {
+        diag._ex1.showForm('lim');
+        diag._ex1.setScenario('low');
+        diag._lim.setScenario('center');
+        diag.updateLimAngle();
+        diag._ex1.goToForm({ name: 'limAngle', duration: 1, animate: 'move' });
+        diag.animations.new()
+          .trigger({
+            delay: 0.8,
+            callback: () => diag.accent({ element: diag._ex1._x_g1, scale: 2, x: 'center', y: 0.8 }),
+          })
           .start();
       },
     });
@@ -1351,7 +1442,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: '29 - Radians are simple and intuitive',
       setContent: [
-        style({ centerV: true, centerH: true }, 'Radians are a simple, natural way to express angles in mathematics'),
+        style({ centerV: true, centerH: true }, 'Radians are a |simple|, |natural| way to express angles in mathematics'),
       ],
     });
 

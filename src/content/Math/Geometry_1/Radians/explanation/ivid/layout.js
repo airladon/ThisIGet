@@ -844,6 +844,7 @@ export default function diagramLayout() {
     mods: {
       scenarios: {
         left: { position: [0.6, -1.5], scale: 1.3 },
+        low: { position: [0.6, -1.5], scale: 1.3 },
         middle: { position: [0.3, 0], scale: 1.3 },
         middleLeft: { position: [-0.8, 0], scale: 1.3 },
         topLeft: { position: new Point(-0.8, 0.6), scale: 1.3 },
