@@ -324,6 +324,7 @@ class PresentationFormat extends SimpleFormat {
 
   setState() {
     // console.log('setState')
+    // console.trace()
     const { diagram } = this;
     const section = this.content.sections[this.currentSectionIndex];
     if (diagram) {

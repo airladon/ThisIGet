@@ -84,6 +84,9 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
               diagram={this.state.diagram}
               dev={this.state.dev}
               duration={this.state.duration}
+              tester={() => {
+                this.componentUpdateCallback = null
+              }}
             />
             { /*<div id="id_ivid_animation_finishing" className="ivid_animation_finishing_container ivid_animation_hidden">
               <div className="ivid_animation_finishing_text">

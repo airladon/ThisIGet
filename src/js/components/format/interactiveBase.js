@@ -93,6 +93,8 @@ export default class InteractiveFormatComponent extends React.Component
   }
 
   componentDidUpdate() {
+    // console.log('updating', this.componentUpdateCallback)
+    // console.trace()
     if (this.componentUpdateCallback) {
       const callback = this.componentUpdateCallback;
       this.componentUpdateCallback = null;
@@ -111,6 +113,7 @@ export default class InteractiveFormatComponent extends React.Component
   }
 
   refreshText(htmlText: string, page: number, callback: ?() => void = null) {
+    // console.trace();
     this.updateGoToButtonListHighlight();
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;

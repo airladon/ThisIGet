@@ -104,6 +104,7 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
+        console.log(this.diagram.recorder)
       },
     });
 
@@ -148,6 +149,7 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._angle, circle._corner,
       ],
       setSteadyState: () => {
+        console.log('here')
         // this.diagram.globalAnimation.setDebugFrameRate(10, 0.5)
         circle.setScenario('title');
         circle._angleText.setScenario('bottomDeg');

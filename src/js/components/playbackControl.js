@@ -101,12 +101,13 @@ export default class PlaybackControl extends React.Component<Props, State> {
     // this.getDiagram = props.getDiagram;
     this.diagram = null;
     this.timeoutID = null;
+    // this.seekTo = null;
     // this.props = props;
   }
 
   componentDidMount() {
     this.updateTime([this.props.duration]);
-    const element = document.getElementById('id__figureone_playback_control');
+    const element = document.getElementById('id__figureone_playback_control__tray');
     if (element == null) {
       return;
     }
@@ -123,6 +124,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
+    // console.log('component update')
     if (this.props.diagram != null && this.diagram == null) {
       this.diagram = this.props.diagram;
       const { subscriptions } = this.diagram.recorder;
@@ -137,6 +139,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
       // console.log(this.diagram.elements.elements.circle.animationFinishedCallback);
       // console.log(this.diagram.elements.elements.circle.asdf)
     }
+    // if (this.seekTo != null) {
+    //   this.seek(this.seekTo);
+    //   this.seekTo = null;
+    // }
   }
 
   preparingToPlay() {
@@ -241,8 +247,31 @@ export default class PlaybackControl extends React.Component<Props, State> {
       return;
     }
     const { recorder } = this.diagram;
-    recorder.pausePlayback('freeze');
-    recorder.startPlayback(recorder.getDeltaTime(delta));
+    let isPlaying = false;
+    if (recorder.state === 'playing' || recorder.state === 'preparingToPlay') {
+      isPlaying = true;
+    }
+    const time = recorder.getDeltaTime(delta);
+    this.seek(time);
+    if (isPlaying) {
+      const settings = recorder.settings.play;
+      recorder.settings.play = 'instant';
+      this.play();
+      recorder.settings.play = settings;
+    } else {
+      // this.diagram.stop('freeze');
+    }
+    // // console.log('diagram state', this.diagram.state)
+    // console.log(this.diagram.getRemainingAnimationTime())
+    // recorder.subscriptions.add('playbackStarted', () => {console.log('playback started from skip')}, 1);
+    // recorder.startPlayback(recorder.getDeltaTime(delta));
+    // this.diagram.recorder.seek(18.5);
+    // this.setState({seek: 0.5});
+    // this.seekTo = 18.5;
+    // console.log('forceUpdate', this.seekTo)
+    // this.forceUpdate();
+    // this.seekToPercent(0.045);
+    // console.log('skipped')
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -258,12 +287,16 @@ export default class PlaybackControl extends React.Component<Props, State> {
   startFade() {
     addClass('id_figureone_playback_control__time', 'playback_fade_out');
     addClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
+    addClass('id__figureone_playback_control__skip_back', 'playback_fade_out');
+    addClass('id__figureone_playback_control__skip_forward', 'playback_fade_out');
     if (this.timeoutID != null) {
       clearTimeout(this.timeoutID);
     }
     this.timeoutID = setTimeout(() => {
       addClass('id_figureone_playback_control__time', 'playback_faded');
       addClass('id_figureone_playback_controll_seek_container', 'playback_faded');
+      addClass('id__figureone_playback_control__skip_back', 'playback_faded');
+    addClass('id__figureone_playback_control__skip_forward', 'playbackplayback_fadedfade_out');
     }, 3000);
   }
 
@@ -272,6 +305,11 @@ export default class PlaybackControl extends React.Component<Props, State> {
     removeClass('id_figureone_playback_controll_seek_container', 'playback_fade_out');
     removeClass('id_figureone_playback_control__time', 'playback_faded');
     removeClass('id_figureone_playback_controll_seek_container', 'playback_faded');
+
+    removeClass('id__figureone_playback_control__skip_back', 'playback_fade_out');
+    removeClass('id__figureone_playback_control__skip_forward', 'playback_fade_out');
+    removeClass('id__figureone_playback_control__skip_back', 'playback_faded');
+    removeClass('id__figureone_playback_control__skip_forward', 'playback_faded');
     if (this.timeoutID != null) {
       clearTimeout(this.timeoutID);
       this.timeoutID = null;
@@ -362,6 +400,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
 
 
   seekToPercent(percent: number) {
+    // console.log('called seek to percent')
     if (this.diagram == null) {
       return;
     }
@@ -369,6 +408,10 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const totalTime = recorder.duration;
     this.setState({ seek: percent });
     recorder.seekToPercent(percent);
+    // console.log(this.diagram.getRemainingAnimationTime())
+    recorder.subscriptions.add('playbackStarted', () => {console.log('playback started from seekToPercent')}, 1);
+    // console.log(this.props.tester)
+    this.props.tester();
     // this.updateTime(percent * totalTime);
   }
 
@@ -381,7 +424,8 @@ export default class PlaybackControl extends React.Component<Props, State> {
     const totalTime = recorder.duration;
     const percent = toTime / totalTime;
     this.setState({ seek: percent });
-    recorder.seek(percent);
+    recorder.seek(toTime);
+    this.props.tester();
     // this.updateTime(toTime);
   }
 
@@ -524,65 +568,85 @@ export default class PlaybackControl extends React.Component<Props, State> {
   }
 
   render() {  // eslint-disable-line class-methods-use-this
-    return <div className="figureone_playback_control" id="id__figureone_playback_control">
-      {/* <div className="figureone_playback_control__h_space"/> */}
+    return <div className="figureone_playback_control">
       {/* <div
-        id="id_figureone_playback_control__skip_back"
-        className="figureone_playback_control__skip"
+          id="id_figureone_playback_control__skip_back"
+          className="figureone_playback_control__skip"
       /> */}
-      <div
-        className={`figureone_playback_control__play_container ${this.state.playClass}`}
-        onClick={this.play.bind(this)}
-      >
+      <div className="figureone_playback_control__tray" id="id__figureone_playback_control__tray">
+        {/* <div className="figureone_playback_control__h_space"/> */}
         <div
-          className="figureone_playback_control__play"
-        />
-      </div>
-      <div
-        className={`figureone_playback_control__play_container ${this.state.pauseClass}`}
-        onClick={this.pause.bind(this)}
-      >
+          className={`figureone_playback_control__play_container ${this.state.playClass}`}
+          onClick={this.play.bind(this)}
+        >
+          <div
+            className="figureone_playback_control__play"
+          />
+        </div>
         <div
-          id="id_figureone_playback_control__pause"
-          className="figureone_playback_control__pause"
-        />
-      </div>
-      <div id="id_figureone_playback_controll_seek_container"
-        className="figureone_playback_controll_seek_container">
-        <ScrollBar
-          id='playback_control_seek'
-          changed={this.seekToPercent.bind(this)}
-          position={this.state.seek}
-        />
-      </div>
-      <div id="id_figureone_playback_control__time" className="figureone_playback_control__time">
-        {this.state.time}
-      </div>
-      {/* <div
-        className={'figureone_playback_control__full_screen'}
-        onClick={this.toggleFullScreen.bind(this)}
-      >
-        full
-      </div> */}
-      {this.renderDev()}
-      <div className="figureone_playback_control__h_space"/>
-      { /*
-      <div className="figureone_playback_control__volume_on"/>
-      <div className="figureone_playback_control__volume_mute"/>
-      <div className="figureone_playback_control__volume_change"/>
-      <div className="figureone_playback_control__settings"/>
-      <div className="figureone_playback_control__full_screen"/>
-      */ }
-      <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPauseClass}`}>
-        <div className="ivid_animation_finishing_text">
-          Animation Finishing before interaction
+          className={`figureone_playback_control__play_container ${this.state.pauseClass}`}
+          onClick={this.pause.bind(this)}
+        >
+          <div
+            id="id_figureone_playback_control__pause"
+            className="figureone_playback_control__pause"
+          />
         </div>
-      </div>
-      <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPlayClass}`}>
-        <div className="ivid_animation_finishing_text">
-          Preparing to Play
+        <div id="id_figureone_playback_controll_seek_container"
+          className="figureone_playback_controll_seek_container">
+          <ScrollBar
+            id='playback_control_seek'
+            changed={this.seekToPercent.bind(this)}
+            position={this.state.seek}
+          />
         </div>
-      </div>
+        <div id="id_figureone_playback_control__time" className="figureone_playback_control__time">
+          {this.state.time}
+        </div>
+        <div className="figureone_playback_control__h_space"/>
+         <div
+          className="figureone_playback_control__skip_container"
+          onClick={this.skip.bind(this, -15)}
+        >
+          <div
+            id="id__figureone_playback_control__skip_back"
+            className="figureone_playback_control__skip"
+          />
+        </div>
+        <div
+          className="figureone_playback_control__skip_container"
+          onClick={this.skip.bind(this, 15)}
+        >
+          <div
+            id="id__figureone_playback_control__skip_forward"
+            className="figureone_playback_control__skip"
+          />
+        </div>
+        {/* <div
+          className={'figureone_playback_control__full_screen'}
+          onClick={this.toggleFullScreen.bind(this)}
+        >
+          full
+        </div> */}
+        {this.renderDev()}
+        { /*
+        <div className="figureone_playback_control__volume_on"/>
+        <div className="figureone_playback_control__volume_mute"/>
+        <div className="figureone_playback_control__volume_change"/>
+        <div className="figureone_playback_control__settings"/>
+        <div className="figureone_playback_control__full_screen"/>
+        */ }
+        <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPauseClass}`}>
+          <div className="ivid_animation_finishing_text">
+            Animation Finishing before interaction
+          </div>
+        </div>
+        <div className={`figureone_playback__animation_finishing_container ${this.state.preparingToPlayClass}`}>
+          <div className="ivid_animation_finishing_text">
+            Preparing to Play
+          </div>
+        </div>
+      </div>;
     </div>;
   }
 }

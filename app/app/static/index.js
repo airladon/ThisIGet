@@ -37090,10 +37090,12 @@ var Recorder = /*#__PURE__*/function () {
     value: function seekToPercent(percentTime) {
       var duration = this.calcDuration();
       this.seek(duration * percentTime);
+      console.log('seekedToPercent');
     }
   }, {
     key: "seek",
     value: function seek(timeIn) {
+      // console.log('called seek', timeIn)
       this.pauseState = null;
       var time = timeIn;
 
@@ -37118,7 +37120,7 @@ var Recorder = /*#__PURE__*/function () {
       //   movingFreely: 'freeze',
       // });
 
-      this.diagram.stop('freeze');
+      this.diagram.stop('freeze'); // console.log('last seek time', this.lastSeekTime)
     }
   }, {
     key: "setToTime",
@@ -37146,11 +37148,13 @@ var Recorder = /*#__PURE__*/function () {
       }
 
       if (stateTime === this.lastSeekTime && !force) {
+        // console.log('setting to time - no change');
         return;
       }
 
       var time = stateTime;
-      this.lastSeekTime = stateTime; // For each eventName, if it is to be set on seek, then get the previous
+      this.lastSeekTime = stateTime; // console.log('setting to time', timeIn, stateTime);
+      // For each eventName, if it is to be set on seek, then get the previous
       // index (or multiple indexes if multiple are set for the same time)
       // and add them to an eventsToExecuteArray
 
@@ -37196,7 +37200,8 @@ var Recorder = /*#__PURE__*/function () {
 
           return 0;
         });
-      }; // Sort the eventsToSet arrays in time
+      }; // console.log(eventsToSetBeforeState);
+      // Sort the eventsToSet arrays in time
 
 
       sortTimes(eventsToSetBeforeState);
@@ -37206,19 +37211,25 @@ var Recorder = /*#__PURE__*/function () {
         events.forEach(function (event) {
           var _event = _slicedToArray(event, 2),
               eventName = _event[0],
-              index = _event[1];
+              index = _event[1]; // if (eventName === 'slide') {
+          //   debugger;
+          // }
+
 
           _this9.setEvent(eventName, index);
         });
-      };
+      }; // console.log('before')
 
-      playEvents(eventsToSetBeforeState); // console.log(this.stateIndex)
+
+      playEvents(eventsToSetBeforeState); // console.log('state')
+      // console.log(this.stateIndex)
 
       if (this.stateIndex !== -1) {
         this.setState(this.stateIndex);
-      }
+      } // console.log('after')
 
-      playEvents(eventsToSetAfterState);
+
+      playEvents(eventsToSetAfterState); // console.log('done')
 
       if (this.audio) {
         this.audio.currentTime = time;
