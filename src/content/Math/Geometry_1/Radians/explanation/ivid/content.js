@@ -92,7 +92,7 @@ class Content extends PresentationFormatContent {
     this.addSection({
       title: '0 -Introduction',
       setContent: [
-        style({ centerH: true, size: 1.8, top: 10 }, 'Radian'),
+        style({ centerH: true, size: 1.8, top: 10, id: 'asdf' }, 'Radian'),
         style({ centerH: true, size: 0.8, top: 2 }, 'What is it, and why use it?'),
       ],
       show: [
@@ -105,6 +105,13 @@ class Content extends PresentationFormatContent {
         circle._line1.setRotation(1);
         circle.setScenario('title');
         console.log(this.diagram.recorder)
+        this.diagram.elements.add('html', this.diagram.shapes.htmlText({
+          text: 'Radians',
+        }));
+        this.diagram.elements._html.animations.new()
+          .dissolveOut({ duration: 2 })
+          .dissolveIn({ duration: 2 })
+          .start();
       },
     });
 
@@ -149,7 +156,7 @@ class Content extends PresentationFormatContent {
         circle._line1, circle._line2, circle._angle, circle._corner,
       ],
       setSteadyState: () => {
-        console.log('here')
+        // console.log('here')
         // this.diagram.globalAnimation.setDebugFrameRate(10, 0.5)
         circle.setScenario('title');
         circle._angleText.setScenario('bottomDeg');

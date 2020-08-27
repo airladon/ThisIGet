@@ -25280,6 +25280,58 @@ var DiagramPrimitives = /*#__PURE__*/function () {
     // }
 
   }, {
+    key: "html",
+    value: function html(optionsIn) {
+      var defaultOptions = {
+        classes: '',
+        position: [0, 0],
+        xAlign: 'center',
+        yAlign: 'middle',
+        wrap: true,
+        id: "id__temp_".concat(Math.round(Math.random() * 10000))
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, defaultOptions, optionsIn);
+      options.element = optionsIn.element;
+      var element;
+      var parent;
+
+      if (options.wrap || Array.isArray(options.element)) {
+        element = document.createElement('div');
+        element.setAttribute('id', options.id);
+
+        if (Array.isArray(options.element)) {
+          options.element.forEach(function (e) {
+            return element.appendChild(e);
+          });
+        } else {
+          element.appendChild(options.element);
+        }
+
+        this.htmlCanvas.appendChild(element);
+        parent = this.htmlCanvas;
+      } else {
+        element = options.element;
+        var id = element.getAttribute('id');
+
+        if (id === '') {
+          element.setAttribute('id', options.id);
+        } else {
+          options.id = id;
+        }
+
+        parent = element.parentElement;
+      }
+
+      if (parent == null) {
+        parent = this.htmlCanvas;
+      }
+
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](parent, options.id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), options.yAlign, options.xAlign);
+      var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(p.x, p.y), [1, 1, 1, 1], this.limits);
+      return diagramElement;
+    }
+  }, {
     key: "htmlElement",
     value: function htmlElement(elementToAdd) {
       var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "id__temp_".concat(Math.round(Math.random() * 10000));
@@ -27790,7 +27842,8 @@ function getFanTrisPolygon(radius, rotation, offset, sides, sidesToDraw, directi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _DrawingObject__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _DrawingObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27814,6 +27867,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 // import * as m2 from '../tools/m2';
+
 
 
 
@@ -27847,6 +27901,8 @@ var HTMLObject = /*#__PURE__*/function (_DrawingObject) {
 
     _this.setBorder();
 
+    _this.lastMatrix = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    _this.lastColor = [-1, -1, -1, -1];
     return _this;
   }
 
@@ -27944,6 +28000,8 @@ var HTMLObject = /*#__PURE__*/function (_DrawingObject) {
   }, {
     key: "transformHtml",
     value: function transformHtml(transformMatrix) {
+      var opacity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
       if (this.show) {
         // this.element.style.visibility = 'visible';
         var glLocation = this.location.transformBy(transformMatrix);
@@ -27967,29 +28025,50 @@ var HTMLObject = /*#__PURE__*/function (_DrawingObject) {
         }
 
         var x = pixelLocation.x + left;
-        var y = pixelLocation.y + top;
-        this.element.style.position = 'absolute';
-        this.element.style.left = "".concat(x, "px");
-        this.element.style.top = "".concat(y, "px");
-        this.element.style.visibility = 'visible'; // this.element.classList.remove('diagram__hidden');
-      } else {
-        this.element.style.position = 'absolute';
-        this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px'; // this.element.classList.add('diagram__hidden');
+        var y = pixelLocation.y + top; // this.element.style.position = 'absolute';
+        // this.element.style.left = `${x}px`;
+        // this.element.style.top = `${y}px`;
+        // this.element.style.visibility = 'visible';
+        // this.element.style.opacity = opacity;
 
-        this.element.style.visibility = 'hidden'; // this.element.style.visibility = 'hidden';
-        // console.trace()
+        var style = "position: absolute; left: ".concat(x, "px; top: ").concat(y, "px; visibility: visible; opacity: ").concat(opacity, ";");
+        var currentStyle = this.element.getAttribute('style');
+
+        if (style !== currentStyle) {
+          this.element.setAttribute('style', style);
+        } // this.element.classList.remove('diagram__hidden');
+
+      } else {
+        this.element.setAttribute('style', "position: absolute; left: -10000px; top: -10000px; visibility: hidden; opacity: ".concat(opacity, ";")); // this.element.style.position = 'absolute';
+        // this.element.style.left = '-10000px';
+        // this.element.style.top = '-10000px';
+        // // this.element.classList.add('diagram__hidden');
+        // this.element.style.visibility = 'hidden';
+        // // this.element.style.visibility = 'hidden';
+        // // console.trace()
       }
     }
   }, {
     key: "drawWithTransformMatrix",
-    value: function drawWithTransformMatrix(transformMatrix) {
-      this.transformHtml(transformMatrix);
+    value: function drawWithTransformMatrix(transformMatrix, color) {
+      var isDifferent = false;
+
+      for (var i = 0; i < transformMatrix.length; i += 1) {
+        if (Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(transformMatrix[i], 8) !== this.lastMatrix[i]) {
+          isDifferent = true;
+        }
+      }
+
+      if (isDifferent || this.lastColor[3] !== Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(color[3], 8)) {
+        this.transformHtml(transformMatrix, color[3]);
+        this.lastMatrix = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(transformMatrix, 8);
+        this.lastColor = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"])(color, 8);
+      }
     }
   }]);
 
   return HTMLObject;
-}(_DrawingObject__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}(_DrawingObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (HTMLObject); // Transform -1 to 1 space to 0 to width/height space
 

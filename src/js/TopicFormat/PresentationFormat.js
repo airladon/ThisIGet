@@ -313,6 +313,8 @@ class PresentationFormat extends SimpleFormat {
       const lastSection = this.content.sections[this.currentSectionIndex - 1];
       const thisContent = section.getContent(false);
       const lastContent = lastSection.getContent(false);
+      console.log(thisContent)
+      console.log(lastContent)
       if (thisContent !== lastContent) {
         const element = document.getElementById('id_topic__diagram_text');
         if (element != null) {
