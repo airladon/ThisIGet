@@ -334,7 +334,7 @@ class Section {
     return null;
   }
 
-  getContent(modify: boolean = true): string {
+  getContentLines(modify: boolean = true): Array<string> {
     if (typeof this.modifiers === 'function') {
       this.modifiers = this.modifiers();
     }
@@ -350,20 +350,37 @@ class Section {
       content = [content];
     }
     const contentInParagraphs = [];
+    let counter = 0;
+    const htmlLines = [];
     content.forEach((line) => {
+      let newLine;
+      const id = `id__figure_one__presentation_content_text__${counter}`
       if (line.charAt(0) !== '<') {
-        contentInParagraphs.push(`<p>${line}</p>`);
+        newLine = `<p>${line}</p>`;
       } else {
-        contentInParagraphs.push(line);
+        newLine = line;
       }
+      if (line.startsWith('<div style="display: table; height: 100%; width: 100%;">')) {
+        newLine = `<div id="${id}" style="display: table; height: 100%; width: 100%;">${newLine}</div>`  
+      } else if (line.startsWith('<div style="display: table; height: 100%; text-align:center; width:100%;">')) {
+        newLine = `<div id="${id}" style="display: table; height: 100%; text-align:center; width:100%;">${newLine}</div>`  
+      } else {
+        newLine = `<div id="${id}">${newLine}</div>`
+      }
+      let html = newLine;
+      if (modify) {
+        html = applyModifiers(newLine, this.modifiers);
+      }
+      htmlLines.push(html);
+      counter += 1;
     });
-    contentInParagraphs.forEach((element) => {
-      htmlText = `${htmlText}${element}`;
-    });
-    // htmlText += '\n';
-    if (modify) {
-      htmlText = applyModifiers(htmlText, this.modifiers);
-    }
+    // contentInParagraphs.forEach((element) => {
+    //   htmlText = `${htmlText}${element}`;
+    // });
+    // // htmlText += '\n';
+    // if (modify) {
+    //   htmlText = applyModifiers(htmlText, this.modifiers);
+    // }
     // Object.keys(this.modifiers).forEach((key) => {
     //   const mod = this.modifiers[key];
     //   htmlText = modifyText(htmlText, key, mod);
@@ -373,7 +390,46 @@ class Section {
     // with default keywords
     // const r = RegExp(/\|([^|]*)\|/, 'gi');
     // return htmlText.replace(r, '<span class="highlight_word">$1</span>');
-    return htmlText;
+    return htmlLines;
+  }
+
+  getContent(modify: boolean = true): string {
+    // if (typeof this.modifiers === 'function') {
+    //   this.modifiers = this.modifiers();
+    // }
+    // let htmlText = '';
+    // let content = '';
+    // if (typeof this.setContent === 'string'
+    //     || Array.isArray(this.setContent)) {
+    //   content = this.setContent;
+    // } else {
+    //   content = this.setContent();
+    // }
+    // if (typeof content === 'string') {
+    //   content = [content];
+    // }
+    // const contentInParagraphs = [];
+    // let counter = 0;
+    // content.forEach((line) => {
+    //   const id = `id__figure_one__presentation_content_text__${counter}`
+    //   if (line.charAt(0) !== '<') {
+    //     contentInParagraphs.push(`<div id=${id}><p>${line}</p></div>`);
+    //   } else {
+    //     contentInParagraphs.push(`<div id=${id}>${line}</div>`);
+    //   }
+    //   counter += 1;
+    // });
+    // contentInParagraphs.forEach((element) => {
+    //   htmlText = `${htmlText}${element}`;
+    // });
+    // // htmlText += '\n';
+    // if (modify) {
+    //   htmlText = applyModifiers(htmlText, this.modifiers);
+    // }
+   
+    // return htmlText;
+    const lines = this.getContentLines((modify));
+    return lines.join('');
   }
 
   /* eslint-disable no-unused-vars */

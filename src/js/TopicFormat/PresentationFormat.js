@@ -311,16 +311,29 @@ class PresentationFormat extends SimpleFormat {
     const section = this.content.sections[this.currentSectionIndex];
     if (section.fadeInFromPrev) {
       const lastSection = this.content.sections[this.currentSectionIndex - 1];
-      const thisContent = section.getContent(false);
-      const lastContent = lastSection.getContent(false);
-      console.log(thisContent)
-      console.log(lastContent)
-      if (thisContent !== lastContent) {
-        const element = document.getElementById('id_topic__diagram_text');
-        if (element != null) {
-          element.classList.add('topic__diagram_text_fade_in');
+      const thisContentLines = section.getContentLines(false);
+      const lastContentLines = lastSection.getContentLines(false);
+      for (let i = 0; i < thisContentLines.length; i += 1) {
+        const thisLine = thisContentLines[i];
+        let lastLine = '';
+        if (lastContentLines.length > i) {
+          lastLine = lastContentLines[i]
+        }
+        if (lastLine !== thisLine) {
+          const element = document.getElementById(`id__figure_one__presentation_content_text__${i}`);
+          if (element != null) {
+            element.classList.add('topic__diagram_text_fade_in')
+          }
         }
       }
+      // // console.log(thisContent)
+      // // console.log(lastContent)
+      // if (thisContent !== lastContent) {
+      //   const element = document.getElementById('id_topic__diagram_text');
+      //   if (element != null) {
+      //     element.classList.add('topic__diagram_text_fade_in');
+      //   }
+      // }
     }
   }
 

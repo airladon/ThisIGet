@@ -646,7 +646,7 @@ export default class PlaybackControl extends React.Component<Props, State> {
             Preparing to Play
           </div>
         </div>
-      </div>;
+      </div>
     </div>;
   }
 }
