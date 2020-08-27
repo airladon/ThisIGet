@@ -22081,7 +22081,15 @@ var EquationLabel = /*#__PURE__*/function () {
       eqn.setCurrentForm(form, formType);
     } else {
       var defaultEqnOptions = {
-        color: color
+        color: color,
+        defaultFormAlignment: {
+          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+          xAlign: xAlign,
+          yAlign: yAlign
+        },
+        scale: scale,
+        form: form,
+        formType: formType
       };
       eqn = equations.equation(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultEqnOptions, labelTextOrEquation));
     }

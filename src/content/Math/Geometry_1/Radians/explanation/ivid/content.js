@@ -137,8 +137,6 @@ class Content extends PresentationFormatContent {
     this.addSection(common, commonShow, {
       setSteadyState: () => {
         circle.setScenario('title');
-        // circle._angleText.setScenario('bottomDeg');
-        // diag.setAngleTextProperties(360, 0, 'º');
         circle.animations.new()
           .inParallel([
             circle.anim.scenario({ target: 'center', duration: 2 }),
@@ -149,7 +147,6 @@ class Content extends PresentationFormatContent {
             duration: 1,
           })
           .start();
-        // circle._angle.pulseSettings.allowFreezeOnStop = true;
       },
     });
 
@@ -164,20 +161,6 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         diag.updateAngle();
         diag.showDegrees();
-        // circle.setScenario('center');
-        // circle._angleText.setScenario('bottomDeg');
-        // diag.setAngleTextProperties(360, 0, 'º');
-        // circle.animations.new()
-        //   .inParallel([
-        //     circle._degrees.anim.dissolveIn(1),
-        //     circle._degreesHighlight.anim.dissolveIn(1),
-        //   ])
-        //   .trigger({
-        //     callback: diag.pulseAngle.bind(diag),
-        //     duration: 1,
-        //   })
-        //   .start();
-        // circle._angle.pulseSettings.allowFreezeOnStop = true;
       },
     });
 
@@ -887,127 +870,36 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    // const listOptions = (top, id) => ({
-    //   list: 'unordered',
-    //   top,
-    //   left: 5,
-    //   size: 1.1,
-    //   id: `radians_${id}`,
-    // });
+    const listOptions1 = (top, id) => ({
+      list: 'unordered',
+      top,
+      left: 5,
+      size: 1.1,
+    });
 
     this.addSection({
       title: '16 - Mid Summary - REALL',
       setContent: [
-        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+        style(listOptions1(12, 1), 'A |radian| is the angle where arc length equals radius length'),
       ],
     });
 
     this.addSection({
       title: '17 - Mid Summary',
       setContent: [
-        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
-        style(listOptions(5, 2), 'There are |2π| radians in a circle'),
+        style(listOptions1(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+        style(listOptions1(5, 2), 'There are |2π| radians in a circle'),
       ],
-      fadeInFromPrev: false,
-      setSteadyState: () => {
-        addClass('radians_2', 'topic__diagram_text_fade_in_05');
-      },
     });
 
     this.addSection({
       title: '18 - Mid Summary',
       setContent: [
-        style(listOptions(12, 1), 'A |radian| is the angle where arc length equals radius length'),
-        style(listOptions(5, 2), 'There are |2π| radians in a circle'),
-        style(listOptions(5, 3), 'With radians we can |relate| arc length, radius and angle'),
+        style(listOptions1(12, 1), 'A |radian| is the angle where arc length equals radius length'),
+        style(listOptions1(5, 2), 'There are |2π| radians in a circle'),
+        style(listOptions1(5, 3), 'With radians we can |relate| arc length, radius and angle'),
       ],
-      fadeInFromPrev: false,
-      setSteadyState: () => {
-        addClass('radians_3', 'topic__diagram_text_fade_in_05');
-      },
     });
-
-
-
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // Angle is just a ratio, as both arc length and radius are a measure of length, their units cancel. Thus when we use radians in our calculations we can simply use it as a number and not have to track units.
-    // this.addSection({
-    //   setContent: [
-    //     style({ top: 50, centerH: true }, 'Radians have no units!'),
-    //   ],
-    //   show: [
-    //     eqn,
-    //   ],
-    //   setSteadyState: () => {
-    //     eqn.showForm('angle');
-    //     eqn.setScenario('center');
-    //   },
-    // });
-
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // **********************************************************************
-    // // Next, if we make the radius equal to 1, we can see that angle equals the arc length, and they can therefore be used interchangably. In geometry and trigonometry we often start with a unit circle, which is a circle of radius 1, and find relationships between properties. The processs to find the relatipnship can be involved, but it is simplified assuming a unit radius. The result is then generalized at the end by scaling the radius.
-    // // Radians is useful because these relationships are clean and simple. When they get used in more complicated relationships they are easiest to manipulate. We can find similar relationships using degrees, but will see they are more complicated, and therefore less useful.
-    // this.addSection({
-    //   show: [
-    //     eqn,
-    //   ],
-    //   setSteadyState: () => {
-    //     eqn.setScenario('center');
-    //     eqn.showForm('radiusEquals1_0');
-    //     diag.animations.new()
-    //       .trigger({
-    //         callback: 'goToForm',
-    //         payload: {
-    //           name: 'radiusEquals1_1',
-    //           animate: 'move',
-    //           dissolveInTime: 0.7,
-    //           dissolveOutTime: 0.7,
-    //         },
-    //         duration: 2,
-    //       })
-    //       .trigger({
-    //         callback: 'goToForm',
-    //         payload: {
-    //           name: 'radiusEquals1_2',
-    //           animate: 'move',
-    //           dissolveInTime: 0.7,
-    //         },
-    //         duration: 1,
-    //       })
-    //       .trigger({
-    //         callback: 'goToForm',
-    //         payload: {
-    //           name: 'radiusEquals1_3',
-    //           animate: 'move',
-    //           dissolveOutTime: 0.7,
-    //           duration: 1,
-    //         },
-    //         duration: 2,
-    //       })
-    //       .trigger({
-    //         callback: 'goToForm',
-    //         payload: {
-    //           name: 'radiusEquals1_4',
-    //           animate: 'move',
-    //           dissolveInTime: 0.7,
-    //         },
-    //         duration: 0.7,
-    //       })
-    //       .start();
-    //   },
-    // });
 
     // // **********************************************************************
     // // **********************************************************************
@@ -1024,7 +916,6 @@ class Content extends PresentationFormatContent {
         devNote({ top: 10 }, '|_2pi|'),
         devNote({ top: 15 }, '|_360|'),
       ],
-      // fadeInFromPrev: false,
       modifiers: {
         _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
         _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
@@ -1056,12 +947,8 @@ class Content extends PresentationFormatContent {
       setContent: [
         devNote({ top: 5 }, '|scalarRad|'),
         devNote({ top: 10 }, '|scalarDeg|'),
-        // devNote({ top: 90 }, '|_360|'),
       ],
-      // fadeInFromPrev: false,
       modifiers: {
-        // _360: diag.bindAccent({ element: diag._radEqn.__360, id: 'note_360' }),
-        // _2pi: diag.bindAccent({ element: diag._radEqn._twoPi, id: 'note_2pi' }),
         scalarRad: diag.bindAccent({ elements: [
           diag._radEqn._v_2,
           diag._radEqn._pi,
@@ -1149,22 +1036,33 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     common = {
       setContent: [
-        devNote({ top: 10 }, '|arc|'),
+        devNote({ top: 5 }, '|angle|'),
+        devNote({ top: 10 }, '|arc_line|'),
         devNote({ top: 15 }, '|radius|'),
-        devNote({ top: 20 }, '|angle|'),
-        devNote({ top: 5 }, '|sin|'),
+        devNote({ top: 20 }, '|sin_line|'),
+        devNote({ top: 25 }, '|sin_label|'),
+        devNote({ top: 30 }, '|arc_label|'),
       ],
       // fadeInFromPrev: false,
       modifiers: {
         angle: diag.bindAccent({
-          element: diag._lim._angle,
+          element: diag._lim._angle._label,
           id: 'note_angle',
-          // centerOn: eqn._v_1,
-          scale: 1.3,
+          x: 'left',
+          y: 'bottom',
+          scale: 2.1,
         }),
-        arc: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
-        sin: click(diag.pulseSine, [diag], { id: 'note_sin' }),
-        radius: click(diag.pulseUnitR, [diag], { id: 'note_radius' }),
+        arc_line: click(diag.pulseLimArc, [diag], { color: colors.arc, id: 'note_arc' }),
+        arc_label: click(diag.pulseLimArcLabel, [diag], { color: colors.arc, id: 'note_arc_label' }),
+        sin_line: click(diag.pulseSineLine, [diag], { id: 'note_sin' }),
+        sin_label: click(diag.pulseSineLabel, [diag], { id: 'note_sin_label' }),
+        radius: diag.bindAccent({
+          element: diag._lim._radius._label,
+          id: 'note_radius',
+          x: 'right',
+          y: 'bottom',
+          scale: 1.8,
+        }),
       },
     }
     this.addSection(common, {
@@ -1262,16 +1160,27 @@ class Content extends PresentationFormatContent {
         devNote({ top: 30 }, '|arc|'),
         devNote({ top: 35 }, '|radius|'),
         devNote({ top: 40 }, '|angle|'),
+        devNote({ top: 45 }, '|ratio|'),
       ],
       fadeInFromPrev: false,
       modifiers: {
         limit: diag.bindAccent({
           elements: [diag._ex1._lim, diag._ex1._xTo0],
-          centerOn: diag._ex1._lim,
+          // centerOn: diag._ex1._lim,
+          centerOn: [-0.8, -1.5],
           // y: 'bottom',
           id: 'note_limit',
           // y: 'top',
-          scale: 1.5,
+          scale: 1.4,
+        }),
+        ratio: diag.bindAccent({
+          elements: [diag._ex1._sin, diag._ex1._x_1, diag._ex1._x_2, diag._ex1._v_1],
+          // centerOn: diag._ex1._lim,
+          centerOn: diag._ex1._v_1,
+          // y: 'bottom',
+          id: 'note_ratio',
+          // y: 'top',
+          scale: 1.4,
         }),
         sinx: diag.bindAccent({
           elements: [diag._ex1._sin, diag._ex1._x_1],

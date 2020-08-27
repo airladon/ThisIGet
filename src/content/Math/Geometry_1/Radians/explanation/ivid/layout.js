@@ -292,6 +292,12 @@ export default function diagramLayout() {
     scenario: 'center',
   };
 
+  // const sinEqn = {
+  //   method: 'equation',
+  //   name: 'eqn',
+  //   o
+  // }
+
   layout.limRad = 3;
   const limAngleProportion = 20;
   const { limRad } = layout;
@@ -309,7 +315,16 @@ export default function diagramLayout() {
           p2: [limRad * Math.cos(limAngle) - 0.01, limRad * Math.sin(limAngle) + 0.005],
           width: 0.03,
           label: {
-            text: 'sin x',
+            text: {
+              elements: {
+                x: { color: colors.angles },
+                sin: { style: 'normal' },
+              },
+              forms: {
+                '0': ['sin', ' ', 'x'],
+              },
+              // scale: 1.2,
+            },
             location: 'left',
             offset: 0.08,
             scale: 1.2,
@@ -746,6 +761,9 @@ export default function diagramLayout() {
         _3f: { text: '3!' },
         _5f: { text: '5!' },
         _7f: { text: '7!' },
+        x_g: { text: 'x', color: colors.angles },
+        x_g1: { text: 'x', color: colors.angles },
+        x_r: { text: 'x', color: colors.arc },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -772,10 +790,14 @@ export default function diagramLayout() {
           dFrac({ sup: ['d', [' ', '_2_1']] }, 'v_1', { sup: ['dx', '_2_2'] }), ' ', { sub: ['sin', 'd_1', 0.4] }, ' ', { sub: ['x_1', 'd_2', 0.4] }, 'equals', dFrac({ sup: ['π', '_2_3'] }, 'v_2', { sup: ['_180', '_2_4'] }), 'times', 'minus', { sub: ['sin_1', 'd_3', 0.4] }, ' ', { sub: ['x_3', 'd_4', 0.4] },
         ],
         lim: [
-          { bottomComment: { content: 'lim', comment: 'xTo0' } }, ' ',
-          frac(['sin', ' ', 'x_1'], 'v_1', 'x_2'),
+          { bottomComment: { content: 'lim', comment: 'xTo0' } }, '   ',
+          frac(['sin', ' ', 'x_g'], 'v_1', 'x_r'),
           'equals', '_1',
-
+        ],
+        limAngle: [
+          { bottomComment: { content: 'lim', comment: 'xTo0' } }, '   ',
+          frac(['sin', ' ', 'x_g'], 'v_1', 'x_g1'),
+          'equals', '_1',
         ],
         limDeg: [
           { bottomComment: { content: 'lim', comment: 'xTo0' } }, ' ',

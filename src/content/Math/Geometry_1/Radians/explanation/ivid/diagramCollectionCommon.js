@@ -171,7 +171,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._lim._arc.setAngleToDraw(r + 0.005);
     this._lim._sin.setEndPoints(
       [this.layout.limRad * Math.cos(r) - 0.01, 0],
-      [this.layout.limRad * Math.cos(r) - 0.01, this.layout.limRad * Math.sin(r)],
+      [this.layout.limRad * Math.cos(r) - 0.01, this.layout.limRad * Math.sin(r) - 0.01],
     );
     this._lim._radius.updateLabel();
     // this._lim._sin.updatePoints()
@@ -460,9 +460,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseSine() {
-    this._lim._sin.pulseWidth({ line: 5 });
-    this.accent({ element: this._lim._sin._label, x: 'right' });
+  pulseSineLine() {
+    this._lim._sin.pulseWidth({ line: 5, label: 1 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSineLabel() {
+    this.accent({ element: this._lim._sin._label, x: 0.8, scale: 1.8 });
     this.diagram.animateNextFrame();
   }
 
@@ -480,6 +484,11 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseLimArc() {
     this._lim._arc.pulseThickNow(1, 1.015, 8);
     // this._lim._x._label.pulseScaleNow(1, 1.5);
+    // this.accent({ element: this._lim._x._label, x: 'left' });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLimArcLabel() {
     this.accent({ element: this._lim._x._label, x: 'left' });
     this.diagram.animateNextFrame();
   }
