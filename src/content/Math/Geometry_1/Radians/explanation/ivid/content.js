@@ -107,38 +107,38 @@ class Content extends PresentationFormatContent {
       },
     });
 
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
     common = {
       setEnterState: () => {
         circle.setScenario('center');
         circle._angleText.setScenario('bottomDeg');
         diag.setAngleTextProperties(360, 0, 'º');
       },
-      modifiers: {
-        Degrees: click(diag.showDegrees, [diag], { id: 'note_degrees' }),
-      },
     };
-
-    const factorsText = '<span class="sub_highlight">1</span>, <span class="sub_highlight">2</span>, <span class="sub_highlight">3</span>, <span class="sub_highlight">4</span>, <span class="sub_highlight">5</span>, <span class="sub_highlight">6</span>, <span class="sub_highlight">8</span>, <span class="sub_highlight">9</span>, <span class="sub_highlight">10</span>, <span class="sub_highlight">12</span>, <span class="sub_highlight">15</span>, <span class="sub_highlight">18</span>, <span class="sub_highlight">20</span>, <span class="sub_highlight">24</span>, <span class="sub_highlight">30</span>, <span class="sub_highlight">36</span>, <span class="sub_highlight">40</span>, <span class="sub_highlight">45</span>, <span class="sub_highlight">60</span>, <span class="sub_highlight">72</span>, <span class="sub_highlight">90</span>, <span class="sub_highlight">120</span>, <span class="sub_highlight">180</span>, <span class="sub_highlight">360</span>';
-
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    // **********************************************************************
-    this.addSection(common, {
-      title: '1 - Degrees',
-      setContent: [
-        devNote({ top: 5 }, '|Degrees|'),
-      ],
+    let commonShow = {
       show: [
         circle._line1, circle._line2, circle._angle, circle._corner,
       ],
+    };
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    this.addSection(common, commonShow, {
       setSteadyState: () => {
         circle.setScenario('title');
-        circle._angleText.setScenario('bottomDeg');
-        diag.setAngleTextProperties(360, 0, 'º');
+        // circle._angleText.setScenario('bottomDeg');
+        // diag.setAngleTextProperties(360, 0, 'º');
         circle.animations.new()
           .inParallel([
             circle.anim.scenario({ target: 'center', duration: 2 }),
@@ -149,7 +149,7 @@ class Content extends PresentationFormatContent {
             duration: 1,
           })
           .start();
-        circle._angle.pulseSettings.allowFreezeOnStop = true;
+        // circle._angle.pulseSettings.allowFreezeOnStop = true;
       },
     });
 
@@ -160,18 +160,49 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection(common, {
-      setContent: [
-        style(
-          { top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors',
-          },
-          factorsText,
-        ),
-      ],
+    this.addSection(common, commonShow, {
+      setSteadyState: () => {
+        diag.updateAngle();
+        diag.showDegrees();
+        // circle.setScenario('center');
+        // circle._angleText.setScenario('bottomDeg');
+        // diag.setAngleTextProperties(360, 0, 'º');
+        // circle.animations.new()
+        //   .inParallel([
+        //     circle._degrees.anim.dissolveIn(1),
+        //     circle._degreesHighlight.anim.dissolveIn(1),
+        //   ])
+        //   .trigger({
+        //     callback: diag.pulseAngle.bind(diag),
+        //     duration: 1,
+        //   })
+        //   .start();
+        // circle._angle.pulseSettings.allowFreezeOnStop = true;
+      },
+    });
+
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    // **********************************************************************
+    const factorsText = style(
+      { top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors',
+      },
+      '<span class="sub_highlight">1</span>, <span class="sub_highlight">2</span>, <span class="sub_highlight">3</span>, <span class="sub_highlight">4</span>, <span class="sub_highlight">5</span>, <span class="sub_highlight">6</span>, <span class="sub_highlight">8</span>, <span class="sub_highlight">9</span>, <span class="sub_highlight">10</span>, <span class="sub_highlight">12</span>, <span class="sub_highlight">15</span>, <span class="sub_highlight">18</span>, <span class="sub_highlight">20</span>, <span class="sub_highlight">24</span>, <span class="sub_highlight">30</span>, <span class="sub_highlight">36</span>, <span class="sub_highlight">40</span>, <span class="sub_highlight">45</span>, <span class="sub_highlight">60</span>, <span class="sub_highlight">72</span>, <span class="sub_highlight">90</span>, <span class="sub_highlight">120</span>, <span class="sub_highlight">180</span>, <span class="sub_highlight">360</span>',
+    );
+    commonShow = {
       show: [
         circle._line1, circle._line2, circle._corner, circle._angle,
         circle._degrees, circle._angleText,
         circle._degreesHighlight,
+      ],
+    };
+    this.addSection(common, commonShow, {
+      setContent: [
+        factorsText,
       ],
       setSteadyState: () => {
         diag.updateAngle();
@@ -185,19 +216,15 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection(common, {
+    this.addSection(common, commonShow, {
       setContent: [
-        style(
-          { top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors',
-          },
-          factorsText,
-        ),
+        factorsText,
       ],
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
-        circle._degrees, circle._angleText,
-        circle._degreesHighlight,
-      ],
+      // show: [
+      //   circle._line1, circle._line2, circle._corner, circle._angle,
+      //   circle._degrees, circle._angleText,
+      //   circle._degreesHighlight,
+      // ],
       setSteadyState: () => {
         diag.updateAngle();
         circle.animations.new()
@@ -279,55 +306,21 @@ class Content extends PresentationFormatContent {
         circle._degreesHighlight,
       ],
     }
-    this.addSection(common, commonTable, {
-      // fadeInFromPrev: false,
+    this.addSection(common, commonTable, commonShow, {
       setContent: [
-        style(
-          { top: 2, size: 0.9, centerH: true, className: 'radians_table_value', id: 'factors',
-          },
-          factorsText,
-        ),
-        tableContent(),
+        factorsText,
+        tableContent (),
       ],
-      show: [
-        circle._line1, circle._line2, circle._corner, circle._angle,
-        circle._degrees, circle._angleText,
-        circle._degreesHighlight,
-      ],
+      setContentFadeFromPrev: [false, true],
+      // show: [
+      //   circle._line1, circle._line2, circle._corner, circle._angle,
+      //   circle._degrees, circle._angleText,
+      //   circle._degreesHighlight,
+      // ],
       setSteadyState: () => {
         diag.updateAngle();
         circle.setScenario('centerLeft');
-        // circle.animations.new()
-        //   .trigger(() => addClass('radians_table', 'topic__diagram_text_fade_in_05'))
-        //   .trigger({
-        //     delay: 0.5,
-        //     callback: () => removeClass('radians_table', 'topic__diagram_text_fade_in_05'),
-        //   })
-        //   .start();
       },
-      
-      // setSteadyState: () => {
-      //   // circle.setScenario('centerLeft');
-      //   addClass('radians_table', 'invisible');
-      //   diag.updateAngle();
-      //   circle.animations.new()
-      //     // .delay(0.5)
-      //     .scenario({ target: 'centerLeft', duration: 1 })
-      //     .trigger({
-      //       callback: () => {
-      //         removeClass('radians_table', 'invisible');
-      //         addClass('radians_table', 'topic__diagram_text_fade_in_05');
-      //         diag.updateAngle();
-      //       },
-      //       duration: 0.5,
-      //     })
-      //     .trigger({
-      //       callback: () => {
-      //         removeClass('radians_table', 'topic__diagram_text_fade_in_05');
-      //       },
-      //     })
-      //     .start();
-      // },
     });
 
     
@@ -490,58 +483,21 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     this.addSection({
-      title: '2 - 360',
-      fadeInFromPrev: false,
-      show: [],
       setContent: [
-        style({ size: 1.1, centerH: true, centerV: true, size: 1.5, className: 'radians_table_value', id: 'arithmetic', },
-          '<span id="arithmetic_1"><sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub></span> &nbsp <span id="arithmetic_2">= &nbsp 120º + 144º &nbsp </span><span id="arithmetic_3">= &nbsp 264º</span>',
+        style({ centerH: true, top: 20, size: 1.5, className: 'radians_table_value'},
+          '<sup>5</sup>&frasl;<sub>9</sub> = &nbsp 200º',
         ),
-        // devNote({ top: 5 }, '|hide_box|'),
-        // devNote({ top: 10 }, '|angles|'),
-        // devNote({ top: 15 }, '|fractions|'),
-        // devNote({ top: 20 }, '|Degrees|'),
-        // devNote({ top: 25 }, '|Angle|'),
-        // tableContent(),
       ],
-      setSteadyState: () => {
-        // circle.setScenario('centerLeft');
-        addClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
-        addClass('arithmetic_2', 'invisible');
-        addClass('arithmetic_3', 'invisible');
-        // diag.updateAngle();
-        diag.animations.new()
-          // .inParallel([
-          //   circle._line1.anim.rotation({
-          //     target: 192 / 180 * Math.PI,
-          //     delay: 1.8,
-          //     duration: 1
-          //   }),
-            .trigger({
-                callback: () => {
-                  removeClass('arithmetic_1', 'topic__diagram_text_fade_in_05');
-                  removeClass('arithmetic_2', 'invisible');
-                  addClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
-              },
-              delay: 0.8,
-            })
-            .trigger({
-              callback: () => {
-                removeClass('arithmetic_2', 'topic__diagram_text_fade_in_05');
-                removeClass('arithmetic_3', 'invisible');
-                addClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
-              },
-              delay: 0.8,
-            })
-            .trigger({
-              callback: () => {
-                removeClass('arithmetic_3', 'topic__diagram_text_fade_in_05');
-              },
-              delay: 0.8,
-            })
-          // ])
-          .start();
-      },
+    });
+    this.addSection({
+     setContent: [
+        style({ centerH: true, top: 20, size: 1.5, className: 'radians_table_value'},
+          '<sup>5</sup>&frasl;<sub>9</sub> = &nbsp 200º',
+        ),
+        style({ centerH: true, top: 5, size: 1.5, className: 'radians_table_value'},
+          '<sup>1</sup>&frasl;<sub>3</sub> + <sup>1</sup>&frasl;<sub>5</sub> &nbsp = &nbsp 120º + 144º &nbsp = &nbsp 264º',
+        ),
+      ],
     });
 
     // **********************************************************************
@@ -551,40 +507,21 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    const listOptions = (top, id) => ({
-      list: 'unordered',
-      top,
-      left: 5,
-      size: 1.1,
-      id: `radians_${id}`,
-    });
-
-    const listOptions1 = (top, id) => ({
-      // list: 'unordered',
-      centerH: true,
-      top,
-      // left: 5,
-      size: 1.2,
-      // id: `radians_${id}`,
-    });
+    const listOptions = (top, id) => ({ centerH: true, top, size: 1.2 });
 
     this.addSection({
       title: '16 - Mid Summary - REALL',
       setContent: [
-        style(listOptions1(20, 1), 'Degrees have |practical| convenience'),
+        style(listOptions(20, 1), 'Degrees have |practical| convenience'),
       ],
     });
 
     this.addSection({
       title: '17 - Mid Summary',
       setContent: [
-        style(listOptions1(20, 1), 'Degrees have |practical| convenience'),
-        style(listOptions1(8, 2), 'Radians have |mathmatical| convenience'),
+        style(listOptions(20, 1), 'Degrees have |practical| convenience'),
+        style(listOptions(8, 2), 'Radians have |mathmatical| convenience'),
       ],
-      // fadeInFromPrev: false,
-      // setSteadyState: () => {
-      //   addClass('radians_2', 'topic__diagram_text_fade_in_05');
-      // },
     });
     
     // **********************************************************************
@@ -594,101 +531,37 @@ class Content extends PresentationFormatContent {
     // **********************************************************************
     // **********************************************************************
     // **********************************************************************
-    this.addSection(common, {
+    commonShow = {
+      show: [
+        circle._line1, circle._line2, circle._corner,
+        circle._angle, circle._arc,
+        circle._circle,
+      ],
+    }
+    this.addSection(common, commonShow, {
       title: '3 - Radian Angle',
-      // setContent: [
-      //   tableContent('radians_table_hidden'),
-      //   // devNote({ top: 5 }, '|Circle|'),
-      //   // devNote({ top: 10 }, '|Lines|'),
-      //   // devNote({ top: 15 }, '|Radius|'),
-      //   // devNote({ top: 20 }, '|Arc|'),
-      //   // devNote({ top: 25 }, '|Angle|'),
-      // ],
-      // modifiers: {
-      //   id_180degr: rowClick(180),
-      //   id_120degr: rowClick(120),
-      //   id_90degr: rowClick(90),
-      //   id_72degr: rowClick(72),
-      //   id_60degr: rowClick(60),
-      //   id_45degr: rowClick(45),
-      //   id_40degr: rowClick(40),
-      //   id_36degr: rowClick(36),
-      //   id_30degr: rowClick(30),
-      //   id_24degr: rowClick(24),
-      //   id_20degr: rowClick(20),
-      //   Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
-      //   'equal': click(diag.bendRadius, [diag, null], { color: colors.diagram.action, id: 'equal_anim' }),
-      //   Lines: click(diag.pulseLines, [diag], { color: colors.lines, id: 'note_lines' }),
-      // },
-      // show: [
-      //   circle._line1, circle._line2, circle._corner, circle._angle,
-      //   circle._arc
-      //   // circle._degrees, circle._angleText,
-      //   // circle._degreesHighlight,
-      // ],
-      // setSteadyState: () => {
-      //   circle.setScenario('centerLeft');
-      //   diag.updateAngle();
-      //   const table = document.getElementById('radians_table');
-      //   if (table) {
-      //     table.classList.remove('radians_table_hidden');
-      //     table.classList.add('radians_table_fade_out');
-      //   }
-      //   circle.animations.new()
-      //     .inParallel([
-      //       circle._degrees.anim.dissolveOut({ duration: 0.5 }),
-      //       circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
-      //       circle._angleText.anim.dissolveOut({ duration: 0.5 }),
-      //       circle.anim.scenario({ target: 'center', duration: 1 }),
-      //     // ])
-      //     // .inParallel([
-      //       circle._arc.anim.dissolveIn(1),
-      //       circle._circle.anim.dissolveIn({ delay: 0.2, duration: 1 }),
-      //       circle.anim.trigger({ callback: 'updateAngle' }),
-      //       circle.anim.trigger({
-      //         callback: () => {
-      //           if (table) {
-      //             table.classList.add('radians_table_hidden');
-      //           }
-      //         },
-      //       }),
-      //     ])
-      //     .start();
-      // },
       setSteadyState: () => {
         circle.setScenario('center');
-        // diag.updateAngle();
-        // const table = document.getElementById('radians_table');
-        // if (table) {
-        //   table.classList.remove('radians_table_hidden');
-        //   table.classList.add('radians_table_fade_out');
-        // }
-        circle._line1.setRotation(2.5);
+        circle._line1.setRotation(0);
         circle.animations.new()
-          .inParallel([
-            // circle._degrees.anim.dissolveOut({ duration: 0.5 }),
-            // circle._degreesHighlight.anim.dissolveOut({ duration: 0.5 }),
-            // circle._angleText.anim.dissolveOut({ duration: 0.5 }),
-            // circle.anim.scenario({ target: 'center', duration: 1 }),
-          // ])
           // .inParallel([
-            circle._arc.anim.dissolveIn(1),
-            circle._line1.anim.dissolveIn(1),
-            circle._corner.anim.dissolveIn(1),
-            circle._angle.anim.dissolveIn(1),
-            circle._circle.anim.dissolveIn(1),
-            circle.anim.trigger({ callback: 'updateAngle' }),
-            // circle.anim.trigger({
-            //   callback: () => {
-            //     if (table) {
-            //       table.classList.add('radians_table_hidden');
-            //     }
-            //   },
-            // }),
-          ])
+          //   circle._arc.anim.dissolveIn(1),
+          //   circle._line1.anim.dissolveIn(1),
+          //   circle._corner.anim.dissolveIn(1),
+          //   circle._angle.anim.dissolveIn(1),
+          //   circle._circle.anim.dissolveIn(1),
+          //   circle.anim.trigger({ callback: 'updateAngle' }),
+          // ])
+          .rotation({
+            element: circle._line1,
+            start: 0,
+            target: 2,
+            duration: 1.5,
+          })
           .trigger({
             callback: diag.pulseAngle.bind(diag),
             duration: 1.5,
+            delay: 1,
           })
           .trigger({
             callback: diag.pulseArc.bind(diag),
@@ -710,9 +583,6 @@ class Content extends PresentationFormatContent {
         style({
           top: 3, centerH: true, id: 'id_main_text',
         }, 'The angle where |arc_length_equals_radius| is |one radian|.'),
-        // devNote({ top: 5 }, '|Radius|'),
-        // devNote({ top: 10 }, '|Arc|'),
-        // devNote({ top: 15 }, '|Angle|'),
       ],
       modifiers: {
         Radius: click(diag.pulseRadius, [diag], { color: colors.lines, id: 'note_radius' }),
