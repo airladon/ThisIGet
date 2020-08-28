@@ -1,29 +1,36 @@
 # 1
 Welcome to this interactive video on the radian and why we use it.
 
-This is interactive, so if you see me interacting with an element on the screen then you can too. When you do so the video will pause so just press play to continue when you’re ready.
+This is interactive, so if you see me interacting with an element on the screen then you can too. When you do so the video will pause so just press play when you're ready to continue.
 
-# 2, 3
-A Radian is a measure of angle, but often we first learn how to measure angle with degrees, where we split a circle into 360 pieces and count the number of pieces in our angle.
+# 2
+There are several ways to measure angle, and the first way we normally learn about is using degrees, where we split a circle into 360 pieces and count the number of pieces in our angle. 
 
-# 4, 5, 6
-Splitting the circle into 360 pieces is quite convenient as 360 has many factors. For instance, 9 is a factor, which means 1/9 of a circle must be a whole number. By extension, 2/9ths, 3/9ths and so on are also whole numbers. So using 360 means that many fractions of a circle are whole numbers.
+# 3, 4, 5
+Using degrees is quite practical as the number 360 has many factors, and therefore many fractions of a circle can be represented with whole numbers.
 
-# 7, 8
-This makes arithmatic like adding, subtracting and dividing portions of a circle easy to do without a calculator.
+For instance, 9 is a factor, which means 1/9 of a circle must be a whole number, or 40º. By extension, 2/9ths, 3/9ths and so on are also whole numbers.
 
-# 9, 10
+<!-- For exam
+Splitting the circle into 360 pieces is quite convenient as 360 has many factors. For instance, 9 is a factor, which means 1/9 of a circle must be a whole number. By extension, 2/9ths, 3/9ths and so on are also whole numbers. So using 360 means that many fractions of a circle are whole numbers. -->
+
+# 6, 7
+So because so many fractions are whole numbers, and the numbers aren't that large it makes arithmatic like dividing, adding, and subtracting angles or portions of a circle easy to do without a calculator.
+
+# 8, 9
 And so we can say degrees have an every day, PRACTICAL convenience.
 
-In comparison, measuring angles in radians provides a mathematical convenience, as it can be used to EXPRESS MATHEMATICAL RELATIONSHIPS between angles and circles more naturally.
+Now Radians are also a measure of angle, and they provide a mathematical convenience - where the distinction here is when they are used in mathematics to express angles, the resulting equations are simpler, more intuitive and natrual that when using a different measure like degrees.
 
-# 3
-So let's see what that means by using an angle to form an arc.
+<!-- In comparison, measuring angles in radians provides a mathematical convenience, as it can be used to EXPRESS MATHEMATICAL RELATIONSHIPS between angles and circles more naturally. -->
 
-# 3, 4
+# 10
+So let's see what that means by defining a Radian. We start with an angle that forms an arc.
+
+# 11
 A radian is defined as the angle where the circle’s arc length equals the radius.
 
-# 5
+# 12
 So if an angle of 1 radian creates an arc of 1 radius length, then an angle of two radians must create an arc of 2 radius lengths, and 3 radians create an arc of 3 radius lengths and so on.
 
 # 6, 7,
