@@ -12,11 +12,17 @@ import InteractiveFormatComponent from './interactiveBase';
 import type { Props } from './interactiveBase';
 
 export default class IVideoFormatComponent extends InteractiveFormatComponent {
+  keyCommands: boolean;
+  mouseX: number;
+  mouseY: number;
 
   constructor(props: Props) {
     super(props);
     this.state.buttonClasses = 'hide__override';
     this.state.topicContainerClasses = 'topic__container__ivid';
+    this.keyCommands = false;
+    this.mouseX = 0;
+    this.mouseY = 0;
   }
 
   componentDidMount() {
@@ -46,6 +52,15 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       });
       const container = document.getElementById('id_figureone__html');
       container.classList.remove('figureone_dev');
+      if (this.keyCommands) {
+        if (document.removeEvent != null && this.keyCommands) { // $FlowFixMe
+          document.removeEvent('keypress', this.keypressHandler, false);
+          document.removeEvent('keydown', this.keydownHandler, false);
+          document.removeEvent('keyup', this.keyupHandler, false);
+          this.addEvent('mousemove', this.mouseMoveHandler, false);
+        }
+        this.keyCommands = false;
+      }
     } else {
       this.setState({
         buttonClasses: '',
@@ -54,9 +69,76 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       });
       const container = document.getElementById('id_figureone__html');
       container.classList.add('figureone_dev');
+      if (this.keyCommands) {
+        return;
+      }
+      document.addEventListener('keypress', this.keypressHandler.bind(this), false);
+      document.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
+      document.addEventListener('keydown', this.keydownHandler.bind(this), false);
+      document.addEventListener('keyup', this.keyupHandler.bind(this), false);
+      this.keyCommands = true;
     //   for (let i = 0; i < elements.length; i += 1) {
     //     elements[i].style.visibility = 'visible';
     //   }
+    }
+  }
+
+  mouseMoveHandler(event: MouseEvent) {
+    this.mouseX = event.clientX;
+    this.mouseY = event.clientY;
+    // this.moveHandler(event, new Point(event.clientX, event.clientY));
+  }
+
+  keypressHandler(event: KeyboardEvent) {
+    if (String.fromCharCode(event.keyCode) === 's') {
+      this.getDiagram().toggleCursor();
+    }
+    if (String.fromCharCode(event.keyCode) === 'f') {
+      const element = document.getElementById('topic__button-next');
+      if (element != null) {
+        element.click();
+      }
+    }
+    if (String.fromCharCode(event.keyCode) === 'a') {
+      const element = document.getElementById('topic__button-previous');
+      if (element != null) {
+        element.click();
+      }
+    }
+  }
+
+  mouseEvent(eventType: 'mousedown' | 'mouseup' | 'click', element: HTMLElement) {
+    const event = new MouseEvent(eventType, {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+        clientX: this.mouseX,
+        clientY: this.mouseY,
+    });
+    element.dispatchEvent(event);
+  }
+
+  keydownHandler(event: KeyboardEvent) {
+    if (event.keyCode === 68) {
+      const element = document.elementFromPoint(this.mouseX, this.mouseY);
+      if (element != null) {
+        if (element.getAttribute('id') === 'id_topic__diagram_text') {
+          this.mouseEvent('mousedown', element);
+        } else {
+          this.mouseEvent('click', element);
+        }
+      }
+    }
+  }
+
+  keyupHandler(event: KeyboardEvent) {
+    if (event.keyCode === 68) {
+      const element = document.elementFromPoint(this.mouseX, this.mouseY);
+      if (element != null) {
+        if (element.getAttribute('id') === 'id_topic__diagram_text') {
+          this.mouseEvent('mouseup', element);
+        }
+      }
     }
   }
 

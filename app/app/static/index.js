@@ -35978,6 +35978,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Gesture = /*#__PURE__*/function () {
   // cursor: () => void;
+  // keyCommands: boolean;
   function Gesture(diagram) {
     _classCallCheck(this, Gesture);
 
@@ -35997,9 +35998,9 @@ var Gesture = /*#__PURE__*/function () {
     this.addEvent('mousemove', this.mouseMoveHandler, false);
     this.addEvent('touchstart', this.touchStartHandler, false);
     this.addEvent('touchend', this.touchEndHandler, false);
-    this.addEvent('touchmove', this.touchMoveHandler, false); // this.addEvent('keypress', this.keypressHandler, false);
-
-    document.addEventListener('keypress', this.toggleCursor, false); // this.diagram.canvas.addEventListener(
+    this.addEvent('touchmove', this.touchMoveHandler, false); // this.keyCommands = false;
+    // this.addEvent('keypress', this.keypressHandler, false);
+    // this.diagram.canvas.addEventListener(
     //   'touchstart',
     //   this.touchStartHandler.bind(this), false,
     // );
@@ -36013,7 +36014,14 @@ var Gesture = /*#__PURE__*/function () {
     // );
 
     this.enable = true;
-  }
+  } // enableKeyCommands() {
+  //   if (this.keyCommands) {
+  //     return;
+  //   }
+  //   document.addEventListener('keypress', this.toggleCursor, false);
+  //   this.keyCommands = true;
+  // }
+
 
   _createClass(Gesture, [{
     key: "addEvent",
@@ -36097,17 +36105,18 @@ var Gesture = /*#__PURE__*/function () {
     key: "touchEndHandler",
     value: function touchEndHandler() {
       this.endHandler();
-    }
-  }, {
-    key: "keypressHandler",
-    value: function keypressHandler(event) {
-      // console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode))
-      // console.log(this.toggleCursor)
-      if (String.fromCharCode(event.keyCode) === 'n' && this.toggleCursor) {
-        // console.log('toggling')
-        this.toggleCursor();
-      }
-    }
+    } // keypressHandler(event: KeyboardEvent) {
+    //   // console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode))
+    //   // console.log(this.toggleCursor)
+    //   if (String.fromCharCode(event.keyCode) === 'n' && this.toggleCursor) {
+    //     this.toggleCursor();
+    //   }
+    //   if (String.fromCharCode(event.keyCode) === 'f') {
+    //     const element = document.getElementById('topic__button-next');
+    //     element.click();
+    //   }
+    // }
+
   }, {
     key: "destroy",
     value: function destroy() {
@@ -36118,11 +36127,9 @@ var Gesture = /*#__PURE__*/function () {
       this.removeEvent('touchend', this.touchEndHandler, false);
       this.removeEvent('touchmove', this.touchMoveHandler, false); // this.removeEvent('keypress', this.keypressHandler, false);
       // $FlowFixMe
-
-      if (document.removeEvent != null) {
-        // $FlowFixMe
-        document.removeEvent('keypress', this.keypressHandler, false);
-      }
+      // if (document.removeEvent != null && this.keyCommands) { // $FlowFixMe
+      //   document.removeEvent('keypress', this.keypressHandler, false);
+      // }
     }
   }]);
 
