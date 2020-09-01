@@ -153,6 +153,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.fnMap.global.add('updateLimAngle', this.updateLimAngle.bind(this));
     this._lim._radius.move.bounds.updateRotation({ min: 0.1, max: 1 });
     this._lim._radius.move.canBeMovedAfterLosingTouch = true;
+    this._eqn._arc.onClick = this.pulseArc.bind(this);
+    this._eqn._arc.isTouchable = true;
+    this._eqn._radiusLengths.onClick = this.pulseRadius.bind(this);
+    this._eqn._radiusLengths.isTouchable = true;
+    this._eqn._value.onClick = this.pulseAngle.bind(this);
+    this._eqn._value.isTouchable = true;
   }
 
   showForm(options: { element: 'string', form: 'string' }) {
@@ -358,10 +364,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     target.updateTranslation(radius + width / 2, 0);
     bendLine.animations.new()
       .trigger({ callback: 'pulseRadius', duration: 1 })
-      .transform({ target, velocity: 1 })
-      .custom({ callback: 'bendRadius', duration: 1.5 })
+      .transform({ target, velocity: 0.5 })
+      .custom({ callback: 'bendRadius', duration: 2 })
       .rotation({
         element: this._circle._line1, target: 1, velocity: 0.5, maxDuration: 1, direction: 2,
+      })
+      .trigger({
+        callback: this.pulseAngle.bind(this),
       })
       .dissolveOut({ duration: 0.8 })
       .whenFinished(finished)

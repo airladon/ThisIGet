@@ -10,7 +10,7 @@ type Props = {
   build: {
     date: string,
     shortDate: string,
-    build: string
+    build: string,
   },
 };
 

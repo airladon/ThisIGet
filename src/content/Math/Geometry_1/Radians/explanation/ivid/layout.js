@@ -60,7 +60,7 @@ export default function diagramLayout() {
       width,
       // widthIs: 'outside',
       color: colors.lines,
-      largerTouchBorder: 100,
+      largerTouchBorder: { width: 0.8, end: 1, start: 0 },
       move: {
         type: 'rotation',
         middleLengthPercent: 0,
@@ -400,7 +400,7 @@ export default function diagramLayout() {
             location: 'top',
             scale: 1.2,
           },
-          largerTouchBorder: 100,
+          largerTouchBorder: { width: 0.8, end: 1, start: 0 },
           move: {
             type: 'rotation',
             middleLengthPercent: 0,

@@ -93,18 +93,38 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     if (String.fromCharCode(event.keyCode) === 's') {
       this.getDiagram().toggleCursor();
     }
-    if (String.fromCharCode(event.keyCode) === 'f') {
-      const element = document.getElementById('topic__button-next');
-      if (element != null) {
-        element.click();
+    const clickOnKey = (key: string, id: string) => {
+      if (String.fromCharCode(event.keyCode) === key) {
+        const element = document.getElementById(id);
+        if (element != null) {
+          element.click();
+        }
       }
     }
-    if (String.fromCharCode(event.keyCode) === 'a') {
-      const element = document.getElementById('topic__button-previous');
-      if (element != null) {
-        element.click();
-      }
-    }
+    clickOnKey('f', 'topic__button-next');
+    clickOnKey('a', 'topic__button-previous');
+    clickOnKey('1', 'content__note_1');
+    clickOnKey('2', 'content__note_2');
+    clickOnKey('3', 'content__note_3');
+    clickOnKey('4', 'content__note_4');
+    clickOnKey('5', 'content__note_5');
+    clickOnKey('6', 'content__note_6');
+    clickOnKey('7', 'content__note_7');
+    clickOnKey('8', 'content__note_8');
+    clickOnKey('9', 'content__note_9');
+    clickOnKey('0', 'content__note_0');
+    // if (String.fromCharCode(event.keyCode) === 'f') {
+    //   const element = document.getElementById('topic__button-next');
+    //   if (element != null) {
+    //     element.click();
+    //   }
+    // }
+    // if (String.fromCharCode(event.keyCode) === 'a') {
+    //   const element = document.getElementById('topic__button-previous');
+    //   if (element != null) {
+    //     element.click();
+    //   }
+    // }
   }
 
   mouseEvent(eventType: 'mousedown' | 'mouseup' | 'click', element: HTMLElement) {
@@ -143,11 +163,14 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
   }
 
   addDevToggleButton() {
-    return <div id="id_topic__dev_toggle_button__container"
-      onClick={this.toggleDev.bind(this)}
-      className="topic__dev_toggle_button__container">
-        Toggle Dev
-      </div>;
+    if (this.props.build.build === 'development') {
+      return <div id="id_topic__dev_toggle_button__container"
+        onClick={this.toggleDev.bind(this)}
+        className="topic__dev_toggle_button__container">
+          Toggle Dev
+        </div>;
+    }
+    return '';
   }
 
   render() {

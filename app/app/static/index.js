@@ -22339,19 +22339,38 @@ function makeStraightLine(shapes, length, width, position, color, dashStyle, lar
 
   if (largerTouchBorder) {
     var multiplier = isTouchDevice ? 16 : 8;
+    var end = 0;
+    var start = 0;
+    var padding = multiplier * width; // let width = null;
+    // const lineWidth = Math.abs(element.drawingObject.border[0][i].y) * 2;
 
     if (typeof largerTouchBorder === 'number') {
-      multiplier = largerTouchBorder;
+      // multiplier = largerTouchBorder;
+      padding = largerTouchBorder;
     }
 
-    var increaseBorderSize = function increaseBorderSize(element) {
-      for (var i = 0; i < element.drawingObject.border[0].length; i += 1) {
-        // eslint-disable-next-line no-param-reassign
-        element.drawingObject.border[0][i].y *= multiplier;
+    if (_typeof(largerTouchBorder) === 'object') {
+      if (largerTouchBorder.width != null) {
+        padding = largerTouchBorder.width;
       }
-    };
 
-    increaseBorderSize(straightLine);
+      if (largerTouchBorder.end != null) {
+        end = largerTouchBorder.end;
+      }
+
+      if (largerTouchBorder.start != null) {
+        start = largerTouchBorder.start;
+      }
+    } // console.log(padding, end, start)
+
+
+    straightLine.drawingObject.border[0] = [straightLine.drawingObject.border[0][0].add(-start, -padding), straightLine.drawingObject.border[0][1].add(-start, padding), straightLine.drawingObject.border[0][2].add(end, padding), straightLine.drawingObject.border[0][3].add(end, -padding)]; // const increaseBorderSize = (element: DiagramElementPrimitive) => {
+    //   for (let i = 0; i < element.drawingObject.border[0].length; i += 1) {
+    //     // eslint-disable-next-line no-param-reassign
+    //     element.drawingObject.border[0][i].y *= multiplier;
+    //   }
+    // };
+    // increaseBorderSize(straightLine);
   }
 
   return straightLine;
@@ -22449,6 +22468,7 @@ var DiagramObjectLine = /*#__PURE__*/function (_DiagramElementCollec) {
       color: [0, 0, 1, 1],
       showLine: true,
       largerTouchBorder: true,
+      touchBorder: null,
       offset: 0,
       dashStyle: null,
       mods: {},
