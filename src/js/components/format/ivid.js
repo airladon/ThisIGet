@@ -15,6 +15,10 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
   keyCommands: boolean;
   mouseX: number;
   mouseY: number;
+  keypressHandlerBind: () => {};
+  keydownHandlerBind: () => {};
+  keyupHandlerBind: () => {};
+  mouseMoveHandlerBind: () => {};
 
   constructor(props: Props) {
     super(props);
@@ -23,6 +27,10 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     this.keyCommands = false;
     this.mouseX = 0;
     this.mouseY = 0;
+    this.keypressHandlerBind = this.keypressHandler.bind(this);
+    this.keydownHandlerBind = this.keydownHandler.bind(this);
+    this.keyupHandlerBind = this.keyupHandler.bind(this);
+    this.mouseMoveHandlerBind = this.mouseMoveHandler.bind(this);
   }
 
   componentDidMount() {
@@ -53,12 +61,10 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       const container = document.getElementById('id_figureone__html');
       container.classList.remove('figureone_dev');
       if (this.keyCommands) {
-        if (document.removeEvent != null && this.keyCommands) { // $FlowFixMe
-          document.removeEvent('keypress', this.keypressHandler, false);
-          document.removeEvent('keydown', this.keydownHandler, false);
-          document.removeEvent('keyup', this.keyupHandler, false);
-          this.addEvent('mousemove', this.mouseMoveHandler, false);
-        }
+        document.removeEventListener('keypress', this.keypressHandlerBind, false);
+        document.removeEventListener('keydown', this.keydownHandlerBind, false);
+        document.removeEventListener('keyup', this.keyupHandlerBind, false);
+        document.removeEventListener('mousemove', this.mouseMoveHandlerBind, false);
         this.keyCommands = false;
       }
     } else {
@@ -72,10 +78,10 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
       if (this.keyCommands) {
         return;
       }
-      document.addEventListener('keypress', this.keypressHandler.bind(this), false);
-      document.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
-      document.addEventListener('keydown', this.keydownHandler.bind(this), false);
-      document.addEventListener('keyup', this.keyupHandler.bind(this), false);
+      document.addEventListener('keypress', this.keypressHandlerBind, false);
+      document.addEventListener('mousemove', this.mouseMoveHandlerBind, false);
+      document.addEventListener('keydown', this.keydownHandlerBind, false);
+      document.addEventListener('keyup', this.keyupHandlerBind, false);
       this.keyCommands = true;
     //   for (let i = 0; i < elements.length; i += 1) {
     //     elements[i].style.visibility = 'visible';
@@ -113,18 +119,6 @@ export default class IVideoFormatComponent extends InteractiveFormatComponent {
     clickOnKey('8', 'content__note_8');
     clickOnKey('9', 'content__note_9');
     clickOnKey('0', 'content__note_0');
-    // if (String.fromCharCode(event.keyCode) === 'f') {
-    //   const element = document.getElementById('topic__button-next');
-    //   if (element != null) {
-    //     element.click();
-    //   }
-    // }
-    // if (String.fromCharCode(event.keyCode) === 'a') {
-    //   const element = document.getElementById('topic__button-previous');
-    //   if (element != null) {
-    //     element.click();
-    //   }
-    // }
   }
 
   mouseEvent(eventType: 'mousedown' | 'mouseup' | 'click', element: HTMLElement) {

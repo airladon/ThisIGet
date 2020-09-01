@@ -106,7 +106,6 @@ class Content extends PresentationFormatContent {
         circle._line2.setScenario('default');
         circle._line1.setRotation(1);
         circle.setScenario('title');
-        console.log(circle._line1._line.drawingObject.border[0])
       },
     });
 
