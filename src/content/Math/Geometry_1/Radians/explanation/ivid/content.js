@@ -608,7 +608,7 @@ class Content extends PresentationFormatContent {
           // .dissolveIn({ element: circle._radians, duration: 0.8 })
           .trigger({
             callback: () => {
-              eqn.goToForm({ name: 'value', animate: 'dissolve' });
+              eqn.goToForm({ form: 'value', animate: 'dissolve' });
             }
           })
           .start();
@@ -634,7 +634,7 @@ class Content extends PresentationFormatContent {
         eqn.setScenario('top');
         eqn.showForm('value');
         diag.setAngleTextRadians();
-        eqn.goToForm({ name: 'generalize', animate: 'move', delay: 1 });
+        eqn.goToForm({ form: 'generalize', animate: 'move', delay: 1 });
       },
     });
 
@@ -658,7 +658,7 @@ class Content extends PresentationFormatContent {
         eqn.setScenario('top');
         eqn.showForm('generalize');
         // diag.setAngleTextRadians();
-        eqn.goToForm({ name: '_arc', animate: 'move' });
+        eqn.goToForm({ form: '_arc', animate: 'move' });
       },
     });
 
@@ -699,7 +699,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('arcSimple');
-        eqn.goToForm({ name: 'arcOfCircle', animate: 'move' });
+        eqn.goToForm({ form: 'arcOfCircle', animate: 'move' });
       },
     });
 
@@ -751,7 +751,7 @@ class Content extends PresentationFormatContent {
         // // eqn._twoPiGreen.setPositionToElement(eqnCirc._twoPi, 'diagram')
         // console.log(eqn._twoPiGreen.getPosition('diagram'))
         // console.log(eqn._twoPiGreen.getPosition(), eqnCirc._twoPi.getPosition())
-        eqn.goToForm({ name: 'arcOfCircle2Pi', animate: 'move' });
+        eqn.goToForm({ form: 'arcOfCircle2Pi', animate: 'move' });
         eqnCirc.animations.new()
           .dissolveOut({ duration: 1, delay: 1 })
           .start();
@@ -773,7 +773,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('arcOfCircle2Pi');
-        eqn.goToForm({ name: 'twoPiRadiansInACircle', animate: 'move', duration: 1 });
+        eqn.goToForm({ form: 'twoPiRadiansInACircle', animate: 'move', duration: 1 });
       },
     });
 
@@ -790,7 +790,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('twoPiRadiansInACircle');
-        eqn.goToForm({ name: '_arc', animate: 'dissolve', duration: 1 });
+        eqn.goToForm({ form: '_arc', animate: 'dissolve', duration: 1 });
       },
     });
 
@@ -807,7 +807,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('_arc');
-        eqn.goToForm({ name: '_arc1', animate: 'move' });
+        eqn.goToForm({ form: '_arc1', animate: 'move' });
       },
     });
 
@@ -824,7 +824,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         eqn.setScenario('center');
         eqn.showForm('_arc1');
-        eqn.goToForm({ name: '_arc2', animate: 'move' });
+        eqn.goToForm({ form: '_arc2', animate: 'move' });
       },
     });
 
@@ -896,7 +896,7 @@ class Content extends PresentationFormatContent {
       setSteadyState: () => {
         diag._radEqn.setScenario('center');
         diag._radEqn.showForm('start');
-        diag._radEqn.goToForm({ name: '0', animate: 'dissolve' });
+        diag._radEqn.goToForm({ form: '0', animate: 'dissolve' });
       },
     });
 
@@ -1277,7 +1277,7 @@ class Content extends PresentationFormatContent {
         diag._ex1.setScenario('low');
         diag._lim.setScenario('center');
         diag.updateLimAngle();
-        diag._ex1.goToForm({ name: 'limAngle', duration: 1, animate: 'move' });
+        diag._ex1.goToForm({ form: 'limAngle', duration: 1, animate: 'move' });
         diag.animations.new()
           .trigger({
             delay: 0.8,

@@ -300,7 +300,7 @@ class Content extends PresentationFormatContent {
         initRotator();
         coll._eqnSame.showForm('oppOnHyp');
         coll._eqnSame.goToForm({
-          name: 'ratioValue',
+          form: 'ratioValue',
           animate: 'move',
           duration: 2,
           callback: done,
@@ -371,7 +371,7 @@ class Content extends PresentationFormatContent {
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
         coll._eqnSame.goToForm({
-          name: 'function',
+          form: 'function',
           animate: 'move',
           dissolveOutTime: 0.5,
           dissolveInTime: 0.5,
@@ -458,7 +458,7 @@ class Content extends PresentationFormatContent {
         coll._tri.setScenario('right');
         coll._eqnSame.setScenario('left');
         coll._eqnSame.goToForm({
-          name: 'sin',
+          form: 'sin',
           animate: 'dissolveInThenMove',
           duration: 1.5,
           callback: done,

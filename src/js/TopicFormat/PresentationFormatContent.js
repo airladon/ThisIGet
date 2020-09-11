@@ -1214,7 +1214,7 @@ class PresentationFormatContent extends SimpleFormatContent {
           }
           e.eqn.showForm(e.from);
           e.eqn.goToForm({
-            name: e.to,
+            form: e.to,
             duration: e.duration,
             callback: callBackSet,
             animate: e.animate,
@@ -1330,7 +1330,7 @@ class PresentationFormatContent extends SimpleFormatContent {
               // nav.showForm(form);
               eqn.hide();
               eqn.goToForm({
-                name: form,
+                form: form,
                 animate: 'dissolve',
                 duration,
                 dissolveInTime,
@@ -1358,7 +1358,7 @@ class PresentationFormatContent extends SimpleFormatContent {
             nav.showForm(toForm);
             eqn.showForm(form);
             eqn.goToForm({
-              name: toForm,
+              form: toForm,
               animate,
               duration,
               dissolveInTime,
@@ -1403,7 +1403,7 @@ class PresentationFormatContent extends SimpleFormatContent {
               nav.showForm(toForm);
               eqn.showForm(form);
               eqn.goToForm({
-                name: toForm,
+                form: toForm,
                 animate: 'move',
                 duration,
                 dissolveInTime,

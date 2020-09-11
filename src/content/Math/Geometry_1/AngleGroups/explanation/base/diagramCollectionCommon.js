@@ -72,7 +72,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         element.onClick = () => { // $FlowFixMe
           if (eqn.getCurrentForm().name !== formName) {
             eqn.goToForm({
-              name: formName,
+              form: formName,
               duration: 1,
               animate: 'move',
               ifAnimating: { cancelGoTo: false, skipToTarget: false },

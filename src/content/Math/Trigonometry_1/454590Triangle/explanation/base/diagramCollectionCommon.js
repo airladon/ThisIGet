@@ -74,13 +74,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     };
     this._square._A1._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
     this._square._A2._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
     this._square._D._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
   }
 }

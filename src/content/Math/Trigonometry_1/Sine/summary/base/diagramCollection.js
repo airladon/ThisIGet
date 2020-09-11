@@ -34,7 +34,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
         name = 'oppFromHyp';
       }
       eqn.goToForm({
-        name, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
+        form, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
       });
       this.diagram.animateNextFrame();
     };
@@ -46,7 +46,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
         name = 'hypFromOpp';
       }
       eqn.goToForm({
-        name, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
+        form, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
       });
       this.diagram.animateNextFrame();
     };
@@ -58,7 +58,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
         name = 'sineFromHyp';
       }
       eqn.goToForm({
-        name, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
+        form, duration: 2, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false },
       });
       this.diagram.animateNextFrame();
     };

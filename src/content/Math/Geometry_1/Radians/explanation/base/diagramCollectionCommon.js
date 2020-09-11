@@ -124,7 +124,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.accent(this._equation.__radius);
     } else {
       this._equation.goToForm({
-        name: 'radius',
+        form: 'radius',
         duration: 2,
         animate: 'move',
         ifAnimating: {
@@ -160,7 +160,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.accent(this._equation.__arc);
     } else {
       this._equation.goToForm({
-        name: 'arc',
+        form: 'arc',
         duration: 2,
         animate: 'move',
         ifAnimating: {
@@ -178,7 +178,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.accent(this._equation.__angle);
     } else {
       this._equation.goToForm({
-        name: 'angle',
+        form: 'angle',
         duration: 2,
         animate: 'move',
         ifAnimating: {

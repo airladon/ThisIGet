@@ -421,7 +421,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.custom.eqnCounter = (this.custom.eqnCounter + 1) % 2;
     }
     this._eqnSame.goToForm({
-      name: option,
+      form: option,
       animate: 'move',
       duration: 2,
       ifAnimating: {

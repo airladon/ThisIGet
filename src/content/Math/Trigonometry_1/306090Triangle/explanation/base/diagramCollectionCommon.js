@@ -78,14 +78,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     };
     this._equil._A._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
     this._equil._Aon2._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
     // });
     this._equil._r32._label.goToForm({
-      name: form, duration: 1, animate: 'move', callback: allDone,
+      form: form, duration: 1, animate: 'move', callback: allDone,
     });
   }
 }

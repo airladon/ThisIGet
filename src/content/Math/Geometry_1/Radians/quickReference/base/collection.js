@@ -83,7 +83,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   goToRadiusForm() {
     this._equation.goToForm({
-      name: 'radius',
+      form: 'radius',
       duration: 2,
       animate: 'move',
       ifAnimating: {
@@ -106,7 +106,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   goToArcForm() {
     this._equation.goToForm({
-      name: 'arc',
+      form: 'arc',
       duration: 2,
       animate: 'move',
       ifAnimating: {
@@ -119,7 +119,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   goToAngleForm() {
     this._equation.goToForm({
-      name: 'angle',
+      form: 'angle',
       duration: 2,
       animate: 'move',
       ifAnimating: {
