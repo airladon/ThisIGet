@@ -112,10 +112,10 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       scale: 1.5,
       elements,
       forms: {

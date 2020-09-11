@@ -115,11 +115,11 @@ export default function diagramLayout() {
         minus: { text: ' – ' },
         _180: { text: '180º' },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         yAlign: 'baseline',
         xAlign: 'center',
         fixTo: 'equals',
-      },
+      } },
       scale: 1.1,
       forms: {
         'b': ['b', 'equals', '_180', 'minus', 'a'],

@@ -339,11 +339,11 @@ export default function diagramLayout() {
         strike1: { symbol: 'strike', style: 'cross', color: colors.working },
         strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': [
           'Area', 'equals',
@@ -471,11 +471,11 @@ export default function diagramLayout() {
         strike1: { symbol: 'strike', style: 'cross', color: colors.working },
         strike2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': ['_360', 'equals', '_21', 'a', 'plus', '_22', 'b'],
         '1': [

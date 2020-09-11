@@ -194,10 +194,10 @@ export default function diagramLayout() {
     options: {
       navType: 'description',
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'middle',
-      },
+      } },
       scale: 0.9,
       elements,
       forms: {

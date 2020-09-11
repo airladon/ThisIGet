@@ -113,9 +113,9 @@ export default function diagramLayout() {
     options: {
       position: [0, 0.9],
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
-      },
+      } },
       color: colors.diagram.text.base,
       elements: {
         Area: { color: colors.area },
@@ -338,9 +338,9 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
-      },
+      } },
       color: colors.diagram.text.base,
       elements: {
         Area: { color: colors.sides },

@@ -36,11 +36,11 @@ export default function diagramLayout() {
   //       strike: { symbol: 'xStrike', color: colors.working },
   //       r: { symbol: 'radical', color: colors.sides },
   //     },
-  //     defaultFormAlignment: {
+  //     formDefaults: { alignment: {
   //       fixTo: 'equals',    // Points can also be defined as objects
   //       xAlign: 'center',
   //       yAlign: 'baseline',
-  //     },
+  //     } },
   //     forms: {
   //       '0': ['a', 'equals', 'b'],
   //     },

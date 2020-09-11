@@ -331,11 +331,11 @@ export default function diagramLayout() {
         s1: { symbol: 'strike', style: 'cross', color: colors.working },
         s2: { symbol: 'strike', style: 'cross', color: colors.working },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': [newTot, 'equals', oldTot, '   ', 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'p1', '   ', '_360', '   ', 'm3', '   ', 'c1'],
         '1': {

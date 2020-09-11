@@ -345,10 +345,10 @@ export default function diagramLayout() {
     options: {
       elements,
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'middle',
-      },
+      } },
       color: colors.diagram.text.base,
       forms: {
         // 'ratios': [

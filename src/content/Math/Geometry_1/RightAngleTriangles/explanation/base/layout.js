@@ -535,10 +535,12 @@ export default function diagramLayout() {
     options: {
       navType: 'description',
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
-        fixTo: 'equals',
-        xAlign: 'center',
-        yAlign: 'baseline',
+      formDefaults: {
+        alignment: {
+          fixTo: 'equals',
+          xAlign: 'center',
+          yAlign: 'baseline',
+        }
       },
       scale: 0.8,
       elements,

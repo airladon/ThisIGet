@@ -460,11 +460,11 @@ export default function diagramLayout() {
     equals: '  =  ',
     v: { symbol: 'vinculum' },
   };
-  const defaultFormAlignment = {
+  const formDefaults = { alignment: {
     fixTo: 'equals',
     xAlign: 'right',
     yAlign: 'top',
-  };
+  } };
 
   const eqn = (name, form, scenariosObject) => ({
     name,
@@ -473,7 +473,7 @@ export default function diagramLayout() {
       color: colors.diagram.text.base,
       scale: 1.2,
       elements,
-      defaultFormAlignment,
+      formDefaults,
       forms: {
         base: form,
       },
@@ -606,7 +606,7 @@ export default function diagramLayout() {
         _2: '2 ',
         equals: '  =  ',
       },
-      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
+      formDefaults: { alignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' } },
       forms: {
         radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
         short: ['circumference', 'equals', 'pi', 'diameter'],
@@ -639,7 +639,7 @@ export default function diagramLayout() {
         v: { symbol: 'vinculum' },
         brace: { symbol: 'brace', side: 'top', numLines: 3 },
       },
-      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
+      formDefaults: { alignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' } },
       forms: {
         '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
         '1': ['circumference', 'equals', 'pi', 'diameter'],

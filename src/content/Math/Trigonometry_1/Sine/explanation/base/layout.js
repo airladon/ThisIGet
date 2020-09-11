@@ -464,9 +464,9 @@ export default function diagramLayout() {
           sin: { text: 'sin', style: 'normal' },
           times: { text: ' \u00D7 ', color: colors.lines },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'v',
-        },
+        } },
         forms: {
           'oppOnHyp': {
             content: [{ frac: ['opp', 'v','hyp'] }, '   ', 'const', 'theta'],
@@ -602,11 +602,11 @@ export default function diagramLayout() {
           s_31: { color: colors.working },
           s_32: { color: colors.working },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'equals',    // Points can also be defined as objects
           xAlign: 'left',
           yAlign: 'baseline',
-        },
+        } },
         forms: {
           // sine: [
           //   // 'sin', { brac: ['lb', 'theta', 'rb'] },
@@ -665,9 +665,9 @@ export default function diagramLayout() {
           // rb: { symbol: 'bracket', side: 'right' },
           sin: { style: 'normal' },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'v',
-        },
+        } },
         forms: {
           'base': {
             content: [
@@ -703,9 +703,9 @@ export default function diagramLayout() {
           // rb: { symbol: 'bracket', side: 'right' },
           cos: { style: 'normal' },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'v',
-        },
+        } },
         forms: {
           'base': {
             content: [
@@ -741,9 +741,9 @@ export default function diagramLayout() {
           // rb: { symbol: 'bracket', side: 'right' },
           tan: { text: 'tan', style: 'normal' },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'v',
-        },
+        } },
         forms: {
           'base': {
             content: [
@@ -789,11 +789,11 @@ export default function diagramLayout() {
         r: { color: colors.lines },
         times: { text: ' \u00D7 ', color: colors.lines },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'value',
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         'base': ['value'],
         'baseTimesR': ['value', 'times', 'r'],
@@ -829,10 +829,10 @@ export default function diagramLayout() {
         rb: { symbol: 'bracket', side: 'right' },
         sin: { style: 'normal' },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         sin: {
           content: ['sin', { brac: ['lb', 'theta', 'rb'] }],

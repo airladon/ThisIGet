@@ -57,9 +57,9 @@ export default function diagramLayout() {
       base: { frac: ['num', 'v', '_2'] },
     },
     scale: 0.6,
-    defaultFormAlignment: {
+    formDefaults: { alignment: {
       xAlign: 'center',
-    },
+    } },
   });
 
   layout.left = {
@@ -198,10 +198,10 @@ export default function diagramLayout() {
         'a': ['a', 'equals', { frac: [['_180', 'minus', 'b'], 'v', '_2'] }],
         'b': ['b', 'equals', '_180', 'minus', '_2', 'a'],
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         // fixTo: 'equals',
         xAlign: 'center',
-      },
+      } },
     },
     mods: {
       scenarios: {

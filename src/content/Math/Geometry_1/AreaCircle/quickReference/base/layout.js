@@ -90,9 +90,9 @@ export default function diagramLayout() {
     options: {
       color: colors.diagram.text.base,
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
-      },
+      } },
       elements: {
         _Area: { text: 'Area', color: colors.qrAreaCircle_sides },
         equals: '  =  ',

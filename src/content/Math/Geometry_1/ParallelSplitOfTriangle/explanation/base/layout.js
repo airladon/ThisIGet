@@ -639,11 +639,11 @@ export default function diagramLayout() {
     options: {
       // navType: '1Button',
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       scale: 0.8,
       elements,
       forms: {
@@ -1195,11 +1195,11 @@ export default function diagramLayout() {
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       scale: 0.8,
       elements: elementsFig2,
       forms: {
@@ -1266,11 +1266,11 @@ export default function diagramLayout() {
     method: 'addEqn',
     options: {
       color: colors.diagram.text.base,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       scale: 0.8,
       elements: {
         AB: { text: 'AB', color: colors.sides },

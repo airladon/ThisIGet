@@ -264,9 +264,9 @@ export default function diagramLayout() {
     options: {
       color: colors.diagram.text.base,
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',
-      },
+      } },
       elements: {
         Area: { color: colors.sides },
         _Area: { text: 'Area', color: colors.sides },

@@ -495,11 +495,11 @@ export default function diagramLayout() {
           symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012, width: 0.05,
         },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'bottom',
-      },
+      } },
       forms: {
         'circ': {
           content: ['circumference', 'equals', 'twoPi', 'r'],
@@ -639,11 +639,11 @@ export default function diagramLayout() {
         x: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'bottom',
-      },
+      } },
       forms: {
         'circumference': ['circumference', 'equals', {
           container: {
@@ -765,11 +765,11 @@ export default function diagramLayout() {
         x_g1: { text: 'x', color: colors.angles },
         x_r: { text: 'x', color: colors.arc },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'bottom',
-      },
+      } },
       forms: {
         radFirst: [
           dFrac('d', 'v_1', 'dx'), ' ', { sub: ['sin', '', 0.4] }, ' ', { sub: ['x_1', '', 0.4] }, 'equals', { sub: ['cos', '', 0.4] }, ' ', { sub: ['x_3', '', 0.4] },
@@ -923,11 +923,11 @@ export default function diagramLayout() {
         s_3: { symbol: 'strike', style: 'cross', color: colors.dull },
         s_4: { symbol: 'strike', style: 'cross', color: colors.dull },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'bottom',
-      },
+      } },
       forms: {
         'start': [],
         '0': {
@@ -1064,11 +1064,11 @@ export default function diagramLayout() {
         s_3: { symbol: 'strike', style: 'cross', color: colors.dull },
         s_4: { symbol: 'strike', style: 'cross', color: colors.dull },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'bottom',
-      },
+      } },
       forms: {
         // '0': [
         //   container(['_360', 'degSym']),

@@ -284,11 +284,11 @@ export default function diagramLayout() {
           symbol: 'brace', side: 'top', color: colors.qrRadians_marks,
         },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'top',
-      },
+      } },
       forms: {
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         // 'radius': [{ frac: ['_arc', '_angle', 'v'] }, 'equals', '_radius'],

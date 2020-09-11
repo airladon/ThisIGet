@@ -216,11 +216,11 @@ export default function diagramLayout() {
           //   mods: { interactiveLocation: new Point(0.2, 0.21) },
           // },
         },
-        defaultFormAlignment: {
+        formDefaults: { alignment: {
           fixTo: 'equals',    // Points can also be defined as objects
           xAlign: 'center',
           yAlign: 'baseline',
-        },
+        } },
         forms: {
           sine: [
             // 'sin', { brac: ['lb', 'theta', 'rb'] },

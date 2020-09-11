@@ -757,9 +757,9 @@ export default function diagramLayout() {
           '_Area', 'equals', { sup: ['__B', '__2'] },
         ],
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
-      },
+      } },
     },
     mods: {
       scenarios: {

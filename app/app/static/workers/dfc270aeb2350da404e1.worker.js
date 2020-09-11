@@ -785,7 +785,7 @@ function rand2D(minX, minY, maxX, maxY) {
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download, Subscriber, SubscriptionManager */
+/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download, Subscriber, SubscriptionManager, getFromObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -825,6 +825,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "download", function() { return download; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Subscriber", function() { return Subscriber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionManager", function() { return SubscriptionManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromObject", function() { return getFromObject; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -874,7 +875,45 @@ var classify = function classify(key, value) {
   var withKey = nonEmpty[0] === '-' || nonEmpty.startsWith("".concat(key, "-")) ? "".concat(key, " ").concat(nonEmpty) : nonEmpty;
   var joinStr = " ".concat(key, "-");
   return "".concat(withKey.split(' -').join(joinStr));
-};
+}; // function getObjectValueFromPath(
+//   obj: Object,
+//   path: string,
+//   createIfUndefined: boolean = false,
+//   levelSeparator: string = '.',
+// ) {
+//   if (path.length === 0 || (path.length === 1 && path[0] === levelSeparator)) {
+//     return obj;
+//   }
+//   if (createIfUndefined) {
+//     obj[path[0]] = {};
+//   }
+//   if (obj[path[0]] === undefined) {
+//     return undefined;
+//   }
+//   if (typeof obj[path[0]] === 'object') {
+//     return getObjectValueFromPath(obj[path[0]], path.slice(1), createIfUndefined, levelSeparator);
+//   }
+//   if (path.length === 1) {
+//     return obj[path[0]];
+//   }
+//   return undefined;
+// }
+// function setObjectValueWithPath(
+//   obj: Object,
+//   path: string,
+//   value: any,
+//   levelSeparator: string = '.',
+// ) {
+//   if (path.length === 0 || (path.length === 1 && path[0] === levelSeparator)) {
+//     return;
+//   }
+//   if (path.length === 1) {
+//     obj[path[0]] = value;
+//     return;
+//   }
+//   if(obj[path[0]])
+// }
+
 
 var ObjectKeyPointer = /*#__PURE__*/function () {
   function ObjectKeyPointer(object, key) {
@@ -925,6 +964,7 @@ var ObjectKeyPointer = /*#__PURE__*/function () {
 
 function extractFrom(objectToExtractFrom, keyValues) {
   var keyPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '_';
   var out = [];
 
   if (typeof keyValues === 'string') {
@@ -932,18 +972,19 @@ function extractFrom(objectToExtractFrom, keyValues) {
       return new ObjectKeyPointer(objectToExtractFrom, keyPrefix + keyValues);
     }
 
-    var keyHeirarchy = keyValues.split('_');
+    var keyHeirarchy = keyValues.split(keySeparator);
     var keys = keyHeirarchy.filter(function (k) {
       return k.length > 0;
     });
+    var prefixAndKey = "".concat(keyPrefix).concat(keys[0]);
 
     if (keys.length > 1) {
-      if (keyPrefix + keys[0] in objectToExtractFrom) {
-        return extractFrom(objectToExtractFrom[keyPrefix + keys[0]], keys.slice(1).join('_'), keyPrefix);
+      if (prefixAndKey in objectToExtractFrom) {
+        return extractFrom(objectToExtractFrom[prefixAndKey], keys.slice(1).join(keySeparator), keyPrefix, keySeparator);
       }
     } else if (keys.length === 1) {
-      if (keyPrefix + keys[0] in objectToExtractFrom) {
-        return new ObjectKeyPointer(objectToExtractFrom, keyPrefix + keys[0]);
+      if (prefixAndKey in objectToExtractFrom) {
+        return new ObjectKeyPointer(objectToExtractFrom, prefixAndKey);
       }
     }
 
@@ -952,7 +993,7 @@ function extractFrom(objectToExtractFrom, keyValues) {
 
   if (Array.isArray(keyValues)) {
     keyValues.forEach(function (kv) {
-      var result = extractFrom(objectToExtractFrom, kv, keyPrefix);
+      var result = extractFrom(objectToExtractFrom, kv, keyPrefix, keySeparator);
 
       if (result !== undefined) {
         out.push(result);
@@ -973,13 +1014,45 @@ function extractFrom(objectToExtractFrom, keyValues) {
   return out;
 }
 
+function getFromObject(objectToGetFrom, keyPath) {
+  var levelSeparator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
+
+  if (keyPath.length === 0 || keyPath === levelSeparator) {
+    return objectToGetFrom;
+  }
+
+  var result = extractFrom(objectToGetFrom, keyPath, '', levelSeparator);
+
+  if (result === undefined) {
+    return undefined;
+  }
+
+  return result.value();
+} // function getObjectValueFromPath(
+//   objectToExtractFrom: Object,
+//   path: string,
+//   pathSeparator: string = '.',
+// ) {
+//   const result = extractFrom(objectToExtractFrom, path, '', pathSeparator);
+//   if (result === undefined) {
+//     return undefined;
+//   }
+//   if (Array.isArray(result)) {
+//     return result[0].value();
+//   }
+//   return result.value();
+// }
+
+
 function getElement(collection, keyValues) {
-  return extractFrom(collection, keyValues, '_');
+  return extractFrom(collection, keyValues, '_', '_');
 }
 
-function addToObject(obj, nameToAdd, valueToAdd) {
-  var splitStr = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '-';
-  var levels = nameToAdd.split(splitStr);
+function addToObject(obj, keyPath, valueToAdd) {
+  var levelSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
+  var levels = keyPath.split(levelSeparator).filter(function (a) {
+    return a.length > 0;
+  });
   var currentLevel = obj;
   levels.forEach(function (level, index) {
     if (index === levels.length - 1) {
@@ -2132,4 +2205,4 @@ function download(filename, text) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=dd868fb1b993e3068607.worker.js.map
+//# sourceMappingURL=dfc270aeb2350da404e1.worker.js.map

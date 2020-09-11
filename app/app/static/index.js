@@ -5666,8 +5666,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
  // import getShaders from './webgl/shaders';
 
- // import * as math from '../tools/math';
 
+// import * as math from '../tools/math';
 
 
 
@@ -6658,7 +6658,8 @@ var Diagram = /*#__PURE__*/function () {
   }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
-      this.limits = limits._dup();
+      var l = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getRect"])(limits);
+      this.limits = l._dup();
       this.setSpaceTransforms();
     } // Renders all tied elements in the first level of diagram elements
 
@@ -7493,17 +7494,16 @@ var Diagram = /*#__PURE__*/function () {
     value: function draw(nowIn) {
       var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
+      // const start = new Date().getTime();
       if (this.state.pause === 'paused') {
         return;
-      } // console.log('Draw draw drawey draw draw', nowIn, this.drawQueued)
-
+      }
 
       var now = nowIn;
 
       if (nowIn === -1) {
         now = this.lastDrawTime;
-      } // console.log((now - this.lastDrawTime) * 1000);
-
+      }
 
       this.lastDrawTime = now;
 
@@ -7511,13 +7511,6 @@ var Diagram = /*#__PURE__*/function () {
         this.scrolled = false;
 
         if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 4) {
-          // if (this.webglLow.gl.canvas.style.top !== '-10000px') {
-          //   this.webglLow.gl.canvas.style.top = '-10000px';
-          //   this.waitForFrames = 1;
-          // }
-          // if (this.waitForFrames > 0) {
-          //   this.waitForFrames -= 1;
-          // } else {
           this.renderAllElementsToTiedCanvases(); // }
 
           this.scrollingFast = true;
@@ -7538,19 +7531,12 @@ var Diagram = /*#__PURE__*/function () {
 
       this.drawQueued = false;
       this.clearContext(canvasIndex); // console.log('really drawing')
+      // const startSetup = new Date().getTime();
 
-      this.elements.setupDraw(now, canvasIndex);
-      this.elements.draw(now, [this.spaceTransforms.diagramToGL], 1, canvasIndex); // console.log('really done')
-      // if (this.pauseAfterNextDrawFlag) {
-      //   this.pause();
-      //   this.pauseAfterNextDrawFlag = false;
-      // }
-      // if (this.state.pause === 'paused') {
-      //   return;
-      // }
-      // if (this.isPaused) {
-      //   return;
-      // }
+      this.elements.setupDraw(now, canvasIndex); // const endSetup = new Date().getTime();
+      // const startDraw = endSetup;
+
+      this.elements.draw(now, [this.spaceTransforms.diagramToGL], 1, canvasIndex); // const endDraw = new Date().getTime();
 
       if (this.elements.isAnyElementMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -7559,11 +7545,11 @@ var Diagram = /*#__PURE__*/function () {
       if (this.drawAnimationFrames > 0) {
         this.drawAnimationFrames -= 1;
         this.animateNextFrame(true, 'queued frames');
-      } // if (this.drawTimeoutId) {
-      //   clearTimeout(this.drawTimeoutId);
-      //   this.drawTimeoutId = null;
-      // }
-      // this.drawTimeoutId = setTimeout(this.renderToImages.bind(this), 100);
+      } // const end = new Date().getTime();
+      // const total = end - start;
+      // const setup = endSetup - startSetup;
+      // const draw = endDraw - startDraw;
+      // console.log(total, setup, draw, total - setup - draw);
 
     } // renderToImages() {
     //   // console.log('visibility1')
@@ -10563,24 +10549,48 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
       color = [0.5, 0.5, 0.5, 1];
     }
 
+    var defaultFont = {
+      family: 'Times New Roman',
+      style: 'normal',
+      size: 0.2,
+      weight: '200',
+      color: color
+    };
     var defaultOptions = {
       color: color,
-      fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       scale: 0.7,
-      defaultFormAlignment: {
-        fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        xAlign: 'left',
-        yAlign: 'baseline'
+      formDefaults: {
+        alignment: {
+          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+          xAlign: 'left',
+          yAlign: 'baseline'
+        },
+        elementMods: {}
       },
       elements: {},
       forms: {},
       formSeries: {},
       formRestart: null
     };
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjectsWithOptions"])({
+      except: ['font']
+    }, {}, defaultOptions, options);
+
+    if (options.font instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]) {
+      optionsToUse.font = options.font;
+    } else if (options.font != null) {
+      optionsToUse.font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"](Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultFont, options.font));
+    } else {
+      optionsToUse.font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"](defaultFont);
+    } // debugger;
+
+
     optionsToUse.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.position, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
-    optionsToUse.defaultFormAlignment.fixTo = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.defaultFormAlignment.fixTo, optionsToUse.defaultFormAlignment.fixTo);
+    optionsToUse.formDefaults.alignment.fixTo = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.formDefaults.alignment.fixTo, optionsToUse.formDefaults.alignment.fixTo); // optionsToUse.defaultFormAlignment.fixTo = parsePoint(
+    //   optionsToUse.defaultFormAlignment.fixTo,
+    //   optionsToUse.defaultFormAlignment.fixTo,
+    // );
 
     if (optionsToUse.formRestart != null && optionsToUse.formRestart.pulse != null) {
       optionsToUse.formRestart.pulse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
@@ -10590,6 +10600,11 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     }
 
     _this = _super.call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits);
+
+    if (optionsToUse.transform != null) {
+      _this.setTransform(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getTransform"])(optionsToUse.transform));
+    }
+
     _this.shapes = shapes;
 
     _this.setColor(optionsToUse.color); // this.isTouchDevice = isTouchDevice;
@@ -10600,18 +10615,23 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     _this.eqn = {
       forms: {},
       currentForm: '',
-      currentSubForm: '',
-      subFormPriority: ['base'],
+      // currentSubForm: '',
+      // subFormPriority: ['base'],
       formSeries: {
         base: []
       },
       currentFormSeries: [],
       currentFormSeriesName: '',
       scale: optionsToUse.scale,
-      defaultFormAlignment: optionsToUse.defaultFormAlignment,
+      // defaultFormAlignment: optionsToUse.defaultFormAlignment,
+      formDefaults: {
+        alignment: optionsToUse.formDefaults.alignment,
+        elementMods: optionsToUse.formDefaults.elementMods,
+        animation: optionsToUse.formDefaults.animation
+      },
       functions: new _EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["EquationFunctions"](_this.elements, _this.addElementFromKey.bind(_assertThisInitialized(_this)), _this.getExistingOrAddSymbol.bind(_assertThisInitialized(_this))),
       symbols: new _EquationSymbols__WEBPACK_IMPORTED_MODULE_8__["default"](_this.shapes, _this.color),
-      fontMath: optionsToUse.fontMath,
+      font: optionsToUse.font,
       // fontText: optionsToUse.fontText,
       isAnimating: false,
       descriptionElement: null,
@@ -10623,6 +10643,10 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
     if (optionsToUse.elements != null) {
       _this.addElements(optionsToUse.elements);
+    }
+
+    if (optionsToUse.phrases != null) {
+      _this.addPhrases(optionsToUse.phrases);
     }
 
     if (optionsToUse.forms != null) {
@@ -10654,12 +10678,14 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     key: "_getStateProperties",
     value: function _getStateProperties(options) {
       // eslint-disable-line class-methods-use-this
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this, options)), ['eqn.currentForm', 'eqn.currentSubForm', 'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStateProperties", this).call(this, options)), ['eqn.currentForm', // 'eqn.currentSubForm',
+      'eqn.isAnimating', 'eqn.currentFormSeries', 'eqn.currentFormSeriesName']);
     }
   }, {
     key: "_getStatePropertiesMin",
     value: function _getStatePropertiesMin() {
-      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStatePropertiesMin", this).call(this)), ['eqn.currentForm', 'eqn.currentSubForm']);
+      return [].concat(_toConsumableArray(_get(_getPrototypeOf(Equation.prototype), "_getStatePropertiesMin", this).call(this)), ['eqn.currentForm' // 'eqn.currentSubForm',
+      ]);
     } // animateToState(
     //   state: Object,
     //   options: Object,
@@ -10705,52 +10731,74 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
         textToUse = options.text;
       }
 
-      var fontToUse = this.eqn.fontMath; // if (textToUse.match(/[A-Z,a-z,\u03B8]/)) {
+      var defaultFontDefinition = this.eqn.font.definition();
+      var fontDefinition = defaultFontDefinition;
+
+      if (options.font != null && options.font instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]) {
+        fontDefinition = options.font.definition();
+      } else if (options.font != null) {
+        fontDefinition = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultFontDefinition, options.font);
+      } // let fontToUse: DiagramFont = this.eqn.fontMath;
+      // if (textToUse.match(/[A-Z,a-z,\u03B8]/)) {
       //   fontToUse = this.eqn.fontText;
       // }
+      // let style;
+      // const { weight, size } = fontDefinition;
 
-      var style;
-      var weight;
-      var scale;
-      var size;
 
       if (options.style != null) {
-        style = options.style;
+        fontDefinition.style = options.style;
       } else if (textToUse.match(/[A-Z,a-z,\u03B8]/)) {
-        style = 'italic';
+        fontDefinition.style = 'italic';
+      } else {
+        fontDefinition.style = 'normal';
       }
 
       if (options.weight != null) {
-        weight = options.weight;
-      }
-
-      if (options.scale != null) {
-        scale = options.scale;
-        size = scale * 0.2;
+        fontDefinition.weight = options.weight;
       }
 
       if (options.size != null) {
-        size = options.size;
+        fontDefinition.size = options.size;
       }
-
-      if (style != null || weight != null || size != null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]('Times New Roman', style || 'normal', size || 0.2, weight || '200', 'left', 'alphabetic', this.color);
-      }
-
-      if (options.font != null) {
-        fontToUse = options.font;
-      }
-
-      var p = this.shapes.text(textToUse, {
-        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        font: fontToUse
-      });
 
       if (options.color != null) {
-        p.setColor(options.color);
-      } else {
-        p.setColor(p.drawingObject.text[0].font.color);
+        fontDefinition.color = options.color;
       }
+
+      if (fontDefinition.color == null) {
+        fontDefinition.color = this.color;
+      } // if (options.font != null && options.font instanceof DiagramFont) {
+      //   fontDefinition = options.font.definition();
+      // } else if (options.font != null) {
+      //   fontDefinition = joinObjects({}, fontDefinition, options.font);
+      // }
+      // if (style != null || weight != null || size != null) {
+
+
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"](fontDefinition); //   'Times New Roman',
+      //   style || 'normal',
+      //   size || 0.2,
+      //   weight || '200',
+      //   'left', 'alphabetic', this.color,
+      // );
+      // }
+      // if (options.font != null) {
+      //   fontToUse = joinObjects({}, fontToUse, options.font);
+      // }
+
+      var p = this.shapes.text( // textToUse,
+      {
+        text: textToUse,
+        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        font: font,
+        xAlign: 'left',
+        yAlign: 'baseline'
+      }); // if (options.color != null) {
+      //   p.setColor(options.color);
+      // } else {
+      //   p.setColor(p.drawingObject.text[0].font.color);
+      // }
 
       return p;
     } // eslint-disable-next-line class-methods-use-this
@@ -10787,6 +10835,17 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
       if (existingElement != null) {
         return existingElement;
+      } // Check if the options has a symbol definition
+
+
+      if (options.symbol != null && typeof options.symbol === 'string') {
+        // debugger;
+        var _symbol = this.makeSymbolElem(options);
+
+        if (_symbol != null) {
+          this.add(key, _symbol);
+          return _symbol;
+        }
       } // Check the key is a symbol
 
 
@@ -11011,19 +11070,18 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
       var isFormElements = function isFormElements(form) {
         return form instanceof _Elements_Element__WEBPACK_IMPORTED_MODULE_4__["Elements"] || form instanceof _Elements_BaseAnnotationFunction__WEBPACK_IMPORTED_MODULE_5__["default"];
-      };
+      }; // const isFormFullObject = (form) => {
+      //   if (isFormString(form) || isFormArray(form)
+      //     || isFormMethodDefinition(form) || isFormElements(form)
+      //   ) {
+      //     return false;
+      //   }
+      //   if (form != null && typeof form === 'object' && form.content != null) {
+      //     return true;
+      //   }
+      //   return false;
+      // };
 
-      var isFormFullObject = function isFormFullObject(form) {
-        if (isFormString(form) || isFormArray(form) || isFormMethodDefinition(form) || isFormElements(form)) {
-          return false;
-        }
-
-        if (form != null && _typeof(form) === 'object' && form.content != null) {
-          return true;
-        }
-
-        return false;
-      };
 
       var addFormNormal = function addFormNormal(name, form) {
         // $FlowFixMe
@@ -11035,28 +11093,27 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
       var addFormFullObject = function addFormFullObject(name, form) {
         // $FlowFixMe
         var formContent = [_this4.eqn.functions.contentToElement(form.content)];
-        var subForm = form.subForm,
-            elementMods = form.elementMods,
+        var elementMods = form.elementMods,
             duration = form.duration,
             alignment = form.alignment,
             scale = form.scale,
             description = form.description,
             modifiers = form.modifiers,
-            fromPrev = form.fromPrev,
-            fromNext = form.fromNext,
-            translation = form.translation;
+            animation = form.animation,
+            fromForm = form.fromForm;
         var options = {
-          subForm: subForm,
+          // subForm,
           // addToSeries,
           elementMods: elementMods,
           duration: duration,
-          translation: translation,
+          animation: animation,
           alignment: alignment,
           scale: scale,
           description: description,
           modifiers: modifiers,
-          fromPrev: fromPrev,
-          fromNext: fromNext
+          // fromPrev,
+          // fromNext,
+          fromForm: fromForm
         }; // $FlowFixMe
 
         _this4.addForm(name, formContent, options);
@@ -11067,29 +11124,25 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
         if (isFormString(form) || isFormArray(form) || isFormMethodDefinition(form) || isFormElements(form)) {
           addFormNormal(name, form);
-        } else if (isFormFullObject(form)) {
-          addFormFullObject(name, form);
         } else {
-          Object.entries(form).forEach(function (subFormEntry) {
-            var _subFormEntry = _slicedToArray(subFormEntry, 2),
-                subFormName = _subFormEntry[0],
-                subFormValue = _subFormEntry[1]; // const subFormOption = { subForm: subFormName };
+          addFormFullObject(name, form);
+        } // } else if (isFormFullObject(form)) {
+        //   addFormFullObject(name, form);
+        // } else {
+        //   Object.entries(form).forEach((subFormEntry) => {
+        //     const [subFormName: string, subFormValue] = subFormEntry;
+        //     // const subFormOption = { subForm: subFormName };
+        //     if (isFormString(subFormValue) || isFormArray(subFormValue)
+        //       || isFormMethodDefinition(subFormValue) || isFormElements(subFormValue)
+        //     ) { // $FlowFixMe
+        //       addFormFullObject(name, { content: subFormValue, subForm: subFormName });
+        //     } else {
+        //       // $FlowFixMe
+        //       addFormFullObject(name, joinObjects(subFormValue, { subForm: subFormName }));
+        //     }
+        //   });
+        // }
 
-
-            if (isFormString(subFormValue) || isFormArray(subFormValue) || isFormMethodDefinition(subFormValue) || isFormElements(subFormValue)) {
-              // $FlowFixMe
-              addFormFullObject(name, {
-                content: subFormValue,
-                subForm: subFormName
-              });
-            } else {
-              // $FlowFixMe
-              addFormFullObject(name, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(subFormValue, {
-                subForm: subFormName
-              }));
-            }
-          });
-        }
       });
     }
   }, {
@@ -11132,25 +11185,21 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
       var _this5 = this;
 
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-      if (!(name in this.eqn.forms)) {
-        // $FlowFixMe   - its ok for this to start undefined, it will be filled.
-        this.eqn.forms[name] = {};
-      }
-
-      var defaultOptions = {
-        subForm: 'base',
+      // if (!(name in this.eqn.forms)) {
+      //   // $FlowFixMe   - its ok for this to start undefined, it will be filled.
+      //   this.eqn.forms[name] = {};
+      // }
+      var defaultOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
         elementMods: {},
-        duration: undefined,
-        // duration: null,                // use velocities instead of time
         description: '',
         modifiers: {},
         scale: this.eqn.scale,
-        alignment: this.eqn.defaultFormAlignment,
-        translation: {},
-        fromNext: undefined,
-        fromPrev: undefined
-      };
+        animation: {
+          duration: undefined // use null for velocities
+
+        },
+        fromForm: {}
+      }, this.eqn.formDefaults);
       var optionsToUse = defaultOptions;
 
       if (options) {
@@ -11158,179 +11207,168 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
       }
 
       var _optionsToUse = optionsToUse,
-          subForm = _optionsToUse.subForm,
           description = _optionsToUse.description,
           modifiers = _optionsToUse.modifiers,
-          duration = _optionsToUse.duration;
-      this.eqn.forms[name].name = name;
-      var form = this.eqn.forms[name];
-      form[subForm] = this.createForm();
-      form[subForm].description = description;
-      form[subForm].modifiers = modifiers;
-      form[subForm].name = name;
-      form[subForm].subForm = subForm;
-      form[subForm].duration = duration; // Populate element mods
+          animation = _optionsToUse.animation,
+          fromForm = _optionsToUse.fromForm; // this.eqn.forms[name].name = name;
+      // const form = this.eqn.forms[name];
+      // form[subForm] = this.createForm();
 
-      form[subForm].elementMods = {};
-      Object.keys(optionsToUse.elementMods).forEach(function (elementName) {
-        var mods = optionsToUse.elementMods[elementName];
-        var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
+      var form = this.createForm();
+      this.eqn.forms[name] = form;
+      form.description = description;
+      form.modifiers = modifiers;
+      form.name = name;
+      form.animation = animation;
+      form.fromForm = fromForm; // Populate element mods
 
-        if (diagramElement != null) {
-          form[subForm].elementMods[elementName] = {
-            element: diagramElement,
-            mods: mods
-          };
-        }
-      }); // Populate translation mods
+      form.elementMods = {};
 
-      form[subForm].translation = {};
-      Object.keys(optionsToUse.translation).forEach(function (elementName) {
-        var mods = optionsToUse.translation[elementName];
-        var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
-        var direction;
-        var style;
-        var mag;
+      var transformElementMods = function transformElementMods(elementMods) {
+        var newMods = {};
+        Object.keys(elementMods).forEach(function (elementName) {
+          var mods = elementMods[elementName];
+          var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
 
-        if (Array.isArray(mods)) {
-          var _mods = _slicedToArray(mods, 3);
+          if (diagramElement != null) {
+            newMods[elementName] = {
+              element: diagramElement,
+              mods: mods
+            };
+          }
+        });
+        return newMods;
+      };
 
-          style = _mods[0];
-          direction = _mods[1];
-          mag = _mods[2];
-        } else {
-          style = mods.style;
-          direction = mods.direction;
-          mag = mods.mag;
-        }
+      var transformTranslation = function transformTranslation(translation) {
+        var newTranslation = {};
+        Object.keys(translation).forEach(function (elementName) {
+          var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
+          var mods = translation[elementName];
+          var direction;
+          var style;
+          var mag;
 
-        if (diagramElement != null) {
-          form[subForm].translation[elementName] = {
-            element: diagramElement,
-            style: style,
-            direction: direction,
-            mag: mag
-          };
-        }
-      }); // Populate translation mods
+          if (Array.isArray(mods)) {
+            var _mods = _slicedToArray(mods, 3);
 
-      var _optionsToUse2 = optionsToUse,
-          fromPrev = _optionsToUse2.fromPrev;
+            style = _mods[0];
+            direction = _mods[1];
+            mag = _mods[2];
+          } else {
+            style = mods.style;
+            direction = mods.direction;
+            mag = mods.mag;
+          }
 
-      if (fromPrev != null) {
-        form[subForm].fromPrev = {};
+          if (diagramElement != null) {
+            newTranslation[elementName] = {
+              element: diagramElement,
+              style: style,
+              direction: direction,
+              mag: mag
+            };
+          }
+        });
+        return newTranslation;
+      };
 
-        if (fromPrev.duration !== undefined) {
-          form[subForm].fromPrev.duration = fromPrev.duration;
-        }
+      form.elementMods = transformElementMods(optionsToUse.elementMods);
 
-        form[subForm].fromPrev.translation = {};
+      if (form.animation.translation != null) {
+        form.animation.translation = transformTranslation(form.animation.translation);
+      } // // form.fromForm = {};
+      // Object.keys(form.fromForm).forEach((formName) => {
+      //   if (fromForm.elementMods != null) {
+      //     form.fromForm[formName].elementMods = transformElementMods(
+      //       form.fromForm[formName].elementMods,
+      //     );
+      //   }
+      //   if (
+      //     form.fromForm[formName].animation != null
+      //     && form.fromForm[formName].animation.translation != null
+      //   ) {
+      //     form.fromForm[formName].animation.translation = transformTranslation(
+      //       form.fromForm[formName].animation.translation,
+      //     );
+      //   }
+      // });
+      // Object.keys(optionsToUse.elementMods).forEach((elementName) => {
+      //   const mods = optionsToUse.elementMods[elementName];
+      //   const diagramElement = getDiagramElement(this, elementName);
+      //   if (diagramElement != null) {
+      //     form.elementMods[elementName] = { element: diagramElement, mods };
+      //   }
+      // });
+      // const getTranslation = (elementName, modOptions) => {
+      //   const diagramElement = getDiagramElement(this, elementName);
+      //   const mods = modOptions[elementName];
+      //   let direction;
+      //   let style;
+      //   let mag;
+      //   if (Array.isArray(mods)) {
+      //     [style, direction, mag] = mods;
+      //   } else {
+      //     ({ style, direction, mag } = mods);
+      //   }
+      //   if (diagramElement != null) {
+      //     return {
+      //       element: diagramElement, style, direction, mag,
+      //     };
+      //   }
+      //   return null;
+      // };
+      // const setFormAnimationOptions = (optionsPath) => {
+      //   const animationOptions = getFromObject(optionsToUse, optionsPath, '.');
+      //   if (animationOptions === undefined) {
+      //     return;
+      //   }
+      //   if (animationOptions.duration !== undefined) {
+      //     addToObject(
+      //       form, `${optionsPath}.duration`, animationOptions.duration,
+      //     );
+      //   }
+      //   if (animationOptions.translation != null) {
+      //     Object.keys(animationOptions.translation).forEach((elementName) => {
+      //       const translation = getTranslation(elementName, animationOptions.translation);
+      //       if (translation != null) {
+      //         if (translation == null) {
+      //           addToObject(
+      //             form, `${optionsPath}.translation`, {},
+      //           );
+      //         } else {
+      //           addToObject(
+      //             form, `${optionsPath}.translation.${elementName}`, translation,
+      //           );
+      //         }
+      //       }
+      //     });
+      //   }
+      // };
+      // setFormAnimationOptions('');
+      // if (optionsToUse.fromForm != null) {
+      //   Object.keys(optionsToUse.fromForm).forEach((formName) => {
+      //     setFormAnimationOptions(`fromForm.${formName}`);
+      //   });
+      // }
 
-        if (fromPrev.translation != null) {
-          Object.keys(fromPrev.translation).forEach(function (elementName) {
-            var mods = fromPrev.translation[elementName];
-            var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
-            var direction;
-            var style;
-            var mag;
-
-            if (Array.isArray(mods)) {
-              var _mods2 = _slicedToArray(mods, 3);
-
-              style = _mods2[0];
-              direction = _mods2[1];
-              mag = _mods2[2];
-            } else {
-              style = mods.style;
-              direction = mods.direction;
-              mag = mods.mag;
-            }
-
-            if (diagramElement != null) {
-              // $FlowFixMe
-              form[subForm].fromPrev.translation[elementName] = {
-                element: diagramElement,
-                style: style,
-                direction: direction,
-                mag: mag
-              };
-            }
-          });
-        }
-      } // Populate translation mods
-
-
-      var _optionsToUse3 = optionsToUse,
-          fromNext = _optionsToUse3.fromNext;
-
-      if (fromNext != null) {
-        form[subForm].fromNext = {};
-
-        if (fromNext.duration !== undefined) {
-          form[subForm].fromNext.duration = fromNext.duration;
-        }
-
-        form[subForm].fromNext.translation = {};
-
-        if (fromNext.translation != null) {
-          Object.keys(fromNext.translation).forEach(function (elementName) {
-            var mods = fromNext.translation[elementName];
-            var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
-            var direction;
-            var style;
-            var mag;
-
-            if (Array.isArray(mods)) {
-              var _mods3 = _slicedToArray(mods, 3);
-
-              style = _mods3[0];
-              direction = _mods3[1];
-              mag = _mods3[2];
-            } else {
-              style = mods.style;
-              direction = mods.direction;
-              mag = mods.mag;
-            }
-
-            if (diagramElement != null) {
-              // $FlowFixMe
-              form[subForm].fromNext.translation[elementName] = {
-                element: diagramElement,
-                style: style,
-                direction: direction,
-                mag: mag
-              };
-            }
-          });
-        }
-      }
 
       optionsToUse.alignment.fixTo = this.checkFixTo(optionsToUse.alignment.fixTo);
-      form[subForm].content = content;
-      form[subForm].arrange(optionsToUse.scale, optionsToUse.alignment.xAlign, optionsToUse.alignment.yAlign, optionsToUse.alignment.fixTo); // const { addToSeries } = optionsToUse;
-      // console.log(addToSeries)
-      // if (addToSeries != null && addToSeries !== '' && typeof addToSeries === 'string') {
-      //   if (this.eqn.formSeries[addToSeries] == null) {
-      //     this.eqn.formSeries[addToSeries] = [];
-      //   }
-      //   this.eqn.formSeries[addToSeries].push(form);
+      form.content = content;
+      form.arrange(optionsToUse.scale, optionsToUse.alignment.xAlign, optionsToUse.alignment.yAlign, optionsToUse.alignment.fixTo); // // make the first form added also equal to the base form as always
+      // // need a base form for some functions
+      // if (this.eqn.forms[name].base === undefined) {
+      //   const baseOptions = joinObjects({}, optionsToUse);
+      //   baseOptions.subForm = 'base';
+      //   this.addForm(name, content, baseOptions);
       // }
-      // make the first form added also equal to the base form as always
-      // need a base form for some functions
-
-      if (this.eqn.forms[name].base === undefined) {
-        var baseOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, optionsToUse);
-        baseOptions.subForm = 'base';
-        this.addForm(name, content, baseOptions);
-      }
 
       if (this.eqn.currentForm === '') {
         this.eqn.currentForm = name;
-      }
+      } // if (this.eqn.currentSubForm === '') {
+      //   this.eqn.currentSubForm = 'base';
+      // }
 
-      if (this.eqn.currentSubForm === '') {
-        this.eqn.currentSubForm = 'base';
-      }
     }
     /**
      * Get the current equation form
@@ -11341,13 +11379,12 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     value: function getCurrentForm() {
       if (this.eqn.forms[this.eqn.currentForm] == null) {
         return null;
-      }
+      } // if (this.eqn.forms[this.eqn.currentForm][this.eqn.currentSubForm] == null) {
+      //   return null;
+      // }
 
-      if (this.eqn.forms[this.eqn.currentForm][this.eqn.currentSubForm] == null) {
-        return null;
-      }
 
-      return this.eqn.forms[this.eqn.currentForm][this.eqn.currentSubForm];
+      return this.eqn.forms[this.eqn.currentForm];
     }
   }, {
     key: "render",
@@ -11369,23 +11406,18 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
   }, {
     key: "setCurrentForm",
-    value: function setCurrentForm(formOrName) {
-      var subForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'base';
-
+    value: function setCurrentForm(formOrName) // subForm: string = 'base',
+    {
       if (typeof formOrName === 'string') {
-        this.eqn.currentForm = '';
-        this.eqn.currentSubForm = '';
+        this.eqn.currentForm = ''; // this.eqn.currentSubForm = '';
 
         if (formOrName in this.eqn.forms) {
-          this.eqn.currentForm = formOrName;
-
-          if (subForm in this.eqn.forms[formOrName]) {
-            this.eqn.currentSubForm = subForm;
-          }
+          this.eqn.currentForm = formOrName; // if (subForm in this.eqn.forms[formOrName]) {
+          //   this.eqn.currentSubForm = subForm;
+          // }
         }
       } else {
-        this.eqn.currentForm = formOrName.name;
-        this.eqn.currentSubForm = formOrName.subForm;
+        this.eqn.currentForm = formOrName.name; // this.eqn.currentSubForm = formOrName.subForm;
       }
     }
     /**
@@ -11395,13 +11427,12 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
   }, {
     key: "showForm",
     value: function showForm(formOrName) {
-      var subForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var animationStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      var animationStop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       this.show();
       var form = formOrName;
 
       if (typeof formOrName === 'string') {
-        form = this.getForm(formOrName, subForm);
+        form = this.getForm(formOrName);
       }
 
       if (form) {
@@ -11415,31 +11446,25 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
   }, {
     key: "getForm",
-    value: function getForm(formOrName, subForm) {
-      var _this6 = this;
-
+    value: function getForm(formOrName) {
       if (formOrName instanceof _EquationForm__WEBPACK_IMPORTED_MODULE_6__["default"]) {
         return formOrName;
       }
 
       if (formOrName in this.eqn.forms) {
-        var formTypeToUse = subForm;
-
-        if (formTypeToUse == null) {
-          var possibleFormTypes // $FlowFixMe
-          = this.eqn.subFormPriority.filter(function (fType) {
-            return fType in _this6.eqn.forms[formOrName];
-          });
-
-          if (possibleFormTypes.length) {
-            // eslint-disable-next-line prefer-destructuring
-            formTypeToUse = possibleFormTypes[0];
-          }
-        }
-
-        if (formTypeToUse != null) {
-          return this.eqn.forms[formOrName][formTypeToUse];
-        }
+        // let formTypeToUse = subForm;
+        // if (formTypeToUse == null) {
+        //   const possibleFormTypes     // $FlowFixMe
+        //     = this.eqn.subFormPriority.filter(fType => fType in this.eqn.forms[formOrName]);
+        //   if (possibleFormTypes.length) {
+        //     // eslint-disable-next-line prefer-destructuring
+        //     formTypeToUse = possibleFormTypes[0];
+        //   }
+        // }
+        // if (formTypeToUse != null) {
+        //   return this.eqn.forms[formOrName][formTypeToUse];
+        // }
+        return this.eqn.forms[formOrName];
       }
 
       return null;
@@ -11451,17 +11476,16 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
   }, {
     key: "goToForm",
     value: function goToForm() {
-      var _this7 = this;
+      var _this6 = this;
 
       var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var defaultOptions = {
         duration: null,
         prioritizeFormDuration: true,
         delay: 0,
-        fromWhere: null,
+        fromWhere: '_current',
         animate: 'dissolve',
         callback: null,
-        // finishAnimatingAndCancelGoTo: false,
         ifAnimating: {
           skipToTarget: true,
           cancelGoTo: true
@@ -11494,8 +11518,8 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
       var form;
 
-      if (options.name != null) {
-        form = this.eqn.forms[options.name];
+      if (options.form != null) {
+        form = this.eqn.forms[options.form];
       } else if (options.index != null) {
         form = this.eqn.forms[this.eqn.currentFormSeries[options.index]];
       } else if (this.eqn.currentFormSeries.length > 0) {
@@ -11522,142 +11546,128 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
 
       if (form == null) {
         return;
-      } // const nextForm = this.eqn.forms[this.eqn.currentFormSeries[formIndex]];
-
-
-      var subForm = null;
-      var subFormToUse = null;
-      var possibleSubForms // $FlowFixMe - this is already checked above
-      = this.eqn.subFormPriority.filter(function (sf) {
-        return sf in form;
-      });
-
-      if (possibleSubForms.length) {
-        // eslint-disable-next-line prefer-destructuring
-        subFormToUse = possibleSubForms[0];
       }
 
-      if (subFormToUse != null) {
-        subForm = form[subFormToUse];
-        var duration = options.duration;
+      if (options.fromWhere === '_current') {
+        options.fromWhere = this.eqn.currentForm;
+      }
 
-        if (options.prioritizeFormDuration) {
-          if (options.fromWhere === 'fromPrev' && subForm.fromPrev != null && subForm.fromPrev.duration !== undefined) {
-            duration = subForm.fromPrev.duration;
-          } else if (options.fromWhere === 'fromNext' && subForm.fromNext != null && subForm.fromNext.duration !== undefined) {
-            duration = subForm.fromNext.duration;
-          } else if (subForm.duration !== undefined) {
-            var _subForm = subForm;
-            duration = _subForm.duration;
-          }
+      var duration = options.duration; // console.log(options)
+
+      if (options.prioritizeFormDuration) {
+        if (form.animation.duration !== undefined) {
+          duration = form.animation.duration;
         }
 
-        if (duration != null && duration > 0 && options.animate === 'dissolve') {
-          if (options.dissolveOutTime == null) {
-            options.dissolveOutTime = duration * 0.4;
-          }
+        if (options.fromWhere != null && form.fromForm[options.fromWhere] != null && form.fromForm[options.fromWhere].animation !== undefined && form.fromForm[options.fromWhere].animation.duration !== undefined) {
+          duration = form.fromForm[options.fromWhere].animation.duration;
+        }
+      }
 
-          if (options.dissolveInTime == null) {
-            options.dissolveInTime = duration * 0.4;
-          }
-
-          if (options.blankTime == null) {
-            options.blankTime = duration * 0.2;
-          }
-        } else {
-          if (options.dissolveOutTime == null) {
-            options.dissolveOutTime = 0.4;
-          }
-
-          if (options.dissolveInTime == null) {
-            options.dissolveInTime = 0.4;
-          }
-
-          if (options.blankTime == null) {
-            options.blankTime = 0.2;
-          }
+      if (duration != null && duration > 0 && options.animate === 'dissolve') {
+        if (options.dissolveOutTime == null) {
+          options.dissolveOutTime = duration * 0.4;
         }
 
-        if (duration === 0) {
-          this.showForm(subForm);
-          this.fnMap.exec(options.callback); // if (options.callback != null) {
+        if (options.dissolveInTime == null) {
+          options.dissolveInTime = duration * 0.4;
+        }
+
+        if (options.blankTime == null) {
+          options.blankTime = duration * 0.2;
+        }
+      } else {
+        if (options.dissolveOutTime == null) {
+          options.dissolveOutTime = 0.4;
+        }
+
+        if (options.dissolveInTime == null) {
+          options.dissolveInTime = 0.4;
+        }
+
+        if (options.blankTime == null) {
+          options.blankTime = 0.2;
+        }
+      }
+
+      if (duration === 0) {
+        this.showForm(form);
+        this.fnMap.exec(options.callback); // if (options.callback != null) {
+        //   options.callback();
+        // }
+      } else {
+        this.eqn.isAnimating = true;
+
+        var end = function end() {
+          _this6.eqn.isAnimating = false;
+
+          _this6.fnMap.exec(options.callback); // if (options.callback != null) {
           //   options.callback();
           // }
-        } else {
-          this.eqn.isAnimating = true;
 
-          var end = function end() {
-            _this7.eqn.isAnimating = false;
+        };
 
-            _this7.fnMap.exec(options.callback); // if (options.callback != null) {
-            //   options.callback();
-            // }
+        if (options.animate === 'move') {
+          // console.log('move', duration, options, subForm.duration)
+          // console.log('******************* animate')
+          form.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, false);
+        } else if (options.animate === 'dissolveInThenMove') {
+          // console.log('move', duration, options, subForm.duration)
+          // console.log('******************* animate')
+          form.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, true);
+        } else if (options.animate === 'moveFrom' && this.eqn.formRestart != null && this.eqn.formRestart.moveFrom != null) {
+          var moveFrom = this.eqn.formRestart.moveFrom;
+          var target = this.getPosition();
+          var start = this.getPosition();
 
-          };
-
-          if (options.animate === 'move') {
-            // console.log('move', duration, options, subForm.duration)
-            // console.log('******************* animate')
-            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, false);
-          } else if (options.animate === 'dissolveInThenMove') {
-            // console.log('move', duration, options, subForm.duration)
-            // console.log('******************* animate')
-            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere, true);
-          } else if (options.animate === 'moveFrom' && this.eqn.formRestart != null && this.eqn.formRestart.moveFrom != null) {
-            var moveFrom = this.eqn.formRestart.moveFrom;
-            var target = this.getPosition();
-            var start = this.getPosition();
-
-            if (moveFrom instanceof Equation) {
-              moveFrom.showForm(subForm.name);
-            }
-
-            if (moveFrom instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
-              start = moveFrom.getPosition();
-            } else {
-              // $FlowFixMe
-              start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestart.moveFrom);
-            }
-
-            var showFormCallback = function showFormCallback() {
-              // $FlowFixMe
-              _this7.showForm(subForm.name, subFormToUse, false);
-            };
-
-            this.fnMap.add('_equationShowFormCallback', showFormCallback);
-            this.animations["new"]().dissolveOut({
-              duration: options.dissolveOutTime
-            }).position({
-              target: start,
-              duration: 0
-            }).trigger({
-              callback: 'showFormCallback',
-              duration: 0.01
-            }).position({
-              target: target,
-              duration: duration
-            }).whenFinished(end).start();
-          } else if (options.animate === 'pulse' && this.eqn.formRestart != null && this.eqn.formRestart.pulse != null) {
-            var pulse = this.eqn.formRestart.pulse;
-
-            var newEnd = function newEnd() {
-              _this7.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
-
-              if (pulse.element != null && pulse.element instanceof Equation // $FlowFixMe
-              && pulse.element.getCurrentForm().name === subForm.name) {
-                pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
-              }
-            };
-
-            subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, newEnd);
-          } else {
-            // console.log('******************* hideshow')
-            subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, end);
+          if (moveFrom instanceof Equation) {
+            moveFrom.showForm(form.name);
           }
 
-          this.setCurrentForm(subForm);
-        } // this.updateDescription();
+          if (moveFrom instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+            start = moveFrom.getPosition();
+          } else {
+            // $FlowFixMe
+            start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestart.moveFrom);
+          }
 
+          var showFormCallback = function showFormCallback() {
+            // $FlowFixMe
+            _this6.showForm(form.name, false);
+          };
+
+          this.fnMap.add('_equationShowFormCallback', showFormCallback);
+          this.animations["new"]().dissolveOut({
+            duration: options.dissolveOutTime
+          }).position({
+            target: start,
+            duration: 0
+          }).trigger({
+            callback: 'showFormCallback',
+            duration: 0.01
+          }).position({
+            target: target,
+            duration: duration
+          }).whenFinished(end).start();
+        } else if (options.animate === 'pulse' && this.eqn.formRestart != null && this.eqn.formRestart.pulse != null) {
+          var pulse = this.eqn.formRestart.pulse;
+
+          var newEnd = function newEnd() {
+            _this6.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
+
+            if (pulse.element != null && pulse.element instanceof Equation // $FlowFixMe
+            && pulse.element.getCurrentForm().name === form.name) {
+              pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
+            }
+          };
+
+          form.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, newEnd);
+        } else {
+          // console.log('******************* hideshow')
+          form.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, end);
+        }
+
+        this.setCurrentForm(form);
       }
     }
   }, {
@@ -11700,7 +11710,7 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
           index: index,
           duration: duration,
           delay: delay,
-          fromWhere: 'fromNext'
+          fromWhere: currentForm.name
         });
       }
     }
@@ -11742,7 +11752,7 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
           index: index,
           duration: duration,
           delay: delay,
-          fromWhere: 'fromPrev',
+          fromWhere: currentForm.name,
           animate: animate
         });
       }
@@ -11799,11 +11809,11 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     }
   }, {
     key: "changeDescription",
-    value: function changeDescription(formOrName) {
+    value: function changeDescription(formOrName) // subForm: string = 'base',
+    {
       var description = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
       var modifiers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      var subForm = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'base';
-      var form = this.getForm(formOrName, subForm);
+      var form = this.getForm(formOrName);
 
       if (form != null) {
         form.description = "".concat(description);
@@ -11812,9 +11822,9 @@ var Equation = /*#__PURE__*/function (_DiagramElementCollec) {
     }
   }, {
     key: "getDescription",
-    value: function getDescription(formOrName) {
-      var subForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'base';
-      var form = this.getForm(formOrName, subForm);
+    value: function getDescription(formOrName) // subForm: string = 'base',
+    {
+      var form = this.getForm(formOrName);
 
       if (form != null && form.description != null) {
         return _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_7__["applyModifiers"](form.description, form.modifiers);
@@ -11919,6 +11929,7 @@ var EquationForm = /*#__PURE__*/function (_Elements) {
 
   // These properties are just saved in the form and not used by this class
   // They are used by external classes using this form
+  // subForm: string;
   function EquationForm(elements, collectionMethods) {
     var _this;
 
@@ -11930,9 +11941,11 @@ var EquationForm = /*#__PURE__*/function (_Elements) {
     _this.description = null;
     _this.modifiers = {};
     _this.elementMods = {}; // this.duration = null;
+    // this.translation = {};
 
-    _this.translation = {};
-    _this.subForm = '';
+    _this.animation = {};
+    _this.fromForm = {}; // this.subForm = '';
+
     return _this;
   }
 
@@ -12351,25 +12364,33 @@ var EquationForm = /*#__PURE__*/function (_Elements) {
   }, {
     key: "applyElementMods",
     value: function applyElementMods() {
-      var _this5 = this;
+      var fromWhere = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-      Object.keys(this.elementMods).forEach(function (elementName) {
-        var _this5$elementMods$el = _this5.elementMods[elementName],
-            element = _this5$elementMods$el.element,
-            mods = _this5$elementMods$el.mods;
+      var setProps = function setProps(elementMods) {
+        Object.keys(elementMods).forEach(function (elementName) {
+          var _elementMods$elementN = elementMods[elementName],
+              element = _elementMods$elementN.element,
+              mods = _elementMods$elementN.mods;
 
-        if (element != null && mods != null) {
-          element.setProperties(mods);
+          if (element != null && mods != null) {
+            element.setProperties(mods);
 
-          if (mods.color != null) {
-            element.setColor(mods.color);
+            if (mods.color != null) {
+              element.setColor(mods.color);
+            }
+
+            if (mods.opacity != null) {
+              element.setOpacity(mods.opacity);
+            }
           }
+        });
+      };
 
-          if (mods.opacity != null) {
-            element.setOpacity(mods.opacity);
-          }
-        }
-      });
+      setProps(this.elementMods);
+
+      if (fromWhere != null && fromWhere.length > 0 && this.fromForm[fromWhere] != null && this.fromForm[fromWhere].elementMods != null) {
+        setProps(this.fromForm[fromWhere].elementMods);
+      }
     } // Check callback is being called
 
   }, {
@@ -12460,15 +12481,13 @@ var EquationForm = /*#__PURE__*/function (_Elements) {
         this.fnMap.exec(dissolveOutCallback);
       }
 
-      this.applyElementMods();
+      this.applyElementMods(fromWhere);
       var translationToUse = {};
 
-      if (fromWhere === 'fromPrev' && this.fromPrev != null) {
-        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation, this.fromPrev);
-      } else if (fromWhere === 'fromNext' && this.fromNext != null) {
-        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation, this.fromNext);
+      if (typeof fromWhere === 'string' && fromWhere.length !== 0 && this.fromForm != null && this.fromForm[fromWhere] != null && this.fromForm[fromWhere].animation != null && this.fromForm[fromWhere].animation.translation !== undefined) {
+        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.animation.translation, this.fromForm[fromWhere].animation.translation);
       } else {
-        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation);
+        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.animation.translation);
       }
 
       Object.keys(translationToUse).forEach(function (key) {
@@ -19364,8 +19383,24 @@ var Axis = /*#__PURE__*/function (_DiagramElementCollec) {
 
       var axis = new _VertexObjects_VAxis__WEBPACK_IMPORTED_MODULE_3__["default"](this.webgl, this.props);
       this.add('line', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](axis, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"](), this.props.color, this.diagramLimits));
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](this.props.titleFontFamily, 'normal', this.props.titleFontSize, this.props.titleFontWeight, 'center', 'middle', this.props.titleFontColor);
-      var titleText = [new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0).transformBy(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).matrix()), this.props.title, font)];
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"]({
+        family: this.props.titleFontFamily,
+        style: 'normal',
+        size: this.props.titleFontSize,
+        weight: this.props.titleFontWeight,
+        // xAlign: 'center',
+        // yAlign: 'middle',
+        color: this.props.titleFontColor
+      }); //   this.props.titleFontFamily,
+      //   'normal',
+      //   this.props.titleFontSize,
+      //   this.props.titleFontWeight,
+      //   'center',
+      //   'middle',
+      //   this.props.titleFontColor,
+      // );
+
+      var titleText = [new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0).transformBy(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).matrix()), this.props.title, font, 'center', 'middle')];
       var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D[0], titleText);
       this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimitive"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
 
@@ -19400,12 +19435,26 @@ var Axis = /*#__PURE__*/function (_DiagramElementCollec) {
         labelGenerator();
       }
 
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](ticks.fontFamily, 'normal', ticks.fontSize, ticks.fontWeight, ticks.labelsHAlign, ticks.labelsVAlign, ticks.fontColor);
-
-      if (this.props.rotation > Math.PI / 2 * 0.95) {
-        font.yAlign = 'middle';
-        font.xAlign = 'right';
-      }
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"]({
+        family: ticks.fontFamily,
+        style: 'normal',
+        size: ticks.fontSize,
+        weight: ticks.fontWeight,
+        // xAlign: ticks.labelsHAlign,
+        // yAlign: ticks.labelsVAlign,
+        color: ticks.fontColor
+      }); //   ticks.fontFamily,
+      //   'normal',
+      //   ticks.fontSize,
+      //   ticks.fontWeight,
+      //   ticks.labelsHAlign,
+      //   ticks.labelsVAlign,
+      //   ticks.fontColor,
+      // );
+      // if (this.props.rotation > Math.PI / 2 * 0.95) {
+      //   font.yAlign = 'middle';
+      //   font.xAlign = 'right';
+      // }
 
       var dText = [];
 
@@ -21363,9 +21412,10 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  // eslint-disable-next-line no-use-before-define
 // export type TypeEquationNavigator = EquationNavigator;
 
-function updateDescription(eqn, subForm, descriptionElement, index) {
-  var setClicks = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-  var prefix = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
+function updateDescription(eqn, // subForm: string,
+descriptionElement, index) {
+  var setClicks = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var prefix = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
   var element = descriptionElement;
 
   if (element == null) {
@@ -21484,7 +21534,7 @@ nav) {
         }
       }
     } else {
-      updateDescription(nav.eqn, currentForm.subForm, nav.nextDescription, nextIndex, false, nextPrefix);
+      updateDescription(nav.eqn, nav.nextDescription, nextIndex, false, nextPrefix);
 
       if (nav.navType === '1Button' && nav.eqn.eqn.currentFormSeries.length > 1) {
         var _next2 = nav.next;
@@ -21497,12 +21547,12 @@ nav) {
       }
     }
 
-    updateDescription(nav.eqn, currentForm.subForm, nav.description, index, true); // nav.eqn.updateDescription(currentForm);
+    updateDescription(nav.eqn, nav.description, index, true); // nav.eqn.updateDescription(currentForm);
 
     var prevIndex = index - 1;
 
     if (prevIndex >= 0) {
-      updateDescription(nav.eqn, currentForm.subForm, nav.prevDescription, prevIndex, false, prevPrefix);
+      updateDescription(nav.eqn, nav.prevDescription, prevIndex, false, prevPrefix);
     } else if (nav.prevDescription) {
       // eslint-disable-next-line no-param-reassign
       nav.prevDescription.innerHTML = '';
@@ -21517,7 +21567,7 @@ function updateButtonsDescriptionOnly(nav) {
   if (currentForm != null) {
     var index = nav.eqn.getFormIndex(currentForm);
     enableTouch(nav.description);
-    updateDescription(nav.eqn, currentForm.subForm, nav.description, index, true);
+    updateDescription(nav.eqn, nav.description, index, true);
   }
 }
 
@@ -21963,9 +22013,8 @@ var EqnNavigator = /*#__PURE__*/function (_DiagramElementCollec) {
   }, {
     key: "showForm",
     value: function showForm(formOrName) {
-      var formType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       this.show();
-      this.eqn.showForm(formOrName, formType); // this.showForm(formOrName, formType);
+      this.eqn.showForm(formOrName); // this.showForm(formOrName, formType);
 
       if (this._table) {
         this._table.show();
@@ -22045,10 +22094,12 @@ var EquationLabel = /*#__PURE__*/function () {
           base: labelTextOrEquation
         },
         color: color,
-        defaultFormAlignment: {
-          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          xAlign: xAlign,
-          yAlign: yAlign
+        formDefaults: {
+          alignment: {
+            fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+            xAlign: xAlign,
+            yAlign: yAlign
+          }
         },
         scale: scale,
         forms: {
@@ -22071,10 +22122,12 @@ var EquationLabel = /*#__PURE__*/function () {
         forms: forms,
         color: color,
         position: position,
-        defaultFormAlignment: {
-          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          xAlign: xAlign,
-          yAlign: yAlign
+        formDefaults: {
+          alignment: {
+            fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+            xAlign: xAlign,
+            yAlign: yAlign
+          }
         },
         scale: scale
       });
@@ -22082,10 +22135,12 @@ var EquationLabel = /*#__PURE__*/function () {
     } else {
       var defaultEqnOptions = {
         color: color,
-        defaultFormAlignment: {
-          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          xAlign: xAlign,
-          yAlign: yAlign
+        formDefaults: {
+          alignment: {
+            fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+            xAlign: xAlign,
+            yAlign: yAlign
+          }
         },
         scale: scale,
         form: form,
@@ -22116,7 +22171,7 @@ var EquationLabel = /*#__PURE__*/function () {
           textObject.setText(text);
         }
 
-        form.arrange(this.eqn.eqn.scale, this.eqn.eqn.defaultFormAlignment.xAlign, this.eqn.eqn.defaultFormAlignment.yAlign, this.eqn.eqn.defaultFormAlignment.fixTo);
+        form.arrange(this.eqn.eqn.scale, this.eqn.eqn.formDefaults.alignment.xAlign, this.eqn.eqn.formDefaults.alignment.yAlign, this.eqn.eqn.formDefaults.alignment.fixTo);
       }
     }
   }, {
@@ -25163,10 +25218,199 @@ var DiagramPrimitives = /*#__PURE__*/function () {
     key: "textGL",
     value: function textGL(options) {
       return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_20__["default"])(this.webgl, this.limits, options);
-    }
+    } // textNew(...optionsIn: Array<{
+    //   text: string | Array<string>,
+    //   font: TypeDiagramFontOptions | Array<TypeDiagramFontOptions>,
+    //   // textPosition: null | TypeParsablePoint | Array<null | TypeParsablePoint>,
+    //   position: TypeParsablePoint,
+    //   offset: null | TypeParsablePoint | Array<null | TypeParsablePoint>,    // vertex space offset
+    //   transform: TypeParsableTransform,
+    //   xAlign: 'left' | 'right' | 'center',
+    //   yAlign: 'bottom' | 'baseline' | 'middle' | 'top',
+    // }>) {
+    //   const defaultOptions = {
+    //     text: '',
+    //     font: {
+    //       family: 'Times New Roman',
+    //       style: 'italic',
+    //       size: 0.2,
+    //       weight: '200',
+    //       // xAlign: 'left',
+    //       // yAlign: 'baseline'
+    //     },
+    //     // position: [0, 0],
+    //     xAlign: 'center',
+    //     yAlign: 'middle',
+    //     offset: null,    // vertex space offset
+    //     color: [1, 0, 0, 1],
+    //     transform: new Transform('text').standard(),
+    //     // draw2D: this.draw2D,
+    //   };
+    //   const options = joinObjects({}, defaultOptions, ...optionsIn);
+    //   if (options.position != null) {
+    //     const p = getPoint(options.position);
+    //     options.transform.updateTranslation(p);
+    //   }
+    //   if (typeof options.text === 'string') {
+    //     options.text = [options.text];
+    //   }
+    //   if (!Array.isArray(options.font)) {
+    //     options.font = [options.font];
+    //   }
+    //   if (!Array.isArray(options.offset)) {
+    //     options.offset = [options.offset];
+    //   }
+    //   const dText = [];
+    //   let fontIndex = 0;
+    //   let offsetIndex = 0;
+    //   let locationIndex = 0;
+    //   for (let i = 0; i < options.text.length; i += 1) {
+    //     if (fontIndex > options.font.length - 1) {
+    //       fontIndex = 0;
+    //     }
+    //     if (offsetIndex > options.offset.length - 1) {
+    //       offsetIndex = 0;
+    //     }
+    //     if (locationIndex > options.location.length - 1) {
+    //       locationIndex = 0;
+    //     }
+    //     const dFont = new DiagramFont(joinObjects({}, options.font[fontIndex]));
+    //     dText.push(new DiagramText(
+    //       options.location[locationIndex],
+    //       options.text[i],
+    //       dFont,
+    //       'left',
+    //       'baseline',
+    //       options.offset[offsetIndex],
+    //     ));
+    //     offsetIndex += 1;
+    //     fontIndex += 1;
+    //     locationIndex += 1;
+    //   }
+    //   // const dT = new DiagramText(o.offset, text, fontToUse);
+    //   const to = new TextObject(this.draw2D, dText, options.xAlign, options.yAlign);
+    //   const element = new DiagramElementPrimitive(
+    //     to,
+    //     options.transform,
+    //     options.color,
+    //     this.limits,
+    //   );
+    //   // if (options.pulse != null) {
+    //   //   if (typeof element.pulseDefault !== 'function') {
+    //   //     element.pulseDefault.scale = options.pulse;
+    //   //   }
+    //   // }
+    //   setupPulse(element, options);
+    //   if (options.mods != null && options.mods !== {}) {
+    //     element.setProperties(options.mods);
+    //   }
+    //   return element;
+    // }
+    // Example of text phrase
+    // {
+    //   name: 'tester',
+    //   method: 'text',
+    //   options: {
+    //     text: [
+    //       'hello ',
+    //       ['MM', { font: f2 }],
+    //       ['2', { offset: [0, -0.02], font: f3 }],
+    //       ['2', { offset: [-0.02, 0.1], font: f3 }],
+    //       ' M',
+    //       ['dg', { font: { weight: 'bolder' }, location: [0, -0.2] }],
+    //     ],
+    //     font: f1,
+    //     position: [-0, -0.5],
+    //     xAlign: 'center',
+    //     yAlign: 'baseline',
+    //     color: [0, 0, 1, 1],
+    //   },
+    // },
+
   }, {
     key: "text",
-    value: function text(textOrOptions) {
+    value: function text() {
+      var defaultOptions = {
+        text: '',
+        font: {
+          family: 'Times New Roman',
+          style: 'normal',
+          size: 0.2,
+          weight: '200'
+        },
+        xAlign: 'left',
+        yAlign: 'baseline',
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('text').standard()
+      };
+
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.font.color == null && options.color != null) {
+        options.font.color = options.color;
+      }
+
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
+      }
+
+      if (typeof options.text === 'string') {
+        options.text = [options.text];
+      }
+
+      var dText = [];
+
+      for (var i = 0; i < options.text.length; i += 1) {
+        var text = options.text[i];
+        var font = void 0;
+        var offset = void 0;
+        var location = void 0;
+        var xAlign = void 0;
+        var yAlign = void 0;
+        var textToUse = void 0;
+
+        if (Array.isArray(text) && text.length === 2) {
+          var _text = _slicedToArray(text, 2);
+
+          textToUse = _text[0];
+          var _text$ = _text[1];
+          font = _text$.font;
+          offset = _text$.offset;
+          location = _text$.location;
+          xAlign = _text$.xAlign;
+          yAlign = _text$.yAlign;
+        } else {
+          textToUse = text;
+        }
+
+        var fontToUse = options.font;
+
+        if (font != null) {
+          fontToUse = font;
+        }
+
+        var dFont = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramFont"](Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"])({}, options.font, fontToUse));
+        dText.push(new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](location || null, textToUse, dFont, xAlign || 'left', yAlign || 'baseline', offset || [0, 0]));
+      }
+
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["TextObject"](this.draw2D, dText, options.xAlign, options.yAlign);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, options.transform, options.color, this.limits);
+      setupPulse(element, options);
+
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
+    }
+  }, {
+    key: "textLegacy",
+    value: function textLegacy(textOrOptions) {
       var defaultOptions = {
         text: '',
         // position: new Point(0, 0),
@@ -25185,8 +25429,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
       };
       var options;
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
-        optionsIn[_key8 - 1] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+        optionsIn[_key9 - 1] = arguments[_key9];
       }
 
       if (typeof textOrOptions === 'string') {
@@ -25207,7 +25451,17 @@ var DiagramPrimitives = /*#__PURE__*/function () {
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramFont"](o.family, o.style, o.size, o.weight, o.xAlign, o.yAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramFont"]({
+          family: o.family,
+          style: o.style,
+          size: o.size,
+          weight: o.weight,
+          xAlign: o.xAlign,
+          yAlign: o.yAlign,
+          color: o.color,
+          opacity: 1
+        }); // o.family, o.style, o.size, o.weight, o.xAlign, o.yAlign, o.color,
+        // );
       }
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
@@ -25240,8 +25494,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         rotation: 0
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
@@ -25354,7 +25608,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         parent = this.htmlCanvas;
       }
 
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](parent, options.id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), options.yAlign, options.xAlign);
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"]( // $FlowFixMe
+      parent, options.id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), options.yAlign, options.xAlign);
       var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
       var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(p.x, p.y), [1, 1, 1, 1], this.limits);
       return diagramElement;
@@ -25419,8 +25674,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
 
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25459,8 +25714,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
 
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25547,8 +25802,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         position: null
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25594,8 +25849,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25632,8 +25887,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25662,8 +25917,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25688,8 +25943,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        optionsIn[_key17] = arguments[_key17];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25773,8 +26028,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
-          moreOptions[_key17 - 1] = arguments[_key17];
+        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
+          moreOptions[_key18 - 1] = arguments[_key18];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -25892,8 +26147,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         lineWidth: 0.01
       };
 
-      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
-        optionsIn[_key18] = arguments[_key18];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -26045,8 +26300,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         position: null
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -26102,8 +26357,8 @@ var DiagramPrimitives = /*#__PURE__*/function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
+        optionsIn[_key21] = arguments[_key21];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -28121,18 +28376,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -28151,6 +28394,18 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -28165,58 +28420,100 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function colorArrayToString(color) {
   return "rgba(".concat(Math.floor(color[0] * 255), ",").concat(Math.floor(color[1] * 255), ",").concat(Math.floor(color[2] * 255), ",").concat(color[3], ")");
-} // DiagramFont defines the font properties to be used in a TextObject
+}
 
-
+// DiagramFont defines the font properties to be used in a TextObject
 var DiagramFont = /*#__PURE__*/function () {
   function DiagramFont() {
-    var family = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Helvetica Neue';
-    var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var weight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '200';
-    var xAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'center';
-    var yAlign = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'middle';
-    var color = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, DiagramFont);
 
-    this.family = family;
-    this.style = style;
-    this.size = size;
-    this.weight = weight;
-    this.xAlign = xAlign;
-    this.yAlign = yAlign;
-    this.opacity = 1;
-    this.setColor(color); // if (Array.isArray(color)) {
-    //   this.color = colorArrayToString(color);
-    // } else {
-    //   this.color = color;
-    // }
+    var defaultOptions = {
+      family: 'Times New Roman',
+      style: '',
+      size: 1,
+      weight: '200',
+      color: null,
+      opacity: 1
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, optionsIn);
+    this.family = options.family;
+    this.style = options.style;
+    this.size = options.size;
+    this.weight = options.weight;
+    this.opacity = options.opacity;
+    this.setColor(options.color);
   }
 
   _createClass(DiagramFont, [{
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      // if (Array.isArray(color)) {
-      //   this.color = colorArrayToString(color);
-      // } else {
-      //   this.color = color;
-      // }
-      this.color = color;
+
+      if (color == null) {
+        this.color = color;
+      } else {
+        this.color = color.slice();
+      }
     }
   }, {
-    key: "set",
-    value: function set(ctx) {
+    key: "definition",
+    value: function definition() {
+      var color = this.color;
+      var colorToUse;
+
+      if (color == null) {
+        colorToUse = color;
+      } else {
+        colorToUse = color.slice();
+      }
+
+      return {
+        family: this.family,
+        style: this.style,
+        size: this.size,
+        weight: this.weight,
+        color: colorToUse,
+        opacity: this.opacity
+      };
+    }
+  }, {
+    key: "setFontInContext",
+    value: function setFontInContext(ctx) {
       var scalingFactor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(this.size * scalingFactor, "px ").concat(this.family);
-      ctx.textAlign = this.xAlign;
-      ctx.textBaseline = this.yAlign;
+    }
+  }, {
+    key: "setColorInContext",
+    value: function setColorInContext(ctx, color) {
+      var thisColor = this.color;
+      var opacity = this.opacity;
+
+      if (color != null) {
+        opacity *= color[3];
+      }
+
+      if (thisColor != null) {
+        var c = [].concat(_toConsumableArray(thisColor.slice(0, 3)), [thisColor[3] * opacity]);
+        ctx.fillStyle = colorArrayToString(c);
+      } else if (color != null) {
+        ctx.fillStyle = colorArrayToString(color);
+      }
     }
   }, {
     key: "_dup",
     value: function _dup() {
-      return new DiagramFont(this.family, this.style, this.size, this.weight, this.xAlign, this.yAlign, this.color);
+      return new DiagramFont({
+        family: this.family,
+        style: this.style,
+        size: this.size,
+        weight: this.weight,
+        // xAlign: this.xAlign,
+        // yAlign: this.yAlign,
+        color: this.color,
+        opacity: this.opacity
+      });
     }
   }]);
 
@@ -28226,22 +28523,160 @@ var DiagramFont = /*#__PURE__*/function () {
 
 
 var DiagramText = /*#__PURE__*/function () {
+  // scalingFactor: number;
   function DiagramText() {
     var location = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
     var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     var font = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new DiagramFont();
+    var xAlign = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
+    var yAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'baseline';
+    var offset = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
 
     _classCallCheck(this, DiagramText);
 
-    this.location = location._dup();
+    this.offset = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(offset);
+
+    if (location == null) {
+      this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
+      this.relativeLocation = true;
+    } else {
+      this.location = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["getPoint"])(location)._dup();
+      this.relativeLocation = false;
+    }
+
     this.text = text.slice();
-    this.font = font._dup();
+
+    if (font instanceof DiagramFont) {
+      this.font = font._dup();
+    } else {
+      this.font = new DiagramFont(font);
+    }
+
+    this.xAlign = xAlign;
+    this.yAlign = yAlign; // if (this.font.size < 20) {
+    //   this.scalingFactor = this.font.size * 50;
+    // }
+    // if (this.font.size < 1) {
+    //   const power = -Math.log(this.font.size) / Math.LN10 + 2;
+    //   this.scalingFactor = 10 ** power;
+    // }
+    // this.font = font._dup();
   }
 
   _createClass(DiagramText, [{
     key: "_dup",
     value: function _dup() {
-      return new DiagramText(this.location._dup(), this.text, this.font._dup());
+      return new DiagramText(this.location, this.text, this.font._dup(), this.xAlign, this.yAlign);
+    } // This method is used instead of the actual ctx.measureText because
+    // Firefox and Chrome don't yet support it's advanced features.
+    // Estimates are made for height based on width.
+    // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "measureText",
+    value: function measureText(ctx) {
+      var scalingFactor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 20;
+      // const location = getPoint(locationIn);
+      this.font.setFontInContext(ctx, scalingFactor);
+      var fontHeight = ctx.font.match(/[^ ]*px/);
+      var aWidth;
+
+      if (fontHeight != null) {
+        aWidth = parseFloat(fontHeight[0]) / 2;
+      } else {
+        aWidth = ctx.measureText('a').width;
+      } // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+
+
+      var ascent = aWidth * 1.4;
+      var descent = aWidth * 0.08; // Uncomment below and change above consts to lets if more resolution on
+      // actual text boundaries is needed
+      // const maxAscentRe =
+      //   /[ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890!#%^&()@$Qbdtfhiklj]/g;
+
+      var midAscentRe = /[acemnorsuvwxz*gyqp]/g;
+      var midDecentRe = /[;,$]/g;
+      var maxDescentRe = /[gjyqp@Q(){}[\]|]/g;
+      var midAscentMatches = this.text.match(midAscentRe);
+
+      if (Array.isArray(midAscentMatches)) {
+        if (midAscentMatches.length === this.text.length) {
+          ascent = aWidth * 0.95;
+        }
+      }
+
+      var midDescentMatches = this.text.match(midDecentRe);
+
+      if (Array.isArray(midDescentMatches)) {
+        if (midDescentMatches.length > 0) {
+          descent = aWidth * 0.2;
+        }
+      }
+
+      var maxDescentMatches = this.text.match(maxDescentRe);
+
+      if (Array.isArray(maxDescentMatches)) {
+        if (maxDescentMatches.length > 0) {
+          descent = aWidth * 0.5;
+        }
+      }
+
+      var height = ascent + descent;
+
+      var _ctx$measureText = ctx.measureText(this.text),
+          width = _ctx$measureText.width;
+
+      var asc = 0;
+      var des = 0;
+      var left = 0;
+      var right = 0; // console.log(scalingFactor, width, this.xAlign)
+
+      if (this.xAlign === 'left') {
+        right = width;
+      }
+
+      if (this.xAlign === 'center') {
+        left = width / 2;
+        right = width / 2;
+      }
+
+      if (this.xAlign === 'right') {
+        left = width;
+      }
+
+      if (this.yAlign === 'alphabetic' || this.yAlign === 'baseline') {
+        asc = ascent;
+        des = descent;
+      }
+
+      if (this.yAlign === 'top') {
+        asc = 0;
+        des = height;
+      }
+
+      if (this.yAlign === 'bottom') {
+        asc = height;
+        des = 0;
+      }
+
+      if (this.yAlign === 'middle') {
+        asc = height / 2;
+        des = height / 2;
+      }
+
+      left /= scalingFactor;
+      right /= scalingFactor;
+      asc /= scalingFactor;
+      des /= scalingFactor;
+      this.lastMeasure = {
+        left: left,
+        right: right,
+        ascent: asc,
+        descent: des,
+        width: right + left,
+        height: asc + des
+      };
+      return this.lastMeasure;
     }
   }]);
 
@@ -28259,6 +28694,8 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
     var _this;
 
     var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+    var xAlign = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'left';
+    var yAlign = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'baseline';
 
     _classCallCheck(this, TextObject);
 
@@ -28273,7 +28710,7 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
     _this.text = text;
     _this.scalingFactor = 1;
     _this.lastDraw = [];
-    _this.lastDrawTransform = []; // this.glRect = new Rect(-1, -1, 2, 2);
+    _this.lastDrawTransform = [];
 
     if (text.length > 0) {
       var minSize = _this.text[0].font.size;
@@ -28282,17 +28719,20 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
         if (t.font.size > 0 && t.font.size < minSize) {
           minSize = t.font.size;
         }
-      });
+      }); // if (minSize < 20) {
+      //   this.scalingFactor = minSize * 50;
+      // }
+      // if (minSize < 1) {
+      //   const power = -Math.log(minSize) / Math.LN10 + 2;
+      //   this.scalingFactor = 10 ** power;
+      // }
 
-      if (minSize < 20) {
-        _this.scalingFactor = minSize * 50;
-      }
 
-      if (minSize < 1) {
-        var power = -Math.log(minSize) / Math.LN10 + 2;
-        _this.scalingFactor = Math.pow(10, power);
-      }
+      _this.scalingFactor = 20 / minSize;
     }
+
+    _this.xAlign = xAlign;
+    _this.yAlign = yAlign;
 
     _this.setBorder();
 
@@ -28339,7 +28779,6 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
   }, {
     key: "setColor",
     value: function setColor(color) {
-      // const c = colorArrayToString(color);
       for (var i = 0; i < this.text.length; i += 1) {
         this.text[i].font.color = color;
       }
@@ -28355,7 +28794,7 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
     } // Text is drawn in pixel space which is 0, 0 in the left hand top corner on
     // a canvas of size canvas.offsetWidth x canvas.offsetHeight.
     //
-    // Font size and text location is therefore defined in pixels.
+    // Font size and text location is therefore defined in pixels in Context2D.
     //
     // However, in a Diagram, the text canvas is overlaid on the diagram GL
     // canvas and we want to think about the size and location of text in
@@ -28380,12 +28819,20 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
     // still in pixels (just now it's super scaled up). Therefore, a scaling
     // factor is needed to make sure the font size can stay well above 1. This
     // scaling factor scales the final space, so a larger font size can be used.
-    // Then all locations definted in Element Space also need to be scaled by
+    // Then all locations defined in Element Space also need to be scaled by
     // this scaling factor.
     //
     // The scaling factor can be number that is large enough to make it so the
     // font size is >>1. In the TextObject constructor, the scaling factor is
     // designed to ensure drawn text always is >20px.
+    //
+    // Therefore the different spaces are:
+    //   - pixelSpace - original space of the 2D canvas
+    //   - elementSpace - space of the DiagramElementPrimitive that holds text
+    //   - scaledPixelSpace
+    //
+    // const glToPixelSpaceMatrix1 = spaceToSpaceTransform(glSpace, pixelSpace);
+    // console.log(glToPixelSpaceMatrix1)
 
   }, {
     key: "drawWithTransformMatrix",
@@ -28395,80 +28842,166 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
       var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [1, 1, 1, 1];
       var contextIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var drawContext2D = this.drawContext2D[contextIndex];
-      var ctx = this.drawContext2D[contextIndex].ctx; // Arbitrary scaling factor used to ensure font size is >> 1 pixel
-      // const scalingFactor = this.drawContext2D.canvas.offsetHeight /
-      //                       (this.diagramLimits.height / 1000);
+      var ctx = this.drawContext2D[contextIndex].ctx;
+      ctx.save(); // Scaling factor used to ensure font size is >> 1 pixel
 
-      var scalingFactor = this.scalingFactor; // Color used if color is not defined in each DiagramText element
+      var scalingFactor = this.scalingFactor; // Find the scaling factor between GL space (width 2, height 2) and canvas
+      // pixel space (width offsetWidth, height offsetHeight)
+      // This is how much we will zoom in on our ctx so one GL unit is
+      // one pixel unit
 
-      var parentColor = "rgba(\n      ".concat(Math.floor(color[0] * 255), ",\n      ").concat(Math.floor(color[1] * 255), ",\n      ").concat(Math.floor(color[2] * 255), ",\n      ").concat(Math.floor(color[3] * 255), ")");
-      ctx.save(); // First convert pixel space to a zoomed in pixel space with the same
-      // dimensions as gl clip space (-1 to 1 for x, y), but inverted y
-      // like to pixel space.
-      // When zoomed: 1 pixel = 1 GL unit.
-      // Zoom in so limits betcome 0 to 2:
-
-      var sx = drawContext2D.canvas.offsetWidth / 2 / scalingFactor;
-      var sy = drawContext2D.canvas.offsetHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
+      var sx = drawContext2D.canvas.offsetWidth / 2;
+      var sy = drawContext2D.canvas.offsetHeight / 2; // GL space (0, 0) is the center of the canvas, and Pixel Space (0, 0)
+      // is the top left of the canvas. Therefore, translate pixel space so
+      // if we put in (0, 0) we actually draw to the center of the canvas
 
       var tx = drawContext2D.canvas.offsetWidth / 2;
-      var ty = drawContext2D.canvas.offsetHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
+      var ty = drawContext2D.canvas.offsetHeight / 2; // So our GL to Pixel Space matrix is now:
+
+      var glToPixelSpaceMatrix = [sx, 0, tx, 0, sy, ty, 0, 0, 1]; // The incoming transform matrix transforms elementSpace to glSpace.
+      // Modify the incoming transformMatrix to be compatible with
       // pixel space
-      //   - Scale by the scaling factor
       //   - Flip the y translation
       //   - Reverse rotation
 
       var tm = transformMatrix;
-      var t = [tm[0], -tm[1], tm[2] * scalingFactor, -tm[3], tm[4], tm[5] * -scalingFactor, 0, 0, 1]; // Combine the zoomed pixel space with the incoming transform matrix
-      // and apply it to the drawing context.
+      var elementToGLMatrix = [tm[0], -tm[1], tm[2], -tm[3], tm[4], tm[5] * -1, 0, 0, 1]; // Combine the elementToGL transform and glToPixel transforms
+      // A X B is apply B then apply A, so apply element to GL, then GL to Pixel
 
-      var totalT = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"]([sx, 0, tx, 0, sy, ty, 0, 0, 1], t);
-      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]);
-      this.lastDrawTransform = totalT.slice(); // Fill in all the text
+      var elementToPixelMatrix = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"](glToPixelSpaceMatrix, elementToGLMatrix); // At this point in time the ctx will be zoomed in such that every 1 unit
+      // of element space is 1 pixel/unit in ctx space. But because font sizes
+      // need to be >1px, we are going to scale out so we can use a font size of
+      // ~20px.
+
+      var pixelToScaledPixelMatrix = [1 / scalingFactor, 0, 0, 0, 1 / scalingFactor, 0, 0, 0, 1];
+      var elementToScaledPixelMatrix = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"](elementToPixelMatrix, pixelToScaledPixelMatrix); // The ctx transform is defined in a different order:
+
+      var cA = elementToScaledPixelMatrix[0];
+      var cB = elementToScaledPixelMatrix[3];
+      var cC = elementToScaledPixelMatrix[1];
+      var cD = elementToScaledPixelMatrix[4];
+      var cE = elementToScaledPixelMatrix[2];
+      var cF = elementToScaledPixelMatrix[5]; // Apply the transform to the ctx. We are now in Scaled
+
+      ctx.transform(cA, cB, cC, cD, cE, cF);
+      this.lastDrawTransform = elementToScaledPixelMatrix.slice(); // Applying this transform to the context, will make anything
+      // we draw now similarly transformed. As this is now a scaled
+      // transform, we need to similarly scale our locations and
+      // font sizes
+      // Text objects can either have absolute or relative locations.
+      // If text.location is null, then the location is calculated relative to
+      // the previous text where it will be placed immediately to the right,
+      // sharing the same baseline. If the text alignment is left, baseline, then
+      // the words will follow each other naturally.
+      //
+
+      var lastRight = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
+      this.text.forEach(function (diagramText) {
+        var relativeLocation = diagramText.relativeLocation,
+            offset = diagramText.offset;
+        var location;
+
+        if (relativeLocation) {
+          location = lastRight._dup();
+          diagramText.location = location;
+        } else {
+          location = diagramText.location;
+        } // Measure the text in scaled space
+
+
+        var measure = diagramText.measureText(ctx, scalingFactor);
+        lastRight = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](location.x + measure.right + offset.x, location.y);
+      }); // We now have calculated all the locations of the text, now let's calculate
+      // the total bounds, so the locations can be scaled by xAlign and yAlign.
+      // Note, if yAlign === 'baseline', then the block of text will be aligned
+      // around the y coordinate of the first text element.
+
+      var xMin = null;
+      var xMax = null;
+      var yMin = null;
+      var yMax = null;
+      this.text.forEach(function (diagramText) {
+        var location = diagramText.location,
+            lastMeasure = diagramText.lastMeasure,
+            offset = diagramText.offset;
+        var xMinText = location.x - lastMeasure.left + offset.x;
+        var xMaxText = location.x + lastMeasure.right + offset.x;
+        var yMaxText = location.y + lastMeasure.ascent;
+        var yMinText = location.y - lastMeasure.descent;
+
+        if (xMin == null || xMinText < xMin) {
+          xMin = xMinText;
+        }
+
+        if (xMax == null || xMaxText > xMax) {
+          xMax = xMaxText;
+        }
+
+        if (yMin == null || yMinText < yMin) {
+          yMin = yMinText;
+        }
+
+        if (yMax == null || yMaxText > yMax) {
+          yMax = yMaxText;
+        }
+      });
+      var locationOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
+
+      if (xMin != null && yMin != null && xMax != null && yMax != null) {
+        if (this.xAlign === 'left') {
+          locationOffset.x = -xMin;
+        } else if (this.xAlign === 'right') {
+          locationOffset.x = -xMax;
+        } else if (this.xAlign === 'center') {
+          locationOffset.x = -xMin - (xMax - xMin) / 2;
+        }
+
+        if (this.yAlign === 'bottom') {
+          locationOffset.y = -yMin;
+        } else if (this.yAlign === 'top') {
+          locationOffset.y = -yMax;
+        } else if (this.yAlign === 'middle') {
+          locationOffset.y = -yMin - (yMax - yMin) / 2;
+        }
+      }
+
+      if (locationOffset.x !== 0 || locationOffset.y !== 0) {
+        this.text.forEach(function (diagramText) {
+          diagramText.location = diagramText.location.add(locationOffset);
+        });
+      } // Fill in all the text
+
 
       this.text.forEach(function (diagramText) {
-        diagramText.font.set(ctx, scalingFactor);
+        diagramText.font.setFontInContext(ctx, scalingFactor);
+        diagramText.font.setColorInContext(ctx, color);
 
-        if (diagramText.font.color != null) {
-          var c = [].concat(_toConsumableArray(diagramText.font.color.slice(0, 3)), [// $FlowFixMe
-          diagramText.font.color[3] * diagramText.font.opacity * color[3]]);
-          ctx.fillStyle = colorArrayToString(c);
-        } else {
-          ctx.fillStyle = parentColor;
-        } // const w = ctx.measureText(diagramText.text).width;
-        // this.lastDraw.push({
-        //   width: w * 2,
-        //   height: w * 2,
-        //   x: diagramText.location.x * scalingFactor - w,
-        //   y: diagramText.location.y * -scalingFactor - w,
-        // });
+        _this2.recordLastDraw(ctx, diagramText, scalingFactor, (diagramText.location.x + diagramText.offset.x) * scalingFactor, (diagramText.location.y + diagramText.offset.y) * -scalingFactor);
 
-
-        _this2.recordLastDraw(ctx, diagramText, scalingFactor, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
-
-        ctx.fillText(diagramText.text, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
+        ctx.fillText(diagramText.text, (diagramText.location.x + diagramText.offset.x) * scalingFactor, (diagramText.location.y + diagramText.offset.y) * -scalingFactor);
       });
       ctx.restore();
     }
   }, {
     key: "recordLastDraw",
     value: function recordLastDraw(ctx, diagramText, scalingFactor, x, y) {
-      var width = ctx.measureText(diagramText.text).width * 1.2;
+      // const width = ctx.measureText(diagramText.text).width * 1.2;
+      var width = diagramText.lastMeasure.width * scalingFactor * 1.2;
       var height = diagramText.font.size * scalingFactor * 1.2;
       var bottom = y + height * 0.1;
       var left = x - width * 0.1;
 
-      if (diagramText.font.yAlign === 'baseline') {
+      if (diagramText.yAlign === 'baseline' || diagramText.yAlign === 'alphabetic') {
         bottom = y + height * 0.2;
-      } else if (diagramText.font.yAlign === 'top') {
+      } else if (diagramText.yAlign === 'top') {
         bottom = y + height;
-      } else if (diagramText.font.yAlign === 'middle') {
+      } else if (diagramText.yAlign === 'middle') {
         bottom = y + height / 2;
       }
 
-      if (diagramText.font.xAlign === 'center') {
+      if (diagramText.xAlign === 'center') {
         left -= width / 2;
-      } else if (diagramText.font.xAlign === 'right') {
+      } else if (diagramText.xAlign === 'right') {
         left -= width;
       }
 
@@ -28476,7 +29009,10 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
         width: width,
         height: -height,
         x: left,
-        y: bottom
+        y: bottom // xActual: x,
+        // yActual: y,
+        // widthActual: width / 1.2,
+
       }); // console.log(this.lastDraw)
     }
   }, {
@@ -28526,154 +29062,110 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
     // Firefox and Chrome don't yet support it's advanced features.
     // Estimates are made for height based on width.
     // eslint-disable-next-line class-methods-use-this
+    // measureText(ctx: CanvasRenderingContext2D, text: DiagramText) {
+    //   // const aWidth = ctx.measureText('a').width;
+    //   const fontHeight = ctx.font.match(/[^ ]*px/);
+    //   let aWidth;
+    //   if (fontHeight != null) {
+    //     aWidth = parseFloat(fontHeight[0]) / 2;
+    //   } else {
+    //     aWidth = ctx.measureText('a').width;
+    //   }
+    //   // const aWidth = parseFloat(ctx.font.match(/[^ ]*px/)[0]) / 2;
+    //   // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+    //   let ascent = aWidth * 1.4;
+    //   let descent = aWidth * 0.08;
+    //   // Uncomment below and change above consts to lets if more resolution on
+    //   // actual text boundaries is needed
+    //   // const maxAscentRe =
+    //   //   /[ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890!#%^&()@$Qbdtfhiklj]/g;
+    //   const midAscentRe = /[acemnorsuvwxz*gyqp]/g;
+    //   const midDecentRe = /[;,$]/g;
+    //   const maxDescentRe = /[gjyqp@Q(){}[\]|]/g;
+    //   const midAscentMatches = text.text.match(midAscentRe);
+    //   if (Array.isArray(midAscentMatches)) {
+    //     if (midAscentMatches.length === text.text.length) {
+    //       ascent = aWidth * 0.95;
+    //     }
+    //   }
+    //   const midDescentMatches = text.text.match(midDecentRe);
+    //   if (Array.isArray(midDescentMatches)) {
+    //     if (midDescentMatches.length > 0) {
+    //       descent = aWidth * 0.2;
+    //     }
+    //   }
+    //   const maxDescentMatches = text.text.match(maxDescentRe);
+    //   if (Array.isArray(maxDescentMatches)) {
+    //     if (maxDescentMatches.length > 0) {
+    //       descent = aWidth * 0.5;
+    //     }
+    //   }
+    //   const height = ascent + descent;
+    //   const { width } = ctx.measureText(text.text);
+    //   let asc = 0;
+    //   let des = 0;
+    //   let left = 0;
+    //   let right = 0;
+    //   if (text.xAlign === 'left') {
+    //     right = width;
+    //   }
+    //   if (text.xAlign === 'center') {
+    //     left = width / 2;
+    //     right = width / 2;
+    //   }
+    //   if (text.xAlign === 'right') {
+    //     left = width;
+    //   }
+    //   if (text.yAlign === 'alphabetic' || text.yAlign === 'baseline') {
+    //     asc = ascent;
+    //     des = descent;
+    //   }
+    //   if (text.yAlign === 'top') {
+    //     asc = 0;
+    //     des = height;
+    //   }
+    //   if (text.yAlign === 'bottom') {
+    //     asc = height;
+    //     des = 0;
+    //   }
+    //   if (text.yAlign === 'middle') {
+    //     asc = height / 2;
+    //     des = height / 2;
+    //   }
+    //   return {
+    //     actualBoundingBoxLeft: left,
+    //     actualBoundingBoxRight: right,
+    //     fontBoundingBoxAscent: asc,
+    //     fontBoundingBoxDescent: des,
+    //   };
+    // }
 
-  }, {
-    key: "measureText",
-    value: function measureText(ctx, text) {
-      // const aWidth = ctx.measureText('a').width;
-      var fontHeight = ctx.font.match(/[^ ]*px/);
-      var aWidth;
-
-      if (fontHeight != null) {
-        aWidth = parseFloat(fontHeight[0]) / 2;
-      } else {
-        aWidth = ctx.measureText('a').width;
-      } // const aWidth = parseFloat(ctx.font.match(/[^ ]*px/)[0]) / 2;
-      // Estimations of FONT ascent and descent for a baseline of "alphabetic"
-
-
-      var ascent = aWidth * 1.4;
-      var descent = aWidth * 0.08; // Uncomment below and change above consts to lets if more resolution on
-      // actual text boundaries is needed
-      // const maxAscentRe =
-      //   /[ABCDEFGHIJKLMNOPRSTUVWXYZ1234567890!#%^&()@$Qbdtfhiklj]/g;
-
-      var midAscentRe = /[acemnorsuvwxz*gyqp]/g;
-      var midDecentRe = /[;,$]/g;
-      var maxDescentRe = /[gjyqp@Q(){}[\]|]/g;
-      var midAscentMatches = text.text.match(midAscentRe);
-
-      if (Array.isArray(midAscentMatches)) {
-        if (midAscentMatches.length === text.text.length) {
-          ascent = aWidth * 0.95;
-        }
-      }
-
-      var midDescentMatches = text.text.match(midDecentRe);
-
-      if (Array.isArray(midDescentMatches)) {
-        if (midDescentMatches.length > 0) {
-          descent = aWidth * 0.2;
-        }
-      }
-
-      var maxDescentMatches = text.text.match(maxDescentRe);
-
-      if (Array.isArray(maxDescentMatches)) {
-        if (maxDescentMatches.length > 0) {
-          descent = aWidth * 0.5;
-        }
-      }
-
-      var height = ascent + descent;
-
-      var _ctx$measureText = ctx.measureText(text.text),
-          width = _ctx$measureText.width;
-
-      var asc = 0;
-      var des = 0;
-      var left = 0;
-      var right = 0;
-
-      if (text.font.xAlign === 'left') {
-        right = width;
-      }
-
-      if (text.font.xAlign === 'center') {
-        left = width / 2;
-        right = width / 2;
-      }
-
-      if (text.font.xAlign === 'right') {
-        left = width;
-      }
-
-      if (text.font.yAlign === 'alphabetic' || text.font.yAlign === 'baseline') {
-        asc = ascent;
-        des = descent;
-      }
-
-      if (text.font.yAlign === 'top') {
-        asc = 0;
-        des = height;
-      }
-
-      if (text.font.yAlign === 'bottom') {
-        asc = height;
-        des = 0;
-      }
-
-      if (text.font.yAlign === 'middle') {
-        asc = height / 2;
-        des = height / 2;
-      }
-
-      return {
-        actualBoundingBoxLeft: left,
-        actualBoundingBoxRight: right,
-        fontBoundingBoxAscent: asc,
-        fontBoundingBoxDescent: des
-      };
-    }
   }, {
     key: "getBoundaryOfText",
     value: function getBoundaryOfText(text) {
       var contextIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var boundary = [];
-      var scalingFactor = this.scalingFactor; // Measure the text
-
-      text.font.set(this.drawContext2D[contextIndex].ctx, scalingFactor); // const textMetrics = this.drawContext2D.ctx.measureText(text.text);
-
-      var textMetrics = this.measureText(this.drawContext2D[contextIndex].ctx, text); // Create a box around the text
-
+      var scalingFactor = this.scalingFactor;
       var location = text.location;
-      var box = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-textMetrics.actualBoundingBoxLeft / scalingFactor, textMetrics.fontBoundingBoxAscent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](textMetrics.actualBoundingBoxRight / scalingFactor, textMetrics.fontBoundingBoxAscent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](textMetrics.actualBoundingBoxRight / scalingFactor, -textMetrics.fontBoundingBoxDescent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-textMetrics.actualBoundingBoxLeft / scalingFactor, -textMetrics.fontBoundingBoxDescent / scalingFactor).add(location)];
+      var meas;
+
+      if (text.lastMeasure != null) {
+        meas = text.lastMeasure;
+      } else {
+        meas = text.measureText(this.drawContext2D[contextIndex].ctx, scalingFactor);
+      }
+
+      var box = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-meas.left, meas.ascent).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](meas.right, meas.ascent).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](meas.right, -meas.descent).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-meas.left, -meas.descent).add(location)];
       box.forEach(function (p) {
         boundary.push(p);
-      }); // console.log('boundary', boundary.width, text.text)
-
+      });
       return boundary;
     }
   }, {
     key: "getGLBoundaryOfText",
     value: function getGLBoundaryOfText(text, lastDrawTransformMatrix) {
       var contextIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var glBoundary = []; // const { scalingFactor } = this;
-      // // Measure the text
-      // text.font.set(this.drawContext2D.ctx, scalingFactor);
-      // // const textMetrics = this.drawContext2D.ctx.measureText(text.text);
-      // const textMetrics = this.measureText(this.drawContext2D.ctx, text);
-      // // Create a box around the text
-      // const { location } = text;
-      // const box = [
-      //   new Point(
-      //     -textMetrics.actualBoundingBoxLeft / scalingFactor,
-      //     textMetrics.fontBoundingBoxAscent / scalingFactor,
-      //   ).add(location),
-      //   new Point(
-      //     textMetrics.actualBoundingBoxRight / scalingFactor,
-      //     textMetrics.fontBoundingBoxAscent / scalingFactor,
-      //   ).add(location),
-      //   new Point(
-      //     textMetrics.actualBoundingBoxRight / scalingFactor,
-      //     -textMetrics.fontBoundingBoxDescent / scalingFactor,
-      //   ).add(location),
-      //   new Point(
-      //     -textMetrics.actualBoundingBoxLeft / scalingFactor,
-      //     -textMetrics.fontBoundingBoxDescent / scalingFactor,
-      //   ).add(location),
-      // ];
-
+      var glBoundary = [];
       var box = this.getBoundaryOfText(text, contextIndex);
       box.forEach(function (p) {
         glBoundary.push(p.transformBy(lastDrawTransformMatrix));
@@ -28691,7 +29183,70 @@ var TextObject = /*#__PURE__*/function (_DrawingObject) {
   return TextObject;
 }(_DrawingObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-
+ // Some notes about using context2D:
+//
+// Let's say our diagram is a square with bottom left corner (-1, -1)
+// and width 2, height 2. We want an equivalent font size of 0.1.
+//
+// If our canvas is 800 x 800 pixels, then we could scale evenything up by
+// 400. So our font size to draw in the cavnas will be 0.1 * 400 = 40px.
+//
+// This is great, except how do we now apply a transform? The parent
+// transform converts element space to GL space, so we will want to add
+// an extra conversion of pixel space. But the way we draw text in a canvas
+// is by applying a transform to the canvas, then drawing text to it.
+//
+// So the way we will do it, is transform the canvas to the element space
+// and then place the text there.
+//
+// * Assume a canvas of 800 x 800
+// * If you plot text with a fontSize of 80px, at a location of
+//   400, 400 then the font will be in the middle of the canvas and
+//   approximately 1/10 of the canvas height
+// * Zoom the canvas by a factor of 2
+//   ctx.scale(2, 2)
+// * Now to achieve the same font size and position relative to the canvas
+//   you will need to use a fontSize of 40px and location of 200, 200
+//
+// * Assume a canvas of 800 x 800
+// * To get text ~1/10th height of canvas and in the middle, plot with
+//   fontSize: 80px at 400, 400.
+//
+// * If you translate the canvas by 400, 400, then you can now plot at 0, 0
+//   for the center of the screen
+//
+// * To plot on the left side of the screen, use location -400, 0.
+//
+// * Now scale the screen by 2: `ctx.scale(2, 2)`
+//
+// * Now to plot same size text (relative to canvas) at same left edge
+//   need to use a font size of 40px, and a location of -200, 0.
+//
+// * So if we want to convert the pixel space to GL space, which is
+//   width 2, height 2, left -1, bottom -1, then we need scale by:
+//      800 / 2 = 400
+// * So if we ctx.scale(400, 400), then to get text in the equivalent size
+//   and position we need to use a fontSize of 80/400 = 0.2, and a location
+//   of -1, 0
+//
+// * In this case, the context manager will try use a font size of 0.2px and
+//   then it will get scaled up with the ctx transform - however, a font
+//   size of 0.2px doesn't make much sense. Infact, small font sizes like
+//   event 5px might be dodgey, so we will try to always use a font size of
+//   around 20 or larger.
+//
+// * Therefore, if we want a font size of 20px, we need to scale 0.2 by 100
+// * This means instead of originally scaling by (400, 400), we should just
+//   just scale by (4, 4). Now we can use a fontSize of 20px, but we will
+//   also have to scale the location (-1 * 100, 0 * 100) = (-100, 0);
+// const glSpace = {
+//   x: { bottomLeft: -1, width: 2 },
+//   y: { bottomLeft: -1, height: 2 },
+// };
+// const pixelSpace = {
+//   x: { bottomLeft: 0, width: drawContext2D.canvas.offsetWidth },
+//   y: { bottomLeft: drawContext2D.canvas.offsetHeight, height: -drawContext2D.canvas.offsetHeight },
+// };
 
 /***/ }),
 
@@ -35997,51 +36552,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 var Gesture = /*#__PURE__*/function () {
-  // cursor: () => void;
-  // keyCommands: boolean;
   function Gesture(diagram) {
     _classCallCheck(this, Gesture);
 
-    this.diagram = diagram; // console.log(diagram.canvas.offsetWidth)
-    // this.diagram.canvas.onmousedown = this.mouseDownHandler.bind(this);
-    // this.diagram.canvas.onmouseup = this.mouseUpHandler.bind(this);
-    // this.diagram.canvas.onmousemove = this.mouseMoveHandler.bind(this);
-    // Override these if you want to use your own touch handlers
+    this.diagram = diagram; // Override these if you want to use your own touch handlers
 
     this.start = this.diagram.touchDownHandler.bind(this.diagram);
     this.end = this.diagram.touchUpHandler.bind(this.diagram);
     this.move = this.diagram.touchMoveHandler.bind(this.diagram);
     this.free = this.diagram.touchFreeHandler.bind(this.diagram);
     this.toggleCursor = this.diagram.toggleCursor.bind(this.diagram);
-    this.addEvent('mousedown', this.mouseDownHandler, false);
-    this.addEvent('mouseup', this.mouseUpHandler, false);
-    this.addEvent('mousemove', this.mouseMoveHandler, false);
-    this.addEvent('touchstart', this.touchStartHandler, false);
-    this.addEvent('touchend', this.touchEndHandler, false);
-    this.addEvent('touchmove', this.touchMoveHandler, false); // this.keyCommands = false;
-    // this.addEvent('keypress', this.keypressHandler, false);
-    // this.diagram.canvas.addEventListener(
-    //   'touchstart',
-    //   this.touchStartHandler.bind(this), false,
-    // );
-    // this.diagram.canvas.addEventListener(
-    //   'touchend',
-    //   this.touchEndHandler.bind(this), false,
-    // );
-    // this.diagram.canvas.addEventListener(
-    //   'touchmove',
-    //   this.touchMoveHandler.bind(this), false,
-    // );
-
+    this.binds = {
+      mouseDownHandler: this.mouseDownHandler.bind(this),
+      mouseUpHandler: this.mouseUpHandler.bind(this),
+      mouseMoveHandler: this.mouseMoveHandler.bind(this),
+      touchStartHandler: this.touchStartHandler.bind(this),
+      touchEndHandler: this.touchEndHandler.bind(this),
+      touchMoveHandler: this.touchMoveHandler.bind(this)
+    };
+    this.addEvent('mousedown', this.binds.mouseDownHandler, false);
+    this.addEvent('mouseup', this.binds.mouseUpHandler, false);
+    this.addEvent('mousemove', this.binds.mouseMoveHandler, false);
+    this.addEvent('touchstart', this.binds.touchStartHandler, false);
+    this.addEvent('touchend', this.binds.touchEndHandler, false);
+    this.addEvent('touchmove', this.binds.touchMoveHandler, false);
     this.enable = true;
-  } // enableKeyCommands() {
-  //   if (this.keyCommands) {
-  //     return;
-  //   }
-  //   document.addEventListener('keypress', this.toggleCursor, false);
-  //   this.keyCommands = true;
-  // }
-
+  }
 
   _createClass(Gesture, [{
     key: "addEvent",
@@ -36083,8 +36619,7 @@ var Gesture = /*#__PURE__*/function () {
         this.previousPoint = point;
       } else {
         this.free(point);
-      } // event.preventDefault();
-
+      }
     }
   }, {
     key: "touchStartHandler",
@@ -36125,31 +36660,16 @@ var Gesture = /*#__PURE__*/function () {
     key: "touchEndHandler",
     value: function touchEndHandler() {
       this.endHandler();
-    } // keypressHandler(event: KeyboardEvent) {
-    //   // console.log(event.code, event.keyCode, String.fromCharCode(event.keyCode))
-    //   // console.log(this.toggleCursor)
-    //   if (String.fromCharCode(event.keyCode) === 'n' && this.toggleCursor) {
-    //     this.toggleCursor();
-    //   }
-    //   if (String.fromCharCode(event.keyCode) === 'f') {
-    //     const element = document.getElementById('topic__button-next');
-    //     element.click();
-    //   }
-    // }
-
+    }
   }, {
     key: "destroy",
     value: function destroy() {
-      this.removeEvent('mousedown', this.mouseDownHandler, false);
-      this.removeEvent('mouseup', this.mouseUpHandler, false);
-      this.removeEvent('mousemove', this.mouseMoveHandler, false);
-      this.removeEvent('touchstart', this.touchStartHandler, false);
-      this.removeEvent('touchend', this.touchEndHandler, false);
-      this.removeEvent('touchmove', this.touchMoveHandler, false); // this.removeEvent('keypress', this.keypressHandler, false);
-      // $FlowFixMe
-      // if (document.removeEvent != null && this.keyCommands) { // $FlowFixMe
-      //   document.removeEvent('keypress', this.keypressHandler, false);
-      // }
+      this.removeEvent('mousedown', this.binds.mouseDownHandler, false);
+      this.removeEvent('mouseup', this.binds.mouseUpHandler, false);
+      this.removeEvent('mousemove', this.binds.mouseMoveHandler, false);
+      this.removeEvent('touchstart', this.binds.touchStartHandler, false);
+      this.removeEvent('touchend', this.binds.touchEndHandler, false);
+      this.removeEvent('touchmove', this.binds.touchMoveHandler, false);
     }
   }]);
 
@@ -37204,7 +37724,6 @@ var Recorder = /*#__PURE__*/function () {
     value: function seekToPercent(percentTime) {
       var duration = this.calcDuration();
       this.seek(duration * percentTime);
-      console.log('seekedToPercent');
     }
   }, {
     key: "seek",
@@ -38116,7 +38635,7 @@ function parseState(state, diagram) {
 /***/ (function(module, exports) {
 
 module.exports = function() {
-  return new Worker("/static/workers/" + "dd868fb1b993e3068607.worker.js");
+  return new Worker("/static/workers/" + "dfc270aeb2350da404e1.worker.js");
 };
 
 /***/ }),
@@ -46255,7 +46774,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download, Subscriber, SubscriptionManager */
+/*! exports provided: diffPathsToObj, diffObjToPaths, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString, duplicate, assignObjectFromTo, joinObjectsWithOptions, objectToPaths, getObjectDiff, updateObjFromPath, pathsToObj, UniqueMap, compressObject, refAndDiffToObject, uncompressObject, unminify, minify, ObjectTracker, download, Subscriber, SubscriptionManager, getFromObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46295,6 +46814,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "download", function() { return download; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Subscriber", function() { return Subscriber; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubscriptionManager", function() { return SubscriptionManager; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromObject", function() { return getFromObject; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _FunctionMap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FunctionMap */ "./src/js/tools/FunctionMap.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -46344,7 +46864,45 @@ var classify = function classify(key, value) {
   var withKey = nonEmpty[0] === '-' || nonEmpty.startsWith("".concat(key, "-")) ? "".concat(key, " ").concat(nonEmpty) : nonEmpty;
   var joinStr = " ".concat(key, "-");
   return "".concat(withKey.split(' -').join(joinStr));
-};
+}; // function getObjectValueFromPath(
+//   obj: Object,
+//   path: string,
+//   createIfUndefined: boolean = false,
+//   levelSeparator: string = '.',
+// ) {
+//   if (path.length === 0 || (path.length === 1 && path[0] === levelSeparator)) {
+//     return obj;
+//   }
+//   if (createIfUndefined) {
+//     obj[path[0]] = {};
+//   }
+//   if (obj[path[0]] === undefined) {
+//     return undefined;
+//   }
+//   if (typeof obj[path[0]] === 'object') {
+//     return getObjectValueFromPath(obj[path[0]], path.slice(1), createIfUndefined, levelSeparator);
+//   }
+//   if (path.length === 1) {
+//     return obj[path[0]];
+//   }
+//   return undefined;
+// }
+// function setObjectValueWithPath(
+//   obj: Object,
+//   path: string,
+//   value: any,
+//   levelSeparator: string = '.',
+// ) {
+//   if (path.length === 0 || (path.length === 1 && path[0] === levelSeparator)) {
+//     return;
+//   }
+//   if (path.length === 1) {
+//     obj[path[0]] = value;
+//     return;
+//   }
+//   if(obj[path[0]])
+// }
+
 
 var ObjectKeyPointer = /*#__PURE__*/function () {
   function ObjectKeyPointer(object, key) {
@@ -46395,6 +46953,7 @@ var ObjectKeyPointer = /*#__PURE__*/function () {
 
 function extractFrom(objectToExtractFrom, keyValues) {
   var keyPrefix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var keySeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '_';
   var out = [];
 
   if (typeof keyValues === 'string') {
@@ -46402,18 +46961,19 @@ function extractFrom(objectToExtractFrom, keyValues) {
       return new ObjectKeyPointer(objectToExtractFrom, keyPrefix + keyValues);
     }
 
-    var keyHeirarchy = keyValues.split('_');
+    var keyHeirarchy = keyValues.split(keySeparator);
     var keys = keyHeirarchy.filter(function (k) {
       return k.length > 0;
     });
+    var prefixAndKey = "".concat(keyPrefix).concat(keys[0]);
 
     if (keys.length > 1) {
-      if (keyPrefix + keys[0] in objectToExtractFrom) {
-        return extractFrom(objectToExtractFrom[keyPrefix + keys[0]], keys.slice(1).join('_'), keyPrefix);
+      if (prefixAndKey in objectToExtractFrom) {
+        return extractFrom(objectToExtractFrom[prefixAndKey], keys.slice(1).join(keySeparator), keyPrefix, keySeparator);
       }
     } else if (keys.length === 1) {
-      if (keyPrefix + keys[0] in objectToExtractFrom) {
-        return new ObjectKeyPointer(objectToExtractFrom, keyPrefix + keys[0]);
+      if (prefixAndKey in objectToExtractFrom) {
+        return new ObjectKeyPointer(objectToExtractFrom, prefixAndKey);
       }
     }
 
@@ -46422,7 +46982,7 @@ function extractFrom(objectToExtractFrom, keyValues) {
 
   if (Array.isArray(keyValues)) {
     keyValues.forEach(function (kv) {
-      var result = extractFrom(objectToExtractFrom, kv, keyPrefix);
+      var result = extractFrom(objectToExtractFrom, kv, keyPrefix, keySeparator);
 
       if (result !== undefined) {
         out.push(result);
@@ -46443,13 +47003,45 @@ function extractFrom(objectToExtractFrom, keyValues) {
   return out;
 }
 
+function getFromObject(objectToGetFrom, keyPath) {
+  var levelSeparator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
+
+  if (keyPath.length === 0 || keyPath === levelSeparator) {
+    return objectToGetFrom;
+  }
+
+  var result = extractFrom(objectToGetFrom, keyPath, '', levelSeparator);
+
+  if (result === undefined) {
+    return undefined;
+  }
+
+  return result.value();
+} // function getObjectValueFromPath(
+//   objectToExtractFrom: Object,
+//   path: string,
+//   pathSeparator: string = '.',
+// ) {
+//   const result = extractFrom(objectToExtractFrom, path, '', pathSeparator);
+//   if (result === undefined) {
+//     return undefined;
+//   }
+//   if (Array.isArray(result)) {
+//     return result[0].value();
+//   }
+//   return result.value();
+// }
+
+
 function getElement(collection, keyValues) {
-  return extractFrom(collection, keyValues, '_');
+  return extractFrom(collection, keyValues, '_', '_');
 }
 
-function addToObject(obj, nameToAdd, valueToAdd) {
-  var splitStr = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '-';
-  var levels = nameToAdd.split(splitStr);
+function addToObject(obj, keyPath, valueToAdd) {
+  var levelSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
+  var levels = keyPath.split(levelSeparator).filter(function (a) {
+    return a.length > 0;
+  });
   var currentLevel = obj;
   levels.forEach(function (level, index) {
     if (index === levels.length - 1) {

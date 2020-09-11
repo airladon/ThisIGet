@@ -141,7 +141,9 @@ export default function diagramLayout() {
         plus: '  +  ',
         minus: '  -  ',
       },
-      defaultFormAlignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
+      formDefaults: {
+        alignment: { fixTo: 'equals', xAlign: 'right', yAlign: 'top' },
+      },
       formSeries: {
         '1': ['c', 'a', 'b'],
       },

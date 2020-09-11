@@ -101,11 +101,11 @@ export default function diagramLayout() {
         },
         v: { symbol: 'vinculum' },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': ['tot1', 'equals', {
           brac: ['lb', ['n', 'minus', '_2'], 'rb'],

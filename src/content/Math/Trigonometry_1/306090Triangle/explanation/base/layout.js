@@ -386,11 +386,11 @@ export default function diagramLayout() {
         r5: { symbol: 'radical' },
         r6: { symbol: 'radical' },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': [
           sq('H', '_22', 0.02), 'plus',

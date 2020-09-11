@@ -716,11 +716,11 @@ export default function diagramLayout() {
         // strike: { symbol: 'xStrike', color: colors.working },
         // r: { symbol: 'radical', color: colors.sides },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         'base': {
           content: [
@@ -1271,11 +1271,11 @@ export default function diagramLayout() {
         r: { color: colors.lines },
         times: { text: ' \u00D7 ', color: colors.lines },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'value',
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         'base': ['value'],
         'baseTimesR': ['value', 'times', 'r'],
@@ -1298,10 +1298,10 @@ export default function diagramLayout() {
         },
         theta: { text: '\u03B8', color: colors.angles },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         angle: 'angle',
         angleToTheta: {
@@ -1337,10 +1337,10 @@ export default function diagramLayout() {
         rb: { symbol: 'bracket', side: 'right' },
         sin: { style: 'normal' },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         opp: 'opp',
         oppHyp1: {

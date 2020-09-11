@@ -183,9 +183,9 @@ export default function diagramLayout() {
     options: {
       color: layout.colors.dimensions,
       scale: 1,
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         xAlign: 'center',
-      },
+      } },
       elements: {
         c: 'c',
         'pi': '3.14',

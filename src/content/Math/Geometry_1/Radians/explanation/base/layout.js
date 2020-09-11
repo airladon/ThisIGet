@@ -293,11 +293,11 @@ export default function diagramLayout() {
           symbol: 'brace', side: 'top', color: colors.marks, lineWidth: 0.012, width: 0.05,
         },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'top',
-      },
+      } },
       forms: {
         'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
         // 'radius': [{ frac: ['_arc', '_angle', 'v'] }, 'equals', '_radius'],
@@ -353,11 +353,11 @@ export default function diagramLayout() {
         _2pi: { text: '2π', color: colors.angles },
         equals: '  =  ',
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'top',
-      },
+      } },
       forms: {
         '0': ['circumference', 'equals', '_2pi', 'x', 'radius'],
       },
@@ -386,11 +386,11 @@ export default function diagramLayout() {
         angle: { text: 'angle', color: colors.angles },
         equals: '  =  ',
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'top',
-      },
+      } },
       forms: {
         '0': ['arc', 'equals', 'angle', 'x', 'radius'],
         '1': [
@@ -505,11 +505,11 @@ export default function diagramLayout() {
         degrees: { text: 'degrees', color: colors.degrees },
         radians: { text: 'radians', color: colors.radianLines },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': [
           {
@@ -637,11 +637,11 @@ export default function diagramLayout() {
         degrees: { text: 'degrees', color: colors.degrees },
         radians: { text: 'radians', color: colors.radianLines },
       },
-      defaultFormAlignment: {
+      formDefaults: { alignment: {
         fixTo: 'equals',    // Points can also be defined as objects
         xAlign: 'right',
         yAlign: 'baseline',
-      },
+      } },
       forms: {
         '0': [
           'degrees', 'equals',
