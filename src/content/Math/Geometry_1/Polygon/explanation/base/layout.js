@@ -342,10 +342,10 @@ export default function diagramLayout() {
           content: [
             newTot, 'equals', oldTot, '   ', 'm1', '   ', 'a1', '   ', 'm2', '   ', 'b1', '   ', 'm3', '   ', 'c1', '   ', 'p1', '   ', '_360',
           ],
-          translation: {
+          animation: { translation: {
             m3: ['curved', 'up', 1],
             c1: ['curved', 'up', 1],
-          },
+          } },
         },
         '2': [
           newTot, 'equals', oldTot, '   ',

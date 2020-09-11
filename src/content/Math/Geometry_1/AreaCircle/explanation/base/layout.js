@@ -327,7 +327,7 @@ export default function diagramLayout() {
             AreaCirc, 'equals', half, ' ', 'mul', '__2', ' ',
             'pi', ' ', '_r', ' ', 'r',
           ],
-          translation: { r: ['curved', 'up', 0.8] },
+          animation: { translation: { r: ['curved', 'up', 0.8] } },
         },
         '10': [
           AreaCirc, 'equals',

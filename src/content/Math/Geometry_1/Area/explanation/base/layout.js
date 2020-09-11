@@ -714,10 +714,12 @@ export default function diagramLayout() {
         '11': ['Area', 'equals', '_10', '_x', '_1', 'm', 'x', '_6', '__x', '__1', '_m'],
         '12': {
           content: ['Area', 'equals', '_10', 'x', '_6', '__x', '__1', '_m', '_x', '_1', 'm'],
-          translation: {
-            m: ['curved', 'up', 0.5],
-            _1: ['curved', 'up', 0.5],
-            _x: ['curved', 'up', 0.5],
+          animation: {
+            translation: {
+              m: ['curved', 'up', 0.5],
+              _1: ['curved', 'up', 0.5],
+              _x: ['curved', 'up', 0.5],
+            },
           },
         },
         '13': [

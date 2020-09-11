@@ -497,10 +497,10 @@ export default function diagramLayout() {
               'equals', 'sin', { brac: ['lb', 'theta', 'rb'] },
             ],
             alignment: { fixTo: 'equals' },
-            translation: {
+            animation: { translation: {
               'opp': ['curved', 'up', 0.45],
               'hyp': ['curved', 'down', 0.45],
-            },
+            } },
           },
           'sinNoBracket': {
             content: [
@@ -508,10 +508,10 @@ export default function diagramLayout() {
               'equals', 'sin', ' ', 'theta',
             ],
             alignment: { fixTo: 'equals' },
-            translation: {
+            animation: { translation: {
               'opp': ['curved', 'up', 0.45],
               'hyp': ['curved', 'down', 0.45],
-            },
+            } },
           },
           'opp': {
             content: [
@@ -519,10 +519,10 @@ export default function diagramLayout() {
               'equals', 'sin', { brac: ['lb', 'theta', 'rb'] }, 'times', 'hyp',
             ],
             alignment: { fixTo: 'equals' },
-            translation: {
+            animation: { translation: {
               'opp': ['curved', 'up', 0.45],
               'hyp': ['curved', 'down', 0.45],
-            },
+            } },
           },
           'hyp': {
             content: [
@@ -530,10 +530,10 @@ export default function diagramLayout() {
               'equals', { frac: ['opp', 'v', ['sin', { brac: ['lb', 'theta', 'rb'] }]] },
             ],
             alignment: { fixTo: 'equals' },
-            translation: {
+            animation: { translation: {
               'opp': ['curved', 'up', 0.45],
               'hyp': ['curved', 'down', 0.45],
-            },
+            } },
           },
           'cos': {
             content: [

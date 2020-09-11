@@ -184,7 +184,7 @@ export default function diagramLayout() {
           // },
           oppFromHyp: {
             content: [opp, 'equals', hyp, 'times', sineAngle],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.3],
               'oppContainer': ['curved', 'up', 0.3],
               'hypotenuse': ['curved', 'down', 0.45],
@@ -194,11 +194,11 @@ export default function diagramLayout() {
               'rb': ['linear'],
               'sinContainer': ['linear'],
               'angle': ['linear'],
-            },
+            } },
           },
           oppFromSine: {
             content: [opp, 'equals', hyp, 'times', sineAngle],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.45],
               'oppContainer': ['curved', 'up', 0.45],
               'hypotenuse': ['linear'],
@@ -208,14 +208,14 @@ export default function diagramLayout() {
               'rb': ['curved', 'down', 0.3],
               'sinContainer': ['curved', 'down', 0.3],
               'angle': ['curved', 'down', 0.3],
-            },
+            } },
           },
           // hyp: {
           //   content: [hyp, 'equals', { frac: [opp, 'v', sineAngle] }],
           // },
           hypFromOpp: {
             content: [hyp, 'equals', { frac: [opp, 'v', sineAngle] }],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.45],
               'oppContainer': ['curved', 'up', 0.45],
               'hypotenuse': ['curved', 'down', 0.45],
@@ -225,11 +225,11 @@ export default function diagramLayout() {
               'rb': ['linear'],
               'sinContainer': ['linear'],
               'angle': ['linear'],
-            },
+            } },
           },
           hypFromSine: {
             content: [hyp, 'equals', { frac: [opp, 'v', sineAngle] }],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.45],
               'oppContainer': ['curved', 'up', 0.45],
               'hypotenuse': ['curved', 'down', 0.45],
@@ -239,7 +239,7 @@ export default function diagramLayout() {
               'rb': ['curved', 'down', 0.8],
               'sinContainer': ['curved', 'down', 0.8],
               'angle': ['curved', 'down', 0.8],
-            },
+            } },
           },
           // sine: {
           //   content: [sineAngle, 'equals', { frac: [opp, 'v', hyp] }],
@@ -257,7 +257,7 @@ export default function diagramLayout() {
           // },
           sineFromOpp: {
             content: [sineAngle, 'equals', { frac: [opp, 'v', hyp] }],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.45],
               'oppContainer': ['curved', 'up', 0.45],
               'hypotenuse': ['linear'],
@@ -267,11 +267,11 @@ export default function diagramLayout() {
               'rb': ['curved', 'down', 0.3],
               'sinContainer': ['curved', 'down', 0.3],
               'angle': ['curved', 'down', 0.3],
-            },
+            } },
           },
           sineFromHyp: {
             content: [sineAngle, 'equals', { frac: [opp, 'v', hyp] }],
-            translation: {
+            animation: { translation: {
               'opposite': ['curved', 'up', 0.45],
               'oppContainer': ['curved', 'up', 0.45],
               'hypotenuse': ['curved', 'down', 0.45],
@@ -281,7 +281,7 @@ export default function diagramLayout() {
               'rb': ['curved', 'down', 0.8],
               'sinContainer': ['curved', 'down', 0.8],
               'angle': ['curved', 'down', 0.8],
-            },
+            } },
           },
         },
         position: [0, -1.4],

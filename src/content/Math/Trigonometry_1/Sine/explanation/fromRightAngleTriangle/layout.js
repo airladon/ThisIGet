@@ -910,14 +910,14 @@ export default function diagramLayout() {
             fixTo: 'equals',
             xAlign: 0,
           },
-          translation: {
+         animation: { translation: {
             'opp': ['curved', 'up', 0.45],
             'hyp': ['linear'],
             'sin': ['curved', 'down', 0.4],
             'lb': ['curved', 'down', 0.4],
             'rb': ['curved', 'down', 0.4],
             'angle': ['curved', 'down', 0.4],
-          },
+          } },
         },
         '0': {
           content: ['opp', 'equals', 'func', { brac: ['lb', 'angle', 'rb'] },
