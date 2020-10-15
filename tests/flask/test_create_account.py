@@ -40,7 +40,7 @@ def create_account_with_confirm(client, username='new_test_user_01',
         repeat_password=password)
     formatted_email = format_email(email)
     user = Users.query \
-        .filter(Users.username_hash == hash_str_with_pepper(username)) \
+        .filter(Users.username_hash == hash_str_with_pepper(username.lower())) \
         .filter(Users.email_hash == hash_str_with_pepper(formatted_email)) \
         .order_by(desc('signed_up_on')) \
         .first()
@@ -62,7 +62,7 @@ def test_create_new_user(client):
     res = create_account(
         client, username='new_test_user_01', follow_redirects=False)
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     assert user is not None
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
@@ -130,7 +130,7 @@ def test_create_account_pass(
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     assert user.confirmed is False
 
 
@@ -179,7 +179,7 @@ def test_create_account_existing_unconfirmed(
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
 
     assert user is not None
     assert user.confirmed is False
@@ -198,7 +198,7 @@ def test_create_account_existing_unconfirmed(
     formatted_email = format_email(email)
     users = Users.query \
         .filter(or_(
-            Users.username_hash == hash_str_with_pepper(username),
+            Users.username_hash == hash_str_with_pepper(username.lower()),
             Users.email_hash == hash_str_with_pepper(formatted_email),
         )) \
         .all()
