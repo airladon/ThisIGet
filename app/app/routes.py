@@ -625,7 +625,7 @@ def confirm_account_message(username):
             f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     if user is None:
         flash('User does not exist', 'error')
         return redirect(url_for('create'))

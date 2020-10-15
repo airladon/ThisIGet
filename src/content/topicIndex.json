@@ -1321,12 +1321,6 @@
           "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
-        },
-        "ivid": {
-          "type": "presentation",
-          "title": "Interactive Video",
-          "description": "",
-          "fullTopic": true
         }
       },
       "links": {
