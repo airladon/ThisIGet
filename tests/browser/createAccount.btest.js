@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   logout, snap, checkSnap, writeReplacements, createAccountWithoutConfirm,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,
-  confirmCreateAccount,
+  confirmCreateAccount, login,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -41,6 +41,28 @@ describe('Create Account', () => {
 
     await click('submit');
     await snap('create-account', snapshots);
+  });
+
+  test('Create Account Capitals', async () => {
+    uname = Test_User_100
+    jest.setTimeout(40000);
+    await sleep(500);
+    await deleteAccount(uname, password);
+    await createAccount(
+      uname, `${uname}@ThiSiget.com`, password,
+      'create-account-capitals', snapshots, 0,
+    );
+    await setFormInput('password', password);
+    await snap('create-account-capitals', snapshots);
+
+    await click('submit');
+    await snap('create-account-capitals', snapshots);
+
+    await logout();
+    await login(uname, password, 'create-account-capitals', snapshots);
+
+    await logout();
+    await login(`${uname}@ThiSiget.com`, password, 'create-account-capitals', snapshots);
   });
 
   test('Create Account - Errors', async () => {

@@ -6,18 +6,203 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/explanation/markdown</loc>
+    <lastmod>2020-02-25T17:18:05+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/explanation/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/discover/simple</loc>
+    <lastmod>2020-02-22T14:03:40+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/quiz/base</loc>
+    <lastmod>2020-03-04T04:36:27+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/links/base</loc>
+    <lastmod>2020-02-22T14:03:40+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/examples/base</loc>
+    <lastmod>2020-02-22T14:03:40+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Cosine/summary/base</loc>
+    <lastmod>2020-03-04T04:36:27+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Introduction/explanation/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/explanation/fromRightAngleTriangle</loc>
+    <lastmod>2020-03-23T18:03:14+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/explanation/brief</loc>
+    <lastmod>2020-02-18T14:19:01+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/explanation/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/quiz/findOpposite</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/quiz/findAdjacent</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/quiz/findAngle</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/quiz/findHypotenuse</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/quiz/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/links/base</loc>
+    <lastmod>2019-11-26T22:01:52+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/examples/base</loc>
+    <lastmod>2020-02-18T14:19:01+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/Sine/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/explanation/static</loc>
+    <lastmod>2020-02-20T22:40:17+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/explanation/base</loc>
+    <lastmod>2020-03-24T02:58:51+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/discover/simple</loc>
+    <lastmod>2020-02-20T22:24:33+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/quiz/entry</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/quiz/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/links/base</loc>
+    <lastmod>2019-11-23T22:20:06+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/examples/simpleGeometries</loc>
+    <lastmod>2019-11-26T04:41:27+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/examples/variousGeometries</loc>
+    <lastmod>2020-02-20T22:40:17+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/306090Triangle/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/explanation/static</loc>
+    <lastmod>2019-11-26T03:49:04+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/explanation/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/discover/simple</loc>
+    <lastmod>2019-11-26T01:56:43+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/quiz/entry</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/quiz/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/links/base</loc>
+    <lastmod>2019-11-23T14:46:32+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/examples/simpleGeometries</loc>
+    <lastmod>2019-11-26T04:41:27+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/examples/variousGeometries</loc>
+    <lastmod>2019-11-26T04:54:45+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Trigonometry_1/454590Triangle/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AngleTypes/explanation/base</loc>
-    <lastmod>2019-10-06T03:53:41+00:00</lastmod>
+    <lastmod>2020-03-23T22:45:50+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AngleTypes/quiz/base</loc>
-    <lastmod>2019-10-06T03:56:46+00:00</lastmod>
+    <lastmod>2020-03-07T19:08:11+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/PointLineDistance/explanation/base</loc>
-    <lastmod>2019-10-07T17:27:13+00:00</lastmod>
+    <lastmod>2020-03-04T04:36:27+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -37,7 +222,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AreaCircle/explanation/base</loc>
-    <lastmod>2019-10-07T17:16:52+00:00</lastmod>
+    <lastmod>2020-04-08T16:36:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -47,7 +232,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AreaCircle/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-07T19:08:11+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -67,7 +252,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AnglesAtIntersections/explanation/base</loc>
-    <lastmod>2019-10-06T14:03:13+00:00</lastmod>
+    <lastmod>2020-03-07T19:09:27+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -97,12 +282,12 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AnglesAtIntersections/summary/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2019-11-09T01:53:51+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelLineDistance/explanation/base</loc>
-    <lastmod>2019-10-07T17:30:40+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -122,12 +307,12 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Area/explanation/base</loc>
-    <lastmod>2019-10-07T16:26:25+00:00</lastmod>
+    <lastmod>2020-04-08T16:36:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Area/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-07T19:08:11+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -146,23 +331,38 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/equilangularIsSimilarProof</loc>
-    <lastmod>2019-10-02T17:21:59+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/equilangularProofBrief</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/equalAnglesAreSimilarProof</loc>
+    <lastmod>2019-11-04T23:37:03+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/staticBrief</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2019-11-04T22:03:18+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/static</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2019-11-04T23:06:26+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/equalAnglesAreSimilarProofBrief</loc>
+    <lastmod>2019-11-02T14:35:41+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/explanation/base</loc>
+    <lastmod>2020-03-24T02:51:40+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/discover/simple</loc>
+    <lastmod>2019-11-04T21:37:39+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/quiz/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -171,8 +371,18 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/examples/base</loc>
+    <lastmod>2019-11-04T23:46:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/SimilarTriangles/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Angle/explanation/base</loc>
-    <lastmod>2019-10-05T22:08:51+00:00</lastmod>
+    <lastmod>2020-03-23T22:09:08+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -182,17 +392,17 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Triangles/explanation/base</loc>
-    <lastmod>2019-10-06T14:16:51+00:00</lastmod>
+    <lastmod>2020-03-23T23:22:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Triangles/discover/base</loc>
-    <lastmod>2019-10-06T14:16:51+00:00</lastmod>
+    <lastmod>2020-03-23T23:22:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Triangles/quiz/types</loc>
-    <lastmod>2019-10-06T14:16:51+00:00</lastmod>
+    <lastmod>2020-03-23T23:22:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -217,22 +427,22 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Introduction/explanation/singlePage</loc>
-    <lastmod>2019-10-06T13:41:41+00:00</lastmod>
+    <lastmod>2020-03-23T21:48:43+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Introduction/explanation/base</loc>
-    <lastmod>2019-10-06T13:41:41+00:00</lastmod>
+    <lastmod>2020-03-23T17:40:52+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelLines/explanation/base</loc>
-    <lastmod>2019-10-06T13:41:41+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelLines/quiz/base</loc>
-    <lastmod>2019-10-06T13:48:35+00:00</lastmod>
+    <lastmod>2020-03-04T04:36:27+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -242,7 +452,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AngleGroups/explanation/base</loc>
-    <lastmod>2019-10-06T03:32:14+00:00</lastmod>
+    <lastmod>2020-03-08T16:15:03+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -272,7 +482,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ExternalAngles/explanation/base</loc>
-    <lastmod>2019-10-07T13:37:39+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -282,7 +492,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ExternalAngles/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -302,7 +512,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AreaTriangle/explanation/base</loc>
-    <lastmod>2019-10-07T17:12:40+00:00</lastmod>
+    <lastmod>2020-04-08T16:36:58+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -312,7 +522,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/AreaTriangle/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-04T04:36:27+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -331,8 +541,43 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/explanation/brief</loc>
+    <lastmod>2019-11-19T18:15:54+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/explanation/base</loc>
+    <lastmod>2020-03-24T02:25:33+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/discover/simple</loc>
+    <lastmod>2019-11-19T18:15:54+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/quiz/base</loc>
+    <lastmod>2019-11-19T22:51:02+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/links/base</loc>
+    <lastmod>2019-11-13T18:18:08+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/examples/base</loc>
+    <lastmod>2019-11-19T18:15:54+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Polygon/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Radians/explanation/base</loc>
-    <lastmod>2019-10-06T04:09:02+00:00</lastmod>
+    <lastmod>2020-03-23T23:07:41+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -342,7 +587,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Radians/quiz/base</loc>
-    <lastmod>2019-10-06T04:09:02+00:00</lastmod>
+    <lastmod>2020-03-07T19:08:11+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -362,7 +607,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Isosceles/explanation/base</loc>
-    <lastmod>2019-10-07T13:57:43+00:00</lastmod>
+    <lastmod>2020-03-24T00:33:55+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -372,7 +617,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Isosceles/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -387,7 +632,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Isosceles/summary/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-24T00:43:43+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -397,7 +642,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/RightAngleTriangles/explanation/base</loc>
-    <lastmod>2019-10-07T17:23:07+00:00</lastmod>
+    <lastmod>2020-03-24T02:34:44+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -407,7 +652,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/RightAngleTriangles/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -427,7 +672,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Degrees/explanation/base</loc>
-    <lastmod>2019-10-07T20:57:50+00:00</lastmod>
+    <lastmod>2020-03-23T22:42:49+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -447,7 +692,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/SideAngleRelationship/explanation/base</loc>
-    <lastmod>2019-10-07T17:07:08+00:00</lastmod>
+    <lastmod>2020-03-24T02:25:33+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -457,7 +702,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/SideAngleRelationship/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -477,17 +722,17 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Circle/explanation/base</loc>
-    <lastmod>2019-10-05T22:08:51+00:00</lastmod>
+    <lastmod>2020-03-21T00:06:12+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Circle/quiz/identifyProperties</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-07T19:08:11+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Circle/quiz/calcProperties</loc>
-    <lastmod>2019-10-02T01:15:00+00:00</lastmod>
+    <lastmod>2019-10-27T22:01:39+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -497,7 +742,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Circle/examples/static</loc>
-    <lastmod>2019-10-02T17:21:59+00:00</lastmod>
+    <lastmod>2019-10-27T02:52:57+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -507,7 +752,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Quadrangles/explanation/base</loc>
-    <lastmod>2019-10-07T13:46:07+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -517,7 +762,7 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Quadrangles/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -537,22 +782,22 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/explanation/fromSAS</loc>
-    <lastmod>2019-10-01T21:02:33+00:00</lastmod>
+    <lastmod>2019-11-22T14:39:44+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/explanation/base</loc>
-    <lastmod>2019-10-07T20:39:45+00:00</lastmod>
+    <lastmod>2020-03-23T23:33:56+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/discover/simple</loc>
-    <lastmod>2019-10-02T00:49:38+00:00</lastmod>
+    <lastmod>2019-11-02T19:10:29+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/quiz/base</loc>
-    <lastmod>2019-10-01T04:04:13+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -567,12 +812,12 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/ta/tri</loc>
-    <lastmod>2019-10-07T13:32:57+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/CongruentTriangles/ta/sss</loc>
-    <lastmod>2019-10-07T13:32:57+00:00</lastmod>
+    <lastmod>2020-03-23T21:48:43+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -581,8 +826,48 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/explanation/brief</loc>
+    <lastmod>2020-03-02T17:47:36+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/explanation/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/discover/base</loc>
+    <lastmod>2020-03-02T17:47:36+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/quiz/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/links/base</loc>
+    <lastmod>2019-11-12T03:21:51+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/examples/identify</loc>
+    <lastmod>2019-11-12T15:33:34+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/examples/base</loc>
+    <lastmod>2019-11-12T01:58:29+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.thisiget.com/content/Math/Geometry_1/Parallelogram/summary/base</loc>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/RectanglesAndSquares/explanation/base</loc>
-    <lastmod>2019-10-07T16:17:22+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -607,12 +892,12 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/static</loc>
-    <lastmod>2019-10-02T17:21:59+00:00</lastmod>
+    <lastmod>2019-10-31T03:13:08+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base</loc>
-    <lastmod>2019-10-07T18:53:05+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -632,12 +917,12 @@
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/ParallelSplitOfTriangle/summary/base</loc>
-    <lastmod>2019-10-07T18:53:05+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://www.thisiget.com/content/Math/Geometry_1/Equilateral/explanation/base</loc>
-    <lastmod>2019-10-07T16:53:59+00:00</lastmod>
+    <lastmod>2020-03-17T04:15:48+00:00</lastmod>
     <changefreq>weekly</changefreq>
   </url>
   <url>

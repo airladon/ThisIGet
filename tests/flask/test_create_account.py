@@ -39,8 +39,9 @@ def create_account_with_confirm(client, username='new_test_user_01',
         client=client, username=username, email=email, password=password,
         repeat_password=password)
     formatted_email = format_email(email)
+    lower_username = username.lower()
     user = Users.query \
-        .filter(Users.username_hash == hash_str_with_pepper(username.lower())) \
+        .filter(Users.username_hash == hash_str_with_pepper(lower_username)) \
         .filter(Users.email_hash == hash_str_with_pepper(formatted_email)) \
         .order_by(desc('signed_up_on')) \
         .first()
