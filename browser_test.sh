@@ -92,6 +92,7 @@ title() {
 }
 
 cp containers/pupp/Dockerfile Dockerfile_pupp
+cp containers/pupp/.dockerignore .dockerignore
 
 HOST_USER_ID=`id -u`
 
@@ -100,6 +101,7 @@ rm Dockerfile_pupp
 
 docker build -t thisiget-pupp .
 rm Dockerfile
+rm .dockerignore
 
 ADDRESS=$1
 if [ "$1" = debug ];
