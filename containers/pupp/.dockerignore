@@ -1,0 +1,10 @@
+node_modules/
+env/
+migrations/
+.git/
+app/
+src/
+assets/
+tests/
+tools/
+webpack/
