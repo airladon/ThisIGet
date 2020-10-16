@@ -33,6 +33,13 @@ for i in range(10):
     print(f'Resetting {username}')
     resetUser(username, email, password)
 
+username = f'Test_User_100'
+email = f'{username}@ThiSiget.com'
+password = '12345678'
+print(f'Resetting {username}')
+resetUser(username, email, password)
+
+
 user = Users.query.filter_by(
     username_hash=hash_str_with_pepper('test_user_002aofkspeD3fif'.lower())) \
     .first()

@@ -286,7 +286,7 @@ async function deleteAccountIfExists(username, password, debug) {
   await logout();
   await login(username, password);
   const url = await page.url();
-  console.log(url)
+
   if (url.slice(-5) === 'login') {
     await goHome();
     return;
