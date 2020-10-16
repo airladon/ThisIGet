@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import {
   logout, snap, checkSnap, writeReplacements, createAccountWithoutConfirm,
   setFormInput, click, goHome, deleteAccount, createAccount, sleep,
-  confirmCreateAccount,
+  confirmCreateAccount, login, deleteAccountIfExists,
 } from './common';
 
 expect.extend({ toMatchImageSnapshot });
@@ -14,7 +14,7 @@ const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
 
 const snapshots = [];
-const indexes = Array.from(Array(26).keys());
+const indexes = Array.from(Array(43).keys());
 const replacements = [];
 
 
@@ -41,6 +41,29 @@ describe('Create Account', () => {
 
     await click('submit');
     await snap('create-account', snapshots);
+  });
+
+  test('Create Account Capitals', async () => {
+    const uname = 'Test_User_100'
+    jest.setTimeout(40000);
+    await sleep(500);
+    await deleteAccountIfExists(uname, password);
+    await createAccount(
+      uname, `${uname}@ThiSiget.com`, password,
+      'create-account-capitals', snapshots, 0,
+    );
+    console.log(1)
+    await setFormInput('password', password);
+    await snap('create-account-capitals', snapshots);
+    console.log(2)
+    await click('submit');
+    await snap('create-account-capitals', snapshots);
+
+    await logout();
+    await login(uname, password, 'create-account-capitals', snapshots);
+
+    await logout();
+    await login(`${uname}@ThiSiget.com`, password, 'create-account-capitals', snapshots);
   });
 
   test('Create Account - Errors', async () => {

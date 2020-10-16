@@ -404,7 +404,7 @@ def apple_touch_icon():
 def loginuser():
     form = LoginForm()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(form.username.data)).first()
+        username_hash=hash_str_with_pepper(form.username.data.lower())).first()
     if user is None or not user.check_password(form.password.data):
         return redirect('/login')
     login_user(user, True)
@@ -587,12 +587,12 @@ def create():
         # Delete any rows in the database that have either the username or
         # email (these rows are guaranteed not confirmed as if they were
         # confirmed the submit validation would have failed)
-        # formatted_email = format_email(form.email.data)
+        formatted_email = format_email(form.email.data)
         Users.query \
             .filter(or_(
                 Users.username_hash == hash_str_with_pepper(
                     form.username.data.lower()),
-                Users.email_hash == hash_str_with_pepper(form.email.data),
+                Users.email_hash == hash_str_with_pepper(formatted_email),
             )) \
             .delete()
         user = Users()
@@ -625,7 +625,7 @@ def confirm_account_message(username):
             f"/{'static/dist'}/{static_files['static/dist']['tools.js']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     if user is None:
         flash('User does not exist', 'error')
         return redirect(url_for('create'))

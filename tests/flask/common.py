@@ -36,7 +36,7 @@ def create_account(
 def remove_account(client, username=new_user):
     # user = Users.query.filter_by(username=username).first()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     if user is not None:
         db.session.delete(user)
         db.session.commit()

@@ -282,6 +282,21 @@ async function deleteAccount(username, password, debug) {
   await debugSnapshot(debug, 5);
 }
 
+async function deleteAccountIfExists(username, password, debug) {
+  await logout();
+  await login(username, password);
+  const url = await page.url();
+  console.log(url)
+  if (url.slice(-5) === 'login') {
+    await goHome();
+    return;
+  }
+  await gotoAccountSettings();
+  await click('delete_form-submit');
+  await click('form-submit_delete');
+  await goHome();
+}
+
 function cleanReplacementFolder(callingScriptPath) {
   const deleteFolderRecursive = (folderPath) => {
     if (fs.existsSync(folderPath)) {
@@ -321,6 +336,7 @@ function writeReplacements(callingScriptPath, replacements) {
 }
 
 module.exports = {
+  deleteAccountIfExists,
   cleanReplacementFolder,
   getReplacementsFolder,
   login,
