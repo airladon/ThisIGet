@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-import tester from '../../../../../../testers/singlePageTester';
+// import tester from '../../../../../../testers/singlePageTester';
 
-tester(
-//   { width: 700 },
-);
+// tester(
+// //   { width: 700 },
+// );

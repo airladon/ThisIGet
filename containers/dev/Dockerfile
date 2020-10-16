@@ -47,7 +47,7 @@ RUN chown myuser /opt/app
 # RUN chmod 666 app/app/app.db
 
 
-# USER myuser
+USER myuser
 
 ENTRYPOINT ["bash"]
 
