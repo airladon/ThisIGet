@@ -2,6 +2,6 @@
 import 'babel-polyfill';
 import tester from '../../../../../../testers/singlePageTester';
 
-// tester(
+tester(
 //   { width: 700 },
-// );
+);
