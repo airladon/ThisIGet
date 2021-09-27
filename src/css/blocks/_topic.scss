@@ -1,5 +1,7 @@
 // Content area aspect ratio
 // $diagram_ratio: 1.5;
+@import './topic/popupBox';
+@import './topic/pathTile';
 
 $title_bar_space_high: 120px;
 $title_bar_space_low: 90px;
@@ -273,6 +275,3 @@ $title_bar_space_low: 90px;
 // #id_topic__title_container .navigator__topic_tile_title_container {
 //   width: calc(var(--topic__title_tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) * 2 - var(--navigator__tile_img_width) * 2);
 // }
-
-@import './topic/popupBox';
-@import './topic/pathTile';
