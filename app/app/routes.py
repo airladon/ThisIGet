@@ -201,15 +201,18 @@ def information_response(name):
 def about():
     return information_response('about')
 
+
 # Uncomment for Privacy
 @app.route('/copyright', strict_slashes=False)
 def copyright():
     return information_response('copyright')
 
+
 # Uncomment for Privacy
 @app.route('/privacy', strict_slashes=False)
 def privacy():
     return information_response('privacy')
+
 
 # Uncomment for Privacy
 @app.route('/terms', strict_slashes=False)
@@ -710,7 +713,7 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')
-        flash(f'Click the link inside it to reset your password.', 'after')
+        flash('Click the link inside it to reset your password.', 'after')
         return redirect(url_for('reset_password_request'))
     return render_template(
         'resetPasswordRequest.html', form=form, css=css, js=js,

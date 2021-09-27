@@ -175,7 +175,7 @@ def test_set_link_rating_not_logged_in(client):
 
 def test_set_rating_wrong_input(client):
     res = client \
-        .get(f'/setVersionRating/invalid/explanation/base?&rating=3') \
+        .get('/setVersionRating/invalid/explanation/base?&rating=3') \
         .get_json()
     assert res['status'] == 'fail'
     assert res['message'] == 'path does not exist'
