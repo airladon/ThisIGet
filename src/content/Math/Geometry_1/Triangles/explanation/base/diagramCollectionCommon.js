@@ -96,7 +96,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       if (quadrant === 3 || quadrant === 4) {
         y *= -1;
       }
-      // eslint-disable-next-line no-param-reassign, $FlowFixMe
+      // eslint-disable-next-line no-param-reassign
       triangle[`_pad${pad}`].scenarios.next = {
         position: [x, y],
         rotation: 0,

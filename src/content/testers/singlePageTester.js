@@ -1,4 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop */
+/* eslint-disable no-restricted-syntax, jest/no-export, jest/no-conditional-expect  */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { joinObjects, writeImage, getReplacementsFolder } from './tools';
