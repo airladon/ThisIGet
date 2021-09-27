@@ -26,7 +26,7 @@ WORKDIR /opt/app
 
 # Install npm packages
 ADD package.json .
-# ADD package-lock.json .
+ADD package-lock.json .
 RUN npm install
 
 # Install Python packages

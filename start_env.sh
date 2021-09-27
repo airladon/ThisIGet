@@ -230,6 +230,7 @@ else
     -v $PROJECT_PATH/updateFigureOne.sh:/opt/app/updateFigureOne.sh \
     -v $PROJECT_PATH/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/.git:/opt/app/.git \
+    -v $PROJECT_PATH/jest-puppeteer.config.js:/opt/app/jest-puppeteer.config.js \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
