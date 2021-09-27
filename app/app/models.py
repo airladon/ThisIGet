@@ -132,7 +132,7 @@ class Users(UserMixin, db.Model):
     def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            app.config['SECRET_KEY'], algorithm='HS256')
 
     def delete_account(self):
         self.username = hash_str_with_pepper(
@@ -158,7 +158,7 @@ class Users(UserMixin, db.Model):
                 'exp': time() + expiration(),
                 'email': email_address,
             },
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            app.config['SECRET_KEY'], algorithm='HS256')
 
     @staticmethod
     def verify_change_email_token(token):
@@ -198,7 +198,7 @@ class Users(UserMixin, db.Model):
                 # 'email_hash': self.email_hash
             },
             app.config['SECRET_KEY'],
-            algorithm='HS256').decode('utf-8')
+            algorithm='HS256')
 
     @staticmethod
     def verify_account_confirmation_token(token):
