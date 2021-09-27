@@ -24,7 +24,7 @@ function entryPoints(buildMode, pathToWatch = '') {
     disclaimer: path.join(__dirname, '../src/js/views/information/disclaimer.js'),
     contribute: path.join(__dirname, '../src/js/views/information/contribute.js'),
     polyfill: path.join(__dirname, '../src/js/polyfills.js'),
-    topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
+    // topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
   };
 
   let topics = pathTools.getAllPaths(
@@ -40,6 +40,7 @@ function entryPoints(buildMode, pathToWatch = '') {
     buildMode,
   );
   topics = [...topics, ...quickReferences];
+  topics = topics.slice(0, 10);
   topics.forEach((topic) => {
     const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);

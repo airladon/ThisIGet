@@ -13,7 +13,7 @@ As an extension, I think that if users can rate the different versions then it i
 This site is not aimed at a particular audience or age group. It is simply reference material that people may, or may not, find useful. It is a constant work in progress and I invite anyone that wants to [contribute](/contact) to do so!
 
 
-![](/static/assets/bio.png)
+<!-- ![](/static/assets/bio.png) -->
 
 ## More Information
 
