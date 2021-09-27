@@ -40,7 +40,7 @@ function entryPoints(buildMode, pathToWatch = '') {
     buildMode,
   );
   topics = [...topics, ...quickReferences];
-  topics = topics.slice(0, 10);
+  // topics = topics.slice(0, 10);
   topics.forEach((topic) => {
     const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);

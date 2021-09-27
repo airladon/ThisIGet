@@ -80,6 +80,7 @@
   color: var(--color-lp-tile-text);
   width: 100%;
   height: 100%;
+  display: table;
 }
 
 .navigator__topic_tile_containter:hover {
@@ -96,9 +97,11 @@
 }
 
 .navigator__topic_tile_title_container {
-  display: table;
+  // display: table;
+  display: table-cell;
+  vertical-align: middle;
   height: 100%;
-  float: left;
+  // float: left;
   width: calc(var(--navigator__tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) - var(--navigator__tile_img_width) - 2px);
 }
 
