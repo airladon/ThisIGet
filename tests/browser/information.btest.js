@@ -8,18 +8,18 @@ singlePageTester({
   prefix: 'information-about-',
   endpoint: 'about',
 },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'information-privacy-',
-//   endpoint: 'privacy',
-// },
-// {
-//   width: 700,
-//   element: 'main',
-//   prefix: 'information-terms-',
-//   endpoint: 'terms',
-// },
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-privacy-',
+  endpoint: 'privacy',
+},
+{
+  width: 700,
+  element: 'main',
+  prefix: 'information-terms-',
+  endpoint: 'terms',
+},
 {
   width: 700,
   element: 'main',

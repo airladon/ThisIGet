@@ -55,8 +55,8 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: false,
     reactDevMode: true,
-    outputFilename: '[name]-[contenthash].js',
-    cssFileName: '[name]-[contenthash].css',
+    outputFilename: '[name].js',
+    cssFileName: '[name].css',
   },
 };
 
