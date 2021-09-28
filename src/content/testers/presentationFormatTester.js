@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, no-await-in-loop */
 /* eslint-disable no-restricted-syntax, jest/no-export, jest/no-conditional-expect */
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import { joinObjects, writeImage, getReplacementsFolder } from './tools';
 import getThreshold from './threshold';
@@ -77,7 +77,7 @@ async function stopHintButton() {
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(3, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   // const replacementsPath = cleanReplacementFolder(fullPath);
   const replacementsPath = getReplacementsFolder(fullPath);
@@ -145,14 +145,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
           await page.goto(fullpath, { waitUntil: 'networkidle0' });
         }
         // await sleep(200);
-        await page.setViewport({
+        await page.setViewportSize({
           width: options.viewPort.width,
           height: options.viewPort.width,
         });
 
         const pageHeight = await page.evaluate(() => document.body.getBoundingClientRect().height);
 
-        await page.setViewport({
+        await page.setViewportSize({
           width: options.viewPort.width,
           height: Math.floor(pageHeight),
         });

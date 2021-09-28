@@ -3,7 +3,7 @@
 // import 'babel-polyfill';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const { joinObjects, writeImage, getReplacementsFolder } = require('./tools');
-const playwright = require('playwright');
+// const playwright = require('playwright');
 
 // import { getReplacementsFolder } from '../../../tests/browser/common';
 
@@ -216,20 +216,3 @@ export default function singlePageTester(optionsOrScenario, ...scenarios) {
     );
   });
 }
-
-
-// test('test1', async () => {
-//   const browser = await playwright['chromium'].launch();
-//   const context = await browser.newContext();
-//   const page = await context.newPage();
-//   await page.goto('http://whatsmyuseragent.org/');
-//   await page.screenshot({ path: './src/example.png' });
-//   await browser.close();
-//   expect(true).toBe(true);
-// });
-
-
-// test('', () => {
-//   expect(true).toBe(true);
-// })
-
