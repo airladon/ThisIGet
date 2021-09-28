@@ -51,7 +51,7 @@ async function removeTopicVariables(p) {
 
 
 // eslint-disable no-await-in-loop
-function singlePageTester(optionsOrScenario, ...scenarios) {
+export default function singlePageTester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
@@ -97,7 +97,6 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
         let errorFlag = false;
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
-        console.log(fullpath)
         await page.goto(fullpath, { waitUntil: 'networkidle0' });
         // await sleep(1000);
 
@@ -107,16 +106,13 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
         for (const hint of hints) {
           await hint.click();
         }
-        console.log(1)
         hints = await page.$$('.simple__hint_label_low');
         for (const hint of hints) {
           await hint.click();
         }
-        console.log(2)
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
-        console.log(3)
 
         // const contentBox = await (await page.$('#topic__content'))
         //   .boundingBox();
@@ -135,15 +131,12 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
         } else {
           await page.setViewportSize({ width, height: viewHeight });
         }
-        console.log(4)
 
         // await page.evaluate((y) => {
         //   window.scrollTo(0, y);
         // }, Math.floor(pageBox.y));
         await removeRatings(page);
-        console.log(4.5)
         await removeTopicVariables(page);
-        console.log(5)
         let clippingBox = await (await page.$(options.element)).boundingBox();
         if (height !== 'auto') {
           clippingBox.height = height;
@@ -155,7 +148,6 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
         //   failureThreshold: options.threshold,
         //   customSnapshotIdentifier: fileName,
         // });
-        console.log(6)
         try {
           expect(image).toMatchImageSnapshot({
             failureThreshold: options.threshold,
@@ -167,7 +159,6 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
           writeImage(image, `${replacementsPath}/${fileName}-snap.png`);
           errorFlag = true;
         }
-        console.log(7)
         if (includeQRs) {
           // Find all links on page that go to QR popups
           // eslint-disable-next-line no-loop-func
@@ -242,6 +233,3 @@ function singlePageTester(optionsOrScenario, ...scenarios) {
 //   expect(true).toBe(true);
 // })
 
-module.exports = {
-  singlePageTester,
-};
