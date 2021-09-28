@@ -20,6 +20,15 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
+page.on('console', async (msg) => {
+  const msgType = msg.type();
+  const args = await Promise.all(msg.args().map(jsHandle => jsHandle.jsonValue()));
+  if (msgType === 'error') {
+  // eslint-disable-next-line no-console
+    console.log(...args);
+  }
+});
+
 // Open all hints on a page
 async function openHints() {
   const hints = await page.$$('.presentation__hint_label');
@@ -140,11 +149,11 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const fullpath =
           `${sitePath}${prePath}/${endpoint}?page=${fromPage}`;
         try {
-          await page.goto(fullpath, { waitUntil: 'networkidle0' });
+          await page.goto(fullpath, { waitUntil: 'load' });
         } catch {
-          await page.goto(fullpath, { waitUntil: 'networkidle0' });
+          await page.goto(fullpath, { waitUntil: 'load' });
         }
-        // await sleep(200);
+        await sleep(200);
         await page.setViewportSize({
           width: options.viewPort.width,
           height: options.viewPort.width,
@@ -263,7 +272,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
             // Get current page
-            await page.cookies()
+            await browser.contexts()[0].cookies()
               .then(cookies => cookies.filter(c => c.name === 'page'))
               .then(cookies => cookies.filter(c => c.path.length > 1))
               // eslint-disable-next-line no-loop-func

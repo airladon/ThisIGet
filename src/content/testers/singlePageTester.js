@@ -17,8 +17,10 @@ function sleep(ms) {
 page.on('console', async (msg) => {
   const msgType = msg.type();
   const args = await Promise.all(msg.args().map(jsHandle => jsHandle.jsonValue()));
+  if (msgType === 'error') {
   // eslint-disable-next-line no-console
-  console[msgType](...args);
+    console.log(...args);
+  }
 });
 
 async function removeRatings(p) {
@@ -53,7 +55,7 @@ async function removeTopicVariables(p) {
 // eslint-disable no-await-in-loop
 export default function singlePageTester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(3, -1).join('/');
   let scenariosToUse = scenarios;
   const replacementsPath = getReplacementsFolder(fullPath);
   const defaultOptions = {
@@ -97,8 +99,8 @@ export default function singlePageTester(optionsOrScenario, ...scenarios) {
         let errorFlag = false;
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
-        await page.goto(fullpath, { waitUntil: 'networkidle0' });
-        // await sleep(1000);
+        await page.goto(fullpath, { waitUntil: 'load' });
+        await sleep(500);
 
         // Open all hints on a page
         let hints = await page.$$('.simple__hint_label');

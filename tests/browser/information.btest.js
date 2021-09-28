@@ -43,5 +43,4 @@ singlePageTester({
   element: 'body',
   prefix: 'fullPage-home-',
   endpoint: '',
-},
-);
+});
