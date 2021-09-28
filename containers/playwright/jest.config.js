@@ -10,5 +10,8 @@ module.exports = {
       browsers: ['chromium'],
     },
   },
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest',
+  },
 };
 
