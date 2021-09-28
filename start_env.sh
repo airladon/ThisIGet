@@ -215,6 +215,7 @@ else
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/browser.sh:/opt/app/browser.sh \
     -v $PROJECT_PATH/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/dev-server.sh:/opt/app/dev-server.sh \
@@ -234,6 +235,7 @@ else
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
+    -e LOCAL_PROJECT_PATH=$PROJECT_PATH \
     --name "devenv-$1" \
     -p $HOST_PORT:$CONTAINER_PORT \
     "devenv-$1" $CMD
