@@ -46,8 +46,6 @@ then
     esac
 fi
 
-title "Running tests on $TIG_ADDRESS"
-
 export TIG_ADDRESS=$TIG_ADDRESS
 
 if [ "$1" == "debug" ];
@@ -59,8 +57,10 @@ then
     -v $LOCAL_PROJECT_PATH/babel.config.js:/babel.config.js \
     -v $LOCAL_PROJECT_PATH/containers/playwright/jest.config.js:/jest.config.js \
     -e TIG_ADDRESS=$TIG_ADDRESS \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     playwright /bin/bash
 else
+  title "Running tests on $TIG_ADDRESS"
   docker run -it --rm --ipc=host \
     -v $LOCAL_PROJECT_PATH/src:/src \
     -v $LOCAL_PROJECT_PATH/tests:/tests \
@@ -68,5 +68,6 @@ else
     -v $LOCAL_PROJECT_PATH/babel.config.js:/babel.config.js \
     -v $LOCAL_PROJECT_PATH/containers/playwright/jest.config.js:/jest.config.js \
     -e TIG_ADDRESS=$TIG_ADDRESS \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     playwright /bin/bash -c "npm run http-server-quiet; npm run jest $2 $3 $4 $5 $6 $7"
 fi
