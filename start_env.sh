@@ -129,6 +129,12 @@ then
   DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
+if [ "$2" ];
+then
+  HOST_PORT=4999
+  CONTAINER_PORT=4998
+fi
+
 
 if [ "$1" != "pupp" ];
 then
@@ -236,7 +242,7 @@ else
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
     -e LOCAL_PROJECT_PATH=$PROJECT_PATH \
-    --name "devenv-$1" \
+    --name "devenv-$1$2" \
     -p $HOST_PORT:$CONTAINER_PORT \
     "devenv-$1" $CMD
 fi
