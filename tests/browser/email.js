@@ -70,10 +70,11 @@ const getEmail = () => new Promise((resolve) => {
       });
       // eslint-disable-next-line no-unused-vars
       f.once('error', (err1) => {
+        // eslint-disable-next-line no-console
+        console.log('Email Error', err1);
         resolve('error');
       });
       f.once('end', () => {
-        // console.log('Done fetching all messages!');
         imap.end();
       });
     });
@@ -81,6 +82,8 @@ const getEmail = () => new Promise((resolve) => {
 
   // eslint-disable-next-line no-unused-vars
   imap.once('error', (err) => {
+    // eslint-disable-next-line no-console
+    console.log('Email Error', err);
     resolve('error');
   });
 

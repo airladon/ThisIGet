@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable no-await-in-loop, jest/expect-expect */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 /* eslint-disable import/named */
@@ -12,6 +12,7 @@ expect.extend({ toMatchImageSnapshot });
 
 const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
+const emailAddress = process.env.TIG_EMAIL || 'test_user_002@thisiget.com';
 
 const snapshots = [];
 const indexes = Array.from(Array(43).keys());
@@ -29,11 +30,11 @@ describe('Create Account', () => {
   });
 
   test('Create Account', async () => {
-    jest.setTimeout(40000);
     await sleep(500);
-    await deleteAccount(username, password);
+    await deleteAccount('delete-create-account', username, password);
+
     await createAccount(
-      username, `${username}@thisiget.com`, password,
+      username, emailAddress, password,
       'create-account', snapshots, 0,
     );
     await setFormInput('password', password);
@@ -41,21 +42,20 @@ describe('Create Account', () => {
 
     await click('submit');
     await snap('create-account', snapshots);
-  });
+  }, 40000);
 
   test('Create Account Capitals', async () => {
-    const uname = 'Test_User_100'
-    jest.setTimeout(40000);
+    const uname = 'Test_User_100';
     await sleep(500);
     await deleteAccountIfExists(uname, password);
     await createAccount(
       uname, `${uname}@ThiSiget.com`, password,
       'create-account-capitals', snapshots, 0,
     );
-    console.log(1)
+
     await setFormInput('password', password);
     await snap('create-account-capitals', snapshots);
-    console.log(2)
+
     await click('submit');
     await snap('create-account-capitals', snapshots);
 
@@ -64,10 +64,9 @@ describe('Create Account', () => {
 
     await logout();
     await login(`${uname}@ThiSiget.com`, password, 'create-account-capitals', snapshots);
-  });
+  }, 40000);
 
   test('Create Account - Errors', async () => {
-    jest.setTimeout(40000);
     await logout();
     await click('id_navbar_loginout');
     await click('login_form__create_account');
@@ -76,7 +75,7 @@ describe('Create Account', () => {
     await click('submit');
     await snap('create-account-errors', snapshots, 1);
 
-    await setFormInput('email', `${username}@thisiget.com`);
+    await setFormInput('email', emailAddress);
     await click('submit');
     await snap('create-account-errors', snapshots);
 
@@ -84,33 +83,32 @@ describe('Create Account', () => {
     await setFormInput('repeat_password', 'asdfasdf1');
     await click('submit');
     await snap('create-account-errors', snapshots);
-  });
+  }, 40000);
 
   test('Create Account Twice', async () => {
-    jest.setTimeout(60000);
     await sleep(500);
-    await deleteAccount(username, password);
+    await deleteAccount('delete-create-account-twice', username, password);
 
     const token1 = await createAccountWithoutConfirm(
-      username, `${username}@thisiget.com`, password,
+      username, emailAddress, password,
       'create-account-twice', snapshots, 0,
     );
     await goHome();
     const token2 = await createAccountWithoutConfirm(
-      username, `${username}@thisiget.com`, password,
+      username, emailAddress, password,
       'create-account-twice', snapshots,
     );
 
     await confirmCreateAccount(token2, 'create-account-twice', snapshots);
     await confirmCreateAccount(token1, 'create-account-twice', snapshots);
-  });
+  }, 60000);
 });
 describe('Test snapshots', () => {
   test.each(indexes)(
     'Screenshot %i',
     (index) => {
-      expect(snapshots).toHaveLength(indexes.length);
       checkSnap(index, snapshots, replacements);
+      expect(snapshots).toHaveLength(indexes.length);
     },
   );
 
