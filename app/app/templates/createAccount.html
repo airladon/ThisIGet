@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block formfields %}
+    <div class="input_form__info">
+        All content can be accessed without an account. You only need to create an account if you wish to rate content (give stars).
+    </div>
+    <div class="input_form__spacer"></div>
     <div class="input_form__field">
         <div class="input_form__field_label">
             {{ form.username.label }}
@@ -46,10 +50,6 @@
         {% for error in form.repeat_password.errors %}
             <span class="input_form__field_error_message">{{ error }}</span>
         {% endfor %}
-    </div>
-    <div class="input_form__spacer"></div>
-    <div class="input_form__info">
-        To create an account, you must read and agree to This I Get's <a href="/terms">Terms of Use</a>, and <a href="/privacy">Privacy Policy</a>.
     </div>
     <div class="input_form__spacer"></div>
     <div class="input_form__field input_form__field__check">
