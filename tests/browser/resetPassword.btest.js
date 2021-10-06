@@ -8,8 +8,9 @@ import {
 } from './common';
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
-const username = process.env.TIG_USERNAME || 'test_user_002';
+// const username = process.env.TIG_USERNAME || 'test_user_002';
 const password = process.env.TIG_PASSWORD || '12345678';
+const emailAddress = process.env.TIG_EMAIL || 'test_user_002@thisiget.com';
 
 const snapshots = [];
 const indexes = Array.from(Array(13).keys());
@@ -17,7 +18,7 @@ const replacements = [];
 
 describe('Reset Password', () => {
   test('Get all snapshots', async () => {
-    jest.setTimeout(180000);
+    // jest.setTimeout(180000);
     await goHome(500, 1200);
     await sleep(500);
     await logout();
@@ -29,7 +30,7 @@ describe('Reset Password', () => {
     await click('login_form__forgot_password');
     await snap('reset-password', snapshots);
 
-    await setFormInput('email', `${username}@thisiget.com`);
+    await setFormInput('email', emailAddress);
     await snap('reset-password', snapshots);
 
     const currentMsgNumber = await getLatestMessage();
@@ -65,7 +66,7 @@ describe('Reset Password', () => {
 
     await logout();
     expect(indexes).toHaveLength(snapshots.length);
-  });
+  }, 180000);
 });
 
 describe('Test snapshots', () => {
