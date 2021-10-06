@@ -144,16 +144,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
     test.each(allTests)(
       'From: %i, to: %s',
       async (fromPage, toPages, options) => {
-        jest.setTimeout(180000);
+        // jest.setTimeout(180000);
         let errorFlag = false;
         const fullpath =
           `${sitePath}${prePath}/${endpoint}?page=${fromPage}`;
         try {
           await page.goto(fullpath, { waitUntil: 'load' });
-        } catch {
-          await page.goto(fullpath, { waitUntil: 'load' });
+        } catch (e) {
+          // await page.goto(fullpath, { waitUntil: 'networkidle' });
+          // eslint-disable-next-line no-console
+          console.log(e);
+          throw new Error(e);
         }
-        await sleep(200);
+        await sleep(1000);
         await page.setViewportSize({
           width: options.viewPort.width,
           height: options.viewPort.width,
@@ -261,13 +264,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
                   return true;
                 }
                 return false;
-              }, { polling: 'raf' });
+              }, null, { polling: 'raf' });
 
               const hrefElement = await page.$(`#${navigation}`);
               await hrefElement.click();
               await page.mouse.click(0, 0);
               await watchDog;
             }
+            await sleep(100);
 
             await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
@@ -309,6 +313,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           expect(true).toBe(false);
         }
       },
+      180000,
     );
   });
 }
