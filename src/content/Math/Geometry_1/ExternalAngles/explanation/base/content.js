@@ -67,10 +67,10 @@ class Content extends PresentationFormatContent {
     this.addSection({
       // title: 'External ',
       setContent: [
-        'Is there a |relationship| between the |external_angle| of a triangle and its |inernal_angles|?',
+        'Is there a |relationship| between the |external_angle| of a triangle and its |internal_angles|?',
       ],
       modifiers: {
-        inernal_angles: click(coll.pulseInternalAngles, [coll], colors.angles),
+        internal_angles: click(coll.pulseInternalAngles, [coll], colors.angles),
         external_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
       },
       show: [
