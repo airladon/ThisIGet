@@ -313,7 +313,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           expect(true).toBe(false);
         }
       },
-      180000,
+      200000,
     );
   });
 }
