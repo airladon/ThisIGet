@@ -215,7 +215,7 @@ export default function singlePageTester(optionsOrScenario, ...scenarios) {
           expect(true).toBe(false);
         }
       },
-      20000,
+      60000,
     );
   });
 }
