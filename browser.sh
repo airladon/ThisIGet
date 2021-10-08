@@ -69,5 +69,6 @@ else
     -v $LOCAL_PROJECT_PATH/containers/playwright/jest.config.js:/jest.config.js \
     -e TIG_ADDRESS=$TIG_ADDRESS \
     --env-file=$PROJECT_PATH/containers/env.txt \
-    playwright /bin/bash -c "npm run http-server-quiet; npm run jest $2 $3 $4 $5 $6 $7"
+    playwright /bin/bash -c "npm run jest $2 $3 $4 $5 $6 $7"
+    # playwright /bin/bash -c "npm run http-server-quiet; npm run jest $2 $3 $4 $5 $6 $7"
 fi
