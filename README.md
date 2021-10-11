@@ -469,7 +469,7 @@ Run site and browser tests local and within containers (so don't have to restart
 
 Setup terminal 1 to host the site, auto rebuilding on file changes
 ```
-./start dev
+./start.sh dev
 ```
 
 It needs to be able to send emails for account creation confirmaion and resetting passwords
@@ -495,11 +495,14 @@ Build and watch files
 ##### Terminal 2
 This terminal runs the browser tests. It needs to be able to receive emails from account creation and password reset events.
 ```
-docker exec -it devenv-dev bash
+./start.sh dev 1
 export MAIL_RECEIVE_SERVER=
 export MAIL_RECEIVE_USERNAME=
 export MAIL_RECEIVE_PASSWORD=
 export MAIL_SERVER=
+export TIG_USERNAME=
+export TIG_EMAIL=
+export TIG_PASSWORD=
 ```
 
 To enter bash for the browser test container and run tests manually:
