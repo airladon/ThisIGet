@@ -3,4 +3,4 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 import thresholds from './thresholds';
 
-tester({ thresholds }, 1);
+tester({ thresholds, viewPort: { width: 700 } }, 1);
