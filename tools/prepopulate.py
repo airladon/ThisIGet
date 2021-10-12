@@ -36,6 +36,8 @@ def addRating(version_uid, rating_value, username):
 for i in range(10):
     username = f'test_user_{i:03}'
     email = f'{username}@thisiget.com'
+    if (i == 2):
+        email = 'noreply@thisiget.com'
     password = '12345678'
     addUser(username, email, password)
 

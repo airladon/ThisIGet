@@ -26,6 +26,10 @@ def resetUser(username, email, password):
     user.confirmed = True
 
 
+print('\n===================================')
+print(f'Resetting database {db.engine.url}')
+print('===================================\n')
+
 for i in range(10):
     username = f'test_user_{i:03}'
     email = f'{username}@thisiget.com'
