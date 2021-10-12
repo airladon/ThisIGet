@@ -39,6 +39,7 @@ heroku config --app=$1 | \
   sed 's/:/="/' | \
   sed '/^FLASK_APP/d' | \
   sed '/^OLD/d' | \
+  sed 's/postgres:\/\//postgresql:\/\//' | \
   sed 's/^/export /' | \
   sed 's/$/"/'
 echo
