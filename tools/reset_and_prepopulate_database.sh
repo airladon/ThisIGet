@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # Setup colors and text formatting
 red=`tput setaf 1`
@@ -13,6 +13,22 @@ then
   echo
   echo "${red}${bold}DATABASE_URL not set${reset}"
   echo DATABASE_URL needs to be set if trying to reset a postgress database
+  echo
+  exit 1
+fi
+
+if [ $DATABASE_URL ] && [ -z $1 ];
+then
+  echo
+  echo "${red}${bold}Database to change not set${reset}"
+  echo
+  echo example usage: 
+  echo
+  echo   reset_and_prepopulate_database.sh thisiget-dev
+  echo   reset_and_prepopulate_database.sh thisiget_local
+  echo   reset_and_prepopulate_database.sh thisiget-stage
+  echo   reset_and_prepopulate_database.sh thisiget-beta
+  echo   reset_and_prepopulate_database.sh thisiget
   echo
   exit 1
 fi
@@ -141,8 +157,8 @@ if [ $LOCALHOST ] || [ $LOCALDOCKER ];
 then
   echo
   echo "${bold}${cyan}==== Resetting Database $APP_OR_DB_NAME =====${reset} "
-  psql -c "drop database $DATABASE_NAME"
-  psql -c "create database $DATABASE_NAME"
+  psql -c "drop database $APP_OR_DB_NAME"
+  psql -c "create database $APP_OR_DB_NAME"
 fi
 
 if [ "$REMOTE" == 1 ];
