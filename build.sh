@@ -201,7 +201,7 @@ if [ "$BUILD" = run ];
 then
   echo
   echo "${bold}${cyan}==================== Packaging =====================${reset}"
-  run_cmd "Packaging" "npm run webpack -- --env.mode=$MODE"
+  run_cmd "Packaging" "npm run webpack -- --env mode=$MODE"
 fi
 
 

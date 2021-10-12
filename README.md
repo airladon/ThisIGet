@@ -250,7 +250,7 @@ sudo pfctl -s nat
 A convenient way to use the stage container is:
 * In dev container, run webpack stage build with watch option:
   * ./start_env.sh dev
-  * webpack --watch --env.mode=stage --progress
+  * webpack --watch --env mode=stage --progress
 
 * In another terminal window, run the stage container
   * export LOCAL_PRODUCTION=DISABLE_SECURITY

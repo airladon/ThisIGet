@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack --env.mode=prod",
+    "build": "webpack --env mode=prod",
     "webpack": "webpack",
     "watchWithMoreMemory": "node --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --watch --progress",
     "watch": "webpack --watch --progress",
