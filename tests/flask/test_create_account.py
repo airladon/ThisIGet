@@ -53,7 +53,9 @@ def create_account_with_confirm(client, username='new_test_user_01',
         db.session.commit()
 
 
-def test_create_new_user(client):
+def test_create_new_user(client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     username = new_user
     remove_account(client, username=username)
     user = Users.query.filter_by(
@@ -98,8 +100,10 @@ def test_create_new_user(client):
             'You must agree to create an account'),
     ])
 def test_create_account_fail(
-        client, exists, username, email, password, repeat_password,
+        client, monkeypatch, exists, username, email, password, repeat_password,
         terms, error):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
     if exists:
         create_account_with_confirm(client)
@@ -119,7 +123,9 @@ def test_create_account_fail(
             '12345678', '12345678'),
     ])
 def test_create_account_pass(
-        client, exists, username, email, password, repeat_password):
+        client, monkeypatch, exists, username, email, password, repeat_password):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
     remove_account(client, username=username)
     if exists:
