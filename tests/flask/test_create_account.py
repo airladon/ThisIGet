@@ -100,8 +100,8 @@ def test_create_new_user(client, monkeypatch):
             'You must agree to create an account'),
     ])
 def test_create_account_fail(
-        client, monkeypatch, exists, username, email, password, repeat_password,
-        terms, error):
+        client, monkeypatch, exists, username, email, password,
+        repeat_password, terms, error):
     monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
     monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
@@ -123,7 +123,8 @@ def test_create_account_fail(
             '12345678', '12345678'),
     ])
 def test_create_account_pass(
-        client, monkeypatch, exists, username, email, password, repeat_password):
+        client, monkeypatch, exists, username, email, password,
+        repeat_password):
     monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
     monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
