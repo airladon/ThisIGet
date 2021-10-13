@@ -1,17 +1,16 @@
 const fs = require('fs');
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const entryPoints = require('./webpack/getContent.js');
-const createTopicIndex = require('./webpack/createIndex.js');
-// const recordBuildTime = require('./webpack/recordBuildTime.js');
-const setFilesForBuild = require('./webpack/setFilesForBuild.js');
+const entryPoints = require('./webpack/getContent');
+const createTopicIndex = require('./webpack/createIndex');
+const setFilesForBuild = require('./webpack/setFilesForBuild');
 const FlaskReloaderPlugin = require('./webpack/flaskReloaderPlugin');
 
 const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
@@ -160,7 +159,7 @@ module.exports = (env) => {
       {
         from: 'content/*/*/topic.png',
         to: '/opt/app/app/app/static/dist/',
-        context:'/opt/app/src/',
+        context: '/opt/app/src/',
         // transformPath: (targetPath) => {
         //   return `${targetPath.replace('src/', '')}`;
         // },
@@ -171,7 +170,7 @@ module.exports = (env) => {
       {
         from: 'content/**/*.svg',
         to: '/opt/app/app/app/static/dist/',
-        context:'/opt/app/src/',
+        context: '/opt/app/src/',
         // transformPath: (targetPath) => {
         //   return `${targetPath.replace('src/', '')}`;
         // },
@@ -227,13 +226,15 @@ module.exports = (env) => {
   // console.log(p)
 
   return {
-    entry: entryPoints.entryPoints(e.name, ''),
+    entry: entryPoints.entryPoints(
+      e.name,
+      '', // search path
+      null, // filter to only include paths with this string
+    ),
     output: {
       path: buildPath,
       filename: e.outputFilename,
-      assetModuleFilename: (pathData) => {
-        return `${path.dirname(pathData.filename).replace(/^src\//, '')}/[name]-[contenthash][ext]`;
-      },
+      assetModuleFilename: pathData => `${path.dirname(pathData.filename).replace(/^src\//, '')}/[name]-[contenthash][ext]`,
     },
 
     // Delete from here after fixing diagram integration
@@ -245,7 +246,7 @@ module.exports = (env) => {
         path.join(__dirname, '/src'),
       ],
       alias: {
-        ['~']: path.join(__dirname, '/src'),
+        '~': path.join(__dirname, '/src'),
       },
 
     },
@@ -254,23 +255,6 @@ module.exports = (env) => {
       ignored: /.*__image_snapshots__.*png/,
     },
     externals,
-    optimization: {
-      minimize: e.uglify,
-      minimizer: [
-        new TerserPlugin({
-          // minify: TerserPlugin.uglifyJsMinify,
-          terserOptions: {
-            compress: true,
-            format: {
-              comments: false,
-            },
-          },
-          extractComments: false,
-        }),
-        `...`,
-        new CssMinimizerPlugin(),
-      ],
-    },
     module: {
       rules: [
         {
@@ -295,7 +279,7 @@ module.exports = (env) => {
               loader: 'postcss-loader',
               options: {
                 postcssOptions: {
-                  plugins: ["autoprefixer"],
+                  plugins: ['autoprefixer'],
                   sourceMap: envConfig.uglifySourceMap,
                 },
               },
@@ -344,6 +328,21 @@ module.exports = (env) => {
     mode: e.webpackMode,
     devtool: e.devtool,
     optimization: {
+      minimize: e.uglify,
+      minimizer: [
+        new TerserPlugin({
+          // minify: TerserPlugin.uglifyJsMinify,
+          terserOptions: {
+            compress: true,
+            format: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        '...',
+        new CssMinimizerPlugin(),
+      ],
       // SplitChunks docs at https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
       splitChunks: {
         chunks: 'all',
