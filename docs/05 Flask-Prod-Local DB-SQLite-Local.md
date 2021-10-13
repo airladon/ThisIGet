@@ -1,6 +1,6 @@
 # Setup
-Flask: Remote production server
-DB: Remote Postgres
+Flask: Local production server
+DB: Local SQLite
 
 Two terminals (Server, Test) will be used.
 
@@ -29,37 +29,39 @@ unset TIG_PASSWORD
 
 
 # Server Terminal
-## Start Server terminal dev environment, and reset test users in database
+## Start Server terminal dev environment
 ``` bash
-export HEROKU_API_KEY=`heroku auth:token`
-tools/get_config_vars.sh thisiget-dev
 ./start_env.sh dev
-export ADMIN=
-export AES_KEY=
-export DATABASE_URL=
-export LOGGING=
-export MAIL_PASSWORD=
-export MAIL_SENDER=
 export MAIL_SERVER=
 export MAIL_USERNAME=
-export PEPPER=
-export SECRET_KEY=
-python tools/reset_test_users.py
-python tools/get_users.py
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+export LOCAL_PRODUCTION=DISABLE_SECURITY
+export FLASK_APP=app/my_app.py
 ```
 
-## Deploy website to thisiget-dev (Server Dev Environment)
-If already built:
-./build.sh deploy dev skip-tests skip-build
+## Build the website if not already built (Server Dev Environment):
+./build.sh dev
+OR
+./build.sh prod
 
-Otherwise:
-./build.sh deploy dev
+Dev website:
+  - Additional sub-topic for quick references
+  - un-minified javascript without hashes
 
+Prod website
+  - minified javascript with hash names
+
+# Reset the test users in the DB (Server Dev Environment)
+python tools/reset_test_users.py
+
+# Run Flask (Server Dev Environment)
+flask run --host 0.0.0.0
 
 
 
 # Test Terminal
-## Start Test Dev Environment
+## Start Test terminal dev environment
 ``` bash
 ./start_env.sh dev tester
 export MAIL_RECEIVE_SERVER
@@ -70,21 +72,22 @@ export TIG_EMAIL
 export TIG_PASSWORD
 ```
 
+
 ## Goto browser and sign in/out with test_user_002 (Browser)
-https://thisiget-dev.herokuapp.com/
+http://localhost:5002/
 
 ## Run simple browser test (Test Dev Environment)
-./browser.sh dev createAccount
+./browser.sh 5002 createAccount
 
 ## Run all browser tests (Test Dev Environment)
-browser.sh dev
+browser.sh 5002
 
 
 
 
 # Debugging
 ## Reset and prepopulate DB (Server Dev Environment):
-./tools/reset_and_prepopulate_database.sh thisiget-dev
+./tools/reset_and_prepopulate_database.sh
 
 ## Reset test users only (Server Dev Environment)
 python tools/reset_test_users.py
@@ -92,9 +95,8 @@ python tools/reset_test_users.py
 ## Get users to check DB (Server Dev Environment)
 python tools/get_users.py
 
+If this fails, then reset and prepopulate DB and try again
+
 ## Replacement and Diff Files
 ./tools/replacement_files.sh rm/ls/replace
 ./tools/diff_files.sh rm/ls/cp
-
-## Heroku logs (OS Terminal)
-heroku logs -t -a thisiget-dev
