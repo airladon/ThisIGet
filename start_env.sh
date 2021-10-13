@@ -209,6 +209,7 @@ else
     -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
     -v $PROJECT_PATH/src:/opt/app/src \
+    -v $PROJECT_PATH/temp:/opt/app/temp \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/tools:/opt/app/tools \
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
