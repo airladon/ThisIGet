@@ -63,8 +63,11 @@ def get_last_edit(file):
 # #############################################################################
 # Get the latest git changed date of all versions
 pages = [['https://www.thisiget.com/', '2019-06-10', 'weekly']]
+# version_index = 0
 for version in versions:
     files = os.listdir(version)
+    # print(version_index, len(versions), files)
+    # version_index += 1
     valid_files = []
     valid_dates = []
     for file in files:
