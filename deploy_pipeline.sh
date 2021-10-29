@@ -59,7 +59,7 @@ title "Ratings Test - Ratings: thisiget-test"
 check_status
 
 title "Browser Tests - General: thisiget-test"
-./browser_test.sh test browser.*btest
+./browser.sh test browser.*btest
 check_status
 
 JEST_OPTIONS=`python browser_test_diff_master.py`
@@ -68,10 +68,10 @@ if [ -z "$JEST_OPTIONS" ];
 then
     echo No extended tests needed
 else
-    ./browser_test.sh test $JEST_OPTIONS
+    ./browser.sh test $JEST_OPTIONS
     check_status
 fi
-# ./browser_test.sh test stage.*btest.js
+# ./browser.sh test stage.*btest.js
 # check_status
 
 ###########################################################################
@@ -88,11 +88,11 @@ title "Ratings Test: thisiget-beta"
 check_status
 
 title "Browser Tests - General: thisiget-test"
-./browser_test.sh beta browser.*btest
+./browser.sh beta browser.*btest
 check_status
 
 title "Browser Tests: thisiget-beta"
-./browser_test.sh beta prod.*btest.js
+./browser.sh beta prod.*btest.js
 check_status
 
 ##########################################################################
@@ -110,7 +110,7 @@ title "Ratings Test: thisiget"
 check_status
 
 title "Browser Tests: thisiget"
-./browser_test.sh prod prod.*btest.js
+./browser.sh prod prod.*btest.js
 check_status
 
 if [ $? != 0 ];

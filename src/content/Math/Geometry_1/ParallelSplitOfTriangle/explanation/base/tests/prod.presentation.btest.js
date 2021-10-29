@@ -3,5 +3,8 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 
 tester(
+  {
+    viewPort: { width: 800 },
+  },
   1,
 );

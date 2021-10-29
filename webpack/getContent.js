@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
-function entryPoints(buildMode, pathToWatch = '') {
+function entryPoints(buildMode, pathToWatch = '', filter = null) {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
     home: ['whatwg-fetch', path.join(__dirname, '../src/js/views/home/home.js')],
@@ -24,7 +24,7 @@ function entryPoints(buildMode, pathToWatch = '') {
     disclaimer: path.join(__dirname, '../src/js/views/information/disclaimer.js'),
     contribute: path.join(__dirname, '../src/js/views/information/contribute.js'),
     polyfill: path.join(__dirname, '../src/js/polyfills.js'),
-    topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
+    // topicIndex: path.join(__dirname, '../src/content/topicIndex.js'),
   };
 
   let topics = pathTools.getAllPaths(
@@ -40,6 +40,14 @@ function entryPoints(buildMode, pathToWatch = '') {
     buildMode,
   );
   topics = [...topics, ...quickReferences];
+  if (filter != null) {
+    topics = topics.filter(t => t.path.includes(filter));
+  }
+  // topics = topics.filter(
+  //   t => t.path.startsWith('/opt/app/src/content/Math/Trigonometry_1/Sine/explanation'),
+  // );
+  // console.log(topics)
+  // topics = topics.slice(0, 10);
   topics.forEach((topic) => {
     const p = topic.path.replace(/.*src\/content\//, '');
     const name = topic.name.slice(0, -3);

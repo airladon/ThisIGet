@@ -1,4 +1,4 @@
-@import './style.scss';
+// @import './style.scss';
 
 // Content area aspect ratio
 $diagram_ratio: 1.5;
@@ -356,14 +356,3 @@ $height_limited_landscape_aspect_ratio: "408/200";
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
-
-@import './topic/presentation/navigationButtons';
-@import './topic/presentation/gotoButton';
-@import './topic/presentation/interactiveItemButton';
-@import './topic/presentation/infoBox';
-@import './topic/presentation/note';
-@import './topic/selector';
-@import './topic/definition';
-@import './topic/quizCheck';
-@import './topic/star';
-@import './topic/equationNavigator';

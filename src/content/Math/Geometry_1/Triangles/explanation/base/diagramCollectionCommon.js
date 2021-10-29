@@ -79,7 +79,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._totalAngle._triangle._pad0.makeTouchable();
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  /* eslint-disable class-methods-use-this */
+  // $FlowFixMe
   randomCustomTriangle(triangle: DiagramObjectPolyLine, layout: Object) {
     const { boundary, radius } = layout.options.pad;
     const boundaryTop = boundary[1] + boundary[3] - radius;
@@ -96,13 +97,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       if (quadrant === 3 || quadrant === 4) {
         y *= -1;
       }
-      // eslint-disable-next-line no-param-reassign, $FlowFixMe
+      // eslint-disable-next-line no-param-reassign
       triangle[`_pad${pad}`].scenarios.next = {
         position: [x, y],
         rotation: 0,
       };
     });
   }
+  /* eslint-enable class-methods-use-this */
 
   newCustomTriangle(callback: ?() => void = null) {
     this.randomCustomTriangle(this._customTriangle, this.layout.customTriangle);

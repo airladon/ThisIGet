@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable no-await-in-loop, jest/expect-expect */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 /* eslint-disable import/named */
@@ -15,6 +15,8 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 const username = process.env.TIG_USERNAME || 'test_user_002';
 const username2 = process.env.TIG_USERNAME2 || 'test_user_002aofkspeD3fif';
 const password = process.env.TIG_PASSWORD || '12345678';
+const emailAddress = process.env.TIG_EMAIL || 'test_user_002@thisiget.com';
+
 
 const snapshots = [];
 const indexes = Array.from(Array(34).keys());
@@ -22,7 +24,7 @@ const replacements = [];
 
 describe('Account Settings Open', () => {
   test('Open', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await goHome(500, 1400);
     await sleep(500);
     await snap('account-settings-open', snapshots, 1);
@@ -30,7 +32,7 @@ describe('Account Settings Open', () => {
     await login(username, password);
     await gotoAccountSettings('account-settings-open', snapshots, 2);
   });
-});
+}, 40000);
 
 describe('Account Settings', () => {
   beforeEach(async () => {
@@ -44,16 +46,16 @@ describe('Account Settings', () => {
   });
 
   test('Delete Cancel', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-cancel-delete', snapshots, 1);
     await click('delete_form-submit');
     await snap('account-settings-cancel-delete', snapshots);
     await click('form-submit_save');
     await snap('account-settings-cancel-delete', snapshots);
-  });
+  }, 40000);
 
   test('Delete', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-delete', snapshots, 1);
 
     await click('delete_form-submit');
@@ -63,15 +65,15 @@ describe('Account Settings', () => {
     await snap('account-settings-delete', snapshots);
 
     // Create a log in to make sure creation worked
-    await createAccount(username, `${username}@thisiget.com`, password);
+    await createAccount(username, emailAddress, password);
     await snap('account-settings-delete', snapshots);
     await setFormInput('password', password);
     await click('submit');
     await snap('account-settings-delete', snapshots);
-  });
+  }, 40000);
 
   test('Change Email', async () => {
-    jest.setTimeout(60000);
+    // jest.setTimeout(60000);
     expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
     expect(process.env.MAIL_RECEIVE_PASSWORD).not.toHaveLength(0);
     expect(process.env.MAIL_RECEIVE_SERVER).not.toHaveLength(0);
@@ -92,17 +94,17 @@ describe('Account Settings', () => {
     await gotoAccountSettings();
     await snap('account-settings-email', snapshots);
 
-    await setFormInput('email_form-email', 'test_user_002@thisiget.com');
+    await setFormInput('email_form-email', emailAddress);
     await click('email_form-submit_email');
     await snap('account-settings-email', snapshots);
 
     token = await getToken('confirmEmailChange', latestEmailNumber);
     await page.goto(`${sitePath}/${token}`);
     await snap('account-settings-email', snapshots);
-  });
+  }, 60000);
 
   test('Change Username', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-username', snapshots, 1);
     await setFormInput('username_form-username', username2);
     await click('username_form-submit_username');
@@ -116,10 +118,10 @@ describe('Account Settings', () => {
     await setFormInput('username_form-username', username);
     await click('username_form-submit_username');
     await snap('account-settings-username', snapshots);
-  });
+  }, 40000);
 
   test('Change Password', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-password', snapshots, 1);
 
     await setFormInput('password_form-password', 'asdfasdf');
@@ -136,10 +138,10 @@ describe('Account Settings', () => {
     await setFormInput('password_form-repeat_password', password);
     await click('password_form-submit_password');
     await snap('account-settings-password', snapshots);
-  });
+  }, 40000);
 
   test('Error Messages', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-errors', snapshots, 1);
 
     await setFormInput('username_form-username', 'test_user_001');
@@ -154,7 +156,7 @@ describe('Account Settings', () => {
     await setFormInput('password_form-repeat_password', 'asdfasdf1');
     await click('password_form-submit_password');
     await snap('account-settings-errors', snapshots);
-  });
+  }, 40000);
 });
 
 describe('Account Settings Flow - Wide Screen', () => {
@@ -168,7 +170,7 @@ describe('Account Settings Flow - Wide Screen', () => {
     await logout();
   });
   test('Change Password', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await snap('account-settings-password-wide', snapshots, 1);
 
     await setFormInput('password_form-password', 'asdfasdf');
@@ -185,7 +187,7 @@ describe('Account Settings Flow - Wide Screen', () => {
     await setFormInput('password_form-repeat_password', password);
     await click('password_form-submit_password');
     await snap('account-settings-password-wide', snapshots);
-  });
+  }, 40000);
 });
 describe('Test snapshots', () => {
   test.each(indexes)(

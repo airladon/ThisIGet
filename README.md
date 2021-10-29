@@ -64,7 +64,7 @@ The environment variable `DATABASE_URL` defines which database option to use.
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
 * `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database accessed from inside a container
 * `export DATABASE_URL=postgresql://postgres@localhost/<local_db_name>` a local postgres database accessed from outside a container
-* ```export DATABASE_URL=`heroku config --app=<heroku_app_name> | grep DATABASE_URL | sed 's/DATABASE_URL: *//'` ``` the database associated with the app `heroku_app_name`
+* ```export DATABASE_URL=`heroku config --app=<heroku_app_name> | grep DATABASE_URL | sed 's/DATABASE_URL: *//' | sed 's/postgres:\/\//postgresql:\/\//'` ``` the database associated with the app `heroku_app_name`
 
 The DATABASE_URL needs to be set:
 * Running flask locally and wanting to use a local or remote postgres database
@@ -250,7 +250,7 @@ sudo pfctl -s nat
 A convenient way to use the stage container is:
 * In dev container, run webpack stage build with watch option:
   * ./start_env.sh dev
-  * webpack --watch --env.mode=stage --progress
+  * webpack --watch --env mode=stage --progress
 
 * In another terminal window, run the stage container
   * export LOCAL_PRODUCTION=DISABLE_SECURITY
@@ -334,8 +334,7 @@ psql -c 'drop database thisiget_local'
 psql -c 'create database thisiget_local'
 export DATABASE_URL=postgresql://postgres@localhost/thisiget_local
 flask db upgrade
-python ./tools/update_lessons_db.py
-python ./tools/prepopulate.py
+tools/reset_and_prepopulate_database.sh thisiget_local
 ```
 
 ##### Dev
@@ -469,7 +468,7 @@ Run site and browser tests local and within containers (so don't have to restart
 
 Setup terminal 1 to host the site, auto rebuilding on file changes
 ```
-./start dev
+./start.sh dev
 ```
 
 It needs to be able to send emails for account creation confirmaion and resetting passwords
@@ -495,11 +494,14 @@ Build and watch files
 ##### Terminal 2
 This terminal runs the browser tests. It needs to be able to receive emails from account creation and password reset events.
 ```
-docker exec -it devenv-dev bash
+./start.sh dev 1
 export MAIL_RECEIVE_SERVER=
 export MAIL_RECEIVE_USERNAME=
 export MAIL_RECEIVE_PASSWORD=
 export MAIL_SERVER=
+export TIG_USERNAME=
+export TIG_EMAIL=
+export TIG_PASSWORD=
 ```
 
 To enter bash for the browser test container and run tests manually:
@@ -807,3 +809,184 @@ A lesson uid comes from its path and is used in many places including QRs.
 * Change title in details to new title if needed
 * Find all instances of old title in code and change to new title if needed
 * ./updatedb.sh lesson_uid_old=RelatedAngles lesson_uid_new=AnglesAtIntersections show write
+
+# Build up
+
+Throughtout two terminals will be used:
+* Server Terminal
+* Test Terminal
+
+Always unset all environment variables before starting dev environments
+
+Server and Test Terminals:
+```
+unset ADMIN
+unset AES_KEY
+unset DATABASE_URL
+unset LOGGING
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+unset PEPPER
+unset SECRET_KEY
+unset MAIL_RECEIVE_SERVER
+unset MAIL_RECEIVE_USERNAME
+unset MAIL_RECEIVE_PASSWORD
+unset TIG_USERNAME
+unset TIG_EMAIL
+unset TIG_PASSWORD
+```
+
+Create Server Terminal dev environment
+```
+export HEROKU_API_KEY=`heroku auth:token`
+./start_env.sh dev
+export MAIL_SERVER=
+export MAIL_USERNAME=
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+export TIG_USERNAME=
+export TIG_EMAIL=
+export TIG_PASSWORD=
+export FLASK_APP=app/my_app.py
+```
+
+Build the production website if not already built (Server Terminal):
+```
+./build.sh prod
+```
+
+Create Test Terminal dev environment and setup mail environment variables for sending and receiving mail.
+```
+./start_env.sh dev tester
+export MAIL_RECEIVE_SERVER
+export MAIL_RECEIVE_USERNAME
+export MAIL_RECEIVE_PASSWORD
+export MAIL_SERVER
+export TIG_USERNAME
+export TIG_EMAIL
+export TIG_PASSWORD
+```
+
+
+## Local Flask, Local SQLite
+### Reset test users
+python tools/reset_test_users.py
+### Run Flask (Server Terminal)
+flask run --host 0.0.0.0
+
+### Goto browser and sign in/out with test_user_002 (Browser)
+http://localhost:5002/
+
+### Run simple browser test (Test Terminal)
+./browser.sh 5002 createAccount
+
+### Run all browser tests (Test Terminal)
+browser.sh 5002
+
+## Debugging Dev, Local Flask, Local SQLight
+
+#### Reset and prepopulate DB (Server Terminal):
+./tools/reset_and_prepopulate_database.sh
+
+#### Reset test users only (Server Terminal)
+python tools/reset_test_users.py
+
+#### Get users to check DB (Server Terminal)
+python tools/get_users.py
+
+If this fails, then reset and prepopulate DB and try again
+
+### Replacement and Diff Files
+./tools/replacement_files.sh rm/ls/replace
+./tools/diff_files.sh rm/ls/cp
+
+
+
+## Local Flask, Local Postgres
+### Create new local postgres database
+OS Terminal - not dev environment:
+```
+psql -c 'drop database thisiget_local'
+psql -c 'create database thisiget_local'
+```
+
+Server Terminal:
+```
+export DATABASE_URL=postgresql://postgres@host.docker.internal:5432/thisiget_local
+flask db upgrade
+tools/reset_and_prepopulate_database.sh thisiget_local
+python tools/get_users.py
+```
+
+### Start flask (Server Terminal)
+flask run --host 0.0.0.0
+
+#### Goto browser and sign in/out with test_user_002 (Browser)
+http://localhost:5002/
+
+### Run simple browser test (Test Terminal)
+./browser.sh 5002 createAccount
+
+### Run all browser tests (Test Terminal)
+browser.sh 5002
+
+
+
+
+## Local Flask, Remote (dev) Postgres
+
+### Setup local postgres database
+### Set DATABASE_URL to thisiget-dev DB, reset test users and start flask (Server Terminal)
+tools/get_config_vars.sh thisiget-dev
+export ADMIN=
+export AES_KEY=
+export DATABASE_URL=
+export LOGGING=
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+export MAIL_SERVER=
+export MAIL_USERNAME=
+export PEPPER=
+export SECRET_KEY=
+python tools/get_users.py
+flask run --host 0.0.0.0
+
+#### Goto browser and sign in/out with test_user_002 (Browser)
+http://localhost:5002/
+
+### Run simple browser test (Test Terminal)
+./browser.sh 5002 createAccount
+
+### Run all browser tests (Test Terminal)
+browser.sh 5002
+
+
+
+## Remote Flask and Postgres (dev)
+### Deploy website (Server Terminal)
+./build.sh deploy dev skip-tests skip-build
+
+### Test get users from database
+tools/get_config_vars.sh thisiget-dev
+export ADMIN=
+export AES_KEY=
+export DATABASE_URL=
+export LOGGING=
+export MAIL_PASSWORD=
+export MAIL_SENDER=
+export MAIL_SERVER=
+export MAIL_USERNAME=
+export PEPPER=
+export SECRET_KEY=
+python tools/get_users.py
+
+#### Goto browser and sign in/out with test_user_002 (Browser)
+https://thisiget-dev.herokuapp.com/
+
+### Run simple browser test (Test Terminal)
+./browser.sh dev createAccount
+
+### Run all browser tests (Test Terminal)
+browser.sh dev

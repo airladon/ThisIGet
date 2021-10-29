@@ -64,8 +64,17 @@ async function snap(
 async function debugSnapshot(
   fileNamePrefix, snapshots = null, startIndex = null,
 ) {
+  let snapshotsToUse = [];
+  if (snapshots != null) {
+    snapshotsToUse = snapshots;
+  }
   if (fileNamePrefix) {
-    await snap(fileNamePrefix, snapshots, startIndex);
+    await snap(fileNamePrefix, snapshotsToUse, startIndex);
+  }
+  if (snapshotsToUse != null && snapshotsToUse.length > 0) {
+    const ds = snapshotsToUse.slice(-1)[0];
+    // eslint-disable-next-line no-use-before-define
+    writeSS(__dirname, ds[0], ds[1], '__debug__');
   }
 }
 
@@ -87,7 +96,7 @@ async function goHome(width = 0, height = 0) {
   await page.goto(sitePath);
 
   if (width !== 0 && height !== 0) {
-    await page.setViewport({ width, height });
+    await page.setViewportSize({ width, height });
   }
 }
 
@@ -99,11 +108,11 @@ async function snapshot(fileName) {
 }
 
 async function getToken(prefix, oldMsgNumber) {
-  await sleep(2000);
+  await sleep(1000);
   let [msgNumber, body] = await getEmail();
   let count = 0;
   while (msgNumber === oldMsgNumber && count < 5) {
-    await sleep(2000);
+    await sleep(1000);
     [msgNumber, body] = await getEmail();
     count += 1;
   }
@@ -136,7 +145,7 @@ async function getLatestMessage() {
 
 async function login(
   username, password,
-  fileNamePrefix = '', snapshots = null, startIndex = null,
+  fileNamePrefix = 'log-in', snapshots = null, startIndex = null,
 ) {
   await debugSnapshot(fileNamePrefix, snapshots, startIndex);
   await click('id_navbar_loginout');
@@ -264,22 +273,37 @@ async function createAccount(
 }
 
 
-async function deleteAccount(username, password, debug) {
-  await debugSnapshot(debug, 0);
+async function deleteAccount(filenamePrefix, username, password, debug) {
+  await debugSnapshot(filenamePrefix, debug, 0);
   await logout();
-  await debugSnapshot(debug, 1);
+  await debugSnapshot(filenamePrefix, debug, 1);
 
-  await login(username, password);
-  await debugSnapshot(debug, 2);
+  await login(username, password, `${filenamePrefix}-login`);
+  await debugSnapshot(filenamePrefix, debug, 2);
 
   await gotoAccountSettings();
-  await debugSnapshot(debug, 3);
+  await debugSnapshot(filenamePrefix, debug, 3);
 
   await click('delete_form-submit');
-  await debugSnapshot(debug, 4);
+  await debugSnapshot(filenamePrefix, debug, 4);
 
   await click('form-submit_delete');
-  await debugSnapshot(debug, 5);
+  await debugSnapshot(filenamePrefix, debug, 5);
+}
+
+async function deleteAccountIfExists(username, password) {
+  await logout();
+  await login(username, password);
+  const url = await page.url();
+
+  if (url.slice(-5) === 'login') {
+    await goHome();
+    return;
+  }
+  await gotoAccountSettings();
+  await click('delete_form-submit');
+  await click('form-submit_delete');
+  await goHome();
 }
 
 function cleanReplacementFolder(callingScriptPath) {
@@ -305,8 +329,8 @@ function getReplacementsFolder(callingScriptPath) {
   return `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
 }
 
-function writeSS(callingScriptPath, fileName, screenshot) {
-  const folder = `${path.join(callingScriptPath, '__image_snapshots__', '__replacements__')}`;
+function writeSS(callingScriptPath, fileName, screenshot, name = '__replacements__') {
+  const folder = `${path.join(callingScriptPath, '__image_snapshots__', name)}`;
   if (!fs.existsSync(folder)) {
     fs.mkdirSync(folder);
   }
@@ -316,11 +340,12 @@ function writeSS(callingScriptPath, fileName, screenshot) {
 function writeReplacements(callingScriptPath, replacements) {
   // cleanReplacementFolder(callingScriptPath);
   replacements.forEach((ss) => {
-    writeSS(__dirname, ...ss);
+    writeSS(__dirname, ss[0], ss[1], '__replacements__');
   });
 }
 
 module.exports = {
+  deleteAccountIfExists,
   cleanReplacementFolder,
   getReplacementsFolder,
   login,

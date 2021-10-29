@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
+from markupsafe import Markup
 # # Uncomment for Privacy
 from wtforms import BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
@@ -62,8 +63,8 @@ class CreateAccountForm(FlaskForm):
     )
 
     # Uncomment for Privacy
-    terms = BooleanField(
-        'I have read and agree to the <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>',  # noqa
+    terms = BooleanField(Markup(
+        'I have read and agree to the <a href="/terms">Terms of Use</a> and <a href="/privacy">Privacy Policy</a>'),  # noqa
         validators=[DataRequired(
             message="You must agree to create an account"), ])
     # privacy = BooleanField(

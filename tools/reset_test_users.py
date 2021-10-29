@@ -26,12 +26,25 @@ def resetUser(username, email, password):
     user.confirmed = True
 
 
+print('\n===================================')
+print(f'Resetting database {db.engine.url}')
+print('===================================\n')
+
 for i in range(10):
     username = f'test_user_{i:03}'
     email = f'{username}@thisiget.com'
+    if (i == 2):
+        email = 'noreply@thisiget.com'
     password = '12345678'
-    print(f'Resetting {username}')
+    print(f'Resetting {username}, {email}')
     resetUser(username, email, password)
+
+username = 'Test_User_100'
+email = f'{username}@ThiSiget.com'
+password = '12345678'
+print(f'Resetting {username}')
+resetUser(username, email, password)
+
 
 user = Users.query.filter_by(
     username_hash=hash_str_with_pepper('test_user_002aofkspeD3fif'.lower())) \

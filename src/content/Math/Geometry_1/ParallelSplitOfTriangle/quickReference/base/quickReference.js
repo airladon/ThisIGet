@@ -160,7 +160,7 @@ export class QRLines extends PopupBoxCollection {
         colors.qrParallelSplitOfTriangleSides,
       ),
     };
-    this.setTitle('Right Angle Triangle');
+    this.setTitle('Lines Split by Parallel Lines');
     this.setDescription([
       'Any |lines| between |parallel_lines| will be split in |equal_proportion| by a |third_parallel_line|.',
     ], modifiers);

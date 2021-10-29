@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable no-await-in-loop, jest/expect-expect */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 /* eslint-disable import/named */
@@ -28,13 +28,12 @@ describe('Account Settings Flow', () => {
   });
 
   test('Log In', async () => {
-    jest.setTimeout(40000);
     await sleep(500);
     await login(username, password, 'login', snapshots, 0);
-  });
+  }, 40000);
 
   test('Log In - Errors', async () => {
-    jest.setTimeout(40000);
+    // jest.setTimeout(40000);
     await click('id_navbar_loginout');
     await snap('login-errors', snapshots, 1);
     await setFormInput('username_or_email', username);
@@ -42,7 +41,7 @@ describe('Account Settings Flow', () => {
     await snap('login-errors', snapshots);
     await click('submit');
     await snap('login-errors', snapshots);
-  });
+  }, 40000);
 });
 describe('Test snapshots', () => {
   test.each(indexes)(

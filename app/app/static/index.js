@@ -20982,11 +20982,11 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimitives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
 /* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
@@ -21029,7 +21029,9 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // import {
+//   round
+// } from '../../tools/math';
 
 
 
@@ -21556,7 +21558,7 @@ function () {
       var element = this.polygon(options); // $FlowFixMe
 
       element.drawingObject.getPointCountForAngle = function (angle) {
-        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_1__["round"](Math.PI * 2) * options.sides);
+        var sidesToDraw = Math.floor(_tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](angle) / _tools_math__WEBPACK_IMPORTED_MODULE_5__["round"](Math.PI * 2) * options.sides);
 
         if (options.fill) {
           return sidesToDraw + 2;
@@ -21661,7 +21663,7 @@ function () {
 
       var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_21__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](to, o.transform, o.color, this.limits);
 
       if (options.pulse != null) {
         if (typeof element.pulseDefault !== 'function') {
@@ -21785,7 +21787,7 @@ function () {
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
       var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_22__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), yAlign, xAlign);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimitive"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
@@ -21864,7 +21866,7 @@ function () {
       var inside = document.createElement('div'); // const htmlText = toHTML(options.textInput, '', '', options.color);
       // console.log(options.textInput, htmlText)
 
-      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_2__["setHTML"])(inside, options.text, options.modifiers);
+      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__["setHTML"])(inside, options.text, options.modifiers);
       var id = options.id,
           classes = options.classes,
           position = options.position,
@@ -21891,64 +21893,45 @@ function () {
       var color = arguments.length > 2 ? arguments[2] : undefined;
       var transform = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
-    }
-  }, {
-    key: "gridLegacy",
-    value: function gridLegacy() {
-      var defaultOptions = {
-        bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
-        xStep: 0.1,
-        yStep: 0.1,
-        xOffset: 0,
-        yOffset: 0,
-        numLinesThick: 1,
-        color: [1, 0, 0, 1],
-        position: null,
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
-      };
+    } // gridLegacy(...optionsIn: Array<TypeGridOptions>) {
+    //   const defaultOptions = {
+    //     bounds: new Rect(-1, -1, 2, 2),
+    //     xStep: 0.1,
+    //     yStep: 0.1,
+    //     xOffset: 0,
+    //     yOffset: 0,
+    //     numLinesThick: 1,
+    //     color: [1, 0, 0, 1],
+    //     position: null,
+    //     transform: new Transform('grid').standard(),
+    //   };
+    //   const options = joinObjects({}, defaultOptions, ...optionsIn);
+    //   if (options.position != null) {
+    //     const point = getPoint(options.position);
+    //     options.transform.updateTranslation(point);
+    //   }
+    //   const linePairs = [];
+    //   // const xLimit = tools.roundNum(bounds.righ + xStep);
+    //   const {
+    //     bounds, xStep, xOffset, yStep, yOffset, color, numLinesThick, transform,
+    //   } = options;
+    //   if (options.xStep !== 0) {
+    //     for (let x = bounds.left + xOffset; tools.roundNum(x, 8) <= bounds.right; x += xStep) {
+    //       linePairs.push([new Point(x, bounds.top), new Point(x, bounds.bottom)]);
+    //     }
+    //   }
+    //   if (yStep !== 0) {
+    //     for (let y = bounds.bottom + yOffset; tools.roundNum(y, 8) <= bounds.top; y += yStep) {
+    //       linePairs.push([new Point(bounds.left, y), new Point(bounds.right, y)]);
+    //     }
+    //   }
+    //   const element = this.lines(linePairs, numLinesThick, color, transform);
+    //   if (options.pulse != null && typeof element.pulseDefault !== 'function') {
+    //     element.pulseDefault.scale = options.pulse;
+    //   }
+    //   return element;
+    // }
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.position != null) {
-        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
-        options.transform.updateTranslation(point);
-      }
-
-      var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
-
-      var bounds = options.bounds,
-          xStep = options.xStep,
-          xOffset = options.xOffset,
-          yStep = options.yStep,
-          yOffset = options.yOffset,
-          color = options.color,
-          numLinesThick = options.numLinesThick,
-          transform = options.transform;
-
-      if (options.xStep !== 0) {
-        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](x, 8) <= bounds.right; x += xStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
-        }
-      }
-
-      if (yStep !== 0) {
-        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](y, 8) <= bounds.top; y += yStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
-        }
-      }
-
-      var element = this.lines(linePairs, numLinesThick, color, transform);
-
-      if (options.pulse != null && typeof element.pulseDefault !== 'function') {
-        element.pulseDefault.scale = options.pulse;
-      }
-
-      return element;
-    }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
@@ -21968,8 +21951,8 @@ function () {
         position: null
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22019,8 +22002,8 @@ function () {
         position: null
       };
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
-        optionsIn[_key14] = arguments[_key14];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22060,8 +22043,8 @@ function () {
         position: null
       };
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
-        optionsIn[_key15] = arguments[_key15];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22094,8 +22077,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22124,8 +22107,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
-        optionsIn[_key17] = arguments[_key17];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22185,8 +22168,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len18 = arguments.length, moreOptions = new Array(_len18 > 1 ? _len18 - 1 : 0), _key18 = 1; _key18 < _len18; _key18++) {
-          moreOptions[_key18 - 1] = arguments[_key18];
+        for (var _len17 = arguments.length, moreOptions = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+          moreOptions[_key17 - 1] = arguments[_key17];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -22208,7 +22191,7 @@ function () {
         }
       }
 
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
       element.setColor(color);
 
       if (pulse != null && typeof element.pulseDefault !== 'function') {
@@ -22304,8 +22287,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
-        optionsIn[_key19] = arguments[_key19];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22352,7 +22335,7 @@ function () {
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
       xProps.majorTicks.color = color.slice();
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22389,7 +22372,7 @@ function () {
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
       yProps.majorTicks.color = color.slice();
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_1__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -22419,8 +22402,8 @@ function () {
       if (showGrid) {
         var gridLines = this.grid({
           bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
-          xStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepX * width / limits.width, 8),
-          yStep: _tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"](stepY * height / limits.height, 8),
+          xStep: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepX * width / limits.width, 8),
+          yStep: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepY * height / limits.height, 8),
           numThickLines: 1,
           // linePrimitives: true,
           // lineNum: 2,
@@ -22457,8 +22440,8 @@ function () {
         position: null
       };
 
-      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
-        optionsIn[_key20] = arguments[_key20];
+      for (var _len19 = arguments.length, optionsIn = new Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+        optionsIn[_key19] = arguments[_key19];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -22514,8 +22497,8 @@ function () {
         position: null
       };
 
-      for (var _len21 = arguments.length, optionsIn = new Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
-        optionsIn[_key21] = arguments[_key21];
+      for (var _len20 = arguments.length, optionsIn = new Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+        optionsIn[_key20] = arguments[_key20];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));

@@ -1,7 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
-import 'babel-polyfill';
-import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { joinObjects, writeImage, getReplacementsFolder } from './tools';
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop */
+/* eslint-disable no-restricted-syntax, jest/no-export, jest/no-conditional-expect  */
+// import 'babel-polyfill';
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
+const { joinObjects, writeImage, getReplacementsFolder } = require('./tools');
+// const playwright = require('playwright');
+
 // import { getReplacementsFolder } from '../../../tests/browser/common';
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
@@ -11,31 +14,17 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// tester(
-//   {
-//     prePath: 'dev'
-//     thresholds: 10,      // 10 pixels allowed to be different
-//     element: '#topic__content',
-//     prefix: ''           // filename prefix
-//
-//   },
-//   {
-//    width: 300,
-//    height: 600,
-//    includeQRs: true,
-//    threshold: 10,
-//   },
-//   {
-//    width: 300,
-//    height: 'full',
-//   },
-//   {
-//    width: 300,
-//   },
-// );
+page.on('console', async (msg) => {
+  const msgType = msg.type();
+  const args = await Promise.all(msg.args().map(jsHandle => jsHandle.jsonValue()));
+  if (msgType === 'error') {
+  // eslint-disable-next-line no-console
+    console.log(...args);
+  }
+});
 
-async function removeRatings(page) {
-  await page.evaluate(() => {
+async function removeRatings(p) {
+  await p.evaluate(() => new Promise((resolve) => {
     (document.querySelectorAll(
       '.rating__container, .approach__links_table__small_screen__value',
     ) || []).forEach(
@@ -44,11 +33,12 @@ async function removeRatings(page) {
         el.style.visibility = 'hidden';
       },
     );
-  });
+    resolve();
+  }));
 }
 
-async function removeTopicVariables(page) {
-  await page.evaluate(() => {
+async function removeTopicVariables(p) {
+  await p.evaluate(() => new Promise((resolve) => {
     (document.querySelectorAll(
       '.topic__variable',
     ) || []).forEach(
@@ -57,13 +47,15 @@ async function removeTopicVariables(page) {
         el.style.display = 'none';
       },
     );
-  });
+    resolve();
+  }));
 }
 
+
 // eslint-disable no-await-in-loop
-export default function tester(optionsOrScenario, ...scenarios) {
+export default function singlePageTester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(3, -1).join('/');
   let scenariosToUse = scenarios;
   const replacementsPath = getReplacementsFolder(fullPath);
   const defaultOptions = {
@@ -107,20 +99,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
         let errorFlag = false;
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
-        await page.goto(fullpath, { waitUntil: 'networkidle0' });
-        // await sleep(1000);
+        await page.goto(fullpath, { waitUntil: 'load' });
+        await sleep(500);
 
         // Open all hints on a page
         let hints = await page.$$('.simple__hint_label');
+
         for (const hint of hints) {
           await hint.click();
         }
-
         hints = await page.$$('.simple__hint_label_low');
         for (const hint of hints) {
           await hint.click();
         }
-
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
@@ -134,13 +125,13 @@ export default function tester(optionsOrScenario, ...scenarios) {
         // console.log(bb)
 
         if (viewHeight === 'auto') {
-          await page.setViewport({ width, height: 1000 });
+          await page.setViewportSize({ width, height: 1000 });
           const pageBox = await (await page.$('body'))
             .boundingBox();
           // const bb = await (await page.$('#topic__content')).boundingBox();
-          await page.setViewport({ width, height: Math.floor(pageBox.height) });
+          await page.setViewportSize({ width, height: Math.floor(pageBox.height) });
         } else {
-          await page.setViewport({ width, height: viewHeight });
+          await page.setViewportSize({ width, height: viewHeight });
         }
 
         // await page.evaluate((y) => {
@@ -148,7 +139,6 @@ export default function tester(optionsOrScenario, ...scenarios) {
         // }, Math.floor(pageBox.y));
         await removeRatings(page);
         await removeTopicVariables(page);
-
         let clippingBox = await (await page.$(options.element)).boundingBox();
         if (height !== 'auto') {
           clippingBox.height = height;
@@ -225,6 +215,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           expect(true).toBe(false);
         }
       },
+      60000,
     );
   });
 }

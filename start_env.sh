@@ -10,6 +10,7 @@ reset=`tput sgr0`
 
 # Default values of variables
 DOCKERFILE='prod/Dockerfile'
+DOCKERIGNOREFILE='prod/Dockerfile'
 HOST_PORT=5000
 CMD=''
 FAIL=0
@@ -76,6 +77,7 @@ then
   CONTAINER_PORT=4000
   stop_dev_server
   DOCKERFILE="prod/Dockerfile"
+  DOCKERIGNOREFILE="prod/.dockerignore"
 fi
 
 if [ "$1" = "stage" ];
@@ -83,6 +85,7 @@ then
   HOST_PORT=5001
   CONTAINER_PORT=5000
   DOCKERFILE="stage/Dockerfile"
+  DOCKERIGNOREFILE="stage/.dockerignore"
 fi
 
 if [ "$1" = "dev" ];
@@ -90,6 +93,7 @@ then
   HOST_PORT=5002
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
 if [ "$1" = "dev-root" ];
@@ -97,12 +101,14 @@ then
   HOST_PORT=5002
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
 fi
 
 if [ "$1" = "pupp" ];
 then
   CONTAINER_PORT=5000
   DOCKERFILE="pupp/Dockerfile"
+  DOCKERIGNOREFILE="pupp/.dockerignore"
 fi
 
 if [ "$1" = 'dev-server' ];
@@ -110,6 +116,7 @@ then
   HOST_PORT=5003
   CONTAINER_PORT=5000
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
   CMD=/opt/app/dev-server.sh
 fi
 
@@ -119,6 +126,13 @@ then
   CONTAINER_PORT=5000
   CMD="/opt/app/deploy_pipeline.sh"
   DOCKERFILE="dev/Dockerfile"
+  DOCKERIGNOREFILE="dev/.dockerignore"
+fi
+
+if [ "$2" ];
+then
+  HOST_PORT=4999
+  CONTAINER_PORT=4998
 fi
 
 
@@ -127,6 +141,7 @@ then
   echo
   echo "${bold}${cyan}================= Building container ===================${reset}"
   cp containers/$DOCKERFILE Dockerfile
+  cp containers/$DOCKERIGNOREFILE .dockerignore 
 
   cp containers/$DOCKERFILE DockerfileTemp
   # set user id of new user in production container to the same user id of the 
@@ -158,6 +173,7 @@ then
   GUNICORN_PORT=4000
   docker build -t "devenv-$1" .
   rm Dockerfile
+  rm .dockerignore
 fi
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
@@ -193,6 +209,7 @@ else
     -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
     -v $PROJECT_PATH/src:/opt/app/src \
+    -v $PROJECT_PATH/temp:/opt/app/temp \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/tools:/opt/app/tools \
     -v $PROJECT_PATH/webpack:/opt/app/webpack \
@@ -205,6 +222,7 @@ else
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/browser.sh:/opt/app/browser.sh \
     -v $PROJECT_PATH/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/dev-server.sh:/opt/app/dev-server.sh \
@@ -220,10 +238,12 @@ else
     -v $PROJECT_PATH/updateFigureOne.sh:/opt/app/updateFigureOne.sh \
     -v $PROJECT_PATH/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/.git:/opt/app/.git \
+    -v $PROJECT_PATH/jest-puppeteer.config.js:/opt/app/jest-puppeteer.config.js \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$LOCAL_PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
-    --name "devenv-$1" \
+    -e LOCAL_PROJECT_PATH=$PROJECT_PATH \
+    --name "devenv-$1$2" \
     -p $HOST_PORT:$CONTAINER_PORT \
     "devenv-$1" $CMD
 fi

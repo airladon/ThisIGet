@@ -24,7 +24,7 @@ async function linkparser(callback, source, map, meta) {
       // console.log(parameters);
       const id = `id__topic__simple_qr__link_${counter}`;
       counter += 1;
-      newLine.push(`<html><a href="javascript:window.topicFunctions.${method}('${id}',${parametersToUse});" style="color:${color};font-weight: 800;" id="${id}" class="topic__qr_action_word">${label}</a></html>`);
+      newLine.push(`<a href="javascript:window.topicFunctions.${method}('${id}',${parametersToUse});" style="color:${color};font-weight: 800;" id="${id}" class="topic__qr_action_word">${label}</a>`);
     });
     outLines.push(newLine.join(''));
   });

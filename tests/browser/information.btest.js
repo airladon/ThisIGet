@@ -1,5 +1,6 @@
 import singlePageTester from '../../src/content/testers/singlePageTester';
-// import presentationTester from '../../src/content/testers/presentationFormatTester';
+// const { singlePageTester } = require('../../src/content/testers/singlePageTester');
+
 
 singlePageTester({
   width: 700,

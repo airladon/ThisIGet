@@ -1,24 +1,27 @@
+const fs = require('fs');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const entryPoints = require('./webpack/getContent.js');
-const createTopicIndex = require('./webpack/createIndex.js');
-const recordBuildTime = require('./webpack/recordBuildTime.js');
-const setFilesForBuild = require('./webpack/setFilesForBuild.js');
+const entryPoints = require('./webpack/getContent');
+const createTopicIndex = require('./webpack/createIndex');
+const setFilesForBuild = require('./webpack/setFilesForBuild');
 const FlaskReloaderPlugin = require('./webpack/flaskReloaderPlugin');
 
 const buildPath = path.join(__dirname, 'app', 'app', 'static', 'dist');
 
 // eslint-disable-next-line no-console
-console.log('Record Build Time');
-const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
+// console.log('Record Build Time');
+// const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
 // eslint-disable-next-line no-console
-console.log(buildTime);
+// console.log(buildTime);
+const dateString = new Date().toISOString();
+const shortDate = dateString.replace(/[-:.TZ]/g, '');
 
 const envConfig = {
   prod: {
@@ -29,9 +32,8 @@ const envConfig = {
     devtool: false,
     uglifySourceMap: false,
     reactDevMode: false,
-    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
-    imageFileName: '[path][name].[ext]',
-    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
+    outputFilename: `[name]-[chunkhash]-${shortDate}.js`,
+    cssFileName: `[name]-[contenthash]-${shortDate}.css`,
   },
   stage: {
     name: 'stage',
@@ -41,20 +43,18 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: true,
     reactDevMode: false,
-    outputFilename: `[name]-[chunkhash]-${buildTime.shortDate}.js`,
-    imageFileName: '[path][name].[ext]',
-    cssFileName: `[name]-[contenthash]-${buildTime.shortDate}.css`,
+    outputFilename: `[name]-[chunkhash]-${shortDate}.js`,
+    cssFileName: `[name]-[contenthash]-${shortDate}.css`,
   },
   dev: {
     name: 'development',
     shortName: 'dev',
     uglify: false,
     webpackMode: 'development',
-    devtool: 'cheap-eval-source-map',
+    devtool: 'source-map',
     uglifySourceMap: false,
     reactDevMode: true,
     outputFilename: '[name].js',
-    imageFileName: '[path][name].[ext]',
     cssFileName: '[name].css',
   },
 };
@@ -74,6 +74,20 @@ module.exports = (env) => {
     }
   }
 
+  const buildStats = {
+    date: dateString,
+    shortDate,
+    build: e.name,
+  };
+
+  // eslint-disable-next-line no-console
+  console.log('Record Build Stats');
+  fs.writeFileSync(path.join(__dirname, 'app/app/buildTime.json'), JSON.stringify(buildStats, null, 2));
+  fs.writeFileSync(path.join(__dirname, 'src/build.json'), JSON.stringify(buildStats, null, 2));
+  // const buildTime = recordBuildTime(path.join(__dirname, 'app/app'));
+  // eslint-disable-next-line no-console
+  console.log(buildStats);
+
   entryPoints.updateDetailsAndVersions();
 
   // eslint-disable-next-line no-console
@@ -89,37 +103,37 @@ module.exports = (env) => {
   setFilesForBuild.setBaseHTML(e.shortName);
 
   console.log(`Building for ${e.name}`); // eslint-disable-line no-console
-  let uglify = '';
+  // let uglify = '';
 
-  if (e.uglify) {
-    uglify = new UglifyJsPlugin({
-      uglifyOptions: {
-        ecma: 8,
-        warnings: false,
-        // parse: { ...options },
-        // compress: { ...options },
-        // mangle: {
-        //   ...options,
-        //   properties: {
-        //     // mangle property options
-        //   },
-        // },
-        output: {
-          comments: false,
-          beautify: false,
-          // ...options
-        },
-        toplevel: false,
-        nameCache: null,
-        ie8: false,
-        keep_classnames: undefined,
-        keep_fnames: false,
-        safari10: false,
-      },
-      sourceMap: e.uglifySourceMap,
-    });
-  }
-  const clean = new CleanWebpackPlugin([buildPath]);
+  // if (e.uglify) {
+  //   uglify = new UglifyJsPlugin({
+  //     uglifyOptions: {
+  //       ecma: 8,
+  //       warnings: false,
+  //       // parse: { ...options },
+  //       // compress: { ...options },
+  //       // mangle: {
+  //       //   ...options,
+  //       //   properties: {
+  //       //     // mangle property options
+  //       //   },
+  //       // },
+  //       output: {
+  //         comments: false,
+  //         beautify: false,
+  //         // ...options
+  //       },
+  //       toplevel: false,
+  //       nameCache: null,
+  //       ie8: false,
+  //       keep_classnames: undefined,
+  //       keep_fnames: false,
+  //       safari10: false,
+  //     },
+  //     sourceMap: e.uglifySourceMap,
+  //   });
+  // }
+  const clean = new CleanWebpackPlugin();
 
   let define = '';
   if (envConfig.reactDevMode) {
@@ -140,52 +154,56 @@ module.exports = (env) => {
   //   allChunks: true,
   // });
 
-  const copy = new CopyWebpackPlugin(
-    [
+  const copy = new CopyWebpackPlugin({
+    patterns: [
       {
-        from: '/opt/app/src/content/*/*/topic.png',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)topic\.png$/,
-        ignore: ['*boilerplate*'],
+        from: 'content/*/*/topic.png',
+        to: '/opt/app/app/app/static/dist/',
+        context: '/opt/app/src/',
+        // transformPath: (targetPath) => {
+        //   return `${targetPath.replace('src/', '')}`;
+        // },
+        globOptions: {
+          ignore: ['*boilerplate*'],
+        },
       },
       {
-        from: '/opt/app/src/content/*/*/*/*.svg',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
-        ignore: ['*boilerplate*'],
-      },
-      {
-        from: '/opt/app/src/content/*/*/*/*/*.svg',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
-        ignore: ['*boilerplate*'],
+        from: 'content/**/*.svg',
+        to: '/opt/app/app/app/static/dist/',
+        context: '/opt/app/src/',
+        // transformPath: (targetPath) => {
+        //   return `${targetPath.replace('src/', '')}`;
+        // },
+        globOptions: {
+          ignore: ['*boilerplate*'],
+        },
       },
     ],
     // { debug: 'debug' },
-  );
+  });
 
-  let cssMini = '';
-  if (e.uglify) {
-    cssMini = new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      // cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
-      },
-      canPrint: true,
-    });
-  }
+  // let cssMini = '';
+  // if (e.uglify) {
+  //   cssMini = new OptimizeCssAssetsPlugin({
+  //     assetNameRegExp: /\.css$/g,
+  //     // cssProcessor: require('cssnano'),
+  //     cssProcessorPluginOptions: {
+  //       preset: ['default', { discardComments: { removeAll: true } }],
+  //     },
+  //     canPrint: true,
+  //   });
+  // }
 
   const flaskReloader = new FlaskReloaderPlugin({});
 
   // Make the plugin array filtering out those plugins that are null
   const pluginArray = [
-    uglify,
+    // uglify,
     define,
     extract,
     copy,
     clean,
-    cssMini,
+    // cssMini,
     flaskReloader,
   ].filter(elem => elem !== '');
 
@@ -208,10 +226,15 @@ module.exports = (env) => {
   // console.log(p)
 
   return {
-    entry: entryPoints.entryPoints(e.name, ''),
+    entry: entryPoints.entryPoints(
+      e.name,
+      '', // search path
+      null, // filter to only include paths with this string
+    ),
     output: {
       path: buildPath,
       filename: e.outputFilename,
+      assetModuleFilename: pathData => `${path.dirname(pathData.filename).replace(/^src\//, '')}/[name]-[contenthash][ext]`,
     },
 
     // Delete from here after fixing diagram integration
@@ -223,7 +246,7 @@ module.exports = (env) => {
         path.join(__dirname, '/src'),
       ],
       alias: {
-        ['~']: path.join(__dirname, '/src'),
+        '~': path.join(__dirname, '/src'),
       },
 
     },
@@ -248,13 +271,17 @@ module.exports = (env) => {
               options: {
                 importLoaders: 2,
                 sourceMap: envConfig.uglifySourceMap,
+                // modules: true,
+                url: false,
               },
             },
             {
               loader: 'postcss-loader',
               options: {
-                plugins: [Autoprefixer],
-                sourceMap: envConfig.uglifySourceMap,
+                postcssOptions: {
+                  plugins: ['autoprefixer'],
+                  sourceMap: envConfig.uglifySourceMap,
+                },
               },
             },
             {
@@ -292,17 +319,8 @@ module.exports = (env) => {
         //   use: ['html-loader'],
         // },
         {
-          test: /\.(png|jpg|gif|svg)$/,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: e.imageFileName,
-                publicPath: '/static/dist/',
-                context: '/opt/app/src',
-              },
-            },
-          ],
+          test: /\.(png|jpg|gif|svg|m4a)$/,
+          type: 'asset/resource',
         },
       ],
     },
@@ -310,16 +328,32 @@ module.exports = (env) => {
     mode: e.webpackMode,
     devtool: e.devtool,
     optimization: {
+      minimize: e.uglify,
+      minimizer: [
+        new TerserPlugin({
+          // minify: TerserPlugin.uglifyJsMinify,
+          terserOptions: {
+            compress: true,
+            format: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+        '...',
+        new CssMinimizerPlugin(),
+      ],
       // SplitChunks docs at https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
       splitChunks: {
         chunks: 'all',
-        minSize: 3000,
+        minSize: 20000,
         cacheGroups: {
-          default: {
-            minChunks: 2000,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
+          // default: {
+          //   minChunks: 2,
+          //   priority: -20,
+          //   reuseExistingChunk: true,
+          // },
+          default: false,
           tools: {
             minSize: 10,
             minChunks: 2,
@@ -344,6 +378,14 @@ module.exports = (env) => {
             test: /content\/topicIndex.js/,
             name: 'topicIndex',
           },
+          // topicDescription: {
+          //   minSize: 10,
+          //   minChunks: 1,
+          //   priority: 0,
+          //   reuseExistingChunk: true,
+          //   test: /content\/topicDescription.js/,
+          //   name: 'topicDescription',
+          // },
           commoncss: {
             minSize: 10,
             minChunks: 2,

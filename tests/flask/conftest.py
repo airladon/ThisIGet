@@ -16,7 +16,7 @@ from app.tools import hash_str_with_pepper  # noqa E402
 def remove_account(username):
     # user = Users.query.filter_by(username=username).first()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     if user is not None:
         db.session.delete(user)
         db.session.commit()

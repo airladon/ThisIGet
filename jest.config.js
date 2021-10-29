@@ -7,4 +7,6 @@ module.exports = {
   },
   testPathIgnorePatterns: ['/node_modules/', '\\.snap$', 'boilerplate'],
   coverageDirectory: './reports',
+  testEnvironment: 'jsdom',
+  // preset: 'jest-puppeteer',
 };

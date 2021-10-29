@@ -4,7 +4,7 @@ import tester from '../../../../../../testers/presentationFormatTester';
 import thresholds from './thresholds';
 
 tester(
-  { thresholds },
+  { thresholds, viewPort: { width: 700 } },
   'goto',
   'nextPrev',
 );

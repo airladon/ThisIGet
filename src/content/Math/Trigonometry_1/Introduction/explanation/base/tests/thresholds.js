@@ -1,7 +1,7 @@
 const thresholds = {
   pages: {
-    23: { goto: 1200, next: 1200, prev: 1200 },
-    24: { goto: 1200, next: 1200, prev: 1200 },
+    23: { goto: 2000, next: 2000, prev: 2000 },
+    24: { goto: 2000, next: 2000, prev: 2000 },
   },
 };
 

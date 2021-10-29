@@ -39,8 +39,9 @@ def create_account_with_confirm(client, username='new_test_user_01',
         client=client, username=username, email=email, password=password,
         repeat_password=password)
     formatted_email = format_email(email)
+    lower_username = username.lower()
     user = Users.query \
-        .filter(Users.username_hash == hash_str_with_pepper(username)) \
+        .filter(Users.username_hash == hash_str_with_pepper(lower_username)) \
         .filter(Users.email_hash == hash_str_with_pepper(formatted_email)) \
         .order_by(desc('signed_up_on')) \
         .first()
@@ -52,7 +53,9 @@ def create_account_with_confirm(client, username='new_test_user_01',
         db.session.commit()
 
 
-def test_create_new_user(client):
+def test_create_new_user(client, monkeypatch):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     username = new_user
     remove_account(client, username=username)
     user = Users.query.filter_by(
@@ -62,7 +65,7 @@ def test_create_new_user(client):
     res = create_account(
         client, username='new_test_user_01', follow_redirects=False)
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     assert user is not None
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
@@ -97,8 +100,10 @@ def test_create_new_user(client):
             'You must agree to create an account'),
     ])
 def test_create_account_fail(
-        client, exists, username, email, password, repeat_password,
-        terms, error):
+        client, monkeypatch, exists, username, email, password,
+        repeat_password, terms, error):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
     if exists:
         create_account_with_confirm(client)
@@ -118,7 +123,10 @@ def test_create_account_fail(
             '12345678', '12345678'),
     ])
 def test_create_account_pass(
-        client, exists, username, email, password, repeat_password):
+        client, monkeypatch, exists, username, email, password,
+        repeat_password):
+    monkeypatch.setattr(app.email, 'can_send_email', always_true_mock)
+    monkeypatch.setattr(app.email, 'send_email', send_email_mock)
     remove_account(client)
     remove_account(client, username=username)
     if exists:
@@ -130,7 +138,7 @@ def test_create_account_pass(
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
     assert user.confirmed is False
 
 
@@ -179,7 +187,7 @@ def test_create_account_existing_unconfirmed(
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper(username)).first()
+        username_hash=hash_str_with_pepper(username.lower())).first()
 
     assert user is not None
     assert user.confirmed is False
@@ -198,7 +206,7 @@ def test_create_account_existing_unconfirmed(
     formatted_email = format_email(email)
     users = Users.query \
         .filter(or_(
-            Users.username_hash == hash_str_with_pepper(username),
+            Users.username_hash == hash_str_with_pepper(username.lower()),
             Users.email_hash == hash_str_with_pepper(formatted_email),
         )) \
         .all()
